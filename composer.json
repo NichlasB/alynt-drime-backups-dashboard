@@ -1,0 +1,28 @@
+{
+  "name": "alynt/alynt-drime-backups-dashboard",
+  "description": "Read-only central monitoring dashboard for Alynt Drime backup uploader sites.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.7",
+    "phpunit/phpunit": "^9.6.34",
+    "brain/monkey": "^2.7",
+    "doctrine/instantiator": "^1.5",
+    "mockery/mockery": "^1.6",
+    "wp-coding-standards/wpcs": "^3.1",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  },
+  "scripts": {
+    "lint": "php ./vendor/bin/phpcs",
+    "lint:fix": "php ./vendor/bin/phpcbf"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

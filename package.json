@@ -1,0 +1,11 @@
+{
+  "name": "alynt-drime-backups-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read-only central monitoring dashboard for Alynt Drime backup uploader sites.",
+  "scripts": {
+    "lint:php": "php ./vendor/bin/phpcs",
+    "test": "php ./vendor/bin/phpunit"
+  },
+  "license": "GPL-2.0-or-later"
+}
