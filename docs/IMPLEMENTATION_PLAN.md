@@ -436,7 +436,7 @@ Exit: UI and storage tests pass without a client endpoint.
 
 Exit: protocol is approved before either repository implements both sides.
 
-Draft artifacts:
+Approved Phase 3 baseline artifacts:
 
 - `docs/PROTOCOL_V1.md`
 - `docs/THREAT_MODEL_V1.md`

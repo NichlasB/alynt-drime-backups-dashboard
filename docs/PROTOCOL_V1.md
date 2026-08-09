@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Protocol v1
 
-Status: draft for Phase 3 approval.
+Status: approved Phase 3 baseline as of 2026-08-09. Implementation remains separately approval-gated.
 
 This document freezes the first cross-plugin protocol between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader. Version 1 is read-only relative to client sites and Drime.
 

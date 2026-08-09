@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Threat Model v1
 
-Status: draft for Phase 3 approval.
+Status: approved Phase 3 baseline as of 2026-08-09. Implementation remains separately approval-gated.
 
 Scope: v1 pairing, opt-in, authenticated dashboard polling, status ingestion, status classification, storage, diagnostics, and operator UI. This model does not authorize remote actions, live deployment, or uploader implementation work.
 
