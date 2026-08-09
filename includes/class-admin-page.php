@@ -47,18 +47,27 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	private $enrollment_manager;
 
 	/**
+	 * Poller.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Poller
+	 */
+	private $poller;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null     $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null $snapshots Snapshot repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null   $classifier Status classifier.
 	 * @param Alynt_Drime_Backups_Dashboard_Enrollment_Manager|null  $enrollment_manager Enrollment manager.
+	 * @param Alynt_Drime_Backups_Dashboard_Poller|null              $poller Poller.
 	 */
-	public function __construct( $sites = null, $snapshots = null, $classifier = null, $enrollment_manager = null ) {
+	public function __construct( $sites = null, $snapshots = null, $classifier = null, $enrollment_manager = null, $poller = null ) {
 		$this->sites              = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots          = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$this->classifier         = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
 		$this->enrollment_manager = $enrollment_manager instanceof Alynt_Drime_Backups_Dashboard_Enrollment_Manager ? $enrollment_manager : new Alynt_Drime_Backups_Dashboard_Enrollment_Manager( $this->sites );
+		$this->poller             = $poller instanceof Alynt_Drime_Backups_Dashboard_Poller ? $poller : new Alynt_Drime_Backups_Dashboard_Poller( $this->sites, $this->snapshots, $this->classifier );
 	}
 
 	/**
@@ -160,6 +169,24 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			);
 		}
 
+		if ( 'check_status_now' === $action ) {
+			check_admin_referer( 'alynt_drime_backups_dashboard_check_status_now' );
+
+			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$result  = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+
+			return array_merge(
+				$result,
+				array(
+					'action' => 'check_status_now',
+				)
+			);
+		}
+
 		return new WP_Error( 'dashboard_action_unknown', __( 'The requested dashboard action is not supported.', 'alynt-drime-backups-dashboard' ) );
 	}
 
@@ -191,6 +218,11 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
 			echo '<div class="notice ' . esc_attr( $class ) . ' inline"><p>' . esc_html( $message ) . '</p></div>';
+			return;
+		}
+
+		if ( isset( $result['action'] ) && 'check_status_now' === $result['action'] ) {
+			echo '<div class="notice notice-success inline"><p>' . esc_html__( 'Read-only status check completed and stored.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 		}
 	}
 
@@ -377,6 +409,14 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 
 		if ( ! isset( $site['enrollment_status'] ) || 'revoked' !== $site['enrollment_status'] ) {
 			?>
+			<?php if ( ! empty( $site['polling_key_id'] ) && ! empty( $site['polling_secret_ciphertext'] ) ) : ?>
+				<form method="post">
+					<?php wp_nonce_field( 'alynt_drime_backups_dashboard_check_status_now' ); ?>
+					<input type="hidden" name="alynt_drime_backups_dashboard_action" value="check_status_now">
+					<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( (string) $site_id ); ?>">
+					<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Check Status Now', 'alynt-drime-backups-dashboard' ); ?></button></p>
+				</form>
+			<?php endif; ?>
 			<form method="post">
 				<?php wp_nonce_field( 'alynt_drime_backups_dashboard_revoke_local' ); ?>
 				<input type="hidden" name="alynt_drime_backups_dashboard_action" value="revoke_local">

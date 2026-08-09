@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Builds fixed read-only status polling requests without executing them.
+ * Builds and executes fixed read-only status polling requests.
  *
  * @since 0.1.0
  */
@@ -74,5 +74,80 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 				),
 			),
 		);
+	}
+
+	/**
+	 * Executes the fixed status request and decodes its JSON response.
+	 *
+	 * @param array<string,mixed> $site Dashboard site row.
+	 * @param string              $polling_auth_scheme Authorization header value.
+	 * @param callable|null       $http_client Optional HTTP client override.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function fetch_status_payload( array $site, $polling_auth_scheme, $http_client = null ) {
+		$request = $this->prepare_status_request( $site, $polling_auth_scheme );
+
+		if ( is_wp_error( $request ) ) {
+			return $request;
+		}
+
+		if ( null === $http_client ) {
+			if ( ! function_exists( 'wp_safe_remote_get' ) ) {
+				return new WP_Error( 'transport_unavailable', __( 'WordPress HTTP transport is not available.', 'alynt-drime-backups-dashboard' ) );
+			}
+
+			$http_client = 'wp_safe_remote_get';
+		}
+
+		$response = call_user_func( $http_client, $request['url'], $request['args'] );
+
+		if ( is_wp_error( $response ) ) {
+			return new WP_Error( 'transport_failed', __( 'The client status request failed.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$code = $this->response_code( $response );
+		if ( 200 !== $code ) {
+			return new WP_Error( 'transport_failed', __( 'The client status request did not return HTTP 200.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$body = $this->response_body( $response );
+		if ( strlen( $body ) > self::MAX_RESPONSE_SIZE_BYTES ) {
+			return new WP_Error( 'response_too_large', __( 'The client status response exceeded the dashboard size limit.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$payload = json_decode( $body, true, 64 );
+		if ( ! is_array( $payload ) ) {
+			return new WP_Error( 'json_invalid', __( 'The client status response was not valid JSON.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		return $payload;
+	}
+
+	/**
+	 * Extracts HTTP response code.
+	 *
+	 * @param mixed $response HTTP response.
+	 * @return int
+	 */
+	private function response_code( $response ) {
+		if ( function_exists( 'wp_remote_retrieve_response_code' ) ) {
+			return (int) wp_remote_retrieve_response_code( $response );
+		}
+
+		return isset( $response['response']['code'] ) ? (int) $response['response']['code'] : 0;
+	}
+
+	/**
+	 * Extracts HTTP response body.
+	 *
+	 * @param mixed $response HTTP response.
+	 * @return string
+	 */
+	private function response_body( $response ) {
+		if ( function_exists( 'wp_remote_retrieve_body' ) ) {
+			return (string) wp_remote_retrieve_body( $response );
+		}
+
+		return isset( $response['body'] ) ? (string) $response['body'] : '';
 	}
 }

@@ -73,4 +73,58 @@ class SafeTransportTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'auth_invalid', $result->get_error_code() );
 	}
+
+	/**
+	 * Transport fetches and decodes JSON through an injected HTTP client.
+	 *
+	 * @return void
+	 */
+	public function test_fetch_status_payload_uses_injected_http_client() {
+		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$result    = $transport->fetch_status_payload(
+			array(
+				'expected_origin' => 'https://client.example.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			function ( $url, $args ) {
+				$this->assertSame( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status', $url );
+				$this->assertSame( 'GET', $args['method'] );
+
+				return array(
+					'response' => array(
+						'code' => 200,
+					),
+					'body'     => '{"schema_version":1}',
+				);
+			}
+		);
+
+		$this->assertSame( array( 'schema_version' => 1 ), $result );
+	}
+
+	/**
+	 * Non-JSON responses fail safely.
+	 *
+	 * @return void
+	 */
+	public function test_fetch_status_payload_rejects_non_json_response() {
+		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$result    = $transport->fetch_status_payload(
+			array(
+				'expected_origin' => 'https://client.example.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			function () {
+				return array(
+					'response' => array(
+						'code' => 200,
+					),
+					'body'     => 'not json',
+				);
+			}
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'json_invalid', $result->get_error_code() );
+	}
 }

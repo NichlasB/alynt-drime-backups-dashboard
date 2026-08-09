@@ -461,7 +461,7 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current partial progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, and REST enrollment completion are implemented. Actual outbound HTTP execution, first-poll activation, and manual **Check Status Now** remain separate approval-gated work.
+Current partial progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, and manual **Check Status Now** are implemented. Scheduled polling, batching, jitter, backoff, retention cleanup, and operator UI completion remain separate approval-gated work.
 
 ### Phase 6 — Scheduled polling and history
 

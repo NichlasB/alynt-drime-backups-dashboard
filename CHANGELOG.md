@@ -12,3 +12,4 @@
 - Added dashboard-side pending enrollment creation, protocol-v1 pairing-token generation, public-HTTPS origin validation, and local revocation scaffolding while keeping polling and REST enrollment disabled.
 - Added credential-vault encryption/decryption and safe status-request preparation foundations without enabling REST enrollment or outbound polling.
 - Added the protocol-v1 REST enrollment endpoint for authenticated client opt-in completion, encrypted polling-credential storage, and display-once credential return while still requiring a later first-poll activation slice.
+- Added schema-1 status payload validation, first-poll activation, snapshot recording, and manual **Check Status Now** through the fixed read-only client status route.

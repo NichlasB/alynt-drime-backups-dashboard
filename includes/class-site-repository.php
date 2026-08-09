@@ -194,6 +194,68 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	}
 
 	/**
+	 * Marks a status poll as successful.
+	 *
+	 * @param int    $site_id Site ID.
+	 * @param string $status Dashboard status category.
+	 * @param string $plugin_version Uploader version.
+	 * @return bool
+	 */
+	public function mark_poll_success( $site_id, $status, $plugin_version = '' ) {
+		global $wpdb;
+
+		$now   = current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		return false !== $wpdb->update(
+			$table,
+			array(
+				'enrollment_status'    => 'active',
+				'overall_status'       => sanitize_key( $status ),
+				'plugin_version'       => sanitize_text_field( $plugin_version ),
+				'last_poll_attempt_at' => $now,
+				'last_seen_at'         => $now,
+				'last_error_code'      => null,
+				'last_error_summary'   => null,
+				'updated_at'           => $now,
+			),
+			array( 'id' => (int) $site_id ),
+			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
+			array( '%d' )
+		);
+	}
+
+	/**
+	 * Marks a status poll failure with safe error metadata.
+	 *
+	 * @param int    $site_id Site ID.
+	 * @param string $error_code Stable error code.
+	 * @param string $summary Operator-safe summary.
+	 * @return bool
+	 */
+	public function mark_poll_failure( $site_id, $error_code, $summary = '' ) {
+		global $wpdb;
+
+		$now   = current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		return false !== $wpdb->update(
+			$table,
+			array(
+				'overall_status'       => 'needs_attention',
+				'last_poll_attempt_at' => $now,
+				'last_error_code'      => sanitize_key( $error_code ),
+				'last_error_summary'   => sanitize_text_field( $summary ),
+				'consecutive_failures' => 1,
+				'updated_at'           => $now,
+			),
+			array( 'id' => (int) $site_id ),
+			array( '%s', '%s', '%s', '%s', '%d', '%s' ),
+			array( '%d' )
+		);
+	}
+
+	/**
 	 * Updates polling evidence for a site.
 	 *
 	 * @param int    $site_id Site ID.

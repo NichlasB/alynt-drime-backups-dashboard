@@ -41,12 +41,18 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 * Constructor.
 	 */
 	public function __construct() {
+		$sites        = new Alynt_Drime_Backups_Dashboard_Site_Repository();
+		$snapshots    = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
+		$classifier   = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
+		$this->poller = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $snapshots, $classifier );
+
 		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(
-			new Alynt_Drime_Backups_Dashboard_Site_Repository(),
-			new Alynt_Drime_Backups_Dashboard_Snapshot_Repository(),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+			$sites,
+			$snapshots,
+			$classifier,
+			null,
+			$this->poller
 		);
-		$this->poller                     = new Alynt_Drime_Backups_Dashboard_Poller();
 		$this->enrollment_rest_controller = new Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller();
 
 		$this->hooks();

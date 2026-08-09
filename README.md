@@ -35,7 +35,8 @@ The scaffold includes:
 - Credential-vault foundation for encrypted dashboard-side polling credential storage.
 - Safe transport foundation that prepares the fixed read-only status request without executing outbound HTTP.
 - Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
-- Poller placeholder that intentionally performs no outbound requests.
+- Manual **Check Status Now** for enrolled sites using the fixed authenticated read-only status route.
+- Scheduled poller placeholder that intentionally keeps cron batching disabled until the scheduled polling slice.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
@@ -59,6 +60,7 @@ php -l includes/class-pairing-tokens.php
 php -l includes/class-plugin.php
 php -l includes/class-poller.php
 php -l includes/class-safe-transport.php
+php -l includes/class-status-payload-validator.php
 php -l includes/class-storage.php
 php -l uninstall.php
 ```
