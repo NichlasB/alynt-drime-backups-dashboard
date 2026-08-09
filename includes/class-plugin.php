@@ -31,15 +31,23 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	private $poller;
 
 	/**
+	 * Enrollment REST controller.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller
+	 */
+	private $enrollment_rest_controller;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->admin_page = new Alynt_Drime_Backups_Dashboard_Admin_Page(
+		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(
 			new Alynt_Drime_Backups_Dashboard_Site_Repository(),
 			new Alynt_Drime_Backups_Dashboard_Snapshot_Repository(),
 			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
 		);
-		$this->poller     = new Alynt_Drime_Backups_Dashboard_Poller();
+		$this->poller                     = new Alynt_Drime_Backups_Dashboard_Poller();
+		$this->enrollment_rest_controller = new Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller();
 
 		$this->hooks();
 	}
@@ -51,6 +59,7 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 */
 	private function hooks() {
 		add_action( 'admin_menu', array( $this->admin_page, 'register_menu' ) );
+		add_action( 'rest_api_init', array( $this->enrollment_rest_controller, 'register_routes' ) );
 		add_action( 'alynt_drime_backups_dashboard_poll_sites', array( $this->poller, 'poll_sites' ) );
 	}
 }

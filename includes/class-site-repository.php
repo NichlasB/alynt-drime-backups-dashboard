@@ -73,6 +73,28 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	}
 
 	/**
+	 * Gets a pending site by public enrollment ID.
+	 *
+	 * @param string $public_id Public ID.
+	 * @return array<string,mixed>|null
+	 */
+	public function get_pending_by_public_id( $public_id ) {
+		global $wpdb;
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+		$row   = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE public_id = %s AND enrollment_status = %s LIMIT 1",
+				sanitize_text_field( $public_id ),
+				'pending'
+			),
+			ARRAY_A
+		);
+
+		return $row ? $row : null;
+	}
+
+	/**
 	 * Creates a pending site placeholder.
 	 *
 	 * @param array $data Site data.
@@ -132,6 +154,42 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 			array( 'id' => (int) $site_id ),
 			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
 			array( '%d' )
+		);
+	}
+
+	/**
+	 * Completes enrollment state while waiting for first valid poll activation.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param array<string,mixed> $data Enrollment data.
+	 * @return bool
+	 */
+	public function complete_enrollment_pending_first_poll( $site_id, array $data ) {
+		global $wpdb;
+
+		$now   = current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		return false !== $wpdb->update(
+			$table,
+			array(
+				'site_uuid'                 => isset( $data['site_uuid'] ) ? sanitize_text_field( $data['site_uuid'] ) : null,
+				'enrollment_status'         => Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller::ENROLLMENT_STATUS_AWAITING_FIRST_POLL,
+				'overall_status'            => 'pending',
+				'pairing_secret_hash'       => null,
+				'pairing_expires_at'        => null,
+				'polling_key_id'            => isset( $data['polling_key_id'] ) ? sanitize_text_field( $data['polling_key_id'] ) : null,
+				'polling_secret_ciphertext' => isset( $data['polling_secret_ciphertext'] ) ? (string) $data['polling_secret_ciphertext'] : null,
+				'plugin_version'            => isset( $data['plugin_version'] ) ? sanitize_text_field( $data['plugin_version'] ) : null,
+				'payload_schema_version'    => isset( $data['payload_schema_version'] ) ? absint( $data['payload_schema_version'] ) : null,
+				'updated_at'                => $now,
+			),
+			array(
+				'id'                => (int) $site_id,
+				'enrollment_status' => 'pending',
+			),
+			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s' ),
+			array( '%d', '%s' )
 		);
 	}
 

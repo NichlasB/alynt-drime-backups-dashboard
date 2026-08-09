@@ -79,6 +79,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-status-classifier.php',
 	'includes/class-pairing-tokens.php',
 	'includes/class-enrollment-manager.php',
+	'includes/class-enrollment-rest-controller.php',
 	'includes/class-safe-transport.php',
 	'includes/class-poller.php',
 	'includes/class-admin-page.php',

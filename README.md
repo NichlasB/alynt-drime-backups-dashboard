@@ -34,6 +34,7 @@ The scaffold includes:
 - Local dashboard-record revocation scaffolding that does not contact client sites.
 - Credential-vault foundation for encrypted dashboard-side polling credential storage.
 - Safe transport foundation that prepares the fixed read-only status request without executing outbound HTTP.
+- Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
 - Poller placeholder that intentionally performs no outbound requests.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
@@ -52,6 +53,7 @@ php -l includes/class-admin-page.php
 php -l includes/class-credential-vault.php
 php -l includes/class-deactivator.php
 php -l includes/class-enrollment-manager.php
+php -l includes/class-enrollment-rest-controller.php
 php -l includes/class-origin-validator.php
 php -l includes/class-pairing-tokens.php
 php -l includes/class-plugin.php

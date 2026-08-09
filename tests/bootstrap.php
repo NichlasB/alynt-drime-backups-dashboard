@@ -116,14 +116,23 @@ if ( ! class_exists( 'WP_Error' ) ) {
 		private $message;
 
 		/**
+		 * Error data.
+		 *
+		 * @var mixed
+		 */
+		private $data;
+
+		/**
 		 * Constructor.
 		 *
 		 * @param string $code Code.
 		 * @param string $message Message.
+		 * @param mixed  $data Data.
 		 */
-		public function __construct( $code = '', $message = '' ) {
+		public function __construct( $code = '', $message = '', $data = null ) {
 			$this->code    = $code;
 			$this->message = $message;
+			$this->data    = $data;
 		}
 
 		/**
@@ -142,6 +151,15 @@ if ( ! class_exists( 'WP_Error' ) ) {
 		 */
 		public function get_error_message() {
 			return $this->message;
+		}
+
+		/**
+		 * Gets the error data.
+		 *
+		 * @return mixed
+		 */
+		public function get_error_data() {
+			return $this->data;
 		}
 	}
 }

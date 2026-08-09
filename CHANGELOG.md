@@ -11,3 +11,4 @@
 - Froze the Phase 3 protocol and threat-model documents as the approved implementation baseline.
 - Added dashboard-side pending enrollment creation, protocol-v1 pairing-token generation, public-HTTPS origin validation, and local revocation scaffolding while keeping polling and REST enrollment disabled.
 - Added credential-vault encryption/decryption and safe status-request preparation foundations without enabling REST enrollment or outbound polling.
+- Added the protocol-v1 REST enrollment endpoint for authenticated client opt-in completion, encrypted polling-credential storage, and display-once credential return while still requiring a later first-poll activation slice.

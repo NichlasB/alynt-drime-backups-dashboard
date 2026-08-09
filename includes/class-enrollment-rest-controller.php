@@ -1,0 +1,287 @@
+<?php
+/**
+ * Dashboard enrollment REST endpoint.
+ *
+ * @package Alynt_Drime_Backups_Dashboard
+ * @since   0.1.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Handles uploader enrollment completion requests.
+ *
+ * @since 0.1.0
+ */
+class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
+	const REST_NAMESPACE                        = 'alynt-drime-backups-dashboard/v1';
+	const REST_ROUTE                            = '/enroll';
+	const PROTOCOL_VERSION                      = 1;
+	const STATUS_SCHEMA_VERSION                 = 1;
+	const ENROLLMENT_STATUS_AWAITING_FIRST_POLL = 'awaiting_first_poll';
+
+	/**
+	 * Site repository.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Site_Repository
+	 */
+	private $sites;
+
+	/**
+	 * Origin validator.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Origin_Validator
+	 */
+	private $origins;
+
+	/**
+	 * Credential vault.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Credential_Vault
+	 */
+	private $vault;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null  $sites Site repository.
+	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null $origins Origin validator.
+	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault|null $vault Credential vault.
+	 */
+	public function __construct( $sites = null, $origins = null, $vault = null ) {
+		$this->sites   = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
+		$this->origins = $origins instanceof Alynt_Drime_Backups_Dashboard_Origin_Validator ? $origins : new Alynt_Drime_Backups_Dashboard_Origin_Validator();
+		$this->vault   = $vault instanceof Alynt_Drime_Backups_Dashboard_Credential_Vault ? $vault : new Alynt_Drime_Backups_Dashboard_Credential_Vault();
+	}
+
+	/**
+	 * Registers REST routes.
+	 *
+	 * @return void
+	 */
+	public function register_routes() {
+		register_rest_route(
+			self::REST_NAMESPACE,
+			self::REST_ROUTE,
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'handle_enroll_request' ),
+				'permission_callback' => '__return_true',
+			)
+		);
+	}
+
+	/**
+	 * Handles the REST request object.
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function handle_enroll_request( $request ) {
+		$authorization = method_exists( $request, 'get_header' ) ? (string) $request->get_header( 'authorization' ) : '';
+		$payload       = method_exists( $request, 'get_json_params' ) ? $request->get_json_params() : array();
+
+		return $this->handle_enrollment( is_array( $payload ) ? $payload : array(), $authorization );
+	}
+
+	/**
+	 * Handles an enrollment payload.
+	 *
+	 * @param array<string,mixed> $payload Enrollment payload.
+	 * @param string              $authorization Authorization header.
+	 * @param int|null            $now Current timestamp override.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function handle_enrollment( array $payload, $authorization, $now = null ) {
+		$now        = null === $now ? time() : (int) $now;
+		$secret     = $this->bearer_secret( $authorization );
+		$enrollment = $this->validate_payload_shape( $payload );
+
+		if ( is_wp_error( $enrollment ) ) {
+			return $enrollment;
+		}
+
+		$site = $this->sites->get_pending_by_public_id( $enrollment['enrollment_id'] );
+
+		if ( ! $site ) {
+			return $this->error( 'pairing_invalid', __( 'The pairing enrollment is not valid.', 'alynt-drime-backups-dashboard' ), 403 );
+		}
+
+		if ( empty( $site['pairing_secret_hash'] ) || empty( $site['pairing_expires_at'] ) ) {
+			return $this->error( 'pairing_used', __( 'The pairing token has already been consumed.', 'alynt-drime-backups-dashboard' ), 409 );
+		}
+
+		if ( strtotime( (string) $site['pairing_expires_at'] ) <= $now ) {
+			return $this->error( 'pairing_expired', __( 'The pairing token has expired.', 'alynt-drime-backups-dashboard' ), 410 );
+		}
+
+		if ( '' === $secret || ! hash_equals( (string) $site['pairing_secret_hash'], Alynt_Drime_Backups_Dashboard_Pairing_Tokens::hash_secret( $secret ) ) ) {
+			return $this->error( 'pairing_invalid', __( 'The pairing credential is not valid.', 'alynt-drime-backups-dashboard' ), 403 );
+		}
+
+		if ( ! hash_equals( (string) $site['expected_origin'], $enrollment['home_origin'] ) ) {
+			return $this->error( 'origin_mismatch', __( 'The client origin does not match the pending dashboard record.', 'alynt-drime-backups-dashboard' ), 409 );
+		}
+
+		$expected_endpoint = $this->origins->status_endpoint_for_origin( $site['expected_origin'] );
+
+		if ( ! hash_equals( $expected_endpoint, $enrollment['status_endpoint'] ) ) {
+			return $this->error( 'endpoint_invalid', __( 'The client status endpoint is not the fixed read-only route.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		$polling_key_id = $this->create_polling_key_id();
+		$polling_secret = Alynt_Drime_Backups_Dashboard_Pairing_Tokens::create_secret();
+		$ciphertext     = $this->vault->encrypt( $polling_secret, 'site:' . $site['public_id'] );
+
+		if ( is_wp_error( $ciphertext ) ) {
+			return $ciphertext;
+		}
+
+		$stored = $this->sites->complete_enrollment_pending_first_poll(
+			(int) $site['id'],
+			array(
+				'site_uuid'                 => $enrollment['site_uuid'],
+				'polling_key_id'            => $polling_key_id,
+				'polling_secret_ciphertext' => $ciphertext,
+				'plugin_version'            => $enrollment['uploader_version'],
+				'payload_schema_version'    => self::STATUS_SCHEMA_VERSION,
+			)
+		);
+
+		if ( ! $stored ) {
+			return $this->error( 'enrollment_store_failed', __( 'The dashboard could not store the enrollment state.', 'alynt-drime-backups-dashboard' ), 500 );
+		}
+
+		return $this->response(
+			array(
+				'protocol_version'         => self::PROTOCOL_VERSION,
+				'dashboard_site_public_id' => (string) $site['public_id'],
+				'polling_key_id'           => $polling_key_id,
+				'polling_secret'           => $polling_secret,
+				'polling_auth_scheme'      => 'Bearer adb-poll-v1.' . $polling_key_id . '.' . $polling_secret,
+				'first_poll_required'      => true,
+			),
+			201
+		);
+	}
+
+	/**
+	 * Validates enrollment payload shape and normalized values.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,string>|WP_Error
+	 */
+	private function validate_payload_shape( array $payload ) {
+		if ( self::PROTOCOL_VERSION !== absint( isset( $payload['protocol_version'] ) ? $payload['protocol_version'] : 0 ) ) {
+			return $this->error( 'protocol_unsupported', __( 'The enrollment protocol version is not supported.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		if ( self::STATUS_SCHEMA_VERSION !== absint( isset( $payload['status_schema_version'] ) ? $payload['status_schema_version'] : 0 ) ) {
+			return $this->error( 'schema_unsupported', __( 'The client status schema version is not supported.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		$enrollment_id = $this->sanitize_uuid( isset( $payload['enrollment_id'] ) ? (string) $payload['enrollment_id'] : '' );
+		$site_uuid     = $this->sanitize_uuid( isset( $payload['site_uuid'] ) ? (string) $payload['site_uuid'] : '' );
+		$home_origin   = $this->origins->normalize_public_https_origin( isset( $payload['home_url'] ) ? (string) $payload['home_url'] : '' );
+		$endpoint      = isset( $payload['status_endpoint'] ) ? esc_url_raw( (string) $payload['status_endpoint'] ) : '';
+
+		if ( '' === $enrollment_id ) {
+			return $this->error( 'pairing_invalid', __( 'The enrollment ID is not valid.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		if ( '' === $site_uuid ) {
+			return $this->error( 'payload_invalid', __( 'The client site UUID is not valid.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		if ( '' === $home_origin ) {
+			return $this->error( 'origin_mismatch', __( 'The client home URL is not a supported public HTTPS origin.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		if ( '' === $endpoint || $endpoint !== $this->origins->status_endpoint_for_origin( $home_origin ) ) {
+			return $this->error( 'endpoint_invalid', __( 'The client status endpoint is not the fixed read-only route.', 'alynt-drime-backups-dashboard' ), 400 );
+		}
+
+		return array(
+			'enrollment_id'    => $enrollment_id,
+			'site_uuid'        => $site_uuid,
+			'home_origin'      => $home_origin,
+			'status_endpoint'  => $endpoint,
+			'uploader_version' => isset( $payload['uploader_version'] ) ? sanitize_text_field( (string) $payload['uploader_version'] ) : '',
+		);
+	}
+
+	/**
+	 * Extracts the bearer secret from an authorization header.
+	 *
+	 * @param string $authorization Header.
+	 * @return string
+	 */
+	private function bearer_secret( $authorization ) {
+		$authorization = trim( (string) $authorization );
+
+		if ( ! preg_match( '/^Bearer\s+([A-Za-z0-9_-]{32,})$/', $authorization, $matches ) ) {
+			return '';
+		}
+
+		return $matches[1];
+	}
+
+	/**
+	 * Creates a polling key ID.
+	 *
+	 * @return string
+	 */
+	private function create_polling_key_id() {
+		return 'pk_' . substr( Alynt_Drime_Backups_Dashboard_Pairing_Tokens::create_secret( 18 ), 0, 24 );
+	}
+
+	/**
+	 * Sanitizes a UUID.
+	 *
+	 * @param string $uuid UUID.
+	 * @return string
+	 */
+	private function sanitize_uuid( $uuid ) {
+		$uuid = strtolower( trim( (string) $uuid ) );
+
+		return preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/', $uuid ) ? $uuid : '';
+	}
+
+	/**
+	 * Builds an error response.
+	 *
+	 * @param string $code Error code.
+	 * @param string $message Error message.
+	 * @param int    $status HTTP status.
+	 * @return WP_Error
+	 */
+	private function error( $code, $message, $status ) {
+		return new WP_Error( $code, $message, array( 'status' => (int) $status ) );
+	}
+
+	/**
+	 * Builds a REST response or array fallback for tests.
+	 *
+	 * @param array<string,mixed> $data Response data.
+	 * @param int                 $status HTTP status.
+	 * @return WP_REST_Response|array<string,mixed>
+	 */
+	private function response( array $data, $status ) {
+		if ( class_exists( 'WP_REST_Response' ) ) {
+			$response = new WP_REST_Response( $data, (int) $status );
+			$response->header( 'Cache-Control', 'no-store' );
+
+			return $response;
+		}
+
+		return array(
+			'data'    => $data,
+			'status'  => (int) $status,
+			'headers' => array(
+				'Cache-Control' => 'no-store',
+			),
+		);
+	}
+}
