@@ -34,7 +34,11 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->admin_page = new Alynt_Drime_Backups_Dashboard_Admin_Page();
+		$this->admin_page = new Alynt_Drime_Backups_Dashboard_Admin_Page(
+			new Alynt_Drime_Backups_Dashboard_Site_Repository(),
+			new Alynt_Drime_Backups_Dashboard_Snapshot_Repository(),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
 		$this->poller     = new Alynt_Drime_Backups_Dashboard_Poller();
 
 		$this->hooks();

@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION = '1';
+	const SCHEMA_VERSION        = '1';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**

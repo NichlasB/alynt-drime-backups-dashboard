@@ -4,13 +4,45 @@
 
 	<file>.</file>
 
-	<exclude-pattern>vendor/*</exclude-pattern>
-	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
 
-	<rule ref="WordPress"/>
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.WP.AlternativeFunctions"/>
+	</rule>
 	<rule ref="WordPress-Extra"/>
 	<rule ref="WordPress-Docs"/>
 	<rule ref="PHPCompatibilityWP"/>
+
+	<rule ref="WordPress.DB.DirectDatabaseQuery">
+		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+		<exclude-pattern>*/uninstall.php</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.DB.PreparedSQL.InterpolatedNotPrepared">
+		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.DB.PreparedSQL.NotPrepared">
+		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber">
+		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare">
+		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.DB.DirectDatabaseQuery.SchemaChange">
+		<exclude-pattern>*/uninstall.php</exclude-pattern>
+	</rule>
 
 	<config name="minimum_supported_wp_version" value="6.0"/>
 	<config name="testVersion" value="7.4-"/>

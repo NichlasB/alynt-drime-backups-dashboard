@@ -69,6 +69,7 @@ class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
 	 * @return string
 	 */
 	private static function base64url_encode( $value ) {
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- Transport encoding for opaque pairing tokens, not code obfuscation.
 		return rtrim( strtr( base64_encode( $value ), '+/', '-_' ), '=' );
 	}
 }
