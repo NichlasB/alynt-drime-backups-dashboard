@@ -7,3 +7,4 @@
 - Added an admin page shell documenting the approved v1 read-only boundary.
 - Added pairing token helper primitives and a no-op poller placeholder.
 - Added implementation plan, package metadata, and development tooling placeholders.
+- Added draft v1 protocol and threat-model documents for the read-only dashboard/uploader boundary.

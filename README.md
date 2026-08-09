@@ -33,6 +33,8 @@ The scaffold includes:
 - Pairing-token helper primitives.
 - Poller placeholder that intentionally performs no outbound requests.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
+- Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
+- Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
 
 Before broad implementation work, create or verify a restore point. For the new dashboard repo, use a baseline commit after this scaffold and then create an external restore point before adding enrollment, polling, or schema migrations. For companion uploader changes, run the toolkit restore-point prompt against the uploader repository first.
 

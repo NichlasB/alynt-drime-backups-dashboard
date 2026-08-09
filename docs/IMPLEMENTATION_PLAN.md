@@ -4,6 +4,8 @@ This document is the implementation plan for the separate **Alynt Drime Backups 
 
 This is now the canonical implementation plan for the dashboard repository. The earlier uploader-side copy remains historical context only and does not make the dashboard part of Alynt Drime Backups Uploader.
 
+Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`.
+
 ## Current State And Safety Boundary
 
 - Planning status: approved for local scaffold.
@@ -433,6 +435,11 @@ Exit: UI and storage tests pass without a client endpoint.
 - complete focused threat modeling for secret theft, replay, brute force, SSRF, DNS rebinding, redirect leakage, payload abuse, logging leakage, and compromised client behavior.
 
 Exit: protocol is approved before either repository implements both sides.
+
+Draft artifacts:
+
+- `docs/PROTOCOL_V1.md`
+- `docs/THREAT_MODEL_V1.md`
 
 ### Phase 4 — Add uploader opt-in and read-only endpoint
 
