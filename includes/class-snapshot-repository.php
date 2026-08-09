@@ -115,6 +115,43 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	}
 
 	/**
+	 * Counts snapshots for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return int
+	 */
+	public function count_for_site( $site_id ) {
+		global $wpdb;
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
+
+		return (int) $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$table} WHERE site_id = %d",
+				(int) $site_id
+			)
+		);
+	}
+
+	/**
+	 * Deletes snapshots for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function delete_for_site( $site_id ) {
+		global $wpdb;
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
+
+		return false !== $wpdb->delete(
+			$table,
+			array( 'site_id' => (int) $site_id ),
+			array( '%d' )
+		);
+	}
+
+	/**
 	 * Decodes snapshot JSON safely.
 	 *
 	 * @param string $payload Payload JSON.

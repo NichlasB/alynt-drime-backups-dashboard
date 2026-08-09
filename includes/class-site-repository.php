@@ -149,4 +149,24 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 
 		return $counts;
 	}
+
+	/**
+	 * Deletes one dashboard site row.
+	 *
+	 * The caller must delete dependent snapshots first when needed.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function delete( $site_id ) {
+		global $wpdb;
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		return false !== $wpdb->delete(
+			$table,
+			array( 'id' => (int) $site_id ),
+			array( '%d' )
+		);
+	}
 }
