@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.0 is a local scaffold with pending-enrollment token generation. It does not contact client sites, expose remote actions, or make live changes.
+Version 0.1.0 is a local scaffold with pending-enrollment token generation, credential-vault primitives, and safe status-request preparation. It does not contact client sites, expose remote actions, or make live changes.
 
 == Installation ==
 
@@ -27,3 +27,4 @@ Version 0.1.0 is a local scaffold with pending-enrollment token generation. It d
 = 0.1.0 =
 * Initial local scaffold.
 * Added local pending enrollment and protocol-v1 pairing token scaffolding.
+* Added encrypted credential-vault and safe transport foundations without enabling polling.

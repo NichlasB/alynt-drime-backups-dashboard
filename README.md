@@ -32,6 +32,8 @@ The scaffold includes:
 - Admin page under Tools > Drime Backups Dashboard for creating local pending enrollments and displaying one-time pairing tokens.
 - Protocol-v1 pairing-token helper primitives with public-HTTPS origin validation.
 - Local dashboard-record revocation scaffolding that does not contact client sites.
+- Credential-vault foundation for encrypted dashboard-side polling credential storage.
+- Safe transport foundation that prepares the fixed read-only status request without executing outbound HTTP.
 - Poller placeholder that intentionally performs no outbound requests.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
@@ -47,10 +49,14 @@ Run PHP syntax checks before packaging:
 php -l alynt-drime-backups-dashboard.php
 php -l includes/class-activator.php
 php -l includes/class-admin-page.php
+php -l includes/class-credential-vault.php
 php -l includes/class-deactivator.php
+php -l includes/class-enrollment-manager.php
+php -l includes/class-origin-validator.php
 php -l includes/class-pairing-tokens.php
 php -l includes/class-plugin.php
 php -l includes/class-poller.php
+php -l includes/class-safe-transport.php
 php -l includes/class-storage.php
 php -l uninstall.php
 ```

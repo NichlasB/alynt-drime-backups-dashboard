@@ -10,3 +10,4 @@
 - Added draft v1 protocol and threat-model documents for the read-only dashboard/uploader boundary.
 - Froze the Phase 3 protocol and threat-model documents as the approved implementation baseline.
 - Added dashboard-side pending enrollment creation, protocol-v1 pairing-token generation, public-HTTPS origin validation, and local revocation scaffolding while keeping polling and REST enrollment disabled.
+- Added credential-vault encryption/decryption and safe status-request preparation foundations without enabling REST enrollment or outbound polling.

@@ -73,11 +73,13 @@ if ( ! alynt_drime_backups_dashboard_meets_requirements() ) {
 $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-storage.php',
 	'includes/class-origin-validator.php',
+	'includes/class-credential-vault.php',
 	'includes/class-site-repository.php',
 	'includes/class-snapshot-repository.php',
 	'includes/class-status-classifier.php',
 	'includes/class-pairing-tokens.php',
 	'includes/class-enrollment-manager.php',
+	'includes/class-safe-transport.php',
 	'includes/class-poller.php',
 	'includes/class-admin-page.php',
 	'includes/class-activator.php',
