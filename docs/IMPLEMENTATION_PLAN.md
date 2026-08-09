@@ -471,7 +471,7 @@ Exit: v1 feature scope is complete and no remote action exists.
 
 ### Phase 8 — Pre-release and local/staging acceptance
 
-- run the full pre-release workflow;
+- run the toolkit full pre-release workflow at `C:\Users\Captain\Documents\AI Workflows\Toolkits\wp-plugin-toolkit\d4-prompts\ds3-pre-release\FULL_PRE_RELEASE_WORKFLOW_PROMPT.md` using `@FULL_PRE_RELEASE_WORKFLOW_PROMPT.md run`;
 - create and inspect the release ZIP;
 - test clean activation, upgrade, deactivation, reactivation, and uninstall in disposable WordPress environments;
 - test native Alynt Plugin Updater behavior after a release candidate exists;
