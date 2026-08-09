@@ -16,7 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
-	const TOKEN_PREFIX = 'adb1.';
+	const TOKEN_PREFIX     = 'adb1.';
+	const PROTOCOL_VERSION = 1;
 
 	/**
 	 * Creates a random URL-safe secret.
@@ -36,20 +37,41 @@ class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
 	 *
 	 * @param string $enrollment_id Pending enrollment identifier.
 	 * @param string $dashboard_origin Canonical dashboard origin.
+	 * @param string $expected_client_origin Canonical client origin.
 	 * @param string $secret One-time enrollment secret.
 	 * @param int    $expires_at Unix timestamp expiry.
 	 * @return string
 	 */
-	public static function format_token( $enrollment_id, $dashboard_origin, $secret, $expires_at ) {
+	public static function format_token( $enrollment_id, $dashboard_origin, $expected_client_origin, $secret, $expires_at ) {
 		$payload = array(
-			'version'          => 1,
-			'enrollment_id'    => (string) $enrollment_id,
-			'dashboard_origin' => (string) $dashboard_origin,
-			'secret'           => (string) $secret,
-			'expires_at'       => (int) $expires_at,
+			'protocol_version'       => self::PROTOCOL_VERSION,
+			'enrollment_id'          => (string) $enrollment_id,
+			'dashboard_origin'       => (string) $dashboard_origin,
+			'expected_client_origin' => (string) $expected_client_origin,
+			'secret'                 => (string) $secret,
+			'expires_at'             => gmdate( 'c', (int) $expires_at ),
 		);
 
 		return self::TOKEN_PREFIX . self::base64url_encode( wp_json_encode( $payload ) );
+	}
+
+	/**
+	 * Creates display-once token material and the verifier to store.
+	 *
+	 * @param string $enrollment_id Pending enrollment identifier.
+	 * @param string $dashboard_origin Canonical dashboard origin.
+	 * @param string $expected_client_origin Canonical client origin.
+	 * @param int    $expires_at Unix timestamp expiry.
+	 * @return array<string,string>
+	 */
+	public static function create_pairing_token( $enrollment_id, $dashboard_origin, $expected_client_origin, $expires_at ) {
+		$secret = self::create_secret();
+
+		return array(
+			'token'       => self::format_token( $enrollment_id, $dashboard_origin, $expected_client_origin, $secret, $expires_at ),
+			'secret_hash' => self::hash_secret( $secret ),
+			'expires_at'  => gmdate( 'c', (int) $expires_at ),
+		);
 	}
 
 	/**

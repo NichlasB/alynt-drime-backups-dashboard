@@ -111,6 +111,31 @@ class StatusClassifierTest extends TestCase {
 	}
 
 	/**
+	 * New snapshot schema payload_json is decoded for classification.
+	 *
+	 * @return void
+	 */
+	public function test_payload_json_snapshot_is_decoded() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			array(
+				'schema_version' => 1,
+				'payload_json'   => wp_json_encode(
+					array(
+						'schema_version'           => 1,
+						'server_outbox_configured' => true,
+						'failed_count'             => 1,
+					)
+				),
+				'observed_at'    => '2023-11-14 22:15:00',
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'needs_attention', $result['category'] );
+	}
+
+	/**
 	 * Queue alone is not a failure.
 	 *
 	 * @return void

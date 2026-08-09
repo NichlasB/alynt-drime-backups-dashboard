@@ -33,14 +33,20 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 		$wpdb->insert(
 			$table,
 			array(
-				'site_id'         => (int) $site_id,
-				'schema_version'  => isset( $payload['schema_version'] ) ? (int) $payload['schema_version'] : 1,
-				'status_category' => sanitize_key( $status_category ),
-				'payload_hash'    => hash( 'sha256', (string) $encoded_payload ),
-				'status_payload'  => (string) $encoded_payload,
-				'captured_at'     => current_time( 'mysql', true ),
+				'dashboard_site_id'   => (int) $site_id,
+				'schema_version'      => isset( $payload['schema_version'] ) ? (int) $payload['schema_version'] : 1,
+				'observed_at'         => current_time( 'mysql', true ),
+				'payload_fingerprint' => hash( 'sha256', (string) $encoded_payload ),
+				'overall_status'      => sanitize_key( $status_category ),
+				'queue_count'         => isset( $payload['queue_count'] ) ? max( 0, (int) $payload['queue_count'] ) : 0,
+				'uploaded_count'      => isset( $payload['uploaded_count'] ) ? max( 0, (int) $payload['uploaded_count'] ) : 0,
+				'failed_count'        => isset( $payload['failed_count'] ) ? max( 0, (int) $payload['failed_count'] ) : 0,
+				'active_upload'       => ! empty( $payload['active_upload'] ) ? 1 : 0,
+				'warning_count'       => isset( $payload['warning_count'] ) ? max( 0, (int) $payload['warning_count'] ) : 0,
+				'cron_status'         => isset( $payload['cron_status'] ) ? sanitize_key( $payload['cron_status'] ) : '',
+				'payload_json'        => (string) $encoded_payload,
 			),
-			array( '%d', '%d', '%s', '%s', '%s', '%s' )
+			array( '%d', '%d', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;
@@ -58,7 +64,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
 		$row   = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE site_id = %d ORDER BY captured_at DESC, id DESC LIMIT 1",
+				"SELECT * FROM {$table} WHERE dashboard_site_id = %d ORDER BY observed_at DESC, id DESC LIMIT 1",
 				(int) $site_id
 			),
 			ARRAY_A
@@ -68,7 +74,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 			return null;
 		}
 
-		$row['decoded_payload'] = $this->decode_payload( $row['status_payload'] );
+		$row['decoded_payload'] = $this->decode_payload( $row['payload_json'] );
 
 		return $row;
 	}
@@ -94,10 +100,10 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 			$wpdb->prepare(
 				"SELECT s1.* FROM {$table} s1
 				INNER JOIN (
-					SELECT site_id, MAX(id) AS latest_id
+					SELECT dashboard_site_id, MAX(id) AS latest_id
 					FROM {$table}
-					WHERE site_id IN ({$placeholders})
-					GROUP BY site_id
+					WHERE dashboard_site_id IN ({$placeholders})
+					GROUP BY dashboard_site_id
 				) latest ON latest.latest_id = s1.id",
 				$site_ids
 			),
@@ -107,8 +113,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 		$snapshots = array();
 
 		foreach ( $rows as $row ) {
-			$row['decoded_payload']             = $this->decode_payload( $row['status_payload'] );
-			$snapshots[ (int) $row['site_id'] ] = $row;
+			$row['decoded_payload']                       = $this->decode_payload( $row['payload_json'] );
+			$snapshots[ (int) $row['dashboard_site_id'] ] = $row;
 		}
 
 		return $snapshots;
@@ -127,7 +133,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 
 		return (int) $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(*) FROM {$table} WHERE site_id = %d",
+				"SELECT COUNT(*) FROM {$table} WHERE dashboard_site_id = %d",
 				(int) $site_id
 			)
 		);
@@ -146,7 +152,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 
 		return false !== $wpdb->delete(
 			$table,
-			array( 'site_id' => (int) $site_id ),
+			array( 'dashboard_site_id' => (int) $site_id ),
 			array( '%d' )
 		);
 	}

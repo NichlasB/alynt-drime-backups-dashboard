@@ -29,8 +29,9 @@ The scaffold includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
-- Admin page shell under Tools > Drime Backups Dashboard.
-- Pairing-token helper primitives.
+- Admin page under Tools > Drime Backups Dashboard for creating local pending enrollments and displaying one-time pairing tokens.
+- Protocol-v1 pairing-token helper primitives with public-HTTPS origin validation.
+- Local dashboard-record revocation scaffolding that does not contact client sites.
 - Poller placeholder that intentionally performs no outbound requests.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
@@ -54,4 +55,4 @@ php -l includes/class-storage.php
 php -l uninstall.php
 ```
 
-Composer dev tooling is defined but not installed by the scaffold.
+Composer dev tooling is defined for linting and tests.

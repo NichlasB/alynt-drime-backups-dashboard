@@ -42,7 +42,9 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return $this->result( self::CATEGORY_PAUSED, __( 'Polling is paused for this site.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		if ( isset( $site['status'] ) && self::CATEGORY_PENDING === $site['status'] ) {
+		$site_status = isset( $site['overall_status'] ) ? (string) $site['overall_status'] : ( isset( $site['status'] ) ? (string) $site['status'] : '' );
+
+		if ( self::CATEGORY_PENDING === $site_status ) {
 			return $this->result( self::CATEGORY_PENDING, __( 'Waiting for the client site to opt in and complete pairing.', 'alynt-drime-backups-dashboard' ) );
 		}
 
@@ -118,8 +120,10 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return $snapshot['decoded_payload'];
 		}
 
-		if ( isset( $snapshot['status_payload'] ) ) {
-			$decoded = json_decode( (string) $snapshot['status_payload'], true );
+		$payload_json = isset( $snapshot['payload_json'] ) ? $snapshot['payload_json'] : ( isset( $snapshot['status_payload'] ) ? $snapshot['status_payload'] : '' );
+
+		if ( '' !== (string) $payload_json ) {
+			$decoded = json_decode( (string) $payload_json, true );
 
 			if ( is_array( $decoded ) ) {
 				return $decoded;
@@ -140,7 +144,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	private function is_stale( array $site, array $snapshot, $now ) {
 		$candidates = array(
 			isset( $site['last_seen_at'] ) ? $site['last_seen_at'] : '',
-			isset( $snapshot['captured_at'] ) ? $snapshot['captured_at'] : '',
+			isset( $snapshot['observed_at'] ) ? $snapshot['observed_at'] : ( isset( $snapshot['captured_at'] ) ? $snapshot['captured_at'] : '' ),
 		);
 
 		foreach ( $candidates as $candidate ) {

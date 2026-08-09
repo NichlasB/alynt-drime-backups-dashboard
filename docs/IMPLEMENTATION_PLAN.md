@@ -11,6 +11,7 @@ Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_M
 - Planning status: approved for local scaffold.
 - Dashboard repository: created locally at `C:\Development\WordPress\Plugins\alynt-drime-backups-dashboard`.
 - Dashboard plugin files: scaffolded.
+- Dashboard pending-enrollment token generation: implemented locally in the dashboard repository.
 - Uploader dashboard endpoint: not implemented.
 - Eventual host: `control-sitesmanage live-only`.
 - Live changes in this planning pass: none.
@@ -459,6 +460,8 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 - test with two disposable WordPress environments over HTTPS or an equivalent isolated integration harness.
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
+
+Current partial progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, and local dashboard-record revocation scaffolding are implemented. REST enrollment completion, credential vaulting, safe HTTP transport, first-poll activation, and manual **Check Status Now** remain separate approval-gated work.
 
 ### Phase 6 — Scheduled polling and history
 
