@@ -11,6 +11,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
+wp_clear_scheduled_hook( 'alynt_drime_backups_dashboard_poll_sites' );
+wp_clear_scheduled_hook( 'alynt_drime_backups_dashboard_cleanup_snapshots' );
+delete_transient( 'alynt_drime_backups_dashboard_poll_sites_lock' );
+
 $tables = array(
 	$wpdb->prefix . 'alynt_drime_dashboard_snapshots',
 	$wpdb->prefix . 'alynt_drime_dashboard_sites',

@@ -31,6 +31,13 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	private $poller;
 
 	/**
+	 * Snapshot repository.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Snapshot_Repository
+	 */
+	private $snapshots;
+
+	/**
 	 * Enrollment REST controller.
 	 *
 	 * @var Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller
@@ -41,14 +48,14 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$sites        = new Alynt_Drime_Backups_Dashboard_Site_Repository();
-		$snapshots    = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
-		$classifier   = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
-		$this->poller = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $snapshots, $classifier );
+		$sites           = new Alynt_Drime_Backups_Dashboard_Site_Repository();
+		$this->snapshots = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
+		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
+		$this->poller    = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier );
 
 		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(
 			$sites,
-			$snapshots,
+			$this->snapshots,
 			$classifier,
 			null,
 			$this->poller
@@ -64,8 +71,11 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 * @return void
 	 */
 	private function hooks() {
+		// phpcs:ignore WordPress.WP.CronInterval.ChangeDetected -- The interval value is registered in cron_schedules().
+		add_filter( 'cron_schedules', array( 'Alynt_Drime_Backups_Dashboard_Poller', 'cron_schedules' ) );
 		add_action( 'admin_menu', array( $this->admin_page, 'register_menu' ) );
 		add_action( 'rest_api_init', array( $this->enrollment_rest_controller, 'register_routes' ) );
-		add_action( 'alynt_drime_backups_dashboard_poll_sites', array( $this->poller, 'poll_sites' ) );
+		add_action( Alynt_Drime_Backups_Dashboard_Poller::CRON_HOOK, array( $this->poller, 'poll_sites' ) );
+		add_action( Alynt_Drime_Backups_Dashboard_Poller::CLEANUP_HOOK, array( $this->snapshots, 'cleanup_retention' ) );
 	}
 }

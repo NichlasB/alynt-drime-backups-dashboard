@@ -73,6 +73,39 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	}
 
 	/**
+	 * Gets enrolled sites that are due for polling.
+	 *
+	 * @param int    $limit Maximum rows.
+	 * @param string $now Current UTC datetime.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function due_for_poll( $limit = 5, $now = '' ) {
+		global $wpdb;
+
+		$limit = max( 1, min( 50, (int) $limit ) );
+		$now   = '' !== $now ? sanitize_text_field( $now ) : current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		return $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$table}
+				WHERE enrollment_status IN (%s, %s)
+					AND paused_at IS NULL
+					AND polling_key_id IS NOT NULL
+					AND polling_secret_ciphertext IS NOT NULL
+					AND (next_poll_at IS NULL OR next_poll_at <= %s)
+				ORDER BY COALESCE(next_poll_at, '1970-01-01 00:00:00') ASC, id ASC
+				LIMIT %d",
+				'active',
+				Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller::ENROLLMENT_STATUS_AWAITING_FIRST_POLL,
+				$now,
+				$limit
+			),
+			ARRAY_A
+		);
+	}
+
+	/**
 	 * Gets a pending site by public enrollment ID.
 	 *
 	 * @param string $public_id Public ID.
@@ -199,13 +232,15 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	 * @param int    $site_id Site ID.
 	 * @param string $status Dashboard status category.
 	 * @param string $plugin_version Uploader version.
+	 * @param string $next_poll_at Next scheduled poll time.
 	 * @return bool
 	 */
-	public function mark_poll_success( $site_id, $status, $plugin_version = '' ) {
+	public function mark_poll_success( $site_id, $status, $plugin_version = '', $next_poll_at = '' ) {
 		global $wpdb;
 
 		$now   = current_time( 'mysql', true );
 		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+		$next  = '' !== $next_poll_at ? sanitize_text_field( $next_poll_at ) : null;
 
 		return false !== $wpdb->update(
 			$table,
@@ -215,12 +250,14 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 				'plugin_version'       => sanitize_text_field( $plugin_version ),
 				'last_poll_attempt_at' => $now,
 				'last_seen_at'         => $now,
+				'next_poll_at'         => $next,
+				'consecutive_failures' => 0,
 				'last_error_code'      => null,
 				'last_error_summary'   => null,
 				'updated_at'           => $now,
 			),
 			array( 'id' => (int) $site_id ),
-			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
+			array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' ),
 			array( '%d' )
 		);
 	}
@@ -231,26 +268,30 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	 * @param int    $site_id Site ID.
 	 * @param string $error_code Stable error code.
 	 * @param string $summary Operator-safe summary.
+	 * @param string $next_poll_at Next retry time.
+	 * @param int    $consecutive_failures Consecutive failure count.
 	 * @return bool
 	 */
-	public function mark_poll_failure( $site_id, $error_code, $summary = '' ) {
+	public function mark_poll_failure( $site_id, $error_code, $summary = '', $next_poll_at = '', $consecutive_failures = 1 ) {
 		global $wpdb;
 
 		$now   = current_time( 'mysql', true );
 		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+		$next  = '' !== $next_poll_at ? sanitize_text_field( $next_poll_at ) : null;
 
 		return false !== $wpdb->update(
 			$table,
 			array(
 				'overall_status'       => 'needs_attention',
 				'last_poll_attempt_at' => $now,
+				'next_poll_at'         => $next,
 				'last_error_code'      => sanitize_key( $error_code ),
 				'last_error_summary'   => sanitize_text_field( $summary ),
-				'consecutive_failures' => 1,
+				'consecutive_failures' => max( 1, (int) $consecutive_failures ),
 				'updated_at'           => $now,
 			),
 			array( 'id' => (int) $site_id ),
-			array( '%s', '%s', '%s', '%s', '%d', '%s' ),
+			array( '%s', '%s', '%s', '%s', '%s', '%d', '%s' ),
 			array( '%d' )
 		);
 	}

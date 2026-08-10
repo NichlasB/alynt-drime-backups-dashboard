@@ -158,6 +158,40 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	}
 
 	/**
+	 * Deletes old snapshots while preserving the latest snapshot for every site.
+	 *
+	 * @param int $retention_days Days to retain.
+	 * @param int $batch_size Maximum rows to delete in one run.
+	 * @return int Deleted row count.
+	 */
+	public function cleanup_retention( $retention_days = 30, $batch_size = 500 ) {
+		global $wpdb;
+
+		$retention_days = max( 1, min( 365, (int) $retention_days ) );
+		$batch_size     = max( 1, min( 5000, (int) $batch_size ) );
+		$cutoff         = gmdate( 'Y-m-d H:i:s', time() - ( $retention_days * 86400 ) );
+		$table          = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
+
+		return (int) $wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM {$table}
+				WHERE observed_at < %s
+					AND id NOT IN (
+						SELECT latest_id FROM (
+							SELECT MAX(id) AS latest_id
+							FROM {$table}
+							GROUP BY dashboard_site_id
+						) latest_snapshots
+					)
+				ORDER BY observed_at ASC, id ASC
+				LIMIT %d",
+				$cutoff,
+				$batch_size
+			)
+		);
+	}
+
+	/**
 	 * Decodes snapshot JSON safely.
 	 *
 	 * @param string $payload Payload JSON.

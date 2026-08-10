@@ -29,11 +29,32 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	public $site;
 
 	/**
+	 * Sites keyed by ID.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $sites = array();
+
+	/**
+	 * Due sites.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $due_sites = array();
+
+	/**
 	 * Success data.
 	 *
 	 * @var array<string,mixed>
 	 */
 	public $success = array();
+
+	/**
+	 * Success rows.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $successes = array();
 
 	/**
 	 * Failure data.
@@ -43,12 +64,39 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	public $failure = array();
 
 	/**
+	 * Failure rows.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $failures = array();
+
+	/**
+	 * Last due-for-poll query.
+	 *
+	 * @var array<string,mixed>
+	 */
+	public $due_query = array();
+
+	/**
 	 * Constructor.
 	 *
-	 * @param array<string,mixed>|null $site Site.
+	 * @param array<string,mixed>|array<int,array<string,mixed>>|null $site Site.
 	 */
 	public function __construct( $site ) {
-		$this->site = $site;
+		if ( is_array( $site ) && isset( $site[0] ) && is_array( $site[0] ) ) {
+			foreach ( $site as $row ) {
+				$this->sites[ (int) $row['id'] ] = $row;
+			}
+
+			$this->due_sites = array_values( $this->sites );
+			$this->site      = reset( $this->sites );
+		} else {
+			$this->site = $site;
+
+			if ( is_array( $site ) && isset( $site['id'] ) ) {
+				$this->sites[ (int) $site['id'] ] = $site;
+			}
+		}
 	}
 
 	/**
@@ -58,7 +106,23 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	 * @return array<string,mixed>|null
 	 */
 	public function get( $site_id ) {
-		return $this->site && (int) $this->site['id'] === (int) $site_id ? $this->site : null;
+		return isset( $this->sites[ (int) $site_id ] ) ? $this->sites[ (int) $site_id ] : null;
+	}
+
+	/**
+	 * Gets due sites.
+	 *
+	 * @param int    $limit Limit.
+	 * @param string $now Now.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function due_for_poll( $limit = 5, $now = '' ) {
+		$this->due_query = array(
+			'limit' => $limit,
+			'now'   => $now,
+		);
+
+		return array_slice( $this->due_sites, 0, (int) $limit );
 	}
 
 	/**
@@ -67,14 +131,17 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	 * @param int    $site_id Site ID.
 	 * @param string $status Status.
 	 * @param string $plugin_version Plugin version.
+	 * @param string $next_poll_at Next poll.
 	 * @return bool
 	 */
-	public function mark_poll_success( $site_id, $status, $plugin_version = '' ) {
+	public function mark_poll_success( $site_id, $status, $plugin_version = '', $next_poll_at = '' ) {
 		$this->success = array(
 			'site_id'        => $site_id,
 			'status'         => $status,
 			'plugin_version' => $plugin_version,
+			'next_poll_at'   => $next_poll_at,
 		);
+		$this->successes[] = $this->success;
 
 		return true;
 	}
@@ -85,14 +152,19 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	 * @param int    $site_id Site ID.
 	 * @param string $error_code Error code.
 	 * @param string $summary Summary.
+	 * @param string $next_poll_at Next poll.
+	 * @param int    $consecutive_failures Consecutive failures.
 	 * @return bool
 	 */
-	public function mark_poll_failure( $site_id, $error_code, $summary = '' ) {
+	public function mark_poll_failure( $site_id, $error_code, $summary = '', $next_poll_at = '', $consecutive_failures = 1 ) {
 		$this->failure = array(
-			'site_id'    => $site_id,
-			'error_code' => $error_code,
-			'summary'    => $summary,
+			'site_id'              => $site_id,
+			'error_code'           => $error_code,
+			'summary'              => $summary,
+			'next_poll_at'         => $next_poll_at,
+			'consecutive_failures' => $consecutive_failures,
 		);
+		$this->failures[] = $this->failure;
 
 		return true;
 	}
@@ -169,7 +241,47 @@ class PollerTest extends TestCase {
 		$this->assertSame( 'working', $snapshots->recorded['status'] );
 		$this->assertSame( 'working', $sites->success['status'] );
 		$this->assertSame( '0.5.3', $sites->success['plugin_version'] );
+		$this->assertNotEmpty( $sites->success['next_poll_at'] );
 		$this->assertSame( array(), $sites->failure );
+	}
+
+	/**
+	 * Scheduled polling processes only the bounded due-site batch.
+	 *
+	 * @return void
+	 */
+	public function test_scheduled_poll_processes_bounded_due_site_batch() {
+		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
+			array(
+				$this->site( $vault, array( 'id' => 77 ) ),
+				$this->site( $vault, array( 'id' => 78 ) ),
+				$this->site( $vault, array( 'id' => 79 ) ),
+			)
+		);
+		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
+		$calls     = 0;
+
+		$http_client = function () use ( &$calls ) {
+			++$calls;
+
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode( $this->payload() ),
+			);
+		};
+		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
+
+		$result = $poller->poll_sites( 2 );
+
+		$this->assertSame( 2, $sites->due_query['limit'] );
+		$this->assertSame( 2, $calls );
+		$this->assertSame( 2, $result['processed'] );
+		$this->assertSame( 2, $result['success'] );
+		$this->assertSame( 0, $result['failure'] );
+		$this->assertCount( 2, $sites->successes );
 	}
 
 	/**
@@ -204,6 +316,8 @@ class PollerTest extends TestCase {
 		$this->assertSame( 'site_uuid_mismatch', $result->get_error_code() );
 		$this->assertSame( array(), $snapshots->recorded );
 		$this->assertSame( 'site_uuid_mismatch', $sites->failure['error_code'] );
+		$this->assertSame( 1, $sites->failure['consecutive_failures'] );
+		$this->assertNotEmpty( $sites->failure['next_poll_at'] );
 		$this->assertSame( array(), $sites->success );
 	}
 
@@ -236,6 +350,37 @@ class PollerTest extends TestCase {
 	}
 
 	/**
+	 * Failure backoff increments the stored failure counter.
+	 *
+	 * @return void
+	 */
+	public function test_failure_backoff_increments_consecutive_failures() {
+		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
+			$this->site(
+				$vault,
+				array(
+					'consecutive_failures' => 2,
+				)
+			)
+		);
+		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
+
+		$http_client = function () {
+			return new WP_Error( 'transport_failed', 'Client status endpoint unavailable.' );
+		};
+		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
+
+		$result = $poller->check_status_now( 77 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'transport_failed', $sites->failure['error_code'] );
+		$this->assertSame( 3, $sites->failure['consecutive_failures'] );
+		$this->assertNotEmpty( $sites->failure['next_poll_at'] );
+		$this->assertSame( array(), $snapshots->recorded );
+	}
+
+	/**
 	 * Creates a poller.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository     $sites Sites.
@@ -262,17 +407,21 @@ class PollerTest extends TestCase {
 	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault $vault Vault.
 	 * @return array<string,mixed>
 	 */
-	private function site( $vault ) {
-		return array(
+	private function site( $vault, $overrides = array() ) {
+		$public_id = isset( $overrides['public_id'] ) ? (string) $overrides['public_id'] : '00000000-0000-4000-8000-000000000000';
+		$site      = array(
 			'id'                         => 77,
-			'public_id'                  => '00000000-0000-4000-8000-000000000000',
+			'public_id'                  => $public_id,
 			'expected_origin'            => 'https://client.example.com',
 			'site_uuid'                  => '11111111-1111-4111-8111-111111111111',
 			'polling_key_id'             => 'pk_example_0000000000000000',
-			'polling_secret_ciphertext'  => $vault->encrypt( str_repeat( 'S', 43 ), 'site:00000000-0000-4000-8000-000000000000' ),
+			'polling_secret_ciphertext'  => $vault->encrypt( str_repeat( 'S', 43 ), 'site:' . $public_id ),
 			'enrollment_status'          => 'awaiting_first_poll',
 			'overall_status'             => 'pending',
+			'consecutive_failures'       => 0,
 		);
+
+		return array_merge( $site, $overrides );
 	}
 
 	/**

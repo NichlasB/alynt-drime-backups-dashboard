@@ -22,6 +22,6 @@ class Alynt_Drime_Backups_Dashboard_Deactivator {
 	 * @return void
 	 */
 	public static function deactivate() {
-		wp_clear_scheduled_hook( 'alynt_drime_backups_dashboard_poll_sites' );
+		Alynt_Drime_Backups_Dashboard_Poller::unschedule_events();
 	}
 }

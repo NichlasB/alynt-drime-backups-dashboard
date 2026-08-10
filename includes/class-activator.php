@@ -23,5 +23,6 @@ class Alynt_Drime_Backups_Dashboard_Activator {
 	 */
 	public static function activate() {
 		Alynt_Drime_Backups_Dashboard_Storage::maybe_install();
+		Alynt_Drime_Backups_Dashboard_Poller::schedule_events();
 	}
 }
