@@ -140,24 +140,6 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	}
 
 	/**
-	 * Deletes snapshots for one site.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function delete_for_site( $site_id ) {
-		global $wpdb;
-
-		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
-
-		return false !== $wpdb->delete(
-			$table,
-			array( 'dashboard_site_id' => (int) $site_id ),
-			array( '%d' )
-		);
-	}
-
-	/**
 	 * Deletes old snapshots while preserving the latest snapshot for every site.
 	 *
 	 * @param int $retention_days Days to retain.
