@@ -44,16 +44,25 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 	private $vault;
 
 	/**
+	 * Structured event log.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Event_Log
+	 */
+	private $event_log;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null  $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null $origins Origin validator.
 	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault|null $vault Credential vault.
+	 * @param Alynt_Drime_Backups_Dashboard_Event_Log|null        $event_log Event log.
 	 */
-	public function __construct( $sites = null, $origins = null, $vault = null ) {
-		$this->sites   = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
-		$this->origins = $origins instanceof Alynt_Drime_Backups_Dashboard_Origin_Validator ? $origins : new Alynt_Drime_Backups_Dashboard_Origin_Validator();
-		$this->vault   = $vault instanceof Alynt_Drime_Backups_Dashboard_Credential_Vault ? $vault : new Alynt_Drime_Backups_Dashboard_Credential_Vault();
+	public function __construct( $sites = null, $origins = null, $vault = null, $event_log = null ) {
+		$this->sites     = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
+		$this->origins   = $origins instanceof Alynt_Drime_Backups_Dashboard_Origin_Validator ? $origins : new Alynt_Drime_Backups_Dashboard_Origin_Validator();
+		$this->vault     = $vault instanceof Alynt_Drime_Backups_Dashboard_Credential_Vault ? $vault : new Alynt_Drime_Backups_Dashboard_Credential_Vault();
+		$this->event_log = $event_log instanceof Alynt_Drime_Backups_Dashboard_Event_Log ? $event_log : new Alynt_Drime_Backups_Dashboard_Event_Log();
 	}
 
 	/**
@@ -100,35 +109,36 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 		$enrollment = $this->validate_payload_shape( $payload );
 
 		if ( is_wp_error( $enrollment ) ) {
+			$this->log_enrollment_failure( $enrollment );
 			return $enrollment;
 		}
 
 		$site = $this->sites->get_pending_by_public_id( $enrollment['enrollment_id'] );
 
 		if ( ! $site ) {
-			return $this->error( 'pairing_invalid', __( 'The pairing enrollment is not valid.', 'alynt-drime-backups-dashboard' ), 403 );
+			return $this->enrollment_error( 'pairing_invalid', __( 'The pairing enrollment is not valid.', 'alynt-drime-backups-dashboard' ), 403 );
 		}
 
 		if ( empty( $site['pairing_secret_hash'] ) || empty( $site['pairing_expires_at'] ) ) {
-			return $this->error( 'pairing_used', __( 'The pairing token has already been consumed.', 'alynt-drime-backups-dashboard' ), 409 );
+			return $this->enrollment_error( 'pairing_used', __( 'The pairing token has already been consumed.', 'alynt-drime-backups-dashboard' ), 409, $site );
 		}
 
 		if ( strtotime( (string) $site['pairing_expires_at'] ) <= $now ) {
-			return $this->error( 'pairing_expired', __( 'The pairing token has expired.', 'alynt-drime-backups-dashboard' ), 410 );
+			return $this->enrollment_error( 'pairing_expired', __( 'The pairing token has expired.', 'alynt-drime-backups-dashboard' ), 410, $site );
 		}
 
 		if ( '' === $secret || ! hash_equals( (string) $site['pairing_secret_hash'], Alynt_Drime_Backups_Dashboard_Pairing_Tokens::hash_secret( $secret ) ) ) {
-			return $this->error( 'pairing_invalid', __( 'The pairing credential is not valid.', 'alynt-drime-backups-dashboard' ), 403 );
+			return $this->enrollment_error( 'pairing_invalid', __( 'The pairing credential is not valid.', 'alynt-drime-backups-dashboard' ), 403, $site );
 		}
 
 		if ( ! hash_equals( (string) $site['expected_origin'], $enrollment['home_origin'] ) ) {
-			return $this->error( 'origin_mismatch', __( 'The client origin does not match the pending dashboard record.', 'alynt-drime-backups-dashboard' ), 409 );
+			return $this->enrollment_error( 'origin_mismatch', __( 'The client origin does not match the pending dashboard record.', 'alynt-drime-backups-dashboard' ), 409, $site );
 		}
 
 		$expected_endpoint = $this->origins->status_endpoint_for_origin( $site['expected_origin'] );
 
 		if ( ! hash_equals( $expected_endpoint, $enrollment['status_endpoint'] ) ) {
-			return $this->error( 'endpoint_invalid', __( 'The client status endpoint is not the fixed read-only route.', 'alynt-drime-backups-dashboard' ), 400 );
+			return $this->enrollment_error( 'endpoint_invalid', __( 'The client status endpoint is not the fixed read-only route.', 'alynt-drime-backups-dashboard' ), 400, $site );
 		}
 
 		$polling_key_id = $this->create_polling_key_id();
@@ -136,6 +146,7 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 		$ciphertext     = $this->vault->encrypt( $polling_secret, 'site:' . $site['public_id'] );
 
 		if ( is_wp_error( $ciphertext ) ) {
+			$this->log_enrollment_failure( $ciphertext, $site );
 			return $ciphertext;
 		}
 
@@ -151,7 +162,7 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 		);
 
 		if ( ! $stored ) {
-			return $this->error( 'enrollment_store_failed', __( 'The dashboard could not store the enrollment state.', 'alynt-drime-backups-dashboard' ), 500 );
+			return $this->enrollment_error( 'enrollment_store_failed', __( 'The dashboard could not store the enrollment state.', 'alynt-drime-backups-dashboard' ), 500, $site );
 		}
 
 		return $this->response(
@@ -259,6 +270,41 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 	 */
 	private function error( $code, $message, $status ) {
 		return new WP_Error( $code, $message, array( 'status' => (int) $status ) );
+	}
+
+	/**
+	 * Builds and logs a safe enrollment error.
+	 *
+	 * @param string                   $code Error code.
+	 * @param string                   $message Error message.
+	 * @param int                      $status HTTP status.
+	 * @param array<string,mixed>|null $site Site row.
+	 * @return WP_Error
+	 */
+	private function enrollment_error( $code, $message, $status, $site = null ) {
+		$error = $this->error( $code, $message, $status );
+
+		$this->log_enrollment_failure( $error, is_array( $site ) ? $site : array() );
+
+		return $error;
+	}
+
+	/**
+	 * Records a redacted enrollment failure event.
+	 *
+	 * @param WP_Error                 $error Error.
+	 * @param array<string,mixed>|null $site Site row.
+	 * @return void
+	 */
+	private function log_enrollment_failure( $error, $site = null ) {
+		$context = array();
+
+		if ( is_array( $site ) && ! empty( $site ) ) {
+			$context['dashboard_site_id'] = isset( $site['id'] ) ? (int) $site['id'] : 0;
+			$context['enrollment_status'] = isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '';
+		}
+
+		$this->event_log->log( 'warning', 'rest', $error->get_error_code(), $error->get_error_message(), $context );
 	}
 
 	/**

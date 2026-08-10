@@ -79,6 +79,13 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 	private $http_client;
 
 	/**
+	 * Structured event log.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Event_Log
+	 */
+	private $event_log;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null          $sites Site repository.
@@ -88,8 +95,9 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 	 * @param Alynt_Drime_Backups_Dashboard_Safe_Transport|null           $transport Transport.
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Payload_Validator|null $validator Payload validator.
 	 * @param callable|null                                               $http_client HTTP client.
+	 * @param Alynt_Drime_Backups_Dashboard_Event_Log|null                $event_log Event log.
 	 */
-	public function __construct( $sites = null, $snapshots = null, $classifier = null, $vault = null, $transport = null, $validator = null, $http_client = null ) {
+	public function __construct( $sites = null, $snapshots = null, $classifier = null, $vault = null, $transport = null, $validator = null, $http_client = null, $event_log = null ) {
 		$this->sites       = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots   = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$this->classifier  = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
@@ -97,6 +105,7 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 		$this->transport   = $transport instanceof Alynt_Drime_Backups_Dashboard_Safe_Transport ? $transport : new Alynt_Drime_Backups_Dashboard_Safe_Transport();
 		$this->validator   = $validator instanceof Alynt_Drime_Backups_Dashboard_Status_Payload_Validator ? $validator : new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
 		$this->http_client = is_callable( $http_client ) ? $http_client : null;
+		$this->event_log   = $event_log instanceof Alynt_Drime_Backups_Dashboard_Event_Log ? $event_log : new Alynt_Drime_Backups_Dashboard_Event_Log();
 	}
 
 	/**
@@ -169,6 +178,7 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 		if ( ! $this->acquire_global_lock() ) {
 			$result['skipped'] = 1;
 			$result['reason']  = 'locked';
+			$this->event_log->log( 'warning', 'cron', 'poll_batch_locked', __( 'The scheduled poll batch was skipped because another batch is running.', 'alynt-drime-backups-dashboard' ) );
 
 			return $result;
 		}
@@ -239,6 +249,7 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 
 		if ( is_wp_error( $auth ) ) {
 			$this->mark_poll_failure( $site, $auth->get_error_code(), $auth->get_error_message() );
+			$this->log_poll_failure( $site, $auth );
 			return $auth;
 		}
 
@@ -246,6 +257,7 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 
 		if ( is_wp_error( $raw_payload ) ) {
 			$this->mark_poll_failure( $site, $raw_payload->get_error_code(), $raw_payload->get_error_message() );
+			$this->log_poll_failure( $site, $raw_payload );
 			return $raw_payload;
 		}
 
@@ -253,6 +265,7 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 
 		if ( is_wp_error( $payload ) ) {
 			$this->mark_poll_failure( $site, $payload->get_error_code(), $payload->get_error_message() );
+			$this->log_poll_failure( $site, $payload );
 			return $payload;
 		}
 
@@ -324,6 +337,28 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 			$summary,
 			$this->next_poll_after_failure( $site, $failures ),
 			$failures
+		);
+	}
+
+	/**
+	 * Records a redacted poll failure event.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param WP_Error            $error Error.
+	 * @return void
+	 */
+	private function log_poll_failure( array $site, $error ) {
+		$this->event_log->log(
+			'error',
+			'external_api',
+			$error->get_error_code(),
+			$error->get_error_message(),
+			array(
+				'dashboard_site_id'    => isset( $site['id'] ) ? (int) $site['id'] : 0,
+				'enrollment_status'    => isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '',
+				'overall_status'       => isset( $site['overall_status'] ) ? sanitize_key( $site['overall_status'] ) : '',
+				'consecutive_failures' => isset( $site['consecutive_failures'] ) ? max( 0, (int) $site['consecutive_failures'] ) + 1 : 1,
+			)
 		);
 	}
 

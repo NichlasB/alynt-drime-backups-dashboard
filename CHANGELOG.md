@@ -20,3 +20,4 @@ All notable changes to this project will be documented in this file.
 - Added scheduled read-only polling with bounded batches, global/per-site locks, deterministic jitter, retry backoff, and 30-day snapshot retention cleanup.
 - Added a redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, and recent safe poll outcomes.
 - Added operator UI polish for Sites, Attention, Site Detail, latest redacted snapshot summaries, accessible status guidance, and support-copy diagnostics.
+- Added optional structured diagnostics logging with disabled-by-default settings, redacted local event storage, recent event viewing/export, clear controls, and targeted enrollment/polling failure instrumentation.

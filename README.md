@@ -39,6 +39,7 @@ The scaffold includes:
 - Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and snapshot retention cleanup.
 - Operator-focused Sites, Attention, and Site Detail views with polling evidence, latest redacted snapshot summaries, accessible status guidance, and local-only revoke/check actions.
 - Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and support-copy output.
+- Optional structured diagnostics logging, disabled by default, with a bounded redacted local event buffer for support troubleshooting.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
@@ -64,6 +65,8 @@ Before broad implementation work, create or verify a restore point. For the new 
 
 Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.0 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
 
+Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Structured diagnostics logging is disabled by default. When an administrator explicitly enables it, the plugin stores a bounded local event buffer with redaction applied before persistence/export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials are not stored in diagnostics events.
+
 ### Changelog Summary
 
 See `CHANGELOG.md` for the current unreleased 0.1.0 changelog and release notes.
@@ -83,6 +86,7 @@ php -l includes/class-admin-page.php
 php -l includes/class-credential-vault.php
 php -l includes/class-deactivator.php
 php -l includes/class-diagnostics.php
+php -l includes/class-event-log.php
 php -l includes/class-enrollment-manager.php
 php -l includes/class-enrollment-rest-controller.php
 php -l includes/class-origin-validator.php

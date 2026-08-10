@@ -38,16 +38,25 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 	private $classifier;
 
 	/**
+	 * Structured event log.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Event_Log
+	 */
+	private $event_log;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null     $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null $snapshots Snapshot repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null   $classifier Status classifier.
+	 * @param Alynt_Drime_Backups_Dashboard_Event_Log|null           $event_log Event log.
 	 */
-	public function __construct( $sites = null, $snapshots = null, $classifier = null ) {
+	public function __construct( $sites = null, $snapshots = null, $classifier = null, $event_log = null ) {
 		$this->sites      = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots  = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$this->classifier = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
+		$this->event_log  = $event_log instanceof Alynt_Drime_Backups_Dashboard_Event_Log ? $event_log : new Alynt_Drime_Backups_Dashboard_Event_Log();
 	}
 
 	/**
@@ -65,6 +74,7 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 			'scheduler' => $this->scheduler_diagnostics( $now ),
 			'counts'    => $this->count_diagnostics( $sites, $snapshots, $now ),
 			'recent'    => $this->recent_poll_outcomes( $sites ),
+			'logging'   => $this->logging_diagnostics(),
 			'support'   => $this->support_summary( $sites, $snapshots, $now ),
 		);
 	}
@@ -116,7 +126,50 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 				'global_lock_active'  => $scheduler['global_lock_active'],
 			),
 			'counts'      => $counts,
+			'logging'     => $this->support_logging_summary(),
 			'recent_safe' => $this->support_recent_outcomes( $recent ),
+		);
+	}
+
+	/**
+	 * Gets the structured event log.
+	 *
+	 * @return Alynt_Drime_Backups_Dashboard_Event_Log
+	 */
+	public function event_log() {
+		return $this->event_log;
+	}
+
+	/**
+	 * Builds logging diagnostics.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function logging_diagnostics() {
+		$settings = $this->event_log->settings();
+
+		return array(
+			'settings' => $settings,
+			'summary'  => $this->event_log->summary(),
+			'events'   => $this->event_log->recent_events( 25 ),
+		);
+	}
+
+	/**
+	 * Builds support-safe logging summary without event context.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function support_logging_summary() {
+		$settings = $this->event_log->settings();
+		$summary  = $this->event_log->summary();
+
+		return array(
+			'enabled'        => ! empty( $settings['enabled'] ),
+			'minimum_level'  => isset( $settings['minimum_level'] ) ? (string) $settings['minimum_level'] : 'warning',
+			'retention_days' => isset( $settings['retention_days'] ) ? (int) $settings['retention_days'] : 14,
+			'event_count'    => isset( $summary['total'] ) ? (int) $summary['total'] : 0,
+			'last_event_at'  => isset( $summary['last_event_at'] ) ? (string) $summary['last_event_at'] : '',
 		);
 	}
 

@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.0 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, and redacted support diagnostics. It does not expose remote actions or make live changes.
+Version 0.1.0 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, and optional structured diagnostics logging that is disabled by default. It does not expose remote actions or make live changes.
 
 == Installation ==
 
@@ -33,3 +33,4 @@ Version 0.1.0 is a local scaffold with pending-enrollment token generation, REST
 * Added scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and retention cleanup.
 * Added redacted admin Diagnostics for scheduler state, retention defaults, polling counts, and recent safe poll outcomes.
 * Added operator UI polish for Sites, Attention, Site Detail, latest redacted snapshot summaries, accessible status guidance, and support-copy diagnostics.
+* Added optional structured diagnostics logging with admin-only settings, redacted event viewing/export, and local clear controls.
