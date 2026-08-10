@@ -47,6 +47,33 @@ Before broad implementation work, create or verify a restore point. For the new 
 
 ## Development
 
+### Requirements
+
+- WordPress 6.0 or higher.
+- PHP 7.4 or higher.
+- Composer dependencies installed for local linting and tests.
+- Node.js/npm for optional asset-build and deployment helper scripts.
+
+### Installation
+
+1. Copy the `alynt-drime-backups-dashboard` folder to `wp-content/plugins/`.
+2. Activate **Alynt Drime Backups Dashboard** from the WordPress Plugins screen.
+3. Open **Tools > Drime Backups Dashboard** in WordPress admin.
+
+### Usage
+
+Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.0 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
+
+### Changelog Summary
+
+See `CHANGELOG.md` for the current unreleased 0.1.0 changelog and release notes.
+
+### License
+
+GPL-2.0-or-later. See `LICENSE`.
+
+### Local Checks
+
 Run PHP syntax checks before packaging:
 
 ```sh
@@ -70,3 +97,9 @@ php -l uninstall.php
 ```
 
 Composer dev tooling is defined for linting and tests.
+
+```sh
+npm test
+npm run lint
+npm run build
+```

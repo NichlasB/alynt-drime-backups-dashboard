@@ -4,3 +4,31 @@
 /.phpunit.result.cache
 /.phpcs-cache
 /*.zip
+
+# Build output
+/assets/dist/
+
+# Environment
+/.env
+/.env.local
+
+# Composer
+/composer.phar
+
+# Source maps
+*.map
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+
+# Local-only workflow files
+/deploy.sh
+/session-context.tmp.md
+/session-handoff.tmp.md
