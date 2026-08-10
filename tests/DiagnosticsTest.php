@@ -10,9 +10,18 @@ use PHPUnit\Framework\TestCase;
 require_once dirname( __DIR__ ) . '/includes/class-site-repository.php';
 require_once dirname( __DIR__ ) . '/includes/class-snapshot-repository.php';
 require_once dirname( __DIR__ ) . '/includes/class-status-classifier.php';
+require_once dirname( __DIR__ ) . '/includes/class-event-log-redactor.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-storage.php';
 require_once dirname( __DIR__ ) . '/includes/class-event-log.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-enrollment-rest-responses.php';
 require_once dirname( __DIR__ ) . '/includes/class-enrollment-rest-controller.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-scheduling.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-locks.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-status-check.php';
 require_once dirname( __DIR__ ) . '/includes/class-poller.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-scheduler.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-support.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-site-metrics.php';
 require_once dirname( __DIR__ ) . '/includes/class-diagnostics.php';
 
 /**

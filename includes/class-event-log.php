@@ -16,6 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Event_Log {
+	use Alynt_Drime_Backups_Dashboard_Event_Log_Storage;
+
 	const OPTION_SETTINGS = 'alynt_drime_backups_dashboard_diagnostics_settings';
 	const OPTION_EVENTS   = 'alynt_drime_backups_dashboard_diagnostics_events';
 
@@ -33,29 +35,20 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	);
 
 	/**
-	 * Sensitive context keys that must be removed or masked.
+	 * Event redactor.
 	 *
-	 * @var array<int,string>
+	 * @var Alynt_Drime_Backups_Dashboard_Event_Log_Redactor
 	 */
-	private $sensitive_key_patterns = array(
-		'password',
-		'passwd',
-		'secret',
-		'token',
-		'api_key',
-		'apikey',
-		'authorization',
-		'cookie',
-		'nonce',
-		'salt',
-		'ciphertext',
-		'payload',
-		'body',
-		'raw',
-		'path',
-		'sql',
-		'drime',
-	);
+	private $redactor;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Event_Log_Redactor|null $redactor Event redactor.
+	 */
+	public function __construct( $redactor = null ) {
+		$this->redactor = $redactor instanceof Alynt_Drime_Backups_Dashboard_Event_Log_Redactor ? $redactor : new Alynt_Drime_Backups_Dashboard_Event_Log_Redactor();
+	}
 
 	/**
 	 * Gets sanitized diagnostics settings.
@@ -126,8 +119,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 				'level'     => $level,
 				'category'  => sanitize_key( $category ),
 				'code'      => sanitize_key( $code ),
-				'message'   => $this->truncate( sanitize_text_field( $message ), 240 ),
-				'context'   => $this->redact_context( $context ),
+				'message'   => $this->redactor->truncate( sanitize_text_field( $message ), 240 ),
+				'context'   => $this->redactor->redact_context( $context ),
 			)
 		);
 	}
@@ -253,129 +246,5 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	 */
 	private function meets_threshold( $level, $minimum ) {
 		return $this->severity_order[ $level ] >= $this->severity_order[ $this->normalize_level( $minimum ) ];
-	}
-
-	/**
-	 * Stores an event in the bounded ring buffer.
-	 *
-	 * @param array<string,mixed> $event Event.
-	 * @return bool
-	 */
-	private function store_event( array $event ) {
-		if ( ! function_exists( 'update_option' ) ) {
-			return false;
-		}
-
-		$settings = $this->settings();
-		$events   = $this->filter_retained_events( $this->stored_events(), (int) $settings['retention_days'] );
-
-		array_unshift( $events, $event );
-		$events = array_slice( $events, 0, (int) $settings['max_events'] );
-
-		return (bool) update_option( self::OPTION_EVENTS, $events, false );
-	}
-
-	/**
-	 * Gets stored events.
-	 *
-	 * @return array<int,array<string,mixed>>
-	 */
-	private function stored_events() {
-		$events = function_exists( 'get_option' ) ? get_option( self::OPTION_EVENTS, array() ) : array();
-
-		return is_array( $events ) ? array_values( array_filter( $events, 'is_array' ) ) : array();
-	}
-
-	/**
-	 * Filters events beyond retention.
-	 *
-	 * @param array<int,array<string,mixed>> $events Events.
-	 * @param int                            $retention_days Retention days.
-	 * @return array<int,array<string,mixed>>
-	 */
-	private function filter_retained_events( array $events, $retention_days ) {
-		$cutoff = time() - ( max( 1, (int) $retention_days ) * 86400 );
-
-		return array_values(
-			array_filter(
-				$events,
-				function ( $event ) use ( $cutoff ) {
-					$timestamp = ! empty( $event['timestamp'] ) ? strtotime( (string) $event['timestamp'] ) : 0;
-
-					return $timestamp <= 0 || $timestamp >= $cutoff;
-				}
-			)
-		);
-	}
-
-	/**
-	 * Redacts sensitive context before storage/export.
-	 *
-	 * @param array<string,mixed> $context Context.
-	 * @return array<string,mixed>
-	 */
-	private function redact_context( array $context ) {
-		$redacted = array();
-
-		foreach ( $context as $key => $value ) {
-			$key      = sanitize_key( (string) $key );
-			$redacts  = $this->key_is_sensitive( $key );
-			$safe_key = '' === $key ? 'context' : $key;
-
-			$redacted[ $safe_key ] = $redacts ? '[redacted]' : $this->redact_value( $value );
-		}
-
-		return $redacted;
-	}
-
-	/**
-	 * Redacts or normalizes a value.
-	 *
-	 * @param mixed $value Value.
-	 * @return mixed
-	 */
-	private function redact_value( $value ) {
-		if ( is_array( $value ) ) {
-			return $this->redact_context( $value );
-		}
-
-		if ( is_bool( $value ) || is_int( $value ) || is_float( $value ) || null === $value ) {
-			return $value;
-		}
-
-		return $this->truncate( sanitize_text_field( (string) $value ), 240 );
-	}
-
-	/**
-	 * Determines whether a context key is sensitive.
-	 *
-	 * @param string $key Key.
-	 * @return bool
-	 */
-	private function key_is_sensitive( $key ) {
-		foreach ( $this->sensitive_key_patterns as $pattern ) {
-			if ( false !== strpos( $key, $pattern ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Truncates scalar text.
-	 *
-	 * @param string $value Value.
-	 * @param int    $length Length.
-	 * @return string
-	 */
-	private function truncate( $value, $length ) {
-		$value = (string) $value;
-
-		if ( strlen( $value ) <= $length ) {
-			return $value;
-		}
-
-		return substr( $value, 0, max( 0, $length - 3 ) ) . '...';
 	}
 }
