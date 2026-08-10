@@ -396,6 +396,8 @@ All screens require a dedicated administrator capability, with `manage_options` 
 - expected release asset: `alynt-drime-backups-dashboard-X.Y.Z.zip`;
 - ZIP top-level folder: `alynt-drime-backups-dashboard/`;
 - GitHub release workflow must build from the release tag, exclude development/local files, and upload an idempotently named asset;
+- Composer dependencies are development-only for v1 release packaging; CI must build npm assets and exclude `vendor/`;
+- release packages should exclude tests, source assets, build scripts, Composer/npm manifests, local deployment helpers, and internal engineering docs while preserving runtime PHP, `readme.txt`, `uninstall.php`, `languages/`, `assets/dist/`, and `LICENSE`;
 - configuration, ZIP validation, publication, updater runtime testing, and live deployment remain separate approval-gated workflows.
 
 ## Implementation Phases And Gates

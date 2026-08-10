@@ -1,0 +1,112 @@
+name: Build Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Release tag to package, such as v0.1.0
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.event.release.tag_name || inputs.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm dependencies and build assets
+        run: |
+          npm ci
+          npm run build
+
+      - name: Create plugin zip
+        id: package
+        run: |
+          PLUGIN_SLUG="alynt-drime-backups-dashboard"
+          RAW_TAG="${{ github.event.release.tag_name || inputs.tag_name }}"
+          VERSION="${RAW_TAG#v}"
+
+          if [ -z "${RAW_TAG}" ] || [ -z "${VERSION}" ]; then
+            echo "Release tag is required." >&2
+            exit 1
+          fi
+
+          mkdir -p "build/${PLUGIN_SLUG}"
+
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.codex' \
+            --exclude='.agents' \
+            --exclude='.opencode' \
+            --exclude='.cursor' \
+            --exclude='.idea' \
+            --exclude='.vscode' \
+            --exclude='.playwright-mcp' \
+            --exclude='build' \
+            --exclude='node_modules' \
+            --exclude='vendor' \
+            --exclude='tests' \
+            --exclude='docs' \
+            --exclude='scripts' \
+            --exclude='coverage' \
+            --exclude='playwright-report' \
+            --exclude='assets/src' \
+            --exclude='composer.json' \
+            --exclude='composer.lock' \
+            --exclude='composer.phar' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='phpunit.xml' \
+            --exclude='phpcs.xml.dist' \
+            --exclude='.editorconfig' \
+            --exclude='.gitattributes' \
+            --exclude='.gitignore' \
+            --exclude='AGENTS.md' \
+            --exclude='AI_CODING_RULES.md' \
+            --exclude='CLAUDE.md' \
+            --exclude='GEMINI.md' \
+            --exclude='opencode.json' \
+            --exclude='deploy.sh' \
+            --exclude='deploy.example.sh' \
+            --exclude='README.md' \
+            --exclude='CHANGELOG.md' \
+            --exclude='implementation-plan.tmp.md' \
+            --exclude='session-context.tmp.md' \
+            --exclude='session-handoff.tmp.md' \
+            --exclude='*.tmp.md' \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            --exclude='*.map' \
+            ./ "build/${PLUGIN_SLUG}/"
+
+          cd build
+          zip -r "${PLUGIN_SLUG}-${VERSION}.zip" "${PLUGIN_SLUG}"
+          echo "zip_file=build/${PLUGIN_SLUG}-${VERSION}.zip" >> "${GITHUB_OUTPUT}"
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.event.release.tag_name || inputs.tag_name }}
+          files: ${{ steps.package.outputs.zip_file }}
+          overwrite_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

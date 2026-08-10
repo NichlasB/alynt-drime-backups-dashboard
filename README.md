@@ -107,3 +107,15 @@ npm test
 npm run lint
 npm run build
 ```
+
+## Release Packaging
+
+Alynt Plugin Updater distribution uses GitHub release assets from `NichlasB/alynt-drime-backups-dashboard`.
+
+- Release tags use `vX.Y.Z`.
+- The release workflow packages `alynt-drime-backups-dashboard-X.Y.Z.zip`.
+- The ZIP top-level folder is `alynt-drime-backups-dashboard/`.
+- CI builds runtime assets with `npm ci` and `npm run build`.
+- Composer dependencies are development-only; release packages exclude `vendor/`.
+- Release packages exclude test suites, source assets, build scripts, Composer/npm manifests, local deployment helpers, and internal engineering docs.
+- Release publication, release-asset validation, and WordPress updater runtime acceptance remain separate approval-gated workflows.
