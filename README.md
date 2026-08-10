@@ -37,6 +37,7 @@ The scaffold includes:
 - Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
 - Manual **Check Status Now** for enrolled sites using the fixed authenticated read-only status route.
 - Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and snapshot retention cleanup.
+- Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, and recent safe poll outcomes.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
@@ -53,6 +54,7 @@ php -l includes/class-activator.php
 php -l includes/class-admin-page.php
 php -l includes/class-credential-vault.php
 php -l includes/class-deactivator.php
+php -l includes/class-diagnostics.php
 php -l includes/class-enrollment-manager.php
 php -l includes/class-enrollment-rest-controller.php
 php -l includes/class-origin-validator.php

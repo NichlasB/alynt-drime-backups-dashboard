@@ -52,13 +52,15 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 		$this->snapshots = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
 		$this->poller    = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier );
+		$diagnostics     = new Alynt_Drime_Backups_Dashboard_Diagnostics( $sites, $this->snapshots, $classifier );
 
 		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(
 			$sites,
 			$this->snapshots,
 			$classifier,
 			null,
-			$this->poller
+			$this->poller,
+			$diagnostics
 		);
 		$this->enrollment_rest_controller = new Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller();
 

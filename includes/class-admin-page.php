@@ -54,6 +54,13 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	private $poller;
 
 	/**
+	 * Diagnostics provider.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Diagnostics
+	 */
+	private $diagnostics;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null     $sites Site repository.
@@ -61,13 +68,15 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null   $classifier Status classifier.
 	 * @param Alynt_Drime_Backups_Dashboard_Enrollment_Manager|null  $enrollment_manager Enrollment manager.
 	 * @param Alynt_Drime_Backups_Dashboard_Poller|null              $poller Poller.
+	 * @param Alynt_Drime_Backups_Dashboard_Diagnostics|null         $diagnostics Diagnostics.
 	 */
-	public function __construct( $sites = null, $snapshots = null, $classifier = null, $enrollment_manager = null, $poller = null ) {
+	public function __construct( $sites = null, $snapshots = null, $classifier = null, $enrollment_manager = null, $poller = null, $diagnostics = null ) {
 		$this->sites              = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots          = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$this->classifier         = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
 		$this->enrollment_manager = $enrollment_manager instanceof Alynt_Drime_Backups_Dashboard_Enrollment_Manager ? $enrollment_manager : new Alynt_Drime_Backups_Dashboard_Enrollment_Manager( $this->sites );
 		$this->poller             = $poller instanceof Alynt_Drime_Backups_Dashboard_Poller ? $poller : new Alynt_Drime_Backups_Dashboard_Poller( $this->sites, $this->snapshots, $this->classifier );
+		$this->diagnostics        = $diagnostics instanceof Alynt_Drime_Backups_Dashboard_Diagnostics ? $diagnostics : new Alynt_Drime_Backups_Dashboard_Diagnostics( $this->sites, $this->snapshots, $this->classifier );
 	}
 
 	/**
@@ -106,7 +115,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 				<p>
 					<?php
 					esc_html_e(
-						'Dashboard Phase 2 shell is local-only. Pairing, polling, and client status ingestion remain disabled until the read-only protocol is implemented and approved.',
+						'This dashboard remains read-only relative to client sites and Drime. It can create local enrollment records, ingest opt-in status payloads, and poll the fixed status endpoint, but it does not run remote backup, restore, cleanup, settings, credential, or Drime actions.',
 						'alynt-drime-backups-dashboard'
 					);
 					?>
@@ -126,6 +135,9 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 					break;
 				case 'attention':
 					$this->render_attention_shell();
+					break;
+				case 'diagnostics':
+					$this->render_diagnostics_shell();
 					break;
 				case 'sites':
 				default:
@@ -234,7 +246,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	private function current_tab() {
 		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'sites'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		return in_array( $tab, array( 'sites', 'add-site', 'site', 'attention' ), true ) ? $tab : 'sites';
+		return in_array( $tab, array( 'sites', 'add-site', 'site', 'attention', 'diagnostics' ), true ) ? $tab : 'sites';
 	}
 
 	/**
@@ -245,9 +257,10 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	 */
 	private function render_tabs( $active ) {
 		$tabs = array(
-			'sites'     => __( 'Sites', 'alynt-drime-backups-dashboard' ),
-			'add-site'  => __( 'Add Site', 'alynt-drime-backups-dashboard' ),
-			'attention' => __( 'Attention', 'alynt-drime-backups-dashboard' ),
+			'sites'       => __( 'Sites', 'alynt-drime-backups-dashboard' ),
+			'add-site'    => __( 'Add Site', 'alynt-drime-backups-dashboard' ),
+			'attention'   => __( 'Attention', 'alynt-drime-backups-dashboard' ),
+			'diagnostics' => __( 'Diagnostics', 'alynt-drime-backups-dashboard' ),
 		);
 
 		echo '<nav class="nav-tab-wrapper" aria-label="' . esc_attr__( 'Dashboard sections', 'alynt-drime-backups-dashboard' ) . '">';
@@ -379,6 +392,55 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	}
 
 	/**
+	 * Renders redacted diagnostics.
+	 *
+	 * @return void
+	 */
+	private function render_diagnostics_shell() {
+		$diagnostics = $this->diagnostics->collect();
+		$scheduler   = isset( $diagnostics['scheduler'] ) && is_array( $diagnostics['scheduler'] ) ? $diagnostics['scheduler'] : array();
+		$counts      = isset( $diagnostics['counts'] ) && is_array( $diagnostics['counts'] ) ? $diagnostics['counts'] : array();
+		$recent      = isset( $diagnostics['recent'] ) && is_array( $diagnostics['recent'] ) ? $diagnostics['recent'] : array();
+
+		echo '<h2>' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
+		echo '<p>' . esc_html__( 'Redacted scheduler and polling diagnostics for operators. This screen never displays pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
+
+		echo '<h3>' . esc_html__( 'Scheduler', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped"><tbody>';
+		$this->render_detail_row( __( 'Poll hook', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'poll_hook' ) );
+		$this->render_detail_row( __( 'Poll schedule state', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'poll_schedule_state' ) );
+		$this->render_detail_row( __( 'Next scheduled poll', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( $this->diagnostic_value( $scheduler, 'poll_next_at' ) ) );
+		$this->render_detail_row( __( 'Poll interval', 'alynt-drime-backups-dashboard' ), $this->seconds_label( $this->diagnostic_int( $scheduler, 'poll_interval_seconds' ) ) );
+		$this->render_detail_row( __( 'Batch size', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $scheduler, 'poll_batch_size' ) );
+		$this->render_detail_row( __( 'Stale threshold', 'alynt-drime-backups-dashboard' ), $this->seconds_label( $this->diagnostic_int( $scheduler, 'stale_after_seconds' ) ) );
+		$this->render_detail_row( __( 'Global scheduler lock', 'alynt-drime-backups-dashboard' ), $this->lock_label( isset( $scheduler['global_lock_active'] ) ? $scheduler['global_lock_active'] : null ) );
+		$this->render_detail_row( __( 'Current UTC time', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'current_utc' ) );
+		echo '</tbody></table>';
+
+		echo '<h3>' . esc_html__( 'History retention', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped"><tbody>';
+		$this->render_detail_row( __( 'Cleanup hook', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'cleanup_hook' ) );
+		$this->render_detail_row( __( 'Cleanup schedule state', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'cleanup_state' ) );
+		$this->render_detail_row( __( 'Next cleanup', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( $this->diagnostic_value( $scheduler, 'cleanup_next_at' ) ) );
+		$this->render_detail_row( __( 'Retention window', 'alynt-drime-backups-dashboard' ), sprintf( /* translators: %d: retention days. */ __( '%d days', 'alynt-drime-backups-dashboard' ), $this->diagnostic_int( $scheduler, 'retention_days' ) ) );
+		$this->render_detail_row( __( 'Cleanup batch size', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $scheduler, 'cleanup_batch_size' ) );
+		echo '</tbody></table>';
+
+		echo '<h3>' . esc_html__( 'Site polling summary', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped"><tbody>';
+		$this->render_detail_row( __( 'Total dashboard sites', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'total_sites' ) );
+		$this->render_detail_row( __( 'Polling-ready sites', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'polling_ready' ) );
+		$this->render_detail_row( __( 'Due now', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'due_now' ) );
+		$this->render_detail_row( __( 'Missing polling credentials', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'missing_credentials' ) );
+		$this->render_detail_row( __( 'Paused locally', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'paused' ) );
+		$this->render_detail_row( __( 'Sites with recorded failures', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'with_failures' ) );
+		echo '</tbody></table>';
+
+		$this->render_status_count_table( isset( $counts['statuses'] ) && is_array( $counts['statuses'] ) ? $counts['statuses'] : array() );
+		$this->render_recent_poll_outcomes( $recent );
+	}
+
+	/**
 	 * Renders one site detail shell.
 	 *
 	 * @return void
@@ -440,6 +502,76 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			esc_html( $label ),
 			esc_html( $value )
 		);
+	}
+
+	/**
+	 * Renders status-count diagnostics.
+	 *
+	 * @param array<string,int> $statuses Status counts.
+	 * @return void
+	 */
+	private function render_status_count_table( array $statuses ) {
+		echo '<h3>' . esc_html__( 'Status distribution', 'alynt-drime-backups-dashboard' ) . '</h3>';
+
+		if ( empty( $statuses ) ) {
+			echo '<p>' . esc_html__( 'No status classifications are available yet.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			return;
+		}
+
+		echo '<table class="widefat striped"><thead><tr>';
+		echo '<th scope="col">' . esc_html__( 'Status', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Sites', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '</tr></thead><tbody>';
+
+		foreach ( $statuses as $category => $total ) {
+			echo '<tr>';
+			echo '<td>' . esc_html( $this->classifier->label( $category ) ) . '</td>';
+			echo '<td>' . esc_html( (string) max( 0, (int) $total ) ) . '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * Renders recent poll outcome diagnostics.
+	 *
+	 * @param array<int,array<string,mixed>> $recent Recent outcomes.
+	 * @return void
+	 */
+	private function render_recent_poll_outcomes( array $recent ) {
+		echo '<h3>' . esc_html__( 'Recent poll outcomes', 'alynt-drime-backups-dashboard' ) . '</h3>';
+
+		if ( empty( $recent ) ) {
+			echo '<p>' . esc_html__( 'No poll attempts have been recorded yet.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			return;
+		}
+
+		echo '<table class="widefat striped"><thead><tr>';
+		echo '<th scope="col">' . esc_html__( 'Site', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Last attempt', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Last seen', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Next poll', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Status', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Failures', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Last safe error', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '</tr></thead><tbody>';
+
+		foreach ( $recent as $row ) {
+			$error = trim( $this->diagnostic_value( $row, 'last_error_code' ) . ' ' . $this->diagnostic_value( $row, 'last_error_summary' ) );
+
+			echo '<tr>';
+			echo '<td>' . esc_html( $this->diagnostic_value( $row, 'site_label' ) ) . '</td>';
+			echo '<td>' . esc_html( $this->date_or_dash( $this->diagnostic_value( $row, 'last_poll_attempt_at' ) ) ) . '</td>';
+			echo '<td>' . esc_html( $this->date_or_dash( $this->diagnostic_value( $row, 'last_seen_at' ) ) ) . '</td>';
+			echo '<td>' . esc_html( $this->date_or_dash( $this->diagnostic_value( $row, 'next_poll_at' ) ) ) . '</td>';
+			echo '<td>' . esc_html( $this->classifier->label( $this->diagnostic_value( $row, 'overall_status' ) ) ) . '</td>';
+			echo '<td>' . esc_html( (string) $this->diagnostic_int( $row, 'consecutive_failures' ) ) . '</td>';
+			echo '<td>' . esc_html( '' === $error ? '-' : $error ) . '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
 	}
 
 	/**
@@ -556,5 +688,81 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		}
 
 		return (string) $value;
+	}
+
+	/**
+	 * Gets a scalar diagnostic value.
+	 *
+	 * @param array<string,mixed> $data Diagnostic data.
+	 * @param string              $key Data key.
+	 * @return string
+	 */
+	private function diagnostic_value( array $data, $key ) {
+		if ( ! isset( $data[ $key ] ) || is_array( $data[ $key ] ) || is_object( $data[ $key ] ) ) {
+			return '';
+		}
+
+		return (string) $data[ $key ];
+	}
+
+	/**
+	 * Gets an integer diagnostic value.
+	 *
+	 * @param array<string,mixed> $data Diagnostic data.
+	 * @param string              $key Data key.
+	 * @return int
+	 */
+	private function diagnostic_int( array $data, $key ) {
+		return isset( $data[ $key ] ) ? max( 0, (int) $data[ $key ] ) : 0;
+	}
+
+	/**
+	 * Formats seconds for operator display.
+	 *
+	 * @param int $seconds Seconds.
+	 * @return string
+	 */
+	private function seconds_label( $seconds ) {
+		$seconds = max( 0, (int) $seconds );
+
+		if ( 0 === $seconds ) {
+			return '-';
+		}
+
+		if ( 0 === $seconds % 3600 ) {
+			return sprintf(
+				/* translators: %d: hours. */
+				__( '%d hours', 'alynt-drime-backups-dashboard' ),
+				(int) ( $seconds / 3600 )
+			);
+		}
+
+		if ( 0 === $seconds % 60 ) {
+			return sprintf(
+				/* translators: %d: minutes. */
+				__( '%d minutes', 'alynt-drime-backups-dashboard' ),
+				(int) ( $seconds / 60 )
+			);
+		}
+
+		return sprintf(
+			/* translators: %d: seconds. */
+			__( '%d seconds', 'alynt-drime-backups-dashboard' ),
+			$seconds
+		);
+	}
+
+	/**
+	 * Formats the scheduler lock state.
+	 *
+	 * @param mixed $value Lock value.
+	 * @return string
+	 */
+	private function lock_label( $value ) {
+		if ( null === $value ) {
+			return __( 'Unavailable outside WordPress runtime', 'alynt-drime-backups-dashboard' );
+		}
+
+		return $value ? __( 'Active', 'alynt-drime-backups-dashboard' ) : __( 'Not active', 'alynt-drime-backups-dashboard' );
 	}
 }
