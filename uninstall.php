@@ -15,6 +15,17 @@ wp_clear_scheduled_hook( 'alynt_drime_backups_dashboard_poll_sites' );
 wp_clear_scheduled_hook( 'alynt_drime_backups_dashboard_cleanup_snapshots' );
 delete_transient( 'alynt_drime_backups_dashboard_poll_sites_lock' );
 
+$site_lock_prefix       = 'alynt_drime_backups_dashboard_poll_site_lock_';
+$site_lock_like         = $wpdb->esc_like( '_transient_' . $site_lock_prefix ) . '%';
+$site_lock_timeout_like = $wpdb->esc_like( '_transient_timeout_' . $site_lock_prefix ) . '%';
+$wpdb->query(
+	$wpdb->prepare(
+		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$site_lock_like,
+		$site_lock_timeout_like
+	)
+);
+
 $tables = array(
 	$wpdb->prefix . 'alynt_drime_dashboard_snapshots',
 	$wpdb->prefix . 'alynt_drime_dashboard_sites',

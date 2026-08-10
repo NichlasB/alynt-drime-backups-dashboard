@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '1';
+	const SCHEMA_VERSION        = '2';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -71,7 +71,6 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				plugin_version varchar(64) NULL,
 				payload_schema_version smallint(5) unsigned NULL,
 				overall_status varchar(32) NOT NULL DEFAULT 'pending',
-				latest_payload_json longtext NULL,
 				last_poll_attempt_at datetime NULL,
 				last_seen_at datetime NULL,
 				next_poll_at datetime NULL,
@@ -87,6 +86,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY expected_origin (expected_origin(191)),
 				KEY enrollment_status (enrollment_status),
 				KEY next_poll_at (next_poll_at),
+				KEY poll_due (enrollment_status, paused_at, next_poll_at, id),
 				KEY last_seen_at (last_seen_at)
 			) {$charset_collate};"
 		);
@@ -109,10 +109,27 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				PRIMARY KEY  (id),
 				KEY site_observed (dashboard_site_id, observed_at),
 				KEY site_fingerprint (dashboard_site_id, payload_fingerprint),
+				KEY site_latest (dashboard_site_id, id),
+				KEY retention_cleanup (observed_at, id),
 				KEY overall_status (overall_status)
 			) {$charset_collate};"
 		);
 
 		update_option( self::OPTION_SCHEMA_VERSION, self::SCHEMA_VERSION, false );
+	}
+
+	/**
+	 * Ensures installed schemas receive safe dbDelta upgrades after plugin updates.
+	 *
+	 * @return void
+	 */
+	public static function maybe_upgrade() {
+		$stored_version = function_exists( 'get_option' ) ? (string) get_option( self::OPTION_SCHEMA_VERSION, '' ) : '';
+
+		if ( self::SCHEMA_VERSION === $stored_version ) {
+			return;
+		}
+
+		self::maybe_install();
 	}
 }

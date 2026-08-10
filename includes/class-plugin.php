@@ -48,6 +48,8 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 * Constructor.
 	 */
 	public function __construct() {
+		Alynt_Drime_Backups_Dashboard_Storage::maybe_upgrade();
+
 		$sites           = new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
