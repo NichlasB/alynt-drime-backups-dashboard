@@ -14,6 +14,7 @@ require_once dirname( __DIR__ ) . '/includes/class-event-log-redactor.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-storage.php';
 require_once dirname( __DIR__ ) . '/includes/class-event-log.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-enrollment-rest-responses.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-enrollment-rest-route-args.php';
 require_once dirname( __DIR__ ) . '/includes/class-enrollment-rest-controller.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-scheduling.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-locks.php';

@@ -88,6 +88,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-pairing-tokens.php',
 	'includes/class-enrollment-manager.php',
 	'includes/traits/trait-enrollment-rest-responses.php',
+	'includes/traits/trait-enrollment-rest-route-args.php',
 	'includes/class-enrollment-rest-controller.php',
 	'includes/class-safe-transport.php',
 	'includes/traits/trait-poller-scheduling.php',

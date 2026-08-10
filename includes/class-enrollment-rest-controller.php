@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 	use Alynt_Drime_Backups_Dashboard_Enrollment_REST_Responses;
+	use Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args;
 
 	const REST_NAMESPACE                        = 'alynt-drime-backups-dashboard/v1';
 	const REST_ROUTE                            = '/enroll';
@@ -80,6 +81,7 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'handle_enroll_request' ),
 				'permission_callback' => '__return_true',
+				'args'                => $this->enrollment_route_args(),
 			)
 		);
 	}
