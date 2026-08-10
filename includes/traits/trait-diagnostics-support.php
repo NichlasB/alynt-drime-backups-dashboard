@@ -45,6 +45,26 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 		$scheduler = $this->scheduler_diagnostics( $now );
 		$counts    = $this->count_diagnostics( $sites, $snapshots, $now );
 		$recent    = $this->recent_poll_outcomes( $sites, 10 );
+		$logging   = array(
+			'settings' => $this->event_log->settings(),
+			'summary'  => $this->event_log->summary(),
+		);
+
+		return $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now );
+	}
+
+	/**
+	 * Builds support-safe diagnostics from already-collected sections.
+	 *
+	 * @param array<string,mixed>            $scheduler Scheduler diagnostics.
+	 * @param array<string,mixed>            $counts Site counts.
+	 * @param array<int,array<string,mixed>> $recent Recent outcomes.
+	 * @param array<string,mixed>            $logging Logging diagnostics.
+	 * @param int                            $now Current Unix timestamp.
+	 * @return array<string,mixed>
+	 */
+	private function support_summary_from_diagnostics( array $scheduler, array $counts, array $recent, array $logging, $now ) {
+		$now = (int) $now;
 
 		return array(
 			'plugin'      => array(
@@ -63,7 +83,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 				'global_lock_active'  => $scheduler['global_lock_active'],
 			),
 			'counts'      => $counts,
-			'logging'     => $this->support_logging_summary(),
+			'logging'     => $this->support_logging_summary_from_diagnostics( $logging ),
 			'recent_safe' => $this->support_recent_outcomes( $recent ),
 		);
 	}
@@ -74,8 +94,23 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 	 * @return array<string,mixed>
 	 */
 	private function support_logging_summary() {
-		$settings = $this->event_log->settings();
-		$summary  = $this->event_log->summary();
+		return $this->support_logging_summary_from_diagnostics(
+			array(
+				'settings' => $this->event_log->settings(),
+				'summary'  => $this->event_log->summary(),
+			)
+		);
+	}
+
+	/**
+	 * Builds support-safe logging summary from collected diagnostics.
+	 *
+	 * @param array<string,mixed> $logging Logging diagnostics.
+	 * @return array<string,mixed>
+	 */
+	private function support_logging_summary_from_diagnostics( array $logging ) {
+		$settings = isset( $logging['settings'] ) && is_array( $logging['settings'] ) ? $logging['settings'] : array();
+		$summary  = isset( $logging['summary'] ) && is_array( $logging['summary'] ) ? $logging['summary'] : array();
 
 		return array(
 			'enabled'        => ! empty( $settings['enabled'] ),

@@ -73,13 +73,17 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 		$site_ids  = $this->site_ids( $sites );
 		$snapshots = $this->snapshots->latest_by_site_ids( $site_ids );
 		$now       = time();
+		$scheduler = $this->scheduler_diagnostics( $now );
+		$counts    = $this->count_diagnostics( $sites, $snapshots, $now );
+		$recent    = $this->recent_poll_outcomes( $sites );
+		$logging   = $this->logging_diagnostics();
 
 		return array(
-			'scheduler' => $this->scheduler_diagnostics( $now ),
-			'counts'    => $this->count_diagnostics( $sites, $snapshots, $now ),
-			'recent'    => $this->recent_poll_outcomes( $sites ),
-			'logging'   => $this->logging_diagnostics(),
-			'support'   => $this->support_summary( $sites, $snapshots, $now ),
+			'scheduler' => $scheduler,
+			'counts'    => $counts,
+			'recent'    => $recent,
+			'logging'   => $logging,
+			'support'   => $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now ),
 		);
 	}
 

@@ -43,7 +43,30 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 		$limit  = max( 1, min( 500, (int) $args['limit'] ) );
 		$offset = max( 0, (int) $args['offset'] );
 		$table  = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
-		$sql    = "SELECT * FROM {$table} {$where} ORDER BY site_label ASC, expected_origin ASC LIMIT %d OFFSET %d";
+		$fields = array(
+			'id',
+			'public_id',
+			'site_uuid',
+			'site_label',
+			'expected_origin',
+			'environment',
+			'enrollment_status',
+			'polling_key_id',
+			"CASE WHEN polling_secret_ciphertext IS NULL OR polling_secret_ciphertext = '' THEN 0 ELSE 1 END AS has_polling_secret",
+			'plugin_version',
+			'payload_schema_version',
+			'overall_status',
+			'last_poll_attempt_at',
+			'last_seen_at',
+			'next_poll_at',
+			'consecutive_failures',
+			'last_error_code',
+			'last_error_summary',
+			'paused_at',
+			'created_at',
+			'updated_at',
+		);
+		$sql    = 'SELECT ' . implode( ', ', $fields ) . " FROM {$table} {$where} ORDER BY site_label ASC, expected_origin ASC LIMIT %d OFFSET %d";
 
 		$params[] = $limit;
 		$params[] = $offset;

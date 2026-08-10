@@ -17,6 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Event_Log_Storage {
 	/**
+	 * Same-request stored event cache.
+	 *
+	 * @var array<int,array<string,mixed>>|null
+	 */
+	private $events_cache = null;
+
+	/**
 	 * Stores an event in the bounded ring buffer.
 	 *
 	 * @param array<string,mixed> $event Event.
@@ -33,7 +40,13 @@ trait Alynt_Drime_Backups_Dashboard_Event_Log_Storage {
 		array_unshift( $events, $event );
 		$events = array_slice( $events, 0, (int) $settings['max_events'] );
 
-		return (bool) update_option( self::OPTION_EVENTS, $events, false );
+		$stored = (bool) update_option( self::OPTION_EVENTS, $events, false );
+
+		if ( $stored ) {
+			$this->events_cache = $events;
+		}
+
+		return $stored;
 	}
 
 	/**
@@ -42,9 +55,15 @@ trait Alynt_Drime_Backups_Dashboard_Event_Log_Storage {
 	 * @return array<int,array<string,mixed>>
 	 */
 	private function stored_events() {
+		if ( null !== $this->events_cache ) {
+			return $this->events_cache;
+		}
+
 		$events = function_exists( 'get_option' ) ? get_option( self::OPTION_EVENTS, array() ) : array();
 
-		return is_array( $events ) ? array_values( array_filter( $events, 'is_array' ) ) : array();
+		$this->events_cache = is_array( $events ) ? array_values( array_filter( $events, 'is_array' ) ) : array();
+
+		return $this->events_cache;
 	}
 
 	/**

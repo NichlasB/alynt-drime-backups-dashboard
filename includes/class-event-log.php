@@ -42,6 +42,13 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	private $redactor;
 
 	/**
+	 * Same-request settings cache.
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	private $settings_cache = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Event_Log_Redactor|null $redactor Event redactor.
@@ -56,9 +63,15 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	 * @return array<string,mixed>
 	 */
 	public function settings() {
+		if ( null !== $this->settings_cache ) {
+			return $this->settings_cache;
+		}
+
 		$stored = function_exists( 'get_option' ) ? get_option( self::OPTION_SETTINGS, array() ) : array();
 
-		return $this->sanitize_settings( is_array( $stored ) ? $stored : array() );
+		$this->settings_cache = $this->sanitize_settings( is_array( $stored ) ? $stored : array() );
+
+		return $this->settings_cache;
 	}
 
 	/**
@@ -87,7 +100,13 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 			return true;
 		}
 
-		return (bool) update_option( self::OPTION_SETTINGS, $sanitized, false );
+		$updated = (bool) update_option( self::OPTION_SETTINGS, $sanitized, false );
+
+		if ( $updated ) {
+			$this->settings_cache = $sanitized;
+		}
+
+		return $updated;
 	}
 
 	/**
@@ -195,7 +214,13 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 			return false;
 		}
 
-		return (bool) update_option( self::OPTION_EVENTS, array(), false );
+		$cleared = (bool) update_option( self::OPTION_EVENTS, array(), false );
+
+		if ( $cleared ) {
+			$this->events_cache = array();
+		}
+
+		return $cleared;
 	}
 
 	/**

@@ -129,7 +129,11 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 	 * @return bool
 	 */
 	private function has_polling_credentials( array $site ) {
-		return ! empty( $site['polling_key_id'] ) && ! empty( $site['polling_secret_ciphertext'] );
+		return ! empty( $site['polling_key_id'] )
+			&& (
+				! empty( $site['polling_secret_ciphertext'] )
+				|| ! empty( $site['has_polling_secret'] )
+			);
 	}
 
 	/**
