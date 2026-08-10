@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 	const DEFAULT_PAIRING_TTL_SECONDS = 900;
+	const MAX_SITE_LABEL_LENGTH       = 191;
+	const MAX_ORIGIN_LENGTH           = 255;
 
 	/**
 	 * Site repository.
@@ -62,8 +64,16 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 			return new WP_Error( 'site_label_required', __( 'Enter a site label before generating a pairing token.', 'alynt-drime-backups-dashboard' ) );
 		}
 
+		if ( $this->string_length( $label ) > self::MAX_SITE_LABEL_LENGTH ) {
+			return new WP_Error( 'site_label_too_long', __( 'Enter a shorter site label before generating a pairing token.', 'alynt-drime-backups-dashboard' ) );
+		}
+
 		if ( '' === $expected_origin ) {
 			return new WP_Error( 'expected_origin_invalid', __( 'Enter a public HTTPS client origin before generating a pairing token.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		if ( strlen( $expected_origin ) > self::MAX_ORIGIN_LENGTH ) {
+			return new WP_Error( 'expected_origin_too_long', __( 'Enter a shorter public HTTPS client origin before generating a pairing token.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		if ( '' === $dashboard_origin ) {
@@ -72,6 +82,12 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 
 		if ( ! in_array( $environment, array( 'production', 'staging', 'development', 'other' ), true ) ) {
 			$environment = 'production';
+		}
+
+		$existing = $this->sites->get_active_pending_by_expected_origin( $expected_origin, gmdate( 'Y-m-d H:i:s', $now ) );
+
+		if ( $existing ) {
+			return new WP_Error( 'pending_site_exists', __( 'A non-expired pending pairing already exists for this client origin. Use the existing token, wait for it to expire, or revoke the pending record before generating another token.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		$public_id  = $this->create_uuid();
@@ -138,5 +154,15 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 			mt_rand( 0, 0xffff ),
 			mt_rand( 0, 0xffff )
 		);
+	}
+
+	/**
+	 * Gets a string length with multibyte support when available.
+	 *
+	 * @param string $value Value.
+	 * @return int
+	 */
+	private function string_length( $value ) {
+		return function_exists( 'mb_strlen' ) ? mb_strlen( (string) $value ) : strlen( (string) $value );
 	}
 }

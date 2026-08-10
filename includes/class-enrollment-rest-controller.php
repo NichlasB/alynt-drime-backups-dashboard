@@ -24,6 +24,7 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 	const PROTOCOL_VERSION                      = 1;
 	const STATUS_SCHEMA_VERSION                 = 1;
 	const ENROLLMENT_STATUS_AWAITING_FIRST_POLL = 'awaiting_first_poll';
+	const MAX_UPLOADER_VERSION_LENGTH           = 64;
 
 	/**
 	 * Site repository.
@@ -223,7 +224,7 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 			'site_uuid'        => $site_uuid,
 			'home_origin'      => $home_origin,
 			'status_endpoint'  => $endpoint,
-			'uploader_version' => isset( $payload['uploader_version'] ) ? sanitize_text_field( (string) $payload['uploader_version'] ) : '',
+			'uploader_version' => $this->bounded_text( isset( $payload['uploader_version'] ) ? (string) $payload['uploader_version'] : '', self::MAX_UPLOADER_VERSION_LENGTH ),
 		);
 	}
 
@@ -262,5 +263,23 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 		$uuid = strtolower( trim( (string) $uuid ) );
 
 		return preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/', $uuid ) ? $uuid : '';
+	}
+
+	/**
+	 * Sanitizes and bounds a text field before storing it in fixed-width columns.
+	 *
+	 * @param string $value Raw value.
+	 * @param int    $max_length Maximum characters.
+	 * @return string
+	 */
+	private function bounded_text( $value, $max_length ) {
+		$value      = sanitize_text_field( (string) $value );
+		$max_length = max( 1, (int) $max_length );
+
+		if ( function_exists( 'mb_substr' ) ) {
+			return mb_substr( $value, 0, $max_length );
+		}
+
+		return substr( $value, 0, $max_length );
 	}
 }

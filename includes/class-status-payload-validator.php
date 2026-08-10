@@ -16,7 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
-	const SUPPORTED_SCHEMA_VERSION = 1;
+	const SUPPORTED_SCHEMA_VERSION  = 1;
+	const MAX_PLUGIN_VERSION_LENGTH = 64;
 
 	/**
 	 * Fields that must never be ingested by the dashboard.
@@ -62,7 +63,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 		$validated = array(
 			'schema_version'              => self::SUPPORTED_SCHEMA_VERSION,
 			'site_uuid'                   => $site_uuid,
-			'plugin_version'              => isset( $payload['plugin_version'] ) ? sanitize_text_field( (string) $payload['plugin_version'] ) : '',
+			'plugin_version'              => $this->bounded_text( isset( $payload['plugin_version'] ) ? (string) $payload['plugin_version'] : '', self::MAX_PLUGIN_VERSION_LENGTH ),
 			'queue_count'                 => $this->non_negative_int( $payload, 'queue_count' ),
 			'uploaded_count'              => $this->non_negative_int( $payload, 'uploaded_count' ),
 			'failed_count'                => $this->non_negative_int( $payload, 'failed_count' ),
@@ -150,5 +151,23 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 		$uuid = strtolower( trim( (string) $uuid ) );
 
 		return preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/', $uuid ) ? $uuid : '';
+	}
+
+	/**
+	 * Sanitizes and bounds a text field before storing it in fixed-width columns.
+	 *
+	 * @param string $value Raw value.
+	 * @param int    $max_length Maximum characters.
+	 * @return string
+	 */
+	private function bounded_text( $value, $max_length ) {
+		$value      = sanitize_text_field( (string) $value );
+		$max_length = max( 1, (int) $max_length );
+
+		if ( function_exists( 'mb_substr' ) ) {
+			return mb_substr( $value, 0, $max_length );
+		}
+
+		return substr( $value, 0, $max_length );
 	}
 }

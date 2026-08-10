@@ -113,6 +113,29 @@ class EnrollmentRestControllerTest extends TestCase {
 	}
 
 	/**
+	 * Overlong uploader versions are bounded before fixed-width storage.
+	 *
+	 * @return void
+	 */
+	public function test_overlong_uploader_version_is_bounded_before_storage() {
+		$secret     = str_repeat( 'A', 43 );
+		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $secret ) );
+		$controller = $this->controller( $repository );
+		$result     = $controller->handle_enrollment(
+			$this->payload(
+				array(
+					'uploader_version' => str_repeat( '1', 100 ),
+				)
+			),
+			'Bearer ' . $secret,
+			strtotime( '2099-01-01T00:00:00Z' )
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 64, strlen( $repository->stored['plugin_version'] ) );
+	}
+
+	/**
 	 * Wrong bearer secret is rejected and not stored.
 	 *
 	 * @return void

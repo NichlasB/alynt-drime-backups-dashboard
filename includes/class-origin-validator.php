@@ -78,6 +78,16 @@ class Alynt_Drime_Backups_Dashboard_Origin_Validator {
 			return false;
 		}
 
+		if ( strlen( $host ) > 253 ) {
+			return false;
+		}
+
+		foreach ( explode( '.', $host ) as $label ) {
+			if ( '' === $label || strlen( $label ) > 63 ) {
+				return false;
+			}
+		}
+
 		if ( false !== filter_var( $host, FILTER_VALIDATE_IP ) ) {
 			return false;
 		}

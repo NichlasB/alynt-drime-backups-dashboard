@@ -22,25 +22,34 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 	 * @return array<string,mixed>|WP_Error|null
 	 */
 	private function handle_post_action() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- The action name selects the nonce action; action-specific verification happens before action payloads are processed.
 		if ( empty( $_POST['alynt_drime_backups_dashboard_action'] ) ) {
 			return null;
 		}
 
-		$action = sanitize_key( wp_unslash( $_POST['alynt_drime_backups_dashboard_action'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$action = sanitize_key( wp_unslash( $_POST['alynt_drime_backups_dashboard_action'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Action-specific verification happens before action payloads are processed.
 
 		if ( 'create_pending_site' === $action ) {
-			check_admin_referer( 'alynt_drime_backups_dashboard_create_pending_site' );
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_create_pending_site' );
 
-			$pending_site = isset( $_POST['alynt_drime_backups_dashboard_pending_site'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_pending_site'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$pending_site = isset( $_POST['alynt_drime_backups_dashboard_pending_site'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_pending_site'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 			$raw          = is_array( $pending_site ) ? $pending_site : array();
 
 			return $this->enrollment_manager->create_pending_site( $raw, home_url( '/', 'https' ) );
 		}
 
 		if ( 'revoke_local' === $action ) {
-			check_admin_referer( 'alynt_drime_backups_dashboard_revoke_local' );
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_revoke_local' );
 
-			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 
 			return array(
 				'action'  => 'revoke_local',
@@ -49,9 +58,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		if ( 'check_status_now' === $action ) {
-			check_admin_referer( 'alynt_drime_backups_dashboard_check_status_now' );
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_check_status_now' );
 
-			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 			$result  = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
 
 			if ( is_wp_error( $result ) ) {
@@ -67,9 +80,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		if ( 'update_diagnostics_settings' === $action ) {
-			check_admin_referer( 'alynt_drime_backups_dashboard_update_diagnostics_settings' );
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_diagnostics_settings' );
 
-			$settings = isset( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$settings = isset( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 
 			return array(
 				'action'  => 'update_diagnostics_settings',
@@ -78,7 +95,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		if ( 'clear_diagnostics_events' === $action ) {
-			check_admin_referer( 'alynt_drime_backups_dashboard_clear_diagnostics_events' );
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_clear_diagnostics_events' );
+
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
 
 			return array(
 				'action'  => 'clear_diagnostics_events',
@@ -87,6 +108,26 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		return new WP_Error( 'dashboard_action_unknown', __( 'The requested dashboard action is not supported.', 'alynt-drime-backups-dashboard' ) );
+	}
+
+	/**
+	 * Verifies an admin form nonce without wp_die() so the dashboard can render a recovery notice.
+	 *
+	 * @param string $action Nonce action.
+	 * @return true|WP_Error
+	 */
+	private function verify_action_nonce( $action ) {
+		if ( empty( $_POST['_wpnonce'] ) || ! function_exists( 'wp_verify_nonce' ) ) {
+			return new WP_Error( 'dashboard_session_expired', __( 'Your dashboard session has expired. Refresh the page and try again.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
+
+		if ( ! wp_verify_nonce( $nonce, $action ) ) {
+			return new WP_Error( 'dashboard_session_expired', __( 'Your dashboard session has expired. Refresh the page and try again.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		return true;
 	}
 
 	/**

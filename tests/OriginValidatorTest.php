@@ -41,6 +41,8 @@ class OriginValidatorTest extends TestCase {
 			'https://example.com/path',
 			'https://user@example.com',
 			'https://example.com?token=secret',
+			'https://' . str_repeat( 'a', 64 ) . '.example.com',
+			'https://' . str_repeat( 'a', 250 ) . '.com',
 		);
 
 		foreach ( $origins as $origin ) {

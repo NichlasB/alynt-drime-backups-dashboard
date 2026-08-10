@@ -151,6 +151,31 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	}
 
 	/**
+	 * Gets a non-expired pending site for a client origin.
+	 *
+	 * @param string $expected_origin Canonical expected client origin.
+	 * @param string $now Current UTC datetime.
+	 * @return array<string,mixed>|null
+	 */
+	public function get_active_pending_by_expected_origin( $expected_origin, $now = '' ) {
+		global $wpdb;
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+		$now   = '' !== $now ? sanitize_text_field( $now ) : current_time( 'mysql', true );
+		$row   = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE expected_origin = %s AND enrollment_status = %s AND pairing_expires_at > %s LIMIT 1",
+				esc_url_raw( $expected_origin ),
+				'pending',
+				$now
+			),
+			ARRAY_A
+		);
+
+		return $row ? $row : null;
+	}
+
+	/**
 	 * Creates a pending site placeholder.
 	 *
 	 * @param array $data Site data.

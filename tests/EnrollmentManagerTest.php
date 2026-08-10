@@ -31,6 +31,13 @@ class Alynt_Drime_Backups_Dashboard_Test_Site_Repository extends Alynt_Drime_Bac
 	public $create_result = 123;
 
 	/**
+	 * Existing active pending site.
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	public $active_pending = null;
+
+	/**
 	 * Creates a pending fake row.
 	 *
 	 * @param array $data Site data.
@@ -40,6 +47,17 @@ class Alynt_Drime_Backups_Dashboard_Test_Site_Repository extends Alynt_Drime_Bac
 		$this->last_insert = $data;
 
 		return $this->create_result;
+	}
+
+	/**
+	 * Gets an active pending fake row.
+	 *
+	 * @param string $expected_origin Expected origin.
+	 * @param string $now Current UTC datetime.
+	 * @return array<string,mixed>|null
+	 */
+	public function get_active_pending_by_expected_origin( $expected_origin, $now = '' ) {
+		return $this->active_pending;
 	}
 }
 
@@ -106,6 +124,62 @@ class EnrollmentManagerTest extends TestCase {
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'expected_origin_invalid', $result->get_error_code() );
+		$this->assertSame( array(), $repository->last_insert );
+	}
+
+	/**
+	 * Overlong labels are rejected before database storage.
+	 *
+	 * @return void
+	 */
+	public function test_create_pending_site_rejects_overlong_label() {
+		$repository = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
+		$manager    = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
+			$repository,
+			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
+		);
+
+		$result = $manager->create_pending_site(
+			array(
+				'site_label'      => str_repeat( 'A', 192 ),
+				'expected_origin' => 'https://client.example.com',
+			),
+			'https://control.sitesmanage.com/',
+			strtotime( '2099-01-01T00:00:00Z' )
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'site_label_too_long', $result->get_error_code() );
+		$this->assertSame( array(), $repository->last_insert );
+	}
+
+	/**
+	 * Existing non-expired pending pairings prevent duplicate display-once tokens.
+	 *
+	 * @return void
+	 */
+	public function test_create_pending_site_rejects_duplicate_active_pending_origin() {
+		$repository                 = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
+		$repository->active_pending = array(
+			'id'              => 44,
+			'expected_origin' => 'https://client.example.com',
+		);
+		$manager                    = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
+			$repository,
+			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
+		);
+
+		$result = $manager->create_pending_site(
+			array(
+				'site_label'      => 'Client Site',
+				'expected_origin' => 'https://client.example.com',
+			),
+			'https://control.sitesmanage.com/',
+			strtotime( '2099-01-01T00:00:00Z' )
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'pending_site_exists', $result->get_error_code() );
 		$this->assertSame( array(), $repository->last_insert );
 	}
 

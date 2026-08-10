@@ -37,6 +37,27 @@ class StatusPayloadValidatorTest extends TestCase {
 	}
 
 	/**
+	 * Overlong plugin versions are bounded before fixed-width storage.
+	 *
+	 * @return void
+	 */
+	public function test_overlong_plugin_version_is_bounded() {
+		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+		$result    = $validator->validate(
+			array_merge(
+				$this->payload(),
+				array(
+					'plugin_version' => str_repeat( '9', 100 ),
+				)
+			),
+			'11111111-1111-4111-8111-111111111111'
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 64, strlen( $result['plugin_version'] ) );
+	}
+
+	/**
 	 * Path-mode fields are rejected.
 	 *
 	 * @return void
