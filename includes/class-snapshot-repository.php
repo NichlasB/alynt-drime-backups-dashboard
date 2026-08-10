@@ -22,7 +22,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	 * @param int    $site_id Site ID.
 	 * @param array  $payload Redacted status payload.
 	 * @param string $status_category Dashboard status category.
-	 * @return int Inserted snapshot ID.
+	 * @return int|WP_Error Inserted snapshot ID, or an error when storage fails.
 	 */
 	public function record( $site_id, array $payload, $status_category ) {
 		global $wpdb;
@@ -30,7 +30,11 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 		$encoded_payload = wp_json_encode( $payload );
 		$table           = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
 
-		$wpdb->insert(
+		if ( false === $encoded_payload ) {
+			return new WP_Error( 'snapshot_payload_encode_failed', __( 'The client status payload could not be prepared for storage.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$inserted = $wpdb->insert(
 			$table,
 			array(
 				'dashboard_site_id'   => (int) $site_id,
@@ -48,6 +52,16 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 			),
 			array( '%d', '%d', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s' )
 		);
+
+		if ( false === $inserted || empty( $wpdb->insert_id ) ) {
+			return new WP_Error(
+				'snapshot_store_failed',
+				__( 'The dashboard could not store the client status snapshot.', 'alynt-drime-backups-dashboard' ),
+				array(
+					'last_error' => isset( $wpdb->last_error ) ? sanitize_text_field( $wpdb->last_error ) : '',
+				)
+			);
+		}
 
 		return (int) $wpdb->insert_id;
 	}
@@ -144,7 +158,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	 *
 	 * @param int $retention_days Days to retain.
 	 * @param int $batch_size Maximum rows to delete in one run.
-	 * @return int Deleted row count.
+	 * @return int|WP_Error Deleted row count, or an error when cleanup fails.
 	 */
 	public function cleanup_retention( $retention_days = 30, $batch_size = 500 ) {
 		global $wpdb;
@@ -154,7 +168,7 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 		$cutoff         = gmdate( 'Y-m-d H:i:s', time() - ( $retention_days * 86400 ) );
 		$table          = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
 
-		return (int) $wpdb->query(
+		$deleted = $wpdb->query(
 			$wpdb->prepare(
 				"DELETE FROM {$table}
 				WHERE observed_at < %s
@@ -171,6 +185,18 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 				$batch_size
 			)
 		);
+
+		if ( false === $deleted ) {
+			return new WP_Error(
+				'snapshot_cleanup_failed',
+				__( 'The dashboard could not clean up old status snapshots.', 'alynt-drime-backups-dashboard' ),
+				array(
+					'last_error' => isset( $wpdb->last_error ) ? sanitize_text_field( $wpdb->last_error ) : '',
+				)
+			);
+		}
+
+		return (int) $deleted;
 	}
 
 	/**

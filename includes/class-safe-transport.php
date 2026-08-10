@@ -102,12 +102,24 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 		$response = call_user_func( $http_client, $request['url'], $request['args'] );
 
 		if ( is_wp_error( $response ) ) {
-			return new WP_Error( 'transport_failed', __( 'The client status request failed.', 'alynt-drime-backups-dashboard' ) );
+			if ( $this->is_timeout_error( $response ) ) {
+				return new WP_Error( 'transport_timeout', __( 'The client status request timed out. Please try again, or wait for the next scheduled poll.', 'alynt-drime-backups-dashboard' ) );
+			}
+
+			return new WP_Error( 'transport_failed', __( 'The client status request could not reach the client site.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		$code = $this->response_code( $response );
 		if ( 200 !== $code ) {
-			return new WP_Error( 'transport_failed', __( 'The client status request did not return HTTP 200.', 'alynt-drime-backups-dashboard' ) );
+			return new WP_Error(
+				'transport_http_status',
+				sprintf(
+					/* translators: %d: HTTP response status code. */
+					__( 'The client status endpoint returned HTTP %d instead of HTTP 200.', 'alynt-drime-backups-dashboard' ),
+					$code
+				),
+				array( 'status' => $code )
+			);
 		}
 
 		$body = $this->response_body( $response );
@@ -149,5 +161,22 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 		}
 
 		return isset( $response['body'] ) ? (string) $response['body'] : '';
+	}
+
+	/**
+	 * Determines whether a WordPress HTTP error looks like a timeout.
+	 *
+	 * @param WP_Error $error HTTP error.
+	 * @return bool
+	 */
+	private function is_timeout_error( $error ) {
+		$message = strtolower( $error->get_error_message() );
+		$code    = strtolower( $error->get_error_code() );
+
+		return false !== strpos( $message, 'timed out' )
+			|| false !== strpos( $message, 'timeout' )
+			|| false !== strpos( $message, 'operation timed out' )
+			|| false !== strpos( $message, 'curl error 28' )
+			|| false !== strpos( $code, 'timeout' );
 	}
 }

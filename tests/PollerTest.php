@@ -77,6 +77,20 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	public $failures = array();
 
 	/**
+	 * Mark success result.
+	 *
+	 * @var bool
+	 */
+	public $mark_success_result = true;
+
+	/**
+	 * Mark failure result.
+	 *
+	 * @var bool
+	 */
+	public $mark_failure_result = true;
+
+	/**
 	 * Last due-for-poll query.
 	 *
 	 * @var array<string,mixed>
@@ -149,7 +163,7 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 		);
 		$this->successes[] = $this->success;
 
-		return true;
+		return $this->mark_success_result;
 	}
 
 	/**
@@ -172,7 +186,7 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 		);
 		$this->failures[] = $this->failure;
 
-		return true;
+		return $this->mark_failure_result;
 	}
 }
 
@@ -186,6 +200,13 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository extends Alyn
 	 * @var array<string,mixed>
 	 */
 	public $recorded = array();
+
+	/**
+	 * Record result.
+	 *
+	 * @var int|WP_Error
+	 */
+	public $record_result = 555;
 
 	/**
 	 * Records a fake snapshot.
@@ -202,7 +223,7 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository extends Alyn
 			'status'  => $status_category,
 		);
 
-		return 555;
+		return $this->record_result;
 	}
 }
 
@@ -384,6 +405,83 @@ class PollerTest extends TestCase {
 		$this->assertSame( 3, $sites->failure['consecutive_failures'] );
 		$this->assertNotEmpty( $sites->failure['next_poll_at'] );
 		$this->assertSame( array(), $snapshots->recorded );
+	}
+
+	/**
+	 * Snapshot storage failures are surfaced instead of reporting success.
+	 *
+	 * @return void
+	 */
+	public function test_snapshot_storage_failure_stops_success_notice() {
+		$vault                    = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$sites                    = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
+		$snapshots                = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
+		$snapshots->record_result = new WP_Error( 'snapshot_store_failed', 'Snapshot could not be stored.' );
+		$http_client              = function () {
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode( $this->payload() ),
+			);
+		};
+		$poller                   = $this->poller( $sites, $snapshots, $vault, $http_client );
+
+		$result = $poller->check_status_now( 77 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'snapshot_store_failed', $result->get_error_code() );
+		$this->assertSame( array(), $sites->success );
+		$this->assertSame( 'snapshot_store_failed', $sites->failure['error_code'] );
+	}
+
+	/**
+	 * Poll success storage failures are surfaced.
+	 *
+	 * @return void
+	 */
+	public function test_poll_success_storage_failure_is_returned() {
+		$vault                      = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$sites                      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
+		$sites->mark_success_result = false;
+		$snapshots                  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
+		$http_client                = function () {
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode( $this->payload() ),
+			);
+		};
+		$poller                     = $this->poller( $sites, $snapshots, $vault, $http_client );
+
+		$result = $poller->check_status_now( 77 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'poll_success_store_failed', $result->get_error_code() );
+		$this->assertSame( 'working', $snapshots->recorded['status'] );
+	}
+
+	/**
+	 * Failure persistence failures are surfaced.
+	 *
+	 * @return void
+	 */
+	public function test_poll_failure_storage_failure_is_returned() {
+		$vault                      = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$sites                      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
+		$sites->mark_failure_result = false;
+		$snapshots                  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
+		$http_client                = function () {
+			return new WP_Error( 'transport_failed', 'Client status endpoint unavailable.' );
+		};
+		$poller                     = $this->poller( $sites, $snapshots, $vault, $http_client );
+
+		$result = $poller->check_status_now( 77 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'poll_failure_store_failed', $result->get_error_code() );
+		$this->assertSame( 'transport_failed', $result->get_error_data()['original_error_code'] );
 	}
 
 	/**

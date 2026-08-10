@@ -148,6 +148,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 
 		echo '<h4>' . esc_html__( 'Redacted event export', 'alynt-drime-backups-dashboard' ) . '</h4>';
 		echo '<p>' . esc_html__( 'Copy this local, redacted event export only when support needs diagnostic event context. Secret-bearing keys are masked before storage and export.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		if ( false === $export ) {
+			echo '<div class="notice notice-error inline"><p>' . esc_html__( 'The redacted event export could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+		}
 		echo '<textarea class="large-text code" rows="10" readonly="readonly" aria-label="' . esc_attr__( 'Redacted diagnostics event export', 'alynt-drime-backups-dashboard' ) . '">';
 		echo esc_textarea( false === $export ? '[]' : $export );
 		echo '</textarea>';
@@ -283,6 +286,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 
 		echo '<h3>' . esc_html__( 'Support copy', 'alynt-drime-backups-dashboard' ) . '</h3>';
 		echo '<p>' . esc_html__( 'Copy this redacted summary when support needs scheduler and polling context. It intentionally omits client domains, site labels, pairing tokens, polling secrets, authorization headers, raw payloads, and raw response bodies.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		if ( false === $encoded ) {
+			echo '<div class="notice notice-error inline"><p>' . esc_html__( 'The support summary could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+		}
 		echo '<textarea class="large-text code" rows="12" readonly="readonly" aria-label="' . esc_attr__( 'Redacted support summary', 'alynt-drime-backups-dashboard' ) . '">';
 		echo esc_textarea( false === $encoded ? '{}' : $encoded );
 		echo '</textarea>';

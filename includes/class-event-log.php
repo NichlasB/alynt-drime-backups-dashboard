@@ -81,7 +81,13 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 			return false;
 		}
 
-		return (bool) update_option( self::OPTION_SETTINGS, $this->sanitize_settings( $settings ), false );
+		$sanitized = $this->sanitize_settings( $settings );
+
+		if ( $sanitized === $this->settings() ) {
+			return true;
+		}
+
+		return (bool) update_option( self::OPTION_SETTINGS, $sanitized, false );
 	}
 
 	/**

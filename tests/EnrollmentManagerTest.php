@@ -24,15 +24,22 @@ class Alynt_Drime_Backups_Dashboard_Test_Site_Repository extends Alynt_Drime_Bac
 	public $last_insert = array();
 
 	/**
+	 * Create result override.
+	 *
+	 * @var int|WP_Error
+	 */
+	public $create_result = 123;
+
+	/**
 	 * Creates a pending fake row.
 	 *
 	 * @param array $data Site data.
-	 * @return int
+	 * @return int|WP_Error
 	 */
 	public function create_pending( array $data ) {
 		$this->last_insert = $data;
 
-		return 123;
+		return $this->create_result;
 	}
 }
 
@@ -100,6 +107,32 @@ class EnrollmentManagerTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'expected_origin_invalid', $result->get_error_code() );
 		$this->assertSame( array(), $repository->last_insert );
+	}
+
+	/**
+	 * Storage failure does not return a display-once token.
+	 *
+	 * @return void
+	 */
+	public function test_create_pending_site_returns_error_when_storage_fails() {
+		$repository                = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
+		$repository->create_result = new WP_Error( 'site_create_failed', 'Could not store site.' );
+		$manager                   = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
+			$repository,
+			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
+		);
+
+		$result = $manager->create_pending_site(
+			array(
+				'site_label'      => 'Client Site',
+				'expected_origin' => 'https://client.example.com',
+			),
+			'https://control.sitesmanage.com/',
+			strtotime( '2099-01-01T00:00:00Z' )
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'site_create_failed', $result->get_error_code() );
 	}
 
 	/**

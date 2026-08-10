@@ -131,15 +131,13 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	 * Creates a pending site placeholder.
 	 *
 	 * @param array $data Site data.
-	 * @return int Inserted site ID.
+	 * @return int|WP_Error Inserted site ID, or an error when storage fails.
 	 */
 	public function create_pending( array $data ) {
 		global $wpdb;
-
-		$now   = current_time( 'mysql', true );
-		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
-
-		$wpdb->insert(
+		$now      = current_time( 'mysql', true );
+		$table    = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+		$inserted = $wpdb->insert(
 			$table,
 			array(
 				'site_uuid'           => ! empty( $data['site_uuid'] ) ? sanitize_text_field( $data['site_uuid'] ) : null,
@@ -156,6 +154,10 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 			),
 			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
 		);
+
+		if ( false === $inserted || empty( $wpdb->insert_id ) ) {
+			return new WP_Error( 'site_create_failed', __( 'The dashboard could not create the pending site record. Please try again before sharing a pairing token.', 'alynt-drime-backups-dashboard' ) );
+		}
 
 		return (int) $wpdb->insert_id;
 	}

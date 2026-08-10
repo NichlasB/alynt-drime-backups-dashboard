@@ -127,4 +127,52 @@ class SafeTransportTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'json_invalid', $result->get_error_code() );
 	}
+
+	/**
+	 * Transport timeout errors get timeout-specific messaging.
+	 *
+	 * @return void
+	 */
+	public function test_fetch_status_payload_returns_timeout_error() {
+		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$result    = $transport->fetch_status_payload(
+			array(
+				'expected_origin' => 'https://client.example.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			function () {
+				return new WP_Error( 'http_request_failed', 'cURL error 28: Operation timed out after 10000 milliseconds.' );
+			}
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'transport_timeout', $result->get_error_code() );
+	}
+
+	/**
+	 * Non-200 HTTP responses include their status.
+	 *
+	 * @return void
+	 */
+	public function test_fetch_status_payload_returns_http_status_error() {
+		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$result    = $transport->fetch_status_payload(
+			array(
+				'expected_origin' => 'https://client.example.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			function () {
+				return array(
+					'response' => array(
+						'code' => 503,
+					),
+					'body'     => '',
+				);
+			}
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'transport_http_status', $result->get_error_code() );
+		$this->assertSame( 503, $result->get_error_data()['status'] );
+	}
 }

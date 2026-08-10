@@ -97,6 +97,14 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 			)
 		);
 
+		if ( is_wp_error( $site_id ) ) {
+			return $site_id;
+		}
+
+		if ( $site_id <= 0 ) {
+			return new WP_Error( 'site_create_failed', __( 'The dashboard could not create the pending site record. Please try again before sharing a pairing token.', 'alynt-drime-backups-dashboard' ) );
+		}
+
 		return array(
 			'site_id'                 => $site_id,
 			'public_id'               => $public_id,

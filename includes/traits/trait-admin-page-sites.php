@@ -43,6 +43,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 	 * @return void
 	 */
 	private function render_add_site_shell( $result = null ) {
+		$submitted = is_wp_error( $result ) ? $this->submitted_pending_site_values() : array();
 		?>
 		<h2><?php esc_html_e( 'Add Site', 'alynt-drime-backups-dashboard' ); ?></h2>
 		<p><?php esc_html_e( 'Create a local pending enrollment and display one dashboard-generated token for the client-site administrator to paste into the uploader. This does not contact the client site or Drime.', 'alynt-drime-backups-dashboard' ); ?></p>
@@ -64,12 +65,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 			<table class="form-table" role="presentation">
 				<tr>
 					<th scope="row"><label for="alynt-dashboard-site-label"><?php esc_html_e( 'Site label', 'alynt-drime-backups-dashboard' ); ?></label></th>
-					<td><input type="text" id="alynt-dashboard-site-label" name="alynt_drime_backups_dashboard_pending_site[site_label]" class="regular-text" required="required" /></td>
+					<td><input type="text" id="alynt-dashboard-site-label" name="alynt_drime_backups_dashboard_pending_site[site_label]" class="regular-text" required="required" value="<?php echo esc_attr( isset( $submitted['site_label'] ) ? $submitted['site_label'] : '' ); ?>" /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="alynt-dashboard-expected-origin"><?php esc_html_e( 'Expected client origin', 'alynt-drime-backups-dashboard' ); ?></label></th>
 					<td>
-						<input type="url" id="alynt-dashboard-expected-origin" name="alynt_drime_backups_dashboard_pending_site[expected_origin]" class="regular-text" required="required" placeholder="https://example.com" />
+						<input type="url" id="alynt-dashboard-expected-origin" name="alynt_drime_backups_dashboard_pending_site[expected_origin]" class="regular-text" required="required" placeholder="https://example.com" value="<?php echo esc_attr( isset( $submitted['expected_origin'] ) ? $submitted['expected_origin'] : '' ); ?>" />
 						<p class="description"><?php esc_html_e( 'Public HTTPS origin only. The status endpoint path is fixed by the v1 protocol.', 'alynt-drime-backups-dashboard' ); ?></p>
 					</td>
 				</tr>
@@ -77,10 +78,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 					<th scope="row"><label for="alynt-dashboard-environment"><?php esc_html_e( 'Environment', 'alynt-drime-backups-dashboard' ); ?></label></th>
 					<td>
 						<select id="alynt-dashboard-environment" name="alynt_drime_backups_dashboard_pending_site[environment]">
-							<option value="production"><?php esc_html_e( 'Production', 'alynt-drime-backups-dashboard' ); ?></option>
-							<option value="staging"><?php esc_html_e( 'Staging', 'alynt-drime-backups-dashboard' ); ?></option>
-							<option value="development"><?php esc_html_e( 'Development', 'alynt-drime-backups-dashboard' ); ?></option>
-							<option value="other"><?php esc_html_e( 'Other', 'alynt-drime-backups-dashboard' ); ?></option>
+							<option value="production" <?php selected( isset( $submitted['environment'] ) ? $submitted['environment'] : '', 'production' ); ?>><?php esc_html_e( 'Production', 'alynt-drime-backups-dashboard' ); ?></option>
+							<option value="staging" <?php selected( isset( $submitted['environment'] ) ? $submitted['environment'] : '', 'staging' ); ?>><?php esc_html_e( 'Staging', 'alynt-drime-backups-dashboard' ); ?></option>
+							<option value="development" <?php selected( isset( $submitted['environment'] ) ? $submitted['environment'] : '', 'development' ); ?>><?php esc_html_e( 'Development', 'alynt-drime-backups-dashboard' ); ?></option>
+							<option value="other" <?php selected( isset( $submitted['environment'] ) ? $submitted['environment'] : '', 'other' ); ?>><?php esc_html_e( 'Other', 'alynt-drime-backups-dashboard' ); ?></option>
 						</select>
 					</td>
 				</tr>
@@ -169,16 +170,43 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 					<?php wp_nonce_field( 'alynt_drime_backups_dashboard_check_status_now' ); ?>
 					<input type="hidden" name="alynt_drime_backups_dashboard_action" value="check_status_now">
 					<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( (string) $site_id ); ?>">
-					<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Check Status Now', 'alynt-drime-backups-dashboard' ); ?></button></p>
+					<p><button type="submit" class="button button-primary" onclick="this.setAttribute('aria-busy','true');this.disabled=true;this.textContent='<?php echo esc_js( __( 'Checking...', 'alynt-drime-backups-dashboard' ) ); ?>';this.form.submit();"><?php esc_html_e( 'Check Status Now', 'alynt-drime-backups-dashboard' ); ?></button></p>
 				</form>
 			<?php endif; ?>
 			<form method="post">
 				<?php wp_nonce_field( 'alynt_drime_backups_dashboard_revoke_local' ); ?>
 				<input type="hidden" name="alynt_drime_backups_dashboard_action" value="revoke_local">
 				<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( (string) $site_id ); ?>">
-				<p><button type="submit" class="button"><?php esc_html_e( 'Revoke Local Dashboard Record', 'alynt-drime-backups-dashboard' ); ?></button></p>
+				<p><button type="submit" class="button" onclick="return window.confirm('<?php echo esc_js( __( 'Revoke this local dashboard record? This removes the local pairing and polling credential state, but does not contact the client site or Drime.', 'alynt-drime-backups-dashboard' ) ); ?>');"><?php esc_html_e( 'Revoke Local Dashboard Record', 'alynt-drime-backups-dashboard' ); ?></button></p>
 			</form>
 			<?php
 		}
+	}
+
+	/**
+	 * Gets sanitized Add Site values from a failed POST for input preservation.
+	 *
+	 * @return array<string,string>
+	 */
+	private function submitted_pending_site_values() {
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! function_exists( 'wp_verify_nonce' )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'alynt_drime_backups_dashboard_create_pending_site' )
+		) {
+			return array();
+		}
+
+		$raw = isset( $_POST['alynt_drime_backups_dashboard_pending_site'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_pending_site'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		if ( ! is_array( $raw ) ) {
+			return array();
+		}
+
+		return array(
+			'site_label'      => isset( $raw['site_label'] ) ? sanitize_text_field( (string) $raw['site_label'] ) : '',
+			'expected_origin' => isset( $raw['expected_origin'] ) ? esc_url_raw( (string) $raw['expected_origin'] ) : '',
+			'environment'     => isset( $raw['environment'] ) ? sanitize_key( (string) $raw['environment'] ) : '',
+		);
 	}
 }
