@@ -383,7 +383,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		echo '<h2>' . esc_html__( 'Attention', 'alynt-drime-backups-dashboard' ) . '</h2>';
 
 		if ( empty( $attention ) ) {
-			echo '<p>' . esc_html__( 'No client sites currently need attention. This view will populate after enrollment and polling are implemented.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			echo '<p>' . esc_html__( 'No client sites currently need attention based on the latest local dashboard evidence.', 'alynt-drime-backups-dashboard' ) . '</p>';
 			$this->render_fixture_status_guide();
 			return;
 		}
@@ -401,6 +401,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		$scheduler   = isset( $diagnostics['scheduler'] ) && is_array( $diagnostics['scheduler'] ) ? $diagnostics['scheduler'] : array();
 		$counts      = isset( $diagnostics['counts'] ) && is_array( $diagnostics['counts'] ) ? $diagnostics['counts'] : array();
 		$recent      = isset( $diagnostics['recent'] ) && is_array( $diagnostics['recent'] ) ? $diagnostics['recent'] : array();
+		$support     = isset( $diagnostics['support'] ) && is_array( $diagnostics['support'] ) ? $diagnostics['support'] : array();
 
 		echo '<h2>' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
 		echo '<p>' . esc_html__( 'Redacted scheduler and polling diagnostics for operators. This screen never displays pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
@@ -438,6 +439,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 
 		$this->render_status_count_table( isset( $counts['statuses'] ) && is_array( $counts['statuses'] ) ? $counts['statuses'] : array() );
 		$this->render_recent_poll_outcomes( $recent );
+		$this->render_support_copy_output( $support );
 	}
 
 	/**
@@ -468,6 +470,18 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		$this->render_detail_row( __( 'Message', 'alynt-drime-backups-dashboard' ), $status['message'] );
 		$this->render_detail_row( __( 'Last seen', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( isset( $site['last_seen_at'] ) ? $site['last_seen_at'] : '' ) );
 		echo '</tbody></table>';
+
+		echo '<h3>' . esc_html__( 'Polling evidence', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped"><tbody>';
+		$this->render_detail_row( __( 'Polling credential state', 'alynt-drime-backups-dashboard' ), $this->credential_state( $site ) );
+		$this->render_detail_row( __( 'Last poll attempt', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( isset( $site['last_poll_attempt_at'] ) ? $site['last_poll_attempt_at'] : '' ) );
+		$this->render_detail_row( __( 'Next scheduled poll', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( isset( $site['next_poll_at'] ) ? $site['next_poll_at'] : '' ) );
+		$this->render_detail_row( __( 'Consecutive failures', 'alynt-drime-backups-dashboard' ), isset( $site['consecutive_failures'] ) ? (string) max( 0, (int) $site['consecutive_failures'] ) : '0' );
+		$this->render_detail_row( __( 'Last safe error', 'alynt-drime-backups-dashboard' ), $this->safe_error_label( $site ) );
+		$this->render_detail_row( __( 'Stored snapshots', 'alynt-drime-backups-dashboard' ), (string) $this->snapshots->count_for_site( $site_id ) );
+		echo '</tbody></table>';
+
+		$this->render_latest_snapshot_summary( $snapshot );
 
 		if ( ! isset( $site['enrollment_status'] ) || 'revoked' !== $site['enrollment_status'] ) {
 			?>
@@ -502,6 +516,64 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			esc_html( $label ),
 			esc_html( $value )
 		);
+	}
+
+	/**
+	 * Renders a latest snapshot summary without raw payload output.
+	 *
+	 * @param array<string,mixed>|null $snapshot Snapshot row.
+	 * @return void
+	 */
+	private function render_latest_snapshot_summary( $snapshot ) {
+		echo '<h3>' . esc_html__( 'Latest redacted snapshot summary', 'alynt-drime-backups-dashboard' ) . '</h3>';
+
+		if ( empty( $snapshot ) || ! is_array( $snapshot ) ) {
+			echo '<p>' . esc_html__( 'No redacted status snapshot has been stored for this site yet.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			return;
+		}
+
+		$payload = $this->decoded_snapshot_payload( $snapshot );
+
+		echo '<table class="widefat striped"><tbody>';
+		$this->render_detail_row( __( 'Observed', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( isset( $snapshot['observed_at'] ) ? $snapshot['observed_at'] : '' ) );
+		$this->render_detail_row( __( 'Schema version', 'alynt-drime-backups-dashboard' ), isset( $snapshot['schema_version'] ) ? (string) (int) $snapshot['schema_version'] : '-' );
+		$this->render_detail_row( __( 'Queue count', 'alynt-drime-backups-dashboard' ), $this->payload_count( $payload, 'queue_count' ) );
+		$this->render_detail_row( __( 'Uploaded count', 'alynt-drime-backups-dashboard' ), $this->payload_count( $payload, 'uploaded_count' ) );
+		$this->render_detail_row( __( 'Failed count', 'alynt-drime-backups-dashboard' ), $this->payload_count( $payload, 'failed_count' ) );
+		$this->render_detail_row( __( 'Warnings', 'alynt-drime-backups-dashboard' ), $this->payload_count( $payload, 'warning_count' ) );
+		$this->render_detail_row( __( 'Cron status', 'alynt-drime-backups-dashboard' ), isset( $payload['cron_status'] ) ? (string) $payload['cron_status'] : '-' );
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * Decodes a snapshot payload for safe summary fields.
+	 *
+	 * @param array<string,mixed> $snapshot Snapshot row.
+	 * @return array<string,mixed>
+	 */
+	private function decoded_snapshot_payload( array $snapshot ) {
+		if ( isset( $snapshot['decoded_payload'] ) && is_array( $snapshot['decoded_payload'] ) ) {
+			return $snapshot['decoded_payload'];
+		}
+
+		if ( empty( $snapshot['payload_json'] ) ) {
+			return array();
+		}
+
+		$decoded = json_decode( (string) $snapshot['payload_json'], true );
+
+		return is_array( $decoded ) ? $decoded : array();
+	}
+
+	/**
+	 * Gets a non-negative payload count.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @param string              $key Field key.
+	 * @return string
+	 */
+	private function payload_count( array $payload, $key ) {
+		return isset( $payload[ $key ] ) ? (string) max( 0, (int) $payload[ $key ] ) : '0';
 	}
 
 	/**
@@ -575,6 +647,22 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	}
 
 	/**
+	 * Renders support-copy diagnostics.
+	 *
+	 * @param array<string,mixed> $support Support summary.
+	 * @return void
+	 */
+	private function render_support_copy_output( array $support ) {
+		$encoded = wp_json_encode( $support, JSON_PRETTY_PRINT );
+
+		echo '<h3>' . esc_html__( 'Support copy', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<p>' . esc_html__( 'Copy this redacted summary when support needs scheduler and polling context. It intentionally omits client domains, site labels, pairing tokens, polling secrets, authorization headers, raw payloads, and raw response bodies.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<textarea class="large-text code" rows="12" readonly="readonly" aria-label="' . esc_attr__( 'Redacted support summary', 'alynt-drime-backups-dashboard' ) . '">';
+		echo esc_textarea( false === $encoded ? '{}' : $encoded );
+		echo '</textarea>';
+	}
+
+	/**
 	 * Renders a sites table.
 	 *
 	 * @param array<int,array<string,mixed>> $sites Sites.
@@ -589,7 +677,8 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		echo '<th scope="col">' . esc_html__( 'Enrollment', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Status', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Last seen', 'alynt-drime-backups-dashboard' ) . '</th>';
-		echo '<th scope="col">' . esc_html__( 'Message', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Next poll', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Failures', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '</tr></thead><tbody>';
 
 		foreach ( $sites as $site ) {
@@ -614,13 +703,35 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			);
 			echo '<td>' . esc_html( isset( $site['environment'] ) ? $site['environment'] : '' ) . '</td>';
 			echo '<td>' . esc_html( isset( $site['enrollment_status'] ) ? $site['enrollment_status'] : '' ) . '</td>';
-			echo '<td>' . esc_html( $status['label'] ) . '</td>';
+			echo '<td>' . $this->status_cell( $status ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '<td>' . esc_html( $this->date_or_dash( isset( $site['last_seen_at'] ) ? $site['last_seen_at'] : '' ) ) . '</td>';
-			echo '<td>' . esc_html( $status['message'] ) . '</td>';
+			echo '<td>' . esc_html( $this->date_or_dash( isset( $site['next_poll_at'] ) ? $site['next_poll_at'] : '' ) ) . '</td>';
+			echo '<td>' . esc_html( isset( $site['consecutive_failures'] ) ? (string) max( 0, (int) $site['consecutive_failures'] ) : '0' ) . '</td>';
 			echo '</tr>';
 		}
 
 		echo '</tbody></table>';
+	}
+
+	/**
+	 * Builds an escaped status cell with plain-language guidance.
+	 *
+	 * @param array<string,string> $status Status classification.
+	 * @return string
+	 */
+	private function status_cell( array $status ) {
+		$label    = isset( $status['label'] ) ? $status['label'] : '';
+		$message  = isset( $status['message'] ) ? $status['message'] : '';
+		$category = isset( $status['category'] ) ? $status['category'] : '';
+		$guidance = $this->status_guidance( $category );
+
+		return sprintf(
+			'<span aria-label="%1$s">%2$s</span><br><span class="description">%3$s</span>%4$s',
+			esc_attr( trim( $label . '. ' . $message . ' ' . $guidance ) ),
+			esc_html( $label ),
+			esc_html( $message ),
+			'' === $guidance ? '' : '<br><span class="description">' . esc_html( $guidance ) . '</span>'
+		);
 	}
 
 	/**
@@ -674,6 +785,58 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		}
 
 		return __( 'Unnamed site', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a safe polling credential state.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	private function credential_state( array $site ) {
+		if ( ! empty( $site['polling_key_id'] ) && ! empty( $site['polling_secret_ciphertext'] ) ) {
+			return __( 'Stored encrypted polling credential metadata is present.', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( isset( $site['enrollment_status'] ) && 'pending' === $site['enrollment_status'] ) {
+			return __( 'Waiting for client opt-in pairing.', 'alynt-drime-backups-dashboard' );
+		}
+
+		return __( 'Polling credential metadata is missing; re-pairing may be required.', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a safe error label.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	private function safe_error_label( array $site ) {
+		$code    = isset( $site['last_error_code'] ) ? sanitize_key( $site['last_error_code'] ) : '';
+		$summary = isset( $site['last_error_summary'] ) ? sanitize_text_field( $site['last_error_summary'] ) : '';
+		$error   = trim( $code . ' ' . $summary );
+
+		return '' === $error ? '-' : $error;
+	}
+
+	/**
+	 * Gets plain-language operator guidance for a status category.
+	 *
+	 * @param string $category Status category.
+	 * @return string
+	 */
+	private function status_guidance( $category ) {
+		$guidance = array(
+			'pending'         => __( 'Next step: complete client opt-in pairing, then run the first read-only status check.', 'alynt-drime-backups-dashboard' ),
+			'paused'          => __( 'Next step: review why polling was paused locally before resuming.', 'alynt-drime-backups-dashboard' ),
+			'incompatible'    => __( 'Next step: update the client uploader or dashboard protocol before relying on this status.', 'alynt-drime-backups-dashboard' ),
+			'not_reporting'   => __( 'Next step: check pairing, credentials, site reachability, and WP-Cron timing.', 'alynt-drime-backups-dashboard' ),
+			'needs_attention' => __( 'Next step: review the latest redacted counts and safe error summary.', 'alynt-drime-backups-dashboard' ),
+			'not_configured'  => __( 'Next step: configure a supported backup source on the client site.', 'alynt-drime-backups-dashboard' ),
+			'working'         => __( 'No action needed from the dashboard.', 'alynt-drime-backups-dashboard' ),
+		);
+
+		return isset( $guidance[ $category ] ) ? $guidance[ $category ] : '';
 	}
 
 	/**

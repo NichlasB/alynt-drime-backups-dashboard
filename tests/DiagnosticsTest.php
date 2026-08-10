@@ -189,6 +189,53 @@ class DiagnosticsTest extends TestCase {
 	}
 
 	/**
+	 * Support-copy summary omits client-identifying and secret-bearing fields.
+	 *
+	 * @return void
+	 */
+	public function test_support_summary_is_support_safe() {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
+				array(
+					$this->site(
+						9,
+						array(
+							'site_label'                 => 'Very Private Client',
+							'expected_origin'            => 'https://private-client.example.com',
+							'last_poll_attempt_at'       => '2026-08-10 08:00:00',
+							'last_seen_at'               => '2026-08-10 08:00:00',
+							'next_poll_at'               => '2026-08-10 08:15:00',
+							'polling_key_id'             => 'pk_example_private',
+							'polling_secret_ciphertext'  => 'adbv1.private-ciphertext',
+							'pairing_secret_hash'        => str_repeat( 'b', 64 ),
+							'latest_payload_json'        => '{"raw":"payload"}',
+							'last_error_code'            => 'transport_failed',
+							'last_error_summary'         => 'Sanitized failure summary.',
+						)
+					),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( array() ),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		$result  = $diagnostics->collect();
+		$encoded = wp_json_encode( $result['support'] );
+
+		$this->assertNotFalse( $encoded );
+		$this->assertStringContainsString( 'recent_safe', $encoded );
+		$this->assertStringContainsString( 'transport_failed', $encoded );
+		$this->assertStringNotContainsString( 'Very Private Client', $encoded );
+		$this->assertStringNotContainsString( 'private-client.example.com', $encoded );
+		$this->assertStringNotContainsString( 'polling_key_id', $encoded );
+		$this->assertStringNotContainsString( 'polling_secret_ciphertext', $encoded );
+		$this->assertStringNotContainsString( 'pairing_secret_hash', $encoded );
+		$this->assertStringNotContainsString( 'latest_payload_json', $encoded );
+		$this->assertStringNotContainsString( 'private-ciphertext', $encoded );
+		$this->assertStringNotContainsString( 'Sanitized failure summary.', $encoded );
+	}
+
+	/**
 	 * Creates a site row.
 	 *
 	 * @param int                 $site_id Site ID.

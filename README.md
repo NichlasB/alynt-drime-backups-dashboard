@@ -37,7 +37,8 @@ The scaffold includes:
 - Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
 - Manual **Check Status Now** for enrolled sites using the fixed authenticated read-only status route.
 - Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and snapshot retention cleanup.
-- Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, and recent safe poll outcomes.
+- Operator-focused Sites, Attention, and Site Detail views with polling evidence, latest redacted snapshot summaries, accessible status guidance, and local-only revoke/check actions.
+- Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and support-copy output.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
