@@ -499,7 +499,12 @@ class PollerTest extends TestCase {
 			$snapshots,
 			new Alynt_Drime_Backups_Dashboard_Status_Classifier(),
 			$vault,
-			new Alynt_Drime_Backups_Dashboard_Safe_Transport(),
+			new Alynt_Drime_Backups_Dashboard_Safe_Transport(
+				new Alynt_Drime_Backups_Dashboard_Origin_Validator(),
+				function () {
+					return array( '93.184.216.34' );
+				}
+			),
 			new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator(),
 			$http_client
 		);

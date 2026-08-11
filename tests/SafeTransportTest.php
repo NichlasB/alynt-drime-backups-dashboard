@@ -20,7 +20,7 @@ class SafeTransportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_prepare_status_request_builds_fixed_read_only_get() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$request   = $transport->prepare_status_request(
 			array(
 				'expected_origin' => 'https://Client.Example.com/',
@@ -44,7 +44,7 @@ class SafeTransportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_prepare_status_request_rejects_unsafe_destination() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$result    = $transport->prepare_status_request(
 			array(
 				'expected_origin' => 'http://127.0.0.1',
@@ -62,7 +62,7 @@ class SafeTransportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_prepare_status_request_rejects_invalid_authorization_shape() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$result    = $transport->prepare_status_request(
 			array(
 				'expected_origin' => 'https://client.example.com',
@@ -75,12 +75,34 @@ class SafeTransportTest extends TestCase {
 	}
 
 	/**
+	 * Private DNS resolution fails before an HTTP request can be built.
+	 *
+	 * @return void
+	 */
+	public function test_prepare_status_request_rejects_private_resolved_destination() {
+		$transport = $this->transport(
+			function () {
+				return array( '192.168.1.20' );
+			}
+		);
+		$result    = $transport->prepare_status_request(
+			array(
+				'expected_origin' => 'https://client.example.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 )
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'destination_unsafe', $result->get_error_code() );
+	}
+
+	/**
 	 * Transport fetches and decodes JSON through an injected HTTP client.
 	 *
 	 * @return void
 	 */
 	public function test_fetch_status_payload_uses_injected_http_client() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
 			array(
 				'expected_origin' => 'https://client.example.com',
@@ -108,7 +130,7 @@ class SafeTransportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_fetch_status_payload_rejects_non_json_response() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
 			array(
 				'expected_origin' => 'https://client.example.com',
@@ -134,7 +156,7 @@ class SafeTransportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_fetch_status_payload_returns_timeout_error() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
 			array(
 				'expected_origin' => 'https://client.example.com',
@@ -155,7 +177,7 @@ class SafeTransportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_fetch_status_payload_returns_http_status_error() {
-		$transport = new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
 			array(
 				'expected_origin' => 'https://client.example.com',
@@ -174,5 +196,21 @@ class SafeTransportTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'transport_http_status', $result->get_error_code() );
 		$this->assertSame( 503, $result->get_error_data()['status'] );
+	}
+
+	/**
+	 * Creates a transport with a public resolver by default.
+	 *
+	 * @param callable|null $resolver Resolver.
+	 * @return Alynt_Drime_Backups_Dashboard_Safe_Transport
+	 */
+	private function transport( $resolver = null ) {
+		if ( null === $resolver ) {
+			$resolver = function () {
+				return array( '93.184.216.34' );
+			};
+		}
+
+		return new Alynt_Drime_Backups_Dashboard_Safe_Transport( new Alynt_Drime_Backups_Dashboard_Origin_Validator(), $resolver );
 	}
 }

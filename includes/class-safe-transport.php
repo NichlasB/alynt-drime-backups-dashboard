@@ -28,14 +28,23 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 	private $origins;
 
 	/**
+	 * Optional DNS resolver override.
+	 *
+	 * @var callable|null
+	 */
+	private $resolver;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null $origins Origin validator.
+	 * @param callable|null                                       $resolver DNS resolver override.
 	 */
-	public function __construct( $origins = null ) {
-		$this->origins = $origins instanceof Alynt_Drime_Backups_Dashboard_Origin_Validator ? $origins : new Alynt_Drime_Backups_Dashboard_Origin_Validator();
+	public function __construct( $origins = null, $resolver = null ) {
+		$this->origins  = $origins instanceof Alynt_Drime_Backups_Dashboard_Origin_Validator ? $origins : new Alynt_Drime_Backups_Dashboard_Origin_Validator();
+		$this->resolver = is_callable( $resolver ) ? $resolver : null;
 	}
 
 	/**
@@ -55,6 +64,10 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 
 		if ( '' === $url ) {
 			return new WP_Error( 'destination_unsafe', __( 'The client status destination is not a supported public HTTPS origin.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		if ( ! $this->origins->resolved_origin_is_public( $origin, $this->resolver ) ) {
+			return new WP_Error( 'destination_unsafe', __( 'The client status destination did not resolve to a public IP address.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		$polling_auth_scheme = trim( (string) $polling_auth_scheme );

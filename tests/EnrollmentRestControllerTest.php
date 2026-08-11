@@ -18,6 +18,51 @@ require_once dirname( __DIR__ ) . '/includes/traits/trait-enrollment-rest-respon
 require_once dirname( __DIR__ ) . '/includes/traits/trait-enrollment-rest-route-args.php';
 require_once dirname( __DIR__ ) . '/includes/class-enrollment-rest-controller.php';
 
+if ( ! function_exists( 'get_transient' ) ) {
+	/**
+	 * Test transient getter.
+	 *
+	 * @param string $key Transient key.
+	 * @return mixed
+	 */
+	function get_transient( $key ) {
+		return isset( $GLOBALS['alynt_drime_backups_dashboard_test_transients'][ $key ] )
+			? $GLOBALS['alynt_drime_backups_dashboard_test_transients'][ $key ]
+			: false;
+	}
+}
+
+if ( ! function_exists( 'set_transient' ) ) {
+	/**
+	 * Test transient setter.
+	 *
+	 * @param string $key Transient key.
+	 * @param mixed  $value Value.
+	 * @param int    $expiration Expiration.
+	 * @return bool
+	 */
+	function set_transient( $key, $value, $expiration = 0 ) {
+		unset( $expiration );
+		$GLOBALS['alynt_drime_backups_dashboard_test_transients'][ $key ] = $value;
+
+		return true;
+	}
+}
+
+if ( ! function_exists( 'delete_transient' ) ) {
+	/**
+	 * Test transient deleter.
+	 *
+	 * @param string $key Transient key.
+	 * @return bool
+	 */
+	function delete_transient( $key ) {
+		unset( $GLOBALS['alynt_drime_backups_dashboard_test_transients'][ $key ] );
+
+		return true;
+	}
+}
+
 /**
  * Fake repository for enrollment REST tests.
  */
@@ -82,6 +127,17 @@ class Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository extends Alyn
  * Tests enrollment REST controller behavior.
  */
 class EnrollmentRestControllerTest extends TestCase {
+	/**
+	 * Resets test transients.
+	 *
+	 * @return void
+	 */
+	protected function setUp(): void {
+		parent::setUp();
+
+		$GLOBALS['alynt_drime_backups_dashboard_test_transients'] = array();
+	}
+
 	/**
 	 * Successful enrollment returns polling credential once and stores ciphertext only.
 	 *
@@ -149,6 +205,46 @@ class EnrollmentRestControllerTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'pairing_invalid', $result->get_error_code() );
 		$this->assertSame( array(), $repository->stored );
+	}
+
+	/**
+	 * Repeated failed attempts for the same enrollment are rate limited.
+	 *
+	 * @return void
+	 */
+	public function test_repeated_invalid_pairing_attempts_are_rate_limited() {
+		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( str_repeat( 'A', 43 ) ) );
+		$controller = $this->controller( $repository );
+
+		for ( $attempt = 0; $attempt < Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller::RATE_LIMIT_FAILURE_THRESHOLD; $attempt++ ) {
+			$result = $controller->handle_enrollment( $this->payload(), 'Bearer ' . str_repeat( 'B', 43 ), strtotime( '2099-01-01T00:00:00Z' ) );
+
+			$this->assertInstanceOf( WP_Error::class, $result );
+			$this->assertSame( 'pairing_invalid', $result->get_error_code() );
+		}
+
+		$result = $controller->handle_enrollment( $this->payload(), 'Bearer ' . str_repeat( 'C', 43 ), strtotime( '2099-01-01T00:00:00Z' ) );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'rate_limited', $result->get_error_code() );
+		$this->assertSame( 429, $result->get_error_data()['status'] );
+		$this->assertSame( array(), $repository->stored );
+	}
+
+	/**
+	 * Permission callback documents the public bearer-auth boundary.
+	 *
+	 * @return void
+	 */
+	public function test_permission_callback_requires_bearer_shape() {
+		$controller = $this->controller( new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository() );
+
+		$missing = $controller->permission_callback( $this->request_with_authorization( '' ) );
+
+		$this->assertInstanceOf( WP_Error::class, $missing );
+		$this->assertSame( 'auth_missing', $missing->get_error_code() );
+		$this->assertSame( 401, $missing->get_error_data()['status'] );
+		$this->assertTrue( $controller->permission_callback( $this->request_with_authorization( 'Bearer ' . str_repeat( 'A', 43 ) ) ) );
 	}
 
 	/**
@@ -306,5 +402,41 @@ class EnrollmentRestControllerTest extends TestCase {
 			),
 			$overrides
 		);
+	}
+
+	/**
+	 * Creates a minimal REST request test double.
+	 *
+	 * @param string $authorization Authorization header.
+	 * @return object
+	 */
+	private function request_with_authorization( $authorization ) {
+		return new class( $authorization ) {
+			/**
+			 * Authorization header.
+			 *
+			 * @var string
+			 */
+			private $authorization;
+
+			/**
+			 * Constructor.
+			 *
+			 * @param string $authorization Authorization header.
+			 */
+			public function __construct( $authorization ) {
+				$this->authorization = (string) $authorization;
+			}
+
+			/**
+			 * Gets a header.
+			 *
+			 * @param string $name Header name.
+			 * @return string
+			 */
+			public function get_header( $name ) {
+				return 'authorization' === strtolower( (string) $name ) ? $this->authorization : '';
+			}
+		};
 	}
 }
