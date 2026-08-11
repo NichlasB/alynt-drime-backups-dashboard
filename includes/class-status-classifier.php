@@ -30,6 +30,8 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	/**
 	 * Classifies one site using its latest snapshot.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array<string,mixed>      $site Site row.
 	 * @param array<string,mixed>|null $snapshot Latest snapshot row.
 	 * @param int|null                 $now Unix timestamp.
@@ -91,6 +93,8 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 
 	/**
 	 * Gets a label for a category.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $category Category slug.
 	 * @return string

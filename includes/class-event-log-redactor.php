@@ -44,6 +44,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log_Redactor {
 	/**
 	 * Redacts sensitive context before storage/export.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array<string,mixed> $context Context.
 	 * @return array<string,mixed>
 	 */
@@ -63,6 +65,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log_Redactor {
 
 	/**
 	 * Truncates scalar text.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $value Value.
 	 * @param int    $length Length.

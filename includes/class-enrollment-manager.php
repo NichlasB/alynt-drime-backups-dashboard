@@ -37,6 +37,8 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null  $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null $origins Origin validator.
 	 */
@@ -47,6 +49,8 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_Manager {
 
 	/**
 	 * Creates a pending dashboard site and one display-once pairing token.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array<string,mixed> $raw Raw form data.
 	 * @param string              $dashboard_origin Raw dashboard origin.

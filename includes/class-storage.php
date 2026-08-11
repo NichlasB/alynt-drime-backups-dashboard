@@ -22,6 +22,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 	/**
 	 * Returns the sites table name.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return string
 	 */
 	public static function sites_table() {
@@ -33,6 +35,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 	/**
 	 * Returns the snapshots table name.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return string
 	 */
 	public static function snapshots_table() {
@@ -43,6 +47,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 
 	/**
 	 * Installs or upgrades dashboard-owned tables.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
@@ -120,6 +126,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 
 	/**
 	 * Ensures installed schemas receive safe dbDelta upgrades after plugin updates.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */

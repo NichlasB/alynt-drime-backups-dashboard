@@ -22,6 +22,8 @@ class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
 	/**
 	 * Creates a random URL-safe secret.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $bytes Number of random bytes.
 	 * @return string
 	 */
@@ -34,6 +36,8 @@ class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
 	 *
 	 * The payload is encoded for transport, not encrypted. Secrets are never
 	 * intended for URLs, logs, email, or long-term plaintext storage.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $enrollment_id Pending enrollment identifier.
 	 * @param string $dashboard_origin Canonical dashboard origin.
@@ -58,6 +62,8 @@ class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
 	/**
 	 * Creates display-once token material and the verifier to store.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param string $enrollment_id Pending enrollment identifier.
 	 * @param string $dashboard_origin Canonical dashboard origin.
 	 * @param string $expected_client_origin Canonical client origin.
@@ -76,6 +82,8 @@ class Alynt_Drime_Backups_Dashboard_Pairing_Tokens {
 
 	/**
 	 * Hashes a secret for verifier storage.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $secret Plain secret.
 	 * @return string

@@ -57,6 +57,8 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null  $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null $origins Origin validator.
 	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault|null $vault Credential vault.
@@ -71,6 +73,8 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 
 	/**
 	 * Registers REST routes.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
@@ -90,6 +94,8 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 	/**
 	 * Handles the REST request object.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response|WP_Error
 	 */
@@ -102,6 +108,8 @@ class Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller {
 
 	/**
 	 * Handles an enrollment payload.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array<string,mixed> $payload Enrollment payload.
 	 * @param string              $authorization Authorization header.

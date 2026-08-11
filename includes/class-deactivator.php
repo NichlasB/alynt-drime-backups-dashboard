@@ -19,6 +19,8 @@ class Alynt_Drime_Backups_Dashboard_Deactivator {
 	/**
 	 * Runs on deactivation.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public static function deactivate() {

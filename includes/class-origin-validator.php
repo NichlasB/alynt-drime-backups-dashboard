@@ -19,6 +19,8 @@ class Alynt_Drime_Backups_Dashboard_Origin_Validator {
 	/**
 	 * Normalizes a public HTTPS origin.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param string $origin Raw origin or URL.
 	 * @return string Empty string when invalid.
 	 */
@@ -57,6 +59,8 @@ class Alynt_Drime_Backups_Dashboard_Origin_Validator {
 
 	/**
 	 * Builds the fixed uploader status endpoint for a canonical origin.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $origin Canonical origin.
 	 * @return string

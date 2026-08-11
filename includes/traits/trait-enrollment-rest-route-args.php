@@ -19,6 +19,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 	/**
 	 * Builds route argument definitions for the enrollment endpoint.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return array<string,array<string,mixed>>
 	 */
 	public function enrollment_route_args() {
@@ -48,6 +50,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 	/**
 	 * Sanitizes an integer route argument.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param mixed $value Value.
 	 * @return int
 	 */
@@ -57,6 +61,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 
 	/**
 	 * Validates the enrollment protocol version.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $value Value.
 	 * @return bool
@@ -68,6 +74,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 	/**
 	 * Validates the status schema version.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param mixed $value Value.
 	 * @return bool
 	 */
@@ -77,6 +85,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 
 	/**
 	 * Sanitizes a UUID argument.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $value Value.
 	 * @return string
@@ -88,6 +98,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 	/**
 	 * Validates a UUID argument.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param mixed $value Value.
 	 * @return bool
 	 */
@@ -97,6 +109,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 
 	/**
 	 * Sanitizes a public HTTPS origin.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $value Value.
 	 * @return string
@@ -108,6 +122,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 	/**
 	 * Validates a public HTTPS origin.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param mixed $value Value.
 	 * @return bool
 	 */
@@ -117,6 +133,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 
 	/**
 	 * Sanitizes a fixed uploader status endpoint.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $value Value.
 	 * @return string
@@ -130,6 +148,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 	/**
 	 * Validates a fixed uploader status endpoint.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param mixed $value Value.
 	 * @return bool
 	 */
@@ -139,6 +159,8 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Route_Args {
 
 	/**
 	 * Validates a scalar optional argument.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param mixed $value Value.
 	 * @return bool

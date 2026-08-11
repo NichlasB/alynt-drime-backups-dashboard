@@ -22,6 +22,8 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 	 * This intentionally omits site labels, domains, credentials, authorization
 	 * headers, raw response bodies, raw payload JSON, and local paths.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array<int,array<string,mixed>>      $sites Sites.
 	 * @param array<int,array<string,mixed>>|null $snapshots Snapshots keyed by site ID.
 	 * @param int|null                            $now Current Unix timestamp.

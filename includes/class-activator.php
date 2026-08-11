@@ -19,6 +19,8 @@ class Alynt_Drime_Backups_Dashboard_Activator {
 	/**
 	 * Runs on activation.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public static function activate() {

@@ -19,6 +19,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	/**
 	 * Lists dashboard sites.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array $args Query args.
 	 * @return array<int,array<string,mixed>>
 	 */
@@ -77,6 +79,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	/**
 	 * Gets one site by ID.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $site_id Site ID.
 	 * @return array<string,mixed>|null
 	 */
@@ -97,6 +101,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 
 	/**
 	 * Gets enrolled sites that are due for polling.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param int    $limit Maximum rows.
 	 * @param string $now Current UTC datetime.
@@ -131,6 +137,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	/**
 	 * Gets a pending site by public enrollment ID.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param string $public_id Public ID.
 	 * @return array<string,mixed>|null
 	 */
@@ -152,6 +160,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 
 	/**
 	 * Gets a non-expired pending site for a client origin.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $expected_origin Canonical expected client origin.
 	 * @param string $now Current UTC datetime.
@@ -177,6 +187,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 
 	/**
 	 * Creates a pending site placeholder.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array $data Site data.
 	 * @return int|WP_Error Inserted site ID, or an error when storage fails.
@@ -213,6 +225,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	/**
 	 * Locally revokes a pending or enrolled site without contacting the client.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $site_id Site ID.
 	 * @return bool
 	 */
@@ -242,6 +256,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 
 	/**
 	 * Completes enrollment state while waiting for first valid poll activation.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param int                 $site_id Site ID.
 	 * @param array<string,mixed> $data Enrollment data.
@@ -279,6 +295,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	/**
 	 * Marks a status poll as successful.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int    $site_id Site ID.
 	 * @param string $status Dashboard status category.
 	 * @param string $plugin_version Uploader version.
@@ -314,6 +332,8 @@ class Alynt_Drime_Backups_Dashboard_Site_Repository {
 
 	/**
 	 * Marks a status poll failure with safe error metadata.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param int    $site_id Site ID.
 	 * @param string $error_code Stable error code.

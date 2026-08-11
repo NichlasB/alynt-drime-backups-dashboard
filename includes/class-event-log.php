@@ -51,6 +51,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Event_Log_Redactor|null $redactor Event redactor.
 	 */
 	public function __construct( $redactor = null ) {
@@ -59,6 +61,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 
 	/**
 	 * Gets sanitized diagnostics settings.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return array<string,mixed>
 	 */
@@ -77,6 +81,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	/**
 	 * Gets supported severity levels.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return array<int,string>
 	 */
 	public function severity_levels() {
@@ -85,6 +91,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 
 	/**
 	 * Saves diagnostics settings with autoload disabled.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array<string,mixed> $settings Raw settings.
 	 * @return bool
@@ -112,6 +120,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	/**
 	 * Returns whether structured diagnostics logging is enabled.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return bool
 	 */
 	public function is_enabled() {
@@ -122,6 +132,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 
 	/**
 	 * Records a structured event when diagnostics logging is enabled.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string              $level Severity level.
 	 * @param string              $category Event category.
@@ -153,6 +165,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	/**
 	 * Gets recent retained events.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $limit Maximum events.
 	 * @return array<int,array<string,mixed>>
 	 */
@@ -166,6 +180,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 
 	/**
 	 * Gets event counts and last-event metadata.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return array<string,mixed>
 	 */
@@ -207,6 +223,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	/**
 	 * Clears all stored diagnostics events.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return bool
 	 */
 	public function clear() {
@@ -225,6 +243,8 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 
 	/**
 	 * Deletes diagnostics options.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */

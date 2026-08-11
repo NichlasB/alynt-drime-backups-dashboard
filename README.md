@@ -25,7 +25,7 @@ This repository is the separate dashboard plugin package. The eventual host site
 
 ## Current Status
 
-The scaffold includes:
+Version 0.1.0 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
@@ -43,6 +43,8 @@ The scaffold includes:
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
+- Settings reference in `docs/SETTINGS.md`.
+- Hook reference in `docs/HOOKS.md`.
 
 Before broad implementation work, create or verify a restore point. For the new dashboard repo, use a baseline commit after this scaffold and then create an external restore point before adding enrollment, polling, or schema migrations. For companion uploader changes, run the toolkit restore-point prompt against the uploader repository first.
 
@@ -67,6 +69,24 @@ Use the dashboard to generate one-time pairing tokens, complete client-site opt-
 
 Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Structured diagnostics logging is disabled by default. When an administrator explicitly enables it, the plugin stores a bounded local event buffer with redaction applied before persistence/export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials are not stored in diagnostics events.
 
+### FAQ
+
+#### Can the dashboard run backups, restores, or cleanup on client sites?
+
+No. Version 0.1.0 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+
+#### What happens when I generate a pairing token?
+
+The dashboard creates a pending local enrollment for the expected client origin and displays a one-time pairing credential. The client site must opt in by submitting the enrollment payload back to the dashboard REST endpoint before the dashboard can poll status.
+
+#### Does diagnostics logging store secrets?
+
+No. Diagnostics logging is disabled by default and redacts sensitive fields before local persistence or export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials must not be stored.
+
+#### Where are implementation details documented?
+
+See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
+
 ### Changelog Summary
 
 See `CHANGELOG.md` for the current unreleased 0.1.0 changelog and release notes.
@@ -77,36 +97,15 @@ GPL-2.0-or-later. See `LICENSE`.
 
 ### Local Checks
 
-Run PHP syntax checks before packaging:
-
-```sh
-php -l alynt-drime-backups-dashboard.php
-php -l includes/class-activator.php
-php -l includes/class-admin-page.php
-php -l includes/class-credential-vault.php
-php -l includes/class-deactivator.php
-php -l includes/class-diagnostics.php
-php -l includes/class-event-log.php
-php -l includes/class-enrollment-manager.php
-php -l includes/class-enrollment-rest-controller.php
-php -l includes/class-origin-validator.php
-php -l includes/class-pairing-tokens.php
-php -l includes/class-plugin.php
-php -l includes/class-poller.php
-php -l includes/class-safe-transport.php
-php -l includes/class-snapshot-repository.php
-php -l includes/class-status-payload-validator.php
-php -l includes/class-storage.php
-php -l uninstall.php
-```
-
-Composer dev tooling is defined for linting and tests.
+Run the configured checks before packaging:
 
 ```sh
 npm test
 npm run lint
 npm run build
 ```
+
+For targeted PHP syntax checks during development, run `php -l` against changed PHP files. The configured lint script covers the committed PHP paths.
 
 ## Release Packaging
 

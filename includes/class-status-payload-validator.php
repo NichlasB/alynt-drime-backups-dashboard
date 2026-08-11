@@ -39,6 +39,8 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	/**
 	 * Validates and sanitizes a status payload.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array<string,mixed> $payload Raw decoded payload.
 	 * @param string              $expected_site_uuid Expected site UUID.
 	 * @return array<string,mixed>|WP_Error

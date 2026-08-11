@@ -19,6 +19,8 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Scheduling {
 	/**
 	 * Registers the custom polling recurrence.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param array<string,array<string,mixed>> $schedules Cron schedules.
 	 * @return array<string,array<string,mixed>>
 	 */
@@ -35,6 +37,8 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Scheduling {
 
 	/**
 	 * Schedules dashboard maintenance events.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
@@ -55,6 +59,8 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Scheduling {
 
 	/**
 	 * Unschedules dashboard maintenance events.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */

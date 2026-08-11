@@ -51,6 +51,8 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null     $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null $snapshots Snapshot repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null   $classifier Status classifier.
@@ -65,6 +67,8 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 
 	/**
 	 * Collects safe diagnostics for operator display.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return array<string,mixed>
 	 */
@@ -89,6 +93,8 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 
 	/**
 	 * Gets the structured event log.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return Alynt_Drime_Backups_Dashboard_Event_Log
 	 */

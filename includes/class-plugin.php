@@ -46,6 +46,8 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 0.1.0
 	 */
 	public function __construct() {
 		Alynt_Drime_Backups_Dashboard_Storage::maybe_upgrade();

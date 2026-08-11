@@ -33,6 +33,8 @@ class Alynt_Drime_Backups_Dashboard_Credential_Vault {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param string|null $secret_material Secret material override.
 	 */
 	public function __construct( $secret_material = null ) {
@@ -41,6 +43,8 @@ class Alynt_Drime_Backups_Dashboard_Credential_Vault {
 
 	/**
 	 * Encrypts a polling credential for storage.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $secret Plain polling secret.
 	 * @param string $context Credential context.
@@ -81,6 +85,8 @@ class Alynt_Drime_Backups_Dashboard_Credential_Vault {
 
 	/**
 	 * Decrypts a stored polling credential.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $stored Stored ciphertext.
 	 * @param string $context Credential context.

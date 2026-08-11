@@ -30,6 +30,8 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null $origins Origin validator.
 	 */
 	public function __construct( $origins = null ) {
@@ -40,6 +42,8 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 	 * Prepares a safe status polling request descriptor.
 	 *
 	 * This method intentionally does not perform the HTTP request.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array<string,mixed> $site Dashboard site row.
 	 * @param string              $polling_auth_scheme Authorization header value.
@@ -78,6 +82,8 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 
 	/**
 	 * Executes the fixed status request and decodes its JSON response.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array<string,mixed> $site Dashboard site row.
 	 * @param string              $polling_auth_scheme Authorization header value.

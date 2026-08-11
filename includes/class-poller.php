@@ -92,6 +92,8 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null          $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null      $snapshots Snapshot repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null        $classifier Classifier.
@@ -114,6 +116,8 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 
 	/**
 	 * Runs the scheduled read-only poll batch.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param int $limit Maximum sites to poll.
 	 * @return array<string,int|string>
@@ -166,6 +170,8 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 
 	/**
 	 * Performs one manual read-only status check.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param int $site_id Site ID.
 	 * @return array<string,mixed>|WP_Error

@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Created the separate Alynt Drime Backups Dashboard plugin scaffold.
 - Added local dashboard storage schema hooks for sites and status snapshots.
 - Added an admin page shell documenting the approved v1 read-only boundary.
-- Added pairing token helper primitives and a no-op poller placeholder.
+- Added pairing token helper primitives and initial poller scaffolding, later expanded into scheduled read-only polling.
 - Added implementation plan, package metadata, and development tooling placeholders.
 - Added draft v1 protocol and threat-model documents for the read-only dashboard/uploader boundary.
 - Froze the Phase 3 protocol and threat-model documents as the approved implementation baseline.
@@ -22,3 +22,4 @@ All notable changes to this project will be documented in this file.
 - Added operator UI polish for Sites, Attention, Site Detail, latest redacted snapshot summaries, accessible status guidance, and support-copy diagnostics.
 - Added optional structured diagnostics logging with disabled-by-default settings, redacted local event storage, recent event viewing/export, clear controls, and targeted enrollment/polling failure instrumentation.
 - Added a WordPress-native responsive admin design with accessible status badges, site summaries, guided pairing, prioritized attention review, bounded recent snapshot history, safer local confirmation screens, and progressive copy/busy-state enhancements.
+- Added hook, settings, FAQ, and developer documentation for the read-only dashboard boundary.

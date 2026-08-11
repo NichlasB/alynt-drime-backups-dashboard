@@ -19,6 +19,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	/**
 	 * Records a status snapshot.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int    $site_id Site ID.
 	 * @param array  $payload Redacted status payload.
 	 * @param string $status_category Dashboard status category.
@@ -69,6 +71,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	/**
 	 * Gets the latest snapshot for one site.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $site_id Site ID.
 	 * @return array<string,mixed>|null
 	 */
@@ -95,6 +99,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 
 	/**
 	 * Gets latest snapshots keyed by site ID.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array<int> $site_ids Site IDs.
 	 * @return array<int,array<string,mixed>>
@@ -137,6 +143,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	/**
 	 * Gets a bounded recent snapshot history for one site.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $site_id Site ID.
 	 * @param int $limit Maximum snapshots to return.
 	 * @return array<int,array<string,mixed>>
@@ -171,6 +179,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	/**
 	 * Counts snapshots for one site.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param int $site_id Site ID.
 	 * @return int
 	 */
@@ -189,6 +199,8 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 
 	/**
 	 * Deletes old snapshots while preserving the latest snapshot for every site.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param int $retention_days Days to retain.
 	 * @param int $batch_size Maximum rows to delete in one run.

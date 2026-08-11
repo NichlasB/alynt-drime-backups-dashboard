@@ -90,6 +90,8 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	/**
 	 * Constructor.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null     $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null $snapshots Snapshot repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null   $classifier Status classifier.
@@ -110,6 +112,8 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	/**
 	 * Registers the admin menu entry.
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public function register_menu() {
@@ -124,6 +128,8 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 
 	/**
 	 * Enqueues the dashboard assets only on this plugin screen.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param string $hook_suffix Current admin page hook.
 	 * @return void
@@ -150,6 +156,8 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 
 	/**
 	 * Renders the current read-only scaffold page.
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
