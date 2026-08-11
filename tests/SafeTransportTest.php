@@ -97,6 +97,29 @@ class SafeTransportTest extends TestCase {
 	}
 
 	/**
+	 * Same-origin dashboard self-polling may use loopback host resolution.
+	 *
+	 * @return void
+	 */
+	public function test_prepare_status_request_allows_same_origin_self_poll_with_loopback_resolution() {
+		$transport = $this->transport(
+			function () {
+				return array( '127.0.0.1' );
+			}
+		);
+		$request   = $transport->prepare_status_request(
+			array(
+				'expected_origin' => 'https://control.sitesmanage.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 )
+		);
+
+		$this->assertIsArray( $request );
+		$this->assertSame( 'https://control.sitesmanage.com/wp-json/alynt-drime-backups-uploader/v1/status', $request['url'] );
+		$this->assertFalse( $request['args']['reject_unsafe_urls'] );
+	}
+
+	/**
 	 * Transport fetches and decodes JSON through an injected HTTP client.
 	 *
 	 * @return void

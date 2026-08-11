@@ -59,14 +59,15 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	public function prepare_status_request( array $site, $polling_auth_scheme ) {
-		$origin = isset( $site['expected_origin'] ) ? (string) $site['expected_origin'] : '';
-		$url    = $this->origins->status_endpoint_for_origin( $origin );
+		$origin              = isset( $site['expected_origin'] ) ? (string) $site['expected_origin'] : '';
+		$url                 = $this->origins->status_endpoint_for_origin( $origin );
+		$is_same_origin_poll = $this->is_same_origin_self_poll( $origin );
 
 		if ( '' === $url ) {
 			return new WP_Error( 'destination_unsafe', __( 'The client status destination is not a supported public HTTPS origin.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		if ( ! $this->origins->resolved_origin_is_public( $origin, $this->resolver ) ) {
+		if ( ! $is_same_origin_poll && ! $this->origins->resolved_origin_is_public( $origin, $this->resolver ) ) {
 			return new WP_Error( 'destination_unsafe', __( 'The client status destination did not resolve to a public IP address.', 'alynt-drime-backups-dashboard' ) );
 		}
 
@@ -83,7 +84,7 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 				'timeout'             => self::DEFAULT_TIMEOUT_SECONDS,
 				'redirection'         => 0,
 				'limit_response_size' => self::MAX_RESPONSE_SIZE_BYTES,
-				'reject_unsafe_urls'  => true,
+				'reject_unsafe_urls'  => ! $is_same_origin_poll,
 				'headers'             => array(
 					'Accept'        => 'application/json',
 					'Cache-Control' => 'no-store',
@@ -91,6 +92,31 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 				),
 			),
 		);
+	}
+
+	/**
+	 * Allows this dashboard to poll its own fixed status endpoint.
+	 *
+	 * Some managed hosts map the site's own public hostname to loopback in
+	 * `/etc/hosts`. That is unsafe for arbitrary client sites, but safe for an
+	 * exact same-origin dashboard self-check because the origin must normalize
+	 * to the dashboard site's own public home URL and the request remains fixed
+	 * to the authenticated read-only status route.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param string $origin Candidate client origin.
+	 * @return bool
+	 */
+	private function is_same_origin_self_poll( $origin ) {
+		if ( ! function_exists( 'home_url' ) ) {
+			return false;
+		}
+
+		$client_origin    = $this->origins->normalize_public_https_origin( $origin );
+		$dashboard_origin = $this->origins->normalize_public_https_origin( home_url( '/', 'https' ) );
+
+		return '' !== $client_origin && '' !== $dashboard_origin && hash_equals( $dashboard_origin, $client_origin );
 	}
 
 	/**

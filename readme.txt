@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ No. Diagnostics logging is disabled by default and redacts sensitive fields befo
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.1 =
+* Allowed exact same-origin dashboard self-polling when the site hostname resolves to loopback locally, while preserving private-address rejection for other client origins.
 
 = 0.1.0 =
 * Initial local scaffold.
