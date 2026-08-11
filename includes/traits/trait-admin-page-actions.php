@@ -142,12 +142,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		if ( is_wp_error( $result ) ) {
-			echo '<div class="notice notice-error is-dismissible inline"><p>' . esc_html( $result->get_error_message() ) . '</p></div>';
+			$this->render_action_notice( $result->get_error_message(), 'notice-error' );
 			return;
 		}
 
 		if ( isset( $result['pairing_token'] ) ) {
-			echo '<div class="notice notice-success is-dismissible inline"><p>' . esc_html__( 'Pending dashboard site created. Copy the pairing token now; it is not stored and cannot be shown again.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+			$this->render_action_notice( __( 'Pending dashboard site created. Copy the pairing token now; it is not stored and cannot be shown again.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
 			return;
 		}
 
@@ -157,12 +157,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 				: __( 'The dashboard record could not be revoked locally.', 'alynt-drime-backups-dashboard' );
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
-			echo '<div class="notice ' . esc_attr( $class ) . ' is-dismissible inline"><p>' . esc_html( $message ) . '</p></div>';
+			$this->render_action_notice( $message, $class );
 			return;
 		}
 
 		if ( isset( $result['action'] ) && 'check_status_now' === $result['action'] ) {
-			echo '<div class="notice notice-success is-dismissible inline"><p>' . esc_html__( 'Read-only status check completed and stored. No backup or client-site setting was changed.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+			$this->render_action_notice( __( 'Read-only status check completed and stored. No backup or client-site setting was changed.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
 			return;
 		}
 
@@ -172,7 +172,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 				: __( 'Diagnostics settings could not be saved.', 'alynt-drime-backups-dashboard' );
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
-			echo '<div class="notice ' . esc_attr( $class ) . ' is-dismissible inline"><p>' . esc_html( $message ) . '</p></div>';
+			$this->render_action_notice( $message, $class );
 			return;
 		}
 
@@ -182,7 +182,26 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 				: __( 'Diagnostics events could not be cleared.', 'alynt-drime-backups-dashboard' );
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
-			echo '<div class="notice ' . esc_attr( $class ) . ' is-dismissible inline"><p>' . esc_html( $message ) . '</p></div>';
+			$this->render_action_notice( $message, $class );
 		}
+	}
+
+	/**
+	 * Renders a submitted-action notice with an explicit live-region role.
+	 *
+	 * @param string $message Notice message.
+	 * @param string $notice_class WordPress notice tone class.
+	 * @return void
+	 */
+	private function render_action_notice( $message, $notice_class ) {
+		$is_error = 'notice-error' === $notice_class;
+
+		printf(
+			'<div id="adbd-action-notice" class="notice %1$s is-dismissible inline" role="%2$s" aria-live="%3$s"><p>%4$s</p></div>',
+			esc_attr( $notice_class ),
+			$is_error ? 'alert' : 'status',
+			$is_error ? 'assertive' : 'polite',
+			esc_html( $message )
+		);
 	}
 }

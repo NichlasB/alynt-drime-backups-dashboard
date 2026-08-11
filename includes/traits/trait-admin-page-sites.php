@@ -66,6 +66,25 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 			),
 			admin_url( 'tools.php' )
 		);
+
+		$site_label_describedby      = 'alynt-dashboard-site-label-help';
+		$expected_origin_describedby = 'alynt-dashboard-expected-origin-help';
+		$site_label_invalid          = false;
+		$expected_origin_invalid     = false;
+
+		if ( is_wp_error( $result ) ) {
+			$error_code = $result->get_error_code();
+
+			if ( in_array( $error_code, array( 'site_label_required', 'site_label_too_long' ), true ) ) {
+				$site_label_invalid      = true;
+				$site_label_describedby .= ' adbd-action-notice';
+			}
+
+			if ( in_array( $error_code, array( 'expected_origin_invalid', 'expected_origin_too_long', 'pending_site_exists' ), true ) ) {
+				$expected_origin_invalid      = true;
+				$expected_origin_describedby .= ' adbd-action-notice';
+			}
+		}
 		?>
 		<section class="adbd-narrow-screen" aria-labelledby="adbd-add-site-heading">
 		<h2 id="adbd-add-site-heading"><?php esc_html_e( 'Add Site', 'alynt-drime-backups-dashboard' ); ?></h2>
@@ -121,12 +140,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 			<div class="adbd-panel adbd-form-panel"><table class="form-table" role="presentation">
 				<tr>
 					<th scope="row"><label for="alynt-dashboard-site-label"><?php esc_html_e( 'Site label', 'alynt-drime-backups-dashboard' ); ?></label></th>
-					<td><input type="text" id="alynt-dashboard-site-label" name="alynt_drime_backups_dashboard_pending_site[site_label]" class="regular-text" required="required" aria-describedby="alynt-dashboard-site-label-help" value="<?php echo esc_attr( isset( $submitted['site_label'] ) ? $submitted['site_label'] : '' ); ?>"><p id="alynt-dashboard-site-label-help" class="description"><?php esc_html_e( 'Used in this dashboard only. It is never sent to the client site.', 'alynt-drime-backups-dashboard' ); ?></p></td>
+					<td><input type="text" id="alynt-dashboard-site-label" name="alynt_drime_backups_dashboard_pending_site[site_label]" class="regular-text" required="required" aria-describedby="<?php echo esc_attr( $site_label_describedby ); ?>" <?php echo $site_label_invalid ? 'aria-invalid="true"' : ''; ?> value="<?php echo esc_attr( isset( $submitted['site_label'] ) ? $submitted['site_label'] : '' ); ?>"><p id="alynt-dashboard-site-label-help" class="description"><?php esc_html_e( 'Used in this dashboard only. It is never sent to the client site.', 'alynt-drime-backups-dashboard' ); ?></p></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="alynt-dashboard-expected-origin"><?php esc_html_e( 'Expected public HTTPS origin', 'alynt-drime-backups-dashboard' ); ?></label></th>
 					<td>
-						<input type="url" id="alynt-dashboard-expected-origin" name="alynt_drime_backups_dashboard_pending_site[expected_origin]" class="regular-text" required="required" aria-describedby="alynt-dashboard-expected-origin-help" placeholder="https://example.com" value="<?php echo esc_attr( isset( $submitted['expected_origin'] ) ? $submitted['expected_origin'] : '' ); ?>">
+						<input type="url" id="alynt-dashboard-expected-origin" name="alynt_drime_backups_dashboard_pending_site[expected_origin]" class="regular-text" required="required" aria-describedby="<?php echo esc_attr( $expected_origin_describedby ); ?>" <?php echo $expected_origin_invalid ? 'aria-invalid="true"' : ''; ?> placeholder="https://example.com" value="<?php echo esc_attr( isset( $submitted['expected_origin'] ) ? $submitted['expected_origin'] : '' ); ?>">
 						<p id="alynt-dashboard-expected-origin-help" class="description"><?php esc_html_e( 'Scheme and host only, with no path. HTTPS is required, and polling is refused if enrollment reports a different origin.', 'alynt-drime-backups-dashboard' ); ?></p>
 					</td>
 				</tr>
@@ -144,7 +163,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 				</tr>
 				<tr>
 					<th scope="row"><?php esc_html_e( 'Status endpoint', 'alynt-drime-backups-dashboard' ); ?></th>
-					<td><code class="adbd-endpoint-preview" data-empty-label="<?php esc_attr_e( 'Enter an HTTPS origin to preview the fixed endpoint.', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Enter an HTTPS origin to preview the fixed endpoint.', 'alynt-drime-backups-dashboard' ); ?></code><p class="description"><?php esc_html_e( 'The path is fixed and cannot be edited. The dashboard polls this authenticated GET endpoint and nothing else.', 'alynt-drime-backups-dashboard' ); ?></p></td>
+					<td><code class="adbd-endpoint-preview" aria-live="polite" aria-atomic="true" data-empty-label="<?php esc_attr_e( 'Enter an HTTPS origin to preview the fixed endpoint.', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Enter an HTTPS origin to preview the fixed endpoint.', 'alynt-drime-backups-dashboard' ); ?></code><p class="description"><?php esc_html_e( 'The path is fixed and cannot be edited. The dashboard polls this authenticated GET endpoint and nothing else.', 'alynt-drime-backups-dashboard' ); ?></p></td>
 				</tr>
 			</table>
 			</div>
@@ -265,7 +284,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 
 		if ( ! $site ) {
 			echo '<h2 id="adbd-site-detail-heading">' . esc_html__( 'Site Detail', 'alynt-drime-backups-dashboard' ) . '</h2>';
-			echo '<div class="notice notice-error inline"><p>' . esc_html__( 'No dashboard site record was found. Return to Sites and choose an existing record.', 'alynt-drime-backups-dashboard' ) . '</p></div></section>';
+			echo '<div class="notice notice-error inline" role="alert"><p>' . esc_html__( 'No dashboard site record was found. Return to Sites and choose an existing record.', 'alynt-drime-backups-dashboard' ) . '</p></div></section>';
 			return;
 		}
 
@@ -284,7 +303,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites {
 
 		echo '<div class="adbd-detail-title"><h2 id="adbd-site-detail-heading">' . esc_html( $this->site_name( $site ) ) . '</h2>' . $this->status_badge( $status ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge is escaped by status_badge().
 		echo '<p class="adbd-site-meta"><span>' . esc_html( isset( $site['expected_origin'] ) ? $site['expected_origin'] : '' ) . '</span><span>' . esc_html( $this->environment_label( isset( $site['environment'] ) ? $site['environment'] : '' ) ) . '</span><span>' . esc_html( isset( $site['plugin_version'] ) && '' !== $site['plugin_version'] ? sprintf( /* translators: %s: uploader plugin version. */ __( 'Uploader %s', 'alynt-drime-backups-dashboard' ), $site['plugin_version'] ) : __( 'Uploader version unknown', 'alynt-drime-backups-dashboard' ) ) . '</span></p>';
-		echo '<div class="notice notice-' . esc_attr( $this->status_notice_tone( $status['category'] ) ) . ' inline adbd-status-summary"><p><strong>' . esc_html( $status['message'] ) . '</strong></p><p>' . esc_html( $this->status_guidance( $status['category'] ) ) . '</p></div>';
+		$status_notice_tone = $this->status_notice_tone( $status['category'] );
+		$status_notice_role = 'error' === $status_notice_tone ? 'alert' : 'status';
+		echo '<div class="notice notice-' . esc_attr( $status_notice_tone ) . ' inline adbd-status-summary" role="' . esc_attr( $status_notice_role ) . '"><p><strong>' . esc_html( $status['message'] ) . '</strong></p><p>' . esc_html( $this->status_guidance( $status['category'] ) ) . '</p></div>';
 		echo '<div class="adbd-actions">';
 		$this->render_check_status_form( $site, $site_id, true );
 		echo '<span class="description">' . esc_html__( 'A manual check reads the same fixed endpoint used by scheduled polling and cannot change a backup.', 'alynt-drime-backups-dashboard' ) . '</span></div>';

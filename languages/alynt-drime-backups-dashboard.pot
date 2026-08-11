@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-11T17:16:48+00:00\n"
+"POT-Creation-Date: 2026-08-11T17:31:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -63,13 +63,13 @@ msgstr ""
 
 #: includes/class-admin-page.php:227
 #: includes/traits/trait-admin-page-display-helpers.php:191
-#: includes/traits/trait-admin-page-sites.php:71
+#: includes/traits/trait-admin-page-sites.php:89
 msgid "Add Site"
 msgstr ""
 
 #: includes/class-admin-page.php:228
 #: includes/traits/trait-admin-page-display-helpers.php:206
-#: includes/traits/trait-admin-page-sites.php:199
+#: includes/traits/trait-admin-page-sites.php:217
 msgid "Attention"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Dashboard sections"
 msgstr ""
 
 #. translators: %d: number of sites needing attention.
-#: includes/class-admin-page.php:254
+#: includes/class-admin-page.php:255
 #, php-format
 msgid "%d site needs attention"
 msgid_plural "%d sites need attention"
@@ -400,6 +400,10 @@ msgstr ""
 msgid "Scheduler"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics.php:39
+msgid "Scheduler diagnostics"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics.php:40
 msgid "Poll hook"
 msgstr ""
@@ -409,7 +413,7 @@ msgid "Poll schedule state"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:42
-#: includes/traits/trait-admin-page-sites.php:303
+#: includes/traits/trait-admin-page-sites.php:323
 msgid "Next scheduled poll"
 msgstr ""
 
@@ -435,6 +439,10 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:50
 msgid "History Retention"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics.php:51
+msgid "History retention diagnostics"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:52
@@ -466,6 +474,10 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:59
 msgid "Site Polling Summary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics.php:60
+msgid "Site polling summary diagnostics"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:61
@@ -531,6 +543,10 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:141
 msgid "Structured Event Log"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics.php:142
+msgid "Structured event log summary"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:143
@@ -608,8 +624,8 @@ msgid "Confirm Clear Diagnostics Events"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:180
-#: includes/traits/trait-admin-page-sites.php:152
-#: includes/traits/trait-admin-page-sites.php:324
+#: includes/traits/trait-admin-page-sites.php:170
+#: includes/traits/trait-admin-page-sites.php:344
 msgid "Cancel"
 msgstr ""
 
@@ -618,6 +634,7 @@ msgid "Review Clearing Diagnostics Events"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:199
+#: includes/traits/trait-admin-page-diagnostics.php:206
 msgid "Recent diagnostic events"
 msgstr ""
 
@@ -657,6 +674,10 @@ msgstr ""
 msgid "No status classifications are available yet."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics.php:245
+msgid "Status distribution diagnostics"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics.php:246
 #: includes/traits/trait-admin-page-diagnostics.php:279
 #: includes/traits/trait-admin-page-display-helpers.php:120
@@ -671,6 +692,10 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:270
 msgid "No poll attempts have been recorded yet."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics.php:274
+msgid "Recent poll outcomes"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:275
@@ -696,7 +721,7 @@ msgid "Failures"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics.php:281
-#: includes/traits/trait-admin-page-sites.php:305
+#: includes/traits/trait-admin-page-sites.php:325
 msgid "Last safe error"
 msgstr ""
 
@@ -890,22 +915,22 @@ msgid "Unnamed site"
 msgstr ""
 
 #: includes/traits/trait-admin-page-formatters.php:92
-#: includes/traits/trait-admin-page-sites.php:137
+#: includes/traits/trait-admin-page-sites.php:155
 msgid "Production"
 msgstr ""
 
 #: includes/traits/trait-admin-page-formatters.php:93
-#: includes/traits/trait-admin-page-sites.php:138
+#: includes/traits/trait-admin-page-sites.php:156
 msgid "Staging"
 msgstr ""
 
 #: includes/traits/trait-admin-page-formatters.php:94
-#: includes/traits/trait-admin-page-sites.php:139
+#: includes/traits/trait-admin-page-sites.php:157
 msgid "Development"
 msgstr ""
 
 #: includes/traits/trait-admin-page-formatters.php:95
-#: includes/traits/trait-admin-page-sites.php:140
+#: includes/traits/trait-admin-page-sites.php:158
 msgid "Other"
 msgstr ""
 
@@ -1032,266 +1057,266 @@ msgstr[1] ""
 msgid "Check Status Now re-polls the site's fixed authenticated read-only status endpoint. It does not start, stop, or alter a backup."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:73
+#: includes/traits/trait-admin-page-sites.php:91
 msgid "The local pending record was created. It stays Pending until an administrator on the client site explicitly opts in."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:75
+#: includes/traits/trait-admin-page-sites.php:93
 msgid "Pairing Token — Shown Once"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:77
+#: includes/traits/trait-admin-page-sites.php:95
 msgid "Copy this token now. Before enrollment, the dashboard stores only a verifier derived from it and cannot show it again. If it is lost, generate a new token; the old one then stops working."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:78
+#: includes/traits/trait-admin-page-sites.php:96
 msgid "Pairing token"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:81
+#: includes/traits/trait-admin-page-sites.php:99
 msgid "Pairing token copied to the clipboard."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:81
+#: includes/traits/trait-admin-page-sites.php:99
 msgid "The token could not be copied automatically. Select the field and copy it manually."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:81
+#: includes/traits/trait-admin-page-sites.php:99
 msgid "Copy Token"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:83
+#: includes/traits/trait-admin-page-sites.php:101
 msgid "This token is single use and is not a Drime API token."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:86
+#: includes/traits/trait-admin-page-sites.php:104
 msgid "Expires"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:87
+#: includes/traits/trait-admin-page-sites.php:105
 msgid "Expected client origin"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:88
+#: includes/traits/trait-admin-page-sites.php:106
 msgid "Endpoint that will be polled"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:93
+#: includes/traits/trait-admin-page-sites.php:111
 msgid "Next Steps on the Client Site"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:96
+#: includes/traits/trait-admin-page-sites.php:114
 msgid "Send the token to an administrator of the client site through a channel you already trust."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:97
+#: includes/traits/trait-admin-page-sites.php:115
 msgid "They paste it into the Alynt Drime Backups Uploader pairing field."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:98
+#: includes/traits/trait-admin-page-sites.php:116
 msgid "They review the dashboard origin and explicitly confirm the opt-in."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:99
+#: includes/traits/trait-admin-page-sites.php:117
 msgid "This dashboard starts polling only the fixed authenticated read-only status endpoint."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:103
+#: includes/traits/trait-admin-page-sites.php:121
 msgid "Done, Back to Sites"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:115
+#: includes/traits/trait-admin-page-sites.php:133
 msgid "Add Another Site"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:117
+#: includes/traits/trait-admin-page-sites.php:135
 msgid "Describe the client site, then generate a short-lived pairing token. Generating it does not contact the client site or Drime. Nothing is collected until a client-site administrator confirms the opt-in."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:123
+#: includes/traits/trait-admin-page-sites.php:141
 msgid "Site label"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:124
+#: includes/traits/trait-admin-page-sites.php:142
 msgid "Used in this dashboard only. It is never sent to the client site."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:127
+#: includes/traits/trait-admin-page-sites.php:145
 msgid "Expected public HTTPS origin"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:130
+#: includes/traits/trait-admin-page-sites.php:148
 msgid "Scheme and host only, with no path. HTTPS is required, and polling is refused if enrollment reports a different origin."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:134
+#: includes/traits/trait-admin-page-sites.php:152
 msgid "Environment"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:142
+#: includes/traits/trait-admin-page-sites.php:160
 msgid "Labels the site in this dashboard. It does not change polling behavior."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:146
+#: includes/traits/trait-admin-page-sites.php:164
 msgid "Status endpoint"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:147
+#: includes/traits/trait-admin-page-sites.php:165
 msgid "Enter an HTTPS origin to preview the fixed endpoint."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:147
+#: includes/traits/trait-admin-page-sites.php:165
 msgid "The path is fixed and cannot be edited. The dashboard polls this authenticated GET endpoint and nothing else."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:151
+#: includes/traits/trait-admin-page-sites.php:169
 msgid "The pairing token is not a Drime API token."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:151
+#: includes/traits/trait-admin-page-sites.php:169
 msgid "It permits one client site to opt in to publishing its own redacted upload status. It grants no access to Drime, storage, or backup files."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:152
+#: includes/traits/trait-admin-page-sites.php:170
 msgid "Generating…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:152
+#: includes/traits/trait-admin-page-sites.php:170
 msgid "Generate Pairing Token"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:152
+#: includes/traits/trait-admin-page-sites.php:170
 msgid "The token is shown once and expires after 15 minutes."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:202
+#: includes/traits/trait-admin-page-sites.php:220
 msgid "No sites currently need attention"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:202
+#: includes/traits/trait-admin-page-sites.php:220
 msgid "No latest local snapshot is classified as needs attention, not reporting, incompatible, or not configured."
 msgstr ""
 
 #. translators: %d: number of sites needing attention.
-#: includes/traits/trait-admin-page-sites.php:212
+#: includes/traits/trait-admin-page-sites.php:230
 #, php-format
 msgid "%d site needs someone to review its latest evidence."
 msgid_plural "%d sites need someone to review their latest evidence. The list is ordered by status priority."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/traits/trait-admin-page-sites.php:236
+#: includes/traits/trait-admin-page-sites.php:254
 msgid "Latest evidence:"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:238
+#: includes/traits/trait-admin-page-sites.php:256
 msgid "View Site"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:264
+#: includes/traits/trait-admin-page-sites.php:282
 msgid "Back to Sites"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:267
+#: includes/traits/trait-admin-page-sites.php:285
 msgid "Site Detail"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:268
+#: includes/traits/trait-admin-page-sites.php:286
 msgid "No dashboard site record was found. Return to Sites and choose an existing record."
 msgstr ""
 
 #. translators: %s: uploader plugin version.
-#: includes/traits/trait-admin-page-sites.php:286
+#: includes/traits/trait-admin-page-sites.php:304
 #, php-format
 msgid "Uploader %s"
 msgstr ""
 
 #. translators: %s: uploader plugin version.
-#: includes/traits/trait-admin-page-sites.php:286
+#: includes/traits/trait-admin-page-sites.php:304
 msgid "Uploader version unknown"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:290
+#: includes/traits/trait-admin-page-sites.php:310
 msgid "A manual check reads the same fixed endpoint used by scheduled polling and cannot change a backup."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:293
+#: includes/traits/trait-admin-page-sites.php:313
 msgid "Enrollment and Identity"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:294
+#: includes/traits/trait-admin-page-sites.php:314
 msgid "Enrollment state"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:295
+#: includes/traits/trait-admin-page-sites.php:315
 msgid "Expected origin"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:296
+#: includes/traits/trait-admin-page-sites.php:316
 msgid "Fixed status endpoint"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:297
+#: includes/traits/trait-admin-page-sites.php:317
 msgid "Status schema"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:299
+#: includes/traits/trait-admin-page-sites.php:319
 msgid "Polling and Credential State"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:300
+#: includes/traits/trait-admin-page-sites.php:320
 msgid "Credential state"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:301
+#: includes/traits/trait-admin-page-sites.php:321
 msgid "Last report received"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:302
+#: includes/traits/trait-admin-page-sites.php:322
 msgid "Last poll attempt"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:304
+#: includes/traits/trait-admin-page-sites.php:324
 msgid "Consecutive failures"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:311
+#: includes/traits/trait-admin-page-sites.php:331
 msgid "Credential and Privacy Boundary"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:311
+#: includes/traits/trait-admin-page-sites.php:331
 msgid "Before enrollment, only a verifier for the display-once pairing token is stored. After enrollment, encrypted per-site polling credential material is stored, but its plaintext is never displayed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:311
+#: includes/traits/trait-admin-page-sites.php:331
 msgid "This screen never shows pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:314
+#: includes/traits/trait-admin-page-sites.php:334
 msgid "Revoke Local Dashboard Record"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:314
+#: includes/traits/trait-admin-page-sites.php:334
 msgid "Revocation marks this local record revoked, clears its pairing and polling credential fields and next-poll state, and stops future polling. Existing snapshots remain under the normal 30-day retention cleanup. It does not contact the client site or Drime."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:317
+#: includes/traits/trait-admin-page-sites.php:337
 msgid "Confirm local revocation."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:317
+#: includes/traits/trait-admin-page-sites.php:337
 msgid "This local credential state cannot be recovered; pairing again requires a new token and client opt-in."
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:323
+#: includes/traits/trait-admin-page-sites.php:343
 msgid "Revoking…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:323
+#: includes/traits/trait-admin-page-sites.php:343
 msgid "Confirm Local Revocation"
 msgstr ""
 
-#: includes/traits/trait-admin-page-sites.php:329
+#: includes/traits/trait-admin-page-sites.php:349
 msgid "Review Local Revocation"
 msgstr ""
 

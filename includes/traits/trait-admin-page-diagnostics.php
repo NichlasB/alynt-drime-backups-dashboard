@@ -36,7 +36,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 		$this->render_diagnostics_settings( $logging );
 
 		echo '<div class="adbd-panel-grid"><div class="adbd-panel"><h3>' . esc_html__( 'Scheduler', 'alynt-drime-backups-dashboard' ) . '</h3>';
-		echo '<table class="widefat striped adbd-detail-table"><tbody>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Scheduler diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
 		$this->render_detail_row( __( 'Poll hook', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'poll_hook' ) );
 		$this->render_detail_row( __( 'Poll schedule state', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'poll_schedule_state' ) );
 		$this->render_detail_row( __( 'Next scheduled poll', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( $this->diagnostic_value( $scheduler, 'poll_next_at' ) ) );
@@ -48,7 +48,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 		echo '</tbody></table></div>';
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'History Retention', 'alynt-drime-backups-dashboard' ) . '</h3>';
-		echo '<table class="widefat striped adbd-detail-table"><tbody>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'History retention diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
 		$this->render_detail_row( __( 'Cleanup hook', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'cleanup_hook' ) );
 		$this->render_detail_row( __( 'Cleanup schedule state', 'alynt-drime-backups-dashboard' ), $this->diagnostic_value( $scheduler, 'cleanup_state' ) );
 		$this->render_detail_row( __( 'Next cleanup', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( $this->diagnostic_value( $scheduler, 'cleanup_next_at' ) ) );
@@ -57,7 +57,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 		echo '</tbody></table></div>';
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Site Polling Summary', 'alynt-drime-backups-dashboard' ) . '</h3>';
-		echo '<table class="widefat striped adbd-detail-table"><tbody>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Site polling summary diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
 		$this->render_detail_row( __( 'Total dashboard sites', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'total_sites' ) );
 		$this->render_detail_row( __( 'Polling-ready sites', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'polling_ready' ) );
 		$this->render_detail_row( __( 'Due now', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'due_now' ) );
@@ -139,7 +139,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 		$export   = wp_json_encode( $this->event_log->recent_events( 200 ), JSON_PRETTY_PRINT );
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Structured Event Log', 'alynt-drime-backups-dashboard' ) . '</h3>';
-		echo '<table class="widefat striped adbd-detail-table"><tbody>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Structured event log summary', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
 		$this->render_detail_row( __( 'Logging enabled', 'alynt-drime-backups-dashboard' ), ! empty( $settings['enabled'] ) ? __( 'Yes', 'alynt-drime-backups-dashboard' ) : __( 'No', 'alynt-drime-backups-dashboard' ) );
 		$this->render_detail_row( __( 'Minimum severity', 'alynt-drime-backups-dashboard' ), isset( $settings['minimum_level'] ) ? (string) $settings['minimum_level'] : 'warning' );
 		$this->render_detail_row( __( 'Event storage backend', 'alynt-drime-backups-dashboard' ), __( 'Autoload-disabled option ring buffer', 'alynt-drime-backups-dashboard' ) );
@@ -152,7 +152,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 		echo '<div class="adbd-panel-body"><h4>' . esc_html__( 'Redacted Event Export', 'alynt-drime-backups-dashboard' ) . '</h4>';
 		echo '<p>' . esc_html__( 'Copy this local, redacted event export only when support needs diagnostic event context. Secret-bearing keys are masked before storage and export.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		if ( false === $export ) {
-			echo '<div class="notice notice-error inline"><p>' . esc_html__( 'The redacted event export could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+			echo '<div class="notice notice-error inline" role="alert"><p>' . esc_html__( 'The redacted event export could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 		}
 		echo '<textarea id="adbd-event-export" class="large-text code" rows="10" readonly="readonly" aria-label="' . esc_attr__( 'Redacted diagnostics event export', 'alynt-drime-backups-dashboard' ) . '">';
 		echo esc_textarea( false === $export ? '[]' : $export );
@@ -203,7 +203,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 			return;
 		}
 
-		echo '<table class="widefat striped"><thead><tr>';
+		echo '<table class="widefat striped" aria-label="' . esc_attr__( 'Recent diagnostic events', 'alynt-drime-backups-dashboard' ) . '"><thead><tr>';
 		echo '<th scope="col">' . esc_html__( 'Time', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Level', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Category', 'alynt-drime-backups-dashboard' ) . '</th>';
@@ -242,7 +242,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 			return;
 		}
 
-		echo '<table class="widefat striped"><thead><tr>';
+		echo '<table class="widefat striped" aria-label="' . esc_attr__( 'Status distribution diagnostics', 'alynt-drime-backups-dashboard' ) . '"><thead><tr>';
 		echo '<th scope="col">' . esc_html__( 'Status', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Sites', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '</tr></thead><tbody>';
@@ -271,7 +271,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 			return;
 		}
 
-		echo '<table class="widefat striped"><thead><tr>';
+		echo '<table class="widefat striped" aria-label="' . esc_attr__( 'Recent poll outcomes', 'alynt-drime-backups-dashboard' ) . '"><thead><tr>';
 		echo '<th scope="col">' . esc_html__( 'Site', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Last attempt', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Last seen', 'alynt-drime-backups-dashboard' ) . '</th>';
@@ -310,7 +310,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics {
 		echo '<div class="adbd-panel adbd-support-panel"><h3>' . esc_html__( 'Support Copy', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
 		echo '<p>' . esc_html__( 'Copy this redacted summary when support needs scheduler and polling context. It intentionally omits client domains, site labels, pairing tokens, polling secrets, authorization headers, raw payloads, and raw response bodies.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		if ( false === $encoded ) {
-			echo '<div class="notice notice-error inline"><p>' . esc_html__( 'The support summary could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+			echo '<div class="notice notice-error inline" role="alert"><p>' . esc_html__( 'The support summary could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 		}
 		echo '<textarea id="adbd-support-copy" class="large-text code" rows="12" readonly="readonly" aria-label="' . esc_attr__( 'Redacted support summary', 'alynt-drime-backups-dashboard' ) . '">';
 		echo esc_textarea( false === $encoded ? '{}' : $encoded );

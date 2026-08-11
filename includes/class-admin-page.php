@@ -234,14 +234,15 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		$attention_count = $this->attention_count();
 
 		foreach ( $tabs as $tab => $label ) {
-			$url   = add_query_arg(
+			$url     = add_query_arg(
 				array(
 					'page' => self::MENU_SLUG,
 					'tab'  => $tab,
 				),
 				admin_url( 'tools.php' )
 			);
-			$class = $tab === $active ? ' nav-tab-active' : '';
+			$class   = $tab === $active ? ' nav-tab-active' : '';
+			$current = $tab === $active ? ' aria-current="page"' : '';
 
 			$count_markup = '';
 
@@ -260,9 +261,10 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			}
 
 			printf(
-				'<a class="nav-tab%1$s" href="%2$s">%3$s%4$s</a>',
+				'<a class="nav-tab%1$s" href="%2$s"%3$s>%4$s%5$s</a>',
 				esc_attr( $class ),
 				esc_url( $url ),
+				$current, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static attribute set above.
 				esc_html( $label ),
 				$count_markup // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Constructed from escaped values above.
 			);
