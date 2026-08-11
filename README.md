@@ -37,8 +37,8 @@ The scaffold includes:
 - Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
 - Manual **Check Status Now** for enrolled sites using the fixed authenticated read-only status route.
 - Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and snapshot retention cleanup.
-- Operator-focused Sites, Attention, and Site Detail views with polling evidence, latest redacted snapshot summaries, accessible status guidance, and local-only revoke/check actions.
-- Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and support-copy output.
+- Responsive, WordPress-native Sites, Attention, and Site Detail views with status summaries, polling evidence, accessible status badges, bounded recent snapshot history, and local-only revoke/check actions.
+- Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and progressively enhanced support-copy/export controls.
 - Optional structured diagnostics logging, disabled by default, with a bounded redacted local event buffer for support troubleshooting.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.

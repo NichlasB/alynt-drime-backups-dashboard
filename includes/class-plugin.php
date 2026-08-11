@@ -79,6 +79,7 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 		// phpcs:ignore WordPress.WP.CronInterval.ChangeDetected -- The interval value is registered in cron_schedules().
 		add_filter( 'cron_schedules', array( 'Alynt_Drime_Backups_Dashboard_Poller', 'cron_schedules' ) );
 		add_action( 'admin_menu', array( $this->admin_page, 'register_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this->admin_page, 'enqueue_assets' ) );
 		add_action( 'rest_api_init', array( $this->enrollment_rest_controller, 'register_routes' ) );
 		add_action( Alynt_Drime_Backups_Dashboard_Poller::CRON_HOOK, array( $this->poller, 'poll_sites' ) );
 		add_action( Alynt_Drime_Backups_Dashboard_Poller::CLEANUP_HOOK, array( $this->snapshots, 'cleanup_retention' ) );

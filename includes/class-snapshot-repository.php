@@ -135,6 +135,40 @@ class Alynt_Drime_Backups_Dashboard_Snapshot_Repository {
 	}
 
 	/**
+	 * Gets a bounded recent snapshot history for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @param int $limit Maximum snapshots to return.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function recent_for_site( $site_id, $limit = 10 ) {
+		global $wpdb;
+
+		$site_id = absint( $site_id );
+		$limit   = max( 1, min( 50, (int) $limit ) );
+
+		if ( 0 === $site_id ) {
+			return array();
+		}
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
+		$rows  = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT id, dashboard_site_id, schema_version, observed_at, overall_status, queue_count, uploaded_count, failed_count, active_upload, warning_count, cron_status
+				FROM {$table}
+				WHERE dashboard_site_id = %d
+				ORDER BY observed_at DESC, id DESC
+				LIMIT %d",
+				$site_id,
+				$limit
+			),
+			ARRAY_A
+		);
+
+		return is_array( $rows ) ? $rows : array();
+	}
+
+	/**
 	 * Counts snapshots for one site.
 	 *
 	 * @param int $site_id Site ID.

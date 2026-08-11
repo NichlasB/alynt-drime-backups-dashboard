@@ -25,6 +25,20 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	const MENU_SLUG = 'alynt-drime-backups-dashboard';
 
 	/**
+	 * Registered WordPress admin page hook.
+	 *
+	 * @var string
+	 */
+	private $page_hook = '';
+
+	/**
+	 * Cached sites, snapshots, and status counts for the current request.
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	private $site_status_context = null;
+
+	/**
 	 * Site repository.
 	 *
 	 * @var Alynt_Drime_Backups_Dashboard_Site_Repository
@@ -99,12 +113,38 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	 * @return void
 	 */
 	public function register_menu() {
-		add_management_page(
+		$this->page_hook = add_management_page(
 			__( 'Drime Backups Dashboard', 'alynt-drime-backups-dashboard' ),
 			__( 'Drime Backups Dashboard', 'alynt-drime-backups-dashboard' ),
 			'manage_options',
 			self::MENU_SLUG,
 			array( $this, 'render' )
+		);
+	}
+
+	/**
+	 * Enqueues the dashboard assets only on this plugin screen.
+	 *
+	 * @param string $hook_suffix Current admin page hook.
+	 * @return void
+	 */
+	public function enqueue_assets( $hook_suffix ) {
+		if ( '' === $this->page_hook || $hook_suffix !== $this->page_hook ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'alynt-drime-backups-dashboard-admin',
+			ALYNT_DRIME_BACKUPS_DASHBOARD_URL . 'assets/dist/admin/index.css',
+			array(),
+			ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION
+		);
+		wp_enqueue_script(
+			'alynt-drime-backups-dashboard-admin',
+			ALYNT_DRIME_BACKUPS_DASHBOARD_URL . 'assets/dist/admin/index.js',
+			array(),
+			ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION,
+			true
 		);
 	}
 
@@ -122,19 +162,20 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		$result = $this->handle_post_action();
 
 		?>
-		<div class="wrap">
+		<div class="wrap adbd-wrap">
 			<h1><?php esc_html_e( 'Drime Backups Dashboard', 'alynt-drime-backups-dashboard' ); ?></h1>
 
-			<div class="notice notice-info inline">
+			<div class="notice notice-info inline adbd-read-only-notice">
 				<p>
 					<?php
 					esc_html_e(
-						'This dashboard remains read-only relative to client sites and Drime. It can create local enrollment records, ingest opt-in status payloads, and poll the fixed status endpoint, but it does not run remote backup, restore, cleanup, settings, credential, or Drime actions.',
+						'Read-only dashboard. This page shows what paired client sites report about their own backup uploads. It cannot create, restore, delete, or clean up backups, and it cannot change client-site settings, credentials, or Drime data. Its actions are limited to polling the fixed status endpoint and managing this dashboard\'s local records.',
 						'alynt-drime-backups-dashboard'
 					);
 					?>
 				</p>
 			</div>
+			<hr class="wp-header-end">
 
 			<?php $this->render_tabs( $tab ); ?>
 			<?php $this->render_action_result( $result ); ?>
@@ -190,6 +231,8 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 
 		echo '<nav class="nav-tab-wrapper" aria-label="' . esc_attr__( 'Dashboard sections', 'alynt-drime-backups-dashboard' ) . '">';
 
+		$attention_count = $this->attention_count();
+
 		foreach ( $tabs as $tab => $label ) {
 			$url   = add_query_arg(
 				array(
@@ -200,11 +243,28 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			);
 			$class = $tab === $active ? ' nav-tab-active' : '';
 
+			$count_markup = '';
+
+			if ( 'attention' === $tab ) {
+				$count_markup = sprintf(
+					'<span class="adbd-tab-count" aria-label="%1$s">%2$s</span>',
+					esc_attr(
+						sprintf(
+							/* translators: %d: number of sites needing attention. */
+							_n( '%d site needs attention', '%d sites need attention', $attention_count, 'alynt-drime-backups-dashboard' ),
+							$attention_count
+						)
+					),
+					esc_html( number_format_i18n( $attention_count ) )
+				);
+			}
+
 			printf(
-				'<a class="nav-tab%1$s" href="%2$s">%3$s</a>',
+				'<a class="nav-tab%1$s" href="%2$s">%3$s%4$s</a>',
 				esc_attr( $class ),
 				esc_url( $url ),
-				esc_html( $label )
+				esc_html( $label ),
+				$count_markup // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Constructed from escaped values above.
 			);
 		}
 

@@ -36,6 +36,13 @@ class Alynt_Drime_Backups_Dashboard_Test_Snapshot_WPDB {
 	public $last_query = '';
 
 	/**
+	 * Rows returned by get_results().
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $result_rows = array();
+
+	/**
 	 * Prepares a query.
 	 *
 	 * @param string $query Query.
@@ -59,12 +66,74 @@ class Alynt_Drime_Backups_Dashboard_Test_Snapshot_WPDB {
 
 		return 17;
 	}
+
+	/**
+	 * Returns configured result rows.
+	 *
+	 * @param string $query Query.
+	 * @param string $output Output format.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function get_results( $query, $output ) {
+		unset( $output );
+		$this->last_query = $query;
+
+		return $this->result_rows;
+	}
 }
 
 /**
  * Tests snapshot retention behavior.
  */
 class SnapshotRepositoryTest extends TestCase {
+	/**
+	 * Recent history is bounded and excludes raw payload JSON.
+	 *
+	 * @return void
+	 */
+	public function test_recent_history_is_bounded_and_selects_summary_fields_only() {
+		global $wpdb;
+
+		$previous_wpdb     = $wpdb;
+		$wpdb              = new Alynt_Drime_Backups_Dashboard_Test_Snapshot_WPDB();
+		$wpdb->result_rows = array(
+			array(
+				'id'                => 9,
+				'dashboard_site_id' => 42,
+				'overall_status'    => 'working',
+			),
+		);
+		$repository        = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
+
+		$rows = $repository->recent_for_site( 42, 999 );
+
+		$this->assertCount( 1, $rows );
+		$this->assertSame( array( 42, 50 ), $wpdb->prepared_args );
+		$this->assertStringContainsString( 'ORDER BY observed_at DESC, id DESC', $wpdb->last_query );
+		$this->assertStringContainsString( 'LIMIT %d', $wpdb->last_query );
+		$this->assertStringNotContainsString( 'payload_json', $wpdb->last_query );
+
+		$wpdb = $previous_wpdb;
+	}
+
+	/**
+	 * Invalid site IDs do not run a history query.
+	 *
+	 * @return void
+	 */
+	public function test_recent_history_rejects_invalid_site_id_without_query() {
+		global $wpdb;
+
+		$previous_wpdb = $wpdb;
+		$wpdb          = new Alynt_Drime_Backups_Dashboard_Test_Snapshot_WPDB();
+		$repository    = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
+
+		$this->assertSame( array(), $repository->recent_for_site( 0 ) );
+		$this->assertSame( '', $wpdb->last_query );
+
+		$wpdb = $previous_wpdb;
+	}
+
 	/**
 	 * Cleanup preserves each site's latest snapshot.
 	 *

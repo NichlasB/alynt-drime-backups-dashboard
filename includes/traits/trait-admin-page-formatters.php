@@ -23,17 +23,43 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Formatters {
 	 * @return string
 	 */
 	private function status_cell( array $status ) {
-		$label    = isset( $status['label'] ) ? $status['label'] : '';
-		$message  = isset( $status['message'] ) ? $status['message'] : '';
-		$category = isset( $status['category'] ) ? $status['category'] : '';
+		$message  = isset( $status['message'] ) ? (string) $status['message'] : '';
+		$category = isset( $status['category'] ) ? (string) $status['category'] : '';
 		$guidance = $this->status_guidance( $category );
 
 		return sprintf(
-			'<span aria-label="%1$s">%2$s</span><br><span class="description">%3$s</span>%4$s',
-			esc_attr( trim( $label . '. ' . $message . ' ' . $guidance ) ),
-			esc_html( $label ),
+			'%1$s<p class="adbd-status-message">%2$s</p>%3$s',
+			$this->status_badge( $status ),
 			esc_html( $message ),
-			'' === $guidance ? '' : '<br><span class="description">' . esc_html( $guidance ) . '</span>'
+			'' === $guidance ? '' : '<p class="description adbd-next-step">' . esc_html( $guidance ) . '</p>'
+		);
+	}
+
+	/**
+	 * Builds an accessible status badge.
+	 *
+	 * @param array<string,string> $status Status classification.
+	 * @return string
+	 */
+	private function status_badge( array $status ) {
+		$category = isset( $status['category'] ) ? sanitize_key( $status['category'] ) : '';
+		$label    = isset( $status['label'] ) ? (string) $status['label'] : $this->classifier->label( $category );
+		$icons    = array(
+			'working'         => 'yes-alt',
+			'pending'         => 'clock',
+			'paused'          => 'controls-pause',
+			'incompatible'    => 'warning',
+			'not_reporting'   => 'dismiss',
+			'needs_attention' => 'warning',
+			'not_configured'  => 'admin-generic',
+		);
+		$icon     = isset( $icons[ $category ] ) ? $icons[ $category ] : 'marker';
+
+		return sprintf(
+			'<span class="adbd-status is-%1$s"><span class="dashicons dashicons-%2$s" aria-hidden="true"></span><span>%3$s</span></span>',
+			esc_attr( $category ),
+			esc_attr( $icon ),
+			esc_html( $label )
 		);
 	}
 
@@ -56,6 +82,42 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Formatters {
 	}
 
 	/**
+	 * Gets a translated environment label.
+	 *
+	 * @param string $environment Environment slug.
+	 * @return string
+	 */
+	private function environment_label( $environment ) {
+		$labels = array(
+			'production'  => __( 'Production', 'alynt-drime-backups-dashboard' ),
+			'staging'     => __( 'Staging', 'alynt-drime-backups-dashboard' ),
+			'development' => __( 'Development', 'alynt-drime-backups-dashboard' ),
+			'other'       => __( 'Other', 'alynt-drime-backups-dashboard' ),
+		);
+		$key    = sanitize_key( $environment );
+
+		return isset( $labels[ $key ] ) ? $labels[ $key ] : __( 'Unspecified', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a translated enrollment-state label.
+	 *
+	 * @param string $state Enrollment state.
+	 * @return string
+	 */
+	private function enrollment_label( $state ) {
+		$labels = array(
+			'pending'             => __( 'Awaiting client opt-in', 'alynt-drime-backups-dashboard' ),
+			'awaiting_first_poll' => __( 'Awaiting first valid report', 'alynt-drime-backups-dashboard' ),
+			'active'              => __( 'Enrolled and polling', 'alynt-drime-backups-dashboard' ),
+			'revoked'             => __( 'Revoked locally', 'alynt-drime-backups-dashboard' ),
+		);
+		$key    = sanitize_key( $state );
+
+		return isset( $labels[ $key ] ) ? $labels[ $key ] : ( '' === $key ? __( 'Unspecified', 'alynt-drime-backups-dashboard' ) : $key );
+	}
+
+	/**
 	 * Gets a safe polling credential state.
 	 *
 	 * @param array<string,mixed> $site Site row.
@@ -63,14 +125,18 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Formatters {
 	 */
 	private function credential_state( array $site ) {
 		if ( ! empty( $site['polling_key_id'] ) && ! empty( $site['polling_secret_ciphertext'] ) ) {
-			return __( 'Stored encrypted polling credential metadata is present.', 'alynt-drime-backups-dashboard' );
+			return __( 'Encrypted per-site polling credential material is stored. Its plaintext is never displayed.', 'alynt-drime-backups-dashboard' );
 		}
 
 		if ( isset( $site['enrollment_status'] ) && 'pending' === $site['enrollment_status'] ) {
-			return __( 'Waiting for client opt-in pairing.', 'alynt-drime-backups-dashboard' );
+			return __( 'A verifier for the display-once pairing token is stored while client opt-in is pending.', 'alynt-drime-backups-dashboard' );
 		}
 
-		return __( 'Polling credential metadata is missing; re-pairing may be required.', 'alynt-drime-backups-dashboard' );
+		if ( isset( $site['enrollment_status'] ) && 'revoked' === $site['enrollment_status'] ) {
+			return __( 'Pairing and polling credential fields were cleared locally.', 'alynt-drime-backups-dashboard' );
+		}
+
+		return __( 'Polling credential material is missing; a new client opt-in pairing may be required.', 'alynt-drime-backups-dashboard' );
 	}
 
 	/**
@@ -95,16 +161,75 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Formatters {
 	 */
 	private function status_guidance( $category ) {
 		$guidance = array(
-			'pending'         => __( 'Next step: complete client opt-in pairing, then run the first read-only status check.', 'alynt-drime-backups-dashboard' ),
+			'pending'         => __( 'Next step: complete client opt-in pairing, then wait for the first read-only status check.', 'alynt-drime-backups-dashboard' ),
 			'paused'          => __( 'Next step: review why polling was paused locally before resuming.', 'alynt-drime-backups-dashboard' ),
-			'incompatible'    => __( 'Next step: update the client uploader or dashboard protocol before relying on this status.', 'alynt-drime-backups-dashboard' ),
-			'not_reporting'   => __( 'Next step: check pairing, credentials, site reachability, and WP-Cron timing.', 'alynt-drime-backups-dashboard' ),
-			'needs_attention' => __( 'Next step: review the latest redacted counts and safe error summary.', 'alynt-drime-backups-dashboard' ),
-			'not_configured'  => __( 'Next step: configure a supported backup source on the client site.', 'alynt-drime-backups-dashboard' ),
-			'working'         => __( 'No action needed from the dashboard.', 'alynt-drime-backups-dashboard' ),
+			'incompatible'    => __( 'Next step: ask the site owner to update the uploader so it publishes supported schema version 1.', 'alynt-drime-backups-dashboard' ),
+			'not_reporting'   => __( 'Next step: confirm the site is reachable and the uploader pairing remains active.', 'alynt-drime-backups-dashboard' ),
+			'needs_attention' => __( 'Next step: ask the site owner to review the uploader warnings, failed queue, and WP-Cron status.', 'alynt-drime-backups-dashboard' ),
+			'not_configured'  => __( 'Next step: ask the site owner to configure a supported backup source in the uploader.', 'alynt-drime-backups-dashboard' ),
+			'working'         => __( 'No action is currently indicated by the latest redacted report.', 'alynt-drime-backups-dashboard' ),
 		);
 
 		return isset( $guidance[ $category ] ) ? $guidance[ $category ] : '';
+	}
+
+	/**
+	 * Maps a status category to a WordPress notice tone.
+	 *
+	 * @param string $category Status category.
+	 * @return string
+	 */
+	private function status_notice_tone( $category ) {
+		if ( 'working' === $category ) {
+			return 'success';
+		}
+
+		if ( in_array( $category, array( 'needs_attention', 'incompatible' ), true ) ) {
+			return 'error';
+		}
+
+		return in_array( $category, array( 'not_reporting', 'not_configured' ), true ) ? 'warning' : 'info';
+	}
+
+	/**
+	 * Builds a time element with relative and exact values.
+	 *
+	 * @param string $value UTC date value.
+	 * @return string
+	 */
+	private function time_html( $value ) {
+		if ( '' === (string) $value ) {
+			return '<span aria-label="' . esc_attr__( 'Not available', 'alynt-drime-backups-dashboard' ) . '">-</span>';
+		}
+
+		try {
+			$date      = new DateTimeImmutable( (string) $value, new DateTimeZone( 'UTC' ) );
+			$timestamp = $date->getTimestamp();
+		} catch ( Exception $exception ) {
+			unset( $exception );
+			return esc_html( (string) $value );
+		}
+
+		$date_format = function_exists( 'get_option' ) ? (string) get_option( 'date_format' ) : 'Y-m-d';
+		$time_format = function_exists( 'get_option' ) ? (string) get_option( 'time_format' ) : 'H:i';
+		$absolute    = function_exists( 'wp_date' ) ? wp_date( $date_format . ', ' . $time_format, $timestamp ) : gmdate( 'Y-m-d H:i', $timestamp ) . ' UTC';
+		$now         = time();
+
+		if ( function_exists( 'human_time_diff' ) ) {
+			$difference = human_time_diff( min( $timestamp, $now ), max( $timestamp, $now ) );
+			$relative   = $timestamp > $now
+				? sprintf( /* translators: %s: human-readable duration. */ __( 'in %s', 'alynt-drime-backups-dashboard' ), $difference )
+				: sprintf( /* translators: %s: human-readable duration. */ __( '%s ago', 'alynt-drime-backups-dashboard' ), $difference );
+		} else {
+			$relative = $absolute;
+		}
+
+		return sprintf(
+			'<time datetime="%1$s"><span class="adbd-time-relative">%2$s</span><span class="adbd-time-exact">%3$s</span></time>',
+			esc_attr( gmdate( 'c', $timestamp ) ),
+			esc_html( $relative ),
+			esc_html( $absolute )
+		);
 	}
 
 	/**
