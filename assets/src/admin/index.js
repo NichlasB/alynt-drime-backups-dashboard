@@ -3,6 +3,29 @@ import './index.css';
 const dashboard = document.querySelector( '.adbd-wrap' );
 
 if ( dashboard ) {
+	const actionNotice = dashboard.querySelector( '#adbd-action-notice' );
+
+	if ( actionNotice ) {
+		actionNotice.setAttribute( 'tabindex', '-1' );
+	}
+
+	const firstInvalidField = dashboard.querySelector( '[aria-invalid="true"]' );
+	const motionSafe = ! window.matchMedia ||
+		! window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+	const focusRecoverableTarget = ( element ) => {
+		element.focus( { preventScroll: true } );
+		element.scrollIntoView( {
+			block: 'center',
+			behavior: motionSafe ? 'smooth' : 'auto',
+		} );
+	};
+
+	if ( firstInvalidField ) {
+		focusRecoverableTarget( firstInvalidField );
+	} else if ( actionNotice && actionNotice.classList.contains( 'notice-error' ) ) {
+		focusRecoverableTarget( actionNotice );
+	}
+
 	const announceCopyResult = ( button, message ) => {
 		const container = button.closest( '.adbd-panel' ) || button.parentElement;
 		const status = container ? container.querySelector( '.adbd-copy-status' ) : null;

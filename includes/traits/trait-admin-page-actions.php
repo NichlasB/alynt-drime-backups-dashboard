@@ -154,7 +154,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		if ( isset( $result['action'] ) && 'revoke_local' === $result['action'] ) {
 			$message = ! empty( $result['success'] )
 				? __( 'Dashboard record revoked locally. No client site or Drime action was attempted.', 'alynt-drime-backups-dashboard' )
-				: __( 'The dashboard record could not be revoked locally.', 'alynt-drime-backups-dashboard' );
+				: __( 'The dashboard record could not be revoked locally. Refresh the site detail screen and try again; the record may already have changed.', 'alynt-drime-backups-dashboard' );
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
 			$this->render_action_notice( $message, $class );
@@ -169,7 +169,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		if ( isset( $result['action'] ) && 'update_diagnostics_settings' === $result['action'] ) {
 			$message = ! empty( $result['success'] )
 				? __( 'Diagnostics settings saved.', 'alynt-drime-backups-dashboard' )
-				: __( 'Diagnostics settings could not be saved.', 'alynt-drime-backups-dashboard' );
+				: __( 'Diagnostics settings could not be saved. Refresh the page and try again; if it continues, check that WordPress options can be updated.', 'alynt-drime-backups-dashboard' );
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
 			$this->render_action_notice( $message, $class );
@@ -179,7 +179,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		if ( isset( $result['action'] ) && 'clear_diagnostics_events' === $result['action'] ) {
 			$message = ! empty( $result['success'] )
 				? __( 'Diagnostics events cleared.', 'alynt-drime-backups-dashboard' )
-				: __( 'Diagnostics events could not be cleared.', 'alynt-drime-backups-dashboard' );
+				: __( 'Diagnostics events could not be cleared. Refresh the Diagnostics screen and try again; the retained event buffer may already have changed.', 'alynt-drime-backups-dashboard' );
 			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
 
 			$this->render_action_notice( $message, $class );
