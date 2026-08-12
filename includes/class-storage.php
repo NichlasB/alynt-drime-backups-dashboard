@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '2';
+	const SCHEMA_VERSION        = '3';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -90,6 +90,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				UNIQUE KEY public_id (public_id),
 				UNIQUE KEY site_uuid (site_uuid),
 				KEY expected_origin (expected_origin(191)),
+				KEY pending_origin (expected_origin(191), enrollment_status, pairing_expires_at),
 				KEY enrollment_status (enrollment_status),
 				KEY next_poll_at (next_poll_at),
 				KEY poll_due (enrollment_status, paused_at, next_poll_at, id),

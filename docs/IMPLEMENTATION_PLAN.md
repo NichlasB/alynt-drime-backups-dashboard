@@ -307,7 +307,7 @@ Recommended tables:
 - payload_json longtext
 ```
 
-Required indexes include sites by `site_uuid`, `enrollment_status`, `next_poll_at`, and `last_seen_at`, plus snapshots by `(dashboard_site_id, observed_at)` and `(dashboard_site_id, payload_fingerprint)`.
+Required indexes include sites by `site_uuid`, `enrollment_status`, `next_poll_at`, `last_seen_at`, due polling `(enrollment_status, paused_at, next_poll_at, id)`, and pending-origin lookup `(expected_origin, enrollment_status, pairing_expires_at)`, plus snapshots by `(dashboard_site_id, observed_at)`, `(dashboard_site_id, payload_fingerprint)`, and latest-site lookup `(dashboard_site_id, id)`.
 
 Database migrations must be versioned, idempotent, covered by tests, and run through WordPress activation/upgrade code. Deactivation unschedules polling but keeps data. Uninstall removes plugin-owned schedules, options, tables, pairing verifiers, and encrypted credentials.
 
