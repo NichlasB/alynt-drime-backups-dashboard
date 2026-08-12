@@ -160,6 +160,73 @@ class StatusClassifierTest extends TestCase {
 	}
 
 	/**
+	 * Source queue warnings alone stay informational.
+	 *
+	 * @return void
+	 */
+	public function test_source_queue_warning_alone_is_working() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot(
+				array_merge(
+					$this->healthy_payload(),
+					array(
+						'backup_sources' => array(
+							'server' => array_merge(
+								$this->source_payload(),
+								array(
+									'queued_count'      => 1,
+									'freshness_status'  => 'fresh',
+									'warning_count'     => 1,
+									'warnings'          => array(
+										array(
+											'code'    => 'source_queue_not_empty',
+											'message' => 'Queued package waiting to upload.',
+										),
+									),
+								)
+							),
+						),
+					)
+				)
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'working', $result['category'] );
+	}
+
+	/**
+	 * Configured stale source evidence needs attention.
+	 *
+	 * @return void
+	 */
+	public function test_stale_backup_source_needs_attention() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot(
+				array_merge(
+					$this->healthy_payload(),
+					array(
+						'backup_sources' => array(
+							'server' => array_merge(
+								$this->source_payload(),
+								array(
+									'freshness_status' => 'stale',
+								)
+							),
+						),
+					)
+				)
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'needs_attention', $result['category'] );
+		$this->assertStringContainsString( 'stale or missing upload evidence', $result['message'] );
+	}
+
+	/**
 	 * Lack of all known sources is not configured.
 	 *
 	 * @return void
@@ -173,6 +240,47 @@ class StatusClassifierTest extends TestCase {
 					'server_outbox_configured'    => false,
 					'wpvivid_override_configured' => false,
 					'old_wpvivid_uploader_active' => false,
+				)
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'not_configured', $result['category'] );
+	}
+
+	/**
+	 * Source summaries can positively prove no supported source is configured.
+	 *
+	 * @return void
+	 */
+	public function test_backup_sources_can_prove_not_configured() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot(
+				array_merge(
+					$this->healthy_payload(),
+					array(
+						'server_outbox_configured'    => true,
+						'wpvivid_override_configured' => true,
+						'backup_sources'              => array(
+							'server'  => array_merge(
+								$this->source_payload(),
+								array(
+									'configured'          => false,
+									'has_upload_evidence' => false,
+									'freshness_status'    => 'not_configured',
+								)
+							),
+							'wpvivid' => array_merge(
+								$this->source_payload(),
+								array(
+									'configured'          => false,
+									'has_upload_evidence' => false,
+									'freshness_status'    => 'not_configured',
+								)
+							),
+						),
+					)
 				)
 			),
 			1700000300
@@ -207,6 +315,48 @@ class StatusClassifierTest extends TestCase {
 			'schema_version'  => isset( $payload['schema_version'] ) ? $payload['schema_version'] : 1,
 			'decoded_payload' => $payload,
 			'captured_at'     => $captured_at,
+		);
+	}
+
+	/**
+	 * Builds a healthy payload.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function healthy_payload() {
+		return array(
+			'schema_version'              => 1,
+			'server_outbox_configured'    => true,
+			'wpvivid_override_configured' => false,
+			'old_wpvivid_uploader_active' => false,
+			'failed_count'                => 0,
+			'warning_count'               => 0,
+			'warnings'                    => array(),
+			'cron_status'                 => 'ok',
+		);
+	}
+
+	/**
+	 * Builds a source summary payload.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function source_payload() {
+		return array(
+			'source_key'                => 'server',
+			'source_label'              => 'Server',
+			'configured'                => true,
+			'has_upload_evidence'       => true,
+			'queued_count'              => 0,
+			'uploaded_count'            => 1,
+			'failed_count'              => 0,
+			'remote_registry_count'     => 1,
+			'latest_uploaded_at'        => 1700000000,
+			'latest_inventory_count'    => 1,
+			'latest_inventory_evidence' => 'local_upload_registry',
+			'freshness_status'          => 'fresh',
+			'warning_count'             => 0,
+			'warnings'                  => array(),
 		);
 	}
 }

@@ -158,8 +158,51 @@ class DiagnosticsTest extends TestCase {
 		$this->assertSame( 1, $result['counts']['missing_credentials'] );
 		$this->assertSame( 1, $result['counts']['paused'] );
 		$this->assertSame( 1, $result['counts']['with_failures'] );
+		$this->assertSame( 0, $result['counts']['backup_sources']['reporting_sites'] );
 		$this->assertSame( 'unavailable', $result['scheduler']['poll_schedule_state'] );
 		$this->assertSame( 30, $result['scheduler']['retention_days'] );
+	}
+
+	/**
+	 * Backup source diagnostics are aggregate-only.
+	 *
+	 * @return void
+	 */
+	public function test_backup_source_diagnostics_are_aggregate_only() {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
+				array(
+					$this->site( 1 ),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
+				array(
+					1 => $this->snapshot(
+						array(
+							'backup_sources' => array(
+								'server'  => array(
+									'freshness_status' => 'stale',
+								),
+								'wpvivid' => array(
+									'freshness_status' => 'no_upload_evidence',
+								),
+							),
+						)
+					),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		$result  = $diagnostics->collect();
+		$encoded = wp_json_encode( $result['support'] );
+
+		$this->assertSame( 1, $result['counts']['backup_sources']['reporting_sites'] );
+		$this->assertSame( 1, $result['counts']['backup_sources']['stale_sources'] );
+		$this->assertSame( 1, $result['counts']['backup_sources']['no_upload_evidence_sources'] );
+		$this->assertStringContainsString( 'backup_sources', $encoded );
+		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
+		$this->assertStringNotContainsString( 'Client 1', $encoded );
 	}
 
 	/**
@@ -281,17 +324,20 @@ class DiagnosticsTest extends TestCase {
 	 *
 	 * @return array<string,mixed>
 	 */
-	private function snapshot() {
+	private function snapshot( array $overrides = array() ) {
 		return array(
 			'schema_version'   => 1,
 			'observed_at'      => gmdate( 'Y-m-d H:i:s' ),
-			'decoded_payload'  => array(
-				'schema_version'           => 1,
-				'server_outbox_configured' => true,
-				'failed_count'             => 0,
-				'warning_count'            => 0,
-				'warnings'                 => array(),
-				'cron_status'              => 'ok',
+			'decoded_payload'  => array_merge(
+				array(
+					'schema_version'           => 1,
+					'server_outbox_configured' => true,
+					'failed_count'             => 0,
+					'warning_count'            => 0,
+					'warnings'                 => array(),
+					'cron_status'              => 'ok',
+				),
+				$overrides
 			),
 		);
 	}

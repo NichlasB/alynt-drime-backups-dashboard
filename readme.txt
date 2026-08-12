@@ -16,6 +16,8 @@ Alynt Drime Backups Dashboard is planned as a read-only central status dashboard
 
 Version 0.1.0 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, and optional structured diagnostics logging that is disabled by default. It does not expose remote actions or make live changes.
 
+The current development tree can also consume optional redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
+
 == Installation ==
 
 1. Upload the plugin folder to `wp-content/plugins/alynt-drime-backups-dashboard`.
@@ -41,6 +43,9 @@ No. Diagnostics logging is disabled by default and redacts sensitive fields befo
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= Unreleased =
+* Added dashboard-side consumption of optional redacted backup source freshness evidence while preserving the read-only boundary.
 
 = 0.1.1 =
 * Allowed exact same-origin dashboard self-polling when the site hostname resolves to loopback locally, while preserving private-address rejection for other client origins.

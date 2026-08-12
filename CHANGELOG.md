@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Added
+
+- Added dashboard-side consumption of optional redacted `backup_sources` status evidence for validation, classification, admin display, aggregate diagnostics, and protocol documentation while preserving the read-only boundary.
+
 ## 0.1.1 - 2026-08-11
 
 ### Fixed

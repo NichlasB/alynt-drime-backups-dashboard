@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	const SUPPORTED_SCHEMA_VERSION  = 1;
 	const MAX_PLUGIN_VERSION_LENGTH = 64;
+	const MAX_SOURCE_LABEL_LENGTH   = 80;
 
 	/**
 	 * Fields that must never be ingested by the dashboard.
@@ -27,11 +28,25 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	private $forbidden_fields = array(
 		'server_outbox_path',
 		'backup_path_override',
+		'server_relative_path',
+		'wpvivid_relative_path',
+		'destination_relative_path',
+		'path',
+		'manifest_path',
+		'checksum_path',
+		'remote_index_path',
+		'remote_catalog_path',
+		'package_id',
+		'backup_set_id',
+		'file_entry_id',
+		'workspace_id',
+		'remote_name',
 		'api_token',
 		'authorization',
 		'cookie',
 		'nonce',
 		'password',
+		'presigned',
 		'secret',
 		'signed_url',
 	);
@@ -46,10 +61,8 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	public function validate( array $payload, $expected_site_uuid ) {
-		foreach ( $this->forbidden_fields as $field ) {
-			if ( array_key_exists( $field, $payload ) ) {
-				return new WP_Error( 'payload_invalid', __( 'The client status payload contains a forbidden field.', 'alynt-drime-backups-dashboard' ) );
-			}
+		if ( $this->contains_forbidden_field( $payload ) ) {
+			return new WP_Error( 'payload_invalid', __( 'The client status payload contains a forbidden field.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		if ( self::SUPPORTED_SCHEMA_VERSION !== absint( isset( $payload['schema_version'] ) ? $payload['schema_version'] : 0 ) ) {
@@ -87,11 +100,95 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 			'last_wp_cli_scan_at'         => $this->non_negative_int( $payload, 'last_wp_cli_scan_at' ),
 		);
 
+		$backup_sources = $this->backup_sources( isset( $payload['backup_sources'] ) ? $payload['backup_sources'] : array() );
+
+		if ( ! empty( $backup_sources ) ) {
+			$validated['backup_sources'] = $backup_sources;
+		}
+
 		if ( '' === $validated['plugin_version'] || '' === $validated['cron_status'] ) {
 			return new WP_Error( 'payload_invalid', __( 'The client status payload is missing required fields.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		return $validated;
+	}
+
+	/**
+	 * Recursively detects forbidden keys anywhere in a payload.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return bool
+	 */
+	private function contains_forbidden_field( array $payload ) {
+		foreach ( $payload as $key => $value ) {
+			if ( in_array( sanitize_key( (string) $key ), $this->forbidden_fields, true ) ) {
+				return true;
+			}
+
+			if ( is_array( $value ) && $this->contains_forbidden_field( $value ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Sanitizes optional per-source backup freshness summaries.
+	 *
+	 * @param mixed $sources Source summaries.
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function backup_sources( $sources ) {
+		if ( ! is_array( $sources ) ) {
+			return array();
+		}
+
+		$clean = array();
+
+		foreach ( array( 'server', 'wpvivid' ) as $source_key ) {
+			if ( empty( $sources[ $source_key ] ) || ! is_array( $sources[ $source_key ] ) ) {
+				continue;
+			}
+
+			$source               = $sources[ $source_key ];
+			$warnings             = $this->warnings( isset( $source['warnings'] ) ? $source['warnings'] : array(), 10 );
+			$clean[ $source_key ] = array(
+				'source_key'                => $source_key,
+				'source_label'              => $this->bounded_text( isset( $source['source_label'] ) ? (string) $source['source_label'] : '', self::MAX_SOURCE_LABEL_LENGTH ),
+				'configured'                => $this->bool_field( $source, 'configured' ),
+				'has_upload_evidence'       => $this->bool_field( $source, 'has_upload_evidence' ),
+				'queued_count'              => $this->non_negative_int( $source, 'queued_count' ),
+				'uploaded_count'            => $this->non_negative_int( $source, 'uploaded_count' ),
+				'failed_count'              => $this->non_negative_int( $source, 'failed_count' ),
+				'remote_registry_count'     => $this->non_negative_int( $source, 'remote_registry_count' ),
+				'latest_created_at'         => $this->non_negative_int( $source, 'latest_created_at' ),
+				'latest_uploaded_at'        => $this->non_negative_int( $source, 'latest_uploaded_at' ),
+				'latest_upload_age_seconds' => $this->non_negative_int( $source, 'latest_upload_age_seconds' ),
+				'latest_remote_status'      => $this->source_status( isset( $source['latest_remote_status'] ) ? (string) $source['latest_remote_status'] : '', array( 'uploaded', 'trashed', '' ) ),
+				'latest_inventory_count'    => $this->non_negative_int( $source, 'latest_inventory_count' ),
+				'latest_inventory_evidence' => $this->source_status( isset( $source['latest_inventory_evidence'] ) ? (string) $source['latest_inventory_evidence'] : '', array( 'generic_outbox_remote_catalog', 'generic_outbox_remote_index', 'local_upload_registry', '' ) ),
+				'freshness_status'          => $this->source_status( isset( $source['freshness_status'] ) ? (string) $source['freshness_status'] : '', array( 'not_configured', 'no_upload_evidence', 'stale', 'fresh', '' ) ),
+				'freshness_window_seconds'  => $this->non_negative_int( $source, 'freshness_window_seconds' ),
+				'warning_count'             => count( $warnings ),
+				'warnings'                  => $warnings,
+			);
+		}
+
+		return $clean;
+	}
+
+	/**
+	 * Sanitizes an allowlisted source status label.
+	 *
+	 * @param string            $value Raw value.
+	 * @param array<int,string> $allowed Allowed labels.
+	 * @return string
+	 */
+	private function source_status( $value, array $allowed ) {
+		$value = sanitize_key( $value );
+
+		return in_array( $value, $allowed, true ) ? $value : '';
 	}
 
 	/**
@@ -120,16 +217,17 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	 * Sanitizes warning records.
 	 *
 	 * @param mixed $warnings Warning records.
+	 * @param int   $limit Maximum warning records.
 	 * @return array<int,array<string,string>>
 	 */
-	private function warnings( $warnings ) {
+	private function warnings( $warnings, $limit = 20 ) {
 		if ( ! is_array( $warnings ) ) {
 			return array();
 		}
 
 		$clean = array();
 
-		foreach ( array_slice( $warnings, 0, 20 ) as $warning ) {
+		foreach ( array_slice( $warnings, 0, max( 0, (int) $limit ) ) as $warning ) {
 			if ( ! is_array( $warning ) ) {
 				continue;
 			}

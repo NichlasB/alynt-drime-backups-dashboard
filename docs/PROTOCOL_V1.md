@@ -194,7 +194,49 @@ Cache-Control: no-store
   "last_runner": "wp_cron",
   "last_runner_at": 1786305600,
   "last_scheduled_scan_at": 1786305600,
-  "last_wp_cli_scan_at": 0
+  "last_wp_cli_scan_at": 0,
+  "backup_sources": {
+    "server": {
+      "source_key": "server",
+      "source_label": "Server runner / generic outbox",
+      "configured": true,
+      "has_upload_evidence": true,
+      "queued_count": 0,
+      "uploaded_count": 12,
+      "failed_count": 0,
+      "remote_registry_count": 3,
+      "latest_created_at": 1786305000,
+      "latest_uploaded_at": 1786305600,
+      "latest_upload_age_seconds": 900,
+      "latest_remote_status": "uploaded",
+      "latest_inventory_count": 3,
+      "latest_inventory_evidence": "generic_outbox_remote_catalog",
+      "freshness_status": "fresh",
+      "freshness_window_seconds": 129600,
+      "warning_count": 0,
+      "warnings": []
+    },
+    "wpvivid": {
+      "source_key": "wpvivid",
+      "source_label": "WPvivid",
+      "configured": false,
+      "has_upload_evidence": false,
+      "queued_count": 0,
+      "uploaded_count": 0,
+      "failed_count": 0,
+      "remote_registry_count": 0,
+      "latest_created_at": 0,
+      "latest_uploaded_at": 0,
+      "latest_upload_age_seconds": 0,
+      "latest_remote_status": "",
+      "latest_inventory_count": 0,
+      "latest_inventory_evidence": "",
+      "freshness_status": "not_configured",
+      "freshness_window_seconds": 129600,
+      "warning_count": 0,
+      "warnings": []
+    }
+  }
 }
 ```
 
@@ -206,6 +248,10 @@ Required dashboard checks:
 - path-mode fields such as `server_outbox_path` and `backup_path_override` are rejected for dashboard ingestion;
 - warning records use stable codes and operator-safe messages;
 - unknown additive fields are ignored unless explicitly allowlisted later.
+
+Optional schema-1 `backup_sources` is allowlisted for dashboard ingestion as a redacted, client-reported summary. The dashboard accepts only the documented `server` and `wpvivid` source keys and only the documented scalar/count/warning fields inside each source. Unknown nested fields are ignored unless they use a forbidden path-, secret-, credential-, package-, or Drime-identifier-like key, in which case the payload is rejected as invalid.
+
+`backup_sources` remains optional. Older schema-1 uploaders that omit it are compatible, but the dashboard must display source-level restore-readiness as "not reported" rather than guessing. The dashboard must not use this field to collect or infer Drime API credentials, raw Drime IDs, signed URLs, local paths, package names, backup set IDs, or raw sidecar contents.
 
 Dashboard receive time is authoritative for `last_seen_at`. Client timestamps are only status evidence.
 
@@ -257,4 +303,5 @@ Dashboard scheduled polling defaults:
 - Client status schema version is initially `1`.
 - Unsupported protocol or schema versions must not be guessed.
 - Additive payload fields are ignored until allowlisted.
+- `backup_sources` is the first allowlisted additive schema-1 status field. It remains optional and backward-compatible.
 - Breaking changes require a new protocol or schema version and migration notes in both repositories.

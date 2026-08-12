@@ -86,6 +86,8 @@ Preferred architecture:
 
 Useful UI language should separate historical activity from current restore confidence. For example, `uploaded_count` may remain as a lifetime registry count, but the primary operator summary should emphasize latest successful upload age and current remote inventory count for `server` and `wpvivid` separately.
 
+Dashboard-side implementation status: the dashboard now has a local, additive schema-1 consumer slice for optional `backup_sources` summaries. This covers payload allowlisting, status classification, Sites list summaries, Site Detail snapshot evidence, aggregate diagnostics, support-safe export counts, protocol documentation, and focused unit coverage. The companion uploader-side producer work remains a separate implementation slice.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

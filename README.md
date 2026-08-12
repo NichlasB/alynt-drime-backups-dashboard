@@ -40,6 +40,7 @@ Version 0.1.0 currently includes:
 - Responsive, WordPress-native Sites, Attention, and Site Detail views with status summaries, polling evidence, accessible status badges, bounded recent snapshot history, and local-only revoke/check actions.
 - Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and progressively enhanced support-copy/export controls.
 - Optional structured diagnostics logging, disabled by default, with a bounded redacted local event buffer for support troubleshooting.
+- Optional dashboard-side display of redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.

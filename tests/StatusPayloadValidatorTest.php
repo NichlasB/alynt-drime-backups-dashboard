@@ -34,6 +34,83 @@ class StatusPayloadValidatorTest extends TestCase {
 		$this->assertSame( 1, $result['schema_version'] );
 		$this->assertSame( '11111111-1111-4111-8111-111111111111', $result['site_uuid'] );
 		$this->assertArrayNotHasKey( 'unexpected_future_field', $result );
+		$this->assertArrayNotHasKey( 'backup_sources', $result );
+	}
+
+	/**
+	 * Optional backup source summaries are allowlisted and sanitized.
+	 *
+	 * @return void
+	 */
+	public function test_backup_sources_are_allowlisted_and_sanitized() {
+		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+		$result    = $validator->validate(
+			array_merge(
+				$this->payload(),
+				array(
+					'backup_sources' => array(
+						'server'      => array_merge(
+							$this->source_payload(),
+							array(
+								'source_label' => '<b>Server runner</b>',
+								'extra_field'  => 'ignored',
+							)
+						),
+						'wpvivid'     => array_merge(
+							$this->source_payload(),
+							array(
+								'source_key'       => 'wpvivid',
+								'freshness_status' => 'fresh',
+							)
+						),
+						'unsupported' => array(
+							'configured' => true,
+						),
+					),
+				)
+			),
+			'11111111-1111-4111-8111-111111111111'
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertArrayHasKey( 'backup_sources', $result );
+		$this->assertArrayHasKey( 'server', $result['backup_sources'] );
+		$this->assertArrayHasKey( 'wpvivid', $result['backup_sources'] );
+		$this->assertArrayNotHasKey( 'unsupported', $result['backup_sources'] );
+		$this->assertArrayNotHasKey( 'extra_field', $result['backup_sources']['server'] );
+		$this->assertSame( 'server', $result['backup_sources']['server']['source_key'] );
+		$this->assertSame( '<b>Server runner</b>', $result['backup_sources']['server']['source_label'] );
+		$this->assertSame( 3, $result['backup_sources']['server']['latest_inventory_count'] );
+		$this->assertSame( 'stale', $result['backup_sources']['server']['freshness_status'] );
+		$this->assertSame( 1, $result['backup_sources']['server']['warning_count'] );
+	}
+
+	/**
+	 * Forbidden nested source fields are rejected instead of silently stored.
+	 *
+	 * @return void
+	 */
+	public function test_forbidden_nested_backup_source_field_is_rejected() {
+		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+		$result    = $validator->validate(
+			array_merge(
+				$this->payload(),
+				array(
+					'backup_sources' => array(
+						'server' => array_merge(
+							$this->source_payload(),
+							array(
+								'remote_index_path' => '/var/backups/private.remote-index.json',
+							)
+						),
+					),
+				)
+			),
+			'11111111-1111-4111-8111-111111111111'
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'payload_invalid', $result->get_error_code() );
 	}
 
 	/**
@@ -123,6 +200,39 @@ class StatusPayloadValidatorTest extends TestCase {
 			'last_runner_at'              => 1786305600,
 			'last_scheduled_scan_at'      => 1786305600,
 			'last_wp_cli_scan_at'         => 0,
+		);
+	}
+
+	/**
+	 * Creates a backup source payload.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function source_payload() {
+		return array(
+			'source_key'                => 'server',
+			'source_label'              => 'Server',
+			'configured'                => true,
+			'has_upload_evidence'       => true,
+			'queued_count'              => 1,
+			'uploaded_count'            => 2,
+			'failed_count'              => 0,
+			'remote_registry_count'     => 1,
+			'latest_created_at'         => 1786305000,
+			'latest_uploaded_at'        => 1786305600,
+			'latest_upload_age_seconds' => 3600,
+			'latest_remote_status'      => 'uploaded',
+			'latest_inventory_count'    => 3,
+			'latest_inventory_evidence' => 'generic_outbox_remote_catalog',
+			'freshness_status'          => 'stale',
+			'freshness_window_seconds'  => 129600,
+			'warning_count'             => 1,
+			'warnings'                  => array(
+				array(
+					'code'    => 'source_latest_upload_stale',
+					'message' => 'The latest uploaded backup evidence is older than the default freshness window.',
+				),
+			),
 		);
 	}
 }

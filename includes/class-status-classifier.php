@@ -65,8 +65,10 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return $this->result( self::CATEGORY_NOT_REPORTING, __( 'The last status snapshot is stale.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		if ( $this->needs_attention( $payload ) ) {
-			return $this->result( self::CATEGORY_NEEDS_ATTENTION, __( 'The client reports warnings or failed backup uploads.', 'alynt-drime-backups-dashboard' ) );
+		$attention_message = $this->attention_message( $payload );
+
+		if ( '' !== $attention_message ) {
+			return $this->result( self::CATEGORY_NEEDS_ATTENTION, $attention_message );
 		}
 
 		if ( $this->is_not_configured( $payload ) ) {
@@ -168,21 +170,68 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 * @param array<string,mixed> $payload Status payload.
 	 * @return bool
 	 */
-	private function needs_attention( array $payload ) {
+	private function attention_message( array $payload ) {
 		if ( isset( $payload['failed_count'] ) && (int) $payload['failed_count'] > 0 ) {
-			return true;
+			return __( 'The client reports failed backup uploads.', 'alynt-drime-backups-dashboard' );
 		}
 
 		if ( isset( $payload['warning_count'] ) && (int) $payload['warning_count'] > 0 ) {
-			return true;
+			return __( 'The client reports uploader warnings.', 'alynt-drime-backups-dashboard' );
 		}
 
 		if ( ! empty( $payload['warnings'] ) && is_array( $payload['warnings'] ) ) {
-			return true;
+			return __( 'The client reports uploader warnings.', 'alynt-drime-backups-dashboard' );
 		}
 
 		if ( isset( $payload['cron_status'] ) && in_array( $payload['cron_status'], array( 'error', 'missed', 'stale' ), true ) ) {
-			return true;
+			return __( 'The client reports cron health that needs review.', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $this->backup_source_needs_attention( $payload ) ) {
+			return __( 'One or more backup sources report stale or missing upload evidence.', 'alynt-drime-backups-dashboard' );
+		}
+
+		return '';
+	}
+
+	/**
+	 * Determines whether source-level freshness evidence needs attention.
+	 *
+	 * @param array<string,mixed> $payload Status payload.
+	 * @return bool
+	 */
+	private function backup_source_needs_attention( array $payload ) {
+		if ( empty( $payload['backup_sources'] ) || ! is_array( $payload['backup_sources'] ) ) {
+			return false;
+		}
+
+		foreach ( $payload['backup_sources'] as $source ) {
+			if ( ! is_array( $source ) ) {
+				continue;
+			}
+
+			$freshness  = isset( $source['freshness_status'] ) ? sanitize_key( (string) $source['freshness_status'] ) : '';
+			$configured = ! empty( $source['configured'] );
+
+			if ( $configured && in_array( $freshness, array( 'no_upload_evidence', 'stale' ), true ) ) {
+				return true;
+			}
+
+			if ( empty( $source['warnings'] ) || ! is_array( $source['warnings'] ) ) {
+				continue;
+			}
+
+			foreach ( $source['warnings'] as $warning ) {
+				if ( ! is_array( $warning ) ) {
+					continue;
+				}
+
+				$code = isset( $warning['code'] ) ? sanitize_key( (string) $warning['code'] ) : '';
+
+				if ( '' !== $code && 'source_queue_not_empty' !== $code ) {
+					return true;
+				}
+			}
 		}
 
 		return false;
@@ -195,6 +244,27 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 * @return bool
 	 */
 	private function is_not_configured( array $payload ) {
+		if ( ! empty( $payload['backup_sources'] ) && is_array( $payload['backup_sources'] ) ) {
+			$reported   = 0;
+			$configured = 0;
+
+			foreach ( $payload['backup_sources'] as $source ) {
+				if ( ! is_array( $source ) ) {
+					continue;
+				}
+
+				++$reported;
+
+				if ( ! empty( $source['configured'] ) || ! empty( $source['has_upload_evidence'] ) ) {
+					++$configured;
+				}
+			}
+
+			if ( $reported > 0 ) {
+				return 0 === $configured;
+			}
+		}
+
 		$has_server_outbox = ! empty( $payload['server_outbox_configured'] );
 		$has_wpvivid       = ! empty( $payload['wpvivid_override_configured'] ) || ! empty( $payload['old_wpvivid_uploader_active'] );
 
