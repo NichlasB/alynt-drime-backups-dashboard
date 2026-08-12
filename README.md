@@ -90,7 +90,7 @@ See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCO
 
 ### Changelog Summary
 
-See `CHANGELOG.md` for the current unreleased 0.1.0 changelog and release notes.
+See `CHANGELOG.md` for the current unreleased changelog and release notes.
 
 ### License
 
