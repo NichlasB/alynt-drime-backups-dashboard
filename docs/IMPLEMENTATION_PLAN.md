@@ -60,6 +60,32 @@ Version 1 should answer:
 - Which sites report source or cron warnings?
 - When did the dashboard last successfully receive status for each site?
 
+## Post-Alpha Backup Freshness And Drime Inventory Slice
+
+The first implemented dashboard baseline intentionally focuses on pairing, read-only polling, coarse uploader health, and redacted status snapshots. It does not yet answer the operator's more important restore-readiness question: whether each enrolled site currently has fresh recoverable backups in Drime by backup source.
+
+Add a follow-up observability slice before treating the dashboard as operationally complete. This slice should remain read-only and should not give the dashboard Drime API credentials or direct Drime mutation powers.
+
+The improved dashboard should answer, per enrolled site and per source:
+
+- When was the latest server-runner/generic-outbox backup package created?
+- When was the latest server-runner/generic-outbox backup package uploaded to Drime?
+- How many current server-runner/generic-outbox backup package sets are visible in the approved Drime destination?
+- When was the latest WPvivid backup set created?
+- When was the latest WPvivid backup set uploaded to Drime?
+- How many current WPvivid backup sets are visible in the approved Drime destination?
+- Is the newest backup evidence fresh enough for the site's expected schedule and retention posture?
+
+Preferred architecture:
+
+1. Extend the uploader's authenticated read-only status payload with optional additive fields, such as a `backup_sources` summary, while keeping path mode disabled.
+2. Let the uploader compute per-source freshness and Drime inventory evidence from its local registry, package sidecars, source metadata, and safe Drime destination checks using its existing Drime credentials.
+3. Keep the dashboard as a consumer of redacted summaries only. The dashboard must not collect, store, forward, or use client Drime API tokens.
+4. Update dashboard validation, snapshot storage, status classification, Sites list, Site Detail, Attention, Diagnostics, and support-copy/export areas to display this evidence clearly.
+5. Preserve backward compatibility with schema-1 clients by treating the new fields as optional until a later protocol/schema version requires them.
+
+Useful UI language should separate historical activity from current restore confidence. For example, `uploaded_count` may remain as a lifetime registry count, but the primary operator summary should emphasize latest successful upload age and current remote inventory count for `server` and `wpvivid` separately.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
