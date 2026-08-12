@@ -67,7 +67,7 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 		$now   = current_time( 'mysql', true );
 		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
 
-		return false !== $wpdb->update(
+		$updated = $wpdb->update(
 			$table,
 			array(
 				'enrollment_status'         => 'revoked',
@@ -83,6 +83,8 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
 			array( '%d' )
 		);
+
+		return $this->update_changed_existing_row( $updated );
 	}
 
 	/**
@@ -100,7 +102,7 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 		$now   = current_time( 'mysql', true );
 		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
 
-		return false !== $wpdb->update(
+		$updated = $wpdb->update(
 			$table,
 			array(
 				'site_uuid'                 => isset( $data['site_uuid'] ) ? sanitize_text_field( $data['site_uuid'] ) : null,
@@ -121,6 +123,8 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s' ),
 			array( '%d', '%s' )
 		);
+
+		return $this->update_changed_existing_row( $updated );
 	}
 
 	/**
@@ -195,5 +199,17 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 			array( '%s', '%s', '%s', '%s', '%s', '%d', '%s' ),
 			array( '%d' )
 		);
+	}
+
+	/**
+	 * Confirms a write touched an existing row.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int|false $updated Update result from wpdb.
+	 * @return bool
+	 */
+	private function update_changed_existing_row( $updated ) {
+		return false !== $updated && (int) $updated > 0;
 	}
 }
