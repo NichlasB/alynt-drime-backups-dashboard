@@ -26,6 +26,17 @@ $wpdb->query(
 	)
 );
 
+$enrollment_rate_limit_prefix       = 'alynt_drime_backups_dashboard_enroll_fail_';
+$enrollment_rate_limit_like         = $wpdb->esc_like( '_transient_' . $enrollment_rate_limit_prefix ) . '%';
+$enrollment_rate_limit_timeout_like = $wpdb->esc_like( '_transient_timeout_' . $enrollment_rate_limit_prefix ) . '%';
+$wpdb->query(
+	$wpdb->prepare(
+		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$enrollment_rate_limit_like,
+		$enrollment_rate_limit_timeout_like
+	)
+);
+
 $tables = array(
 	$wpdb->prefix . 'alynt_drime_dashboard_snapshots',
 	$wpdb->prefix . 'alynt_drime_dashboard_sites',
