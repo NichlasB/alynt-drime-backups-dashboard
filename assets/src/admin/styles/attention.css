@@ -1,0 +1,47 @@
+.adbd-wrap .adbd-attention-list {
+	max-width: 1050px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: adbd-attention;
+}
+
+.adbd-wrap .adbd-attention-list > li {
+	position: relative;
+	margin-block: 0 12px;
+	padding: 16px 16px 16px 52px;
+	border: 1px solid var(--adbd-border);
+	background: var(--adbd-surface);
+	counter-increment: adbd-attention;
+}
+
+.adbd-wrap .adbd-attention-list > li::before {
+	position: absolute;
+	inset-block-start: 15px;
+	inset-inline-start: 16px;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: var(--adbd-surface-muted);
+	content: counter(adbd-attention);
+	font-weight: 600;
+	line-height: 24px;
+	text-align: center;
+}
+
+.adbd-wrap .adbd-attention-heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+}
+
+.adbd-wrap .adbd-attention-list p {
+	margin-block: 7px 0;
+	line-height: 1.6;
+}
+
+.adbd-wrap .adbd-attention-freshness {
+	color: var(--adbd-subtle);
+	font-size: 12px;
+}

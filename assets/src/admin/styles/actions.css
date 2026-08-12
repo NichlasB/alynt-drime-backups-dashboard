@@ -1,0 +1,36 @@
+.adbd-wrap .adbd-evidence {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px 14px;
+	line-height: 1.55;
+}
+
+.adbd-wrap .adbd-row-actions,
+.adbd-wrap .adbd-actions,
+.adbd-wrap .adbd-copy-row,
+.adbd-wrap .adbd-detail-title,
+.adbd-wrap .adbd-site-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+}
+
+.adbd-wrap .adbd-row-actions {
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.adbd-wrap .adbd-inline-form {
+	display: inline;
+	margin: 0;
+}
+
+.adbd-wrap .adbd-action-unavailable {
+	display: block;
+	line-height: 1.5;
+}
+
+.adbd-wrap .adbd-table-note {
+	margin-block-start: 12px;
+}

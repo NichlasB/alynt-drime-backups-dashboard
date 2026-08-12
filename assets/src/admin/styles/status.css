@@ -1,0 +1,44 @@
+.adbd-wrap .adbd-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	max-width: 100%;
+	padding: 3px 7px;
+	border: 1px solid var(--adbd-border);
+	border-radius: 3px;
+	background: var(--adbd-surface-muted);
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.adbd-wrap .adbd-status .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+
+.adbd-wrap .adbd-status.is-working {
+	border-color: #8bbf9a;
+	color: var(--adbd-success);
+}
+
+.adbd-wrap .adbd-status.is-needs_attention,
+.adbd-wrap .adbd-status.is-incompatible {
+	border-color: #dba5a5;
+	color: var(--adbd-danger);
+}
+
+.adbd-wrap .adbd-status.is-not_reporting {
+	border-color: #d6bd75;
+	color: var(--adbd-warning);
+}
+
+.adbd-wrap .adbd-status-message {
+	margin-block: 6px 0;
+	line-height: 1.55;
+}
+
+.adbd-wrap .adbd-next-step {
+	margin-block: 5px 0;
+	line-height: 1.55;
+}

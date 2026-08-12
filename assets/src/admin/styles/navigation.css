@@ -1,0 +1,34 @@
+.adbd-wrap .nav-tab-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 4px;
+	margin-block: 14px 20px;
+}
+
+.adbd-wrap .nav-tab {
+	display: inline-flex;
+	gap: 7px;
+	align-items: center;
+	margin-inline-start: 0;
+}
+
+.adbd-wrap .adbd-tab-count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 20px;
+	min-height: 20px;
+	padding-inline: 5px;
+	border-radius: 10px;
+	background: #dcdcde;
+	color: var(--adbd-text);
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.adbd-wrap .nav-tab-active .adbd-tab-count {
+	background: var(--adbd-link);
+	color: #fff;
+}

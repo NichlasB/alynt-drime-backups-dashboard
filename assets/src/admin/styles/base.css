@@ -1,0 +1,34 @@
+.adbd-wrap {
+	--adbd-text: #1d2327;
+	--adbd-muted: #50575e;
+	--adbd-subtle: #646970;
+	--adbd-border: #c3c4c7;
+	--adbd-border-light: #dcdcde;
+	--adbd-surface: #fff;
+	--adbd-surface-muted: #f6f7f7;
+	--adbd-link: #2271b1;
+	--adbd-success: #00641e;
+	--adbd-warning: #8a6100;
+	--adbd-danger: #b32d2e;
+	max-width: 1480px;
+}
+
+.adbd-wrap :focus-visible {
+	outline: 2px solid var(--adbd-link);
+	outline-offset: 1px;
+	box-shadow: 0 0 0 1px #fff;
+}
+
+.adbd-wrap > h1 {
+	margin-block-end: 12px;
+}
+
+.adbd-wrap .wp-header-end {
+	margin-block: 0;
+}
+
+.adbd-wrap .adbd-read-only-notice,
+.adbd-wrap .adbd-screen-intro,
+.adbd-wrap .adbd-status-summary {
+	max-width: 1100px;
+}

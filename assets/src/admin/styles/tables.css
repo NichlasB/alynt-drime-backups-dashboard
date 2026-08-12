@@ -1,0 +1,68 @@
+.adbd-wrap .adbd-table-wrap {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.adbd-wrap table caption {
+	padding-block-end: 8px;
+	color: var(--adbd-subtle);
+	font-size: 12px;
+	text-align: start;
+}
+
+.adbd-wrap .adbd-sites-table {
+	table-layout: fixed;
+}
+
+.adbd-wrap .adbd-sites-table th:nth-child(1) {
+	width: 24%;
+}
+
+.adbd-wrap .adbd-sites-table th:nth-child(2) {
+	width: 28%;
+}
+
+.adbd-wrap .adbd-sites-table th:nth-child(3) {
+	width: 22%;
+}
+
+.adbd-wrap .adbd-sites-table th:nth-child(4) {
+	width: 15%;
+}
+
+.adbd-wrap .adbd-sites-table th:nth-child(5) {
+	width: 11%;
+}
+
+.adbd-wrap .adbd-sites-table td,
+.adbd-wrap .adbd-sites-table th,
+.adbd-wrap .adbd-history-table td,
+.adbd-wrap .adbd-history-table th {
+	padding: 12px;
+	vertical-align: top;
+}
+
+.adbd-wrap .row-title,
+.adbd-wrap .adbd-attention-heading > a {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.adbd-wrap .adbd-origin,
+.adbd-wrap .adbd-row-meta,
+.adbd-wrap .adbd-time-exact {
+	display: block;
+	overflow-wrap: anywhere;
+}
+
+.adbd-wrap .adbd-origin {
+	margin-block-start: 3px;
+	color: var(--adbd-muted);
+}
+
+.adbd-wrap .adbd-row-meta,
+.adbd-wrap .adbd-time-exact {
+	margin-block-start: 4px;
+	color: var(--adbd-subtle);
+	font-size: 12px;
+}

@@ -1,0 +1,15 @@
+.adbd-wrap section > h2 {
+	margin-block: 0 4px;
+	font-size: 18px;
+	line-height: 1.4;
+}
+
+.adbd-wrap .adbd-screen-intro {
+	margin-block: 0 16px;
+	color: var(--adbd-muted);
+	line-height: 1.7;
+}
+
+.adbd-wrap .adbd-narrow-screen {
+	max-width: 920px;
+}

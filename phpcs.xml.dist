@@ -19,17 +19,23 @@
 
 	<rule ref="WordPress.DB.DirectDatabaseQuery">
 		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
 		<exclude-pattern>*/uninstall.php</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.DB.PreparedSQL.InterpolatedNotPrepared">
 		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.DB.PreparedSQL.NotPrepared">
 		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
 	</rule>
 

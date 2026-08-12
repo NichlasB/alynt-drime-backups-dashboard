@@ -1,0 +1,38 @@
+.adbd-wrap .adbd-metrics {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-block-end: 18px;
+}
+
+.adbd-wrap .adbd-metric {
+	min-width: 126px;
+	padding: 10px 14px;
+	border: 1px solid var(--adbd-border);
+	background: var(--adbd-surface);
+}
+
+.adbd-wrap .adbd-metric strong,
+.adbd-wrap .adbd-metric span {
+	display: block;
+}
+
+.adbd-wrap .adbd-metric strong {
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+.adbd-wrap .adbd-metric span {
+	margin-block-start: 2px;
+	color: var(--adbd-muted);
+	font-size: 12px;
+}
+
+.adbd-wrap .adbd-metric.is-success strong {
+	color: var(--adbd-success);
+}
+
+.adbd-wrap .adbd-metric.is-danger strong {
+	color: var(--adbd-danger);
+}

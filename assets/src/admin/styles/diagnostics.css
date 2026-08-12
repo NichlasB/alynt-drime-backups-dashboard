@@ -1,0 +1,20 @@
+.adbd-wrap .adbd-detail-table {
+	border: 0;
+}
+
+.adbd-wrap .adbd-detail-table th {
+	width: 42%;
+}
+
+.adbd-wrap .adbd-settings-panel .form-table th {
+	width: 220px;
+}
+
+.adbd-wrap .adbd-support-panel textarea,
+.adbd-wrap #adbd-event-export {
+	max-width: 980px;
+}
+
+.adbd-wrap .adbd-history-table .adbd-status {
+	white-space: nowrap;
+}

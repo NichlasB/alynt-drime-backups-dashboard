@@ -1,0 +1,30 @@
+.adbd-wrap .adbd-empty-state {
+	max-width: 700px;
+	padding: 28px 30px 30px;
+	border: 1px solid var(--adbd-border);
+	background: var(--adbd-surface);
+}
+
+.adbd-wrap .adbd-empty-state > .dashicons {
+	width: 32px;
+	height: 32px;
+	color: var(--adbd-link);
+	font-size: 32px;
+}
+
+.adbd-wrap .adbd-empty-state h3 {
+	margin-block: 10px 8px;
+	font-size: 15px;
+}
+
+.adbd-wrap .adbd-empty-state p {
+	max-width: 620px;
+	color: var(--adbd-muted);
+	line-height: 1.7;
+}
+
+.adbd-wrap .adbd-steps {
+	margin-block: 0 20px;
+	padding-inline-start: 22px;
+	line-height: 1.8;
+}
