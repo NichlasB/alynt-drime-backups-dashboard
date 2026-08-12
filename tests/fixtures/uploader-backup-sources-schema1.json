@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "site_uuid": "12345678-1234-4234-9234-123456789abc",
+  "plugin_version": "0.5.5",
+  "queue_count": 2,
+  "uploaded_count": 3,
+  "failed_count": 0,
+  "active_upload": false,
+  "auto_scan_enabled": true,
+  "server_cron_expected": true,
+  "server_outbox_configured": true,
+  "server_outbox_readable": true,
+  "wpvivid_override_configured": true,
+  "old_wpvivid_uploader_active": false,
+  "wp_cron_disabled": false,
+  "cron_status": "ok",
+  "cron_reason": "Scheduled scans are available.",
+  "warning_count": 0,
+  "warnings": [],
+  "last_runner": "wp_cli",
+  "last_runner_at": 1786305600,
+  "last_scheduled_scan_at": 1786305600,
+  "last_wp_cli_scan_at": 1786305600,
+  "backup_sources": {
+    "server": {
+      "source_key": "server",
+      "source_label": "Server runner / generic outbox",
+      "configured": true,
+      "has_upload_evidence": true,
+      "queued_count": 1,
+      "uploaded_count": 2,
+      "failed_count": 0,
+      "remote_registry_count": 1,
+      "latest_created_at": 1786305200,
+      "latest_uploaded_at": 1786305480,
+      "latest_upload_age_seconds": 120,
+      "latest_remote_status": "uploaded",
+      "latest_inventory_count": 3,
+      "latest_inventory_evidence": "generic_outbox_remote_catalog",
+      "freshness_status": "fresh",
+      "freshness_window_seconds": 129600,
+      "warning_count": 1,
+      "warnings": [
+        {
+          "code": "source_queue_not_empty",
+          "message": "This source has queued backup packages waiting to upload."
+        }
+      ]
+    },
+    "wpvivid": {
+      "source_key": "wpvivid",
+      "source_label": "WPvivid",
+      "configured": true,
+      "has_upload_evidence": true,
+      "queued_count": 1,
+      "uploaded_count": 1,
+      "failed_count": 0,
+      "remote_registry_count": 1,
+      "latest_created_at": 0,
+      "latest_uploaded_at": 1786305540,
+      "latest_upload_age_seconds": 60,
+      "latest_remote_status": "uploaded",
+      "latest_inventory_count": 1,
+      "latest_inventory_evidence": "local_upload_registry",
+      "freshness_status": "fresh",
+      "freshness_window_seconds": 129600,
+      "warning_count": 1,
+      "warnings": [
+        {
+          "code": "source_queue_not_empty",
+          "message": "This source has queued backup packages waiting to upload."
+        }
+      ]
+    }
+  }
+}
