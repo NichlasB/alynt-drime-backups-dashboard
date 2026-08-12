@@ -9,7 +9,7 @@ const buildOptions = {
 	bundle: true,
 	minify: !isWatch,
 	sourcemap: isWatch,
-	outdir: 'assets/dist',
+	outdir: 'assets/dist/admin',
 	target: ['es2020'],
 	loader: {
 		'.css': 'css',
