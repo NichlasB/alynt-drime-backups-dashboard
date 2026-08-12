@@ -32,6 +32,7 @@ class SafeTransportTest extends TestCase {
 		$this->assertSame( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status', $request['url'] );
 		$this->assertSame( 'GET', $request['args']['method'] );
 		$this->assertSame( 0, $request['args']['redirection'] );
+		$this->assertSame( Alynt_Drime_Backups_Dashboard_Safe_Transport::MAX_RESPONSE_SIZE_BYTES, $request['args']['limit_response_size'] );
 		$this->assertTrue( $request['args']['reject_unsafe_urls'] );
 		$this->assertSame( 'application/json', $request['args']['headers']['Accept'] );
 		$this->assertSame( 'no-store', $request['args']['headers']['Cache-Control'] );
@@ -219,6 +220,32 @@ class SafeTransportTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'transport_http_status', $result->get_error_code() );
 		$this->assertSame( 503, $result->get_error_data()['status'] );
+	}
+
+	/**
+	 * Oversized JSON responses fail before decode.
+	 *
+	 * @return void
+	 */
+	public function test_fetch_status_payload_rejects_oversized_response_body() {
+		$transport = $this->transport();
+		$result    = $transport->fetch_status_payload(
+			array(
+				'expected_origin' => 'https://client.example.com',
+			),
+			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			function () {
+				return array(
+					'response' => array(
+						'code' => 200,
+					),
+					'body'     => str_repeat( ' ', Alynt_Drime_Backups_Dashboard_Safe_Transport::MAX_RESPONSE_SIZE_BYTES + 1 ),
+				);
+			}
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'response_too_large', $result->get_error_code() );
 	}
 
 	/**
