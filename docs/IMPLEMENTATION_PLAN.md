@@ -280,7 +280,6 @@ Recommended tables:
 - plugin_version varchar(64) nullable
 - payload_schema_version smallint unsigned nullable
 - overall_status varchar(32)
-- latest_payload_json longtext nullable
 - last_poll_attempt_at datetime nullable
 - last_seen_at datetime nullable
 - next_poll_at datetime nullable

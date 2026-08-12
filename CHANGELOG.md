@@ -4,15 +4,28 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+No unreleased changes yet.
+
+## 0.1.1 - 2026-08-12
+
 ### Added
 
 - Added dashboard-side consumption of optional redacted `backup_sources` status evidence for validation, classification, admin display, aggregate diagnostics, and protocol documentation while preserving the read-only boundary.
+- Added a pending-origin lookup index for enrollment completion queries.
 
-## 0.1.1 - 2026-08-11
+### Changed
+
+- Refreshed the dashboard translation template and release-readiness documentation for the current release candidate.
 
 ### Fixed
 
 - Allowed exact same-origin dashboard self-polling when the site hostname resolves to loopback locally, while preserving private-address rejection for other client origins.
+- Treated stale or unchanged enrollment completion and local revocation writes as failures instead of reporting success.
+- Cleaned enrollment failure-rate-limit transients during uninstall.
+
+### Tests
+
+- Hardened adversarial coverage for stale enrollment and revoke writes, transport response-size limits, and backup-source payload bounds/status enums.
 
 ## 0.1.0 - 2026-08-11
 

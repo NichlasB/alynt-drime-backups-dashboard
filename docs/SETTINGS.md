@@ -2,7 +2,7 @@
 
 ## Alynt Drime Backups Dashboard Settings
 
-The plugin stores one administrator-configurable diagnostics option and two internal options in version 0.1.0. No option grants remote-action capability.
+The plugin stores one administrator-configurable diagnostics option and two internal options in version 0.1.1. No option grants remote-action capability.
 
 | Option Key | Type | Default | Sanitization | Tab | Description |
 |------------|------|---------|--------------|-----|-------------|
@@ -17,8 +17,8 @@ Structured diagnostics logging is disabled by default. When enabled, events are 
 ## Related Non-Option Storage
 
 - Custom tables store dashboard-owned site enrollment records and normalized read-only status snapshots.
-- Transient locks coordinate bounded polling batches and per-site poll attempts.
-- Uninstall cleanup removes dashboard-owned options, transient locks, scheduled hooks, and custom tables without contacting client sites.
+- Transient locks coordinate bounded polling batches, per-site poll attempts, and bounded enrollment failure rate limits.
+- Uninstall cleanup removes dashboard-owned options, transient locks, enrollment failure-rate-limit transients, scheduled hooks, and custom tables without contacting client sites.
 
 ---
 

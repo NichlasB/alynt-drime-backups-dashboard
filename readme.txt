@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.0 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, and optional structured diagnostics logging that is disabled by default. It does not expose remote actions or make live changes.
+Version 0.1.1 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, and optional dashboard-side display of redacted per-source backup freshness evidence. It does not expose remote actions or make live changes.
 
 The current development tree can also consume optional redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
 
@@ -28,7 +28,7 @@ The current development tree can also consume optional redacted per-source backu
 
 = Can the dashboard run backups, restores, or cleanup on client sites? =
 
-No. Version 0.1.0 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+No. Version 0.1.1 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
 
 = What happens when I generate a pairing token? =
 
@@ -45,10 +45,15 @@ See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCO
 == Changelog ==
 
 = Unreleased =
-* Added dashboard-side consumption of optional redacted backup source freshness evidence while preserving the read-only boundary.
+* No unreleased changes yet.
 
 = 0.1.1 =
+* Added dashboard-side consumption of optional redacted backup source freshness evidence while preserving the read-only boundary.
 * Allowed exact same-origin dashboard self-polling when the site hostname resolves to loopback locally, while preserving private-address rejection for other client origins.
+* Added a pending-origin lookup index for enrollment completion queries.
+* Treated stale or unchanged enrollment completion and local revocation writes as failures.
+* Cleaned enrollment failure-rate-limit transients during uninstall.
+* Refreshed translation and documentation artifacts for the current release candidate.
 
 = 0.1.0 =
 * Initial local scaffold.
