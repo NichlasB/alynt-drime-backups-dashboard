@@ -5,7 +5,6 @@ const isWatch = process.argv.includes('--watch');
 const buildOptions = {
 	entryPoints: [
 		'assets/src/admin/index.js',
-		'assets/src/frontend/index.js',
 	],
 	bundle: true,
 	minify: !isWatch,
