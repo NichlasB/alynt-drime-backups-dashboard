@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes yet.
 
+## 0.1.2 - 2026-08-13
+
+### Changed
+
+- Expanded the Sites tab to show per-source backup freshness, current package counts, latest backup/package time, and latest upload time at a glance for reported Server and WPvivid backup evidence.
+- Polished the narrow Sites table layout so the accessible table caption no longer appears as a cramped visual column in stacked mobile-style rows.
+
+### Tests
+
+- Added focused admin rendering coverage for compact Sites-row backup source evidence and detailed source timestamp output.
+
 ## 0.1.1 - 2026-08-12
 
 ### Added
