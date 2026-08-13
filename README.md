@@ -25,7 +25,7 @@ This repository is the separate dashboard plugin package. The eventual host site
 
 ## Current Status
 
-Version 0.1.3 currently includes:
+Version 0.1.4 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
@@ -43,6 +43,7 @@ Version 0.1.3 currently includes:
 - Optional dashboard-side display of redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
 - At-a-glance Sites-row source summaries for Server and WPvivid freshness, current package counts, latest backup/package time, and latest upload time when clients report that evidence.
 - Credential-aware Sites-tab manual-check state copy for active, pending, revoked, and missing-credential rows.
+- Sites-tab layout protection for action buttons and hiding of superseded revoked duplicate rows when a healthy active enrollment exists for the same origin.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
 - Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
 - Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
@@ -68,7 +69,7 @@ Before broad implementation work, create or verify a restore point. For the new 
 
 ### Usage
 
-Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.3 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
+Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.4 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
 
 Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Structured diagnostics logging is disabled by default. When an administrator explicitly enables it, the plugin stores a bounded local event buffer with redaction applied before persistence/export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials are not stored in diagnostics events.
 
@@ -76,7 +77,7 @@ Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Struct
 
 #### Can the dashboard run backups, restores, or cleanup on client sites?
 
-No. Version 0.1.3 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+No. Version 0.1.4 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
 
 #### What happens when I generate a pairing token?
 

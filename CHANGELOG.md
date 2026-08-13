@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes yet.
 
+## 0.1.4 - 2026-08-13
+
+### Fixed
+
+- Prevented Sites-tab action buttons from overflowing the table on narrower desktop widths.
+- Hid revoked duplicate Sites-tab rows when a healthy active enrollment exists for the same client origin, while preserving the stored revoked record for audit/history.
+
+### Tests
+
+- Added focused Sites-list coverage for superseded revoked duplicate filtering.
+
 ## 0.1.3 - 2026-08-13
 
 ### Fixed
