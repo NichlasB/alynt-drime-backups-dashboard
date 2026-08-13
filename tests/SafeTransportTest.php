@@ -133,7 +133,8 @@ class SafeTransportTest extends TestCase {
 			),
 			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
 			function ( $url, $args ) {
-				$this->assertSame( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status', $url );
+				$this->assertStringStartsWith( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status?', $url );
+				$this->assertStringContainsString( '_adbd_cache_bust=', $url );
 				$this->assertSame( 'GET', $args['method'] );
 
 				return array(

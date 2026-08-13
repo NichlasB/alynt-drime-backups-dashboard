@@ -262,7 +262,8 @@ class PollerTest extends TestCase {
 		$this->assertIsArray( $result );
 		$this->assertSame( 'working', $result['category'] );
 		$this->assertSame( 555, $result['snapshot_id'] );
-		$this->assertSame( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status', $captured['url'] );
+		$this->assertStringStartsWith( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status?', $captured['url'] );
+		$this->assertStringContainsString( '_adbd_cache_bust=', $captured['url'] );
 		$this->assertSame( 'GET', $captured['args']['method'] );
 		$this->assertStringStartsWith( 'Bearer adb-poll-v1.pk_example_', $captured['args']['headers']['Authorization'] );
 		$this->assertSame( 'working', $snapshots->recorded['status'] );

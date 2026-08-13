@@ -144,7 +144,7 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 			$http_client = 'wp_safe_remote_get';
 		}
 
-		$response = call_user_func( $http_client, $request['url'], $request['args'] );
+		$response = call_user_func( $http_client, $this->cache_busted_status_url( (string) $request['url'] ), $request['args'] );
 
 		if ( is_wp_error( $response ) ) {
 			if ( $this->is_timeout_error( $response ) ) {
@@ -206,6 +206,26 @@ class Alynt_Drime_Backups_Dashboard_Safe_Transport {
 		}
 
 		return isset( $response['body'] ) ? (string) $response['body'] : '';
+	}
+
+	/**
+	 * Adds a harmless per-request cache-buster to status fetches.
+	 *
+	 * The destination remains the fixed authenticated read-only status route,
+	 * but some managed hosts may still cache the exact REST URL. Appending a
+	 * dashboard-owned query parameter avoids stale status payloads without
+	 * granting any remote action or changing the client endpoint contract.
+	 *
+	 * @since 0.1.6
+	 *
+	 * @param string $url Canonical status endpoint URL.
+	 * @return string URL with a per-request cache-buster query parameter.
+	 */
+	private function cache_busted_status_url( $url ) {
+		$separator = false === strpos( $url, '?' ) ? '?' : '&';
+		$bust      = rawurlencode( str_replace( ' ', '', (string) microtime() ) );
+
+		return $url . $separator . '_adbd_cache_bust=' . $bust;
 	}
 
 	/**
