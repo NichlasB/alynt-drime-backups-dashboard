@@ -29,6 +29,8 @@
 .adbd-wrap .adbd-action-unavailable {
 	display: block;
 	line-height: 1.5;
+	max-width: 22ch;
+	color: #50575e;
 }
 
 .adbd-wrap .adbd-table-note {

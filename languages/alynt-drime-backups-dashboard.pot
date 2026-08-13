@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-13T11:33:03+00:00\n"
+"POT-Creation-Date: 2026-08-13T13:45:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -698,7 +698,7 @@ msgid "No redacted status snapshot has been stored for this site yet. This is ex
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:151
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:222
 msgid "Observed"
 msgstr ""
 
@@ -734,31 +734,56 @@ msgstr ""
 msgid "Cron status"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:123
-msgid "Manual check unavailable until active pairing credentials exist."
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:150
+msgid "Pairing revoked locally. Re-enroll this site before manual checks are available."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:132
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:154
+msgid "Waiting for client opt-in before manual checks are available."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:157
+msgid "Polling credentials are missing. Re-enroll this site to restore manual checks."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:168
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:181
+msgid "Next poll:"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:174
+msgid "Unavailable until re-enrolled"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:176
+msgid "Waiting for client opt-in"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:178
+msgid "Credentials missing"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:203
 msgid "Checking…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:132
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:203
 msgid "Check Status Now"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:144
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:215
 msgid "Recent Status History"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:147
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:218
 msgid "No status history is available yet."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:151
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:222
 msgid "The ten most recent retained redacted snapshots for this site"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:151
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:222
 #: includes/traits/trait-admin-page-diagnostics-tables.php:34
 #: includes/traits/trait-admin-page-diagnostics-tables.php:67
 #: includes/traits/trait-admin-page-sites-table.php:32
@@ -766,17 +791,17 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:151
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:222
 msgid "Evidence"
 msgstr ""
 
 #. translators: 1: queue count, 2: uploaded count, 3: failed count, 4: warning count, 5: cron status.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:168
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:239
 #, php-format
 msgid "Queue %1$s; Uploaded %2$s; Failed %3$s; Warnings %4$s; Cron %5$s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:197
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:268
 msgid "Status categories"
 msgstr ""
 
@@ -1339,10 +1364,6 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-sites-table.php:76
 msgid "No validated snapshot is stored yet."
-msgstr ""
-
-#: includes/traits/trait-admin-page-sites-table.php:80
-msgid "Next poll:"
 msgstr ""
 
 #: includes/traits/trait-admin-page-sites-table.php:81
