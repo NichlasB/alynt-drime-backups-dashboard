@@ -23,6 +23,16 @@
 		max-width: none;
 	}
 
+	.adbd-wrap .adbd-sites-table caption {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
 	.adbd-wrap .adbd-sites-table,
 	.adbd-wrap .adbd-sites-table tbody,
 	.adbd-wrap .adbd-sites-table tr,

@@ -115,11 +115,78 @@ if ( ! function_exists( '__' ) ) {
 	 * Minimal translation shim for pure unit tests.
 	 *
 	 * @param string $text Text.
+	 * @param string $domain Domain.
 	 * @return string
 	 */
 	function __( $text, $domain = 'default' ) {
 		unset( $domain );
 		return $text;
+	}
+}
+
+if ( ! function_exists( '_n' ) ) {
+	/**
+	 * Minimal plural translation shim for pure unit tests.
+	 *
+	 * @param string $single Single text.
+	 * @param string $plural Plural text.
+	 * @param int    $number Number.
+	 * @param string $domain Domain.
+	 * @return string
+	 */
+	function _n( $single, $plural, $number, $domain = 'default' ) {
+		unset( $domain );
+		return 1 === (int) $number ? $single : $plural;
+	}
+}
+
+if ( ! function_exists( 'esc_html' ) ) {
+	/**
+	 * Minimal esc_html shim for pure unit tests.
+	 *
+	 * @param mixed $text Text.
+	 * @return string
+	 */
+	function esc_html( $text ) {
+		return htmlspecialchars( (string) $text, ENT_QUOTES, 'UTF-8' );
+	}
+}
+
+if ( ! function_exists( 'esc_attr' ) ) {
+	/**
+	 * Minimal esc_attr shim for pure unit tests.
+	 *
+	 * @param mixed $text Text.
+	 * @return string
+	 */
+	function esc_attr( $text ) {
+		return htmlspecialchars( (string) $text, ENT_QUOTES, 'UTF-8' );
+	}
+}
+
+if ( ! function_exists( 'esc_html__' ) ) {
+	/**
+	 * Minimal esc_html__ shim for pure unit tests.
+	 *
+	 * @param string $text Text.
+	 * @param string $domain Domain.
+	 * @return string
+	 */
+	function esc_html__( $text, $domain = 'default' ) {
+		return esc_html( __( $text, $domain ) );
+	}
+}
+
+if ( ! function_exists( 'esc_attr__' ) ) {
+	/**
+	 * Minimal esc_attr__ shim for pure unit tests.
+	 *
+	 * @param string $text Text.
+	 * @param string $domain Domain.
+	 * @return string
+	 */
+	function esc_attr__( $text, $domain = 'default' ) {
+		return esc_attr( __( $text, $domain ) );
 	}
 }
 

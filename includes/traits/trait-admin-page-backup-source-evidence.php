@@ -40,6 +40,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			echo '<h5>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ' ' . $this->source_freshness_badge( $source ) . '</h5>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge helper returns escaped markup.
 			echo '<dl class="adbd-detail-list adbd-source-list">';
 			$this->render_detail_item( __( 'Configured', 'alynt-drime-backups-dashboard' ), ! empty( $source['configured'] ) ? __( 'Yes', 'alynt-drime-backups-dashboard' ) : __( 'No', 'alynt-drime-backups-dashboard' ) );
+			$this->render_detail_item( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Current remote inventory', 'alynt-drime-backups-dashboard' ), $this->source_inventory_label( $source ) );
 			$this->render_detail_item( __( 'Queued / Failed', 'alynt-drime-backups-dashboard' ), sprintf( '%1$d / %2$d', isset( $source['queued_count'] ) ? max( 0, (int) $source['queued_count'] ) : 0, isset( $source['failed_count'] ) ? max( 0, (int) $source['failed_count'] ) : 0 ) );
@@ -72,7 +73,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		foreach ( $sources as $source_key => $source ) {
 			$html .= '<li><strong>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ':</strong> ';
 			$html .= esc_html( $this->source_freshness_label( isset( $source['freshness_status'] ) ? (string) $source['freshness_status'] : '' ) );
-			$html .= ' <span class="adbd-row-meta">' . esc_html( $this->source_inventory_label( $source ) ) . '</span></li>';
+			$html .= '<span class="adbd-row-meta adbd-source-line">' . esc_html( $this->source_inventory_label( $source ) ) . '</span>';
+			$html .= $this->source_compact_timestamp_html( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 );
+			$html .= $this->source_compact_timestamp_html( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 );
+			$html .= '</li>';
 		}
 
 		return $html . '</ul>';
@@ -193,6 +197,21 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		}
 
 		return $this->time_html( gmdate( 'Y-m-d H:i:s', $timestamp ) );
+	}
+
+	/**
+	 * Builds compact timestamp evidence for the Sites table.
+	 *
+	 * @param string $label Timestamp label.
+	 * @param mixed  $timestamp Unix timestamp.
+	 * @return string
+	 */
+	private function source_compact_timestamp_html( $label, $timestamp ) {
+		return sprintf(
+			'<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">%1$s:</span> %2$s</span>',
+			esc_html( $label ),
+			$this->source_timestamp_html( $timestamp )
+		);
 	}
 
 	/**

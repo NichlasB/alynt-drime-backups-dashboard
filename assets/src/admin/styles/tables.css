@@ -66,3 +66,22 @@
 	color: var(--adbd-subtle);
 	font-size: 12px;
 }
+
+.adbd-wrap .adbd-source-summary {
+	margin: 8px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.adbd-wrap .adbd-source-summary > li + li {
+	margin-block-start: 10px;
+}
+
+.adbd-wrap .adbd-source-line {
+	margin-block-start: 2px;
+}
+
+.adbd-wrap .adbd-source-line-label {
+	color: var(--adbd-muted);
+	font-weight: 500;
+}
