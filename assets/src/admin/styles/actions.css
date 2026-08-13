@@ -26,6 +26,16 @@
 	margin: 0;
 }
 
+.adbd-wrap .adbd-row-actions .adbd-inline-form {
+	max-width: 100%;
+}
+
+.adbd-wrap .adbd-row-actions .button {
+	max-width: 100%;
+	white-space: normal;
+	text-align: center;
+}
+
 .adbd-wrap .adbd-action-unavailable {
 	display: block;
 	line-height: 1.5;

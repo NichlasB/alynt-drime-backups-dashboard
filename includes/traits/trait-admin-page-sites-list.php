@@ -61,7 +61,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List {
 			return $this->site_status_context;
 		}
 
-		$sites     = $this->sites->all();
+		$sites     = $this->without_superseded_revoked_sites( $this->sites->all() );
 		$snapshots = $this->snapshots->latest_by_site_ids( wp_list_pluck( $sites, 'id' ) );
 		$statuses  = array();
 		$counts    = array(
@@ -96,6 +96,62 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List {
 		);
 
 		return $this->site_status_context;
+	}
+
+	/**
+	 * Removes revoked rows that have been superseded by an active row for the same origin.
+	 *
+	 * The dashboard preserves revoked rows in storage for audit/history, but the
+	 * main Sites tab should not show a stale revoked duplicate next to the
+	 * healthy re-enrolled row for the same client origin.
+	 *
+	 * @param array<int,array<string,mixed>> $sites Sites.
+	 * @return array<int,array<string,mixed>>
+	 */
+	private function without_superseded_revoked_sites( array $sites ) {
+		$active_origins = array();
+
+		foreach ( $sites as $site ) {
+			$status = isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '';
+
+			if ( ! in_array( $status, array( 'active', 'awaiting_first_poll' ), true ) ) {
+				continue;
+			}
+
+			$origin = $this->normalized_expected_origin( isset( $site['expected_origin'] ) ? $site['expected_origin'] : '' );
+			if ( '' !== $origin ) {
+				$active_origins[ $origin ] = true;
+			}
+		}
+
+		if ( empty( $active_origins ) ) {
+			return $sites;
+		}
+
+		$filtered = array();
+
+		foreach ( $sites as $site ) {
+			$status = isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '';
+			$origin = $this->normalized_expected_origin( isset( $site['expected_origin'] ) ? $site['expected_origin'] : '' );
+
+			if ( 'revoked' === $status && '' !== $origin && isset( $active_origins[ $origin ] ) ) {
+				continue;
+			}
+
+			$filtered[] = $site;
+		}
+
+		return $filtered;
+	}
+
+	/**
+	 * Normalizes a stored expected origin for duplicate-row comparisons.
+	 *
+	 * @param mixed $origin Expected origin.
+	 * @return string
+	 */
+	private function normalized_expected_origin( $origin ) {
+		return rtrim( strtolower( trim( (string) $origin ) ), '/' );
 	}
 
 	/**
