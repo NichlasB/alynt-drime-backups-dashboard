@@ -45,6 +45,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			$this->render_detail_item( __( 'Current remote inventory', 'alynt-drime-backups-dashboard' ), $this->source_inventory_label( $source ) );
 			$this->render_detail_item( __( 'Queued / Failed', 'alynt-drime-backups-dashboard' ), sprintf( '%1$d / %2$d', isset( $source['queued_count'] ) ? max( 0, (int) $source['queued_count'] ) : 0, isset( $source['failed_count'] ) ? max( 0, (int) $source['failed_count'] ) : 0 ) );
 			$this->render_detail_item( __( 'Evidence type', 'alynt-drime-backups-dashboard' ), $this->source_inventory_evidence_label( isset( $source['latest_inventory_evidence'] ) ? (string) $source['latest_inventory_evidence'] : '' ) );
+			if ( 'wpvivid' === $source_key ) {
+				$this->render_detail_item( __( 'WPvivid activity', 'alynt-drime-backups-dashboard' ), $this->source_activity_label( $source ) );
+				$this->render_detail_item( __( 'Latest WPvivid activity', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_source_activity_at'] ) ? $source['latest_source_activity_at'] : 0 ), true );
+				$this->render_detail_item( __( 'Local WPvivid ZIPs', 'alynt-drime-backups-dashboard' ), sprintf( '%d', isset( $source['local_candidate_count'] ) ? max( 0, (int) $source['local_candidate_count'] ) : 0 ) );
+			}
 			echo '</dl>';
 			$this->render_source_warnings( $source );
 			echo '</section>';
@@ -76,6 +81,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			$html .= '<span class="adbd-row-meta adbd-source-line">' . esc_html( $this->source_inventory_label( $source ) ) . '</span>';
 			$html .= $this->source_compact_timestamp_html( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 );
 			$html .= $this->source_compact_timestamp_html( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 );
+			if ( 'wpvivid' === $source_key ) {
+				$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'WPvivid activity', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_activity_label( $source ) ) . '</span>';
+				$html .= $this->source_compact_timestamp_html( __( 'Latest WPvivid activity', 'alynt-drime-backups-dashboard' ), isset( $source['latest_source_activity_at'] ) ? $source['latest_source_activity_at'] : 0 );
+			}
 			$html .= '</li>';
 		}
 
@@ -181,6 +190,26 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		$key    = sanitize_key( $evidence );
 
 		return isset( $labels[ $key ] ) ? $labels[ $key ] : __( 'Not reported', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a source activity label.
+	 *
+	 * @param array<string,mixed> $source Source summary.
+	 * @return string
+	 */
+	private function source_activity_label( array $source ) {
+		$evidence = isset( $source['source_activity_evidence'] ) ? sanitize_key( (string) $source['source_activity_evidence'] ) : '';
+
+		if ( 'wpvivid_local_archive' === $evidence ) {
+			return __( 'Local WPvivid ZIP available', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( 'wpvivid_backup_log' === $evidence ) {
+			return __( 'WPvivid backup log observed; no local ZIP may be available for Alynt upload', 'alynt-drime-backups-dashboard' );
+		}
+
+		return __( 'Not reported', 'alynt-drime-backups-dashboard' );
 	}
 
 	/**

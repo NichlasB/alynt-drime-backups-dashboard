@@ -83,6 +83,8 @@ class StatusPayloadValidatorTest extends TestCase {
 		$this->assertSame( 3, $result['backup_sources']['server']['latest_inventory_count'] );
 		$this->assertSame( 'stale', $result['backup_sources']['server']['freshness_status'] );
 		$this->assertSame( 1, $result['backup_sources']['server']['warning_count'] );
+		$this->assertSame( 'wpvivid_backup_log', $result['backup_sources']['wpvivid']['source_activity_evidence'] );
+		$this->assertSame( 0, $result['backup_sources']['wpvivid']['local_candidate_count'] );
 	}
 
 	/**
@@ -112,6 +114,7 @@ class StatusPayloadValidatorTest extends TestCase {
 								'source_label'              => str_repeat( 'S', 120 ),
 								'latest_remote_status'      => 'uploaded_elsewhere',
 								'latest_inventory_evidence' => 'raw_drime_api',
+								'source_activity_evidence'  => 'raw_log_path',
 								'freshness_status'          => 'mysterious',
 								'warnings'                  => $warnings,
 							)
@@ -126,6 +129,7 @@ class StatusPayloadValidatorTest extends TestCase {
 		$this->assertSame( 80, strlen( $result['backup_sources']['server']['source_label'] ) );
 		$this->assertSame( '', $result['backup_sources']['server']['latest_remote_status'] );
 		$this->assertSame( '', $result['backup_sources']['server']['latest_inventory_evidence'] );
+		$this->assertSame( '', $result['backup_sources']['server']['source_activity_evidence'] );
 		$this->assertSame( '', $result['backup_sources']['server']['freshness_status'] );
 		$this->assertSame( 10, $result['backup_sources']['server']['warning_count'] );
 		$this->assertCount( 10, $result['backup_sources']['server']['warnings'] );
@@ -270,6 +274,10 @@ class StatusPayloadValidatorTest extends TestCase {
 			'latest_remote_status'      => 'uploaded',
 			'latest_inventory_count'    => 3,
 			'latest_inventory_evidence' => 'generic_outbox_remote_catalog',
+			'latest_source_activity_at' => 1786305900,
+			'latest_source_activity_age_seconds' => 3300,
+			'source_activity_evidence'  => 'wpvivid_backup_log',
+			'local_candidate_count'     => 0,
 			'freshness_status'          => 'stale',
 			'freshness_window_seconds'  => 129600,
 			'warning_count'             => 1,

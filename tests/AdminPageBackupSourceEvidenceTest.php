@@ -29,6 +29,8 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$this->assertStringContainsString( '1 current package set', $html );
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
+		$this->assertStringContainsString( 'WPvivid activity', $html );
+		$this->assertStringContainsString( 'WPvivid backup log observed', $html );
 		$this->assertStringContainsString( '<time datetime=', $html );
 	}
 
@@ -43,6 +45,8 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
+		$this->assertStringContainsString( 'Latest WPvivid activity', $html );
+		$this->assertStringContainsString( 'Local WPvivid ZIPs', $html );
 		$this->assertStringContainsString( 'Source evidence is reported by the client uploader as a redacted operational hint.', $html );
 	}
 

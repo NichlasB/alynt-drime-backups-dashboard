@@ -626,6 +626,20 @@ msgstr ""
 msgid "Evidence type"
 msgstr ""
 
+#: includes/traits/trait-admin-page-backup-source-evidence.php:49
+#: includes/traits/trait-admin-page-backup-source-evidence.php:83
+msgid "WPvivid activity"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:50
+#: includes/traits/trait-admin-page-backup-source-evidence.php:84
+msgid "Latest WPvivid activity"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:51
+msgid "Local WPvivid ZIPs"
+msgstr ""
+
 #: includes/traits/trait-admin-page-backup-source-evidence.php:54
 msgid "Source evidence is reported by the client uploader as a redacted operational hint. This dashboard does not receive Drime credentials and does not perform a direct Drime inventory audit."
 msgstr ""
@@ -682,6 +696,14 @@ msgstr ""
 #: includes/traits/trait-admin-page-backup-source-evidence.php:183
 #: includes/traits/trait-admin-page-sites-table.php:73
 msgid "Not reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:197
+msgid "Local WPvivid ZIP available"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:201
+msgid "WPvivid backup log observed; no local ZIP may be available for Alynt upload"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-evidence.php:196

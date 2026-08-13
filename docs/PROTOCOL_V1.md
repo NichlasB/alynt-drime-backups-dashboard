@@ -211,6 +211,10 @@ Cache-Control: no-store
       "latest_remote_status": "uploaded",
       "latest_inventory_count": 3,
       "latest_inventory_evidence": "generic_outbox_remote_catalog",
+      "latest_source_activity_at": 0,
+      "latest_source_activity_age_seconds": 0,
+      "source_activity_evidence": "",
+      "local_candidate_count": 0,
       "freshness_status": "fresh",
       "freshness_window_seconds": 129600,
       "warning_count": 0,
@@ -231,6 +235,10 @@ Cache-Control: no-store
       "latest_remote_status": "",
       "latest_inventory_count": 0,
       "latest_inventory_evidence": "",
+      "latest_source_activity_at": 0,
+      "latest_source_activity_age_seconds": 0,
+      "source_activity_evidence": "",
+      "local_candidate_count": 0,
       "freshness_status": "not_configured",
       "freshness_window_seconds": 129600,
       "warning_count": 0,
@@ -249,9 +257,9 @@ Required dashboard checks:
 - warning records use stable codes and operator-safe messages;
 - unknown additive fields are ignored unless explicitly allowlisted later.
 
-Optional schema-1 `backup_sources` is allowlisted for dashboard ingestion as a redacted, client-reported summary. The dashboard accepts only the documented `server` and `wpvivid` source keys and only the documented scalar/count/warning fields inside each source. Unknown nested fields are ignored unless they use a forbidden path-, secret-, credential-, package-, or Drime-identifier-like key, in which case the payload is rejected as invalid.
+Optional schema-1 `backup_sources` is allowlisted for dashboard ingestion as a redacted, client-reported summary. The dashboard accepts only the documented `server` and `wpvivid` source keys and only the documented scalar/count/warning fields inside each source. This includes optional source-activity hints such as `latest_source_activity_at`, `latest_source_activity_age_seconds`, `source_activity_evidence`, and `local_candidate_count`; these are activity hints only and do not prove Drime upload success. Unknown nested fields are ignored unless they use a forbidden path-, secret-, credential-, package-, or Drime-identifier-like key, in which case the payload is rejected as invalid.
 
-`backup_sources` remains optional. Older schema-1 uploaders that omit it are compatible, but the dashboard must display source-level restore-readiness as "not reported" rather than guessing. The dashboard must not use this field to collect or infer Drime API credentials, raw Drime IDs, signed URLs, local paths, package names, backup set IDs, or raw sidecar contents.
+`backup_sources` remains optional. Older schema-1 uploaders that omit it are compatible, but the dashboard must display source-level restore-readiness as "not reported" rather than guessing. WPvivid source-activity evidence such as `wpvivid_backup_log` means WPvivid appears active locally, but it does not override `freshness_status` when Alynt upload evidence is missing or stale. The dashboard must not use this field to collect or infer Drime API credentials, raw Drime IDs, signed URLs, local paths, package names, backup set IDs, or raw sidecar contents.
 
 Dashboard receive time is authoritative for `last_seen_at`. Client timestamps are only status evidence.
 
