@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes yet.
 
+## 0.1.3 - 2026-08-13
+
+### Fixed
+
+- Clarified Sites-tab manual-check availability for pending, revoked, and missing-credential rows while preserving the read-only polling model.
+- Allowed active Sites-list rows with redacted stored polling-secret evidence to show **Check Status Now** without exposing encrypted credential data.
+
+### Tests
+
+- Added focused admin rendering coverage for credential-aware manual-check and next-poll state copy.
+
 ## 0.1.2 - 2026-08-13
 
 ### Changed
