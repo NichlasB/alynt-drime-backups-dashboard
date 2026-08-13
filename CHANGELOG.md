@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.6 - 2026-08-14
+
+### Fixed
+
+- Added a harmless per-request cache-buster to read-only status polling so managed page caches cannot serve stale authenticated status payloads from the fixed endpoint URL.
+
 ## 0.1.5 - 2026-08-13
 
 ### Added
