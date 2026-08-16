@@ -6,15 +6,17 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`.
 
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. That document does not change the v1 read-only contract; it exists to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+
 ## Current State And Safety Boundary
 
-- Planning status: approved for local scaffold.
+- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring; remaining work is acceptance hardening, documentation alignment, and future planning.
 - Dashboard repository: created locally at `C:\Development\WordPress\Plugins\alynt-drime-backups-dashboard`.
-- Dashboard plugin files: scaffolded.
-- Dashboard pending-enrollment token generation: implemented locally in the dashboard repository.
-- Uploader dashboard endpoint: not implemented.
-- Eventual host: `control-sitesmanage live-only`.
-- Live changes in this planning pass: none.
+- Dashboard plugin files: implemented and released through GitHub release assets.
+- Dashboard pending-enrollment token generation: implemented.
+- Uploader dashboard endpoint: implemented in the companion uploader plugin and enabled only after explicit client-site opt-in.
+- Current host: `control-sitesmanage live-only`.
+- Live rollout state: deployed to `https://control.sitesmanage.com` after explicit approval.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
@@ -106,6 +108,8 @@ Do not add any dashboard-to-client or dashboard-to-Drime mutation:
 
 Local dashboard actions needed to manage enrollment, polling, and retained status history are in scope. They must remain capability- and nonce-protected.
 
+Remote actions intentionally belong to future v2 planning, not unresolved v1 scope. See `docs/V2_REMOTE_ACTIONS_PLAN.md` for the separate planning boundary and candidate feature sequence.
+
 ## Eventual Host And Live-Site Gate
 
 The approved eventual target profile is:
@@ -157,7 +161,7 @@ The uploader change is a separate feature slice in the existing uploader reposit
 3. As a dashboard administrator, I can confirm the first authenticated read-only status check before enrollment becomes active.
 4. As a dashboard administrator, I can see all enrolled sites in a scannable list with a plain-language status.
 5. As a dashboard administrator, I can open a site detail view for the latest redacted payload and recent status history.
-6. As a dashboard administrator, I can run **Check Status Now** without triggering any backup or changing the client.
+6. As a dashboard administrator, I can run **Check Now** without triggering any backup or changing the client.
 7. As a dashboard administrator, I can see when a site has stopped reporting or has an authentication, network, schema, or payload error.
 8. As a dashboard administrator, I can pause polling or revoke/remove a local dashboard registration without sending a remote action.
 
@@ -317,7 +321,7 @@ Database migrations must be versioned, idempotent, covered by tests, and run thr
 - Add per-site jitter so all sites are not requested at the same second.
 - Use a global scheduler lock plus a per-site poll lock with bounded expiry.
 - Process a bounded number of due sites per cron run.
-- Manual **Check Status Now** uses the same transport and validation pipeline as scheduled polling.
+- Manual **Check Now** uses the same transport and validation pipeline as scheduled polling.
 - Back off repeated network or server failures exponentially, capped at 6 hours, while preserving the visible stale state.
 - Authentication failures do not retry aggressively; mark attention and require credential review or re-pairing.
 - Store a snapshot on meaningful payload/status change and at most one unchanged heartbeat snapshot per hour.
@@ -340,7 +344,7 @@ Use `WP_List_Table` conventions with:
 - uploader version;
 - queue, failed, and warning counts;
 - cron health;
-- row links for **View**, **Check Status Now**, and local **Pause/Resume**.
+- row links for **View**, **Check Now**, and local **Pause/Resume**.
 
 Include explicit empty, loading, success, error, and incompatible states. Status must use text and icons in addition to color.
 
@@ -485,12 +489,12 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 - implement pending enrollment and one-time token flow;
 - implement credential vault and safe HTTP transport;
-- implement first-poll activation and **Check Status Now**;
+- implement first-poll activation and **Check Now**;
 - test with two disposable WordPress environments over HTTPS or an equivalent isolated integration harness.
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current partial progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Status Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, and support-copy diagnostics are implemented. Full pre-release review remains separate approval-gated work.
+Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, release packaging, and approval-gated live deployment are implemented. Full pre-release/lifecycle/updater acceptance remains separate approval-gated work.
 
 ### Phase 6 — Scheduled polling and history
 

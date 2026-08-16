@@ -2,7 +2,7 @@
 
 Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
 
-This repository is the separate dashboard plugin package. The eventual host site is `control-sitesmanage` in `live-only` mode, but this scaffold makes no live changes and does not contact client sites.
+This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. The plugin remains read-only relative to client sites and Drime.
 
 ## v1 Boundary
 
@@ -47,8 +47,9 @@ Version 0.1.7 currently includes:
 - Sites-tab layout protection for action buttons and hiding of superseded revoked duplicate rows when a healthy active enrollment exists for the same origin.
 - Harmless per-request cache-busting for read-only status polling so managed page caches cannot serve stale authenticated status payloads.
 - Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
-- Draft Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
-- Draft Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
+- Approved Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
+- Approved Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
+- Future v2 remote-actions planning in `docs/V2_REMOTE_ACTIONS_PLAN.md`.
 - Settings reference in `docs/SETTINGS.md`.
 - Hook reference in `docs/HOOKS.md`.
 
@@ -79,7 +80,7 @@ Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Struct
 
 #### Can the dashboard run backups, restores, or cleanup on client sites?
 
-No. Version 0.1.6 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+No. Version 0.1.7 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
 
 #### What happens when I generate a pairing token?
 
@@ -91,7 +92,7 @@ No. Diagnostics logging is disabled by default and redacts sensitive fields befo
 
 #### Where are implementation details documented?
 
-See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
+See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/V2_REMOTE_ACTIONS_PLAN.md` for future remote-operation planning, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 ### Changelog Summary
 
