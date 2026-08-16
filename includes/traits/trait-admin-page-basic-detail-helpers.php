@@ -200,7 +200,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 			<?php wp_nonce_field( 'alynt_drime_backups_dashboard_check_status_now' ); ?>
 			<input type="hidden" name="alynt_drime_backups_dashboard_action" value="check_status_now">
 			<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( (string) $site_id ); ?>">
-			<button type="submit" class="button <?php echo $primary ? 'button-primary' : ''; ?>" data-busy-label="<?php esc_attr_e( 'Checking…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Check Status Now', 'alynt-drime-backups-dashboard' ); ?></button>
+			<button type="submit" class="button <?php echo $primary ? 'button-primary' : ''; ?>" data-busy-label="<?php esc_attr_e( 'Checking…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Check Now', 'alynt-drime-backups-dashboard' ); ?></button>
 		</form>
 		<?php
 	}

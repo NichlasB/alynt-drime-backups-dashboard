@@ -25,7 +25,7 @@ This repository is the separate dashboard plugin package. The eventual host site
 
 ## Current Status
 
-Version 0.1.6 currently includes:
+Version 0.1.7 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
@@ -35,7 +35,7 @@ Version 0.1.6 currently includes:
 - Credential-vault foundation for encrypted dashboard-side polling credential storage.
 - Safe transport foundation that prepares the fixed read-only status request without executing outbound HTTP.
 - Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
-- Manual **Check Status Now** for enrolled sites using the fixed authenticated read-only status route.
+- Manual **Check Now** for enrolled sites using the fixed authenticated read-only status route.
 - Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and snapshot retention cleanup.
 - Responsive, WordPress-native Sites, Attention, and Site Detail views with status summaries, polling evidence, accessible status badges, bounded recent snapshot history, and local-only revoke/check actions.
 - Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and progressively enhanced support-copy/export controls.
@@ -71,7 +71,7 @@ Before broad implementation work, create or verify a restore point. For the new 
 
 ### Usage
 
-Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.6 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
+Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.7 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
 
 Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Structured diagnostics logging is disabled by default. When an administrator explicitly enables it, the plugin stores a bounded local event buffer with redaction applied before persistence/export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials are not stored in diagnostics events.
 

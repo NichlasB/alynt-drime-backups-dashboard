@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.7 - 2026-08-16
+
+### Changed
+
+- Shortened the manual status-check button label from **Check Status Now** to **Check Now**.
+
 ## 0.1.6 - 2026-08-14
 
 ### Fixed

@@ -69,7 +69,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$action_html = $harness->check_form_html( $site );
 		$next_html   = $harness->next_poll_line( $site );
 
-		$this->assertStringContainsString( 'Check Status Now', $action_html );
+		$this->assertStringContainsString( 'Check Now', $action_html );
 		$this->assertStringNotContainsString( 'Manual check unavailable', $action_html );
 		$this->assertStringContainsString( '<time datetime=', $next_html );
 	}

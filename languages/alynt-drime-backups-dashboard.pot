@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Alynt Drime Backups Dashboard 0.1.5\n"
+"Project-Id-Version: Alynt Drime Backups Dashboard 0.1.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/alynt-drime-backups-dashboard\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -790,7 +790,7 @@ msgid "Checking…"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:203
-msgid "Check Status Now"
+msgid "Check Now"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:215
