@@ -45,7 +45,10 @@ See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCO
 == Changelog ==
 
 = Unreleased =
-* No unreleased changes yet.
+* Added accessible busy-state feedback for pairing-token, diagnostics-event, and support-summary copy buttons.
+* Added explicit WordPress date/time format fallbacks for admin timestamp rendering.
+* Treated malformed or empty stored status snapshot payloads as not reporting instead of falling through to a misleading configuration state.
+* Added focused status-classifier regression coverage for malformed JSON and empty decoded snapshot payloads.
 
 = 0.1.7 =
 * Shortened the manual status-check button label from Check Status Now to Check Now.

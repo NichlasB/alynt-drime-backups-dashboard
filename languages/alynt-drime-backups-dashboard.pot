@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-13T14:41:26+00:00\n"
+"POT-Creation-Date: 2026-08-17T18:15:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -276,68 +276,72 @@ msgstr ""
 msgid "No status snapshot has been received yet."
 msgstr ""
 
-#: includes/class-status-classifier.php:61
+#: includes/class-status-classifier.php:60
+msgid "The latest status snapshot could not be decoded."
+msgstr ""
+
+#: includes/class-status-classifier.php:66
 msgid "The client status schema is not supported by this dashboard version."
 msgstr ""
 
-#: includes/class-status-classifier.php:65
+#: includes/class-status-classifier.php:70
 msgid "The last status snapshot is stale."
 msgstr ""
 
-#: includes/class-status-classifier.php:75
+#: includes/class-status-classifier.php:80
 msgid "No supported backup source appears configured on the client site."
 msgstr ""
 
-#: includes/class-status-classifier.php:78
+#: includes/class-status-classifier.php:83
 msgid "The latest redacted status payload looks healthy."
 msgstr ""
 
-#: includes/class-status-classifier.php:106
+#: includes/class-status-classifier.php:111
 #: includes/traits/trait-admin-page-sites-table.php:120
 msgid "Pending"
 msgstr ""
 
-#: includes/class-status-classifier.php:107
+#: includes/class-status-classifier.php:112
 #: includes/traits/trait-admin-page-sites-table.php:121
 msgid "Paused"
 msgstr ""
 
-#: includes/class-status-classifier.php:108
+#: includes/class-status-classifier.php:113
 msgid "Incompatible"
 msgstr ""
 
-#: includes/class-status-classifier.php:109
+#: includes/class-status-classifier.php:114
 msgid "Not reporting"
 msgstr ""
 
-#: includes/class-status-classifier.php:110
+#: includes/class-status-classifier.php:115
 msgid "Needs attention"
 msgstr ""
 
-#: includes/class-status-classifier.php:111
-#: includes/traits/trait-admin-page-backup-source-evidence.php:145
+#: includes/class-status-classifier.php:116
+#: includes/traits/trait-admin-page-backup-source-evidence.php:154
 msgid "Not configured"
 msgstr ""
 
-#: includes/class-status-classifier.php:112
+#: includes/class-status-classifier.php:117
 #: includes/traits/trait-admin-page-sites-table.php:118
 msgid "Working"
 msgstr ""
 
-#: includes/class-status-classifier.php:175
+#: includes/class-status-classifier.php:180
 msgid "The client reports failed backup uploads."
 msgstr ""
 
-#: includes/class-status-classifier.php:179
-#: includes/class-status-classifier.php:183
+#: includes/class-status-classifier.php:184
+#: includes/class-status-classifier.php:188
 msgid "The client reports uploader warnings."
 msgstr ""
 
-#: includes/class-status-classifier.php:187
+#: includes/class-status-classifier.php:192
 msgid "The client reports cron health that needs review."
 msgstr ""
 
-#: includes/class-status-classifier.php:191
+#: includes/class-status-classifier.php:196
 msgid "One or more backup sources report stale or missing upload evidence."
 msgstr ""
 
@@ -412,6 +416,12 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:62
 msgid "Pairing token"
+msgstr ""
+
+#: includes/traits/trait-admin-page-add-site.php:65
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:50
+#: includes/traits/trait-admin-page-diagnostics-support-output.php:35
+msgid "Copying…"
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:65
@@ -605,12 +615,12 @@ msgid "No"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-evidence.php:43
-#: includes/traits/trait-admin-page-backup-source-evidence.php:77
+#: includes/traits/trait-admin-page-backup-source-evidence.php:82
 msgid "Latest backup/package"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-evidence.php:44
-#: includes/traits/trait-admin-page-backup-source-evidence.php:78
+#: includes/traits/trait-admin-page-backup-source-evidence.php:83
 msgid "Latest upload"
 msgstr ""
 
@@ -627,12 +637,12 @@ msgid "Evidence type"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-evidence.php:49
-#: includes/traits/trait-admin-page-backup-source-evidence.php:83
+#: includes/traits/trait-admin-page-backup-source-evidence.php:85
 msgid "WPvivid activity"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-evidence.php:50
-#: includes/traits/trait-admin-page-backup-source-evidence.php:84
+#: includes/traits/trait-admin-page-backup-source-evidence.php:86
 msgid "Latest WPvivid activity"
 msgstr ""
 
@@ -640,73 +650,74 @@ msgstr ""
 msgid "Local WPvivid ZIPs"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:54
+#: includes/traits/trait-admin-page-backup-source-evidence.php:59
 msgid "Source evidence is reported by the client uploader as a redacted operational hint. This dashboard does not receive Drime credentials and does not perform a direct Drime inventory audit."
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:68
+#: includes/traits/trait-admin-page-backup-source-evidence.php:73
 msgid "Source evidence: not reported"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:119
+#: includes/traits/trait-admin-page-backup-source-evidence.php:128
 msgid "WPvivid"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:119
+#: includes/traits/trait-admin-page-backup-source-evidence.php:128
 msgid "Server"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:142
+#: includes/traits/trait-admin-page-backup-source-evidence.php:151
 msgid "Fresh"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:143
+#: includes/traits/trait-admin-page-backup-source-evidence.php:152
 msgid "Stale"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:144
+#: includes/traits/trait-admin-page-backup-source-evidence.php:153
 msgid "No upload evidence"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:149
+#: includes/traits/trait-admin-page-backup-source-evidence.php:158
 msgid "Unknown"
 msgstr ""
 
 #. translators: %d: number of current package sets.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:163
+#: includes/traits/trait-admin-page-backup-source-evidence.php:172
 #, php-format
 msgid "%d current package set"
 msgid_plural "%d current package sets"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:176
+#: includes/traits/trait-admin-page-backup-source-evidence.php:185
 msgid "Server remote catalog sidecar"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:177
+#: includes/traits/trait-admin-page-backup-source-evidence.php:186
 msgid "Server remote index sidecar"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:178
+#: includes/traits/trait-admin-page-backup-source-evidence.php:187
 msgid "Uploader local upload registry"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:179
-#: includes/traits/trait-admin-page-backup-source-evidence.php:183
+#: includes/traits/trait-admin-page-backup-source-evidence.php:188
+#: includes/traits/trait-admin-page-backup-source-evidence.php:192
+#: includes/traits/trait-admin-page-backup-source-evidence.php:212
 #: includes/traits/trait-admin-page-sites-table.php:73
 msgid "Not reported"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:197
+#: includes/traits/trait-admin-page-backup-source-evidence.php:205
 msgid "Local WPvivid ZIP available"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:201
+#: includes/traits/trait-admin-page-backup-source-evidence.php:209
 msgid "WPvivid backup log observed; no local ZIP may be available for Alynt upload"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:196
+#: includes/traits/trait-admin-page-backup-source-evidence.php:225
 #: includes/traits/trait-admin-page-time-formatters.php:27
 msgid "Not available"
 msgstr ""

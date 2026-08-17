@@ -56,6 +56,13 @@ if ( dashboard ) {
 			}
 
 			let copied = false;
+			const originalLabel = button.textContent;
+			const busyLabel = button.dataset.busyLabel || originalLabel;
+
+			button.disabled = true;
+			button.setAttribute( 'aria-disabled', 'true' );
+			button.setAttribute( 'aria-busy', 'true' );
+			button.textContent = busyLabel;
 
 			try {
 				if ( navigator.clipboard && window.isSecureContext ) {
@@ -65,7 +72,16 @@ if ( dashboard ) {
 					copied = fallbackCopy( field );
 				}
 			} catch ( error ) {
-				copied = fallbackCopy( field );
+				try {
+					copied = fallbackCopy( field );
+				} catch ( fallbackError ) {
+					copied = false;
+				}
+			} finally {
+				button.disabled = false;
+				button.removeAttribute( 'aria-disabled' );
+				button.removeAttribute( 'aria-busy' );
+				button.textContent = originalLabel;
 			}
 
 			announceCopyResult(

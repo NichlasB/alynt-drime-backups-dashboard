@@ -47,7 +47,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 		echo '<textarea id="adbd-event-export" class="large-text code" rows="10" readonly="readonly" aria-label="' . esc_attr__( 'Redacted diagnostics event export', 'alynt-drime-backups-dashboard' ) . '">';
 		echo esc_textarea( false === $export ? '[]' : $export );
 		echo '</textarea>';
-		echo '<p class="adbd-actions"><button type="button" class="button adbd-copy-button" hidden data-copy-target="adbd-event-export" data-success-message="' . esc_attr__( 'Redacted event export copied to the clipboard.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The export could not be copied automatically. Select it and copy it manually.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Copy Event Export', 'alynt-drime-backups-dashboard' ) . '</button></p>';
+		echo '<p class="adbd-actions"><button type="button" class="button adbd-copy-button" hidden data-copy-target="adbd-event-export" data-busy-label="' . esc_attr__( 'Copying…', 'alynt-drime-backups-dashboard' ) . '" data-success-message="' . esc_attr__( 'Redacted event export copied to the clipboard.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The export could not be copied automatically. Select it and copy it manually.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Copy Event Export', 'alynt-drime-backups-dashboard' ) . '</button></p>';
 		echo '<p class="adbd-copy-status" role="status" aria-live="polite"></p>';
 
 		if ( ! empty( $events ) ) {

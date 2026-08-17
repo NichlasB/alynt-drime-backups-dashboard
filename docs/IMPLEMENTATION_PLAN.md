@@ -139,7 +139,7 @@ Before the first live operation, present the exact profile above again and obtai
 - latest status and retained snapshots;
 - health classification and stale-site detection;
 - WordPress administrator screens;
-- local revocation, pause, and removal of dashboard records;
+- local revocation of dashboard records, with pause/resume and removal reserved for later local-only operator slices;
 - dashboard diagnostics that never expose credentials or raw sensitive responses.
 
 ### Uploader plugin owns
@@ -163,7 +163,7 @@ The uploader change is a separate feature slice in the existing uploader reposit
 5. As a dashboard administrator, I can open a site detail view for the latest redacted payload and recent status history.
 6. As a dashboard administrator, I can run **Check Now** without triggering any backup or changing the client.
 7. As a dashboard administrator, I can see when a site has stopped reporting or has an authentication, network, schema, or payload error.
-8. As a dashboard administrator, I can pause polling or revoke/remove a local dashboard registration without sending a remote action.
+8. As a dashboard administrator, I can revoke a local dashboard registration without sending a remote action; later local-only slices may add pause/resume or removal after separate review.
 
 ## Pairing And Authentication Contract
 
@@ -344,7 +344,7 @@ Use `WP_List_Table` conventions with:
 - uploader version;
 - queue, failed, and warning counts;
 - cron health;
-- row links for **View**, **Check Now**, and local **Pause/Resume**.
+- row links for **View** and **Check Now**; local **Pause/Resume** remains a deferred local-only operator slice.
 
 Include explicit empty, loading, success, error, and incompatible states. Status must use text and icons in addition to color.
 
@@ -364,7 +364,7 @@ Include explicit empty, loading, success, error, and incompatible states. Status
 - recent status timeline;
 - sanitized polling failures;
 - enrollment and credential state without displaying a secret;
-- local actions for check, pause/resume, revoke, and remove.
+- local actions for check and revoke; pause/resume and remove remain deferred local-only operator slices.
 
 ### Attention Queue
 

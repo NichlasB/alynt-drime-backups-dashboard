@@ -6,6 +6,7 @@
 /*.zip
 
 # Build output
+/build/
 /assets/dist/
 
 # Environment

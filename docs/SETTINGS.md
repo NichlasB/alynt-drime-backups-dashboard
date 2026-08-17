@@ -2,7 +2,7 @@
 
 ## Alynt Drime Backups Dashboard Settings
 
-The plugin stores one administrator-configurable diagnostics option and two internal options in version 0.1.1. No option grants remote-action capability.
+The plugin stores one administrator-configurable diagnostics option and two internal options in version 0.1.7. No option grants remote-action capability.
 
 | Option Key | Type | Default | Sanitization | Tab | Description |
 |------------|------|---------|--------------|-----|-------------|

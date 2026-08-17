@@ -55,7 +55,12 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 		}
 
 		$payload = $this->payload_from_snapshot( $snapshot );
-		$schema  = isset( $payload['schema_version'] ) ? (int) $payload['schema_version'] : (int) $snapshot['schema_version'];
+
+		if ( empty( $payload ) ) {
+			return $this->result( self::CATEGORY_NOT_REPORTING, __( 'The latest status snapshot could not be decoded.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$schema = isset( $payload['schema_version'] ) ? (int) $payload['schema_version'] : ( isset( $snapshot['schema_version'] ) ? (int) $snapshot['schema_version'] : 0 );
 
 		if ( self::SUPPORTED_SCHEMA_VERSION !== $schema ) {
 			return $this->result( self::CATEGORY_INCOMPATIBLE, __( 'The client status schema is not supported by this dashboard version.', 'alynt-drime-backups-dashboard' ) );

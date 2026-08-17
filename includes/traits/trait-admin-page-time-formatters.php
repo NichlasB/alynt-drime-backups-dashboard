@@ -35,8 +35,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters {
 			return esc_html( (string) $value );
 		}
 
-		$date_format = function_exists( 'get_option' ) ? (string) get_option( 'date_format' ) : 'Y-m-d';
-		$time_format = function_exists( 'get_option' ) ? (string) get_option( 'time_format' ) : 'H:i';
+		$date_format = function_exists( 'get_option' ) ? (string) get_option( 'date_format', 'Y-m-d' ) : 'Y-m-d';
+		$time_format = function_exists( 'get_option' ) ? (string) get_option( 'time_format', 'H:i' ) : 'H:i';
 		$absolute    = function_exists( 'wp_date' ) ? wp_date( $date_format . ', ' . $time_format, $timestamp ) : gmdate( 'Y-m-d H:i', $timestamp ) . ' UTC';
 		$now         = time();
 

@@ -136,6 +136,42 @@ class StatusClassifierTest extends TestCase {
 	}
 
 	/**
+	 * Corrupted stored payload JSON is not treated as healthy or merely unconfigured.
+	 *
+	 * @return void
+	 */
+	public function test_malformed_payload_json_is_not_reporting() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			array(
+				'schema_version' => 1,
+				'payload_json'   => '{"schema_version":1,',
+				'observed_at'    => '2023-11-14 22:15:00',
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'not_reporting', $result['category'] );
+		$this->assertStringContainsString( 'could not be decoded', $result['message'] );
+	}
+
+	/**
+	 * Empty decoded snapshot payloads fail closed.
+	 *
+	 * @return void
+	 */
+	public function test_empty_decoded_payload_is_not_reporting() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot( array() ),
+			1700000300
+		);
+
+		$this->assertSame( 'not_reporting', $result['category'] );
+		$this->assertStringContainsString( 'could not be decoded', $result['message'] );
+	}
+
+	/**
 	 * Queue alone is not a failure.
 	 *
 	 * @return void

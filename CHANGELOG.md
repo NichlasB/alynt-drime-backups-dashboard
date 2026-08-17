@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Added accessible busy-state feedback for pairing-token, diagnostics-event, and support-summary copy buttons.
+- Added explicit WordPress date/time format fallbacks for admin timestamp rendering.
+
+### Fixed
+
+- Treated malformed or empty stored status snapshot payloads as not reporting instead of falling through to a misleading configuration state.
+
+### Tests
+
+- Added focused status-classifier regression coverage for malformed JSON and empty decoded snapshot payloads.
+
 ## 0.1.7 - 2026-08-16
 
 ### Changed
