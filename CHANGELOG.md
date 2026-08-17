@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.9 - 2026-08-17
+
+### Fixed
+
+- Aligned the Sites-tab helper copy with the shortened **Check Now** manual status-check button label.
+
 ## 0.1.8 - 2026-08-17
 
 ### Changed

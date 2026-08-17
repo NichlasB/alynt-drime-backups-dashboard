@@ -47,7 +47,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List {
 
 		$this->render_status_summary( $context['counts'], count( $sites ), $context['attention_count'] );
 		$this->render_sites_table( $sites, $snapshots, $context['statuses'] );
-		echo '<p class="description adbd-table-note">' . esc_html__( 'Check Status Now re-polls the site\'s fixed authenticated read-only status endpoint. It does not start, stop, or alter a backup.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p class="description adbd-table-note">' . esc_html__( 'Check Now re-polls the site\'s fixed authenticated read-only status endpoint. It does not start, stop, or alter a backup.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '</section>';
 	}
 

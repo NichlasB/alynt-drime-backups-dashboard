@@ -1,6 +1,6 @@
 {
   "name": "alynt-drime-backups-dashboard",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "description": "Read-only central monitoring dashboard for Alynt Drime backup uploader sites.",
   "type": "module",
