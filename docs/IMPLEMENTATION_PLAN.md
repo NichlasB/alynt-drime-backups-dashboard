@@ -90,6 +90,26 @@ Useful UI language should separate historical activity from current restore conf
 
 Dashboard-side implementation status: the dashboard now has a local, additive schema-1 consumer slice for optional `backup_sources` summaries. This covers payload allowlisting, status classification, Sites list summaries, Site Detail snapshot evidence, aggregate diagnostics, support-safe export counts, protocol documentation, and focused unit coverage. The companion uploader-side producer work remains a separate implementation slice.
 
+### Dashboard-Side Backup Freshness Policy Slice
+
+Operational rollout showed that the first backup-source classifier was too strict for WPvivid on sites where WPvivid is intentionally scheduled weekly, biweekly, or as a secondary/manual safety layer. The initial source-level rule treated any configured source with uploader-reported `stale` freshness as `Needs attention`, even when the server-runner source was fresh, queues were empty, failed counts were zero, cron was healthy, and WPvivid upload evidence was only slightly older than the uploader's conservative 36-hour freshness window.
+
+Implement a dashboard-side freshness-policy layer before treating source-level attention counts as reliable operational alarms:
+
+- Keep server-runner/generic-outbox evidence strict. Its freshness should continue to reflect the uploader-reported source freshness window unless a later explicit policy UI is added.
+- Treat WPvivid as a separately cadenced source. Dashboard v1 should use a default WPvivid policy window of 15 days so weekly and biweekly WPvivid schedules do not continuously produce false `Needs attention` rows.
+- Preserve hard attention states for configured sources with failed source uploads, missing upload evidence, non-queue warnings other than `source_latest_upload_stale` while still within the dashboard policy, or WPvivid evidence older than the dashboard policy window.
+- Display the dashboard policy in Sites-list and Site-detail evidence so operators can distinguish `Fresh`, `Within policy`, `Stale`, `No upload evidence`, and `Not configured` without assuming the dashboard has performed a direct Drime audit.
+- Keep the change dashboard-side, additive, and read-only. Do not give the dashboard Drime API credentials, do not add remote actions, and do not require a status schema-version change unless a future uploader field becomes mandatory.
+
+Acceptance criteria:
+
+- A WPvivid source that reports `freshness_status: stale`, has upload evidence, has no failed source uploads, and has `latest_upload_age_seconds` within 15 days classifies as `Working` when no other payload condition needs attention.
+- A WPvivid source older than 15 days still classifies as `Needs attention`.
+- A server source that reports stale still classifies as `Needs attention`.
+- The Sites list and Site detail views show the source as within the dashboard policy and include the expected window.
+- Existing schema-1 clients remain compatible and the v1 read-only boundary remains unchanged.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

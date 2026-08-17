@@ -37,9 +37,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 
 		foreach ( $sources as $source_key => $source ) {
 			echo '<section class="adbd-source-card is-' . esc_attr( $source_key ) . '" aria-label="' . esc_attr( $this->backup_source_label( $source_key, $source ) ) . '">';
-			echo '<h5>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ' ' . $this->source_freshness_badge( $source ) . '</h5>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge helper returns escaped markup.
+			echo '<h5>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ' ' . $this->source_freshness_badge( $source_key, $source ) . '</h5>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge helper returns escaped markup.
 			echo '<dl class="adbd-detail-list adbd-source-list">';
 			$this->render_detail_item( __( 'Configured', 'alynt-drime-backups-dashboard' ), ! empty( $source['configured'] ) ? __( 'Yes', 'alynt-drime-backups-dashboard' ) : __( 'No', 'alynt-drime-backups-dashboard' ) );
+			$this->render_detail_item( __( 'Expected freshness', 'alynt-drime-backups-dashboard' ), $this->source_policy_label( $source_key, $source ) );
 			$this->render_detail_item( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Current remote inventory', 'alynt-drime-backups-dashboard' ), $this->source_inventory_label( $source ) );
@@ -77,7 +78,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 
 		foreach ( $sources as $source_key => $source ) {
 			$html .= '<li><strong>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ':</strong> ';
-			$html .= esc_html( $this->source_freshness_label( isset( $source['freshness_status'] ) ? (string) $source['freshness_status'] : '' ) );
+			$html .= esc_html( $this->source_freshness_label( $this->source_effective_freshness_status( $source_key, $source ) ) );
+			$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'Expected', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_policy_label( $source_key, $source ) ) . '</span>';
 			$html .= '<span class="adbd-row-meta adbd-source-line">' . esc_html( $this->source_inventory_label( $source ) ) . '</span>';
 			$html .= $this->source_compact_timestamp_html( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 );
 			$html .= $this->source_compact_timestamp_html( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 );
@@ -131,11 +133,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	/**
 	 * Builds a source freshness badge.
 	 *
+	 * @param string              $source_key Source key.
 	 * @param array<string,mixed> $source Source summary.
 	 * @return string
 	 */
-	private function source_freshness_badge( array $source ) {
-		$freshness = isset( $source['freshness_status'] ) ? sanitize_key( $source['freshness_status'] ) : '';
+	private function source_freshness_badge( $source_key, array $source ) {
+		$freshness = $this->source_effective_freshness_status( $source_key, $source );
 
 		return '<span class="adbd-source-freshness is-' . esc_attr( $freshness ) . '">' . esc_html( $this->source_freshness_label( $freshness ) ) . '</span>';
 	}
@@ -149,6 +152,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	private function source_freshness_label( $freshness ) {
 		$labels = array(
 			'fresh'              => __( 'Fresh', 'alynt-drime-backups-dashboard' ),
+			'within_policy'      => __( 'Within policy', 'alynt-drime-backups-dashboard' ),
 			'stale'              => __( 'Stale', 'alynt-drime-backups-dashboard' ),
 			'no_upload_evidence' => __( 'No upload evidence', 'alynt-drime-backups-dashboard' ),
 			'not_configured'     => __( 'Not configured', 'alynt-drime-backups-dashboard' ),
@@ -156,6 +160,99 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		$key    = sanitize_key( $freshness );
 
 		return isset( $labels[ $key ] ) ? $labels[ $key ] : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets effective freshness after applying dashboard display policy.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $source Source summary.
+	 * @return string
+	 */
+	private function source_effective_freshness_status( $source_key, array $source ) {
+		$freshness = isset( $source['freshness_status'] ) ? sanitize_key( $source['freshness_status'] ) : '';
+
+		if ( 'wpvivid' === $source_key && 'stale' === $freshness && ! empty( $source['has_upload_evidence'] ) ) {
+			$age = isset( $source['latest_upload_age_seconds'] ) ? max( 0, (int) $source['latest_upload_age_seconds'] ) : 0;
+
+			if ( $age > 0 && $age <= $this->source_policy_window_seconds( $source_key, $source ) ) {
+				return 'within_policy';
+			}
+		}
+
+		return $freshness;
+	}
+
+	/**
+	 * Gets a human-readable dashboard freshness policy label.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $source Source summary.
+	 * @return string
+	 */
+	private function source_policy_label( $source_key, array $source ) {
+		$seconds = $this->source_policy_window_seconds( $source_key, $source );
+
+		if ( $seconds <= 0 ) {
+			return __( 'Not reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		return sprintf(
+			/* translators: %s: human readable freshness window. */
+			__( 'within %s', 'alynt-drime-backups-dashboard' ),
+			$this->source_duration_label( $seconds )
+		);
+	}
+
+	/**
+	 * Gets the dashboard freshness policy window for a source.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $source Source summary.
+	 * @return int
+	 */
+	private function source_policy_window_seconds( $source_key, array $source ) {
+		$reported = isset( $source['freshness_window_seconds'] ) ? max( 0, (int) $source['freshness_window_seconds'] ) : 0;
+
+		if ( 'wpvivid' === $source_key ) {
+			return max( 1296000, $reported );
+		}
+
+		return $reported;
+	}
+
+	/**
+	 * Formats a duration for source freshness policy display.
+	 *
+	 * @param int $seconds Duration in seconds.
+	 * @return string
+	 */
+	private function source_duration_label( $seconds ) {
+		$seconds = max( 0, (int) $seconds );
+		$day     = 86400;
+		$hour    = 3600;
+
+		if ( $seconds >= $day && 0 === $seconds % $day ) {
+			return sprintf(
+				/* translators: %d: number of days. */
+				_n( '%d day', '%d days', (int) ( $seconds / $day ), 'alynt-drime-backups-dashboard' ),
+				(int) ( $seconds / $day )
+			);
+		}
+
+		if ( $seconds >= $hour && 0 === $seconds % $hour ) {
+			return sprintf(
+				/* translators: %d: number of hours. */
+				_n( '%d hour', '%d hours', (int) ( $seconds / $hour ), 'alynt-drime-backups-dashboard' ),
+				(int) ( $seconds / $hour )
+			);
+		}
+
+		return sprintf(
+			/* translators: %d: number of seconds. */
+			_n( '%d second', '%d seconds', $seconds, 'alynt-drime-backups-dashboard' ),
+			$seconds
+		);
 	}
 
 	/**

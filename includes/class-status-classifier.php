@@ -26,6 +26,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 
 	const SUPPORTED_SCHEMA_VERSION    = 1;
 	const DEFAULT_STALE_AFTER_SECONDS = 3600;
+	const WPVIVID_POLICY_WINDOW       = 1296000; // 15 days.
 
 	/**
 	 * Classifies one site using its latest snapshot.
@@ -210,36 +211,112 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return false;
 		}
 
-		foreach ( $payload['backup_sources'] as $source ) {
+		foreach ( $payload['backup_sources'] as $source_key => $source ) {
 			if ( ! is_array( $source ) ) {
 				continue;
 			}
 
-			$freshness  = isset( $source['freshness_status'] ) ? sanitize_key( (string) $source['freshness_status'] ) : '';
-			$configured = ! empty( $source['configured'] );
-
-			if ( $configured && in_array( $freshness, array( 'no_upload_evidence', 'stale' ), true ) ) {
+			if ( $this->source_needs_attention( sanitize_key( (string) $source_key ), $source ) ) {
 				return true;
-			}
-
-			if ( empty( $source['warnings'] ) || ! is_array( $source['warnings'] ) ) {
-				continue;
-			}
-
-			foreach ( $source['warnings'] as $warning ) {
-				if ( ! is_array( $warning ) ) {
-					continue;
-				}
-
-				$code = isset( $warning['code'] ) ? sanitize_key( (string) $warning['code'] ) : '';
-
-				if ( '' !== $code && 'source_queue_not_empty' !== $code ) {
-					return true;
-				}
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Determines whether one source-level evidence summary needs attention.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $source Source evidence.
+	 * @return bool
+	 */
+	private function source_needs_attention( $source_key, array $source ) {
+		$configured = ! empty( $source['configured'] );
+
+		if ( ! $configured ) {
+			return false;
+		}
+
+		if ( isset( $source['failed_count'] ) && (int) $source['failed_count'] > 0 ) {
+			return true;
+		}
+
+		$freshness = isset( $source['freshness_status'] ) ? sanitize_key( (string) $source['freshness_status'] ) : '';
+
+		if ( 'no_upload_evidence' === $freshness ) {
+			return true;
+		}
+
+		if ( 'stale' === $freshness && $this->source_is_outside_dashboard_policy( $source_key, $source ) ) {
+			return true;
+		}
+
+		if ( empty( $source['warnings'] ) || ! is_array( $source['warnings'] ) ) {
+			return false;
+		}
+
+		foreach ( $source['warnings'] as $warning ) {
+			if ( ! is_array( $warning ) ) {
+				continue;
+			}
+
+			$code = isset( $warning['code'] ) ? sanitize_key( (string) $warning['code'] ) : '';
+
+			if ( '' === $code || 'source_queue_not_empty' === $code ) {
+				continue;
+			}
+
+			if ( 'source_latest_upload_stale' === $code && ! $this->source_is_outside_dashboard_policy( $source_key, $source ) ) {
+				continue;
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Determines whether source age is outside the dashboard policy.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $source Source evidence.
+	 * @return bool
+	 */
+	private function source_is_outside_dashboard_policy( $source_key, array $source ) {
+		if ( 'wpvivid' !== $source_key ) {
+			return true;
+		}
+
+		if ( empty( $source['has_upload_evidence'] ) ) {
+			return true;
+		}
+
+		$age = isset( $source['latest_upload_age_seconds'] ) ? max( 0, (int) $source['latest_upload_age_seconds'] ) : 0;
+
+		if ( $age <= 0 ) {
+			return true;
+		}
+
+		return $age > $this->source_policy_window_seconds( $source_key, $source );
+	}
+
+	/**
+	 * Gets the dashboard policy window for source-level evidence.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $source Source evidence.
+	 * @return int
+	 */
+	private function source_policy_window_seconds( $source_key, array $source ) {
+		$reported = isset( $source['freshness_window_seconds'] ) ? max( 0, (int) $source['freshness_window_seconds'] ) : 0;
+
+		if ( 'wpvivid' === $source_key ) {
+			return max( self::WPVIVID_POLICY_WINDOW, $reported );
+		}
+
+		return $reported;
 	}
 
 	/**

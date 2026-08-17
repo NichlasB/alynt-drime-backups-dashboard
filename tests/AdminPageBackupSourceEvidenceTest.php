@@ -29,6 +29,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$this->assertStringContainsString( '1 current package set', $html );
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
+		$this->assertSame( 2, substr_count( $html, 'Expected' ) );
 		$this->assertStringContainsString( 'WPvivid activity', $html );
 		$this->assertStringContainsString( 'WPvivid backup log observed', $html );
 		$this->assertStringContainsString( '<time datetime=', $html );
@@ -45,9 +46,33 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
+		$this->assertSame( 2, substr_count( $html, 'Expected freshness' ) );
+		$this->assertStringContainsString( 'within 15 days', $html );
 		$this->assertStringContainsString( 'Latest WPvivid activity', $html );
 		$this->assertStringContainsString( 'Local WPvivid ZIPs', $html );
 		$this->assertStringContainsString( 'Source evidence is reported by the client uploader as a redacted operational hint.', $html );
+	}
+
+	/**
+	 * WPvivid evidence inside the dashboard policy window is labeled separately from stale.
+	 *
+	 * @return void
+	 */
+	public function test_wpvivid_stale_inside_policy_displays_within_policy() {
+		$payload = $this->fixture_payload();
+
+		$payload['backup_sources']['wpvivid']['freshness_status']          = 'stale';
+		$payload['backup_sources']['wpvivid']['latest_upload_age_seconds'] = 172800;
+		$payload['backup_sources']['wpvivid']['freshness_window_seconds']  = 129600;
+
+		$harness      = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
+		$compact_html = $harness->compact_html( $payload );
+		$detail_html  = $harness->detail_html( $payload );
+
+		$this->assertStringContainsString( 'Within policy', $compact_html );
+		$this->assertStringContainsString( 'within 15 days', $compact_html );
+		$this->assertStringContainsString( 'Within policy', $detail_html );
+		$this->assertStringContainsString( 'within 15 days', $detail_html );
 	}
 
 	/**
