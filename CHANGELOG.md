@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.8 - 2026-08-17
+
 ### Changed
 
 - Added accessible busy-state feedback for pairing-token, diagnostics-event, and support-summary copy buttons.
 - Added explicit WordPress date/time format fallbacks for admin timestamp rendering.
+- Added v2 remote-action planning documentation while preserving the v1 read-only boundary.
 
 ### Fixed
 

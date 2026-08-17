@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.7
+Stable tag: 0.1.8
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.7 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, and shorter manual-check button wording. It does not expose remote actions or make live changes.
+Version 0.1.8 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, and v2 remote-action planning documentation. It does not expose remote actions or make live changes.
 
 The current development tree can also show optional redacted per-source backup freshness, current package counts, latest backup/package time, and latest upload time directly on the Sites tab when schema-1 uploader payloads report that evidence.
 
@@ -28,7 +28,7 @@ The current development tree can also show optional redacted per-source backup f
 
 = Can the dashboard run backups, restores, or cleanup on client sites? =
 
-No. Version 0.1.7 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+No. Version 0.1.8 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
 
 = What happens when I generate a pairing token? =
 
@@ -44,9 +44,10 @@ See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCO
 
 == Changelog ==
 
-= Unreleased =
+= 0.1.8 =
 * Added accessible busy-state feedback for pairing-token, diagnostics-event, and support-summary copy buttons.
 * Added explicit WordPress date/time format fallbacks for admin timestamp rendering.
+* Added v2 remote-action planning documentation while preserving the v1 read-only boundary.
 * Treated malformed or empty stored status snapshot payloads as not reporting instead of falling through to a misleading configuration state.
 * Added focused status-classifier regression coverage for malformed JSON and empty decoded snapshot payloads.
 
