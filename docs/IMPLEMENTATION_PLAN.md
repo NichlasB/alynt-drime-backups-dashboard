@@ -110,6 +110,27 @@ Acceptance criteria:
 - The Sites list and Site detail views show the source as within the dashboard policy and include the expected window.
 - Existing schema-1 clients remain compatible and the v1 read-only boundary remains unchanged.
 
+### WPvivid Schedule-Aware Freshness Policy Slice
+
+The fixed 15-day WPvivid policy is intentionally safer than the uploader's conservative 36-hour source freshness window, but it is still a dashboard-wide fallback. Sites that intentionally run WPvivid every month can still look stale too early, while sites that run WPvivid daily may be allowed too much drift.
+
+Implement a small cross-plugin, read-only schedule-awareness slice:
+
+- The uploader reports an optional redacted `backup_sources.wpvivid.schedule_policy` summary on every authenticated status poll.
+- The uploader derives the summary from local WPvivid schedule state and WordPress cron schedule metadata only. It must not expose raw WPvivid option blobs, local paths, task IDs, backup names, credentials, database values, or Drime identifiers.
+- The dashboard allowlists the optional schedule summary inside schema version `1`, stores only sanitized scalar fields, and ignores it when missing.
+- The dashboard uses the detected `policy_window_seconds` for WPvivid freshness classification/display when available, with the existing 15-day WPvivid policy retained as the fallback.
+- The first detector should support the known WPvivid Free schedule shape around `wpvivid_schedule_setting`, `WPVIVID_MAIN_SCHEDULE_EVENT`, and standard WP-Cron recurrence intervals. Unknown or custom shapes should degrade to `detected: false` rather than guessing.
+- When multiple local WPvivid intervals are detected, the policy should use the least frequent supported cadence (the largest interval) so intentionally infrequent scheduled backups do not become false alarms.
+
+Acceptance criteria:
+
+- Existing schema-1 clients without `schedule_policy` continue to classify and render exactly as before.
+- A WPvivid source with upload evidence and an age inside the detected policy window stays `Working` / `Within policy`.
+- A WPvivid source with upload evidence older than the detected policy window becomes `Needs attention`.
+- Sites list and site detail views show whether the WPvivid expected freshness is schedule-detected or using the dashboard fallback.
+- The dashboard remains read-only, receives no Drime API credentials, and performs no remote actions.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

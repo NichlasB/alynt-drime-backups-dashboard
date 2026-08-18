@@ -343,6 +343,104 @@ class StatusClassifierTest extends TestCase {
 	}
 
 	/**
+	 * WPvivid stale evidence inside a detected schedule policy window stays working.
+	 *
+	 * @return void
+	 */
+	public function test_wpvivid_stale_inside_detected_schedule_policy_is_working() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot(
+				array_merge(
+					$this->healthy_payload(),
+					array(
+						'backup_sources' => array(
+							'server'  => $this->source_payload(),
+							'wpvivid' => array_merge(
+								$this->source_payload(),
+								array(
+									'source_key'                => 'wpvivid',
+									'source_label'              => 'WPvivid',
+									'freshness_status'          => 'stale',
+									'freshness_window_seconds'  => 129600,
+									'latest_upload_age_seconds' => 2500000,
+									'schedule_policy'           => array(
+										'detected'              => true,
+										'basis'                 => 'wpvivid_schedule_setting',
+										'recurrence'            => 'wpvivid_monthly',
+										'schedule_count'        => 1,
+										'interval_seconds'      => 2592000,
+										'grace_seconds'         => 259200,
+										'policy_window_seconds' => 2851200,
+									),
+									'warnings'                  => array(
+										array(
+											'code'    => 'source_latest_upload_stale',
+											'message' => 'The latest uploaded backup evidence is older than the default freshness window.',
+										),
+									),
+								)
+							),
+						),
+					)
+				)
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'working', $result['category'] );
+	}
+
+	/**
+	 * WPvivid stale evidence outside a detected schedule policy window still needs attention.
+	 *
+	 * @return void
+	 */
+	public function test_wpvivid_stale_outside_detected_schedule_policy_needs_attention() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot(
+				array_merge(
+					$this->healthy_payload(),
+					array(
+						'backup_sources' => array(
+							'server'  => $this->source_payload(),
+							'wpvivid' => array_merge(
+								$this->source_payload(),
+								array(
+									'source_key'                => 'wpvivid',
+									'source_label'              => 'WPvivid',
+									'freshness_status'          => 'stale',
+									'freshness_window_seconds'  => 129600,
+									'latest_upload_age_seconds' => 900000,
+									'schedule_policy'           => array(
+										'detected'              => true,
+										'basis'                 => 'wpvivid_schedule_setting',
+										'recurrence'            => 'wpvivid_weekly',
+										'schedule_count'        => 1,
+										'interval_seconds'      => 604800,
+										'grace_seconds'         => 172800,
+										'policy_window_seconds' => 777600,
+									),
+									'warnings'                  => array(
+										array(
+											'code'    => 'source_latest_upload_stale',
+											'message' => 'The latest uploaded backup evidence is older than the default freshness window.',
+										),
+									),
+								)
+							),
+						),
+					)
+				)
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'needs_attention', $result['category'] );
+	}
+
+	/**
 	 * Missing WPvivid upload evidence still needs attention when the source is configured.
 	 *
 	 * @return void

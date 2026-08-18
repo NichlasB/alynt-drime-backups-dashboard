@@ -197,6 +197,24 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			return __( 'Not reported', 'alynt-drime-backups-dashboard' );
 		}
 
+		if ( 'wpvivid' === $source_key ) {
+			$policy = isset( $source['schedule_policy'] ) && is_array( $source['schedule_policy'] ) ? $source['schedule_policy'] : array();
+
+			if ( ! empty( $policy['detected'] ) && ! empty( $policy['policy_window_seconds'] ) ) {
+				return sprintf(
+					/* translators: %s: human readable freshness window. */
+					__( 'within %s (detected WPvivid schedule)', 'alynt-drime-backups-dashboard' ),
+					$this->source_duration_label( $seconds )
+				);
+			}
+
+			return sprintf(
+				/* translators: %s: human readable freshness window. */
+				__( 'within %s (dashboard fallback)', 'alynt-drime-backups-dashboard' ),
+				$this->source_duration_label( $seconds )
+			);
+		}
+
 		return sprintf(
 			/* translators: %s: human readable freshness window. */
 			__( 'within %s', 'alynt-drime-backups-dashboard' ),
@@ -215,6 +233,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		$reported = isset( $source['freshness_window_seconds'] ) ? max( 0, (int) $source['freshness_window_seconds'] ) : 0;
 
 		if ( 'wpvivid' === $source_key ) {
+			$schedule_policy = isset( $source['schedule_policy'] ) && is_array( $source['schedule_policy'] ) ? $source['schedule_policy'] : array();
+			$detected_window = ! empty( $schedule_policy['detected'] ) && isset( $schedule_policy['policy_window_seconds'] ) ? max( 0, (int) $schedule_policy['policy_window_seconds'] ) : 0;
+
+			if ( $detected_window > 0 ) {
+				return max( $detected_window, $reported );
+			}
+
 			return max( 1296000, $reported );
 		}
 

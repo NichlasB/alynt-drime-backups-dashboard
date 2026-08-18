@@ -313,6 +313,13 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 		$reported = isset( $source['freshness_window_seconds'] ) ? max( 0, (int) $source['freshness_window_seconds'] ) : 0;
 
 		if ( 'wpvivid' === $source_key ) {
+			$schedule_policy = isset( $source['schedule_policy'] ) && is_array( $source['schedule_policy'] ) ? $source['schedule_policy'] : array();
+			$detected_window = ! empty( $schedule_policy['detected'] ) && isset( $schedule_policy['policy_window_seconds'] ) ? max( 0, (int) $schedule_policy['policy_window_seconds'] ) : 0;
+
+			if ( $detected_window > 0 ) {
+				return max( $detected_window, $reported );
+			}
+
 			return max( self::WPVIVID_POLICY_WINDOW, $reported );
 		}
 

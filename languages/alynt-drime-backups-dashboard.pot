@@ -700,6 +700,18 @@ msgstr ""
 msgid "within %s"
 msgstr ""
 
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-evidence.php:205
+#, php-format
+msgid "within %s (detected WPvivid schedule)"
+msgstr ""
+
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-evidence.php:213
+#, php-format
+msgid "within %s (dashboard fallback)"
+msgstr ""
+
 #. translators: %d: number of days.
 #: includes/traits/trait-admin-page-backup-source-evidence.php:238
 #, php-format

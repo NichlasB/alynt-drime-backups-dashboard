@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added dashboard ingestion, classification, and display support for uploader-reported WPvivid schedule policy summaries, using detected client cadence when available and the 15-day dashboard fallback otherwise.
+
 ## 0.1.10 - 2026-08-17
 
 ### Added

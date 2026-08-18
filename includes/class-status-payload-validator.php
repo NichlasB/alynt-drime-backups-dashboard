@@ -177,9 +177,35 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 				'warning_count'                      => count( $warnings ),
 				'warnings'                           => $warnings,
 			);
+
+			if ( 'wpvivid' === $source_key ) {
+				$clean[ $source_key ]['schedule_policy'] = $this->schedule_policy( isset( $source['schedule_policy'] ) ? $source['schedule_policy'] : array() );
+			}
 		}
 
 		return $clean;
+	}
+
+	/**
+	 * Sanitizes optional redacted WPvivid schedule policy evidence.
+	 *
+	 * @param mixed $policy Schedule policy payload.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_policy( $policy ) {
+		if ( ! is_array( $policy ) ) {
+			$policy = array();
+		}
+
+		return array(
+			'detected'              => $this->bool_field( $policy, 'detected' ),
+			'basis'                 => $this->source_status( isset( $policy['basis'] ) ? (string) $policy['basis'] : '', array( 'wpvivid_schedule_setting', 'wp_cron_event', 'not_detected', '' ) ),
+			'recurrence'            => isset( $policy['recurrence'] ) ? sanitize_key( (string) $policy['recurrence'] ) : '',
+			'schedule_count'        => $this->non_negative_int( $policy, 'schedule_count' ),
+			'interval_seconds'      => $this->non_negative_int( $policy, 'interval_seconds' ),
+			'grace_seconds'         => $this->non_negative_int( $policy, 'grace_seconds' ),
+			'policy_window_seconds' => $this->non_negative_int( $policy, 'policy_window_seconds' ),
+		);
 	}
 
 	/**

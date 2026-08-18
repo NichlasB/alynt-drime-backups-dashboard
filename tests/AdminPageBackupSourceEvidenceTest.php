@@ -47,7 +47,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
 		$this->assertSame( 2, substr_count( $html, 'Expected freshness' ) );
-		$this->assertStringContainsString( 'within 15 days', $html );
+		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $html );
 		$this->assertStringContainsString( 'Latest WPvivid activity', $html );
 		$this->assertStringContainsString( 'Local WPvivid ZIPs', $html );
 		$this->assertStringContainsString( 'Source evidence is reported by the client uploader as a redacted operational hint.', $html );
@@ -70,9 +70,9 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$detail_html  = $harness->detail_html( $payload );
 
 		$this->assertStringContainsString( 'Within policy', $compact_html );
-		$this->assertStringContainsString( 'within 15 days', $compact_html );
+		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $compact_html );
 		$this->assertStringContainsString( 'Within policy', $detail_html );
-		$this->assertStringContainsString( 'within 15 days', $detail_html );
+		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $detail_html );
 	}
 
 	/**
