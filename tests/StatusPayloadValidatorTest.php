@@ -63,7 +63,7 @@ class StatusPayloadValidatorTest extends TestCase {
 								'freshness_status' => 'fresh',
 								'schedule_policy'  => array(
 									'detected'              => true,
-									'basis'                 => 'wpvivid_schedule_setting',
+									'basis'                 => 'wpvivid_schedule_addon_setting',
 									'recurrence'            => 'wpvivid_weekly',
 									'schedule_count'        => 1,
 									'interval_seconds'      => 604800,
@@ -95,7 +95,7 @@ class StatusPayloadValidatorTest extends TestCase {
 		$this->assertSame( 1, $result['backup_sources']['server']['warning_count'] );
 		$this->assertSame( 'wpvivid_backup_log', $result['backup_sources']['wpvivid']['source_activity_evidence'] );
 		$this->assertSame( 0, $result['backup_sources']['wpvivid']['local_candidate_count'] );
-		$this->assertSame( 'wpvivid_schedule_setting', $result['backup_sources']['wpvivid']['schedule_policy']['basis'] );
+		$this->assertSame( 'wpvivid_schedule_addon_setting', $result['backup_sources']['wpvivid']['schedule_policy']['basis'] );
 		$this->assertSame( 777600, $result['backup_sources']['wpvivid']['schedule_policy']['policy_window_seconds'] );
 		$this->assertArrayNotHasKey( 'raw_option', $result['backup_sources']['wpvivid']['schedule_policy'] );
 	}

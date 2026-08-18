@@ -120,7 +120,7 @@ Implement a small cross-plugin, read-only schedule-awareness slice:
 - The uploader derives the summary from local WPvivid schedule state and WordPress cron schedule metadata only. It must not expose raw WPvivid option blobs, local paths, task IDs, backup names, credentials, database values, or Drime identifiers.
 - The dashboard allowlists the optional schedule summary inside schema version `1`, stores only sanitized scalar fields, and ignores it when missing.
 - The dashboard uses the detected `policy_window_seconds` for WPvivid freshness classification/display when available, with the existing 15-day WPvivid policy retained as the fallback.
-- The first detector should support the known WPvivid Free schedule shape around `wpvivid_schedule_setting`, `WPVIVID_MAIN_SCHEDULE_EVENT`, and standard WP-Cron recurrence intervals. Unknown or custom shapes should degrade to `detected: false` rather than guessing.
+- The first detector should support the known WPvivid Free schedule shape around `wpvivid_schedule_setting`, WPvivid Pro/addon schedule state around `wpvivid_schedule_addon_setting` and `wpvivid_incremental_schedules`, `WPVIVID_MAIN_SCHEDULE_EVENT`, and standard WP-Cron recurrence intervals. Unknown or custom shapes should degrade to `detected: false` rather than guessing.
 - When multiple local WPvivid intervals are detected, the policy should use the least frequent supported cadence (the largest interval) so intentionally infrequent scheduled backups do not become false alarms.
 
 Acceptance criteria:

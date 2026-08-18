@@ -199,7 +199,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 
 		return array(
 			'detected'              => $this->bool_field( $policy, 'detected' ),
-			'basis'                 => $this->source_status( isset( $policy['basis'] ) ? (string) $policy['basis'] : '', array( 'wpvivid_schedule_setting', 'wp_cron_event', 'not_detected', '' ) ),
+			'basis'                 => $this->source_status( isset( $policy['basis'] ) ? (string) $policy['basis'] : '', array( 'wpvivid_schedule_setting', 'wpvivid_schedule_addon_setting', 'wpvivid_incremental_schedules', 'wp_cron_event', 'not_detected', '' ) ),
 			'recurrence'            => isset( $policy['recurrence'] ) ? sanitize_key( (string) $policy['recurrence'] ) : '',
 			'schedule_count'        => $this->non_negative_int( $policy, 'schedule_count' ),
 			'interval_seconds'      => $this->non_negative_int( $policy, 'interval_seconds' ),

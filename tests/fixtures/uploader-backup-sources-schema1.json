@@ -74,7 +74,7 @@
       "freshness_window_seconds": 129600,
       "schedule_policy": {
         "detected": true,
-        "basis": "wpvivid_schedule_setting",
+        "basis": "wpvivid_schedule_addon_setting",
         "recurrence": "wpvivid_weekly",
         "schedule_count": 1,
         "interval_seconds": 604800,
