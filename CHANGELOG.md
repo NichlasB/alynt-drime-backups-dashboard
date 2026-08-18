@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.12 - 2026-08-18
+
+### Fixed
+
+- Allowed dashboard ingestion of WPvivid Pro/addon schedule policy basis labels reported by live uploader sites.
+
 ## 0.1.11 - 2026-08-18
 
 ### Added
