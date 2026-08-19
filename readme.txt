@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.10
+Stable tag: 0.1.13
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.10 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, and v2 remote-action planning documentation. It does not expose remote actions or make live changes.
+Version 0.1.13 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, and v2 remote-action planning documentation. It does not expose remote actions or make live changes.
 
 The current development tree can also show optional redacted per-source backup freshness, current package counts, latest backup/package time, and latest upload time directly on the Sites tab when schema-1 uploader payloads report that evidence.
 
@@ -28,7 +28,7 @@ The current development tree can also show optional redacted per-source backup f
 
 = Can the dashboard run backups, restores, or cleanup on client sites? =
 
-No. Version 0.1.10 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+No. Version 0.1.13 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
 
 = What happens when I generate a pairing token? =
 
@@ -43,6 +43,15 @@ No. Diagnostics logging is disabled by default and redacts sensitive fields befo
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.13 =
+* Added an always-on, bounded, redacted operator action history for dashboard-local actions such as pairing-token creation, local revocation, manual Check Now, and diagnostics changes.
+
+= 0.1.12 =
+* Allowed dashboard ingestion of WPvivid Pro/addon schedule policy basis labels reported by live uploader sites.
+
+= 0.1.11 =
+* Added dashboard ingestion, classification, and display support for uploader-reported WPvivid schedule policy summaries.
 
 = 0.1.10 =
 * Added a dashboard-side WPvivid freshness policy so weekly or biweekly WPvivid backup evidence can remain healthy while server-runner evidence stays strictly monitored.
