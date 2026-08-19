@@ -39,7 +39,19 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			$pending_site = isset( $_POST['alynt_drime_backups_dashboard_pending_site'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_pending_site'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 			$raw          = is_array( $pending_site ) ? $pending_site : array();
 
-			return $this->enrollment_manager->create_pending_site( $raw, home_url( '/', 'https' ) );
+			$result = $this->enrollment_manager->create_pending_site( $raw, home_url( '/', 'https' ) );
+
+			$this->record_admin_audit_action(
+				'create_pending_site',
+				is_wp_error( $result ) ? 'failed' : 'succeeded',
+				array(
+					'dashboard_site_id' => is_array( $result ) && isset( $result['site_id'] ) ? (int) $result['site_id'] : 0,
+					'environment'       => isset( $raw['environment'] ) ? sanitize_key( (string) $raw['environment'] ) : '',
+					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+				)
+			);
+
+			return $result;
 		}
 
 		if ( 'revoke_local' === $action ) {
@@ -50,10 +62,19 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			}
 
 			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$success = $site_id > 0 && $this->sites->revoke_local( $site_id );
+
+			$this->record_admin_audit_action(
+				'revoke_local',
+				$success ? 'succeeded' : 'failed',
+				array(
+					'dashboard_site_id' => $site_id,
+				)
+			);
 
 			return array(
 				'action'  => 'revoke_local',
-				'success' => $site_id > 0 && $this->sites->revoke_local( $site_id ),
+				'success' => $success,
 			);
 		}
 
@@ -66,6 +87,16 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 
 			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 			$result  = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+
+			$this->record_admin_audit_action(
+				'check_status_now',
+				is_wp_error( $result ) ? 'failed' : 'succeeded',
+				array(
+					'dashboard_site_id' => $site_id,
+					'status_category'   => is_array( $result ) && isset( $result['category'] ) ? sanitize_key( (string) $result['category'] ) : '',
+					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+				)
+			);
 
 			if ( is_wp_error( $result ) ) {
 				return $result;
@@ -87,10 +118,20 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			}
 
 			$settings = isset( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$success  = is_array( $settings ) && $this->event_log->update_settings( $settings );
+
+			$this->record_admin_audit_action(
+				'update_diagnostics_settings',
+				$success ? 'succeeded' : 'failed',
+				array(
+					'diagnostics_logging_enabled' => is_array( $settings ) && ! empty( $settings['enabled'] ),
+					'minimum_level'               => is_array( $settings ) && isset( $settings['minimum_level'] ) ? sanitize_key( (string) $settings['minimum_level'] ) : '',
+				)
+			);
 
 			return array(
 				'action'  => 'update_diagnostics_settings',
-				'success' => is_array( $settings ) && $this->event_log->update_settings( $settings ),
+				'success' => $success,
 			);
 		}
 
@@ -101,9 +142,16 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 				return $nonce;
 			}
 
+			$success = $this->event_log->clear();
+
+			$this->record_admin_audit_action(
+				'clear_diagnostics_events',
+				$success ? 'succeeded' : 'failed'
+			);
+
 			return array(
 				'action'  => 'clear_diagnostics_events',
-				'success' => $this->event_log->clear(),
+				'success' => $success,
 			);
 		}
 
@@ -128,6 +176,22 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Records a support-safe local operator action audit event when available.
+	 *
+	 * @param string              $action Action identifier.
+	 * @param string              $outcome Action outcome.
+	 * @param array<string,mixed> $context Safe context.
+	 * @return void
+	 */
+	private function record_admin_audit_action( $action, $outcome, array $context = array() ) {
+		if ( ! isset( $this->event_log ) || ! is_object( $this->event_log ) || ! method_exists( $this->event_log, 'audit_action' ) ) {
+			return;
+		}
+
+		$this->event_log->audit_action( $action, $outcome, $context );
 	}
 
 	/**

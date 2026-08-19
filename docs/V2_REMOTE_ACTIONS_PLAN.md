@@ -72,15 +72,17 @@ Recommended constraints:
 
 This should be the first implemented remote-action slice if v2 proceeds.
 
-### Candidate V2.2: Action History And Audit UI Hardening
+### Candidate V2.2: Remote Action History And Audit UI Hardening
 
 Purpose: make remote-action state visible, reviewable, and support-safe before any persistent behavior change is allowed.
+
+Dashboard-local foundation status: v1 now includes an always-on, bounded, redacted operator action history for local dashboard actions. This is not a remote-action implementation, but it establishes the support-safe storage/display pattern that future v2 remote-action history should build on rather than replace.
 
 Risk: non-destructive, but still gated because it defines the operator evidence model for later higher-risk actions.
 
 Recommended constraints:
 
-- implement a dashboard-side action history view before schedule, cleanup, delete, or restore controls;
+- extend the dashboard-side local action history into a remote-action history view before schedule, cleanup, delete, or restore controls;
 - show actor, site, action type, requested time, accepted/running/completed/failed state, final result summary, and correlation ID;
 - show only redacted arguments and results;
 - separate operator-visible history from deeper support diagnostics;

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Stores bounded, redacted diagnostics events when explicitly enabled.
+ * Stores bounded, redacted diagnostics events and local audit history.
  *
  * @since 0.1.0
  */
@@ -21,6 +21,10 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 
 	const OPTION_SETTINGS = 'alynt_drime_backups_dashboard_diagnostics_settings';
 	const OPTION_EVENTS   = 'alynt_drime_backups_dashboard_diagnostics_events';
+	const OPTION_AUDIT    = 'alynt_drime_backups_dashboard_audit_events';
+
+	const AUDIT_RETENTION_DAYS = 90;
+	const AUDIT_MAX_EVENTS     = 500;
 
 	/**
 	 * Severity order.
@@ -90,6 +94,96 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 				'context'   => $this->redactor->redact_context( $context ),
 			)
 		);
+	}
+
+	/**
+	 * Records an always-on redacted operator audit event.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string              $action Stable dashboard action identifier.
+	 * @param string              $outcome Action outcome.
+	 * @param array<string,mixed> $context Redacted context.
+	 * @return bool
+	 */
+	public function audit_action( $action, $outcome, array $context = array() ) {
+		$action  = sanitize_key( $action );
+		$outcome = sanitize_key( $outcome );
+
+		if ( '' === $action ) {
+			$action = 'dashboard_action';
+		}
+
+		if ( '' === $outcome ) {
+			$outcome = 'recorded';
+		}
+
+		return $this->store_audit_event(
+			array(
+				'timestamp' => gmdate( 'c' ),
+				'actor_id'  => function_exists( 'get_current_user_id' ) ? max( 0, (int) get_current_user_id() ) : 0,
+				'action'    => $this->redactor->truncate( $action, 80 ),
+				'outcome'   => $this->redactor->truncate( $outcome, 40 ),
+				'context'   => $this->redactor->redact_context( $context ),
+			)
+		);
+	}
+
+	/**
+	 * Gets recent retained audit events.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $limit Maximum events.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function recent_audit_events( $limit = 50 ) {
+		$events = $this->stored_audit_events();
+		$events = $this->filter_retained_events( $events, self::AUDIT_RETENTION_DAYS );
+
+		return array_slice( $events, 0, max( 1, min( self::AUDIT_MAX_EVENTS, (int) $limit ) ) );
+	}
+
+	/**
+	 * Gets audit event counts and last-action metadata.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return array<string,mixed>
+	 */
+	public function audit_summary() {
+		$events  = $this->recent_audit_events( self::AUDIT_MAX_EVENTS );
+		$summary = array(
+			'total'          => count( $events ),
+			'last_action_at' => '',
+			'actions'        => array(),
+			'outcomes'       => array(),
+		);
+
+		foreach ( $events as $event ) {
+			$action  = isset( $event['action'] ) ? (string) $event['action'] : 'unknown';
+			$outcome = isset( $event['outcome'] ) ? (string) $event['outcome'] : 'unknown';
+
+			if ( '' === $summary['last_action_at'] && ! empty( $event['timestamp'] ) ) {
+				$summary['last_action_at'] = (string) $event['timestamp'];
+			}
+
+			if ( ! isset( $summary['actions'][ $action ] ) ) {
+				$summary['actions'][ $action ] = 0;
+			}
+
+			if ( ! isset( $summary['outcomes'][ $outcome ] ) ) {
+				$summary['outcomes'][ $outcome ] = 0;
+			}
+
+			++$summary['actions'][ $action ];
+			++$summary['outcomes'][ $outcome ];
+		}
+
+		ksort( $summary['actions'] );
+		ksort( $summary['outcomes'] );
+
+		return $summary;
 	}
 
 	/**
@@ -172,7 +266,7 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 	}
 
 	/**
-	 * Deletes diagnostics options.
+	 * Deletes diagnostics and audit options.
 	 *
 	 * @since 0.1.0
 	 *
@@ -182,6 +276,7 @@ class Alynt_Drime_Backups_Dashboard_Event_Log {
 		if ( function_exists( 'delete_option' ) ) {
 			delete_option( self::OPTION_SETTINGS );
 			delete_option( self::OPTION_EVENTS );
+			delete_option( self::OPTION_AUDIT );
 		}
 	}
 }

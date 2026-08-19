@@ -114,6 +114,10 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 			'settings' => $settings,
 			'summary'  => $this->event_log->summary(),
 			'events'   => $this->event_log->recent_events( 25 ),
+			'audit'    => array(
+				'summary' => $this->event_log->audit_summary(),
+				'events'  => $this->event_log->recent_audit_events( 25 ),
+			),
 		);
 	}
 }

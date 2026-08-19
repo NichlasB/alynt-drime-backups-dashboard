@@ -24,6 +24,13 @@ trait Alynt_Drime_Backups_Dashboard_Event_Log_Storage {
 	private $events_cache = null;
 
 	/**
+	 * Same-request audit event cache.
+	 *
+	 * @var array<int,array<string,mixed>>|null
+	 */
+	private $audit_events_cache = null;
+
+	/**
 	 * Stores an event in the bounded ring buffer.
 	 *
 	 * @param array<string,mixed> $event Event.
@@ -50,6 +57,31 @@ trait Alynt_Drime_Backups_Dashboard_Event_Log_Storage {
 	}
 
 	/**
+	 * Stores an audit event in a separate bounded ring buffer.
+	 *
+	 * @param array<string,mixed> $event Event.
+	 * @return bool
+	 */
+	private function store_audit_event( array $event ) {
+		if ( ! function_exists( 'update_option' ) ) {
+			return false;
+		}
+
+		$events = $this->filter_retained_events( $this->stored_audit_events(), Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_RETENTION_DAYS );
+
+		array_unshift( $events, $event );
+		$events = array_slice( $events, 0, Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_MAX_EVENTS );
+
+		$stored = (bool) update_option( Alynt_Drime_Backups_Dashboard_Event_Log::OPTION_AUDIT, $events, false );
+
+		if ( $stored ) {
+			$this->audit_events_cache = $events;
+		}
+
+		return $stored;
+	}
+
+	/**
 	 * Gets stored events.
 	 *
 	 * @return array<int,array<string,mixed>>
@@ -64,6 +96,23 @@ trait Alynt_Drime_Backups_Dashboard_Event_Log_Storage {
 		$this->events_cache = is_array( $events ) ? array_values( array_filter( $events, 'is_array' ) ) : array();
 
 		return $this->events_cache;
+	}
+
+	/**
+	 * Gets stored audit events.
+	 *
+	 * @return array<int,array<string,mixed>>
+	 */
+	private function stored_audit_events() {
+		if ( null !== $this->audit_events_cache ) {
+			return $this->audit_events_cache;
+		}
+
+		$events = function_exists( 'get_option' ) ? get_option( Alynt_Drime_Backups_Dashboard_Event_Log::OPTION_AUDIT, array() ) : array();
+
+		$this->audit_events_cache = is_array( $events ) ? array_values( array_filter( $events, 'is_array' ) ) : array();
+
+		return $this->audit_events_cache;
 	}
 
 	/**

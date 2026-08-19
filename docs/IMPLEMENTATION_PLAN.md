@@ -18,6 +18,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Current host: `control-sitesmanage live-only`.
 - Live rollout state: deployed to `https://control.sitesmanage.com` after explicit approval.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
+- Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
@@ -535,7 +536,7 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, release packaging, and approval-gated live deployment are implemented. Full pre-release/lifecycle/updater acceptance remains separate approval-gated work.
+Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, release packaging, and approval-gated live deployment are implemented. Full pre-release/lifecycle/updater acceptance remains separate approval-gated work.
 
 ### Phase 6 — Scheduled polling and history
 

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added an always-on, bounded, redacted operator action history for dashboard-local actions such as pairing-token creation, local revocation, manual **Check Now**, and diagnostics changes.
+
 ## 0.1.12 - 2026-08-18
 
 ### Fixed

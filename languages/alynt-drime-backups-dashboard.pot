@@ -922,6 +922,71 @@ msgstr ""
 msgid "Not active"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:95
+msgid "Operator Action History"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:97
+msgid "This always-on local audit history records dashboard actions such as pairing-token creation, local revocation, manual checks, and diagnostics changes. It is separate from optional diagnostic logging and stores only redacted context."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:99
+msgid "Operator action history summary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:100
+msgid "Retained actions"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:101
+msgid "Last action"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:102
+msgid "Retention window"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:103
+msgid "Storage limit"
+msgstr ""
+
+#. translators: %d: maximum retained audit events.
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:103
+#, php-format
+msgid "%d actions"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:118
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:126
+msgid "Recent operator actions"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:121
+msgid "No operator actions yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:122
+msgid "Dashboard-local actions will appear here after an administrator creates a pairing token, runs Check Now, revokes a local record, or changes diagnostics settings."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:128
+msgid "Actor"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:130
+msgid "Outcome"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:159
+msgid "Unknown user"
+msgstr ""
+
+#. translators: %d: WordPress user ID.
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:164
+#, php-format
+msgid "User ID %d"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:31
 msgid "Structured Event Log"
 msgstr ""

@@ -50,6 +50,9 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 		$logging   = array(
 			'settings' => $this->event_log->settings(),
 			'summary'  => $this->event_log->summary(),
+			'audit'    => array(
+				'summary' => $this->event_log->audit_summary(),
+			),
 		);
 
 		return $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now );
@@ -100,6 +103,9 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			array(
 				'settings' => $this->event_log->settings(),
 				'summary'  => $this->event_log->summary(),
+				'audit'    => array(
+					'summary' => $this->event_log->audit_summary(),
+				),
 			)
 		);
 	}
@@ -111,8 +117,10 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 	 * @return array<string,mixed>
 	 */
 	private function support_logging_summary_from_diagnostics( array $logging ) {
-		$settings = isset( $logging['settings'] ) && is_array( $logging['settings'] ) ? $logging['settings'] : array();
-		$summary  = isset( $logging['summary'] ) && is_array( $logging['summary'] ) ? $logging['summary'] : array();
+		$settings      = isset( $logging['settings'] ) && is_array( $logging['settings'] ) ? $logging['settings'] : array();
+		$summary       = isset( $logging['summary'] ) && is_array( $logging['summary'] ) ? $logging['summary'] : array();
+		$audit         = isset( $logging['audit'] ) && is_array( $logging['audit'] ) ? $logging['audit'] : array();
+		$audit_summary = isset( $audit['summary'] ) && is_array( $audit['summary'] ) ? $audit['summary'] : array();
 
 		return array(
 			'enabled'        => ! empty( $settings['enabled'] ),
@@ -120,6 +128,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			'retention_days' => isset( $settings['retention_days'] ) ? (int) $settings['retention_days'] : 14,
 			'event_count'    => isset( $summary['total'] ) ? (int) $summary['total'] : 0,
 			'last_event_at'  => isset( $summary['last_event_at'] ) ? (string) $summary['last_event_at'] : '',
+			'audit_history'  => array(
+				'event_count'    => isset( $audit_summary['total'] ) ? (int) $audit_summary['total'] : 0,
+				'last_action_at' => isset( $audit_summary['last_action_at'] ) ? (string) $audit_summary['last_action_at'] : '',
+				'retention_days' => Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_RETENTION_DAYS,
+				'max_events'     => Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_MAX_EVENTS,
+			),
 		);
 	}
 
