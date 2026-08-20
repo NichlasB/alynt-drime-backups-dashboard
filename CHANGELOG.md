@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- Hardened uninstall safety: rollback copies discovered by WordPress now exit before touching dashboard state, and canonical plugin deletion preserves dashboard records by default. A permanent dashboard-data purge now requires an explicit `wp-config.php` constant.
+
 ## 0.1.13 - 2026-08-19
 
 ### Added

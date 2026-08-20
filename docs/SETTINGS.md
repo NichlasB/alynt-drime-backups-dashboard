@@ -21,7 +21,7 @@ Operator action history is stored separately from optional diagnostics logging. 
 
 - Custom tables store dashboard-owned site enrollment records and normalized read-only status snapshots.
 - Transient locks coordinate bounded polling batches, per-site poll attempts, and bounded enrollment failure rate limits.
-- Uninstall cleanup removes dashboard-owned options, transient locks, enrollment failure-rate-limit transients, scheduled hooks, and custom tables without contacting client sites.
+- Uninstall cleanup removes transient locks, enrollment failure-rate-limit transients, and scheduled hooks without contacting client sites. Dashboard-owned tables and options are preserved by default because they contain the dashboard-side enrollment and polling state. A permanent purge requires the explicit `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` constant in `wp-config.php`; copied rollback directories always exit before cleanup.
 
 ---
 

@@ -9,6 +9,15 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
+/*
+ * Rollback copies must live outside the plugins directory. This guard is a
+ * second line of defence: if WordPress discovers and uninstalls a copied
+ * plugin directory, it must not alter the canonical dashboard's shared data.
+ */
+if ( 'alynt-drime-backups-dashboard' !== basename( __DIR__ ) ) {
+	return;
+}
+
 global $wpdb;
 
 wp_clear_scheduled_hook( 'alynt_drime_backups_dashboard_poll_sites' );
@@ -36,6 +45,16 @@ $wpdb->query(
 		$enrollment_rate_limit_timeout_like
 	)
 );
+
+/*
+ * Preserve dashboard records by default. Pairings include dashboard-held
+ * polling credentials, so an ordinary WordPress plugin deletion must not
+ * silently destroy recoverable monitoring state. A deliberate permanent
+ * purge requires an operator-controlled wp-config.php constant.
+ */
+if ( ! defined( 'ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL' ) || true !== ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL ) {
+	return;
+}
 
 $tables = array(
 	$wpdb->prefix . 'alynt_drime_dashboard_snapshots',

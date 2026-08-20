@@ -2,13 +2,13 @@
 
 ## Alynt Drime Backups Dashboard Hooks
 
-Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.13.
+Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.14.
 
 The hooks below are internal WordPress integration points owned by the plugin. Treat them as implementation details unless a future release explicitly documents them as public extension points.
 
 ## Public Extension Hooks
 
-None in version 0.1.13.
+None in version 0.1.14.
 
 ## WordPress Lifecycle Hooks
 
@@ -26,9 +26,7 @@ Runs `Alynt_Drime_Backups_Dashboard_Deactivator::deactivate()` to unschedule das
 
 ### Uninstall
 
-Handled by `uninstall.php`.
-
-Uninstall clears dashboard scheduled events, deletes dashboard transient locks and enrollment failure-rate-limit transients, drops dashboard-owned custom tables, and deletes dashboard-owned options. It does not contact client sites.
+Handled by `uninstall.php`. WordPress-discovered copies outside the canonical `alynt-drime-backups-dashboard` folder exit without affecting dashboard state. A canonical uninstall clears scheduled events, transient locks, and enrollment failure-rate-limit transients but preserves monitoring records, snapshots, encrypted polling credentials, and dashboard options by default. Permanent dashboard-data removal requires the explicit `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` constant in `wp-config.php`. It does not contact client sites.
 
 ## Admin and Runtime Hooks
 
@@ -64,4 +62,4 @@ The enrollment route validates the one-time pairing token, expected client origi
 - Add new public extension hooks here before release if they are intentionally supported for third-party use.
 - Keep internal hooks clearly labeled as internal implementation details.
 - Do not document secrets, raw tokens, authorization headers, cookies, nonces, salts, filesystem paths, SQL, raw payloads, raw response bodies, or Drime credentials.
-- Preserve the version 0.1.13 read-only boundary unless a later release has an explicitly approved architecture change.
+- Preserve the version 0.1.14 read-only boundary unless a later release has an explicitly approved architecture change.

@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.13
+Stable tag: 0.1.14
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.13 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, and v2 remote-action planning documentation. It does not expose remote actions or make live changes.
+Version 0.1.14 is a local scaffold with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, safe default preservation of dashboard data during uninstall, and v2 remote-action planning documentation. It does not expose remote actions or make live changes.
 
 The current development tree can also show optional redacted per-source backup freshness, current package counts, latest backup/package time, and latest upload time directly on the Sites tab when schema-1 uploader payloads report that evidence.
 
@@ -28,7 +28,7 @@ The current development tree can also show optional redacted per-source backup f
 
 = Can the dashboard run backups, restores, or cleanup on client sites? =
 
-No. Version 0.1.13 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+No. Version 0.1.14 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
 
 = What happens when I generate a pairing token? =
 
@@ -38,11 +38,18 @@ The dashboard creates a pending local enrollment for the expected client origin 
 
 No. Diagnostics logging is disabled by default and redacts sensitive fields before local persistence or export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials must not be stored.
 
+= Does deleting the plugin erase dashboard monitoring records? =
+
+No, not by default. Standard uninstall clears dashboard scheduler and transient state but preserves enrolled sites, status history, dashboard-side polling credentials, and dashboard settings. Permanent removal of this dashboard-owned data requires an explicit operator-controlled `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` constant in `wp-config.php`.
+
 == Developer Notes ==
 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.14 =
+* Hardened uninstall safety. WordPress-discovered rollback copies cannot alter the canonical dashboard data, and normal plugin deletion now preserves dashboard records by default. A permanent data purge requires an explicit wp-config.php constant.
 
 = 0.1.13 =
 * Added an always-on, bounded, redacted operator action history for dashboard-local actions such as pairing-token creation, local revocation, manual Check Now, and diagnostics changes.

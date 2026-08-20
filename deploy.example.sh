@@ -9,6 +9,10 @@ set -e
 REMOTE_HOST="your-ssh-alias"
 REMOTE_PATH="/var/www/your-site/htdocs/wp-content/plugins/alynt-drime-backups-dashboard"
 
+# Keep rollback archives outside wp-content/plugins (for example in a private
+# site directory). WordPress discovers every plugin-like folder here, and a
+# copied dashboard uninstall handler must never be an operational rollback.
+
 echo "Deploying alynt-drime-backups-dashboard..."
 rsync -avz --delete \
 	--exclude='.git' \
