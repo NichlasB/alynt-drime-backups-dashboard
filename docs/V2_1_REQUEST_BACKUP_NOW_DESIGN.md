@@ -1,6 +1,6 @@
 # V2.1 Request Backup Now Design
 
-Status: design phase only. This document does not approve runtime implementation, release, deployment, or live-site enablement.
+Status: V2.1 design baseline. The local action opt-in token foundation has been implemented, but signed dispatch, the client action-intent endpoint, release, deployment, and live-site enablement remain unapproved and unimplemented.
 
 Related planning:
 
@@ -9,6 +9,7 @@ Related planning:
 - `docs/PROTOCOL_V1.md`
 - `docs/PROTOCOL_V2.md`
 - `docs/THREAT_MODEL_V2.md`
+- `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`
 - uploader `docs/STATUS_PAYLOAD.md`
 
 ## Boundary

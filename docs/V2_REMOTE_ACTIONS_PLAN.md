@@ -2,12 +2,16 @@
 
 This document captures future remote-operation planning for **Alynt Drime Backups Dashboard**. It is intentionally separate from the v1 implementation plan because v1 is an operational read-only monitoring dashboard, while remote actions introduce a materially different security and reliability model.
 
-Status: planning only. No runtime implementation is approved by this document.
+Status: V2 planning baseline. The local V2.1 action opt-in token foundation has been implemented, but signed dispatch, client action-intent endpoints, release, deployment, and live-site enablement remain unapproved and unimplemented.
 
 Draft V2.1 protocol and threat-model artifacts:
 
 - `docs/PROTOCOL_V2.md`
 - `docs/THREAT_MODEL_V2.md`
+- `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`
+- `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`
+
+Current local implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, and redacted capability reporting. Signed dispatch and the client action-intent endpoint are still not implemented.
 
 ## Boundary Decision
 
