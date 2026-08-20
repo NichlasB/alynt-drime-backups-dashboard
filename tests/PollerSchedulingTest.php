@@ -86,6 +86,9 @@ class PollerSchedulingTest extends TestCase {
 	 */
 	private function invoke_schedule_event( $recurrence, $hook ) {
 		$method = new ReflectionMethod( Alynt_Drime_Backups_Dashboard_Poller::class, 'schedule_event' );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true );
+		}
 
 		return $method->invoke( null, time() + 60, $recurrence, $hook );
 	}
