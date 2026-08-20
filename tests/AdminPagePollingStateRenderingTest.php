@@ -223,6 +223,38 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'does not advertise V2.1 scan/upload-now capability', $html );
 		$this->assertStringContainsString( 'No V2 remote action requests are stored for this site yet.', $html );
 	}
+
+	/**
+	 * Disabled V2 capability is shown as an opt-in requirement.
+	 *
+	 * @return void
+	 */
+	public function test_request_backup_now_panel_explains_disabled_v2_capability() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+		);
+		$payload = array(
+			'remote_actions' => array(
+				'protocol_version'   => 2,
+				'enabled'            => false,
+				'allowed_actions'    => array(),
+				'sodium_available'   => true,
+			),
+		);
+		$html    = $harness->request_backup_panel_html(
+			$site,
+			array(
+				'decoded_payload' => $payload,
+			),
+			array()
+		);
+
+		$this->assertStringContainsString( 'understands V2.1 remote actions', $html );
+		$this->assertStringContainsString( 'Request Backup: opt-in needed', $harness->request_backup_row_hint_html( $site, $payload ) );
+	}
 }
 
 /**

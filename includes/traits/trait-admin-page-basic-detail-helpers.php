@@ -245,7 +245,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		$availability = $this->request_backup_now_availability( $site, $payload );
 		$label        = $availability['available']
 			? __( 'Request Backup: capability reported', 'alynt-drime-backups-dashboard' )
-			: __( 'Request Backup: not available yet', 'alynt-drime-backups-dashboard' );
+			: $availability['short_label'];
 
 		return '<span class="description adbd-row-meta">' . esc_html( $label ) . '</span>';
 	}
@@ -255,13 +255,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	 *
 	 * @param array<string,mixed> $site Site row.
 	 * @param array<string,mixed> $payload Latest decoded snapshot payload.
-	 * @return array{available:bool,message:string}
+	 * @return array{available:bool,message:string,short_label:string}
 	 */
 	private function request_backup_now_availability( array $site, array $payload ) {
 		if ( ! $this->site_can_manual_check( $site ) ) {
 			return array(
-				'available' => false,
-				'message'   => __( 'This site must be actively enrolled with polling credentials before V2 actions can be considered.', 'alynt-drime-backups-dashboard' ),
+				'available'   => false,
+				'message'     => __( 'This site must be actively enrolled with polling credentials before V2 actions can be considered.', 'alynt-drime-backups-dashboard' ),
+				'short_label' => __( 'Request Backup: enrollment needed', 'alynt-drime-backups-dashboard' ),
 			);
 		}
 
@@ -270,14 +271,24 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 
 		if ( $capabilities->supports_scan_upload_now( $remote_actions ) ) {
 			return array(
-				'available' => true,
-				'message'   => __( 'The latest client report says scan/upload-now capability is available, but this dashboard build has not enabled dispatch yet.', 'alynt-drime-backups-dashboard' ),
+				'available'   => true,
+				'message'     => __( 'The latest client report says scan/upload-now capability is available, but this dashboard build has not enabled dispatch yet.', 'alynt-drime-backups-dashboard' ),
+				'short_label' => __( 'Request Backup: capability reported', 'alynt-drime-backups-dashboard' ),
+			);
+		}
+
+		if ( 2 === absint( isset( $remote_actions['protocol_version'] ) ? $remote_actions['protocol_version'] : 0 ) ) {
+			return array(
+				'available'   => false,
+				'message'     => __( 'The latest client report understands V2.1 remote actions, but the client has not opted in with a valid action key or Sodium verification is unavailable.', 'alynt-drime-backups-dashboard' ),
+				'short_label' => __( 'Request Backup: opt-in needed', 'alynt-drime-backups-dashboard' ),
 			);
 		}
 
 		return array(
-			'available' => false,
-			'message'   => __( 'The latest client report does not advertise V2.1 scan/upload-now capability. Upgrade and opt in on the client site before this action can be enabled.', 'alynt-drime-backups-dashboard' ),
+			'available'   => false,
+			'message'     => __( 'The latest client report does not advertise V2.1 scan/upload-now capability. Upgrade and opt in on the client site before this action can be enabled.', 'alynt-drime-backups-dashboard' ),
+			'short_label' => __( 'Request Backup: not available yet', 'alynt-drime-backups-dashboard' ),
 		);
 	}
 
