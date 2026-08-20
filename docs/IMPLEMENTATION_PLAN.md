@@ -4,13 +4,13 @@ This document is the implementation plan for the separate **Alynt Drime Backups 
 
 This is now the canonical implementation plan for the dashboard repository. The earlier uploader-side copy remains historical context only and does not make the dashboard part of Alynt Drime Backups Uploader.
 
-Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`.
+Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`. V2.1 action-request protocol details are tracked in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`.
 
 Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, and signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
 
 ## Current State And Safety Boundary
 
-- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring; remaining work is acceptance hardening, documentation alignment, and future planning.
+- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now is implemented locally as a release-candidate slice and is awaiting final pre-release/release gates before any live enablement.
 - Dashboard repository: created locally at `C:\Development\WordPress\Plugins\alynt-drime-backups-dashboard`.
 - Dashboard plugin files: implemented and released through GitHub release assets.
 - Dashboard pending-enrollment token generation: implemented.
@@ -151,7 +151,7 @@ Do not add any dashboard-to-client or dashboard-to-Drime mutation:
 
 Local dashboard actions needed to manage enrollment, polling, and retained status history are in scope. They must remain capability- and nonce-protected.
 
-Remote actions intentionally belong to future v2 planning, not unresolved v1 scope. See `docs/V2_REMOTE_ACTIONS_PLAN.md` for the separate planning boundary and candidate feature sequence.
+Remote actions remain outside unresolved v1 scope. V2.1 is the first separately planned and threat-modeled action slice, limited to signed `scan_upload_now`; broader action classes intentionally remain future gated phases. See `docs/V2_REMOTE_ACTIONS_PLAN.md` for the separate planning boundary and candidate feature sequence.
 
 ## Eventual Host And Live-Site Gate
 
@@ -538,7 +538,7 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, release packaging, and approval-gated live deployment are implemented. Full pre-release/lifecycle/updater acceptance remains separate approval-gated work.
+Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, release packaging, and approval-gated live deployment are implemented locally. Full pre-release/lifecycle/updater acceptance remains separate approval-gated work.
 
 ### Phase 6 — Scheduled polling and history
 
@@ -554,7 +554,7 @@ Exit: deterministic automated tests and an isolated multi-site soak test pass.
 - complete redacted diagnostics and support output;
 - run feature light, bloat/structure, UI/UX, security, and documentation-sync workflows.
 
-Exit: v1 feature scope is complete and no remote action exists.
+Exit: v1 feature scope is complete and no v1 remote action exists. V2.1 remote-action work remains governed by the separate V2 protocol/threat-model boundary.
 
 ### Phase 8 — Pre-release and local/staging acceptance
 
@@ -604,7 +604,7 @@ Version 1 is complete only when:
 - status history is bounded and cleanup is tested;
 - the UI is accessible, translatable, and understandable without reading logs;
 - dashboard, uploader, isolated integration, release-package, and updater tests pass;
-- no remote action route, Drime credential field, or client mutation exists;
+- no v1 remote action route, Drime credential field, or client mutation exists; V2.1 `scan_upload_now` remains separate, signed, explicitly opted in, and non-destructive;
 - no live deployment occurs without a new explicit `control-sitesmanage live-only` confirmation.
 
 ## Decisions Required Before Scaffolding

@@ -69,7 +69,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities|null $remote_action_capabilities Remote-action sanitizer.
 	 */

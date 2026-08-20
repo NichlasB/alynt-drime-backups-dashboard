@@ -242,13 +242,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	 * @return void
 	 */
 	private function render_request_backup_now_form( array $site ) {
+		$description_id = 'adbd-request-backup-now-description';
 		?>
 		<form method="post" class="adbd-inline-form">
 			<?php wp_nonce_field( 'alynt_drime_backups_dashboard_request_backup_now' ); ?>
 			<input type="hidden" name="alynt_drime_backups_dashboard_action" value="request_backup_now">
 			<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( isset( $site['id'] ) ? (string) (int) $site['id'] : '0' ); ?>">
-			<button type="submit" class="button button-secondary" data-busy-label="<?php esc_attr_e( 'Requesting…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Request Backup Now', 'alynt-drime-backups-dashboard' ); ?></button>
-			<span class="description"><?php esc_html_e( 'Sends one signed scan/upload-now intent. The client site may accept, reject, rate-limit, or report busy; no backup creation, restore, cleanup, settings, or credential action is requested.', 'alynt-drime-backups-dashboard' ); ?></span>
+			<button type="submit" class="button button-secondary" data-busy-label="<?php esc_attr_e( 'Requesting…', 'alynt-drime-backups-dashboard' ); ?>" aria-describedby="<?php echo esc_attr( $description_id ); ?>"><?php esc_html_e( 'Request Backup Now', 'alynt-drime-backups-dashboard' ); ?></button>
+			<span id="<?php echo esc_attr( $description_id ); ?>" class="description"><?php esc_html_e( 'Sends one signed scan/upload-now intent. The client site may accept, reject, rate-limit, or report busy; no backup creation, restore, cleanup, settings, or credential action is requested.', 'alynt-drime-backups-dashboard' ); ?></span>
 		</form>
 		<?php
 	}
@@ -295,13 +296,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 			return;
 		}
 
+		$description_id = 'adbd-action-opt-in-generation-description';
 		?>
 		<form method="post" class="adbd-inline-form">
 			<?php wp_nonce_field( 'alynt_drime_backups_dashboard_generate_action_opt_in_token' ); ?>
 			<input type="hidden" name="alynt_drime_backups_dashboard_action" value="generate_action_opt_in_token">
 			<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( isset( $site['id'] ) ? (string) (int) $site['id'] : '0' ); ?>">
-			<button type="submit" class="button" data-busy-label="<?php esc_attr_e( 'Generating…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Generate V2 Opt-In Token', 'alynt-drime-backups-dashboard' ); ?></button>
-			<span class="description"><?php esc_html_e( 'Creates a short-lived adb2a token for client-side V2 action opt-in. It does not request a backup.', 'alynt-drime-backups-dashboard' ); ?></span>
+			<button type="submit" class="button" data-busy-label="<?php esc_attr_e( 'Generating…', 'alynt-drime-backups-dashboard' ); ?>" aria-describedby="<?php echo esc_attr( $description_id ); ?>"><?php esc_html_e( 'Generate V2 Opt-In Token', 'alynt-drime-backups-dashboard' ); ?></button>
+			<span id="<?php echo esc_attr( $description_id ); ?>" class="description"><?php esc_html_e( 'Creates a short-lived adb2a token for client-side V2 action opt-in. It does not request a backup.', 'alynt-drime-backups-dashboard' ); ?></span>
 		</form>
 		<?php
 	}

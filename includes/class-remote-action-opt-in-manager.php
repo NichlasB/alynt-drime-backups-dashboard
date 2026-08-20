@@ -3,7 +3,7 @@
  * Remote action opt-in token workflow.
  *
  * @package Alynt_Drime_Backups_Dashboard
- * @since   0.1.14
+ * @since   0.1.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Creates display-once V2 action opt-in tokens for already enrolled sites.
  *
- * @since 0.1.14
+ * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Manager {
 	const DEFAULT_TOKEN_TTL_SECONDS = 900;
@@ -49,7 +49,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Manager {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null      $sites Site repository.
 	 * @param Alynt_Drime_Backups_Dashboard_Origin_Validator|null     $origins Origin validator.
@@ -66,7 +66,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Manager {
 	/**
 	 * Creates a display-once V2 action opt-in token for one enrolled site.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int      $site_id Site ID.
 	 * @param string   $dashboard_origin Dashboard origin.

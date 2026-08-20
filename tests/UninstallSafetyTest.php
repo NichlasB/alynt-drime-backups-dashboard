@@ -208,5 +208,6 @@ class Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Test extends TestCase {
 		$this->assertIsString( $uninstall_source );
 		$this->assertStringContainsString( "defined( 'ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL' )", $uninstall_source );
 		$this->assertStringContainsString( 'true !== ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL', $uninstall_source );
+		$this->assertStringContainsString( "alynt_drime_dashboard_actions", $uninstall_source );
 	}
 }

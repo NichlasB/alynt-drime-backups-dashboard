@@ -170,7 +170,7 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 	/**
 	 * Stores a dashboard-owned V2 action signing key for one enrolled site.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int    $site_id Site ID.
 	 * @param string $action_key_id Action key ID.

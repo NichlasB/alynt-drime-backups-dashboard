@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added V2.1 **Request Backup Now** for separately opted-in clients. The dashboard generates display-once `adb2a` action opt-in tokens, stores the matching signing key encrypted, dispatches signed `scan_upload_now` intents, records bounded redacted remote-action history, and may run a follow-up read-only status poll after client acceptance.
+
+### Changed
+
+- Bumped the release candidate to `0.1.15` because `v0.1.14` is already used by the prior dashboard patch release.
+- Added an action-history cleanup index and uninstall purge coverage for dashboard-owned remote-action records.
+- Hardened dashboard activation so failed cron scheduling is reported instead of silently leaving polling or cleanup unscheduled.
+- Improved V2.1 action-button accessibility by linking buttons to their explanatory guardrail text.
+
 ### Fixed
 
 - Hardened uninstall safety: rollback copies discovered by WordPress now exit before touching dashboard state, and canonical plugin deletion preserves dashboard records by default. A permanent dashboard-data purge now requires an explicit `wp-config.php` constant.

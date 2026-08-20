@@ -2,7 +2,7 @@
 
 Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
 
-This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. The plugin remains read-only relative to client sites and Drime.
+This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. The current V2.1 release candidate adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials.
 
 ## v1 Boundary
 
@@ -10,6 +10,14 @@ This repository is the separate dashboard plugin package. The current dashboard 
 - Client-site opt-in before any status endpoint is enabled.
 - Dashboard polling of a fixed read-only client status endpoint.
 - No remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
+
+## V2.1 Boundary
+
+- Requires V1 pairing first.
+- Requires a separate dashboard-generated `adb2a` action opt-in token pasted on the client site.
+- Uses per-site signed action intents with short expiry, idempotency, and client-side rate/lock enforcement.
+- Allows only `scan_upload_now`: the client scans for ready backup packages and schedules eligible uploads.
+- Does not create fresh WPvivid/server-runner backups, restore, delete, clean up, change schedules/settings, expose filesystem paths, or store Drime API credentials in the dashboard.
 
 ## Package Identity
 
@@ -25,7 +33,7 @@ This repository is the separate dashboard plugin package. The current dashboard 
 
 ## Current Status
 
-Version 0.1.14 currently includes:
+Version 0.1.15 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
@@ -44,6 +52,7 @@ Version 0.1.14 currently includes:
 - Optional dashboard-side display of redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
 - Redacted WPvivid source-activity hints that distinguish local WPvivid activity evidence from Alynt upload proof.
 - At-a-glance Sites-row source summaries for Server and WPvivid freshness, current package counts, latest backup/package time, and latest upload time when clients report that evidence.
+- V2.1 dashboard-generated action opt-in tokens, encrypted dashboard-side signing-key storage, signed `Request Backup Now` dispatch, and redacted remote-action history for the single `scan_upload_now` action.
 - Credential-aware Sites-tab manual-check state copy for active, pending, revoked, and missing-credential rows.
 - Sites-tab layout protection for action buttons and hiding of superseded revoked duplicate rows when a healthy active enrollment exists for the same origin.
 - Harmless per-request cache-busting for read-only status polling so managed page caches cannot serve stale authenticated status payloads.
@@ -73,7 +82,7 @@ Before broad implementation work, create or verify a restore point. For the new 
 
 ### Usage
 
-Use the dashboard to generate one-time pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. Version 0.1.14 does not expose remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
+Use the dashboard to generate one-time V1 pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. For V2.1-capable paired clients, a dashboard administrator can generate a separate one-time action opt-in token and then use **Request Backup Now** to send one signed `scan_upload_now` intent. The dashboard still does not create fresh backups, restore, delete, clean up, change settings, store Drime credentials, or run arbitrary commands.
 
 Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Structured diagnostics logging is disabled by default. When an administrator explicitly enables it, the plugin stores a bounded local event buffer with redaction applied before persistence/export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials are not stored in diagnostics events.
 
@@ -81,7 +90,7 @@ Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Struct
 
 #### Can the dashboard run backups, restores, or cleanup on client sites?
 
-No. Version 0.1.14 is read-only. It can generate dashboard-owned pairing tokens, accept client opt-in enrollment, poll a fixed authenticated status endpoint, and store local status snapshots. It cannot trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary command actions.
+Version 1 cannot run any remote actions. The V2.1 release candidate adds only a bounded **Request Backup Now** action after separate client-side opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it does not create fresh WPvivid/server-runner backups and cannot restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands.
 
 #### What happens when I generate a pairing token?
 
@@ -93,7 +102,7 @@ No. Diagnostics logging is disabled by default and redacts sensitive fields befo
 
 #### Where are implementation details documented?
 
-See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/V2_REMOTE_ACTIONS_PLAN.md` for future remote-operation planning, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
+See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md` for the V2.1 signed-action boundary, `docs/V2_REMOTE_ACTIONS_PLAN.md` for later remote-operation planning, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 ### Changelog Summary
 

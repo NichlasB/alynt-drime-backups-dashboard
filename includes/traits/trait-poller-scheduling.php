@@ -40,7 +40,7 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Scheduling {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return void
+	 * @return true|WP_Error
 	 */
 	public static function schedule_events() {
 		if ( function_exists( 'add_filter' ) ) {
@@ -49,12 +49,51 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Scheduling {
 		}
 
 		if ( function_exists( 'wp_next_scheduled' ) && function_exists( 'wp_schedule_event' ) && ! wp_next_scheduled( self::CRON_HOOK ) ) {
-			wp_schedule_event( time() + 60, self::CRON_RECURRENCE, self::CRON_HOOK );
+			$scheduled = self::schedule_event( time() + 60, self::CRON_RECURRENCE, self::CRON_HOOK );
+
+			if ( is_wp_error( $scheduled ) ) {
+				return $scheduled;
+			}
 		}
 
 		if ( function_exists( 'wp_next_scheduled' ) && function_exists( 'wp_schedule_event' ) && ! wp_next_scheduled( self::CLEANUP_HOOK ) ) {
-			wp_schedule_event( time() + 300, 'daily', self::CLEANUP_HOOK );
+			$scheduled = self::schedule_event( time() + 300, 'daily', self::CLEANUP_HOOK );
+
+			if ( is_wp_error( $scheduled ) ) {
+				return $scheduled;
+			}
 		}
+
+		return true;
+	}
+
+	/**
+	 * Schedules one dashboard cron event and returns a structured failure.
+	 *
+	 * @param int    $timestamp Timestamp.
+	 * @param string $recurrence Recurrence.
+	 * @param string $hook Hook.
+	 * @return true|WP_Error
+	 */
+	private static function schedule_event( $timestamp, $recurrence, $hook ) {
+		$scheduled = wp_schedule_event( $timestamp, $recurrence, $hook, array(), true );
+
+		if ( is_wp_error( $scheduled ) ) {
+			return $scheduled;
+		}
+
+		if ( false === $scheduled ) {
+			return new WP_Error(
+				'dashboard_cron_schedule_failed',
+				__( 'WordPress could not schedule dashboard maintenance events.', 'alynt-drime-backups-dashboard' ),
+				array(
+					'hook'       => $hook,
+					'recurrence' => $recurrence,
+				)
+			);
+		}
+
+		return true;
 	}
 
 	/**

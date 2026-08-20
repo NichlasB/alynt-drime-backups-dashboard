@@ -198,6 +198,8 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( '<form method="post"', $html );
 		$this->assertStringContainsString( 'value="request_backup_now"', $html );
 		$this->assertStringContainsString( 'value="7"', $html );
+		$this->assertStringContainsString( 'aria-describedby="adbd-request-backup-now-description"', $html );
+		$this->assertStringContainsString( 'id="adbd-request-backup-now-description"', $html );
 		$this->assertStringContainsString( 'Queued for dispatch', $html );
 		$this->assertStringContainsString( 'Stored locally only.', $html );
 		$this->assertStringNotContainsString( 'private', strtolower( $html ) );
@@ -257,6 +259,8 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Not available yet', $html );
 		$this->assertStringContainsString( 'does not advertise V2.1 scan/upload-now capability', $html );
 		$this->assertStringContainsString( 'Generate V2 Opt-In Token', $html );
+		$this->assertStringContainsString( 'aria-describedby="adbd-action-opt-in-generation-description"', $html );
+		$this->assertStringContainsString( 'id="adbd-action-opt-in-generation-description"', $html );
 		$this->assertStringContainsString( 'No V2 remote action requests are stored for this site yet.', $html );
 	}
 

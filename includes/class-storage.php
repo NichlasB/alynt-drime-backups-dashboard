@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '5';
+	const SCHEMA_VERSION        = '6';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -48,7 +48,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 	/**
 	 * Returns the remote actions table name.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @return string
 	 */
@@ -167,7 +167,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY site_requested (dashboard_site_id, requested_at),
 				KEY site_state_requested (dashboard_site_id, state, requested_at),
 				KEY state_expires (state, expires_at),
-				KEY idempotency_key (idempotency_key)
+				KEY idempotency_key (idempotency_key),
+				KEY completed_at (completed_at, id)
 			) {$charset_collate};"
 		);
 

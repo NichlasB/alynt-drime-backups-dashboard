@@ -3,7 +3,7 @@
  * Remote action capability sanitizer.
  *
  * @package Alynt_Drime_Backups_Dashboard
- * @since   0.1.14
+ * @since   0.1.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Validates optional V2 remote-action capability summaries.
  *
- * @since 0.1.14
+ * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	const PROTOCOL_VERSION       = 2;
@@ -82,7 +82,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	/**
 	 * Sanitizes a remote-action capability summary.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param mixed $payload Raw remote_actions value.
 	 * @return array<string,mixed>|WP_Error
@@ -124,7 +124,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	/**
 	 * Gets whether sanitized capabilities allow the initial V2.1 action.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param array<string,mixed> $capabilities Sanitized capabilities.
 	 * @return bool
@@ -139,7 +139,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	/**
 	 * Sanitizes an action type.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $action_type Action type.
 	 * @return string
@@ -153,7 +153,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	/**
 	 * Sanitizes an action state.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $state Action state.
 	 * @return string

@@ -2,13 +2,13 @@
 
 ## Alynt Drime Backups Dashboard Hooks
 
-Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.14.
+Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.15.
 
 The hooks below are internal WordPress integration points owned by the plugin. Treat them as implementation details unless a future release explicitly documents them as public extension points.
 
 ## Public Extension Hooks
 
-None in version 0.1.14.
+None in version 0.1.15.
 
 ## WordPress Lifecycle Hooks
 
@@ -47,7 +47,7 @@ Handled by `uninstall.php`. WordPress-discovered copies outside the canonical `a
 | `alynt_drime_backups_dashboard_poll_sites` | `alynt_drime_backups_dashboard_15_minutes` | Runs bounded read-only polling batches for enrolled client sites. |
 | `alynt_drime_backups_dashboard_cleanup_snapshots` | `daily` | Removes old local dashboard snapshot rows according to retention rules. |
 
-Polling uses the fixed authenticated client status route and stores normalized local snapshots. It must not trigger remote backup, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary-command actions.
+Polling uses the fixed authenticated client status route and stores normalized local snapshots. It must not trigger remote backup creation, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary-command actions. V2.1 Request Backup Now uses a separate client opt-in and signed action-intent route; it is not authorized by polling credentials.
 
 ## REST Route
 
@@ -55,11 +55,11 @@ Polling uses the fixed authenticated client status route and stores normalized l
 |-------|--------|---------|
 | `/wp-json/alynt-drime-backups-dashboard/v1/enroll` | `POST` | Completes client-site opt-in enrollment using a dashboard-generated pairing token. |
 
-The enrollment route validates the one-time pairing token, expected client origin, protocol version, and status schema version before storing encrypted dashboard-side polling credentials. It does not enable remote actions.
+The enrollment route validates the one-time pairing token, expected client origin, protocol version, and status schema version before storing encrypted dashboard-side polling credentials. It does not enable V2.1 actions; those require a separate `adb2a` action opt-in token after V1 pairing.
 
 ## Maintenance Rules
 
 - Add new public extension hooks here before release if they are intentionally supported for third-party use.
 - Keep internal hooks clearly labeled as internal implementation details.
 - Do not document secrets, raw tokens, authorization headers, cookies, nonces, salts, filesystem paths, SQL, raw payloads, raw response bodies, or Drime credentials.
-- Preserve the version 0.1.14 read-only boundary unless a later release has an explicitly approved architecture change.
+- Preserve the V1 read-only boundary. V2.1 action behavior must remain limited to separately opted-in signed `scan_upload_now` intents unless a later release has an explicitly approved architecture change.

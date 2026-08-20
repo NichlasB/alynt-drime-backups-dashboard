@@ -2,7 +2,7 @@
 
 ## Alynt Drime Backups Dashboard Settings
 
-The plugin stores one administrator-configurable diagnostics option and three internal options. No option grants remote-action capability.
+The plugin stores one administrator-configurable diagnostics option and three internal options. V2.1 action capability is not granted by an option alone; it requires an enrolled site row with a stored encrypted action signing key plus client-reported opt-in capability.
 
 | Option Key | Type | Default | Sanitization | Tab | Description |
 |------------|------|---------|--------------|-----|-------------|
@@ -19,9 +19,9 @@ Operator action history is stored separately from optional diagnostics logging. 
 
 ## Related Non-Option Storage
 
-- Custom tables store dashboard-owned site enrollment records and normalized read-only status snapshots.
+- Custom tables store dashboard-owned site enrollment records, normalized read-only status snapshots, and bounded V2.1 remote-action request/history records.
 - Transient locks coordinate bounded polling batches, per-site poll attempts, and bounded enrollment failure rate limits.
-- Uninstall cleanup removes transient locks, enrollment failure-rate-limit transients, and scheduled hooks without contacting client sites. Dashboard-owned tables and options are preserved by default because they contain the dashboard-side enrollment and polling state. A permanent purge requires the explicit `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` constant in `wp-config.php`; copied rollback directories always exit before cleanup.
+- Uninstall cleanup removes transient locks, enrollment failure-rate-limit transients, and scheduled hooks without contacting client sites. Dashboard-owned tables and options are preserved by default because they contain the dashboard-side enrollment, polling, and action-history state. A permanent purge requires the explicit `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` constant in `wp-config.php`; copied rollback directories always exit before cleanup.
 
 ---
 

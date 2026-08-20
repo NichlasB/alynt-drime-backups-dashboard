@@ -3,7 +3,7 @@
  * Remote action signing helper.
  *
  * @package Alynt_Drime_Backups_Dashboard
- * @since   0.1.14
+ * @since   0.1.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Creates and verifies deterministic V2 remote-action signatures.
  *
- * @since 0.1.14
+ * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	const SIGNING_PREFIX    = 'ADB-ACTION-V2';
@@ -22,7 +22,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Returns whether Ed25519 signing is available.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @return bool
 	 */
@@ -35,7 +35,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Creates a new action key pair.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @return array<string,string>|WP_Error
 	 */
@@ -56,7 +56,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Builds deterministic JSON for signing.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param array<string,mixed> $body Body.
 	 * @return string|WP_Error
@@ -75,7 +75,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Builds the V2 signing input.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $method HTTP method.
 	 * @param string $route Route path.
@@ -101,7 +101,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Signs canonical input.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $private_key Encoded private key.
 	 * @param string $signing_input Signing input.
@@ -124,7 +124,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Verifies a signed input.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $public_key Encoded public key.
 	 * @param string $signing_input Signing input.
@@ -154,7 +154,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Encodes bytes as base64url.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $value Bytes.
 	 * @return string
@@ -166,7 +166,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
 	/**
 	 * Decodes base64url.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param string $value Encoded value.
 	 * @return string|false

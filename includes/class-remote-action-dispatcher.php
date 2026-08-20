@@ -3,7 +3,7 @@
  * Remote action dispatcher.
  *
  * @package Alynt_Drime_Backups_Dashboard
- * @since   0.1.14
+ * @since   0.1.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Creates, signs, dispatches, and records V2.1 remote action intents.
  *
- * @since 0.1.14
+ * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 	const ACTION_ROUTE       = '/wp-json/alynt-drime-backups-uploader/v2/action-intents';

@@ -3,7 +3,7 @@
  * Remote action repository.
  *
  * @package Alynt_Drime_Backups_Dashboard
- * @since   0.1.14
+ * @since   0.1.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Stores dashboard-owned remote action request records.
  *
- * @since 0.1.14
+ * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	const DEFAULT_STATE  = 'queued_for_dispatch';
@@ -29,7 +29,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities|null $capabilities Capability sanitizer.
 	 */
@@ -40,7 +40,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Records a queued dashboard action request.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int                 $site_id Site ID.
 	 * @param string              $action_type Action type.
@@ -113,7 +113,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Marks an action state with a safe result summary.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int    $action_id Action row ID.
 	 * @param string $state Action state.
@@ -163,7 +163,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Marks an action as dispatched without storing remote response contents.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int $action_id Action row ID.
 	 * @return bool
@@ -195,7 +195,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Gets latest action for one site.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int $site_id Site ID.
 	 * @return array<string,mixed>|null
@@ -226,7 +226,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Gets recent action rows for one site.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int $site_id Site ID.
 	 * @param int $limit Limit.
@@ -266,7 +266,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	/**
 	 * Deletes old completed action records in bounded batches.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param int $retention_days Retention days.
 	 * @param int $batch_size Batch size.

@@ -3,7 +3,7 @@
  * Remote action opt-in token helpers.
  *
  * @package Alynt_Drime_Backups_Dashboard
- * @since   0.1.14
+ * @since   0.1.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Builds dashboard-generated V2 remote-action opt-in token material.
  *
- * @since 0.1.14
+ * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Tokens {
 	const TOKEN_PREFIX     = 'adb2a.';
@@ -26,7 +26,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Tokens {
 	 * The action public key is not secret, but this token is still display-once
 	 * because it binds one dashboard/site/action-key tuple for client opt-in.
 	 *
-	 * @since 0.1.14
+	 * @since 0.1.15
 	 *
 	 * @param array<string,mixed> $payload Token payload.
 	 * @return string|WP_Error

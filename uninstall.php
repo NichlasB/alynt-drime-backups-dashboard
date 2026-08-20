@@ -57,6 +57,7 @@ if ( ! defined( 'ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL' ) || tru
 }
 
 $tables = array(
+	$wpdb->prefix . 'alynt_drime_dashboard_actions',
 	$wpdb->prefix . 'alynt_drime_dashboard_snapshots',
 	$wpdb->prefix . 'alynt_drime_dashboard_sites',
 );
