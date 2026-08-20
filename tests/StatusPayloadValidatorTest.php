@@ -101,6 +101,67 @@ class StatusPayloadValidatorTest extends TestCase {
 	}
 
 	/**
+	 * Optional remote-action capabilities are allowlisted and sanitized.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_capabilities_are_allowlisted_and_sanitized() {
+		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+		$result    = $validator->validate(
+			array_merge(
+				$this->payload(),
+				array(
+					'remote_actions' => array(
+						'protocol_version'            => 2,
+						'enabled'                     => true,
+						'key_id'                      => 'ak_123',
+						'allowed_actions'             => array( 'scan_upload_now', 'restore_now' ),
+						'sodium_available'            => true,
+						'min_interval_seconds'        => 600,
+						'one_running_action_per_site' => true,
+						'extra_field'                 => 'ignored',
+					),
+				)
+			),
+			'11111111-1111-4111-8111-111111111111'
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertArrayHasKey( 'remote_actions', $result );
+		$this->assertTrue( $result['remote_actions']['enabled'] );
+		$this->assertSame( array( 'scan_upload_now' ), $result['remote_actions']['allowed_actions'] );
+		$this->assertArrayNotHasKey( 'extra_field', $result['remote_actions'] );
+	}
+
+	/**
+	 * Remote-action summaries containing secrets or path-mode fields are rejected.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_forbidden_field_is_rejected() {
+		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+		$result    = $validator->validate(
+			array_merge(
+				$this->payload(),
+				array(
+					'remote_actions' => array(
+						'protocol_version' => 2,
+						'enabled'          => true,
+						'last_action'      => array(
+							'action_id' => '11111111-1111-4111-8111-111111111111',
+							'file'      => '/private/backup.zip',
+						),
+					),
+				)
+			),
+			'11111111-1111-4111-8111-111111111111'
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'payload_invalid', $result->get_error_code() );
+	}
+
+	/**
 	 * Source-level labels, warnings, and enum values are bounded before storage.
 	 *
 	 * @return void

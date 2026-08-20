@@ -49,7 +49,33 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 		'presigned',
 		'secret',
 		'signed_url',
+		'private_key',
+		'action_private_key',
+		'raw_response',
+		'command',
+		'filename',
+		'backup_id',
+		'backup_name',
+		'token',
 	);
+
+	/**
+	 * Remote action capability sanitizer.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities
+	 */
+	private $remote_action_capabilities;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.14
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities|null $remote_action_capabilities Remote-action sanitizer.
+	 */
+	public function __construct( $remote_action_capabilities = null ) {
+		$this->remote_action_capabilities = $remote_action_capabilities instanceof Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities ? $remote_action_capabilities : new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+	}
 
 	/**
 	 * Validates and sanitizes a status payload.
@@ -104,6 +130,16 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 
 		if ( ! empty( $backup_sources ) ) {
 			$validated['backup_sources'] = $backup_sources;
+		}
+
+		$remote_actions = $this->remote_action_capabilities->sanitize( isset( $payload['remote_actions'] ) ? $payload['remote_actions'] : array() );
+
+		if ( is_wp_error( $remote_actions ) ) {
+			return $remote_actions;
+		}
+
+		if ( ! empty( $remote_actions ) ) {
+			$validated['remote_actions'] = $remote_actions;
 		}
 
 		if ( '' === $validated['plugin_version'] || '' === $validated['cron_status'] ) {

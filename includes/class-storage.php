@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '3';
+	const SCHEMA_VERSION        = '4';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -46,6 +46,19 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 	}
 
 	/**
+	 * Returns the remote actions table name.
+	 *
+	 * @since 0.1.14
+	 *
+	 * @return string
+	 */
+	public static function actions_table() {
+		global $wpdb;
+
+		return $wpdb->prefix . 'alynt_drime_dashboard_actions';
+	}
+
+	/**
 	 * Installs or upgrades dashboard-owned tables.
 	 *
 	 * @since 0.1.0
@@ -58,6 +71,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 		$charset_collate = $wpdb->get_charset_collate();
 		$sites_table     = self::sites_table();
 		$snapshots_table = self::snapshots_table();
+		$actions_table   = self::actions_table();
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
@@ -119,6 +133,38 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY site_latest (dashboard_site_id, id),
 				KEY retention_cleanup (observed_at, id),
 				KEY overall_status (overall_status)
+			) {$charset_collate};"
+		);
+
+		dbDelta(
+			"CREATE TABLE {$actions_table} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				public_id char(36) NOT NULL,
+				dashboard_site_id bigint(20) unsigned NOT NULL,
+				action_type varchar(64) NOT NULL DEFAULT '',
+				state varchar(32) NOT NULL DEFAULT 'queued_for_dispatch',
+				idempotency_key varchar(128) NOT NULL DEFAULT '',
+				action_key_id varchar(128) NOT NULL DEFAULT '',
+				requested_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				requested_at datetime NOT NULL,
+				dispatched_at datetime NULL,
+				accepted_at datetime NULL,
+				completed_at datetime NULL,
+				expires_at datetime NOT NULL,
+				last_seen_at datetime NULL,
+				retry_after_seconds int(10) unsigned NOT NULL DEFAULT 0,
+				result_code varchar(64) NOT NULL DEFAULT '',
+				result_summary text NULL,
+				request_fingerprint char(64) NOT NULL DEFAULT '',
+				redacted_context_json longtext NOT NULL,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				PRIMARY KEY  (id),
+				UNIQUE KEY public_id (public_id),
+				KEY site_requested (dashboard_site_id, requested_at),
+				KEY site_state_requested (dashboard_site_id, state, requested_at),
+				KEY state_expires (state, expires_at),
+				KEY idempotency_key (idempotency_key)
 			) {$charset_collate};"
 		);
 
