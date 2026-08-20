@@ -80,6 +80,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_Table {
 			echo '<td data-label="' . esc_attr__( 'Freshness', 'alynt-drime-backups-dashboard' ) . '">' . $this->time_html( isset( $site['last_seen_at'] ) ? $site['last_seen_at'] : '' ) . $this->next_poll_html( $site ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() and next_poll_html() return escaped markup.
 			echo '<td data-label="' . esc_attr__( 'Actions', 'alynt-drime-backups-dashboard' ) . '"><div class="adbd-row-actions"><a class="button" href="' . esc_url( $url ) . '">' . esc_html__( 'View', 'alynt-drime-backups-dashboard' ) . '</a>';
 			$this->render_check_status_form( $site, $site_id, false );
+			echo $this->request_backup_now_row_hint( $site, $payload ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns escaped row hint markup.
 			echo '</div></td>';
 			echo '</tr>';
 		}

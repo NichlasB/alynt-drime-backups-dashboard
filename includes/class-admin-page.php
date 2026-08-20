@@ -88,18 +88,26 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	private $event_log;
 
 	/**
+	 * Remote action repository.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Remote_Action_Repository
+	 */
+	private $remote_actions;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null     $sites Site repository.
-	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null $snapshots Snapshot repository.
-	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null   $classifier Status classifier.
-	 * @param Alynt_Drime_Backups_Dashboard_Enrollment_Manager|null  $enrollment_manager Enrollment manager.
-	 * @param Alynt_Drime_Backups_Dashboard_Poller|null              $poller Poller.
-	 * @param Alynt_Drime_Backups_Dashboard_Diagnostics|null         $diagnostics Diagnostics.
+	 * @param Alynt_Drime_Backups_Dashboard_Site_Repository|null          $sites Site repository.
+	 * @param Alynt_Drime_Backups_Dashboard_Snapshot_Repository|null      $snapshots Snapshot repository.
+	 * @param Alynt_Drime_Backups_Dashboard_Status_Classifier|null        $classifier Status classifier.
+	 * @param Alynt_Drime_Backups_Dashboard_Enrollment_Manager|null       $enrollment_manager Enrollment manager.
+	 * @param Alynt_Drime_Backups_Dashboard_Poller|null                   $poller Poller.
+	 * @param Alynt_Drime_Backups_Dashboard_Diagnostics|null              $diagnostics Diagnostics.
+	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Repository|null $remote_actions Remote action repository.
 	 */
-	public function __construct( $sites = null, $snapshots = null, $classifier = null, $enrollment_manager = null, $poller = null, $diagnostics = null ) {
+	public function __construct( $sites = null, $snapshots = null, $classifier = null, $enrollment_manager = null, $poller = null, $diagnostics = null, $remote_actions = null ) {
 		$this->sites              = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots          = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$this->classifier         = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
@@ -107,6 +115,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 		$this->poller             = $poller instanceof Alynt_Drime_Backups_Dashboard_Poller ? $poller : new Alynt_Drime_Backups_Dashboard_Poller( $this->sites, $this->snapshots, $this->classifier );
 		$this->diagnostics        = $diagnostics instanceof Alynt_Drime_Backups_Dashboard_Diagnostics ? $diagnostics : new Alynt_Drime_Backups_Dashboard_Diagnostics( $this->sites, $this->snapshots, $this->classifier );
 		$this->event_log          = $this->diagnostics->event_log();
+		$this->remote_actions     = $remote_actions instanceof Alynt_Drime_Backups_Dashboard_Remote_Action_Repository ? $remote_actions : new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
 	}
 
 	/**

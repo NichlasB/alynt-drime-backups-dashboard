@@ -206,6 +206,151 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	}
 
 	/**
+	 * Renders the V2.1 Request Backup Now eligibility and history panel.
+	 *
+	 * This intentionally renders an inert control until dashboard dispatch and
+	 * client-side action handling are implemented and explicitly enabled.
+	 *
+	 * @param array<string,mixed>            $site Site row.
+	 * @param array<string,mixed>|null       $snapshot Latest snapshot row.
+	 * @param array<int,array<string,mixed>> $history Remote action history.
+	 * @return void
+	 */
+	private function render_request_backup_now_panel( array $site, $snapshot, array $history ) {
+		$payload      = is_array( $snapshot ) ? $this->decoded_snapshot_payload( $snapshot ) : array();
+		$availability = $this->request_backup_now_availability( $site, $payload );
+
+		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Request Backup Now', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
+		echo '<p>' . esc_html__( 'V2.1 is designed as a signed request for the client uploader to scan for ready backup packages and upload eligible items using its own local settings. The dashboard still does not receive Drime credentials and does not create, restore, delete, or clean up backups.', 'alynt-drime-backups-dashboard' ) . '</p>';
+
+		if ( $availability['available'] ) {
+			echo '<p><span class="adbd-status-pill is-working">' . esc_html__( 'Capability reported', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
+			echo '<p><button type="button" class="button button-secondary" disabled aria-disabled="true">' . esc_html__( 'Request Backup Now', 'alynt-drime-backups-dashboard' ) . '</button> <span class="description">' . esc_html__( 'Dispatch is intentionally disabled until the signed request endpoint is implemented and the client site opts in to V2 actions.', 'alynt-drime-backups-dashboard' ) . '</span></p>';
+		} else {
+			echo '<p><span class="adbd-status-pill is-pending">' . esc_html__( 'Not available yet', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
+		}
+
+		$this->render_remote_action_history( $history );
+		echo '</div></div>';
+	}
+
+	/**
+	 * Renders a compact V2.1 row hint for the Sites table.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param array<string,mixed> $payload Latest decoded snapshot payload.
+	 * @return string
+	 */
+	private function request_backup_now_row_hint( array $site, array $payload ) {
+		$availability = $this->request_backup_now_availability( $site, $payload );
+		$label        = $availability['available']
+			? __( 'Request Backup: capability reported', 'alynt-drime-backups-dashboard' )
+			: __( 'Request Backup: not available yet', 'alynt-drime-backups-dashboard' );
+
+		return '<span class="description adbd-row-meta">' . esc_html( $label ) . '</span>';
+	}
+
+	/**
+	 * Gets V2.1 Request Backup Now availability from redacted client evidence.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param array<string,mixed> $payload Latest decoded snapshot payload.
+	 * @return array{available:bool,message:string}
+	 */
+	private function request_backup_now_availability( array $site, array $payload ) {
+		if ( ! $this->site_can_manual_check( $site ) ) {
+			return array(
+				'available' => false,
+				'message'   => __( 'This site must be actively enrolled with polling credentials before V2 actions can be considered.', 'alynt-drime-backups-dashboard' ),
+			);
+		}
+
+		$remote_actions = isset( $payload['remote_actions'] ) && is_array( $payload['remote_actions'] ) ? $payload['remote_actions'] : array();
+		$capabilities   = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+
+		if ( $capabilities->supports_scan_upload_now( $remote_actions ) ) {
+			return array(
+				'available' => true,
+				'message'   => __( 'The latest client report says scan/upload-now capability is available, but this dashboard build has not enabled dispatch yet.', 'alynt-drime-backups-dashboard' ),
+			);
+		}
+
+		return array(
+			'available' => false,
+			'message'   => __( 'The latest client report does not advertise V2.1 scan/upload-now capability. Upgrade and opt in on the client site before this action can be enabled.', 'alynt-drime-backups-dashboard' ),
+		);
+	}
+
+	/**
+	 * Renders recent remote action history without raw payloads.
+	 *
+	 * @param array<int,array<string,mixed>> $history Remote action history.
+	 * @return void
+	 */
+	private function render_remote_action_history( array $history ) {
+		echo '<h4>' . esc_html__( 'Remote Action History', 'alynt-drime-backups-dashboard' ) . '</h4>';
+
+		if ( empty( $history ) ) {
+			echo '<p class="description">' . esc_html__( 'No V2 remote action requests are stored for this site yet.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			return;
+		}
+
+		echo '<div class="adbd-table-wrap"><table class="widefat striped adbd-history-table"><caption>' . esc_html__( 'Recent V2 remote action requests for this site', 'alynt-drime-backups-dashboard' ) . '</caption><thead><tr>';
+		echo '<th scope="col">' . esc_html__( 'Requested', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Action', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'State', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Result', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '</tr></thead><tbody>';
+
+		foreach ( $history as $row ) {
+			echo '<tr><td>' . $this->time_html( isset( $row['requested_at'] ) ? $row['requested_at'] : '' ) . '</td><td>' . esc_html( $this->remote_action_label( isset( $row['action_type'] ) ? (string) $row['action_type'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_state_label( isset( $row['state'] ) ? (string) $row['state'] : '' ) ) . '</td><td>' . esc_html( isset( $row['result_summary'] ) && '' !== $row['result_summary'] ? (string) $row['result_summary'] : '-' ) . '</td></tr>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() returns escaped markup.
+		}
+
+		echo '</tbody></table></div>';
+	}
+
+	/**
+	 * Gets a safe operator label for a V2 action type.
+	 *
+	 * @param string $action_type Action type.
+	 * @return string
+	 */
+	private function remote_action_label( $action_type ) {
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW === sanitize_key( $action_type ) ) {
+			return __( 'Request Backup Now', 'alynt-drime-backups-dashboard' );
+		}
+
+		return __( 'Unknown action', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a safe operator label for a V2 action state.
+	 *
+	 * @param string $state State.
+	 * @return string
+	 */
+	private function remote_action_state_label( $state ) {
+		$labels = array(
+			'queued_for_dispatch' => __( 'Queued for dispatch', 'alynt-drime-backups-dashboard' ),
+			'dispatch_failed'     => __( 'Dispatch failed', 'alynt-drime-backups-dashboard' ),
+			'accepted'            => __( 'Accepted', 'alynt-drime-backups-dashboard' ),
+			'rejected'            => __( 'Rejected', 'alynt-drime-backups-dashboard' ),
+			'unsupported'         => __( 'Unsupported', 'alynt-drime-backups-dashboard' ),
+			'rate_limited'        => __( 'Rate limited', 'alynt-drime-backups-dashboard' ),
+			'busy'                => __( 'Busy', 'alynt-drime-backups-dashboard' ),
+			'running'             => __( 'Running', 'alynt-drime-backups-dashboard' ),
+			'succeeded'           => __( 'Succeeded', 'alynt-drime-backups-dashboard' ),
+			'failed'              => __( 'Failed', 'alynt-drime-backups-dashboard' ),
+			'timed_out'           => __( 'Timed out', 'alynt-drime-backups-dashboard' ),
+			'stale'               => __( 'Stale', 'alynt-drime-backups-dashboard' ),
+		);
+
+		$state = sanitize_key( $state );
+
+		return isset( $labels[ $state ] ) ? $labels[ $state ] : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
 	 * Renders a bounded recent snapshot history table.
 	 *
 	 * @param array<int,array<string,mixed>> $history Snapshot history.

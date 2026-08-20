@@ -131,6 +131,98 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Polling credentials are missing. Re-enroll this site to restore manual checks.', $harness->check_form_html( $site ) );
 		$this->assertStringContainsString( 'Credentials missing', $harness->next_poll_line( $site ) );
 	}
+
+	/**
+	 * Sites rows show a compact V2.1 eligibility hint from redacted capability evidence.
+	 *
+	 * @return void
+	 */
+	public function test_request_backup_now_row_hint_reports_capability_without_rendering_action_form() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+		);
+		$payload = array(
+			'remote_actions' => array(
+				'protocol_version'   => 2,
+				'enabled'            => true,
+				'allowed_actions'    => array( 'scan_upload_now' ),
+				'sodium_available'   => true,
+			),
+		);
+		$html    = $harness->request_backup_row_hint_html( $site, $payload );
+
+		$this->assertStringContainsString( 'Request Backup: capability reported', $html );
+		$this->assertStringNotContainsString( '<form', $html );
+	}
+
+	/**
+	 * The V2.1 detail panel is visible but inert before dispatch exists.
+	 *
+	 * @return void
+	 */
+	public function test_request_backup_now_panel_renders_disabled_control_and_safe_history() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+		);
+		$snapshot = array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version'   => 2,
+					'enabled'            => true,
+					'allowed_actions'    => array( 'scan_upload_now' ),
+					'sodium_available'   => true,
+				),
+			),
+		);
+		$history  = array(
+			array(
+				'action_type'    => 'scan_upload_now',
+				'state'          => 'queued_for_dispatch',
+				'requested_at'   => '2026-08-20 12:00:00',
+				'result_summary' => 'Stored locally only.',
+			),
+		);
+		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
+
+		$this->assertStringContainsString( 'Request Backup Now', $html );
+		$this->assertStringContainsString( 'Capability reported', $html );
+		$this->assertStringContainsString( 'disabled aria-disabled="true"', $html );
+		$this->assertStringContainsString( 'Queued for dispatch', $html );
+		$this->assertStringContainsString( 'Stored locally only.', $html );
+		$this->assertStringNotContainsString( '<form', $html );
+		$this->assertStringNotContainsString( 'private', strtolower( $html ) );
+	}
+
+	/**
+	 * Missing V2.1 capability explains the client opt-in requirement.
+	 *
+	 * @return void
+	 */
+	public function test_request_backup_now_panel_explains_missing_capability() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+		);
+		$html    = $harness->request_backup_panel_html(
+			$site,
+			array(
+				'decoded_payload' => array(),
+			),
+			array()
+		);
+
+		$this->assertStringContainsString( 'Not available yet', $html );
+		$this->assertStringContainsString( 'does not advertise V2.1 scan/upload-now capability', $html );
+		$this->assertStringContainsString( 'No V2 remote action requests are stored for this site yet.', $html );
+	}
 }
 
 /**
@@ -160,6 +252,31 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	 */
 	public function next_poll_line( array $site ) {
 		return $this->next_poll_html( $site );
+	}
+
+	/**
+	 * Exposes V2.1 row hint markup.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param array<string,mixed> $payload Payload.
+	 * @return string
+	 */
+	public function request_backup_row_hint_html( array $site, array $payload ) {
+		return $this->request_backup_now_row_hint( $site, $payload );
+	}
+
+	/**
+	 * Exposes V2.1 detail-panel markup.
+	 *
+	 * @param array<string,mixed>          $site Site row.
+	 * @param array<string,mixed>|null     $snapshot Snapshot row.
+	 * @param array<int,array<string,mixed>> $history History rows.
+	 * @return string
+	 */
+	public function request_backup_panel_html( array $site, $snapshot, array $history ) {
+		ob_start();
+		$this->render_request_backup_now_panel( $site, $snapshot, $history );
+		return (string) ob_get_clean();
 	}
 
 	/**
