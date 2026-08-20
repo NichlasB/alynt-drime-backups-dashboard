@@ -6,7 +6,7 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`.
 
-Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. That document does not change the v1 read-only contract; it exists to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
 
 ## Current State And Safety Boundary
 
@@ -19,6 +19,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Live rollout state: deployed to `https://control.sitesmanage.com` after explicit approval.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
+- V2.1 Request Backup Now design is planning-only. The recommended first action is `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 

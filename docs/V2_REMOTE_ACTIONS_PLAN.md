@@ -4,6 +4,11 @@ This document captures future remote-operation planning for **Alynt Drime Backup
 
 Status: planning only. No runtime implementation is approved by this document.
 
+Draft V2.1 protocol and threat-model artifacts:
+
+- `docs/PROTOCOL_V2.md`
+- `docs/THREAT_MODEL_V2.md`
+
 ## Boundary Decision
 
 Version 1 remains read-only:
@@ -34,8 +39,8 @@ This preserves the current ownership boundary: the dashboard coordinates; the cl
 
 Before any remote action ships:
 
-- new protocol document, separate from `PROTOCOL_V1.md`;
-- new threat model for command authorization, replay, confused deputy, compromise, rollback, and destructive action risks;
+- approved protocol document, separate from `PROTOCOL_V1.md`;
+- approved threat model for command authorization, replay, confused deputy, compromise, rollback, and destructive action risks;
 - explicit client-side opt-in for remote actions, separate from read-only monitoring opt-in;
 - per-action capability checks on the dashboard and client;
 - per-site remote-action enablement and disablement;
@@ -61,6 +66,8 @@ Purpose: let an operator request a client site to create and/or scan for a backu
 
 Risk: lowest acceptable remote-action risk. This creates load and state on the client, but it is not inherently destructive. It is the only initial low-risk candidate for v2 implementation.
 
+Design artifact: `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md` defines the first implementation direction. It recommends `scan_upload_now` as the initial low-risk action because it can reuse the uploader's existing scanner, queue, registry, and upload worker behavior without giving the dashboard Drime credentials or forcing a backup producer to create a fresh package.
+
 Recommended constraints:
 
 - disabled by default per client site;
@@ -69,6 +76,8 @@ Recommended constraints:
 - client enforces concurrency locks and minimum intervals;
 - dashboard displays accepted, running, succeeded, failed, timed out, and rate-limited states;
 - status payload remains redacted and does not expose local paths or Drime secrets.
+
+The first implementation should not promise fresh WPvivid or server-runner backup creation unless the client declares a separate safe local capability for that action type. The operator label may be `Request Backup Now`, but the initial capability detail should clearly say `Scan for ready backup packages and upload eligible items now`.
 
 This should be the first implemented remote-action slice if v2 proceeds.
 
@@ -186,7 +195,7 @@ Keep separate from backup operations. If needed later, design it as a dedicated 
 
 ## Suggested V2 Sequence
 
-1. V2 planning baseline: protocol, threat model, action audit schema, and client opt-in model.
+1. V2 planning baseline: protocol, threat model, action audit schema, client opt-in model, and the V2.1 design artifact.
 2. V2.1 request backup now / scan-upload now as the only initial low-risk candidate.
 3. V2.2 action history and operator audit UI hardening before any higher-risk controls.
 4. V2.3 schedule management with preview and rollback as a higher-risk gated phase.
