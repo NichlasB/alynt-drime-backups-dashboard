@@ -228,10 +228,64 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 			echo '<p><button type="button" class="button button-secondary" disabled aria-disabled="true">' . esc_html__( 'Request Backup Now', 'alynt-drime-backups-dashboard' ) . '</button> <span class="description">' . esc_html__( 'Dispatch is intentionally disabled until the signed request endpoint is implemented and the client site opts in to V2 actions.', 'alynt-drime-backups-dashboard' ) . '</span></p>';
 		} else {
 			echo '<p><span class="adbd-status-pill is-pending">' . esc_html__( 'Not available yet', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
+			$this->render_action_opt_in_form( $site );
 		}
 
 		$this->render_remote_action_history( $history );
 		echo '</div></div>';
+	}
+
+	/**
+	 * Renders a display-once V2 action opt-in token result.
+	 *
+	 * @param array<string,mixed>|WP_Error|null $result Action result.
+	 * @param int                               $site_id Current site ID.
+	 * @return void
+	 */
+	private function render_action_opt_in_token_panel( $result, $site_id ) {
+		if (
+			! is_array( $result )
+			|| ! isset( $result['action'], $result['action_opt_in_token'], $result['site_id'] )
+			|| 'generate_action_opt_in_token' !== $result['action']
+			|| (int) $result['site_id'] !== (int) $site_id
+		) {
+			return;
+		}
+
+		echo '<div class="adbd-panel adbd-token-panel"><h3>' . esc_html__( 'V2 Action Opt-In Token — Shown Once', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
+		echo '<p>' . esc_html__( 'Copy this token now and paste it into the paired client site. It lets that client explicitly opt in to the V2.1 scan/upload-now action using the public action key in the token. The dashboard stores the matching private key encrypted, but it does not store this token.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<label for="adbd-action-opt-in-token"><strong>' . esc_html__( 'Action opt-in token', 'alynt-drime-backups-dashboard' ) . '</strong></label>';
+		echo '<div class="adbd-copy-row"><input id="adbd-action-opt-in-token" class="large-text code" type="text" readonly="readonly" value="' . esc_attr( (string) $result['action_opt_in_token'] ) . '" aria-describedby="adbd-action-opt-in-token-help">';
+		echo '<button type="button" class="button button-primary adbd-copy-button" hidden data-copy-target="adbd-action-opt-in-token" data-busy-label="' . esc_attr__( 'Copying…', 'alynt-drime-backups-dashboard' ) . '" data-success-message="' . esc_attr__( 'Action opt-in token copied to the clipboard.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The token could not be copied automatically. Select the field and copy it manually.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Copy Token', 'alynt-drime-backups-dashboard' ) . '</button></div>';
+		echo '<p id="adbd-action-opt-in-token-help" class="description">' . esc_html__( 'This token is not a Drime token and does not grant restore, delete, cleanup, schedule, settings, or credential actions.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p class="adbd-copy-status" role="status" aria-live="polite"></p>';
+		echo '<dl class="adbd-detail-list">';
+		$this->render_detail_item( __( 'Expires', 'alynt-drime-backups-dashboard' ), isset( $result['action_token_expires_at'] ) ? (string) $result['action_token_expires_at'] : '-' );
+		$this->render_detail_item( __( 'Expected client origin', 'alynt-drime-backups-dashboard' ), isset( $result['expected_origin'] ) ? (string) $result['expected_origin'] : '-' );
+		$this->render_detail_item( __( 'Allowed action', 'alynt-drime-backups-dashboard' ), __( 'Scan for ready backup packages and upload eligible items', 'alynt-drime-backups-dashboard' ) );
+		echo '</dl></div></div>';
+	}
+
+	/**
+	 * Renders the V2 action opt-in token generation form.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return void
+	 */
+	private function render_action_opt_in_form( array $site ) {
+		if ( ! $this->site_can_manual_check( $site ) ) {
+			return;
+		}
+
+		?>
+		<form method="post" class="adbd-inline-form">
+			<?php wp_nonce_field( 'alynt_drime_backups_dashboard_generate_action_opt_in_token' ); ?>
+			<input type="hidden" name="alynt_drime_backups_dashboard_action" value="generate_action_opt_in_token">
+			<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( isset( $site['id'] ) ? (string) (int) $site['id'] : '0' ); ?>">
+			<button type="submit" class="button" data-busy-label="<?php esc_attr_e( 'Generating…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Generate V2 Opt-In Token', 'alynt-drime-backups-dashboard' ); ?></button>
+			<span class="description"><?php esc_html_e( 'Creates a short-lived adb2a token for client-side V2 action opt-in. It does not request a backup.', 'alynt-drime-backups-dashboard' ); ?></span>
+		</form>
+		<?php
 	}
 
 	/**

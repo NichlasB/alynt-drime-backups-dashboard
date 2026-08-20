@@ -81,6 +81,8 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-remote-action-capabilities.php',
 	'includes/class-remote-action-repository.php',
 	'includes/class-remote-action-signer.php',
+	'includes/class-remote-action-opt-in-tokens.php',
+	'includes/class-remote-action-opt-in-manager.php',
 	'includes/class-status-classifier.php',
 	'includes/class-event-log-redactor.php',
 	'includes/traits/trait-event-log-storage.php',

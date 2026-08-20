@@ -19,9 +19,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 	/**
 	 * Renders one site detail shell.
 	 *
+	 * @param array<string,mixed>|WP_Error|null $result Optional action result.
 	 * @return void
 	 */
-	private function render_site_detail_shell() {
+	private function render_site_detail_shell( $result = null ) {
 		$site_id   = isset( $_GET['site_id'] ) ? absint( wp_unslash( $_GET['site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$site      = $site_id > 0 ? $this->sites->get( $site_id ) : null;
 		$snapshot  = $site ? $this->snapshots->latest_for_site( $site_id ) : null;
@@ -57,6 +58,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 
 		echo '<div class="adbd-detail-title"><h2 id="adbd-site-detail-heading">' . esc_html( $this->site_name( $site ) ) . '</h2>' . $this->status_badge( $status ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge is escaped by status_badge().
 		echo '<p class="adbd-site-meta"><span>' . esc_html( isset( $site['expected_origin'] ) ? $site['expected_origin'] : '' ) . '</span><span>' . esc_html( $this->environment_label( isset( $site['environment'] ) ? $site['environment'] : '' ) ) . '</span><span>' . esc_html( isset( $site['plugin_version'] ) && '' !== $site['plugin_version'] ? sprintf( /* translators: %s: uploader plugin version. */ __( 'Uploader %s', 'alynt-drime-backups-dashboard' ), $site['plugin_version'] ) : __( 'Uploader version unknown', 'alynt-drime-backups-dashboard' ) ) . '</span></p>';
+		$this->render_action_opt_in_token_panel( $result, $site_id );
 		$status_notice_tone = $this->status_notice_tone( $status['category'] );
 		$status_notice_role = 'error' === $status_notice_tone ? 'alert' : 'status';
 		echo '<div class="notice notice-' . esc_attr( $status_notice_tone ) . ' inline adbd-status-summary" role="' . esc_attr( $status_notice_role ) . '"><p><strong>' . esc_html( $status['message'] ) . '</strong></p><p>' . esc_html( $this->status_guidance( $status['category'] ) ) . '</p></div>';

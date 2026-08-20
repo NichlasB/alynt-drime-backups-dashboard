@@ -110,6 +110,29 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			);
 		}
 
+		if ( 'generate_action_opt_in_token' === $action ) {
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_generate_action_opt_in_token' );
+
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$result  = $this->action_opt_in_manager->create_opt_in_token( $site_id, home_url( '/', 'https' ) );
+
+			$this->record_admin_audit_action(
+				'generate_action_opt_in_token',
+				is_wp_error( $result ) ? 'failed' : 'succeeded',
+				array(
+					'dashboard_site_id' => $site_id,
+					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
+					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+				)
+			);
+
+			return $result;
+		}
+
 		if ( 'update_diagnostics_settings' === $action ) {
 			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_diagnostics_settings' );
 
@@ -227,6 +250,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 
 		if ( isset( $result['action'] ) && 'check_status_now' === $result['action'] ) {
 			$this->render_action_notice( __( 'Read-only status check completed and stored. No backup or client-site setting was changed.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
+			return;
+		}
+
+		if ( isset( $result['action'] ) && 'generate_action_opt_in_token' === $result['action'] ) {
+			$this->render_action_notice( __( 'V2 action opt-in token generated. Copy it now; the token is not stored and cannot be shown again.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
 			return;
 		}
 

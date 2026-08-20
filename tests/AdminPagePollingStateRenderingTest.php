@@ -221,6 +221,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 
 		$this->assertStringContainsString( 'Not available yet', $html );
 		$this->assertStringContainsString( 'does not advertise V2.1 scan/upload-now capability', $html );
+		$this->assertStringContainsString( 'Generate V2 Opt-In Token', $html );
 		$this->assertStringContainsString( 'No V2 remote action requests are stored for this site yet.', $html );
 	}
 
@@ -253,6 +254,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		);
 
 		$this->assertStringContainsString( 'understands V2.1 remote actions', $html );
+		$this->assertStringContainsString( 'Generate V2 Opt-In Token', $html );
 		$this->assertStringContainsString( 'Request Backup: opt-in needed', $harness->request_backup_row_hint_html( $site, $payload ) );
 	}
 }

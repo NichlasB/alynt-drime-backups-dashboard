@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '4';
+	const SCHEMA_VERSION        = '5';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -88,6 +88,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				pairing_expires_at datetime NULL,
 				polling_key_id varchar(64) NULL,
 				polling_secret_ciphertext longtext NULL,
+				action_key_id varchar(128) NULL,
+				action_private_key_ciphertext longtext NULL,
 				plugin_version varchar(64) NULL,
 				payload_schema_version smallint(5) unsigned NULL,
 				overall_status varchar(32) NOT NULL DEFAULT 'pending',
@@ -106,6 +108,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY expected_origin (expected_origin(191)),
 				KEY pending_origin (expected_origin(191), enrollment_status, pairing_expires_at),
 				KEY enrollment_status (enrollment_status),
+				KEY action_key_id (action_key_id),
 				KEY next_poll_at (next_poll_at),
 				KEY poll_due (enrollment_status, paused_at, next_poll_at, id),
 				KEY last_seen_at (last_seen_at)

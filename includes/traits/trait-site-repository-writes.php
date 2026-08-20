@@ -70,17 +70,19 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 		$updated = $wpdb->update(
 			$table,
 			array(
-				'enrollment_status'         => 'revoked',
-				'overall_status'            => 'pending',
-				'pairing_secret_hash'       => null,
-				'pairing_expires_at'        => null,
-				'polling_key_id'            => null,
-				'polling_secret_ciphertext' => null,
-				'next_poll_at'              => null,
-				'updated_at'                => $now,
+				'enrollment_status'             => 'revoked',
+				'overall_status'                => 'pending',
+				'pairing_secret_hash'           => null,
+				'pairing_expires_at'            => null,
+				'polling_key_id'                => null,
+				'polling_secret_ciphertext'     => null,
+				'action_key_id'                 => null,
+				'action_private_key_ciphertext' => null,
+				'next_poll_at'                  => null,
+				'updated_at'                    => $now,
 			),
 			array( 'id' => (int) $site_id ),
-			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
+			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
 			array( '%d' )
 		);
 
@@ -163,6 +165,37 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 			array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' ),
 			array( '%d' )
 		);
+	}
+
+	/**
+	 * Stores a dashboard-owned V2 action signing key for one enrolled site.
+	 *
+	 * @since 0.1.14
+	 *
+	 * @param int    $site_id Site ID.
+	 * @param string $action_key_id Action key ID.
+	 * @param string $private_key_ciphertext Encrypted private key.
+	 * @return bool
+	 */
+	public function store_action_signing_key( $site_id, $action_key_id, $private_key_ciphertext ) {
+		global $wpdb;
+
+		$now   = current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		$updated = $wpdb->update(
+			$table,
+			array(
+				'action_key_id'                 => sanitize_text_field( (string) $action_key_id ),
+				'action_private_key_ciphertext' => (string) $private_key_ciphertext,
+				'updated_at'                    => $now,
+			),
+			array( 'id' => (int) $site_id ),
+			array( '%s', '%s', '%s' ),
+			array( '%d' )
+		);
+
+		return $this->update_changed_existing_row( $updated );
 	}
 
 	/**
