@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1 protocol baseline. The local action opt-in token foundation has been implemented, but signed action dispatch, the client action-intent endpoint, release, deployment, and live-site enablement remain unapproved and unimplemented.
+Status: V2.1 protocol baseline. The local action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented locally. Release, deployment, and live-site enablement remain separate approval gates.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 

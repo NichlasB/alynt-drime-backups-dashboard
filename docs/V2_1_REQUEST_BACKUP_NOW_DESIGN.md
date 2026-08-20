@@ -1,6 +1,6 @@
 # V2.1 Request Backup Now Design
 
-Status: V2.1 design baseline. The local action opt-in token foundation has been implemented, but signed dispatch, the client action-intent endpoint, release, deployment, and live-site enablement remain unapproved and unimplemented.
+Status: V2.1 design baseline. The local action opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint have been implemented locally. Release, deployment, and live-site enablement remain separate approval gates.
 
 Related planning:
 

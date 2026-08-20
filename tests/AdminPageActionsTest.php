@@ -38,6 +38,19 @@ if ( ! function_exists( 'wp_verify_nonce' ) ) {
 	}
 }
 
+if ( ! function_exists( 'get_current_user_id' ) ) {
+	/**
+	 * Test get_current_user_id shim.
+	 *
+	 * @return int
+	 */
+	function get_current_user_id() {
+		global $alynt_drime_backups_dashboard_test_current_user_id;
+
+		return (int) $alynt_drime_backups_dashboard_test_current_user_id;
+	}
+}
+
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-actions.php';
 
 /**
@@ -79,6 +92,98 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager {
 }
 
 /**
+ * Fake remote action dispatcher.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Dispatcher {
+	/**
+	 * Calls.
+	 *
+	 * @var array<int,array<string,int>>
+	 */
+	public $calls = array();
+
+	/**
+	 * Result.
+	 *
+	 * @var array<string,mixed>|WP_Error
+	 */
+	public $result = array(
+		'action'       => 'request_backup_now',
+		'remote_state' => 'accepted',
+	);
+
+	/**
+	 * Records request.
+	 *
+	 * @param int $site_id Site ID.
+	 * @param int $requested_by User ID.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function request_scan_upload_now( $site_id, $requested_by = 0 ) {
+		$this->calls[] = array(
+			'site_id'      => (int) $site_id,
+			'requested_by' => (int) $requested_by,
+		);
+
+		return $this->result;
+	}
+}
+
+/**
+ * Fake poller.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Poller {
+	/**
+	 * Calls.
+	 *
+	 * @var array<int,int>
+	 */
+	public $calls = array();
+
+	/**
+	 * Checks status.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return array<string,mixed>
+	 */
+	public function check_status_now( $site_id ) {
+		$this->calls[] = (int) $site_id;
+
+		return array(
+			'category' => 'working',
+		);
+	}
+}
+
+/**
+ * Fake event log.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Event_Log {
+	/**
+	 * Audit calls.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $audit_calls = array();
+
+	/**
+	 * Records audit.
+	 *
+	 * @param string              $action Action.
+	 * @param string              $outcome Outcome.
+	 * @param array<string,mixed> $context Context.
+	 * @return void
+	 */
+	public function audit_action( $action, $outcome, array $context = array() ) {
+		$this->audit_calls[] = array(
+			'action'  => $action,
+			'outcome' => $outcome,
+			'context' => $context,
+		);
+	}
+}
+
+/**
  * Minimal harness exposing the private trait action handler for tests.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness {
@@ -92,12 +197,36 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness {
 	public $enrollment_manager;
 
 	/**
+	 * Remote action dispatcher.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Dispatcher
+	 */
+	public $remote_action_dispatcher;
+
+	/**
+	 * Poller.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Poller
+	 */
+	public $poller;
+
+	/**
+	 * Event log.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Event_Log
+	 */
+	public $event_log;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager $enrollment_manager Enrollment manager.
 	 */
 	public function __construct( $enrollment_manager ) {
-		$this->enrollment_manager = $enrollment_manager;
+		$this->enrollment_manager       = $enrollment_manager;
+		$this->remote_action_dispatcher = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Dispatcher();
+		$this->poller                   = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Poller();
+		$this->event_log                = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Event_Log();
 	}
 
 	/**
@@ -131,12 +260,14 @@ class AdminPageActionsTest extends TestCase {
 
 		global $alynt_drime_backups_dashboard_test_nonce_action;
 		global $alynt_drime_backups_dashboard_test_nonce_value;
+		global $alynt_drime_backups_dashboard_test_current_user_id;
 
 		$this->previous_post = $_POST;
 		$_POST              = array();
 
 		$alynt_drime_backups_dashboard_test_nonce_action = '';
 		$alynt_drime_backups_dashboard_test_nonce_value  = '';
+		$alynt_drime_backups_dashboard_test_current_user_id = 77;
 	}
 
 	/**
@@ -206,6 +337,37 @@ class AdminPageActionsTest extends TestCase {
 		$this->assertCount( 1, $manager->calls );
 		$this->assertSame( $_POST['alynt_drime_backups_dashboard_pending_site'], $manager->calls[0]['raw'] );
 		$this->assertSame( 'https://control.sitesmanage.com/', $manager->calls[0]['dashboard_origin'] );
+	}
+
+	/**
+	 * Request Backup Now delegates after nonce validation and performs a read-only follow-up poll.
+	 *
+	 * @return void
+	 */
+	public function test_valid_request_backup_now_nonce_delegates_and_polls_after_acceptance() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_request_backup_now';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'request_backup_now',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'request_backup_now', $result['action'] );
+		$this->assertTrue( $result['poll_after_dispatch'] );
+		$this->assertSame( array( array( 'site_id' => 42, 'requested_by' => 77 ) ), $harness->remote_action_dispatcher->calls );
+		$this->assertSame( array( 42 ), $harness->poller->calls );
+		$this->assertSame( 'request_backup_now', $harness->event_log->audit_calls[0]['action'] );
 	}
 
 	/**

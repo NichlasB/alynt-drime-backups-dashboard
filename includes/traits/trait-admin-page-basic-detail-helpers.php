@@ -225,7 +225,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 
 		if ( $availability['available'] ) {
 			echo '<p><span class="adbd-status-pill is-working">' . esc_html__( 'Capability reported', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
-			echo '<p><button type="button" class="button button-secondary" disabled aria-disabled="true">' . esc_html__( 'Request Backup Now', 'alynt-drime-backups-dashboard' ) . '</button> <span class="description">' . esc_html__( 'Dispatch is intentionally disabled until the signed request endpoint is implemented and the client site opts in to V2 actions.', 'alynt-drime-backups-dashboard' ) . '</span></p>';
+			$this->render_request_backup_now_form( $site );
 		} else {
 			echo '<p><span class="adbd-status-pill is-pending">' . esc_html__( 'Not available yet', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
 			$this->render_action_opt_in_form( $site );
@@ -233,6 +233,24 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 
 		$this->render_remote_action_history( $history );
 		echo '</div></div>';
+	}
+
+	/**
+	 * Renders the signed V2.1 Request Backup Now form.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return void
+	 */
+	private function render_request_backup_now_form( array $site ) {
+		?>
+		<form method="post" class="adbd-inline-form">
+			<?php wp_nonce_field( 'alynt_drime_backups_dashboard_request_backup_now' ); ?>
+			<input type="hidden" name="alynt_drime_backups_dashboard_action" value="request_backup_now">
+			<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( isset( $site['id'] ) ? (string) (int) $site['id'] : '0' ); ?>">
+			<button type="submit" class="button button-secondary" data-busy-label="<?php esc_attr_e( 'Requesting…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Request Backup Now', 'alynt-drime-backups-dashboard' ); ?></button>
+			<span class="description"><?php esc_html_e( 'Sends one signed scan/upload-now intent. The client site may accept, reject, rate-limit, or report busy; no backup creation, restore, cleanup, settings, or credential action is requested.', 'alynt-drime-backups-dashboard' ); ?></span>
+		</form>
+		<?php
 	}
 
 	/**
@@ -324,9 +342,17 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		$capabilities   = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
 
 		if ( $capabilities->supports_scan_upload_now( $remote_actions ) ) {
+			if ( array_key_exists( 'action_key_id', $site ) && ( empty( $site['action_key_id'] ) || empty( $site['action_private_key_ciphertext'] ) ) ) {
+				return array(
+					'available'   => false,
+					'message'     => __( 'The latest client report says scan/upload-now capability is available, but this dashboard record no longer has the encrypted signing key. Regenerate the V2 opt-in token and run Check Now.', 'alynt-drime-backups-dashboard' ),
+					'short_label' => __( 'Request Backup: opt-in needed', 'alynt-drime-backups-dashboard' ),
+				);
+			}
+
 			return array(
 				'available'   => true,
-				'message'     => __( 'The latest client report says scan/upload-now capability is available, but this dashboard build has not enabled dispatch yet.', 'alynt-drime-backups-dashboard' ),
+				'message'     => __( 'The latest client report says scan/upload-now capability is available. The request is signed by this dashboard and the client remains the execution owner.', 'alynt-drime-backups-dashboard' ),
 				'short_label' => __( 'Request Backup: capability reported', 'alynt-drime-backups-dashboard' ),
 			);
 		}

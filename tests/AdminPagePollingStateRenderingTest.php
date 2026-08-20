@@ -159,16 +159,19 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
-	 * The V2.1 detail panel is visible but inert before dispatch exists.
+	 * The V2.1 detail panel renders a signed dispatch form when capability is present.
 	 *
 	 * @return void
 	 */
-	public function test_request_backup_now_panel_renders_disabled_control_and_safe_history() {
+	public function test_request_backup_now_panel_renders_dispatch_form_and_safe_history() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site    = array(
+			'id'                           => 7,
 			'enrollment_status'  => 'active',
 			'polling_key_id'     => 'key-id',
 			'has_polling_secret' => '1',
+			'action_key_id'                => 'ak_test',
+			'action_private_key_ciphertext' => 'ciphertext',
 		);
 		$snapshot = array(
 			'decoded_payload' => array(
@@ -192,11 +195,43 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 
 		$this->assertStringContainsString( 'Request Backup Now', $html );
 		$this->assertStringContainsString( 'Capability reported', $html );
-		$this->assertStringContainsString( 'disabled aria-disabled="true"', $html );
+		$this->assertStringContainsString( '<form method="post"', $html );
+		$this->assertStringContainsString( 'value="request_backup_now"', $html );
+		$this->assertStringContainsString( 'value="7"', $html );
 		$this->assertStringContainsString( 'Queued for dispatch', $html );
 		$this->assertStringContainsString( 'Stored locally only.', $html );
-		$this->assertStringNotContainsString( '<form', $html );
 		$this->assertStringNotContainsString( 'private', strtolower( $html ) );
+	}
+
+	/**
+	 * Detail rows fail closed when a local signing key is missing.
+	 *
+	 * @return void
+	 */
+	public function test_request_backup_now_panel_requires_local_signing_key_when_detail_fields_are_loaded() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'id'                            => 7,
+			'enrollment_status'             => 'active',
+			'polling_key_id'                => 'key-id',
+			'has_polling_secret'            => '1',
+			'action_key_id'                 => '',
+			'action_private_key_ciphertext' => '',
+		);
+		$snapshot = array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version' => 2,
+					'enabled'          => true,
+					'allowed_actions'  => array( 'scan_upload_now' ),
+					'sodium_available' => true,
+				),
+			),
+		);
+		$html     = $harness->request_backup_panel_html( $site, $snapshot, array() );
+
+		$this->assertStringContainsString( 'encrypted signing key', $html );
+		$this->assertStringNotContainsString( 'value="request_backup_now"', $html );
 	}
 
 	/**

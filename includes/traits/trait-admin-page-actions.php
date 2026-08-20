@@ -133,6 +133,42 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			return $result;
 		}
 
+		if ( 'request_backup_now' === $action ) {
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_request_backup_now' );
+
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id      = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$requested_by = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
+			$result       = $this->remote_action_dispatcher->request_scan_upload_now( $site_id, $requested_by );
+
+			$this->record_admin_audit_action(
+				'request_backup_now',
+				is_wp_error( $result ) ? 'failed' : 'succeeded',
+				array(
+					'dashboard_site_id' => $site_id,
+					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
+					'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
+					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+				)
+			);
+
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+
+			if ( $this->remote_action_should_poll_after_dispatch( $result ) ) {
+				$poll_result = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+
+				$result['poll_after_dispatch'] = ! is_wp_error( $poll_result );
+				$result['poll_error_code']     = is_wp_error( $poll_result ) ? $poll_result->get_error_code() : '';
+			}
+
+			return $result;
+		}
+
 		if ( 'update_diagnostics_settings' === $action ) {
 			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_diagnostics_settings' );
 
@@ -258,6 +294,26 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			return;
 		}
 
+		if ( isset( $result['action'] ) && 'request_backup_now' === $result['action'] ) {
+			$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
+
+			if ( in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true ) ) {
+				$message = ! empty( $result['poll_after_dispatch'] )
+					? __( 'Request Backup Now was accepted by the client site, and a read-only status check was completed.', 'alynt-drime-backups-dashboard' )
+					: __( 'Request Backup Now was accepted by the client site. Wait briefly, then use Check Now to confirm the latest reported result.', 'alynt-drime-backups-dashboard' );
+				$this->render_action_notice( $message, 'notice-success' );
+				return;
+			}
+
+			if ( in_array( $remote_state, array( 'rate_limited', 'busy', 'rejected', 'unsupported' ), true ) ) {
+				$this->render_action_notice( isset( $result['result_summary'] ) ? (string) $result['result_summary'] : __( 'The client site did not accept the remote action request.', 'alynt-drime-backups-dashboard' ), 'notice-warning' );
+				return;
+			}
+
+			$this->render_action_notice( __( 'Request Backup Now could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
+			return;
+		}
+
 		if ( isset( $result['action'] ) && 'update_diagnostics_settings' === $result['action'] ) {
 			$message = ! empty( $result['success'] )
 				? __( 'Diagnostics settings saved.', 'alynt-drime-backups-dashboard' )
@@ -295,5 +351,17 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			$is_error ? 'assertive' : 'polite',
 			esc_html( $message )
 		);
+	}
+
+	/**
+	 * Returns whether a dispatch response should be followed by a read-only poll.
+	 *
+	 * @param array<string,mixed> $result Dispatch result.
+	 * @return bool
+	 */
+	private function remote_action_should_poll_after_dispatch( array $result ) {
+		$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
+
+		return in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true );
 	}
 }

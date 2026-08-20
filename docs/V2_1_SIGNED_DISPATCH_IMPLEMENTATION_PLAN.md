@@ -21,7 +21,7 @@ The following V2.1 foundations are already implemented locally:
 - dashboard encrypted per-site action private-key storage;
 - uploader `adb2a` parser and explicit client-side V2 action opt-in;
 - uploader redacted `remote_actions` capability summary with `enabled`, `key_id`, `allowed_actions`, `sodium_available`, `min_interval_seconds`, and `one_running_action_per_site`;
-- no action dispatch endpoint;
+- local dashboard action dispatch endpoint client has been implemented in the dashboard, and the paired uploader action-intent endpoint has been implemented locally;
 - no remote backup execution.
 
 Recent local baseline commits:
@@ -50,8 +50,8 @@ The client uploader remains the execution owner and must be able to reject the r
 
 Implement this as two local commits, then run focused feature workflows before any release planning:
 
-1. **Uploader receive/verify/enqueue slice** - add the disabled-by-default V2 action-intent endpoint and local action audit/idempotency store.
-2. **Dashboard sign/dispatch/reconcile slice** - add the operator confirmation action, signed POST dispatch, state recording, safe response handling, and optional immediate read-only poll after client acceptance.
+1. **Uploader receive/verify/enqueue slice** - completed locally: disabled-by-default V2 action-intent endpoint and local action audit/idempotency store.
+2. **Dashboard sign/dispatch/reconcile slice** - completed locally: operator action, signed POST dispatch, state recording, safe response handling, and optional immediate read-only poll after client acceptance.
 
 Release order, later and separately approved:
 
@@ -363,4 +363,3 @@ Before writing endpoint/dispatch implementation code, confirm:
 - the client may schedule existing local scan/upload workers but must not trigger backup creation;
 - dashboard will still not receive Drime credentials, local paths, package names, Drime IDs, signed URLs, or raw responses;
 - implementation remains local-only until a separate release/deploy approval gate.
-

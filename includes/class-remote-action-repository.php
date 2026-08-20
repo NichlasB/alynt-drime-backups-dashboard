@@ -161,6 +161,38 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	}
 
 	/**
+	 * Marks an action as dispatched without storing remote response contents.
+	 *
+	 * @since 0.1.14
+	 *
+	 * @param int $action_id Action row ID.
+	 * @return bool
+	 */
+	public function mark_dispatched( $action_id ) {
+		global $wpdb;
+
+		$action_id = absint( $action_id );
+
+		if ( 0 === $action_id ) {
+			return false;
+		}
+
+		$now = current_time( 'mysql', true );
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository updates a plugin-owned custom table; callers own caching decisions.
+		$updated = $wpdb->update(
+			Alynt_Drime_Backups_Dashboard_Storage::actions_table(),
+			array(
+				'dispatched_at' => $now,
+				'updated_at'    => $now,
+			),
+			array( 'id' => $action_id )
+		);
+
+		return false !== $updated;
+	}
+
+	/**
 	 * Gets latest action for one site.
 	 *
 	 * @since 0.1.14

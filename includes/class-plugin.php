@@ -56,8 +56,10 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 		$this->snapshots = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
 		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
 		$event_log       = new Alynt_Drime_Backups_Dashboard_Event_Log();
+		$remote_actions  = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
 		$this->poller    = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier, null, null, null, null, $event_log );
 		$diagnostics     = new Alynt_Drime_Backups_Dashboard_Diagnostics( $sites, $this->snapshots, $classifier, $event_log );
+		$dispatcher      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher( $sites, $this->snapshots, $remote_actions );
 
 		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(
 			$sites,
@@ -65,7 +67,10 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 			$classifier,
 			null,
 			$this->poller,
-			$diagnostics
+			$diagnostics,
+			$remote_actions,
+			null,
+			$dispatcher
 		);
 		$this->enrollment_rest_controller = new Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller( null, null, null, $event_log );
 
