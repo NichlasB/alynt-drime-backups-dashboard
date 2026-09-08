@@ -1,6 +1,6 @@
 # V2.1 Request Backup Now Design
 
-Status: V2.1 design baseline. The local action opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint have been implemented locally. Release, deployment, and live-site enablement remain separate approval gates.
+Status: V2.1 design baseline. The action opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint have been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader client enablement remains a separate per-site approval gate.
 
 Related planning:
 

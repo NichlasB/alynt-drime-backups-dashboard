@@ -10,7 +10,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 
 ## Current State And Safety Boundary
 
-- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now is implemented locally as a release-candidate slice and is awaiting final pre-release/release gates before any live enablement.
+- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now has been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader V2.1 client enablement remains a separate per-site approval gate.
 - Dashboard repository: created locally at `C:\Development\WordPress\Plugins\alynt-drime-backups-dashboard`.
 - Dashboard plugin files: implemented and released through GitHub release assets.
 - Dashboard pending-enrollment token generation: implemented.
@@ -19,7 +19,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Live rollout state: deployed to `https://control.sitesmanage.com` after explicit approval.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
-- V2.1 Request Backup Now has a local opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented locally. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability. Release, deployment, and live-site enablement remain separate approval gates.
+- V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability. `purecleanse.net` has completed the first controlled live pilot; additional client enablement remains separately approval-gated.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 

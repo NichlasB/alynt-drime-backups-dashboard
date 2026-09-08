@@ -2,7 +2,7 @@
 
 This document captures future remote-operation planning for **Alynt Drime Backups Dashboard**. It is intentionally separate from the v1 implementation plan because v1 is an operational read-only monitoring dashboard, while remote actions introduce a materially different security and reliability model.
 
-Status: V2 planning baseline. The local V2.1 action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented locally. Release, deployment, and live-site enablement remain separate approval gates.
+Status: V2 planning baseline. The V2.1 action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader client enablement remains a separate per-site approval gate.
 
 Draft V2.1 protocol and threat-model artifacts:
 
@@ -11,7 +11,7 @@ Draft V2.1 protocol and threat-model artifacts:
 - `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`
 - `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`
 
-Current local implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint.
+Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
 ## Boundary Decision
 

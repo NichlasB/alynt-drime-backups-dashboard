@@ -1,6 +1,6 @@
 # V2.1 Signed Request Backup Now Dispatch Implementation Plan
 
-Status: local implementation planning. This document does not approve release, deployment, live-site enablement, broad rollout, destructive actions, restore actions, schedule changes, or Drime credential storage in the dashboard.
+Status: implementation baseline. V2.1 signed dispatch has been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. This document does not approve broad rollout, destructive actions, restore actions, schedule changes, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -12,7 +12,7 @@ Related artifacts:
 
 ## Current Baseline
 
-The following V2.1 foundations are already implemented locally:
+The following V2.1 foundations are implemented and released:
 
 - dashboard action table and dashboard-local action repository;
 - dashboard redacted action-history display;
@@ -22,7 +22,14 @@ The following V2.1 foundations are already implemented locally:
 - uploader `adb2a` parser and explicit client-side V2 action opt-in;
 - uploader redacted `remote_actions` capability summary with `enabled`, `key_id`, `allowed_actions`, `sodium_available`, `min_interval_seconds`, and `one_running_action_per_site`;
 - local dashboard action dispatch endpoint client has been implemented in the dashboard, and the paired uploader action-intent endpoint has been implemented locally;
-- no remote backup execution.
+- no remote backup creation, restore, delete, cleanup, schedule mutation, arbitrary command execution, or dashboard-side Drime credential storage.
+
+Controlled live pilot:
+
+- `purecleanse.net` was enabled as the first V2.1 client pilot.
+- A signed `scan_upload_now` request was accepted and the client worker completed successfully with queue 0 and failed 0.
+- A follow-up request was intentionally rate-limited by the client, confirming the one-hour guard.
+- Broader client enablement remains separately approval-gated.
 
 Recent local baseline commits:
 
