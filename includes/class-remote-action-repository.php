@@ -52,6 +52,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	 * @param string              $expires_at Expiry date in MySQL UTC format.
 	 * @param string              $request_fingerprint Request fingerprint.
 	 * @param array<string,mixed> $context Redacted context.
+	 * @param string              $public_id Optional pre-generated public action UUID.
 	 * @return int|WP_Error
 	 */
 	public function create_request(
@@ -62,12 +63,14 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 		$action_key_id,
 		$expires_at,
 		$request_fingerprint = '',
-		array $context = array()
+		array $context = array(),
+		$public_id = ''
 	) {
 		global $wpdb;
 
 		$site_id     = absint( $site_id );
 		$action_type = $this->capabilities->sanitize_action_type( $action_type );
+		$public_id   = $this->sanitize_uuid( $public_id );
 
 		if ( 0 === $site_id || '' === $action_type ) {
 			return new WP_Error( 'remote_action_invalid', __( 'The remote action request is not valid.', 'alynt-drime-backups-dashboard' ) );
@@ -85,7 +88,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 		$inserted = $wpdb->insert(
 			$table,
 			array(
-				'public_id'             => $this->create_uuid(),
+				'public_id'             => '' === $public_id ? $this->create_uuid() : $public_id,
 				'dashboard_site_id'     => $site_id,
 				'action_type'           => $action_type,
 				'state'                 => self::DEFAULT_STATE,

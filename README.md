@@ -2,7 +2,7 @@
 
 Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
 
-This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.16 adds V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers.
+This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.17 includes V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers, plus a patch fix so newly dispatched action rows use the same public action UUID reported by clients.
 
 ## v1 Boundary
 
@@ -33,7 +33,7 @@ This repository is the separate dashboard plugin package. The current dashboard 
 
 ## Current Status
 
-Version 0.1.16 currently includes:
+Version 0.1.17 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.

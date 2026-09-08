@@ -261,6 +261,8 @@ class RemoteActionDispatcherTest extends TestCase {
 		$this->assertSame( 'application/json', $captured['args']['headers']['Content-Type'] );
 		$this->assertSame( 'ak_test', $captured['args']['headers']['X-Adbd-Action-Key-Id'] );
 		$this->assertStringStartsWith( 'sig_', $captured['args']['headers']['X-Adbd-Action-Signature'] );
+		$request_body = json_decode( $captured['args']['body'], true );
+		$this->assertSame( $request_body['action_id'], $this->wpdb->inserted_data['public_id'] );
 		$this->assertSame( 'scan_upload_now', $this->wpdb->inserted_data['action_type'] );
 		$last_update = end( $this->wpdb->updates );
 		$this->assertSame( 'accepted', $last_update['data']['state'] );

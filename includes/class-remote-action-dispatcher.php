@@ -150,7 +150,8 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 				'capability_reported'   => true,
 				'min_interval_seconds'  => isset( $capabilities['min_interval_seconds'] ) ? absint( $capabilities['min_interval_seconds'] ) : 0,
 				'requested_action_type' => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
-			)
+			),
+			$prepared['body']['action_id']
 		);
 
 		if ( is_wp_error( $action_id ) ) {

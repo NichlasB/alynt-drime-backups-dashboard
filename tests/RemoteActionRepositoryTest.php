@@ -249,11 +249,13 @@ class RemoteActionRepositoryTest extends TestCase {
 				'operator_note' => '<b>Manual check</b>',
 				'client_path'   => '/private/path',
 				'found'         => 3,
-			)
+			),
+			'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
 		);
 
 		$this->assertSame( 321, $action_id );
 		$this->assertSame( 'wp_alynt_drime_dashboard_actions', $this->wpdb->inserted_table );
+		$this->assertSame( 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', $this->wpdb->inserted_data['public_id'] );
 		$this->assertSame( 44, $this->wpdb->inserted_data['dashboard_site_id'] );
 		$this->assertSame( 'scan_upload_now', $this->wpdb->inserted_data['action_type'] );
 		$this->assertSame( 'queued_for_dispatch', $this->wpdb->inserted_data['state'] );

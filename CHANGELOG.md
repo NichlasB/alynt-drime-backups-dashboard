@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.17 - 2026-09-08
+
+### Fixed
+
+- Fixed V2.2 remote-action reconciliation for newly dispatched Request Backup Now actions by storing the signed action UUID as the dashboard action record public ID, matching the client-reported `remote_actions.last_action.action_id`.
+
 ## 0.1.16 - 2026-09-08
 
 ### Added
