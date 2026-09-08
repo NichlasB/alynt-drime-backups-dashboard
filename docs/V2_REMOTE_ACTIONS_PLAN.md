@@ -10,6 +10,7 @@ Draft V2.1 protocol and threat-model artifacts:
 - `docs/THREAT_MODEL_V2.md`
 - `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`
 - `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`
+- `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -90,6 +91,8 @@ This should be the first implemented remote-action slice if v2 proceeds.
 Purpose: make remote-action state visible, reviewable, and support-safe before any persistent behavior change is allowed.
 
 Dashboard-local foundation status: v1 now includes an always-on, bounded, redacted operator action history for local dashboard actions. This is not a remote-action implementation, but it establishes the support-safe storage/display pattern that future v2 remote-action history should build on rather than replace.
+
+Implementation planning: `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`.
 
 Risk: non-destructive, but still gated because it defines the operator evidence model for later higher-risk actions.
 

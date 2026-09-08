@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Threat Model v2
 
-Status: draft planning baseline for V2.1 design review. This document does not approve runtime implementation, release, deployment, or live-site enablement.
+Status: V2.1 threat-model baseline. V2.1 signed `scan_upload_now` dispatch has been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. This document does not approve broad rollout, V2.2+ implementation, destructive actions, restore actions, schedule changes, cleanup/delete actions, or Drime credential storage in the dashboard.
 
 Scope: V2.1 `scan_upload_now` remote-action planning for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 

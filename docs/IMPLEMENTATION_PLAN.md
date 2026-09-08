@@ -6,7 +6,7 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`. V2.1 action-request protocol details are tracked in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`.
 
-Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, and signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, and V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
 
 ## Current State And Safety Boundary
 
@@ -20,6 +20,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
 - V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability. `purecleanse.net` has completed the first controlled live pilot; additional client enablement remains separately approval-gated.
+- V2.2 is the next planned feature slice. It should harden remote-action history, dashboard/client reconciliation, stale-action evidence, filters, diagnostics, and support-safe exports before broader V2.1 rollout or any V2.3+ higher-risk action class.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
