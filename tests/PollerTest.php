@@ -16,6 +16,9 @@ require_once dirname( __DIR__ ) . '/includes/class-status-classifier.php';
 require_once dirname( __DIR__ ) . '/includes/class-event-log-redactor.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-storage.php';
 require_once dirname( __DIR__ ) . '/includes/class-event-log.php';
+require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
+require_once dirname( __DIR__ ) . '/includes/class-remote-action-repository.php';
+require_once dirname( __DIR__ ) . '/includes/class-remote-action-reconciler.php';
 require_once dirname( __DIR__ ) . '/includes/class-status-payload-validator.php';
 require_once dirname( __DIR__ ) . '/includes/class-safe-transport.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-scheduling.php';
@@ -224,6 +227,45 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository extends Alyn
 		);
 
 		return $this->record_result;
+	}
+}
+
+/**
+ * Fake remote action reconciler for poller tests.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Poller_Remote_Action_Reconciler extends Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler {
+	/**
+	 * Calls.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $calls = array();
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct() {}
+
+	/**
+	 * Reconciles payload.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param array<string,mixed> $payload Payload.
+	 * @param string|null         $now Now.
+	 * @return array<string,int>
+	 */
+	public function reconcile_site_payload( $site_id, array $payload, $now = null ) {
+		unset( $now );
+
+		$this->calls[] = array(
+			'site_id' => $site_id,
+			'payload' => $payload,
+		);
+
+		return array(
+			'matched' => 0,
+			'stale'   => 0,
+		);
 	}
 }
 
@@ -507,7 +549,9 @@ class PollerTest extends TestCase {
 				}
 			),
 			new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator(),
-			$http_client
+			$http_client,
+			null,
+			new Alynt_Drime_Backups_Dashboard_Test_Poller_Remote_Action_Reconciler()
 		);
 	}
 

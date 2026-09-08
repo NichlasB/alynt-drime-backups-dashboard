@@ -55,7 +55,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			),
 		);
 
-		return $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now );
+		return $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now, $this->remote_actions->support_summary() );
 	}
 
 	/**
@@ -66,10 +66,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 	 * @param array<int,array<string,mixed>> $recent Recent outcomes.
 	 * @param array<string,mixed>            $logging Logging diagnostics.
 	 * @param int                            $now Current Unix timestamp.
+	 * @param array<string,mixed>|null       $remote_actions Remote action aggregate summary.
 	 * @return array<string,mixed>
 	 */
-	private function support_summary_from_diagnostics( array $scheduler, array $counts, array $recent, array $logging, $now ) {
-		$now = (int) $now;
+	private function support_summary_from_diagnostics( array $scheduler, array $counts, array $recent, array $logging, $now, $remote_actions = null ) {
+		$now            = (int) $now;
+		$remote_actions = is_array( $remote_actions ) ? $remote_actions : array();
 
 		return array(
 			'plugin'      => array(
@@ -89,7 +91,24 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			),
 			'counts'      => $counts,
 			'logging'     => $this->support_logging_summary_from_diagnostics( $logging ),
+			'actions'     => $this->support_remote_action_summary( $remote_actions ),
 			'recent_safe' => $this->support_recent_outcomes( $recent ),
+		);
+	}
+
+	/**
+	 * Reduces remote-action aggregate data to support-safe fields.
+	 *
+	 * @param array<string,mixed> $remote_actions Remote action aggregate summary.
+	 * @return array<string,mixed>
+	 */
+	private function support_remote_action_summary( array $remote_actions ) {
+		return array(
+			'total'                 => isset( $remote_actions['total'] ) ? max( 0, (int) $remote_actions['total'] ) : 0,
+			'client_reconciled'     => isset( $remote_actions['client_reconciled'] ) ? max( 0, (int) $remote_actions['client_reconciled'] ) : 0,
+			'stale'                 => isset( $remote_actions['stale'] ) ? max( 0, (int) $remote_actions['stale'] ) : 0,
+			'awaiting_confirmation' => isset( $remote_actions['awaiting_confirmation'] ) ? max( 0, (int) $remote_actions['awaiting_confirmation'] ) : 0,
+			'latest_updated_at'     => isset( $remote_actions['latest_updated_at'] ) ? sanitize_text_field( (string) $remote_actions['latest_updated_at'] ) : '',
 		);
 	}
 

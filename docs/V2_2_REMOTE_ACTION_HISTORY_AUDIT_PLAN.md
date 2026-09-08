@@ -1,6 +1,6 @@
 # V2.2 Remote Action History And Audit UI Hardening Plan
 
-Status: planning baseline. This document does not approve runtime implementation, release, deployment, broad client enablement, destructive actions, restore actions, schedule changes, cleanup/delete actions, or Drime credential storage in the dashboard.
+Status: implemented and validated locally; pending explicit release/deployment approval. This document does not approve release, deployment, broad client enablement, destructive actions, restore actions, schedule changes, cleanup/delete actions, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -23,6 +23,8 @@ The pilot showed that the remote-action security and dispatch model works, but i
 - the dashboard does not yet reconcile that client-reported final evidence back into the durable dashboard action row in a way that supports strong filtering, review, stale-action detection, or support exports.
 
 V2.2 should close that evidence gap before broader V2.1 enablement or any higher-risk V2.3+ control is considered.
+
+Local implementation note: the dashboard now adds action-table reconciliation fields, reconciles sanitized `remote_actions.last_action` evidence after successful status polls, marks unconfirmed accepted/running actions stale after bounded thresholds, distinguishes dashboard and client state in Site Detail action history, shows a compact latest-client-action hint on Sites rows, and adds support-safe aggregate action-history counts to Diagnostics support copy.
 
 ## Goal
 

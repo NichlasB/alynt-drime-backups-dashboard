@@ -16,8 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
-	const DEFAULT_STATE  = 'queued_for_dispatch';
-	const RETENTION_DAYS = 90;
+	const DEFAULT_STATE                       = 'queued_for_dispatch';
+	const RETENTION_DAYS                      = 90;
+	const ACCEPTED_CONFIRMATION_STALE_SECONDS = 1800;
+	const RUNNING_CONFIRMATION_STALE_SECONDS  = 3600;
 
 	/**
 	 * Capability sanitizer.
@@ -193,6 +195,154 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	}
 
 	/**
+	 * Finds one dashboard action by public ID and dashboard site.
+	 *
+	 * @since 0.1.16
+	 *
+	 * @param string $public_id Public action UUID.
+	 * @param int    $site_id Dashboard site ID.
+	 * @return array<string,mixed>|null
+	 */
+	public function find_by_public_id_for_site( $public_id, $site_id ) {
+		global $wpdb;
+
+		$public_id = $this->sanitize_uuid( $public_id );
+		$site_id   = absint( $site_id );
+
+		if ( '' === $public_id || 0 === $site_id ) {
+			return null;
+		}
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::actions_table();
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository reads a plugin-owned custom table; callers own caching decisions.
+		$row = $wpdb->get_row(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is produced by Storage for a plugin-owned custom table.
+				"SELECT * FROM {$table} WHERE public_id = %s AND dashboard_site_id = %d LIMIT 1",
+				$public_id,
+				$site_id
+			),
+			ARRAY_A
+		);
+
+		return is_array( $row ) ? $row : null;
+	}
+
+	/**
+	 * Stores a support-safe client-side action report on the matching dashboard action.
+	 *
+	 * @since 0.1.16
+	 *
+	 * @param int                 $action_id Dashboard action row ID.
+	 * @param array<string,mixed> $client_action Sanitized client last-action summary.
+	 * @param string|null         $now Current UTC MySQL timestamp.
+	 * @return bool
+	 */
+	public function mark_client_report( $action_id, array $client_action, $now = null ) {
+		global $wpdb;
+
+		$action_id = absint( $action_id );
+		$state     = $this->capabilities->sanitize_state( isset( $client_action['state'] ) ? (string) $client_action['state'] : '' );
+
+		if ( 0 === $action_id ) {
+			return false;
+		}
+
+		$now               = $this->date_or_default( null === $now ? gmdate( 'Y-m-d H:i:s' ) : $now, gmdate( 'Y-m-d H:i:s' ) );
+		$client_updated_at = $this->client_action_updated_at( $client_action );
+		$counts_json       = wp_json_encode( $this->client_action_counts( isset( $client_action['counts'] ) ? $client_action['counts'] : array() ), JSON_UNESCAPED_SLASHES );
+
+		if ( false === $counts_json ) {
+			$counts_json = '{}';
+		}
+
+		$data = array(
+			'state'                 => $state,
+			'client_state'          => $state,
+			'client_result_code'    => isset( $client_action['result_code'] ) ? sanitize_key( (string) $client_action['result_code'] ) : '',
+			'client_result_summary' => $this->bounded_text( isset( $client_action['result_summary'] ) ? (string) $client_action['result_summary'] : '', 240 ),
+			'client_counts_json'    => (string) $counts_json,
+			'client_updated_at'     => '' === $client_updated_at ? null : $client_updated_at,
+			'reconciled_at'         => $now,
+			'last_seen_at'          => $now,
+			'updated_at'            => $now,
+		);
+
+		if ( 'accepted' === $state ) {
+			$data['accepted_at'] = $now;
+		}
+
+		if ( in_array( $state, array( 'succeeded', 'failed', 'rejected', 'unsupported', 'rate_limited', 'busy', 'timed_out', 'stale', 'dispatch_failed' ), true ) ) {
+			$data['completed_at'] = $now;
+		}
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository updates a plugin-owned custom table; callers own caching decisions.
+		$updated = $wpdb->update(
+			Alynt_Drime_Backups_Dashboard_Storage::actions_table(),
+			$data,
+			array( 'id' => $action_id )
+		);
+
+		return false !== $updated;
+	}
+
+	/**
+	 * Marks old accepted/running actions stale when status polling never confirms them.
+	 *
+	 * @since 0.1.16
+	 *
+	 * @param int         $site_id Dashboard site ID.
+	 * @param string|null $now Current UTC MySQL timestamp.
+	 * @return int|WP_Error
+	 */
+	public function mark_unconfirmed_actions_stale_for_site( $site_id, $now = null ) {
+		global $wpdb;
+
+		$site_id = absint( $site_id );
+
+		if ( 0 === $site_id ) {
+			return 0;
+		}
+
+		$now             = $this->date_or_default( null === $now ? gmdate( 'Y-m-d H:i:s' ) : $now, gmdate( 'Y-m-d H:i:s' ) );
+		$now_timestamp   = strtotime( $now );
+		$accepted_cutoff = gmdate( 'Y-m-d H:i:s', ( false === $now_timestamp ? time() : $now_timestamp ) - self::ACCEPTED_CONFIRMATION_STALE_SECONDS );
+		$running_cutoff  = gmdate( 'Y-m-d H:i:s', ( false === $now_timestamp ? time() : $now_timestamp ) - self::RUNNING_CONFIRMATION_STALE_SECONDS );
+		$summary         = __( 'No matching client-side action confirmation has appeared in status polling within the expected window.', 'alynt-drime-backups-dashboard' );
+		$table           = Alynt_Drime_Backups_Dashboard_Storage::actions_table();
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository updates a plugin-owned custom table in a scoped maintenance pass.
+		$updated = $wpdb->query(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is produced by Storage for a plugin-owned custom table.
+				"UPDATE {$table}
+				SET state = 'stale',
+					result_code = 'client_confirmation_stale',
+					result_summary = %s,
+					completed_at = %s,
+					updated_at = %s
+				WHERE dashboard_site_id = %d
+					AND client_state IS NULL
+					AND (
+						( state = 'accepted' AND accepted_at IS NOT NULL AND accepted_at < %s )
+						OR ( state = 'running' AND last_seen_at IS NOT NULL AND last_seen_at < %s )
+					)",
+				$summary,
+				$now,
+				$now,
+				$site_id,
+				$accepted_cutoff,
+				$running_cutoff
+			)
+		);
+
+		if ( false === $updated ) {
+			return new WP_Error( 'remote_action_stale_update_failed', __( 'The dashboard could not update stale remote action records.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		return (int) $updated;
+	}
+
+	/**
 	 * Gets latest action for one site.
 	 *
 	 * @since 0.1.15
@@ -248,7 +398,9 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT id, public_id, dashboard_site_id, action_type, state, requested_by, requested_at, accepted_at,
-				completed_at, last_seen_at, retry_after_seconds, result_code, result_summary
+				completed_at, last_seen_at, retry_after_seconds, result_code, result_summary,
+				client_state, client_result_code, client_result_summary, client_counts_json,
+				client_updated_at, reconciled_at
 				FROM {$table}
 				WHERE dashboard_site_id = %d
 				ORDER BY requested_at DESC, id DESC
@@ -261,6 +413,62 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 		return is_array( $rows ) ? $rows : array();
+	}
+
+	/**
+	 * Builds support-safe aggregate action-history diagnostics.
+	 *
+	 * @since 0.1.16
+	 *
+	 * @return array<string,mixed>
+	 */
+	public function support_summary() {
+		global $wpdb;
+
+		if ( ! is_object( $wpdb ) || empty( $wpdb->prefix ) ) {
+			return $this->empty_support_summary();
+		}
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::actions_table();
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is produced by Storage for a plugin-owned custom table.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository reads aggregate support-safe data from a plugin-owned custom table.
+		$row = $wpdb->get_row(
+			"SELECT COUNT(*) AS total,
+				SUM(CASE WHEN client_state IS NOT NULL AND client_state != '' THEN 1 ELSE 0 END) AS client_reconciled,
+				SUM(CASE WHEN state = 'stale' THEN 1 ELSE 0 END) AS stale,
+				SUM(CASE WHEN state IN ('accepted', 'running') THEN 1 ELSE 0 END) AS awaiting_confirmation,
+				MAX(updated_at) AS latest_updated_at
+			FROM {$table}",
+			ARRAY_A
+		);
+		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+
+		if ( ! is_array( $row ) ) {
+			$row = array();
+		}
+
+		return array(
+			'total'                 => isset( $row['total'] ) ? max( 0, (int) $row['total'] ) : 0,
+			'client_reconciled'     => isset( $row['client_reconciled'] ) ? max( 0, (int) $row['client_reconciled'] ) : 0,
+			'stale'                 => isset( $row['stale'] ) ? max( 0, (int) $row['stale'] ) : 0,
+			'awaiting_confirmation' => isset( $row['awaiting_confirmation'] ) ? max( 0, (int) $row['awaiting_confirmation'] ) : 0,
+			'latest_updated_at'     => isset( $row['latest_updated_at'] ) ? (string) $row['latest_updated_at'] : '',
+		);
+	}
+
+	/**
+	 * Gets an empty support-safe aggregate action summary.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function empty_support_summary() {
+		return array(
+			'total'                 => 0,
+			'client_reconciled'     => 0,
+			'stale'                 => 0,
+			'awaiting_confirmation' => 0,
+			'latest_updated_at'     => '',
+		);
 	}
 
 	/**
@@ -371,6 +579,18 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	}
 
 	/**
+	 * Sanitizes a UUID.
+	 *
+	 * @param string $uuid UUID.
+	 * @return string
+	 */
+	private function sanitize_uuid( $uuid ) {
+		$uuid = strtolower( trim( (string) $uuid ) );
+
+		return preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/', $uuid ) ? $uuid : '';
+	}
+
+	/**
 	 * Sanitizes and bounds text.
 	 *
 	 * @param string $value Raw value.
@@ -386,6 +606,48 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 		}
 
 		return substr( $value, 0, $max_length );
+	}
+
+	/**
+	 * Sanitizes client-reported action counts.
+	 *
+	 * @param mixed $counts Counts.
+	 * @return array<string,int>
+	 */
+	private function client_action_counts( $counts ) {
+		if ( ! is_array( $counts ) ) {
+			return array();
+		}
+
+		$clean = array();
+
+		foreach ( array( 'found', 'queued', 'already_known', 'upload_attempted', 'failed' ) as $key ) {
+			$clean[ $key ] = isset( $counts[ $key ] ) ? max( 0, (int) $counts[ $key ] ) : 0;
+		}
+
+		return $clean;
+	}
+
+	/**
+	 * Gets the best client-side timestamp available for an action report.
+	 *
+	 * @param array<string,mixed> $client_action Client action report.
+	 * @return string
+	 */
+	private function client_action_updated_at( array $client_action ) {
+		foreach ( array( 'updated_at', 'completed_at', 'requested_at' ) as $key ) {
+			if ( empty( $client_action[ $key ] ) ) {
+				continue;
+			}
+
+			$date = $this->date_or_default( (string) $client_action[ $key ], '' );
+
+			if ( '' !== $date ) {
+				return $date;
+			}
+		}
+
+		return '';
 	}
 
 	/**

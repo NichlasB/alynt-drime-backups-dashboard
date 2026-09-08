@@ -90,6 +90,13 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 	private $event_log;
 
 	/**
+	 * Remote action reconciler.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler
+	 */
+	private $remote_action_reconciler;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1.0
@@ -102,16 +109,18 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 	 * @param Alynt_Drime_Backups_Dashboard_Status_Payload_Validator|null $validator Payload validator.
 	 * @param callable|null                                               $http_client HTTP client.
 	 * @param Alynt_Drime_Backups_Dashboard_Event_Log|null                $event_log Event log.
+	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler|null $remote_action_reconciler Remote action reconciler.
 	 */
-	public function __construct( $sites = null, $snapshots = null, $classifier = null, $vault = null, $transport = null, $validator = null, $http_client = null, $event_log = null ) {
-		$this->sites       = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
-		$this->snapshots   = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
-		$this->classifier  = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
-		$this->vault       = $vault instanceof Alynt_Drime_Backups_Dashboard_Credential_Vault ? $vault : new Alynt_Drime_Backups_Dashboard_Credential_Vault();
-		$this->transport   = $transport instanceof Alynt_Drime_Backups_Dashboard_Safe_Transport ? $transport : new Alynt_Drime_Backups_Dashboard_Safe_Transport();
-		$this->validator   = $validator instanceof Alynt_Drime_Backups_Dashboard_Status_Payload_Validator ? $validator : new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
-		$this->http_client = is_callable( $http_client ) ? $http_client : null;
-		$this->event_log   = $event_log instanceof Alynt_Drime_Backups_Dashboard_Event_Log ? $event_log : new Alynt_Drime_Backups_Dashboard_Event_Log();
+	public function __construct( $sites = null, $snapshots = null, $classifier = null, $vault = null, $transport = null, $validator = null, $http_client = null, $event_log = null, $remote_action_reconciler = null ) {
+		$this->sites                    = $sites instanceof Alynt_Drime_Backups_Dashboard_Site_Repository ? $sites : new Alynt_Drime_Backups_Dashboard_Site_Repository();
+		$this->snapshots                = $snapshots instanceof Alynt_Drime_Backups_Dashboard_Snapshot_Repository ? $snapshots : new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
+		$this->classifier               = $classifier instanceof Alynt_Drime_Backups_Dashboard_Status_Classifier ? $classifier : new Alynt_Drime_Backups_Dashboard_Status_Classifier();
+		$this->vault                    = $vault instanceof Alynt_Drime_Backups_Dashboard_Credential_Vault ? $vault : new Alynt_Drime_Backups_Dashboard_Credential_Vault();
+		$this->transport                = $transport instanceof Alynt_Drime_Backups_Dashboard_Safe_Transport ? $transport : new Alynt_Drime_Backups_Dashboard_Safe_Transport();
+		$this->validator                = $validator instanceof Alynt_Drime_Backups_Dashboard_Status_Payload_Validator ? $validator : new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+		$this->http_client              = is_callable( $http_client ) ? $http_client : null;
+		$this->event_log                = $event_log instanceof Alynt_Drime_Backups_Dashboard_Event_Log ? $event_log : new Alynt_Drime_Backups_Dashboard_Event_Log();
+		$this->remote_action_reconciler = $remote_action_reconciler instanceof Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler ? $remote_action_reconciler : new Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler();
 	}
 
 	/**

@@ -1,10 +1,10 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1 protocol baseline. The action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader client enablement and V2.2+ changes remain separate approval gates.
+Status: V2.1 protocol baseline with V2.2 dashboard-side action-history reconciliation implemented and validated locally. The action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader client enablement and V2.2 release/deployment remain separate approval gates.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The next action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 

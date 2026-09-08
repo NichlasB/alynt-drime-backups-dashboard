@@ -320,6 +320,16 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		$label        = $availability['available']
 			? __( 'Request Backup: capability reported', 'alynt-drime-backups-dashboard' )
 			: $availability['short_label'];
+		$last_action  = $this->remote_action_last_action( $payload );
+
+		if ( ! empty( $last_action['state'] ) ) {
+			$label = sprintf(
+				/* translators: 1: capability label, 2: latest client action state. */
+				__( '%1$s · latest client action: %2$s', 'alynt-drime-backups-dashboard' ),
+				$label,
+				$this->remote_action_state_label( (string) $last_action['state'] )
+			);
+		}
 
 		return '<span class="description adbd-row-meta">' . esc_html( $label ) . '</span>';
 	}
@@ -391,12 +401,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		echo '<div class="adbd-table-wrap"><table class="widefat striped adbd-history-table"><caption>' . esc_html__( 'Recent V2 remote action requests for this site', 'alynt-drime-backups-dashboard' ) . '</caption><thead><tr>';
 		echo '<th scope="col">' . esc_html__( 'Requested', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Action', 'alynt-drime-backups-dashboard' ) . '</th>';
-		echo '<th scope="col">' . esc_html__( 'State', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Dashboard', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Client report', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Result', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Counts', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '</tr></thead><tbody>';
 
 		foreach ( $history as $row ) {
-			echo '<tr><td>' . $this->time_html( isset( $row['requested_at'] ) ? $row['requested_at'] : '' ) . '</td><td>' . esc_html( $this->remote_action_label( isset( $row['action_type'] ) ? (string) $row['action_type'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_state_label( isset( $row['state'] ) ? (string) $row['state'] : '' ) ) . '</td><td>' . esc_html( isset( $row['result_summary'] ) && '' !== $row['result_summary'] ? (string) $row['result_summary'] : '-' ) . '</td></tr>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() returns escaped markup.
+			echo '<tr><td>' . $this->time_html( isset( $row['requested_at'] ) ? $row['requested_at'] : '' ) . '</td><td>' . esc_html( $this->remote_action_label( isset( $row['action_type'] ) ? (string) $row['action_type'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_state_label( isset( $row['state'] ) ? (string) $row['state'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_client_report_label( $row ) ) . '</td><td>' . esc_html( $this->remote_action_result_label( $row ) ) . '</td><td>' . esc_html( $this->remote_action_counts_label( $row ) ) . '</td></tr>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() returns escaped markup.
 		}
 
 		echo '</tbody></table></div>';
@@ -441,6 +453,78 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		$state = sanitize_key( $state );
 
 		return isset( $labels[ $state ] ) ? $labels[ $state ] : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets the latest client-reported action summary from a sanitized payload.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,mixed>
+	 */
+	private function remote_action_last_action( array $payload ) {
+		$remote_actions = isset( $payload['remote_actions'] ) && is_array( $payload['remote_actions'] ) ? $payload['remote_actions'] : array();
+
+		return isset( $remote_actions['last_action'] ) && is_array( $remote_actions['last_action'] ) ? $remote_actions['last_action'] : array();
+	}
+
+	/**
+	 * Gets a client-report label for a history row.
+	 *
+	 * @param array<string,mixed> $row History row.
+	 * @return string
+	 */
+	private function remote_action_client_report_label( array $row ) {
+		if ( empty( $row['client_state'] ) ) {
+			return __( 'Awaiting client status', 'alynt-drime-backups-dashboard' );
+		}
+
+		return $this->remote_action_state_label( (string) $row['client_state'] );
+	}
+
+	/**
+	 * Gets a safe result summary for a history row.
+	 *
+	 * @param array<string,mixed> $row History row.
+	 * @return string
+	 */
+	private function remote_action_result_label( array $row ) {
+		if ( ! empty( $row['client_result_summary'] ) ) {
+			return (string) $row['client_result_summary'];
+		}
+
+		if ( ! empty( $row['result_summary'] ) ) {
+			return (string) $row['result_summary'];
+		}
+
+		return '-';
+	}
+
+	/**
+	 * Gets a compact action-count summary for a history row.
+	 *
+	 * @param array<string,mixed> $row History row.
+	 * @return string
+	 */
+	private function remote_action_counts_label( array $row ) {
+		if ( empty( $row['client_counts_json'] ) ) {
+			return '-';
+		}
+
+		$counts = json_decode( (string) $row['client_counts_json'], true );
+
+		if ( ! is_array( $counts ) ) {
+			return '-';
+		}
+
+		return sprintf(
+			/* translators: 1: found count, 2: queued count, 3: already-known count, 4: attempted count, 5: failed count. */
+			__( 'Found %1$d; Queued %2$d; Known %3$d; Attempts %4$d; Failed %5$d', 'alynt-drime-backups-dashboard' ),
+			isset( $counts['found'] ) ? max( 0, (int) $counts['found'] ) : 0,
+			isset( $counts['queued'] ) ? max( 0, (int) $counts['queued'] ) : 0,
+			isset( $counts['already_known'] ) ? max( 0, (int) $counts['already_known'] ) : 0,
+			isset( $counts['upload_attempted'] ) ? max( 0, (int) $counts['upload_attempted'] ) : 0,
+			isset( $counts['failed'] ) ? max( 0, (int) $counts['failed'] ) : 0
+		);
 	}
 
 	/**

@@ -96,6 +96,20 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Status_Check {
 			return $error;
 		}
 
+		$reconciled = $this->remote_action_reconciler->reconcile_site_payload( $site_id, $payload );
+
+		if ( is_wp_error( $reconciled ) ) {
+			$this->event_log->log(
+				'warning',
+				'storage',
+				$reconciled->get_error_code(),
+				$reconciled->get_error_message(),
+				array(
+					'dashboard_site_id' => $site_id,
+				)
+			);
+		}
+
 		return array(
 			'category'    => $status['category'],
 			'label'       => $status['label'],

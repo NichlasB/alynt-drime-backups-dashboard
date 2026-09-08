@@ -20,7 +20,10 @@ class StorageSchemaTest extends TestCase {
 		$source = file_get_contents( dirname( __DIR__ ) . '/includes/class-storage.php' );
 
 		$this->assertIsString( $source );
-		$this->assertStringContainsString( "const SCHEMA_VERSION        = '6';", $source );
+		$this->assertStringContainsString( "const SCHEMA_VERSION        = '7';", $source );
+		$this->assertStringContainsString( 'client_state varchar(32) NULL', $source );
+		$this->assertStringContainsString( 'client_counts_json longtext NULL', $source );
+		$this->assertStringContainsString( 'reconciled_at datetime NULL', $source );
 		$this->assertStringContainsString( 'KEY completed_at (completed_at, id)', $source );
 	}
 }

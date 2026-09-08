@@ -232,6 +232,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			'state'          => $this->sanitize_state( isset( $action['state'] ) ? (string) $action['state'] : '' ),
 			'requested_at'   => isset( $action['requested_at'] ) ? sanitize_text_field( (string) $action['requested_at'] ) : '',
 			'completed_at'   => isset( $action['completed_at'] ) ? sanitize_text_field( (string) $action['completed_at'] ) : '',
+			'updated_at'     => isset( $action['updated_at'] ) ? sanitize_text_field( (string) $action['updated_at'] ) : '',
 			'result_code'    => isset( $action['result_code'] ) ? sanitize_key( (string) $action['result_code'] ) : '',
 			'result_summary' => $this->bounded_text( isset( $action['result_summary'] ) ? (string) $action['result_summary'] : '', self::MAX_RESULT_SUMMARY_LENGTH ),
 			'counts'         => $this->counts( isset( $action['counts'] ) ? $action['counts'] : array() ),

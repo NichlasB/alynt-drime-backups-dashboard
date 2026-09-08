@@ -46,6 +46,7 @@ if ( ! function_exists( 'esc_attr_e' ) ) {
 }
 
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 
 /**
@@ -185,10 +186,21 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		);
 		$history  = array(
 			array(
-				'action_type'    => 'scan_upload_now',
-				'state'          => 'queued_for_dispatch',
-				'requested_at'   => '2026-08-20 12:00:00',
-				'result_summary' => 'Stored locally only.',
+				'action_type'           => 'scan_upload_now',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-08-20 12:00:00',
+				'result_summary'        => 'Stored locally only.',
+				'client_result_summary' => 'Scan completed safely.',
+				'client_counts_json'    => wp_json_encode(
+					array(
+						'found'            => 2,
+						'queued'           => 0,
+						'already_known'    => 1,
+						'upload_attempted' => 1,
+						'failed'           => 0,
+					)
+				),
 			),
 		);
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
@@ -200,9 +212,41 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'value="7"', $html );
 		$this->assertStringContainsString( 'aria-describedby="adbd-request-backup-now-description"', $html );
 		$this->assertStringContainsString( 'id="adbd-request-backup-now-description"', $html );
-		$this->assertStringContainsString( 'Queued for dispatch', $html );
-		$this->assertStringContainsString( 'Stored locally only.', $html );
+		$this->assertStringContainsString( 'Dashboard', $html );
+		$this->assertStringContainsString( 'Client report', $html );
+		$this->assertStringContainsString( 'Succeeded', $html );
+		$this->assertStringContainsString( 'Scan completed safely.', $html );
+		$this->assertStringContainsString( 'Found 2; Queued 0; Known 1; Attempts 1; Failed 0', $html );
 		$this->assertStringNotContainsString( 'private', strtolower( $html ) );
+	}
+
+	/**
+	 * Sites rows include a compact latest-client-action hint from sanitized payload evidence.
+	 *
+	 * @return void
+	 */
+	public function test_request_backup_now_row_hint_includes_latest_client_action_state() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+		);
+		$payload = array(
+			'remote_actions' => array(
+				'protocol_version' => 2,
+				'enabled'          => true,
+				'allowed_actions'  => array( 'scan_upload_now' ),
+				'sodium_available' => true,
+				'last_action'      => array(
+					'action_id'   => 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+					'action_type' => 'scan_upload_now',
+					'state'       => 'rate_limited',
+				),
+			),
+		);
+
+		$this->assertStringContainsString( 'latest client action: Rate limited', $harness->request_backup_row_hint_html( $site, $payload ) );
 	}
 
 	/**

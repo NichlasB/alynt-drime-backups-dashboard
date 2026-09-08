@@ -283,6 +283,66 @@ class RemoteActionRepositoryTest extends TestCase {
 	}
 
 	/**
+	 * Client reports store support-safe reconciliation fields.
+	 *
+	 * @return void
+	 */
+	public function test_mark_client_report_stores_sanitized_reconciliation_fields() {
+		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+
+		$this->assertTrue(
+			$repository->mark_client_report(
+				321,
+				array(
+					'state'          => 'succeeded',
+					'updated_at'     => '2026-08-20T12:04:00+00:00',
+					'result_code'    => 'action_succeeded',
+					'result_summary' => '<b>Scan completed safely.</b>',
+					'counts'         => array(
+						'found'            => 4,
+						'queued'           => 1,
+						'already_known'    => 2,
+						'upload_attempted' => 1,
+						'failed'           => -1,
+						'local_path'       => '/private/path',
+					),
+				),
+				'2026-08-20 12:05:00'
+			)
+		);
+
+		$this->assertSame( array( 'id' => 321 ), $this->wpdb->updated_where );
+		$this->assertSame( 'succeeded', $this->wpdb->updated_data['state'] );
+		$this->assertSame( 'succeeded', $this->wpdb->updated_data['client_state'] );
+		$this->assertSame( 'action_succeeded', $this->wpdb->updated_data['client_result_code'] );
+		$this->assertSame( '<b>Scan completed safely.</b>', $this->wpdb->updated_data['client_result_summary'] );
+		$this->assertSame( '2026-08-20 12:04:00', $this->wpdb->updated_data['client_updated_at'] );
+		$this->assertSame( '2026-08-20 12:05:00', $this->wpdb->updated_data['reconciled_at'] );
+		$this->assertArrayHasKey( 'completed_at', $this->wpdb->updated_data );
+
+		$counts = json_decode( $this->wpdb->updated_data['client_counts_json'], true );
+
+		$this->assertSame( 4, $counts['found'] );
+		$this->assertSame( 0, $counts['failed'] );
+		$this->assertArrayNotHasKey( 'local_path', $counts );
+	}
+
+	/**
+	 * Stale reconciliation is scoped to one dashboard site.
+	 *
+	 * @return void
+	 */
+	public function test_mark_unconfirmed_actions_stale_is_site_scoped() {
+		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+
+		$this->assertSame( 2, $repository->mark_unconfirmed_actions_stale_for_site( 44, '2026-08-20 12:05:00' ) );
+		$this->assertStringContainsString( "state = 'stale'", $this->wpdb->last_query );
+		$this->assertStringContainsString( 'dashboard_site_id = %d', $this->wpdb->last_query );
+		$this->assertStringContainsString( 'client_state IS NULL', $this->wpdb->last_query );
+		$this->assertSame( 44, $this->wpdb->prepared_args[3] );
+	}
+
+	/**
 	 * Lookup queries remain scoped to one site.
 	 *
 	 * @return void

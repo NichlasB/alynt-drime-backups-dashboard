@@ -57,8 +57,9 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
 		$event_log       = new Alynt_Drime_Backups_Dashboard_Event_Log();
 		$remote_actions  = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
-		$this->poller    = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier, null, null, null, null, $event_log );
-		$diagnostics     = new Alynt_Drime_Backups_Dashboard_Diagnostics( $sites, $this->snapshots, $classifier, $event_log );
+		$reconciler      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler( $remote_actions );
+		$this->poller    = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier, null, null, null, null, $event_log, $reconciler );
+		$diagnostics     = new Alynt_Drime_Backups_Dashboard_Diagnostics( $sites, $this->snapshots, $classifier, $event_log, $remote_actions );
 		$dispatcher      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher( $sites, $this->snapshots, $remote_actions );
 
 		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(

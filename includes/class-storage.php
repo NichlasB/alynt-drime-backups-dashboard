@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '6';
+	const SCHEMA_VERSION        = '7';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -158,6 +158,12 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				retry_after_seconds int(10) unsigned NOT NULL DEFAULT 0,
 				result_code varchar(64) NOT NULL DEFAULT '',
 				result_summary text NULL,
+				client_state varchar(32) NULL,
+				client_result_code varchar(64) NULL,
+				client_result_summary text NULL,
+				client_counts_json longtext NULL,
+				client_updated_at datetime NULL,
+				reconciled_at datetime NULL,
 				request_fingerprint char(64) NOT NULL DEFAULT '',
 				redacted_context_json longtext NOT NULL,
 				created_at datetime NOT NULL,
