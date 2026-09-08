@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.15
+Stable tag: 0.1.16
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.15 is a local release candidate with pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, safe default preservation of dashboard data during uninstall, and V2.1 Request Backup Now for separately opted-in clients. V2.1 is limited to signed `scan_upload_now` intents that ask the client uploader to scan for ready packages and upload eligible items using its own local settings; it does not create fresh backups, restore, delete, clean up, change settings, store Drime credentials, or run arbitrary commands.
+Version 0.1.16 includes pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, safe default preservation of dashboard data during uninstall, V2.1 Request Backup Now for separately opted-in clients, and V2.2 dashboard-side action-history reconciliation/audit hardening. V2.1 is limited to signed `scan_upload_now` intents that ask the client uploader to scan for ready packages and upload eligible items using its own local settings; V2.2 reconciles redacted client action results back into dashboard history. The dashboard does not create fresh backups, restore, delete, clean up, change settings, store Drime credentials, or run arbitrary commands.
 
 The current development tree can also show optional redacted per-source backup freshness, current package counts, latest backup/package time, and latest upload time directly on the Sites tab when schema-1 uploader payloads report that evidence.
 
@@ -28,7 +28,7 @@ The current development tree can also show optional redacted per-source backup f
 
 = Can the dashboard run backups, restores, or cleanup on client sites? =
 
-Version 1 cannot run any remote actions. Version 0.1.15 adds only a bounded Request Backup Now action after separate client-side V2.1 opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it cannot create fresh backups, restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands.
+Version 1 cannot run any remote actions. Version 0.1.16 includes only one bounded Request Backup Now action after separate client-side V2.1 opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it cannot create fresh backups, restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands. V2.2 only reconciles redacted client action evidence into dashboard history and diagnostics.
 
 = What happens when I generate a pairing token? =
 
@@ -47,6 +47,11 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.16 =
+* Added V2.2 dashboard-side reconciliation of sanitized client action evidence into matching dashboard action-history records.
+* Added stale-action detection, clearer dashboard/client action-history columns, compact Sites-row latest-client-action hints, and support-safe Diagnostics action aggregates.
+* Preserved the V1 read-only polling boundary and V2.1 scan/upload-now-only action boundary; no new remote powers were added.
 
 = 0.1.15 =
 * Added V2.1 Request Backup Now for separately opted-in clients, limited to signed `scan_upload_now` intents that ask the client uploader to scan for ready packages and upload eligible items.

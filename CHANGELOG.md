@@ -4,19 +4,35 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.16 - 2026-09-08
+
+### Added
+
+- Added V2.2 dashboard-side reconciliation for V2 remote-action history. Successful status polls now reconcile sanitized client `remote_actions.last_action` evidence back to matching dashboard action records for the same site.
+- Added support-safe client execution evidence fields for action history, including client state, result code/summary, bounded numeric counts, client timestamp, and reconciliation timestamp.
+- Added stale-action detection for accepted/running actions that do not receive matching client confirmation within the expected window.
+- Added compact Sites-row latest-client-action hints and clearer Site Detail history columns that distinguish dashboard request state from client-reported execution state.
+- Added support-safe Diagnostics aggregate counts for remote-action history.
+
+### Changed
+
+- Preserved the V1 read-only status-polling boundary and the V2.1 `scan_upload_now` action boundary; this release does not add backup creation, restore, cleanup, schedule management, delete actions, Drime credential storage, filesystem browsing, or arbitrary commands.
+
+## 0.1.15 - 2026-08-20
+
 ### Added
 
 - Added V2.1 **Request Backup Now** for separately opted-in clients. The dashboard generates display-once `adb2a` action opt-in tokens, stores the matching signing key encrypted, dispatches signed `scan_upload_now` intents, records bounded redacted remote-action history, and may run a follow-up read-only status poll after client acceptance.
+- Added an action-history cleanup index and uninstall purge coverage for dashboard-owned remote-action records.
 
 ### Changed
 
 - Bumped the release candidate to `0.1.15` because `v0.1.14` is already used by the prior dashboard patch release.
-- Added an action-history cleanup index and uninstall purge coverage for dashboard-owned remote-action records.
-- Hardened dashboard activation so failed cron scheduling is reported instead of silently leaving polling or cleanup unscheduled.
 - Improved V2.1 action-button accessibility by linking buttons to their explanatory guardrail text.
 
 ### Fixed
 
+- Hardened dashboard activation so failed cron scheduling is reported instead of silently leaving polling or cleanup unscheduled.
 - Hardened uninstall safety: rollback copies discovered by WordPress now exit before touching dashboard state, and canonical plugin deletion preserves dashboard records by default. A permanent dashboard-data purge now requires an explicit `wp-config.php` constant.
 
 ## 0.1.13 - 2026-08-19

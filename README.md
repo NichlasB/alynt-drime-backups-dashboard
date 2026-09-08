@@ -2,7 +2,7 @@
 
 Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
 
-This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. The current V2.1 release candidate adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials.
+This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.16 adds V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers.
 
 ## v1 Boundary
 
@@ -33,7 +33,7 @@ This repository is the separate dashboard plugin package. The current dashboard 
 
 ## Current Status
 
-Version 0.1.15 currently includes:
+Version 0.1.16 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
@@ -53,6 +53,7 @@ Version 0.1.15 currently includes:
 - Redacted WPvivid source-activity hints that distinguish local WPvivid activity evidence from Alynt upload proof.
 - At-a-glance Sites-row source summaries for Server and WPvivid freshness, current package counts, latest backup/package time, and latest upload time when clients report that evidence.
 - V2.1 dashboard-generated action opt-in tokens, encrypted dashboard-side signing-key storage, signed `Request Backup Now` dispatch, and redacted remote-action history for the single `scan_upload_now` action.
+- V2.2 dashboard-side reconciliation of sanitized client `remote_actions.last_action` evidence into matching dashboard action records for the same site, with stale-action detection, clearer Site Detail action-history columns, compact Sites-row latest-client-action hints, and support-safe Diagnostics aggregates.
 - Credential-aware Sites-tab manual-check state copy for active, pending, revoked, and missing-credential rows.
 - Sites-tab layout protection for action buttons and hiding of superseded revoked duplicate rows when a healthy active enrollment exists for the same origin.
 - Harmless per-request cache-busting for read-only status polling so managed page caches cannot serve stale authenticated status payloads.
@@ -90,7 +91,7 @@ Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Struct
 
 #### Can the dashboard run backups, restores, or cleanup on client sites?
 
-Version 1 cannot run any remote actions. The V2.1 release candidate adds only a bounded **Request Backup Now** action after separate client-side opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it does not create fresh WPvivid/server-runner backups and cannot restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands.
+Version 1 cannot run any remote actions. V2.1 adds only a bounded **Request Backup Now** action after separate client-side opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it does not create fresh WPvivid/server-runner backups and cannot restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands. V2.2 only hardens action-history reconciliation, audit visibility, stale-action evidence, and support-safe diagnostics for that existing action.
 
 #### What happens when I generate a pairing token?
 
