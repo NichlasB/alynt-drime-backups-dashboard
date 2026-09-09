@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.17
+Stable tag: 0.1.18
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
 
-Version 0.1.17 includes pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, safe default preservation of dashboard data during uninstall, V2.1 Request Backup Now for separately opted-in clients, V2.2 dashboard-side action-history reconciliation/audit hardening, and a patch fix that stores the signed action UUID as the dashboard action record public ID for newly dispatched actions. V2.1 is limited to signed `scan_upload_now` intents that ask the client uploader to scan for ready packages and upload eligible items using its own local settings; V2.2 reconciles redacted client action results back into dashboard history. The dashboard does not create fresh backups, restore, delete, clean up, change settings, store Drime credentials, or run arbitrary commands.
+Version 0.1.18 includes pending-enrollment token generation, REST enrollment completion, credential-vault primitives, safe status-request preparation, first-poll activation, manual read-only status checks, scheduled read-only polling, bounded status-history retention, operator-focused admin views, redacted support diagnostics, optional structured diagnostics logging that is disabled by default, always-on redacted operator action history for dashboard-local actions, optional dashboard-side display of redacted per-source backup freshness evidence, redacted WPvivid source-activity hints, dashboard-side WPvivid freshness policy for weekly/biweekly schedules, schedule-aware WPvivid freshness-policy ingestion, clearer Sites-tab manual-check state copy, improved Sites-tab handling for action-button width and superseded revoked duplicates, stale-cache protection for read-only status polling, shorter manual-check button wording, aligned Sites-tab manual-check helper copy, copy-control busy-state polish, timestamp fallback hardening, malformed snapshot fail-closed behavior, safe default preservation of dashboard data during uninstall, V2.1 Request Backup Now for separately opted-in clients, V2.2 dashboard-side action-history reconciliation/audit hardening, a patch fix that stores the signed action UUID as the dashboard action record public ID for newly dispatched actions, and a same-origin dashboard self-action safety fix for managed-host loopback/private DNS resolution. V2.1 is limited to signed `scan_upload_now` intents that ask the client uploader to scan for ready packages and upload eligible items using its own local settings; V2.2 reconciles redacted client action results back into dashboard history. The dashboard does not create fresh backups, restore, delete, clean up, change settings, store Drime credentials, or run arbitrary commands.
 
 The current development tree can also show optional redacted per-source backup freshness, current package counts, latest backup/package time, and latest upload time directly on the Sites tab when schema-1 uploader payloads report that evidence.
 
@@ -28,7 +28,7 @@ The current development tree can also show optional redacted per-source backup f
 
 = Can the dashboard run backups, restores, or cleanup on client sites? =
 
-Version 1 cannot run any remote actions. Version 0.1.17 includes only one bounded Request Backup Now action after separate client-side V2.1 opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it cannot create fresh backups, restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands. V2.2 only reconciles redacted client action evidence into dashboard history and diagnostics.
+Version 1 cannot run any remote actions. Version 0.1.18 includes only one bounded Request Backup Now action after separate client-side V2.1 opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it cannot create fresh backups, restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands. V2.2 only reconciles redacted client action evidence into dashboard history and diagnostics.
 
 = What happens when I generate a pairing token? =
 
@@ -47,6 +47,9 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.18 =
+* Allowed the dashboard host to dispatch the bounded V2.1 Request Backup Now action to its own same-origin uploader endpoint when managed-host DNS resolves the public hostname to loopback/private addresses, while preserving public-IP enforcement for all non-same-origin client action destinations.
 
 = 0.1.17 =
 * Fixed V2.2 action-history reconciliation for newly dispatched Request Backup Now actions by storing the signed action UUID as the dashboard row public ID, matching the client-reported action ID.

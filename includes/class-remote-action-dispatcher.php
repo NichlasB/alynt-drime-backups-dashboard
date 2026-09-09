@@ -239,12 +239,13 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 			return new WP_Error( 'action_signing_unavailable', __( 'Remote action signing is unavailable because PHP Sodium support is missing.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		$origin = $this->origins->normalize_public_https_origin( (string) $site['expected_origin'] );
+		$origin                = $this->origins->normalize_public_https_origin( (string) $site['expected_origin'] );
+		$is_same_origin_action = $this->is_same_origin_self_action( $origin );
 		if ( '' === $origin ) {
 			return new WP_Error( 'remote_action_destination_invalid', __( 'The client action destination is not a supported public HTTPS origin.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		if ( ! $this->origins->resolved_origin_is_public( $origin, $this->resolver ) ) {
+		if ( ! $is_same_origin_action && ! $this->origins->resolved_origin_is_public( $origin, $this->resolver ) ) {
 			return new WP_Error( 'remote_action_destination_unsafe', __( 'The client action destination did not resolve to a public IP address.', 'alynt-drime-backups-dashboard' ) );
 		}
 
@@ -288,7 +289,34 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 			'body'                => $body,
 			'body_json'           => $body_json,
 			'request_fingerprint' => hash( 'sha256', $body_json ),
+			'reject_unsafe_urls'  => ! $is_same_origin_action,
 		);
+	}
+
+	/**
+	 * Allows this dashboard to request its own fixed signed action endpoint.
+	 *
+	 * Some managed hosts resolve the site's own public hostname to loopback or
+	 * a private address from the server itself. That remains unsafe for
+	 * arbitrary client sites, but is acceptable for the exact same-origin
+	 * dashboard self-action case because the origin must match this dashboard's
+	 * public HTTPS home URL and the request remains fixed, signed, bounded, and
+	 * opt-in-gated to the V2.1 scan/upload-now route.
+	 *
+	 * @since 0.1.18
+	 *
+	 * @param string $origin Candidate client origin.
+	 * @return bool
+	 */
+	private function is_same_origin_self_action( $origin ) {
+		if ( ! function_exists( 'home_url' ) ) {
+			return false;
+		}
+
+		$client_origin    = $this->origins->normalize_public_https_origin( $origin );
+		$dashboard_origin = $this->origins->normalize_public_https_origin( home_url( '/', 'https' ) );
+
+		return '' !== $client_origin && '' !== $dashboard_origin && hash_equals( $dashboard_origin, $client_origin );
 	}
 
 	/**
@@ -316,7 +344,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 				'timeout'             => self::DEFAULT_TIMEOUT,
 				'redirection'         => 0,
 				'limit_response_size' => self::MAX_RESPONSE_BYTES,
-				'reject_unsafe_urls'  => true,
+				'reject_unsafe_urls'  => ! empty( $prepared['reject_unsafe_urls'] ),
 				'headers'             => array(
 					'Accept'                  => 'application/json',
 					'Content-Type'            => 'application/json',

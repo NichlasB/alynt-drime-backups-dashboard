@@ -10,7 +10,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 
 ## Current State And Safety Boundary
 
-- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now has been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader V2.1 client enablement remains a separate per-site approval gate.
+- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now and V2.2 dashboard-side action-history reconciliation/audit hardening have been implemented, released, and deployed to the dashboard host. V2.1 has been broadly proven across active enrolled client rows; dashboard-host self-action proof required a same-origin safety patch because managed-host DNS can resolve the dashboard's own public hostname to loopback/private addresses from the dashboard server.
 - Dashboard repository: created locally at `C:\Development\WordPress\Plugins\alynt-drime-backups-dashboard`.
 - Dashboard plugin files: implemented and released through GitHub release assets.
 - Dashboard pending-enrollment token generation: implemented.
@@ -19,8 +19,9 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Live rollout state: deployed to `https://control.sitesmanage.com` after explicit approval.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
-- V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability. `purecleanse.net` has completed the first controlled live pilot; additional client enablement remains separately approval-gated.
-- V2.2 remote-action history/audit hardening is implemented and validated locally, pending explicit release/deployment approval. It hardens dashboard/client reconciliation, stale-action evidence, Site Detail action history, compact Sites-row action hints, Diagnostics aggregates, and support-safe export fields before broader V2.1 rollout or any V2.3+ higher-risk action class.
+- V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability.
+- V2.2 remote-action history/audit hardening is implemented, released, and deployed. It hardens dashboard/client reconciliation, stale-action evidence, Site Detail action history, compact Sites-row action hints, Diagnostics aggregates, and support-safe export fields before any V2.3+ higher-risk action class.
+- A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 

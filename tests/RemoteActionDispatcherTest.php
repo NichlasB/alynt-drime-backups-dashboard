@@ -25,6 +25,21 @@ if ( ! function_exists( 'current_time' ) ) {
 	}
 }
 
+if ( ! function_exists( 'home_url' ) ) {
+	/**
+	 * Test home_url shim.
+	 *
+	 * @param string      $path Path.
+	 * @param string|null $scheme Scheme.
+	 * @return string
+	 */
+	function home_url( $path = '', $scheme = null ) {
+		unset( $scheme );
+
+		return 'https://control.sitesmanage.com' . $path;
+	}
+}
+
 /**
  * Fake wpdb for dispatcher tests.
  */
@@ -358,13 +373,77 @@ class RemoteActionDispatcherTest extends TestCase {
 		$this->assertSame( 3600, $last_update['data']['retry_after_seconds'] );
 	}
 
+	public function test_same_origin_self_action_allows_private_resolution_without_unsafe_url_rejection() {
+		$this->wpdb->site = $this->site_row(
+			array(
+				'expected_origin' => 'https://control.sitesmanage.com',
+			)
+		);
+		$captured         = array();
+		$http             = function ( $url, $args ) use ( &$captured ) {
+			$captured = array(
+				'url'  => $url,
+				'args' => $args,
+			);
+			$body     = json_decode( $args['body'], true );
+
+			return array(
+				'response' => array(
+					'code' => 202,
+				),
+				'body'     => wp_json_encode(
+					array(
+						'protocol_version' => 2,
+						'action_id'        => $body['action_id'],
+						'state'            => 'accepted',
+						'code'             => 'action_accepted',
+						'summary'          => 'Accepted safely.',
+						'retry_after'      => 0,
+					)
+				),
+			);
+		};
+
+		$result = $this->dispatcher(
+			$http,
+			function () {
+				return array( '127.0.0.1' );
+			}
+		)->request_scan_upload_now( 9, 7 );
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'accepted', $result['remote_state'] );
+		$this->assertSame( 'https://control.sitesmanage.com/wp-json/alynt-drime-backups-uploader/v2/action-intents', $captured['url'] );
+		$this->assertFalse( $captured['args']['reject_unsafe_urls'] );
+	}
+
+	public function test_non_same_origin_action_still_rejects_private_resolution() {
+		$called = false;
+		$http   = function () use ( &$called ) {
+			$called = true;
+			return array();
+		};
+
+		$result = $this->dispatcher(
+			$http,
+			function () {
+				return array( '127.0.0.1' );
+			}
+		)->request_scan_upload_now( 9, 7 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'remote_action_destination_unsafe', $result->get_error_code() );
+		$this->assertFalse( $called );
+		$this->assertSame( array(), $this->wpdb->inserted_data );
+	}
+
 	/**
 	 * Creates dispatcher.
 	 *
 	 * @param callable $http HTTP fake.
 	 * @return Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher
 	 */
-	private function dispatcher( $http ) {
+	private function dispatcher( $http, $resolver = null ) {
 		return new Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher(
 			new Alynt_Drime_Backups_Dashboard_Site_Repository(),
 			new Alynt_Drime_Backups_Dashboard_Snapshot_Repository(),
@@ -374,9 +453,9 @@ class RemoteActionDispatcherTest extends TestCase {
 			new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Signer(),
 			new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities(),
 			$http,
-			function () {
+			null === $resolver ? function () {
 				return array( '93.184.216.34' );
-			}
+			} : $resolver
 		);
 	}
 
@@ -385,8 +464,9 @@ class RemoteActionDispatcherTest extends TestCase {
 	 *
 	 * @return array<string,mixed>
 	 */
-	private function site_row() {
-		return array(
+	private function site_row( array $overrides = array() ) {
+		return array_merge(
+			array(
 			'id'                            => 9,
 			'public_id'                     => '00000000-0000-4000-8000-000000000000',
 			'site_uuid'                     => '11111111-1111-4111-8111-111111111111',
@@ -396,6 +476,8 @@ class RemoteActionDispatcherTest extends TestCase {
 			'polling_secret_ciphertext'     => 'poll-cipher',
 			'action_key_id'                 => 'ak_test',
 			'action_private_key_ciphertext' => 'action-cipher',
+			),
+			$overrides
 		);
 	}
 

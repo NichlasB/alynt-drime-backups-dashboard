@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.18 - 2026-09-09
+
+### Fixed
+
+- Allowed the dashboard host to dispatch the bounded V2.1 Request Backup Now action to its own same-origin uploader endpoint when managed-host DNS resolves the public hostname to a loopback/private address, while preserving public-IP enforcement for all non-same-origin client action destinations.
+
 ## 0.1.17 - 2026-09-08
 
 ### Fixed
