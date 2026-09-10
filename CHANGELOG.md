@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.19 - 2026-09-10
+
+### Added
+
+- Added a dashboard-owned per-site WPvivid monitoring policy so a site can explicitly treat WPvivid as external/optional when WPvivid backups are intentionally handled outside Alynt-uploaded evidence.
+- Added a Site Detail toggle for the WPvivid source policy, with Sites-list and Site-detail evidence labels showing `External / optional` when enabled.
+
+### Changed
+
+- Kept WPvivid external/optional policy read-only and dashboard-local: it suppresses stale/missing WPvivid upload-evidence attention only for that source while preserving attention for failed uploads, global failures, cron problems, incompatible payloads, polling failures, and unrelated warnings.
+
 ## 0.1.18 - 2026-09-09
 
 ### Fixed

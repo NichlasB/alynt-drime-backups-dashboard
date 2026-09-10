@@ -54,7 +54,8 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 
 		$sites           = new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
-		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
+		$source_policy   = new Alynt_Drime_Backups_Dashboard_Source_Policy();
+		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier( $source_policy );
 		$event_log       = new Alynt_Drime_Backups_Dashboard_Event_Log();
 		$remote_actions  = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
 		$reconciler      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler( $remote_actions );
@@ -71,7 +72,8 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 			$diagnostics,
 			$remote_actions,
 			null,
-			$dispatcher
+			$dispatcher,
+			$source_policy
 		);
 		$this->enrollment_rest_controller = new Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller( null, null, null, $event_log );
 

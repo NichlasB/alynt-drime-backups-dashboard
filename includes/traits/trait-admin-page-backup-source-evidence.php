@@ -20,9 +20,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	 * Renders detailed source-level backup evidence.
 	 *
 	 * @param array<string,mixed> $payload Payload.
+	 * @param array<string,mixed> $site Site row.
 	 * @return void
 	 */
-	private function render_backup_sources_detail( array $payload ) {
+	private function render_backup_sources_detail( array $payload, array $site = array() ) {
 		$sources = $this->backup_sources_from_payload( $payload );
 
 		echo '<div class="adbd-backup-sources">';
@@ -37,10 +38,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 
 		foreach ( $sources as $source_key => $source ) {
 			echo '<section class="adbd-source-card is-' . esc_attr( $source_key ) . '" aria-label="' . esc_attr( $this->backup_source_label( $source_key, $source ) ) . '">';
-			echo '<h5>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ' ' . $this->source_freshness_badge( $source_key, $source ) . '</h5>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge helper returns escaped markup.
+			echo '<h5>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ' ' . $this->source_freshness_badge( $source_key, $source, $site ) . '</h5>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge helper returns escaped markup.
 			echo '<dl class="adbd-detail-list adbd-source-list">';
 			$this->render_detail_item( __( 'Configured', 'alynt-drime-backups-dashboard' ), ! empty( $source['configured'] ) ? __( 'Yes', 'alynt-drime-backups-dashboard' ) : __( 'No', 'alynt-drime-backups-dashboard' ) );
-			$this->render_detail_item( __( 'Expected freshness', 'alynt-drime-backups-dashboard' ), $this->source_policy_label( $source_key, $source ) );
+			$this->render_detail_item( __( 'Expected freshness', 'alynt-drime-backups-dashboard' ), $this->source_policy_label( $source_key, $source, $site ) );
 			$this->render_detail_item( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Current remote inventory', 'alynt-drime-backups-dashboard' ), $this->source_inventory_label( $source ) );
@@ -65,9 +66,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	 * Builds compact escaped backup-source evidence for table rows.
 	 *
 	 * @param array<string,mixed> $payload Payload.
+	 * @param array<string,mixed> $site Site row.
 	 * @return string
 	 */
-	private function backup_sources_compact_html( array $payload ) {
+	private function backup_sources_compact_html( array $payload, array $site = array() ) {
 		$sources = $this->backup_sources_from_payload( $payload );
 
 		if ( empty( $sources ) ) {
@@ -78,8 +80,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 
 		foreach ( $sources as $source_key => $source ) {
 			$html .= '<li><strong>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ':</strong> ';
-			$html .= esc_html( $this->source_freshness_label( $this->source_effective_freshness_status( $source_key, $source ) ) );
-			$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'Expected', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_policy_label( $source_key, $source ) ) . '</span>';
+			$html .= esc_html( $this->source_freshness_label( $this->source_effective_freshness_status( $source_key, $source, $site ) ) );
+			$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'Expected', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_policy_label( $source_key, $source, $site ) ) . '</span>';
 			$html .= '<span class="adbd-row-meta adbd-source-line">' . esc_html( $this->source_inventory_label( $source ) ) . '</span>';
 			$html .= $this->source_compact_timestamp_html( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 );
 			$html .= $this->source_compact_timestamp_html( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 );
@@ -135,10 +137,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	 *
 	 * @param string              $source_key Source key.
 	 * @param array<string,mixed> $source Source summary.
+	 * @param array<string,mixed> $site Site row.
 	 * @return string
 	 */
-	private function source_freshness_badge( $source_key, array $source ) {
-		$freshness = $this->source_effective_freshness_status( $source_key, $source );
+	private function source_freshness_badge( $source_key, array $source, array $site = array() ) {
+		$freshness = $this->source_effective_freshness_status( $source_key, $source, $site );
 
 		return '<span class="adbd-source-freshness is-' . esc_attr( $freshness ) . '">' . esc_html( $this->source_freshness_label( $freshness ) ) . '</span>';
 	}
@@ -156,6 +159,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			'stale'              => __( 'Stale', 'alynt-drime-backups-dashboard' ),
 			'no_upload_evidence' => __( 'No upload evidence', 'alynt-drime-backups-dashboard' ),
 			'not_configured'     => __( 'Not configured', 'alynt-drime-backups-dashboard' ),
+			'external_optional'  => __( 'External / optional', 'alynt-drime-backups-dashboard' ),
 		);
 		$key    = sanitize_key( $freshness );
 
@@ -167,10 +171,15 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	 *
 	 * @param string              $source_key Source key.
 	 * @param array<string,mixed> $source Source summary.
+	 * @param array<string,mixed> $site Site row.
 	 * @return string
 	 */
-	private function source_effective_freshness_status( $source_key, array $source ) {
+	private function source_effective_freshness_status( $source_key, array $source, array $site = array() ) {
 		$freshness = isset( $source['freshness_status'] ) ? sanitize_key( $source['freshness_status'] ) : '';
+
+		if ( $this->backup_source_is_external_optional( $site, $source_key ) ) {
+			return 'external_optional';
+		}
 
 		if ( 'wpvivid' === $source_key && 'stale' === $freshness && ! empty( $source['has_upload_evidence'] ) ) {
 			$age = isset( $source['latest_upload_age_seconds'] ) ? max( 0, (int) $source['latest_upload_age_seconds'] ) : 0;
@@ -188,9 +197,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	 *
 	 * @param string              $source_key Source key.
 	 * @param array<string,mixed> $source Source summary.
+	 * @param array<string,mixed> $site Site row.
 	 * @return string
 	 */
-	private function source_policy_label( $source_key, array $source ) {
+	private function source_policy_label( $source_key, array $source, array $site = array() ) {
+		if ( $this->backup_source_is_external_optional( $site, $source_key ) ) {
+			return __( 'external / optional on this dashboard', 'alynt-drime-backups-dashboard' );
+		}
+
 		$seconds = $this->source_policy_window_seconds( $source_key, $source );
 
 		if ( $seconds <= 0 ) {
@@ -244,6 +258,21 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		}
 
 		return $reported;
+	}
+
+	/**
+	 * Determines whether a source has a dashboard-local external/optional policy.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param string              $source_key Source key.
+	 * @return bool
+	 */
+	private function backup_source_is_external_optional( array $site, $source_key ) {
+		if ( ! isset( $this->source_policy ) || ! $this->source_policy instanceof Alynt_Drime_Backups_Dashboard_Source_Policy ) {
+			return false;
+		}
+
+		return $this->source_policy->source_is_external_optional( $site, $source_key );
 	}
 
 	/**

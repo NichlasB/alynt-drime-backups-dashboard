@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Alynt Drime Backups Dashboard 0.1.17\n"
+"Project-Id-Version: Alynt Drime Backups Dashboard 0.1.19\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/alynt-drime-backups-dashboard\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-08T21:06:51+00:00\n"
+"POT-Creation-Date: 2026-09-10T14:12:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -49,21 +49,21 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:121
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:122
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:174
-#: includes/class-admin-page.php:148
-#: includes/class-admin-page.php:149
-#: includes/class-admin-page.php:201
+#: includes/class-admin-page.php:157
+#: includes/class-admin-page.php:158
+#: includes/class-admin-page.php:210
 msgid "Drime Backups Dashboard"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:166
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:166
-#: includes/class-admin-page.php:193
+#: includes/class-admin-page.php:202
 msgid "You do not have permission to access this page."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:179
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:179
-#: includes/class-admin-page.php:206
+#: includes/class-admin-page.php:215
 msgid "Read-only dashboard. This page shows what paired client sites report about their own backup uploads. It cannot create, restore, delete, or clean up backups, and it cannot change client-site settings, credentials, or Drime data. Its actions are limited to polling the fixed status endpoint and managing this dashboard's local records."
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:234
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-tables.php:35
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-list.php:30
-#: includes/class-admin-page.php:261
+#: includes/class-admin-page.php:270
 #: includes/traits/trait-admin-page-diagnostics-tables.php:35
 #: includes/traits/trait-admin-page-sites-list.php:30
 msgid "Sites"
@@ -85,7 +85,7 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:235
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:55
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:104
-#: includes/class-admin-page.php:262
+#: includes/class-admin-page.php:271
 #: includes/traits/trait-admin-page-add-site.php:55
 #: includes/traits/trait-admin-page-sites-table.php:105
 msgid "Add Site"
@@ -97,7 +97,7 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:236
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-attention.php:59
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:119
-#: includes/class-admin-page.php:263
+#: includes/class-admin-page.php:272
 #: includes/traits/trait-admin-page-attention.php:59
 #: includes/traits/trait-admin-page-sites-table.php:120
 msgid "Attention"
@@ -107,21 +107,21 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-overview.php:33
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:237
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-overview.php:33
-#: includes/class-admin-page.php:264
+#: includes/class-admin-page.php:273
 #: includes/traits/trait-admin-page-diagnostics-overview.php:33
 msgid "Diagnostics"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:240
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:240
-#: includes/class-admin-page.php:267
+#: includes/class-admin-page.php:276
 msgid "Dashboard sections"
 msgstr ""
 
 #. translators: %d: number of sites needing attention.
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:263
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-admin-page.php:263
-#: includes/class-admin-page.php:290
+#: includes/class-admin-page.php:299
 #, php-format
 msgid "%d site needs attention"
 msgid_plural "%d sites need attention"
@@ -340,7 +340,7 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-safe-transport.php:141
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-safe-transport.php:141
-#: includes/class-remote-action-dispatcher.php:304
+#: includes/class-remote-action-dispatcher.php:333
 #: includes/class-safe-transport.php:141
 msgid "WordPress HTTP transport is not available."
 msgstr ""
@@ -400,43 +400,43 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:44
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:44
-#: includes/class-status-classifier.php:45
+#: includes/class-status-classifier.php:61
 msgid "Polling is paused for this site."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:50
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:50
-#: includes/class-status-classifier.php:51
+#: includes/class-status-classifier.php:67
 msgid "Waiting for the client site to opt in and complete pairing."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:54
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:54
-#: includes/class-status-classifier.php:55
+#: includes/class-status-classifier.php:71
 msgid "No status snapshot has been received yet."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:61
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:61
-#: includes/class-status-classifier.php:67
+#: includes/class-status-classifier.php:83
 msgid "The client status schema is not supported by this dashboard version."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:65
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:65
-#: includes/class-status-classifier.php:71
+#: includes/class-status-classifier.php:87
 msgid "The last status snapshot is stale."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:75
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:75
-#: includes/class-status-classifier.php:81
+#: includes/class-status-classifier.php:97
 msgid "No supported backup source appears configured on the client site."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:78
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:78
-#: includes/class-status-classifier.php:84
+#: includes/class-status-classifier.php:100
 msgid "The latest redacted status payload looks healthy."
 msgstr ""
 
@@ -444,7 +444,7 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:120
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:106
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:120
-#: includes/class-status-classifier.php:112
+#: includes/class-status-classifier.php:128
 #: includes/traits/trait-admin-page-sites-table.php:121
 msgid "Pending"
 msgstr ""
@@ -453,26 +453,26 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:121
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:107
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:121
-#: includes/class-status-classifier.php:113
+#: includes/class-status-classifier.php:129
 #: includes/traits/trait-admin-page-sites-table.php:122
 msgid "Paused"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:108
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:108
-#: includes/class-status-classifier.php:114
+#: includes/class-status-classifier.php:130
 msgid "Incompatible"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:109
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:109
-#: includes/class-status-classifier.php:115
+#: includes/class-status-classifier.php:131
 msgid "Not reporting"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:110
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:110
-#: includes/class-status-classifier.php:116
+#: includes/class-status-classifier.php:132
 msgid "Needs attention"
 msgstr ""
 
@@ -480,8 +480,8 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:154
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:111
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:154
-#: includes/class-status-classifier.php:117
-#: includes/traits/trait-admin-page-backup-source-evidence.php:158
+#: includes/class-status-classifier.php:133
+#: includes/traits/trait-admin-page-backup-source-evidence.php:161
 msgid "Not configured"
 msgstr ""
 
@@ -489,14 +489,14 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:118
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:112
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:118
-#: includes/class-status-classifier.php:118
+#: includes/class-status-classifier.php:134
 #: includes/traits/trait-admin-page-sites-table.php:119
 msgid "Working"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:175
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:175
-#: includes/class-status-classifier.php:181
+#: includes/class-status-classifier.php:198
 msgid "The client reports failed backup uploads."
 msgstr ""
 
@@ -504,20 +504,20 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:183
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:179
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:183
-#: includes/class-status-classifier.php:185
-#: includes/class-status-classifier.php:189
+#: includes/class-status-classifier.php:202
+#: includes/class-status-classifier.php:206
 msgid "The client reports uploader warnings."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:187
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:187
-#: includes/class-status-classifier.php:193
+#: includes/class-status-classifier.php:210
 msgid "The client reports cron health that needs review."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:191
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/class-status-classifier.php:191
-#: includes/class-status-classifier.php:197
+#: includes/class-status-classifier.php:214
 msgid "One or more backup sources report stale or missing upload evidence."
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:110
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:110
-#: includes/traits/trait-admin-page-actions.php:217
+#: includes/traits/trait-admin-page-actions.php:247
 msgid "The requested dashboard action is not supported."
 msgstr ""
 
@@ -555,56 +555,56 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:127
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:121
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:127
-#: includes/traits/trait-admin-page-actions.php:228
-#: includes/traits/trait-admin-page-actions.php:234
+#: includes/traits/trait-admin-page-actions.php:258
+#: includes/traits/trait-admin-page-actions.php:264
 msgid "Your dashboard session has expired. Refresh the page and try again."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:150
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:150
-#: includes/traits/trait-admin-page-actions.php:273
+#: includes/traits/trait-admin-page-actions.php:303
 msgid "Pending dashboard site created. Copy the pairing token now; it is not stored and cannot be shown again."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:156
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:156
-#: includes/traits/trait-admin-page-actions.php:279
+#: includes/traits/trait-admin-page-actions.php:309
 msgid "Dashboard record revoked locally. No client site or Drime action was attempted."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:157
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:157
-#: includes/traits/trait-admin-page-actions.php:280
+#: includes/traits/trait-admin-page-actions.php:310
 msgid "The dashboard record could not be revoked locally. Refresh the site detail screen and try again; the record may already have changed."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:165
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:165
-#: includes/traits/trait-admin-page-actions.php:288
+#: includes/traits/trait-admin-page-actions.php:318
 msgid "Read-only status check completed and stored. No backup or client-site setting was changed."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:171
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:171
-#: includes/traits/trait-admin-page-actions.php:319
+#: includes/traits/trait-admin-page-actions.php:359
 msgid "Diagnostics settings saved."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:172
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:172
-#: includes/traits/trait-admin-page-actions.php:320
+#: includes/traits/trait-admin-page-actions.php:360
 msgid "Diagnostics settings could not be saved. Refresh the page and try again; if it continues, check that WordPress options can be updated."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:181
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:181
-#: includes/traits/trait-admin-page-actions.php:329
+#: includes/traits/trait-admin-page-actions.php:369
 msgid "Diagnostics events cleared."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:182
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-actions.php:182
-#: includes/traits/trait-admin-page-actions.php:330
+#: includes/traits/trait-admin-page-actions.php:370
 msgid "Diagnostics events could not be cleared. Refresh the Diagnostics screen and try again; the retained event buffer may already have changed."
 msgstr ""
 
@@ -641,14 +641,14 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:65
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:65
 #: includes/traits/trait-admin-page-add-site.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:278
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:320
 msgid "The token could not be copied automatically. Select the field and copy it manually."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:65
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:65
 #: includes/traits/trait-admin-page-add-site.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:278
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:320
 msgid "Copy Token"
 msgstr ""
 
@@ -661,14 +661,14 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:70
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:70
 #: includes/traits/trait-admin-page-add-site.php:70
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:282
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:324
 msgid "Expires"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:71
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:71
 #: includes/traits/trait-admin-page-add-site.php:71
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:283
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:325
 msgid "Expected client origin"
 msgstr ""
 
@@ -831,7 +831,7 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:136
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-add-site.php:136
 #: includes/traits/trait-admin-page-add-site.php:136
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:305
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:347
 msgid "Generating…"
 msgstr ""
 
@@ -849,7 +849,7 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:99
 #: includes/traits/trait-admin-page-add-site.php:136
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:73
-#: includes/traits/trait-admin-page-site-detail.php:102
+#: includes/traits/trait-admin-page-site-detail.php:103
 msgid "Cancel"
 msgstr ""
 
@@ -895,19 +895,19 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:29
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:29
-#: includes/traits/trait-admin-page-backup-source-evidence.php:29
+#: includes/traits/trait-admin-page-backup-source-evidence.php:30
 msgid "Backup Sources"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:32
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:32
-#: includes/traits/trait-admin-page-backup-source-evidence.php:32
+#: includes/traits/trait-admin-page-backup-source-evidence.php:33
 msgid "This uploader version has not reported source-level backup freshness evidence yet."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:42
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:42
-#: includes/traits/trait-admin-page-backup-source-evidence.php:42
+#: includes/traits/trait-admin-page-backup-source-evidence.php:43
 msgid "Configured"
 msgstr ""
 
@@ -917,8 +917,8 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:42
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:71
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-event-log.php:33
-#: includes/traits/trait-admin-page-backup-source-evidence.php:42
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:71
+#: includes/traits/trait-admin-page-backup-source-evidence.php:43
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:36
 msgid "Yes"
 msgstr ""
@@ -929,8 +929,8 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:42
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:71
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-event-log.php:33
-#: includes/traits/trait-admin-page-backup-source-evidence.php:42
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:71
+#: includes/traits/trait-admin-page-backup-source-evidence.php:43
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:36
 msgid "No"
 msgstr ""
@@ -939,8 +939,8 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:82
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:43
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:82
-#: includes/traits/trait-admin-page-backup-source-evidence.php:44
-#: includes/traits/trait-admin-page-backup-source-evidence.php:84
+#: includes/traits/trait-admin-page-backup-source-evidence.php:45
+#: includes/traits/trait-admin-page-backup-source-evidence.php:86
 msgid "Latest backup/package"
 msgstr ""
 
@@ -948,26 +948,26 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:83
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:44
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:83
-#: includes/traits/trait-admin-page-backup-source-evidence.php:45
-#: includes/traits/trait-admin-page-backup-source-evidence.php:85
+#: includes/traits/trait-admin-page-backup-source-evidence.php:46
+#: includes/traits/trait-admin-page-backup-source-evidence.php:87
 msgid "Latest upload"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:45
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:45
-#: includes/traits/trait-admin-page-backup-source-evidence.php:46
+#: includes/traits/trait-admin-page-backup-source-evidence.php:47
 msgid "Current remote inventory"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:46
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:46
-#: includes/traits/trait-admin-page-backup-source-evidence.php:47
+#: includes/traits/trait-admin-page-backup-source-evidence.php:48
 msgid "Queued / Failed"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:47
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:47
-#: includes/traits/trait-admin-page-backup-source-evidence.php:48
+#: includes/traits/trait-admin-page-backup-source-evidence.php:49
 msgid "Evidence type"
 msgstr ""
 
@@ -975,8 +975,8 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:85
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:49
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:85
-#: includes/traits/trait-admin-page-backup-source-evidence.php:50
-#: includes/traits/trait-admin-page-backup-source-evidence.php:87
+#: includes/traits/trait-admin-page-backup-source-evidence.php:51
+#: includes/traits/trait-admin-page-backup-source-evidence.php:89
 msgid "WPvivid activity"
 msgstr ""
 
@@ -984,71 +984,71 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:86
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:50
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:86
-#: includes/traits/trait-admin-page-backup-source-evidence.php:51
-#: includes/traits/trait-admin-page-backup-source-evidence.php:88
+#: includes/traits/trait-admin-page-backup-source-evidence.php:52
+#: includes/traits/trait-admin-page-backup-source-evidence.php:90
 msgid "Latest WPvivid activity"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:51
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:51
-#: includes/traits/trait-admin-page-backup-source-evidence.php:52
+#: includes/traits/trait-admin-page-backup-source-evidence.php:53
 msgid "Local WPvivid ZIPs"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:59
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:59
-#: includes/traits/trait-admin-page-backup-source-evidence.php:60
+#: includes/traits/trait-admin-page-backup-source-evidence.php:61
 msgid "Source evidence is reported by the client uploader as a redacted operational hint. This dashboard does not receive Drime credentials and does not perform a direct Drime inventory audit."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:73
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:73
-#: includes/traits/trait-admin-page-backup-source-evidence.php:74
+#: includes/traits/trait-admin-page-backup-source-evidence.php:76
 msgid "Source evidence: not reported"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:128
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:128
-#: includes/traits/trait-admin-page-backup-source-evidence.php:130
+#: includes/traits/trait-admin-page-backup-source-evidence.php:132
 msgid "WPvivid"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:128
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:128
-#: includes/traits/trait-admin-page-backup-source-evidence.php:130
+#: includes/traits/trait-admin-page-backup-source-evidence.php:132
 msgid "Server"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:151
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:151
-#: includes/traits/trait-admin-page-backup-source-evidence.php:154
+#: includes/traits/trait-admin-page-backup-source-evidence.php:157
 msgid "Fresh"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:152
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:152
-#: includes/traits/trait-admin-page-backup-source-evidence.php:156
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:450
+#: includes/traits/trait-admin-page-backup-source-evidence.php:159
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:492
 msgid "Stale"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:153
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:153
-#: includes/traits/trait-admin-page-backup-source-evidence.php:157
+#: includes/traits/trait-admin-page-backup-source-evidence.php:160
 msgid "No upload evidence"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:158
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:158
-#: includes/traits/trait-admin-page-backup-source-evidence.php:162
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:455
+#: includes/traits/trait-admin-page-backup-source-evidence.php:166
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:497
 msgid "Unknown"
 msgstr ""
 
 #. translators: %d: number of current package sets.
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:172
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:172
-#: includes/traits/trait-admin-page-backup-source-evidence.php:294
+#: includes/traits/trait-admin-page-backup-source-evidence.php:323
 #, php-format
 msgid "%d current package set"
 msgid_plural "%d current package sets"
@@ -1057,19 +1057,19 @@ msgstr[1] ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:185
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:185
-#: includes/traits/trait-admin-page-backup-source-evidence.php:307
+#: includes/traits/trait-admin-page-backup-source-evidence.php:336
 msgid "Server remote catalog sidecar"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:186
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:186
-#: includes/traits/trait-admin-page-backup-source-evidence.php:308
+#: includes/traits/trait-admin-page-backup-source-evidence.php:337
 msgid "Server remote index sidecar"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:187
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:187
-#: includes/traits/trait-admin-page-backup-source-evidence.php:309
+#: includes/traits/trait-admin-page-backup-source-evidence.php:338
 msgid "Uploader local upload registry"
 msgstr ""
 
@@ -1081,23 +1081,23 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:192
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:212
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:73
-#: includes/traits/trait-admin-page-backup-source-evidence.php:197
-#: includes/traits/trait-admin-page-backup-source-evidence.php:310
-#: includes/traits/trait-admin-page-backup-source-evidence.php:314
-#: includes/traits/trait-admin-page-backup-source-evidence.php:334
+#: includes/traits/trait-admin-page-backup-source-evidence.php:211
+#: includes/traits/trait-admin-page-backup-source-evidence.php:339
+#: includes/traits/trait-admin-page-backup-source-evidence.php:343
+#: includes/traits/trait-admin-page-backup-source-evidence.php:363
 #: includes/traits/trait-admin-page-sites-table.php:73
 msgid "Not reported"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:205
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:205
-#: includes/traits/trait-admin-page-backup-source-evidence.php:327
+#: includes/traits/trait-admin-page-backup-source-evidence.php:356
 msgid "Local WPvivid ZIP available"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:209
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:209
-#: includes/traits/trait-admin-page-backup-source-evidence.php:331
+#: includes/traits/trait-admin-page-backup-source-evidence.php:360
 msgid "WPvivid backup log observed; no local ZIP may be available for Alynt upload"
 msgstr ""
 
@@ -1105,20 +1105,20 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-time-formatters.php:27
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-backup-source-evidence.php:225
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-time-formatters.php:27
-#: includes/traits/trait-admin-page-backup-source-evidence.php:347
+#: includes/traits/trait-admin-page-backup-source-evidence.php:376
 #: includes/traits/trait-admin-page-time-formatters.php:27
 msgid "Not available"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:55
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:55
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:55
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:56
 msgid "Latest Redacted Snapshot"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:58
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:58
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:58
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:59
 msgid "No redacted status snapshot has been stored for this site yet. This is expected while client opt-in or the first valid report is pending."
 msgstr ""
 
@@ -1126,14 +1126,14 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:222
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:65
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:222
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:544
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:66
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:586
 msgid "Observed"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:66
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:66
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:66
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:67
 msgid "Schema version"
 msgstr ""
 
@@ -1141,7 +1141,7 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:67
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:67
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:68
 #: includes/traits/trait-admin-page-sites-table.php:72
 msgid "Queue"
 msgstr ""
@@ -1150,7 +1150,7 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:68
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:68
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:69
 #: includes/traits/trait-admin-page-sites-table.php:72
 msgid "Uploaded"
 msgstr ""
@@ -1159,8 +1159,8 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:69
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:69
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:448
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:70
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:490
 #: includes/traits/trait-admin-page-sites-table.php:72
 msgid "Failed"
 msgstr ""
@@ -1169,38 +1169,38 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:70
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:72
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:70
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:71
 #: includes/traits/trait-admin-page-sites-table.php:72
 msgid "Warnings"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:71
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:71
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:71
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
 msgid "Active upload"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:72
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:72
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:73
 msgid "Cron status"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:150
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:150
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:150
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:192
 msgid "Pairing revoked locally. Re-enroll this site before manual checks are available."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:154
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:154
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:154
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:196
 msgid "Waiting for client opt-in before manual checks are available."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:157
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:157
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:157
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:199
 msgid "Polling credentials are missing. Re-enroll this site to restore manual checks."
 msgstr ""
 
@@ -1208,32 +1208,32 @@ msgstr ""
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:181
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:168
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:181
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:168
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:181
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:210
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:223
 msgid "Next poll:"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:174
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:174
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:174
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:216
 msgid "Unavailable until re-enrolled"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:176
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:176
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:176
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:218
 msgid "Waiting for client opt-in"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:178
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:178
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:178
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:220
 msgid "Credentials missing"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:203
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:203
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:203
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:245
 msgid "Checking…"
 msgstr ""
 
@@ -1243,19 +1243,19 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:215
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:215
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:537
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:579
 msgid "Recent Status History"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:218
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:218
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:540
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:582
 msgid "No status history is available yet."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:222
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:222
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:544
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:586
 msgid "The ten most recent retained redacted snapshots for this site"
 msgstr ""
 
@@ -1269,7 +1269,7 @@ msgstr ""
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-tables.php:67
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:32
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-sites-table.php:68
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:544
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:586
 #: includes/traits/trait-admin-page-diagnostics-tables.php:34
 #: includes/traits/trait-admin-page-diagnostics-tables.php:67
 #: includes/traits/trait-admin-page-sites-table.php:32
@@ -1279,21 +1279,21 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:222
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:222
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:544
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:586
 msgid "Evidence"
 msgstr ""
 
 #. translators: 1: queue count, 2: uploaded count, 3: failed count, 4: warning count, 5: cron status.
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:239
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:239
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:561
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:603
 #, php-format
 msgid "Queue %1$s; Uploaded %2$s; Failed %3$s; Warnings %4$s; Cron %5$s"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:268
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:268
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:590
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:632
 msgid "Status categories"
 msgstr ""
 
@@ -1724,6 +1724,7 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-settings.php:66
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-diagnostics-settings.php:66
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:113
 #: includes/traits/trait-admin-page-diagnostics-settings.php:66
 msgid "Saving…"
 msgstr ""
@@ -1958,61 +1959,61 @@ msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:86
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:86
-#: includes/traits/trait-admin-page-site-detail.php:89
+#: includes/traits/trait-admin-page-site-detail.php:90
 msgid "Credential and Privacy Boundary"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:86
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:86
-#: includes/traits/trait-admin-page-site-detail.php:89
+#: includes/traits/trait-admin-page-site-detail.php:90
 msgid "Before enrollment, only a verifier for the display-once pairing token is stored. After enrollment, encrypted per-site polling credential material is stored, but its plaintext is never displayed."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:86
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:86
-#: includes/traits/trait-admin-page-site-detail.php:89
+#: includes/traits/trait-admin-page-site-detail.php:90
 msgid "This screen never shows pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:89
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:89
-#: includes/traits/trait-admin-page-site-detail.php:92
+#: includes/traits/trait-admin-page-site-detail.php:93
 msgid "Revoke Local Dashboard Record"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:89
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:89
-#: includes/traits/trait-admin-page-site-detail.php:92
+#: includes/traits/trait-admin-page-site-detail.php:93
 msgid "Revocation marks this local record revoked, clears its pairing and polling credential fields and next-poll state, and stops future polling. Existing snapshots remain under the normal 30-day retention cleanup. It does not contact the client site or Drime."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:92
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:92
-#: includes/traits/trait-admin-page-site-detail.php:95
+#: includes/traits/trait-admin-page-site-detail.php:96
 msgid "Confirm local revocation."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:92
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:92
-#: includes/traits/trait-admin-page-site-detail.php:95
+#: includes/traits/trait-admin-page-site-detail.php:96
 msgid "This local credential state cannot be recovered; pairing again requires a new token and client opt-in."
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:98
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:98
-#: includes/traits/trait-admin-page-site-detail.php:101
+#: includes/traits/trait-admin-page-site-detail.php:102
 msgid "Revoking…"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:98
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:98
-#: includes/traits/trait-admin-page-site-detail.php:101
+#: includes/traits/trait-admin-page-site-detail.php:102
 msgid "Confirm Local Revocation"
 msgstr ""
 
 #: build/release-v0.1.6-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:104
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-site-detail.php:104
-#: includes/traits/trait-admin-page-site-detail.php:107
+#: includes/traits/trait-admin-page-site-detail.php:108
 msgid "Review Local Revocation"
 msgstr ""
 
@@ -2311,7 +2312,7 @@ msgid "The status check failed, and the dashboard could not save the failure det
 msgstr ""
 
 #: build/release-v0.1.7-verify/expanded/alynt-drime-backups-dashboard/includes/traits/trait-admin-page-basic-detail-helpers.php:203
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:203
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:245
 msgid "Check Now"
 msgstr ""
 
@@ -2323,66 +2324,66 @@ msgstr ""
 msgid "Choose an enrolled site before requesting a remote action."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:167
+#: includes/class-remote-action-dispatcher.php:168
 msgid "The signed request could not be delivered to the client site."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:180
+#: includes/class-remote-action-dispatcher.php:181
 msgid "The dashboard could not store the remote action response."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:211
+#: includes/class-remote-action-dispatcher.php:212
 msgid "The latest client report does not allow Request Backup Now. Complete V2 opt-in and run Check Now first."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:226
+#: includes/class-remote-action-dispatcher.php:227
 msgid "Active read-only pairing is required before requesting a remote action."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:230
+#: includes/class-remote-action-dispatcher.php:231
 msgid "Generate and complete a V2 action opt-in token before requesting this action."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:234
+#: includes/class-remote-action-dispatcher.php:235
 msgid "The latest client capability report does not match the dashboard action key. Regenerate the V2 opt-in token and run Check Now."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:238
+#: includes/class-remote-action-dispatcher.php:239
 #: includes/class-remote-action-opt-in-manager.php:108
 #: includes/class-remote-action-signer.php:44
 #: includes/class-remote-action-signer.php:112
 msgid "Remote action signing is unavailable because PHP Sodium support is missing."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:243
+#: includes/class-remote-action-dispatcher.php:245
 msgid "The client action destination is not a supported public HTTPS origin."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:247
+#: includes/class-remote-action-dispatcher.php:249
 msgid "The client action destination did not resolve to a public IP address."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:332
+#: includes/class-remote-action-dispatcher.php:361
 msgid "The signed request could not reach the client action endpoint."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:339
+#: includes/class-remote-action-dispatcher.php:368
 msgid "The client action response exceeded the dashboard size limit."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:344
+#: includes/class-remote-action-dispatcher.php:373
 msgid "The client action response was not valid JSON."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:351
+#: includes/class-remote-action-dispatcher.php:380
 msgid "The client action response did not match the dashboard request."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:356
+#: includes/class-remote-action-dispatcher.php:385
 msgid "The client action response did not include a supported action state."
 msgstr ""
 
-#: includes/class-remote-action-dispatcher.php:360
+#: includes/class-remote-action-dispatcher.php:389
 msgid "The client action endpoint returned an unsupported HTTP status."
 msgstr ""
 
@@ -2410,27 +2411,27 @@ msgstr ""
 msgid "The action opt-in token could not be encoded."
 msgstr ""
 
-#: includes/class-remote-action-repository.php:73
+#: includes/class-remote-action-repository.php:76
 msgid "The remote action request is not valid."
 msgstr ""
 
-#: includes/class-remote-action-repository.php:79
+#: includes/class-remote-action-repository.php:82
 msgid "The remote action context could not be prepared for storage."
 msgstr ""
 
-#: includes/class-remote-action-repository.php:109
+#: includes/class-remote-action-repository.php:112
 msgid "The dashboard could not store the remote action request."
 msgstr ""
 
-#: includes/class-remote-action-repository.php:311
+#: includes/class-remote-action-repository.php:314
 msgid "No matching client-side action confirmation has appeared in status polling within the expected window."
 msgstr ""
 
-#: includes/class-remote-action-repository.php:339
+#: includes/class-remote-action-repository.php:342
 msgid "The dashboard could not update stale remote action records."
 msgstr ""
 
-#: includes/class-remote-action-repository.php:505
+#: includes/class-remote-action-repository.php:508
 msgid "The dashboard could not clean up old remote action records."
 msgstr ""
 
@@ -2442,268 +2443,313 @@ msgstr ""
 msgid "The remote action private key is invalid."
 msgstr ""
 
-#: includes/class-status-classifier.php:61
+#: includes/class-status-classifier.php:77
 msgid "The latest status snapshot could not be decoded."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:293
+#: includes/traits/trait-admin-page-actions.php:323
 msgid "V2 action opt-in token generated. Copy it now; the token is not stored and cannot be shown again."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:302
+#: includes/traits/trait-admin-page-actions.php:332
 msgid "Request Backup Now was accepted by the client site, and a read-only status check was completed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:303
+#: includes/traits/trait-admin-page-actions.php:333
 msgid "Request Backup Now was accepted by the client site. Wait briefly, then use Check Now to confirm the latest reported result."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:309
+#: includes/traits/trait-admin-page-actions.php:339
 msgid "The client site did not accept the remote action request."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:313
+#: includes/traits/trait-admin-page-actions.php:343
 msgid "Request Backup Now could not be completed. Review the remote action history for this site."
 msgstr ""
 
+#: includes/traits/trait-admin-page-actions.php:349
+msgid "Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed."
+msgstr ""
+
+#: includes/traits/trait-admin-page-actions.php:350
+msgid "Backup-source monitoring policy could not be saved. Refresh the site detail screen and try again."
+msgstr ""
+
 #: includes/traits/trait-admin-page-add-site.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:278
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:320
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:53
 #: includes/traits/trait-admin-page-diagnostics-support-output.php:35
 msgid "Copying…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:43
+#: includes/traits/trait-admin-page-backup-source-evidence.php:44
 msgid "Expected freshness"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:82
+#: includes/traits/trait-admin-page-backup-source-evidence.php:84
 msgid "Expected"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:155
+#: includes/traits/trait-admin-page-backup-source-evidence.php:158
 msgid "Within policy"
 msgstr ""
 
-#. translators: %s: human readable freshness window.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:206
-#, php-format
-msgid "within %s (detected WPvivid schedule)"
+#: includes/traits/trait-admin-page-backup-source-evidence.php:162
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:99
+msgid "External / optional"
 msgstr ""
 
-#. translators: %s: human readable freshness window.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:213
-#, php-format
-msgid "within %s (dashboard fallback)"
+#: includes/traits/trait-admin-page-backup-source-evidence.php:205
+msgid "external / optional on this dashboard"
 msgstr ""
 
 #. translators: %s: human readable freshness window.
 #: includes/traits/trait-admin-page-backup-source-evidence.php:220
 #, php-format
+msgid "within %s (detected WPvivid schedule)"
+msgstr ""
+
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-evidence.php:227
+#, php-format
+msgid "within %s (dashboard fallback)"
+msgstr ""
+
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-evidence.php:234
+#, php-format
 msgid "within %s"
 msgstr ""
 
 #. translators: %d: number of seconds.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:278
+#: includes/traits/trait-admin-page-backup-source-evidence.php:307
 #, php-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:223
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:251
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:425
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:98
+msgid "Require Alynt-uploaded WPvivid evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:98
+msgid "Treat WPvivid as external / optional"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:99
+msgid "Alynt-uploaded evidence required"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:101
+msgid "Backup Source Monitoring Policy"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:102
+msgid "This dashboard-local policy controls whether WPvivid must have Alynt-uploaded evidence before the site is marked healthy. It does not change WPvivid, the client uploader, backups, or Drime."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:104
+msgid "WPvivid monitoring mode"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:114
+msgid "Use this only when WPvivid backups are intentionally handled outside Alynt-uploaded evidence for this site."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:265
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:293
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:467
 msgid "Request Backup Now"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:224
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:266
 msgid "V2.1 is designed as a signed request for the client uploader to scan for ready backup packages and upload eligible items using its own local settings. The dashboard still does not receive Drime credentials and does not create, restore, delete, or clean up backups."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:227
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:269
 msgid "Capability reported"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:230
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:272
 msgid "Not available yet"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:251
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:293
 msgid "Requesting…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:252
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:294
 msgid "Sends one signed scan/upload-now intent. The client site may accept, reject, rate-limit, or report busy; no backup creation, restore, cleanup, settings, or credential action is requested."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:274
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:316
 msgid "V2 Action Opt-In Token — Shown Once"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:275
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:317
 msgid "Copy this token now and paste it into the paired client site. It lets that client explicitly opt in to the V2.1 scan/upload-now action using the public action key in the token. The dashboard stores the matching private key encrypted, but it does not store this token."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:276
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:318
 msgid "Action opt-in token"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:278
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:320
 msgid "Action opt-in token copied to the clipboard."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:279
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:321
 msgid "This token is not a Drime token and does not grant restore, delete, cleanup, schedule, settings, or credential actions."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:284
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:326
 msgid "Allowed action"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:284
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:326
 msgid "Scan for ready backup packages and upload eligible items"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:305
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:347
 msgid "Generate V2 Opt-In Token"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:306
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:348
 msgid "Creates a short-lived adb2a token for client-side V2 action opt-in. It does not request a backup."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:321
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:368
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:363
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:410
 msgid "Request Backup: capability reported"
 msgstr ""
 
 #. translators: 1: capability label, 2: latest client action state.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:328
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:370
 #, php-format
 msgid "%1$s · latest client action: %2$s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:348
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:390
 msgid "This site must be actively enrolled with polling credentials before V2 actions can be considered."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:349
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:391
 msgid "Request Backup: enrollment needed"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:360
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:402
 msgid "The latest client report says scan/upload-now capability is available, but this dashboard record no longer has the encrypted signing key. Regenerate the V2 opt-in token and run Check Now."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:361
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:376
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:403
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:418
 msgid "Request Backup: opt-in needed"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:367
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:409
 msgid "The latest client report says scan/upload-now capability is available. The request is signed by this dashboard and the client remains the execution owner."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:375
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:417
 msgid "The latest client report understands V2.1 remote actions, but the client has not opted in with a valid action key or Sodium verification is unavailable."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:382
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:424
 msgid "The latest client report does not advertise V2.1 scan/upload-now capability. Upgrade and opt in on the client site before this action can be enabled."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:383
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:425
 msgid "Request Backup: not available yet"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:394
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:436
 msgid "Remote Action History"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:397
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:439
 msgid "No V2 remote action requests are stored for this site yet."
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:401
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:443
 msgid "Recent V2 remote action requests for this site"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:402
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:444
 msgid "Requested"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:403
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:445
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:129
 msgid "Action"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:404
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:446
 msgid "Dashboard"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:405
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:447
 msgid "Client report"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:406
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:448
 msgid "Result"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:407
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:449
 msgid "Counts"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:428
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:470
 msgid "Unknown action"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:439
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:481
 msgid "Queued for dispatch"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:440
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:482
 msgid "Dispatch failed"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:441
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:483
 msgid "Accepted"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:442
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:484
 msgid "Rejected"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:443
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:485
 msgid "Unsupported"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:444
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:486
 msgid "Rate limited"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:445
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:487
 msgid "Busy"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:446
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:488
 msgid "Running"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:447
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:489
 msgid "Succeeded"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:449
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:491
 msgid "Timed out"
 msgstr ""
 
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:478
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:520
 msgid "Awaiting client status"
 msgstr ""
 
 #. translators: 1: found count, 2: queued count, 3: already-known count, 4: attempted count, 5: failed count.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:521
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:563
 #, php-format
 msgid "Found %1$d; Queued %2$d; Known %3$d; Attempts %4$d; Failed %5$d"
 msgstr ""

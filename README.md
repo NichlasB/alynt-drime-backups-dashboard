@@ -2,7 +2,7 @@
 
 Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
 
-This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.18 includes V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers, plus patch fixes so newly dispatched action rows use the same public action UUID reported by clients and same-origin dashboard self-actions can pass managed-host loopback/private DNS resolution safely.
+This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.19 includes V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers, patch fixes so newly dispatched action rows use the same public action UUID reported by clients and same-origin dashboard self-actions can pass managed-host loopback/private DNS resolution safely, plus a dashboard-owned WPvivid external/optional monitoring policy for sites that intentionally handle WPvivid backups outside Alynt-uploaded evidence.
 
 ## v1 Boundary
 
@@ -33,7 +33,7 @@ This repository is the separate dashboard plugin package. The current dashboard 
 
 ## Current Status
 
-Version 0.1.18 currently includes:
+Version 0.1.19 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.
@@ -52,6 +52,7 @@ Version 0.1.18 currently includes:
 - Optional dashboard-side display of redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
 - Redacted WPvivid source-activity hints that distinguish local WPvivid activity evidence from Alynt upload proof.
 - At-a-glance Sites-row source summaries for Server and WPvivid freshness, current package counts, latest backup/package time, and latest upload time when clients report that evidence.
+- A dashboard-owned per-site WPvivid external/optional monitoring policy that changes classification/display only and does not contact client sites, mutate WPvivid, create backups, or touch Drime.
 - V2.1 dashboard-generated action opt-in tokens, encrypted dashboard-side signing-key storage, signed `Request Backup Now` dispatch, and redacted remote-action history for the single `scan_upload_now` action.
 - V2.2 dashboard-side reconciliation of sanitized client `remote_actions.last_action` evidence into matching dashboard action records for the same site, with stale-action detection, clearer Site Detail action-history columns, compact Sites-row latest-client-action hints, and support-safe Diagnostics aggregates.
 - Same-origin dashboard self-action dispatch support for the bounded V2.1 action when managed-host DNS resolves the dashboard's own public hostname to loopback/private addresses, while preserving public-IP enforcement for non-self client action destinations.

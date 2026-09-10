@@ -83,7 +83,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		echo '</dl></div></div>';
 
 		$this->render_request_backup_now_panel( $site, $snapshot, $this->remote_actions->recent_for_site( $site_id, 10 ) );
-		$this->render_latest_snapshot_summary( $snapshot );
+		$this->render_source_policy_panel( $site, $snapshot );
+		$this->render_latest_snapshot_summary( $snapshot, $site );
 		$this->render_recent_history( $history );
 
 		echo '<div class="adbd-panel adbd-privacy-panel"><h3>' . esc_html__( 'Credential and Privacy Boundary', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body"><p>' . esc_html__( 'Before enrollment, only a verifier for the display-once pairing token is stored. After enrollment, encrypted per-site polling credential material is stored, but its plaintext is never displayed.', 'alynt-drime-backups-dashboard' ) . '</p><p>' . esc_html__( 'This screen never shows pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials.', 'alynt-drime-backups-dashboard' ) . '</p></div></div>';

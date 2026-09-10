@@ -169,6 +169,36 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			return $result;
 		}
 
+		if ( 'update_source_policy' === $action ) {
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_source_policy' );
+
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id    = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$source_key = isset( $_POST['source_key'] ) ? sanitize_key( wp_unslash( $_POST['source_key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$mode       = isset( $_POST['source_mode'] ) ? sanitize_key( wp_unslash( $_POST['source_mode'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$success    = $site_id > 0 && $this->source_policy->set_source_mode( $site_id, $source_key, $mode );
+
+			$this->record_admin_audit_action(
+				'update_source_policy',
+				$success ? 'succeeded' : 'failed',
+				array(
+					'dashboard_site_id' => $site_id,
+					'source_key'        => $source_key,
+					'source_mode'       => $mode,
+				)
+			);
+
+			return array(
+				'action'     => 'update_source_policy',
+				'success'    => $success,
+				'source_key' => $source_key,
+				'mode'       => $mode,
+			);
+		}
+
 		if ( 'update_diagnostics_settings' === $action ) {
 			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_diagnostics_settings' );
 
@@ -311,6 +341,16 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			}
 
 			$this->render_action_notice( __( 'Request Backup Now could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
+			return;
+		}
+
+		if ( isset( $result['action'] ) && 'update_source_policy' === $result['action'] ) {
+			$message = ! empty( $result['success'] )
+				? __( 'Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed.', 'alynt-drime-backups-dashboard' )
+				: __( 'Backup-source monitoring policy could not be saved. Refresh the site detail screen and try again.', 'alynt-drime-backups-dashboard' );
+			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
+
+			$this->render_action_notice( $message, $class );
 			return;
 		}
 

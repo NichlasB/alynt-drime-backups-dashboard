@@ -135,6 +135,25 @@ Acceptance criteria:
 - Sites list and site detail views show whether the WPvivid expected freshness is schedule-detected or using the dashboard fallback.
 - The dashboard remains read-only, receives no Drime API credentials, and performs no remote actions.
 
+### Dashboard-Owned Source Optionality Policy Slice
+
+Operational rollout also found a separate class of site: WPvivid is intentionally active, but its configured destination is outside the Alynt uploader's local package/upload path. In that case the dashboard should not claim Alynt-uploaded WPvivid evidence is missing as an operational backup failure, while still showing the operator that WPvivid is being treated as external/optional for that site.
+
+Implement a small dashboard-local policy override:
+
+- Store per-site source monitoring policy in a dashboard-owned option rather than mutating client settings or adding a table migration.
+- Support only the `wpvivid` source initially, with modes `required` and `external_optional`.
+- Let `external_optional` suppress WPvivid stale/missing Alynt-upload evidence attention for that site, while preserving hard attention states such as failed source uploads, global failed uploads, cron problems, incompatible payloads, polling failures, or unrelated warnings.
+- Show the policy in Sites-list and Site-detail backup evidence as `External / optional` so the row is transparent at a glance.
+- Add a nonce- and capability-protected Site Detail toggle that changes dashboard classification only. It must not call the client site, change WPvivid, create backups, delete backups, clean up files, or mutate Drime.
+
+Acceptance criteria:
+
+- A site with server evidence healthy and WPvivid configured but intentionally external can be marked `Working` when WPvivid lacks Alynt-uploaded evidence.
+- A site with WPvivid marked external/optional still reports `Needs attention` when the source or global payload has failed uploads.
+- The UI clearly states that the policy is dashboard-local and read-only.
+- Existing sites without the option continue using the detected/fallback WPvivid freshness policy unchanged.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

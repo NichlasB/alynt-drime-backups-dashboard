@@ -29,6 +29,22 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	const WPVIVID_POLICY_WINDOW       = 1296000; // 15 days.
 
 	/**
+	 * Dashboard-owned source policy.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Source_Policy
+	 */
+	private $source_policy;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Source_Policy|null $source_policy Source policy store.
+	 */
+	public function __construct( $source_policy = null ) {
+		$this->source_policy = $source_policy instanceof Alynt_Drime_Backups_Dashboard_Source_Policy ? $source_policy : new Alynt_Drime_Backups_Dashboard_Source_Policy();
+	}
+
+	/**
 	 * Classifies one site using its latest snapshot.
 	 *
 	 * @since 0.1.0
@@ -71,7 +87,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return $this->result( self::CATEGORY_NOT_REPORTING, __( 'The last status snapshot is stale.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		$attention_message = $this->attention_message( $payload );
+		$attention_message = $this->attention_message( $payload, $site );
 
 		if ( '' !== $attention_message ) {
 			return $this->result( self::CATEGORY_NEEDS_ATTENTION, $attention_message );
@@ -174,9 +190,10 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 * Determines whether the payload indicates attention is needed.
 	 *
 	 * @param array<string,mixed> $payload Status payload.
+	 * @param array<string,mixed> $site Site row.
 	 * @return bool
 	 */
-	private function attention_message( array $payload ) {
+	private function attention_message( array $payload, array $site ) {
 		if ( isset( $payload['failed_count'] ) && (int) $payload['failed_count'] > 0 ) {
 			return __( 'The client reports failed backup uploads.', 'alynt-drime-backups-dashboard' );
 		}
@@ -193,7 +210,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return __( 'The client reports cron health that needs review.', 'alynt-drime-backups-dashboard' );
 		}
 
-		if ( $this->backup_source_needs_attention( $payload ) ) {
+		if ( $this->backup_source_needs_attention( $payload, $site ) ) {
 			return __( 'One or more backup sources report stale or missing upload evidence.', 'alynt-drime-backups-dashboard' );
 		}
 
@@ -204,9 +221,10 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 * Determines whether source-level freshness evidence needs attention.
 	 *
 	 * @param array<string,mixed> $payload Status payload.
+	 * @param array<string,mixed> $site Site row.
 	 * @return bool
 	 */
-	private function backup_source_needs_attention( array $payload ) {
+	private function backup_source_needs_attention( array $payload, array $site ) {
 		if ( empty( $payload['backup_sources'] ) || ! is_array( $payload['backup_sources'] ) ) {
 			return false;
 		}
@@ -216,7 +234,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 				continue;
 			}
 
-			if ( $this->source_needs_attention( sanitize_key( (string) $source_key ), $source ) ) {
+			if ( $this->source_needs_attention( sanitize_key( (string) $source_key ), $source, $site ) ) {
 				return true;
 			}
 		}
@@ -229,10 +247,12 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 *
 	 * @param string              $source_key Source key.
 	 * @param array<string,mixed> $source Source evidence.
+	 * @param array<string,mixed> $site Site row.
 	 * @return bool
 	 */
-	private function source_needs_attention( $source_key, array $source ) {
-		$configured = ! empty( $source['configured'] );
+	private function source_needs_attention( $source_key, array $source, array $site ) {
+		$configured               = ! empty( $source['configured'] );
+		$requires_upload_evidence = $this->source_requires_upload_evidence( $source_key, $site );
 
 		if ( ! $configured ) {
 			return false;
@@ -244,11 +264,11 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 
 		$freshness = isset( $source['freshness_status'] ) ? sanitize_key( (string) $source['freshness_status'] ) : '';
 
-		if ( 'no_upload_evidence' === $freshness ) {
+		if ( 'no_upload_evidence' === $freshness && $requires_upload_evidence ) {
 			return true;
 		}
 
-		if ( 'stale' === $freshness && $this->source_is_outside_dashboard_policy( $source_key, $source ) ) {
+		if ( 'stale' === $freshness && $this->source_is_outside_dashboard_policy( $source_key, $source, $site ) ) {
 			return true;
 		}
 
@@ -267,7 +287,11 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 				continue;
 			}
 
-			if ( 'source_latest_upload_stale' === $code && ! $this->source_is_outside_dashboard_policy( $source_key, $source ) ) {
+			if ( in_array( $code, array( 'source_latest_upload_stale', 'source_no_upload_evidence' ), true ) && ! $requires_upload_evidence ) {
+				continue;
+			}
+
+			if ( 'source_latest_upload_stale' === $code && ! $this->source_is_outside_dashboard_policy( $source_key, $source, $site ) ) {
 				continue;
 			}
 
@@ -282,11 +306,16 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 *
 	 * @param string              $source_key Source key.
 	 * @param array<string,mixed> $source Source evidence.
+	 * @param array<string,mixed> $site Site row.
 	 * @return bool
 	 */
-	private function source_is_outside_dashboard_policy( $source_key, array $source ) {
+	private function source_is_outside_dashboard_policy( $source_key, array $source, array $site ) {
 		if ( 'wpvivid' !== $source_key ) {
 			return true;
+		}
+
+		if ( ! $this->source_requires_upload_evidence( $source_key, $site ) ) {
+			return false;
 		}
 
 		if ( empty( $source['has_upload_evidence'] ) ) {
@@ -300,6 +329,21 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 		}
 
 		return $age > $this->source_policy_window_seconds( $source_key, $source );
+	}
+
+	/**
+	 * Determines whether the dashboard should require Alynt-uploaded evidence.
+	 *
+	 * @param string              $source_key Source key.
+	 * @param array<string,mixed> $site Site row.
+	 * @return bool
+	 */
+	private function source_requires_upload_evidence( $source_key, array $site ) {
+		if ( 'wpvivid' !== $source_key ) {
+			return true;
+		}
+
+		return ! $this->source_policy->source_is_external_optional( $site, $source_key );
 	}
 
 	/**

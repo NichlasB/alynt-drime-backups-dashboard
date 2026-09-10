@@ -71,7 +71,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_Table {
 			if ( $snapshot ) {
 				echo '<div class="adbd-evidence"><span>' . esc_html__( 'Queue', 'alynt-drime-backups-dashboard' ) . ' <strong>' . esc_html( $this->payload_count( $payload, 'queue_count' ) ) . '</strong></span><span>' . esc_html__( 'Uploaded', 'alynt-drime-backups-dashboard' ) . ' <strong>' . esc_html( $this->payload_count( $payload, 'uploaded_count' ) ) . '</strong></span><span>' . esc_html__( 'Failed', 'alynt-drime-backups-dashboard' ) . ' <strong>' . esc_html( $this->payload_count( $payload, 'failed_count' ) ) . '</strong></span><span>' . esc_html__( 'Warnings', 'alynt-drime-backups-dashboard' ) . ' <strong>' . esc_html( $this->payload_count( $payload, 'warning_count' ) ) . '</strong></span></div>';
 				echo '<span class="adbd-row-meta">' . esc_html__( 'Cron:', 'alynt-drime-backups-dashboard' ) . ' ' . esc_html( isset( $payload['cron_status'] ) && '' !== $payload['cron_status'] ? $payload['cron_status'] : __( 'Not reported', 'alynt-drime-backups-dashboard' ) ) . '</span>';
-				echo $this->backup_sources_compact_html( $payload ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns escaped source-summary markup.
+				echo $this->backup_sources_compact_html( $payload, $site ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns escaped source-summary markup.
 			} else {
 				echo '<span class="description">' . esc_html__( 'No validated snapshot is stored yet.', 'alynt-drime-backups-dashboard' ) . '</span>';
 			}

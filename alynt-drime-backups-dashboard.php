@@ -3,7 +3,7 @@
  * Plugin Name:       Alynt Drime Backups Dashboard
  * Plugin URI:        https://alynt.com/
  * Description:       Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
- * Version:           0.1.18
+ * Version:           0.1.19
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Alynt
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION', '0.1.18' );
+define( 'ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION', '0.1.19' );
 define( 'ALYNT_DRIME_BACKUPS_DASHBOARD_MINIMUM_WP', '6.0' );
 define( 'ALYNT_DRIME_BACKUPS_DASHBOARD_MINIMUM_PHP', '7.4' );
 define( 'ALYNT_DRIME_BACKUPS_DASHBOARD_FILE', __FILE__ );
@@ -85,6 +85,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-remote-action-dispatcher.php',
 	'includes/class-remote-action-opt-in-tokens.php',
 	'includes/class-remote-action-opt-in-manager.php',
+	'includes/class-source-policy.php',
 	'includes/class-status-classifier.php',
 	'includes/class-event-log-redactor.php',
 	'includes/traits/trait-event-log-storage.php',

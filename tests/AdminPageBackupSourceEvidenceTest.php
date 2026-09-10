@@ -8,6 +8,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__ ) . '/includes/class-source-policy.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 
 /**
@@ -76,6 +77,36 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 	}
 
 	/**
+	 * External optional WPvivid policy is visible in compact and detail evidence.
+	 *
+	 * @return void
+	 */
+	public function test_external_optional_wpvivid_policy_displays_explicitly() {
+		$payload = $this->fixture_payload();
+		$site    = array(
+			'id' => 12,
+		);
+
+		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness(
+			new Alynt_Drime_Backups_Dashboard_Source_Policy(
+				array(
+					'12' => array(
+						'wpvivid' => 'external_optional',
+					),
+				)
+			)
+		);
+
+		$compact_html = $harness->compact_html( $payload, $site );
+		$detail_html  = $harness->detail_html( $payload, $site );
+
+		$this->assertStringContainsString( 'External / optional', $compact_html );
+		$this->assertStringContainsString( 'external / optional on this dashboard', $compact_html );
+		$this->assertStringContainsString( 'External / optional', $detail_html );
+		$this->assertStringContainsString( 'external / optional on this dashboard', $detail_html );
+	}
+
+	/**
 	 * Loads the validated uploader-shaped schema-1 fixture.
 	 *
 	 * @return array<string,mixed>
@@ -98,24 +129,42 @@ class Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence;
 
 	/**
+	 * Source policy.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Source_Policy
+	 */
+	private $source_policy;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Source_Policy|null $source_policy Source policy.
+	 */
+	public function __construct( $source_policy = null ) {
+		$this->source_policy = $source_policy instanceof Alynt_Drime_Backups_Dashboard_Source_Policy ? $source_policy : new Alynt_Drime_Backups_Dashboard_Source_Policy();
+	}
+
+	/**
 	 * Exposes compact source evidence markup.
 	 *
 	 * @param array<string,mixed> $payload Payload.
+	 * @param array<string,mixed> $site Site row.
 	 * @return string
 	 */
-	public function compact_html( array $payload ) {
-		return $this->backup_sources_compact_html( $payload );
+	public function compact_html( array $payload, array $site = array() ) {
+		return $this->backup_sources_compact_html( $payload, $site );
 	}
 
 	/**
 	 * Exposes detail source evidence markup.
 	 *
 	 * @param array<string,mixed> $payload Payload.
+	 * @param array<string,mixed> $site Site row.
 	 * @return string
 	 */
-	public function detail_html( array $payload ) {
+	public function detail_html( array $payload, array $site = array() ) {
 		ob_start();
-		$this->render_backup_sources_detail( $payload );
+		$this->render_backup_sources_detail( $payload, $site );
 		return (string) ob_get_clean();
 	}
 
