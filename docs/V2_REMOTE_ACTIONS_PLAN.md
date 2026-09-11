@@ -12,6 +12,7 @@ Draft V2.1 protocol and threat-model artifacts:
 - `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`
 - `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`
 - `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`
+- `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -116,7 +117,7 @@ Purpose: update approved backup or scan/upload schedules from the dashboard.
 
 Risk: higher-risk gated phase. It changes future backup behavior and therefore requires previews, rollback metadata, and explicit administrator confirmation.
 
-Design artifact: `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md` defines the initial planning boundary. It recommends starting with preview-only schedule capability reporting and dashboard display, then separately gating apply and rollback behavior after protocol and threat-model updates.
+Design artifacts: `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md` defines the product/safety boundary, and `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md` defines the first implementation slice. The recommended first slice is preview-only `alynt_scan_upload` schedule capability reporting and dashboard display, then separately gating preview/apply/rollback action behavior after further protocol and threat-model updates.
 
 Recommended constraints:
 

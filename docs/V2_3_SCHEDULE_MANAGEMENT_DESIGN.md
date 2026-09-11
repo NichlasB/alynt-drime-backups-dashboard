@@ -11,6 +11,7 @@ Related artifacts:
 - `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`
 - `docs/PROTOCOL_V2.md`
 - `docs/THREAT_MODEL_V2.md`
+- `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`
 - uploader `docs/STATUS_PAYLOAD.md`
 
 ## Boundary
@@ -328,4 +329,4 @@ Before any V2.3 code implementation, require explicit approval for:
 - release/deployment plan;
 - rollback plan.
 
-Recommended first implementation slice: **preview-only schedule capability reporting and dashboard display**. This gives operational visibility with no schedule mutation and keeps the first V2.3 step as small as possible.
+Recommended first implementation slice: **preview-only schedule capability reporting and dashboard display**. This gives operational visibility with no schedule mutation and keeps the first V2.3 step as small as possible. The implementation plan for that slice is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`.
