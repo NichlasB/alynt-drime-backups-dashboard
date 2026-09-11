@@ -1,10 +1,10 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1 protocol baseline with V2.2 dashboard-side action-history reconciliation implemented and validated locally. The action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader client enablement and V2.2 release/deployment remain separate approval gates.
+Status: V2.1/V2.2 protocol baseline with a V2.3 preview-only schedule capability extension planned. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, and dashboard-side action-history reconciliation have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. Broader client enablement and any V2.3 implementation remain separate approval gates.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 
@@ -17,6 +17,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - The client uploader remains the only system that can execute backup-related work, and it uses its own local settings, credentials, locks, and policy.
 - V2.1 initially allows only `scan_upload_now`.
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
+- V2.3 initially allows only schedule capability reporting and preview-only display. Applying or rolling back schedule changes requires a later protocol update and separate approval gate.
 
 ## Actors And Responsibilities
 
@@ -66,6 +67,29 @@ Recommended shape:
         "upload_attempted": 1,
         "failed": 0
       }
+    },
+    "schedule_management": {
+      "protocol_version": 2,
+      "capability_version": 1,
+      "enabled": true,
+      "preview_only": true,
+      "apply_supported": false,
+      "rollback_supported": false,
+      "schedules": [
+        {
+          "schedule_id": "alynt_scan_upload",
+          "label": "Alynt scan/upload",
+          "owner": "alynt_uploader",
+          "manageable": true,
+          "current_cadence": "every_15_minutes",
+          "current_next_run_at": "2026-09-11T17:45:00Z",
+          "supported_cadences": ["every_15_minutes", "every_30_minutes", "hourly"],
+          "minimum_interval_seconds": 900,
+          "can_disable": false,
+          "requires_high_friction_disable": true,
+          "rollback_supported": true
+        }
+      ]
     }
   }
 }
@@ -78,6 +102,24 @@ Dashboard ingestion rules:
 - Accept only documented action types and states.
 - Reject any nested key or value that looks like a path, credential, token, raw package name, raw Drime identifier, signed URL, raw response body, SQL, salt, cookie, nonce, or command.
 - Do not infer backup freshness from action state. Freshness still comes from backup-source evidence in the normal status payload.
+
+### Preview-Only Schedule Capability Reporting
+
+V2.3 may add an optional `remote_actions.schedule_management` object to the authenticated status payload. This is capability reporting only unless a later approved action type is added.
+
+Dashboard ingestion rules:
+
+- Treat `schedule_management` as optional and backward-compatible.
+- Treat clients that omit it as not supporting dashboard schedule management.
+- Accept only documented scalar fields, bounded arrays, and allowlisted schedule objects.
+- Accept only dashboard-recognized schedule IDs. The first planned IDs are `alynt_scan_upload` and, later only after separate client proof, `alynt_server_runner`.
+- Accept only allowlisted owner labels such as `alynt_uploader` and `alynt_server_runner`.
+- Accept only allowlisted cadence labels such as `every_15_minutes`, `every_30_minutes`, `hourly`, `daily`, and `weekly`.
+- Require `preview_only: true`, `apply_supported: false`, and `rollback_supported: false` for the first V2.3 slice.
+- Display capability as unavailable when Sodium, V2 action opt-in, or schedule capability reporting is unavailable.
+- Reject or ignore any raw cron line, crontab fragment, WP-Cron array, raw WPvivid option, filesystem path, package name, Drime identifier, token, credential, shell command, SQL, signed URL, or arbitrary setting payload.
+
+The preview-only slice may show current schedule posture and supported cadence choices, but it must not dispatch schedule mutation. Future `schedule_preview`, `schedule_apply`, or `schedule_rollback` action types require a separate protocol update.
 
 ## Client Action Opt-In
 
@@ -192,6 +234,7 @@ Forbidden request fields:
 - Drime credentials;
 - retention/delete scopes;
 - schedule changes;
+- schedule preview/apply/rollback payloads until V2.3 action types are separately approved;
 - restore targets;
 - arbitrary URLs.
 
@@ -215,6 +258,16 @@ Not included:
 - deleting remote files;
 - restoring backups;
 - changing Drime settings or credentials.
+
+## Future V2.3 Schedule Action Types
+
+The V2.3 design reserves the following action names, but they are not active in the current protocol baseline:
+
+- `schedule_preview`
+- `schedule_apply`
+- `schedule_rollback`
+
+Until this protocol is updated again, the dashboard must not send these action types and the client must reject them as unsupported. The first V2.3 implementation slice should only ingest and render `remote_actions.schedule_management` capability data.
 
 ## Action Response
 
@@ -298,6 +351,8 @@ Dashboard requirements:
 | `action_busy` | Client | A backup/upload/action lock is already active. |
 | `action_rate_limited` | Client | Minimum interval has not elapsed. |
 | `action_queue_failed` | Client | Client could not record or queue local work. |
+| `schedule_capability_invalid` | Dashboard | Schedule capability payload was malformed, unsafe, or incompatible. |
+| `schedule_management_unavailable` | Dashboard | Client does not currently expose supported schedule-management capability. |
 | `action_dispatch_failed` | Dashboard | Dashboard could not send the signed intent safely. |
 | `action_response_invalid` | Dashboard | Client response was malformed or unsafe. |
 | `action_result_stale` | Dashboard | No fresh status confirmation arrived in the expected window. |
@@ -309,6 +364,7 @@ All error summaries must be operator-safe and must not include raw exception tex
 - V1-only clients remain valid and monitored.
 - Dashboard must hide V2 action controls unless the client reports compatible capability.
 - Client may support v2 status capability reporting before accepting any action.
+- Client may support `remote_actions.schedule_management` preview-only reporting without accepting schedule mutation actions.
 - Breaking changes require a new protocol version and explicit migration notes in both repositories.
 
 ## Implementation Gate
@@ -317,6 +373,7 @@ Do not implement this protocol until:
 
 - `docs/THREAT_MODEL_V2.md` is approved;
 - the V2.1 design direction is approved;
+- the V2.3 preview-only schedule capability shape is approved before schedule-management implementation begins;
 - both repositories have restore points or clean commit baselines;
 - focused test plans exist for dashboard and uploader;
 - the live rollout plan keeps all remote actions disabled until each client explicitly opts in.

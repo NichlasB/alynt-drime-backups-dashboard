@@ -1,8 +1,8 @@
 # Alynt Drime Backups Dashboard Threat Model v2
 
-Status: V2.1 threat-model baseline. V2.1 signed `scan_upload_now` dispatch has been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. This document does not approve broad rollout, V2.2+ implementation, destructive actions, restore actions, schedule changes, cleanup/delete actions, or Drime credential storage in the dashboard.
+Status: V2.1/V2.2 threat-model baseline with a V2.3 preview-only schedule capability extension planned. V2.1 signed `scan_upload_now` dispatch and V2.2 action-history/audit hardening have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. This document does not approve broad rollout, schedule mutation, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
 
-Scope: V2.1 `scan_upload_now` remote-action planning for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
+Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, and V2.3 preview-only schedule capability reporting for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
 This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and status polling remain in force.
 
@@ -16,6 +16,7 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Action intent body | Site-scoped, action-scoped, signed, short-lived, idempotent, no arbitrary inputs. |
 | Client backup execution state | Protected from duplicate work, overload, replay, and unsafe action expansion. |
 | Action history | Durable enough for support, redacted enough for screenshots and export. |
+| Schedule capability summary | Redacted schedule posture only; no raw cron, raw option blobs, shell commands, usernames, paths, credentials, or mutation authority. |
 | Drime credentials | Never stored, requested, displayed, signed, or transported by the dashboard. |
 | Client backup evidence | Reported as redacted counts and states, not paths, package names, object IDs, or signed URLs. |
 
@@ -49,6 +50,10 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Compromised dashboard overloads clients | Dashboard sends valid but excessive requests. | Client-side opt-in, rate limit, one-running-action lock, local disable/revoke. | Client policy tests. |
 | Rollback vulnerability | Old plugin version accepts action with weaker validation. | Capability version reporting; action controls hidden for incompatible clients; release order uploader first. | Compatibility tests. |
 | Logging leakage | Raw request, signature, key, response body, path, or package data enters logs. | Stable codes, operator-safe summaries, redactor denylist, no raw body persistence. | Diagnostics and audit tests. |
+| Schedule capability leakage | Client reports raw crontab lines, WP-Cron arrays, WPvivid options, usernames, paths, or shell fragments through capability data. | Allowlisted schedule capability schema; reject forbidden keys/values; display redacted labels only. | Capability validation and export tests. |
+| Schedule mutation smuggling | Preview-only capability fields are misused to send or apply schedule changes. | First V2.3 slice is status-payload capability reporting only; no schedule action types enabled; client rejects `schedule_preview`, `schedule_apply`, and `schedule_rollback` until separately approved. | Dashboard UI/action tests and client action allowlist tests. |
+| Unsafe schedule choices | Dashboard offers cadence options the client cannot safely support. | Dashboard displays only client-declared schedule IDs and supported cadence labels; no free-form cron input. | UI rendering and payload tests. |
+| False sense of control | Operator thinks preview-only capability reporting changed a schedule. | UI labels: "preview only" / "not applied"; action history records no schedule mutation. | UI copy and workflow tests. |
 
 ## Abuse Cases Explicitly Out Of Scope For V2.1
 
@@ -61,13 +66,14 @@ These must remain impossible in V2.1 code and UI:
 - backup deletion;
 - retention cleanup;
 - local file cleanup;
-- schedule changes;
+- schedule changes, including V2.3 apply or rollback;
 - settings changes;
 - Drime credential updates;
 - dashboard-side Drime API use;
 - arbitrary URL checks;
 - filesystem browsing;
 - accepting paths, package names, backup IDs, or Drime object IDs from the dashboard.
+- accepting raw cron expressions, raw crontab lines, raw WP-Cron arrays, raw WPvivid option blobs, or free-form cadence input from the dashboard.
 
 ## Required Controls By Component
 
@@ -134,6 +140,8 @@ Dashboard:
 - deterministic signing fixtures;
 - state transitions for accepted, rejected, busy, rate-limited, failed, timed out, stale;
 - support export redacts signatures, keys, paths, package names, Drime identifiers, and raw responses.
+- schedule capability parsing rejects raw cron, raw options, paths, commands, credentials, package names, and Drime identifiers;
+- schedule controls render as preview-only/unavailable until approved schedule action types exist.
 
 Uploader:
 
@@ -145,6 +153,8 @@ Uploader:
 - `scan_upload_now` uses existing scan/queue/upload scheduling and accepts no arbitrary paths;
 - lock/rate-limit behavior is deterministic;
 - status reports redacted action summaries only.
+- preview-only schedule capability reports redacted schedule IDs, labels, owners, current cadence, supported cadence choices, next run timestamps, and safety flags only;
+- schedule mutation action types are rejected until separately implemented and approved.
 
 Cross-plugin:
 
@@ -153,6 +163,7 @@ Cross-plugin:
 - dashboard records accepted/running/final state;
 - backup freshness changes only after normal status evidence changes;
 - client-side disable/revoke immediately prevents future actions.
+- preview-only schedule capability display does not alter client schedules.
 
 ## Release And Rollout Constraints
 
@@ -161,6 +172,7 @@ Cross-plugin:
 - Live rollout must start with one low-risk client.
 - No production client should opt in until release packages, updater behavior, tests, and rollback guidance are verified.
 - No destructive or persistent action slice may proceed until V2.1 and action history hardening are proven.
+- V2.3 must start with preview-only capability reporting and dashboard display before any apply or rollback implementation.
 
 ## Approval Gate
 
@@ -169,6 +181,7 @@ Before any V2 runtime implementation:
 - approve `docs/PROTOCOL_V2.md`;
 - approve this threat model;
 - approve `scan_upload_now` as the first V2.1 action;
+- approve preview-only schedule capability reporting as the first V2.3 slice before any schedule-management code;
 - create or confirm restore points for dashboard and uploader repositories;
 - create focused implementation tickets/checklists for both repositories;
 - keep live `control-sitesmanage` unchanged until a separate release/deploy approval gate.
