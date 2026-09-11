@@ -1,6 +1,6 @@
 # V2.3 Preview-Only Schedule Capability Implementation Plan
 
-Status: implementation planning only. This document does not approve code changes, release, deployment, live-site writes, schedule changes, backup creation, cleanup/delete actions, restore actions, or Drime credential storage in the dashboard.
+Status: implemented locally for preview-only capability reporting and dashboard display. This document does not approve release, deployment, live-site writes, schedule changes, backup creation, cleanup/delete actions, restore actions, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -28,6 +28,18 @@ This slice should help the operator answer:
 - What is the current cadence and next run?
 - Which cadence choices could be offered later?
 - Is this only preview/reporting, or can the dashboard apply changes? For this slice the answer must be preview/reporting only.
+
+## Local Implementation Status
+
+The coordinated uploader/dashboard preview-only slice is implemented locally:
+
+- uploader reports redacted `remote_actions.schedule_management` capability for `alynt_scan_upload`;
+- dashboard allowlists and stores sanitized preview-only capability inside existing status snapshots;
+- Site Detail shows a read-only Schedule Management Preview panel;
+- Sites list shows a compact schedule-preview hint when capability is reported;
+- Diagnostics/support output includes aggregate schedule-management counts only;
+- focused tests cover sanitizer, payload validation, rendering, and aggregate diagnostics;
+- no `schedule_preview`, `schedule_apply`, or `schedule_rollback` action handling exists.
 
 ## Non-Goals
 

@@ -278,6 +278,206 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	}
 
 	/**
+	 * Renders preview-only schedule-management capability reported by the client.
+	 *
+	 * @param array<string,mixed>|null $snapshot Latest snapshot row.
+	 * @return void
+	 */
+	private function render_schedule_management_panel( $snapshot ) {
+		$payload              = is_array( $snapshot ) ? $this->decoded_snapshot_payload( $snapshot ) : array();
+		$schedule_management  = $this->schedule_management_summary( $payload );
+		$capabilities         = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$preview_is_supported = $capabilities->supports_schedule_management_preview( $this->remote_actions_from_payload( $payload ) );
+
+		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Schedule Management Preview', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
+		echo '<p>' . esc_html__( 'V2.3 starts with read-only schedule visibility only. The client reports supported schedule choices, but this dashboard version does not apply, disable, roll back, or otherwise change schedules.', 'alynt-drime-backups-dashboard' ) . '</p>';
+
+		if ( ! $preview_is_supported ) {
+			echo '<p><span class="adbd-status-pill is-pending">' . esc_html__( 'Not reported yet', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html__( 'The latest client snapshot does not advertise preview-only schedule capability. Upgrade and poll the client before schedule posture can be shown here.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			echo '</div></div>';
+			return;
+		}
+
+		echo '<p><span class="adbd-status-pill is-working">' . esc_html__( 'Preview only', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html__( 'Schedule capability is reported for operator review only.', 'alynt-drime-backups-dashboard' ) . '</p>';
+
+		foreach ( $schedule_management['schedules'] as $schedule ) {
+			if ( ! is_array( $schedule ) ) {
+				continue;
+			}
+
+			echo '<section class="adbd-source-card adbd-schedule-card" aria-label="' . esc_attr( $this->schedule_label( $schedule ) ) . '">';
+			echo '<h4>' . esc_html( $this->schedule_label( $schedule ) ) . '</h4>';
+			echo '<dl class="adbd-detail-list">';
+			$this->render_detail_item( __( 'Owner', 'alynt-drime-backups-dashboard' ), $this->schedule_owner_label( isset( $schedule['owner'] ) ? (string) $schedule['owner'] : '' ) );
+			$this->render_detail_item( __( 'Current cadence', 'alynt-drime-backups-dashboard' ), $this->schedule_cadence_label( isset( $schedule['current_cadence'] ) ? (string) $schedule['current_cadence'] : '' ) );
+			$this->render_detail_item( __( 'Current interval', 'alynt-drime-backups-dashboard' ), $this->schedule_interval_label( isset( $schedule['current_interval_seconds'] ) ? (int) $schedule['current_interval_seconds'] : 0 ) );
+			$this->render_detail_item( __( 'Next run', 'alynt-drime-backups-dashboard' ), $this->time_html( isset( $schedule['current_next_run_at'] ) ? (string) $schedule['current_next_run_at'] : '' ), true );
+			$this->render_detail_item( __( 'Supported cadences', 'alynt-drime-backups-dashboard' ), $this->schedule_cadences_label( isset( $schedule['supported_cadences'] ) ? $schedule['supported_cadences'] : array() ) );
+			$this->render_detail_item( __( 'Minimum interval', 'alynt-drime-backups-dashboard' ), $this->schedule_interval_label( isset( $schedule['minimum_interval_seconds'] ) ? (int) $schedule['minimum_interval_seconds'] : 0 ) );
+			$this->render_detail_item( __( 'Apply changes', 'alynt-drime-backups-dashboard' ), __( 'Not available in this version', 'alynt-drime-backups-dashboard' ) );
+			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Not available in this version', 'alynt-drime-backups-dashboard' ) );
+			echo '</dl></section>';
+		}
+
+		echo '<p class="description">' . esc_html__( 'Schedule preview data is redacted capability evidence from the client uploader. It does not grant dashboard-side schedule mutation, backup creation, restore, cleanup, or credential access.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '</div></div>';
+	}
+
+	/**
+	 * Renders a compact Sites-list schedule capability hint.
+	 *
+	 * @param array<string,mixed> $payload Latest decoded snapshot payload.
+	 * @return string
+	 */
+	private function schedule_management_row_hint( array $payload ) {
+		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+
+		if ( ! $capabilities->supports_schedule_management_preview( $this->remote_actions_from_payload( $payload ) ) ) {
+			return '';
+		}
+
+		$schedule_management = $this->schedule_management_summary( $payload );
+		$schedule            = ! empty( $schedule_management['schedules'][0] ) && is_array( $schedule_management['schedules'][0] ) ? $schedule_management['schedules'][0] : array();
+
+		if ( empty( $schedule ) ) {
+			return '';
+		}
+
+		$label = sprintf(
+			/* translators: 1: schedule label, 2: current cadence. */
+			__( 'Schedule preview: %1$s %2$s', 'alynt-drime-backups-dashboard' ),
+			$this->schedule_label( $schedule ),
+			$this->schedule_cadence_label( isset( $schedule['current_cadence'] ) ? (string) $schedule['current_cadence'] : '' )
+		);
+
+		return '<span class="description adbd-row-meta">' . esc_html( $label ) . '</span>';
+	}
+
+	/**
+	 * Gets sanitized remote-action capability summary from a payload.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,mixed>
+	 */
+	private function remote_actions_from_payload( array $payload ) {
+		return isset( $payload['remote_actions'] ) && is_array( $payload['remote_actions'] ) ? $payload['remote_actions'] : array();
+	}
+
+	/**
+	 * Gets sanitized schedule-management capability from a payload.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_management_summary( array $payload ) {
+		$remote_actions = $this->remote_actions_from_payload( $payload );
+
+		return isset( $remote_actions['schedule_management'] ) && is_array( $remote_actions['schedule_management'] ) ? $remote_actions['schedule_management'] : array();
+	}
+
+	/**
+	 * Gets a schedule label.
+	 *
+	 * @param array<string,mixed> $schedule Schedule summary.
+	 * @return string
+	 */
+	private function schedule_label( array $schedule ) {
+		if ( ! empty( $schedule['label'] ) ) {
+			return (string) $schedule['label'];
+		}
+
+		if ( ! empty( $schedule['schedule_id'] ) ) {
+			return (string) $schedule['schedule_id'];
+		}
+
+		return __( 'Reported schedule', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a human-readable schedule owner label.
+	 *
+	 * @param string $owner Owner.
+	 * @return string
+	 */
+	private function schedule_owner_label( $owner ) {
+		$labels = array(
+			'alynt_uploader' => __( 'Alynt uploader', 'alynt-drime-backups-dashboard' ),
+			'wpvivid'        => __( 'WPvivid', 'alynt-drime-backups-dashboard' ),
+			'wordpress'      => __( 'WordPress', 'alynt-drime-backups-dashboard' ),
+			'unknown'        => __( 'Unknown', 'alynt-drime-backups-dashboard' ),
+			''               => __( 'Unknown', 'alynt-drime-backups-dashboard' ),
+		);
+		$owner  = sanitize_key( $owner );
+
+		return isset( $labels[ $owner ] ) ? $labels[ $owner ] : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets a human-readable cadence label.
+	 *
+	 * @param string $cadence Cadence key.
+	 * @return string
+	 */
+	private function schedule_cadence_label( $cadence ) {
+		$labels  = array(
+			'every_15_minutes' => __( 'every 15 minutes', 'alynt-drime-backups-dashboard' ),
+			'every_30_minutes' => __( 'every 30 minutes', 'alynt-drime-backups-dashboard' ),
+			'hourly'           => __( 'hourly', 'alynt-drime-backups-dashboard' ),
+			'daily'            => __( 'daily', 'alynt-drime-backups-dashboard' ),
+			'weekly'           => __( 'weekly', 'alynt-drime-backups-dashboard' ),
+			'unknown'          => __( 'unknown', 'alynt-drime-backups-dashboard' ),
+			''                 => __( 'not reported', 'alynt-drime-backups-dashboard' ),
+		);
+		$cadence = sanitize_key( $cadence );
+
+		return isset( $labels[ $cadence ] ) ? $labels[ $cadence ] : str_replace( '_', ' ', $cadence );
+	}
+
+	/**
+	 * Gets a comma-separated cadence label list.
+	 *
+	 * @param mixed $cadences Cadence list.
+	 * @return string
+	 */
+	private function schedule_cadences_label( $cadences ) {
+		if ( ! is_array( $cadences ) || empty( $cadences ) ) {
+			return __( 'Not reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		$labels = array();
+
+		foreach ( $cadences as $cadence ) {
+			$labels[] = $this->schedule_cadence_label( (string) $cadence );
+		}
+
+		return implode( ', ', array_unique( $labels ) );
+	}
+
+	/**
+	 * Formats a schedule interval.
+	 *
+	 * @param int $seconds Interval seconds.
+	 * @return string
+	 */
+	private function schedule_interval_label( $seconds ) {
+		$seconds = max( 0, (int) $seconds );
+
+		if ( $seconds <= 0 ) {
+			return __( 'Not reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( method_exists( $this, 'source_duration_label' ) ) {
+			return $this->source_duration_label( $seconds );
+		}
+
+		return sprintf(
+			/* translators: %d: number of seconds. */
+			_n( '%d second', '%d seconds', $seconds, 'alynt-drime-backups-dashboard' ),
+			$seconds
+		);
+	}
+
+	/**
 	 * Renders the signed V2.1 Request Backup Now form.
 	 *
 	 * @param array<string,mixed> $site Site row.

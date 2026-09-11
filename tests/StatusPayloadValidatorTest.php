@@ -119,6 +119,28 @@ class StatusPayloadValidatorTest extends TestCase {
 						'sodium_available'            => true,
 						'min_interval_seconds'        => 600,
 						'one_running_action_per_site' => true,
+						'schedule_management'         => array(
+							'protocol_version'   => 2,
+							'capability_version' => 1,
+							'enabled'            => true,
+							'preview_only'       => true,
+							'apply_supported'    => false,
+							'rollback_supported' => false,
+							'schedules'          => array(
+								array(
+									'schedule_id'              => 'alynt_scan_upload',
+									'label'                    => 'Alynt scan/upload',
+									'owner'                    => 'alynt_uploader',
+									'manageable'               => true,
+									'current_cadence'          => 'every_15_minutes',
+									'current_interval_seconds' => 900,
+									'current_next_run_at'      => '2026-06-25T16:45:00+00:00',
+									'supported_cadences'       => array( 'every_15_minutes' ),
+									'minimum_interval_seconds' => 900,
+									'extra_field'              => 'ignored',
+								),
+							),
+						),
 						'extra_field'                 => 'ignored',
 					),
 				)
@@ -131,6 +153,13 @@ class StatusPayloadValidatorTest extends TestCase {
 		$this->assertTrue( $result['remote_actions']['enabled'] );
 		$this->assertSame( array( 'scan_upload_now' ), $result['remote_actions']['allowed_actions'] );
 		$this->assertArrayNotHasKey( 'extra_field', $result['remote_actions'] );
+		$this->assertArrayHasKey( 'schedule_management', $result['remote_actions'] );
+		$this->assertTrue( $result['remote_actions']['schedule_management']['enabled'] );
+		$this->assertTrue( $result['remote_actions']['schedule_management']['preview_only'] );
+		$this->assertFalse( $result['remote_actions']['schedule_management']['apply_supported'] );
+		$this->assertFalse( $result['remote_actions']['schedule_management']['rollback_supported'] );
+		$this->assertSame( 'alynt_scan_upload', $result['remote_actions']['schedule_management']['schedules'][0]['schedule_id'] );
+		$this->assertArrayNotHasKey( 'extra_field', $result['remote_actions']['schedule_management']['schedules'][0] );
 	}
 
 	/**

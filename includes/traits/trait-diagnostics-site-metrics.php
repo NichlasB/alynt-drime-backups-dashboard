@@ -41,6 +41,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				'no_upload_evidence_sources' => 0,
 				'not_configured_sources'     => 0,
 			),
+			'schedule_management' => array(
+				'reporting_sites'    => 0,
+				'preview_only_sites' => 0,
+				'unavailable_sites'  => 0,
+				'reported_schedules' => 0,
+			),
 		);
 
 		foreach ( $sites as $site ) {
@@ -77,6 +83,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 
 			foreach ( $source_counts as $key => $value ) {
 				$counts['backup_sources'][ $key ] += $value;
+			}
+
+			$schedule_counts = $this->schedule_management_diagnostics( $snapshot );
+
+			foreach ( $schedule_counts as $key => $value ) {
+				$counts['schedule_management'][ $key ] += $value;
 			}
 		}
 

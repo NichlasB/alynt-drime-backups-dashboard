@@ -83,6 +83,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		echo '</dl></div></div>';
 
 		$this->render_request_backup_now_panel( $site, $snapshot, $this->remote_actions->recent_for_site( $site_id, 10 ) );
+		$this->render_schedule_management_panel( $snapshot );
 		$this->render_source_policy_panel( $site, $snapshot );
 		$this->render_latest_snapshot_summary( $snapshot, $site );
 		$this->render_recent_history( $history );

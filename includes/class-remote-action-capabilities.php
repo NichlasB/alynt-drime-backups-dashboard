@@ -21,6 +21,9 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 
 	const MAX_ALLOWED_ACTIONS       = 5;
 	const MAX_RESULT_SUMMARY_LENGTH = 160;
+	const MAX_SCHEDULES             = 5;
+	const MAX_SCHEDULE_CADENCES     = 10;
+	const MAX_SCHEDULE_LABEL_LENGTH = 80;
 
 	/**
 	 * Allowed action states.
@@ -118,6 +121,12 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			$clean['last_action'] = $last_action;
 		}
 
+		$schedule_management = $this->schedule_management( isset( $payload['schedule_management'] ) ? $payload['schedule_management'] : array() );
+
+		if ( ! empty( $schedule_management ) ) {
+			$clean['schedule_management'] = $schedule_management;
+		}
+
 		return $clean;
 	}
 
@@ -134,6 +143,25 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			&& ! empty( $capabilities['sodium_available'] )
 			&& ! empty( $capabilities['allowed_actions'] )
 			&& in_array( self::ACTION_SCAN_UPLOAD_NOW, (array) $capabilities['allowed_actions'], true );
+	}
+
+	/**
+	 * Gets whether sanitized capabilities report preview-only schedule management.
+	 *
+	 * @since 0.1.16
+	 *
+	 * @param array<string,mixed> $capabilities Sanitized capabilities.
+	 * @return bool
+	 */
+	public function supports_schedule_management_preview( array $capabilities ) {
+		$schedule_management = isset( $capabilities['schedule_management'] ) && is_array( $capabilities['schedule_management'] ) ? $capabilities['schedule_management'] : array();
+
+		return ! empty( $schedule_management['enabled'] )
+			&& ! empty( $schedule_management['preview_only'] )
+			&& empty( $schedule_management['apply_supported'] )
+			&& empty( $schedule_management['rollback_supported'] )
+			&& ! empty( $schedule_management['schedules'] )
+			&& is_array( $schedule_management['schedules'] );
 	}
 
 	/**
@@ -237,6 +265,121 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			'result_summary' => $this->bounded_text( isset( $action['result_summary'] ) ? (string) $action['result_summary'] : '', self::MAX_RESULT_SUMMARY_LENGTH ),
 			'counts'         => $this->counts( isset( $action['counts'] ) ? $action['counts'] : array() ),
 		);
+	}
+
+	/**
+	 * Sanitizes preview-only schedule-management capability reporting.
+	 *
+	 * @param mixed $capability Schedule-management capability payload.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_management( $capability ) {
+		if ( ! is_array( $capability ) ) {
+			return array();
+		}
+
+		if ( self::PROTOCOL_VERSION !== absint( isset( $capability['protocol_version'] ) ? $capability['protocol_version'] : 0 ) ) {
+			return array();
+		}
+
+		$schedules    = $this->schedules( isset( $capability['schedules'] ) ? $capability['schedules'] : array() );
+		$preview_safe = ! empty( $capability['preview_only'] ) && empty( $capability['apply_supported'] ) && empty( $capability['rollback_supported'] );
+
+		return array(
+			'protocol_version'   => self::PROTOCOL_VERSION,
+			'capability_version' => $this->non_negative_int( $capability, 'capability_version' ),
+			'enabled'            => ! empty( $capability['enabled'] ) && $preview_safe && ! empty( $schedules ),
+			'preview_only'       => ! empty( $capability['preview_only'] ),
+			'apply_supported'    => false,
+			'rollback_supported' => false,
+			'schedules'          => $schedules,
+		);
+	}
+
+	/**
+	 * Sanitizes schedule summaries.
+	 *
+	 * @param mixed $schedules Schedule summaries.
+	 * @return array<int,array<string,mixed>>
+	 */
+	private function schedules( $schedules ) {
+		if ( ! is_array( $schedules ) ) {
+			return array();
+		}
+
+		$clean = array();
+
+		foreach ( array_slice( $schedules, 0, self::MAX_SCHEDULES ) as $schedule ) {
+			if ( ! is_array( $schedule ) ) {
+				continue;
+			}
+
+			$schedule_id = isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '';
+
+			if ( '' === $schedule_id ) {
+				continue;
+			}
+
+			$clean[] = array(
+				'schedule_id'                    => $schedule_id,
+				'label'                          => $this->bounded_text( isset( $schedule['label'] ) ? (string) $schedule['label'] : '', self::MAX_SCHEDULE_LABEL_LENGTH ),
+				'owner'                          => $this->sanitize_schedule_owner( isset( $schedule['owner'] ) ? (string) $schedule['owner'] : '' ),
+				'manageable'                     => ! empty( $schedule['manageable'] ),
+				'current_cadence'                => isset( $schedule['current_cadence'] ) ? sanitize_key( (string) $schedule['current_cadence'] ) : '',
+				'current_interval_seconds'       => $this->non_negative_int( $schedule, 'current_interval_seconds' ),
+				'current_next_run_at'            => isset( $schedule['current_next_run_at'] ) ? sanitize_text_field( (string) $schedule['current_next_run_at'] ) : '',
+				'supported_cadences'             => $this->schedule_cadences( isset( $schedule['supported_cadences'] ) ? $schedule['supported_cadences'] : array() ),
+				'minimum_interval_seconds'       => $this->non_negative_int( $schedule, 'minimum_interval_seconds' ),
+				'can_disable'                    => ! empty( $schedule['can_disable'] ),
+				'requires_high_friction_disable' => ! empty( $schedule['requires_high_friction_disable'] ),
+				'rollback_supported'             => false,
+			);
+		}
+
+		return $clean;
+	}
+
+	/**
+	 * Sanitizes schedule owner labels.
+	 *
+	 * @param string $owner Owner.
+	 * @return string
+	 */
+	private function sanitize_schedule_owner( $owner ) {
+		$owner   = sanitize_key( $owner );
+		$allowed = array(
+			'alynt_uploader',
+			'wpvivid',
+			'wordpress',
+			'unknown',
+			'',
+		);
+
+		return in_array( $owner, $allowed, true ) ? $owner : 'unknown';
+	}
+
+	/**
+	 * Sanitizes supported cadence labels.
+	 *
+	 * @param mixed $cadences Cadence list.
+	 * @return array<int,string>
+	 */
+	private function schedule_cadences( $cadences ) {
+		if ( ! is_array( $cadences ) ) {
+			return array();
+		}
+
+		$clean = array();
+
+		foreach ( array_slice( $cadences, 0, self::MAX_SCHEDULE_CADENCES ) as $cadence ) {
+			$cadence = sanitize_key( (string) $cadence );
+
+			if ( '' !== $cadence && ! in_array( $cadence, $clean, true ) ) {
+				$clean[] = $cadence;
+			}
+		}
+
+		return $clean;
 	}
 
 	/**
