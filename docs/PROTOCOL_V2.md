@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1/V2.2 protocol baseline with a V2.3 preview-only schedule capability extension planned. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, and dashboard-side action-history reconciliation have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. Broader client enablement and any V2.3 implementation remain separate approval gates.
+Status: V2.1/V2.2 protocol baseline with a V2.3 preview-only schedule capability extension and a planned non-mutating `schedule_preview` action slice. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, and dashboard-side action-history reconciliation have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. Broader client enablement and any V2.3 runtime implementation remain separate approval gates.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
@@ -17,7 +17,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - The client uploader remains the only system that can execute backup-related work, and it uses its own local settings, credentials, locks, and policy.
 - V2.1 initially allows only `scan_upload_now`.
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
-- V2.3 initially allows only schedule capability reporting and preview-only display. Applying or rolling back schedule changes requires a later protocol update and separate approval gate.
+- V2.3 starts with schedule capability reporting and preview-only display. The next planned V2.3 action is `schedule_preview`, which validates a proposed schedule change and returns redacted before/after evidence without changing any schedule. Applying or rolling back schedule changes requires a later protocol update and separate approval gate.
 
 ## Actors And Responsibilities
 
@@ -119,7 +119,34 @@ Dashboard ingestion rules:
 - Display capability as unavailable when Sodium, V2 action opt-in, or schedule capability reporting is unavailable.
 - Reject or ignore any raw cron line, crontab fragment, WP-Cron array, raw WPvivid option, filesystem path, package name, Drime identifier, token, credential, shell command, SQL, signed URL, or arbitrary setting payload.
 
-The preview-only slice may show current schedule posture and supported cadence choices, but it must not dispatch schedule mutation. Future `schedule_preview`, `schedule_apply`, or `schedule_rollback` action types require a separate protocol update.
+The preview-only slice may show current schedule posture and supported cadence choices, but it must not dispatch schedule mutation.
+
+### Planned Schedule Preview Action
+
+The next V2.3 slice may allow a signed `schedule_preview` action for `alynt_scan_upload` only. `schedule_preview` is non-mutating: it asks the client to validate a proposed cadence against local capability state and return a redacted before/after preview.
+
+Planned request extension:
+
+```json
+{
+  "action_type": "schedule_preview",
+  "schedule_preview": {
+    "schedule_id": "alynt_scan_upload",
+    "proposed_cadence": "every_30_minutes",
+    "capability_version": 1
+  }
+}
+```
+
+Rules:
+
+- The dashboard may offer only client-declared schedule IDs and cadence labels.
+- The dashboard must not send raw cron syntax, next-run timestamps, paths, commands, option names/values, package names, backup IDs, Drime IDs, credentials, disable flags, or arbitrary labels.
+- The client must compute the preview from current local state.
+- The client must reject unknown schedule IDs, unsupported cadences, free-form cron expressions, and unsafe local state.
+- The response may include schedule ID, label, owner, current cadence, proposed cadence, current next run, proposed next-run estimate, `would_change`, warning codes, and support-safe result codes.
+- The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
+- `schedule_apply` and `schedule_rollback` remain reserved and must be rejected until separately implemented and approved.
 
 ## Client Action Opt-In
 
@@ -267,7 +294,7 @@ The V2.3 design reserves the following action names, but they are not active in 
 - `schedule_apply`
 - `schedule_rollback`
 
-Until this protocol is updated again, the dashboard must not send these action types and the client must reject them as unsupported. The first V2.3 implementation slice should only ingest and render `remote_actions.schedule_management` capability data.
+Until the `schedule_preview` runtime slice is implemented and explicitly approved, the dashboard must not send schedule action types and the client must reject them as unsupported. Even after `schedule_preview` is implemented, `schedule_apply` and `schedule_rollback` remain reserved and must be rejected until separately implemented and approved.
 
 ## Action Response
 

@@ -12,6 +12,7 @@ Related artifacts:
 - `docs/PROTOCOL_V2.md`
 - `docs/THREAT_MODEL_V2.md`
 - `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`
+- `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`
 - uploader `docs/STATUS_PAYLOAD.md`
 
 ## Boundary
@@ -329,4 +330,6 @@ Before any V2.3 code implementation, require explicit approval for:
 - release/deployment plan;
 - rollback plan.
 
-Recommended first implementation slice: **preview-only schedule capability reporting and dashboard display**. This gives operational visibility with no schedule mutation and keeps the first V2.3 step as small as possible. The implementation plan for that slice is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`.
+The first implementation slice, **preview-only schedule capability reporting and dashboard display**, is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`.
+
+Recommended next implementation slice: **non-mutating signed `schedule_preview` for `alynt_scan_upload` only**. This lets the dashboard request a client-validated before/after preview without applying schedule changes. The implementation plan for that slice is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`.

@@ -13,6 +13,7 @@ Draft V2.1 protocol and threat-model artifacts:
 - `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`
 - `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`
 - `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`
+- `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -117,7 +118,14 @@ Purpose: update approved backup or scan/upload schedules from the dashboard.
 
 Risk: higher-risk gated phase. It changes future backup behavior and therefore requires previews, rollback metadata, and explicit administrator confirmation.
 
-Design artifacts: `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md` defines the product/safety boundary, and `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md` defines the first implementation slice. The recommended first slice is preview-only `alynt_scan_upload` schedule capability reporting and dashboard display, then separately gating preview/apply/rollback action behavior after further protocol and threat-model updates.
+Design artifacts: `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md` defines the product/safety boundary, `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md` defines the first passive capability-display slice, and `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md` defines the next non-mutating signed `schedule_preview` action slice.
+
+Recommended sequencing inside V2.3:
+
+1. Preview-only `alynt_scan_upload` schedule capability reporting and dashboard display.
+2. Non-mutating signed `schedule_preview` for `alynt_scan_upload` only.
+3. Separately gated `schedule_apply` only after preview proves safe and reliable.
+4. Separately gated `schedule_rollback` only after apply exists and captures rollback metadata.
 
 Recommended constraints:
 
@@ -209,7 +217,7 @@ Keep separate from backup operations. If needed later, design it as a dedicated 
 1. V2 planning baseline: protocol, threat model, action audit schema, client opt-in model, and the V2.1 design artifact.
 2. V2.1 request backup now / scan-upload now as the only initial low-risk candidate.
 3. V2.2 action history and operator audit UI hardening before any higher-risk controls.
-4. V2.3 schedule management with preview and rollback as a higher-risk gated phase.
+4. V2.3 passive schedule capability display, then non-mutating `schedule_preview`, then separately gated apply/rollback.
 5. V2.4 cleanup dry-run/apply for local artifacts only as a higher-risk gated phase.
 6. V2.5 remote retention/delete planning after inventory evidence is mature as a higher-risk gated phase.
 7. V2.6 restore preparation as a higher-risk gated phase.
