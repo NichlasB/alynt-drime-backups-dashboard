@@ -91,7 +91,7 @@ class StatusClassifierTest extends TestCase {
 	}
 
 	/**
-	 * Failed uploads require attention.
+	 * Failed uploads with a current queue require attention.
 	 *
 	 * @return void
 	 */
@@ -102,6 +102,7 @@ class StatusClassifierTest extends TestCase {
 				array(
 					'schema_version'           => 1,
 					'server_outbox_configured' => true,
+					'queue_count'              => 1,
 					'failed_count'             => 1,
 				)
 			),
@@ -109,6 +110,46 @@ class StatusClassifierTest extends TestCase {
 		);
 
 		$this->assertSame( 'needs_attention', $result['category'] );
+	}
+
+	/**
+	 * Historical failed upload counts do not override healthy current evidence.
+	 *
+	 * @return void
+	 */
+	public function test_historical_failed_uploads_without_queue_are_working_when_sources_are_healthy() {
+		$result = $this->classifier->classify(
+			$this->active_site(),
+			$this->snapshot(
+				array_merge(
+					$this->healthy_payload(),
+					array(
+						'failed_count'   => 1,
+						'backup_sources' => array(
+							'server'  => array_merge(
+								$this->source_payload(),
+								array(
+									'failed_count' => 1,
+								)
+							),
+							'wpvivid' => array_merge(
+								$this->source_payload(),
+								array(
+									'source_key'     => 'wpvivid',
+									'source_label'   => 'WPvivid',
+									'failed_count'   => 0,
+									'queued_count'   => 0,
+									'uploaded_count' => 1,
+								)
+							),
+						),
+					)
+				)
+			),
+			1700000300
+		);
+
+		$this->assertSame( 'working', $result['category'] );
 	}
 
 	/**
@@ -125,6 +166,7 @@ class StatusClassifierTest extends TestCase {
 					array(
 						'schema_version'           => 1,
 						'server_outbox_configured' => true,
+						'queue_count'              => 1,
 						'failed_count'             => 1,
 					)
 				),
@@ -567,6 +609,7 @@ class StatusClassifierTest extends TestCase {
 								array(
 									'source_key'       => 'wpvivid',
 									'source_label'     => 'WPvivid',
+									'queued_count'     => 1,
 									'failed_count'     => 1,
 									'freshness_status' => 'no_upload_evidence',
 								)

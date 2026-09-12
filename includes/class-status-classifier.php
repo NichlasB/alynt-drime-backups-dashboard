@@ -194,7 +194,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 	 * @return bool
 	 */
 	private function attention_message( array $payload, array $site ) {
-		if ( isset( $payload['failed_count'] ) && (int) $payload['failed_count'] > 0 ) {
+		if ( $this->payload_failed_uploads_need_attention( $payload ) ) {
 			return __( 'The client reports failed backup uploads.', 'alynt-drime-backups-dashboard' );
 		}
 
@@ -215,6 +215,29 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Determines whether top-level failed upload evidence represents a current attention condition.
+	 *
+	 * The uploader's failed counters are registry evidence and can include old failures that later
+	 * recovered or were superseded by newer successful uploads. Treat failed counters as an alarm
+	 * only when a queue is still present; otherwise source freshness and warning evidence decide
+	 * whether the current state needs attention.
+	 *
+	 * @param array<string,mixed> $payload Status payload.
+	 * @return bool
+	 */
+	private function payload_failed_uploads_need_attention( array $payload ) {
+		$failed = isset( $payload['failed_count'] ) ? max( 0, (int) $payload['failed_count'] ) : 0;
+
+		if ( 0 === $failed ) {
+			return false;
+		}
+
+		$queued = isset( $payload['queue_count'] ) ? max( 0, (int) $payload['queue_count'] ) : 0;
+
+		return $queued > 0;
 	}
 
 	/**
@@ -258,7 +281,7 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 			return false;
 		}
 
-		if ( isset( $source['failed_count'] ) && (int) $source['failed_count'] > 0 ) {
+		if ( $this->source_failed_uploads_need_attention( $source ) ) {
 			return true;
 		}
 
@@ -299,6 +322,24 @@ class Alynt_Drime_Backups_Dashboard_Status_Classifier {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Determines whether source failed upload evidence represents a current attention condition.
+	 *
+	 * @param array<string,mixed> $source Source evidence.
+	 * @return bool
+	 */
+	private function source_failed_uploads_need_attention( array $source ) {
+		$failed = isset( $source['failed_count'] ) ? max( 0, (int) $source['failed_count'] ) : 0;
+
+		if ( 0 === $failed ) {
+			return false;
+		}
+
+		$queued = isset( $source['queued_count'] ) ? max( 0, (int) $source['queued_count'] ) : 0;
+
+		return $queued > 0;
 	}
 
 	/**

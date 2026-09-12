@@ -136,6 +136,25 @@ Acceptance criteria:
 - Sites list and site detail views show whether the WPvivid expected freshness is schedule-detected or using the dashboard fallback.
 - The dashboard remains read-only, receives no Drime API credentials, and performs no remote actions.
 
+### Historical Failed-Count Status Policy Slice
+
+Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
+
+Dashboard classification should treat failed counters as evidence, not as a permanent alarm by themselves:
+
+- Keep failed counts visible in the Sites list, Site Detail, Diagnostics, snapshots, and support copy.
+- Continue to classify as `Needs attention` when failed counters are paired with current queued work, current source-level queued failures, missing required upload evidence, source freshness outside policy, hard source warnings, cron problems, or uploader warnings.
+- Do not classify as `Needs attention` solely because top-level or source-level `failed_count` is non-zero when queue is `0` and the current source evidence is otherwise healthy or within dashboard policy.
+- Keep the change dashboard-side, additive, read-only, and schema-compatible. Do not mutate client failed registries, clear records, trigger backups, or require a status schema-version change.
+
+Acceptance criteria:
+
+- A payload with `failed_count > 0`, `queue_count = 0`, warning_count `0`, and fresh/policy-valid source evidence classifies as `Working`.
+- A payload with `failed_count > 0` and `queue_count > 0` still classifies as `Needs attention`.
+- A source with `failed_count > 0`, `queued_count = 0`, and fresh/policy-valid source evidence does not by itself classify the site as `Needs attention`.
+- A source with `failed_count > 0` and `queued_count > 0` still classifies as `Needs attention`.
+- Existing source freshness, missing-evidence, warning, cron, incompatible-schema, stale-reporting, and not-configured behavior remains unchanged.
+
 ### Dashboard-Owned Source Optionality Policy Slice
 
 Operational rollout also found a separate class of site: WPvivid is intentionally active, but its configured destination is outside the Alynt uploader's local package/upload path. In that case the dashboard should not claim Alynt-uploaded WPvivid evidence is missing as an operational backup failure, while still showing the operator that WPvivid is being treated as external/optional for that site.
