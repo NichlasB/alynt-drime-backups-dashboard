@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.20 - 2026-09-12
+
+### Added
+
+- Added V2.3 preview-only schedule visibility for clients that report the Alynt scan/upload schedule capability, including Site Detail schedule posture, compact Sites-row hints, and support-safe Diagnostics aggregates.
+
+### Changed
+
+- Kept V2.3 schedule management strictly read-only: the dashboard sanitizes schedule capability evidence, ignores unsupported schedules, and does not apply, disable, roll back, or otherwise change schedules.
+- Improved schedule interval display so minute-based cadences such as the 15-minute scan/upload interval are shown in human-readable form.
+
 ## 0.1.19 - 2026-09-10
 
 ### Added
