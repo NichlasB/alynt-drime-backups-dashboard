@@ -2831,3 +2831,69 @@ msgstr ""
 #: includes/traits/trait-poller-scheduling.php:88
 msgid "WordPress could not schedule dashboard maintenance events."
 msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:292
+msgid "Schedule Management Preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:293
+msgid "V2.3 starts with read-only schedule visibility only. The client reports supported schedule choices, but this dashboard version does not apply, disable, roll back, or otherwise change schedules."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:296
+msgid "Not reported yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:296
+msgid "The latest client snapshot does not advertise preview-only schedule capability. Upgrade and poll the client before schedule posture can be shown here."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:301
+msgid "Preview only"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:301
+msgid "Schedule capability is reported for operator review only."
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:312
+msgid "Current cadence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:313
+msgid "Current interval"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:315
+msgid "Supported cadences"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:316
+msgid "Minimum interval"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:317
+msgid "Apply changes"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:318
+msgid "Rollback"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:322
+msgid "Schedule preview data is redacted capability evidence from the client uploader. It does not grant dashboard-side schedule mutation, backup creation, restore, cleanup, or credential access."
+msgstr ""
+
+#. translators: 1: schedule label, 2: current cadence.
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:348
+#, php-format
+msgid "Schedule preview: %1$s %2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:393
+msgid "Reported schedule"
+msgstr ""
+
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:404
+msgid "Alynt uploader"
+msgstr ""
