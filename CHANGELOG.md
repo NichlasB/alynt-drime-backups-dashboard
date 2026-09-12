@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.21 - 2026-09-12
+
+### Fixed
+
+- Kept historical resolved failed upload counts visible while preventing them from forcing `needs_attention` when no matching queue remains and the current source evidence is otherwise healthy.
+
 ## 0.1.20 - 2026-09-12
 
 ### Added
