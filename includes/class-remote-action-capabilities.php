@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	const PROTOCOL_VERSION       = 2;
 	const ACTION_SCAN_UPLOAD_NOW = 'scan_upload_now';
+	const SCHEDULE_SCAN_UPLOAD   = 'alynt_scan_upload';
 
 	const MAX_ALLOWED_ACTIONS       = 5;
 	const MAX_RESULT_SUMMARY_LENGTH = 160;
@@ -316,7 +317,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 
 			$schedule_id = isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '';
 
-			if ( '' === $schedule_id ) {
+			if ( self::SCHEDULE_SCAN_UPLOAD !== $schedule_id ) {
 				continue;
 			}
 

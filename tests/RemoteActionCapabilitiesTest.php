@@ -97,6 +97,51 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	}
 
 	/**
+	 * Preview schedule summaries are restricted to the supported Alynt uploader schedule.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_management_preview_ignores_unsupported_schedules() {
+		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$result       = $capabilities->sanitize(
+			array(
+				'protocol_version'     => 2,
+				'enabled'              => true,
+				'schedule_management'  => array(
+					'protocol_version'   => 2,
+					'capability_version' => 1,
+					'enabled'            => true,
+					'preview_only'       => true,
+					'apply_supported'    => false,
+					'rollback_supported' => false,
+					'schedules'          => array(
+						array(
+							'schedule_id'              => 'third_party_schedule',
+							'label'                    => 'Third-party schedule',
+							'current_cadence'          => 'daily',
+							'supported_cadences'       => array( 'daily' ),
+							'minimum_interval_seconds' => 86400,
+						),
+						array(
+							'schedule_id'              => 'alynt_scan_upload',
+							'label'                    => 'Alynt scan/upload',
+							'owner'                    => 'alynt_uploader',
+							'current_cadence'          => 'every_15_minutes',
+							'supported_cadences'       => array( 'every_15_minutes' ),
+							'minimum_interval_seconds' => 900,
+						),
+					),
+				),
+			)
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertTrue( $capabilities->supports_schedule_management_preview( $result ) );
+		$this->assertCount( 1, $result['schedule_management']['schedules'] );
+		$this->assertSame( 'alynt_scan_upload', $result['schedule_management']['schedules'][0]['schedule_id'] );
+	}
+
+	/**
 	 * Preview schedule capability is disabled if a client advertises mutation support early.
 	 *
 	 * @return void

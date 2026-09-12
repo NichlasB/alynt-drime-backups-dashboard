@@ -2521,8 +2521,16 @@ msgstr ""
 msgid "within %s"
 msgstr ""
 
-#. translators: %d: number of seconds.
+#. translators: %d: number of minutes.
 #: includes/traits/trait-admin-page-backup-source-evidence.php:307
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of seconds.
+#: includes/traits/trait-admin-page-backup-source-evidence.php:316
 #, php-format
 msgid "%d second"
 msgid_plural "%d seconds"

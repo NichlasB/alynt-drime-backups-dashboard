@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 
 /**
@@ -28,6 +29,7 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( 'Preview only', $html );
 		$this->assertStringContainsString( 'Alynt scan/upload', $html );
 		$this->assertStringContainsString( 'every 15 minutes', $html );
+		$this->assertStringContainsString( '15 minutes', $html );
 		$this->assertStringContainsString( 'Not available in this version', $html );
 		$this->assertStringNotContainsString( 'schedule_apply', $html );
 		$this->assertStringNotContainsString( 'schedule_rollback', $html );
@@ -103,6 +105,7 @@ class AdminPageScheduleManagementTest extends TestCase {
  */
 class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 
 	/**

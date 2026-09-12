@@ -285,6 +285,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		$seconds = max( 0, (int) $seconds );
 		$day     = 86400;
 		$hour    = 3600;
+		$minute  = 60;
 
 		if ( $seconds >= $day && 0 === $seconds % $day ) {
 			return sprintf(
@@ -299,6 +300,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 				/* translators: %d: number of hours. */
 				_n( '%d hour', '%d hours', (int) ( $seconds / $hour ), 'alynt-drime-backups-dashboard' ),
 				(int) ( $seconds / $hour )
+			);
+		}
+
+		if ( $seconds >= $minute && 0 === $seconds % $minute ) {
+			return sprintf(
+				/* translators: %d: number of minutes. */
+				_n( '%d minute', '%d minutes', (int) ( $seconds / $minute ), 'alynt-drime-backups-dashboard' ),
+				(int) ( $seconds / $minute )
 			);
 		}
 
