@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.22 - 2026-09-13
+
+### Added
+
+- Added V2.3 preview-only schedule change dispatch for separately opted-in clients. The dashboard can send a signed `schedule_preview` intent for the Alynt scan/upload schedule and show the redacted client result without changing schedules.
+
+### Changed
+
+- Kept schedule management read-only: this release does not apply, disable, roll back, or otherwise change client schedules, and it does not add backup creation, restore, cleanup, settings, credential, Drime-token, or arbitrary-command actions.
+- Regenerated the dashboard POT with release-artifact directories excluded so translation source references come only from current runtime source.
+
 ## 0.1.21 - 2026-09-12
 
 ### Fixed
