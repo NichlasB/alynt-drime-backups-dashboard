@@ -99,7 +99,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Operator action history summary', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
 		$this->render_detail_row( __( 'Retained actions', 'alynt-drime-backups-dashboard' ), isset( $summary['total'] ) ? (string) (int) $summary['total'] : '0' );
 		$this->render_detail_row( __( 'Last action', 'alynt-drime-backups-dashboard' ), $this->date_or_dash( isset( $summary['last_action_at'] ) ? (string) $summary['last_action_at'] : '' ) );
-		$this->render_detail_row( __( 'Retention window', 'alynt-drime-backups-dashboard' ), sprintf( /* translators: %d: number of days. */ __( '%d days', 'alynt-drime-backups-dashboard' ), Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_RETENTION_DAYS ) );
+		$this->render_detail_row( __( 'Retention window', 'alynt-drime-backups-dashboard' ), sprintf( /* translators: %d: retention days. */ __( '%d days', 'alynt-drime-backups-dashboard' ), Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_RETENTION_DAYS ) );
 		$this->render_detail_row( __( 'Storage limit', 'alynt-drime-backups-dashboard' ), sprintf( /* translators: %d: maximum retained audit events. */ __( '%d actions', 'alynt-drime-backups-dashboard' ), Alynt_Drime_Backups_Dashboard_Event_Log::AUDIT_MAX_EVENTS ) );
 		echo '</tbody></table>';
 
