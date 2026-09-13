@@ -41,7 +41,10 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Tokens {
 			'site_uuid'                => isset( $payload['site_uuid'] ) ? (string) $payload['site_uuid'] : '',
 			'action_key_id'            => isset( $payload['action_key_id'] ) ? (string) $payload['action_key_id'] : '',
 			'action_public_key'        => isset( $payload['action_public_key'] ) ? (string) $payload['action_public_key'] : '',
-			'allowed_actions'          => array( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW ),
+			'allowed_actions'          => array(
+				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
+				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
+			),
 			'expires_at'               => isset( $payload['expires_at'] ) ? (string) $payload['expires_at'] : '',
 		);
 

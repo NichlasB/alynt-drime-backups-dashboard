@@ -16,9 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.15
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
-	const PROTOCOL_VERSION       = 2;
-	const ACTION_SCAN_UPLOAD_NOW = 'scan_upload_now';
-	const SCHEDULE_SCAN_UPLOAD   = 'alynt_scan_upload';
+	const PROTOCOL_VERSION        = 2;
+	const ACTION_SCAN_UPLOAD_NOW  = 'scan_upload_now';
+	const ACTION_SCHEDULE_PREVIEW = 'schedule_preview';
+	const SCHEDULE_SCAN_UPLOAD    = 'alynt_scan_upload';
 
 	const MAX_ALLOWED_ACTIONS       = 5;
 	const MAX_RESULT_SUMMARY_LENGTH = 160;
@@ -166,6 +167,46 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	}
 
 	/**
+	 * Gets whether sanitized capabilities allow the preview-only schedule action.
+	 *
+	 * @since 0.1.22
+	 *
+	 * @param array<string,mixed> $capabilities Sanitized capabilities.
+	 * @param string              $schedule_id Schedule ID.
+	 * @param string              $proposed_cadence Proposed cadence.
+	 * @return bool
+	 */
+	public function supports_schedule_preview_action( array $capabilities, $schedule_id, $proposed_cadence ) {
+		if (
+			empty( $capabilities['enabled'] )
+			|| empty( $capabilities['sodium_available'] )
+			|| empty( $capabilities['allowed_actions'] )
+			|| ! in_array( self::ACTION_SCHEDULE_PREVIEW, (array) $capabilities['allowed_actions'], true )
+			|| ! $this->supports_schedule_management_preview( $capabilities )
+		) {
+			return false;
+		}
+
+		$schedule_id      = sanitize_key( (string) $schedule_id );
+		$proposed_cadence = sanitize_key( (string) $proposed_cadence );
+		$schedules        = isset( $capabilities['schedule_management']['schedules'] ) && is_array( $capabilities['schedule_management']['schedules'] ) ? $capabilities['schedule_management']['schedules'] : array();
+
+		foreach ( $schedules as $schedule ) {
+			if (
+				is_array( $schedule )
+				&& ( isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '' ) === $schedule_id
+				&& ! empty( $schedule['manageable'] )
+				&& ! empty( $schedule['supported_cadences'] )
+				&& in_array( $proposed_cadence, (array) $schedule['supported_cadences'], true )
+			) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Sanitizes an action type.
 	 *
 	 * @since 0.1.15
@@ -176,7 +217,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	public function sanitize_action_type( $action_type ) {
 		$action_type = sanitize_key( (string) $action_type );
 
-		return self::ACTION_SCAN_UPLOAD_NOW === $action_type ? $action_type : '';
+		return in_array( $action_type, array( self::ACTION_SCAN_UPLOAD_NOW, self::ACTION_SCHEDULE_PREVIEW ), true ) ? $action_type : '';
 	}
 
 	/**
@@ -256,16 +297,66 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 		}
 
 		return array(
-			'action_id'      => $action_id,
-			'action_type'    => $action_type,
-			'state'          => $this->sanitize_state( isset( $action['state'] ) ? (string) $action['state'] : '' ),
-			'requested_at'   => isset( $action['requested_at'] ) ? sanitize_text_field( (string) $action['requested_at'] ) : '',
-			'completed_at'   => isset( $action['completed_at'] ) ? sanitize_text_field( (string) $action['completed_at'] ) : '',
-			'updated_at'     => isset( $action['updated_at'] ) ? sanitize_text_field( (string) $action['updated_at'] ) : '',
-			'result_code'    => isset( $action['result_code'] ) ? sanitize_key( (string) $action['result_code'] ) : '',
-			'result_summary' => $this->bounded_text( isset( $action['result_summary'] ) ? (string) $action['result_summary'] : '', self::MAX_RESULT_SUMMARY_LENGTH ),
-			'counts'         => $this->counts( isset( $action['counts'] ) ? $action['counts'] : array() ),
+			'action_id'        => $action_id,
+			'action_type'      => $action_type,
+			'state'            => $this->sanitize_state( isset( $action['state'] ) ? (string) $action['state'] : '' ),
+			'requested_at'     => isset( $action['requested_at'] ) ? sanitize_text_field( (string) $action['requested_at'] ) : '',
+			'completed_at'     => isset( $action['completed_at'] ) ? sanitize_text_field( (string) $action['completed_at'] ) : '',
+			'updated_at'       => isset( $action['updated_at'] ) ? sanitize_text_field( (string) $action['updated_at'] ) : '',
+			'result_code'      => isset( $action['result_code'] ) ? sanitize_key( (string) $action['result_code'] ) : '',
+			'result_summary'   => $this->bounded_text( isset( $action['result_summary'] ) ? (string) $action['result_summary'] : '', self::MAX_RESULT_SUMMARY_LENGTH ),
+			'counts'           => $this->counts( isset( $action['counts'] ) ? $action['counts'] : array() ),
+			'schedule_preview' => $this->schedule_preview( isset( $action['schedule_preview'] ) ? $action['schedule_preview'] : array() ),
 		);
+	}
+
+	/**
+	 * Sanitizes a client-reported schedule preview result.
+	 *
+	 * @param mixed $preview Preview result.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_preview( $preview ) {
+		if ( ! is_array( $preview ) ) {
+			return array();
+		}
+
+		return array(
+			'schedule_id'                   => isset( $preview['schedule_id'] ) ? sanitize_key( (string) $preview['schedule_id'] ) : '',
+			'label'                         => $this->bounded_text( isset( $preview['label'] ) ? (string) $preview['label'] : '', self::MAX_SCHEDULE_LABEL_LENGTH ),
+			'owner'                         => $this->sanitize_schedule_owner( isset( $preview['owner'] ) ? (string) $preview['owner'] : '' ),
+			'current_cadence'               => isset( $preview['current_cadence'] ) ? sanitize_key( (string) $preview['current_cadence'] ) : '',
+			'proposed_cadence'              => isset( $preview['proposed_cadence'] ) ? sanitize_key( (string) $preview['proposed_cadence'] ) : '',
+			'current_next_run_at'           => isset( $preview['current_next_run_at'] ) ? sanitize_text_field( (string) $preview['current_next_run_at'] ) : '',
+			'proposed_next_run_estimate_at' => isset( $preview['proposed_next_run_estimate_at'] ) ? sanitize_text_field( (string) $preview['proposed_next_run_estimate_at'] ) : '',
+			'would_change'                  => ! empty( $preview['would_change'] ),
+			'apply_supported'               => false,
+			'rollback_supported'            => false,
+			'warnings'                      => $this->schedule_preview_warnings( isset( $preview['warnings'] ) ? $preview['warnings'] : array() ),
+		);
+	}
+
+	/**
+	 * Sanitizes schedule preview warning codes.
+	 *
+	 * @param mixed $warnings Warning list.
+	 * @return array<int,string>
+	 */
+	private function schedule_preview_warnings( $warnings ) {
+		if ( ! is_array( $warnings ) ) {
+			return array();
+		}
+
+		$clean = array();
+
+		foreach ( array_slice( $warnings, 0, 10 ) as $warning ) {
+			$warning = sanitize_key( (string) $warning );
+			if ( '' !== $warning && ! in_array( $warning, $clean, true ) ) {
+				$clean[] = $warning;
+			}
+		}
+
+		return $clean;
 	}
 
 	/**

@@ -281,9 +281,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	 * Renders preview-only schedule-management capability reported by the client.
 	 *
 	 * @param array<string,mixed>|null $snapshot Latest snapshot row.
+	 * @param array<string,mixed>      $site Site row.
 	 * @return void
 	 */
-	private function render_schedule_management_panel( $snapshot ) {
+	private function render_schedule_management_panel( $snapshot, array $site = array() ) {
 		$payload              = is_array( $snapshot ) ? $this->decoded_snapshot_payload( $snapshot ) : array();
 		$schedule_management  = $this->schedule_management_summary( $payload );
 		$capabilities         = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
@@ -316,11 +317,49 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 			$this->render_detail_item( __( 'Minimum interval', 'alynt-drime-backups-dashboard' ), $this->schedule_interval_label( isset( $schedule['minimum_interval_seconds'] ) ? (int) $schedule['minimum_interval_seconds'] : 0 ) );
 			$this->render_detail_item( __( 'Apply changes', 'alynt-drime-backups-dashboard' ), __( 'Not available in this version', 'alynt-drime-backups-dashboard' ) );
 			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Not available in this version', 'alynt-drime-backups-dashboard' ) );
-			echo '</dl></section>';
+			echo '</dl>';
+			$this->render_schedule_preview_form( $site, $schedule );
+			echo '</section>';
 		}
 
 		echo '<p class="description">' . esc_html__( 'Schedule preview data is redacted capability evidence from the client uploader. It does not grant dashboard-side schedule mutation, backup creation, restore, cleanup, or credential access.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '</div></div>';
+	}
+
+	/**
+	 * Renders the signed V2.3 schedule-preview form.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param array<string,mixed> $schedule Schedule summary.
+	 * @return void
+	 */
+	private function render_schedule_preview_form( array $site, array $schedule ) {
+		$site_id            = isset( $site['id'] ) ? absint( $site['id'] ) : 0;
+		$schedule_id        = isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '';
+		$supported_cadences = isset( $schedule['supported_cadences'] ) && is_array( $schedule['supported_cadences'] ) ? $schedule['supported_cadences'] : array();
+
+		if ( 0 === $site_id || '' === $schedule_id || empty( $supported_cadences ) ) {
+			echo '<p class="description">' . esc_html__( 'Schedule preview requests become available after this site is opened from its detail screen and the client reports supported cadence choices.', 'alynt-drime-backups-dashboard' ) . '</p>';
+			return;
+		}
+
+		$description_id = 'adbd-schedule-preview-description-' . $schedule_id;
+		?>
+		<form method="post" class="adbd-inline-form adbd-schedule-preview-form">
+			<?php wp_nonce_field( 'alynt_drime_backups_dashboard_preview_schedule_change' ); ?>
+			<input type="hidden" name="alynt_drime_backups_dashboard_action" value="preview_schedule_change">
+			<input type="hidden" name="dashboard_site_id" value="<?php echo esc_attr( (string) $site_id ); ?>">
+			<input type="hidden" name="schedule_id" value="<?php echo esc_attr( $schedule_id ); ?>">
+			<label for="<?php echo esc_attr( $description_id ); ?>-cadence" class="screen-reader-text"><?php esc_html_e( 'Proposed cadence', 'alynt-drime-backups-dashboard' ); ?></label>
+			<select id="<?php echo esc_attr( $description_id ); ?>-cadence" name="proposed_cadence" aria-describedby="<?php echo esc_attr( $description_id ); ?>">
+				<?php foreach ( $supported_cadences as $cadence ) : ?>
+					<option value="<?php echo esc_attr( sanitize_key( (string) $cadence ) ); ?>"><?php echo esc_html( $this->schedule_cadence_label( (string) $cadence ) ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<button type="submit" class="button" data-busy-label="<?php esc_attr_e( 'Previewing…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Preview Schedule Change', 'alynt-drime-backups-dashboard' ); ?></button>
+			<span id="<?php echo esc_attr( $description_id ); ?>" class="description"><?php esc_html_e( 'Sends a signed read-only preview request. The client estimates the result and does not apply a schedule change.', 'alynt-drime-backups-dashboard' ); ?></span>
+		</form>
+		<?php
 	}
 
 	/**
@@ -665,6 +704,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	private function remote_action_label( $action_type ) {
 		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW === sanitize_key( $action_type ) ) {
 			return __( 'Request Backup Now', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW === sanitize_key( $action_type ) ) {
+			return __( 'Schedule Preview', 'alynt-drime-backups-dashboard' );
 		}
 
 		return __( 'Unknown action', 'alynt-drime-backups-dashboard' );

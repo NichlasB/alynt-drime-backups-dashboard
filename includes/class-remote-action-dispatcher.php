@@ -133,7 +133,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 			return $capabilities;
 		}
 
-		$prepared = $this->prepare_signed_intent( $site, $capabilities );
+		$prepared = $this->prepare_signed_intent( $site, $capabilities, Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW );
 		if ( is_wp_error( $prepared ) ) {
 			return $prepared;
 		}
@@ -193,18 +193,125 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 	}
 
 	/**
-	 * Gets latest remote action capabilities.
+	 * Requests a non-mutating schedule preview on one opted-in client site.
 	 *
-	 * @param int $site_id Site ID.
+	 * @param int    $site_id Site ID.
+	 * @param string $schedule_id Schedule ID.
+	 * @param string $proposed_cadence Proposed cadence.
+	 * @param int    $requested_by User ID.
 	 * @return array<string,mixed>|WP_Error
 	 */
-	private function latest_capabilities( $site_id ) {
+	public function request_schedule_preview( $site_id, $schedule_id, $proposed_cadence, $requested_by = 0 ) {
+		$site_id          = absint( $site_id );
+		$schedule_id      = sanitize_key( (string) $schedule_id );
+		$proposed_cadence = sanitize_key( (string) $proposed_cadence );
+
+		if ( 0 === $site_id ) {
+			return new WP_Error( 'remote_action_site_required', __( 'Choose an enrolled site before requesting a remote action.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$site = $this->sites->get( $site_id );
+		if ( ! is_array( $site ) ) {
+			return new WP_Error( 'remote_action_site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$capabilities = $this->latest_capabilities( $site_id, Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW, $schedule_id, $proposed_cadence );
+		if ( is_wp_error( $capabilities ) ) {
+			return $capabilities;
+		}
+
+		$schedule_preview = array(
+			'schedule_id'        => $schedule_id,
+			'proposed_cadence'   => $proposed_cadence,
+			'capability_version' => 1,
+		);
+		$prepared         = $this->prepare_signed_intent( $site, $capabilities, Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW, $schedule_preview );
+		if ( is_wp_error( $prepared ) ) {
+			return $prepared;
+		}
+
+		$action_id = $this->actions->create_request(
+			$site_id,
+			Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
+			$requested_by,
+			$prepared['body']['idempotency_key'],
+			$prepared['key_id'],
+			gmdate( 'Y-m-d H:i:s', strtotime( $prepared['body']['expires_at'] ) ),
+			$prepared['request_fingerprint'],
+			array(
+				'capability_reported'   => true,
+				'requested_action_type' => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
+				'schedule_id'           => $schedule_id,
+				'proposed_cadence'      => $proposed_cadence,
+				'preview_only'          => true,
+			),
+			$prepared['body']['action_id']
+		);
+
+		if ( is_wp_error( $action_id ) ) {
+			return $action_id;
+		}
+
+		if ( method_exists( $this->actions, 'mark_dispatched' ) ) {
+			$this->actions->mark_dispatched( $action_id );
+		}
+
+		$response = $this->post_intent( $prepared );
+
+		if ( is_wp_error( $response ) ) {
+			$this->actions->mark_state( $action_id, 'dispatch_failed', $response->get_error_code(), __( 'The signed request could not be delivered to the client site.', 'alynt-drime-backups-dashboard' ) );
+			return $response;
+		}
+
+		$recorded = $this->actions->mark_state(
+			$action_id,
+			$response['state'],
+			$response['code'],
+			$response['summary'],
+			$response['retry_after']
+		);
+
+		if ( ! $recorded ) {
+			return new WP_Error( 'remote_action_state_store_failed', __( 'The dashboard could not store the remote action response.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		return array(
+			'action'         => 'schedule_preview',
+			'site_id'        => $site_id,
+			'action_id'      => $action_id,
+			'remote_state'   => $response['state'],
+			'result_code'    => $response['code'],
+			'result_summary' => $response['summary'],
+			'retry_after'    => $response['retry_after'],
+		);
+	}
+
+	/**
+	 * Gets latest remote action capabilities.
+	 *
+	 * @param int    $site_id Site ID.
+	 * @param string $action_type Action type.
+	 * @param string $schedule_id Schedule ID.
+	 * @param string $proposed_cadence Proposed cadence.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function latest_capabilities( $site_id, $action_type = '', $schedule_id = '', $proposed_cadence = '' ) {
 		$snapshot = $this->snapshots->latest_for_site( $site_id );
 		$payload  = is_array( $snapshot ) && isset( $snapshot['decoded_payload'] ) && is_array( $snapshot['decoded_payload'] ) ? $snapshot['decoded_payload'] : array();
 		$remote   = isset( $payload['remote_actions'] ) && is_array( $payload['remote_actions'] ) ? $payload['remote_actions'] : array();
 		$clean    = $this->capabilities->sanitize( $remote );
 
 		if ( is_wp_error( $clean ) ) {
+			return $clean;
+		}
+
+		$action_type = '' === $action_type ? Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW : sanitize_key( (string) $action_type );
+
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW === $action_type ) {
+			if ( ! $this->capabilities->supports_schedule_preview_action( $clean, $schedule_id, $proposed_cadence ) ) {
+				return new WP_Error( 'schedule_management_unavailable', __( 'The latest client report does not allow schedule preview for the selected schedule and cadence. Run Check Now after updating the client.', 'alynt-drime-backups-dashboard' ) );
+			}
+
 			return $clean;
 		}
 
@@ -220,9 +327,11 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 	 *
 	 * @param array<string,mixed> $site Site.
 	 * @param array<string,mixed> $capabilities Capabilities.
+	 * @param string              $action_type Action type.
+	 * @param array<string,mixed> $schedule_preview Schedule preview request.
 	 * @return array<string,mixed>|WP_Error
 	 */
-	private function prepare_signed_intent( array $site, array $capabilities ) {
+	private function prepare_signed_intent( array $site, array $capabilities, $action_type, array $schedule_preview = array() ) {
 		if ( empty( $site['polling_key_id'] ) || empty( $site['polling_secret_ciphertext'] ) ) {
 			return new WP_Error( 'remote_action_requires_pairing', __( 'Active read-only pairing is required before requesting a remote action.', 'alynt-drime-backups-dashboard' ) );
 		}
@@ -254,17 +363,24 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 			return $private_key;
 		}
 
-		$now       = time();
-		$body      = array(
+		$now  = time();
+		$body = array(
 			'protocol_version'         => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::PROTOCOL_VERSION,
 			'action_id'                => $this->create_uuid(),
 			'dashboard_site_public_id' => sanitize_text_field( (string) $site['public_id'] ),
 			'site_uuid'                => sanitize_text_field( (string) $site['site_uuid'] ),
-			'action_type'              => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
+			'action_type'              => sanitize_key( (string) $action_type ),
 			'requested_at'             => gmdate( 'c', $now ),
 			'expires_at'               => gmdate( 'c', $now + self::INTENT_TTL_SECONDS ),
 			'idempotency_key'          => $this->create_idempotency_key(),
 		);
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW === $body['action_type'] ) {
+			$body['schedule_preview'] = array(
+				'schedule_id'        => isset( $schedule_preview['schedule_id'] ) ? sanitize_key( (string) $schedule_preview['schedule_id'] ) : '',
+				'proposed_cadence'   => isset( $schedule_preview['proposed_cadence'] ) ? sanitize_key( (string) $schedule_preview['proposed_cadence'] ) : '',
+				'capability_version' => isset( $schedule_preview['capability_version'] ) ? absint( $schedule_preview['capability_version'] ) : 1,
+			);
+		}
 		$body_json = $this->signer->canonical_json( $body );
 
 		if ( is_wp_error( $body_json ) ) {

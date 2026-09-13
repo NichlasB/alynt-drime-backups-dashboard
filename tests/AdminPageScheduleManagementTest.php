@@ -31,9 +31,11 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( 'every 15 minutes', $html );
 		$this->assertStringContainsString( '15 minutes', $html );
 		$this->assertStringContainsString( 'Not available in this version', $html );
+		$this->assertStringContainsString( 'Preview Schedule Change', $html );
+		$this->assertStringContainsString( 'every 30 minutes', $html );
+		$this->assertStringContainsString( '<form', $html );
 		$this->assertStringNotContainsString( 'schedule_apply', $html );
 		$this->assertStringNotContainsString( 'schedule_rollback', $html );
-		$this->assertStringNotContainsString( '<form', $html );
 	}
 
 	/**
@@ -87,7 +89,7 @@ class AdminPageScheduleManagementTest extends TestCase {
 							'current_cadence'                => 'every_15_minutes',
 							'current_interval_seconds'       => 900,
 							'current_next_run_at'            => '2026-06-25T16:45:00+00:00',
-							'supported_cadences'             => array( 'every_15_minutes' ),
+							'supported_cadences'             => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
 							'minimum_interval_seconds'       => 900,
 							'can_disable'                    => false,
 							'requires_high_friction_disable' => true,
@@ -119,6 +121,9 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 		$this->render_schedule_management_panel(
 			array(
 				'decoded_payload' => $payload,
+			),
+			array(
+				'id' => 9,
 			)
 		);
 		return (string) ob_get_clean();

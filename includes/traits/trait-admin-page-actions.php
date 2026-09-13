@@ -169,6 +169,35 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			return $result;
 		}
 
+		if ( 'preview_schedule_change' === $action ) {
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_preview_schedule_change' );
+
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id          = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$schedule_id      = isset( $_POST['schedule_id'] ) ? sanitize_key( wp_unslash( $_POST['schedule_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$proposed_cadence = isset( $_POST['proposed_cadence'] ) ? sanitize_key( wp_unslash( $_POST['proposed_cadence'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$requested_by     = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
+			$result           = $this->remote_action_dispatcher->request_schedule_preview( $site_id, $schedule_id, $proposed_cadence, $requested_by );
+
+			$this->record_admin_audit_action(
+				'preview_schedule_change',
+				is_wp_error( $result ) ? 'failed' : 'succeeded',
+				array(
+					'dashboard_site_id' => $site_id,
+					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
+					'schedule_id'       => $schedule_id,
+					'proposed_cadence'  => $proposed_cadence,
+					'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
+					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+				)
+			);
+
+			return $result;
+		}
+
 		if ( 'update_source_policy' === $action ) {
 			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_source_policy' );
 
@@ -341,6 +370,23 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			}
 
 			$this->render_action_notice( __( 'Request Backup Now could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
+			return;
+		}
+
+		if ( isset( $result['action'] ) && 'schedule_preview' === $result['action'] ) {
+			$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
+
+			if ( in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true ) ) {
+				$this->render_action_notice( __( 'Schedule preview was accepted by the client site. No schedule was changed. Wait briefly, then use Check Now to see the preview result reported by the client.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
+				return;
+			}
+
+			if ( in_array( $remote_state, array( 'rate_limited', 'busy', 'rejected', 'unsupported' ), true ) ) {
+				$this->render_action_notice( isset( $result['result_summary'] ) ? (string) $result['result_summary'] : __( 'The client site did not accept the schedule preview request.', 'alynt-drime-backups-dashboard' ), 'notice-warning' );
+				return;
+			}
+
+			$this->render_action_notice( __( 'Schedule preview could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
 			return;
 		}
 

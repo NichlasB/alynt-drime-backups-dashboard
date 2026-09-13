@@ -150,7 +150,10 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Manager {
 			'action_key_id'            => $keys['key_id'],
 			'action_opt_in_token'      => $token,
 			'action_token_expires_at'  => gmdate( 'c', $expires_at ),
-			'allowed_actions'          => array( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW ),
+			'allowed_actions'          => array(
+				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
+				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
+			),
 		);
 	}
 }

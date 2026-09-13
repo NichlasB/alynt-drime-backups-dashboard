@@ -284,6 +284,62 @@ class RemoteActionDispatcherTest extends TestCase {
 		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $this->wpdb->inserted_data ) );
 	}
 
+	public function test_schedule_preview_dispatch_posts_signed_preview_intent() {
+		$captured = array();
+		$http     = function ( $url, $args ) use ( &$captured ) {
+			$captured = array(
+				'url'  => $url,
+				'args' => $args,
+			);
+			$body     = json_decode( $args['body'], true );
+
+			return array(
+				'response' => array(
+					'code' => 202,
+				),
+				'body'     => wp_json_encode(
+					array(
+						'protocol_version' => 2,
+						'action_id'        => $body['action_id'],
+						'state'            => 'accepted',
+						'code'             => 'action_accepted',
+						'summary'          => 'Schedule preview accepted safely.',
+						'retry_after'      => 0,
+					)
+				),
+			);
+		};
+
+		$result = $this->dispatcher( $http )->request_schedule_preview( 9, 'alynt_scan_upload', 'every_30_minutes', 7 );
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'schedule_preview', $result['action'] );
+		$this->assertSame( 'accepted', $result['remote_state'] );
+		$request_body = json_decode( $captured['args']['body'], true );
+		$this->assertSame( 'schedule_preview', $request_body['action_type'] );
+		$this->assertSame( 'alynt_scan_upload', $request_body['schedule_preview']['schedule_id'] );
+		$this->assertSame( 'every_30_minutes', $request_body['schedule_preview']['proposed_cadence'] );
+		$this->assertSame( 1, $request_body['schedule_preview']['capability_version'] );
+		$this->assertSame( 'schedule_preview', $this->wpdb->inserted_data['action_type'] );
+		$this->assertStringContainsString( 'every_30_minutes', $this->wpdb->inserted_data['redacted_context_json'] );
+		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $this->wpdb->inserted_data ) );
+	}
+
+	public function test_schedule_preview_rejects_unsupported_cadence_without_http_dispatch() {
+		$called = false;
+		$http   = function () use ( &$called ) {
+			$called = true;
+			return array();
+		};
+
+		$result = $this->dispatcher( $http )->request_schedule_preview( 9, 'alynt_scan_upload', 'raw_cron', 7 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'schedule_management_unavailable', $result->get_error_code() );
+		$this->assertFalse( $called );
+		$this->assertSame( array(), $this->wpdb->inserted_data );
+	}
+
 	public function test_missing_capability_fails_without_http_dispatch() {
 		$this->wpdb->snapshot = array(
 			'payload_json' => wp_json_encode(
@@ -494,10 +550,34 @@ class RemoteActionDispatcherTest extends TestCase {
 						'protocol_version'            => 2,
 						'enabled'                     => true,
 						'key_id'                      => 'ak_test',
-						'allowed_actions'             => array( 'scan_upload_now' ),
+						'allowed_actions'             => array( 'scan_upload_now', 'schedule_preview' ),
 						'sodium_available'            => true,
 						'min_interval_seconds'        => 3600,
 						'one_running_action_per_site' => true,
+						'schedule_management'         => array(
+							'protocol_version'   => 2,
+							'capability_version' => 1,
+							'enabled'            => true,
+							'preview_only'       => true,
+							'apply_supported'    => false,
+							'rollback_supported' => false,
+							'schedules'          => array(
+								array(
+									'schedule_id'                    => 'alynt_scan_upload',
+									'label'                          => 'Alynt scan/upload',
+									'owner'                          => 'alynt_uploader',
+									'manageable'                     => true,
+									'current_cadence'                => 'every_15_minutes',
+									'current_interval_seconds'       => 900,
+									'current_next_run_at'            => '2026-06-25T16:45:00+00:00',
+									'supported_cadences'             => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
+									'minimum_interval_seconds'       => 900,
+									'can_disable'                    => false,
+									'requires_high_friction_disable' => true,
+									'rollback_supported'             => false,
+								),
+							),
+						),
 					),
 				)
 			),
