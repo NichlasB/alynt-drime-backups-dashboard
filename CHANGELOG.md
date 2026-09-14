@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.23 - 2026-09-14
+
+### Fixed
+
+- Preserved client-reported remote-action result codes and summaries when clients report the current `code` and `summary` fields, so schedule-preview action history can show the reconciled client result text.
+
 ## 0.1.22 - 2026-09-13
 
 ### Added
