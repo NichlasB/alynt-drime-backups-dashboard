@@ -1,6 +1,6 @@
 # V2.3 Schedule Preview Action Implementation Plan
 
-Status: planning baseline only. This document does not approve code implementation, release, deployment, broad client enablement, live-site writes, schedule changes, backup creation, cleanup/delete actions, restore actions, or Drime credential storage in the dashboard.
+Status: implemented, released, and deployed as the non-mutating V2.3 `schedule_preview` slice. Dashboard support shipped in dashboard `0.1.22`; client-side support shipped in uploader `0.5.18`. Fleet rollout and read-only post-rollout verification confirmed active tracked sites advertise preview-only schedule capability and remain healthy. This document still does not approve `schedule_apply`, `schedule_rollback`, live-site writes beyond the already approved rollout, schedule changes, backup creation, cleanup/delete actions, restore actions, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -14,7 +14,7 @@ Related artifacts:
 
 ## Goal
 
-Implement the next V2.3 slice as a signed, non-mutating `schedule_preview` action.
+Document and preserve the V2.3 signed, non-mutating `schedule_preview` action boundary.
 
 The dashboard should be able to ask an explicitly opted-in client:
 
@@ -197,28 +197,32 @@ Dashboard action records must not store:
 - signatures;
 - raw remote response bodies.
 
-## Dashboard Implementation Plan
+## Dashboard Implementation Status
 
-1. Extend dashboard action-type allowlists to recognize `schedule_preview` without enabling apply/rollback.
-2. Extend action redaction/validation for `schedule_preview` request/result context.
-3. Add Site Detail preview form behind existing capability checks.
-4. Restrict UI controls to client-declared `alynt_scan_upload` cadence choices.
-5. Dispatch via the existing signed V2 dispatcher.
-6. Store redacted preview context in existing action history.
-7. Reconcile latest client-reported schedule-preview action through existing V2.2 action history.
-8. Add diagnostics/support aggregate counts for schedule preview actions.
-9. Ensure Sites tab remains display-only for schedule management.
+Implemented in dashboard `0.1.22`:
 
-## Uploader Implementation Plan
+1. Dashboard action-type allowlists recognize `schedule_preview` without enabling apply/rollback.
+2. Action redaction/validation supports bounded `schedule_preview` request/result context.
+3. Site Detail includes a preview form behind existing capability checks.
+4. UI controls are restricted to client-declared `alynt_scan_upload` cadence choices.
+5. Dispatch uses the existing signed V2 dispatcher.
+6. Redacted preview context is stored in existing action history.
+7. Latest client-reported schedule-preview action reconciles through existing V2.2 action history.
+8. Diagnostics/support aggregate counts include schedule preview actions.
+9. Sites tab remains display-only for schedule management.
 
-1. Extend local V2 allowed-action policy to opt into `schedule_preview` separately from `scan_upload_now`.
-2. Add request validation for `schedule_preview.schedule_id` and `schedule_preview.proposed_cadence`.
-3. Add an Alynt scan/upload schedule preview service that reads current WP-Cron schedule posture without writing.
-4. Calculate redacted before/after preview from local capability declarations.
-5. Persist local action state/result through the existing action store.
-6. Report the redacted latest action result through the existing status payload.
-7. Reject `schedule_apply` and `schedule_rollback` explicitly until separately implemented.
-8. Keep all existing scan/upload-now behavior unchanged.
+## Uploader Implementation Status
+
+Implemented in uploader `0.5.18`:
+
+1. Local V2 allowed-action policy can expose `schedule_preview` alongside `scan_upload_now` after action opt-in.
+2. Request validation covers `schedule_preview.schedule_id` and `schedule_preview.proposed_cadence`.
+3. Alynt scan/upload schedule preview reads current WP-Cron schedule posture without writing.
+4. The client calculates redacted before/after preview from local capability declarations.
+5. Local action state/result is persisted through the existing action store.
+6. The redacted latest action result is reported through the existing status payload.
+7. `schedule_apply` and `schedule_rollback` remain rejected until separately implemented.
+8. Existing scan/upload-now behavior remains unchanged.
 
 ## Test Plan
 
@@ -255,20 +259,28 @@ Cross-plugin checks:
 - Existing `scan_upload_now` still works.
 - Existing read-only polling still works.
 
-## Release And Rollout Plan
+## Release And Rollout Status
 
-Recommended order:
+Completed:
+
+- Dashboard `0.1.22` released and deployed to `control.sitesmanage.com`.
+- Uploader `0.5.18` released and rolled out across the 14 active tracked live sites.
+- Post-rollout read-only health check confirmed all active dashboard rows working, uploader `0.5.18`, queue 0, failed 0, warning_count 0, and preview-only schedule evidence.
+
+## Future Schedule-Slice Release And Rollout Plan
+
+Use this order for future schedule-management slices, especially any slice that moves beyond preview-only behavior:
 
 1. Planning approval.
 2. Restore point or clean baseline confirmation for dashboard and uploader repositories.
-3. Uploader implementation first, with `schedule_preview` disabled by default unless client admin opts in.
+3. Uploader implementation first, with new schedule action types disabled by default unless the client administrator separately opts in.
 4. Dashboard implementation second, with controls hidden until client capability is visible.
 5. Local/low-risk verification.
 6. Feature workflow and pre-release workflow as appropriate.
 7. Release uploader first.
 8. Release dashboard second.
 9. Pilot on one low-risk live site.
-10. Expand only after preview proves it does not mutate schedule state.
+10. Expand only after tests and live verification prove the slice preserves its approved safety boundary.
 
 ## Acceptance Criteria
 
@@ -280,13 +292,13 @@ Recommended order:
 - `schedule_apply` and `schedule_rollback` are still impossible.
 - Existing V1 polling, backup-source freshness, V2.1 `scan_upload_now`, and V2.2 action reconciliation remain unchanged.
 
-## Approval Gate Before Code
+## Approval Gate Before Future Code
 
-Before code implementation, explicitly approve:
+Before any future schedule-management code implementation, explicitly approve:
 
-- exact first schedule target: `alynt_scan_upload`;
-- preview-only action scope: `schedule_preview` only;
-- no `schedule_apply` or `schedule_rollback`;
+- exact schedule target;
+- exact action scope;
+- whether any apply/rollback behavior is in scope;
 - no WPvivid schedule management;
 - dashboard and uploader repo restore points or clean baselines;
 - local test target;

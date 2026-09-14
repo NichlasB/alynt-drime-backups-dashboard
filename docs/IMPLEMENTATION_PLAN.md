@@ -6,7 +6,7 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`. V2.1 action-request protocol details are tracked in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`.
 
-Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, and the next non-mutating V2.3 schedule-preview action planning baseline is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, and the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
 
 ## Current State And Safety Boundary
 
@@ -21,8 +21,25 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
 - V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability.
 - V2.2 remote-action history/audit hardening is implemented, released, and deployed. It hardens dashboard/client reconciliation, stale-action evidence, Site Detail action history, compact Sites-row action hints, Diagnostics aggregates, and support-safe export fields before any V2.3+ higher-risk action class.
-- V2.3 schedule management remains a higher-risk gated phase because later slices may change persistent client backup behavior. The first preview-only `alynt_scan_upload` schedule capability slice is implemented locally for additive status reporting, dashboard display, compact Sites-row hints, and aggregate diagnostics/support counts. The next recommended V2.3 slice is a non-mutating signed `schedule_preview` action for `alynt_scan_upload` only. No `schedule_apply` or `schedule_rollback` action behavior is coded.
+- V2.3 schedule management remains a higher-risk gated phase because later slices may change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The action is preview-only: the dashboard can request a redacted before/after estimate from a separately opted-in client, but no `schedule_apply` or `schedule_rollback` action behavior is coded.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
+
+## Toolkit Workflow Gates For Future V2 Schedule Slices
+
+Future schedule-management work must use the `wp-plugin-toolkit` routing rather than ad-hoc implementation. Treat each new schedule slice as Phase 4 feature work until it becomes a release candidate.
+
+Required gates:
+
+1. Refresh target-plugin context with the toolkit router, target repo status, current implementation plan, protocol docs, threat model, changelog, test/build tooling, and relevant handoff/context files.
+2. Recommend or create a restore point before edit-heavy work.
+3. After implementation, run the ds2 feature reviews that apply:
+   - `d4-prompts/ds2-feature/FEATURE_LIGHT_REVIEW_PROMPT.md`;
+   - `d4-prompts/ds2-feature/FEATURE_BLOAT_AND_STRUCTURE_REVIEW_PROMPT.md` when PHP/JS/CSS structure changed;
+   - `d4-prompts/ds2-feature/FEATURE_UI_UX_IMPLEMENTATION_PROMPT.md` for admin UI, forms, AJAX states, or user-facing copy;
+   - `d4-prompts/ds2-feature/FEATURE_SECURITY_REVIEW_PROMPT.md`.
+4. Before release/deploy, run `d4-prompts/ds3-pre-release/FULL_PRE_RELEASE_WORKFLOW_PROMPT.md` or an explicitly justified targeted ds3 subset. For schedule-management work, the default targeted subset should include code cleanup, error handling, WordPress best practices, performance, edge cases, adversarial test-suite review, i18n, accessibility, code quality, documentation, and security audit.
+5. Add database and uninstall reviews when the slice changes schema, custom tables, option lifecycle, retention, uninstall behavior, or stored action payload shape.
+6. Do not proceed from preview to apply/rollback without a new protocol/threat-model update, explicit user approval, tests proving no unsafe fallback, and a separate release/deploy gate.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
