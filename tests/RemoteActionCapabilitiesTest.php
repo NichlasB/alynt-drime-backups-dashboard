@@ -142,6 +142,39 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	}
 
 	/**
+	 * Client latest-action code aliases are normalized for dashboard reconciliation.
+	 *
+	 * @return void
+	 */
+	public function test_last_action_code_aliases_are_normalized() {
+		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$result       = $capabilities->sanitize(
+			array(
+				'protocol_version' => 2,
+				'enabled'          => true,
+				'last_action'      => array(
+					'action_id'        => '11111111-1111-4111-8111-111111111111',
+					'action_type'      => 'schedule_preview',
+					'state'            => 'succeeded',
+					'code'             => 'schedule_preview_ready',
+					'summary'          => 'Schedule preview is ready. No schedule was changed.',
+					'schedule_preview' => array(
+						'schedule_id'      => 'alynt_scan_upload',
+						'current_cadence'  => 'every_15_minutes',
+						'proposed_cadence' => 'every_30_minutes',
+						'would_change'     => true,
+					),
+				),
+			)
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'schedule_preview_ready', $result['last_action']['result_code'] );
+		$this->assertSame( 'Schedule preview is ready. No schedule was changed.', $result['last_action']['result_summary'] );
+		$this->assertSame( 'every_30_minutes', $result['last_action']['schedule_preview']['proposed_cadence'] );
+	}
+
+	/**
 	 * Preview schedule capability is disabled if a client advertises mutation support early.
 	 *
 	 * @return void

@@ -296,6 +296,9 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			return array();
 		}
 
+		$result_code    = isset( $action['result_code'] ) ? (string) $action['result_code'] : ( isset( $action['code'] ) ? (string) $action['code'] : '' );
+		$result_summary = isset( $action['result_summary'] ) ? (string) $action['result_summary'] : ( isset( $action['summary'] ) ? (string) $action['summary'] : '' );
+
 		return array(
 			'action_id'        => $action_id,
 			'action_type'      => $action_type,
@@ -303,8 +306,8 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			'requested_at'     => isset( $action['requested_at'] ) ? sanitize_text_field( (string) $action['requested_at'] ) : '',
 			'completed_at'     => isset( $action['completed_at'] ) ? sanitize_text_field( (string) $action['completed_at'] ) : '',
 			'updated_at'       => isset( $action['updated_at'] ) ? sanitize_text_field( (string) $action['updated_at'] ) : '',
-			'result_code'      => isset( $action['result_code'] ) ? sanitize_key( (string) $action['result_code'] ) : '',
-			'result_summary'   => $this->bounded_text( isset( $action['result_summary'] ) ? (string) $action['result_summary'] : '', self::MAX_RESULT_SUMMARY_LENGTH ),
+			'result_code'      => sanitize_key( $result_code ),
+			'result_summary'   => $this->bounded_text( $result_summary, self::MAX_RESULT_SUMMARY_LENGTH ),
 			'counts'           => $this->counts( isset( $action['counts'] ) ? $action['counts'] : array() ),
 			'schedule_preview' => $this->schedule_preview( isset( $action['schedule_preview'] ) ? $action['schedule_preview'] : array() ),
 		);
