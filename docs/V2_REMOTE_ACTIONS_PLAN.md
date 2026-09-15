@@ -118,13 +118,13 @@ Purpose: update approved backup or scan/upload schedules from the dashboard.
 
 Risk: higher-risk gated phase. It changes future backup behavior and therefore requires previews, rollback metadata, and explicit administrator confirmation.
 
-Design artifacts: `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md` defines the product/safety boundary, `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md` defines the first passive capability-display slice, and `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md` defines the next non-mutating signed `schedule_preview` action slice.
+Design artifacts: `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md` defines the product/safety boundary, `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md` defines the first passive capability-display slice, `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md` defines the implemented non-mutating signed `schedule_preview` action slice, and `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md` defines the planning baseline for a future mutating `schedule_apply` slice.
 
 Recommended sequencing inside V2.3:
 
 1. Preview-only `alynt_scan_upload` schedule capability reporting and dashboard display.
 2. Non-mutating signed `schedule_preview` for `alynt_scan_upload` only.
-3. Separately gated `schedule_apply` only after preview proves safe and reliable.
+3. Separately gated `schedule_apply` for `alynt_scan_upload` cadence changes only after preview proves safe and reliable, with a fresh-preview requirement and local rollback metadata capture.
 4. Separately gated `schedule_rollback` only after apply exists and captures rollback metadata.
 
 Recommended constraints:

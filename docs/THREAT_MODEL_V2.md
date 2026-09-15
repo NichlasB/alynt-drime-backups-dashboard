@@ -1,8 +1,8 @@
 # Alynt Drime Backups Dashboard Threat Model v2
 
-Status: V2.1/V2.2 threat-model baseline with a V2.3 preview-only schedule capability extension and a planned non-mutating `schedule_preview` action slice. V2.1 signed `scan_upload_now` dispatch and V2.2 action-history/audit hardening have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. This document does not approve broad rollout, schedule mutation, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
+Status: V2.1/V2.2 threat-model baseline with implemented V2.3 preview-only schedule capability reporting and implemented non-mutating `schedule_preview`. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, and V2.3 schedule preview have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. A future mutating `schedule_apply` slice is planned but not implemented or approved for runtime use. This document does not approve broad rollout, schedule rollback, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
 
-Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, and planning for non-mutating V2.3 `schedule_preview` for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
+Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, implemented non-mutating V2.3 `schedule_preview`, and planning for mutating V2.3 `schedule_apply` for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
 This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and status polling remain in force.
 
@@ -51,12 +51,16 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Rollback vulnerability | Old plugin version accepts action with weaker validation. | Capability version reporting; action controls hidden for incompatible clients; release order uploader first. | Compatibility tests. |
 | Logging leakage | Raw request, signature, key, response body, path, or package data enters logs. | Stable codes, operator-safe summaries, redactor denylist, no raw body persistence. | Diagnostics and audit tests. |
 | Schedule capability leakage | Client reports raw crontab lines, WP-Cron arrays, WPvivid options, usernames, paths, or shell fragments through capability data. | Allowlisted schedule capability schema; reject forbidden keys/values; display redacted labels only. | Capability validation and export tests. |
-| Schedule mutation smuggling | Preview-only capability fields are misused to send or apply schedule changes. | First V2.3 slice is status-payload capability reporting only; no schedule action types enabled; client rejects `schedule_preview`, `schedule_apply`, and `schedule_rollback` until separately approved. | Dashboard UI/action tests and client action allowlist tests. |
+| Schedule mutation smuggling | Preview-only capability fields or preview action fields are misused to apply schedule changes. | Capability reporting is status-only; `schedule_preview` is non-mutating; client rejects `schedule_apply` and `schedule_rollback` until separately approved. | Dashboard UI/action tests and client action allowlist tests. |
 | Schedule preview mutation | A supposedly preview-only action changes WP-Cron, crontab, WPvivid settings, or uploader schedule state. | `schedule_preview` implementation must use read-only local schedule inspection only; tests compare schedule state before and after preview; apply/rollback actions remain rejected. | Uploader read-only preview tests and integration checks. |
 | Schedule preview free-form input | Operator or compromised dashboard sends raw cron, arbitrary cadence, path, command, or option payload disguised as preview context. | Dashboard offers only client-declared cadence choices; client revalidates schedule ID and cadence locally; forbidden-key/value rejection. | Dashboard form tests, client payload validation tests. |
 | Schedule preview false authority | Operator believes a preview applied a change or guarantees a future apply will still be safe. | UI/action history labels must say preview only, not applied; previews are informational and must be regenerated before any future apply slice. | UI copy tests and action-history tests. |
 | Unsafe schedule choices | Dashboard offers cadence options the client cannot safely support. | Dashboard displays only client-declared schedule IDs and supported cadence labels; no free-form cron input. | UI rendering and payload tests. |
 | False sense of control | Operator thinks preview-only capability reporting changed a schedule. | UI labels: "preview only" / "not applied"; action history records no schedule mutation. | UI copy and workflow tests. |
+| Stale preview apply | Operator applies a preview after local schedule state changed. | `schedule_apply` must reference a fresh successful preview; client revalidates preview fingerprint/current state and rejects stale previews. | Dashboard fresh-preview tests and uploader stale-preview tests. |
+| Schedule apply free-form mutation | Dashboard sends raw cron, arbitrary cadence, disable flag, option payload, or other settings through `schedule_apply`. | Dashboard builds apply only from allowlisted preview evidence; client accepts only `alynt_scan_upload`, supported cadence labels, and bounded preview references. | Dashboard payload tests and client action validation tests. |
+| Rollback metadata missing | Client applies a schedule change without enough local metadata to reverse it later. | Client captures local rollback metadata before mutation and rejects apply if capture fails. Dashboard stores only rollback availability/expiry, not raw rollback internals. | Client rollback-capture tests and dashboard redaction tests. |
+| Schedule apply overreach | Apply changes WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or unrelated settings. | First apply slice targets only `alynt_scan_upload`; tests prove only that schedule changes and all other action types remain rejected. | Client integration tests and cross-plugin checks. |
 
 ## Abuse Cases Explicitly Out Of Scope For V2.1
 
@@ -69,7 +73,7 @@ These must remain impossible in V2.1 code and UI:
 - backup deletion;
 - retention cleanup;
 - local file cleanup;
-- schedule changes, including V2.3 apply or rollback;
+- schedule changes beyond the separately planned `alynt_scan_upload` `schedule_apply` slice, including rollback;
 - settings changes;
 - Drime credential updates;
 - dashboard-side Drime API use;
@@ -157,7 +161,8 @@ Uploader:
 - lock/rate-limit behavior is deterministic;
 - status reports redacted action summaries only.
 - preview-only schedule capability reports redacted schedule IDs, labels, owners, current cadence, supported cadence choices, next run timestamps, and safety flags only;
-- `schedule_preview`, when implemented, reports only redacted before/after preview evidence and does not alter schedule state;
+- `schedule_preview` reports only redacted before/after preview evidence and does not alter schedule state;
+- `schedule_apply`, when implemented, must require a fresh preview, capture local rollback metadata before mutation, and report only redacted previous/applied cadence evidence;
 - schedule mutation action types are rejected until separately implemented and approved.
 
 Cross-plugin:
@@ -178,6 +183,7 @@ Cross-plugin:
 - No destructive or persistent action slice may proceed until V2.1 and action history hardening are proven.
 - V2.3 must start with preview-only capability reporting and dashboard display before any apply or rollback implementation.
 - Any `schedule_preview` implementation must prove no schedule mutation before any apply or rollback implementation is considered.
+- Any `schedule_apply` implementation must be limited to `alynt_scan_upload`, require fresh preview revalidation, and preserve rollback metadata before one low-risk live pilot is considered.
 
 ## Approval Gate
 
@@ -187,6 +193,7 @@ Before any V2 runtime implementation:
 - approve this threat model;
 - approve `scan_upload_now` as the first V2.1 action;
 - approve preview-only schedule capability reporting as the first V2.3 slice before any schedule-management code;
+- separately approve `schedule_apply` scope, restore points, implementation tickets, and pilot target before any schedule-mutation code;
 - create or confirm restore points for dashboard and uploader repositories;
 - create focused implementation tickets/checklists for both repositories;
 - keep live `control-sitesmanage` unchanged until a separate release/deploy approval gate.
