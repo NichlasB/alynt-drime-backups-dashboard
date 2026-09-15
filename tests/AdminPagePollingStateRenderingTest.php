@@ -214,10 +214,61 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'id="adbd-request-backup-now-description"', $html );
 		$this->assertStringContainsString( 'Dashboard', $html );
 		$this->assertStringContainsString( 'Client report', $html );
+		$this->assertStringContainsString( 'Details', $html );
 		$this->assertStringContainsString( 'Succeeded', $html );
 		$this->assertStringContainsString( 'Scan completed safely.', $html );
 		$this->assertStringContainsString( 'Found 2; Queued 0; Known 1; Attempts 1; Failed 0', $html );
 		$this->assertStringNotContainsString( 'private', strtolower( $html ) );
+	}
+
+	/**
+	 * Schedule action history shows operator-friendly schedule details.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_renders_schedule_apply_details() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'id'                            => 7,
+			'enrollment_status'             => 'active',
+			'polling_key_id'                => 'key-id',
+			'has_polling_secret'            => '1',
+			'action_key_id'                 => 'ak_test',
+			'action_private_key_ciphertext' => 'ciphertext',
+		);
+		$snapshot = array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version'   => 2,
+					'enabled'            => true,
+					'allowed_actions'    => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+					'sodium_available'   => true,
+				),
+			),
+		);
+		$history  = array(
+			array(
+				'action_type'           => 'schedule_apply',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 18:23:43',
+				'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
+				'redacted_context_json' => wp_json_encode(
+					array(
+						'schedule_apply' => array(
+							'previous_cadence' => 'every_15_minutes',
+							'applied_cadence'  => 'every_30_minutes',
+							'new_next_run_at'  => '2026-09-15T18:53:55+00:00',
+						),
+					)
+				),
+			),
+		);
+		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
+
+		$this->assertStringContainsString( 'Schedule Apply', $html );
+		$this->assertStringContainsString( 'every 15 minutes → every 30 minutes', $html );
+		$this->assertStringContainsString( 'Next run 2026-09-15 18:53 UTC', $html );
 	}
 
 	/**

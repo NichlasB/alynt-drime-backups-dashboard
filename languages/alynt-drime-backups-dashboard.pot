@@ -1444,7 +1444,7 @@ msgid "Result"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:786
-msgid "Counts"
+msgid "Details"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:808
@@ -1501,6 +1501,24 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:865
 msgid "Awaiting client status"
+msgstr ""
+
+#. translators: 1: previous cadence label, 2: applied cadence label.
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:945
+#, php-format
+msgid "%1$s → %2$s"
+msgstr ""
+
+#. translators: %s: next run date/time.
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:954
+#, php-format
+msgid "Next run %s"
+msgstr ""
+
+#. translators: 1: current cadence label, 2: proposed cadence label.
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:966
+#, php-format
+msgid "Preview: %1$s → %2$s"
 msgstr ""
 
 #. translators: 1: found count, 2: queued count, 3: already-known count, 4: attempted count, 5: failed count.

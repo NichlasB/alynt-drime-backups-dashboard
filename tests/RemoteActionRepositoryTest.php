@@ -330,6 +330,54 @@ class RemoteActionRepositoryTest extends TestCase {
 	}
 
 	/**
+	 * Client schedule apply reports preserve support-safe apply details.
+	 *
+	 * @return void
+	 */
+	public function test_mark_client_report_preserves_schedule_apply_details() {
+		$repository      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$this->wpdb->row = array(
+			'id'                    => 321,
+			'redacted_context_json' => wp_json_encode( array() ),
+		);
+
+		$this->assertTrue(
+			$repository->mark_client_report(
+				321,
+				array(
+					'state'          => 'succeeded',
+					'result_code'    => 'schedule_apply_succeeded',
+					'result_summary' => 'Schedule apply completed for Alynt scan/upload.',
+					'schedule_apply' => array(
+						'schedule_id'          => 'alynt_scan_upload',
+						'label'                => 'Alynt scan/upload',
+						'owner'                => 'alynt_uploader',
+						'capability_version'   => 1,
+						'preview_action_id'    => '22222222-2222-4222-8222-222222222222',
+						'preview_fingerprint'  => str_repeat( 'a', 64 ),
+						'proposed_cadence'     => 'every_30_minutes',
+						'previous_cadence'     => 'every_15_minutes',
+						'applied_cadence'      => 'every_30_minutes',
+						'previous_next_run_at' => '2026-09-15T18:30:03+00:00',
+						'applied_next_run_at'  => '2026-09-15T18:53:55+00:00',
+						'changed'              => true,
+					),
+				),
+				'2026-09-15 18:24:12'
+			)
+		);
+
+		$context = json_decode( $this->wpdb->updated_data['redacted_context_json'], true );
+
+		$this->assertSame( 'alynt_scan_upload', $context['schedule_apply']['schedule_id'] );
+		$this->assertSame( 'every_15_minutes', $context['schedule_apply']['previous_cadence'] );
+		$this->assertSame( 'every_30_minutes', $context['schedule_apply']['applied_cadence'] );
+		$this->assertSame( '2026-09-15T18:53:55+00:00', $context['schedule_apply']['new_next_run_at'] );
+		$this->assertSame( '22222222-2222-4222-8222-222222222222', $context['schedule_apply']['preview_action_id'] );
+		$this->assertTrue( $context['schedule_apply']['changed'] );
+	}
+
+	/**
 	 * Stale reconciliation is scoped to one dashboard site.
 	 *
 	 * @return void

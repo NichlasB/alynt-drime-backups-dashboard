@@ -402,14 +402,21 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			return array();
 		}
 
+		$new_next_run_at = isset( $apply['new_next_run_at'] ) ? (string) $apply['new_next_run_at'] : ( isset( $apply['applied_next_run_at'] ) ? (string) $apply['applied_next_run_at'] : '' );
+
 		return array(
 			'schedule_id'          => isset( $apply['schedule_id'] ) ? sanitize_key( (string) $apply['schedule_id'] ) : '',
 			'label'                => $this->bounded_text( isset( $apply['label'] ) ? (string) $apply['label'] : '', self::MAX_SCHEDULE_LABEL_LENGTH ),
 			'owner'                => $this->sanitize_schedule_owner( isset( $apply['owner'] ) ? (string) $apply['owner'] : '' ),
+			'capability_version'   => $this->non_negative_int( $apply, 'capability_version' ),
+			'preview_action_id'    => isset( $apply['preview_action_id'] ) ? $this->sanitize_uuid( (string) $apply['preview_action_id'] ) : '',
+			'preview_fingerprint'  => isset( $apply['preview_fingerprint'] ) ? $this->sha256_or_empty( (string) $apply['preview_fingerprint'] ) : '',
+			'proposed_cadence'     => isset( $apply['proposed_cadence'] ) ? sanitize_key( (string) $apply['proposed_cadence'] ) : '',
 			'previous_cadence'     => isset( $apply['previous_cadence'] ) ? sanitize_key( (string) $apply['previous_cadence'] ) : '',
 			'applied_cadence'      => isset( $apply['applied_cadence'] ) ? sanitize_key( (string) $apply['applied_cadence'] ) : '',
 			'previous_next_run_at' => isset( $apply['previous_next_run_at'] ) ? sanitize_text_field( (string) $apply['previous_next_run_at'] ) : '',
-			'new_next_run_at'      => isset( $apply['new_next_run_at'] ) ? sanitize_text_field( (string) $apply['new_next_run_at'] ) : '',
+			'new_next_run_at'      => sanitize_text_field( $new_next_run_at ),
+			'changed'              => ! empty( $apply['changed'] ),
 			'rollback_available'   => ! empty( $apply['rollback_available'] ),
 			'rollback_expires_at'  => isset( $apply['rollback_expires_at'] ) ? sanitize_text_field( (string) $apply['rollback_expires_at'] ) : '',
 			'warnings'             => $this->schedule_preview_warnings( isset( $apply['warnings'] ) ? $apply['warnings'] : array() ),

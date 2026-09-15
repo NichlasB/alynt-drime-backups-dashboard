@@ -783,11 +783,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		echo '<th scope="col">' . esc_html__( 'Dashboard', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Client report', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '<th scope="col">' . esc_html__( 'Result', 'alynt-drime-backups-dashboard' ) . '</th>';
-		echo '<th scope="col">' . esc_html__( 'Counts', 'alynt-drime-backups-dashboard' ) . '</th>';
+		echo '<th scope="col">' . esc_html__( 'Details', 'alynt-drime-backups-dashboard' ) . '</th>';
 		echo '</tr></thead><tbody>';
 
 		foreach ( $history as $row ) {
-			echo '<tr><td>' . $this->time_html( isset( $row['requested_at'] ) ? $row['requested_at'] : '' ) . '</td><td>' . esc_html( $this->remote_action_label( isset( $row['action_type'] ) ? (string) $row['action_type'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_state_label( isset( $row['state'] ) ? (string) $row['state'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_client_report_label( $row ) ) . '</td><td>' . esc_html( $this->remote_action_result_label( $row ) ) . '</td><td>' . esc_html( $this->remote_action_counts_label( $row ) ) . '</td></tr>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() returns escaped markup.
+			echo '<tr><td>' . $this->time_html( isset( $row['requested_at'] ) ? $row['requested_at'] : '' ) . '</td><td>' . esc_html( $this->remote_action_label( isset( $row['action_type'] ) ? (string) $row['action_type'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_state_label( isset( $row['state'] ) ? (string) $row['state'] : '' ) ) . '</td><td>' . esc_html( $this->remote_action_client_report_label( $row ) ) . '</td><td>' . esc_html( $this->remote_action_result_label( $row ) ) . '</td><td>' . esc_html( $this->remote_action_details_label( $row ) ) . '</td></tr>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() returns escaped markup.
 		}
 
 		echo '</tbody></table></div>';
@@ -892,7 +892,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	 * @param array<string,mixed> $row History row.
 	 * @return string
 	 */
-	private function remote_action_counts_label( array $row ) {
+	private function remote_action_details_label( array $row ) {
+		$schedule_details = $this->remote_action_schedule_details_label( $row );
+
+		if ( '' !== $schedule_details ) {
+			return $schedule_details;
+		}
+
 		if ( empty( $row['client_counts_json'] ) ) {
 			return '-';
 		}
@@ -912,6 +918,58 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 			isset( $counts['upload_attempted'] ) ? max( 0, (int) $counts['upload_attempted'] ) : 0,
 			isset( $counts['failed'] ) ? max( 0, (int) $counts['failed'] ) : 0
 		);
+	}
+
+	/**
+	 * Gets a compact schedule-management summary for a history row.
+	 *
+	 * @param array<string,mixed> $row History row.
+	 * @return string
+	 */
+	private function remote_action_schedule_details_label( array $row ) {
+		$context = ! empty( $row['redacted_context_json'] ) ? json_decode( (string) $row['redacted_context_json'], true ) : array();
+
+		if ( ! is_array( $context ) ) {
+			return '';
+		}
+
+		$preview = isset( $context['schedule_preview'] ) && is_array( $context['schedule_preview'] ) ? $context['schedule_preview'] : array();
+		$apply   = isset( $context['schedule_apply'] ) && is_array( $context['schedule_apply'] ) ? $context['schedule_apply'] : array();
+
+		if ( ! empty( $apply['previous_cadence'] ) || ! empty( $apply['applied_cadence'] ) ) {
+			$previous = ! empty( $apply['previous_cadence'] ) ? $this->schedule_cadence_label( (string) $apply['previous_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+			$applied  = ! empty( $apply['applied_cadence'] ) ? $this->schedule_cadence_label( (string) $apply['applied_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+			$detail   = sprintf(
+				/* translators: 1: previous cadence label, 2: applied cadence label. */
+				__( '%1$s → %2$s', 'alynt-drime-backups-dashboard' ),
+				$previous,
+				$applied
+			);
+
+			if ( ! empty( $apply['new_next_run_at'] ) ) {
+				$detail .= '; ' . sprintf(
+					/* translators: %s: next run date/time. */
+					__( 'Next run %s', 'alynt-drime-backups-dashboard' ),
+					$this->datetime_label( (string) $apply['new_next_run_at'] )
+				);
+			}
+
+			return $detail;
+		}
+
+		if ( ! empty( $preview['current_cadence'] ) || ! empty( $preview['proposed_cadence'] ) ) {
+			$current  = ! empty( $preview['current_cadence'] ) ? $this->schedule_cadence_label( (string) $preview['current_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+			$proposed = ! empty( $preview['proposed_cadence'] ) ? $this->schedule_cadence_label( (string) $preview['proposed_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+
+			return sprintf(
+				/* translators: 1: current cadence label, 2: proposed cadence label. */
+				__( 'Preview: %1$s → %2$s', 'alynt-drime-backups-dashboard' ),
+				$current,
+				$proposed
+			);
+		}
+
+		return '';
 	}
 
 	/**
