@@ -17,6 +17,8 @@
 }
 
 .adbd-wrap .adbd-row-actions {
+	--adbd-row-action-width: 9.5rem;
+
 	flex-direction: column;
 	align-items: flex-start;
 }
@@ -27,10 +29,13 @@
 }
 
 .adbd-wrap .adbd-row-actions .adbd-inline-form {
+	inline-size: min(100%, var(--adbd-row-action-width));
 	max-width: 100%;
 }
 
 .adbd-wrap .adbd-row-actions .button {
+	box-sizing: border-box;
+	inline-size: min(100%, var(--adbd-row-action-width));
 	max-width: 100%;
 	white-space: normal;
 	text-align: center;
