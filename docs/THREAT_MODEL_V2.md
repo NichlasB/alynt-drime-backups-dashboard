@@ -1,8 +1,8 @@
 # Alynt Drime Backups Dashboard Threat Model v2
 
-Status: V2.1/V2.2 threat-model baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, and local/unreleased guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, and V2.3 schedule preview have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. `schedule_apply` has local repository implementation but is not yet released, deployed, broadly enabled, or live-piloted. This document does not approve broad rollout, schedule rollback, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
+Status: V2.1/V2.2 threat-model baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, and guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, V2.3 schedule preview, and guarded V2.3 Schedule Apply have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. This document does not approve broad rollout, schedule rollback, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
 
-Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, implemented non-mutating V2.3 `schedule_preview`, and planning for mutating V2.3 `schedule_apply` for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
+Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, implemented non-mutating V2.3 `schedule_preview`, guarded V2.3 `schedule_apply`, and planning for rollback metadata capture/readiness for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
 This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and status polling remain in force.
 
@@ -59,7 +59,7 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | False sense of control | Operator thinks preview-only capability reporting changed a schedule. | UI labels: "preview only" / "not applied"; action history records no schedule mutation. | UI copy and workflow tests. |
 | Stale preview apply | Operator applies a preview after local schedule state changed. | `schedule_apply` must reference a fresh successful preview; client revalidates preview fingerprint/current state and rejects stale previews. | Dashboard fresh-preview tests and uploader stale-preview tests. |
 | Schedule apply free-form mutation | Dashboard sends raw cron, arbitrary cadence, disable flag, option payload, or other settings through `schedule_apply`. | Dashboard builds apply only from allowlisted preview evidence; client accepts only `alynt_scan_upload`, supported cadence labels, and bounded preview references. | Dashboard payload tests and client action validation tests. |
-| Rollback metadata missing | Client applies a schedule change without enough local metadata to reverse it later. | Client captures local rollback metadata before mutation and rejects apply if capture fails. Dashboard stores only rollback availability/expiry, not raw rollback internals. | Client rollback-capture tests and dashboard redaction tests. |
+| Rollback metadata missing | Client applies a schedule change without enough local evidence to support a future rollback design. | Current released apply reports rollback unavailable. The next metadata-capture slice must capture bounded support-safe previous-schedule evidence without enabling `schedule_rollback`; runtime rollback remains separately gated. | Client rollback-metadata tests and dashboard redaction tests. |
 | Schedule apply overreach | Apply changes WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or unrelated settings. | First apply slice targets only `alynt_scan_upload`; tests prove only that schedule changes and all other action types remain rejected. | Client integration tests and cross-plugin checks. |
 
 ## Abuse Cases Explicitly Out Of Scope For V2.1
@@ -73,7 +73,7 @@ These must remain impossible in V2.1 code and UI:
 - backup deletion;
 - retention cleanup;
 - local file cleanup;
-- schedule changes beyond the locally implemented, unreleased `alynt_scan_upload` `schedule_apply` slice, including rollback;
+- schedule changes beyond the released guarded `alynt_scan_upload` `schedule_apply` slice, including rollback;
 - settings changes;
 - Drime credential updates;
 - dashboard-side Drime API use;

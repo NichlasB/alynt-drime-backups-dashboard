@@ -1,6 +1,6 @@
 # V2.3 Schedule Apply Implementation Plan
 
-Status: local dashboard/uploader release-candidate implementation in progress and unreleased. This document does not approve release, deployment, live-site writes, broad client enablement, schedule rollback, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
+Status: implemented, released, and deployed as the guarded V2.3 `schedule_apply` slice. Dashboard support shipped through dashboard `0.1.25`; uploader support shipped through uploader `0.5.19`. This document does not approve broad client enablement, schedule rollback, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -9,6 +9,7 @@ Related artifacts:
 - `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`
 - `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`
 - `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`
+- `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`
 - `docs/PROTOCOL_V2.md`
 - `docs/THREAT_MODEL_V2.md`
 - uploader `docs/STATUS_PAYLOAD.md`
@@ -331,7 +332,19 @@ Cross-plugin checks:
 - `schedule_rollback` is still impossible.
 - Existing V1 polling, backup-source freshness, V2.1 `scan_upload_now`, V2.2 action reconciliation, and V2.3 `schedule_preview` remain unchanged.
 
-## Approval Gate Before Code
+## Post-Release Stabilization And Next Slice
+
+Schedule Apply is now available only when a client separately opts in and the dashboard has a fresh successful matching preview. The next recommended slice is not rollback execution. It is rollback metadata capture/readiness:
+
+- define exactly what support-safe previous-schedule evidence the client may retain locally after apply;
+- define the bounded redacted fields the dashboard may display in action history;
+- preserve `rollback_available: false` until a later `schedule_rollback` runtime slice is explicitly approved;
+- verify that metadata capture does not expose raw cron arrays, option blobs, paths, credentials, Drime IDs, package names, or arbitrary settings;
+- update docs/tests before any future rollback action is considered.
+
+The planning baseline for that next slice is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`.
+
+## Historical Approval Gate Before Code
 
 Before implementation begins, explicitly approve:
 

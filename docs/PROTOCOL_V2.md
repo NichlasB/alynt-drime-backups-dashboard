@@ -1,10 +1,10 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, and local/unreleased guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, and schedule-preview action have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. `schedule_apply` is implemented locally in the dashboard/uploader repositories but is not yet released, deployed, broadly enabled, or live-piloted.
+Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, and guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, schedule-preview action, and guarded Schedule Apply have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, and guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, and rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 
@@ -17,7 +17,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - The client uploader remains the only system that can execute backup-related work, and it uses its own local settings, credentials, locks, and policy.
 - V2.1 initially allows only `scan_upload_now`.
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
-- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The next implemented local/unreleased V2.3 action is `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and separate release/deploy/pilot approval gates. Rolling back schedule changes and rollback metadata capture require a later protocol update and separate approval gate.
+- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The current mutating V2.3 action is guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and release/deploy approval gates. Rollback metadata capture/readiness and rolling back schedule changes require later protocol updates and separate approval gates.
 
 ## Actors And Responsibilities
 
@@ -150,7 +150,7 @@ Rules:
 
 ### Schedule Apply Action
 
-The local/unreleased V2.3 Schedule Apply slice may allow a signed `schedule_apply` action for `alynt_scan_upload` only. `schedule_apply` is mutating: it asks the client to apply one already-previewed cadence change after revalidating the preview against current local schedule state.
+The V2.3 Schedule Apply slice may allow a signed `schedule_apply` action for `alynt_scan_upload` only. `schedule_apply` is mutating: it asks the client to apply one already-previewed cadence change after revalidating the preview against current local schedule state.
 
 Request extension:
 
@@ -173,7 +173,7 @@ Rules:
 - The dashboard must not send raw cron syntax, current next-run assumptions, paths, commands, option names/values, package names, backup IDs, Drime IDs, credentials, disable flags, or arbitrary labels.
 - The client must revalidate the preview against current local state before applying.
 - The client must reject unknown schedule IDs, unsupported cadences, missing/expired/stale preview references, free-form cron expressions, unsafe local state, and changes that would disable all backup production.
-- The client must report rollback unavailable in this slice; `schedule_rollback` and rollback metadata capture remain reserved until separately implemented and approved.
+- The client must report rollback unavailable in this slice; `schedule_rollback` and richer rollback metadata capture/readiness remain reserved until separately implemented and approved.
 - The response may include schedule ID, label, owner, previous cadence, applied cadence, previous next run, new next run, rollback availability as false, empty rollback expiry, warning codes, and support-safe result codes.
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
 
