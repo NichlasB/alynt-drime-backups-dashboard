@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.25 - 2026-09-15
+
+### Fixed
+
+- Polished Schedule Apply history details so applied schedule rows show the sanitized cadence transition and next run time reported by the client.
+- Preserved support-safe Schedule Apply context fields in dashboard action history, including preview identifiers and cadence evidence, without storing raw payloads or secrets.
+
 ## 0.1.24 - 2026-09-15
 
 ### Added
