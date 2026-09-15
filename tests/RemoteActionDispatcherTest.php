@@ -203,6 +203,98 @@ class Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Signer extends Alynt_Drime_B
 }
 
 /**
+ * Test action repository with a fixed fresh preview.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions extends Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
+	/**
+	 * Inserted requests.
+	 *
+	 * @var array<int,array<string,mixed>>
+	 */
+	public $requests = array();
+
+	/**
+	 * Latest state update.
+	 *
+	 * @var array<string,mixed>
+	 */
+	public $latest_state = array();
+
+	/**
+	 * Returns a fixed fresh preview for apply.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param string              $preview_public_id Preview public ID.
+	 * @param array<string,mixed> $capabilities Capabilities.
+	 * @param string|null         $now Now.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function fresh_schedule_preview_for_apply( $site_id, $preview_public_id, array $capabilities, $now = null ) {
+		unset( $site_id, $capabilities, $now );
+
+		if ( '22222222-2222-4222-8222-222222222222' !== $preview_public_id ) {
+			return new WP_Error( 'schedule_apply_preview_missing', 'Missing preview.' );
+		}
+
+		return array(
+			'preview_action_id'   => $preview_public_id,
+			'preview_fingerprint' => str_repeat( 'a', 64 ),
+			'schedule_id'         => 'alynt_scan_upload',
+			'current_cadence'     => 'every_15_minutes',
+			'proposed_cadence'    => 'every_30_minutes',
+			'capability_version'  => 1,
+		);
+	}
+
+	/**
+	 * Stores request context.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param string              $action_type Action type.
+	 * @param int                 $requested_by User ID.
+	 * @param string              $idempotency_key Idempotency key.
+	 * @param string              $action_key_id Action key ID.
+	 * @param string              $expires_at Expiry.
+	 * @param string              $request_fingerprint Fingerprint.
+	 * @param array<string,mixed> $context Context.
+	 * @param string              $public_id Public ID.
+	 * @return int
+	 */
+	public function create_request( $site_id, $action_type, $requested_by, $idempotency_key, $action_key_id, $expires_at, $request_fingerprint = '', array $context = array(), $public_id = '' ) {
+		$this->requests[] = compact( 'site_id', 'action_type', 'requested_by', 'idempotency_key', 'action_key_id', 'expires_at', 'request_fingerprint', 'context', 'public_id' );
+
+		return 55;
+	}
+
+	/**
+	 * Marks dispatch.
+	 *
+	 * @param int $action_id Action ID.
+	 * @return bool
+	 */
+	public function mark_dispatched( $action_id ) {
+		unset( $action_id );
+		return true;
+	}
+
+	/**
+	 * Marks state.
+	 *
+	 * @param int    $action_id Action ID.
+	 * @param string $state State.
+	 * @param string $result_code Result code.
+	 * @param string $result_summary Summary.
+	 * @param int    $retry_after_seconds Retry after.
+	 * @return bool
+	 */
+	public function mark_state( $action_id, $state, $result_code = '', $result_summary = '', $retry_after_seconds = 0 ) {
+		$this->latest_state = compact( 'action_id', 'state', 'result_code', 'result_summary', 'retry_after_seconds' );
+
+		return true;
+	}
+}
+
+/**
  * Tests signed remote action dispatch.
  */
 class RemoteActionDispatcherTest extends TestCase {
@@ -323,6 +415,56 @@ class RemoteActionDispatcherTest extends TestCase {
 		$this->assertSame( 'schedule_preview', $this->wpdb->inserted_data['action_type'] );
 		$this->assertStringContainsString( 'every_30_minutes', $this->wpdb->inserted_data['redacted_context_json'] );
 		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $this->wpdb->inserted_data ) );
+	}
+
+	public function test_schedule_apply_dispatch_posts_signed_apply_intent_from_fresh_preview() {
+		$this->wpdb->snapshot = $this->snapshot_row(
+			array(
+				'allowed_actions'     => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+				'preview_only'        => false,
+				'apply_supported'     => true,
+				'rollback_supported'  => false,
+			)
+		);
+		$actions              = new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions();
+		$captured             = array();
+		$http                 = function ( $url, $args ) use ( &$captured ) {
+			$captured = array(
+				'url'  => $url,
+				'args' => $args,
+			);
+			$body     = json_decode( $args['body'], true );
+
+			return array(
+				'response' => array(
+					'code' => 202,
+				),
+				'body'     => wp_json_encode(
+					array(
+						'protocol_version' => 2,
+						'action_id'        => $body['action_id'],
+						'state'            => 'accepted',
+						'result_code'      => 'action_accepted',
+						'result_summary'   => 'Schedule apply accepted safely.',
+						'retry_after'      => 0,
+					)
+				),
+			);
+		};
+
+		$result = $this->dispatcher( $http, null, $actions )->request_schedule_apply( 9, '22222222-2222-4222-8222-222222222222', 7 );
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'schedule_apply', $result['action'] );
+		$this->assertSame( 'accepted', $result['remote_state'] );
+		$request_body = json_decode( $captured['args']['body'], true );
+		$this->assertSame( 'schedule_apply', $request_body['action_type'] );
+		$this->assertSame( 'alynt_scan_upload', $request_body['schedule_apply']['schedule_id'] );
+		$this->assertSame( 'every_30_minutes', $request_body['schedule_apply']['proposed_cadence'] );
+		$this->assertSame( '22222222-2222-4222-8222-222222222222', $request_body['schedule_apply']['preview_action_id'] );
+		$this->assertSame( str_repeat( 'a', 64 ), $request_body['schedule_apply']['preview_fingerprint'] );
+		$this->assertSame( 'schedule_apply', $actions->requests[0]['action_type'] );
+		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $request_body ) );
 	}
 
 	public function test_schedule_preview_rejects_unsupported_cadence_without_http_dispatch() {
@@ -499,11 +641,11 @@ class RemoteActionDispatcherTest extends TestCase {
 	 * @param callable $http HTTP fake.
 	 * @return Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher
 	 */
-	private function dispatcher( $http, $resolver = null ) {
+	private function dispatcher( $http, $resolver = null, $actions = null ) {
 		return new Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher(
 			new Alynt_Drime_Backups_Dashboard_Site_Repository(),
 			new Alynt_Drime_Backups_Dashboard_Snapshot_Repository(),
-			new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository(),
+			$actions instanceof Alynt_Drime_Backups_Dashboard_Remote_Action_Repository ? $actions : new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository(),
 			new Alynt_Drime_Backups_Dashboard_Origin_Validator(),
 			new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Vault(),
 			new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Signer(),
@@ -542,25 +684,41 @@ class RemoteActionDispatcherTest extends TestCase {
 	 *
 	 * @return array<string,mixed>
 	 */
-	private function snapshot_row() {
+	private function snapshot_row( array $remote_action_overrides = array() ) {
+		$remote_actions = array_merge(
+			array(
+				'protocol_version'            => 2,
+				'enabled'                     => true,
+				'key_id'                      => 'ak_test',
+				'allowed_actions'             => array( 'scan_upload_now', 'schedule_preview' ),
+				'sodium_available'            => true,
+				'min_interval_seconds'        => 3600,
+				'one_running_action_per_site' => true,
+				'preview_only'                => true,
+				'apply_supported'             => false,
+				'rollback_supported'          => false,
+			),
+			$remote_action_overrides
+		);
+
 		return array(
 			'payload_json' => wp_json_encode(
 				array(
 					'remote_actions' => array(
-						'protocol_version'            => 2,
-						'enabled'                     => true,
-						'key_id'                      => 'ak_test',
-						'allowed_actions'             => array( 'scan_upload_now', 'schedule_preview' ),
-						'sodium_available'            => true,
-						'min_interval_seconds'        => 3600,
-						'one_running_action_per_site' => true,
+						'protocol_version'            => $remote_actions['protocol_version'],
+						'enabled'                     => $remote_actions['enabled'],
+						'key_id'                      => $remote_actions['key_id'],
+						'allowed_actions'             => $remote_actions['allowed_actions'],
+						'sodium_available'            => $remote_actions['sodium_available'],
+						'min_interval_seconds'        => $remote_actions['min_interval_seconds'],
+						'one_running_action_per_site' => $remote_actions['one_running_action_per_site'],
 						'schedule_management'         => array(
 							'protocol_version'   => 2,
 							'capability_version' => 1,
 							'enabled'            => true,
-							'preview_only'       => true,
-							'apply_supported'    => false,
-							'rollback_supported' => false,
+							'preview_only'       => $remote_actions['preview_only'],
+							'apply_supported'    => $remote_actions['apply_supported'],
+							'rollback_supported' => $remote_actions['rollback_supported'],
 							'schedules'          => array(
 								array(
 									'schedule_id'                    => 'alynt_scan_upload',

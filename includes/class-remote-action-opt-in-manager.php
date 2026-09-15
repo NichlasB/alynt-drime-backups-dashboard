@@ -153,6 +153,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Opt_In_Manager {
 			'allowed_actions'          => array(
 				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
 				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
+				Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY,
 			),
 		);
 	}

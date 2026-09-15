@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added local, unreleased V2.3 guarded Schedule Apply support for the Alynt scan/upload schedule. The dashboard can dispatch a signed `schedule_apply` intent only from a fresh successful matching `schedule_preview` result when the client reports local Schedule Apply support.
+
+### Changed
+
+- Extended V2 action opt-in tokens to include `schedule_apply` for new opt-ins while keeping client-side Schedule Apply disabled unless a local client administrator separately enables that policy.
+- Preserved the schedule-management boundary: no rollback runtime behavior, WPvivid schedule mutation, server-runner schedule mutation, backup creation, restore, cleanup, delete, Drime credential storage, arbitrary cron, or arbitrary command actions were added.
+
 ## 0.1.23 - 2026-09-14
 
 ### Fixed

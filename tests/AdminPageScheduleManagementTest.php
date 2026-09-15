@@ -8,6 +8,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
+require_once dirname( __DIR__ ) . '/includes/class-remote-action-repository.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
@@ -25,16 +26,33 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$harness = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
 		$html    = $harness->panel_html( $this->payload() );
 
-		$this->assertStringContainsString( 'Schedule Management Preview', $html );
+		$this->assertStringContainsString( 'Schedule Management', $html );
 		$this->assertStringContainsString( 'Preview only', $html );
 		$this->assertStringContainsString( 'Alynt scan/upload', $html );
 		$this->assertStringContainsString( 'every 15 minutes', $html );
 		$this->assertStringContainsString( '15 minutes', $html );
-		$this->assertStringContainsString( 'Not available in this version', $html );
+		$this->assertStringContainsString( 'Not enabled on the client', $html );
 		$this->assertStringContainsString( 'Preview Schedule Change', $html );
 		$this->assertStringContainsString( 'every 30 minutes', $html );
 		$this->assertStringContainsString( '<form', $html );
 		$this->assertStringNotContainsString( 'schedule_apply', $html );
+		$this->assertStringNotContainsString( 'schedule_rollback', $html );
+	}
+
+	/**
+	 * Apply-capable schedule management shows apply only for a fresh preview.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_apply_form_requires_fresh_preview() {
+		$harness                 = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
+		$harness->remote_actions = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions();
+		$html                    = $harness->panel_html( $this->payload( true ) );
+
+		$this->assertStringContainsString( 'Apply available after preview', $html );
+		$this->assertStringContainsString( 'Apply Previewed Schedule Change', $html );
+		$this->assertStringContainsString( 'schedule_apply_confirm', $html );
+		$this->assertStringContainsString( 'from every 15 minutes to every 30 minutes', $html );
 		$this->assertStringNotContainsString( 'schedule_rollback', $html );
 	}
 
@@ -68,17 +86,19 @@ class AdminPageScheduleManagementTest extends TestCase {
 	 *
 	 * @return array<string,mixed>
 	 */
-	private function payload() {
+	private function payload( $apply_supported = false ) {
 		return array(
 			'remote_actions' => array(
 				'protocol_version'     => 2,
 				'enabled'              => true,
+				'sodium_available'     => true,
+				'allowed_actions'      => $apply_supported ? array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ) : array( 'scan_upload_now', 'schedule_preview' ),
 				'schedule_management'  => array(
 					'protocol_version'   => 2,
 					'capability_version' => 1,
 					'enabled'            => true,
-					'preview_only'       => true,
-					'apply_supported'    => false,
+					'preview_only'       => ! $apply_supported,
+					'apply_supported'    => $apply_supported,
 					'rollback_supported' => false,
 					'schedules'          => array(
 						array(
@@ -111,6 +131,13 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 
 	/**
+	 * Remote action repository.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Remote_Action_Repository|null
+	 */
+	public $remote_actions;
+
+	/**
 	 * Renders the schedule preview panel for tests.
 	 *
 	 * @param array<string,mixed> $payload Snapshot payload.
@@ -137,5 +164,51 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 	 */
 	public function row_hint_html( array $payload ) {
 		return $this->schedule_management_row_hint( $payload );
+	}
+}
+
+/**
+ * Fake action repository for schedule apply rendering tests.
+ */
+class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions extends Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
+	/**
+	 * Recent action rows.
+	 *
+	 * @param int $site_id Site ID.
+	 * @param int $limit Limit.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function recent_for_site( $site_id, $limit = 10 ) {
+		unset( $site_id, $limit );
+
+		return array(
+			array(
+				'public_id'   => '22222222-2222-4222-8222-222222222222',
+				'action_type' => 'schedule_preview',
+				'state'       => 'succeeded',
+			),
+		);
+	}
+
+	/**
+	 * Fresh preview response.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param string              $preview_public_id Preview ID.
+	 * @param array<string,mixed> $capabilities Capabilities.
+	 * @param string|null         $now Now.
+	 * @return array<string,mixed>
+	 */
+	public function fresh_schedule_preview_for_apply( $site_id, $preview_public_id, array $capabilities, $now = null ) {
+		unset( $site_id, $capabilities, $now );
+
+		return array(
+			'preview_action_id'   => $preview_public_id,
+			'preview_fingerprint' => str_repeat( 'a', 64 ),
+			'schedule_id'         => 'alynt_scan_upload',
+			'current_cadence'     => 'every_15_minutes',
+			'proposed_cadence'    => 'every_30_minutes',
+			'capability_version'  => 1,
+		);
 	}
 }

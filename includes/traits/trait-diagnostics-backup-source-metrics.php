@@ -71,6 +71,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 		$counts = array(
 			'reporting_sites'    => 0,
 			'preview_only_sites' => 0,
+			'apply_sites'        => 0,
 			'unavailable_sites'  => 0,
 			'reported_schedules' => 0,
 		);
@@ -94,11 +95,13 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 
 		if (
 			! empty( $schedule_management['enabled'] )
-			&& ! empty( $schedule_management['preview_only'] )
-			&& empty( $schedule_management['apply_supported'] )
 			&& empty( $schedule_management['rollback_supported'] )
 		) {
-			$counts['preview_only_sites'] = 1;
+			if ( ! empty( $schedule_management['apply_supported'] ) ) {
+				$counts['apply_sites'] = 1;
+			} else {
+				$counts['preview_only_sites'] = 1;
+			}
 		} else {
 			$counts['unavailable_sites'] = 1;
 		}

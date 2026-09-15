@@ -1102,6 +1102,84 @@ msgstr ""
 msgid "Schedule Management Preview"
 msgstr ""
 
+msgid "Schedule Management"
+msgstr ""
+
+msgid "V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, or change credentials."
+msgstr ""
+
+msgid "Apply available after preview"
+msgstr ""
+
+msgid "The client reports guarded Schedule Apply support for this schedule class."
+msgstr ""
+
+msgid "Available after a fresh matching preview"
+msgstr ""
+
+msgid "Not enabled on the client"
+msgstr ""
+
+msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview."
+msgstr ""
+
+msgid "Apply becomes available after a fresh successful preview for this schedule. Run Preview Schedule Change, then Check Now if the preview result has not appeared yet."
+msgstr ""
+
+msgid "Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only."
+msgstr ""
+
+msgid "I understand this applies only the previewed future Alynt scan/upload cadence change and does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
+msgstr ""
+
+msgid "Applying…"
+msgstr ""
+
+msgid "Apply Previewed Schedule Change"
+msgstr ""
+
+msgid "Schedule Apply"
+msgstr ""
+
+msgid "Choose a fresh schedule preview before applying a schedule change."
+msgstr ""
+
+msgid "The selected schedule preview could not be found. Run a new preview before applying a schedule change."
+msgstr ""
+
+msgid "The selected schedule preview has not succeeded yet. Run Check Now and confirm the preview result before applying."
+msgstr ""
+
+msgid "The selected preview does not describe a schedule change to apply."
+msgstr ""
+
+msgid "The selected preview is missing required safe apply evidence. Run a new preview before applying."
+msgstr ""
+
+msgid "The selected schedule preview has expired. Run a new preview before applying."
+msgstr ""
+
+msgid "The selected schedule preview is no longer fresh. Run a new preview before applying."
+msgstr ""
+
+msgid "The latest client report does not allow applying this previewed schedule change. Run Check Now after enabling Schedule Apply on the client."
+msgstr ""
+
+msgid "The latest client report does not allow Schedule Apply. Enable Schedule Apply on the client and run Check Now first."
+msgstr ""
+
+msgid "Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview."
+msgstr ""
+
+msgid "Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client."
+msgstr ""
+
+msgid "The client site did not accept the Schedule Apply request."
+msgstr ""
+
+msgid "Schedule Apply could not be completed. Review the remote action history for this site."
+msgstr ""
+
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:294
 msgid "V2.3 starts with read-only schedule visibility only. The client reports supported schedule choices, but this dashboard version does not apply, disable, roll back, or otherwise change schedules."
 msgstr ""

@@ -19,6 +19,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	const PROTOCOL_VERSION        = 2;
 	const ACTION_SCAN_UPLOAD_NOW  = 'scan_upload_now';
 	const ACTION_SCHEDULE_PREVIEW = 'schedule_preview';
+	const ACTION_SCHEDULE_APPLY   = 'schedule_apply';
 	const SCHEDULE_SCAN_UPLOAD    = 'alynt_scan_upload';
 
 	const MAX_ALLOWED_ACTIONS       = 5;
@@ -159,8 +160,6 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 		$schedule_management = isset( $capabilities['schedule_management'] ) && is_array( $capabilities['schedule_management'] ) ? $capabilities['schedule_management'] : array();
 
 		return ! empty( $schedule_management['enabled'] )
-			&& ! empty( $schedule_management['preview_only'] )
-			&& empty( $schedule_management['apply_supported'] )
 			&& empty( $schedule_management['rollback_supported'] )
 			&& ! empty( $schedule_management['schedules'] )
 			&& is_array( $schedule_management['schedules'] );
@@ -207,6 +206,52 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	}
 
 	/**
+	 * Gets whether sanitized capabilities allow a guarded schedule apply action.
+	 *
+	 * @since 0.1.24
+	 *
+	 * @param array<string,mixed> $capabilities Sanitized capabilities.
+	 * @param string              $schedule_id Schedule ID.
+	 * @param string              $proposed_cadence Proposed cadence.
+	 * @return bool
+	 */
+	public function supports_schedule_apply_action( array $capabilities, $schedule_id, $proposed_cadence ) {
+		if (
+			empty( $capabilities['enabled'] )
+			|| empty( $capabilities['sodium_available'] )
+			|| empty( $capabilities['allowed_actions'] )
+			|| ! in_array( self::ACTION_SCHEDULE_APPLY, (array) $capabilities['allowed_actions'], true )
+			|| empty( $capabilities['schedule_management'] )
+			|| ! is_array( $capabilities['schedule_management'] )
+			|| empty( $capabilities['schedule_management']['enabled'] )
+			|| empty( $capabilities['schedule_management']['apply_supported'] )
+			|| ! empty( $capabilities['schedule_management']['rollback_supported'] )
+		) {
+			return false;
+		}
+
+		$schedule_id      = sanitize_key( (string) $schedule_id );
+		$proposed_cadence = sanitize_key( (string) $proposed_cadence );
+		$schedules        = isset( $capabilities['schedule_management']['schedules'] ) && is_array( $capabilities['schedule_management']['schedules'] ) ? $capabilities['schedule_management']['schedules'] : array();
+
+		foreach ( $schedules as $schedule ) {
+			if (
+				is_array( $schedule )
+				&& self::SCHEDULE_SCAN_UPLOAD === $schedule_id
+				&& ( isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '' ) === $schedule_id
+				&& ! empty( $schedule['manageable'] )
+				&& ! empty( $schedule['supported_cadences'] )
+				&& in_array( $proposed_cadence, (array) $schedule['supported_cadences'], true )
+				&& empty( $schedule['can_disable'] )
+			) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Sanitizes an action type.
 	 *
 	 * @since 0.1.15
@@ -217,7 +262,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	public function sanitize_action_type( $action_type ) {
 		$action_type = sanitize_key( (string) $action_type );
 
-		return in_array( $action_type, array( self::ACTION_SCAN_UPLOAD_NOW, self::ACTION_SCHEDULE_PREVIEW ), true ) ? $action_type : '';
+		return in_array( $action_type, array( self::ACTION_SCAN_UPLOAD_NOW, self::ACTION_SCHEDULE_PREVIEW, self::ACTION_SCHEDULE_APPLY ), true ) ? $action_type : '';
 	}
 
 	/**
@@ -310,6 +355,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			'result_summary'   => $this->bounded_text( $result_summary, self::MAX_RESULT_SUMMARY_LENGTH ),
 			'counts'           => $this->counts( isset( $action['counts'] ) ? $action['counts'] : array() ),
 			'schedule_preview' => $this->schedule_preview( isset( $action['schedule_preview'] ) ? $action['schedule_preview'] : array() ),
+			'schedule_apply'   => $this->schedule_apply( isset( $action['schedule_apply'] ) ? $action['schedule_apply'] : array() ),
 		);
 	}
 
@@ -333,9 +379,40 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			'current_next_run_at'           => isset( $preview['current_next_run_at'] ) ? sanitize_text_field( (string) $preview['current_next_run_at'] ) : '',
 			'proposed_next_run_estimate_at' => isset( $preview['proposed_next_run_estimate_at'] ) ? sanitize_text_field( (string) $preview['proposed_next_run_estimate_at'] ) : '',
 			'would_change'                  => ! empty( $preview['would_change'] ),
-			'apply_supported'               => false,
+			'apply_supported'               => ! empty( $preview['apply_supported'] ),
 			'rollback_supported'            => false,
+			'preview_action_id'             => isset( $preview['preview_action_id'] ) ? $this->sanitize_uuid( (string) $preview['preview_action_id'] ) : '',
+			'preview_fingerprint'           => isset( $preview['preview_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['preview_fingerprint'] ) : '',
+			'current_schedule_fingerprint'  => isset( $preview['current_schedule_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['current_schedule_fingerprint'] ) : '',
+			'capability_version'            => $this->non_negative_int( $preview, 'capability_version' ),
+			'preview_created_at'            => isset( $preview['preview_created_at'] ) ? sanitize_text_field( (string) $preview['preview_created_at'] ) : '',
+			'preview_expires_at'            => isset( $preview['preview_expires_at'] ) ? sanitize_text_field( (string) $preview['preview_expires_at'] ) : '',
 			'warnings'                      => $this->schedule_preview_warnings( isset( $preview['warnings'] ) ? $preview['warnings'] : array() ),
+		);
+	}
+
+	/**
+	 * Sanitizes a client-reported schedule apply result.
+	 *
+	 * @param mixed $apply Apply result.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_apply( $apply ) {
+		if ( ! is_array( $apply ) ) {
+			return array();
+		}
+
+		return array(
+			'schedule_id'          => isset( $apply['schedule_id'] ) ? sanitize_key( (string) $apply['schedule_id'] ) : '',
+			'label'                => $this->bounded_text( isset( $apply['label'] ) ? (string) $apply['label'] : '', self::MAX_SCHEDULE_LABEL_LENGTH ),
+			'owner'                => $this->sanitize_schedule_owner( isset( $apply['owner'] ) ? (string) $apply['owner'] : '' ),
+			'previous_cadence'     => isset( $apply['previous_cadence'] ) ? sanitize_key( (string) $apply['previous_cadence'] ) : '',
+			'applied_cadence'      => isset( $apply['applied_cadence'] ) ? sanitize_key( (string) $apply['applied_cadence'] ) : '',
+			'previous_next_run_at' => isset( $apply['previous_next_run_at'] ) ? sanitize_text_field( (string) $apply['previous_next_run_at'] ) : '',
+			'new_next_run_at'      => isset( $apply['new_next_run_at'] ) ? sanitize_text_field( (string) $apply['new_next_run_at'] ) : '',
+			'rollback_available'   => ! empty( $apply['rollback_available'] ),
+			'rollback_expires_at'  => isset( $apply['rollback_expires_at'] ) ? sanitize_text_field( (string) $apply['rollback_expires_at'] ) : '',
+			'warnings'             => $this->schedule_preview_warnings( isset( $apply['warnings'] ) ? $apply['warnings'] : array() ),
 		);
 	}
 
@@ -377,15 +454,17 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			return array();
 		}
 
-		$schedules    = $this->schedules( isset( $capability['schedules'] ) ? $capability['schedules'] : array() );
-		$preview_safe = ! empty( $capability['preview_only'] ) && empty( $capability['apply_supported'] ) && empty( $capability['rollback_supported'] );
+		$schedules          = $this->schedules( isset( $capability['schedules'] ) ? $capability['schedules'] : array() );
+		$rollback_supported = ! empty( $capability['rollback_supported'] );
+		$apply_supported    = ! empty( $capability['apply_supported'] ) && ! $rollback_supported;
+		$preview_only       = ! empty( $capability['preview_only'] ) && ! $apply_supported && ! $rollback_supported;
 
 		return array(
 			'protocol_version'   => self::PROTOCOL_VERSION,
 			'capability_version' => $this->non_negative_int( $capability, 'capability_version' ),
-			'enabled'            => ! empty( $capability['enabled'] ) && $preview_safe && ! empty( $schedules ),
-			'preview_only'       => ! empty( $capability['preview_only'] ),
-			'apply_supported'    => false,
+			'enabled'            => ! empty( $capability['enabled'] ) && ! $rollback_supported && ! empty( $schedules ),
+			'preview_only'       => $preview_only,
+			'apply_supported'    => $apply_supported,
 			'rollback_supported' => false,
 			'schedules'          => $schedules,
 		);
@@ -529,6 +608,16 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 		$uuid = strtolower( trim( (string) $uuid ) );
 
 		return preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/', $uuid ) ? $uuid : '';
+	}
+
+	/**
+	 * Keeps valid SHA-256 fingerprints only.
+	 *
+	 * @param string $value Value.
+	 * @return string
+	 */
+	private function sha256_or_empty( $value ) {
+		return preg_match( '/^[a-f0-9]{64}$/', (string) $value ) ? (string) $value : '';
 	}
 
 	/**

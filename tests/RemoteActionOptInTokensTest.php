@@ -40,7 +40,7 @@ class RemoteActionOptInTokensTest extends TestCase {
 		$this->assertSame( 'remote_action_opt_in', $payload['purpose'] );
 		$this->assertSame( 'https://control.sitesmanage.com', $payload['dashboard_origin'] );
 		$this->assertSame( 'https://client.example.com', $payload['expected_client_origin'] );
-		$this->assertSame( array( 'scan_upload_now', 'schedule_preview' ), $payload['allowed_actions'] );
+		$this->assertSame( array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ), $payload['allowed_actions'] );
 		$this->assertArrayHasKey( 'action_public_key', $payload );
 		$this->assertArrayNotHasKey( 'action_private_key', $payload );
 		$this->assertStringNotContainsString( 'private', strtolower( wp_json_encode( $payload ) ) );

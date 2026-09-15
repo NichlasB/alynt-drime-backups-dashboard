@@ -198,6 +198,38 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			return $result;
 		}
 
+		if ( 'apply_schedule_change' === $action ) {
+			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_apply_schedule_change' );
+
+			if ( is_wp_error( $nonce ) ) {
+				return $nonce;
+			}
+
+			$site_id           = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+			$preview_action_id = isset( $_POST['preview_action_id'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_action_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+
+			if ( empty( $_POST['schedule_apply_confirm'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by verify_action_nonce() above.
+				$result = new WP_Error( 'schedule_apply_confirmation_required', __( 'Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview.', 'alynt-drime-backups-dashboard' ) );
+			} else {
+				$requested_by = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
+				$result       = $this->remote_action_dispatcher->request_schedule_apply( $site_id, $preview_action_id, $requested_by );
+			}
+
+			$this->record_admin_audit_action(
+				'apply_schedule_change',
+				is_wp_error( $result ) ? 'failed' : 'succeeded',
+				array(
+					'dashboard_site_id' => $site_id,
+					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY,
+					'preview_action_id' => $preview_action_id,
+					'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
+					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+				)
+			);
+
+			return $result;
+		}
+
 		if ( 'update_source_policy' === $action ) {
 			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_source_policy' );
 
@@ -387,6 +419,23 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			}
 
 			$this->render_action_notice( __( 'Schedule preview could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
+			return;
+		}
+
+		if ( isset( $result['action'] ) && 'schedule_apply' === $result['action'] ) {
+			$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
+
+			if ( in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true ) ) {
+				$this->render_action_notice( __( 'Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
+				return;
+			}
+
+			if ( in_array( $remote_state, array( 'rate_limited', 'busy', 'rejected', 'unsupported' ), true ) ) {
+				$this->render_action_notice( isset( $result['result_summary'] ) ? (string) $result['result_summary'] : __( 'The client site did not accept the Schedule Apply request.', 'alynt-drime-backups-dashboard' ), 'notice-warning' );
+				return;
+			}
+
+			$this->render_action_notice( __( 'Schedule Apply could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
 			return;
 		}
 

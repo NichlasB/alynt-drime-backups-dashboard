@@ -1,6 +1,6 @@
 # V2.3 Schedule Apply Implementation Plan
 
-Status: planning baseline only. This document does not approve implementation, release, deployment, live-site writes, broad client enablement, schedule rollback, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
+Status: local dashboard/uploader implementation in progress and unreleased. This document does not approve release, deployment, live-site writes, broad client enablement, schedule rollback, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
 
 Related artifacts:
 

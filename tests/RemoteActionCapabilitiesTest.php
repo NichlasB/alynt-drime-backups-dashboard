@@ -215,6 +215,70 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	}
 
 	/**
+	 * Apply-capable summaries are accepted only for guarded Alynt scan/upload cadence choices.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_apply_support_requires_action_and_client_policy() {
+		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$result       = $capabilities->sanitize(
+			array(
+				'protocol_version'     => 2,
+				'enabled'              => true,
+				'sodium_available'     => true,
+				'allowed_actions'      => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+				'schedule_management'  => array(
+					'protocol_version'   => 2,
+					'capability_version' => 1,
+					'enabled'            => true,
+					'preview_only'       => false,
+					'apply_supported'    => true,
+					'rollback_supported' => false,
+					'schedules'          => array(
+						array(
+							'schedule_id'              => 'alynt_scan_upload',
+							'label'                    => 'Alynt scan/upload',
+							'owner'                    => 'alynt_uploader',
+							'manageable'               => true,
+							'current_cadence'          => 'every_15_minutes',
+							'supported_cadences'       => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
+							'minimum_interval_seconds' => 900,
+							'can_disable'              => false,
+						),
+					),
+				),
+				'last_action'          => array(
+					'action_id'        => '11111111-1111-4111-8111-111111111111',
+					'action_type'      => 'schedule_preview',
+					'state'            => 'succeeded',
+					'result_code'      => 'schedule_preview_ready',
+					'result_summary'   => 'Schedule preview is ready.',
+					'schedule_preview' => array(
+						'schedule_id'                  => 'alynt_scan_upload',
+						'current_cadence'              => 'every_15_minutes',
+						'proposed_cadence'             => 'every_30_minutes',
+						'would_change'                 => true,
+						'apply_supported'              => true,
+						'preview_action_id'            => '11111111-1111-4111-8111-111111111111',
+						'preview_fingerprint'          => str_repeat( 'a', 64 ),
+						'current_schedule_fingerprint' => str_repeat( 'b', 64 ),
+						'capability_version'           => 1,
+						'preview_expires_at'           => '2099-01-01T00:15:00+00:00',
+					),
+				),
+			)
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertTrue( $capabilities->supports_schedule_management_preview( $result ) );
+		$this->assertTrue( $capabilities->supports_schedule_preview_action( $result, 'alynt_scan_upload', 'every_30_minutes' ) );
+		$this->assertTrue( $capabilities->supports_schedule_apply_action( $result, 'alynt_scan_upload', 'every_30_minutes' ) );
+		$this->assertFalse( $result['schedule_management']['preview_only'] );
+		$this->assertTrue( $result['schedule_management']['apply_supported'] );
+		$this->assertSame( str_repeat( 'a', 64 ), $result['last_action']['schedule_preview']['preview_fingerprint'] );
+	}
+
+	/**
 	 * Capability summaries with forbidden keys are rejected.
 	 *
 	 * @return void

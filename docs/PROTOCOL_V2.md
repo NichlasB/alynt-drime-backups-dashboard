@@ -1,10 +1,10 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1/V2.2 protocol baseline with implemented V2.3 preview-only schedule capability reporting and implemented non-mutating `schedule_preview`. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, and schedule-preview action have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. A future mutating `schedule_apply` slice is planned but not implemented or approved for runtime use.
+Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, and local/unreleased guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, and schedule-preview action have been implemented, released, deployed to the dashboard host, and proven through controlled rollout. `schedule_apply` is implemented locally in the dashboard/uploader repositories but is not yet released, deployed, broadly enabled, or live-piloted.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, and future schedule apply planning is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, and guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 
@@ -17,7 +17,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - The client uploader remains the only system that can execute backup-related work, and it uses its own local settings, credentials, locks, and policy.
 - V2.1 initially allows only `scan_upload_now`.
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
-- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The next planned V2.3 action is `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, local rollback metadata capture, and a separate approval gate. Rolling back schedule changes requires a later protocol update and separate approval gate.
+- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The next implemented local/unreleased V2.3 action is `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, local rollback metadata capture, and separate release/deploy/pilot approval gates. Rolling back schedule changes requires a later protocol update and separate approval gate.
 
 ## Actors And Responsibilities
 
@@ -115,7 +115,7 @@ Dashboard ingestion rules:
 - Accept only dashboard-recognized schedule IDs. The first planned IDs are `alynt_scan_upload` and, later only after separate client proof, `alynt_server_runner`.
 - Accept only allowlisted owner labels such as `alynt_uploader` and `alynt_server_runner`.
 - Accept only allowlisted cadence labels such as `every_15_minutes`, `every_30_minutes`, `hourly`, `daily`, and `weekly`.
-- Require `preview_only: true`, `apply_supported: false`, and `rollback_supported: false` for the first V2.3 slice.
+- For preview-only clients, require `preview_only: true`, `apply_supported: false`, and `rollback_supported: false`. For apply-capable clients, require `apply_supported: true`, `rollback_supported: false`, `schedule_apply` in `allowed_actions`, and a fresh matching preview before any apply control is shown.
 - Display capability as unavailable when Sodium, V2 action opt-in, or schedule capability reporting is unavailable.
 - Reject or ignore any raw cron line, crontab fragment, WP-Cron array, raw WPvivid option, filesystem path, package name, Drime identifier, token, credential, shell command, SQL, signed URL, or arbitrary setting payload.
 
@@ -148,11 +148,11 @@ Rules:
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
 - `schedule_apply` and `schedule_rollback` remain reserved and must be rejected until separately implemented and approved.
 
-### Planned Schedule Apply Action
+### Schedule Apply Action
 
 The next V2.3 slice may allow a signed `schedule_apply` action for `alynt_scan_upload` only. `schedule_apply` is mutating: it asks the client to apply one already-previewed cadence change after revalidating the preview against current local schedule state.
 
-Planned request extension:
+Request extension:
 
 ```json
 {
@@ -315,7 +315,7 @@ Not included:
 - restoring backups;
 - changing Drime settings or credentials.
 
-## Future V2.3 Schedule Action Types
+## V2.3 Schedule Action Types
 
 The V2.3 design reserves the following action names, but they are not active in the current protocol baseline:
 
@@ -323,7 +323,7 @@ The V2.3 design reserves the following action names, but they are not active in 
 - `schedule_apply`
 - `schedule_rollback`
 
-`schedule_preview` is implemented as a non-mutating V2.3 action. `schedule_apply` and `schedule_rollback` remain reserved and must be rejected until separately implemented and approved.
+`schedule_preview` is implemented as a non-mutating V2.3 action. `schedule_apply` is implemented locally and unreleased for `alynt_scan_upload` cadence changes only. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
 
 ## Action Response
 

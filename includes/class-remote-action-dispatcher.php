@@ -287,6 +287,102 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 	}
 
 	/**
+	 * Requests a guarded schedule apply from one fresh successful preview.
+	 *
+	 * @since 0.1.24
+	 *
+	 * @param int    $site_id Site ID.
+	 * @param string $preview_action_id Preview action public ID.
+	 * @param int    $requested_by User ID.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function request_schedule_apply( $site_id, $preview_action_id, $requested_by = 0 ) {
+		$site_id           = absint( $site_id );
+		$preview_action_id = strtolower( trim( (string) $preview_action_id ) );
+
+		if ( 0 === $site_id ) {
+			return new WP_Error( 'remote_action_site_required', __( 'Choose an enrolled site before requesting a remote action.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$site = $this->sites->get( $site_id );
+		if ( ! is_array( $site ) ) {
+			return new WP_Error( 'remote_action_site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		$capabilities = $this->latest_capabilities( $site_id, Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY );
+		if ( is_wp_error( $capabilities ) ) {
+			return $capabilities;
+		}
+
+		$schedule_apply = $this->actions->fresh_schedule_preview_for_apply( $site_id, $preview_action_id, $capabilities );
+		if ( is_wp_error( $schedule_apply ) ) {
+			return $schedule_apply;
+		}
+
+		$prepared = $this->prepare_signed_intent( $site, $capabilities, Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY, array(), $schedule_apply );
+		if ( is_wp_error( $prepared ) ) {
+			return $prepared;
+		}
+
+		$action_id = $this->actions->create_request(
+			$site_id,
+			Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY,
+			$requested_by,
+			$prepared['body']['idempotency_key'],
+			$prepared['key_id'],
+			gmdate( 'Y-m-d H:i:s', strtotime( $prepared['body']['expires_at'] ) ),
+			$prepared['request_fingerprint'],
+			array(
+				'capability_reported'   => true,
+				'requested_action_type' => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY,
+				'schedule_id'           => isset( $schedule_apply['schedule_id'] ) ? (string) $schedule_apply['schedule_id'] : '',
+				'proposed_cadence'      => isset( $schedule_apply['proposed_cadence'] ) ? (string) $schedule_apply['proposed_cadence'] : '',
+				'preview_action_id'     => isset( $schedule_apply['preview_action_id'] ) ? (string) $schedule_apply['preview_action_id'] : '',
+				'preview_fingerprint'   => isset( $schedule_apply['preview_fingerprint'] ) ? (string) $schedule_apply['preview_fingerprint'] : '',
+			),
+			$prepared['body']['action_id']
+		);
+
+		if ( is_wp_error( $action_id ) ) {
+			return $action_id;
+		}
+
+		if ( method_exists( $this->actions, 'mark_dispatched' ) ) {
+			$this->actions->mark_dispatched( $action_id );
+		}
+
+		$response = $this->post_intent( $prepared );
+
+		if ( is_wp_error( $response ) ) {
+			$this->actions->mark_state( $action_id, 'dispatch_failed', $response->get_error_code(), __( 'The signed request could not be delivered to the client site.', 'alynt-drime-backups-dashboard' ) );
+			return $response;
+		}
+
+		$recorded = $this->actions->mark_state(
+			$action_id,
+			$response['state'],
+			$response['code'],
+			$response['summary'],
+			$response['retry_after']
+		);
+
+		if ( ! $recorded ) {
+			return new WP_Error( 'remote_action_state_store_failed', __( 'The dashboard could not store the remote action response.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		return array(
+			'action'            => 'schedule_apply',
+			'site_id'           => $site_id,
+			'action_id'         => $action_id,
+			'preview_action_id' => isset( $schedule_apply['preview_action_id'] ) ? (string) $schedule_apply['preview_action_id'] : '',
+			'remote_state'      => $response['state'],
+			'result_code'       => $response['code'],
+			'result_summary'    => $response['summary'],
+			'retry_after'       => $response['retry_after'],
+		);
+	}
+
+	/**
 	 * Gets latest remote action capabilities.
 	 *
 	 * @param int    $site_id Site ID.
@@ -315,6 +411,21 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 			return $clean;
 		}
 
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY === $action_type ) {
+			if (
+				empty( $clean['enabled'] )
+				|| empty( $clean['sodium_available'] )
+				|| empty( $clean['allowed_actions'] )
+				|| ! in_array( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY, (array) $clean['allowed_actions'], true )
+				|| empty( $clean['schedule_management']['enabled'] )
+				|| empty( $clean['schedule_management']['apply_supported'] )
+			) {
+				return new WP_Error( 'schedule_apply_unavailable', __( 'The latest client report does not allow Schedule Apply. Enable Schedule Apply on the client and run Check Now first.', 'alynt-drime-backups-dashboard' ) );
+			}
+
+			return $clean;
+		}
+
 		if ( ! $this->capabilities->supports_scan_upload_now( $clean ) ) {
 			return new WP_Error( 'remote_action_capability_missing', __( 'The latest client report does not allow Request Backup Now. Complete V2 opt-in and run Check Now first.', 'alynt-drime-backups-dashboard' ) );
 		}
@@ -329,9 +440,10 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 	 * @param array<string,mixed> $capabilities Capabilities.
 	 * @param string              $action_type Action type.
 	 * @param array<string,mixed> $schedule_preview Schedule preview request.
+	 * @param array<string,mixed> $schedule_apply Schedule apply request.
 	 * @return array<string,mixed>|WP_Error
 	 */
-	private function prepare_signed_intent( array $site, array $capabilities, $action_type, array $schedule_preview = array() ) {
+	private function prepare_signed_intent( array $site, array $capabilities, $action_type, array $schedule_preview = array(), array $schedule_apply = array() ) {
 		if ( empty( $site['polling_key_id'] ) || empty( $site['polling_secret_ciphertext'] ) ) {
 			return new WP_Error( 'remote_action_requires_pairing', __( 'Active read-only pairing is required before requesting a remote action.', 'alynt-drime-backups-dashboard' ) );
 		}
@@ -379,6 +491,15 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 				'schedule_id'        => isset( $schedule_preview['schedule_id'] ) ? sanitize_key( (string) $schedule_preview['schedule_id'] ) : '',
 				'proposed_cadence'   => isset( $schedule_preview['proposed_cadence'] ) ? sanitize_key( (string) $schedule_preview['proposed_cadence'] ) : '',
 				'capability_version' => isset( $schedule_preview['capability_version'] ) ? absint( $schedule_preview['capability_version'] ) : 1,
+			);
+		}
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY === $body['action_type'] ) {
+			$body['schedule_apply'] = array(
+				'schedule_id'         => isset( $schedule_apply['schedule_id'] ) ? sanitize_key( (string) $schedule_apply['schedule_id'] ) : '',
+				'proposed_cadence'    => isset( $schedule_apply['proposed_cadence'] ) ? sanitize_key( (string) $schedule_apply['proposed_cadence'] ) : '',
+				'capability_version'  => isset( $schedule_apply['capability_version'] ) ? absint( $schedule_apply['capability_version'] ) : 1,
+				'preview_action_id'   => isset( $schedule_apply['preview_action_id'] ) ? sanitize_text_field( (string) $schedule_apply['preview_action_id'] ) : '',
+				'preview_fingerprint' => isset( $schedule_apply['preview_fingerprint'] ) ? preg_replace( '/[^a-f0-9]/', '', (string) $schedule_apply['preview_fingerprint'] ) : '',
 			);
 		}
 		$body_json = $this->signer->canonical_json( $body );
@@ -507,8 +628,8 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 
 		return array(
 			'state'       => $state,
-			'code'        => isset( $payload['code'] ) ? sanitize_key( (string) $payload['code'] ) : '',
-			'summary'     => isset( $payload['summary'] ) ? $this->bounded_summary( (string) $payload['summary'] ) : '',
+			'code'        => isset( $payload['result_code'] ) ? sanitize_key( (string) $payload['result_code'] ) : ( isset( $payload['code'] ) ? sanitize_key( (string) $payload['code'] ) : '' ),
+			'summary'     => isset( $payload['result_summary'] ) ? $this->bounded_summary( (string) $payload['result_summary'] ) : ( isset( $payload['summary'] ) ? $this->bounded_summary( (string) $payload['summary'] ) : '' ),
 			'retry_after' => isset( $payload['retry_after'] ) ? max( 0, absint( $payload['retry_after'] ) ) : 0,
 		);
 	}

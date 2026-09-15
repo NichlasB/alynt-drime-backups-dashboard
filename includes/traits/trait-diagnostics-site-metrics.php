@@ -44,6 +44,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			'schedule_management' => array(
 				'reporting_sites'    => 0,
 				'preview_only_sites' => 0,
+				'apply_sites'        => 0,
 				'unavailable_sites'  => 0,
 				'reported_schedules' => 0,
 			),
