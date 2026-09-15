@@ -345,6 +345,66 @@ class RemoteActionRepositoryTest extends TestCase {
 	}
 
 	/**
+	 * Expired schedule previews cannot be reused for schedule apply.
+	 *
+	 * @return void
+	 */
+	public function test_fresh_schedule_preview_rejects_expired_preview() {
+		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$preview_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+
+		$this->wpdb->row = array(
+			'id'                    => 321,
+			'public_id'             => $preview_id,
+			'dashboard_site_id'     => 44,
+			'action_type'           => 'schedule_preview',
+			'state'                 => 'succeeded',
+			'completed_at'          => '2026-08-20 12:00:00',
+			'redacted_context_json' => wp_json_encode(
+				array(
+					'schedule_preview' => array(
+						'preview_action_id'    => $preview_id,
+						'preview_fingerprint'  => str_repeat( 'a', 64 ),
+						'schedule_id'          => 'alynt_scan_upload',
+						'current_cadence'      => 'every_15_minutes',
+						'proposed_cadence'     => 'every_30_minutes',
+						'capability_version'   => 1,
+						'preview_expires_at'   => '2026-08-20T12:05:00+00:00',
+						'would_change'         => true,
+						'apply_supported'      => true,
+						'rollback_supported'   => false,
+					),
+				)
+			),
+		);
+
+		$result = $repository->fresh_schedule_preview_for_apply(
+			44,
+			$preview_id,
+			array(
+				'allowed_actions'      => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+				'schedule_management' => array(
+					'schedules'         => array(
+						array(
+							'id'                 => 'alynt_scan_upload',
+							'apply_supported'    => true,
+							'supported_cadences' => array( 'every_30_minutes' ),
+						),
+					),
+					'apply_supported'   => true,
+					'preview_supported' => true,
+				),
+			),
+			'2026-08-20 12:06:00'
+		);
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'schedule_apply_preview_expired', $result->get_error_code() );
+		$this->assertStringContainsString( 'WHERE public_id = %s AND dashboard_site_id = %d', $this->wpdb->last_query );
+		$this->assertSame( array( $preview_id, 44 ), $this->wpdb->prepared_args );
+	}
+
+	/**
 	 * Lookup queries remain scoped to one site.
 	 *
 	 * @return void

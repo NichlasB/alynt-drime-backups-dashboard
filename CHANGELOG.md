@@ -4,9 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.24 - 2026-09-15
+
 ### Added
 
-- Added local, unreleased V2.3 guarded Schedule Apply support for the Alynt scan/upload schedule. The dashboard can dispatch a signed `schedule_apply` intent only from a fresh successful matching `schedule_preview` result when the client reports local Schedule Apply support.
+- Added V2.3 guarded Schedule Apply support for the Alynt scan/upload schedule. The dashboard can dispatch a signed `schedule_apply` intent only from a fresh successful matching `schedule_preview` result when the client reports local Schedule Apply support.
 
 ### Changed
 

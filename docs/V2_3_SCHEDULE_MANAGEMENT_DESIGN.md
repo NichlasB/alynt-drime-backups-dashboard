@@ -90,9 +90,11 @@ Each capability should be an allowlisted object, for example:
   "minimum_interval_seconds": 900,
   "can_disable": false,
   "requires_high_friction_disable": true,
-  "rollback_supported": true
+  "rollback_supported": false
 }
 ```
+
+The first implemented Schedule Apply release candidate keeps rollback unsupported. Later rollback sections in this design are future-direction notes only and require a separate implementation plan, security review, release gate, and rollout proof.
 
 The client must not expose raw crontab lines, raw WP-Cron arrays, filesystem paths, usernames, shell commands, option blobs, backup package names, Drime object IDs, credentials, or tokens.
 

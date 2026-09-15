@@ -1,6 +1,6 @@
 # V2.3 Schedule Apply Implementation Plan
 
-Status: local dashboard/uploader implementation in progress and unreleased. This document does not approve release, deployment, live-site writes, broad client enablement, schedule rollback, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
+Status: local dashboard/uploader release-candidate implementation in progress and unreleased. This document does not approve release, deployment, live-site writes, broad client enablement, schedule rollback, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -36,7 +36,6 @@ Allowed:
 - intent references a fresh successful `schedule_preview` result by preview fingerprint or short-lived preview token;
 - client revalidates local schedule state against the preview before applying;
 - client applies only a client-declared supported cadence;
-- client stores local rollback metadata before applying;
 - client records a redacted local audit event;
 - dashboard records redacted request/result state in existing V2 action history;
 - normal dashboard polling reconciles the latest redacted client action result.
@@ -61,7 +60,7 @@ Use only the schedule target already proven by preview rollout:
 - cadence choices: client-declared allowlist only
 - minimum interval: client-declared and revalidated locally
 - disable/pause: not part of this slice
-- rollback: metadata capture only; runtime rollback remains a later separately approved slice
+- rollback: not available in this slice; rollback metadata and runtime rollback remain later separately approved work
 
 Do not include `alynt_server_runner` until the uploader can prove ownership, safe mutation, and rollback for that schedule. Do not include WPvivid schedules in this slice.
 
@@ -87,7 +86,7 @@ The control must:
 - explain that it does not create a backup immediately;
 - explain that it does not change WPvivid, server-runner, Drime, retention, delete, cleanup, or restore behavior;
 - require a capability + nonce check;
-- require an explicit confirmation phrase or equivalent high-friction confirmation if the cadence becomes less frequent than the current cadence;
+- require explicit operator confirmation that the change affects only future Alynt scan/upload cadence;
 - submit a signed `schedule_apply` action that references the fresh preview.
 
 Sites tab remains display-only for schedule management. It must not contain schedule apply controls.
@@ -162,7 +161,6 @@ The uploader must reject apply when:
 - preview action ID or preview fingerprint is missing, unknown, expired, or not bound to the same site/schedule/cadence;
 - local current schedule state no longer matches the preview baseline;
 - the change would disable all backup production;
-- rollback metadata cannot be captured locally;
 - local schedule state cannot be persisted safely;
 - idempotency state conflicts;
 - a schedule action lock is already active.
@@ -177,7 +175,6 @@ Recommended rejection/result codes:
 - `schedule_apply_preview_stale`
 - `schedule_apply_unsupported_cadence`
 - `schedule_apply_lock_busy`
-- `schedule_apply_rollback_capture_failed`
 - `schedule_apply_persist_failed`
 - `schedule_apply_succeeded`
 
@@ -200,8 +197,8 @@ The client action result should remain support-safe and redacted:
     "applied_cadence": "every_30_minutes",
     "previous_next_run_at": "2026-09-15T10:15:00Z",
     "new_next_run_at": "2026-09-15T10:30:00Z",
-    "rollback_available": true,
-    "rollback_expires_at": "2026-09-22T10:00:00Z",
+    "rollback_available": false,
+    "rollback_expires_at": "",
     "warnings": []
   }
 }
@@ -224,7 +221,7 @@ Dashboard action records may store:
 - new next-run timestamp;
 - preview action ID;
 - preview fingerprint hash;
-- rollback availability flag and expiry;
+- rollback availability flag and expiry, which must remain false/empty for this slice;
 - actor ID;
 - state transitions;
 - result code and support-safe summary.
@@ -244,14 +241,14 @@ Dashboard action records must not store:
 - signatures;
 - raw remote response bodies.
 
-Client storage should keep rollback metadata locally. Dashboard may store only rollback availability and expiry evidence.
+Rollback storage is deferred. For this slice, the client and dashboard may report/store only rollback availability as false and rollback expiry as empty.
 
 ## Dashboard Implementation Plan
 
 1. Extend action capability parsing so `schedule_apply` remains hidden unless latest status declares `apply_supported: true` for `alynt_scan_upload`.
 2. Add fresh-preview lookup logic in the remote action repository or a focused helper.
 3. Add Site Detail apply UI only beside eligible preview results.
-4. Add nonce/capability checks and high-friction confirmation for less-frequent cadences.
+4. Add nonce/capability checks and explicit operator confirmation that apply changes only future Alynt scan/upload cadence.
 5. Extend dispatcher allowlists/redaction to build and store only bounded `schedule_apply` context.
 6. Extend action-history display, Diagnostics, and support export with redacted apply summaries.
 7. Keep Sites tab compact and display-only.
@@ -262,11 +259,10 @@ Client storage should keep rollback metadata locally. Dashboard may store only r
 1. Extend local V2 action opt-in policy to allow `schedule_apply` only when the administrator separately enables schedule mutation.
 2. Persist short-lived preview evidence or fingerprints from successful `schedule_preview` actions.
 3. Validate `schedule_apply` against the preview, current local schedule state, cadence allowlist, locks, idempotency, and local opt-in.
-4. Capture rollback metadata locally before applying.
-5. Apply only the `alynt_scan_upload` schedule using local WordPress scheduling APIs.
-6. Persist local audit/result evidence.
-7. Report redacted latest action result through the existing status payload.
-8. Keep `schedule_rollback` rejected until separately implemented.
+4. Apply only the `alynt_scan_upload` schedule using local WordPress scheduling APIs.
+5. Persist local audit/result evidence.
+6. Report redacted latest action result through the existing status payload, with rollback unavailable.
+7. Keep `schedule_rollback` rejected until separately implemented.
 
 ## Test Plan
 
@@ -279,7 +275,7 @@ Dashboard tests:
 - stale/superseded preview requires a new preview;
 - apply request body includes only allowlisted fields;
 - nonce/capability enforcement for apply request;
-- high-friction confirmation is required when cadence becomes less frequent;
+- explicit operator confirmation is required before apply dispatch;
 - action history renders apply result without exposing raw internals;
 - support export includes only redacted apply summaries;
 - `schedule_rollback` remains unavailable.
@@ -294,7 +290,6 @@ Uploader tests:
 - apply without matching preview is rejected;
 - expired preview is rejected;
 - stale local schedule state is rejected;
-- valid apply captures rollback metadata before mutation;
 - valid apply changes only `alynt_scan_upload`;
 - duplicate idempotency returns prior apply result without applying twice;
 - failed persistence preserves the prior schedule;
@@ -330,9 +325,9 @@ Cross-plugin checks:
 - Dashboard never sends raw cron, raw option, path, command, credential, package, Drime ID, or arbitrary settings fields.
 - Dashboard offers only client-declared supported cadences.
 - Client revalidates from local state and rejects stale previews.
-- Client captures rollback metadata before applying.
 - Apply changes only `alynt_scan_upload`.
 - Apply result is redacted and safe for screenshots/support export.
+- Apply result reports rollback unavailable.
 - `schedule_rollback` is still impossible.
 - Existing V1 polling, backup-source freshness, V2.1 `scan_upload_now`, V2.2 action reconciliation, and V2.3 `schedule_preview` remain unchanged.
 

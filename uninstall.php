@@ -67,6 +67,7 @@ foreach ( $tables as $table ) {
 }
 
 delete_option( 'alynt_drime_backups_dashboard_schema_version' );
+delete_option( 'alynt_drime_backups_dashboard_source_policies' );
 delete_option( 'alynt_drime_backups_dashboard_diagnostics_settings' );
 delete_option( 'alynt_drime_backups_dashboard_diagnostics_events' );
 delete_option( 'alynt_drime_backups_dashboard_audit_events' );
