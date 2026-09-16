@@ -146,7 +146,7 @@ Rules:
 - The client must reject unknown schedule IDs, unsupported cadences, free-form cron expressions, and unsafe local state.
 - The response may include schedule ID, label, owner, current cadence, proposed cadence, current next run, proposed next-run estimate, `would_change`, warning codes, and support-safe result codes.
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
-- `schedule_apply` and `schedule_rollback` remain reserved and must be rejected until separately implemented and approved.
+- `schedule_apply` is implemented only for the approved, guarded `alynt_scan_upload` cadence flow. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
 
 ### Schedule Apply Action
 
@@ -173,8 +173,9 @@ Rules:
 - The dashboard must not send raw cron syntax, current next-run assumptions, paths, commands, option names/values, package names, backup IDs, Drime IDs, credentials, disable flags, or arbitrary labels.
 - The client must revalidate the preview against current local state before applying.
 - The client must reject unknown schedule IDs, unsupported cadences, missing/expired/stale preview references, free-form cron expressions, unsafe local state, and changes that would disable all backup production.
-- The client must report rollback unavailable in this slice; `schedule_rollback` and richer rollback metadata capture/readiness remain reserved until separately implemented and approved.
-- The response may include schedule ID, label, owner, previous cadence, applied cadence, previous next run, new next run, rollback availability as false, empty rollback expiry, warning codes, and support-safe result codes.
+- The client must report rollback unavailable in this slice; `schedule_rollback` remains reserved until separately implemented and approved.
+- The response may include schedule ID, label, owner, previous cadence, applied cadence, previous next run, new next run, rollback availability as false, empty rollback expiry, warning codes, support-safe result codes, and an additive `rollback_metadata` object.
+- `rollback_metadata`, when present, is evidence-only. It may include `captured`, `available: false`, `reason`, source action IDs, previous/applied cadence labels, previous/applied next-run timestamps, before/after redacted schedule fingerprints, `captured_at`, and `expires_at`.
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
 
 ## Client Action Opt-In

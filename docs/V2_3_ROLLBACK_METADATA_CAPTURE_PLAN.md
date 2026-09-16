@@ -1,6 +1,6 @@
 # V2.3 Rollback Metadata Capture Plan
 
-Status: planning-only slice. This document does not approve code changes, release, deployment, live-site writes, broad client enablement, `schedule_rollback` runtime behavior, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
+Status: local implementation slice. This document does not approve release, deployment, live-site writes, broad client enablement, `schedule_rollback` runtime behavior, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -53,10 +53,11 @@ The client may store rollback-readiness metadata locally, scoped to one successf
   "rollback_metadata": {
     "captured": true,
     "available": false,
-    "reason": "rollback_runtime_not_implemented",
+    "reason": "schedule_rollback_runtime_not_implemented",
     "schedule_id": "alynt_scan_upload",
     "owner": "alynt_uploader",
     "source_action_id": "00000000-0000-4000-8000-000000000000",
+    "source_preview_action_id": "00000000-0000-4000-8000-000000000001",
     "previous_cadence": "every_15_minutes",
     "applied_cadence": "every_30_minutes",
     "previous_next_run_at": "2026-09-15T10:15:00Z",
@@ -86,7 +87,7 @@ Dashboard action history may show:
 - rollback execution unavailable;
 - previous cadence to applied cadence;
 - captured/expiry time if present;
-- concise reason code such as `rollback_runtime_not_implemented`.
+- concise reason code such as `schedule_rollback_runtime_not_implemented`.
 
 Dashboard must not show:
 
@@ -127,8 +128,8 @@ Uploader tests:
 Dashboard tests:
 
 - action history displays captured rollback metadata without raw internals;
-- Site Detail and Diagnostics show rollback unavailable;
-- support export includes only redacted rollback-readiness fields;
+- Site Detail status remains rollback-unavailable and does not expose rollback controls;
+- diagnostics/support context includes only redacted rollback-readiness fields already present in the bounded action context;
 - missing metadata degrades to rollback unavailable;
 - `schedule_rollback` controls remain hidden/unavailable.
 
@@ -154,7 +155,7 @@ Before code:
 ## Acceptance Criteria
 
 - The client captures bounded support-safe previous-schedule metadata after successful `schedule_apply`.
-- The dashboard can display and export rollback-readiness evidence.
+- The dashboard can sanitize, store, and display rollback-readiness evidence.
 - `rollback_available` remains false unless a later runtime rollback slice is approved.
 - `schedule_rollback` remains impossible.
 - No raw schedule internals, filesystem paths, commands, credentials, package names, Drime IDs, or arbitrary settings are exposed.

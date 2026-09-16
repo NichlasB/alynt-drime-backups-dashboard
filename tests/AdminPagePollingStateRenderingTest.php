@@ -259,6 +259,11 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 							'previous_cadence' => 'every_15_minutes',
 							'applied_cadence'  => 'every_30_minutes',
 							'new_next_run_at'  => '2026-09-15T18:53:55+00:00',
+							'rollback_metadata' => array(
+								'captured'  => true,
+								'available' => false,
+								'reason'    => 'schedule_rollback_runtime_not_implemented',
+							),
 						),
 					)
 				),
@@ -269,6 +274,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Schedule Apply', $html );
 		$this->assertStringContainsString( 'every 15 minutes → every 30 minutes', $html );
 		$this->assertStringContainsString( 'Next run 2026-09-15 18:53 UTC', $html );
+		$this->assertStringContainsString( 'Rollback metadata captured; rollback unavailable', $html );
 	}
 
 	/**

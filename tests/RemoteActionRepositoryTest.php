@@ -361,6 +361,24 @@ class RemoteActionRepositoryTest extends TestCase {
 						'previous_next_run_at' => '2026-09-15T18:30:03+00:00',
 						'applied_next_run_at'  => '2026-09-15T18:53:55+00:00',
 						'changed'              => true,
+						'rollback_available'   => true,
+						'rollback_metadata'    => array(
+							'captured'                            => true,
+							'available'                           => true,
+							'reason'                              => 'schedule_rollback_runtime_not_implemented',
+							'source_action_id'                    => '33333333-3333-4333-8333-333333333333',
+							'source_preview_action_id'            => '22222222-2222-4222-8222-222222222222',
+							'schedule_id'                         => 'alynt_scan_upload',
+							'owner'                               => 'alynt_uploader',
+							'previous_cadence'                    => 'every_15_minutes',
+							'applied_cadence'                     => 'every_30_minutes',
+							'previous_next_run_at'                => '2026-09-15T18:30:03+00:00',
+							'applied_next_run_at'                 => '2026-09-15T18:53:55+00:00',
+							'current_schedule_fingerprint_before' => str_repeat( 'b', 64 ),
+							'current_schedule_fingerprint_after'  => str_repeat( 'c', 64 ),
+							'captured_at'                         => '2026-09-15T18:24:12+00:00',
+							'expires_at'                          => '2026-09-15T19:24:12+00:00',
+						),
 					),
 				),
 				'2026-09-15 18:24:12'
@@ -375,6 +393,12 @@ class RemoteActionRepositoryTest extends TestCase {
 		$this->assertSame( '2026-09-15T18:53:55+00:00', $context['schedule_apply']['new_next_run_at'] );
 		$this->assertSame( '22222222-2222-4222-8222-222222222222', $context['schedule_apply']['preview_action_id'] );
 		$this->assertTrue( $context['schedule_apply']['changed'] );
+		$this->assertFalse( $context['schedule_apply']['rollback_available'] );
+		$this->assertTrue( $context['schedule_apply']['rollback_metadata']['captured'] );
+		$this->assertFalse( $context['schedule_apply']['rollback_metadata']['available'] );
+		$this->assertSame( 'schedule_rollback_runtime_not_implemented', $context['schedule_apply']['rollback_metadata']['reason'] );
+		$this->assertSame( str_repeat( 'b', 64 ), $context['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_before'] );
+		$this->assertSame( str_repeat( 'c', 64 ), $context['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_after'] );
 	}
 
 	/**

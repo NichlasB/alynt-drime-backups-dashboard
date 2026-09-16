@@ -1515,6 +1515,10 @@ msgstr ""
 msgid "Next run %s"
 msgstr ""
 
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:958
+msgid "Rollback metadata captured; rollback unavailable"
+msgstr ""
+
 #. translators: 1: current cadence label, 2: proposed cadence label.
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:966
 #, php-format

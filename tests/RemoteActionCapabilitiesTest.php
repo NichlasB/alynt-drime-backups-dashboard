@@ -201,6 +201,24 @@ class RemoteActionCapabilitiesTest extends TestCase {
 						'previous_next_run_at' => '2026-09-15T18:30:03+00:00',
 						'applied_next_run_at'  => '2026-09-15T18:53:55+00:00',
 						'changed'              => true,
+						'rollback_available'   => true,
+						'rollback_metadata'    => array(
+							'captured'                            => true,
+							'available'                           => true,
+							'reason'                              => 'schedule_rollback_runtime_not_implemented',
+							'source_action_id'                    => '11111111-1111-4111-8111-111111111111',
+							'source_preview_action_id'            => '22222222-2222-4222-8222-222222222222',
+							'schedule_id'                         => 'alynt_scan_upload',
+							'owner'                               => 'alynt_uploader',
+							'previous_cadence'                    => 'every_15_minutes',
+							'applied_cadence'                     => 'every_30_minutes',
+							'previous_next_run_at'                => '2026-09-15T18:30:03+00:00',
+							'applied_next_run_at'                 => '2026-09-15T18:53:55+00:00',
+							'current_schedule_fingerprint_before' => str_repeat( 'b', 64 ),
+							'current_schedule_fingerprint_after'  => str_repeat( 'c', 64 ),
+							'captured_at'                         => '2026-09-15T18:24:12+00:00',
+							'expires_at'                          => '2026-09-15T19:24:12+00:00',
+						),
 					),
 				),
 			)
@@ -211,6 +229,12 @@ class RemoteActionCapabilitiesTest extends TestCase {
 		$this->assertSame( '2026-09-15T18:53:55+00:00', $result['last_action']['schedule_apply']['new_next_run_at'] );
 		$this->assertSame( '22222222-2222-4222-8222-222222222222', $result['last_action']['schedule_apply']['preview_action_id'] );
 		$this->assertTrue( $result['last_action']['schedule_apply']['changed'] );
+		$this->assertFalse( $result['last_action']['schedule_apply']['rollback_available'] );
+		$this->assertTrue( $result['last_action']['schedule_apply']['rollback_metadata']['captured'] );
+		$this->assertFalse( $result['last_action']['schedule_apply']['rollback_metadata']['available'] );
+		$this->assertSame( 'schedule_rollback_runtime_not_implemented', $result['last_action']['schedule_apply']['rollback_metadata']['reason'] );
+		$this->assertSame( str_repeat( 'b', 64 ), $result['last_action']['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_before'] );
+		$this->assertSame( str_repeat( 'c', 64 ), $result['last_action']['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_after'] );
 	}
 
 	/**

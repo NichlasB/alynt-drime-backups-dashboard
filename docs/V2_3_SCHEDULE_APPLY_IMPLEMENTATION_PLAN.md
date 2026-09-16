@@ -200,6 +200,19 @@ The client action result should remain support-safe and redacted:
     "new_next_run_at": "2026-09-15T10:30:00Z",
     "rollback_available": false,
     "rollback_expires_at": "",
+    "rollback_metadata": {
+      "captured": true,
+      "available": false,
+      "reason": "schedule_rollback_runtime_not_implemented",
+      "source_action_id": "00000000-0000-4000-8000-000000000000",
+      "source_preview_action_id": "00000000-0000-4000-8000-000000000001",
+      "previous_cadence": "every_15_minutes",
+      "applied_cadence": "every_30_minutes",
+      "previous_next_run_at": "2026-09-15T10:15:00Z",
+      "applied_next_run_at": "2026-09-15T10:30:00Z",
+      "captured_at": "2026-09-15T10:00:00Z",
+      "expires_at": "2026-09-15T11:00:00Z"
+    },
     "warnings": []
   }
 }

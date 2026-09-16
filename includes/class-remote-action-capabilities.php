@@ -404,7 +404,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 
 		$new_next_run_at = isset( $apply['new_next_run_at'] ) ? (string) $apply['new_next_run_at'] : ( isset( $apply['applied_next_run_at'] ) ? (string) $apply['applied_next_run_at'] : '' );
 
-		return array(
+		$clean = array(
 			'schedule_id'          => isset( $apply['schedule_id'] ) ? sanitize_key( (string) $apply['schedule_id'] ) : '',
 			'label'                => $this->bounded_text( isset( $apply['label'] ) ? (string) $apply['label'] : '', self::MAX_SCHEDULE_LABEL_LENGTH ),
 			'owner'                => $this->sanitize_schedule_owner( isset( $apply['owner'] ) ? (string) $apply['owner'] : '' ),
@@ -417,9 +417,45 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 			'previous_next_run_at' => isset( $apply['previous_next_run_at'] ) ? sanitize_text_field( (string) $apply['previous_next_run_at'] ) : '',
 			'new_next_run_at'      => sanitize_text_field( $new_next_run_at ),
 			'changed'              => ! empty( $apply['changed'] ),
-			'rollback_available'   => ! empty( $apply['rollback_available'] ),
+			'rollback_available'   => false,
 			'rollback_expires_at'  => isset( $apply['rollback_expires_at'] ) ? sanitize_text_field( (string) $apply['rollback_expires_at'] ) : '',
 			'warnings'             => $this->schedule_preview_warnings( isset( $apply['warnings'] ) ? $apply['warnings'] : array() ),
+		);
+
+		if ( isset( $apply['rollback_metadata'] ) && is_array( $apply['rollback_metadata'] ) ) {
+			$clean['rollback_metadata'] = $this->schedule_rollback_metadata( $apply['rollback_metadata'] );
+		}
+
+		return $clean;
+	}
+
+	/**
+	 * Sanitizes evidence-only rollback metadata reported by a client apply result.
+	 *
+	 * @param mixed $metadata Rollback metadata.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_rollback_metadata( $metadata ) {
+		if ( ! is_array( $metadata ) ) {
+			return array();
+		}
+
+		return array(
+			'captured'                            => ! empty( $metadata['captured'] ),
+			'available'                           => false,
+			'reason'                              => isset( $metadata['reason'] ) ? sanitize_key( (string) $metadata['reason'] ) : '',
+			'source_action_id'                    => isset( $metadata['source_action_id'] ) ? $this->sanitize_uuid( (string) $metadata['source_action_id'] ) : '',
+			'source_preview_action_id'            => isset( $metadata['source_preview_action_id'] ) ? $this->sanitize_uuid( (string) $metadata['source_preview_action_id'] ) : '',
+			'schedule_id'                         => isset( $metadata['schedule_id'] ) ? sanitize_key( (string) $metadata['schedule_id'] ) : '',
+			'owner'                               => $this->sanitize_schedule_owner( isset( $metadata['owner'] ) ? (string) $metadata['owner'] : '' ),
+			'previous_cadence'                    => isset( $metadata['previous_cadence'] ) ? sanitize_key( (string) $metadata['previous_cadence'] ) : '',
+			'applied_cadence'                     => isset( $metadata['applied_cadence'] ) ? sanitize_key( (string) $metadata['applied_cadence'] ) : '',
+			'previous_next_run_at'                => isset( $metadata['previous_next_run_at'] ) ? sanitize_text_field( (string) $metadata['previous_next_run_at'] ) : '',
+			'applied_next_run_at'                 => isset( $metadata['applied_next_run_at'] ) ? sanitize_text_field( (string) $metadata['applied_next_run_at'] ) : '',
+			'current_schedule_fingerprint_before' => isset( $metadata['current_schedule_fingerprint_before'] ) ? $this->sha256_or_empty( (string) $metadata['current_schedule_fingerprint_before'] ) : '',
+			'current_schedule_fingerprint_after'  => isset( $metadata['current_schedule_fingerprint_after'] ) ? $this->sha256_or_empty( (string) $metadata['current_schedule_fingerprint_after'] ) : '',
+			'captured_at'                         => isset( $metadata['captured_at'] ) ? sanitize_text_field( (string) $metadata['captured_at'] ) : '',
+			'expires_at'                          => isset( $metadata['expires_at'] ) ? sanitize_text_field( (string) $metadata['expires_at'] ) : '',
 		);
 	}
 

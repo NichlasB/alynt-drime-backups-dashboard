@@ -954,6 +954,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 				);
 			}
 
+			if ( ! empty( $apply['rollback_metadata'] ) && is_array( $apply['rollback_metadata'] ) && ! empty( $apply['rollback_metadata']['captured'] ) ) {
+				$detail .= '; ' . __( 'Rollback metadata captured; rollback unavailable', 'alynt-drime-backups-dashboard' );
+			}
+
 			return $detail;
 		}
 
