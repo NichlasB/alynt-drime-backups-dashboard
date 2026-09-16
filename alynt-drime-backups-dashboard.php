@@ -145,6 +145,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-admin-page-remote-action-history-helpers.php',
 	'includes/traits/trait-admin-page-status-history-detail-helpers.php',
 	'includes/traits/trait-admin-page-sites-table.php',
+	'includes/traits/trait-admin-page-backup-source-evidence-helpers.php',
 	'includes/traits/trait-admin-page-backup-source-evidence.php',
 	'includes/traits/trait-admin-page-display-helpers.php',
 	'includes/traits/trait-admin-page-status-formatters.php',
