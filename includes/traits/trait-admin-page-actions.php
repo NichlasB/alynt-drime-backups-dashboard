@@ -16,6 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Action_Notices;
+
 	/**
 	 * Handles approved local dashboard POST actions.
 	 *
@@ -29,283 +33,40 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 
 		$action = sanitize_key( wp_unslash( $_POST['alynt_drime_backups_dashboard_action'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Action-specific verification happens before action payloads are processed.
 
-		if ( 'create_pending_site' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_create_pending_site' );
+		switch ( $action ) {
+			case 'create_pending_site':
+				return $this->handle_create_pending_site_action();
 
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
+			case 'revoke_local':
+				return $this->handle_revoke_local_action();
 
-			$pending_site = isset( $_POST['alynt_drime_backups_dashboard_pending_site'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_pending_site'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$raw          = is_array( $pending_site ) ? $pending_site : array();
+			case 'check_status_now':
+				return $this->handle_check_status_now_action();
 
-			$result = $this->enrollment_manager->create_pending_site( $raw, home_url( '/', 'https' ) );
+			case 'generate_action_opt_in_token':
+				return $this->handle_generate_action_opt_in_token_action();
 
-			$this->record_admin_audit_action(
-				'create_pending_site',
-				is_wp_error( $result ) ? 'failed' : 'succeeded',
-				array(
-					'dashboard_site_id' => is_array( $result ) && isset( $result['site_id'] ) ? (int) $result['site_id'] : 0,
-					'environment'       => isset( $raw['environment'] ) ? sanitize_key( (string) $raw['environment'] ) : '',
-					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
-				)
-			);
+			case 'request_backup_now':
+				return $this->handle_request_backup_now_action();
 
-			return $result;
+			case 'preview_schedule_change':
+				return $this->handle_preview_schedule_change_action();
+
+			case 'apply_schedule_change':
+				return $this->handle_apply_schedule_change_action();
+
+			case 'update_source_policy':
+				return $this->handle_update_source_policy_action();
+
+			case 'update_diagnostics_settings':
+				return $this->handle_update_diagnostics_settings_action();
+
+			case 'clear_diagnostics_events':
+				return $this->handle_clear_diagnostics_events_action();
+
+			default:
+				return new WP_Error( 'dashboard_action_unknown', __( 'The requested dashboard action is not supported.', 'alynt-drime-backups-dashboard' ) );
 		}
-
-		if ( 'revoke_local' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_revoke_local' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$success = $site_id > 0 && $this->sites->revoke_local( $site_id );
-
-			$this->record_admin_audit_action(
-				'revoke_local',
-				$success ? 'succeeded' : 'failed',
-				array(
-					'dashboard_site_id' => $site_id,
-				)
-			);
-
-			return array(
-				'action'  => 'revoke_local',
-				'success' => $success,
-			);
-		}
-
-		if ( 'check_status_now' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_check_status_now' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$result  = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
-
-			$this->record_admin_audit_action(
-				'check_status_now',
-				is_wp_error( $result ) ? 'failed' : 'succeeded',
-				array(
-					'dashboard_site_id' => $site_id,
-					'status_category'   => is_array( $result ) && isset( $result['category'] ) ? sanitize_key( (string) $result['category'] ) : '',
-					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
-				)
-			);
-
-			if ( is_wp_error( $result ) ) {
-				return $result;
-			}
-
-			return array_merge(
-				$result,
-				array(
-					'action' => 'check_status_now',
-				)
-			);
-		}
-
-		if ( 'generate_action_opt_in_token' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_generate_action_opt_in_token' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$result  = $this->action_opt_in_manager->create_opt_in_token( $site_id, home_url( '/', 'https' ) );
-
-			$this->record_admin_audit_action(
-				'generate_action_opt_in_token',
-				is_wp_error( $result ) ? 'failed' : 'succeeded',
-				array(
-					'dashboard_site_id' => $site_id,
-					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
-					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
-				)
-			);
-
-			return $result;
-		}
-
-		if ( 'request_backup_now' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_request_backup_now' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id      = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$requested_by = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
-			$result       = $this->remote_action_dispatcher->request_scan_upload_now( $site_id, $requested_by );
-
-			$this->record_admin_audit_action(
-				'request_backup_now',
-				is_wp_error( $result ) ? 'failed' : 'succeeded',
-				array(
-					'dashboard_site_id' => $site_id,
-					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW,
-					'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
-					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
-				)
-			);
-
-			if ( is_wp_error( $result ) ) {
-				return $result;
-			}
-
-			if ( $this->remote_action_should_poll_after_dispatch( $result ) ) {
-				$poll_result = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
-
-				$result['poll_after_dispatch'] = ! is_wp_error( $poll_result );
-				$result['poll_error_code']     = is_wp_error( $poll_result ) ? $poll_result->get_error_code() : '';
-			}
-
-			return $result;
-		}
-
-		if ( 'preview_schedule_change' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_preview_schedule_change' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id          = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$schedule_id      = isset( $_POST['schedule_id'] ) ? sanitize_key( wp_unslash( $_POST['schedule_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$proposed_cadence = isset( $_POST['proposed_cadence'] ) ? sanitize_key( wp_unslash( $_POST['proposed_cadence'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$requested_by     = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
-			$result           = $this->remote_action_dispatcher->request_schedule_preview( $site_id, $schedule_id, $proposed_cadence, $requested_by );
-
-			$this->record_admin_audit_action(
-				'preview_schedule_change',
-				is_wp_error( $result ) ? 'failed' : 'succeeded',
-				array(
-					'dashboard_site_id' => $site_id,
-					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW,
-					'schedule_id'       => $schedule_id,
-					'proposed_cadence'  => $proposed_cadence,
-					'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
-					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
-				)
-			);
-
-			return $result;
-		}
-
-		if ( 'apply_schedule_change' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_apply_schedule_change' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id           = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$preview_action_id = isset( $_POST['preview_action_id'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_action_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-
-			if ( empty( $_POST['schedule_apply_confirm'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by verify_action_nonce() above.
-				$result = new WP_Error( 'schedule_apply_confirmation_required', __( 'Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview.', 'alynt-drime-backups-dashboard' ) );
-			} else {
-				$requested_by = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
-				$result       = $this->remote_action_dispatcher->request_schedule_apply( $site_id, $preview_action_id, $requested_by );
-			}
-
-			$this->record_admin_audit_action(
-				'apply_schedule_change',
-				is_wp_error( $result ) ? 'failed' : 'succeeded',
-				array(
-					'dashboard_site_id' => $site_id,
-					'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY,
-					'preview_action_id' => $preview_action_id,
-					'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
-					'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
-				)
-			);
-
-			return $result;
-		}
-
-		if ( 'update_source_policy' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_source_policy' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$site_id    = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$source_key = isset( $_POST['source_key'] ) ? sanitize_key( wp_unslash( $_POST['source_key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$mode       = isset( $_POST['source_mode'] ) ? sanitize_key( wp_unslash( $_POST['source_mode'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$success    = $site_id > 0 && $this->source_policy->set_source_mode( $site_id, $source_key, $mode );
-
-			$this->record_admin_audit_action(
-				'update_source_policy',
-				$success ? 'succeeded' : 'failed',
-				array(
-					'dashboard_site_id' => $site_id,
-					'source_key'        => $source_key,
-					'source_mode'       => $mode,
-				)
-			);
-
-			return array(
-				'action'     => 'update_source_policy',
-				'success'    => $success,
-				'source_key' => $source_key,
-				'mode'       => $mode,
-			);
-		}
-
-		if ( 'update_diagnostics_settings' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_update_diagnostics_settings' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$settings = isset( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) ? wp_unslash( $_POST['alynt_drime_backups_dashboard_diagnostics'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-			$success  = is_array( $settings ) && $this->event_log->update_settings( $settings );
-
-			$this->record_admin_audit_action(
-				'update_diagnostics_settings',
-				$success ? 'succeeded' : 'failed',
-				array(
-					'diagnostics_logging_enabled' => is_array( $settings ) && ! empty( $settings['enabled'] ),
-					'minimum_level'               => is_array( $settings ) && isset( $settings['minimum_level'] ) ? sanitize_key( (string) $settings['minimum_level'] ) : '',
-				)
-			);
-
-			return array(
-				'action'  => 'update_diagnostics_settings',
-				'success' => $success,
-			);
-		}
-
-		if ( 'clear_diagnostics_events' === $action ) {
-			$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_clear_diagnostics_events' );
-
-			if ( is_wp_error( $nonce ) ) {
-				return $nonce;
-			}
-
-			$success = $this->event_log->clear();
-
-			$this->record_admin_audit_action(
-				'clear_diagnostics_events',
-				$success ? 'succeeded' : 'failed'
-			);
-
-			return array(
-				'action'  => 'clear_diagnostics_events',
-				'success' => $success,
-			);
-		}
-
-		return new WP_Error( 'dashboard_action_unknown', __( 'The requested dashboard action is not supported.', 'alynt-drime-backups-dashboard' ) );
 	}
 
 	/**
@@ -342,161 +103,5 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 		}
 
 		$this->event_log->audit_action( $action, $outcome, $context );
-	}
-
-	/**
-	 * Renders an action result notice.
-	 *
-	 * @param array<string,mixed>|WP_Error|null $result Result.
-	 * @return void
-	 */
-	private function render_action_result( $result ) {
-		if ( null === $result ) {
-			return;
-		}
-
-		if ( is_wp_error( $result ) ) {
-			$this->render_action_notice( $result->get_error_message(), 'notice-error' );
-			return;
-		}
-
-		if ( isset( $result['pairing_token'] ) ) {
-			$this->render_action_notice( __( 'Pending dashboard site created. Copy the pairing token now; it is not stored and cannot be shown again.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'revoke_local' === $result['action'] ) {
-			$message = ! empty( $result['success'] )
-				? __( 'Dashboard record revoked locally. No client site or Drime action was attempted.', 'alynt-drime-backups-dashboard' )
-				: __( 'The dashboard record could not be revoked locally. Refresh the site detail screen and try again; the record may already have changed.', 'alynt-drime-backups-dashboard' );
-			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
-
-			$this->render_action_notice( $message, $class );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'check_status_now' === $result['action'] ) {
-			$this->render_action_notice( __( 'Read-only status check completed and stored. No backup or client-site setting was changed.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'generate_action_opt_in_token' === $result['action'] ) {
-			$this->render_action_notice( __( 'V2 action opt-in token generated. Copy it now; the token is not stored and cannot be shown again.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'request_backup_now' === $result['action'] ) {
-			$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
-
-			if ( in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true ) ) {
-				$message = ! empty( $result['poll_after_dispatch'] )
-					? __( 'Request Backup Now was accepted by the client site, and a read-only status check was completed.', 'alynt-drime-backups-dashboard' )
-					: __( 'Request Backup Now was accepted by the client site. Wait briefly, then use Check Now to confirm the latest reported result.', 'alynt-drime-backups-dashboard' );
-				$this->render_action_notice( $message, 'notice-success' );
-				return;
-			}
-
-			if ( in_array( $remote_state, array( 'rate_limited', 'busy', 'rejected', 'unsupported' ), true ) ) {
-				$this->render_action_notice( isset( $result['result_summary'] ) ? (string) $result['result_summary'] : __( 'The client site did not accept the remote action request.', 'alynt-drime-backups-dashboard' ), 'notice-warning' );
-				return;
-			}
-
-			$this->render_action_notice( __( 'Request Backup Now could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'schedule_preview' === $result['action'] ) {
-			$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
-
-			if ( in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true ) ) {
-				$this->render_action_notice( __( 'Schedule preview was accepted by the client site. No schedule was changed. Wait briefly, then use Check Now to see the preview result reported by the client.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
-				return;
-			}
-
-			if ( in_array( $remote_state, array( 'rate_limited', 'busy', 'rejected', 'unsupported' ), true ) ) {
-				$this->render_action_notice( isset( $result['result_summary'] ) ? (string) $result['result_summary'] : __( 'The client site did not accept the schedule preview request.', 'alynt-drime-backups-dashboard' ), 'notice-warning' );
-				return;
-			}
-
-			$this->render_action_notice( __( 'Schedule preview could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'schedule_apply' === $result['action'] ) {
-			$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
-
-			if ( in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true ) ) {
-				$this->render_action_notice( __( 'Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
-				return;
-			}
-
-			if ( in_array( $remote_state, array( 'rate_limited', 'busy', 'rejected', 'unsupported' ), true ) ) {
-				$this->render_action_notice( isset( $result['result_summary'] ) ? (string) $result['result_summary'] : __( 'The client site did not accept the Schedule Apply request.', 'alynt-drime-backups-dashboard' ), 'notice-warning' );
-				return;
-			}
-
-			$this->render_action_notice( __( 'Schedule Apply could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' ), 'notice-error' );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'update_source_policy' === $result['action'] ) {
-			$message = ! empty( $result['success'] )
-				? __( 'Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed.', 'alynt-drime-backups-dashboard' )
-				: __( 'Backup-source monitoring policy could not be saved. Refresh the site detail screen and try again.', 'alynt-drime-backups-dashboard' );
-			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
-
-			$this->render_action_notice( $message, $class );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'update_diagnostics_settings' === $result['action'] ) {
-			$message = ! empty( $result['success'] )
-				? __( 'Diagnostics settings saved.', 'alynt-drime-backups-dashboard' )
-				: __( 'Diagnostics settings could not be saved. Refresh the page and try again; if it continues, check that WordPress options can be updated.', 'alynt-drime-backups-dashboard' );
-			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
-
-			$this->render_action_notice( $message, $class );
-			return;
-		}
-
-		if ( isset( $result['action'] ) && 'clear_diagnostics_events' === $result['action'] ) {
-			$message = ! empty( $result['success'] )
-				? __( 'Diagnostics events cleared.', 'alynt-drime-backups-dashboard' )
-				: __( 'Diagnostics events could not be cleared. Refresh the Diagnostics screen and try again; the retained event buffer may already have changed.', 'alynt-drime-backups-dashboard' );
-			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
-
-			$this->render_action_notice( $message, $class );
-		}
-	}
-
-	/**
-	 * Renders a submitted-action notice with an explicit live-region role.
-	 *
-	 * @param string $message Notice message.
-	 * @param string $notice_class WordPress notice tone class.
-	 * @return void
-	 */
-	private function render_action_notice( $message, $notice_class ) {
-		$is_error = 'notice-error' === $notice_class;
-
-		printf(
-			'<div id="adbd-action-notice" class="notice %1$s is-dismissible inline" role="%2$s" aria-live="%3$s"><p>%4$s</p></div>',
-			esc_attr( $notice_class ),
-			$is_error ? 'alert' : 'status',
-			$is_error ? 'assertive' : 'polite',
-			esc_html( $message )
-		);
-	}
-
-	/**
-	 * Returns whether a dispatch response should be followed by a read-only poll.
-	 *
-	 * @param array<string,mixed> $result Dispatch result.
-	 * @return bool
-	 */
-	private function remote_action_should_poll_after_dispatch( array $result ) {
-		$remote_state = isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '';
-
-		return in_array( $remote_state, array( 'accepted', 'running', 'succeeded' ), true );
 	}
 }
