@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin page 
+ * Admin page
 polling detail helpers
 .
  *
@@ -12,12 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 
+ *
 Provides polling and manual status-check rendering helpers for dashboard admin screens.
  */
-trait 
-Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers
- {
+trait Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers {
+
 
 	/**
 	 * Determines whether a site row has active polling credentials.

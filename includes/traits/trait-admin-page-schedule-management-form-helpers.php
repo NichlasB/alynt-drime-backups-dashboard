@@ -10,12 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 
+ *
 Provides remote schedule management form and panel rendering helpers.
  */
-trait 
-Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers
- {
+trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers {
+
 
 	/**
 	 * Renders preview-only schedule-management capability reported by the client.

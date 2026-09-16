@@ -10,12 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 
+ *
 Provides remote schedule summary and label helpers.
  */
-trait 
-Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers
- {
+trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers {
+
 
 	/**
 	 * Gets sanitized remote-action capability summary from a payload.

@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin page 
+ * Admin page
 status history detail helpers
 .
  *
@@ -12,12 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 
+ *
 Provides recent status history and fixture guide rendering helpers for dashboard admin screens.
  */
-trait 
-Alynt_Drime_Backups_Dashboard_Admin_Page_Status_History_Detail_Helpers
- {
+trait Alynt_Drime_Backups_Dashboard_Admin_Page_Status_History_Detail_Helpers {
+
 
 	/**
 	 * Renders a bounded recent snapshot history table.

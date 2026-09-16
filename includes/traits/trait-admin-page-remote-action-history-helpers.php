@@ -10,12 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 
+ *
 Provides remote action history rendering and label helpers.
  */
-trait 
-Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers
- {
+trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
+
 
 	/**
 	 * Renders recent remote action history without raw payloads.

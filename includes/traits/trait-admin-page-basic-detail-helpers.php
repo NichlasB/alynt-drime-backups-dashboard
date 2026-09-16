@@ -147,37 +147,4 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 	private function payload_count( array $payload, $key ) {
 		return isset( $payload[ $key ] ) ? (string) max( 0, (int) $payload[ $key ] ) : '0';
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

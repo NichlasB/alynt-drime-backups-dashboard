@@ -10,12 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 
+ *
 Provides request-backup and remote-action opt-in rendering helpers.
  */
-trait 
-Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers
- {
+trait Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers {
+
 
 	/**
 	 * Renders the V2.1 Request Backup Now eligibility and history panel.
