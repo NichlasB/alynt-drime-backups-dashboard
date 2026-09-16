@@ -129,6 +129,8 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers;
 
 	/**
 	 * Remote action repository.

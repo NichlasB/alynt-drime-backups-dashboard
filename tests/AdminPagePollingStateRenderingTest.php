@@ -405,6 +405,11 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers;
 
 	/**
 	 * Exposes check-status action markup.
