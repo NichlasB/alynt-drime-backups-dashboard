@@ -98,6 +98,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-remote-action-opt-in-tokens.php',
 	'includes/class-remote-action-opt-in-manager.php',
 	'includes/class-source-policy.php',
+	'includes/traits/trait-status-classifier-backup-sources.php',
 	'includes/class-status-classifier.php',
 	'includes/class-event-log-redactor.php',
 	'includes/traits/trait-event-log-storage.php',
