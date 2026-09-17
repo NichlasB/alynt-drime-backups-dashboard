@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.26 - 2026-09-17
+
+### Added
+
+- Added clearer operator-facing backup source attention summaries on the Sites list and Site Detail screens so stale or missing evidence explains which source needs review and why.
+- Added support-safe rollback readiness evidence for redacted Schedule Apply metadata, including Diagnostics aggregates that show whether preview/apply context is available without exposing raw payloads or secrets.
+
+### Changed
+
+- Preserved the current remote-action boundary: rollback remains unavailable, and the dashboard still cannot create backups, restore, delete, clean up, change WPvivid or server-runner schedules, store Drime credentials, or run arbitrary commands.
+
 ## 0.1.25 - 2026-09-15
 
 ### Fixed
