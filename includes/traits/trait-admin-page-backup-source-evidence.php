@@ -45,6 +45,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			echo '<dl class="adbd-detail-list adbd-source-list">';
 			$this->render_detail_item( __( 'Configured', 'alynt-drime-backups-dashboard' ), ! empty( $source['configured'] ) ? __( 'Yes', 'alynt-drime-backups-dashboard' ) : __( 'No', 'alynt-drime-backups-dashboard' ) );
 			$this->render_detail_item( __( 'Expected freshness', 'alynt-drime-backups-dashboard' ), $this->source_policy_label( $source_key, $source, $site ) );
+			$this->render_detail_item( __( 'Operator summary', 'alynt-drime-backups-dashboard' ), $this->source_operator_reason_label( $source_key, $source, $site ) );
 			$this->render_detail_item( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), $this->source_timestamp_html( isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 ), true );
 			$this->render_detail_item( __( 'Current remote inventory', 'alynt-drime-backups-dashboard' ), $this->source_inventory_label( $source ) );
@@ -84,6 +85,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 		foreach ( $sources as $source_key => $source ) {
 			$html .= '<li><strong>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ':</strong> ';
 			$html .= esc_html( $this->source_freshness_label( $this->source_effective_freshness_status( $source_key, $source, $site ) ) );
+			$html .= '<span class="adbd-row-meta adbd-source-line adbd-source-reason"><span class="adbd-source-line-label">' . esc_html__( 'Why', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_operator_reason_label( $source_key, $source, $site ) ) . '</span>';
 			$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'Expected', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_policy_label( $source_key, $source, $site ) ) . '</span>';
 			$html .= '<span class="adbd-row-meta adbd-source-line">' . esc_html( $this->source_inventory_label( $source ) ) . '</span>';
 			$html .= $this->source_compact_timestamp_html( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 );

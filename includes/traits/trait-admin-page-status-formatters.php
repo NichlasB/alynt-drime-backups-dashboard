@@ -75,7 +75,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Status_Formatters {
 			'paused'          => __( 'Next step: review why polling was paused locally before resuming.', 'alynt-drime-backups-dashboard' ),
 			'incompatible'    => __( 'Next step: ask the site owner to update the uploader so it publishes supported schema version 1.', 'alynt-drime-backups-dashboard' ),
 			'not_reporting'   => __( 'Next step: confirm the site is reachable and the uploader pairing remains active.', 'alynt-drime-backups-dashboard' ),
-			'needs_attention' => __( 'Next step: ask the site owner to review the uploader warnings, failed queue, and WP-Cron status.', 'alynt-drime-backups-dashboard' ),
+			'needs_attention' => __( 'Next step: review the specific uploader warnings, failed queue, cron status, and source-level Backup Evidence reason lines.', 'alynt-drime-backups-dashboard' ),
 			'not_configured'  => __( 'Next step: ask the site owner to configure a supported backup source in the uploader.', 'alynt-drime-backups-dashboard' ),
 			'working'         => __( 'No action is currently indicated by the latest redacted report.', 'alynt-drime-backups-dashboard' ),
 		);

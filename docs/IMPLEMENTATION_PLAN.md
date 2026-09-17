@@ -192,6 +192,26 @@ Acceptance criteria:
 - The UI clearly states that the policy is dashboard-local and read-only.
 - Existing sites without the option continue using the detected/fallback WPvivid freshness policy unchanged.
 
+### Needs-Attention Reason Clarity / Observability Polish Slice
+
+Operational use showed that source-level freshness labels are correct but still require too much interpretation from the Sites tab. Operators need to see whether a row is a real alarm, a schedule-valid WPvivid state, an external/optional WPvivid policy, or merely a queued/informational condition without opening every Site Detail screen.
+
+Implement a small dashboard-side display polish:
+
+- Add a concise operator-facing reason line to compact Sites-row source evidence and Site Detail source cards.
+- Keep the summary derived only from the already-redacted schema-1 source evidence and dashboard-local source policy.
+- Distinguish `Fresh`, `Within policy`, `External / optional`, `Stale`, `No upload evidence`, `Not configured`, queued packages, and current failed queued uploads in plain language.
+- Preserve the existing status classifier, storage, polling, and source-policy behavior unless a separate implementation slice changes those contracts.
+- Keep the dashboard read-only. Do not add Drime credentials, direct Drime inventory, client mutation, remote backup creation, restore, delete, cleanup, settings mutation, or schema-version requirements.
+
+Acceptance criteria:
+
+- Sites-row source evidence includes a concise reason line explaining why each source is okay, policy-valid, optional, stale, missing, or needs review.
+- Site Detail source evidence includes the same summary as `Operator summary`.
+- Schedule-valid WPvivid evidence says it is allowed by the dashboard policy instead of looking like an unexplained stale alarm.
+- External/optional WPvivid evidence says it is not required for Alynt-uploaded evidence on this dashboard.
+- Existing schema-1 clients remain compatible and the v1/V2 read-only boundaries remain unchanged.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

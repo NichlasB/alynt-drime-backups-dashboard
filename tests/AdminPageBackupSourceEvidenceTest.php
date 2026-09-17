@@ -33,6 +33,8 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
 		$this->assertSame( 2, substr_count( $html, 'Expected' ) );
+		$this->assertSame( 2, substr_count( $html, 'Why' ) );
+		$this->assertStringContainsString( 'The latest upload is fresh; queued packages are waiting to upload.', $html );
 		$this->assertStringContainsString( 'WPvivid activity', $html );
 		$this->assertStringContainsString( 'WPvivid backup log observed', $html );
 		$this->assertStringContainsString( '<time datetime=', $html );
@@ -50,6 +52,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
 		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
 		$this->assertSame( 2, substr_count( $html, 'Expected freshness' ) );
+		$this->assertSame( 2, substr_count( $html, 'Operator summary' ) );
 		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $html );
 		$this->assertStringContainsString( 'Latest WPvivid activity', $html );
 		$this->assertStringContainsString( 'Local WPvivid ZIPs', $html );
@@ -74,8 +77,10 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 
 		$this->assertStringContainsString( 'Within policy', $compact_html );
 		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $compact_html );
+		$this->assertStringContainsString( 'The uploader marked this source stale, but the latest upload is still inside the dashboard freshness policy.', $compact_html );
 		$this->assertStringContainsString( 'Within policy', $detail_html );
 		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $detail_html );
+		$this->assertStringContainsString( 'The uploader marked this source stale, but the latest upload is still inside the dashboard freshness policy.', $detail_html );
 	}
 
 	/**
@@ -104,8 +109,37 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 
 		$this->assertStringContainsString( 'External / optional', $compact_html );
 		$this->assertStringContainsString( 'external / optional on this dashboard', $compact_html );
+		$this->assertStringContainsString( 'This source is marked external/optional, so Alynt-uploaded evidence is not required on this dashboard.', $compact_html );
 		$this->assertStringContainsString( 'External / optional', $detail_html );
 		$this->assertStringContainsString( 'external / optional on this dashboard', $detail_html );
+		$this->assertStringContainsString( 'This source is marked external/optional, so Alynt-uploaded evidence is not required on this dashboard.', $detail_html );
+	}
+
+	/**
+	 * Stale and missing source evidence show direct operator reasons.
+	 *
+	 * @return void
+	 */
+	public function test_attention_source_states_show_direct_operator_reasons() {
+		$payload = $this->fixture_payload();
+
+		$payload['backup_sources']['server']['freshness_status']          = 'stale';
+		$payload['backup_sources']['server']['latest_upload_age_seconds'] = 200000;
+		$payload['backup_sources']['server']['warnings']                  = array(
+			array(
+				'code'    => 'source_latest_upload_stale',
+				'message' => 'The latest uploaded backup evidence is older than expected.',
+			),
+		);
+		$payload['backup_sources']['wpvivid']['freshness_status']         = 'no_upload_evidence';
+		$payload['backup_sources']['wpvivid']['has_upload_evidence']      = false;
+		$payload['backup_sources']['wpvivid']['warnings']                 = array();
+
+		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
+		$html    = $harness->compact_html( $payload );
+
+		$this->assertStringContainsString( 'The latest uploaded backup evidence is older than expected.', $html );
+		$this->assertStringContainsString( 'No Alynt-uploaded backup evidence is reported for this source.', $html );
 	}
 
 	/**

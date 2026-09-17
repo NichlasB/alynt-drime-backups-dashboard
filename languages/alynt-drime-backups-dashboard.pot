@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T15:07:15+00:00\n"
+"POT-Creation-Date: 2026-09-17T13:59:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -41,54 +41,11 @@ msgstr ""
 msgid "Alynt Drime Backups Dashboard requires WordPress %1$s or higher and PHP %2$s or higher."
 msgstr ""
 
-#: includes/class-admin-page.php:157
 #: includes/class-admin-page.php:158
-#: includes/class-admin-page.php:210
+#: includes/class-admin-page.php:159
+#: includes/traits/trait-admin-page-shell.php:36
 msgid "Drime Backups Dashboard"
 msgstr ""
-
-#: includes/class-admin-page.php:202
-msgid "You do not have permission to access this page."
-msgstr ""
-
-#: includes/class-admin-page.php:215
-msgid "Read-only dashboard. This page shows what paired client sites report about their own backup uploads. It cannot create, restore, delete, or clean up backups, and it cannot change client-site settings, credentials, or Drime data. Its actions are limited to polling the fixed status endpoint and managing this dashboard's local records."
-msgstr ""
-
-#: includes/class-admin-page.php:270
-#: includes/traits/trait-admin-page-diagnostics-tables.php:35
-#: includes/traits/trait-admin-page-sites-list.php:30
-msgid "Sites"
-msgstr ""
-
-#: includes/class-admin-page.php:271
-#: includes/traits/trait-admin-page-add-site.php:55
-#: includes/traits/trait-admin-page-sites-table.php:106
-msgid "Add Site"
-msgstr ""
-
-#: includes/class-admin-page.php:272
-#: includes/traits/trait-admin-page-attention.php:59
-#: includes/traits/trait-admin-page-sites-table.php:121
-msgid "Attention"
-msgstr ""
-
-#: includes/class-admin-page.php:273
-#: includes/traits/trait-admin-page-diagnostics-overview.php:33
-msgid "Diagnostics"
-msgstr ""
-
-#: includes/class-admin-page.php:276
-msgid "Dashboard sections"
-msgstr ""
-
-#. translators: %d: number of sites needing attention.
-#: includes/class-admin-page.php:299
-#, php-format
-msgid "%d site needs attention"
-msgid_plural "%d sites need attention"
-msgstr[0] ""
-msgstr[1] ""
 
 #: includes/class-credential-vault.php:63
 msgid "Secure random bytes are not available for the dashboard credential vault."
@@ -205,107 +162,17 @@ msgid "The scheduled poll batch was skipped because another batch is running."
 msgstr ""
 
 #: includes/class-poller.php:192
-#: includes/class-remote-action-dispatcher.php:128
-#: includes/class-remote-action-dispatcher.php:215
-#: includes/class-remote-action-dispatcher.php:309
 #: includes/class-remote-action-opt-in-manager.php:87
-#: includes/traits/trait-admin-page-actions.php:89
-#: includes/traits/trait-admin-page-actions.php:163
+#: includes/traits/trait-admin-page-local-actions.php:90
+#: includes/traits/trait-admin-page-remote-actions.php:79
+#: includes/traits/trait-remote-action-dispatcher-actions.php:38
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:39
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:133
 msgid "The dashboard site record was not found."
 msgstr ""
 
 #: includes/class-poller.php:196
 msgid "A status check is already running for this site."
-msgstr ""
-
-#: includes/class-remote-action-capabilities.php:102
-msgid "The remote action summary contains a forbidden field."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:123
-#: includes/class-remote-action-dispatcher.php:210
-#: includes/class-remote-action-dispatcher.php:304
-msgid "Choose an enrolled site before requesting a remote action."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:168
-#: includes/class-remote-action-dispatcher.php:262
-#: includes/class-remote-action-dispatcher.php:357
-msgid "The signed request could not be delivered to the client site."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:181
-#: includes/class-remote-action-dispatcher.php:275
-#: includes/class-remote-action-dispatcher.php:370
-msgid "The dashboard could not store the remote action response."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:408
-msgid "The latest client report does not allow schedule preview for the selected schedule and cadence. Run Check Now after updating the client."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:423
-msgid "The latest client report does not allow Schedule Apply. Enable Schedule Apply on the client and run Check Now first."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:430
-msgid "The latest client report does not allow Request Backup Now. Complete V2 opt-in and run Check Now first."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:448
-msgid "Active read-only pairing is required before requesting a remote action."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:452
-msgid "Generate and complete a V2 action opt-in token before requesting this action."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:456
-msgid "The latest client capability report does not match the dashboard action key. Regenerate the V2 opt-in token and run Check Now."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:460
-#: includes/class-remote-action-opt-in-manager.php:108
-#: includes/class-remote-action-signer.php:44
-#: includes/class-remote-action-signer.php:112
-msgid "Remote action signing is unavailable because PHP Sodium support is missing."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:466
-msgid "The client action destination is not a supported public HTTPS origin."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:470
-msgid "The client action destination did not resolve to a public IP address."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:570
-#: includes/class-safe-transport.php:141
-msgid "WordPress HTTP transport is not available."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:598
-msgid "The signed request could not reach the client action endpoint."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:605
-msgid "The client action response exceeded the dashboard size limit."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:610
-msgid "The client action response was not valid JSON."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:617
-msgid "The client action response did not match the dashboard request."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:622
-msgid "The client action response did not include a supported action state."
-msgstr ""
-
-#: includes/class-remote-action-dispatcher.php:626
-msgid "The client action endpoint returned an unsupported HTTP status."
 msgstr ""
 
 #: includes/class-remote-action-opt-in-manager.php:81
@@ -324,68 +191,19 @@ msgstr ""
 msgid "Active polling credentials are required before generating a V2 action opt-in token."
 msgstr ""
 
+#: includes/class-remote-action-opt-in-manager.php:108
+#: includes/class-remote-action-signer.php:44
+#: includes/class-remote-action-signer.php:112
+#: includes/traits/trait-remote-action-dispatcher-intent.php:97
+msgid "Remote action signing is unavailable because PHP Sodium support is missing."
+msgstr ""
+
 #: includes/class-remote-action-opt-in-manager.php:141
 msgid "The dashboard could not store the encrypted action signing key."
 msgstr ""
 
 #: includes/class-remote-action-opt-in-tokens.php:55
 msgid "The action opt-in token could not be encoded."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:77
-msgid "The remote action request is not valid."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:83
-msgid "The remote action context could not be prepared for storage."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:113
-msgid "The dashboard could not store the remote action request."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:314
-msgid "Choose a fresh schedule preview before applying a schedule change."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:320
-msgid "The selected schedule preview could not be found. Run a new preview before applying a schedule change."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:324
-msgid "The selected schedule preview has not succeeded yet. Run Check Now and confirm the preview result before applying."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:331
-msgid "The selected preview does not describe a schedule change to apply."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:347
-msgid "The selected preview is missing required safe apply evidence. Run a new preview before applying."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:359
-msgid "The selected schedule preview has expired. Run a new preview before applying."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:363
-msgid "The selected schedule preview is no longer fresh. Run a new preview before applying."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:367
-msgid "The latest client report does not allow applying this previewed schedule change. Run Check Now after enabling Schedule Apply on the client."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:404
-msgid "No matching client-side action confirmation has appeared in status polling within the expected window."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:432
-msgid "The dashboard could not update stale remote action records."
-msgstr ""
-
-#: includes/class-remote-action-repository.php:598
-msgid "The dashboard could not clean up old remote action records."
 msgstr ""
 
 #: includes/class-remote-action-signer.php:69
@@ -406,6 +224,11 @@ msgstr ""
 
 #: includes/class-safe-transport.php:77
 msgid "The polling authorization scheme is not valid."
+msgstr ""
+
+#: includes/class-safe-transport.php:141
+#: includes/traits/trait-remote-action-dispatcher-transport.php:59
+msgid "WordPress HTTP transport is not available."
 msgstr ""
 
 #: includes/class-safe-transport.php:151
@@ -430,211 +253,194 @@ msgstr ""
 msgid "The client status response was not valid JSON."
 msgstr ""
 
-#: includes/class-snapshot-repository.php:36
+#: includes/class-snapshot-repository.php:39
 msgid "The client status payload could not be prepared for storage."
 msgstr ""
 
-#: includes/class-snapshot-repository.php:61
+#: includes/class-snapshot-repository.php:64
 #: includes/traits/trait-poller-status-check.php:80
 msgid "The dashboard could not store the client status snapshot."
 msgstr ""
 
-#: includes/class-snapshot-repository.php:238
-msgid "The dashboard could not clean up old status snapshots."
-msgstr ""
-
-#: includes/class-status-classifier.php:61
+#: includes/class-status-classifier.php:64
 msgid "Polling is paused for this site."
 msgstr ""
 
-#: includes/class-status-classifier.php:67
+#: includes/class-status-classifier.php:70
 msgid "Waiting for the client site to opt in and complete pairing."
 msgstr ""
 
-#: includes/class-status-classifier.php:71
+#: includes/class-status-classifier.php:74
 msgid "No status snapshot has been received yet."
 msgstr ""
 
-#: includes/class-status-classifier.php:77
+#: includes/class-status-classifier.php:80
 msgid "The latest status snapshot could not be decoded."
 msgstr ""
 
-#: includes/class-status-classifier.php:83
+#: includes/class-status-classifier.php:86
 msgid "The client status schema is not supported by this dashboard version."
 msgstr ""
 
-#: includes/class-status-classifier.php:87
+#: includes/class-status-classifier.php:90
 msgid "The last status snapshot is stale."
 msgstr ""
 
-#: includes/class-status-classifier.php:97
+#: includes/class-status-classifier.php:100
 msgid "No supported backup source appears configured on the client site."
 msgstr ""
 
-#: includes/class-status-classifier.php:100
+#: includes/class-status-classifier.php:103
 msgid "The latest redacted status payload looks healthy."
 msgstr ""
 
-#: includes/class-status-classifier.php:128
+#: includes/class-status-classifier.php:131
 #: includes/traits/trait-admin-page-sites-table.php:122
 msgid "Pending"
 msgstr ""
 
-#: includes/class-status-classifier.php:129
+#: includes/class-status-classifier.php:132
 #: includes/traits/trait-admin-page-sites-table.php:123
 msgid "Paused"
 msgstr ""
 
-#: includes/class-status-classifier.php:130
+#: includes/class-status-classifier.php:133
 msgid "Incompatible"
 msgstr ""
 
-#: includes/class-status-classifier.php:131
+#: includes/class-status-classifier.php:134
 msgid "Not reporting"
 msgstr ""
 
-#: includes/class-status-classifier.php:132
+#: includes/class-status-classifier.php:135
 msgid "Needs attention"
 msgstr ""
 
-#: includes/class-status-classifier.php:133
-#: includes/traits/trait-admin-page-backup-source-evidence.php:161
+#: includes/class-status-classifier.php:136
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:82
 msgid "Not configured"
 msgstr ""
 
-#: includes/class-status-classifier.php:134
+#: includes/class-status-classifier.php:137
 #: includes/traits/trait-admin-page-sites-table.php:120
 msgid "Working"
 msgstr ""
 
-#: includes/class-status-classifier.php:198
-msgid "The client reports failed backup uploads."
-msgstr ""
-
-#: includes/class-status-classifier.php:202
-#: includes/class-status-classifier.php:206
-msgid "The client reports uploader warnings."
-msgstr ""
-
-#: includes/class-status-classifier.php:210
-msgid "The client reports cron health that needs review."
-msgstr ""
-
-#: includes/class-status-classifier.php:214
-msgid "One or more backup sources report stale or missing upload evidence."
-msgstr ""
-
-#: includes/class-status-payload-validator.php:91
+#: includes/class-status-payload-validator.php:94
 msgid "The client status payload contains a forbidden field."
 msgstr ""
 
-#: includes/class-status-payload-validator.php:95
+#: includes/class-status-payload-validator.php:98
 msgid "The client status schema is not supported."
 msgstr ""
 
-#: includes/class-status-payload-validator.php:101
+#: includes/class-status-payload-validator.php:104
 msgid "The client status payload does not match the enrolled site UUID."
 msgstr ""
 
-#: includes/class-status-payload-validator.php:146
+#: includes/class-status-payload-validator.php:149
 msgid "The client status payload is missing required fields."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:212
-msgid "Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview."
-msgstr ""
-
-#: includes/traits/trait-admin-page-actions.php:308
-msgid "The requested dashboard action is not supported."
-msgstr ""
-
-#: includes/traits/trait-admin-page-actions.php:319
-#: includes/traits/trait-admin-page-actions.php:325
-msgid "Your dashboard session has expired. Refresh the page and try again."
-msgstr ""
-
-#: includes/traits/trait-admin-page-actions.php:364
+#: includes/traits/trait-admin-page-action-notices.php:36
 msgid "Pending dashboard site created. Copy the pairing token now; it is not stored and cannot be shown again."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:370
+#: includes/traits/trait-admin-page-action-notices.php:42
 msgid "Dashboard record revoked locally. No client site or Drime action was attempted."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:371
+#: includes/traits/trait-admin-page-action-notices.php:43
 msgid "The dashboard record could not be revoked locally. Refresh the site detail screen and try again; the record may already have changed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:379
+#: includes/traits/trait-admin-page-action-notices.php:51
 msgid "Read-only status check completed and stored. No backup or client-site setting was changed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:384
+#: includes/traits/trait-admin-page-action-notices.php:56
 msgid "V2 action opt-in token generated. Copy it now; the token is not stored and cannot be shown again."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:393
+#: includes/traits/trait-admin-page-action-notices.php:63
 msgid "Request Backup Now was accepted by the client site, and a read-only status check was completed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:394
+#: includes/traits/trait-admin-page-action-notices.php:64
 msgid "Request Backup Now was accepted by the client site. Wait briefly, then use Check Now to confirm the latest reported result."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:400
+#: includes/traits/trait-admin-page-action-notices.php:65
 msgid "The client site did not accept the remote action request."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:404
+#: includes/traits/trait-admin-page-action-notices.php:66
 msgid "Request Backup Now could not be completed. Review the remote action history for this site."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:412
+#: includes/traits/trait-admin-page-action-notices.php:74
+#: includes/traits/trait-admin-page-action-notices.php:75
 msgid "Schedule preview was accepted by the client site. No schedule was changed. Wait briefly, then use Check Now to see the preview result reported by the client."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:417
+#: includes/traits/trait-admin-page-action-notices.php:76
 msgid "The client site did not accept the schedule preview request."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:421
+#: includes/traits/trait-admin-page-action-notices.php:77
 msgid "Schedule preview could not be completed. Review the remote action history for this site."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:429
+#: includes/traits/trait-admin-page-action-notices.php:85
+#: includes/traits/trait-admin-page-action-notices.php:86
 msgid "Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:434
+#: includes/traits/trait-admin-page-action-notices.php:87
 msgid "The client site did not accept the Schedule Apply request."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:438
+#: includes/traits/trait-admin-page-action-notices.php:88
 msgid "Schedule Apply could not be completed. Review the remote action history for this site."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:444
+#: includes/traits/trait-admin-page-action-notices.php:95
 msgid "Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:445
+#: includes/traits/trait-admin-page-action-notices.php:96
 msgid "Backup-source monitoring policy could not be saved. Refresh the site detail screen and try again."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:454
+#: includes/traits/trait-admin-page-action-notices.php:105
 msgid "Diagnostics settings saved."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:455
+#: includes/traits/trait-admin-page-action-notices.php:106
 msgid "Diagnostics settings could not be saved. Refresh the page and try again; if it continues, check that WordPress options can be updated."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:464
+#: includes/traits/trait-admin-page-action-notices.php:115
 msgid "Diagnostics events cleared."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:465
+#: includes/traits/trait-admin-page-action-notices.php:116
 msgid "Diagnostics events could not be cleared. Refresh the Diagnostics screen and try again; the retained event buffer may already have changed."
+msgstr ""
+
+#: includes/traits/trait-admin-page-actions.php:68
+msgid "The requested dashboard action is not supported."
+msgstr ""
+
+#: includes/traits/trait-admin-page-actions.php:80
+#: includes/traits/trait-admin-page-actions.php:86
+msgid "Your dashboard session has expired. Refresh the page and try again."
+msgstr ""
+
+#: includes/traits/trait-admin-page-add-site.php:55
+#: includes/traits/trait-admin-page-shell.php:97
+#: includes/traits/trait-admin-page-sites-table.php:106
+msgid "Add Site"
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:57
@@ -654,9 +460,9 @@ msgid "Pairing token"
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:657
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:53
 #: includes/traits/trait-admin-page-diagnostics-support-output.php:35
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:89
 msgid "Copying…"
 msgstr ""
 
@@ -665,12 +471,12 @@ msgid "Pairing token copied to the clipboard."
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:657
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:89
 msgid "The token could not be copied automatically. Select the field and copy it manually."
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:65
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:657
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:89
 msgid "Copy Token"
 msgstr ""
 
@@ -679,12 +485,12 @@ msgid "This token is single use and is not a Drime API token."
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:70
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:661
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:93
 msgid "Expires"
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:71
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:662
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:94
 msgid "Expected client origin"
 msgstr ""
 
@@ -789,7 +595,7 @@ msgid "It permits one client site to opt in to publishing its own redacted uploa
 msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:136
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:684
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:116
 msgid "Generating…"
 msgstr ""
 
@@ -805,6 +611,12 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-add-site.php:136
 msgid "The token is shown once and expires after 15 minutes."
+msgstr ""
+
+#: includes/traits/trait-admin-page-attention.php:59
+#: includes/traits/trait-admin-page-shell.php:98
+#: includes/traits/trait-admin-page-sites-table.php:121
+msgid "Attention"
 msgstr ""
 
 #: includes/traits/trait-admin-page-attention.php:62
@@ -831,156 +643,52 @@ msgstr ""
 msgid "View Site"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:30
-msgid "Backup Sources"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:33
-msgid "This uploader version has not reported source-level backup freshness evidence yet."
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:43
-msgid "Configured"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:43
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:36
-msgid "Yes"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:43
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:36
-msgid "No"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:44
-msgid "Expected freshness"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:45
-#: includes/traits/trait-admin-page-backup-source-evidence.php:86
-msgid "Latest backup/package"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:46
-#: includes/traits/trait-admin-page-backup-source-evidence.php:87
-msgid "Latest upload"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:47
-msgid "Current remote inventory"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:48
-msgid "Queued / Failed"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:49
-msgid "Evidence type"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:51
-#: includes/traits/trait-admin-page-backup-source-evidence.php:89
-msgid "WPvivid activity"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:52
-#: includes/traits/trait-admin-page-backup-source-evidence.php:90
-msgid "Latest WPvivid activity"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:53
-msgid "Local WPvivid ZIPs"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:61
-msgid "Source evidence is reported by the client uploader as a redacted operational hint. This dashboard does not receive Drime credentials and does not perform a direct Drime inventory audit."
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:76
-msgid "Source evidence: not reported"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:84
-msgid "Expected"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:132
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:542
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:53
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:68
 msgid "WPvivid"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:132
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:53
 msgid "Server"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:157
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:78
 msgid "Fresh"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:158
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:79
 msgid "Within policy"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:159
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:837
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:80
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:90
 msgid "Stale"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:160
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:81
 msgid "No upload evidence"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:162
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:83
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:99
 msgid "External / optional"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:166
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:544
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:545
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:549
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:842
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:87
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:95
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:193
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:194
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:218
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:219
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:70
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:71
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:75
 msgid "Unknown"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:205
-msgid "external / optional on this dashboard"
-msgstr ""
-
-#: includes/traits/trait-admin-page-backup-source-evidence.php:211
-#: includes/traits/trait-admin-page-backup-source-evidence.php:348
-#: includes/traits/trait-admin-page-backup-source-evidence.php:352
-#: includes/traits/trait-admin-page-backup-source-evidence.php:372
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:581
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:603
-#: includes/traits/trait-admin-page-sites-table.php:73
-msgid "Not reported"
-msgstr ""
-
-#. translators: %s: human readable freshness window.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:220
-#, php-format
-msgid "within %s (detected WPvivid schedule)"
-msgstr ""
-
-#. translators: %s: human readable freshness window.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:227
-#, php-format
-msgid "within %s (dashboard fallback)"
-msgstr ""
-
-#. translators: %s: human readable freshness window.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:234
-#, php-format
-msgid "within %s"
-msgstr ""
-
 #. translators: %d: number of seconds.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:316
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:612
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:128
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:138
 #, php-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -988,36 +696,194 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of current package sets.
-#: includes/traits/trait-admin-page-backup-source-evidence.php:332
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:144
 #, php-format
 msgid "%d current package set"
 msgid_plural "%d current package sets"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:345
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:157
 msgid "Server remote catalog sidecar"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:346
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:158
 msgid "Server remote index sidecar"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:347
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:159
 msgid "Uploader local upload registry"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:365
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:160
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:164
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:184
+#: includes/traits/trait-admin-page-backup-source-policy-helpers.php:61
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:107
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:129
+#: includes/traits/trait-admin-page-sites-table.php:73
+msgid "Not reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:177
 msgid "Local WPvivid ZIP available"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:369
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:181
 msgid "WPvivid backup log observed; no local ZIP may be available for Alynt upload"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:385
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:197
+msgid "This source is not configured on the client report."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:205
+msgid "Failed uploads are still queued for this source."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:215
+msgid "This source is marked external/optional, so Alynt-uploaded evidence is not required on this dashboard."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:219
+msgid "The uploader marked this source stale, but the latest upload is still inside the dashboard freshness policy."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:223
+msgid "The latest upload is older than the expected freshness window."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:227
+msgid "No Alynt-uploaded backup evidence is reported for this source."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:231
+msgid "This source is reported as not configured."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:235
+msgid "The latest upload is fresh; queued packages are waiting to upload."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:238
+msgid "The latest upload is within the expected freshness window."
+msgstr ""
+
+#. translators: %s: source warning code.
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:280
+#, php-format
+msgid "The uploader reports source warning %s."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:298
 #: includes/traits/trait-admin-page-time-formatters.php:27
 msgid "Not available"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:33
+msgid "Backup Sources"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:36
+msgid "This uploader version has not reported source-level backup freshness evidence yet."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:46
+msgid "Configured"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:46
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:36
+msgid "Yes"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:46
+#: includes/traits/trait-admin-page-basic-detail-helpers.php:72
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:36
+msgid "No"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:47
+msgid "Expected freshness"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:48
+msgid "Operator summary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:49
+#: includes/traits/trait-admin-page-backup-source-evidence.php:91
+msgid "Latest backup/package"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:50
+#: includes/traits/trait-admin-page-backup-source-evidence.php:92
+msgid "Latest upload"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:51
+msgid "Current remote inventory"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:52
+msgid "Queued / Failed"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:53
+msgid "Evidence type"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:55
+#: includes/traits/trait-admin-page-backup-source-evidence.php:94
+msgid "WPvivid activity"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:56
+#: includes/traits/trait-admin-page-backup-source-evidence.php:95
+msgid "Latest WPvivid activity"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:57
+msgid "Local WPvivid ZIPs"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:65
+msgid "Source evidence is reported by the client uploader as a redacted operational hint. This dashboard does not receive Drime credentials and does not perform a direct Drime inventory audit."
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:80
+msgid "Source evidence: not reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:88
+msgid "Why"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence.php:89
+msgid "Expected"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-policy-helpers.php:55
+msgid "external / optional on this dashboard"
+msgstr ""
+
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-policy-helpers.php:70
+#, php-format
+msgid "within %s (detected WPvivid schedule)"
+msgstr ""
+
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-policy-helpers.php:77
+#, php-format
+msgid "within %s (dashboard fallback)"
+msgstr ""
+
+#. translators: %s: human readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-policy-helpers.php:84
+#, php-format
+msgid "within %s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:56
@@ -1029,7 +895,7 @@ msgid "No redacted status snapshot has been stored for this site yet. This is ex
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:66
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:931
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:35
 msgid "Observed"
 msgstr ""
 
@@ -1048,7 +914,7 @@ msgid "Uploaded"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:70
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:835
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:88
 #: includes/traits/trait-admin-page-sites-table.php:72
 msgid "Failed"
 msgstr ""
@@ -1097,472 +963,6 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:114
 msgid "Use this only when WPvivid backups are intentionally handled outside Alynt-uploaded evidence for this site."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:192
-msgid "Pairing revoked locally. Re-enroll this site before manual checks are available."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:196
-msgid "Waiting for client opt-in before manual checks are available."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:199
-msgid "Polling credentials are missing. Re-enroll this site to restore manual checks."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:210
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:223
-msgid "Next poll:"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:216
-msgid "Unavailable until re-enrolled"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:218
-msgid "Waiting for client opt-in"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:220
-msgid "Credentials missing"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:245
-msgid "Checking…"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:245
-msgid "Check Now"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:265
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:630
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:804
-msgid "Request Backup Now"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:266
-msgid "V2.1 is designed as a signed request for the client uploader to scan for ready backup packages and upload eligible items using its own local settings. The dashboard still does not receive Drime credentials and does not create, restore, delete, or clean up backups."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:269
-msgid "Capability reported"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:272
-msgid "Not available yet"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:296
-msgid "Schedule Management"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:297
-msgid "V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, or change credentials."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:300
-msgid "Not reported yet"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:300
-msgid "The latest client snapshot does not advertise preview-only schedule capability. Upgrade and poll the client before schedule posture can be shown here."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:306
-msgid "Apply available after preview"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:306
-msgid "The client reports guarded Schedule Apply support for this schedule class."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:308
-msgid "Preview only"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:308
-msgid "Schedule capability is reported for operator review only."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:319
-msgid "Owner"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:320
-msgid "Current cadence"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:321
-msgid "Current interval"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:322
-msgid "Next run"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:323
-msgid "Supported cadences"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:324
-msgid "Minimum interval"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:325
-msgid "Apply changes"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:325
-msgid "Available after a fresh matching preview"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:325
-msgid "Not enabled on the client"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:326
-msgid "Rollback"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:326
-msgid "Not available in this version"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:333
-msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:350
-msgid "Schedule preview requests become available after this site is opened from its detail screen and the client reports supported cadence choices."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:361
-msgid "Proposed cadence"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:367
-msgid "Previewing…"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:367
-msgid "Preview Schedule Change"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:368
-msgid "Sends a signed read-only preview request. The client estimates the result and does not apply a schedule change."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:397
-msgid "Apply becomes available after a fresh successful preview for this schedule. Run Preview Schedule Change, then Check Now if the preview result has not appeared yet."
-msgstr ""
-
-#. translators: 1: current cadence, 2: proposed cadence.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:413
-#, php-format
-msgid "Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:422
-msgid "I understand this applies only the previewed future Alynt scan/upload cadence change and does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:424
-msgid "Applying…"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:424
-msgid "Apply Previewed Schedule Change"
-msgstr ""
-
-#. translators: 1: schedule label, 2: current cadence.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:485
-#, php-format
-msgid "Schedule preview: %1$s %2$s"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:530
-msgid "Reported schedule"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:541
-msgid "Alynt uploader"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:543
-msgid "WordPress"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:560
-msgid "every 15 minutes"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:561
-msgid "every 30 minutes"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:562
-msgid "hourly"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:563
-msgid "daily"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:564
-msgid "weekly"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:565
-msgid "unknown"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:566
-msgid "not reported"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:630
-msgid "Requesting…"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:631
-msgid "Sends one signed scan/upload-now intent. The client site may accept, reject, rate-limit, or report busy; no backup creation, restore, cleanup, settings, or credential action is requested."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:653
-msgid "V2 Action Opt-In Token — Shown Once"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:654
-msgid "Copy this token now and paste it into the paired client site. It lets that client explicitly opt in to the V2.1 scan/upload-now action using the public action key in the token. The dashboard stores the matching private key encrypted, but it does not store this token."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:655
-msgid "Action opt-in token"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:657
-msgid "Action opt-in token copied to the clipboard."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:658
-msgid "This token is not a Drime token and does not grant restore, delete, cleanup, schedule, settings, or credential actions."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:663
-msgid "Allowed action"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:663
-msgid "Scan for ready backup packages and upload eligible items"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:684
-msgid "Generate V2 Opt-In Token"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:685
-msgid "Creates a short-lived adb2a token for client-side V2 action opt-in. It does not request a backup."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:700
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:747
-msgid "Request Backup: capability reported"
-msgstr ""
-
-#. translators: 1: capability label, 2: latest client action state.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:707
-#, php-format
-msgid "%1$s · latest client action: %2$s"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:727
-msgid "This site must be actively enrolled with polling credentials before V2 actions can be considered."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:728
-msgid "Request Backup: enrollment needed"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:739
-msgid "The latest client report says scan/upload-now capability is available, but this dashboard record no longer has the encrypted signing key. Regenerate the V2 opt-in token and run Check Now."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:740
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:755
-msgid "Request Backup: opt-in needed"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:746
-msgid "The latest client report says scan/upload-now capability is available. The request is signed by this dashboard and the client remains the execution owner."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:754
-msgid "The latest client report understands V2.1 remote actions, but the client has not opted in with a valid action key or Sodium verification is unavailable."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:761
-msgid "The latest client report does not advertise V2.1 scan/upload-now capability. Upgrade and opt in on the client site before this action can be enabled."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:762
-msgid "Request Backup: not available yet"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:773
-msgid "Remote Action History"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:776
-msgid "No V2 remote action requests are stored for this site yet."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:780
-msgid "Recent V2 remote action requests for this site"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:781
-msgid "Requested"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:782
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:129
-msgid "Action"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:783
-msgid "Dashboard"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:784
-msgid "Client report"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:785
-msgid "Result"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:786
-msgid "Details"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:808
-msgid "Schedule Preview"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:812
-msgid "Schedule Apply"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:815
-msgid "Unknown action"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:826
-msgid "Queued for dispatch"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:827
-msgid "Dispatch failed"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:828
-msgid "Accepted"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:829
-msgid "Rejected"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:830
-msgid "Unsupported"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:831
-msgid "Rate limited"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:832
-msgid "Busy"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:833
-msgid "Running"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:834
-msgid "Succeeded"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:836
-msgid "Timed out"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:865
-msgid "Awaiting client status"
-msgstr ""
-
-#. translators: 1: previous cadence label, 2: applied cadence label.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:945
-#, php-format
-msgid "%1$s → %2$s"
-msgstr ""
-
-#. translators: %s: next run date/time.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:954
-#, php-format
-msgid "Next run %s"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:958
-msgid "Rollback metadata captured; rollback unavailable"
-msgstr ""
-
-#. translators: 1: current cadence label, 2: proposed cadence label.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:966
-#, php-format
-msgid "Preview: %1$s → %2$s"
-msgstr ""
-
-#. translators: 1: found count, 2: queued count, 3: already-known count, 4: attempted count, 5: failed count.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:908
-#, php-format
-msgid "Found %1$d; Queued %2$d; Known %3$d; Attempts %4$d; Failed %5$d"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:924
-msgid "Recent Status History"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:927
-msgid "No status history is available yet."
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:931
-msgid "The ten most recent retained redacted snapshots for this site"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:931
-#: includes/traits/trait-admin-page-diagnostics-tables.php:34
-#: includes/traits/trait-admin-page-diagnostics-tables.php:67
-#: includes/traits/trait-admin-page-sites-table.php:32
-#: includes/traits/trait-admin-page-sites-table.php:68
-msgid "Status"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:931
-msgid "Evidence"
-msgstr ""
-
-#. translators: 1: queue count, 2: uploaded count, 3: failed count, 4: warning count, 5: cron status.
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:948
-#, php-format
-msgid "Queue %1$s; Uploaded %2$s; Failed %3$s; Warnings %4$s; Cron %5$s"
-msgstr ""
-
-#: includes/traits/trait-admin-page-basic-detail-helpers.php:977
-msgid "Status categories"
 msgstr ""
 
 #. translators: %d: hours.
@@ -1741,6 +1141,11 @@ msgstr ""
 msgid "Actor"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:129
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:35
+msgid "Action"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:130
 msgid "Outcome"
 msgstr ""
@@ -1783,6 +1188,11 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:188
 msgid "Message"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:33
+#: includes/traits/trait-admin-page-shell.php:99
+msgid "Diagnostics"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:34
@@ -1955,6 +1365,20 @@ msgstr ""
 msgid "Status distribution diagnostics"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-tables.php:34
+#: includes/traits/trait-admin-page-diagnostics-tables.php:67
+#: includes/traits/trait-admin-page-sites-table.php:32
+#: includes/traits/trait-admin-page-sites-table.php:68
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:35
+msgid "Status"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-tables.php:35
+#: includes/traits/trait-admin-page-shell.php:96
+#: includes/traits/trait-admin-page-sites-list.php:30
+msgid "Sites"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-tables.php:55
 msgid "Recent Poll Outcomes"
 msgstr ""
@@ -1993,6 +1417,457 @@ msgstr ""
 #: includes/traits/trait-admin-page-site-detail.php:82
 msgid "Last safe error"
 msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:57
+msgid "Pairing revoked locally. Re-enroll this site before manual checks are available."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:61
+msgid "Waiting for client opt-in before manual checks are available."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:64
+msgid "Polling credentials are missing. Re-enroll this site to restore manual checks."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:75
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:88
+msgid "Next poll:"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:81
+msgid "Unavailable until re-enrolled"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:83
+msgid "Waiting for client opt-in"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:85
+msgid "Credentials missing"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:110
+msgid "Checking…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:110
+msgid "Check Now"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:26
+msgid "Remote Action History"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:29
+msgid "No V2 remote action requests are stored for this site yet."
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:33
+msgid "Recent V2 remote action requests for this site"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:34
+msgid "Requested"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:36
+msgid "Dashboard"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:37
+msgid "Client report"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:38
+msgid "Result"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:39
+msgid "Details"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:57
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:34
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:62
+msgid "Request Backup Now"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:61
+msgid "Schedule Preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:65
+msgid "Schedule Apply"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:68
+msgid "Unknown action"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:79
+msgid "Queued for dispatch"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:80
+msgid "Dispatch failed"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:81
+msgid "Accepted"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:82
+msgid "Rejected"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:83
+msgid "Unsupported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:84
+msgid "Rate limited"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:85
+msgid "Busy"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:86
+msgid "Running"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:87
+msgid "Succeeded"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:89
+msgid "Timed out"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:118
+msgid "Awaiting client status"
+msgstr ""
+
+#. translators: 1: found count, 2: queued count, 3: already-known count, 4: attempted count, 5: failed count.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:167
+#, php-format
+msgid "Found %1$d; Queued %2$d; Known %3$d; Attempts %4$d; Failed %5$d"
+msgstr ""
+
+#. translators: 1: previous cadence label, 2: applied cadence label.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:197
+#, php-format
+msgid "%1$s → %2$s"
+msgstr ""
+
+#. translators: %s: next run date/time.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:205
+#, php-format
+msgid "Next run %s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:211
+msgid "Rollback metadata captured; rollback unavailable"
+msgstr ""
+
+#. translators: 1: current cadence label, 2: proposed cadence label.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:223
+#, php-format
+msgid "Preview: %1$s → %2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-actions.php:138
+msgid "Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:35
+msgid "V2.1 is designed as a signed request for the client uploader to scan for ready backup packages and upload eligible items using its own local settings. The dashboard still does not receive Drime credentials and does not create, restore, delete, or clean up backups."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:38
+msgid "Capability reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:41
+msgid "Not available yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:62
+msgid "Requesting…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:63
+msgid "Sends one signed scan/upload-now intent. The client site may accept, reject, rate-limit, or report busy; no backup creation, restore, cleanup, settings, or credential action is requested."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:85
+msgid "V2 Action Opt-In Token — Shown Once"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:86
+msgid "Copy this token now and paste it into the paired client site. It lets that client explicitly opt in to the V2.1 scan/upload-now action using the public action key in the token. The dashboard stores the matching private key encrypted, but it does not store this token."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:87
+msgid "Action opt-in token"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:89
+msgid "Action opt-in token copied to the clipboard."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:90
+msgid "This token is not a Drime token and does not grant restore, delete, cleanup, schedule, settings, or credential actions."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:95
+msgid "Allowed action"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:95
+msgid "Scan for ready backup packages and upload eligible items"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:116
+msgid "Generate V2 Opt-In Token"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:117
+msgid "Creates a short-lived adb2a token for client-side V2 action opt-in. It does not request a backup."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:132
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:179
+msgid "Request Backup: capability reported"
+msgstr ""
+
+#. translators: 1: capability label, 2: latest client action state.
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:139
+#, php-format
+msgid "%1$s · latest client action: %2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:159
+msgid "This site must be actively enrolled with polling credentials before V2 actions can be considered."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:160
+msgid "Request Backup: enrollment needed"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:171
+msgid "The latest client report says scan/upload-now capability is available, but this dashboard record no longer has the encrypted signing key. Regenerate the V2 opt-in token and run Check Now."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:172
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:187
+msgid "Request Backup: opt-in needed"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:178
+msgid "The latest client report says scan/upload-now capability is available. The request is signed by this dashboard and the client remains the execution owner."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:186
+msgid "The latest client report understands V2.1 remote actions, but the client has not opted in with a valid action key or Sodium verification is unavailable."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:193
+msgid "The latest client report does not advertise V2.1 scan/upload-now capability. Upgrade and opt in on the client site before this action can be enabled."
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:194
+msgid "Request Backup: not available yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:56
+msgid "Reported schedule"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:67
+msgid "Alynt uploader"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:69
+msgid "WordPress"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:86
+msgid "every 15 minutes"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:87
+msgid "every 30 minutes"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:88
+msgid "hourly"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:89
+msgid "daily"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:90
+msgid "weekly"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:91
+msgid "unknown"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:92
+msgid "not reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:35
+msgid "Schedule Management"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:36
+msgid "V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, or change credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:39
+msgid "Not reported yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:39
+msgid "The latest client snapshot does not advertise preview-only schedule capability. Upgrade and poll the client before schedule posture can be shown here."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:45
+msgid "Apply available after preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:45
+msgid "The client reports guarded Schedule Apply support for this schedule class."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:47
+msgid "Preview only"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:47
+msgid "Schedule capability is reported for operator review only."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:58
+msgid "Owner"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:59
+msgid "Current cadence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:60
+msgid "Current interval"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:61
+msgid "Next run"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:62
+msgid "Supported cadences"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:63
+msgid "Minimum interval"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:64
+msgid "Apply changes"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:64
+msgid "Available after a fresh matching preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:64
+msgid "Not enabled on the client"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
+msgid "Rollback"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
+msgid "Not available in this version"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:72
+msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:89
+msgid "Schedule preview requests become available after this site is opened from its detail screen and the client reports supported cadence choices."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:100
+msgid "Proposed cadence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:106
+msgid "Previewing…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:106
+msgid "Preview Schedule Change"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:107
+msgid "Sends a signed read-only preview request. The client estimates the result and does not apply a schedule change."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:136
+msgid "Apply becomes available after a fresh successful preview for this schedule. Run Preview Schedule Change, then Check Now if the preview result has not appeared yet."
+msgstr ""
+
+#. translators: 1: current cadence, 2: proposed cadence.
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:152
+#, php-format
+msgid "Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:161
+msgid "I understand this applies only the previewed future Alynt scan/upload cadence change and does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:163
+msgid "Applying…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:163
+msgid "Apply Previewed Schedule Change"
+msgstr ""
+
+#. translators: 1: schedule label, 2: current cadence.
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:224
+#, php-format
+msgid "Schedule preview: %1$s %2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-shell.php:28
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: includes/traits/trait-admin-page-shell.php:41
+msgid "Read-only dashboard. This page shows what paired client sites report about their own backup uploads. It cannot create, restore, delete, or clean up backups, and it cannot change client-site settings, credentials, or Drime data. Its actions are limited to polling the fixed status endpoint and managing this dashboard's local records."
+msgstr ""
+
+#: includes/traits/trait-admin-page-shell.php:102
+msgid "Dashboard sections"
+msgstr ""
+
+#. translators: %d: number of sites needing attention.
+#: includes/traits/trait-admin-page-shell.php:125
+#, php-format
+msgid "%d site needs attention"
+msgid_plural "%d sites need attention"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/traits/trait-admin-page-site-detail.php:38
 msgid "Back to Sites"
@@ -2102,7 +1977,7 @@ msgid "Review Local Revocation"
 msgstr ""
 
 #: includes/traits/trait-admin-page-site-formatters.php:34
-#: includes/traits/trait-diagnostics-site-metrics.php:235
+#: includes/traits/trait-diagnostics-site-metric-helpers.php:114
 msgid "Unnamed site"
 msgstr ""
 
@@ -2237,7 +2112,7 @@ msgid "Next step: confirm the site is reachable and the uploader pairing remains
 msgstr ""
 
 #: includes/traits/trait-admin-page-status-formatters.php:78
-msgid "Next step: ask the site owner to review the uploader warnings, failed queue, and WP-Cron status."
+msgid "Next step: review the specific uploader warnings, failed queue, cron status, and source-level Backup Evidence reason lines."
 msgstr ""
 
 #: includes/traits/trait-admin-page-status-formatters.php:79
@@ -2246,6 +2121,32 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-status-formatters.php:80
 msgid "No action is currently indicated by the latest redacted report."
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:28
+msgid "Recent Status History"
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:31
+msgid "No status history is available yet."
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:35
+msgid "The ten most recent retained redacted snapshots for this site"
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:35
+msgid "Evidence"
+msgstr ""
+
+#. translators: 1: queue count, 2: uploaded count, 3: failed count, 4: warning count, 5: cron status.
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:52
+#, php-format
+msgid "Queue %1$s; Uploaded %2$s; Failed %3$s; Warnings %4$s; Cron %5$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:81
+msgid "Status categories"
 msgstr ""
 
 #. translators: %s: human-readable duration.
@@ -2298,4 +2199,159 @@ msgstr ""
 
 #: includes/traits/trait-poller-status-check.php:171
 msgid "The status check failed, and the dashboard could not save the failure details."
+msgstr ""
+
+#: includes/traits/trait-remote-action-capabilities-public.php:36
+msgid "The remote action summary contains a forbidden field."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-actions.php:33
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:34
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:128
+msgid "Choose an enrolled site before requesting a remote action."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-actions.php:78
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:86
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:181
+msgid "The signed request could not be delivered to the client site."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-actions.php:91
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:99
+#: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:194
+msgid "The dashboard could not store the remote action response."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:45
+msgid "The latest client report does not allow schedule preview for the selected schedule and cadence. Run Check Now after updating the client."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:60
+msgid "The latest client report does not allow Schedule Apply. Enable Schedule Apply on the client and run Check Now first."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:67
+msgid "The latest client report does not allow Request Backup Now. Complete V2 opt-in and run Check Now first."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:85
+msgid "Active read-only pairing is required before requesting a remote action."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:89
+msgid "Generate and complete a V2 action opt-in token before requesting this action."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:93
+msgid "The latest client capability report does not match the dashboard action key. Regenerate the V2 opt-in token and run Check Now."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:103
+msgid "The client action destination is not a supported public HTTPS origin."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:107
+msgid "The client action destination did not resolve to a public IP address."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-transport.php:87
+msgid "The signed request could not reach the client action endpoint."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-transport.php:94
+msgid "The client action response exceeded the dashboard size limit."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-transport.php:99
+msgid "The client action response was not valid JSON."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-transport.php:106
+msgid "The client action response did not match the dashboard request."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-transport.php:111
+msgid "The client action response did not include a supported action state."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-transport.php:115
+msgid "The client action endpoint returned an unsupported HTTP status."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:72
+msgid "Choose a fresh schedule preview before applying a schedule change."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:78
+msgid "The selected schedule preview could not be found. Run a new preview before applying a schedule change."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:82
+msgid "The selected schedule preview has not succeeded yet. Run Check Now and confirm the preview result before applying."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:89
+msgid "The selected preview does not describe a schedule change to apply."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:105
+msgid "The selected preview is missing required safe apply evidence. Run a new preview before applying."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:117
+msgid "The selected schedule preview has expired. Run a new preview before applying."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:121
+msgid "The selected schedule preview is no longer fresh. Run a new preview before applying."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-lookups.php:125
+msgid "The latest client report does not allow applying this previewed schedule change. Run Check Now after enabling Schedule Apply on the client."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-reconciliation.php:104
+msgid "No matching client-side action confirmation has appeared in status polling within the expected window."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-reconciliation.php:132
+msgid "The dashboard could not update stale remote action records."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-state.php:56
+msgid "The remote action request is not valid."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-state.php:62
+msgid "The remote action context could not be prepared for storage."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-state.php:92
+msgid "The dashboard could not store the remote action request."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-summary.php:109
+msgid "The dashboard could not clean up old remote action records."
+msgstr ""
+
+#: includes/traits/trait-snapshot-repository-retention.php:57
+msgid "The dashboard could not clean up old status snapshots."
+msgstr ""
+
+#: includes/traits/trait-status-classifier-helpers.php:77
+msgid "The client reports failed backup uploads."
+msgstr ""
+
+#: includes/traits/trait-status-classifier-helpers.php:81
+#: includes/traits/trait-status-classifier-helpers.php:85
+msgid "The client reports uploader warnings."
+msgstr ""
+
+#: includes/traits/trait-status-classifier-helpers.php:89
+msgid "The client reports cron health that needs review."
+msgstr ""
+
+#: includes/traits/trait-status-classifier-helpers.php:93
+msgid "One or more backup sources report stale or missing upload evidence."
 msgstr ""
