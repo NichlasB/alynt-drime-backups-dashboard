@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.28 - 2026-09-17
+
+### Changed
+
+- Polished Diagnostics operator action history so dashboard-local and remote-action audit rows show operator-friendly labels, including Pause Polling and Resume Polling, instead of raw action slugs.
+- Updated Operator Action History helper text so scheduled polling pause/resume controls are documented alongside pairing-token creation, Check Now, local revocation, and diagnostics changes.
+
 ## 0.1.27 - 2026-09-17
 
 ### Added
