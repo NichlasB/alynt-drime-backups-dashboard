@@ -19,6 +19,7 @@ require_once dirname( __DIR__ ) . '/includes/class-event-log.php';
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-repository.php';
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-reconciler.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-status-payload-validator-backup-sources.php';
 require_once dirname( __DIR__ ) . '/includes/class-status-payload-validator.php';
 require_once dirname( __DIR__ ) . '/includes/class-safe-transport.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-scheduling.php';

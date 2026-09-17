@@ -7,6 +7,7 @@
 
 use PHPUnit\Framework\TestCase;
 
+require_once dirname( __DIR__ ) . '/includes/traits/trait-status-payload-validator-backup-sources.php';
 require_once dirname( __DIR__ ) . '/includes/class-status-payload-validator.php';
 
 /**

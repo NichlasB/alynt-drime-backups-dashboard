@@ -109,6 +109,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-diagnostics-backup-source-metrics.php',
 	'includes/traits/trait-diagnostics-site-metrics.php',
 	'includes/class-diagnostics.php',
+	'includes/traits/trait-status-payload-validator-backup-sources.php',
 	'includes/class-status-payload-validator.php',
 	'includes/class-pairing-tokens.php',
 	'includes/class-enrollment-manager.php',
