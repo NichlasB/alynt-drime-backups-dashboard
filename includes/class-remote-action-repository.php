@@ -22,6 +22,7 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Lookups;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Summary;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_State;
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Reconciliation;
 
 	const DEFAULT_STATE                       = 'queued_for_dispatch';
 	const RETENTION_DAYS                      = 90;
