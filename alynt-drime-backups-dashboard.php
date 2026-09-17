@@ -92,6 +92,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-remote-action-reconciler.php',
 	'includes/class-remote-action-signer.php',
 	'includes/traits/trait-remote-action-dispatcher-actions.php',
+	'includes/traits/trait-remote-action-dispatcher-schedule-actions.php',
 	'includes/traits/trait-remote-action-dispatcher-intent.php',
 	'includes/traits/trait-remote-action-dispatcher-transport.php',
 	'includes/traits/trait-remote-action-dispatcher-utils.php',

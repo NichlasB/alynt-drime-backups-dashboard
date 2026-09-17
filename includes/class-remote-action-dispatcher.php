@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher {
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Actions;
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Schedule_Actions;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Intent;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Transport;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Utils;
