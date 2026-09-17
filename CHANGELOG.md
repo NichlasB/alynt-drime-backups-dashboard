@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.27 - 2026-09-17
+
+### Added
+
+- Added dashboard-local scheduled polling Pause/Resume controls on Sites rows and Site Detail so operators can temporarily stop automatic polling for an enrolled record while keeping manual Check Now available.
+
+### Changed
+
+- Preserved the local-only boundary: pausing or resuming scheduled polling changes only dashboard-owned schedule state and does not contact client sites, start or stop backups, change settings, delete data, mutate Drime, or alter V2 remote-action capabilities.
+
 ## 0.1.26 - 2026-09-17
 
 ### Added
