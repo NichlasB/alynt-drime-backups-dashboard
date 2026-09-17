@@ -41,7 +41,7 @@ This repository is the separate dashboard plugin package. The current dashboard 
 
 ## Current Status
 
-Version 0.1.20 currently includes:
+Version 0.1.25 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.

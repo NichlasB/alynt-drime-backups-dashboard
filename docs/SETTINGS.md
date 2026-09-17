@@ -2,11 +2,12 @@
 
 ## Alynt Drime Backups Dashboard Settings
 
-The plugin stores one administrator-configurable diagnostics option and three internal options. V2.1 action capability is not granted by an option alone; it requires an enrolled site row with a stored encrypted action signing key plus client-reported opt-in capability.
+The plugin stores one administrator-configurable diagnostics option and four internal options. V2.1 action capability is not granted by an option alone; it requires an enrolled site row with a stored encrypted action signing key plus client-reported opt-in capability.
 
 | Option Key | Type | Default | Sanitization | Tab | Description |
 |------------|------|---------|--------------|-----|-------------|
 | `alynt_drime_backups_dashboard_schema_version` | string | none | Internal constant value | Internal | Internal database schema marker written during activation/migration. |
+| `alynt_drime_backups_dashboard_source_policies` | array | empty | Site/source integer keys, allowlisted policy values | Site Detail | Dashboard-local source monitoring policy overrides, currently used to mark WPvivid as external/optional for a site without contacting the client site or changing backup behavior. |
 | `alynt_drime_backups_dashboard_diagnostics_settings` | array | disabled, minimum `warning`, 14 days, 200 events | Boolean, severity allowlist, bounded integers | Diagnostics | Admin-controlled structured diagnostics logging settings. Stored with autoload disabled. |
 | `alynt_drime_backups_dashboard_diagnostics_events` | array | empty | Structured event normalizer and context redaction before persistence | Diagnostics | Bounded local diagnostics event ring buffer. Stored with autoload disabled. |
 | `alynt_drime_backups_dashboard_audit_events` | array | empty | Operator-action normalizer and context redaction before persistence | Diagnostics | Always-on bounded local operator action history for dashboard-local actions. Stored with autoload disabled. |
