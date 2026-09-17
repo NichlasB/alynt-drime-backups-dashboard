@@ -1097,7 +1097,7 @@ msgid "Operator Action History"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:97
-msgid "This always-on local audit history records dashboard actions such as pairing-token creation, local revocation, manual checks, and diagnostics changes. It is separate from optional diagnostic logging and stores only redacted context."
+msgid "This always-on local audit history records dashboard actions such as pairing-token creation, local revocation, manual checks, scheduled polling pause/resume, and diagnostics changes. It is separate from optional diagnostic logging and stores only redacted context."
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:99
@@ -1145,7 +1145,7 @@ msgid "No operator actions yet"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:122
-msgid "Dashboard-local actions will appear here after an administrator creates a pairing token, runs Check Now, revokes a local record, or changes diagnostics settings."
+msgid "Dashboard-local actions will appear here after an administrator creates a pairing token, runs Check Now, pauses or resumes scheduled polling, revokes a local record, or changes diagnostics settings."
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:127
@@ -1173,6 +1173,26 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:159
 msgid "Unknown user"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:182
+msgid "Clear Diagnostics Events"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:183
+msgid "Create Pairing Token"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:187
+msgid "Revoke Local Pairing"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:188
+msgid "Apply Schedule Change"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:190
+msgid "Update Diagnostics Settings"
 msgstr ""
 
 #. translators: %d: WordPress user ID.
@@ -1468,14 +1488,17 @@ msgstr ""
 msgid "Checking…"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:181
 #: includes/traits/trait-admin-page-polling-detail-helpers.php:110
 msgid "Check Now"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:186
 #: includes/traits/trait-admin-page-polling-detail-helpers.php:124
 msgid "Resume Polling"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:184
 #: includes/traits/trait-admin-page-polling-detail-helpers.php:124
 msgid "Pause Polling"
 msgstr ""
@@ -1557,6 +1580,7 @@ msgid "Details"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:57
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:185
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:34
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:62
 msgid "Request Backup Now"
@@ -1894,6 +1918,7 @@ msgstr ""
 msgid "Previewing…"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:189
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:106
 msgid "Preview Schedule Change"
 msgstr ""

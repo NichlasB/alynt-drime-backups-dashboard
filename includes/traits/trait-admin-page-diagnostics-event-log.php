@@ -94,7 +94,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Operator Action History', 'alynt-drime-backups-dashboard' ) . '</h3>';
 		echo '<div class="adbd-panel-body">';
-		echo '<p>' . esc_html__( 'This always-on local audit history records dashboard actions such as pairing-token creation, local revocation, manual checks, and diagnostics changes. It is separate from optional diagnostic logging and stores only redacted context.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p>' . esc_html__( 'This always-on local audit history records dashboard actions such as pairing-token creation, local revocation, manual checks, scheduled polling pause/resume, and diagnostics changes. It is separate from optional diagnostic logging and stores only redacted context.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '</div>';
 		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Operator action history summary', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
 		$this->render_detail_row( __( 'Retained actions', 'alynt-drime-backups-dashboard' ), isset( $summary['total'] ) ? (string) (int) $summary['total'] : '0' );
@@ -119,7 +119,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 
 		if ( empty( $events ) ) {
 			echo '<div class="adbd-empty-state"><h3>' . esc_html__( 'No operator actions yet', 'alynt-drime-backups-dashboard' ) . '</h3>';
-			echo '<p>' . esc_html__( 'Dashboard-local actions will appear here after an administrator creates a pairing token, runs Check Now, revokes a local record, or changes diagnostics settings.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+			echo '<p>' . esc_html__( 'Dashboard-local actions will appear here after an administrator creates a pairing token, runs Check Now, pauses or resumes scheduled polling, revokes a local record, or changes diagnostics settings.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 			return;
 		}
 
@@ -137,7 +137,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 			echo '<tr>';
 			echo '<td>' . esc_html( $this->date_or_dash( isset( $event['timestamp'] ) ? (string) $event['timestamp'] : '' ) ) . '</td>';
 			echo '<td>' . esc_html( $this->audit_actor_label( isset( $event['actor_id'] ) ? (int) $event['actor_id'] : 0 ) ) . '</td>';
-			echo '<td>' . esc_html( isset( $event['action'] ) ? (string) $event['action'] : '' ) . '</td>';
+			echo '<td>' . esc_html( $this->audit_action_label( isset( $event['action'] ) ? (string) $event['action'] : '' ) ) . '</td>';
 			echo '<td>' . esc_html( isset( $event['outcome'] ) ? (string) $event['outcome'] : '' ) . '</td>';
 			echo '<td><code>' . esc_html( false === $context ? '{}' : $context ) . '</code></td>';
 			echo '</tr>';
@@ -164,6 +164,30 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 			__( 'User ID %d', 'alynt-drime-backups-dashboard' ),
 			$actor_id
 		);
+	}
+
+	/**
+	 * Formats an audit action for operator-facing diagnostics.
+	 *
+	 * @param string $action Stored audit action slug.
+	 * @return string
+	 */
+	private function audit_action_label( $action ) {
+		$action = sanitize_key( (string) $action );
+		$labels = array(
+			'check_status_now'         => __( 'Check Now', 'alynt-drime-backups-dashboard' ),
+			'clear_diagnostics_events' => __( 'Clear Diagnostics Events', 'alynt-drime-backups-dashboard' ),
+			'create_pending_site'      => __( 'Create Pairing Token', 'alynt-drime-backups-dashboard' ),
+			'pause_polling'            => __( 'Pause Polling', 'alynt-drime-backups-dashboard' ),
+			'request_backup_now'       => __( 'Request Backup Now', 'alynt-drime-backups-dashboard' ),
+			'resume_polling'           => __( 'Resume Polling', 'alynt-drime-backups-dashboard' ),
+			'revoke_local'             => __( 'Revoke Local Pairing', 'alynt-drime-backups-dashboard' ),
+			'schedule_apply'           => __( 'Apply Schedule Change', 'alynt-drime-backups-dashboard' ),
+			'schedule_preview'         => __( 'Preview Schedule Change', 'alynt-drime-backups-dashboard' ),
+			'update_diagnostics'       => __( 'Update Diagnostics Settings', 'alynt-drime-backups-dashboard' ),
+		);
+
+		return isset( $labels[ $action ] ) ? $labels[ $action ] : $action;
 	}
 
 	/**
