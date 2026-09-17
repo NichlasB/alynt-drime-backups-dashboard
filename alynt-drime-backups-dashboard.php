@@ -154,6 +154,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-admin-page-time-formatters.php',
 	'includes/traits/trait-admin-page-diagnostic-formatters.php',
 	'includes/traits/trait-admin-page-formatters.php',
+	'includes/traits/trait-admin-page-shell.php',
 	'includes/class-admin-page.php',
 	'includes/class-activator.php',
 	'includes/class-deactivator.php',
