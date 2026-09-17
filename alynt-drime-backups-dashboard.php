@@ -77,6 +77,8 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-site-repository-reads.php',
 	'includes/traits/trait-site-repository-writes.php',
 	'includes/class-site-repository.php',
+	'includes/traits/trait-snapshot-repository-reads.php',
+	'includes/traits/trait-snapshot-repository-retention.php',
 	'includes/class-snapshot-repository.php',
 	'includes/traits/trait-remote-action-capabilities-public.php',
 	'includes/traits/trait-remote-action-capabilities-action-data.php',

@@ -8,6 +8,8 @@
 use PHPUnit\Framework\TestCase;
 
 require_once dirname( __DIR__ ) . '/includes/class-storage.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-snapshot-repository-reads.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-snapshot-repository-retention.php';
 require_once dirname( __DIR__ ) . '/includes/class-snapshot-repository.php';
 
 /**

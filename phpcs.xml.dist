@@ -23,6 +23,8 @@
 		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-retention.php</exclude-pattern>
 		<exclude-pattern>*/uninstall.php</exclude-pattern>
 	</rule>
 
@@ -31,6 +33,8 @@
 		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-retention.php</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.DB.PreparedSQL.NotPrepared">
@@ -38,14 +42,18 @@
 		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-retention.php</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber">
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare">
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
 	</rule>
 
 	<rule ref="WordPress.DB.DirectDatabaseQuery.SchemaChange">
