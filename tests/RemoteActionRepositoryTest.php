@@ -153,7 +153,8 @@ class Alynt_Drime_Backups_Dashboard_Test_Remote_Action_WPDB {
 	 * @return array<string,mixed>|null
 	 */
 	public function get_row( $query, $output = ARRAY_A ) {
-		unset( $query, $output );
+		unset( $output );
+		$this->last_query = $query;
 
 		return $this->row;
 	}
@@ -399,6 +400,33 @@ class RemoteActionRepositoryTest extends TestCase {
 		$this->assertSame( 'schedule_rollback_runtime_not_implemented', $context['schedule_apply']['rollback_metadata']['reason'] );
 		$this->assertSame( str_repeat( 'b', 64 ), $context['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_before'] );
 		$this->assertSame( str_repeat( 'c', 64 ), $context['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_after'] );
+	}
+
+	/**
+	 * Support summaries count rollback-readiness evidence without exposing details.
+	 *
+	 * @return void
+	 */
+	public function test_support_summary_counts_schedule_apply_rollback_metadata() {
+		$repository      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$this->wpdb->row = array(
+			'total'                      => 4,
+			'client_reconciled'          => 3,
+			'stale'                      => 1,
+			'awaiting_confirmation'      => 1,
+			'schedule_apply'             => 2,
+			'rollback_metadata_captured' => 1,
+			'latest_updated_at'          => '2026-09-15 19:24:12',
+		);
+
+		$summary = $repository->support_summary();
+
+		$this->assertSame( 4, $summary['total'] );
+		$this->assertSame( 2, $summary['schedule_apply'] );
+		$this->assertSame( 1, $summary['rollback_metadata'] );
+		$this->assertStringContainsString( "action_type = 'schedule_apply'", $this->wpdb->last_query );
+		$this->assertStringContainsString( 'rollback_metadata', $this->wpdb->last_query );
+		$this->assertArrayNotHasKey( 'redacted_context_json', $summary );
 	}
 
 	/**

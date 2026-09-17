@@ -263,6 +263,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 								'captured'  => true,
 								'available' => false,
 								'reason'    => 'schedule_rollback_runtime_not_implemented',
+								'expires_at' => '2026-09-15T19:24:12+00:00',
 							),
 						),
 					)
@@ -275,6 +276,8 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'every 15 minutes → every 30 minutes', $html );
 		$this->assertStringContainsString( 'Next run 2026-09-15 18:53 UTC', $html );
 		$this->assertStringContainsString( 'Rollback metadata captured; rollback unavailable', $html );
+		$this->assertStringContainsString( 'Reason schedule_rollback_runtime_not_implemented', $html );
+		$this->assertStringContainsString( 'metadata expires 2026-09-15 19:24 UTC', $html );
 	}
 
 	/**

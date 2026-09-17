@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-17T13:59:40+00:00\n"
+"POT-Creation-Date: 2026-09-17T14:10:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -678,8 +678,8 @@ msgstr ""
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:95
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:193
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:194
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:218
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:219
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:220
 #: includes/traits/trait-admin-page-schedule-label-helpers.php:70
 #: includes/traits/trait-admin-page-schedule-label-helpers.php:71
 #: includes/traits/trait-admin-page-schedule-label-helpers.php:75
@@ -1567,14 +1567,26 @@ msgstr ""
 msgid "Next run %s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:211
+#. translators: 1: current cadence label, 2: proposed cadence label.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:224
+#, php-format
+msgid "Preview: %1$s → %2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:245
 msgid "Rollback metadata captured; rollback unavailable"
 msgstr ""
 
-#. translators: 1: current cadence label, 2: proposed cadence label.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:223
+#. translators: %s: rollback unavailable reason code.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:252
 #, php-format
-msgid "Preview: %1$s → %2$s"
+msgid "Reason %s"
+msgstr ""
+
+#. translators: %s: rollback metadata expiry date/time.
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:260
+#, php-format
+msgid "metadata expires %s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-actions.php:138
@@ -2331,7 +2343,7 @@ msgstr ""
 msgid "The dashboard could not store the remote action request."
 msgstr ""
 
-#: includes/traits/trait-remote-action-repository-summary.php:109
+#: includes/traits/trait-remote-action-repository-summary.php:115
 msgid "The dashboard could not clean up old remote action records."
 msgstr ""
 

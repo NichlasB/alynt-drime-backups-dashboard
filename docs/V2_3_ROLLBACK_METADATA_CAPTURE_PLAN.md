@@ -89,6 +89,8 @@ Dashboard action history may show:
 - captured/expiry time if present;
 - concise reason code such as `schedule_rollback_runtime_not_implemented`.
 
+Dashboard-side local hardening may add richer display and support aggregates for already-redacted rollback-readiness metadata before uploader-side metadata capture ships. That local-only dashboard work must still preserve the same evidence-only boundary and must not add rollback buttons, dispatch, or runtime execution.
+
 Dashboard must not show:
 
 - raw schedule internals;

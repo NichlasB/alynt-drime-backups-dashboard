@@ -108,6 +108,8 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			'client_reconciled'     => isset( $remote_actions['client_reconciled'] ) ? max( 0, (int) $remote_actions['client_reconciled'] ) : 0,
 			'stale'                 => isset( $remote_actions['stale'] ) ? max( 0, (int) $remote_actions['stale'] ) : 0,
 			'awaiting_confirmation' => isset( $remote_actions['awaiting_confirmation'] ) ? max( 0, (int) $remote_actions['awaiting_confirmation'] ) : 0,
+			'schedule_apply'        => isset( $remote_actions['schedule_apply'] ) ? max( 0, (int) $remote_actions['schedule_apply'] ) : 0,
+			'rollback_metadata'     => isset( $remote_actions['rollback_metadata'] ) ? max( 0, (int) $remote_actions['rollback_metadata'] ) : 0,
 			'latest_updated_at'     => isset( $remote_actions['latest_updated_at'] ) ? sanitize_text_field( (string) $remote_actions['latest_updated_at'] ) : '',
 		);
 	}

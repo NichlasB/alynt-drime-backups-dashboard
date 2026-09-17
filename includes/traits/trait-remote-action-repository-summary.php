@@ -41,6 +41,8 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Summary {
 				SUM(CASE WHEN client_state IS NOT NULL AND client_state != '' THEN 1 ELSE 0 END) AS client_reconciled,
 				SUM(CASE WHEN state = 'stale' THEN 1 ELSE 0 END) AS stale,
 				SUM(CASE WHEN state IN ('accepted', 'running') THEN 1 ELSE 0 END) AS awaiting_confirmation,
+				SUM(CASE WHEN action_type = 'schedule_apply' THEN 1 ELSE 0 END) AS schedule_apply,
+				SUM(CASE WHEN action_type = 'schedule_apply' AND redacted_context_json LIKE '%\"rollback_metadata\"%' THEN 1 ELSE 0 END) AS rollback_metadata_captured,
 				MAX(updated_at) AS latest_updated_at
 			FROM {$table}",
 			ARRAY_A
@@ -56,6 +58,8 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Summary {
 			'client_reconciled'     => isset( $row['client_reconciled'] ) ? max( 0, (int) $row['client_reconciled'] ) : 0,
 			'stale'                 => isset( $row['stale'] ) ? max( 0, (int) $row['stale'] ) : 0,
 			'awaiting_confirmation' => isset( $row['awaiting_confirmation'] ) ? max( 0, (int) $row['awaiting_confirmation'] ) : 0,
+			'schedule_apply'        => isset( $row['schedule_apply'] ) ? max( 0, (int) $row['schedule_apply'] ) : 0,
+			'rollback_metadata'     => isset( $row['rollback_metadata_captured'] ) ? max( 0, (int) $row['rollback_metadata_captured'] ) : 0,
 			'latest_updated_at'     => isset( $row['latest_updated_at'] ) ? (string) $row['latest_updated_at'] : '',
 		);
 	}
@@ -71,6 +75,8 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Summary {
 			'client_reconciled'     => 0,
 			'stale'                 => 0,
 			'awaiting_confirmation' => 0,
+			'schedule_apply'        => 0,
+			'rollback_metadata'     => 0,
 			'latest_updated_at'     => '',
 		);
 	}

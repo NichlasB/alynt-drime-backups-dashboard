@@ -207,8 +207,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 				);
 			}
 
-			if ( ! empty( $apply['rollback_metadata'] ) && is_array( $apply['rollback_metadata'] ) && ! empty( $apply['rollback_metadata']['captured'] ) ) {
-				$detail .= '; ' . __( 'Rollback metadata captured; rollback unavailable', 'alynt-drime-backups-dashboard' );
+			$rollback_label = isset( $apply['rollback_metadata'] ) && is_array( $apply['rollback_metadata'] ) ? $this->remote_action_rollback_metadata_label( $apply['rollback_metadata'] ) : '';
+			if ( '' !== $rollback_label ) {
+				$detail .= '; ' . $rollback_label;
 			}
 
 			return $detail;
@@ -227,5 +228,40 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Gets a compact rollback-readiness label for a schedule apply row.
+	 *
+	 * @param array<string,mixed> $metadata Rollback metadata.
+	 * @return string
+	 */
+	private function remote_action_rollback_metadata_label( array $metadata ) {
+		if ( empty( $metadata['captured'] ) ) {
+			return '';
+		}
+
+		$parts  = array(
+			__( 'Rollback metadata captured; rollback unavailable', 'alynt-drime-backups-dashboard' ),
+		);
+		$reason = isset( $metadata['reason'] ) ? sanitize_key( (string) $metadata['reason'] ) : '';
+
+		if ( '' !== $reason ) {
+			$parts[] = sprintf(
+				/* translators: %s: rollback unavailable reason code. */
+				__( 'Reason %s', 'alynt-drime-backups-dashboard' ),
+				$reason
+			);
+		}
+
+		if ( ! empty( $metadata['expires_at'] ) ) {
+			$parts[] = sprintf(
+				/* translators: %s: rollback metadata expiry date/time. */
+				__( 'metadata expires %s', 'alynt-drime-backups-dashboard' ),
+				$this->datetime_label( (string) $metadata['expires_at'] )
+			);
+		}
+
+		return implode( '; ', $parts );
 	}
 }
