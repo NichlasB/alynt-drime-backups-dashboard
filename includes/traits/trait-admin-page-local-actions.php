@@ -75,6 +75,77 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions {
 	}
 
 	/**
+	 * Handles dashboard-local scheduled polling pause.
+	 *
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function handle_pause_polling_action() {
+		return $this->handle_polling_pause_state_action(
+			'pause_polling',
+			'alynt_drime_backups_dashboard_pause_polling',
+			true
+		);
+	}
+
+	/**
+	 * Handles dashboard-local scheduled polling resume.
+	 *
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function handle_resume_polling_action() {
+		return $this->handle_polling_pause_state_action(
+			'resume_polling',
+			'alynt_drime_backups_dashboard_resume_polling',
+			false
+		);
+	}
+
+	/**
+	 * Handles one dashboard-local scheduled polling pause-state transition.
+	 *
+	 * @param string $action Action result slug.
+	 * @param string $nonce_action Nonce action.
+	 * @param bool   $pause Whether to pause or resume.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function handle_polling_pause_state_action( $action, $nonce_action, $pause ) {
+		$nonce = $this->verify_action_nonce( $nonce_action );
+
+		if ( is_wp_error( $nonce ) ) {
+			return $nonce;
+		}
+
+		$site_id = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+		$site    = $site_id > 0 ? $this->sites->get( $site_id ) : null;
+
+		if ( empty( $site ) || ! is_array( $site ) ) {
+			$result = new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+		} elseif ( isset( $site['enrollment_status'] ) && 'revoked' === $site['enrollment_status'] ) {
+			$result = new WP_Error( 'site_revoked', __( 'Revoked dashboard records cannot be paused or resumed. Re-enroll this site before changing polling state.', 'alynt-drime-backups-dashboard' ) );
+		} else {
+			$result = $pause ? $this->sites->pause_polling( $site_id ) : $this->sites->resume_polling( $site_id );
+		}
+
+		$this->record_admin_audit_action(
+			$action,
+			is_wp_error( $result ) || ! $result ? 'failed' : 'succeeded',
+			array(
+				'dashboard_site_id' => $site_id,
+				'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+			)
+		);
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		return array(
+			'action'  => $action,
+			'success' => (bool) $result,
+		);
+	}
+
+	/**
 	 * Handles a manual read-only status check.
 	 *
 	 * @return array<string,mixed>|WP_Error

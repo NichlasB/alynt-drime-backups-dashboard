@@ -40,6 +40,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			case 'revoke_local':
 				return $this->handle_revoke_local_action();
 
+			case 'pause_polling':
+				return $this->handle_pause_polling_action();
+
+			case 'resume_polling':
+				return $this->handle_resume_polling_action();
+
 			case 'check_status_now':
 				return $this->handle_check_status_now_action();
 

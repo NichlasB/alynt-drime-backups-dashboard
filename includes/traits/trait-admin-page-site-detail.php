@@ -82,6 +82,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		$this->render_detail_item( __( 'Last safe error', 'alynt-drime-backups-dashboard' ), $this->safe_error_label( $site ) );
 		echo '</dl></div></div>';
 
+		$this->render_polling_pause_panel( $site );
 		$this->render_request_backup_now_panel( $site, $snapshot, $this->remote_actions->recent_for_site( $site_id, 10 ) );
 		$this->render_schedule_management_panel( $snapshot, $site );
 		$this->render_source_policy_panel( $site, $snapshot );

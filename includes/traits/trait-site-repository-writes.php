@@ -90,6 +90,64 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Writes {
 	}
 
 	/**
+	 * Pauses scheduled polling for one dashboard-owned site record.
+	 *
+	 * @since 0.1.27
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function pause_polling( $site_id ) {
+		global $wpdb;
+
+		$now   = current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		$updated = $wpdb->update(
+			$table,
+			array(
+				'paused_at'    => $now,
+				'next_poll_at' => null,
+				'updated_at'   => $now,
+			),
+			array( 'id' => (int) $site_id ),
+			array( '%s', '%s', '%s' ),
+			array( '%d' )
+		);
+
+		return $this->update_changed_existing_row( $updated );
+	}
+
+	/**
+	 * Resumes scheduled polling for one dashboard-owned site record.
+	 *
+	 * @since 0.1.27
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function resume_polling( $site_id ) {
+		global $wpdb;
+
+		$now   = current_time( 'mysql', true );
+		$table = Alynt_Drime_Backups_Dashboard_Storage::sites_table();
+
+		$updated = $wpdb->update(
+			$table,
+			array(
+				'paused_at'    => null,
+				'next_poll_at' => $now,
+				'updated_at'   => $now,
+			),
+			array( 'id' => (int) $site_id ),
+			array( '%s', '%s', '%s' ),
+			array( '%d' )
+		);
+
+		return $this->update_changed_existing_row( $updated );
+	}
+
+	/**
 	 * Completes enrollment state while waiting for first valid poll activation.
 	 *
 	 * @since 0.1.0

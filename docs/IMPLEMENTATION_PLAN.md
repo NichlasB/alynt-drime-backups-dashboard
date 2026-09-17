@@ -261,7 +261,7 @@ Before the first live operation, present the exact profile above again and obtai
 - latest status and retained snapshots;
 - health classification and stale-site detection;
 - WordPress administrator screens;
-- local revocation of dashboard records, with pause/resume and removal reserved for later local-only operator slices;
+- local revocation and pause/resume of dashboard records, with removal reserved for a later local-only operator slice;
 - dashboard diagnostics that never expose credentials or raw sensitive responses.
 
 ### Uploader plugin owns
@@ -285,7 +285,7 @@ The uploader change is a separate feature slice in the existing uploader reposit
 5. As a dashboard administrator, I can open a site detail view for the latest redacted payload and recent status history.
 6. As a dashboard administrator, I can run **Check Now** without triggering any backup or changing the client.
 7. As a dashboard administrator, I can see when a site has stopped reporting or has an authentication, network, schema, or payload error.
-8. As a dashboard administrator, I can revoke a local dashboard registration without sending a remote action; later local-only slices may add pause/resume or removal after separate review.
+8. As a dashboard administrator, I can revoke a local dashboard registration or pause/resume scheduled polling without sending a remote action; a later local-only slice may add permanent removal after separate review.
 
 ## Pairing And Authentication Contract
 
@@ -466,7 +466,7 @@ Use `WP_List_Table` conventions with:
 - uploader version;
 - queue, failed, and warning counts;
 - cron health;
-- row links for **View** and **Check Now**; local **Pause/Resume** remains a deferred local-only operator slice.
+- row links for **View**, **Check Now**, and local scheduled polling **Pause/Resume**.
 
 Include explicit empty, loading, success, error, and incompatible states. Status must use text and icons in addition to color.
 
@@ -486,7 +486,7 @@ Include explicit empty, loading, success, error, and incompatible states. Status
 - recent status timeline;
 - sanitized polling failures;
 - enrollment and credential state without displaying a secret;
-- local actions for check and revoke; pause/resume and remove remain deferred local-only operator slices.
+- local actions for check, pause/resume scheduled polling, and revoke; permanent remove remains a deferred local-only operator slice.
 
 ### Attention Queue
 
@@ -617,7 +617,7 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, V2.3 preview-only schedule capability reporting/display, signed non-mutating `schedule_preview`, guarded `schedule_apply` for the Alynt scan/upload cadence, release packaging, and approval-gated live deployment are implemented and deployed to the dashboard host. Local dashboard-side rollback-readiness display/support hardening is in progress; `schedule_rollback` runtime behavior remains unavailable.
+Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, local scheduled polling pause/resume controls, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, V2.3 preview-only schedule capability reporting/display, signed non-mutating `schedule_preview`, guarded `schedule_apply` for the Alynt scan/upload cadence, release packaging, and approval-gated live deployment are implemented and deployed to the dashboard host. Local dashboard-side rollback-readiness display/support hardening is implemented for display/support evidence; `schedule_rollback` runtime behavior remains unavailable.
 
 ### Phase 6 — Scheduled polling and history
 

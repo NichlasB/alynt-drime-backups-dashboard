@@ -184,6 +184,87 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Event_Log {
 }
 
 /**
+ * Fake site repository.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
+	/**
+	 * Current site row.
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	public $site = array(
+		'id'                => 42,
+		'enrollment_status' => 'active',
+	);
+
+	/**
+	 * Pause calls.
+	 *
+	 * @var array<int,int>
+	 */
+	public $pause_calls = array();
+
+	/**
+	 * Resume calls.
+	 *
+	 * @var array<int,int>
+	 */
+	public $resume_calls = array();
+
+	/**
+	 * Pause result.
+	 *
+	 * @var bool
+	 */
+	public $pause_result = true;
+
+	/**
+	 * Resume result.
+	 *
+	 * @var bool
+	 */
+	public $resume_result = true;
+
+	/**
+	 * Gets a site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return array<string,mixed>|null
+	 */
+	public function get( $site_id ) {
+		if ( ! is_array( $this->site ) || (int) $this->site['id'] !== (int) $site_id ) {
+			return null;
+		}
+
+		return $this->site;
+	}
+
+	/**
+	 * Records pause.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function pause_polling( $site_id ) {
+		$this->pause_calls[] = (int) $site_id;
+
+		return $this->pause_result;
+	}
+
+	/**
+	 * Records resume.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function resume_polling( $site_id ) {
+		$this->resume_calls[] = (int) $site_id;
+
+		return $this->resume_result;
+	}
+}
+
+/**
  * Minimal harness exposing the private trait action handler for tests.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness {
@@ -218,6 +299,13 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness {
 	public $event_log;
 
 	/**
+	 * Site repository.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites
+	 */
+	public $sites;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager $enrollment_manager Enrollment manager.
@@ -227,6 +315,7 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness {
 		$this->remote_action_dispatcher = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Dispatcher();
 		$this->poller                   = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Poller();
 		$this->event_log                = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Event_Log();
+		$this->sites                    = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites();
 	}
 
 	/**
@@ -368,6 +457,100 @@ class AdminPageActionsTest extends TestCase {
 		$this->assertSame( array( array( 'site_id' => 42, 'requested_by' => 77 ) ), $harness->remote_action_dispatcher->calls );
 		$this->assertSame( array( 42 ), $harness->poller->calls );
 		$this->assertSame( 'request_backup_now', $harness->event_log->audit_calls[0]['action'] );
+	}
+
+	/**
+	 * Valid pause posts update only dashboard-local polling state and audit the action.
+	 *
+	 * @return void
+	 */
+	public function test_valid_pause_polling_nonce_delegates_to_local_site_repository() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_pause_polling';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'pause_polling',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'pause_polling', $result['action'] );
+		$this->assertTrue( $result['success'] );
+		$this->assertSame( array( 42 ), $harness->sites->pause_calls );
+		$this->assertSame( array(), $harness->sites->resume_calls );
+		$this->assertSame( 'pause_polling', $harness->event_log->audit_calls[0]['action'] );
+		$this->assertSame( 'succeeded', $harness->event_log->audit_calls[0]['outcome'] );
+	}
+
+	/**
+	 * Valid resume posts update only dashboard-local polling state and audit the action.
+	 *
+	 * @return void
+	 */
+	public function test_valid_resume_polling_nonce_delegates_to_local_site_repository() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_resume_polling';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'resume_polling',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'resume_polling', $result['action'] );
+		$this->assertTrue( $result['success'] );
+		$this->assertSame( array(), $harness->sites->pause_calls );
+		$this->assertSame( array( 42 ), $harness->sites->resume_calls );
+		$this->assertSame( 'resume_polling', $harness->event_log->audit_calls[0]['action'] );
+		$this->assertSame( 'succeeded', $harness->event_log->audit_calls[0]['outcome'] );
+	}
+
+	/**
+	 * Revoked dashboard records cannot be paused.
+	 *
+	 * @return void
+	 */
+	public function test_pause_polling_rejects_revoked_site_records() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_pause_polling';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+		$harness->sites->site['enrollment_status'] = 'revoked';
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'pause_polling',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'site_revoked', $result->get_error_code() );
+		$this->assertSame( array(), $harness->sites->pause_calls );
+		$this->assertSame( 'failed', $harness->event_log->audit_calls[0]['outcome'] );
 	}
 
 	/**

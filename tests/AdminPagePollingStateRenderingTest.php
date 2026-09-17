@@ -134,6 +134,105 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Paused rows show local paused next-poll copy while keeping manual checks available.
+	 *
+	 * @return void
+	 */
+	public function test_paused_rows_show_paused_polling_copy_and_manual_check_button() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+			'paused_at'          => '2026-09-17 12:00:00',
+			'next_poll_at'       => '',
+		);
+
+		$this->assertStringContainsString( 'Check Now', $harness->check_form_html( $site ) );
+		$this->assertStringContainsString( 'Next poll:', $harness->next_poll_line( $site ) );
+		$this->assertStringContainsString( 'Paused locally', $harness->next_poll_line( $site ) );
+		$this->assertStringNotContainsString( '<time datetime=', $harness->next_poll_line( $site ) );
+	}
+
+	/**
+	 * Active rows render a local Pause Polling control.
+	 *
+	 * @return void
+	 */
+	public function test_active_rows_render_pause_polling_form() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+			'paused_at'          => '',
+		);
+		$html    = $harness->pause_form_html( $site );
+
+		$this->assertStringContainsString( 'Pause Polling', $html );
+		$this->assertStringContainsString( 'value="pause_polling"', $html );
+		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_pause_polling', $html );
+	}
+
+	/**
+	 * Paused rows render a local Resume Polling control.
+	 *
+	 * @return void
+	 */
+	public function test_paused_rows_render_resume_polling_form() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+			'paused_at'          => '2026-09-17 12:00:00',
+		);
+		$html    = $harness->pause_form_html( $site );
+
+		$this->assertStringContainsString( 'Resume Polling', $html );
+		$this->assertStringContainsString( 'value="resume_polling"', $html );
+		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_resume_polling', $html );
+	}
+
+	/**
+	 * Revoked rows do not render polling pause controls.
+	 *
+	 * @return void
+	 */
+	public function test_revoked_rows_do_not_render_pause_polling_form() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'revoked',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+		);
+
+		$this->assertSame( '', $harness->pause_form_html( $site ) );
+	}
+
+	/**
+	 * Site detail polling control explains the local-only boundary.
+	 *
+	 * @return void
+	 */
+	public function test_site_detail_polling_pause_panel_explains_local_only_boundary() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'id'                 => 7,
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+			'paused_at'          => '',
+		);
+		$html    = $harness->pause_panel_html( $site );
+
+		$this->assertStringContainsString( 'Scheduled Polling Control', $html );
+		$this->assertStringContainsString( 'changes only this dashboard record', $html );
+		$this->assertStringContainsString( 'does not contact the client site', $html );
+		$this->assertStringContainsString( 'Pause Polling', $html );
+	}
+
+	/**
 	 * Sites rows show a compact V2.1 eligibility hint from redacted capability evidence.
 	 *
 	 * @return void
@@ -423,6 +522,30 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public function check_form_html( array $site ) {
 		ob_start();
 		$this->render_check_status_form( $site, 7, false );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes scheduled polling pause/resume markup.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	public function pause_form_html( array $site ) {
+		ob_start();
+		$this->render_polling_pause_form( $site, 7 );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes scheduled polling control panel markup.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	public function pause_panel_html( array $site ) {
+		ob_start();
+		$this->render_polling_pause_panel( $site );
 		return (string) ob_get_clean();
 	}
 

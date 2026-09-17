@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Alynt Drime Backups Dashboard 0.1.25\n"
+"Project-Id-Version: Alynt Drime Backups Dashboard 0.1.26\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/alynt-drime-backups-dashboard\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -356,6 +356,22 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-action-notices.php:51
 msgid "Read-only status check completed and stored. No backup or client-site setting was changed."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:66
+msgid "Scheduled polling paused locally. Manual Check Now remains available when polling credentials exist, and no client site or Drime action was attempted."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:67
+msgid "Scheduled polling could not be paused locally. Refresh the site detail screen and try again; the record may already have changed."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:78
+msgid "Scheduled polling resumed locally. The next scheduled poll is due as soon as WordPress cron runs."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:79
+msgid "Scheduled polling could not be resumed locally. Refresh the site detail screen and try again; the record may already have changed."
 msgstr ""
 
 #: includes/traits/trait-admin-page-action-notices.php:56
@@ -1290,6 +1306,7 @@ msgid "Missing polling credentials"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:65
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:76
 msgid "Paused locally"
 msgstr ""
 
@@ -1453,6 +1470,58 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-polling-detail-helpers.php:110
 msgid "Check Now"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:124
+msgid "Resume Polling"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:124
+msgid "Pause Polling"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:125
+msgid "Resuming…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:125
+msgid "Pausing…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:127
+msgid "Resume scheduled read-only polling for this dashboard record."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:128
+msgid "Pause scheduled read-only polling for this dashboard record. Manual Check Now remains available."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:149
+msgid "Scheduled Polling Control"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:150
+msgid "This control changes only this dashboard record. It does not contact the client site, start or stop a backup, change settings, delete data, or mutate Drime."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:152
+msgid "Scheduled polling"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:152
+msgid "Enabled"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:153
+msgid "Paused since"
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:159
+msgid "Use this when a site is intentionally offline, under maintenance, or should stop scheduled dashboard polling temporarily."
+msgstr ""
+
+#: includes/traits/trait-admin-page-polling-detail-helpers.php:161
+msgid "Pause and resume are available only for non-revoked enrolled records with active polling credentials."
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:26
