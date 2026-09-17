@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/class-source-policy.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-timestamp-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-policy-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
@@ -162,6 +163,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
  */
 class Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Timestamp_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence;
 
 	/**

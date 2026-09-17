@@ -22,6 +22,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Display_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Formatters;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Shell;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Timestamp_Helpers;
 
 	const MENU_SLUG = 'alynt-drime-backups-dashboard';
 

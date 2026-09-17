@@ -1,15 +1,16 @@
 # Alynt Drime Backups Dashboard Pre-Release Checklist
 
-Updated: 2026-09-12
+Updated: 2026-09-17
 
 Use this checklist to track release-candidate readiness for the `Alynt Drime Backups Dashboard` plugin. Mark a workflow complete only after current evidence has passed for the recorded candidate.
 
 ## Current Release Candidate
 
-- Candidate version: `0.1.20`
-- Previous published release: `v0.1.19`
-- Candidate purpose: V2.3 preview-only schedule visibility for the Alynt scan/upload schedule capability, plus release metadata and translation-template alignment.
-- Boundary: read-only schedule capability display only. No schedule apply, disable, rollback, backup creation, restore, cleanup, settings, credential, Drime-token, or arbitrary-command action is included.
+- Candidate version: `0.1.28` plus local unreleased file-structure cleanup.
+- Previous published release: `v0.1.28`
+- Candidate purpose: targeted DS3 file-structure cleanup after the `0.1.28` dashboard release and `0.5.20` uploader rollout.
+- Boundary: local source refactor only. No live-site change, deployment, release, backup creation, restore, cleanup, settings, credential, Drime-token, database, or remote action is included.
+- Current checklist note: rows not explicitly updated on 2026-09-17 remain historical release evidence from earlier release-candidate work and should be rerun before the next full release.
 
 ## Prerequisites
 
@@ -30,7 +31,7 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 ## Pre-Release Review Sequence
 
 - [x] 01 Code Cleanup Review: no TODO/FIXME/debug remnants found by targeted source scans.
-- [x] 02 File Structure Review: no new feature-stage split required; oversized files are existing aggregate/trait/test surfaces already covered by structure review deferral.
+- [x] 02 File Structure Review: rerun for current `0.1.28` source on 2026-09-17. Runtime source bloat was reduced by extracting backup-source timestamp helpers into a dedicated trait; PHP/CSS/JS runtime source files are now under the workflow thresholds. Remaining over-threshold files are test files/test bootstrap only and are deferred as lower-risk test-suite organization work. Evidence: `npm.cmd test`, `php .\vendor\bin\phpcs`, and changed-file PHP syntax checks passed.
 - [x] 03 Error Handling Review: status, schedule-capability, and unavailable-capability paths render explicit non-mutating feedback.
 - [x] 04 WP Best Practices Review: WordPress APIs, translatable strings, nonces/capability gates, and existing admin patterns retained.
 - [x] 05 Database Review: no schema/table migration introduced for V2.3; existing snapshot storage handles additive sanitized payload fields.
