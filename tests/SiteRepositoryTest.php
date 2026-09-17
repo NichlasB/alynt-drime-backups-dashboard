@@ -27,6 +27,9 @@ if ( ! function_exists( 'current_time' ) ) {
 }
 
 require_once dirname( __DIR__ ) . '/includes/class-storage.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-site-repository-reads.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-site-repository-writes.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-site-repository-runtime-writes.php';
 require_once dirname( __DIR__ ) . '/includes/class-site-repository.php';
 
 /**

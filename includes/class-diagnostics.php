@@ -19,6 +19,7 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Scheduler;
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Support;
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics;
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metric_Helpers;
 
 	/**
 	 * Site repository.

@@ -9,6 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 require_once dirname( __DIR__ ) . '/includes/class-origin-validator.php';
 require_once dirname( __DIR__ ) . '/includes/class-pairing-tokens.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-site-repository-reads.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-site-repository-writes.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-site-repository-runtime-writes.php';
 require_once dirname( __DIR__ ) . '/includes/class-site-repository.php';
 require_once dirname( __DIR__ ) . '/includes/class-enrollment-manager.php';
 

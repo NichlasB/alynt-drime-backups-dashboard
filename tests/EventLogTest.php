@@ -64,6 +64,8 @@ if ( ! function_exists( 'delete_option' ) ) {
 
 require_once dirname( __DIR__ ) . '/includes/class-event-log-redactor.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-storage.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-settings.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-reporting.php';
 require_once dirname( __DIR__ ) . '/includes/class-event-log.php';
 
 /**

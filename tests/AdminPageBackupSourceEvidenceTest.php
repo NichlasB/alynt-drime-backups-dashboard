@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/class-source-policy.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-policy-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 
 /**

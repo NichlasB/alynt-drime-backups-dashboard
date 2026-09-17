@@ -18,4 +18,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Alynt_Drime_Backups_Dashboard_Site_Repository {
 	use Alynt_Drime_Backups_Dashboard_Site_Repository_Reads;
 	use Alynt_Drime_Backups_Dashboard_Site_Repository_Writes;
+	use Alynt_Drime_Backups_Dashboard_Site_Repository_Runtime_Writes;
 }

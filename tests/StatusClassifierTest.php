@@ -7,8 +7,10 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once dirname( __DIR__ ) . '/includes/class-status-classifier.php';
 require_once dirname( __DIR__ ) . '/includes/class-source-policy.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-status-classifier-backup-sources.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-status-classifier-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/class-status-classifier.php';
 
 /**
  * Tests dashboard status classification.

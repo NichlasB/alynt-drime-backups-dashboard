@@ -22,6 +22,7 @@
 		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-runtime-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-snapshot-repository-retention.php</exclude-pattern>
@@ -32,6 +33,7 @@
 		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-runtime-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-snapshot-repository-retention.php</exclude-pattern>
@@ -41,6 +43,7 @@
 		<exclude-pattern>*/includes/class-site-repository.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-site-repository-writes.php</exclude-pattern>
+		<exclude-pattern>*/includes/traits/trait-site-repository-runtime-writes.php</exclude-pattern>
 		<exclude-pattern>*/includes/class-snapshot-repository.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-snapshot-repository-reads.php</exclude-pattern>
 		<exclude-pattern>*/includes/traits/trait-snapshot-repository-retention.php</exclude-pattern>
