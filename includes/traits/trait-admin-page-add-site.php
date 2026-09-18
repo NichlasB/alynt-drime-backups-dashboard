@@ -61,7 +61,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Add_Site {
 					<p><?php esc_html_e( 'Copy this token now. Before enrollment, the dashboard stores only a verifier derived from it and cannot show it again. If it is lost, generate a new token; the old one then stops working.', 'alynt-drime-backups-dashboard' ); ?></p>
 					<label for="adbd-pairing-token"><strong><?php esc_html_e( 'Pairing token', 'alynt-drime-backups-dashboard' ); ?></strong></label>
 					<div class="adbd-copy-row">
-						<input id="adbd-pairing-token" class="large-text code" type="text" readonly="readonly" value="<?php echo esc_attr( (string) $result['pairing_token'] ); ?>" aria-describedby="adbd-pairing-token-help">
+						<input id="adbd-pairing-token" class="large-text code" type="text" readonly="readonly" value="<?php echo esc_attr( (string) $result['pairing_token'] ); ?>" aria-label="<?php esc_attr_e( 'Dashboard pairing token', 'alynt-drime-backups-dashboard' ); ?>" aria-describedby="adbd-pairing-token-help">
 						<button type="button" class="button button-primary adbd-copy-button" hidden data-copy-target="adbd-pairing-token" data-busy-label="<?php esc_attr_e( 'Copying…', 'alynt-drime-backups-dashboard' ); ?>" data-success-message="<?php esc_attr_e( 'Pairing token copied to the clipboard.', 'alynt-drime-backups-dashboard' ); ?>" data-error-message="<?php esc_attr_e( 'The token could not be copied automatically. Select the field and copy it manually.', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Copy Token', 'alynt-drime-backups-dashboard' ); ?></button>
 					</div>
 					<p id="adbd-pairing-token-help" class="description"><?php esc_html_e( 'This token is single use and is not a Drime API token.', 'alynt-drime-backups-dashboard' ); ?></p>

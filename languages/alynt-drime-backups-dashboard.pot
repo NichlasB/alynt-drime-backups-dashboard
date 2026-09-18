@@ -475,6 +475,10 @@ msgstr ""
 msgid "Pairing token"
 msgstr ""
 
+#: includes/traits/trait-admin-page-add-site.php:64
+msgid "Dashboard pairing token"
+msgstr ""
+
 #: includes/traits/trait-admin-page-add-site.php:65
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:53
 #: includes/traits/trait-admin-page-diagnostics-support-output.php:35
@@ -1716,6 +1720,10 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:87
 msgid "Action opt-in token"
+msgstr ""
+
+#: includes/traits/trait-admin-page-request-backup-detail-helpers.php:88
+msgid "V2 action opt-in token"
 msgstr ""
 
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:89
