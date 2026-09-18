@@ -38,6 +38,13 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	private $snapshots;
 
 	/**
+	 * Remote action repository.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Remote_Action_Repository
+	 */
+	private $remote_actions;
+
+	/**
 	 * Enrollment REST controller.
 	 *
 	 * @var Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller
@@ -52,16 +59,16 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	public function __construct() {
 		Alynt_Drime_Backups_Dashboard_Storage::maybe_upgrade();
 
-		$sites           = new Alynt_Drime_Backups_Dashboard_Site_Repository();
-		$this->snapshots = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
-		$source_policy   = new Alynt_Drime_Backups_Dashboard_Source_Policy();
-		$classifier      = new Alynt_Drime_Backups_Dashboard_Status_Classifier( $source_policy );
-		$event_log       = new Alynt_Drime_Backups_Dashboard_Event_Log();
-		$remote_actions  = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
-		$reconciler      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler( $remote_actions );
-		$this->poller    = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier, null, null, null, null, $event_log, $reconciler );
-		$diagnostics     = new Alynt_Drime_Backups_Dashboard_Diagnostics( $sites, $this->snapshots, $classifier, $event_log, $remote_actions );
-		$dispatcher      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher( $sites, $this->snapshots, $remote_actions );
+		$sites                = new Alynt_Drime_Backups_Dashboard_Site_Repository();
+		$this->snapshots      = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
+		$source_policy        = new Alynt_Drime_Backups_Dashboard_Source_Policy();
+		$classifier           = new Alynt_Drime_Backups_Dashboard_Status_Classifier( $source_policy );
+		$event_log            = new Alynt_Drime_Backups_Dashboard_Event_Log();
+		$this->remote_actions = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$reconciler           = new Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler( $this->remote_actions );
+		$this->poller         = new Alynt_Drime_Backups_Dashboard_Poller( $sites, $this->snapshots, $classifier, null, null, null, null, $event_log, $reconciler );
+		$diagnostics          = new Alynt_Drime_Backups_Dashboard_Diagnostics( $sites, $this->snapshots, $classifier, $event_log, $this->remote_actions );
+		$dispatcher           = new Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher( $sites, $this->snapshots, $this->remote_actions );
 
 		$this->admin_page                 = new Alynt_Drime_Backups_Dashboard_Admin_Page(
 			$sites,
@@ -70,7 +77,7 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 			null,
 			$this->poller,
 			$diagnostics,
-			$remote_actions,
+			$this->remote_actions,
 			null,
 			$dispatcher,
 			$source_policy
@@ -92,6 +99,16 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 		add_action( 'admin_enqueue_scripts', array( $this->admin_page, 'enqueue_assets' ) );
 		add_action( 'rest_api_init', array( $this->enrollment_rest_controller, 'register_routes' ) );
 		add_action( Alynt_Drime_Backups_Dashboard_Poller::CRON_HOOK, array( $this->poller, 'poll_sites' ) );
-		add_action( Alynt_Drime_Backups_Dashboard_Poller::CLEANUP_HOOK, array( $this->snapshots, 'cleanup_retention' ) );
+		add_action( Alynt_Drime_Backups_Dashboard_Poller::CLEANUP_HOOK, array( $this, 'cleanup_retention' ) );
+	}
+
+	/**
+	 * Runs bounded dashboard database retention cleanup.
+	 *
+	 * @return void
+	 */
+	public function cleanup_retention() {
+		$this->snapshots->cleanup_retention();
+		$this->remote_actions->cleanup_retention();
 	}
 }
