@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.30 - 2026-09-18
+
 ### Changed
 
 - Made Sites-tab backup evidence more compact with an at-a-glance backup-health summary and short per-source rows while keeping detailed reasons on Site Detail.
