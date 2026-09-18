@@ -2,7 +2,7 @@
 
 Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
 
-This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.28 includes dashboard-local scheduled polling pause/resume controls and friendlier Diagnostics operator action-history labels, while version 0.1.25 includes V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers, patch fixes so newly dispatched action rows use the same public action UUID reported by clients and same-origin dashboard self-actions can pass managed-host loopback/private DNS resolution safely, a dashboard-owned WPvivid external/optional monitoring policy for sites that intentionally handle WPvivid backups outside Alynt-uploaded evidence, V2.3 Alynt scan/upload schedule visibility plus guarded preview/apply workflow, and clearer Schedule Apply history details. Schedule Apply remains hidden unless a client reports its separate local Schedule Apply opt-in.
+This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.29 includes scheduled-maintenance cleanup wiring, diagnostics no-op handling, targeted signer coverage, detail-view history reuse, and accessible copy-field labels, while version 0.1.28 includes dashboard-local scheduled polling pause/resume controls and friendlier Diagnostics operator action-history labels. Version 0.1.25 includes V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers, patch fixes so newly dispatched action rows use the same public action UUID reported by clients and same-origin dashboard self-actions can pass managed-host loopback/private DNS resolution safely, a dashboard-owned WPvivid external/optional monitoring policy for sites that intentionally handle WPvivid backups outside Alynt-uploaded evidence, V2.3 Alynt scan/upload schedule visibility plus guarded preview/apply workflow, and clearer Schedule Apply history details. Schedule Apply remains hidden unless a client reports its separate local Schedule Apply opt-in.
 
 ## v1 Boundary
 
@@ -41,7 +41,7 @@ This repository is the separate dashboard plugin package. The current dashboard 
 
 ## Current Status
 
-Version 0.1.28 currently includes:
+Version 0.1.29 currently includes:
 
 - WordPress plugin header and requirement gate.
 - Local custom table migration hooks for dashboard-owned sites and snapshots.

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.29 - 2026-09-18
+
 ### Added
 
 - Added targeted remote-action signer regression coverage for unsupported PHP Sodium runtimes and malformed signature material.
