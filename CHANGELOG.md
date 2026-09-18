@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added targeted remote-action signer regression coverage for unsupported PHP Sodium runtimes and malformed signature material.
+
+### Changed
+
+- Reused already-loaded Site Detail remote-action history when rendering V2 action panels, reducing duplicate repository reads.
+- Added accessible names to display-once pairing-token and V2 action opt-in token copy fields.
+
+### Fixed
+
+- Treated clearing an already-empty diagnostics event buffer as a successful no-op.
+- Wired scheduled maintenance to run completed remote-action retention cleanup alongside snapshot retention cleanup.
+
 ## 0.1.28 - 2026-09-17
 
 ### Changed

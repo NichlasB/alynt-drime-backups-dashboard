@@ -2,13 +2,13 @@
 
 ## Alynt Drime Backups Dashboard Hooks
 
-Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.25.
+Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.28.
 
 The hooks below are internal WordPress integration points owned by the plugin. Treat them as implementation details unless a future release explicitly documents them as public extension points.
 
 ## Public Extension Hooks
 
-None in version 0.1.25.
+None in version 0.1.28.
 
 ## WordPress Lifecycle Hooks
 
@@ -16,13 +16,13 @@ None in version 0.1.25.
 
 Registered from `alynt-drime-backups-dashboard.php`.
 
-Runs `Alynt_Drime_Backups_Dashboard_Activator::activate()` to install or upgrade local dashboard-owned tables, store the schema version marker, and schedule the read-only polling and local snapshot cleanup events.
+Runs `Alynt_Drime_Backups_Dashboard_Activator::activate()` to install or upgrade local dashboard-owned tables, store the schema version marker, and schedule the read-only polling and local retention cleanup events.
 
 ### Deactivation
 
 Registered from `alynt-drime-backups-dashboard.php`.
 
-Runs `Alynt_Drime_Backups_Dashboard_Deactivator::deactivate()` to unschedule dashboard polling and local snapshot cleanup events. Deactivation does not contact client sites and does not delete stored dashboard records.
+Runs `Alynt_Drime_Backups_Dashboard_Deactivator::deactivate()` to unschedule dashboard polling and local retention cleanup events. Deactivation does not contact client sites and does not delete stored dashboard records.
 
 ### Uninstall
 
@@ -45,7 +45,7 @@ Handled by `uninstall.php`. WordPress-discovered copies outside the canonical `a
 | Hook | Recurrence | Purpose |
 |------|------------|---------|
 | `alynt_drime_backups_dashboard_poll_sites` | `alynt_drime_backups_dashboard_15_minutes` | Runs bounded read-only polling batches for enrolled client sites. |
-| `alynt_drime_backups_dashboard_cleanup_snapshots` | `daily` | Removes old local dashboard snapshot rows according to retention rules. |
+| `alynt_drime_backups_dashboard_cleanup_snapshots` | `daily` | Removes old local dashboard snapshot rows and completed remote-action history according to retention rules. |
 
 Polling uses the fixed authenticated client status route and stores normalized local snapshots. It must not trigger remote backup creation, restore, delete, cleanup, settings, credential, Drime-token, or arbitrary-command actions. V2.1 Request Backup Now uses a separate client opt-in and signed action-intent route; it is not authorized by polling credentials.
 
