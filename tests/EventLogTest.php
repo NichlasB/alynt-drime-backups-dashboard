@@ -38,6 +38,15 @@ if ( ! function_exists( 'update_option' ) ) {
 	function update_option( $option, $value, $autoload = null ) {
 		global $alynt_drime_backups_dashboard_test_options;
 		global $alynt_drime_backups_dashboard_test_autoload;
+		global $alynt_drime_backups_dashboard_test_unchanged_update_fails;
+
+		if (
+			! empty( $alynt_drime_backups_dashboard_test_unchanged_update_fails )
+			&& array_key_exists( $option, $alynt_drime_backups_dashboard_test_options )
+			&& $alynt_drime_backups_dashboard_test_options[ $option ] === $value
+		) {
+			return false;
+		}
 
 		$alynt_drime_backups_dashboard_test_options[ $option ]  = $value;
 		$alynt_drime_backups_dashboard_test_autoload[ $option ] = $autoload;
@@ -82,9 +91,11 @@ class EventLogTest extends TestCase {
 
 		global $alynt_drime_backups_dashboard_test_options;
 		global $alynt_drime_backups_dashboard_test_autoload;
+		global $alynt_drime_backups_dashboard_test_unchanged_update_fails;
 
 		$alynt_drime_backups_dashboard_test_options  = array();
 		$alynt_drime_backups_dashboard_test_autoload = array();
+		$alynt_drime_backups_dashboard_test_unchanged_update_fails = false;
 	}
 
 	/**
@@ -183,6 +194,25 @@ class EventLogTest extends TestCase {
 		$log->log( 'critical', 'cron', 'poll_failed', 'Poll failed.' );
 
 		$this->assertNotEmpty( $log->recent_events() );
+		$this->assertTrue( $log->clear() );
+		$this->assertSame( array(), $log->recent_events() );
+	}
+
+	/**
+	 * Clear treats an already-empty event buffer as a successful no-op.
+	 *
+	 * @return void
+	 */
+	public function test_clear_empty_events_succeeds_as_noop() {
+		global $alynt_drime_backups_dashboard_test_options;
+		global $alynt_drime_backups_dashboard_test_unchanged_update_fails;
+
+		$alynt_drime_backups_dashboard_test_options[ Alynt_Drime_Backups_Dashboard_Event_Log::OPTION_EVENTS ] = array();
+		$alynt_drime_backups_dashboard_test_unchanged_update_fails = true;
+
+		$log = new Alynt_Drime_Backups_Dashboard_Event_Log();
+
+		$this->assertSame( array(), $log->recent_events() );
 		$this->assertTrue( $log->clear() );
 		$this->assertSame( array(), $log->recent_events() );
 	}

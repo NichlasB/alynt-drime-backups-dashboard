@@ -143,6 +143,11 @@ trait Alynt_Drime_Backups_Dashboard_Event_Log_Reporting {
 			return false;
 		}
 
+		if ( array() === $this->stored_events() ) {
+			$this->events_cache = array();
+			return true;
+		}
+
 		$cleared = (bool) update_option( self::OPTION_EVENTS, array(), false );
 
 		if ( $cleared ) {
