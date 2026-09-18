@@ -19,7 +19,7 @@ require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-sour
  */
 class AdminPageBackupSourceEvidenceTest extends TestCase {
 	/**
-	 * Sites table compact evidence includes at-a-glance source timestamps.
+	 * Sites table compact evidence includes at-a-glance source summaries.
 	 *
 	 * @return void
 	 */
@@ -29,16 +29,20 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 
 		$this->assertStringContainsString( 'Server runner / generic outbox', $html );
 		$this->assertStringContainsString( 'WPvivid', $html );
-		$this->assertStringContainsString( '3 current package sets', $html );
-		$this->assertStringContainsString( '1 current package set', $html );
-		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
-		$this->assertSame( 2, substr_count( $html, 'Latest upload' ) );
-		$this->assertSame( 2, substr_count( $html, 'Expected' ) );
-		$this->assertSame( 2, substr_count( $html, 'Why' ) );
-		$this->assertStringContainsString( 'The latest upload is fresh; queued packages are waiting to upload.', $html );
-		$this->assertStringContainsString( 'WPvivid activity', $html );
-		$this->assertStringContainsString( 'WPvivid backup log observed', $html );
-		$this->assertStringContainsString( '<time datetime=', $html );
+		$this->assertStringContainsString( 'Backups:', $html );
+		$this->assertStringContainsString( 'On schedule', $html );
+		$this->assertStringContainsString( '2 minutes ago', $html );
+		$this->assertStringContainsString( '1 minute ago', $html );
+		$this->assertStringContainsString( '3 sets', $html );
+		$this->assertStringContainsString( '1 set', $html );
+		$this->assertStringContainsString( 'expected ≤36 hours', $html );
+		$this->assertStringContainsString( 'expected ≤9 days', $html );
+		$this->assertStringNotContainsString( 'Latest backup/package', $html );
+		$this->assertStringNotContainsString( 'Latest upload', $html );
+		$this->assertStringNotContainsString( 'Expected:', $html );
+		$this->assertStringNotContainsString( 'Why:', $html );
+		$this->assertStringNotContainsString( 'WPvivid backup log observed', $html );
+		$this->assertStringNotContainsString( '<time datetime=', $html );
 	}
 
 	/**
@@ -77,8 +81,8 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$detail_html  = $harness->detail_html( $payload );
 
 		$this->assertStringContainsString( 'Within policy', $compact_html );
-		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $compact_html );
-		$this->assertStringContainsString( 'The uploader marked this source stale, but the latest upload is still inside the dashboard freshness policy.', $compact_html );
+		$this->assertStringContainsString( 'expected ≤9 days', $compact_html );
+		$this->assertStringNotContainsString( 'The uploader marked this source stale, but the latest upload is still inside the dashboard freshness policy.', $compact_html );
 		$this->assertStringContainsString( 'Within policy', $detail_html );
 		$this->assertStringContainsString( 'within 9 days (detected WPvivid schedule)', $detail_html );
 		$this->assertStringContainsString( 'The uploader marked this source stale, but the latest upload is still inside the dashboard freshness policy.', $detail_html );
@@ -109,15 +113,15 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$detail_html  = $harness->detail_html( $payload, $site );
 
 		$this->assertStringContainsString( 'External / optional', $compact_html );
-		$this->assertStringContainsString( 'external / optional on this dashboard', $compact_html );
-		$this->assertStringContainsString( 'This source is marked external/optional, so Alynt-uploaded evidence is not required on this dashboard.', $compact_html );
+		$this->assertStringContainsString( 'external / optional', $compact_html );
+		$this->assertStringNotContainsString( 'This source is marked external/optional, so Alynt-uploaded evidence is not required on this dashboard.', $compact_html );
 		$this->assertStringContainsString( 'External / optional', $detail_html );
 		$this->assertStringContainsString( 'external / optional on this dashboard', $detail_html );
 		$this->assertStringContainsString( 'This source is marked external/optional, so Alynt-uploaded evidence is not required on this dashboard.', $detail_html );
 	}
 
 	/**
-	 * Stale and missing source evidence show direct operator reasons.
+	 * Stale and missing source evidence show compact warning summaries.
 	 *
 	 * @return void
 	 */
@@ -139,8 +143,12 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
 		$html    = $harness->compact_html( $payload );
 
-		$this->assertStringContainsString( 'The latest uploaded backup evidence is older than expected.', $html );
-		$this->assertStringContainsString( 'No Alynt-uploaded backup evidence is reported for this source.', $html );
+		$this->assertStringContainsString( 'Backups:', $html );
+		$this->assertStringContainsString( 'Server overdue', $html );
+		$this->assertStringContainsString( 'Stale', $html );
+		$this->assertStringContainsString( 'No upload evidence', $html );
+		$this->assertStringNotContainsString( 'The latest uploaded backup evidence is older than expected.', $html );
+		$this->assertStringNotContainsString( 'No Alynt-uploaded backup evidence is reported for this source.', $html );
 	}
 
 	/**

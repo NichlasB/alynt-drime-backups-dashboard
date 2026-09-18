@@ -113,6 +113,26 @@ Useful UI language should separate historical activity from current restore conf
 
 Dashboard-side implementation status: the dashboard now has a local, additive schema-1 consumer slice for optional `backup_sources` summaries. This covers payload allowlisting, status classification, Sites list summaries, Site Detail snapshot evidence, aggregate diagnostics, support-safe export counts, protocol documentation, and focused unit coverage. The companion uploader-side producer work remains a separate implementation slice.
 
+### Compact Sites Backup Evidence UI Slice
+
+Operational use showed that the Sites tab backup evidence column became too dense after source-level freshness, schedule-aware policy, inventory counts, WPvivid activity hints, and explanatory reason lines were all added to each table row. The data is useful, but the default list view should be an at-a-glance monitor first and a detailed explanation surface second.
+
+Implement a small dashboard-only UI slice that preserves all existing classifications, source-policy logic, status payload handling, and read-only boundaries while making healthy rows easier to scan:
+
+- Add a compact row-level backup health summary such as `Backups: On schedule`, `Backups: WPvivid overdue`, `Backups: Missing evidence`, or `Backups: Unknown`.
+- Replace verbose Sites-list source prose with compact source rows, for example `Server runner · Fresh · 14 hours ago · 1 set · expected ≤36 hours` and `WPvivid · Within policy · 5 days ago · 12 sets · expected ≤9 days`.
+- Remove default `Why:` and full `Expected:` explanation blocks from the Sites table. Keep operator reasons, exact policy wording, WPvivid activity explanations, evidence type, and warnings available on the Site Detail screen.
+- Keep healthy rows visually quiet. Warning, overdue, missing-evidence, and unknown states should remain visibly stronger than healthy detail.
+- Do not change client protocol, status classification, schedule-detected freshness policy, remote-action capabilities, credential handling, polling behavior, or dashboard security boundaries.
+
+Acceptance criteria:
+
+- Sites-tab rows can be scanned quickly to determine whether each site's backups are on schedule.
+- The Backup Evidence column uses a short backup-health summary plus compact per-source rows by default.
+- Detailed source explanations remain available on Site Detail.
+- Healthy rows use less vertical space than the previous verbose source evidence block.
+- Rendering tests cover the compact output and prove verbose reason labels are not shown in the Sites-list helper.
+
 ### Dashboard-Side Backup Freshness Policy Slice
 
 Operational rollout showed that the first backup-source classifier was too strict for WPvivid on sites where WPvivid is intentionally scheduled weekly, biweekly, or as a secondary/manual safety layer. The initial source-level rule treated any configured source with uploader-reported `stale` freshness as `Needs attention`, even when the server-runner source was fresh, queues were empty, failed counts were zero, cron was healthy, and WPvivid upload evidence was only slightly older than the uploader's conservative 36-hour freshness window.

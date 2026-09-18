@@ -80,21 +80,21 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			return '<span class="adbd-row-meta">' . esc_html__( 'Source evidence: not reported', 'alynt-drime-backups-dashboard' ) . '</span>';
 		}
 
-		$html = '<ul class="adbd-source-summary">';
+		$health = $this->backup_sources_compact_health_summary( $sources, $site );
+		$html   = '<div class="adbd-source-health is-' . esc_attr( $health['state'] ) . '"><span class="adbd-source-health-label">' . esc_html__( 'Backups:', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $health['label'] ) . '</div>';
+		$html  .= '<ul class="adbd-source-summary">';
 
 		foreach ( $sources as $source_key => $source ) {
-			$html .= '<li><strong>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . ':</strong> ';
-			$html .= esc_html( $this->source_freshness_label( $this->source_effective_freshness_status( $source_key, $source, $site ) ) );
-			$html .= '<span class="adbd-row-meta adbd-source-line adbd-source-reason"><span class="adbd-source-line-label">' . esc_html__( 'Why', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_operator_reason_label( $source_key, $source, $site ) ) . '</span>';
-			$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'Expected', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_policy_label( $source_key, $source, $site ) ) . '</span>';
-			$html .= '<span class="adbd-row-meta adbd-source-line">' . esc_html( $this->source_inventory_label( $source ) ) . '</span>';
-			$html .= $this->source_compact_timestamp_html( __( 'Latest backup/package', 'alynt-drime-backups-dashboard' ), isset( $source['latest_created_at'] ) ? $source['latest_created_at'] : 0 );
-			$html .= $this->source_compact_timestamp_html( __( 'Latest upload', 'alynt-drime-backups-dashboard' ), isset( $source['latest_uploaded_at'] ) ? $source['latest_uploaded_at'] : 0 );
-			if ( 'wpvivid' === $source_key ) {
-				$html .= '<span class="adbd-row-meta adbd-source-line"><span class="adbd-source-line-label">' . esc_html__( 'WPvivid activity', 'alynt-drime-backups-dashboard' ) . ':</span> ' . esc_html( $this->source_activity_label( $source ) ) . '</span>';
-				$html .= $this->source_compact_timestamp_html( __( 'Latest WPvivid activity', 'alynt-drime-backups-dashboard' ), isset( $source['latest_source_activity_at'] ) ? $source['latest_source_activity_at'] : 0 );
-			}
-			$html .= '</li>';
+			$freshness = $this->source_effective_freshness_status( $source_key, $source, $site );
+			$html     .= '<li class="is-' . esc_attr( $freshness ) . '">';
+			$html     .= '<strong>' . esc_html( $this->backup_source_label( $source_key, $source ) ) . '</strong>';
+			$html     .= '<span class="adbd-source-compact-parts">';
+			$html     .= '<span class="adbd-source-freshness is-' . esc_attr( $freshness ) . '">' . esc_html( $this->source_freshness_label( $freshness ) ) . '</span>';
+			$html     .= '<span>' . esc_html( $this->source_compact_upload_age_label( $source ) ) . '</span>';
+			$html     .= '<span>' . esc_html( $this->source_inventory_compact_label( $source ) ) . '</span>';
+			$html     .= '<span>' . esc_html( $this->source_policy_compact_label( $source_key, $source, $site ) ) . '</span>';
+			$html     .= '</span>';
+			$html     .= '</li>';
 		}
 
 		return $html . '</ul>';

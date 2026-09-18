@@ -876,12 +876,48 @@ msgstr ""
 msgid "Source evidence: not reported"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:88
-msgid "Why"
+#: includes/traits/trait-admin-page-backup-source-evidence.php:84
+msgid "Backups:"
 msgstr ""
 
-#: includes/traits/trait-admin-page-backup-source-evidence.php:89
-msgid "Expected"
+#. translators: %s: backup source label, such as Server or WPvivid.
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:167
+#, php-format
+msgid "%s overdue"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:192
+msgid "Missing evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:205
+msgid "On schedule"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:235
+msgid "no upload time"
+msgstr ""
+
+#. translators: %d: number of current backup sets.
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:256
+#, php-format
+msgid "%d set"
+msgid_plural "%d sets"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:271
+msgid "external / optional"
+msgstr ""
+
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:277
+msgid "expected unknown"
+msgstr ""
+
+#. translators: %s: human-readable freshness window.
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:282
+#, php-format
+msgid "expected ≤%s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-policy-helpers.php:55
@@ -2270,6 +2306,7 @@ msgid "in %s"
 msgstr ""
 
 #. translators: %s: human-readable duration.
+#: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:241
 #: includes/traits/trait-admin-page-time-formatters.php:47
 #, php-format
 msgid "%s ago"
