@@ -374,7 +374,8 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Schedule Apply', $html );
 		$this->assertStringContainsString( 'every 15 minutes → every 30 minutes', $html );
 		$this->assertStringContainsString( 'Next run 2026-09-15 18:53 UTC', $html );
-		$this->assertStringContainsString( 'Rollback metadata captured; rollback unavailable', $html );
+		$this->assertStringContainsString( 'Alynt scan/upload only', $html );
+		$this->assertStringContainsString( 'Rollback metadata captured as evidence only; rollback action unavailable', $html );
 		$this->assertStringContainsString( 'Reason schedule_rollback_runtime_not_implemented', $html );
 		$this->assertStringContainsString( 'metadata expires 2026-09-15 19:24 UTC', $html );
 	}

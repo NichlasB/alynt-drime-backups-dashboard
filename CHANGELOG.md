@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Clarified V2.3 Schedule Apply wording so operators see that changes are limited to future Alynt scan/upload cadence and rollback remains unavailable in this release.
+
 ## 0.1.31 - 2026-09-18
 
 ### Fixed

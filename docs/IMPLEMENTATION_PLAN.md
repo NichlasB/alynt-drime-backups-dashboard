@@ -42,6 +42,24 @@ Required gates:
 6. Do not proceed from preview to apply/rollback without a new protocol/threat-model update, explicit user approval, tests proving no unsafe fallback, and a separate release/deploy gate.
 7. Treat rollback metadata capture as a separate stabilization/readiness slice from rollback execution. Capturing support-safe metadata may be designed before a `schedule_rollback` action exists, but `schedule_rollback` must remain unavailable until a later protocol/threat-model and release gate are approved.
 
+### V2.3 Schedule-Control Stabilization Slice
+
+After guarded Schedule Apply reached the live dashboard, the next safe dashboard-side slice is stabilization rather than a new remote power. This slice should harden operator wording and tests around the already released V2.3 boundary:
+
+- make Site Detail copy unmistakable that Schedule Apply changes only future Alynt scan/upload cadence;
+- make rollback status explicit: rollback metadata may be displayed as support evidence, but no `schedule_rollback` action, button, dispatch path, or runtime behavior is available in this version;
+- make remote-action history details describe schedule apply as `Alynt scan/upload only` so operators do not infer WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or credential control;
+- preserve the existing signed preview/apply behavior, fresh-preview requirement, action history storage, support-safe rollback-readiness metadata display, and per-client Schedule Apply opt-in gate;
+- avoid client protocol changes unless a later rollback-readiness or runtime rollback slice is separately planned and approved.
+
+Acceptance criteria:
+
+- Site Detail Schedule Management copy says rollback is unavailable in this release and no rollback control is rendered.
+- Apply confirmation copy says the action is only for future Alynt scan/upload cadence and rollback is unavailable.
+- Remote Action History labels Schedule Apply details as Alynt scan/upload only and treats rollback metadata as evidence-only.
+- Existing schedule preview/apply tests pass, and targeted tests cover the hardened wording.
+- No remote backup creation, WPvivid schedule changes, server-runner schedule changes, cleanup, delete, restore, rollback dispatch, arbitrary cron, Drime credential storage, or live-site changes are introduced.
+
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
 ## Repository And Package Identity Confirmation Gate

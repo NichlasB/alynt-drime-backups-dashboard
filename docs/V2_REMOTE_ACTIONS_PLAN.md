@@ -6,6 +6,8 @@ Status: V2 planning baseline. The V2.1 action opt-in token foundation, dashboard
 
 Current V2.3 state: passive schedule capability display, signed non-mutating `schedule_preview`, and guarded signed `schedule_apply` for the Alynt scan/upload cadence have been implemented, released, and deployed. Schedule Apply remains disabled by default on clients and requires explicit per-client local opt-in. `schedule_rollback` runtime behavior is not implemented.
 
+Next V2.3 stabilization step: harden dashboard operator wording and tests around the existing Schedule Apply boundary before any broader remote-action class is considered. The dashboard may display support-safe rollback-readiness metadata as evidence, but it must continue to render no rollback control and dispatch no `schedule_rollback` action.
+
 Draft V2.1 protocol and threat-model artifacts:
 
 - `docs/PROTOCOL_V2.md`

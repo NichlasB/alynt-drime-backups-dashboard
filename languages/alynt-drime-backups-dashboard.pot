@@ -1706,8 +1706,12 @@ msgstr ""
 msgid "Preview: %1$s → %2$s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:245
-msgid "Rollback metadata captured; rollback unavailable"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:210
+msgid "Alynt scan/upload only"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:247
+msgid "Rollback metadata captured as evidence only; rollback action unavailable"
 msgstr ""
 
 #. translators: %s: rollback unavailable reason code.
@@ -1874,8 +1878,8 @@ msgstr ""
 msgid "Schedule Management"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:36
-msgid "V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, or change credentials."
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:37
+msgid "V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, roll back schedules, or change credentials."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:39
@@ -1942,12 +1946,12 @@ msgstr ""
 msgid "Rollback"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
-msgid "Not available in this version"
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
+msgid "Unavailable in this release; rollback metadata is evidence only and no rollback action exists."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:72
-msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview."
+msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:89
@@ -1976,13 +1980,13 @@ msgid "Apply becomes available after a fresh successful preview for this schedul
 msgstr ""
 
 #. translators: 1: current cadence, 2: proposed cadence.
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:152
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:154
 #, php-format
-msgid "Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only."
+msgid "Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only; rollback is not available in this release."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:161
-msgid "I understand this applies only the previewed future Alynt scan/upload cadence change and does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:163
+msgid "I understand this applies only the previewed future Alynt scan/upload cadence change, rollback is unavailable, and this does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:163

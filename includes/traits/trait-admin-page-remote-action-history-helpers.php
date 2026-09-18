@@ -207,6 +207,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 				);
 			}
 
+			$detail .= '; ' . __( 'Alynt scan/upload only', 'alynt-drime-backups-dashboard' );
+
 			$rollback_label = isset( $apply['rollback_metadata'] ) && is_array( $apply['rollback_metadata'] ) ? $this->remote_action_rollback_metadata_label( $apply['rollback_metadata'] ) : '';
 			if ( '' !== $rollback_label ) {
 				$detail .= '; ' . $rollback_label;
@@ -242,7 +244,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 		}
 
 		$parts  = array(
-			__( 'Rollback metadata captured; rollback unavailable', 'alynt-drime-backups-dashboard' ),
+			__( 'Rollback metadata captured as evidence only; rollback action unavailable', 'alynt-drime-backups-dashboard' ),
 		);
 		$reason = isset( $metadata['reason'] ) ? sanitize_key( (string) $metadata['reason'] ) : '';
 
