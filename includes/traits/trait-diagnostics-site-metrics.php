@@ -30,11 +30,20 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 		$counts = array(
 			'total_sites'         => count( $sites ),
 			'polling_ready'       => 0,
+			'not_polling'         => 0,
 			'due_now'             => 0,
 			'missing_credentials' => 0,
 			'paused'              => 0,
 			'with_failures'       => 0,
 			'statuses'            => array(),
+			'record_states'       => array(
+				'active'              => 0,
+				'awaiting_first_poll' => 0,
+				'pending'             => 0,
+				'revoked'             => 0,
+				'other'               => 0,
+				'unknown'             => 0,
+			),
 			'backup_sources'      => array(
 				'reporting_sites'            => 0,
 				'stale_sources'              => 0,
@@ -55,12 +64,19 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			$snapshot = isset( $snapshots[ $site_id ] ) ? $snapshots[ $site_id ] : null;
 			$status   = $this->classifier->classify( $site, $snapshot, $now );
 			$category = isset( $status['category'] ) ? (string) $status['category'] : 'unknown';
+			$state    = $this->site_record_state( $site );
 
 			if ( ! isset( $counts['statuses'][ $category ] ) ) {
 				$counts['statuses'][ $category ] = 0;
 			}
 
 			++$counts['statuses'][ $category ];
+
+			if ( ! isset( $counts['record_states'][ $state ] ) ) {
+				$counts['record_states'][ $state ] = 0;
+			}
+
+			++$counts['record_states'][ $state ];
 
 			if ( ! empty( $site['paused_at'] ) ) {
 				++$counts['paused'];
@@ -74,6 +90,10 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				}
 			} elseif ( $this->is_enrolled_for_polling( $site ) && empty( $site['paused_at'] ) && ! $this->has_polling_credentials( $site ) ) {
 				++$counts['missing_credentials'];
+			}
+
+			if ( ! $this->is_polling_ready( $site ) ) {
+				++$counts['not_polling'];
 			}
 
 			if ( ! empty( $site['consecutive_failures'] ) ) {

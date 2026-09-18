@@ -79,6 +79,26 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metric_Helpers {
 	}
 
 	/**
+	 * Gets a support-safe dashboard record state bucket.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	private function site_record_state( array $site ) {
+		$status = isset( $site['enrollment_status'] ) ? sanitize_key( (string) $site['enrollment_status'] ) : '';
+
+		if ( '' === $status ) {
+			return 'unknown';
+		}
+
+		if ( in_array( $status, array( 'active', 'awaiting_first_poll', 'pending', 'revoked' ), true ) ) {
+			return $status;
+		}
+
+		return 'other';
+	}
+
+	/**
 	 * Extracts site IDs without depending on WordPress helpers.
 	 *
 	 * @param array<int,array<string,mixed>> $sites Sites.

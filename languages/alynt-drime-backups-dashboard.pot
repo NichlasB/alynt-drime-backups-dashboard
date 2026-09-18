@@ -1349,28 +1349,52 @@ msgstr ""
 msgid "Site polling summary diagnostics"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-overview.php:61
-msgid "Total dashboard sites"
-msgstr ""
-
 #: includes/traits/trait-admin-page-diagnostics-overview.php:62
-msgid "Polling-ready sites"
+msgid "Total dashboard records"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:63
-msgid "Due now"
+msgid "Ready for scheduled polling"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:64
-msgid "Missing polling credentials"
+msgid "Records not currently polling"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:65
+msgid "Due now"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:66
+msgid "Missing polling credentials"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:67
 #: includes/traits/trait-admin-page-polling-detail-helpers.php:76
 msgid "Paused locally"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-overview.php:66
+#: includes/traits/trait-admin-page-diagnostics-overview.php:68
+msgid "Active enrollment records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:69
+msgid "Awaiting first poll records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:70
+msgid "Pending pairing records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:71
+msgid "Locally revoked records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:72
+msgid "Other or unknown enrollment records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:73
 msgid "Sites with recorded failures"
 msgstr ""
 

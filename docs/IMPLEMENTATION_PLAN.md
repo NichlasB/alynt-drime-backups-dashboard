@@ -250,6 +250,25 @@ Acceptance criteria:
 - External/optional WPvivid evidence says it is not required for Alynt-uploaded evidence on this dashboard.
 - Existing schema-1 clients remain compatible and the v1/V2 read-only boundaries remain unchanged.
 
+### Dashboard Record-State Diagnostics Clarity Slice
+
+Post-release monitoring showed that Diagnostics can correctly report the total number of dashboard records and the number of polling-ready records, but the difference between those two numbers is not obvious enough for operators. The dashboard should explain when extra records are pending pairing, awaiting first poll, revoked locally, paused, missing credentials, or otherwise not currently eligible for scheduled polling.
+
+Implement a small dashboard-only diagnostics slice:
+
+- Keep the Sites tab, polling scheduler, enrollment flow, status classification, and retained records unchanged.
+- Add support-safe aggregate enrollment-state counts to Diagnostics and support copy, including active, awaiting first poll, pending, locally revoked, unknown/other, and records not currently polling.
+- Rename operator-facing Diagnostics wording from generic “sites” toward “dashboard records” where it helps make clear that revoked/pending local records can still exist in storage for audit/history.
+- Do not delete, hide, purge, revoke, re-enroll, or mutate any dashboard records as part of this slice.
+- Do not change client protocol, client status payloads, remote actions, Drime credentials, scheduler cadence, or live-site state.
+
+Acceptance criteria:
+
+- Diagnostics clearly explains why total dashboard records can be greater than polling-ready records.
+- Support copy contains only aggregate record-state counts and no site labels, domains, credentials, tokens, raw payloads, or response bodies.
+- Existing polling and classification behavior remains unchanged.
+- Targeted diagnostics tests cover the record-state counts and rendering.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

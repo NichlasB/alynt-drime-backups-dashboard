@@ -28,6 +28,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$recent      = isset( $diagnostics['recent'] ) && is_array( $diagnostics['recent'] ) ? $diagnostics['recent'] : array();
 		$logging     = isset( $diagnostics['logging'] ) && is_array( $diagnostics['logging'] ) ? $diagnostics['logging'] : array();
 		$support     = isset( $diagnostics['support'] ) && is_array( $diagnostics['support'] ) ? $diagnostics['support'] : array();
+		$states      = isset( $counts['record_states'] ) && is_array( $counts['record_states'] ) ? $counts['record_states'] : array();
 
 		echo '<section aria-labelledby="adbd-diagnostics-heading">';
 		echo '<h2 id="adbd-diagnostics-heading">' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
@@ -58,11 +59,17 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Site Polling Summary', 'alynt-drime-backups-dashboard' ) . '</h3>';
 		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Site polling summary diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
-		$this->render_detail_row( __( 'Total dashboard sites', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'total_sites' ) );
-		$this->render_detail_row( __( 'Polling-ready sites', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'polling_ready' ) );
+		$this->render_detail_row( __( 'Total dashboard records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'total_sites' ) );
+		$this->render_detail_row( __( 'Ready for scheduled polling', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'polling_ready' ) );
+		$this->render_detail_row( __( 'Records not currently polling', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'not_polling' ) );
 		$this->render_detail_row( __( 'Due now', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'due_now' ) );
 		$this->render_detail_row( __( 'Missing polling credentials', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'missing_credentials' ) );
 		$this->render_detail_row( __( 'Paused locally', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'paused' ) );
+		$this->render_detail_row( __( 'Active enrollment records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'active' ) );
+		$this->render_detail_row( __( 'Awaiting first poll records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'awaiting_first_poll' ) );
+		$this->render_detail_row( __( 'Pending pairing records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'pending' ) );
+		$this->render_detail_row( __( 'Locally revoked records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'revoked' ) );
+		$this->render_detail_row( __( 'Other or unknown enrollment records', 'alynt-drime-backups-dashboard' ), (string) ( $this->diagnostic_int( $states, 'other' ) + $this->diagnostic_int( $states, 'unknown' ) ) );
 		$this->render_detail_row( __( 'Sites with recorded failures', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'with_failures' ) );
 		echo '</tbody></table></div></div>';
 

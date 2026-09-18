@@ -14,6 +14,8 @@ require_once dirname( __DIR__ ) . '/includes/traits/trait-event-log-reporting.ph
 require_once dirname( __DIR__ ) . '/includes/class-event-log.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-diagnostic-formatters.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-diagnostics-overview.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-diagnostics-event-log.php';
 
 /**
@@ -81,6 +83,60 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringNotContainsString( '>pause_polling<', $html );
 		$this->assertStringNotContainsString( '>resume_polling<', $html );
 	}
+
+	/**
+	 * Site-polling diagnostics explain non-polling record states.
+	 *
+	 * @return void
+	 */
+	public function test_overview_renders_record_state_polling_summary() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness();
+		$html    = $harness->overview_html(
+			array(
+				'scheduler' => array(
+					'poll_hook'             => 'alynt_drime_backups_dashboard_poll_sites',
+					'poll_schedule_state'   => 'scheduled',
+					'poll_next_at'          => '2026-09-18 12:15:00',
+					'poll_interval_seconds' => 900,
+					'poll_batch_size'       => 5,
+					'stale_after_seconds'   => 3600,
+					'global_lock_active'    => false,
+					'current_utc'           => '2026-09-18 12:00:00',
+					'cleanup_hook'          => 'alynt_drime_backups_dashboard_cleanup_snapshots',
+					'cleanup_state'         => 'scheduled',
+					'cleanup_next_at'       => '2026-09-19 00:00:00',
+					'retention_days'        => 30,
+					'cleanup_batch_size'    => 100,
+				),
+				'counts'    => array(
+					'total_sites'         => 17,
+					'polling_ready'       => 14,
+					'not_polling'         => 3,
+					'due_now'             => 6,
+					'missing_credentials' => 0,
+					'paused'              => 0,
+					'with_failures'       => 0,
+					'record_states'       => array(
+						'active'              => 14,
+						'awaiting_first_poll' => 0,
+						'pending'             => 2,
+						'revoked'             => 1,
+						'other'               => 0,
+						'unknown'             => 0,
+					),
+				),
+				'recent'    => array(),
+				'logging'   => array(),
+				'support'   => array(),
+			)
+		);
+
+		$this->assertStringContainsString( 'Total dashboard records', $html );
+		$this->assertStringContainsString( 'Records not currently polling', $html );
+		$this->assertStringContainsString( 'Pending pairing records', $html );
+		$this->assertStringContainsString( 'Locally revoked records', $html );
+		$this->assertStringContainsString( '<td>3</td>', $html );
+	}
 }
 
 /**
@@ -101,5 +157,116 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics_Rendering_Test_Harness {
 		ob_start();
 		$this->render_audit_history_diagnostics( $audit );
 		return (string) ob_get_clean();
+	}
+}
+
+/**
+ * Harness exposing the diagnostics overview shell.
+ */
+class Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness {
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostic_Formatters;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview;
+
+	/**
+	 * Diagnostics service stub.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Service_Stub
+	 */
+	private $diagnostics;
+
+	/**
+	 * Exposes diagnostics overview markup.
+	 *
+	 * @param array<string,mixed> $diagnostics Diagnostics payload.
+	 * @return string
+	 */
+	public function overview_html( array $diagnostics ) {
+		$this->diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Service_Stub( $diagnostics );
+
+		ob_start();
+		$this->render_diagnostics_shell();
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Stubs settings diagnostics for this focused overview test.
+	 *
+	 * @param array<string,mixed> $logging Logging diagnostics.
+	 * @return void
+	 */
+	private function render_diagnostics_settings( array $logging ) {
+		unset( $logging );
+	}
+
+	/**
+	 * Stubs status-count diagnostics for this focused overview test.
+	 *
+	 * @param array<string,int> $statuses Status counts.
+	 * @return void
+	 */
+	private function render_status_count_table( array $statuses ) {
+		unset( $statuses );
+	}
+
+	/**
+	 * Stubs recent polling diagnostics for this focused overview test.
+	 *
+	 * @param array<int,array<string,mixed>> $recent Recent outcomes.
+	 * @return void
+	 */
+	private function render_recent_poll_outcomes( array $recent ) {
+		unset( $recent );
+	}
+
+	/**
+	 * Stubs event-log diagnostics for this focused overview test.
+	 *
+	 * @param array<string,mixed> $logging Logging diagnostics.
+	 * @return void
+	 */
+	private function render_event_log_diagnostics( array $logging ) {
+		unset( $logging );
+	}
+
+	/**
+	 * Stubs support-copy diagnostics for this focused overview test.
+	 *
+	 * @param array<string,mixed> $support Support diagnostics.
+	 * @return void
+	 */
+	private function render_support_copy_output( array $support ) {
+		unset( $support );
+	}
+}
+
+/**
+ * Fake diagnostics service for overview rendering tests.
+ */
+class Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Service_Stub {
+	/**
+	 * Diagnostics payload.
+	 *
+	 * @var array<string,mixed>
+	 */
+	private $diagnostics;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param array<string,mixed> $diagnostics Diagnostics payload.
+	 */
+	public function __construct( array $diagnostics ) {
+		$this->diagnostics = $diagnostics;
+	}
+
+	/**
+	 * Returns the diagnostics payload.
+	 *
+	 * @return array<string,mixed>
+	 */
+	public function collect() {
+		return $this->diagnostics;
 	}
 }

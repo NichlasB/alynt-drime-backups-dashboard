@@ -164,13 +164,72 @@ class DiagnosticsTest extends TestCase {
 
 		$this->assertSame( 3, $result['counts']['total_sites'] );
 		$this->assertSame( 1, $result['counts']['polling_ready'] );
+		$this->assertSame( 2, $result['counts']['not_polling'] );
 		$this->assertSame( 1, $result['counts']['due_now'] );
 		$this->assertSame( 1, $result['counts']['missing_credentials'] );
 		$this->assertSame( 1, $result['counts']['paused'] );
 		$this->assertSame( 1, $result['counts']['with_failures'] );
+		$this->assertSame( 2, $result['counts']['record_states']['active'] );
+		$this->assertSame( 1, $result['counts']['record_states']['awaiting_first_poll'] );
+		$this->assertSame( 0, $result['counts']['record_states']['pending'] );
+		$this->assertSame( 0, $result['counts']['record_states']['revoked'] );
 		$this->assertSame( 0, $result['counts']['backup_sources']['reporting_sites'] );
 		$this->assertSame( 'unavailable', $result['scheduler']['poll_schedule_state'] );
 		$this->assertSame( 30, $result['scheduler']['retention_days'] );
+	}
+
+	/**
+	 * Diagnostics expose support-safe aggregate record states.
+	 *
+	 * @return void
+	 */
+	public function test_record_state_diagnostics_explain_non_polling_records() {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
+				array(
+					$this->site(
+						1,
+						array(
+							'enrollment_status' => 'pending',
+							'overall_status'    => 'pending',
+							'polling_key_id'    => '',
+						)
+					),
+					$this->site(
+						2,
+						array(
+							'enrollment_status' => 'revoked',
+							'overall_status'    => 'pending',
+							'polling_key_id'    => '',
+						)
+					),
+					$this->site(
+						3,
+						array(
+							'enrollment_status' => '',
+							'overall_status'    => 'pending',
+							'polling_key_id'    => '',
+						)
+					),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( array() ),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		$result  = $diagnostics->collect();
+		$encoded = wp_json_encode( $result['support'] );
+
+		$this->assertSame( 3, $result['counts']['total_sites'] );
+		$this->assertSame( 0, $result['counts']['polling_ready'] );
+		$this->assertSame( 3, $result['counts']['not_polling'] );
+		$this->assertSame( 1, $result['counts']['record_states']['pending'] );
+		$this->assertSame( 1, $result['counts']['record_states']['revoked'] );
+		$this->assertSame( 1, $result['counts']['record_states']['unknown'] );
+		$this->assertStringContainsString( 'record_states', $encoded );
+		$this->assertStringContainsString( 'not_polling', $encoded );
+		$this->assertStringNotContainsString( 'Client 1', $encoded );
+		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
 	}
 
 	/**
