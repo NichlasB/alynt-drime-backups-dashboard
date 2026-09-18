@@ -44,6 +44,54 @@ class RemoteActionSignerTest extends TestCase {
 	}
 
 	/**
+	 * Unsupported runtimes fail closed without generating or accepting action signatures.
+	 *
+	 * @return void
+	 */
+	public function test_unsupported_runtime_returns_errors_and_refuses_verification() {
+		$signer = new class() extends Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
+			/**
+			 * Forces the unsupported branch for deterministic testing.
+			 *
+			 * @return bool
+			 */
+			public function is_supported() {
+				return false;
+			}
+		};
+
+		$key_pair = $signer->create_key_pair();
+		$signed   = $signer->sign( 'private-key', 'input' );
+
+		$this->assertInstanceOf( WP_Error::class, $key_pair );
+		$this->assertSame( 'action_signing_unavailable', $key_pair->get_error_code() );
+		$this->assertInstanceOf( WP_Error::class, $signed );
+		$this->assertSame( 'action_signing_unavailable', $signed->get_error_code() );
+		$this->assertFalse( $signer->verify( 'public-key', 'input', 'signature' ) );
+	}
+
+	/**
+	 * Malformed signature material is refused before any verification can succeed.
+	 *
+	 * @return void
+	 */
+	public function test_malformed_signature_material_never_verifies() {
+		$signer = new class() extends Alynt_Drime_Backups_Dashboard_Remote_Action_Signer {
+			/**
+			 * Forces the validation branch without requiring a sodium-enabled runtime.
+			 *
+			 * @return bool
+			 */
+			public function is_supported() {
+				return true;
+			}
+		};
+
+		$this->assertFalse( $signer->verify( 'not valid!', 'input', 'signature' ) );
+		$this->assertFalse( $signer->verify( 'public-key', 'input', 'not valid!' ) );
+	}
+
+	/**
 	 * Sodium signatures round-trip against the deterministic signing input.
 	 *
 	 * @return void
