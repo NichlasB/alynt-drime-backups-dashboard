@@ -25,7 +25,7 @@ class Alynt_Drime_Backups_Dashboard_Poller {
 	const CRON_RECURRENCE         = 'alynt_drime_backups_dashboard_15_minutes';
 	const POLL_INTERVAL_SECONDS   = 900;
 	const POLL_JITTER_SECONDS     = 300;
-	const DEFAULT_BATCH_SIZE      = 5;
+	const DEFAULT_BATCH_SIZE      = 20;
 	const GLOBAL_LOCK_KEY         = 'alynt_drime_backups_dashboard_poll_sites_lock';
 	const SITE_LOCK_KEY_PREFIX    = 'alynt_drime_backups_dashboard_poll_site_lock_';
 	const LOCK_TTL_SECONDS        = 600;

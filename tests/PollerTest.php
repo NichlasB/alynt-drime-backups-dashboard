@@ -366,6 +366,38 @@ class PollerTest extends TestCase {
 	}
 
 	/**
+	 * Scheduled polling uses the tuned default batch size when no override is supplied.
+	 *
+	 * @return void
+	 */
+	public function test_scheduled_poll_uses_default_batch_size_without_override() {
+		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
+			array(
+				$this->site( $vault, array( 'id' => 77 ) ),
+			)
+		);
+		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
+
+		$http_client = function () {
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode( $this->payload() ),
+			);
+		};
+		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
+
+		$result = $poller->poll_sites();
+
+		$this->assertSame( Alynt_Drime_Backups_Dashboard_Poller::DEFAULT_BATCH_SIZE, $sites->due_query['limit'] );
+		$this->assertSame( 20, $sites->due_query['limit'] );
+		$this->assertSame( 1, $result['processed'] );
+		$this->assertSame( 1, $result['success'] );
+	}
+
+	/**
 	 * Invalid payload marks safe failure without recording a snapshot.
 	 *
 	 * @return void
