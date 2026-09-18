@@ -19,11 +19,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 	/**
 	 * Renders preview-only schedule-management capability reported by the client.
 	 *
-	 * @param array<string,mixed>|null $snapshot Latest snapshot row.
-	 * @param array<string,mixed>      $site Site row.
+	 * @param array<string,mixed>|null       $snapshot Latest snapshot row.
+	 * @param array<string,mixed>            $site Site row.
+	 * @param array<int,array<string,mixed>> $remote_action_history Recent remote action rows.
 	 * @return void
 	 */
-	private function render_schedule_management_panel( $snapshot, array $site = array() ) {
+	private function render_schedule_management_panel( $snapshot, array $site = array(), array $remote_action_history = array() ) {
 		$payload              = is_array( $snapshot ) ? $this->decoded_snapshot_payload( $snapshot ) : array();
 		$schedule_management  = $this->schedule_management_summary( $payload );
 		$capabilities         = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
@@ -65,7 +66,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Not available in this version', 'alynt-drime-backups-dashboard' ) );
 			echo '</dl>';
 			$this->render_schedule_preview_form( $site, $schedule );
-			$this->render_schedule_apply_form( $site, $schedule, $clean_capabilities );
+			$this->render_schedule_apply_form( $site, $schedule, $clean_capabilities, $remote_action_history );
 			echo '</section>';
 		}
 
@@ -112,12 +113,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 	/**
 	 * Renders the guarded V2.3 schedule-apply form when a fresh preview exists.
 	 *
-	 * @param array<string,mixed> $site Site row.
-	 * @param array<string,mixed> $schedule Schedule summary.
-	 * @param array<string,mixed> $capabilities Sanitized capabilities.
+	 * @param array<string,mixed>            $site Site row.
+	 * @param array<string,mixed>            $schedule Schedule summary.
+	 * @param array<string,mixed>            $capabilities Sanitized capabilities.
+	 * @param array<int,array<string,mixed>> $remote_action_history Recent remote action rows.
 	 * @return void
 	 */
-	private function render_schedule_apply_form( array $site, array $schedule, array $capabilities ) {
+	private function render_schedule_apply_form( array $site, array $schedule, array $capabilities, array $remote_action_history = array() ) {
 		$site_id = isset( $site['id'] ) ? absint( $site['id'] ) : 0;
 
 		if (
@@ -130,7 +132,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 		}
 
 		$schedule_id = isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '';
-		$preview     = $this->remote_actions->fresh_schedule_preview_for_apply( $site_id, $this->latest_preview_public_id_for_schedule( $site_id, $schedule_id ), $capabilities );
+		$preview     = $this->remote_actions->fresh_schedule_preview_for_apply( $site_id, $this->latest_preview_public_id_for_schedule( $site_id, $schedule_id, $remote_action_history ), $capabilities );
 
 		if ( is_wp_error( $preview ) ) {
 			echo '<p class="description">' . esc_html__( 'Apply becomes available after a fresh successful preview for this schedule. Run Preview Schedule Change, then Check Now if the preview result has not appeared yet.', 'alynt-drime-backups-dashboard' ) . '</p>';
@@ -168,11 +170,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 	/**
 	 * Gets the latest preview public ID for one schedule from recent action history.
 	 *
-	 * @param int    $site_id Site ID.
-	 * @param string $schedule_id Schedule ID.
+	 * @param int                                 $site_id Site ID.
+	 * @param string                              $schedule_id Schedule ID.
+	 * @param array<int,array<string,mixed>>|null $remote_action_history Recent remote action rows, or null to fetch.
 	 * @return string
 	 */
-	private function latest_preview_public_id_for_schedule( $site_id, $schedule_id ) {
+	private function latest_preview_public_id_for_schedule( $site_id, $schedule_id, $remote_action_history = null ) {
 		$site_id     = absint( $site_id );
 		$schedule_id = sanitize_key( (string) $schedule_id );
 
@@ -185,7 +188,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			return '';
 		}
 
-		foreach ( $this->remote_actions->recent_for_site( $site_id, 10 ) as $row ) {
+		$history = is_array( $remote_action_history ) ? $remote_action_history : $this->remote_actions->recent_for_site( $site_id, 10 );
+
+		foreach ( $history as $row ) {
 			if (
 				is_array( $row )
 				&& Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW === ( isset( $row['action_type'] ) ? sanitize_key( (string) $row['action_type'] ) : '' )

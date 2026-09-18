@@ -46,6 +46,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		$status         = $this->classifier->classify( $site, $snapshot );
 		$endpoint       = rtrim( isset( $site['expected_origin'] ) ? (string) $site['expected_origin'] : '', '/' ) . '/wp-json/alynt-drime-backups-uploader/v1/status';
 		$history        = $this->snapshots->recent_for_site( $site_id, 10 );
+		$action_history = $this->remote_actions->recent_for_site( $site_id, 10 );
 		$confirm_revoke = isset( $_GET['confirm_revoke'] ) && '1' === sanitize_key( wp_unslash( $_GET['confirm_revoke'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only presentation state.
 		$detail_url     = add_query_arg(
 			array(
@@ -83,8 +84,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		echo '</dl></div></div>';
 
 		$this->render_polling_pause_panel( $site );
-		$this->render_request_backup_now_panel( $site, $snapshot, $this->remote_actions->recent_for_site( $site_id, 10 ) );
-		$this->render_schedule_management_panel( $snapshot, $site );
+		$this->render_request_backup_now_panel( $site, $snapshot, $action_history );
+		$this->render_schedule_management_panel( $snapshot, $site, $action_history );
 		$this->render_source_policy_panel( $site, $snapshot );
 		$this->render_latest_snapshot_summary( $snapshot, $site );
 		$this->render_recent_history( $history );
