@@ -238,7 +238,59 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence_Helpers {
 		return sprintf(
 			/* translators: %s: human-readable upload age. */
 			__( '%s ago', 'alynt-drime-backups-dashboard' ),
-			$this->source_duration_label( $age )
+			$this->source_compact_age_duration_label( $age )
+		);
+	}
+
+	/**
+	 * Formats an upload age for compact row display.
+	 *
+	 * Unlike policy labels, upload ages should be quickly scannable even when
+	 * the reported age is not an exact minute, hour, or day boundary.
+	 *
+	 * @param int $seconds Upload age in seconds.
+	 * @return string
+	 */
+	private function source_compact_age_duration_label( $seconds ) {
+		$seconds = max( 0, (int) $seconds );
+		$day     = 86400;
+		$hour    = 3600;
+		$minute  = 60;
+
+		if ( $seconds >= $day ) {
+			$days = (int) floor( $seconds / $day );
+
+			return sprintf(
+				/* translators: %d: number of days. */
+				_n( '%d day', '%d days', $days, 'alynt-drime-backups-dashboard' ),
+				$days
+			);
+		}
+
+		if ( $seconds >= $hour ) {
+			$hours = (int) floor( $seconds / $hour );
+
+			return sprintf(
+				/* translators: %d: number of hours. */
+				_n( '%d hour', '%d hours', $hours, 'alynt-drime-backups-dashboard' ),
+				$hours
+			);
+		}
+
+		if ( $seconds >= $minute ) {
+			$minutes = (int) floor( $seconds / $minute );
+
+			return sprintf(
+				/* translators: %d: number of minutes. */
+				_n( '%d minute', '%d minutes', $minutes, 'alynt-drime-backups-dashboard' ),
+				$minutes
+			);
+		}
+
+		return sprintf(
+			/* translators: %d: number of seconds. */
+			_n( '%d second', '%d seconds', $seconds, 'alynt-drime-backups-dashboard' ),
+			$seconds
 		);
 	}
 

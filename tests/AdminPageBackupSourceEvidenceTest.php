@@ -25,14 +25,21 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 	 */
 	public function test_sites_table_compact_evidence_includes_source_timestamps() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
-		$html    = $harness->compact_html( $this->fixture_payload() );
+		$payload = $this->fixture_payload();
+
+		$payload['backup_sources']['server']['latest_upload_age_seconds']  = 53442;
+		$payload['backup_sources']['wpvivid']['latest_upload_age_seconds'] = 64152;
+
+		$html = $harness->compact_html( $payload );
 
 		$this->assertStringContainsString( 'Server runner / generic outbox', $html );
 		$this->assertStringContainsString( 'WPvivid', $html );
 		$this->assertStringContainsString( 'Backups:', $html );
 		$this->assertStringContainsString( 'On schedule', $html );
-		$this->assertStringContainsString( '2 minutes ago', $html );
-		$this->assertStringContainsString( '1 minute ago', $html );
+		$this->assertStringContainsString( '14 hours ago', $html );
+		$this->assertStringContainsString( '17 hours ago', $html );
+		$this->assertStringNotContainsString( '53442 seconds ago', $html );
+		$this->assertStringNotContainsString( '64152 seconds ago', $html );
 		$this->assertStringContainsString( '3 sets', $html );
 		$this->assertStringContainsString( '1 set', $html );
 		$this->assertStringContainsString( 'expected ≤36 hours', $html );

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- Rounded compact Sites-tab backup source upload ages to readable minute/hour/day labels instead of raw seconds.
+
 ## 0.1.30 - 2026-09-18
 
 ### Changed
