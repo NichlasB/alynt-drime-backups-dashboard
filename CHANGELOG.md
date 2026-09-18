@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.33 - 2026-09-18
+
+### Changed
+
+- Clarified Diagnostics polling summaries with aggregate dashboard record-state counts so operators can distinguish total records from active polling records, pending pairings, awaiting-first-poll records, and locally revoked records.
+
 ## 0.1.32 - 2026-09-18
 
 ### Changed
