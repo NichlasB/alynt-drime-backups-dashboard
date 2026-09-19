@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.37 - 2026-09-19
+
+### Added
+
+- Added dashboard-local archive/unarchive controls for revoked and expired pending dashboard records.
+- Added an archived-records view so operators can keep audit history without crowding the default Sites and Attention workflows.
+
+### Changed
+
+- Excluded archived local records from default Sites, Attention, and scheduled polling contexts.
+- Added archived-record counts to Diagnostics support summaries.
+- Split archive admin action handlers into a focused trait during release prep.
+
 ## 0.1.36 - 2026-09-19
 
 ### Changed
