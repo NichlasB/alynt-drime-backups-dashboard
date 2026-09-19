@@ -49,6 +49,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers {
 	private function site_can_toggle_scheduled_polling( array $site ) {
 		$status = isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '';
 
+		if ( ! empty( $site['archived_at'] ) ) {
+			return false;
+		}
+
 		if ( in_array( $status, array( 'pending', 'revoked' ), true ) ) {
 			return false;
 		}
@@ -63,6 +67,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers {
 	 * @return bool
 	 */
 	private function site_can_manual_check( array $site ) {
+		if ( ! empty( $site['archived_at'] ) ) {
+			return false;
+		}
+
 		if ( isset( $site['enrollment_status'] ) && 'revoked' === $site['enrollment_status'] ) {
 			return false;
 		}
@@ -78,6 +86,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers {
 	 */
 	private function manual_check_unavailable_message( array $site ) {
 		$status = isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '';
+
+		if ( ! empty( $site['archived_at'] ) ) {
+			return __( 'Record archived locally. Unarchive it before manual checks are available.', 'alynt-drime-backups-dashboard' );
+		}
 
 		if ( 'revoked' === $status ) {
 			return __( 'Pairing revoked locally. Re-enroll this site before manual checks are available.', 'alynt-drime-backups-dashboard' );
@@ -107,7 +119,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers {
 
 		$status = isset( $site['enrollment_status'] ) ? sanitize_key( $site['enrollment_status'] ) : '';
 
-		if ( 'revoked' === $status ) {
+		if ( ! empty( $site['archived_at'] ) ) {
+			$message = __( 'Archived locally', 'alynt-drime-backups-dashboard' );
+		} elseif ( 'revoked' === $status ) {
 			$message = __( 'Unavailable until re-enrolled', 'alynt-drime-backups-dashboard' );
 		} elseif ( 'pending' === $status ) {
 			$message = __( 'Waiting for client opt-in', 'alynt-drime-backups-dashboard' );

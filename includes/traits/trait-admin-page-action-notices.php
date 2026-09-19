@@ -47,6 +47,24 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Action_Notices {
 			return;
 		}
 
+		if ( isset( $result['action'] ) && 'archive_local' === $result['action'] ) {
+			$message = ! empty( $result['success'] )
+				? __( 'Dashboard record archived locally. It is hidden from the default Sites view and no client site or Drime action was attempted.', 'alynt-drime-backups-dashboard' )
+				: __( 'The dashboard record could not be archived locally. Refresh the site detail screen and try again; the record may already have changed.', 'alynt-drime-backups-dashboard' );
+			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
+			$this->render_action_notice( $message, $class );
+			return;
+		}
+
+		if ( isset( $result['action'] ) && 'unarchive_local' === $result['action'] ) {
+			$message = ! empty( $result['success'] )
+				? __( 'Dashboard record unarchived locally. It is visible again in dashboard history; credentials and polling were not restored.', 'alynt-drime-backups-dashboard' )
+				: __( 'The dashboard record could not be unarchived locally. Refresh the site detail screen and try again; the record may already have changed.', 'alynt-drime-backups-dashboard' );
+			$class   = ! empty( $result['success'] ) ? 'notice-success' : 'notice-error';
+			$this->render_action_notice( $message, $class );
+			return;
+		}
+
 		if ( isset( $result['action'] ) && 'check_status_now' === $result['action'] ) {
 			$this->render_action_notice( __( 'Read-only status check completed and stored. No backup or client-site setting was changed.', 'alynt-drime-backups-dashboard' ), 'notice-success' );
 			return;

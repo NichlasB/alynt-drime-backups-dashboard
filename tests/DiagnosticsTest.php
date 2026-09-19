@@ -211,6 +211,15 @@ class DiagnosticsTest extends TestCase {
 							'polling_key_id'    => '',
 						)
 					),
+					$this->site(
+						4,
+						array(
+							'enrollment_status' => 'revoked',
+							'overall_status'    => 'pending',
+							'polling_key_id'    => '',
+							'archived_at'       => '2026-09-19 18:30:00',
+						)
+					),
 				)
 			),
 			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( array() ),
@@ -220,11 +229,12 @@ class DiagnosticsTest extends TestCase {
 		$result  = $diagnostics->collect();
 		$encoded = wp_json_encode( $result['support'] );
 
-		$this->assertSame( 3, $result['counts']['total_sites'] );
+		$this->assertSame( 4, $result['counts']['total_sites'] );
 		$this->assertSame( 0, $result['counts']['polling_ready'] );
-		$this->assertSame( 3, $result['counts']['not_polling'] );
+		$this->assertSame( 4, $result['counts']['not_polling'] );
 		$this->assertSame( 1, $result['counts']['record_states']['pending'] );
 		$this->assertSame( 1, $result['counts']['record_states']['revoked'] );
+		$this->assertSame( 1, $result['counts']['record_states']['archived'] );
 		$this->assertSame( 1, $result['counts']['record_states']['unknown'] );
 		$this->assertStringContainsString( 'record_states', $encoded );
 		$this->assertStringContainsString( 'not_polling', $encoded );

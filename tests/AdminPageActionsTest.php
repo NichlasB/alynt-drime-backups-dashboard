@@ -212,6 +212,20 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
 	public $resume_calls = array();
 
 	/**
+	 * Archive calls.
+	 *
+	 * @var array<int,int>
+	 */
+	public $archive_calls = array();
+
+	/**
+	 * Unarchive calls.
+	 *
+	 * @var array<int,int>
+	 */
+	public $unarchive_calls = array();
+
+	/**
 	 * Pause result.
 	 *
 	 * @var bool
@@ -224,6 +238,20 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
 	 * @var bool
 	 */
 	public $resume_result = true;
+
+	/**
+	 * Archive result.
+	 *
+	 * @var bool
+	 */
+	public $archive_result = true;
+
+	/**
+	 * Unarchive result.
+	 *
+	 * @var bool
+	 */
+	public $unarchive_result = true;
 
 	/**
 	 * Gets a site.
@@ -261,6 +289,30 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
 		$this->resume_calls[] = (int) $site_id;
 
 		return $this->resume_result;
+	}
+
+	/**
+	 * Records archive.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function archive_local( $site_id ) {
+		$this->archive_calls[] = (int) $site_id;
+
+		return $this->archive_result;
+	}
+
+	/**
+	 * Records unarchive.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return bool
+	 */
+	public function unarchive_local( $site_id ) {
+		$this->unarchive_calls[] = (int) $site_id;
+
+		return $this->unarchive_result;
 	}
 }
 
@@ -551,6 +603,99 @@ class AdminPageActionsTest extends TestCase {
 		$this->assertSame( 'site_revoked', $result->get_error_code() );
 		$this->assertSame( array(), $harness->sites->pause_calls );
 		$this->assertSame( 'failed', $harness->event_log->audit_calls[0]['outcome'] );
+	}
+
+	/**
+	 * Revoked records can be archived locally without contacting client sites.
+	 *
+	 * @return void
+	 */
+	public function test_archive_local_allows_revoked_records() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_archive_local';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+		$harness->sites->site['enrollment_status'] = 'revoked';
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'archive_local',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'archive_local', $result['action'] );
+		$this->assertTrue( $result['success'] );
+		$this->assertSame( array( 42 ), $harness->sites->archive_calls );
+		$this->assertSame( 'archive_local', $harness->event_log->audit_calls[0]['action'] );
+		$this->assertSame( 'succeeded', $harness->event_log->audit_calls[0]['outcome'] );
+	}
+
+	/**
+	 * Active enrolled records cannot be hidden with archive controls.
+	 *
+	 * @return void
+	 */
+	public function test_archive_local_rejects_active_records() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_archive_local';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'archive_local',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'site_archive_not_allowed', $result->get_error_code() );
+		$this->assertSame( array(), $harness->sites->archive_calls );
+		$this->assertSame( 'failed', $harness->event_log->audit_calls[0]['outcome'] );
+	}
+
+	/**
+	 * Archived records can be unarchived locally without restoring credentials.
+	 *
+	 * @return void
+	 */
+	public function test_unarchive_local_delegates_to_repository() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_unarchive_local';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+		$harness->sites->site['enrollment_status'] = 'revoked';
+		$harness->sites->site['archived_at']        = '2026-09-19 18:30:00';
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'unarchive_local',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'unarchive_local', $result['action'] );
+		$this->assertTrue( $result['success'] );
+		$this->assertSame( array( 42 ), $harness->sites->unarchive_calls );
+		$this->assertSame( 'unarchive_local', $harness->event_log->audit_calls[0]['action'] );
 	}
 
 	/**

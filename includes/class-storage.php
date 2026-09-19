@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  */
 class Alynt_Drime_Backups_Dashboard_Storage {
-	const SCHEMA_VERSION        = '7';
+	const SCHEMA_VERSION        = '8';
 	const OPTION_SCHEMA_VERSION = 'alynt_drime_backups_dashboard_schema_version';
 
 	/**
@@ -100,6 +100,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				last_error_code varchar(64) NULL,
 				last_error_summary text NULL,
 				paused_at datetime NULL,
+				archived_at datetime NULL,
 				created_at datetime NOT NULL,
 				updated_at datetime NOT NULL,
 				PRIMARY KEY  (id),
@@ -111,6 +112,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY action_key_id (action_key_id),
 				KEY next_poll_at (next_poll_at),
 				KEY poll_due (enrollment_status, paused_at, next_poll_at, id),
+				KEY archived_at (archived_at),
 				KEY last_seen_at (last_seen_at)
 			) {$charset_collate};"
 		);

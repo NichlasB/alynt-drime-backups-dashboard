@@ -307,6 +307,31 @@ Acceptance criteria:
 - Tests cover the revoked-only rendering and wording.
 - No new POST action, database write, remote action, protocol field, or live-site behavior is introduced.
 
+### Local Dashboard Record Archive Slice
+
+After revoked-record guidance shipped, the remaining operator problem is local dashboard clutter: revoked or expired-pending records are retained for audit/history, but they can still be opened directly and can inflate total-record diagnostics. Permanent deletion remains intentionally out of scope because dashboard records, snapshots, and action history may be useful during support review.
+
+Implement a small dashboard-local archive/unarchive slice:
+
+- Add an `archived_at` timestamp to the dashboard-owned sites table through an idempotent schema migration.
+- Hide archived records from the default Sites table, Attention queue, and scheduled-polling contexts.
+- Keep Diagnostics/support copy aware of archived local records as retained dashboard records, not paired active sites.
+- Allow archiving only for non-polling local records: revoked records and expired pending records. Active, awaiting-first-poll, paused, or credentialed enrolled records must not be archivable until they are revoked or otherwise no longer polling.
+- Provide a clearly labeled archived-records view from the Sites tab so operators can still audit and restore visibility for archived records.
+- Provide an unarchive action that only clears `archived_at`; it must not recreate credentials, resume polling, reuse pairing tokens, contact clients, or change backups.
+- Keep permanent removal unavailable unless a later purge/delete design is separately approved.
+- Do not contact the client site, Drime, WPvivid, server-runner, GridPane, or any remote service.
+
+Acceptance criteria:
+
+- Default Sites and Attention views exclude archived local records.
+- Archived records remain available in a dedicated archived-records view and direct Site Detail URLs.
+- Revoked and expired pending records can be archived; active/enrolled/polling records cannot.
+- Archived records can be unarchived locally without restoring credentials or polling.
+- Diagnostics/support copy distinguishes active/polling records, revoked records, and archived local records without exposing secrets.
+- Tests cover archive eligibility, archive/unarchive action handling, Sites filtering, and revoked/archived Site Detail guidance.
+- No remote action, credential reuse, backup creation, restore, cleanup/delete, protocol change, or live-site behavior is introduced.
+
 ### Schedule Row Hint Clarity Slice
 
 The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.

@@ -70,6 +70,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_detail_row( __( 'Awaiting first poll records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'awaiting_first_poll' ) );
 		$this->render_detail_row( __( 'Pending pairing records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'pending' ) );
 		$this->render_detail_row( __( 'Locally revoked records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'revoked' ) );
+		$this->render_detail_row( __( 'Archived local records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $states, 'archived' ) );
 		$this->render_detail_row( __( 'Other or unknown enrollment records', 'alynt-drime-backups-dashboard' ), (string) ( $this->diagnostic_int( $states, 'other' ) + $this->diagnostic_int( $states, 'unknown' ) ) );
 		$this->render_detail_row( __( 'Sites with recorded failures', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'with_failures' ) );
 		echo '</tbody></table></div></div>';

@@ -46,6 +46,7 @@ if ( ! function_exists( 'esc_attr_e' ) ) {
 }
 
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-local-actions.php';
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 
@@ -211,6 +212,25 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Archived rows fail closed for manual checks and scheduled-poll controls.
+	 *
+	 * @return void
+	 */
+	public function test_archived_rows_disable_manual_and_polling_controls() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'enrollment_status'  => 'active',
+			'polling_key_id'     => 'key-id',
+			'has_polling_secret' => '1',
+			'archived_at'        => '2026-09-19 18:30:00',
+		);
+
+		$this->assertStringContainsString( 'Record archived locally. Unarchive it before manual checks are available.', $harness->check_form_html( $site ) );
+		$this->assertStringContainsString( 'Archived locally', $harness->next_poll_line( $site ) );
+		$this->assertSame( '', $harness->pause_form_html( $site ) );
+	}
+
+	/**
 	 * Site detail polling control explains the local-only boundary.
 	 *
 	 * @return void
@@ -268,6 +288,48 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		);
 
 		$this->assertSame( '', $html );
+	}
+
+	/**
+	 * Revoked Site Detail screens expose local archive controls.
+	 *
+	 * @return void
+	 */
+	public function test_revoked_site_detail_can_show_archive_control() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->archive_record_panel_html(
+			array(
+				'id'                => 7,
+				'enrollment_status' => 'revoked',
+				'archived_at'       => '',
+			)
+		);
+
+		$this->assertStringContainsString( 'Local Record Visibility', $html );
+		$this->assertStringContainsString( 'Archive Local Record', $html );
+		$this->assertStringContainsString( 'value="archive_local"', $html );
+		$this->assertStringContainsString( 'does not delete data, contact the client site, change backups, alter Drime, or reuse credentials', $html );
+	}
+
+	/**
+	 * Archived Site Detail screens expose local unarchive controls.
+	 *
+	 * @return void
+	 */
+	public function test_archived_site_detail_can_show_unarchive_control() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->archive_record_panel_html(
+			array(
+				'id'                => 7,
+				'enrollment_status' => 'revoked',
+				'archived_at'       => '2026-09-19 18:30:00',
+			)
+		);
+
+		$this->assertStringContainsString( 'This dashboard record is archived locally', $html );
+		$this->assertStringContainsString( 'Unarchive Local Record', $html );
+		$this->assertStringContainsString( 'value="unarchive_local"', $html );
+		$this->assertStringNotContainsString( 'restore credentials', strtolower( $html ) );
 	}
 
 	/**
@@ -545,6 +607,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
  */
 class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail;
@@ -598,6 +661,18 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public function revoked_record_guidance_html( array $site ) {
 		ob_start();
 		$this->render_revoked_record_guidance( $site );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes local archive-panel markup.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	public function archive_record_panel_html( array $site ) {
+		ob_start();
+		$this->render_archive_record_panel( $site, isset( $site['id'] ) ? (int) $site['id'] : 7 );
 		return (string) ob_get_clean();
 	}
 

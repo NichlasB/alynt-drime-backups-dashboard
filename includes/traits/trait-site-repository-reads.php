@@ -28,9 +28,10 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Reads {
 		global $wpdb;
 
 		$defaults = array(
-			'status' => '',
-			'limit'  => 100,
-			'offset' => 0,
+			'status'   => '',
+			'archived' => 'include',
+			'limit'    => 100,
+			'offset'   => 0,
 		);
 
 		$args   = wp_parse_args( $args, $defaults );
@@ -40,6 +41,12 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Reads {
 		if ( '' !== $args['status'] ) {
 			$where   .= ' AND enrollment_status = %s';
 			$params[] = $args['status'];
+		}
+
+		if ( 'exclude' === $args['archived'] ) {
+			$where .= ' AND archived_at IS NULL';
+		} elseif ( 'only' === $args['archived'] ) {
+			$where .= ' AND archived_at IS NOT NULL';
 		}
 
 		$limit  = max( 1, min( 500, (int) $args['limit'] ) );
@@ -65,6 +72,7 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Reads {
 			'last_error_code',
 			'last_error_summary',
 			'paused_at',
+			'archived_at',
 			'created_at',
 			'updated_at',
 		);
@@ -119,6 +127,7 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Reads {
 			$wpdb->prepare(
 				"SELECT * FROM {$table}
 				WHERE enrollment_status IN (%s, %s)
+					AND archived_at IS NULL
 					AND paused_at IS NULL
 					AND polling_key_id IS NOT NULL
 					AND polling_secret_ciphertext IS NOT NULL

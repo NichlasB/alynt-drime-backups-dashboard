@@ -41,6 +41,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				'awaiting_first_poll' => 0,
 				'pending'             => 0,
 				'revoked'             => 0,
+				'archived'            => 0,
 				'other'               => 0,
 				'unknown'             => 0,
 			),
@@ -77,6 +78,11 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			}
 
 			++$counts['record_states'][ $state ];
+
+			if ( ! empty( $site['archived_at'] ) ) {
+				++$counts['not_polling'];
+				continue;
+			}
 
 			if ( ! empty( $site['paused_at'] ) ) {
 				++$counts['paused'];

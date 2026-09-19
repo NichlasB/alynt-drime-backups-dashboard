@@ -121,6 +121,7 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 						'awaiting_first_poll' => 0,
 						'pending'             => 2,
 						'revoked'             => 1,
+						'archived'            => 0,
 						'other'               => 0,
 						'unknown'             => 0,
 					),
@@ -135,6 +136,7 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Records not currently polling', $html );
 		$this->assertStringContainsString( 'Pending pairing records', $html );
 		$this->assertStringContainsString( 'Locally revoked records', $html );
+		$this->assertStringContainsString( 'Archived local records', $html );
 		$this->assertStringContainsString( '<td>3</td>', $html );
 	}
 

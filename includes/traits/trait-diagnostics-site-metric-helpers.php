@@ -24,6 +24,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metric_Helpers {
 	 */
 	private function is_polling_ready( array $site ) {
 		return $this->is_enrolled_for_polling( $site )
+			&& empty( $site['archived_at'] )
 			&& empty( $site['paused_at'] )
 			&& $this->has_polling_credentials( $site );
 	}
@@ -85,6 +86,10 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metric_Helpers {
 	 * @return string
 	 */
 	private function site_record_state( array $site ) {
+		if ( ! empty( $site['archived_at'] ) ) {
+			return 'archived';
+		}
+
 		$status = isset( $site['enrollment_status'] ) ? sanitize_key( (string) $site['enrollment_status'] ) : '';
 
 		if ( '' === $status ) {
