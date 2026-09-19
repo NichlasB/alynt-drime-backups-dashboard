@@ -137,6 +137,37 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Locally revoked records', $html );
 		$this->assertStringContainsString( '<td>3</td>', $html );
 	}
+
+	/**
+	 * Diagnostics overview shows generated-at evidence and a cache-busted refresh link.
+	 *
+	 * @return void
+	 */
+	public function test_overview_renders_diagnostics_freshness_notice() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness();
+		$html    = $harness->overview_html(
+			array(
+				'scheduler' => array(
+					'current_utc'           => '2026-09-19 10:53:22',
+					'poll_hook'             => 'alynt_drime_backups_dashboard_poll_sites',
+					'poll_schedule_state'   => 'scheduled',
+					'poll_next_at'          => '2026-09-19 11:06:29',
+					'poll_interval_seconds' => 900,
+					'poll_batch_size'       => 20,
+					'stale_after_seconds'   => 3600,
+				),
+				'counts'    => array(),
+				'recent'    => array(),
+				'logging'   => array(),
+				'support'   => array(),
+			)
+		);
+
+		$this->assertStringContainsString( 'Generated at 2026-09-19 10:53:22 UTC.', $html );
+		$this->assertStringContainsString( 'Refresh diagnostics', $html );
+		$this->assertStringContainsString( 'tab=diagnostics', $html );
+		$this->assertStringContainsString( '_adbd_check=20260919105322', $html );
+	}
 }
 
 /**
@@ -168,6 +199,8 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostic_Formatters;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview;
+
+	const MENU_SLUG = 'alynt-drime-backups-dashboard';
 
 	/**
 	 * Diagnostics service stub.

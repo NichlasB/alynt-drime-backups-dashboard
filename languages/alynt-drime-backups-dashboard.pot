@@ -1275,6 +1275,16 @@ msgstr ""
 msgid "Redacted scheduler, retention, and polling evidence for operators. This screen never displays pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials."
 msgstr ""
 
+#. translators: %s: UTC diagnostics generation time.
+#: includes/traits/trait-admin-page-diagnostics-overview.php:118
+#, php-format
+msgid "Generated at %s UTC."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:129
+msgid "Refresh diagnostics"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:38
 msgid "Scheduler"
 msgstr ""

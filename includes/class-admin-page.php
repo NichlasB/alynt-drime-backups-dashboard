@@ -162,6 +162,23 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page {
 			self::MENU_SLUG,
 			array( $this, 'render' )
 		);
+
+		if ( '' !== $this->page_hook ) {
+			add_action( 'load-' . $this->page_hook, array( $this, 'send_no_cache_headers' ) );
+		}
+	}
+
+	/**
+	 * Sends no-cache headers for the dashboard admin surface.
+	 *
+	 * @since 0.1.35
+	 *
+	 * @return void
+	 */
+	public function send_no_cache_headers() {
+		if ( function_exists( 'nocache_headers' ) ) {
+			nocache_headers();
+		}
 	}
 
 	/**

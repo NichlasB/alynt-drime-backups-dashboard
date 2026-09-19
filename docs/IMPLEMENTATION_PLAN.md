@@ -269,6 +269,24 @@ Acceptance criteria:
 - Existing polling and classification behavior remains unchanged.
 - Targeted diagnostics tests cover the record-state counts and rendering.
 
+### Diagnostics Freshness And Cache Protection Slice
+
+Post-release monitoring showed that a browser/admin cache can display an older Diagnostics render even after the dashboard plugin and database have current state. Diagnostics already includes current UTC and support-copy timestamps, but operators need clearer freshness evidence and an easy cache-busted refresh path.
+
+Implement a small admin-only polish slice:
+
+- Send no-cache headers for the dashboard admin page only.
+- Show the Diagnostics generated-at UTC timestamp near the top of the Diagnostics screen.
+- Provide a “Refresh diagnostics” link that reloads the Diagnostics tab with a cache-busting query parameter.
+- Keep all output redacted and support-safe.
+- Do not change polling, status classification, remote-action behavior, pairing, protocol fields, credentials, or live-site deployment rules.
+
+Acceptance criteria:
+
+- Diagnostics exposes visible generated-at evidence and a cache-busted refresh link.
+- The dashboard admin page discourages stale cached renders.
+- Existing Diagnostics support copy remains unchanged except for naturally current timestamps.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

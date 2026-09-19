@@ -33,6 +33,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		echo '<section aria-labelledby="adbd-diagnostics-heading">';
 		echo '<h2 id="adbd-diagnostics-heading">' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
 		echo '<p class="adbd-screen-intro">' . esc_html__( 'Redacted scheduler, retention, and polling evidence for operators. This screen never displays pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		$this->render_diagnostics_freshness_notice( $scheduler );
 
 		$this->render_diagnostics_settings( $logging );
 
@@ -78,5 +79,54 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_event_log_diagnostics( $logging );
 		$this->render_support_copy_output( $support );
 		echo '</section>';
+	}
+
+	/**
+	 * Renders generated-at copy and a cache-busted Diagnostics refresh link.
+	 *
+	 * @param array<string,mixed> $scheduler Scheduler diagnostics.
+	 * @return void
+	 */
+	private function render_diagnostics_freshness_notice( array $scheduler ) {
+		$current_utc = $this->diagnostic_value( $scheduler, 'current_utc' );
+		$refresh_url = $this->diagnostics_refresh_url( $current_utc );
+
+		echo '<p class="description adbd-diagnostics-freshness">';
+
+		if ( '' !== $current_utc ) {
+			printf(
+				/* translators: %s: UTC diagnostics generation time. */
+				esc_html__( 'Generated at %s UTC.', 'alynt-drime-backups-dashboard' ),
+				esc_html( $current_utc )
+			);
+			echo ' ';
+		}
+
+		printf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( $refresh_url ),
+			esc_html__( 'Refresh diagnostics', 'alynt-drime-backups-dashboard' )
+		);
+
+		echo '</p>';
+	}
+
+	/**
+	 * Builds a cache-busted Diagnostics URL.
+	 *
+	 * @param string $current_utc Current UTC timestamp.
+	 * @return string
+	 */
+	private function diagnostics_refresh_url( $current_utc ) {
+		$cache_buster = '' !== $current_utc ? preg_replace( '/[^0-9]/', '', $current_utc ) : (string) time();
+
+		return add_query_arg(
+			array(
+				'page'        => self::MENU_SLUG,
+				'tab'         => 'diagnostics',
+				'_adbd_check' => $cache_buster,
+			),
+			admin_url( 'tools.php' )
+		);
 	}
 }
