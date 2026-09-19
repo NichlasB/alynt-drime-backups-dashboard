@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.39 - 2026-09-19
+
+### Changed
+
+- Stacked the Sites tab archive-toggle helper copy below its button by default so the helper stays readable in constrained admin layouts.
+
 ## 0.1.38 - 2026-09-19
 
 ### Changed

@@ -12,9 +12,10 @@
 
 .adbd-wrap .adbd-view-toggle {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
+	flex-direction: column;
 	flex-wrap: wrap;
-	gap: 8px 10px;
+	gap: 8px;
 	margin-block: 12px 16px;
 }
 
