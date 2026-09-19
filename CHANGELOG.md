@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.36 - 2026-09-19
+
+### Changed
+
+- Added Site Detail guidance for locally revoked dashboard records so operators understand audit retention, re-enrollment requirements, and the absence of permanent local removal in this release.
+- Clarified Sites-row schedule capability hints so preview-only clients and apply-gated clients are distinguishable without adding row-level schedule controls.
+
 ## 0.1.33 - 2026-09-18
 
 ### Changed
