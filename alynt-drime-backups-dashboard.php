@@ -133,6 +133,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-poller-status-check.php',
 	'includes/class-poller.php',
 	'includes/traits/trait-admin-page-local-actions.php',
+	'includes/traits/trait-admin-page-archive-actions.php',
 	'includes/traits/trait-admin-page-remote-actions.php',
 	'includes/traits/trait-admin-page-action-notices.php',
 	'includes/traits/trait-admin-page-actions.php',

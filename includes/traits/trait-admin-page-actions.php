@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Archive_Actions;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Action_Notices;
 

@@ -47,6 +47,7 @@ if ( ! function_exists( 'esc_attr_e' ) ) {
 
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-local-actions.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-archive-actions.php';
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 
@@ -608,6 +609,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Archive_Actions;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail;
