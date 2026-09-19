@@ -2516,6 +2516,19 @@ msgstr ""
 msgid "Permanent local removal is not available in this release. Keeping the revoked record does not contact the client site, change backups, alter Drime, or change client settings."
 msgstr ""
 
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:226
+msgid "apply gated"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:227
+msgid "preview only"
+msgstr ""
+
+#. translators: 1: schedule capability mode, 2: schedule label, 3: current cadence.
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:231
+msgid "Schedule: %1$s · %2$s %3$s"
+msgstr ""
+
 #: includes/traits/trait-remote-action-repository-reconciliation.php:104
 msgid "No matching client-side action confirmation has appeared in status polling within the expected window."
 msgstr ""

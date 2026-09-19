@@ -212,8 +212,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 	 */
 	private function schedule_management_row_hint( array $payload ) {
 		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$remote       = $this->remote_actions_from_payload( $payload );
+		$clean        = $capabilities->sanitize( $remote );
+		$clean        = is_wp_error( $clean ) ? array() : $clean;
 
-		if ( ! $capabilities->supports_schedule_management_preview( $this->remote_actions_from_payload( $payload ) ) ) {
+		if ( ! $capabilities->supports_schedule_management_preview( $clean ) ) {
 			return '';
 		}
 
@@ -224,9 +227,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			return '';
 		}
 
+		$mode  = ! empty( $clean['schedule_management']['apply_supported'] )
+			? __( 'apply gated', 'alynt-drime-backups-dashboard' )
+			: __( 'preview only', 'alynt-drime-backups-dashboard' );
 		$label = sprintf(
-			/* translators: 1: schedule label, 2: current cadence. */
-			__( 'Schedule preview: %1$s %2$s', 'alynt-drime-backups-dashboard' ),
+			/* translators: 1: schedule capability mode, 2: schedule label, 3: current cadence. */
+			__( 'Schedule: %1$s · %2$s %3$s', 'alynt-drime-backups-dashboard' ),
+			$mode,
 			$this->schedule_label( $schedule ),
 			$this->schedule_cadence_label( isset( $schedule['current_cadence'] ) ? (string) $schedule['current_cadence'] : '' )
 		);

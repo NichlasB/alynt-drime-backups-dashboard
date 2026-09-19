@@ -70,7 +70,25 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$harness = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
 		$html    = $harness->row_hint_html( $this->payload() );
 
-		$this->assertStringContainsString( 'Schedule preview: Alynt scan/upload every 15 minutes', $html );
+		$this->assertStringContainsString( 'Schedule: preview only', $html );
+		$this->assertStringContainsString( 'Alynt scan/upload every 15 minutes', $html );
+		$this->assertStringNotContainsString( '<form', $html );
+	}
+
+	/**
+	 * Sites list distinguishes apply-capable schedule hints without rendering controls.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_apply_capable_row_hint_is_display_only() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
+		$html    = $harness->row_hint_html( $this->payload( true ) );
+
+		$this->assertStringContainsString( 'Schedule: apply gated', $html );
+		$this->assertStringContainsString( 'Alynt scan/upload every 15 minutes', $html );
+		$this->assertStringNotContainsString( '<form', $html );
+		$this->assertStringNotContainsString( 'Preview Schedule Change', $html );
+		$this->assertStringNotContainsString( 'Apply Previewed Schedule Change', $html );
 	}
 
 	/**

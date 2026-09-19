@@ -307,6 +307,25 @@ Acceptance criteria:
 - Tests cover the revoked-only rendering and wording.
 - No new POST action, database write, remote action, protocol field, or live-site behavior is introduced.
 
+### Schedule Row Hint Clarity Slice
+
+The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.
+
+Implement a small display-only Sites-row polish:
+
+- Keep the Sites tab display-only for schedule management.
+- Label preview-only clients as `Schedule: preview only`.
+- Label apply-capable clients as `Schedule: apply gated`, making clear that apply still requires Site Detail, a fresh preview, client opt-in, and confirmation.
+- Continue showing the schedule label and current cadence compactly.
+- Do not add Sites-row schedule buttons, POST actions, protocol changes, database writes, remote actions, or live-site behavior.
+
+Acceptance criteria:
+
+- Preview-only schedule capability renders a compact Sites-row hint with `Schedule: preview only`.
+- Apply-capable schedule capability renders a compact Sites-row hint with `Schedule: apply gated`.
+- Missing schedule capability renders no row hint.
+- Existing Site Detail schedule controls and action dispatch behavior remain unchanged.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
