@@ -23,6 +23,12 @@
 		max-width: none;
 	}
 
+	.adbd-wrap .adbd-view-toggle {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 8px;
+	}
+
 	.adbd-wrap .adbd-sites-table caption {
 		position: absolute;
 		width: 1px;

@@ -10,6 +10,19 @@
 	line-height: 1.7;
 }
 
+.adbd-wrap .adbd-view-toggle {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 10px;
+	margin-block: 12px 16px;
+}
+
+.adbd-wrap .adbd-view-toggle .description {
+	display: inline-block;
+	max-width: 48rem;
+}
+
 .adbd-wrap .adbd-narrow-screen {
 	max-width: 920px;
 }

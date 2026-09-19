@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.38 - 2026-09-19
+
+### Changed
+
+- Polished the Sites tab archive-toggle helper layout so the button and explanatory copy stack cleanly on narrow admin screens.
+
 ## 0.1.37 - 2026-09-19
 
 ### Added
