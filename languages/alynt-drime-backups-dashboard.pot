@@ -2500,6 +2500,22 @@ msgstr ""
 msgid "The latest client report does not allow applying this previewed schedule change. Run Check Now after enabling Schedule Apply on the client."
 msgstr ""
 
+#: includes/traits/trait-admin-page-site-detail.php:126
+msgid "Revoked Local Dashboard Record"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail.php:127
+msgid "This record is retained locally for audit/history. It is not scheduled for polling, and dashboard actions that require active pairing credentials are unavailable."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail.php:128
+msgid "To monitor this origin again, create a new pairing token and complete client-site opt-in. This dashboard will not reuse revoked polling or action credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail.php:129
+msgid "Permanent local removal is not available in this release. Keeping the revoked record does not contact the client site, change backups, alter Drime, or change client settings."
+msgstr ""
+
 #: includes/traits/trait-remote-action-repository-reconciliation.php:104
 msgid "No matching client-side action confirmation has appeared in status polling within the expected window."
 msgstr ""

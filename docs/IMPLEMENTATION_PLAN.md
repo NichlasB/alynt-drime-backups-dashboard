@@ -287,6 +287,26 @@ Acceptance criteria:
 - The dashboard admin page discourages stale cached renders.
 - Existing Diagnostics support copy remains unchanged except for naturally current timestamps.
 
+### Revoked Dashboard Record Guidance Slice
+
+Operational rollout can leave superseded local dashboard records after a site is re-enrolled. Diagnostics now explains total dashboard records versus polling-ready records, and the Sites tab hides superseded revoked duplicates, but the individual Site Detail screen should make the revoked-record boundary explicit when an operator opens a revoked record directly.
+
+Implement a small non-destructive Site Detail guidance slice:
+
+- Render a clear revoked-record panel only for records with `enrollment_status = revoked`.
+- Explain that the record is retained locally for audit/history, is not polling, and cannot run Check Now, pause/resume, Request Backup Now, Schedule Preview, or Schedule Apply.
+- Explain that monitoring this origin again requires a new pairing token and client opt-in.
+- Explicitly state that there is no permanent-remove control in this release.
+- Do not delete, purge, archive, hide, re-enroll, or otherwise mutate any dashboard record.
+- Do not contact the client site, Drime, WPvivid, server-runner, GridPane, or any remote service.
+
+Acceptance criteria:
+
+- Revoked Site Detail screens show the local-only retention guidance.
+- Active/non-revoked Site Detail screens do not show revoked-record guidance.
+- Tests cover the revoked-only rendering and wording.
+- No new POST action, database write, remote action, protocol field, or live-site behavior is introduced.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

@@ -233,6 +233,44 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Revoked Site Detail guidance explains retention and re-enrollment without removal controls.
+	 *
+	 * @return void
+	 */
+	public function test_revoked_site_detail_guidance_explains_local_retention() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->revoked_record_guidance_html(
+			array(
+				'id'                => 7,
+				'enrollment_status' => 'revoked',
+			)
+		);
+
+		$this->assertStringContainsString( 'Revoked Local Dashboard Record', $html );
+		$this->assertStringContainsString( 'retained locally for audit/history', $html );
+		$this->assertStringContainsString( 'create a new pairing token and complete client-site opt-in', $html );
+		$this->assertStringContainsString( 'Permanent local removal is not available in this release', $html );
+		$this->assertStringNotContainsString( '<form', $html );
+	}
+
+	/**
+	 * Active Site Detail screens do not show revoked-record guidance.
+	 *
+	 * @return void
+	 */
+	public function test_active_site_detail_does_not_show_revoked_guidance() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->revoked_record_guidance_html(
+			array(
+				'id'                => 7,
+				'enrollment_status' => 'active',
+			)
+		);
+
+		$this->assertSame( '', $html );
+	}
+
+	/**
 	 * Sites rows show a compact V2.1 eligibility hint from redacted capability evidence.
 	 *
 	 * @return void
@@ -509,6 +547,7 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Polling_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers;
@@ -547,6 +586,18 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public function pause_panel_html( array $site ) {
 		ob_start();
 		$this->render_polling_pause_panel( $site );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes revoked-record guidance markup.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return string
+	 */
+	public function revoked_record_guidance_html( array $site ) {
+		ob_start();
+		$this->render_revoked_record_guidance( $site );
 		return (string) ob_get_clean();
 	}
 

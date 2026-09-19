@@ -89,6 +89,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		$this->render_source_policy_panel( $site, $snapshot );
 		$this->render_latest_snapshot_summary( $snapshot, $site );
 		$this->render_recent_history( $history );
+		$this->render_revoked_record_guidance( $site );
 
 		echo '<div class="adbd-panel adbd-privacy-panel"><h3>' . esc_html__( 'Credential and Privacy Boundary', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body"><p>' . esc_html__( 'Before enrollment, only a verifier for the display-once pairing token is stored. After enrollment, encrypted per-site polling credential material is stored, but its plaintext is never displayed.', 'alynt-drime-backups-dashboard' ) . '</p><p>' . esc_html__( 'This screen never shows pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials.', 'alynt-drime-backups-dashboard' ) . '</p></div></div>';
 
@@ -115,5 +116,23 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		}
 
 		echo '</section>';
+	}
+
+	/**
+	 * Renders local-only guidance for revoked dashboard records.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @return void
+	 */
+	private function render_revoked_record_guidance( array $site ) {
+		if ( ! isset( $site['enrollment_status'] ) || 'revoked' !== $site['enrollment_status'] ) {
+			return;
+		}
+
+		echo '<div class="adbd-panel adbd-warning-panel"><h3>' . esc_html__( 'Revoked Local Dashboard Record', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
+		echo '<p>' . esc_html__( 'This record is retained locally for audit/history. It is not scheduled for polling, and dashboard actions that require active pairing credentials are unavailable.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p>' . esc_html__( 'To monitor this origin again, create a new pairing token and complete client-site opt-in. This dashboard will not reuse revoked polling or action credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p>' . esc_html__( 'Permanent local removal is not available in this release. Keeping the revoked record does not contact the client site, change backups, alter Drime, or change client settings.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '</div></div>';
 	}
 }
