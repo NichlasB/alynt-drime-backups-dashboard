@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.41 - 2026-09-20
+
+### Added
+
+- Added Site Detail Remote Action History filters for action type and dashboard state with active-filter summaries, reset links, and empty filtered-result messaging.
+
+### Changed
+
+- Compacted long Site Detail Remote Action History detail cells so cadence transitions stay visible by default while longer support-safe details remain available behind a native disclosure.
+- Split backup-source evidence helper methods into focused compact-row and operator-detail traits during pre-release structure cleanup.
+
 ## 0.1.40 - 2026-09-20
 
 ### Changed

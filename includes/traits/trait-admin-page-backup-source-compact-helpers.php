@@ -106,7 +106,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Compact_Helpers {
 		}
 
 		return sprintf(
-			/* translators: %s: human-readable upload age. */
+			/* translators: %s: human-readable duration. */
 			__( '%s ago', 'alynt-drime-backups-dashboard' ),
 			$this->source_compact_age_duration_label( $age )
 		);
