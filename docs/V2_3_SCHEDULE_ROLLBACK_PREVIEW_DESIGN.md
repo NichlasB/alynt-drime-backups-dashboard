@@ -1,6 +1,6 @@
 # V2.3 Schedule Rollback Preview Design
 
-Status: planning/design slice only. This document does not approve implementation, release, deployment, live-site writes, broad client enablement, `schedule_rollback_preview` runtime behavior, `schedule_rollback` runtime behavior, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, arbitrary setting mutation, or Drime credential storage in the dashboard.
+Status: design slice with local client-side implementation started. The non-mutating uploader-side `schedule_rollback_preview` validator/worker/storage path and passive dashboard sanitizer compatibility are implemented locally but not released or deployed. This document does not approve live-site writes, broad client enablement, dashboard dispatch/UI controls, `schedule_rollback` runtime behavior, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, arbitrary setting mutation, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -34,17 +34,17 @@ The released V2.3 schedule-management baseline is:
 1. `schedule_preview`: implemented, non-mutating, scoped to `alynt_scan_upload`.
 2. `schedule_apply`: implemented, guarded, scoped to `alynt_scan_upload`, disabled by default per client, requires a fresh successful preview and client-local Schedule Apply opt-in.
 3. Rollback-readiness metadata: displayed as support evidence only.
-4. `schedule_rollback_preview`: reserved, not implemented.
+4. `schedule_rollback_preview`: local uploader-side non-mutating validation/storage and passive dashboard sanitizer compatibility implemented; dashboard dispatch/UI controls not implemented.
 5. `schedule_rollback`: reserved, not implemented.
 
 ## Non-Goals
 
 This design does not include:
 
-- adding `schedule_rollback_preview` or `schedule_rollback` to current `allowed_actions`;
+- adding `schedule_rollback_preview` to `allowed_actions` by default, or adding `schedule_rollback` to `allowed_actions`;
 - rendering dashboard rollback controls in the current release;
 - adding dashboard dispatch code;
-- adding client action handlers;
+- adding mutating client action handlers;
 - adding client-local Schedule Rollback opt-in controls;
 - changing the database schema;
 - changing action-history storage shape;
@@ -53,14 +53,14 @@ This design does not include:
 
 ## Required Preconditions Before Runtime Implementation
 
-Do not implement `schedule_rollback_preview` until all of the following are true:
+Do not proceed beyond local client-side preview validation/storage into dashboard dispatch/UI or release/deploy until all of the following are true:
 
 - at least one low-risk pilot has proven `schedule_apply` and support-safe rollback metadata;
 - the pilot has been returned to its intended cadence after proof;
 - rollback metadata includes source apply action ID, schedule ID, previous cadence, applied cadence, previous next-run evidence, applied next-run evidence, before/after redacted fingerprints, capture time, and expiry time;
 - dashboard action history displays rollback-readiness metadata without raw internals;
 - tests prove `schedule_rollback` remains unavailable;
-- the user explicitly approves moving from this design into runtime implementation.
+- the user explicitly approves moving from local implementation into dashboard dispatch/UI and release/deploy planning.
 
 ## Proposed Capability Shape
 
@@ -250,4 +250,3 @@ If approved later:
 - The design explicitly keeps `schedule_rollback` execution out of scope.
 - Roadmap/protocol references point to this design without approving runtime behavior.
 - No source code, release, deployment, live site, client setting, production data, or runtime behavior changed.
-

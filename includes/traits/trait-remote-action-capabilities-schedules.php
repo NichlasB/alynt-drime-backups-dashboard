@@ -34,19 +34,21 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Schedules {
 			return array();
 		}
 
-		$schedules          = $this->schedules( isset( $capability['schedules'] ) ? $capability['schedules'] : array() );
-		$rollback_supported = ! empty( $capability['rollback_supported'] );
-		$apply_supported    = ! empty( $capability['apply_supported'] ) && ! $rollback_supported;
-		$preview_only       = ! empty( $capability['preview_only'] ) && ! $apply_supported && ! $rollback_supported;
+		$schedules                  = $this->schedules( isset( $capability['schedules'] ) ? $capability['schedules'] : array() );
+		$rollback_supported         = ! empty( $capability['rollback_supported'] );
+		$rollback_preview_supported = ! empty( $capability['rollback_preview_supported'] ) && ! $rollback_supported;
+		$apply_supported            = ! empty( $capability['apply_supported'] ) && ! $rollback_supported;
+		$preview_only               = ! empty( $capability['preview_only'] ) && ! $apply_supported && ! $rollback_supported;
 
 		return array(
-			'protocol_version'   => self::PROTOCOL_VERSION,
-			'capability_version' => $this->non_negative_int( $capability, 'capability_version' ),
-			'enabled'            => ! empty( $capability['enabled'] ) && ! $rollback_supported && ! empty( $schedules ),
-			'preview_only'       => $preview_only,
-			'apply_supported'    => $apply_supported,
-			'rollback_supported' => false,
-			'schedules'          => $schedules,
+			'protocol_version'           => self::PROTOCOL_VERSION,
+			'capability_version'         => $this->non_negative_int( $capability, 'capability_version' ),
+			'enabled'                    => ! empty( $capability['enabled'] ) && ! $rollback_supported && ! empty( $schedules ),
+			'preview_only'               => $preview_only,
+			'apply_supported'            => $apply_supported,
+			'rollback_preview_supported' => $rollback_preview_supported,
+			'rollback_supported'         => false,
+			'schedules'                  => $schedules,
 		);
 	}
 
@@ -86,6 +88,7 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Schedules {
 				'minimum_interval_seconds'       => $this->non_negative_int( $schedule, 'minimum_interval_seconds' ),
 				'can_disable'                    => ! empty( $schedule['can_disable'] ),
 				'requires_high_friction_disable' => ! empty( $schedule['requires_high_friction_disable'] ),
+				'rollback_preview_supported'     => ! empty( $schedule['rollback_preview_supported'] ),
 				'rollback_supported'             => false,
 			);
 		}

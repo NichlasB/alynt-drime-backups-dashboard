@@ -196,7 +196,7 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Public {
 	public function sanitize_action_type( $action_type ) {
 		$action_type = sanitize_key( (string) $action_type );
 
-		return in_array( $action_type, array( self::ACTION_SCAN_UPLOAD_NOW, self::ACTION_SCHEDULE_PREVIEW, self::ACTION_SCHEDULE_APPLY ), true ) ? $action_type : '';
+		return in_array( $action_type, array( self::ACTION_SCAN_UPLOAD_NOW, self::ACTION_SCHEDULE_PREVIEW, self::ACTION_SCHEDULE_APPLY, self::ACTION_SCHEDULE_ROLLBACK_PREVIEW ), true ) ? $action_type : '';
 	}
 
 	/**

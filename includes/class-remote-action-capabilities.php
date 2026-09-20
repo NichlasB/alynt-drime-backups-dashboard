@@ -20,11 +20,12 @@ class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Action_Data;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Schedules;
 
-	const PROTOCOL_VERSION        = 2;
-	const ACTION_SCAN_UPLOAD_NOW  = 'scan_upload_now';
-	const ACTION_SCHEDULE_PREVIEW = 'schedule_preview';
-	const ACTION_SCHEDULE_APPLY   = 'schedule_apply';
-	const SCHEDULE_SCAN_UPLOAD    = 'alynt_scan_upload';
+	const PROTOCOL_VERSION                 = 2;
+	const ACTION_SCAN_UPLOAD_NOW           = 'scan_upload_now';
+	const ACTION_SCHEDULE_PREVIEW          = 'schedule_preview';
+	const ACTION_SCHEDULE_APPLY            = 'schedule_apply';
+	const ACTION_SCHEDULE_ROLLBACK_PREVIEW = 'schedule_rollback_preview';
+	const SCHEDULE_SCAN_UPLOAD             = 'alynt_scan_upload';
 
 	const MAX_ALLOWED_ACTIONS       = 5;
 	const MAX_RESULT_SUMMARY_LENGTH = 160;
