@@ -6,7 +6,7 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`. V2.1 action-request protocol details are tracked in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`.
 
-Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded V2.3 schedule-apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata capture is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, and the planning-only schedule rollback readiness gate is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded V2.3 schedule-apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata capture is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, the planning-only schedule rollback readiness gate is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, and the non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
 
 ## Current State And Safety Boundary
 
@@ -42,6 +42,27 @@ Required gates:
 6. Do not proceed from preview to apply/rollback without a new protocol/threat-model update, explicit user approval, tests proving no unsafe fallback, and a separate release/deploy gate.
 7. Treat rollback metadata capture as a separate stabilization/readiness slice from rollback execution. Capturing support-safe metadata may be designed before a `schedule_rollback` action exists, but `schedule_rollback` must remain unavailable until a later protocol/threat-model and release gate are approved.
 8. Treat `schedule_rollback_preview` as the next possible runtime design step before any mutating rollback action. Do not implement `schedule_rollback` directly from metadata capture without a non-mutating preview design, updated protocol/threat model, explicit user approval, tests proving stale/current-state rejection, and a separate release/deploy gate.
+
+### V2.3 Schedule Rollback Preview Design Slice
+
+Implementation status: planning/design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`; runtime behavior remains unavailable.
+
+The next possible rollback-adjacent implementation must be a non-mutating `schedule_rollback_preview` slice, not `schedule_rollback` execution. This design step defines how the dashboard would ask a client whether one previous `schedule_apply` action is still safely rollback-previewable, while preserving the rule that the client owns current-state validation and no schedule changes occur during preview.
+
+Design boundaries:
+
+- keep `schedule_rollback_preview` unavailable until a later runtime implementation plan is separately approved;
+- keep `schedule_rollback` unavailable until after rollback preview is implemented, proven, and separately approved;
+- limit all future preview planning to `alynt_scan_upload`;
+- reject free-form cadence, raw cron, WP-Cron arrays, option names/values, filesystem paths, commands, Drime identifiers, credentials, and arbitrary settings payloads;
+- require client-owned rollback metadata, a source apply action reference, metadata fingerprint, expiry checks, and current schedule fingerprint revalidation;
+- keep rollback-preview UI non-mutating and distinct from rollback apply.
+
+Acceptance criteria for the design slice:
+
+- a dedicated rollback-preview design artifact exists;
+- roadmap/protocol references point to it without approving runtime behavior;
+- no source code, release, deployment, live-site change, client setting, production data, or schedule mutation is introduced.
 
 ### V2.3 Schedule-Control Stabilization Slice
 

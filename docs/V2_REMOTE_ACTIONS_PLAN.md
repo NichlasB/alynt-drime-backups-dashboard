@@ -6,7 +6,7 @@ Status: V2 planning baseline. The V2.1 action opt-in token foundation, dashboard
 
 Current V2.3 state: passive schedule capability display, signed non-mutating `schedule_preview`, and guarded signed `schedule_apply` for the Alynt scan/upload cadence have been implemented, released, and deployed. Schedule Apply remains disabled by default on clients and requires explicit per-client local opt-in. `schedule_rollback` runtime behavior is not implemented.
 
-Next V2.3 stabilization step: keep observing support-safe rollback-readiness metadata and, if runtime rollback is still desired, design a non-mutating `schedule_rollback_preview` before any `schedule_rollback` apply action. The dashboard may display support-safe rollback-readiness metadata as evidence, but it must continue to render no rollback control and dispatch no `schedule_rollback` action until a separate protocol/threat-model and release gate are approved.
+Next V2.3 stabilization step: keep observing support-safe rollback-readiness metadata and, if runtime rollback is still desired, implement only a separately approved non-mutating `schedule_rollback_preview` before any `schedule_rollback` apply action. The rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. The dashboard may display support-safe rollback-readiness metadata as evidence, but it must continue to render no rollback control and dispatch no `schedule_rollback` action until a separate protocol/threat-model and release gate are approved.
 
 Draft V2.1 protocol and threat-model artifacts:
 
@@ -21,6 +21,7 @@ Draft V2.1 protocol and threat-model artifacts:
 - `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`
 - `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`
 - `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`
+- `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -133,7 +134,7 @@ Recommended sequencing inside V2.3:
 2. Non-mutating signed `schedule_preview` for `alynt_scan_upload` only.
 3. Separately gated `schedule_apply` for `alynt_scan_upload` cadence changes only after preview proves safe and reliable, with a fresh-preview requirement, separate local Schedule Apply opt-in, and rollback reported unavailable.
 4. Separately gated rollback metadata capture/readiness after apply is proven enough to stabilize the evidence model.
-5. Separately gated `schedule_rollback_preview` only after rollback metadata capture has been proven enough to support a non-mutating current-state check.
+5. Separately gated `schedule_rollback_preview` only after rollback metadata capture has been proven enough to support a non-mutating current-state check; design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`.
 6. Separately gated `schedule_rollback` only after rollback preview, recovery design, protocol/threat-model updates, tests, and rollout proof are separately approved.
 
 Recommended constraints:

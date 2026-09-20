@@ -4,7 +4,7 @@ Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability re
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, and planning-only rollback readiness gates are tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, planning-only rollback readiness gates are tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, and non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 
@@ -149,7 +149,7 @@ Rules:
 
 ### Reserved Schedule Rollback Actions
 
-`schedule_rollback_preview` and `schedule_rollback` are reserved action names. They are not approved runtime behavior in the current protocol baseline, must not appear in `allowed_actions`, and must be rejected by clients until a later protocol/threat-model update and release gate explicitly approve them.
+`schedule_rollback_preview` and `schedule_rollback` are reserved action names. The design boundary for a future non-mutating preview is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, but these actions are not approved runtime behavior in the current protocol baseline, must not appear in `allowed_actions`, and must be rejected by clients until a later protocol/threat-model update and release gate explicitly approve them.
 
 Any future rollback design must use a two-step model:
 
