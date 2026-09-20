@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.40 - 2026-09-20
+
+### Changed
+
+- Clarified V2.3 Schedule Apply wording so operators see that apply changes only the Alynt uploader scan cadence, not upload-worker, WPvivid, server-runner, Drime, restore, cleanup, or credential behavior.
+
+### Fixed
+
+- Avoided misleading Schedule Preview and Schedule Apply history rows such as `Unknown → every 15 minutes` while waiting for the client to report current or previous cadence evidence.
+
 ## 0.1.39 - 2026-09-19
 
 ### Changed
