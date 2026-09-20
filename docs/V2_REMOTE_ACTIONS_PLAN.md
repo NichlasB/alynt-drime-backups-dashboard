@@ -6,7 +6,7 @@ Status: V2 planning baseline. The V2.1 action opt-in token foundation, dashboard
 
 Current V2.3 state: passive schedule capability display, signed non-mutating `schedule_preview`, and guarded signed `schedule_apply` for the Alynt scan/upload cadence have been implemented, released, and deployed. Schedule Apply remains disabled by default on clients and requires explicit per-client local opt-in. `schedule_rollback` runtime behavior is not implemented.
 
-Next V2.3 stabilization step: harden dashboard operator wording and tests around the existing Schedule Apply boundary before any broader remote-action class is considered. The dashboard may display support-safe rollback-readiness metadata as evidence, but it must continue to render no rollback control and dispatch no `schedule_rollback` action.
+Next V2.3 stabilization step: keep observing support-safe rollback-readiness metadata and, if runtime rollback is still desired, design a non-mutating `schedule_rollback_preview` before any `schedule_rollback` apply action. The dashboard may display support-safe rollback-readiness metadata as evidence, but it must continue to render no rollback control and dispatch no `schedule_rollback` action until a separate protocol/threat-model and release gate are approved.
 
 Draft V2.1 protocol and threat-model artifacts:
 
@@ -20,6 +20,7 @@ Draft V2.1 protocol and threat-model artifacts:
 - `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`
 - `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`
 - `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`
+- `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -132,7 +133,8 @@ Recommended sequencing inside V2.3:
 2. Non-mutating signed `schedule_preview` for `alynt_scan_upload` only.
 3. Separately gated `schedule_apply` for `alynt_scan_upload` cadence changes only after preview proves safe and reliable, with a fresh-preview requirement, separate local Schedule Apply opt-in, and rollback reported unavailable.
 4. Separately gated rollback metadata capture/readiness after apply is proven enough to stabilize the evidence model.
-5. Separately gated `schedule_rollback` only after rollback metadata capture, recovery design, protocol/threat-model updates, tests, and rollout proof are separately approved.
+5. Separately gated `schedule_rollback_preview` only after rollback metadata capture has been proven enough to support a non-mutating current-state check.
+6. Separately gated `schedule_rollback` only after rollback preview, recovery design, protocol/threat-model updates, tests, and rollout proof are separately approved.
 
 Recommended constraints:
 
@@ -226,11 +228,12 @@ Keep separate from backup operations. If needed later, design it as a dedicated 
 3. V2.2 action history and operator audit UI hardening before any higher-risk controls.
 4. V2.3 passive schedule capability display, then non-mutating `schedule_preview`, then guarded `schedule_apply`.
 5. V2.3 rollback metadata capture/readiness without `schedule_rollback` execution.
-6. V2.3 `schedule_rollback` only after a separate recovery design and approval gate.
-7. V2.4 cleanup dry-run/apply for local artifacts only as a higher-risk gated phase.
-8. V2.5 remote retention/delete planning after inventory evidence is mature as a higher-risk gated phase.
-9. V2.6 restore preparation as a higher-risk gated phase.
-10. V2.7 restore execution only after staging drills and explicit production safety gates.
+6. V2.3 `schedule_rollback_preview` only after a separate recovery-readiness design and approval gate.
+7. V2.3 `schedule_rollback` only after rollback preview proof and a separate apply approval gate.
+8. V2.4 cleanup dry-run/apply for local artifacts only as a higher-risk gated phase.
+9. V2.5 remote retention/delete planning after inventory evidence is mature as a higher-risk gated phase.
+10. V2.6 restore preparation as a higher-risk gated phase.
+11. V2.7 restore execution only after staging drills and explicit production safety gates.
 
 ## Acceptance Gate For Starting V2 Implementation
 

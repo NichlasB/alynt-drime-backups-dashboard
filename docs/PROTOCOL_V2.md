@@ -4,7 +4,7 @@ Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability re
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, and rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, and planning-only rollback readiness gates are tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 
@@ -146,7 +146,21 @@ Rules:
 - The client must reject unknown schedule IDs, unsupported cadences, free-form cron expressions, and unsafe local state.
 - The response may include schedule ID, label, owner, current cadence, proposed cadence, current next run, proposed next-run estimate, `would_change`, warning codes, and support-safe result codes.
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
-- `schedule_apply` is implemented only for the approved, guarded `alynt_scan_upload` cadence flow. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
+
+### Reserved Schedule Rollback Actions
+
+`schedule_rollback_preview` and `schedule_rollback` are reserved action names. They are not approved runtime behavior in the current protocol baseline, must not appear in `allowed_actions`, and must be rejected by clients until a later protocol/threat-model update and release gate explicitly approve them.
+
+Any future rollback design must use a two-step model:
+
+1. `schedule_rollback_preview` is non-mutating and references one successful `schedule_apply` action plus captured rollback metadata.
+2. `schedule_rollback` is mutating and references a fresh successful rollback preview.
+
+The dashboard must not send a free-form target cadence, raw cron expression, raw WP-Cron array, option name/value, path, command, username, package name, backup ID, Drime identifier, credential, token, signed URL, or arbitrary settings payload. The client must compute rollback eligibility from its own stored, support-safe metadata and current local schedule state.
+
+Any future rollback action must remain limited to `alynt_scan_upload` unless a later approved design expands the scope. It must fail closed when metadata is missing or expired, the current schedule fingerprint no longer matches the post-apply state, the preview is stale, local Schedule Rollback opt-in is disabled, or rollback would disable all schedule execution.
+
+The current `schedule_apply` flow is implemented only for the approved, guarded `alynt_scan_upload` cadence flow. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
 
 ### Schedule Apply Action
 

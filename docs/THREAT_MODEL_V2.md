@@ -61,6 +61,9 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Schedule apply free-form mutation | Dashboard sends raw cron, arbitrary cadence, disable flag, option payload, or other settings through `schedule_apply`. | Dashboard builds apply only from allowlisted preview evidence; client accepts only `alynt_scan_upload`, supported cadence labels, and bounded preview references. | Dashboard payload tests and client action validation tests. |
 | Rollback metadata missing | Client applies a schedule change without enough local evidence to support a future rollback design. | Current released apply reports rollback unavailable. The next metadata-capture slice must capture bounded support-safe previous-schedule evidence without enabling `schedule_rollback`; runtime rollback remains separately gated. | Client rollback-metadata tests and dashboard redaction tests. |
 | Schedule apply overreach | Apply changes WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or unrelated settings. | First apply slice targets only `alynt_scan_upload`; tests prove only that schedule changes and all other action types remain rejected. | Client integration tests and cross-plugin checks. |
+| Rollback without preview | A future rollback action changes schedule state directly from old metadata without a fresh current-state check. | Require non-mutating `schedule_rollback_preview` before any `schedule_rollback`; client revalidates current schedule fingerprint immediately before mutation. | Future rollback preview/apply tests. |
+| Rollback stale state | Metadata was captured, but the local schedule changed after apply; rollback would overwrite an intentional later change. | Bind rollback to source apply action, metadata fingerprint, fresh rollback preview, current schedule fingerprint, and expiry window; fail closed on mismatch. | Future stale-fingerprint and expiry tests. |
+| Rollback scope creep | Rollback grows into generic cron editing, WPvivid schedule changes, server-runner schedule changes, or arbitrary settings mutation. | Reserve rollback for `alynt_scan_upload` only; reject raw cron/options/paths/commands and unsupported schedule IDs; require separate design for any expanded target. | Future payload validation and capability tests. |
 
 ## Abuse Cases Explicitly Out Of Scope For V2.1
 
@@ -81,6 +84,7 @@ These must remain impossible in V2.1 code and UI:
 - filesystem browsing;
 - accepting paths, package names, backup IDs, or Drime object IDs from the dashboard.
 - accepting raw cron expressions, raw crontab lines, raw WP-Cron arrays, raw WPvivid option blobs, or free-form cadence input from the dashboard.
+- dispatching or accepting `schedule_rollback_preview` or `schedule_rollback` until a later protocol/threat-model update and release gate explicitly approve them.
 
 ## Required Controls By Component
 
@@ -184,6 +188,7 @@ Cross-plugin:
 - V2.3 must start with preview-only capability reporting and dashboard display before any apply or rollback implementation.
 - Any `schedule_preview` implementation must prove no schedule mutation before any apply or rollback implementation is considered.
 - Any `schedule_apply` implementation must be limited to `alynt_scan_upload`, require fresh preview revalidation, and preserve rollback metadata before one low-risk live pilot is considered.
+- Any future `schedule_rollback` implementation must be preceded by a non-mutating `schedule_rollback_preview` implementation and proof, and must remain disabled by default behind a separate client-local rollback opt-in.
 
 ## Approval Gate
 
