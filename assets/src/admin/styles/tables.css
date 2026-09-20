@@ -126,3 +126,24 @@
 .adbd-wrap .adbd-source-reason {
 	color: var(--adbd-muted);
 }
+
+.adbd-wrap .adbd-history-detail-summary {
+	display: block;
+	font-weight: 500;
+}
+
+.adbd-wrap .adbd-history-detail-disclosure {
+	margin-block-start: 4px;
+	color: var(--adbd-subtle);
+	font-size: 12px;
+}
+
+.adbd-wrap .adbd-history-detail-disclosure > summary {
+	cursor: pointer;
+}
+
+.adbd-wrap .adbd-history-detail-disclosure > span {
+	display: block;
+	margin-block-start: 4px;
+	overflow-wrap: anywhere;
+}

@@ -85,6 +85,26 @@ Acceptance criteria:
 - Existing remote-action rendering tests pass, with added coverage for action/state filtering and empty filtered results.
 - No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, or new remote-action behavior is introduced.
 
+### Compact Remote Action History Details UI Slice
+
+After adding action-history filters, keep the Site Detail history table readable by reducing default row density. Schedule Apply rows can include cadence transitions, next-run estimates, scope warnings, rollback-readiness metadata, reason codes, and expiry timestamps. Those details are useful for audit/support, but they should not dominate the table by default.
+
+Implement a small dashboard-only rendering slice:
+
+- Keep the existing support-safe detail text available in the row.
+- Show a compact Details summary by default, prioritizing cadence transition/count evidence.
+- Move long secondary details behind a native disclosure pattern inside the Details cell.
+- Preserve all existing action labels, result labels, rollback-readiness wording, filtering, redaction, repository storage, dispatch, polling, and protocol behavior.
+- Do not add JavaScript requirements for this interaction.
+
+Acceptance criteria:
+
+- Long Schedule Apply rows show the cadence transition as the default Details-cell summary.
+- Rollback metadata, next-run evidence, and scope wording remain available behind an expandable disclosure.
+- Short Request Backup rows remain unchanged when they do not need expansion.
+- Rendering tests cover the compact default summary and the retained full support-safe detail text.
+- No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, rollback, or new remote-action behavior is introduced.
+
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
 ## Repository And Package Identity Confirmation Gate
