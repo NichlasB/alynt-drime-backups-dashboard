@@ -46,17 +46,19 @@ Required gates:
 
 After guarded Schedule Apply reached the live dashboard, the next safe dashboard-side slice is stabilization rather than a new remote power. This slice should harden operator wording and tests around the already released V2.3 boundary:
 
-- make Site Detail copy unmistakable that Schedule Apply changes only future Alynt scan/upload cadence;
+- make Site Detail copy unmistakable that Schedule Apply changes only future Alynt uploader scan cadence, even when the client-facing capability label remains `Alynt scan/upload`;
 - make rollback status explicit: rollback metadata may be displayed as support evidence, but no `schedule_rollback` action, button, dispatch path, or runtime behavior is available in this version;
-- make remote-action history details describe schedule apply as `Alynt scan/upload only` so operators do not infer WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or credential control;
+- make remote-action history details describe schedule apply as Alynt uploader scan-cadence only so operators do not infer upload-worker cadence, WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or credential control;
+- avoid misleading `Unknown → target cadence` history rows while waiting for the client to echo the current cadence; missing cadence evidence should be called out as pending client report rather than treated as a known cadence;
 - preserve the existing signed preview/apply behavior, fresh-preview requirement, action history storage, support-safe rollback-readiness metadata display, and per-client Schedule Apply opt-in gate;
 - avoid client protocol changes unless a later rollback-readiness or runtime rollback slice is separately planned and approved.
 
 Acceptance criteria:
 
 - Site Detail Schedule Management copy says rollback is unavailable in this release and no rollback control is rendered.
-- Apply confirmation copy says the action is only for future Alynt scan/upload cadence and rollback is unavailable.
-- Remote Action History labels Schedule Apply details as Alynt scan/upload only and treats rollback metadata as evidence-only.
+- Apply confirmation copy says the action is only for future Alynt uploader scan cadence and rollback is unavailable.
+- Remote Action History labels Schedule Apply details as Alynt uploader scan-cadence only and treats rollback metadata as evidence-only.
+- Remote Action History shows a pending-client-report explanation instead of a definitive transition when the current or applied cadence has not yet been reported.
 - Existing schedule preview/apply tests pass, and targeted tests cover the hardened wording.
 - No remote backup creation, WPvivid schedule changes, server-runner schedule changes, cleanup, delete, restore, rollback dispatch, arbitrary cron, Drime credential storage, or live-site changes are introduced.
 

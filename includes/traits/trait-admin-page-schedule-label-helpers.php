@@ -139,4 +139,46 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers {
 			$seconds
 		);
 	}
+
+	/**
+	 * Gets a schedule transition label without presenting missing cadence evidence as a known value.
+	 *
+	 * @param string $from From cadence label, or empty when not reported.
+	 * @param string $to To cadence label, or empty when not reported.
+	 * @param string $target_prefix Prefix used when only the target cadence is known.
+	 * @param string $from_missing Missing-from explanation.
+	 * @param string $to_missing Missing-to explanation.
+	 * @return string
+	 */
+	private function schedule_transition_label( $from, $to, $target_prefix, $from_missing, $to_missing ) {
+		if ( '' !== $from && '' !== $to ) {
+			return sprintf(
+				/* translators: 1: source cadence label, 2: target cadence label. */
+				__( '%1$s → %2$s', 'alynt-drime-backups-dashboard' ),
+				$from,
+				$to
+			);
+		}
+
+		if ( '' === $from && '' !== $to ) {
+			return sprintf(
+				/* translators: 1: label prefix, 2: target cadence label, 3: missing cadence explanation. */
+				__( '%1$s: %2$s; %3$s', 'alynt-drime-backups-dashboard' ),
+				$target_prefix,
+				$to,
+				$from_missing
+			);
+		}
+
+		if ( '' !== $from && '' === $to ) {
+			return sprintf(
+				/* translators: 1: source cadence label, 2: missing target cadence explanation. */
+				__( '%1$s → pending; %2$s', 'alynt-drime-backups-dashboard' ),
+				$from,
+				$to_missing
+			);
+		}
+
+		return __( 'Schedule cadence pending client report', 'alynt-drime-backups-dashboard' );
+	}
 }

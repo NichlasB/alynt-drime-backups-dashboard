@@ -56,8 +56,11 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( 'Apply Previewed Schedule Change', $html );
 		$this->assertStringContainsString( 'schedule_apply_confirm', $html );
 		$this->assertStringContainsString( 'from every 15 minutes to every 30 minutes', $html );
+		$this->assertStringContainsString( 'future scan scheduling for the Alynt uploader only', $html );
+		$this->assertStringContainsString( 'upload worker may keep its own cadence', $html );
 		$this->assertStringContainsString( 'rollback is not available in this release', $html );
 		$this->assertStringContainsString( 'rollback is unavailable', $html );
+		$this->assertStringNotContainsString( 'future scan/upload timing only', $html );
 		$this->assertStringNotContainsString( 'schedule_rollback', $html );
 	}
 

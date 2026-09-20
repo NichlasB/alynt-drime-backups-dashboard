@@ -427,7 +427,7 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-action-notices.php:123
 #: includes/traits/trait-admin-page-action-notices.php:124
-msgid "Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client."
+msgid "Schedule Apply was accepted by the client site. It changes only future Alynt uploader scan cadence. Use Check Now to confirm the applied cadence reported by the client."
 msgstr ""
 
 #: includes/traits/trait-admin-page-action-notices.php:125
@@ -1799,46 +1799,80 @@ msgstr ""
 msgid "Found %1$d; Queued %2$d; Known %3$d; Attempts %4$d; Failed %5$d"
 msgstr ""
 
-#. translators: 1: previous cadence label, 2: applied cadence label.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:197
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:199
+msgid "Applied cadence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:200
+msgid "previous cadence pending client report"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:201
+msgid "applied cadence pending client report"
+msgstr ""
+
+#. translators: 1: source cadence label, 2: target cadence label.
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:156
 #, php-format
 msgid "%1$s → %2$s"
 msgstr ""
 
 #. translators: %s: next run date/time.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:205
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:207
 #, php-format
 msgid "Next run %s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:210
-msgid "Alynt scan/upload only"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:212
+msgid "Alynt uploader scan cadence only; upload worker cadence may remain separate"
 msgstr ""
 
-#. translators: 1: current cadence label, 2: proposed cadence label.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:226
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:228
+msgid "Preview target"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:229
+msgid "current cadence pending client report"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:230
+msgid "proposed cadence pending client report"
+msgstr ""
+
+#. translators: 1: label prefix, 2: target cadence label, 3: missing cadence explanation.
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:165
 #, php-format
-msgid "Preview: %1$s → %2$s"
+msgid "%1$s: %2$s; %3$s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:247
+#. translators: 1: source cadence label, 2: missing target cadence explanation.
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:175
+#, php-format
+msgid "%1$s → pending; %2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-label-helpers.php:182
+msgid "Schedule cadence pending client report"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:299
 msgid "Rollback metadata captured as evidence only; rollback action unavailable"
 msgstr ""
 
 #. translators: %s: rollback unavailable reason code.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:254
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:306
 #, php-format
 msgid "Reason %s"
 msgstr ""
 
 #. translators: %s: rollback metadata expiry date/time.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:262
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:314
 #, php-format
 msgid "metadata expires %s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-actions.php:138
-msgid "Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview."
+msgid "Confirm that Schedule Apply changes only future Alynt uploader scan cadence before applying this preview."
 msgstr ""
 
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:35
@@ -1990,7 +2024,7 @@ msgid "Schedule Management"
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:37
-msgid "V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, roll back schedules, or change credentials."
+msgid "V2.3 schedule controls are limited to the Alynt uploader scan cadence reported by the client as Alynt scan/upload. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change upload-worker, WPvivid, or server-runner schedules, alter Drime, delete, clean up, restore, roll back schedules, or change credentials."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:40
@@ -2062,7 +2096,7 @@ msgid "Unavailable in this release; rollback metadata is evidence only and no ro
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:73
-msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview."
+msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt uploader scan cadence changes after a fresh preview."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:90
@@ -2088,11 +2122,11 @@ msgstr ""
 #. translators: 1: current cadence, 2: proposed cadence.
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:154
 #, php-format
-msgid "Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only; rollback is not available in this release."
+msgid "Applies the fresh previewed Alynt uploader scan cadence change from %1$s to %2$s. This changes future scan scheduling for the Alynt uploader only; the upload worker may keep its own cadence and rollback is not available in this release."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:163
-msgid "I understand this applies only the previewed future Alynt scan/upload cadence change, rollback is unavailable, and this does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
+msgid "I understand this applies only the previewed future Alynt uploader scan cadence change, rollback is unavailable, and this does not create backups or change upload-worker cadence, WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:165

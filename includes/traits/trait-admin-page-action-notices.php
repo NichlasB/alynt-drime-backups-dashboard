@@ -120,8 +120,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Action_Notices {
 		if ( isset( $result['action'] ) && 'schedule_apply' === $result['action'] ) {
 			$this->render_remote_action_notice(
 				$result,
-				__( 'Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client.', 'alynt-drime-backups-dashboard' ),
-				__( 'Schedule Apply was accepted by the client site. It changes only future Alynt scan/upload timing. Use Check Now to confirm the applied cadence reported by the client.', 'alynt-drime-backups-dashboard' ),
+				__( 'Schedule Apply was accepted by the client site. It changes only future Alynt uploader scan cadence. Use Check Now to confirm the applied cadence reported by the client.', 'alynt-drime-backups-dashboard' ),
+				__( 'Schedule Apply was accepted by the client site. It changes only future Alynt uploader scan cadence. Use Check Now to confirm the applied cadence reported by the client.', 'alynt-drime-backups-dashboard' ),
 				__( 'The client site did not accept the Schedule Apply request.', 'alynt-drime-backups-dashboard' ),
 				__( 'Schedule Apply could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' )
 			);

@@ -83,11 +83,11 @@ Then the dashboard may show an **Apply Previewed Schedule Change** control next 
 The control must:
 
 - restate the exact before/after cadence;
-- explain that this changes future scan/upload timing only;
+- explain that this changes future Alynt uploader scan cadence only, while the upload worker cadence may remain separate;
 - explain that it does not create a backup immediately;
 - explain that it does not change WPvivid, server-runner, Drime, retention, delete, cleanup, or restore behavior;
 - require a capability + nonce check;
-- require explicit operator confirmation that the change affects only future Alynt scan/upload cadence;
+- require explicit operator confirmation that the change affects only future Alynt uploader scan cadence;
 - submit a signed `schedule_apply` action that references the fresh preview.
 
 Sites tab remains display-only for schedule management. It must not contain schedule apply controls.
@@ -262,7 +262,7 @@ Rollback storage is deferred. For this slice, the client and dashboard may repor
 1. Extend action capability parsing so `schedule_apply` remains hidden unless latest status declares `apply_supported: true` for `alynt_scan_upload`.
 2. Add fresh-preview lookup logic in the remote action repository or a focused helper.
 3. Add Site Detail apply UI only beside eligible preview results.
-4. Add nonce/capability checks and explicit operator confirmation that apply changes only future Alynt scan/upload cadence.
+4. Add nonce/capability checks and explicit operator confirmation that apply changes only future Alynt uploader scan cadence.
 5. Extend dispatcher allowlists/redaction to build and store only bounded `schedule_apply` context.
 6. Extend action-history display, Diagnostics, and support export with redacted apply summaries.
 7. Keep Sites tab compact and display-only.

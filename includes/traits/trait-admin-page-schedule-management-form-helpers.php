@@ -34,7 +34,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 		$preview_is_supported = $capabilities->supports_schedule_management_preview( $clean_capabilities );
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Schedule Management', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
-		echo '<p>' . esc_html__( 'V2.3 schedule controls are limited to the Alynt scan/upload cadence. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change WPvivid or server-runner schedules, alter Drime, delete, clean up, restore, roll back schedules, or change credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p>' . esc_html__( 'V2.3 schedule controls are limited to the Alynt uploader scan cadence reported by the client as Alynt scan/upload. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change upload-worker, WPvivid, or server-runner schedules, alter Drime, delete, clean up, restore, roll back schedules, or change credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
 
 		if ( ! $preview_is_supported ) {
 			echo '<p><span class="adbd-status-pill is-pending">' . esc_html__( 'Not reported yet', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html__( 'The latest client snapshot does not advertise preview-only schedule capability. Upgrade and poll the client before schedule posture can be shown here.', 'alynt-drime-backups-dashboard' ) . '</p>';
@@ -70,7 +70,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			echo '</section>';
 		}
 
-		echo '<p class="description">' . esc_html__( 'Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt scan/upload cadence changes after a fresh preview.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt uploader scan cadence changes after a fresh preview.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '</div></div>';
 	}
 
@@ -151,7 +151,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 				echo esc_html(
 					sprintf(
 						/* translators: 1: current cadence, 2: proposed cadence. */
-						__( 'Applies the fresh previewed Alynt scan/upload cadence change from %1$s to %2$s. This changes future scan/upload timing only; rollback is not available in this release.', 'alynt-drime-backups-dashboard' ),
+						__( 'Applies the fresh previewed Alynt uploader scan cadence change from %1$s to %2$s. This changes future scan scheduling for the Alynt uploader only; the upload worker may keep its own cadence and rollback is not available in this release.', 'alynt-drime-backups-dashboard' ),
 						$this->schedule_cadence_label( isset( $preview['current_cadence'] ) ? (string) $preview['current_cadence'] : '' ),
 						$this->schedule_cadence_label( isset( $preview['proposed_cadence'] ) ? (string) $preview['proposed_cadence'] : '' )
 					)
@@ -160,7 +160,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			</p>
 			<label>
 				<input type="checkbox" name="schedule_apply_confirm" value="1" aria-describedby="<?php echo esc_attr( $description_id ); ?>">
-				<?php esc_html_e( 'I understand this applies only the previewed future Alynt scan/upload cadence change, rollback is unavailable, and this does not create backups or change WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials.', 'alynt-drime-backups-dashboard' ); ?>
+				<?php esc_html_e( 'I understand this applies only the previewed future Alynt uploader scan cadence change, rollback is unavailable, and this does not create backups or change upload-worker cadence, WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials.', 'alynt-drime-backups-dashboard' ); ?>
 			</label>
 			<button type="submit" class="button" data-busy-label="<?php esc_attr_e( 'Applying…', 'alynt-drime-backups-dashboard' ); ?>"><?php esc_html_e( 'Apply Previewed Schedule Change', 'alynt-drime-backups-dashboard' ); ?></button>
 		</form>

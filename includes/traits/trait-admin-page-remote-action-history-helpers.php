@@ -190,13 +190,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 		$apply   = isset( $context['schedule_apply'] ) && is_array( $context['schedule_apply'] ) ? $context['schedule_apply'] : array();
 
 		if ( ! empty( $apply['previous_cadence'] ) || ! empty( $apply['applied_cadence'] ) ) {
-			$previous = ! empty( $apply['previous_cadence'] ) ? $this->schedule_cadence_label( (string) $apply['previous_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
-			$applied  = ! empty( $apply['applied_cadence'] ) ? $this->schedule_cadence_label( (string) $apply['applied_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
-			$detail   = sprintf(
-				/* translators: 1: previous cadence label, 2: applied cadence label. */
-				__( '%1$s → %2$s', 'alynt-drime-backups-dashboard' ),
+			$previous = ! empty( $apply['previous_cadence'] ) ? $this->schedule_cadence_label( (string) $apply['previous_cadence'] ) : '';
+			$applied  = ! empty( $apply['applied_cadence'] ) ? $this->schedule_cadence_label( (string) $apply['applied_cadence'] ) : '';
+			$detail   = $this->schedule_transition_label(
 				$previous,
-				$applied
+				$applied,
+				__( 'Applied cadence', 'alynt-drime-backups-dashboard' ),
+				__( 'previous cadence pending client report', 'alynt-drime-backups-dashboard' ),
+				__( 'applied cadence pending client report', 'alynt-drime-backups-dashboard' )
 			);
 
 			if ( ! empty( $apply['new_next_run_at'] ) ) {
@@ -207,7 +208,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 				);
 			}
 
-			$detail .= '; ' . __( 'Alynt scan/upload only', 'alynt-drime-backups-dashboard' );
+			$detail .= '; ' . __( 'Alynt uploader scan cadence only; upload worker cadence may remain separate', 'alynt-drime-backups-dashboard' );
 
 			$rollback_label = isset( $apply['rollback_metadata'] ) && is_array( $apply['rollback_metadata'] ) ? $this->remote_action_rollback_metadata_label( $apply['rollback_metadata'] ) : '';
 			if ( '' !== $rollback_label ) {
@@ -218,14 +219,15 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 		}
 
 		if ( ! empty( $preview['current_cadence'] ) || ! empty( $preview['proposed_cadence'] ) ) {
-			$current  = ! empty( $preview['current_cadence'] ) ? $this->schedule_cadence_label( (string) $preview['current_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
-			$proposed = ! empty( $preview['proposed_cadence'] ) ? $this->schedule_cadence_label( (string) $preview['proposed_cadence'] ) : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+			$current  = ! empty( $preview['current_cadence'] ) ? $this->schedule_cadence_label( (string) $preview['current_cadence'] ) : '';
+			$proposed = ! empty( $preview['proposed_cadence'] ) ? $this->schedule_cadence_label( (string) $preview['proposed_cadence'] ) : '';
 
-			return sprintf(
-				/* translators: 1: current cadence label, 2: proposed cadence label. */
-				__( 'Preview: %1$s → %2$s', 'alynt-drime-backups-dashboard' ),
+			return $this->schedule_transition_label(
 				$current,
-				$proposed
+				$proposed,
+				__( 'Preview target', 'alynt-drime-backups-dashboard' ),
+				__( 'current cadence pending client report', 'alynt-drime-backups-dashboard' ),
+				__( 'proposed cadence pending client report', 'alynt-drime-backups-dashboard' )
 			);
 		}
 

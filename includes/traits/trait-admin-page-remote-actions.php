@@ -135,7 +135,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions {
 		$preview_action_id = isset( $_POST['preview_action_id'] ) ? sanitize_text_field( wp_unslash( $_POST['preview_action_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 
 		if ( empty( $_POST['schedule_apply_confirm'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by verify_action_nonce() above.
-			$result = new WP_Error( 'schedule_apply_confirmation_required', __( 'Confirm that Schedule Apply changes only future Alynt scan/upload timing before applying this preview.', 'alynt-drime-backups-dashboard' ) );
+			$result = new WP_Error( 'schedule_apply_confirmation_required', __( 'Confirm that Schedule Apply changes only future Alynt uploader scan cadence before applying this preview.', 'alynt-drime-backups-dashboard' ) );
 		} else {
 			$requested_by = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
 			$result       = $this->remote_action_dispatcher->request_schedule_apply( $site_id, $preview_action_id, $requested_by );

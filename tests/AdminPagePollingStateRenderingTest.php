@@ -475,10 +475,72 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Schedule Apply', $html );
 		$this->assertStringContainsString( 'every 15 minutes → every 30 minutes', $html );
 		$this->assertStringContainsString( 'Next run 2026-09-15 18:53 UTC', $html );
-		$this->assertStringContainsString( 'Alynt scan/upload only', $html );
+		$this->assertStringContainsString( 'Alynt uploader scan cadence only; upload worker cadence may remain separate', $html );
 		$this->assertStringContainsString( 'Rollback metadata captured as evidence only; rollback action unavailable', $html );
 		$this->assertStringContainsString( 'Reason schedule_rollback_runtime_not_implemented', $html );
 		$this->assertStringContainsString( 'metadata expires 2026-09-15 19:24 UTC', $html );
+	}
+
+	/**
+	 * Schedule history avoids presenting missing cadence evidence as a known transition.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_marks_pending_schedule_cadence_report() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site    = array(
+			'id'                            => 7,
+			'enrollment_status'             => 'active',
+			'polling_key_id'                => 'key-id',
+			'has_polling_secret'            => '1',
+			'action_key_id'                 => 'ak_test',
+			'action_private_key_ciphertext' => 'ciphertext',
+		);
+		$snapshot = array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version' => 2,
+					'enabled'          => true,
+					'allowed_actions'  => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+					'sodium_available' => true,
+				),
+			),
+		);
+		$history  = array(
+			array(
+				'action_type'           => 'schedule_preview',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 18:10:00',
+				'client_result_summary' => 'Schedule preview completed for Alynt scan/upload.',
+				'redacted_context_json' => wp_json_encode(
+					array(
+						'schedule_preview' => array(
+							'proposed_cadence' => 'every_15_minutes',
+						),
+					)
+				),
+			),
+			array(
+				'action_type'           => 'schedule_apply',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 18:20:00',
+				'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
+				'redacted_context_json' => wp_json_encode(
+					array(
+						'schedule_apply' => array(
+							'applied_cadence' => 'every_15_minutes',
+						),
+					)
+				),
+			),
+		);
+		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
+
+		$this->assertStringContainsString( 'Preview target: every 15 minutes; current cadence pending client report', $html );
+		$this->assertStringContainsString( 'Applied cadence: every 15 minutes; previous cadence pending client report', $html );
+		$this->assertStringNotContainsString( 'Unknown → every 15 minutes', $html );
 	}
 
 	/**
