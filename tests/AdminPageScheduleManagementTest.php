@@ -97,6 +97,17 @@ class AdminPageScheduleManagementTest extends TestCase {
 	}
 
 	/**
+	 * Sites list omits schedule hints when no capability is reported.
+	 *
+	 * @return void
+	 */
+	public function test_missing_schedule_capability_renders_no_row_hint() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
+
+		$this->assertSame( '', $harness->row_hint_html( array() ) );
+	}
+
+	/**
 	 * Missing capability renders a clear no-data state.
 	 *
 	 * @return void
