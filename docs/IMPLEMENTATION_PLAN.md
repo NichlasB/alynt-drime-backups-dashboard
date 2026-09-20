@@ -63,6 +63,28 @@ Acceptance criteria:
 - Existing schedule preview/apply tests pass, and targeted tests cover the hardened wording.
 - No remote backup creation, WPvivid schedule changes, server-runner schedule changes, cleanup, delete, restore, rollback dispatch, arbitrary cron, Drime credential storage, or live-site changes are introduced.
 
+### Remote Action History Filtering / Grouping UI Slice
+
+Request Backup Now, Schedule Preview, Schedule Apply, stale reconciliation, rate limiting, and rollback-readiness metadata have made the Site Detail Remote Action History increasingly useful but increasingly noisy. Before adding any runtime rollback capability, add a small dashboard-only filtering slice so operators can review the action audit trail without changing storage, dispatch, client protocol, or remote permissions.
+
+Implement the smallest safe UI improvement:
+
+- Add read-only GET filters above the Site Detail Remote Action History table for action type and dashboard action state.
+- Keep filters allowlisted and sanitized. Unknown filter values should fall back to `All`.
+- Filter only the already loaded recent history rows at render time; do not change database schema, repository queries, retention, reconciliation, polling, dispatch, or client payload contracts.
+- Show a clear filtered-count summary and a reset link when a filter is active.
+- Show an empty filtered state that explains no rows match the current filters, rather than implying no history exists.
+- Keep support-safe redaction, rollback metadata wording, and all existing action detail labels.
+
+Acceptance criteria:
+
+- Site Detail action history can be filtered to `Request Backup Now`, `Schedule Preview`, or `Schedule Apply`.
+- Site Detail action history can be filtered by dashboard state such as `Succeeded`, `Failed`, `Stale`, or `Rate limited`.
+- The filter form preserves the current dashboard page, site tab, and site id.
+- Invalid or unexpected filter query values do not alter output or create unsafe markup.
+- Existing remote-action rendering tests pass, with added coverage for action/state filtering and empty filtered results.
+- No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, or new remote-action behavior is introduced.
+
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
 ## Repository And Package Identity Confirmation Gate

@@ -544,6 +544,87 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Remote action history filters keep Site Detail audit trails scannable.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_filters_by_action_type() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
+		$history  = $this->remote_action_history_rows();
+
+		$_GET['adbd_history_action'] = 'schedule_apply';
+
+		try {
+			$html = $harness->request_backup_panel_html( $site, $snapshot, $history );
+		} finally {
+			unset( $_GET['adbd_history_action'] );
+		}
+
+		$this->assertStringContainsString( 'Filter History', $html );
+		$this->assertStringContainsString( 'value="schedule_apply" selected="selected"', $html );
+		$this->assertStringContainsString( 'Showing 1 of 3 remote action requests.', $html );
+		$this->assertStringContainsString( 'Reset filters', $html );
+		$this->assertStringContainsString( 'Schedule apply completed for Alynt scan/upload.', $html );
+		$this->assertStringNotContainsString( 'Scan completed safely.', $html );
+		$this->assertStringNotContainsString( 'Schedule preview completed for Alynt scan/upload.', $html );
+	}
+
+	/**
+	 * Remote action history filters can narrow by dashboard state.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_filters_by_state() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
+		$history  = $this->remote_action_history_rows();
+
+		$_GET['adbd_history_state'] = 'rate_limited';
+
+		try {
+			$html = $harness->request_backup_panel_html( $site, $snapshot, $history );
+		} finally {
+			unset( $_GET['adbd_history_state'] );
+		}
+
+		$this->assertStringContainsString( 'value="rate_limited" selected="selected"', $html );
+		$this->assertStringContainsString( 'Showing 1 of 3 remote action requests.', $html );
+		$this->assertStringContainsString( 'Rate limited by client.', $html );
+		$this->assertStringNotContainsString( 'Schedule apply completed for Alynt scan/upload.', $html );
+		$this->assertStringNotContainsString( 'Schedule preview completed for Alynt scan/upload.', $html );
+	}
+
+	/**
+	 * Remote action history filters fail closed for unknown values and explain no-match results.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_filters_handle_invalid_and_empty_results() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
+		$history  = $this->remote_action_history_rows();
+
+		$_GET['adbd_history_action'] = 'not_real';
+		$_GET['adbd_history_state']  = 'failed';
+
+		try {
+			$html = $harness->request_backup_panel_html( $site, $snapshot, $history );
+		} finally {
+			unset( $_GET['adbd_history_action'], $_GET['adbd_history_state'] );
+		}
+
+		$this->assertStringContainsString( 'value="" selected="selected"', $html );
+		$this->assertStringContainsString( 'value="failed" selected="selected"', $html );
+		$this->assertStringContainsString( 'Showing 0 of 3 remote action requests.', $html );
+		$this->assertStringContainsString( 'No remote action requests match the current filters.', $html );
+		$this->assertStringNotContainsString( '<tbody>', $html );
+	}
+
+	/**
 	 * Sites rows include a compact latest-client-action hint from sanitized payload evidence.
 	 *
 	 * @return void
@@ -662,6 +743,71 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'understands V2.1 remote actions', $html );
 		$this->assertStringContainsString( 'Generate V2 Opt-In Token', $html );
 		$this->assertStringContainsString( 'Request Backup: opt-in needed', $harness->request_backup_row_hint_html( $site, $payload ) );
+	}
+
+	/**
+	 * Gets a reusable V2-capable site row for remote-action history tests.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function remote_action_history_site() {
+		return array(
+			'id'                            => 7,
+			'enrollment_status'             => 'active',
+			'polling_key_id'                => 'key-id',
+			'has_polling_secret'            => '1',
+			'action_key_id'                 => 'ak_test',
+			'action_private_key_ciphertext' => 'ciphertext',
+		);
+	}
+
+	/**
+	 * Gets a reusable V2-capable snapshot for remote-action history tests.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function remote_action_history_snapshot() {
+		return array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version' => 2,
+					'enabled'          => true,
+					'allowed_actions'  => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+					'sodium_available' => true,
+				),
+			),
+		);
+	}
+
+	/**
+	 * Gets reusable remote-action rows for history filter tests.
+	 *
+	 * @return array<int,array<string,mixed>>
+	 */
+	private function remote_action_history_rows() {
+		return array(
+			array(
+				'action_type'           => 'scan_upload_now',
+				'state'                 => 'rate_limited',
+				'client_state'          => 'rate_limited',
+				'requested_at'          => '2026-09-15 18:00:00',
+				'client_result_summary' => 'Rate limited by client.',
+			),
+			array(
+				'action_type'           => 'schedule_preview',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 18:10:00',
+				'client_result_summary' => 'Schedule preview completed for Alynt scan/upload.',
+			),
+			array(
+				'action_type'           => 'schedule_apply',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 18:20:00',
+				'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
+			),
+		);
 	}
 }
 

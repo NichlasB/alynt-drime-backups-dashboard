@@ -42,7 +42,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers {
 			$this->render_action_opt_in_form( $site );
 		}
 
-		$this->render_remote_action_history( $history );
+		$this->render_remote_action_history( $history, isset( $site['id'] ) ? (int) $site['id'] : 0 );
 		echo '</div></div>';
 	}
 
