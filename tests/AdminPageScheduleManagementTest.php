@@ -11,6 +11,8 @@ require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.ph
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-repository.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-compact-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-operator-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 

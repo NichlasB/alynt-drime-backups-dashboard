@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Compact_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Operator_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Policy_Helpers;
 
 	/**

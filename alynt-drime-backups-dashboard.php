@@ -160,6 +160,8 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-admin-page-sites-table.php',
 	'includes/traits/trait-admin-page-backup-source-timestamp-helpers.php',
 	'includes/traits/trait-admin-page-backup-source-evidence-helpers.php',
+	'includes/traits/trait-admin-page-backup-source-compact-helpers.php',
+	'includes/traits/trait-admin-page-backup-source-operator-helpers.php',
 	'includes/traits/trait-admin-page-backup-source-policy-helpers.php',
 	'includes/traits/trait-admin-page-backup-source-evidence.php',
 	'includes/traits/trait-admin-page-display-helpers.php',

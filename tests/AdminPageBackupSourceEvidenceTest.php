@@ -11,6 +11,8 @@ require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-format
 require_once dirname( __DIR__ ) . '/includes/class-source-policy.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-timestamp-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-compact-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-operator-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-policy-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 
