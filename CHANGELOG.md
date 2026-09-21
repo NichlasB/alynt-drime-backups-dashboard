@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.42 - 2026-09-21
+
+### Changed
+
+- Added compact Sites-row source reason lines so operators can see why source evidence is fresh, policy-valid, optional, stale, missing, or queued without opening Site Detail.
+
 ## 0.1.41 - 2026-09-20
 
 ### Added
