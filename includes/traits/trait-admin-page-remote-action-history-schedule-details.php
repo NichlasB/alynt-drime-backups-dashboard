@@ -61,27 +61,32 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Schedule_De
 		}
 
 		if ( ! empty( $rollback_preview['current_cadence'] ) || ! empty( $rollback_preview['rollback_cadence'] ) ) {
-			$current  = ! empty( $rollback_preview['current_cadence'] ) ? $this->schedule_cadence_label( (string) $rollback_preview['current_cadence'] ) : '';
-			$rollback = ! empty( $rollback_preview['rollback_cadence'] ) ? $this->schedule_cadence_label( (string) $rollback_preview['rollback_cadence'] ) : '';
-			$detail   = $this->schedule_transition_label(
-				$current,
-				$rollback,
-				__( 'Rollback preview', 'alynt-drime-backups-dashboard' ),
-				__( 'current cadence pending client report', 'alynt-drime-backups-dashboard' ),
-				__( 'rollback cadence pending client report', 'alynt-drime-backups-dashboard' )
+			$parts = array(
+				$this->rollback_preview_result_label( $rollback_preview ),
 			);
 
+			if ( ! empty( $rollback_preview['current_next_run_at'] ) ) {
+				$parts[] = sprintf(
+					/* translators: %s: current next run date/time. */
+					__( 'Current next run %s', 'alynt-drime-backups-dashboard' ),
+					$this->datetime_label( (string) $rollback_preview['current_next_run_at'] )
+				);
+			}
+
 			if ( ! empty( $rollback_preview['rollback_next_run_estimate_at'] ) ) {
-				$detail .= '; ' . sprintf(
+				$parts[] = sprintf(
 					/* translators: %s: next run date/time. */
-					__( 'Estimated next run %s', 'alynt-drime-backups-dashboard' ),
+					__( 'Rollback estimate next run %s', 'alynt-drime-backups-dashboard' ),
 					$this->datetime_label( (string) $rollback_preview['rollback_next_run_estimate_at'] )
 				);
 			}
 
-			$detail .= '; ' . __( 'Preview only; no schedule changed and rollback execution remains unavailable', 'alynt-drime-backups-dashboard' );
+			$parts[] = ! empty( $rollback_preview['would_change'] )
+				? __( 'If applied in a future release, rollback would change the Alynt scan cadence; this preview did not change it', 'alynt-drime-backups-dashboard' )
+				: __( 'No cadence change would be needed based on this preview; this preview did not change it', 'alynt-drime-backups-dashboard' );
+			$parts[] = __( 'Rollback execution remains unavailable', 'alynt-drime-backups-dashboard' );
 
-			return $detail;
+			return implode( '; ', array_filter( $parts ) );
 		}
 
 		if ( ! empty( $preview['current_cadence'] ) || ! empty( $preview['proposed_cadence'] ) ) {
@@ -131,16 +136,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Schedule_De
 		}
 
 		if ( ! empty( $rollback_preview['current_cadence'] ) || ! empty( $rollback_preview['rollback_cadence'] ) ) {
-			$current  = ! empty( $rollback_preview['current_cadence'] ) ? $this->schedule_cadence_label( (string) $rollback_preview['current_cadence'] ) : '';
-			$rollback = ! empty( $rollback_preview['rollback_cadence'] ) ? $this->schedule_cadence_label( (string) $rollback_preview['rollback_cadence'] ) : '';
-
-			return $this->schedule_transition_label(
-				$current,
-				$rollback,
-				__( 'Rollback preview', 'alynt-drime-backups-dashboard' ),
-				__( 'current cadence pending client report', 'alynt-drime-backups-dashboard' ),
-				__( 'rollback cadence pending client report', 'alynt-drime-backups-dashboard' )
-			);
+			return $this->rollback_preview_result_label( $rollback_preview );
 		}
 
 		if ( ! empty( $preview['current_cadence'] ) || ! empty( $preview['proposed_cadence'] ) ) {
@@ -157,6 +153,47 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Schedule_De
 		}
 
 		return '';
+	}
+
+	/**
+	 * Gets an operator-facing rollback-preview result label.
+	 *
+	 * @param array<string,mixed> $rollback_preview Rollback-preview context.
+	 * @return string
+	 */
+	private function rollback_preview_result_label( array $rollback_preview ) {
+		$current  = ! empty( $rollback_preview['current_cadence'] ) ? $this->schedule_cadence_label( (string) $rollback_preview['current_cadence'] ) : '';
+		$rollback = ! empty( $rollback_preview['rollback_cadence'] ) ? $this->schedule_cadence_label( (string) $rollback_preview['rollback_cadence'] ) : '';
+
+		if ( ! empty( $rollback_preview['would_change'] ) ) {
+			return sprintf(
+				/* translators: %s: cadence transition label. */
+				__( 'Rollback preview would restore: %s', 'alynt-drime-backups-dashboard' ),
+				$this->schedule_transition_label(
+					$current,
+					$rollback,
+					__( 'rollback target', 'alynt-drime-backups-dashboard' ),
+					__( 'current cadence pending client report', 'alynt-drime-backups-dashboard' ),
+					__( 'rollback cadence pending client report', 'alynt-drime-backups-dashboard' )
+				)
+			);
+		}
+
+		if ( '' !== $rollback ) {
+			return sprintf(
+				/* translators: %s: rollback cadence label. */
+				__( 'Rollback preview: already at %s; no change needed', 'alynt-drime-backups-dashboard' ),
+				$rollback
+			);
+		}
+
+		return $this->schedule_transition_label(
+			$current,
+			$rollback,
+			__( 'Rollback preview', 'alynt-drime-backups-dashboard' ),
+			__( 'current cadence pending client report', 'alynt-drime-backups-dashboard' ),
+			__( 'rollback cadence pending client report', 'alynt-drime-backups-dashboard' )
+		);
 	}
 
 	/**

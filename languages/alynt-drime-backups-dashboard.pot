@@ -2804,23 +2804,49 @@ msgstr ""
 msgid "Schedule Rollback Preview"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:67
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:137
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:183
 msgid "Rollback preview"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:69
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:139
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:179
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:185
 msgid "rollback cadence pending client report"
 msgstr ""
 
-#. translators: %s: next run date/time.
+#. translators: %s: current next run date/time.
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:76
-msgid "Estimated next run %s"
+msgid "Current next run %s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:82
-msgid "Preview only; no schedule changed and rollback execution remains unavailable"
+#. translators: %s: next run date/time.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:85
+msgid "Rollback estimate next run %s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:92
+msgid "If applied in a future release, rollback would change the Alynt scan cadence; this preview did not change it"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:93
+msgid "No cadence change would be needed based on this preview; this preview did not change it"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:94
+msgid "Rollback execution remains unavailable"
+msgstr ""
+
+#. translators: %s: cadence transition label.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:173
+msgid "Rollback preview would restore: %s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:177
+msgid "rollback target"
+msgstr ""
+
+#. translators: %s: rollback cadence label.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:191
+msgid "Rollback preview: already at %s; no change needed"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-actions.php:177

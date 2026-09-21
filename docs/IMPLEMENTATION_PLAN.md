@@ -45,7 +45,7 @@ Required gates:
 
 ### V2.3 Schedule Rollback Preview Design Slice
 
-Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Local client-side runtime validation/storage for non-mutating `schedule_rollback_preview` and passive dashboard sanitizer compatibility are implemented as an unreleased local slice. Dashboard-side non-mutating dispatch/UI controls are implemented locally but not released, deployed, or enabled on live dashboard sites by this planning entry. Mutating `schedule_rollback` runtime behavior remains unavailable.
+Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Local client-side runtime validation/storage for non-mutating `schedule_rollback_preview` and passive dashboard sanitizer compatibility are implemented as an unreleased local slice. Dashboard-side non-mutating dispatch/UI controls and operator-facing rollback-preview result summaries are implemented locally but not released, deployed, or enabled on live dashboard sites by this planning entry. Mutating `schedule_rollback` runtime behavior remains unavailable.
 
 The next possible rollback-adjacent implementation must be a non-mutating `schedule_rollback_preview` slice, not `schedule_rollback` execution. This design step defines how the dashboard would ask a client whether one previous `schedule_apply` action is still safely rollback-previewable, while preserving the rule that the client owns current-state validation and no schedule changes occur during preview.
 
@@ -57,6 +57,13 @@ Design boundaries:
 - reject free-form cadence, raw cron, WP-Cron arrays, option names/values, filesystem paths, commands, Drime identifiers, credentials, and arbitrary settings payloads;
 - require client-owned rollback metadata, a source apply action reference, metadata fingerprint, expiry checks, and current schedule fingerprint revalidation;
 - keep rollback-preview UI non-mutating and distinct from rollback apply.
+
+Dashboard-side result display requirements:
+
+- show rollback-preview results as "would restore" evidence, not as an executed rollback;
+- show whether the preview would change cadence or whether no cadence change would be needed;
+- keep "preview only" and "rollback execution unavailable" copy visible in the action history details;
+- avoid exposing raw fingerprints, credentials, Drime identifiers, paths, commands, or arbitrary client payload fields.
 
 Acceptance criteria for the design slice:
 

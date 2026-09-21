@@ -485,6 +485,47 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Schedule rollback-preview history uses explicit preview-only operator wording.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_renders_schedule_rollback_preview_details() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
+		$history  = array(
+			array(
+				'action_type'           => 'schedule_rollback_preview',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 19:00:00',
+				'client_result_summary' => 'Schedule rollback preview is ready. No schedule was changed.',
+				'redacted_context_json' => wp_json_encode(
+					array(
+						'schedule_rollback_preview' => array(
+							'schedule_id'                   => 'alynt_scan_upload',
+							'current_cadence'               => 'every_30_minutes',
+							'rollback_cadence'              => 'every_15_minutes',
+							'current_next_run_at'           => '2026-09-15T19:30:00+00:00',
+							'rollback_next_run_estimate_at' => '2026-09-15T19:15:00+00:00',
+							'would_change'                  => true,
+						),
+					)
+				),
+			),
+		);
+		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
+
+		$this->assertStringContainsString( 'Schedule Rollback Preview', $html );
+		$this->assertStringContainsString( 'Rollback preview would restore: every 30 minutes → every 15 minutes', $html );
+		$this->assertStringContainsString( 'Current next run 2026-09-15 19:30 UTC', $html );
+		$this->assertStringContainsString( 'Rollback estimate next run 2026-09-15 19:15 UTC', $html );
+		$this->assertStringContainsString( 'If applied in a future release, rollback would change the Alynt scan cadence; this preview did not change it', $html );
+		$this->assertStringContainsString( 'Rollback execution remains unavailable', $html );
+		$this->assertStringNotContainsString( 'Rollback completed', $html );
+	}
+
+	/**
 	 * The schedule panel renders rollback preview only after successful apply evidence.
 	 *
 	 * @return void
