@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.43 - 2026-09-21
+
+### Added
+
+- Added non-mutating Schedule Rollback Preview dispatch and Site Detail controls for clients that separately advertise rollback-preview support and have fresh support-safe rollback metadata from a successful Schedule Apply action.
+- Added support-safe Schedule Rollback Preview action-history details and Diagnostics/action-summary counts.
+
+### Changed
+
+- Clarified rollback-preview labels so operators can distinguish a preview from any future rollback execution.
+
+### Security
+
+- Preserved the V2.3 boundary: this release does not execute rollback, mutate schedules during rollback preview, change WPvivid/server-runner schedules, create backups, restore, delete, clean up, change credentials, store Drime API credentials, or run arbitrary commands.
+
 ## 0.1.42 - 2026-09-21
 
 ### Changed
