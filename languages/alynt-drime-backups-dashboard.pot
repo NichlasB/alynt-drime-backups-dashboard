@@ -1290,7 +1290,11 @@ msgstr ""
 msgid "Pause Polling"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:182
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:183
+msgid "Preview Schedule Rollback"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:183
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:138
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:112
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:34

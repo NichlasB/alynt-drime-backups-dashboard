@@ -175,16 +175,17 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 	private function audit_action_label( $action ) {
 		$action = sanitize_key( (string) $action );
 		$labels = array(
-			'check_status_now'         => __( 'Check Now', 'alynt-drime-backups-dashboard' ),
-			'clear_diagnostics_events' => __( 'Clear Diagnostics Events', 'alynt-drime-backups-dashboard' ),
-			'create_pending_site'      => __( 'Create Pairing Token', 'alynt-drime-backups-dashboard' ),
-			'pause_polling'            => __( 'Pause Polling', 'alynt-drime-backups-dashboard' ),
-			'request_backup_now'       => __( 'Request Backup Now', 'alynt-drime-backups-dashboard' ),
-			'resume_polling'           => __( 'Resume Polling', 'alynt-drime-backups-dashboard' ),
-			'revoke_local'             => __( 'Revoke Local Pairing', 'alynt-drime-backups-dashboard' ),
-			'schedule_apply'           => __( 'Apply Schedule Change', 'alynt-drime-backups-dashboard' ),
-			'schedule_preview'         => __( 'Preview Schedule Change', 'alynt-drime-backups-dashboard' ),
-			'update_diagnostics'       => __( 'Update Diagnostics Settings', 'alynt-drime-backups-dashboard' ),
+			'check_status_now'          => __( 'Check Now', 'alynt-drime-backups-dashboard' ),
+			'clear_diagnostics_events'  => __( 'Clear Diagnostics Events', 'alynt-drime-backups-dashboard' ),
+			'create_pending_site'       => __( 'Create Pairing Token', 'alynt-drime-backups-dashboard' ),
+			'pause_polling'             => __( 'Pause Polling', 'alynt-drime-backups-dashboard' ),
+			'preview_schedule_rollback' => __( 'Preview Schedule Rollback', 'alynt-drime-backups-dashboard' ),
+			'request_backup_now'        => __( 'Request Backup Now', 'alynt-drime-backups-dashboard' ),
+			'resume_polling'            => __( 'Resume Polling', 'alynt-drime-backups-dashboard' ),
+			'revoke_local'              => __( 'Revoke Local Pairing', 'alynt-drime-backups-dashboard' ),
+			'schedule_apply'            => __( 'Apply Schedule Change', 'alynt-drime-backups-dashboard' ),
+			'schedule_preview'          => __( 'Preview Schedule Change', 'alynt-drime-backups-dashboard' ),
+			'update_diagnostics'        => __( 'Update Diagnostics Settings', 'alynt-drime-backups-dashboard' ),
 		);
 
 		return isset( $labels[ $action ] ) ? $labels[ $action ] : $action;
