@@ -10,7 +10,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 
 ## Current State And Safety Boundary
 
-- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now, V2.2 dashboard-side action-history reconciliation/audit hardening, and V2.3 schedule visibility/preview/apply for the Alynt scan/upload cadence have been implemented, released, and deployed to the dashboard host. V2.1 has been broadly proven across active enrolled client rows; dashboard-host self-action proof required a same-origin safety patch because managed-host DNS can resolve the dashboard's own public hostname to loopback/private addresses from the dashboard server.
+- Planning status: v1 read-only dashboard is implemented, released, and deployed for operational monitoring. V2.1 Request Backup Now, V2.2 dashboard-side action-history reconciliation/audit hardening, V2.3 schedule visibility/preview/apply for the Alynt scan/upload cadence, and dashboard-side non-mutating Schedule Rollback Preview controls have been implemented, released, and deployed to the dashboard host. V2.1 has been broadly proven across active enrolled client rows; dashboard-host self-action proof required a same-origin safety patch because managed-host DNS can resolve the dashboard's own public hostname to loopback/private addresses from the dashboard server.
 - Dashboard repository: created locally at `C:\Development\WordPress\Plugins\alynt-drime-backups-dashboard`.
 - Dashboard plugin files: implemented and released through GitHub release assets.
 - Dashboard pending-enrollment token generation: implemented.
@@ -21,7 +21,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
 - V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability.
 - V2.2 remote-action history/audit hardening is implemented, released, and deployed. It hardens dashboard/client reconciliation, stale-action evidence, Site Detail action history, compact Sites-row action hints, Diagnostics aggregates, and support-safe export fields before any V2.3+ higher-risk action class.
-- V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Local client-side `schedule_rollback_preview` validation/storage and passive dashboard sanitizer compatibility are implemented but not released or deployed; dashboard-side dispatch/UI controls for non-mutating `schedule_rollback_preview` are implemented locally as an unreleased slice. Any mutating `schedule_rollback` runtime behavior remains unavailable.
+- V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`, but remain hidden unless a latest client capability report explicitly advertises rollback-preview support. Client-side rollback-preview enablement, pilot proof, and any mutating `schedule_rollback` runtime behavior remain unavailable without separate approval gates.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
 
 ## Toolkit Workflow Gates For Future V2 Schedule Slices
@@ -45,13 +45,14 @@ Required gates:
 
 ### V2.3 Schedule Rollback Preview Design Slice
 
-Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Local client-side runtime validation/storage for non-mutating `schedule_rollback_preview` and passive dashboard sanitizer compatibility are implemented as an unreleased local slice. Dashboard-side non-mutating dispatch/UI controls and operator-facing rollback-preview result summaries are implemented locally but not released, deployed, or enabled on live dashboard sites by this planning entry. Mutating `schedule_rollback` runtime behavior remains unavailable.
+Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement and pilot proof remain separate gates. Mutating `schedule_rollback` runtime behavior remains unavailable.
 
-The next possible rollback-adjacent implementation must be a non-mutating `schedule_rollback_preview` slice, not `schedule_rollback` execution. This design step defines how the dashboard would ask a client whether one previous `schedule_apply` action is still safely rollback-previewable, while preserving the rule that the client owns current-state validation and no schedule changes occur during preview.
+The next possible rollback-adjacent rollout step must prove non-mutating `schedule_rollback_preview` on one explicitly approved pilot before any rollback execution design begins. That proof must confirm the dashboard can ask a client whether one previous `schedule_apply` action is still safely rollback-previewable, while preserving the rule that the client owns current-state validation and no schedule changes occur during preview.
 
 Design boundaries:
 
-- keep `schedule_rollback_preview` dashboard dispatch/UI preview-only, client-capability-gated, and unreleased until a separate release/deploy gate is approved;
+- keep `schedule_rollback_preview` dashboard dispatch/UI preview-only and client-capability-gated;
+- keep any client-side rollback-preview release, opt-in, and pilot enablement separately gated;
 - keep `schedule_rollback` unavailable until after rollback preview is implemented, proven, and separately approved;
 - limit all future preview planning to `alynt_scan_upload`;
 - reject free-form cadence, raw cron, WP-Cron arrays, option names/values, filesystem paths, commands, Drime identifiers, credentials, and arbitrary settings payloads;
@@ -76,7 +77,27 @@ Acceptance criteria for the design slice:
 
 - a dedicated rollback-preview design artifact exists;
 - roadmap/protocol references point to it without approving runtime behavior;
-- no source code, release, deployment, live-site change, client setting, production data, or schedule mutation is introduced.
+- no rollback execution, schedule mutation, backup creation, restore, cleanup/delete action, credential change, Drime mutation, or broad client enablement is introduced.
+
+### V2.3 Schedule Rollback Preview Post-Release Proof Slice
+
+After dashboard `0.1.43`, the next safe rollback-adjacent slice is proof and hardening of the already bounded, non-mutating preview path. This is not rollback execution.
+
+Scope:
+
+- verify the live dashboard keeps rollback-preview controls hidden for clients that do not advertise support;
+- verify a separately approved client build advertises rollback-preview support only after explicit client-local opt-in;
+- prove on one low-risk pilot that rollback preview can reconcile into dashboard action history without changing schedule cadence;
+- confirm failure states such as expired metadata, changed current schedule fingerprint, missing metadata, unsupported schedule, and unsafe previous cadence remain visible and non-mutating;
+- record pilot findings in support-safe documentation without storing secrets, raw cron payloads, paths, credentials, or Drime identifiers.
+
+Exit criteria:
+
+- one pilot demonstrates successful non-mutating preview or a concrete fail-closed reason;
+- the dashboard remains healthy after scheduled polling;
+- no rollback apply control is rendered;
+- `schedule_rollback` remains rejected/unavailable;
+- no live-site broad rollout, backup creation, restore, cleanup/delete action, schedule mutation, credential change, Drime mutation, database migration, or deployment occurs without a separate release/deploy approval gate.
 
 ### V2.3 Schedule-Control Stabilization Slice
 
@@ -842,7 +863,7 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, local scheduled polling pause/resume controls, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, V2.3 preview-only schedule capability reporting/display, signed non-mutating `schedule_preview`, guarded `schedule_apply` for the Alynt scan/upload cadence, release packaging, and approval-gated live deployment are implemented and deployed to the dashboard host. Local dashboard-side rollback-readiness display/support hardening is implemented for display/support evidence; local non-mutating `schedule_rollback_preview` dashboard dispatch/UI controls are implemented as an unreleased dashboard slice. `schedule_rollback` runtime behavior remains unavailable. A local scheduled-poll throughput tune raises the default bounded batch size so the current enrolled fleet can be refreshed in one normal scheduled run while keeping repository-level caps and explicit test/runtime limits intact.
+Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, local scheduled polling pause/resume controls, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, V2.3 preview-only schedule capability reporting/display, signed non-mutating `schedule_preview`, guarded `schedule_apply` for the Alynt scan/upload cadence, release packaging, and approval-gated live deployment are implemented and deployed to the dashboard host. Dashboard-side rollback-readiness display/support hardening and non-mutating `schedule_rollback_preview` dashboard dispatch/UI controls are released and deployed through dashboard `0.1.43`, but remain hidden unless the latest client capability explicitly advertises rollback-preview support. Client-side rollback-preview enablement and pilot proof remain separate gates. `schedule_rollback` runtime behavior remains unavailable. A local scheduled-poll throughput tune raises the default bounded batch size so the current enrolled fleet can be refreshed in one normal scheduled run while keeping repository-level caps and explicit test/runtime limits intact.
 
 ### Phase 6 — Scheduled polling and history
 

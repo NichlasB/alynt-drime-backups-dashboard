@@ -1,6 +1,6 @@
 # V2.3 Schedule Rollback Preview Design
 
-Status: design slice with local client-side and dashboard-side preview implementation started. The non-mutating uploader-side `schedule_rollback_preview` validator/worker/storage path, passive dashboard sanitizer compatibility, and dashboard-side non-mutating dispatch/UI controls are implemented locally but not released, deployed, pushed as a release, or enabled on live sites by this document. This document does not approve live-site writes, broad client enablement, `schedule_rollback` runtime behavior, backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, arbitrary setting mutation, or Drime credential storage in the dashboard.
+Status: design slice with dashboard-side preview implementation released and deployed through dashboard `0.1.43`. The dashboard-side non-mutating dispatch/UI controls remain hidden unless the latest client capability report explicitly advertises rollback-preview support. Client-side rollback-preview release/enablement, pilot proof, broad client enablement, and any mutating `schedule_rollback` runtime behavior remain separate gates. This document does not approve backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, arbitrary setting mutation, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -34,7 +34,7 @@ The released V2.3 schedule-management baseline is:
 1. `schedule_preview`: implemented, non-mutating, scoped to `alynt_scan_upload`.
 2. `schedule_apply`: implemented, guarded, scoped to `alynt_scan_upload`, disabled by default per client, requires a fresh successful preview and client-local Schedule Apply opt-in.
 3. Rollback-readiness metadata: displayed as support evidence only.
-4. `schedule_rollback_preview`: local uploader-side non-mutating validation/storage, passive dashboard sanitizer compatibility, and dashboard-side non-mutating dispatch/UI controls implemented; release/deploy/pilot enablement not yet approved.
+4. `schedule_rollback_preview`: dashboard-side non-mutating dispatch/UI controls released and deployed through dashboard `0.1.43`; client-side enablement and pilot proof remain separately gated.
 5. `schedule_rollback`: reserved, not implemented.
 
 ## Non-Goals
@@ -42,13 +42,13 @@ The released V2.3 schedule-management baseline is:
 This design does not include:
 
 - adding `schedule_rollback_preview` to `allowed_actions` by default, or adding `schedule_rollback` to `allowed_actions`;
-- rendering dashboard rollback controls in a released/live build before a separate release/deploy gate;
+- rendering dashboard rollback-preview controls unless the latest client capability explicitly advertises support;
 - adding mutating dashboard rollback dispatch code;
 - adding mutating client action handlers;
 - adding client-local Schedule Rollback opt-in controls;
 - changing the database schema;
 - changing action-history storage shape;
-- changing current release packages or live sites;
+- broad client enablement or live pilot execution without a separate approval gate;
 - implementing mutating rollback execution.
 
 ## Required Preconditions Before Runtime Implementation
@@ -60,7 +60,7 @@ Do not proceed beyond local preview-only dashboard dispatch/UI into release/depl
 - rollback metadata includes source apply action ID, schedule ID, previous cadence, applied cadence, previous next-run evidence, applied next-run evidence, before/after redacted fingerprints, capture time, and expiry time;
 - dashboard action history displays rollback-readiness metadata without raw internals;
 - tests prove `schedule_rollback` remains unavailable;
-- the user explicitly approves moving from local implementation into release/deploy planning and any pilot enablement.
+- the user explicitly approves any client-side release/enablement and pilot proof.
 
 ## Proposed Capability Shape
 
@@ -173,13 +173,13 @@ Failure examples:
 
 ## Dashboard UI Design
 
-Until runtime preview is approved and released:
+Until a client explicitly advertises rollback-preview support:
 
 - keep rendering rollback as unavailable;
 - keep showing rollback-readiness metadata as evidence only;
 - render no preview/apply rollback form, button, or link.
 
-The local dashboard implementation follows this design for unreleased runtime preview:
+The released dashboard implementation follows this design for runtime preview controls:
 
 - show a distinct "Preview Rollback" control only on Site Detail and only when the latest client report explicitly supports rollback preview;
 - describe it as non-mutating;
@@ -230,18 +230,17 @@ Cross-plugin tests:
 - preview result reconciles into dashboard history without mutation;
 - subsequent `schedule_preview`, `schedule_apply`, and `scan_upload_now` continue to work unchanged.
 
-## Release And Rollout Plan For A Later Runtime Slice
+## Release And Rollout Plan For A Later Client/Pilot Slice
 
-If release/deploy is approved later:
+If client release/enablement and pilot proof are approved later:
 
-1. Update protocol and threat model from reserved to implemented-preview-only status.
-2. Implement uploader support first, disabled by default.
-3. Release uploader.
-4. Implement dashboard UI/dispatch second, hidden until client capability appears.
-5. Release dashboard.
-6. Enable on one low-risk pilot only after explicit approval.
-7. Prove preview is non-mutating.
-8. Do not implement rollback apply in the same slice.
+1. Keep protocol and threat model in implemented-preview-only status.
+2. Confirm the client build supports rollback preview disabled by default.
+3. Release or select the approved client build.
+4. Enable rollback-preview opt-in on one low-risk pilot only after explicit approval.
+5. Prove preview is non-mutating and reconciles into dashboard history.
+6. Confirm `schedule_rollback` remains unavailable.
+7. Do not implement rollback apply in the same slice.
 
 ## Acceptance Criteria For This Design Slice
 

@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Threat Model v2
 
-Status: V2.1/V2.2 threat-model baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, and locally implemented non-mutating `schedule_rollback_preview` dispatch/UI controls. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, V2.3 schedule preview, and guarded V2.3 Schedule Apply have been implemented, released, and deployed to the dashboard host. The local `schedule_rollback_preview` dashboard slice is not released or deployed by this document. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. This document does not approve broad rollout, schedule rollback execution, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
+Status: V2.1/V2.2 threat-model baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, and released dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, V2.3 schedule preview, guarded V2.3 Schedule Apply, and dashboard-side Schedule Rollback Preview controls have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `schedule_rollback_preview` remains hidden unless a latest client capability report explicitly advertises support. This document does not approve broad rollout, schedule rollback execution, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
 
 Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, implemented non-mutating V2.3 `schedule_preview`, guarded V2.3 `schedule_apply`, rollback metadata capture/readiness, and non-mutating `schedule_rollback_preview` design/local implementation for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
@@ -84,7 +84,7 @@ These must remain impossible in V2.1 code and UI:
 - filesystem browsing;
 - accepting paths, package names, backup IDs, or Drime object IDs from the dashboard.
 - accepting raw cron expressions, raw crontab lines, raw WP-Cron arrays, raw WPvivid option blobs, or free-form cadence input from the dashboard.
-- releasing, deploying, or enabling `schedule_rollback_preview` without explicit release/deploy and client opt-in approval; dispatching or accepting `schedule_rollback` until a later protocol/threat-model update and release gate explicitly approve it.
+- enabling `schedule_rollback_preview` on a client or pilot without explicit client opt-in approval; dispatching or accepting `schedule_rollback` until a later protocol/threat-model update and release gate explicitly approve it.
 
 ## Required Controls By Component
 

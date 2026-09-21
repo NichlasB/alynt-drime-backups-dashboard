@@ -4,9 +4,9 @@ This document captures future remote-operation planning for **Alynt Drime Backup
 
 Status: V2 planning baseline. The V2.1 action opt-in token foundation, dashboard signed dispatch, and client action-intent endpoint have been implemented, released, deployed to the dashboard host, and proven through a controlled `purecleanse.net` pilot. Broader client enablement remains a separate per-site approval gate.
 
-Current V2.3 state: passive schedule capability display, signed non-mutating `schedule_preview`, and guarded signed `schedule_apply` for the Alynt scan/upload cadence have been implemented, released, and deployed. Schedule Apply remains disabled by default on clients and requires explicit per-client local opt-in. `schedule_rollback` runtime behavior is not implemented.
+Current V2.3 state: passive schedule capability display, signed non-mutating `schedule_preview`, guarded signed `schedule_apply` for the Alynt scan/upload cadence, and dashboard-side non-mutating `schedule_rollback_preview` controls have been implemented, released, and deployed on the dashboard. Schedule Apply remains disabled by default on clients and requires explicit per-client local opt-in. Schedule Rollback Preview remains hidden unless a latest client capability report explicitly advertises rollback-preview support. `schedule_rollback` runtime behavior is not implemented.
 
-Next V2.3 stabilization step: keep observing support-safe rollback-readiness metadata and, if runtime rollback is still desired, implement only a separately approved non-mutating `schedule_rollback_preview` before any `schedule_rollback` apply action. The rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. The dashboard may display support-safe rollback-readiness metadata as evidence, but it must continue to render no rollback control and dispatch no `schedule_rollback` action until a separate protocol/threat-model and release gate are approved.
+Next V2.3 stabilization step: prove the already released dashboard-side, non-mutating `schedule_rollback_preview` path on one separately approved client/pilot before any `schedule_rollback` apply design begins. The rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. The dashboard may display support-safe rollback-readiness metadata and preview results as evidence, but it must continue to render no rollback-apply control and dispatch no `schedule_rollback` action until a separate protocol/threat-model and release gate are approved.
 
 Draft V2.1 protocol and threat-model artifacts:
 
@@ -134,7 +134,7 @@ Recommended sequencing inside V2.3:
 2. Non-mutating signed `schedule_preview` for `alynt_scan_upload` only.
 3. Separately gated `schedule_apply` for `alynt_scan_upload` cadence changes only after preview proves safe and reliable, with a fresh-preview requirement, separate local Schedule Apply opt-in, and rollback reported unavailable.
 4. Separately gated rollback metadata capture/readiness after apply is proven enough to stabilize the evidence model.
-5. Separately gated `schedule_rollback_preview` only after rollback metadata capture has been proven enough to support a non-mutating current-state check; design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`.
+5. Separately gated `schedule_rollback_preview` proof after rollback metadata capture has been proven enough to support a non-mutating current-state check; design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`.
 6. Separately gated `schedule_rollback` only after rollback preview, recovery design, protocol/threat-model updates, tests, and rollout proof are separately approved.
 
 Recommended constraints:
@@ -229,7 +229,7 @@ Keep separate from backup operations. If needed later, design it as a dedicated 
 3. V2.2 action history and operator audit UI hardening before any higher-risk controls.
 4. V2.3 passive schedule capability display, then non-mutating `schedule_preview`, then guarded `schedule_apply`.
 5. V2.3 rollback metadata capture/readiness without `schedule_rollback` execution.
-6. V2.3 `schedule_rollback_preview` only after a separate recovery-readiness design and approval gate.
+6. V2.3 `schedule_rollback_preview` pilot proof only after a separate client enablement and approval gate.
 7. V2.3 `schedule_rollback` only after rollback preview proof and a separate apply approval gate.
 8. V2.4 cleanup dry-run/apply for local artifacts only as a higher-risk gated phase.
 9. V2.5 remote retention/delete planning after inventory evidence is mature as a higher-risk gated phase.

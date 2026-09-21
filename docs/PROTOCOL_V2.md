@@ -17,7 +17,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - The client uploader remains the only system that can execute backup-related work, and it uses its own local settings, credentials, locks, and policy.
 - V2.1 initially allows only `scan_upload_now`.
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
-- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The current mutating V2.3 action is guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and release/deploy approval gates. Non-mutating `schedule_rollback_preview` is implemented locally as a preview-only request shape for clients that explicitly advertise it, but is not released/deployed by this document. Rolling back schedule changes with `schedule_rollback` requires later protocol updates and separate approval gates.
+- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The current mutating V2.3 action is guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and release/deploy approval gates. Non-mutating `schedule_rollback_preview` is implemented and released on the dashboard as a preview-only request shape for clients that explicitly advertise it. Rolling back schedule changes with `schedule_rollback` requires later protocol updates and separate approval gates.
 
 ## Actors And Responsibilities
 
@@ -149,7 +149,7 @@ Rules:
 
 ### Schedule Rollback Preview And Reserved Rollback Action
 
-`schedule_rollback_preview` is a non-mutating V2.3 action shape implemented locally for future release/deploy consideration. It may appear in `allowed_actions` only when both dashboard and client builds support it and the client administrator explicitly enables rollback-preview opt-in. It asks the client whether one previous successful `schedule_apply` still has valid rollback metadata and matching current schedule state. It does not change schedules.
+`schedule_rollback_preview` is a non-mutating V2.3 action shape implemented and released on the dashboard for separately approved client/pilot proof. It may appear in `allowed_actions` only when both dashboard and client builds support it and the client administrator explicitly enables rollback-preview opt-in. It asks the client whether one previous successful `schedule_apply` still has valid rollback metadata and matching current schedule state. It does not change schedules.
 
 `schedule_rollback` remains a reserved mutating action name. It must not appear in `allowed_actions` and must be rejected by clients until a later protocol/threat-model update and release gate explicitly approve it.
 
@@ -363,7 +363,7 @@ The V2.3 design defines the following schedule action names:
 - `schedule_rollback_preview`
 - `schedule_rollback`
 
-`schedule_preview` is implemented as a non-mutating V2.3 action. `schedule_apply` is implemented for `alynt_scan_upload` cadence changes only. `schedule_rollback_preview` is implemented locally as a non-mutating preview-only action shape and must remain hidden unless latest client capability explicitly advertises it. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
+`schedule_preview` is implemented as a non-mutating V2.3 action. `schedule_apply` is implemented for `alynt_scan_upload` cadence changes only. `schedule_rollback_preview` is implemented on the dashboard as a non-mutating preview-only action shape and must remain hidden unless latest client capability explicitly advertises it. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
 
 ## Action Response
 
