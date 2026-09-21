@@ -96,6 +96,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Backup_Source_Evidence {
 			$html     .= '<span>' . esc_html( $this->source_inventory_compact_label( $source ) ) . '</span>';
 			$html     .= '<span>' . esc_html( $this->source_policy_compact_label( $source_key, $source, $site ) ) . '</span>';
 			$html     .= '</span>';
+			$html     .= '<span class="adbd-source-reason">' . esc_html( $this->source_operator_reason_label( $source_key, $source, $site ) ) . '</span>';
 			$html     .= '</li>';
 		}
 

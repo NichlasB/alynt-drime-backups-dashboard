@@ -124,7 +124,10 @@
 }
 
 .adbd-wrap .adbd-source-reason {
+	display: block;
+	margin-block-start: 2px;
 	color: var(--adbd-muted);
+	font-size: 12px;
 }
 
 .adbd-wrap .adbd-history-detail-summary {

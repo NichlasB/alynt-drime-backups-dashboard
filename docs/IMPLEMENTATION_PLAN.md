@@ -316,6 +316,10 @@ Acceptance criteria:
 - External/optional WPvivid evidence says it is not required for Alynt-uploaded evidence on this dashboard.
 - Existing schema-1 clients remain compatible and the v1/V2 read-only boundaries remain unchanged.
 
+Implementation status:
+
+- 2026-09-21: Local implementation added compact Sites-row source reason lines by reusing the existing redacted operator-summary helper already shown on Site Detail. The change is display-only, preserves classifier/source-policy behavior, and keeps the dashboard read-only.
+
 ### Dashboard Record-State Diagnostics Clarity Slice
 
 Post-release monitoring showed that Diagnostics can correctly report the total number of dashboard records and the number of polling-ready records, but the difference between those two numbers is not obvious enough for operators. The dashboard should explain when extra records are pending pairing, awaiting first poll, revoked locally, paused, missing credentials, or otherwise not currently eligible for scheduled polling.
