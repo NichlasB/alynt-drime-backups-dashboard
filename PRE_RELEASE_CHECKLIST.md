@@ -58,15 +58,15 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] `git diff --check` passed.
 - [x] Translation-template coverage checked for rollback-preview source strings; runtime strings remain wrapped, but generated POT references were not regenerated because WP-CLI is unavailable.
 - [ ] `npm.cmd run pot` blocked: `wp` CLI is not on PATH in this environment. Run `wp i18n make-pot` on a machine with WP-CLI before or during release packaging if generated POT provenance is required.
-- [ ] Release ZIP audit not yet run for `0.1.43`.
-- [ ] GitHub release not yet created.
+- [x] Release ZIP audit passed for `0.1.43`: GitHub release asset `alynt-drime-backups-dashboard-0.1.43.zip` downloaded to `C:\Users\Captain\Documents\AI Workflows\work\adbd-v0.1.43-release-verify`, expanded with a single `alynt-drime-backups-dashboard/` top-level folder, 114 runtime files, expected `0.1.43` plugin/readme/POT metadata, no dev/test/docs/vendor/node/build workflow files, and SHA256 `A84265D45490DC351101F0C5B2AFE6ADFBA7BE81B71BD9658E4877028010D9AE`.
+- [x] GitHub release created: `https://github.com/NichlasB/alynt-drime-backups-dashboard/releases/tag/v0.1.43`. Build Release workflow `35649641368` passed and uploaded the release asset.
 - [ ] Updater install/update smoke verification not yet run for `0.1.43`.
 - [ ] Live dashboard deployment/update on `control-sitesmanage` not yet performed.
 
 ## Open Items
 
-- [ ] Commit `0.1.43` release-prep metadata/checklist changes.
-- [ ] Push local `0.1.43` commits to `origin/master` and verify CI.
-- [ ] Tag/publish `v0.1.43` and verify release asset packaging.
-- [ ] Run release ZIP audit for `0.1.43`.
+- [x] Commit `0.1.43` release-prep metadata/checklist changes: `7495b79`.
+- [x] Push local `0.1.43` commits to `origin/master` and verify CI: run `35649373726` passed on PHP 8.3 and PHP 7.4.
+- [x] Tag/publish `v0.1.43` and verify release asset packaging.
+- [x] Run release ZIP audit for `0.1.43`.
 - [ ] Deploy/update dashboard plugin on `control-sitesmanage` only after live-site approval.
