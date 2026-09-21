@@ -247,6 +247,33 @@ class Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions extends Alynt_Drime_
 	}
 
 	/**
+	 * Returns a fixed successful apply for rollback preview.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param string              $apply_public_id Apply public ID.
+	 * @param array<string,mixed> $capabilities Capabilities.
+	 * @param string|null         $now Now.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function successful_schedule_apply_for_rollback_preview( $site_id, $apply_public_id, array $capabilities, $now = null ) {
+		unset( $site_id, $capabilities, $now );
+
+		if ( '33333333-3333-4333-8333-333333333333' !== $apply_public_id ) {
+			return new WP_Error( 'schedule_rollback_preview_apply_missing', 'Missing apply.' );
+		}
+
+		return array(
+			'source_apply_action_id'        => $apply_public_id,
+			'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
+			'schedule_id'                   => 'alynt_scan_upload',
+			'previous_cadence'              => 'every_15_minutes',
+			'applied_cadence'               => 'every_30_minutes',
+			'capability_version'            => 1,
+			'metadata_expires_at'           => '2099-01-01T00:15:00+00:00',
+		);
+	}
+
+	/**
 	 * Stores request context.
 	 *
 	 * @param int                 $site_id Site ID.
@@ -467,6 +494,61 @@ class RemoteActionDispatcherTest extends TestCase {
 		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $request_body ) );
 	}
 
+	public function test_schedule_rollback_preview_dispatch_posts_signed_non_mutating_intent_from_successful_apply() {
+		$this->wpdb->snapshot = $this->snapshot_row(
+			array(
+				'allowed_actions'             => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply', 'schedule_rollback_preview' ),
+				'preview_only'                => false,
+				'apply_supported'             => true,
+				'rollback_preview_supported'  => true,
+				'rollback_supported'          => false,
+			)
+		);
+		$actions              = new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions();
+		$captured             = array();
+		$http                 = function ( $url, $args ) use ( &$captured ) {
+			$captured = array(
+				'url'  => $url,
+				'args' => $args,
+			);
+			$body     = json_decode( $args['body'], true );
+
+			return array(
+				'response' => array(
+					'code' => 202,
+				),
+				'body'     => wp_json_encode(
+					array(
+						'protocol_version' => 2,
+						'action_id'        => $body['action_id'],
+						'state'            => 'accepted',
+						'result_code'      => 'action_accepted',
+						'result_summary'   => 'Schedule rollback preview accepted safely.',
+						'retry_after'      => 0,
+					)
+				),
+			);
+		};
+
+		$result = $this->dispatcher( $http, null, $actions )->request_schedule_rollback_preview( 9, '33333333-3333-4333-8333-333333333333', 7 );
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'schedule_rollback_preview', $result['action'] );
+		$this->assertSame( 'accepted', $result['remote_state'] );
+		$request_body = json_decode( $captured['args']['body'], true );
+		$this->assertSame( 'schedule_rollback_preview', $request_body['action_type'] );
+		$this->assertSame( 'alynt_scan_upload', $request_body['schedule_rollback_preview']['schedule_id'] );
+		$this->assertSame( '33333333-3333-4333-8333-333333333333', $request_body['schedule_rollback_preview']['source_apply_action_id'] );
+		$this->assertSame( str_repeat( 'b', 64 ), $request_body['schedule_rollback_preview']['rollback_metadata_fingerprint'] );
+		$this->assertSame( 1, $request_body['schedule_rollback_preview']['capability_version'] );
+		$this->assertArrayNotHasKey( 'schedule_rollback', $request_body );
+		$this->assertArrayNotHasKey( 'proposed_cadence', $request_body['schedule_rollback_preview'] );
+		$this->assertSame( 'schedule_rollback_preview', $actions->requests[0]['action_type'] );
+		$this->assertTrue( $actions->requests[0]['context']['preview_only'] );
+		$this->assertTrue( $actions->requests[0]['context']['non_mutating'] );
+		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $request_body ) );
+	}
+
 	public function test_schedule_preview_rejects_unsupported_cadence_without_http_dispatch() {
 		$called = false;
 		$http   = function () use ( &$called ) {
@@ -480,6 +562,32 @@ class RemoteActionDispatcherTest extends TestCase {
 		$this->assertSame( 'schedule_management_unavailable', $result->get_error_code() );
 		$this->assertFalse( $called );
 		$this->assertSame( array(), $this->wpdb->inserted_data );
+	}
+
+	public function test_schedule_rollback_preview_rejects_missing_capability_without_http_dispatch() {
+		$this->wpdb->snapshot = $this->snapshot_row(
+			array(
+				'allowed_actions'             => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
+				'preview_only'                => false,
+				'apply_supported'             => true,
+				'rollback_preview_supported'  => false,
+				'rollback_supported'          => false,
+			)
+		);
+		$actions              = new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions();
+		$called               = false;
+		$http                 = function () use ( &$called ) {
+			$called = true;
+			return array();
+		};
+
+		$result = $this->dispatcher( $http, null, $actions )->request_schedule_rollback_preview( 9, '33333333-3333-4333-8333-333333333333', 7 );
+
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'schedule_rollback_preview_unavailable', $result->get_error_code() );
+		$this->assertFalse( $called );
+		$this->assertSame( array(), $this->wpdb->inserted_data );
+		$this->assertSame( array(), $actions->requests );
 	}
 
 	public function test_missing_capability_fails_without_http_dispatch() {
@@ -697,6 +805,7 @@ class RemoteActionDispatcherTest extends TestCase {
 				'preview_only'                => true,
 				'apply_supported'             => false,
 				'rollback_supported'          => false,
+				'rollback_preview_supported'  => false,
 			),
 			$remote_action_overrides
 		);
@@ -718,6 +827,7 @@ class RemoteActionDispatcherTest extends TestCase {
 							'enabled'            => true,
 							'preview_only'       => $remote_actions['preview_only'],
 							'apply_supported'    => $remote_actions['apply_supported'],
+							'rollback_preview_supported' => $remote_actions['rollback_preview_supported'],
 							'rollback_supported' => $remote_actions['rollback_supported'],
 							'schedules'          => array(
 								array(
@@ -732,6 +842,7 @@ class RemoteActionDispatcherTest extends TestCase {
 									'minimum_interval_seconds'       => 900,
 									'can_disable'                    => false,
 									'requires_high_friction_disable' => true,
+									'rollback_preview_supported'     => $remote_actions['rollback_preview_supported'],
 									'rollback_supported'             => false,
 								),
 							),

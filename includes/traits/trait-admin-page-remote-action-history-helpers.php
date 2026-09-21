@@ -120,6 +120,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 			return __( 'Schedule Apply', 'alynt-drime-backups-dashboard' );
 		}
 
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_ROLLBACK_PREVIEW === sanitize_key( $action_type ) ) {
+			return __( 'Schedule Rollback Preview', 'alynt-drime-backups-dashboard' );
+		}
+
 		return __( 'Unknown action', 'alynt-drime-backups-dashboard' );
 	}
 

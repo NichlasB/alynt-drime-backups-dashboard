@@ -128,6 +128,17 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Action_Notices {
 			return;
 		}
 
+		if ( isset( $result['action'] ) && 'schedule_rollback_preview' === $result['action'] ) {
+			$this->render_remote_action_notice(
+				$result,
+				__( 'Schedule Rollback Preview was accepted by the client site. No schedule was changed. Use Check Now to see the preview result reported by the client.', 'alynt-drime-backups-dashboard' ),
+				__( 'Schedule Rollback Preview was accepted by the client site. No schedule was changed. Use Check Now to see the preview result reported by the client.', 'alynt-drime-backups-dashboard' ),
+				__( 'The client site did not accept the Schedule Rollback Preview request.', 'alynt-drime-backups-dashboard' ),
+				__( 'Schedule Rollback Preview could not be completed. Review the remote action history for this site.', 'alynt-drime-backups-dashboard' )
+			);
+			return;
+		}
+
 		if ( isset( $result['action'] ) && 'update_source_policy' === $result['action'] ) {
 			$message = ! empty( $result['success'] )
 				? __( 'Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed.', 'alynt-drime-backups-dashboard' )

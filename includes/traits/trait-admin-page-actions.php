@@ -68,6 +68,9 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 			case 'apply_schedule_change':
 				return $this->handle_apply_schedule_change_action();
 
+			case 'preview_schedule_rollback':
+				return $this->handle_preview_schedule_rollback_action();
+
 			case 'update_source_policy':
 				return $this->handle_update_source_policy_action();
 

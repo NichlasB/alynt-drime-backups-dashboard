@@ -15,6 +15,7 @@ require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-sour
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-operator-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php';
 
 /**
  * Tests read-only schedule-management preview rendering.
@@ -35,8 +36,8 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( 'every 15 minutes', $html );
 		$this->assertStringContainsString( '15 minutes', $html );
 		$this->assertStringContainsString( 'Not enabled on the client', $html );
-		$this->assertStringContainsString( 'rollback metadata is evidence only and no rollback action exists', $html );
-		$this->assertStringContainsString( 'Rollback remains unavailable in this release', $html );
+		$this->assertStringContainsString( 'Execution unavailable; preview may be available', $html );
+		$this->assertStringContainsString( 'Rollback execution remains unavailable in this release', $html );
 		$this->assertStringContainsString( 'Preview Schedule Change', $html );
 		$this->assertStringContainsString( 'every 30 minutes', $html );
 		$this->assertStringContainsString( '<form', $html );

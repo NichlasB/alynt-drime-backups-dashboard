@@ -81,6 +81,10 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Context {
 			$context['schedule_apply'] = $this->safe_schedule_apply_context( $client_action['schedule_apply'] );
 		}
 
+		if ( ! empty( $client_action['schedule_rollback_preview'] ) && is_array( $client_action['schedule_rollback_preview'] ) ) {
+			$context['schedule_rollback_preview'] = $this->safe_schedule_rollback_preview_context( $client_action['schedule_rollback_preview'] );
+		}
+
 		$encoded = wp_json_encode( $context, JSON_UNESCAPED_SLASHES );
 
 		return false === $encoded ? '' : (string) $encoded;
@@ -166,8 +170,41 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Context {
 			'applied_next_run_at'                 => isset( $metadata['applied_next_run_at'] ) ? sanitize_text_field( (string) $metadata['applied_next_run_at'] ) : '',
 			'current_schedule_fingerprint_before' => isset( $metadata['current_schedule_fingerprint_before'] ) ? $this->sha256_or_empty( (string) $metadata['current_schedule_fingerprint_before'] ) : '',
 			'current_schedule_fingerprint_after'  => isset( $metadata['current_schedule_fingerprint_after'] ) ? $this->sha256_or_empty( (string) $metadata['current_schedule_fingerprint_after'] ) : '',
+			'rollback_metadata_fingerprint'       => isset( $metadata['rollback_metadata_fingerprint'] ) ? $this->sha256_or_empty( (string) $metadata['rollback_metadata_fingerprint'] ) : '',
 			'captured_at'                         => isset( $metadata['captured_at'] ) ? sanitize_text_field( (string) $metadata['captured_at'] ) : '',
 			'expires_at'                          => isset( $metadata['expires_at'] ) ? sanitize_text_field( (string) $metadata['expires_at'] ) : '',
+		);
+	}
+
+	/**
+	 * Sanitizes rollback-preview context for local dashboard storage.
+	 *
+	 * @param array<string,mixed> $preview Rollback preview.
+	 * @return array<string,mixed>
+	 */
+	private function safe_schedule_rollback_preview_context( array $preview ) {
+		return array(
+			'schedule_id'                           => isset( $preview['schedule_id'] ) ? sanitize_key( (string) $preview['schedule_id'] ) : '',
+			'label'                                 => $this->bounded_text( isset( $preview['label'] ) ? (string) $preview['label'] : '', 80 ),
+			'owner'                                 => isset( $preview['owner'] ) ? sanitize_key( (string) $preview['owner'] ) : '',
+			'current_cadence'                       => isset( $preview['current_cadence'] ) ? sanitize_key( (string) $preview['current_cadence'] ) : '',
+			'applied_cadence'                       => isset( $preview['applied_cadence'] ) ? sanitize_key( (string) $preview['applied_cadence'] ) : '',
+			'rollback_cadence'                      => isset( $preview['rollback_cadence'] ) ? sanitize_key( (string) $preview['rollback_cadence'] ) : '',
+			'current_next_run_at'                   => isset( $preview['current_next_run_at'] ) ? sanitize_text_field( (string) $preview['current_next_run_at'] ) : '',
+			'rollback_next_run_estimate_at'         => isset( $preview['rollback_next_run_estimate_at'] ) ? sanitize_text_field( (string) $preview['rollback_next_run_estimate_at'] ) : '',
+			'would_change'                          => ! empty( $preview['would_change'] ),
+			'rollback_apply_supported'              => false,
+			'rollback_supported'                    => false,
+			'preview_action_id'                     => isset( $preview['preview_action_id'] ) ? $this->sanitize_uuid( (string) $preview['preview_action_id'] ) : '',
+			'preview_fingerprint'                   => isset( $preview['preview_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['preview_fingerprint'] ) : '',
+			'source_apply_action_id'                => isset( $preview['source_apply_action_id'] ) ? $this->sanitize_uuid( (string) $preview['source_apply_action_id'] ) : '',
+			'rollback_metadata_fingerprint'         => isset( $preview['rollback_metadata_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['rollback_metadata_fingerprint'] ) : '',
+			'current_schedule_fingerprint'          => isset( $preview['current_schedule_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['current_schedule_fingerprint'] ) : '',
+			'expected_current_schedule_fingerprint' => isset( $preview['expected_current_schedule_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['expected_current_schedule_fingerprint'] ) : '',
+			'previous_schedule_fingerprint'         => isset( $preview['previous_schedule_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['previous_schedule_fingerprint'] ) : '',
+			'capability_version'                    => isset( $preview['capability_version'] ) ? absint( $preview['capability_version'] ) : 0,
+			'preview_created_at'                    => isset( $preview['preview_created_at'] ) ? sanitize_text_field( (string) $preview['preview_created_at'] ) : '',
+			'preview_expires_at'                    => isset( $preview['preview_expires_at'] ) ? sanitize_text_field( (string) $preview['preview_expires_at'] ) : '',
 		);
 	}
 

@@ -138,6 +138,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Filters {
 			Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCAN_UPLOAD_NOW => __( 'Request Backup Now', 'alynt-drime-backups-dashboard' ),
 			Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_PREVIEW => __( 'Schedule Preview', 'alynt-drime-backups-dashboard' ),
 			Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_APPLY => __( 'Schedule Apply', 'alynt-drime-backups-dashboard' ),
+			Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_ROLLBACK_PREVIEW => __( 'Schedule Rollback Preview', 'alynt-drime-backups-dashboard' ),
 		);
 	}
 

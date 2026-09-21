@@ -63,6 +63,14 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Intent {
 			return $clean;
 		}
 
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_ROLLBACK_PREVIEW === $action_type ) {
+			if ( ! $this->capabilities->supports_schedule_rollback_preview_action( $clean, $schedule_id ) ) {
+				return new WP_Error( 'schedule_rollback_preview_unavailable', __( 'The latest client report does not allow Schedule Rollback Preview. Enable rollback-preview support on the client and run Check Now first.', 'alynt-drime-backups-dashboard' ) );
+			}
+
+			return $clean;
+		}
+
 		if ( ! $this->capabilities->supports_scan_upload_now( $clean ) ) {
 			return new WP_Error( 'remote_action_capability_missing', __( 'The latest client report does not allow Request Backup Now. Complete V2 opt-in and run Check Now first.', 'alynt-drime-backups-dashboard' ) );
 		}
@@ -78,9 +86,10 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Intent {
 	 * @param string              $action_type Action type.
 	 * @param array<string,mixed> $schedule_preview Schedule preview request.
 	 * @param array<string,mixed> $schedule_apply Schedule apply request.
+	 * @param array<string,mixed> $schedule_rollback_preview Schedule rollback-preview request.
 	 * @return array<string,mixed>|WP_Error
 	 */
-	private function prepare_signed_intent( array $site, array $capabilities, $action_type, array $schedule_preview = array(), array $schedule_apply = array() ) {
+	private function prepare_signed_intent( array $site, array $capabilities, $action_type, array $schedule_preview = array(), array $schedule_apply = array(), array $schedule_rollback_preview = array() ) {
 		if ( empty( $site['polling_key_id'] ) || empty( $site['polling_secret_ciphertext'] ) ) {
 			return new WP_Error( 'remote_action_requires_pairing', __( 'Active read-only pairing is required before requesting a remote action.', 'alynt-drime-backups-dashboard' ) );
 		}
@@ -137,6 +146,14 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Dispatcher_Intent {
 				'capability_version'  => isset( $schedule_apply['capability_version'] ) ? absint( $schedule_apply['capability_version'] ) : 1,
 				'preview_action_id'   => isset( $schedule_apply['preview_action_id'] ) ? sanitize_text_field( (string) $schedule_apply['preview_action_id'] ) : '',
 				'preview_fingerprint' => isset( $schedule_apply['preview_fingerprint'] ) ? preg_replace( '/[^a-f0-9]/', '', (string) $schedule_apply['preview_fingerprint'] ) : '',
+			);
+		}
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_SCHEDULE_ROLLBACK_PREVIEW === $body['action_type'] ) {
+			$body['schedule_rollback_preview'] = array(
+				'schedule_id'                   => isset( $schedule_rollback_preview['schedule_id'] ) ? sanitize_key( (string) $schedule_rollback_preview['schedule_id'] ) : '',
+				'source_apply_action_id'        => isset( $schedule_rollback_preview['source_apply_action_id'] ) ? sanitize_text_field( (string) $schedule_rollback_preview['source_apply_action_id'] ) : '',
+				'rollback_metadata_fingerprint' => isset( $schedule_rollback_preview['rollback_metadata_fingerprint'] ) ? preg_replace( '/[^a-f0-9]/', '', (string) $schedule_rollback_preview['rollback_metadata_fingerprint'] ) : '',
+				'capability_version'            => isset( $schedule_rollback_preview['capability_version'] ) ? absint( $schedule_rollback_preview['capability_version'] ) : 1,
 			);
 		}
 		$body_json = $this->signer->canonical_json( $body );

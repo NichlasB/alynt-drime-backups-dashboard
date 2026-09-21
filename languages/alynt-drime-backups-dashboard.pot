@@ -2786,3 +2786,100 @@ msgstr ""
 #: includes/traits/trait-status-classifier-helpers.php:93
 msgid "One or more backup sources report stale or missing upload evidence."
 msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:134
+msgid "Schedule Rollback Preview was accepted by the client site. No schedule was changed. Use Check Now to see the preview result reported by the client."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:136
+msgid "The client site did not accept the Schedule Rollback Preview request."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:137
+msgid "Schedule Rollback Preview could not be completed. Review the remote action history for this site."
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-filters.php:141
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:124
+msgid "Schedule Rollback Preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:67
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:137
+msgid "Rollback preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:69
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:139
+msgid "rollback cadence pending client report"
+msgstr ""
+
+#. translators: %s: next run date/time.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:76
+msgid "Estimated next run %s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:82
+msgid "Preview only; no schedule changed and rollback execution remains unavailable"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-actions.php:177
+msgid "Confirm that Schedule Rollback Preview is non-mutating before sending this request."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
+msgid "Execution unavailable; preview may be available after a successful apply with rollback metadata and explicit client support."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:74
+msgid "Schedule data is redacted capability evidence from the client uploader. Rollback execution remains unavailable in this release; rollback preview is non-mutating and only asks the client what a rollback would look like after a successful apply with complete rollback metadata."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:48
+msgid "Rollback preview becomes available after a successful Schedule Apply with unexpired rollback metadata and explicit client rollback-preview support. No rollback execution is available."
+msgstr ""
+
+#. translators: 1: applied cadence, 2: rollback cadence.
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:63
+msgid "Asks the client to preview reverting the Alynt uploader scan cadence from %1$s back to %2$s. This is non-mutating: it does not change schedules, start backups, restore, delete, clean up, alter Drime, or change credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:73
+msgid "I understand this only previews rollback readiness and does not execute a rollback or change any schedule."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:75
+msgid "Preview Rollback"
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:67
+msgid "The latest client report does not allow Schedule Rollback Preview. Enable rollback-preview support on the client and run Check Now first."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:32
+msgid "Choose a successful Schedule Apply action before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:38
+msgid "The selected Schedule Apply action could not be found. Run a fresh Schedule Apply before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:42
+msgid "The selected Schedule Apply action has not succeeded yet. Run Check Now and confirm the apply result before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:50
+msgid "The selected Schedule Apply action does not include rollback metadata. Run a new apply after rollback metadata capture is available."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:64
+msgid "The selected Schedule Apply action is missing required safe rollback-preview evidence."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:74
+msgid "The selected Schedule Apply rollback metadata has expired. Run a new schedule preview/apply sequence before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:78
+msgid "The latest client report does not allow Schedule Rollback Preview for this schedule. Enable rollback-preview support on the client and run Check Now first."
+msgstr ""

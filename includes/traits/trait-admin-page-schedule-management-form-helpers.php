@@ -15,6 +15,7 @@ Provides remote schedule management form and panel rendering helpers.
  */
 trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers {
 
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Rollback_Preview_Helpers;
 
 	/**
 	 * Renders preview-only schedule-management capability reported by the client.
@@ -63,14 +64,15 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			$this->render_detail_item( __( 'Supported cadences', 'alynt-drime-backups-dashboard' ), $this->schedule_cadences_label( isset( $schedule['supported_cadences'] ) ? $schedule['supported_cadences'] : array() ) );
 			$this->render_detail_item( __( 'Minimum interval', 'alynt-drime-backups-dashboard' ), $this->schedule_interval_label( isset( $schedule['minimum_interval_seconds'] ) ? (int) $schedule['minimum_interval_seconds'] : 0 ) );
 			$this->render_detail_item( __( 'Apply changes', 'alynt-drime-backups-dashboard' ), ! empty( $clean_capabilities['schedule_management']['apply_supported'] ) ? __( 'Available after a fresh matching preview', 'alynt-drime-backups-dashboard' ) : __( 'Not enabled on the client', 'alynt-drime-backups-dashboard' ) );
-			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Unavailable in this release; rollback metadata is evidence only and no rollback action exists.', 'alynt-drime-backups-dashboard' ) );
+			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Execution unavailable; preview may be available after a successful apply with rollback metadata and explicit client support.', 'alynt-drime-backups-dashboard' ) );
 			echo '</dl>';
 			$this->render_schedule_preview_form( $site, $schedule );
 			$this->render_schedule_apply_form( $site, $schedule, $clean_capabilities, $remote_action_history );
+			$this->render_schedule_rollback_preview_form( $site, $schedule, $clean_capabilities, $remote_action_history );
 			echo '</section>';
 		}
 
-		echo '<p class="description">' . esc_html__( 'Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt uploader scan cadence changes after a fresh preview.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Schedule data is redacted capability evidence from the client uploader. Rollback execution remains unavailable in this release; rollback preview is non-mutating and only asks the client what a rollback would look like after a successful apply with complete rollback metadata.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '</div></div>';
 	}
 

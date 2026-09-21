@@ -377,6 +377,7 @@ class RemoteActionRepositoryTest extends TestCase {
 							'applied_next_run_at'                 => '2026-09-15T18:53:55+00:00',
 							'current_schedule_fingerprint_before' => str_repeat( 'b', 64 ),
 							'current_schedule_fingerprint_after'  => str_repeat( 'c', 64 ),
+							'rollback_metadata_fingerprint'       => str_repeat( 'd', 64 ),
 							'captured_at'                         => '2026-09-15T18:24:12+00:00',
 							'expires_at'                          => '2026-09-15T19:24:12+00:00',
 						),
@@ -400,6 +401,66 @@ class RemoteActionRepositoryTest extends TestCase {
 		$this->assertSame( 'schedule_rollback_runtime_not_implemented', $context['schedule_apply']['rollback_metadata']['reason'] );
 		$this->assertSame( str_repeat( 'b', 64 ), $context['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_before'] );
 		$this->assertSame( str_repeat( 'c', 64 ), $context['schedule_apply']['rollback_metadata']['current_schedule_fingerprint_after'] );
+		$this->assertSame( str_repeat( 'd', 64 ), $context['schedule_apply']['rollback_metadata']['rollback_metadata_fingerprint'] );
+	}
+
+	/**
+	 * Client rollback-preview reports preserve support-safe preview details.
+	 *
+	 * @return void
+	 */
+	public function test_mark_client_report_preserves_schedule_rollback_preview_details() {
+		$repository      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$this->wpdb->row = array(
+			'id'                    => 321,
+			'redacted_context_json' => wp_json_encode( array() ),
+		);
+
+		$this->assertTrue(
+			$repository->mark_client_report(
+				321,
+				array(
+					'state'                     => 'succeeded',
+					'result_code'               => 'schedule_rollback_preview_ready',
+					'result_summary'            => 'Schedule rollback preview completed.',
+					'schedule_rollback_preview' => array(
+						'schedule_id'                           => 'alynt_scan_upload',
+						'label'                                 => 'Alynt scan/upload',
+						'owner'                                 => 'alynt_uploader',
+						'current_cadence'                       => 'every_30_minutes',
+						'applied_cadence'                       => 'every_30_minutes',
+						'rollback_cadence'                      => 'every_15_minutes',
+						'current_next_run_at'                   => '2026-09-15T18:53:55+00:00',
+						'rollback_next_run_estimate_at'         => '2026-09-15T18:45:00+00:00',
+						'would_change'                          => true,
+						'rollback_apply_supported'              => true,
+						'rollback_supported'                    => true,
+						'preview_action_id'                     => '44444444-4444-4444-8444-444444444444',
+						'preview_fingerprint'                   => str_repeat( 'a', 64 ),
+						'source_apply_action_id'                => '33333333-3333-4333-8333-333333333333',
+						'rollback_metadata_fingerprint'         => str_repeat( 'b', 64 ),
+						'current_schedule_fingerprint'          => str_repeat( 'c', 64 ),
+						'expected_current_schedule_fingerprint' => str_repeat( 'd', 64 ),
+						'previous_schedule_fingerprint'         => str_repeat( 'e', 64 ),
+						'capability_version'                    => 1,
+						'preview_created_at'                    => '2026-09-15T18:35:00+00:00',
+						'preview_expires_at'                    => '2026-09-15T18:50:00+00:00',
+					),
+				),
+				'2026-09-15 18:35:12'
+			)
+		);
+
+		$context = json_decode( $this->wpdb->updated_data['redacted_context_json'], true );
+
+		$this->assertSame( 'alynt_scan_upload', $context['schedule_rollback_preview']['schedule_id'] );
+		$this->assertSame( 'every_30_minutes', $context['schedule_rollback_preview']['current_cadence'] );
+		$this->assertSame( 'every_15_minutes', $context['schedule_rollback_preview']['rollback_cadence'] );
+		$this->assertTrue( $context['schedule_rollback_preview']['would_change'] );
+		$this->assertFalse( $context['schedule_rollback_preview']['rollback_apply_supported'] );
+		$this->assertFalse( $context['schedule_rollback_preview']['rollback_supported'] );
+		$this->assertSame( '33333333-3333-4333-8333-333333333333', $context['schedule_rollback_preview']['source_apply_action_id'] );
+		$this->assertSame( str_repeat( 'b', 64 ), $context['schedule_rollback_preview']['rollback_metadata_fingerprint'] );
 	}
 
 	/**
@@ -519,6 +580,78 @@ class RemoteActionRepositoryTest extends TestCase {
 		$this->assertSame( 'schedule_apply_preview_expired', $result->get_error_code() );
 		$this->assertStringContainsString( 'WHERE public_id = %s AND dashboard_site_id = %d', $this->wpdb->last_query );
 		$this->assertSame( array( $preview_id, 44 ), $this->wpdb->prepared_args );
+	}
+
+	/**
+	 * Successful schedule apply rows can provide bounded rollback-preview request data.
+	 *
+	 * @return void
+	 */
+	public function test_successful_schedule_apply_for_rollback_preview_returns_safe_request_data() {
+		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$apply_id   = '33333333-3333-4333-8333-333333333333';
+
+		$this->wpdb->row = array(
+			'id'                    => 321,
+			'public_id'             => $apply_id,
+			'dashboard_site_id'     => 44,
+			'action_type'           => 'schedule_apply',
+			'state'                 => 'succeeded',
+			'completed_at'          => '2026-09-15 18:24:12',
+			'redacted_context_json' => wp_json_encode(
+				array(
+					'schedule_apply' => array(
+						'schedule_id'        => 'alynt_scan_upload',
+						'previous_cadence'   => 'every_15_minutes',
+						'applied_cadence'    => 'every_30_minutes',
+						'capability_version' => 1,
+						'rollback_metadata'  => array(
+							'captured'                      => true,
+							'source_action_id'              => $apply_id,
+							'schedule_id'                   => 'alynt_scan_upload',
+							'previous_cadence'              => 'every_15_minutes',
+							'applied_cadence'               => 'every_30_minutes',
+							'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
+							'expires_at'                    => '2026-09-15T19:24:12+00:00',
+						),
+					),
+				)
+			),
+		);
+
+		$result = $repository->successful_schedule_apply_for_rollback_preview(
+			44,
+			$apply_id,
+			array(
+				'enabled'          => true,
+				'sodium_available' => true,
+				'allowed_actions'  => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply', 'schedule_rollback_preview' ),
+				'schedule_management' => array(
+					'enabled'                    => true,
+					'rollback_preview_supported' => true,
+					'rollback_supported'         => false,
+					'schedules'                  => array(
+						array(
+							'schedule_id'                => 'alynt_scan_upload',
+							'manageable'                 => true,
+							'rollback_preview_supported' => true,
+							'rollback_supported'         => false,
+						),
+					),
+				),
+			),
+			'2026-09-15 19:00:00'
+		);
+
+		$this->assertIsArray( $result );
+		$this->assertSame( $apply_id, $result['source_apply_action_id'] );
+		$this->assertSame( str_repeat( 'b', 64 ), $result['rollback_metadata_fingerprint'] );
+		$this->assertSame( 'alynt_scan_upload', $result['schedule_id'] );
+		$this->assertSame( 'every_15_minutes', $result['previous_cadence'] );
+		$this->assertSame( 'every_30_minutes', $result['applied_cadence'] );
+		$this->assertSame( 1, $result['capability_version'] );
+		$this->assertStringContainsString( 'WHERE public_id = %s AND dashboard_site_id = %d', $this->wpdb->last_query );
+		$this->assertSame( array( $apply_id, 44 ), $this->wpdb->prepared_args );
 	}
 
 	/**

@@ -308,6 +308,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 		$this->assertFalse( $result['schedule_management']['rollback_supported'] );
 		$this->assertTrue( $result['schedule_management']['schedules'][0]['rollback_preview_supported'] );
 		$this->assertFalse( $result['schedule_management']['schedules'][0]['rollback_supported'] );
+		$this->assertTrue( $capabilities->supports_schedule_rollback_preview_action( $result, 'alynt_scan_upload' ) );
 		$this->assertSame( 'schedule_rollback_preview', $result['last_action']['action_type'] );
 		$this->assertSame( 'every_15_minutes', $result['last_action']['schedule_rollback_preview']['rollback_cadence'] );
 		$this->assertFalse( $result['last_action']['schedule_rollback_preview']['rollback_apply_supported'] );

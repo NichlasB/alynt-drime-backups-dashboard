@@ -485,6 +485,67 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * The schedule panel renders rollback preview only after successful apply evidence.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_management_panel_renders_non_mutating_rollback_preview_form() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$history = array(
+			array(
+				'public_id'             => '33333333-3333-4333-8333-333333333333',
+				'action_type'           => 'schedule_apply',
+				'state'                 => 'succeeded',
+				'redacted_context_json' => wp_json_encode(
+					array(
+						'schedule_apply' => array(
+							'schedule_id'     => 'alynt_scan_upload',
+							'previous_cadence' => 'every_15_minutes',
+							'applied_cadence'  => 'every_30_minutes',
+							'rollback_metadata' => array(
+								'captured'                      => true,
+								'schedule_id'                   => 'alynt_scan_upload',
+								'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
+							),
+						),
+					)
+				),
+			),
+		);
+		$html    = $harness->schedule_management_panel_html(
+			$this->remote_action_history_site(),
+			$this->schedule_management_snapshot( true ),
+			$history,
+			new Alynt_Drime_Backups_Dashboard_Test_Admin_Actions()
+		);
+
+		$this->assertStringContainsString( 'Preview Rollback', $html );
+		$this->assertStringContainsString( 'value="preview_schedule_rollback"', $html );
+		$this->assertStringContainsString( 'name="source_apply_action_id" value="33333333-3333-4333-8333-333333333333"', $html );
+		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_preview_schedule_rollback', $html );
+		$this->assertStringContainsString( 'does not execute a rollback or change any schedule', $html );
+		$this->assertStringNotContainsString( 'value="schedule_rollback"', $html );
+	}
+
+	/**
+	 * The schedule panel hides rollback preview unless the latest capability explicitly allows it.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_management_panel_hides_rollback_preview_without_capability() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->schedule_management_panel_html(
+			$this->remote_action_history_site(),
+			$this->schedule_management_snapshot( false ),
+			array(),
+			new Alynt_Drime_Backups_Dashboard_Test_Admin_Actions()
+		);
+
+		$this->assertStringNotContainsString( 'Preview Rollback', $html );
+		$this->assertStringNotContainsString( 'value="preview_schedule_rollback"', $html );
+	}
+
+	/**
 	 * Schedule history avoids presenting missing cadence evidence as a known transition.
 	 *
 	 * @return void
@@ -816,6 +877,57 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Gets a reusable schedule-management snapshot.
+	 *
+	 * @param bool $rollback_preview_supported Whether rollback preview is advertised.
+	 * @return array<string,mixed>
+	 */
+	private function schedule_management_snapshot( $rollback_preview_supported ) {
+		$allowed_actions = array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' );
+
+		if ( $rollback_preview_supported ) {
+			$allowed_actions[] = 'schedule_rollback_preview';
+		}
+
+		return array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version' => 2,
+					'enabled'          => true,
+					'allowed_actions'  => $allowed_actions,
+					'sodium_available' => true,
+					'schedule_management' => array(
+						'protocol_version'            => 2,
+						'capability_version'          => 1,
+						'enabled'                     => true,
+						'preview_only'                => false,
+						'apply_supported'             => true,
+						'rollback_preview_supported'  => $rollback_preview_supported,
+						'rollback_supported'          => false,
+						'schedules'                   => array(
+							array(
+								'schedule_id'                    => 'alynt_scan_upload',
+								'label'                          => 'Alynt scan/upload',
+								'owner'                          => 'alynt_uploader',
+								'manageable'                     => true,
+								'current_cadence'                => 'every_30_minutes',
+								'current_interval_seconds'       => 1800,
+								'current_next_run_at'            => '2026-09-15T18:53:55+00:00',
+								'supported_cadences'             => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
+								'minimum_interval_seconds'       => 900,
+								'can_disable'                    => false,
+								'requires_high_friction_disable' => true,
+								'rollback_preview_supported'     => $rollback_preview_supported,
+								'rollback_supported'             => false,
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
 	 * Gets reusable remote-action rows for history filter tests.
 	 *
 	 * @return array<int,array<string,mixed>>
@@ -861,6 +973,13 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers;
+
+	/**
+	 * Remote action repository test double.
+	 *
+	 * @var Alynt_Drime_Backups_Dashboard_Remote_Action_Repository|null
+	 */
+	public $remote_actions;
 
 	/**
 	 * Exposes check-status action markup.
@@ -958,6 +1077,25 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	}
 
 	/**
+	 * Exposes V2.3 schedule-management panel markup.
+	 *
+	 * @param array<string,mixed>              $site Site row.
+	 * @param array<string,mixed>|null         $snapshot Snapshot row.
+	 * @param array<int,array<string,mixed>>   $history History rows.
+	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Repository|null $remote_actions Remote actions test double.
+	 * @return string
+	 */
+	public function schedule_management_panel_html( array $site, $snapshot, array $history, $remote_actions = null ) {
+		if ( $remote_actions instanceof Alynt_Drime_Backups_Dashboard_Remote_Action_Repository ) {
+			$this->remote_actions = $remote_actions;
+		}
+
+		ob_start();
+		$this->render_schedule_management_panel( $snapshot, $site, $history );
+		return (string) ob_get_clean();
+	}
+
+	/**
 	 * Minimal snapshot decoder needed by the included helper trait.
 	 *
 	 * @param array<string,mixed> $snapshot Snapshot row.
@@ -975,5 +1113,37 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	 */
 	private function render_backup_sources_detail( array $payload ) {
 		unset( $payload );
+	}
+}
+
+/**
+ * Admin rendering remote action repository test double.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Admin_Actions extends Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
+	/**
+	 * Returns fixed rollback-preview readiness data.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param string              $apply_public_id Apply public ID.
+	 * @param array<string,mixed> $capabilities Capabilities.
+	 * @param string|null         $now Now.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function successful_schedule_apply_for_rollback_preview( $site_id, $apply_public_id, array $capabilities, $now = null ) {
+		unset( $site_id, $capabilities, $now );
+
+		if ( '33333333-3333-4333-8333-333333333333' !== $apply_public_id ) {
+			return new WP_Error( 'schedule_rollback_preview_apply_missing', 'Missing apply.' );
+		}
+
+		return array(
+			'source_apply_action_id'        => $apply_public_id,
+			'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
+			'schedule_id'                   => 'alynt_scan_upload',
+			'previous_cadence'              => 'every_15_minutes',
+			'applied_cadence'               => 'every_30_minutes',
+			'capability_version'            => 1,
+			'metadata_expires_at'           => '2099-01-01T00:15:00+00:00',
+		);
 	}
 }

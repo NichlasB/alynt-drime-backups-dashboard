@@ -17,7 +17,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - The client uploader remains the only system that can execute backup-related work, and it uses its own local settings, credentials, locks, and policy.
 - V2.1 initially allows only `scan_upload_now`.
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
-- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The current mutating V2.3 action is guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and release/deploy approval gates. Rollback metadata capture/readiness and rolling back schedule changes require later protocol updates and separate approval gates.
+- V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The current mutating V2.3 action is guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and release/deploy approval gates. Non-mutating `schedule_rollback_preview` is implemented locally as a preview-only request shape for clients that explicitly advertise it, but is not released/deployed by this document. Rolling back schedule changes with `schedule_rollback` requires later protocol updates and separate approval gates.
 
 ## Actors And Responsibilities
 
@@ -147,20 +147,44 @@ Rules:
 - The response may include schedule ID, label, owner, current cadence, proposed cadence, current next run, proposed next-run estimate, `would_change`, warning codes, and support-safe result codes.
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
 
-### Reserved Schedule Rollback Actions
+### Schedule Rollback Preview And Reserved Rollback Action
 
-`schedule_rollback_preview` and `schedule_rollback` are reserved action names. The design boundary for a future non-mutating preview is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, but these actions are not approved runtime behavior in the current protocol baseline, must not appear in `allowed_actions`, and must be rejected by clients until a later protocol/threat-model update and release gate explicitly approve them.
+`schedule_rollback_preview` is a non-mutating V2.3 action shape implemented locally for future release/deploy consideration. It may appear in `allowed_actions` only when both dashboard and client builds support it and the client administrator explicitly enables rollback-preview opt-in. It asks the client whether one previous successful `schedule_apply` still has valid rollback metadata and matching current schedule state. It does not change schedules.
 
-Any future rollback design must use a two-step model:
+`schedule_rollback` remains a reserved mutating action name. It must not appear in `allowed_actions` and must be rejected by clients until a later protocol/threat-model update and release gate explicitly approve it.
+
+Rollback design must use a two-step model:
 
 1. `schedule_rollback_preview` is non-mutating and references one successful `schedule_apply` action plus captured rollback metadata.
 2. `schedule_rollback` is mutating and references a fresh successful rollback preview.
 
 The dashboard must not send a free-form target cadence, raw cron expression, raw WP-Cron array, option name/value, path, command, username, package name, backup ID, Drime identifier, credential, token, signed URL, or arbitrary settings payload. The client must compute rollback eligibility from its own stored, support-safe metadata and current local schedule state.
 
-Any future rollback action must remain limited to `alynt_scan_upload` unless a later approved design expands the scope. It must fail closed when metadata is missing or expired, the current schedule fingerprint no longer matches the post-apply state, the preview is stale, local Schedule Rollback opt-in is disabled, or rollback would disable all schedule execution.
+Rollback preview and any future rollback action must remain limited to `alynt_scan_upload` unless a later approved design expands the scope. Rollback preview must fail closed when metadata is missing or expired, the current schedule fingerprint no longer matches the post-apply state, the preview request is stale, local Schedule Rollback Preview opt-in is disabled, or the stored rollback target is unsafe.
 
 The current `schedule_apply` flow is implemented only for the approved, guarded `alynt_scan_upload` cadence flow. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
+
+Request extension:
+
+```json
+{
+  "action_type": "schedule_rollback_preview",
+  "schedule_rollback_preview": {
+    "schedule_id": "alynt_scan_upload",
+    "source_apply_action_id": "00000000-0000-4000-8000-000000000001",
+    "rollback_metadata_fingerprint": "sha256-example-redacted-rollback-metadata-fingerprint",
+    "capability_version": 1
+  }
+}
+```
+
+Rules:
+
+- The dashboard may dispatch `schedule_rollback_preview` only from a successful `schedule_apply` row for the same site with complete, unexpired rollback metadata and a latest client capability report advertising `schedule_rollback_preview`.
+- The dashboard must not send target cadence, raw cron syntax, current next-run assumptions, paths, commands, option names/values, package names, backup IDs, Drime IDs, credentials, disable flags, or arbitrary labels.
+- The client must revalidate the referenced apply metadata, metadata fingerprint, current local schedule fingerprint, capability version, and opt-in state.
+- The response may include schedule ID, label, owner, current cadence, applied cadence, rollback cadence, current next run, rollback next-run estimate, `would_change`, warning codes, support-safe result codes, preview fingerprint, source apply action ID, and metadata expiry.
+- The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
 
 ### Schedule Apply Action
 
@@ -305,7 +329,7 @@ Forbidden request fields:
 - Drime credentials;
 - retention/delete scopes;
 - schedule changes;
-- schedule preview/apply/rollback payloads until V2.3 action types are separately approved;
+- schedule preview/apply/rollback payloads unless they match the currently approved V2.3 action shape for that client capability;
 - restore targets;
 - arbitrary URLs.
 
@@ -332,13 +356,14 @@ Not included:
 
 ## V2.3 Schedule Action Types
 
-The V2.3 design reserves the following action names, but they are not active in the current protocol baseline:
+The V2.3 design defines the following schedule action names:
 
 - `schedule_preview`
 - `schedule_apply`
+- `schedule_rollback_preview`
 - `schedule_rollback`
 
-`schedule_preview` is implemented as a non-mutating V2.3 action. `schedule_apply` is implemented locally and unreleased for `alynt_scan_upload` cadence changes only. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
+`schedule_preview` is implemented as a non-mutating V2.3 action. `schedule_apply` is implemented for `alynt_scan_upload` cadence changes only. `schedule_rollback_preview` is implemented locally as a non-mutating preview-only action shape and must remain hidden unless latest client capability explicitly advertises it. `schedule_rollback` remains reserved and must be rejected until separately implemented and approved.
 
 ## Action Response
 
