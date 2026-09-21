@@ -68,6 +68,7 @@ Dashboard-side result display requirements:
 Dashboard-side diagnostics/audit display requirements:
 
 - show the local operator action for rollback preview as `Preview Schedule Rollback` in Diagnostics;
+- include aggregate `schedule_rollback_preview` counts in support-safe Diagnostics action summaries;
 - keep the stored audit context redacted and support-safe;
 - preserve the existing stored audit slug and action history storage behavior.
 

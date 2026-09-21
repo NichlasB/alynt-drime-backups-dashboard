@@ -425,6 +425,50 @@ class DiagnosticsTest extends TestCase {
 	}
 
 	/**
+	 * Support action summaries include rollback-preview counts as aggregates only.
+	 *
+	 * @return void
+	 */
+	public function test_support_action_summary_includes_rollback_preview_count() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Test_Harness();
+		$actions = $harness->support_action_summary(
+			array(
+				'total'                     => 6,
+				'client_reconciled'         => 5,
+				'stale'                     => 1,
+				'awaiting_confirmation'     => 2,
+				'schedule_apply'            => 3,
+				'schedule_rollback_preview' => 2,
+				'rollback_metadata'         => 1,
+				'latest_updated_at'         => '2026-09-21 16:00:00',
+			)
+		);
+
+		$this->assertSame( 6, $actions['total'] );
+		$this->assertSame( 3, $actions['schedule_apply'] );
+		$this->assertSame( 2, $actions['schedule_rollback_preview'] );
+		$this->assertSame( 1, $actions['rollback_metadata'] );
+		$this->assertArrayNotHasKey( 'redacted_context_json', $actions );
+		$this->assertArrayNotHasKey( 'source_apply_action_id', $actions );
+	}
+
+	/**
+	 * Support action summaries keep rollback-preview counts non-negative.
+	 *
+	 * @return void
+	 */
+	public function test_support_action_summary_bounds_rollback_preview_count() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Test_Harness();
+		$actions = $harness->support_action_summary(
+			array(
+				'schedule_rollback_preview' => -4,
+			)
+		);
+
+		$this->assertSame( 0, $actions['schedule_rollback_preview'] );
+	}
+
+	/**
 	 * Creates a site row.
 	 *
 	 * @param int                 $site_id Site ID.
@@ -475,5 +519,44 @@ class DiagnosticsTest extends TestCase {
 				$overrides
 			),
 		);
+	}
+}
+
+/**
+ * Harness exposing support-summary action aggregates.
+ */
+class Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Test_Harness {
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Support;
+
+	/**
+	 * Gets support-safe action aggregate output.
+	 *
+	 * @param array<string,mixed> $remote_actions Remote-action aggregate.
+	 * @return array<string,mixed>
+	 */
+	public function support_action_summary( array $remote_actions ) {
+		$support = $this->support_summary_from_diagnostics(
+			array(
+				'poll_schedule_state'  => 'scheduled',
+				'cleanup_state'        => 'scheduled',
+				'poll_interval_seconds' => 900,
+				'poll_batch_size'      => 20,
+				'retention_days'       => 30,
+				'global_lock_active'   => false,
+			),
+			array(),
+			array(),
+			array(
+				'settings' => array(),
+				'summary'  => array(),
+				'audit'    => array(
+					'summary' => array(),
+				),
+			),
+			1789843200,
+			$remote_actions
+		);
+
+		return $support['actions'];
 	}
 }

@@ -476,6 +476,7 @@ class RemoteActionRepositoryTest extends TestCase {
 			'stale'                      => 1,
 			'awaiting_confirmation'      => 1,
 			'schedule_apply'             => 2,
+			'schedule_rollback_preview'  => 1,
 			'rollback_metadata_captured' => 1,
 			'latest_updated_at'          => '2026-09-15 19:24:12',
 		);
@@ -484,8 +485,10 @@ class RemoteActionRepositoryTest extends TestCase {
 
 		$this->assertSame( 4, $summary['total'] );
 		$this->assertSame( 2, $summary['schedule_apply'] );
+		$this->assertSame( 1, $summary['schedule_rollback_preview'] );
 		$this->assertSame( 1, $summary['rollback_metadata'] );
 		$this->assertStringContainsString( "action_type = 'schedule_apply'", $this->wpdb->last_query );
+		$this->assertStringContainsString( "action_type = 'schedule_rollback_preview'", $this->wpdb->last_query );
 		$this->assertStringContainsString( 'rollback_metadata', $this->wpdb->last_query );
 		$this->assertArrayNotHasKey( 'redacted_context_json', $summary );
 	}
