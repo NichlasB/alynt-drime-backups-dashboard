@@ -86,6 +86,7 @@ After dashboard `0.1.43`, the next safe rollback-adjacent slice is proof and har
 Scope:
 
 - verify the live dashboard keeps rollback-preview controls hidden for clients that do not advertise support;
+- make the Site Detail schedule panel explicitly show the pilot-readiness reason: hidden until client support, supported but waiting for successful apply metadata, or ready for non-mutating preview;
 - verify a separately approved client build advertises rollback-preview support only after explicit client-local opt-in;
 - prove on one low-risk pilot that rollback preview can reconcile into dashboard action history without changing schedule cadence;
 - confirm failure states such as expired metadata, changed current schedule fingerprint, missing metadata, unsupported schedule, and unsafe previous cadence remain visible and non-mutating;

@@ -36,7 +36,8 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( 'every 15 minutes', $html );
 		$this->assertStringContainsString( '15 minutes', $html );
 		$this->assertStringContainsString( 'Not enabled on the client', $html );
-		$this->assertStringContainsString( 'Execution unavailable; preview may be available', $html );
+		$this->assertStringContainsString( 'Execution unavailable; rollback apply is not available in this release.', $html );
+		$this->assertStringContainsString( 'Hidden until the latest client report advertises rollback-preview support.', $html );
 		$this->assertStringContainsString( 'Rollback execution remains unavailable in this release', $html );
 		$this->assertStringContainsString( 'Preview Schedule Change', $html );
 		$this->assertStringContainsString( 'every 30 minutes', $html );

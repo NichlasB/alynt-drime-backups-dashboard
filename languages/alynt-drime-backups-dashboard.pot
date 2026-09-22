@@ -2858,7 +2858,43 @@ msgid "Confirm that Schedule Rollback Preview is non-mutating before sending thi
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
-msgid "Execution unavailable; preview may be available after a successful apply with rollback metadata and explicit client support."
+msgid "Execution unavailable; rollback apply is not available in this release."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:95
+msgid "Unavailable for this schedule class."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:99
+msgid "Hidden until the latest client report advertises rollback-preview support."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:108
+msgid "Supported by the client, but waiting for dashboard action history."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:114
+msgid "Supported by the client; waiting for a successful Schedule Apply with rollback metadata."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:123
+msgid "Supported by the client, but the latest rollback metadata has expired."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:127
+msgid "Supported by the client, but rollback metadata is incomplete. Run a new preview/apply sequence before pilot proof."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:131
+msgid "Supported by the client; waiting for the selected Schedule Apply to succeed."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:139
+msgid "Supported by the client; waiting for rollback-preview-ready apply evidence."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:142
+msgid "Ready for non-mutating rollback preview from the latest successful Schedule Apply."
 msgstr ""
 
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:74

@@ -64,7 +64,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			$this->render_detail_item( __( 'Supported cadences', 'alynt-drime-backups-dashboard' ), $this->schedule_cadences_label( isset( $schedule['supported_cadences'] ) ? $schedule['supported_cadences'] : array() ) );
 			$this->render_detail_item( __( 'Minimum interval', 'alynt-drime-backups-dashboard' ), $this->schedule_interval_label( isset( $schedule['minimum_interval_seconds'] ) ? (int) $schedule['minimum_interval_seconds'] : 0 ) );
 			$this->render_detail_item( __( 'Apply changes', 'alynt-drime-backups-dashboard' ), ! empty( $clean_capabilities['schedule_management']['apply_supported'] ) ? __( 'Available after a fresh matching preview', 'alynt-drime-backups-dashboard' ) : __( 'Not enabled on the client', 'alynt-drime-backups-dashboard' ) );
-			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Execution unavailable; preview may be available after a successful apply with rollback metadata and explicit client support.', 'alynt-drime-backups-dashboard' ) );
+			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Execution unavailable; rollback apply is not available in this release.', 'alynt-drime-backups-dashboard' ) );
+			$this->render_detail_item( __( 'Rollback preview', 'alynt-drime-backups-dashboard' ), $this->schedule_rollback_preview_readiness_label( $site, $schedule, $clean_capabilities, $remote_action_history ) );
 			echo '</dl>';
 			$this->render_schedule_preview_form( $site, $schedule );
 			$this->render_schedule_apply_form( $site, $schedule, $clean_capabilities, $remote_action_history );

@@ -561,6 +561,8 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		);
 
 		$this->assertStringContainsString( 'Preview Rollback', $html );
+		$this->assertStringContainsString( 'Rollback preview', $html );
+		$this->assertStringContainsString( 'Ready for non-mutating rollback preview from the latest successful Schedule Apply.', $html );
 		$this->assertStringContainsString( 'value="preview_schedule_rollback"', $html );
 		$this->assertStringContainsString( 'name="source_apply_action_id" value="33333333-3333-4333-8333-333333333333"', $html );
 		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_preview_schedule_rollback', $html );
@@ -582,7 +584,29 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 			new Alynt_Drime_Backups_Dashboard_Test_Admin_Actions()
 		);
 
+		$this->assertStringContainsString( 'Rollback preview', $html );
+		$this->assertStringContainsString( 'Hidden until the latest client report advertises rollback-preview support.', $html );
 		$this->assertStringNotContainsString( 'Preview Rollback', $html );
+		$this->assertStringNotContainsString( 'value="preview_schedule_rollback"', $html );
+	}
+
+	/**
+	 * The schedule panel explains rollback-preview support while waiting for apply metadata.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_management_panel_reports_rollback_preview_waiting_for_apply_metadata() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->schedule_management_panel_html(
+			$this->remote_action_history_site(),
+			$this->schedule_management_snapshot( true ),
+			array(),
+			new Alynt_Drime_Backups_Dashboard_Test_Admin_Actions()
+		);
+
+		$this->assertStringContainsString( 'Rollback preview', $html );
+		$this->assertStringContainsString( 'Supported by the client; waiting for a successful Schedule Apply with rollback metadata.', $html );
+		$this->assertStringContainsString( 'Rollback preview becomes available after a successful Schedule Apply with unexpired rollback metadata and explicit client rollback-preview support.', $html );
 		$this->assertStringNotContainsString( 'value="preview_schedule_rollback"', $html );
 	}
 

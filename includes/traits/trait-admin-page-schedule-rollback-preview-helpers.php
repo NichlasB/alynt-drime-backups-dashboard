@@ -80,6 +80,68 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Rollback_Preview_Helpers
 	}
 
 	/**
+	 * Gets the operator-facing schedule rollback-preview readiness label.
+	 *
+	 * @param array<string,mixed>            $site Site row.
+	 * @param array<string,mixed>            $schedule Schedule summary.
+	 * @param array<string,mixed>            $capabilities Sanitized capabilities.
+	 * @param array<int,array<string,mixed>> $remote_action_history Recent remote action rows.
+	 * @return string
+	 */
+	private function schedule_rollback_preview_readiness_label( array $site, array $schedule, array $capabilities, array $remote_action_history = array() ) {
+		$site_id             = isset( $site['id'] ) ? absint( $site['id'] ) : 0;
+		$schedule_id         = isset( $schedule['schedule_id'] ) ? sanitize_key( (string) $schedule['schedule_id'] ) : '';
+		$capabilities_helper = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+
+		if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::SCHEDULE_SCAN_UPLOAD !== $schedule_id ) {
+			return __( 'Unavailable for this schedule class.', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( ! $capabilities_helper->supports_schedule_rollback_preview_action( $capabilities, $schedule_id ) ) {
+			return __( 'Hidden until the latest client report advertises rollback-preview support.', 'alynt-drime-backups-dashboard' );
+		}
+
+		if (
+			0 === $site_id
+			|| ! property_exists( $this, 'remote_actions' )
+			|| ! $this->remote_actions instanceof Alynt_Drime_Backups_Dashboard_Remote_Action_Repository
+		) {
+			return __( 'Supported by the client, but waiting for dashboard action history.', 'alynt-drime-backups-dashboard' );
+		}
+
+		$apply_public_id = $this->latest_apply_public_id_for_rollback_preview( $site_id, $schedule_id, $remote_action_history );
+
+		if ( '' === $apply_public_id ) {
+			return __( 'Supported by the client; waiting for a successful Schedule Apply with rollback metadata.', 'alynt-drime-backups-dashboard' );
+		}
+
+		$rollback_preview = $this->remote_actions->successful_schedule_apply_for_rollback_preview( $site_id, $apply_public_id, $capabilities );
+
+		if ( is_wp_error( $rollback_preview ) ) {
+			$code = $rollback_preview->get_error_code();
+
+			if ( 'schedule_rollback_preview_metadata_expired' === $code ) {
+				return __( 'Supported by the client, but the latest rollback metadata has expired.', 'alynt-drime-backups-dashboard' );
+			}
+
+			if ( in_array( $code, array( 'schedule_rollback_preview_metadata_missing', 'schedule_rollback_preview_metadata_invalid' ), true ) ) {
+				return __( 'Supported by the client, but rollback metadata is incomplete. Run a new preview/apply sequence before pilot proof.', 'alynt-drime-backups-dashboard' );
+			}
+
+			if ( 'schedule_rollback_preview_apply_not_ready' === $code ) {
+				return __( 'Supported by the client; waiting for the selected Schedule Apply to succeed.', 'alynt-drime-backups-dashboard' );
+			}
+
+			if ( 'schedule_rollback_preview_unavailable' === $code ) {
+				return __( 'Hidden until the latest client report advertises rollback-preview support.', 'alynt-drime-backups-dashboard' );
+			}
+
+			return __( 'Supported by the client; waiting for rollback-preview-ready apply evidence.', 'alynt-drime-backups-dashboard' );
+		}
+
+		return __( 'Ready for non-mutating rollback preview from the latest successful Schedule Apply.', 'alynt-drime-backups-dashboard' );
+	}
+	/**
 	 * Gets the latest successful apply public ID that may support rollback preview.
 	 *
 	 * @param int                                 $site_id Site ID.
