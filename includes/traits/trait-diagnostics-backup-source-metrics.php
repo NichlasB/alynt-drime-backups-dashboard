@@ -69,11 +69,14 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 	 */
 	private function schedule_management_diagnostics( $snapshot ) {
 		$counts = array(
-			'reporting_sites'    => 0,
-			'preview_only_sites' => 0,
-			'apply_sites'        => 0,
-			'unavailable_sites'  => 0,
-			'reported_schedules' => 0,
+			'reporting_sites'                  => 0,
+			'preview_only_sites'               => 0,
+			'apply_sites'                      => 0,
+			'unavailable_sites'                => 0,
+			'reported_schedules'               => 0,
+			'rollback_preview_supported_sites' => 0,
+			'rollback_preview_hidden_sites'    => 0,
+			'rollback_apply_advertised_sites'  => 0,
 		);
 
 		if ( empty( $snapshot ) || ! is_array( $snapshot ) ) {
@@ -102,8 +105,18 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 			} else {
 				$counts['preview_only_sites'] = 1;
 			}
+
+			if ( ! empty( $schedule_management['rollback_preview_supported'] ) ) {
+				$counts['rollback_preview_supported_sites'] = 1;
+			} else {
+				$counts['rollback_preview_hidden_sites'] = 1;
+			}
 		} else {
 			$counts['unavailable_sites'] = 1;
+		}
+
+		if ( ! empty( $schedule_management['rollback_supported'] ) ) {
+			$counts['rollback_apply_advertised_sites'] = 1;
 		}
 
 		return $counts;

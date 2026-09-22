@@ -52,11 +52,14 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				'not_configured_sources'     => 0,
 			),
 			'schedule_management' => array(
-				'reporting_sites'    => 0,
-				'preview_only_sites' => 0,
-				'apply_sites'        => 0,
-				'unavailable_sites'  => 0,
-				'reported_schedules' => 0,
+				'reporting_sites'                  => 0,
+				'preview_only_sites'               => 0,
+				'apply_sites'                      => 0,
+				'unavailable_sites'                => 0,
+				'reported_schedules'               => 0,
+				'rollback_preview_supported_sites' => 0,
+				'rollback_preview_hidden_sites'    => 0,
+				'rollback_apply_advertised_sites'  => 0,
 			),
 		);
 
