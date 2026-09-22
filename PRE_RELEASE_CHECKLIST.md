@@ -58,15 +58,15 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] `git diff --check` passed.
 - [x] Translation-template coverage checked for this patch release. No new runtime strings were added; POT version metadata was manually aligned to `0.1.44`.
 - [ ] `npm.cmd run pot` blocked: `wp` CLI is not on PATH in this environment. Run `wp i18n make-pot` on a machine with WP-CLI before or during release packaging if generated POT provenance is required.
-- [ ] Release ZIP audit for `0.1.44`.
-- [ ] GitHub release for `v0.1.44`.
+- [x] Release ZIP audit passed for `0.1.44`: GitHub release asset `alynt-drime-backups-dashboard-0.1.44.zip` downloaded to `C:\Users\Captain\Documents\AI Workflows\work\adbd-v0.1.44-release-verify`, inspected with a single `alynt-drime-backups-dashboard/` top-level folder, 121 runtime files, expected `0.1.44` plugin/readme/POT metadata, no dev/test/docs/vendor/node/build workflow files, and SHA256 `dc241365a6218dcc6dc92fb756c000b133e574e04986f4a4ed44565d207e4590`.
+- [x] GitHub release created: `https://github.com/NichlasB/alynt-drime-backups-dashboard/releases/tag/v0.1.44`. CI run `35712575039` passed on PHP 8.3 and PHP 7.4 for release commit `c5b8370`; Build Release workflow `35712671190` passed and uploaded the release asset.
 - [ ] Updater install/update smoke verification not yet run for `0.1.44`.
 - [ ] Live dashboard deployment/update on `control-sitesmanage` not yet performed.
 
 ## Open Items
 
-- [ ] Commit `0.1.44` release-prep metadata/checklist changes after approval.
-- [ ] Push local `0.1.44` release commit to `origin/master` and verify CI.
-- [ ] Tag/publish `v0.1.44` and verify release asset packaging after CI passes.
-- [ ] Run release ZIP audit for `0.1.44`.
+- [x] Commit `0.1.44` release-prep metadata/checklist changes: `c5b8370`.
+- [x] Push local `0.1.44` release commit to `origin/master` and verify CI: run `35712575039` passed on PHP 8.3 and PHP 7.4.
+- [x] Tag/publish `v0.1.44` and verify release asset packaging after CI passes.
+- [x] Run release ZIP audit for `0.1.44`.
 - [ ] Deploy/update dashboard plugin on `control-sitesmanage` only after live-site approval.
