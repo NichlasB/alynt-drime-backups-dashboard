@@ -1,23 +1,23 @@
 # Alynt Drime Backups Dashboard Pre-Release Checklist
 
-Updated: 2026-09-21
+Updated: 2026-09-22
 
 Use this checklist to track release-candidate readiness for the `Alynt Drime Backups Dashboard` plugin. Mark a workflow complete only after current evidence has passed for the recorded candidate.
 
 ## Current Release Candidate
 
-- Candidate version: `0.1.43`
-- Previous published release: `v0.1.42`
-- Candidate purpose: release the non-mutating V2.3 Schedule Rollback Preview dashboard-side dispatch/UI slice, action-history wording, Diagnostics audit labels, and support-safe action aggregates.
+- Candidate version: `0.1.44`
+- Previous published release: `v0.1.43`
+- Candidate purpose: release the rollback-preview readiness polish and support-safe Diagnostics aggregate counts added after `v0.1.43`.
 - Boundary: release-prep source/docs/package metadata only. This candidate does not deploy/update `control-sitesmanage`, create backups, restore, delete, clean up, change WPvivid/server-runner schedules, execute rollback, change credentials, store Drime API credentials, run arbitrary commands, or perform database/server actions.
-- Current checklist note: rows updated on 2026-09-21 reflect the current `0.1.43` release candidate after the local DS3 pre-release pass and validation commands listed below.
+- Current checklist note: rows updated on 2026-09-22 reflect the current `0.1.44` release candidate after the local release-prep validation commands listed below. The full DS3 pre-release workflow is intentionally not rerun here because the toolkit marks it as not applicable to packaging/release-publication-only passes.
 
 ## Prerequisites
 
 - [x] Build tooling present: `package.json`, Node build script, PHPUnit, PHPCS/WPCS, Composer dev tooling, GitHub release workflow.
 - [x] Observability present: Diagnostics tab, support-safe export/copy, redacted polling/action/source aggregates.
 - [x] Updater compatibility present: GitHub Plugin URI and prior GitHub release/update flow established through previous dashboard releases.
-- [x] Restore point/rollback baseline available through local Git history, current `v0.1.42` release/tag, and the user's fresh live GridPane backup from the prior release/deploy cycle. No live-site, database, deployment, or destructive action was performed in this pass.
+- [x] Restore point/rollback baseline available through local Git history and current `v0.1.43` release/tag. No live-site, database, deployment, or destructive action was performed in this pass.
 
 ## Current Feature Workflow Tracking
 
@@ -26,15 +26,15 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] DS2 Feature Bloat And Structure Phase 1 completed. Result: changed large files are existing cohesive architecture/test files; no safe feature-stage split forced.
 - [x] DS2 UI/UX Review completed. Result: native admin copy/buttons/status presentation retained; schedule UI is preview-only and non-mutating.
 - [x] DS2 Security Review completed. Result: schedule capability sanitizer now ignores unsupported schedule IDs and never enables apply/rollback.
-- [x] V2.3 Schedule Rollback Preview dashboard-side dispatch/UI, action-history wording, Diagnostics audit labeling, and support-safe action aggregates are implemented locally in four commits after `v0.1.42`.
+- [x] Rollback-preview readiness and Diagnostics support-count polish are implemented locally in two commits after `v0.1.43`.
 
 ## Pre-Release Review Sequence
 
 - [x] 01 Code Cleanup Review: rerun on 2026-09-21; no source TODO/FIXME/debug remnants found by targeted scans. Matches are intentional build-script console output and normal WordPress `wp_die()` permission/activation paths.
-- [x] 02 File Structure Review: rerun for current `0.1.43` source on 2026-09-21. Runtime `includes/*.php` files are under the prior workflow bloat threshold; the rollback-preview slice uses focused traits instead of growing the dispatcher/repository monoliths.
+- [x] 02 File Structure Review: prior structure pass remains current for this small patch. The `0.1.44` changes extend existing focused Site Detail and Diagnostics traits without introducing new monoliths.
 - [x] 03 Error Handling Review: rollback-preview unavailable, missing-apply, not-ready, metadata-missing, metadata-invalid, metadata-expired, and unsupported-capability paths render explicit non-mutating feedback.
 - [x] 04 WP Best Practices Review: WordPress APIs, translatable strings, nonces/capability gates, and existing admin patterns retained.
-- [x] 05 Database Review: no schema/table migration introduced for `0.1.43`; existing remote-action storage records support-safe action context only.
+- [x] 05 Database Review: no schema/table migration introduced for `0.1.44`; existing local records are read for support-safe readiness/count display only.
 - [x] 06 Performance Review: no scheduled poll broadening and no Drime/API browsing added; rollback-preview lookup is bounded to existing local action history.
 - [x] 07 Edge Cases Review: rollback-preview remains hidden unless the latest client capabilities and a fresh successful Schedule Apply record support it; stale/missing metadata is rejected.
 - [x] 07A Adversarial Test-Suite Review: focused tests and full PHPUnit baseline cover capability gating, dispatcher payloads, repository rollback-preview lookups, Diagnostics counts, and rendering.
@@ -48,25 +48,25 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 ## Release Validation
 
 - [x] Main plugin PHP syntax check passed.
-- [x] Focused remote-action repository tests passed: 11 tests, 89 assertions.
-- [x] Focused Diagnostics tests passed: 8 tests, 63 assertions.
-- [x] PHPUnit passed: 215 tests, 1085 assertions, 2 expected skips.
+- [x] Focused Site Detail polling-state rendering tests passed: 30 tests, 126 assertions.
+- [x] Focused Diagnostics tests passed: 8 tests, 68 assertions.
+- [x] PHPUnit full suite passed: 216 tests, 1099 assertions, 2 expected skips.
 - [x] PHPCS passed across 109 files.
 - [x] Build passed: `npm.cmd run build`.
 - [x] npm audit passed: 0 vulnerabilities at moderate threshold.
 - [x] Composer audit passed via local `php .\composer.phar audit`: no security vulnerability advisories found.
 - [x] `git diff --check` passed.
-- [x] Translation-template coverage checked for rollback-preview source strings; runtime strings remain wrapped, but generated POT references were not regenerated because WP-CLI is unavailable.
+- [x] Translation-template coverage checked for this patch release. No new runtime strings were added; POT version metadata was manually aligned to `0.1.44`.
 - [ ] `npm.cmd run pot` blocked: `wp` CLI is not on PATH in this environment. Run `wp i18n make-pot` on a machine with WP-CLI before or during release packaging if generated POT provenance is required.
-- [x] Release ZIP audit passed for `0.1.43`: GitHub release asset `alynt-drime-backups-dashboard-0.1.43.zip` downloaded to `C:\Users\Captain\Documents\AI Workflows\work\adbd-v0.1.43-release-verify`, expanded with a single `alynt-drime-backups-dashboard/` top-level folder, 114 runtime files, expected `0.1.43` plugin/readme/POT metadata, no dev/test/docs/vendor/node/build workflow files, and SHA256 `A84265D45490DC351101F0C5B2AFE6ADFBA7BE81B71BD9658E4877028010D9AE`.
-- [x] GitHub release created: `https://github.com/NichlasB/alynt-drime-backups-dashboard/releases/tag/v0.1.43`. Build Release workflow `35649641368` passed and uploaded the release asset.
-- [ ] Updater install/update smoke verification not yet run for `0.1.43`.
+- [ ] Release ZIP audit for `0.1.44`.
+- [ ] GitHub release for `v0.1.44`.
+- [ ] Updater install/update smoke verification not yet run for `0.1.44`.
 - [ ] Live dashboard deployment/update on `control-sitesmanage` not yet performed.
 
 ## Open Items
 
-- [x] Commit `0.1.43` release-prep metadata/checklist changes: `7495b79`.
-- [x] Push local `0.1.43` commits to `origin/master` and verify CI: run `35649373726` passed on PHP 8.3 and PHP 7.4.
-- [x] Tag/publish `v0.1.43` and verify release asset packaging.
-- [x] Run release ZIP audit for `0.1.43`.
+- [ ] Commit `0.1.44` release-prep metadata/checklist changes after approval.
+- [ ] Push local `0.1.44` release commit to `origin/master` and verify CI.
+- [ ] Tag/publish `v0.1.44` and verify release asset packaging after CI passes.
+- [ ] Run release ZIP audit for `0.1.44`.
 - [ ] Deploy/update dashboard plugin on `control-sitesmanage` only after live-site approval.

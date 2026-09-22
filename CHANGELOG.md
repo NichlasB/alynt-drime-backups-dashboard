@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.44 - 2026-09-22
+
+### Added
+
+- Added explicit Site Detail Schedule Management rollback-preview readiness states so operators can distinguish hidden, waiting-for-apply-metadata, and ready non-mutating preview conditions.
+- Added support-safe Diagnostics aggregate counts for rollback-preview-supported sites, rollback-preview-hidden sites, and rollback-apply-advertised canary evidence.
+
+### Security
+
+- Preserved the rollback-preview boundary: this release does not execute rollback, mutate schedules during rollback preview, create backups, restore, delete, clean up, change credentials, store Drime API credentials, or run arbitrary commands.
+
 ## 0.1.43 - 2026-09-21
 
 ### Added
