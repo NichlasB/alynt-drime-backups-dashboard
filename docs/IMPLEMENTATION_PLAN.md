@@ -83,12 +83,15 @@ Acceptance criteria for the design slice:
 
 After dashboard `0.1.43`, the next safe rollback-adjacent slice is proof and hardening of the already bounded, non-mutating preview path. This is not rollback execution.
 
+Post-uploader-`0.5.21` rollout note: the client-side non-mutating `schedule_rollback_preview` support is released and deployed across the tracked active client rollout set, but it remains disabled by default and hidden from the dashboard unless a client explicitly advertises rollback-preview support. A live proof cannot reuse old Schedule Apply metadata because the client expires rollback metadata one hour after capture. The next runtime proof therefore requires one explicitly approved pilot window that creates fresh rollback metadata with a guarded Schedule Apply, runs the non-mutating rollback preview while that metadata is still valid, and then returns the pilot to its intended cadence if the proof cadence differs from the desired steady state.
+
 Scope:
 
 - verify the live dashboard keeps rollback-preview controls hidden for clients that do not advertise support;
 - make the Site Detail schedule panel explicitly show the pilot-readiness reason: hidden until client support, supported but waiting for successful apply metadata, or ready for non-mutating preview;
 - include support-safe Diagnostics aggregate counts for rollback-preview hidden/supported states so pilot readiness can be checked without exposing client identifiers, schedule IDs, raw payloads, credentials, or Drime details;
 - verify a separately approved client build advertises rollback-preview support only after explicit client-local opt-in;
+- verify old/expired Schedule Apply rollback metadata blocks rollback-preview dispatch with a fail-closed reason;
 - prove on one low-risk pilot that rollback preview can reconcile into dashboard action history without changing schedule cadence;
 - confirm failure states such as expired metadata, changed current schedule fingerprint, missing metadata, unsupported schedule, and unsafe previous cadence remain visible and non-mutating;
 - record pilot findings in support-safe documentation without storing secrets, raw cron payloads, paths, credentials, or Drime identifiers.
