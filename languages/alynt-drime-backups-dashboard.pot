@@ -2286,6 +2286,33 @@ msgstr ""
 msgid "Rollback preview becomes available after a successful Schedule Apply with unexpired rollback metadata and explicit client rollback-preview support. No rollback execution is available."
 msgstr ""
 
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:135
+msgid "Unavailable"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:143
+msgid "Hidden"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:155
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:165
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:194
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:209
+msgid "Waiting"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:178
+msgid "Expired"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:186
+msgid "Blocked"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:216
+msgid "Ready"
+msgstr ""
+
 #. translators: 1: applied cadence, 2: rollback cadence.
 #: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:66
 #, php-format

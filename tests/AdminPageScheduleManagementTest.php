@@ -37,6 +37,8 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( '15 minutes', $html );
 		$this->assertStringContainsString( 'Not enabled on the client', $html );
 		$this->assertStringContainsString( 'Execution unavailable; rollback apply is not available in this release.', $html );
+		$this->assertStringContainsString( 'adbd-status-pill is-hidden', $html );
+		$this->assertStringContainsString( '>Hidden</span> Hidden until the latest client report advertises rollback-preview support.', $html );
 		$this->assertStringContainsString( 'Hidden until the latest client report advertises rollback-preview support.', $html );
 		$this->assertStringContainsString( 'Rollback execution remains unavailable in this release', $html );
 		$this->assertStringContainsString( 'Preview Schedule Change', $html );
@@ -66,6 +68,57 @@ class AdminPageScheduleManagementTest extends TestCase {
 		$this->assertStringContainsString( 'rollback is unavailable', $html );
 		$this->assertStringNotContainsString( 'future scan/upload timing only', $html );
 		$this->assertStringNotContainsString( 'schedule_rollback', $html );
+	}
+
+	/**
+	 * Rollback-preview readiness distinguishes support from ready metadata.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_rollback_preview_readiness_waits_for_apply_metadata() {
+		$harness                 = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
+		$harness->remote_actions = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions();
+		$html                    = $harness->panel_html( $this->payload( true, true ) );
+
+		$this->assertStringContainsString( 'adbd-status-pill is-waiting', $html );
+		$this->assertStringContainsString( '>Waiting</span> Supported by the client; waiting for a successful Schedule Apply with rollback metadata.', $html );
+		$this->assertStringNotContainsString( 'Preview Rollback', $html );
+		$this->assertStringNotContainsString( 'schedule_rollback_preview_confirm', $html );
+	}
+
+	/**
+	 * Rollback-preview readiness shows ready only for fresh successful apply metadata.
+	 *
+	 * @return void
+	 */
+	public function test_schedule_rollback_preview_readiness_shows_ready_with_apply_metadata() {
+		$harness                 = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
+		$harness->remote_actions = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions();
+		$history                 = array(
+			array(
+				'public_id'              => '33333333-3333-4333-8333-333333333333',
+				'action_type'            => 'schedule_apply',
+				'state'                  => 'succeeded',
+				'redacted_context_json'  => wp_json_encode(
+					array(
+						'schedule_apply' => array(
+							'schedule_id'       => 'alynt_scan_upload',
+							'rollback_metadata' => array(
+								'captured' => true,
+							),
+						),
+					)
+				),
+			),
+		);
+		$html                    = $harness->panel_html( $this->payload( true, true ), $history );
+
+		$this->assertStringContainsString( 'adbd-status-pill is-ready', $html );
+		$this->assertStringContainsString( '>Ready</span> Ready for non-mutating rollback preview from the latest successful Schedule Apply.', $html );
+		$this->assertStringContainsString( 'Preview Rollback', $html );
+		$this->assertStringContainsString( 'schedule_rollback_preview_confirm', $html );
+		$this->assertStringContainsString( 'only previews rollback readiness and does not execute a rollback', $html );
+		$this->assertStringNotContainsString( 'schedule_rollback&quot;', $html );
 	}
 
 	/**
@@ -127,21 +180,22 @@ class AdminPageScheduleManagementTest extends TestCase {
 	 *
 	 * @return array<string,mixed>
 	 */
-	private function payload( $apply_supported = false ) {
+	private function payload( $apply_supported = false, $rollback_preview_supported = false ) {
 		return array(
 			'remote_actions' => array(
 				'protocol_version'     => 2,
 				'enabled'              => true,
 				'sodium_available'     => true,
-				'allowed_actions'      => $apply_supported ? array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ) : array( 'scan_upload_now', 'schedule_preview' ),
+				'allowed_actions'      => $rollback_preview_supported ? array( 'scan_upload_now', 'schedule_preview', 'schedule_apply', 'schedule_rollback_preview' ) : ( $apply_supported ? array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ) : array( 'scan_upload_now', 'schedule_preview' ) ),
 				'schedule_management'  => array(
-					'protocol_version'   => 2,
-					'capability_version' => 1,
-					'enabled'            => true,
-					'preview_only'       => ! $apply_supported,
-					'apply_supported'    => $apply_supported,
-					'rollback_supported' => false,
-					'schedules'          => array(
+					'protocol_version'           => 2,
+					'capability_version'         => 1,
+					'enabled'                    => true,
+					'preview_only'               => ! $apply_supported,
+					'apply_supported'            => $apply_supported,
+					'rollback_preview_supported' => $rollback_preview_supported,
+					'rollback_supported'         => false,
+					'schedules'                  => array(
 						array(
 							'schedule_id'                    => 'alynt_scan_upload',
 							'label'                          => 'Alynt scan/upload',
@@ -154,6 +208,7 @@ class AdminPageScheduleManagementTest extends TestCase {
 							'minimum_interval_seconds'       => 900,
 							'can_disable'                    => false,
 							'requires_high_friction_disable' => true,
+							'rollback_preview_supported'     => $rollback_preview_supported,
 							'rollback_supported'             => false,
 						),
 					),
@@ -186,7 +241,7 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 	 * @param array<string,mixed> $payload Snapshot payload.
 	 * @return string
 	 */
-	public function panel_html( array $payload ) {
+	public function panel_html( array $payload, array $remote_action_history = array() ) {
 		ob_start();
 		$this->render_schedule_management_panel(
 			array(
@@ -194,7 +249,8 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness {
 			),
 			array(
 				'id' => 9,
-			)
+			),
+			$remote_action_history
 		);
 		return (string) ob_get_clean();
 	}
@@ -252,6 +308,32 @@ class Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions extends Aly
 			'current_cadence'     => 'every_15_minutes',
 			'proposed_cadence'    => 'every_30_minutes',
 			'capability_version'  => 1,
+		);
+	}
+
+	/**
+	 * Successful apply response for rollback-preview readiness tests.
+	 *
+	 * @param int                 $site_id Site ID.
+	 * @param string              $apply_public_id Apply ID.
+	 * @param array<string,mixed> $capabilities Capabilities.
+	 * @param string|null         $now Now.
+	 * @return array<string,mixed>
+	 */
+	public function successful_schedule_apply_for_rollback_preview( $site_id, $apply_public_id, array $capabilities, $now = null ) {
+		unset( $site_id, $capabilities, $now );
+
+		if ( '33333333-3333-4333-8333-333333333333' !== $apply_public_id ) {
+			return new WP_Error( 'schedule_rollback_preview_apply_missing', 'Missing apply.' );
+		}
+
+		return array(
+			'source_apply_action_id'        => $apply_public_id,
+			'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
+			'schedule_id'                   => 'alynt_scan_upload',
+			'applied_cadence'               => 'every_30_minutes',
+			'previous_cadence'              => 'every_15_minutes',
+			'capability_version'            => 1,
 		);
 	}
 }

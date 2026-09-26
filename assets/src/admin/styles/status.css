@@ -33,6 +33,38 @@
 	color: var(--adbd-warning);
 }
 
+.adbd-wrap .adbd-status-pill {
+	display: inline-flex;
+	align-items: center;
+	margin-inline-end: 4px;
+	padding: 1px 6px;
+	border: 1px solid var(--adbd-border);
+	border-radius: 999px;
+	background: var(--adbd-surface-muted);
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.5;
+	vertical-align: text-bottom;
+}
+
+.adbd-wrap .adbd-status-pill.is-working,
+.adbd-wrap .adbd-status-pill.is-ready {
+	border-color: #8bbf9a;
+	color: var(--adbd-success);
+}
+
+.adbd-wrap .adbd-status-pill.is-pending,
+.adbd-wrap .adbd-status-pill.is-waiting,
+.adbd-wrap .adbd-status-pill.is-hidden {
+	border-color: #d6bd75;
+	color: var(--adbd-warning);
+}
+
+.adbd-wrap .adbd-status-pill.is-blocked {
+	border-color: #dba5a5;
+	color: var(--adbd-danger);
+}
+
 .adbd-wrap .adbd-status-message {
 	margin-block: 6px 0;
 	line-height: 1.55;
