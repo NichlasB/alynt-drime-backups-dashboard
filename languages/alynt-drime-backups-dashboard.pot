@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-20T18:21:14+00:00\n"
+"POT-Creation-Date: 2026-09-26T13:40:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -170,6 +170,7 @@ msgstr ""
 #: includes/traits/trait-remote-action-dispatcher-actions.php:38
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:39
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:133
+#: includes/traits/trait-remote-action-dispatcher-schedule-rollback-preview.php:39
 msgid "The dashboard site record was not found."
 msgstr ""
 
@@ -196,7 +197,7 @@ msgstr ""
 #: includes/class-remote-action-opt-in-manager.php:108
 #: includes/class-remote-action-signer.php:44
 #: includes/class-remote-action-signer.php:112
-#: includes/traits/trait-remote-action-dispatcher-intent.php:97
+#: includes/traits/trait-remote-action-dispatcher-intent.php:106
 msgid "Remote action signing is unavailable because PHP Sodium support is missing."
 msgstr ""
 
@@ -438,36 +439,49 @@ msgstr ""
 msgid "Schedule Apply could not be completed. Review the remote action history for this site."
 msgstr ""
 
-#: includes/traits/trait-admin-page-action-notices.php:133
-msgid "Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed."
-msgstr ""
-
 #: includes/traits/trait-admin-page-action-notices.php:134
-msgid "Backup-source monitoring policy could not be saved. Refresh the site detail screen and try again."
+#: includes/traits/trait-admin-page-action-notices.php:135
+msgid "Schedule Rollback Preview was accepted by the client site. No schedule was changed. Use Check Now to see the preview result reported by the client."
 msgstr ""
 
-#: includes/traits/trait-admin-page-action-notices.php:143
-msgid "Diagnostics settings saved."
+#: includes/traits/trait-admin-page-action-notices.php:136
+msgid "The client site did not accept the Schedule Rollback Preview request."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:137
+msgid "Schedule Rollback Preview could not be completed. Review the remote action history for this site."
 msgstr ""
 
 #: includes/traits/trait-admin-page-action-notices.php:144
-msgid "Diagnostics settings could not be saved. Refresh the page and try again; if it continues, check that WordPress options can be updated."
+msgid "Backup-source monitoring policy saved. This changes dashboard classification only; no client site, backup, or Drime data was changed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-action-notices.php:153
-msgid "Diagnostics events cleared."
+#: includes/traits/trait-admin-page-action-notices.php:145
+msgid "Backup-source monitoring policy could not be saved. Refresh the site detail screen and try again."
 msgstr ""
 
 #: includes/traits/trait-admin-page-action-notices.php:154
+msgid "Diagnostics settings saved."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:155
+msgid "Diagnostics settings could not be saved. Refresh the page and try again; if it continues, check that WordPress options can be updated."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:164
+msgid "Diagnostics events cleared."
+msgstr ""
+
+#: includes/traits/trait-admin-page-action-notices.php:165
 msgid "Diagnostics events could not be cleared. Refresh the Diagnostics screen and try again; the retained event buffer may already have changed."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:81
+#: includes/traits/trait-admin-page-actions.php:85
 msgid "The requested dashboard action is not supported."
 msgstr ""
 
-#: includes/traits/trait-admin-page-actions.php:93
-#: includes/traits/trait-admin-page-actions.php:99
+#: includes/traits/trait-admin-page-actions.php:97
+#: includes/traits/trait-admin-page-actions.php:103
 msgid "Your dashboard session has expired. Refresh the page and try again."
 msgstr ""
 
@@ -697,7 +711,7 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-compact-helpers.php:69
 #: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:87
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:150
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:154
 #: includes/traits/trait-admin-page-schedule-label-helpers.php:70
 #: includes/traits/trait-admin-page-schedule-label-helpers.php:71
 #: includes/traits/trait-admin-page-schedule-label-helpers.php:75
@@ -795,8 +809,8 @@ msgid "Within policy"
 msgstr ""
 
 #: includes/traits/trait-admin-page-backup-source-evidence-helpers.php:80
-#: includes/traits/trait-admin-page-remote-action-history-filters.php:163
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:145
+#: includes/traits/trait-admin-page-remote-action-history-filters.php:164
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:149
 msgid "Stale"
 msgstr ""
 
@@ -1020,8 +1034,8 @@ msgid "Uploaded"
 msgstr ""
 
 #: includes/traits/trait-admin-page-basic-detail-helpers.php:70
-#: includes/traits/trait-admin-page-remote-action-history-filters.php:161
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:143
+#: includes/traits/trait-admin-page-remote-action-history-filters.php:162
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:147
 #: includes/traits/trait-admin-page-sites-table.php:72
 msgid "Failed"
 msgstr ""
@@ -1240,7 +1254,7 @@ msgid "Dashboard-local actions will appear here after an administrator creates a
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:127
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:208
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:209
 msgid "Time"
 msgstr ""
 
@@ -1258,7 +1272,7 @@ msgid "Outcome"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-event-log.php:131
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:213
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:214
 msgid "Context"
 msgstr ""
 
@@ -1290,7 +1304,7 @@ msgstr ""
 msgid "Pause Polling"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:183
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:182
 msgid "Preview Schedule Rollback"
 msgstr ""
 
@@ -1302,50 +1316,50 @@ msgstr ""
 msgid "Request Backup Now"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:183
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:184
 #: includes/traits/trait-admin-page-polling-detail-helpers.php:174
 msgid "Resume Polling"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:184
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:185
 msgid "Revoke Local Pairing"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:185
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:186
 msgid "Apply Schedule Change"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:186
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:107
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:187
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:110
 msgid "Preview Schedule Change"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:187
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:188
 msgid "Update Diagnostics Settings"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:200
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:207
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:201
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:208
 msgid "Recent diagnostic events"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:203
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:204
 msgid "No structured diagnostics events are currently stored."
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:209
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:210
 msgid "Level"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:210
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:211
 msgid "Category"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:211
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:212
 msgid "Code"
 msgstr ""
 
-#: includes/traits/trait-admin-page-diagnostics-event-log.php:212
+#: includes/traits/trait-admin-page-diagnostics-event-log.php:213
 msgid "Message"
 msgstr ""
 
@@ -1743,57 +1757,62 @@ msgstr ""
 msgid "Schedule Apply"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-filters.php:151
-msgid "All dashboard states"
+#: includes/traits/trait-admin-page-remote-action-history-filters.php:141
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:124
+msgid "Schedule Rollback Preview"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:152
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:134
-msgid "Queued for dispatch"
+msgid "All dashboard states"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:153
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:135
-msgid "Dispatch failed"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:138
+msgid "Queued for dispatch"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:154
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:136
-msgid "Accepted"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:139
+msgid "Dispatch failed"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:155
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:137
-msgid "Rejected"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:140
+msgid "Accepted"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:156
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:138
-msgid "Unsupported"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:141
+msgid "Rejected"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:157
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:139
-msgid "Rate limited"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:142
+msgid "Unsupported"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:158
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:140
-msgid "Busy"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:143
+msgid "Rate limited"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:159
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:141
-msgid "Running"
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:144
+msgid "Busy"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-filters.php:160
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:142
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:145
+msgid "Running"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-filters.php:161
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:146
 msgid "Succeeded"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-filters.php:162
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:144
+#: includes/traits/trait-admin-page-remote-action-history-filters.php:163
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:148
 msgid "Timed out"
 msgstr ""
 
@@ -1834,78 +1853,134 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:123
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:127
 msgid "Unknown action"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:173
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:177
 msgid "Awaiting client status"
 msgstr ""
 
 #. translators: 1: found count, 2: queued count, 3: already-known count, 4: attempted count, 5: failed count.
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:222
+#: includes/traits/trait-admin-page-remote-action-history-helpers.php:226
 #, php-format
 msgid "Found %1$d; Queued %2$d; Known %3$d; Attempts %4$d; Failed %5$d"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:39
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:101
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:40
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:132
 msgid "Applied cadence"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:40
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:102
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:41
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:133
 msgid "previous cadence pending client report"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:41
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:103
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:42
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:134
 msgid "applied cadence pending client report"
 msgstr ""
 
 #. translators: %s: next run date/time.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:47
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:48
 #, php-format
 msgid "Next run %s"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:52
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:53
 msgid "Alynt uploader scan cadence only; upload worker cadence may remain separate"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:69
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:114
+#. translators: %s: current next run date/time.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:71
+#, php-format
+msgid "Current next run %s"
+msgstr ""
+
+#. translators: %s: next run date/time.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:79
+#, php-format
+msgid "Rollback estimate next run %s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:85
+msgid "If applied in a future release, rollback would change the Alynt scan cadence; this preview did not change it"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:86
+msgid "No cadence change would be needed based on this preview; this preview did not change it"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:87
+msgid "Rollback execution remains unavailable"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:99
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:149
 msgid "Preview target"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:70
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:115
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:100
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:150
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:176
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:194
 msgid "current cadence pending client report"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:71
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:116
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:101
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:151
 msgid "proposed cadence pending client report"
 msgstr ""
 
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:135
+#. translators: %s: cadence transition label.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:171
+#, php-format
+msgid "Rollback preview would restore: %s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:175
+msgid "rollback target"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:177
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:195
+msgid "rollback cadence pending client report"
+msgstr ""
+
+#. translators: %s: rollback cadence label.
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:185
+#, php-format
+msgid "Rollback preview: already at %s; no change needed"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:193
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:68
+msgid "Rollback preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:211
 msgid "Rollback metadata captured as evidence only; rollback action unavailable"
 msgstr ""
 
 #. translators: %s: rollback unavailable reason code.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:142
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:218
 #, php-format
 msgid "Reason %s"
 msgstr ""
 
 #. translators: %s: rollback metadata expiry date/time.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:150
+#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:226
 #, php-format
 msgid "metadata expires %s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-actions.php:138
 msgid "Confirm that Schedule Apply changes only future Alynt uploader scan cadence before applying this preview."
+msgstr ""
+
+#: includes/traits/trait-admin-page-remote-actions.php:177
+msgid "Confirm that Schedule Rollback Preview is non-mutating before sending this request."
 msgstr ""
 
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:35
@@ -2074,136 +2149,192 @@ msgstr ""
 msgid "Schedule cadence pending client report"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:36
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:37
 msgid "Schedule Management"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:37
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:38
 msgid "V2.3 schedule controls are limited to the Alynt uploader scan cadence reported by the client as Alynt scan/upload. Preview is non-mutating. Apply requires a fresh matching preview, client-side Schedule Apply opt-in, and a signed request; it does not create backups, change upload-worker, WPvivid, or server-runner schedules, alter Drime, delete, clean up, restore, roll back schedules, or change credentials."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:40
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:41
 msgid "Not reported yet"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:40
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:41
 msgid "The latest client snapshot does not advertise preview-only schedule capability. Upgrade and poll the client before schedule posture can be shown here."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:46
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:47
 msgid "Apply available after preview"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:46
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:47
 msgid "The client reports guarded Schedule Apply support for this schedule class."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:48
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:49
 msgid "Preview only"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:48
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:49
 msgid "Schedule capability is reported for operator review only."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:59
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:60
 msgid "Owner"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:60
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:61
 msgid "Current cadence"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:61
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:62
 msgid "Current interval"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:62
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:63
 msgid "Next run"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:63
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:64
 msgid "Supported cadences"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:64
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
 msgid "Minimum interval"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
 msgid "Apply changes"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
 msgid "Available after a fresh matching preview"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:65
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
 msgid "Not enabled on the client"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:67
 msgid "Rollback"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
-msgid "Unavailable in this release; rollback metadata is evidence only and no rollback action exists."
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:67
+msgid "Execution unavailable; rollback apply is not available in this release."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:73
-msgid "Schedule data is redacted capability evidence from the client uploader. Rollback remains unavailable in this release, and Schedule Apply is limited to future Alynt uploader scan cadence changes after a fresh preview."
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:76
+msgid "Schedule data is redacted capability evidence from the client uploader. Rollback execution remains unavailable in this release; rollback preview is non-mutating and only asks the client what a rollback would look like after a successful apply with complete rollback metadata."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:90
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:93
 msgid "Schedule preview requests become available after this site is opened from its detail screen and the client reports supported cadence choices."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:101
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:104
 msgid "Proposed cadence"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:107
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:110
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:77
 msgid "Previewing…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:108
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:111
 msgid "Sends a signed read-only preview request. The client estimates the result and does not apply a schedule change."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:138
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:141
 msgid "Apply becomes available after a fresh successful preview for this schedule. Run Preview Schedule Change, then Check Now if the preview result has not appeared yet."
 msgstr ""
 
 #. translators: 1: current cadence, 2: proposed cadence.
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:154
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:157
 #, php-format
 msgid "Applies the fresh previewed Alynt uploader scan cadence change from %1$s to %2$s. This changes future scan scheduling for the Alynt uploader only; the upload worker may keep its own cadence and rollback is not available in this release."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:163
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:166
 msgid "I understand this applies only the previewed future Alynt uploader scan cadence change, rollback is unavailable, and this does not create backups or change upload-worker cadence, WPvivid, server-runner, Drime, restore, delete, cleanup, or credentials."
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:165
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:168
 msgid "Applying…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:165
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:168
 msgid "Apply Previewed Schedule Change"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:231
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:234
 msgid "apply gated"
 msgstr ""
 
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:232
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:235
 msgid "preview only"
 msgstr ""
 
 #. translators: 1: schedule capability mode, 2: schedule label, 3: current cadence.
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:235
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:238
 #, php-format
 msgid "Schedule: %1$s · %2$s %3$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:50
+msgid "Rollback preview becomes available after a successful Schedule Apply with unexpired rollback metadata and explicit client rollback-preview support. No rollback execution is available."
+msgstr ""
+
+#. translators: 1: applied cadence, 2: rollback cadence.
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:66
+#, php-format
+msgid "Asks the client to preview reverting the Alynt uploader scan cadence from %1$s back to %2$s. This is non-mutating: it does not change schedules, start backups, restore, delete, clean up, alter Drime, or change credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:75
+msgid "I understand this only previews rollback readiness and does not execute a rollback or change any schedule."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:77
+msgid "Preview Rollback"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:97
+msgid "Unavailable for this schedule class."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:101
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:136
+msgid "Hidden until the latest client report advertises rollback-preview support."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:109
+msgid "Supported by the client, but waiting for dashboard action history."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:115
+msgid "Supported by the client; waiting for a successful Schedule Apply with rollback metadata."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:124
+msgid "Supported by the client, but the latest rollback metadata has expired."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:128
+msgid "Supported by the client, but rollback metadata is incomplete. Run a new preview/apply sequence before pilot proof."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:132
+msgid "Supported by the client; waiting for the selected Schedule Apply to succeed."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:139
+msgid "Supported by the client; waiting for rollback-preview-ready apply evidence."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:142
+msgid "Ready for non-mutating rollback preview from the latest successful Schedule Apply."
 msgstr ""
 
 #: includes/traits/trait-admin-page-shell.php:28
@@ -2225,6 +2356,54 @@ msgid "%d site needs attention"
 msgid_plural "%d sites need attention"
 msgstr[0] ""
 msgstr[1] ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:30
+msgid "Revoked Local Dashboard Record"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:31
+msgid "This record is retained locally for audit/history. It is not scheduled for polling, and dashboard actions that require active pairing credentials are unavailable."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:32
+msgid "To monitor this origin again, create a new pairing token and complete client-site opt-in. This dashboard will not reuse revoked polling or action credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:33
+msgid "Permanent local removal is not available in this release. Keeping the revoked record does not contact the client site, change backups, alter Drime, or change client settings."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:47
+msgid "Local Record Visibility"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:50
+msgid "This dashboard record is archived locally. It remains retained for audit/history, is not shown in the default Sites view, and archive state does not restore or remove any credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:57
+msgid "Archive is available only for revoked records and expired pending records. Active or credentialed records must be revoked first so archive never hides a record that can still poll or perform signed client actions."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:62
+msgid "Archive hides this local record from the default Sites view while retaining it for audit/history. It does not delete data, contact the client site, change backups, alter Drime, or reuse credentials."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:77
+msgid "Archive Local Record"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:77
+msgid "Unarchive Local Record"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:78
+msgid "Archiving…"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:78
+msgid "Unarchiving…"
+msgstr ""
 
 #: includes/traits/trait-admin-page-site-detail.php:38
 msgid "Back to Sites"
@@ -2331,54 +2510,6 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-site-detail.php:113
 msgid "Review Local Revocation"
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:133
-msgid "Revoked Local Dashboard Record"
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:134
-msgid "This record is retained locally for audit/history. It is not scheduled for polling, and dashboard actions that require active pairing credentials are unavailable."
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:135
-msgid "To monitor this origin again, create a new pairing token and complete client-site opt-in. This dashboard will not reuse revoked polling or action credentials."
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:136
-msgid "Permanent local removal is not available in this release. Keeping the revoked record does not contact the client site, change backups, alter Drime, or change client settings."
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:150
-msgid "Local Record Visibility"
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:153
-msgid "This dashboard record is archived locally. It remains retained for audit/history, is not shown in the default Sites view, and archive state does not restore or remove any credentials."
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:160
-msgid "Archive is available only for revoked records and expired pending records. Active or credentialed records must be revoked first so archive never hides a record that can still poll or perform signed client actions."
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:165
-msgid "Archive hides this local record from the default Sites view while retaining it for audit/history. It does not delete data, contact the client site, change backups, alter Drime, or reuse credentials."
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:180
-msgid "Archive Local Record"
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:180
-msgid "Unarchive Local Record"
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:181
-msgid "Archiving…"
-msgstr ""
-
-#: includes/traits/trait-admin-page-site-detail.php:181
-msgid "Unarchiving…"
 msgstr ""
 
 #: includes/traits/trait-admin-page-site-formatters.php:34
@@ -2643,18 +2774,21 @@ msgstr ""
 #: includes/traits/trait-remote-action-dispatcher-actions.php:33
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:34
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:128
+#: includes/traits/trait-remote-action-dispatcher-schedule-rollback-preview.php:34
 msgid "Choose an enrolled site before requesting a remote action."
 msgstr ""
 
 #: includes/traits/trait-remote-action-dispatcher-actions.php:78
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:86
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:181
+#: includes/traits/trait-remote-action-dispatcher-schedule-rollback-preview.php:88
 msgid "The signed request could not be delivered to the client site."
 msgstr ""
 
 #: includes/traits/trait-remote-action-dispatcher-actions.php:91
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:99
 #: includes/traits/trait-remote-action-dispatcher-schedule-actions.php:194
+#: includes/traits/trait-remote-action-dispatcher-schedule-rollback-preview.php:101
 msgid "The dashboard could not store the remote action response."
 msgstr ""
 
@@ -2666,27 +2800,31 @@ msgstr ""
 msgid "The latest client report does not allow Schedule Apply. Enable Schedule Apply on the client and run Check Now first."
 msgstr ""
 
-#: includes/traits/trait-remote-action-dispatcher-intent.php:67
+#: includes/traits/trait-remote-action-dispatcher-intent.php:68
+msgid "The latest client report does not allow Schedule Rollback Preview. Enable rollback-preview support on the client and run Check Now first."
+msgstr ""
+
+#: includes/traits/trait-remote-action-dispatcher-intent.php:75
 msgid "The latest client report does not allow Request Backup Now. Complete V2 opt-in and run Check Now first."
 msgstr ""
 
-#: includes/traits/trait-remote-action-dispatcher-intent.php:85
+#: includes/traits/trait-remote-action-dispatcher-intent.php:94
 msgid "Active read-only pairing is required before requesting a remote action."
 msgstr ""
 
-#: includes/traits/trait-remote-action-dispatcher-intent.php:89
+#: includes/traits/trait-remote-action-dispatcher-intent.php:98
 msgid "Generate and complete a V2 action opt-in token before requesting this action."
 msgstr ""
 
-#: includes/traits/trait-remote-action-dispatcher-intent.php:93
+#: includes/traits/trait-remote-action-dispatcher-intent.php:102
 msgid "The latest client capability report does not match the dashboard action key. Regenerate the V2 opt-in token and run Check Now."
 msgstr ""
 
-#: includes/traits/trait-remote-action-dispatcher-intent.php:103
+#: includes/traits/trait-remote-action-dispatcher-intent.php:112
 msgid "The client action destination is not a supported public HTTPS origin."
 msgstr ""
 
-#: includes/traits/trait-remote-action-dispatcher-intent.php:107
+#: includes/traits/trait-remote-action-dispatcher-intent.php:116
 msgid "The client action destination did not resolve to a public IP address."
 msgstr ""
 
@@ -2754,6 +2892,34 @@ msgstr ""
 msgid "The dashboard could not update stale remote action records."
 msgstr ""
 
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:35
+msgid "Choose a successful Schedule Apply action before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:41
+msgid "The selected Schedule Apply action could not be found. Run a fresh Schedule Apply before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:45
+msgid "The selected Schedule Apply action has not succeeded yet. Run Check Now and confirm the apply result before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:53
+msgid "The selected Schedule Apply action does not include rollback metadata. Run a new apply after rollback metadata capture is available."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:67
+msgid "The selected Schedule Apply action is missing required safe rollback-preview evidence."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:77
+msgid "The selected Schedule Apply rollback metadata has expired. Run a new schedule preview/apply sequence before previewing rollback."
+msgstr ""
+
+#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:81
+msgid "The latest client report does not allow Schedule Rollback Preview for this schedule. Enable rollback-preview support on the client and run Check Now first."
+msgstr ""
+
 #: includes/traits/trait-remote-action-repository-state.php:56
 msgid "The remote action request is not valid."
 msgstr ""
@@ -2766,7 +2932,7 @@ msgstr ""
 msgid "The dashboard could not store the remote action request."
 msgstr ""
 
-#: includes/traits/trait-remote-action-repository-summary.php:115
+#: includes/traits/trait-remote-action-repository-summary.php:118
 msgid "The dashboard could not clean up old remote action records."
 msgstr ""
 
@@ -2789,163 +2955,4 @@ msgstr ""
 
 #: includes/traits/trait-status-classifier-helpers.php:93
 msgid "One or more backup sources report stale or missing upload evidence."
-msgstr ""
-
-#: includes/traits/trait-admin-page-action-notices.php:134
-msgid "Schedule Rollback Preview was accepted by the client site. No schedule was changed. Use Check Now to see the preview result reported by the client."
-msgstr ""
-
-#: includes/traits/trait-admin-page-action-notices.php:136
-msgid "The client site did not accept the Schedule Rollback Preview request."
-msgstr ""
-
-#: includes/traits/trait-admin-page-action-notices.php:137
-msgid "Schedule Rollback Preview could not be completed. Review the remote action history for this site."
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-filters.php:141
-#: includes/traits/trait-admin-page-remote-action-history-helpers.php:124
-msgid "Schedule Rollback Preview"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:183
-msgid "Rollback preview"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:179
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:185
-msgid "rollback cadence pending client report"
-msgstr ""
-
-#. translators: %s: current next run date/time.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:76
-msgid "Current next run %s"
-msgstr ""
-
-#. translators: %s: next run date/time.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:85
-msgid "Rollback estimate next run %s"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:92
-msgid "If applied in a future release, rollback would change the Alynt scan cadence; this preview did not change it"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:93
-msgid "No cadence change would be needed based on this preview; this preview did not change it"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:94
-msgid "Rollback execution remains unavailable"
-msgstr ""
-
-#. translators: %s: cadence transition label.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:173
-msgid "Rollback preview would restore: %s"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:177
-msgid "rollback target"
-msgstr ""
-
-#. translators: %s: rollback cadence label.
-#: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:191
-msgid "Rollback preview: already at %s; no change needed"
-msgstr ""
-
-#: includes/traits/trait-admin-page-remote-actions.php:177
-msgid "Confirm that Schedule Rollback Preview is non-mutating before sending this request."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:66
-msgid "Execution unavailable; rollback apply is not available in this release."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:95
-msgid "Unavailable for this schedule class."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:99
-msgid "Hidden until the latest client report advertises rollback-preview support."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:108
-msgid "Supported by the client, but waiting for dashboard action history."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:114
-msgid "Supported by the client; waiting for a successful Schedule Apply with rollback metadata."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:123
-msgid "Supported by the client, but the latest rollback metadata has expired."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:127
-msgid "Supported by the client, but rollback metadata is incomplete. Run a new preview/apply sequence before pilot proof."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:131
-msgid "Supported by the client; waiting for the selected Schedule Apply to succeed."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:139
-msgid "Supported by the client; waiting for rollback-preview-ready apply evidence."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:142
-msgid "Ready for non-mutating rollback preview from the latest successful Schedule Apply."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:74
-msgid "Schedule data is redacted capability evidence from the client uploader. Rollback execution remains unavailable in this release; rollback preview is non-mutating and only asks the client what a rollback would look like after a successful apply with complete rollback metadata."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:48
-msgid "Rollback preview becomes available after a successful Schedule Apply with unexpired rollback metadata and explicit client rollback-preview support. No rollback execution is available."
-msgstr ""
-
-#. translators: 1: applied cadence, 2: rollback cadence.
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:63
-msgid "Asks the client to preview reverting the Alynt uploader scan cadence from %1$s back to %2$s. This is non-mutating: it does not change schedules, start backups, restore, delete, clean up, alter Drime, or change credentials."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:73
-msgid "I understand this only previews rollback readiness and does not execute a rollback or change any schedule."
-msgstr ""
-
-#: includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php:75
-msgid "Preview Rollback"
-msgstr ""
-
-#: includes/traits/trait-remote-action-dispatcher-intent.php:67
-msgid "The latest client report does not allow Schedule Rollback Preview. Enable rollback-preview support on the client and run Check Now first."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:32
-msgid "Choose a successful Schedule Apply action before previewing rollback."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:38
-msgid "The selected Schedule Apply action could not be found. Run a fresh Schedule Apply before previewing rollback."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:42
-msgid "The selected Schedule Apply action has not succeeded yet. Run Check Now and confirm the apply result before previewing rollback."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:50
-msgid "The selected Schedule Apply action does not include rollback metadata. Run a new apply after rollback metadata capture is available."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:64
-msgid "The selected Schedule Apply action is missing required safe rollback-preview evidence."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:74
-msgid "The selected Schedule Apply rollback metadata has expired. Run a new schedule preview/apply sequence before previewing rollback."
-msgstr ""
-
-#: includes/traits/trait-remote-action-repository-rollback-preview-lookups.php:78
-msgid "The latest client report does not allow Schedule Rollback Preview for this schedule. Enable rollback-preview support on the client and run Check Now first."
 msgstr ""
