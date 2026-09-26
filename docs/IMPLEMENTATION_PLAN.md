@@ -245,6 +245,8 @@ Dashboard-side implementation status: the dashboard now has a local, additive sc
 
 Operational use showed that the Sites tab backup evidence column became too dense after source-level freshness, schedule-aware policy, inventory counts, WPvivid activity hints, and explanatory reason lines were all added to each table row. The data is useful, but the default list view should be an at-a-glance monitor first and a detailed explanation surface second.
 
+Implementation status: implemented and released. The Sites tab now renders compact backup-health summaries and short per-source evidence rows while retaining detailed source evidence on Site Detail. This was display-only and did not change classification, status payload handling, polling, credentials, protocol behavior, or remote-action permissions.
+
 Implement a small dashboard-only UI slice that preserves all existing classifications, source-policy logic, status payload handling, and read-only boundaries while making healthy rows easier to scan:
 
 - Add a compact row-level backup health summary such as `Backups: On schedule`, `Backups: WPvivid overdue`, `Backups: Missing evidence`, or `Backups: Unknown`.
@@ -265,6 +267,8 @@ Acceptance criteria:
 
 Operational rollout showed that the first backup-source classifier was too strict for WPvivid on sites where WPvivid is intentionally scheduled weekly, biweekly, or as a secondary/manual safety layer. The initial source-level rule treated any configured source with uploader-reported `stale` freshness as `Needs attention`, even when the server-runner source was fresh, queues were empty, failed counts were zero, cron was healthy, and WPvivid upload evidence was only slightly older than the uploader's conservative 36-hour freshness window.
 
+Implementation status: implemented and released. The dashboard keeps server-runner evidence strict while treating WPvivid as a separately cadenced source with a 15-day fallback policy window, preserving hard attention states for current failures, missing required evidence, cron problems, incompatible payloads, polling failures, and unrelated warnings.
+
 Implement a dashboard-side freshness-policy layer before treating source-level attention counts as reliable operational alarms:
 
 - Keep server-runner/generic-outbox evidence strict. Its freshness should continue to reflect the uploader-reported source freshness window unless a later explicit policy UI is added.
@@ -284,6 +288,8 @@ Acceptance criteria:
 ### WPvivid Schedule-Aware Freshness Policy Slice
 
 The fixed 15-day WPvivid policy is intentionally safer than the uploader's conservative 36-hour source freshness window, but it is still a dashboard-wide fallback. Sites that intentionally run WPvivid every month can still look stale too early, while sites that run WPvivid daily may be allowed too much drift.
+
+Implementation status: implemented and released as an additive dashboard consumer for optional schema-1 `backup_sources.wpvivid.schedule_policy` summaries. The dashboard uses detected positive policy windows when present and falls back to the 15-day WPvivid policy when missing or undetected; it still receives no Drime credentials and performs no remote action.
 
 Implement a small cross-plugin, read-only schedule-awareness slice:
 
@@ -306,6 +312,8 @@ Acceptance criteria:
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
 
+Implementation status: implemented and released. Failed counters remain visible as evidence, but they no longer create `Needs attention` by themselves when queues are empty and current source evidence is healthy, policy-valid, or dashboard-optional.
+
 Dashboard classification should treat failed counters as evidence, not as a permanent alarm by themselves:
 
 - Keep failed counts visible in the Sites list, Site Detail, Diagnostics, snapshots, and support copy.
@@ -324,6 +332,8 @@ Acceptance criteria:
 ### Dashboard-Owned Source Optionality Policy Slice
 
 Operational rollout also found a separate class of site: WPvivid is intentionally active, but its configured destination is outside the Alynt uploader's local package/upload path. In that case the dashboard should not claim Alynt-uploaded WPvivid evidence is missing as an operational backup failure, while still showing the operator that WPvivid is being treated as external/optional for that site.
+
+Implementation status: implemented and released. The dashboard stores a local per-site WPvivid source policy override with `required` and `external_optional` modes, exposes the Site Detail toggle with nonce/capability protection, and keeps the setting dashboard-local and read-only.
 
 Implement a small dashboard-local policy override:
 
@@ -368,6 +378,8 @@ Implementation status:
 
 Post-release monitoring showed that Diagnostics can correctly report the total number of dashboard records and the number of polling-ready records, but the difference between those two numbers is not obvious enough for operators. The dashboard should explain when extra records are pending pairing, awaiting first poll, revoked locally, paused, missing credentials, or otherwise not currently eligible for scheduled polling.
 
+Implementation status: implemented and released. Diagnostics and support copy now distinguish total dashboard records from polling-ready records and expose support-safe aggregate record-state counts, including locally revoked and archived local records, without listing domains or secrets.
+
 Implement a small dashboard-only diagnostics slice:
 
 - Keep the Sites tab, polling scheduler, enrollment flow, status classification, and retained records unchanged.
@@ -387,6 +399,8 @@ Acceptance criteria:
 
 Post-release monitoring showed that a browser/admin cache can display an older Diagnostics render even after the dashboard plugin and database have current state. Diagnostics already includes current UTC and support-copy timestamps, but operators need clearer freshness evidence and an easy cache-busted refresh path.
 
+Implementation status: implemented and released. The Diagnostics screen now shows visible generated-at evidence and a cache-busted refresh path, and the admin page sends dashboard-scoped no-cache guidance without changing polling, classification, protocol, credentials, or remote actions.
+
 Implement a small admin-only polish slice:
 
 - Send no-cache headers for the dashboard admin page only.
@@ -404,6 +418,8 @@ Acceptance criteria:
 ### Revoked Dashboard Record Guidance Slice
 
 Operational rollout can leave superseded local dashboard records after a site is re-enrolled. Diagnostics now explains total dashboard records versus polling-ready records, and the Sites tab hides superseded revoked duplicates, but the individual Site Detail screen should make the revoked-record boundary explicit when an operator opens a revoked record directly.
+
+Implementation status: implemented and released. Revoked Site Detail records now show local-only retention guidance explaining that the record is retained for audit/history, does not poll, cannot run dashboard actions, and has no permanent-remove control in this release.
 
 Implement a small non-destructive Site Detail guidance slice:
 
@@ -424,6 +440,8 @@ Acceptance criteria:
 ### Local Dashboard Record Archive Slice
 
 After revoked-record guidance shipped, the remaining operator problem is local dashboard clutter: revoked or expired-pending records are retained for audit/history, but they can still be opened directly and can inflate total-record diagnostics. Permanent deletion remains intentionally out of scope because dashboard records, snapshots, and action history may be useful during support review.
+
+Implementation status: implemented and released. Dashboard-local archive/unarchive now hides eligible retained local records from default operational views while preserving audit/history, direct detail access, Diagnostics counts, and local unarchive. Active, polling, credentialed, or awaiting-first-poll records remain ineligible for archive.
 
 Implement a small dashboard-local archive/unarchive slice:
 
@@ -872,7 +890,7 @@ Exit: endpoint is disabled by default, authenticated when paired, read-only, red
 
 Exit: end-to-end pairing and manual status polling pass without scheduled polling or live-site work.
 
-Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, local scheduled polling pause/resume controls, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, WPvivid activity hints, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, V2.3 preview-only schedule capability reporting/display, signed non-mutating `schedule_preview`, guarded `schedule_apply` for the Alynt scan/upload cadence, release packaging, and approval-gated live deployment are implemented and deployed to the dashboard host. Dashboard-side rollback-readiness display/support hardening and non-mutating `schedule_rollback_preview` dashboard dispatch/UI controls are released and deployed through dashboard `0.1.43`, but remain hidden unless the latest client capability explicitly advertises rollback-preview support. Client-side rollback-preview enablement and pilot proof remain separate gates. `schedule_rollback` runtime behavior remains unavailable. A local scheduled-poll throughput tune raises the default bounded batch size so the current enrolled fleet can be refreshed in one normal scheduled run while keeping repository-level caps and explicit test/runtime limits intact.
+Current progress: pending enrollment creation, protocol-v1 token generation, public-HTTPS origin validation, display-once token UI, local dashboard-record revocation scaffolding, credential-vault encryption/decryption, safe status-request preparation, REST enrollment completion, schema-1 payload validation, first-poll activation, snapshot recording, manual **Check Now**, scheduled read-only polling, local scheduled polling pause/resume controls, bounded batching, locks, jitter, retry backoff, 30-day retention cleanup, baseline redacted admin Diagnostics, optional disabled-by-default structured diagnostics logging, always-on redacted operator action history for dashboard-local actions, operator-focused Sites/Attention/Site Detail polish, accessible status guidance, latest redacted snapshot summaries, support-copy diagnostics, dashboard-side `backup_sources` consumption, Sites-row source summaries, compact backup evidence, WPvivid fallback and schedule-aware freshness policy, historical failed-count alert-noise reduction, dashboard-owned WPvivid external/optional source policy, source reason lines, Diagnostics record-state clarity, Diagnostics cache/freshness clarity, revoked-record guidance, local archive/unarchive controls, action-button layout protection, stale-cache protection, V2.1 action opt-in token generation, signed `scan_upload_now` dispatch, bounded redacted remote-action history, V2.3 preview-only schedule capability reporting/display, signed non-mutating `schedule_preview`, guarded `schedule_apply` for the Alynt scan/upload cadence, display-only Sites-row schedule hints, release packaging, and approval-gated live deployment are implemented and deployed to the dashboard host. Dashboard-side rollback-readiness display/support hardening and non-mutating `schedule_rollback_preview` dashboard dispatch/UI controls are released and deployed through dashboard `0.1.43`, with additional local readiness-state UI polish committed after `0.1.45`; controls remain hidden unless the latest client capability explicitly advertises rollback-preview support. Client-side rollback-preview enablement and pilot proof remain separate gates. `schedule_rollback` runtime behavior remains unavailable. A local scheduled-poll throughput tune raises the default bounded batch size so the current enrolled fleet can be refreshed in one normal scheduled run while keeping repository-level caps and explicit test/runtime limits intact.
 
 ### Phase 6 — Scheduled polling and history
 
