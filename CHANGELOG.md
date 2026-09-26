@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.46 - 2026-09-26
+
+### Changed
+
+- Added compact rollback-preview readiness pills on Site Detail so hidden, waiting, blocked, expired, and ready states are easier to scan without implying rollback execution is available.
+- Reconciled the implementation roadmap so completed backup-evidence, diagnostics, archive, source-policy, schedule-hint, and action-history slices are clearly marked as implemented/released.
+
+### Security
+
+- Preserved the V2.3 rollback boundary: this release does not execute rollback, mutate schedules during rollback preview, create backups, restore, delete, clean up, change credentials, store Drime API credentials, or run arbitrary commands.
+
 ## 0.1.45 - 2026-09-26
 
 ### Changed
