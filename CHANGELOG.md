@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Split dashboard-local Diagnostics POST handlers into a focused admin action trait during structure cleanup.
+- Split Site Detail local record visibility and archive panels into a focused rendering trait during structure cleanup.
 
 ## 0.1.44 - 2026-09-22
 
