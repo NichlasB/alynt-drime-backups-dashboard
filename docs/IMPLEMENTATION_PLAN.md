@@ -128,6 +128,8 @@ Acceptance criteria:
 
 Request Backup Now, Schedule Preview, Schedule Apply, stale reconciliation, rate limiting, and rollback-readiness metadata have made the Site Detail Remote Action History increasingly useful but increasingly noisy. Before adding any runtime rollback capability, add a small dashboard-only filtering slice so operators can review the action audit trail without changing storage, dispatch, client protocol, or remote permissions.
 
+Implementation status: implemented and released through dashboard `0.1.45`. The Site Detail Remote Action History now supports read-only allowlisted GET filters for action type and dashboard action state, a filtered-count summary, reset link, and empty filtered state. Filtering is applied only to already loaded recent history rows at render time and does not change storage, repository queries, retention, reconciliation, polling, dispatch, client payload contracts, protocol, schema, credentials, Drime behavior, backup creation, restore, delete, cleanup, or remote-action permissions.
+
 Implement the smallest safe UI improvement:
 
 - Add read-only GET filters above the Site Detail Remote Action History table for action type and dashboard action state.
@@ -149,6 +151,8 @@ Acceptance criteria:
 ### Compact Remote Action History Details UI Slice
 
 After adding action-history filters, keep the Site Detail history table readable by reducing default row density. Schedule Apply rows can include cadence transitions, next-run estimates, scope warnings, rollback-readiness metadata, reason codes, and expiry timestamps. Those details are useful for audit/support, but they should not dominate the table by default.
+
+Implementation status: implemented and released through dashboard `0.1.45`. Remote Action History rows now keep full support-safe details available while showing compact default summaries for longer schedule-management rows. Long secondary details are placed behind a native `<details>` disclosure pattern, short Request Backup rows remain flat, and the change does not add JavaScript requirements or alter action labels, result labels, rollback-readiness wording, filtering, redaction, repository storage, dispatch, polling, protocol behavior, or remote-action permissions.
 
 Implement a small dashboard-only rendering slice:
 
