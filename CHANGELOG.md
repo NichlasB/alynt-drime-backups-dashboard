@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Split dashboard-local Diagnostics POST handlers into a focused admin action trait during structure cleanup.
+
 ## 0.1.44 - 2026-09-22
 
 ### Added
