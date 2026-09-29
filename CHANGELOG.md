@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.48 - 2026-09-29
+
+### Added
+
+- Added support-safe Diagnostics aggregate counts and readable summaries for retained attention/recovery snapshot history, so operators can see fleet-level recent recovery and repeated-attention patterns without exposing client identifiers.
+
+### Security
+
+- Preserved the dashboard-local, read-only boundary: this release does not add schema changes, client protocol changes, backup creation, restore, delete, cleanup, schedule mutation, credential changes, Drime credential storage, or arbitrary command actions.
+
 ## 0.1.47 - 2026-09-29
 
 ### Added
