@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.47 - 2026-09-29
+
+### Added
+
+- Added a Site Detail Attention / Recovery History panel derived from retained redacted snapshot summary fields so operators can understand transient attention states that later recover.
+
+### Security
+
+- Preserved the dashboard-local, read-only boundary: this release does not add schema changes, client protocol changes, backup creation, restore, delete, cleanup, schedule mutation, credential changes, Drime credential storage, or arbitrary command actions.
+
 ## 0.1.46 - 2026-09-26
 
 ### Changed
