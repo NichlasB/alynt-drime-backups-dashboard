@@ -45,11 +45,25 @@ if ( ! function_exists( 'esc_attr_e' ) ) {
 	}
 }
 
+if ( ! function_exists( 'number_format_i18n' ) ) {
+	/**
+	 * Minimal number_format_i18n shim.
+	 *
+	 * @param float|int $number Number.
+	 * @param int       $decimals Decimals.
+	 * @return string
+	 */
+	function number_format_i18n( $number, $decimals = 0 ) {
+		return number_format( (float) $number, (int) $decimals );
+	}
+}
+
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-local-actions.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-archive-actions.php';
 require_once dirname( __DIR__ ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-status-history-detail-helpers.php';
 
 /**
  * Tests credential-aware Sites-row rendering.
@@ -194,6 +208,121 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Resume Polling', $html );
 		$this->assertStringContainsString( 'value="resume_polling"', $html );
 		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_resume_polling', $html );
+	}
+
+	/**
+	 * Site Detail recovery history shows transient attention and recovery changes.
+	 *
+	 * @return void
+	 */
+	public function test_attention_recovery_history_summarizes_transitions() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$history = array(
+			array(
+				'observed_at'    => '2026-09-29 03:00:00',
+				'overall_status' => 'working',
+				'queue_count'    => 0,
+				'uploaded_count' => 48,
+				'failed_count'   => 0,
+				'warning_count'  => 0,
+				'cron_status'    => 'likely_configured',
+			),
+			array(
+				'observed_at'    => '2026-09-28 03:00:00',
+				'overall_status' => 'needs_attention',
+				'queue_count'    => 0,
+				'uploaded_count' => 47,
+				'failed_count'   => 0,
+				'warning_count'  => 1,
+				'cron_status'    => 'likely_configured',
+			),
+			array(
+				'observed_at'    => '2026-09-27 03:00:00',
+				'overall_status' => 'working',
+				'queue_count'    => 0,
+				'uploaded_count' => 47,
+				'failed_count'   => 0,
+				'warning_count'  => 0,
+				'cron_status'    => 'likely_configured',
+			),
+		);
+
+		$html = $harness->attention_recovery_history_html( $history );
+
+		$this->assertStringContainsString( 'Attention / Recovery History', $html );
+		$this->assertStringContainsString( 'Recovered from Needs attention to Working.', $html );
+		$this->assertStringContainsString( 'Entered Needs attention from Working.', $html );
+		$this->assertStringContainsString( 'Queue 0; Uploaded 48; Failed 0; Warnings 0; Cron likely_configured', $html );
+	}
+
+	/**
+	 * Site Detail recovery history stays quiet when retained snapshots did not change status.
+	 *
+	 * @return void
+	 */
+	public function test_attention_recovery_history_empty_state_for_unchanged_snapshots() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$history = array(
+			array(
+				'observed_at'    => '2026-09-29 03:00:00',
+				'overall_status' => 'working',
+			),
+			array(
+				'observed_at'    => '2026-09-28 03:00:00',
+				'overall_status' => 'working',
+			),
+		);
+
+		$html = $harness->attention_recovery_history_html( $history );
+
+		$this->assertStringContainsString( 'No recent attention or recovery transitions are available in the retained snapshot window.', $html );
+		$this->assertStringNotContainsString( 'Recovered from', $html );
+		$this->assertStringNotContainsString( 'Entered Needs attention', $html );
+	}
+
+	/**
+	 * Site Detail recovery history keeps the latest bounded transitions.
+	 *
+	 * @return void
+	 */
+	public function test_attention_recovery_history_keeps_latest_bounded_transitions() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$history = array(
+			array(
+				'observed_at'    => '2026-09-30 03:00:00',
+				'overall_status' => 'working',
+			),
+			array(
+				'observed_at'    => '2026-09-29 03:00:00',
+				'overall_status' => 'needs_attention',
+			),
+			array(
+				'observed_at'    => '2026-09-28 03:00:00',
+				'overall_status' => 'working',
+			),
+			array(
+				'observed_at'    => '2026-09-27 03:00:00',
+				'overall_status' => 'needs_attention',
+			),
+			array(
+				'observed_at'    => '2026-09-26 03:00:00',
+				'overall_status' => 'working',
+			),
+			array(
+				'observed_at'    => '2026-09-25 03:00:00',
+				'overall_status' => 'needs_attention',
+			),
+			array(
+				'observed_at'    => '2026-09-24 03:00:00',
+				'overall_status' => 'working',
+			),
+		);
+
+		$html = $harness->attention_recovery_history_html( $history );
+
+		$this->assertStringContainsString( '2026-09-30T03:00:00+00:00', $html );
+		$this->assertStringContainsString( '2026-09-26T03:00:00+00:00', $html );
+		$this->assertStringNotContainsString( '2026-09-25T03:00:00+00:00', $html );
 	}
 
 	/**
@@ -1039,6 +1168,7 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Status_History_Detail_Helpers;
 
 	/**
 	 * Remote action repository test double.
@@ -1104,6 +1234,18 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public function archive_record_panel_html( array $site ) {
 		ob_start();
 		$this->render_archive_record_panel( $site, isset( $site['id'] ) ? (int) $site['id'] : 7 );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes attention/recovery history markup.
+	 *
+	 * @param array<int,array<string,mixed>> $history Snapshot history rows.
+	 * @return string
+	 */
+	public function attention_recovery_history_html( array $history ) {
+		ob_start();
+		$this->render_attention_recovery_history( $history );
 		return (string) ob_get_clean();
 	}
 

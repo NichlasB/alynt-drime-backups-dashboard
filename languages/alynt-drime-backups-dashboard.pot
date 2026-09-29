@@ -2726,6 +2726,40 @@ msgstr ""
 msgid "Recent Status History"
 msgstr ""
 
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:75
+msgid "Attention / Recovery History"
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:78
+msgid "No recent attention or recovery transitions are available in the retained snapshot window."
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:82
+msgid "Recent status changes derived from retained redacted snapshots for this site"
+msgstr ""
+
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:82
+msgid "Change"
+msgstr ""
+
+#. translators: 1: previous status, 2: current status.
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:93
+#, php-format
+msgid "Recovered from %1$s to %2$s."
+msgstr ""
+
+#. translators: 1: current status, 2: previous status.
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:101
+#, php-format
+msgid "Entered %1$s from %2$s."
+msgstr ""
+
+#. translators: 1: previous status, 2: current status.
+#: includes/traits/trait-admin-page-status-history-detail-helpers.php:109
+#, php-format
+msgid "Changed from %1$s to %2$s."
+msgstr ""
+
 #: includes/traits/trait-admin-page-status-history-detail-helpers.php:31
 msgid "No status history is available yet."
 msgstr ""

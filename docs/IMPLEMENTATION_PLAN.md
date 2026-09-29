@@ -267,7 +267,7 @@ Acceptance criteria:
 
 Operational rollout showed that a site can briefly enter `Needs attention` for a concrete reason, such as stale server-runner evidence after a missed scheduled window, then self-recover after the next successful scheduled run and dashboard poll. The current dashboard correctly shows the live state, and Site Detail already has recent status snapshots, but the recovery story is not obvious enough after the row returns to `Working`. Operators should not need to reconstruct transient incidents from local rollout tracker notes.
 
-Implementation status: planned. This is a dashboard-local observability and UI slice only. It should derive support-safe transition history from already stored dashboard snapshots where possible, and it must not change client protocol, client settings, polling credentials, remote-action permissions, backup creation, restore, cleanup/delete behavior, Drime access, or live-site state.
+Implementation status: implemented locally, pending release/deploy planning. Site Detail now renders a compact `Attention / Recovery History` panel from retained dashboard snapshot summary fields, without adding storage, schema, protocol, credential, polling, remote-action, backup, restore, cleanup/delete, Drime, or live-site changes.
 
 Recommended implementation path:
 
