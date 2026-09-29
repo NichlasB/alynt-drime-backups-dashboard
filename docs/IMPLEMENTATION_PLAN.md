@@ -263,6 +263,37 @@ Acceptance criteria:
 - Healthy rows use less vertical space than the previous verbose source evidence block.
 - Rendering tests cover the compact output and prove verbose reason labels are not shown in the Sites-list helper.
 
+### Transient Attention / Recovery History Slice
+
+Operational rollout showed that a site can briefly enter `Needs attention` for a concrete reason, such as stale server-runner evidence after a missed scheduled window, then self-recover after the next successful scheduled run and dashboard poll. The current dashboard correctly shows the live state, and Site Detail already has recent status snapshots, but the recovery story is not obvious enough after the row returns to `Working`. Operators should not need to reconstruct transient incidents from local rollout tracker notes.
+
+Implementation status: planned. This is a dashboard-local observability and UI slice only. It should derive support-safe transition history from already stored dashboard snapshots where possible, and it must not change client protocol, client settings, polling credentials, remote-action permissions, backup creation, restore, cleanup/delete behavior, Drime access, or live-site state.
+
+Recommended implementation path:
+
+- Start with Site Detail, not the Sites list. Add a compact `Attention / Recovery History` panel that summarizes recent meaningful status transitions such as `Working -> Needs attention` and `Needs attention -> Working`.
+- Prefer deriving transitions from retained snapshot history and existing site status fields before adding schema or storage. A database migration should require a separate justification.
+- Keep the Sites tab visually quiet. If needed after the Site Detail proof, add only a small hint such as `Recovered from attention 2 days ago` for recently recovered sites; do not add long explanations back into compact rows.
+- Preserve active-alert priority. If a site is currently `Needs attention`, the current reason remains primary and any recovery history is secondary context.
+- Include source-aware reasons when they are already available from sanitized snapshot data, for example server-runner stale evidence, WPvivid outside detected policy, missing evidence, polling failure, or cron concern. If the snapshot does not contain enough context, say `Status changed; see snapshot details` rather than guessing.
+- Add Diagnostics/support-copy aggregates such as recent recoveries and repeated attention transitions only after the Site Detail panel is proven useful.
+- Keep all output support-safe and redacted. Do not expose credentials, local paths, Drime identifiers, raw option blobs, or untrusted payload values without existing sanitization.
+
+Suggested tests:
+
+- Snapshot/repository transition derivation returns bounded, chronological, meaningful changes and ignores repeated same-status snapshots.
+- Site Detail rendering shows a recovered transient incident when recent snapshots contain `needs_attention -> working`.
+- Active `Needs attention` rendering still prioritizes the current reason over historical recovery context.
+- Missing or insufficient historical context renders an empty/quiet state rather than a false explanation.
+- Existing Sites, Attention, Diagnostics, polling, classification, and remote-action tests continue to pass.
+
+Acceptance criteria:
+
+- A transient issue that later self-recovers can be explained from dashboard history on the individual Site Detail screen.
+- The feature remains dashboard-local, read-only, schema-compatible unless separately approved, and safe for existing enrolled clients.
+- Healthy Sites-list rows remain compact; detailed explanations stay on Site Detail unless a later, deliberately small row hint is approved.
+- No live-site, release, deployment, push, protocol, credential, Drime, backup, restore, delete, cleanup, or new remote-action behavior is introduced by the local implementation slice.
+
 ### Dashboard-Side Backup Freshness Policy Slice
 
 Operational rollout showed that the first backup-source classifier was too strict for WPvivid on sites where WPvivid is intentionally scheduled weekly, biweekly, or as a secondary/manual safety layer. The initial source-level rule treated any configured source with uploader-reported `stale` freshness as `Needs attention`, even when the server-runner source was fresh, queues were empty, failed counts were zero, cron was healthy, and WPvivid upload evidence was only slightly older than the uploader's conservative 36-hour freshness window.
