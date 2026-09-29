@@ -267,7 +267,7 @@ Acceptance criteria:
 
 Operational rollout showed that a site can briefly enter `Needs attention` for a concrete reason, such as stale server-runner evidence after a missed scheduled window, then self-recover after the next successful scheduled run and dashboard poll. The current dashboard correctly shows the live state, and Site Detail already has recent status snapshots, but the recovery story is not obvious enough after the row returns to `Working`. Operators should not need to reconstruct transient incidents from local rollout tracker notes.
 
-Implementation status: implemented locally, pending release/deploy planning. Site Detail now renders a compact `Attention / Recovery History` panel from retained dashboard snapshot summary fields, without adding storage, schema, protocol, credential, polling, remote-action, backup, restore, cleanup/delete, Drime, or live-site changes.
+Implementation status: implemented, released, and deployed through dashboard `0.1.47`. Site Detail now renders a compact `Attention / Recovery History` panel from retained dashboard snapshot summary fields, without adding storage, schema, protocol, credential, polling, remote-action, backup, restore, cleanup/delete, Drime, or live-site changes.
 
 Recommended implementation path:
 
@@ -282,6 +282,8 @@ Recommended implementation path:
 ### Diagnostics Attention/Recovery Aggregate Slice
 
 After the Site Detail `Attention / Recovery History` panel shipped, the next safe dashboard-only improvement is aggregate Diagnostics visibility. Operators should be able to tell whether retained snapshot history shows recent recoveries or repeated attention transitions across the fleet without opening each site and without exposing client identifiers.
+
+Implementation status: implemented, released, and deployed through dashboard `0.1.48`. Diagnostics and support copy now include support-safe aggregate retained-history counts and a readable attention-history summary so operators can distinguish quiet history, recent recovery, repeated attention, and insufficient retained history without exposing client identifiers or raw payloads.
 
 Scope:
 
