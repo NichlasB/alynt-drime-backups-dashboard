@@ -423,9 +423,7 @@ Acceptance criteria:
 - External/optional WPvivid evidence says it is not required for Alynt-uploaded evidence on this dashboard.
 - Existing schema-1 clients remain compatible and the v1/V2 read-only boundaries remain unchanged.
 
-Implementation status:
-
-- 2026-09-21: Local implementation added compact Sites-row source reason lines by reusing the existing redacted operator-summary helper already shown on Site Detail. The change is display-only, preserves classifier/source-policy behavior, and keeps the dashboard read-only.
+Implementation status: implemented and released through dashboard `0.1.26`. Compact Sites-row source reason lines reuse the existing redacted operator-summary helper already shown on Site Detail. The change is display-only, preserves classifier/source-policy behavior, and keeps the dashboard read-only.
 
 ### Dashboard Record-State Diagnostics Clarity Slice
 
