@@ -183,6 +183,37 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 	}
 
 	/**
+	 * Gets a support-safe summary code for attention/recovery aggregates.
+	 *
+	 * @param array<string,mixed> $attention_history Attention history counts.
+	 * @return string
+	 */
+	private function attention_history_summary_code( array $attention_history ) {
+		$records_with_history = isset( $attention_history['records_with_history'] ) ? max( 0, (int) $attention_history['records_with_history'] ) : 0;
+		$repeated_records     = isset( $attention_history['repeated_attention_records'] ) ? max( 0, (int) $attention_history['repeated_attention_records'] ) : 0;
+		$recovered_records    = isset( $attention_history['recently_recovered_records'] ) ? max( 0, (int) $attention_history['recently_recovered_records'] ) : 0;
+		$transitions          = isset( $attention_history['recent_attention_transitions'] ) ? max( 0, (int) $attention_history['recent_attention_transitions'] ) : 0;
+
+		if ( 0 === $records_with_history ) {
+			return 'no_retained_history';
+		}
+
+		if ( $repeated_records > 0 ) {
+			return 'repeated_attention_seen';
+		}
+
+		if ( $recovered_records > 0 ) {
+			return 'recent_recoveries_seen';
+		}
+
+		if ( $transitions > 0 ) {
+			return 'attention_transitions_seen';
+		}
+
+		return 'quiet_retained_history';
+	}
+
+	/**
 	 * Counts transitions from a non-attention state into an attention state.
 	 *
 	 * Snapshot repository history is newest-first; transition counting is easier

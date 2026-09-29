@@ -2736,6 +2736,10 @@ msgid "Attention and recovery history diagnostics"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:81
+msgid "Summary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:81
 msgid "Records with retained history"
 msgstr ""
 
@@ -2753,6 +2757,30 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:88
 msgid "These aggregate counts come from retained redacted snapshot status history only. They do not list client domains, labels, raw payloads, paths, credentials, Drime identifiers, or remote-action details."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:105
+msgid "No retained history yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:107
+msgid "No recent attention transitions"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:109
+msgid "Recent recoveries seen"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:111
+msgid "Repeated attention seen"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:113
+msgid "Attention transitions seen"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:115
+msgid "Not enough history to summarize"
 msgstr ""
 
 #: includes/traits/trait-admin-page-status-history-detail-helpers.php:78

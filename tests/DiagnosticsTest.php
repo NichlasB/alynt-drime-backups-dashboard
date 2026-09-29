@@ -446,8 +446,11 @@ class DiagnosticsTest extends TestCase {
 		$this->assertSame( 2, $result['counts']['attention_history']['recently_recovered_records'] );
 		$this->assertSame( 1, $result['counts']['attention_history']['repeated_attention_records'] );
 		$this->assertSame( 3, $result['counts']['attention_history']['recent_attention_transitions'] );
+		$this->assertSame( 'repeated_attention_seen', $result['summaries']['attention_history'] );
 		$this->assertStringContainsString( 'attention_history', $encoded );
 		$this->assertStringContainsString( 'recently_recovered_records', $encoded );
+		$this->assertStringContainsString( 'repeated_attention_seen', $encoded );
+		$this->assertStringContainsString( 'Retained snapshot history shows repeated transitions into attention states.', $encoded );
 		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
 		$this->assertStringNotContainsString( 'Client 1', $encoded );
 		$this->assertStringNotContainsString( 'needs_attention -&gt; working', $encoded );

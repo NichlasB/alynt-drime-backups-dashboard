@@ -56,7 +56,11 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			),
 		);
 
-		return $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now, $this->remote_actions->support_summary() );
+		$summaries = array(
+			'attention_history' => $this->attention_history_summary_code( $counts['attention_history'] ),
+		);
+
+		return $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now, $this->remote_actions->support_summary(), $summaries );
 	}
 
 	/**
@@ -68,9 +72,10 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 	 * @param array<string,mixed>            $logging Logging diagnostics.
 	 * @param int                            $now Current Unix timestamp.
 	 * @param array<string,mixed>|null       $remote_actions Remote action aggregate summary.
+	 * @param array<string,string>           $summaries Diagnostic summary codes.
 	 * @return array<string,mixed>
 	 */
-	private function support_summary_from_diagnostics( array $scheduler, array $counts, array $recent, array $logging, $now, $remote_actions = null ) {
+	private function support_summary_from_diagnostics( array $scheduler, array $counts, array $recent, array $logging, $now, $remote_actions = null, array $summaries = array() ) {
 		$now            = (int) $now;
 		$remote_actions = is_array( $remote_actions ) ? $remote_actions : array();
 
@@ -91,10 +96,54 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 				'global_lock_active'  => $scheduler['global_lock_active'],
 			),
 			'counts'      => $counts,
+			'summaries'   => $this->support_diagnostic_summaries( $summaries ),
 			'logging'     => $this->support_logging_summary_from_diagnostics( $logging ),
 			'actions'     => $this->support_remote_action_summary( $remote_actions ),
 			'recent_safe' => $this->support_recent_outcomes( $recent ),
 		);
+	}
+
+	/**
+	 * Builds support-safe diagnostic summary labels.
+	 *
+	 * @param array<string,string> $summaries Diagnostic summary codes.
+	 * @return array<string,array<string,string>>
+	 */
+	private function support_diagnostic_summaries( array $summaries ) {
+		$attention_code = isset( $summaries['attention_history'] ) ? sanitize_key( $summaries['attention_history'] ) : 'unknown';
+
+		return array(
+			'attention_history' => array(
+				'code'  => $attention_code,
+				'label' => $this->support_attention_history_summary_label( $attention_code ),
+			),
+		);
+	}
+
+	/**
+	 * Gets a support-safe English label for an attention-history summary code.
+	 *
+	 * Support-copy JSON is intentionally stable English diagnostic text rather
+	 * than translated UI copy.
+	 *
+	 * @param string $code Summary code.
+	 * @return string
+	 */
+	private function support_attention_history_summary_label( $code ) {
+		switch ( (string) $code ) {
+			case 'no_retained_history':
+				return 'No retained snapshot history is available for aggregate attention/recovery interpretation yet.';
+			case 'quiet_retained_history':
+				return 'Retained snapshot history shows no recent transitions into attention states.';
+			case 'recent_recoveries_seen':
+				return 'Retained snapshot history shows recent recovery from attention states.';
+			case 'repeated_attention_seen':
+				return 'Retained snapshot history shows repeated transitions into attention states.';
+			case 'attention_transitions_seen':
+				return 'Retained snapshot history shows recent transitions into attention states.';
+			default:
+				return 'Attention/recovery history summary is unavailable.';
+		}
 	}
 
 	/**

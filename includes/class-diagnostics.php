@@ -90,15 +90,19 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 		$scheduler                   = $this->scheduler_diagnostics( $now );
 		$counts                      = $this->count_diagnostics( $sites, $snapshots, $now );
 		$counts['attention_history'] = $this->attention_history_diagnostics( $sites );
+		$summaries                   = array(
+			'attention_history' => $this->attention_history_summary_code( $counts['attention_history'] ),
+		);
 		$recent                      = $this->recent_poll_outcomes( $sites );
 		$logging                     = $this->logging_diagnostics();
 
 		return array(
 			'scheduler' => $scheduler,
 			'counts'    => $counts,
+			'summaries' => $summaries,
 			'recent'    => $recent,
 			'logging'   => $logging,
-			'support'   => $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now, $this->remote_actions->support_summary() ),
+			'support'   => $this->support_summary_from_diagnostics( $scheduler, $counts, $recent, $logging, $now, $this->remote_actions->support_summary(), $summaries ),
 		);
 	}
 

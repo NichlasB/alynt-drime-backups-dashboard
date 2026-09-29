@@ -165,6 +165,9 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 						'recent_attention_transitions' => 3,
 					),
 				),
+				'summaries' => array(
+					'attention_history' => 'repeated_attention_seen',
+				),
 				'recent'    => array(),
 				'logging'   => array(),
 				'support'   => array(),
@@ -177,6 +180,7 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Locally revoked records', $html );
 		$this->assertStringContainsString( 'Archived local records', $html );
 		$this->assertStringContainsString( 'Attention / Recovery History', $html );
+		$this->assertStringContainsString( 'Repeated attention seen', $html );
 		$this->assertStringContainsString( 'Recently recovered records', $html );
 		$this->assertStringContainsString( 'Repeated attention records', $html );
 		$this->assertStringContainsString( 'Recent attention transitions', $html );

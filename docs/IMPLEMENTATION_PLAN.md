@@ -295,6 +295,7 @@ Acceptance criteria:
 
 - Diagnostics shows support-safe aggregate recent recovery / repeated-attention counts.
 - Support Copy includes the same aggregate under existing redacted `counts` output.
+- Diagnostics and Support Copy include a coarse support-safe interpretation of the aggregate counts so operators can quickly tell whether retained history is quiet, recently recovered, repeatedly entering attention, or not yet sufficient.
 - Existing Diagnostics, snapshot, and rendering tests pass, with added coverage for the aggregate.
 - No live-site, release, deploy, push, schema, protocol, credential, Drime, backup, restore, delete, cleanup, rollback, or new remote-action behavior is introduced.
 

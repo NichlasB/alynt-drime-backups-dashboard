@@ -30,6 +30,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$support           = isset( $diagnostics['support'] ) && is_array( $diagnostics['support'] ) ? $diagnostics['support'] : array();
 		$states            = isset( $counts['record_states'] ) && is_array( $counts['record_states'] ) ? $counts['record_states'] : array();
 		$attention_history = isset( $counts['attention_history'] ) && is_array( $counts['attention_history'] ) ? $counts['attention_history'] : array();
+		$summaries         = isset( $diagnostics['summaries'] ) && is_array( $diagnostics['summaries'] ) ? $diagnostics['summaries'] : array();
 
 		echo '<section aria-labelledby="adbd-diagnostics-heading">';
 		echo '<h2 id="adbd-diagnostics-heading">' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
@@ -78,6 +79,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Attention / Recovery History', 'alynt-drime-backups-dashboard' ) . '</h3>';
 		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Attention and recovery history diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
+		$this->render_detail_row( __( 'Summary', 'alynt-drime-backups-dashboard' ), $this->attention_history_summary_label( isset( $summaries['attention_history'] ) ? $summaries['attention_history'] : '' ) );
 		$this->render_detail_row( __( 'Records with retained history', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'records_with_history' ) );
 		$this->render_detail_row( __( 'Recently recovered records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'recently_recovered_records' ) );
 		$this->render_detail_row( __( 'Repeated attention records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'repeated_attention_records' ) );
@@ -90,6 +92,29 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_event_log_diagnostics( $logging );
 		$this->render_support_copy_output( $support );
 		echo '</section>';
+	}
+
+	/**
+	 * Gets an operator-facing summary label for attention/recovery aggregates.
+	 *
+	 * @param string $code Summary code.
+	 * @return string
+	 */
+	private function attention_history_summary_label( $code ) {
+		switch ( (string) $code ) {
+			case 'no_retained_history':
+				return __( 'No retained history yet', 'alynt-drime-backups-dashboard' );
+			case 'quiet_retained_history':
+				return __( 'No recent attention transitions', 'alynt-drime-backups-dashboard' );
+			case 'recent_recoveries_seen':
+				return __( 'Recent recoveries seen', 'alynt-drime-backups-dashboard' );
+			case 'repeated_attention_seen':
+				return __( 'Repeated attention seen', 'alynt-drime-backups-dashboard' );
+			case 'attention_transitions_seen':
+				return __( 'Attention transitions seen', 'alynt-drime-backups-dashboard' );
+			default:
+				return __( 'Not enough history to summarize', 'alynt-drime-backups-dashboard' );
+		}
 	}
 
 	/**
