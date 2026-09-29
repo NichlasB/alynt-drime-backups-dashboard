@@ -2726,8 +2726,33 @@ msgstr ""
 msgid "Recent Status History"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview.php:79
 #: includes/traits/trait-admin-page-status-history-detail-helpers.php:75
 msgid "Attention / Recovery History"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:80
+msgid "Attention and recovery history diagnostics"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:81
+msgid "Records with retained history"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:82
+msgid "Recently recovered records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:83
+msgid "Repeated attention records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:84
+msgid "Recent attention transitions"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:88
+msgid "These aggregate counts come from retained redacted snapshot status history only. They do not list client domains, labels, raw payloads, paths, credentials, Drime identifiers, or remote-action details."
 msgstr ""
 
 #: includes/traits/trait-admin-page-status-history-detail-helpers.php:78

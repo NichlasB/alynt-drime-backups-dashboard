@@ -22,13 +22,14 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 	 * @return void
 	 */
 	private function render_diagnostics_shell() {
-		$diagnostics = $this->diagnostics->collect();
-		$scheduler   = isset( $diagnostics['scheduler'] ) && is_array( $diagnostics['scheduler'] ) ? $diagnostics['scheduler'] : array();
-		$counts      = isset( $diagnostics['counts'] ) && is_array( $diagnostics['counts'] ) ? $diagnostics['counts'] : array();
-		$recent      = isset( $diagnostics['recent'] ) && is_array( $diagnostics['recent'] ) ? $diagnostics['recent'] : array();
-		$logging     = isset( $diagnostics['logging'] ) && is_array( $diagnostics['logging'] ) ? $diagnostics['logging'] : array();
-		$support     = isset( $diagnostics['support'] ) && is_array( $diagnostics['support'] ) ? $diagnostics['support'] : array();
-		$states      = isset( $counts['record_states'] ) && is_array( $counts['record_states'] ) ? $counts['record_states'] : array();
+		$diagnostics       = $this->diagnostics->collect();
+		$scheduler         = isset( $diagnostics['scheduler'] ) && is_array( $diagnostics['scheduler'] ) ? $diagnostics['scheduler'] : array();
+		$counts            = isset( $diagnostics['counts'] ) && is_array( $diagnostics['counts'] ) ? $diagnostics['counts'] : array();
+		$recent            = isset( $diagnostics['recent'] ) && is_array( $diagnostics['recent'] ) ? $diagnostics['recent'] : array();
+		$logging           = isset( $diagnostics['logging'] ) && is_array( $diagnostics['logging'] ) ? $diagnostics['logging'] : array();
+		$support           = isset( $diagnostics['support'] ) && is_array( $diagnostics['support'] ) ? $diagnostics['support'] : array();
+		$states            = isset( $counts['record_states'] ) && is_array( $counts['record_states'] ) ? $counts['record_states'] : array();
+		$attention_history = isset( $counts['attention_history'] ) && is_array( $counts['attention_history'] ) ? $counts['attention_history'] : array();
 
 		echo '<section aria-labelledby="adbd-diagnostics-heading">';
 		echo '<h2 id="adbd-diagnostics-heading">' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
@@ -74,6 +75,15 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_detail_row( __( 'Other or unknown enrollment records', 'alynt-drime-backups-dashboard' ), (string) ( $this->diagnostic_int( $states, 'other' ) + $this->diagnostic_int( $states, 'unknown' ) ) );
 		$this->render_detail_row( __( 'Sites with recorded failures', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'with_failures' ) );
 		echo '</tbody></table></div></div>';
+
+		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Attention / Recovery History', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Attention and recovery history diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
+		$this->render_detail_row( __( 'Records with retained history', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'records_with_history' ) );
+		$this->render_detail_row( __( 'Recently recovered records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'recently_recovered_records' ) );
+		$this->render_detail_row( __( 'Repeated attention records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'repeated_attention_records' ) );
+		$this->render_detail_row( __( 'Recent attention transitions', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'recent_attention_transitions' ) );
+		echo '</tbody></table>';
+		echo '<p class="description">' . esc_html__( 'These aggregate counts come from retained redacted snapshot status history only. They do not list client domains, labels, raw payloads, paths, credentials, Drime identifiers, or remote-action details.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 
 		$this->render_status_count_table( isset( $counts['statuses'] ) && is_array( $counts['statuses'] ) ? $counts['statuses'] : array() );
 		$this->render_recent_poll_outcomes( $recent );

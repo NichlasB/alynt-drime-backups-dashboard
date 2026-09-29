@@ -279,6 +279,25 @@ Recommended implementation path:
 - Add Diagnostics/support-copy aggregates such as recent recoveries and repeated attention transitions only after the Site Detail panel is proven useful.
 - Keep all output support-safe and redacted. Do not expose credentials, local paths, Drime identifiers, raw option blobs, or untrusted payload values without existing sanitization.
 
+### Diagnostics Attention/Recovery Aggregate Slice
+
+After the Site Detail `Attention / Recovery History` panel shipped, the next safe dashboard-only improvement is aggregate Diagnostics visibility. Operators should be able to tell whether retained snapshot history shows recent recoveries or repeated attention transitions across the fleet without opening each site and without exposing client identifiers.
+
+Scope:
+
+- derive aggregate counts only from retained dashboard-owned snapshot summary rows;
+- count records with enough retained history, records whose latest retained status recovered to `working` from a recent attention status, and records with repeated transitions into attention states;
+- include the aggregate in Diagnostics and support-copy output without listing site labels, domains, raw payload JSON, paths, credentials, Drime identifiers, schedule IDs, or action fingerprints;
+- keep the query path bounded by the existing per-site recent snapshot limit;
+- do not change schema, protocol, polling behavior, status classification, pairing, credentials, remote actions, backup/restore/delete/cleanup behavior, Drime behavior, release packaging, or live-site state.
+
+Acceptance criteria:
+
+- Diagnostics shows support-safe aggregate recent recovery / repeated-attention counts.
+- Support Copy includes the same aggregate under existing redacted `counts` output.
+- Existing Diagnostics, snapshot, and rendering tests pass, with added coverage for the aggregate.
+- No live-site, release, deploy, push, schema, protocol, credential, Drime, backup, restore, delete, cleanup, rollback, or new remote-action behavior is introduced.
+
 Suggested tests:
 
 - Snapshot/repository transition derivation returns bounded, chronological, meaningful changes and ignores repeated same-status snapshots.

@@ -158,6 +158,12 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 						'other'               => 0,
 						'unknown'             => 0,
 					),
+					'attention_history'   => array(
+						'records_with_history'         => 14,
+						'recently_recovered_records'  => 2,
+						'repeated_attention_records'  => 1,
+						'recent_attention_transitions' => 3,
+					),
 				),
 				'recent'    => array(),
 				'logging'   => array(),
@@ -170,6 +176,11 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Pending pairing records', $html );
 		$this->assertStringContainsString( 'Locally revoked records', $html );
 		$this->assertStringContainsString( 'Archived local records', $html );
+		$this->assertStringContainsString( 'Attention / Recovery History', $html );
+		$this->assertStringContainsString( 'Recently recovered records', $html );
+		$this->assertStringContainsString( 'Repeated attention records', $html );
+		$this->assertStringContainsString( 'Recent attention transitions', $html );
+		$this->assertStringContainsString( 'These aggregate counts come from retained redacted snapshot status history only.', $html );
 		$this->assertStringContainsString( '<td>3</td>', $html );
 	}
 

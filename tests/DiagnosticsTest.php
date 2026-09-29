@@ -80,12 +80,21 @@ class Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository extends
 	private $snapshots;
 
 	/**
+	 * Recent snapshot histories keyed by site ID.
+	 *
+	 * @var array<int,array<int,array<string,mixed>>>
+	 */
+	private $histories;
+
+	/**
 	 * Constructor.
 	 *
-	 * @param array<int,array<string,mixed>> $snapshots Snapshots.
+	 * @param array<int,array<string,mixed>>            $snapshots Snapshots.
+	 * @param array<int,array<int,array<string,mixed>>> $histories Recent snapshot histories.
 	 */
-	public function __construct( array $snapshots ) {
+	public function __construct( array $snapshots, array $histories = array() ) {
 		$this->snapshots = $snapshots;
+		$this->histories = $histories;
 	}
 
 	/**
@@ -104,6 +113,23 @@ class Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository extends
 		}
 
 		return $matched;
+	}
+
+	/**
+	 * Gets recent snapshots for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @param int $limit Maximum snapshots.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function recent_for_site( $site_id, $limit = 10 ) {
+		$site_id = (int) $site_id;
+
+		if ( empty( $this->histories[ $site_id ] ) ) {
+			return array();
+		}
+
+		return array_slice( $this->histories[ $site_id ], 0, max( 1, min( 50, (int) $limit ) ) );
 	}
 }
 
@@ -371,6 +397,63 @@ class DiagnosticsTest extends TestCase {
 	}
 
 	/**
+	 * Attention-history diagnostics are aggregate-only and support safe.
+	 *
+	 * @return void
+	 */
+	public function test_attention_history_diagnostics_are_aggregate_only() {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
+				array(
+					$this->site( 1 ),
+					$this->site( 2 ),
+					$this->site(
+						3,
+						array(
+							'archived_at' => '2026-09-29 10:00:00',
+						)
+					),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
+				array(),
+				array(
+					1 => array(
+						$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
+						$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
+						$this->snapshot_row( 'working', '2026-09-29 09:00:00' ),
+					),
+					2 => array(
+						$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
+						$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
+						$this->snapshot_row( 'working', '2026-09-29 09:00:00' ),
+						$this->snapshot_row( 'not_reporting', '2026-09-29 08:00:00' ),
+						$this->snapshot_row( 'working', '2026-09-29 07:00:00' ),
+					),
+					3 => array(
+						$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
+						$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
+					),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		$result  = $diagnostics->collect();
+		$encoded = wp_json_encode( $result['support'] );
+
+		$this->assertSame( 2, $result['counts']['attention_history']['records_with_history'] );
+		$this->assertSame( 2, $result['counts']['attention_history']['recently_recovered_records'] );
+		$this->assertSame( 1, $result['counts']['attention_history']['repeated_attention_records'] );
+		$this->assertSame( 3, $result['counts']['attention_history']['recent_attention_transitions'] );
+		$this->assertStringContainsString( 'attention_history', $encoded );
+		$this->assertStringContainsString( 'recently_recovered_records', $encoded );
+		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
+		$this->assertStringNotContainsString( 'Client 1', $encoded );
+		$this->assertStringNotContainsString( 'needs_attention -&gt; working', $encoded );
+	}
+
+	/**
 	 * Recent diagnostics omit stored credential fields.
 	 *
 	 * @return void
@@ -548,6 +631,20 @@ class DiagnosticsTest extends TestCase {
 				),
 				$overrides
 			),
+		);
+	}
+
+	/**
+	 * Creates a retained snapshot summary row.
+	 *
+	 * @param string $status Snapshot status.
+	 * @param string $observed_at Observed time.
+	 * @return array<string,mixed>
+	 */
+	private function snapshot_row( $status, $observed_at ) {
+		return array(
+			'overall_status' => $status,
+			'observed_at'    => $observed_at,
 		);
 	}
 }

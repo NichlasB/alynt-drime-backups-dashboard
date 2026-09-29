@@ -83,14 +83,15 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics {
 	 * @return array<string,mixed>
 	 */
 	public function collect() {
-		$sites     = $this->sites->all();
-		$site_ids  = $this->site_ids( $sites );
-		$snapshots = $this->snapshots->latest_by_site_ids( $site_ids );
-		$now       = time();
-		$scheduler = $this->scheduler_diagnostics( $now );
-		$counts    = $this->count_diagnostics( $sites, $snapshots, $now );
-		$recent    = $this->recent_poll_outcomes( $sites );
-		$logging   = $this->logging_diagnostics();
+		$sites                       = $this->sites->all();
+		$site_ids                    = $this->site_ids( $sites );
+		$snapshots                   = $this->snapshots->latest_by_site_ids( $site_ids );
+		$now                         = time();
+		$scheduler                   = $this->scheduler_diagnostics( $now );
+		$counts                      = $this->count_diagnostics( $sites, $snapshots, $now );
+		$counts['attention_history'] = $this->attention_history_diagnostics( $sites );
+		$recent                      = $this->recent_poll_outcomes( $sites );
+		$logging                     = $this->logging_diagnostics();
 
 		return array(
 			'scheduler' => $scheduler,

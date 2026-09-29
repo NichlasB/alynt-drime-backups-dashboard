@@ -43,11 +43,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support {
 			$snapshots = array();
 		}
 
-		$now       = null === $now ? time() : (int) $now;
-		$scheduler = $this->scheduler_diagnostics( $now );
-		$counts    = $this->count_diagnostics( $sites, $snapshots, $now );
-		$recent    = $this->recent_poll_outcomes( $sites, 10 );
-		$logging   = array(
+		$now                         = null === $now ? time() : (int) $now;
+		$scheduler                   = $this->scheduler_diagnostics( $now );
+		$counts                      = $this->count_diagnostics( $sites, $snapshots, $now );
+		$counts['attention_history'] = $this->attention_history_diagnostics( $sites );
+		$recent                      = $this->recent_poll_outcomes( $sites, 10 );
+		$logging                     = array(
 			'settings' => $this->event_log->settings(),
 			'summary'  => $this->event_log->summary(),
 			'audit'    => array(
