@@ -8,7 +8,7 @@ Current V2.3 state: passive schedule capability display, signed non-mutating `sc
 
 Current V2.3 stabilization decision: the already released dashboard-side, non-mutating `schedule_rollback_preview` path was proven on the separately approved PureCleanse pilot on 2026-09-30. The rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard wording and action-history rendering have also been hardened so Schedule Apply is described as future Alynt uploader scan-cadence only, rollback metadata is evidence-only, missing cadence evidence is treated as pending client report, and rollback execution remains unavailable. The dashboard may display support-safe rollback-readiness metadata and preview results as evidence, but it must continue to render no rollback-apply control and dispatch no `schedule_rollback` action until a separate protocol/threat-model and release gate are approved.
 
-Next recommended V2 step: do not add another runtime control by default. If development continues beyond the stabilized V2.3 schedule-management line, use the design-only V2.4 decision record in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md` as the planning boundary. Runtime cleanup implementation remains blocked until protocol/threat-model updates, client-local opt-in, dry-run/apply controls, restore-point expectations, tests, and separate release/deploy gates are approved.
+Next recommended V2 step: do not add another runtime control by default. If development continues beyond the stabilized V2.3 schedule-management line, use the design-only V2.4 decision record in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md` and the non-mutating cleanup-preview implementation plan in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md` as the planning boundary. Runtime cleanup implementation remains blocked until protocol/threat-model updates, client-local opt-in, dry-run/apply controls, restore-point expectations, tests, and separate release/deploy gates are approved.
 
 V2 protocol, threat-model, and planning artifacts:
 
@@ -25,6 +25,7 @@ V2 protocol, threat-model, and planning artifacts:
 - `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`
 - `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`
 - `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`
+- `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -155,7 +156,7 @@ Purpose: clean local outbox/staging artifacts or request remote retention cleanu
 
 Risk: higher-risk gated phase. This is destructive or semi-destructive and must not be implemented until V2.1 and V2.2 are proven.
 
-Design artifact: `docs/V2_4_CLEANUP_RETENTION_DESIGN.md` defines the current decision boundary. The recommended first V2.4 runtime candidate is narrower than the broad title: client-owned local cleanup preview/apply for Alynt uploader-owned temporary artifacts only. Drime retention, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard-side Drime credentials remain deferred.
+Design artifact: `docs/V2_4_CLEANUP_RETENTION_DESIGN.md` defines the current decision boundary. Implementation sequencing for the non-mutating first sub-slice is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`. The recommended first V2.4 runtime candidate is narrower than the broad title: client-owned local cleanup preview for Alynt uploader-owned temporary artifacts only. Cleanup apply, Drime retention, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard-side Drime credentials remain deferred.
 
 Recommended constraints:
 
