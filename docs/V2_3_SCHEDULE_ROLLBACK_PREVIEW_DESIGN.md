@@ -1,6 +1,6 @@
 # V2.3 Schedule Rollback Preview Design
 
-Status: design slice with dashboard-side preview implementation released and deployed through dashboard `0.1.43`. The dashboard-side non-mutating dispatch/UI controls remain hidden unless the latest client capability report explicitly advertises rollback-preview support. Client-side rollback-preview release/enablement, pilot proof, broad client enablement, and any mutating `schedule_rollback` runtime behavior remain separate gates. This document does not approve backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, arbitrary setting mutation, or Drime credential storage in the dashboard.
+Status: design slice with dashboard-side preview implementation released and deployed through dashboard `0.1.43`. The dashboard-side non-mutating dispatch/UI controls remain hidden unless the latest client capability report explicitly advertises rollback-preview support. Client-side rollback-preview release/enablement remains disabled by default, and one PureCleanse pilot proof completed on 2026-09-30. Broad client enablement and any mutating `schedule_rollback` runtime behavior remain separate gates. This document does not approve backup creation, cleanup/delete actions, restore actions, WPvivid schedule management, server-runner schedule management, arbitrary cron editing, arbitrary setting mutation, or Drime credential storage in the dashboard.
 
 Related artifacts:
 
@@ -34,7 +34,7 @@ The released V2.3 schedule-management baseline is:
 1. `schedule_preview`: implemented, non-mutating, scoped to `alynt_scan_upload`.
 2. `schedule_apply`: implemented, guarded, scoped to `alynt_scan_upload`, disabled by default per client, requires a fresh successful preview and client-local Schedule Apply opt-in.
 3. Rollback-readiness metadata: displayed as support evidence only.
-4. `schedule_rollback_preview`: dashboard-side non-mutating dispatch/UI controls released and deployed through dashboard `0.1.43`; client-side enablement and pilot proof remain separately gated.
+4. `schedule_rollback_preview`: dashboard-side non-mutating dispatch/UI controls released and deployed through dashboard `0.1.43`; one PureCleanse-only client-side opt-in pilot proof completed on 2026-09-30, while broad enablement remains separately gated.
 5. `schedule_rollback`: reserved, not implemented.
 
 ## Non-Goals
@@ -60,7 +60,7 @@ Do not proceed beyond local preview-only dashboard dispatch/UI into release/depl
 - rollback metadata includes source apply action ID, schedule ID, previous cadence, applied cadence, previous next-run evidence, applied next-run evidence, before/after redacted fingerprints, capture time, and expiry time;
 - dashboard action history displays rollback-readiness metadata without raw internals;
 - tests prove `schedule_rollback` remains unavailable;
-- the user explicitly approves any client-side release/enablement and pilot proof.
+- the user explicitly approves any broad client-side release/enablement or additional pilot proof.
 
 ## Proposed Capability Shape
 
@@ -232,13 +232,13 @@ Cross-plugin tests:
 
 ## Release And Rollout Plan For A Later Client/Pilot Slice
 
-If client release/enablement and pilot proof are approved later:
+The first client opt-in and pilot proof completed on PureCleanse on 2026-09-30. For any future client enablement or repeat pilot:
 
 1. Keep protocol and threat model in implemented-preview-only status.
 2. Confirm the client build supports rollback preview disabled by default.
 3. Release or select the approved client build.
 4. Enable rollback-preview opt-in on one low-risk pilot only after explicit approval.
-5. Prove preview is non-mutating and reconciles into dashboard history.
+5. Prove preview is non-mutating and reconciles into dashboard history, as PureCleanse did on 2026-09-30.
 6. Confirm `schedule_rollback` remains unavailable.
 7. Do not implement rollback apply in the same slice.
 

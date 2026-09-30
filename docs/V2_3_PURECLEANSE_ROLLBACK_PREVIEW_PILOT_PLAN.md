@@ -1,8 +1,19 @@
 # V2.3 PureCleanse Rollback Preview Pilot Plan
 
-Status: planning-only. Do not run this pilot until the live approval gate is satisfied.
+Status: completed on 2026-09-30 after the live approval gate and user-confirmed restore points.
 
 This plan covers the smallest safe proof for the V2.3 schedule rollback-preview feature. The pilot proves that the dashboard can request a non-mutating rollback preview from one explicitly opted-in client site while preserving the existing read-only/default-hidden safety model.
+
+## Pilot result
+
+- Restore points were confirmed before the live pilot.
+- PureCleanse was temporarily opted into rollback-preview support only for this pilot window.
+- The dashboard proved the normal guarded schedule flow from `every_15_minutes` to `every_30_minutes`.
+- The dashboard then dispatched `schedule_rollback_preview`, which returned a successful non-mutating result showing the schedule would be restored to `every_15_minutes`.
+- The preview did not change the active schedule.
+- PureCleanse was returned to `every_15_minutes` through the normal guarded preview/apply flow.
+- Rollback-preview opt-in was disabled again after the proof.
+- Final dashboard/client evidence showed PureCleanse Working with queue count 0, failed count 0, warnings 0, `rollback_preview_supported=false`, and `rollback_supported=false`.
 
 ## Target
 
@@ -26,7 +37,7 @@ This plan covers the smallest safe proof for the V2.3 schedule rollback-preview 
 
 ## Required live approval gate
 
-Before any live client opt-in, remote action dispatch, or schedule mutation, confirm all of the following:
+Completed before the 2026-09-30 live pilot. Before any future live client opt-in, remote action dispatch, or schedule mutation, confirm all of the following again:
 
 1. A fresh PureCleanse restore point exists.
 2. A fresh `control-sitesmanage` restore point exists, or the user explicitly accepts relying on the existing dashboard backup posture for this non-schema pilot.
@@ -47,6 +58,8 @@ Run these before enabling the pilot:
 - Confirm rollback-preview is still hidden before explicit opt-in.
 
 ## Pilot flow
+
+Completed on 2026-09-30. The numbered flow below remains the reference sequence for understanding what was performed and for any separately approved future repeat pilot.
 
 1. Enable the client-local rollback-preview policy on PureCleanse only. Do not enable rollback execution.
 2. Run a dashboard manual poll for PureCleanse.
@@ -80,16 +93,14 @@ Stop the pilot and report the exact state if any of these occur:
 
 ## Acceptance criteria
 
-- Rollback-preview remains unavailable by default.
-- After PureCleanse-only opt-in, the dashboard shows rollback-preview capability for PureCleanse only.
-- Rollback-preview completes as a non-mutating action using fresh rollback metadata.
-- No schedule rollback execution is exposed or accepted.
-- PureCleanse is returned to every 15 minutes.
-- PureCleanse remains working with queue count 0 and failed count 0.
-- The dashboard and rollout tracker record the pilot result without storing secrets.
+- Met: rollback-preview remains unavailable by default.
+- Met: after PureCleanse-only opt-in, the dashboard showed rollback-preview capability for PureCleanse only.
+- Met: rollback-preview completed as a non-mutating action using fresh rollback metadata.
+- Met: no schedule rollback execution was exposed or accepted.
+- Met: PureCleanse was returned to every 15 minutes.
+- Met: PureCleanse remained working with queue count 0 and failed count 0.
+- Met: the dashboard and rollout tracker recorded the pilot result without storing secrets.
 
 ## Recommendation
 
-Use PureCleanse as the pilot site because it is already the only observed apply-capable site, is active on dashboard site ID 5, and reports uploader `0.5.22`, which includes the shortened schedule-management retry window needed for a valid preview/apply/rollback-preview sequence.
-
-Do not run the pilot until the required live approval gate is complete. The next safest step is to ask the user to create or confirm the PureCleanse restore point, then approve the short `every_15_minutes -> every_30_minutes -> every_15_minutes` pilot window.
+The PureCleanse pilot is complete. Keep rollback-preview disabled by default and do not broaden enablement automatically. The next safest product decision is whether to leave rollback-preview as proven support evidence only, or open a separate planning slice for mutating `schedule_rollback` with a new protocol/threat model, explicit UI warning model, fresh restore-point requirements, and its own approval gate.
