@@ -112,6 +112,8 @@ Exit criteria:
 
 After guarded Schedule Apply reached the live dashboard, the next safe dashboard-side slice is stabilization rather than a new remote power. This slice should harden operator wording and tests around the already released V2.3 boundary:
 
+Implementation status: implemented in the current dashboard codebase and present in the `0.1.50` release line. Site Detail copy, Schedule Apply confirmation copy, and Remote Action History rendering now state that Schedule Apply is limited to future Alynt uploader scan cadence, rollback execution remains unavailable, rollback metadata is evidence-only, and missing cadence evidence is pending client report rather than a known transition. The slice did not add backup creation, WPvivid schedule changes, server-runner schedule changes, cleanup, delete, restore, rollback dispatch, arbitrary cron, Drime credential storage, or live-site behavior.
+
 - make Site Detail copy unmistakable that Schedule Apply changes only future Alynt uploader scan cadence, even when the client-facing capability label remains `Alynt scan/upload`;
 - make rollback status explicit: rollback metadata may be displayed as support evidence, but no `schedule_rollback` action, button, dispatch path, or runtime behavior is available in this version;
 - make remote-action history details describe schedule apply as Alynt uploader scan-cadence only so operators do not infer upload-worker cadence, WPvivid, server-runner, Drime, retention, cleanup, delete, restore, or credential control;
