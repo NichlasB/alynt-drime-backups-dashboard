@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added a design-only V2.4 cleanup/retention decision record that narrows the first possible cleanup direction to client-owned local cleanup preview/apply for Alynt uploader-owned temporary artifacts only.
+
+### Security
+
+- Preserved the remote-action boundary: this planning update does not add runtime cleanup controls, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard Drime credential storage, deployment behavior, or live-site state changes.
+
 ## 0.1.50 - 2026-09-30
 
 ### Added

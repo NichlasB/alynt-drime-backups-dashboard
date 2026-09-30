@@ -6,7 +6,7 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`. V2.1 action-request protocol details are tracked in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`.
 
-Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded V2.3 schedule-apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata capture is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, the planning-only schedule rollback readiness gate is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, and the non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded V2.3 schedule-apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata capture is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, the planning-only schedule rollback readiness gate is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, the non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, and the design-only V2.4 cleanup/retention decision record is tracked in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
 
 ## Current State And Safety Boundary
 
@@ -175,6 +175,17 @@ Acceptance criteria:
 - Short Request Backup rows remain unchanged when they do not need expansion.
 - Rendering tests cover the compact default summary and the retained full support-safe detail text.
 - No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, rollback, or new remote-action behavior is introduced.
+
+### V2.4 Cleanup And Retention Design Slice
+
+Implementation status: design-only decision record created in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`. The recommended first V2.4 direction is a narrowly scoped, client-owned local cleanup preview/apply model for Alynt uploader-owned temporary artifacts only. Runtime implementation, release, deploy, live enablement, Drime deletion, remote retention mutation, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard Drime credential storage remain unavailable until later protocol/threat-model updates and explicit approval gates.
+
+Recommended next boundary:
+
+- start V2.4 with `cleanup_preview` before any cleanup apply;
+- keep cleanup apply behind a fresh preview fingerprint, expiry, client-side revalidation, idempotency, client-local opt-in, operator confirmation, and restore-point expectations;
+- defer Drime retention/delete and backup-set deletion to V2.5 or later;
+- do not add dashboard controls, action types, capability advertisements, schema changes, live-site changes, or release behavior from the design slice alone.
 
 The repository path and package identity below were explicitly confirmed before scaffolding. Broad feature implementation should still begin with a fresh restore point or an equivalent baseline snapshot.
 
