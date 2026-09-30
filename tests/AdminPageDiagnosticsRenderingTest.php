@@ -218,6 +218,32 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'tab=diagnostics', $html );
 		$this->assertStringContainsString( '_adbd_check=20260919105322', $html );
 	}
+
+	/**
+	 * Diagnostics overview shows support-safe runtime identity evidence.
+	 *
+	 * @return void
+	 */
+	public function test_overview_renders_dashboard_runtime_identity() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness();
+		$html    = $harness->overview_html(
+			array(
+				'scheduler' => array(
+					'current_utc' => '2026-09-30 19:30:00',
+				),
+				'counts'    => array(),
+				'recent'    => array(),
+				'logging'   => array(),
+				'support'   => array(),
+			)
+		);
+
+		$this->assertStringContainsString( 'Dashboard Runtime', $html );
+		$this->assertStringContainsString( 'Installed version', $html );
+		$this->assertStringContainsString( ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION, $html );
+		$this->assertStringContainsString( 'Protocol v1 / Status schema v1', $html );
+		$this->assertStringContainsString( 'support-safe identity check', $html );
+	}
 }
 
 /**

@@ -1372,6 +1372,36 @@ msgstr ""
 msgid "Redacted scheduler, retention, and polling evidence for operators. This screen never displays pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview.php:108
+msgid "Dashboard Runtime"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:109
+msgid "Dashboard runtime diagnostics"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:110
+msgid "Plugin"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:111
+msgid "Installed version"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:113
+msgid "Polling contract"
+msgstr ""
+
+#. translators: 1: protocol version. 2: status schema version.
+#: includes/traits/trait-admin-page-diagnostics-overview.php:116
+#, php-format
+msgid "Protocol v%1$s / Status schema v%2$s"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:123
+msgid "This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies."
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:40
 msgid "Scheduler"
 msgstr ""

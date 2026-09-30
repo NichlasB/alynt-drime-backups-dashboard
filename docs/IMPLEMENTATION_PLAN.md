@@ -470,6 +470,26 @@ Acceptance criteria:
 - The dashboard admin page discourages stale cached renders.
 - Existing Diagnostics support copy remains unchanged except for naturally current timestamps.
 
+### Diagnostics Runtime Identity Slice
+
+Post-release operations repeatedly require confirming which dashboard build is installed before interpreting Diagnostics, post-release monitoring evidence, or operator screenshots. The support-copy JSON already includes the plugin version, but operators should not have to open support copy or run WP-CLI to confirm the active dashboard identity.
+
+Implementation status: implemented locally. Diagnostics now shows a support-safe Dashboard Runtime panel with active plugin version and protocol/schema contract. The change is display-only and does not alter support-copy JSON, polling, classification, scheduler behavior, protocol behavior, database schema, remote-action permissions, backup creation, restore, cleanup/delete, deployment, or live-site state.
+
+Implement a small display-only runtime identity panel:
+
+- Show the active dashboard plugin name and `ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION` on the Diagnostics tab.
+- Show the dashboard polling contract as read-only `Protocol v1 / Status schema v1` operator context.
+- Keep this visible panel support-safe: no filesystem paths, domains, labels, credentials, pairing tokens, polling secrets, authorization headers, raw payloads, raw responses, cookies, nonces, salts, Drime identifiers, or server environment details.
+- Preserve the existing support-copy JSON shape unless a later support workflow needs additional stable fields.
+- Do not change polling, classification, scheduler behavior, protocol behavior, database schema, remote-action permissions, backup creation, restore, cleanup/delete, deployment, or live-site state.
+
+Acceptance criteria:
+
+- Diagnostics visibly exposes the active dashboard version and protocol/schema contract.
+- Existing Diagnostics support copy remains unchanged.
+- A focused rendering test covers the runtime identity panel.
+
 ### Revoked Dashboard Record Guidance Slice
 
 Operational rollout can leave superseded local dashboard records after a site is re-enrolled. Diagnostics now explains total dashboard records versus polling-ready records, and the Sites tab hides superseded revoked duplicates, but the individual Site Detail screen should make the revoked-record boundary explicit when an operator opens a revoked record directly.

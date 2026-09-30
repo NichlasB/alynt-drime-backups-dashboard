@@ -36,6 +36,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		echo '<h2 id="adbd-diagnostics-heading">' . esc_html__( 'Diagnostics', 'alynt-drime-backups-dashboard' ) . '</h2>';
 		echo '<p class="adbd-screen-intro">' . esc_html__( 'Redacted scheduler, retention, and polling evidence for operators. This screen never displays pairing tokens, polling secrets, authorization headers, raw response bodies, filesystem paths, SQL, cookies, nonces, salts, or Drime credentials.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		$this->render_diagnostics_freshness_notice( $scheduler );
+		$this->render_diagnostics_runtime_identity();
 
 		$this->render_diagnostics_settings( $logging );
 
@@ -92,6 +93,33 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_event_log_diagnostics( $logging );
 		$this->render_support_copy_output( $support );
 		echo '</section>';
+	}
+
+	/**
+	 * Renders the visible dashboard runtime identity panel.
+	 *
+	 * @return void
+	 */
+	private function render_diagnostics_runtime_identity() {
+		$version               = defined( 'ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION' ) ? ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION : '';
+		$protocol_version      = class_exists( 'Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller' ) ? (string) Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller::PROTOCOL_VERSION : '1';
+		$status_schema_version = class_exists( 'Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller' ) ? (string) Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller::STATUS_SCHEMA_VERSION : '1';
+
+		echo '<div class="adbd-panel adbd-runtime-panel"><h3>' . esc_html__( 'Dashboard Runtime', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Dashboard runtime diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
+		$this->render_detail_row( __( 'Plugin', 'alynt-drime-backups-dashboard' ), __( 'Alynt Drime Backups Dashboard', 'alynt-drime-backups-dashboard' ) );
+		$this->render_detail_row( __( 'Installed version', 'alynt-drime-backups-dashboard' ), '' !== $version ? $version : '-' );
+		$this->render_detail_row(
+			__( 'Polling contract', 'alynt-drime-backups-dashboard' ),
+			sprintf(
+				/* translators: 1: protocol version. 2: status schema version. */
+				__( 'Protocol v%1$s / Status schema v%2$s', 'alynt-drime-backups-dashboard' ),
+				$protocol_version,
+				$status_schema_version
+			)
+		);
+		echo '</tbody></table>';
+		echo '<p class="description">' . esc_html__( 'This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 	}
 
 	/**
