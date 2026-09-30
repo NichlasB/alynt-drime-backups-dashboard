@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.50 - 2026-09-30
+
+### Added
+
+- Added a support-safe Dashboard Runtime panel to Diagnostics so operators can confirm the installed dashboard version and protocol/schema contract from the UI.
+
+### Security
+
+- Preserved the dashboard-local diagnostics boundary: this release does not change polling, classification, protocol behavior, database schema, remote-action permissions, backup creation, restore, delete, cleanup, credential handling, Drime credential storage, deployment behavior, or live-site state.
+
 ## 0.1.49 - 2026-09-30
 
 ### Added
