@@ -87,6 +87,8 @@ Post-uploader-`0.5.21` rollout note: the client-side non-mutating `schedule_roll
 
 Completion note: On 2026-09-30, after user-confirmed restore points, the PureCleanse pilot temporarily enabled rollback-preview opt-in, changed `alynt_scan_upload` from `every_15_minutes` to `every_30_minutes`, ran `schedule_rollback_preview` successfully with a "would restore to every 15 minutes" result, confirmed the preview did not change the active schedule, returned PureCleanse to `every_15_minutes`, disabled rollback-preview opt-in, and verified PureCleanse ended Working with queue count 0, failed count 0, warnings 0, `rollback_preview_supported=false`, and `rollback_supported=false`.
 
+Follow-up local UI slice: keep the latest successful rollback-preview proof visible in the Site Detail Schedule Management panel as support-safe history evidence even after rollback-preview support is disabled again. This must remain display-only, must not add a rollback execution control, and must not imply current client rollback-preview support.
+
 Scope:
 
 - verify the live dashboard keeps rollback-preview controls hidden for clients that do not advertise support;

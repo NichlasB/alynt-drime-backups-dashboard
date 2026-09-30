@@ -1925,6 +1925,7 @@ msgstr ""
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:150
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:176
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:194
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:82
 msgid "current cadence pending client report"
 msgstr ""
 
@@ -1940,11 +1941,13 @@ msgid "Rollback preview would restore: %s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:175
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:81
 msgid "rollback target"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:177
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:195
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:83
 msgid "rollback cadence pending client report"
 msgstr ""
 
@@ -1957,6 +1960,10 @@ msgstr ""
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:193
 #: includes/traits/trait-admin-page-schedule-management-form-helpers.php:68
 msgid "Rollback preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-management-form-helpers.php:70
+msgid "Latest rollback preview"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-schedule-details.php:211
@@ -1981,6 +1988,26 @@ msgstr ""
 
 #: includes/traits/trait-admin-page-remote-actions.php:177
 msgid "Confirm that Schedule Rollback Preview is non-mutating before sending this request."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:56
+msgid "Previewed"
+msgstr ""
+
+#. translators: %s: cadence transition label.
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:75
+#, php-format
+msgid "Latest proof: rollback preview would restore %s. No schedule was changed; rollback execution remains unavailable."
+msgstr ""
+
+#. translators: %s: rollback cadence label.
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:91
+#, php-format
+msgid "Latest proof: rollback preview reported the schedule was already at %s. No schedule was changed; rollback execution remains unavailable."
+msgstr ""
+
+#: includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php:96
+msgid "Latest proof: rollback preview completed without changing the schedule; rollback execution remains unavailable."
 msgstr ""
 
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:35

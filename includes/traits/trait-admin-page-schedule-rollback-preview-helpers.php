@@ -16,6 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.43
  */
 trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Rollback_Preview_Helpers {
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Rollback_Preview_Evidence;
+
 	/**
 	 * Renders the guarded V2.3 schedule-rollback-preview form when rollback metadata exists.
 	 *

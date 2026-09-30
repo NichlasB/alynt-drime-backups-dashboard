@@ -66,6 +66,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers 
 			$this->render_detail_item( __( 'Apply changes', 'alynt-drime-backups-dashboard' ), ! empty( $clean_capabilities['schedule_management']['apply_supported'] ) ? __( 'Available after a fresh matching preview', 'alynt-drime-backups-dashboard' ) : __( 'Not enabled on the client', 'alynt-drime-backups-dashboard' ) );
 			$this->render_detail_item( __( 'Rollback', 'alynt-drime-backups-dashboard' ), __( 'Execution unavailable; rollback apply is not available in this release.', 'alynt-drime-backups-dashboard' ) );
 			$this->render_detail_item( __( 'Rollback preview', 'alynt-drime-backups-dashboard' ), $this->schedule_rollback_preview_readiness_markup( $site, $schedule, $clean_capabilities, $remote_action_history ), true );
+			$latest_rollback_preview = $this->latest_schedule_rollback_preview_evidence_markup( $schedule, $remote_action_history );
+			if ( '' !== $latest_rollback_preview ) {
+				$this->render_detail_item( __( 'Latest rollback preview', 'alynt-drime-backups-dashboard' ), $latest_rollback_preview, true );
+			}
 			echo '</dl>';
 			$this->render_schedule_preview_form( $site, $schedule );
 			$this->render_schedule_apply_form( $site, $schedule, $clean_capabilities, $remote_action_history );
