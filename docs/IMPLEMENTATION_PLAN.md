@@ -180,7 +180,7 @@ Acceptance criteria:
 
 Implementation status: design-only decision record created in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`. The recommended first V2.4 direction is a narrowly scoped, client-owned local cleanup preview/apply model for Alynt uploader-owned temporary artifacts only. Runtime implementation, release, deploy, live enablement, Drime deletion, remote retention mutation, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard Drime credential storage remain unavailable until later protocol/threat-model updates and explicit approval gates.
 
-Cleanup-preview planning status: implementation sequencing for the non-mutating `cleanup_preview` sub-slice is documented in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`. This plan keeps `cleanup_apply`, Drime retention/delete, backup-set deletion, restore, arbitrary filesystem browsing, dashboard Drime credentials, release, deploy, and live enablement behind later gates.
+Cleanup-preview planning status: implementation sequencing for the non-mutating `cleanup_preview` sub-slice is documented in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`, with the planned capability/action boundary reflected in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`. This plan keeps `cleanup_apply`, Drime retention/delete, backup-set deletion, restore, arbitrary filesystem browsing, dashboard Drime credentials, release, deploy, and live enablement behind later gates.
 
 Recommended next boundary:
 

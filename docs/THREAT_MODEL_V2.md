@@ -1,8 +1,8 @@
 # Alynt Drime Backups Dashboard Threat Model v2
 
-Status: V2.1/V2.2 threat-model baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, and released dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, V2.3 schedule preview, guarded V2.3 Schedule Apply, and dashboard-side Schedule Rollback Preview controls have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `schedule_rollback_preview` remains hidden unless a latest client capability report explicitly advertises support. This document does not approve broad rollout, schedule rollback execution, destructive actions, restore actions, cleanup/delete actions, or Drime credential storage in the dashboard.
+Status: V2.1/V2.2 threat-model baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, released dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, and planned V2.4 non-mutating `cleanup_preview` scope. V2.1 signed `scan_upload_now` dispatch, V2.2 action-history/audit hardening, V2.3 schedule preview, guarded V2.3 Schedule Apply, and dashboard-side Schedule Rollback Preview controls have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `schedule_rollback_preview` remains hidden unless a latest client capability report explicitly advertises support. `cleanup_preview` is documented as planning only and is not implemented or approved for release/deploy/live enablement. This document does not approve broad rollout, schedule rollback execution, destructive actions, restore actions, cleanup/delete apply actions, or Drime credential storage in the dashboard.
 
-Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, implemented non-mutating V2.3 `schedule_preview`, guarded V2.3 `schedule_apply`, rollback metadata capture/readiness, and non-mutating `schedule_rollback_preview` design/local implementation for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
+Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 preview-only schedule capability reporting, implemented non-mutating V2.3 `schedule_preview`, guarded V2.3 `schedule_apply`, rollback metadata capture/readiness, non-mutating `schedule_rollback_preview` design/local implementation, and planned non-mutating V2.4 `cleanup_preview` design for Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
 This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and status polling remain in force.
 
@@ -17,6 +17,7 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Client backup execution state | Protected from duplicate work, overload, replay, and unsafe action expansion. |
 | Action history | Durable enough for support, redacted enough for screenshots and export. |
 | Schedule capability summary | Redacted schedule posture only; no raw cron, raw option blobs, shell commands, usernames, paths, credentials, or mutation authority. |
+| Cleanup capability summary | Redacted cleanup-preview posture only; no paths, filenames, package names, backup IDs, Drime identifiers, credentials, delete criteria, or mutation authority. |
 | Drime credentials | Never stored, requested, displayed, signed, or transported by the dashboard. |
 | Client backup evidence | Reported as redacted counts and states, not paths, package names, object IDs, or signed URLs. |
 
@@ -64,6 +65,12 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Rollback without preview | A future rollback action changes schedule state directly from old metadata without a fresh current-state check. | Require non-mutating `schedule_rollback_preview` before any `schedule_rollback`; client revalidates current schedule fingerprint during preview and again immediately before any later mutation. | Rollback preview/action tests. |
 | Rollback stale state | Metadata was captured, but the local schedule changed after apply; rollback would overwrite an intentional later change. | Bind rollback preview to source apply action, metadata fingerprint, current schedule fingerprint, and expiry window; fail closed on mismatch. | Stale-fingerprint and expiry tests. |
 | Rollback scope creep | Rollback grows into generic cron editing, WPvivid schedule changes, server-runner schedule changes, or arbitrary settings mutation. | Reserve rollback for `alynt_scan_upload` only; reject raw cron/options/paths/commands and unsupported schedule IDs; require separate design for any expanded target. | Future payload validation and capability tests. |
+| Cleanup preview path disclosure | A cleanup preview leaks raw filesystem paths, filenames, package names, backup IDs, Drime IDs, or registry payloads. | `cleanup_preview` results may include only category slugs, counts, approximate bytes, age bands, reason codes, preview fingerprint, and expiry; dashboard redaction rejects forbidden keys/values. | Dashboard/uploader result validation and support export tests. |
+| Cleanup preview mutation | A non-mutating preview deletes local artifacts, changes registry state, alters schedules, touches Drime, or changes credentials. | Client preview evaluator must be read-only; tests compare relevant local state before and after preview; `cleanup_apply` remains rejected. | Uploader read-only preview tests and integration checks. |
+| Cleanup preview unsafe input | Dashboard sends paths, glob patterns, regexes, raw retention dates, arbitrary thresholds, item lists, object IDs, URLs, SQL, or commands disguised as cleanup criteria. | Dashboard builds requests only from client-declared category slugs and scope; client revalidates category/scope and rejects forbidden fields. | Dashboard payload tests and client validation tests. |
+| Cleanup category confusion | Operator interprets local uploader temporary artifact cleanup as Drime retention, backup-set deletion, WPvivid pruning, or restore cleanup. | UI/action history labels must say cleanup preview is local and non-mutating; Drime retention/delete and `cleanup_apply` remain unavailable until later gates. | UI copy and action-history tests. |
+| Cleanup stale preview apply | A future cleanup apply uses stale preview evidence after local state changed. | `cleanup_apply` is reserved; any future apply must require a fresh preview fingerprint, expiry, client revalidation, idempotency, and locks. | Future cleanup apply tests. |
+| Cleanup scope creep | Cleanup grows into arbitrary filesystem browsing, Drime deletion, backup-set deletion, restore, or remote retention mutation. | First runtime candidate is `cleanup_preview` only for allowlisted uploader-owned categories; Drime/delete/restore behavior requires separate protocol, threat model, and release gates. | Static review, payload validation, and future action allowlist tests. |
 
 ## Abuse Cases Explicitly Out Of Scope For V2.1
 
@@ -85,6 +92,7 @@ These must remain impossible in V2.1 code and UI:
 - accepting paths, package names, backup IDs, or Drime object IDs from the dashboard.
 - accepting raw cron expressions, raw crontab lines, raw WP-Cron arrays, raw WPvivid option blobs, or free-form cadence input from the dashboard.
 - enabling `schedule_rollback_preview` on a client or pilot without explicit client opt-in approval; dispatching or accepting `schedule_rollback` until a later protocol/threat-model update and release gate explicitly approve it.
+- cleanup apply, Drime retention cleanup, backup-set deletion, WPvivid pruning, server-runner deletion outside uploader-owned staging, restore cleanup, arbitrary filesystem browsing, and accepting paths or delete criteria from the dashboard.
 
 ## Required Controls By Component
 
@@ -100,6 +108,7 @@ These must remain impossible in V2.1 code and UI:
 - Run a normal status poll after dispatch when safe.
 - Mark accepted/running actions stale when no fresh client status confirms progress.
 - Keep support export redacted and aggregate-first.
+- For planned cleanup preview, render controls only after explicit client capability; dispatch only allowlisted category/scope fields; keep `cleanup_apply` hidden/unavailable until a later approved slice.
 
 ### Uploader
 
@@ -114,6 +123,7 @@ These must remain impossible in V2.1 code and UI:
 - Use existing scanner, queue, registry, and upload worker behavior.
 - Report only redacted counts and stable state/result codes.
 - Allow the local admin to disable or revoke remote actions without contacting the dashboard.
+- For planned cleanup preview, keep support disabled by default, advertise only after explicit local opt-in, evaluate only known uploader-owned safe categories, return aggregate evidence only, and reject `cleanup_apply` until separately approved.
 
 ## Fail-Closed Rules
 
@@ -138,6 +148,7 @@ The dashboard must reject or hide action controls when:
 - dashboard cannot decrypt the action private key;
 - client response is redirected, oversized, malformed, unsafe, or not JSON;
 - action result contains forbidden fields or unsafe values.
+- latest client status advertises cleanup apply or unknown cleanup scopes without a matching approved protocol slice.
 
 ## Verification Minimums
 
@@ -153,6 +164,10 @@ Dashboard:
 - support export redacts signatures, keys, paths, package names, Drime identifiers, and raw responses.
 - schedule capability parsing rejects raw cron, raw options, paths, commands, credentials, package names, and Drime identifiers;
 - schedule controls render as preview-only/unavailable until approved schedule action types exist.
+- cleanup capability parsing rejects raw paths, filenames, package names, backup IDs, Drime identifiers, credentials, raw retention criteria, URLs, SQL, commands, and unknown categories;
+- cleanup preview controls remain hidden unless latest client capability explicitly advertises support;
+- cleanup preview request payloads contain only allowlisted category slugs, scope, and capability version;
+- cleanup action history and support export remain aggregate-only and support-safe.
 
 Uploader:
 
@@ -169,6 +184,11 @@ Uploader:
 - `schedule_apply`, when implemented, must require a fresh preview, capture local rollback metadata before mutation, and report only redacted previous/applied cadence evidence;
 - `schedule_rollback_preview` reports only bounded support-safe readiness evidence and does not alter schedule state;
 - `schedule_rollback` and any schedule mutation beyond `alynt_scan_upload` cadence apply are rejected until separately implemented and approved.
+- cleanup preview is disabled before explicit local opt-in;
+- cleanup preview accepts only allowlisted category slugs and scope constants;
+- cleanup preview is non-mutating and does not change filesystem, registry, queue, schedule, Drime, credential, backup, restore, or dashboard-pairing state;
+- cleanup preview result redaction rejects paths, filenames, package names, backup IDs, Drime IDs, credentials, signed URLs, raw registry payloads, or raw response bodies;
+- `cleanup_apply`, Drime retention/delete, backup-set deletion, restore cleanup, and arbitrary filesystem browsing are rejected until separately implemented and approved.
 
 Cross-plugin:
 
@@ -178,6 +198,7 @@ Cross-plugin:
 - backup freshness changes only after normal status evidence changes;
 - client-side disable/revoke immediately prevents future actions.
 - preview-only schedule capability display does not alter client schedules.
+- preview-only cleanup capability display does not alter client files or registries.
 
 ## Release And Rollout Constraints
 

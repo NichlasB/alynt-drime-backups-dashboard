@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Added a design-only V2.4 cleanup/retention decision record that narrows the first possible cleanup direction to client-owned local cleanup preview/apply for Alynt uploader-owned temporary artifacts only.
 - Added a V2.4 `cleanup_preview` implementation plan that limits the next runtime step to non-mutating preview evidence and defers cleanup apply behind later gates.
+- Extended the V2 protocol and threat-model docs with the planned non-mutating `cleanup_preview` capability, request/result boundary, forbidden fields, threat controls, and verification minimums.
 
 ### Security
 
