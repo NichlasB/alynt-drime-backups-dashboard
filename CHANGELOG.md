@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.49 - 2026-09-30
+
+### Added
+
+- Added display-only latest rollback-preview proof evidence to Site Detail Schedule Management when dashboard-local action history contains a successful rollback-preview result.
+
+### Security
+
+- Preserved the rollback-preview boundary: this release does not execute rollback, mutate schedules during rollback preview, create backups, restore, delete, clean up, change credentials, store Drime API credentials, or run arbitrary commands.
+
 ## 0.1.48 - 2026-09-29
 
 ### Added
