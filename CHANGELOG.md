@@ -4,15 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.51 - 2026-10-01
+
 ### Added
 
-- Added a design-only V2.4 cleanup/retention decision record that narrows the first possible cleanup direction to client-owned local cleanup preview/apply for Alynt uploader-owned temporary artifacts only.
-- Added a V2.4 `cleanup_preview` implementation plan that limits the next runtime step to non-mutating preview evidence and defers cleanup apply behind later gates.
-- Extended the V2 protocol and threat-model docs with the planned non-mutating `cleanup_preview` capability, request/result boundary, forbidden fields, threat controls, and verification minimums.
+- Added V2.4 Cleanup Preview dashboard controls for separately opted-in clients that advertise non-mutating cleanup-preview support for Alynt uploader-owned temporary artifacts.
+- Added support-safe Cleanup Preview action-history, diagnostics, support-copy, protocol, threat-model, and implementation-plan documentation.
+- Added cleanup-preview capability sanitization and signed preview-only intent dispatch for the `safe_local_uploader_owned` / `uploader_temp_artifacts` allowlist.
 
 ### Security
 
-- Preserved the remote-action boundary: this planning update does not add runtime cleanup controls, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard Drime credential storage, deployment behavior, or live-site state changes.
+- Preserved the cleanup boundary: this release does not add cleanup apply, backup deletion, Drime cleanup/deletion, restore behavior, arbitrary filesystem browsing, credential mutation, dashboard Drime credential storage, deployment behavior, or live-site state changes.
 
 ## 0.1.50 - 2026-09-30
 
