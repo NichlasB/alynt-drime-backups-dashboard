@@ -397,6 +397,76 @@ class DiagnosticsTest extends TestCase {
 	}
 
 	/**
+	 * Cleanup-preview diagnostics are aggregate-only.
+	 *
+	 * @return void
+	 */
+	public function test_cleanup_preview_diagnostics_are_aggregate_only() {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
+				array(
+					$this->site( 1 ),
+					$this->site( 2 ),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
+				array(
+					1 => $this->snapshot(
+						array(
+							'remote_actions' => array(
+								'protocol_version'   => 2,
+								'enabled'            => true,
+								'cleanup_management' => array(
+									'protocol_version'        => 2,
+									'capability_version'      => 1,
+									'enabled'                 => true,
+									'preview_supported'       => true,
+									'apply_supported'         => false,
+									'scope'                   => 'safe_local_uploader_owned',
+									'supported_categories'    => array( 'uploader_temp_artifacts' ),
+									'max_preview_age_seconds' => 900,
+								),
+							),
+						)
+					),
+					2 => $this->snapshot(
+						array(
+							'remote_actions' => array(
+								'protocol_version'   => 2,
+								'enabled'            => true,
+								'cleanup_management' => array(
+									'protocol_version'       => 2,
+									'enabled'                => true,
+									'preview_supported'      => true,
+									'apply_supported'        => true,
+									'cleanup_apply_available' => true,
+									'scope'                  => 'safe_local_uploader_owned',
+									'supported_categories'   => array( 'uploader_temp_artifacts' ),
+								),
+							),
+						)
+					),
+				)
+			),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		$result  = $diagnostics->collect();
+		$encoded = wp_json_encode( $result['support'] );
+
+		$this->assertSame( 2, $result['counts']['cleanup_preview']['reporting_sites'] );
+		$this->assertSame( 1, $result['counts']['cleanup_preview']['preview_supported_sites'] );
+		$this->assertSame( 1, $result['counts']['cleanup_preview']['unavailable_sites'] );
+		$this->assertSame( 1, $result['counts']['cleanup_preview']['apply_or_mutation_advertised_sites'] );
+		$this->assertSame( 2, $result['counts']['cleanup_preview']['supported_categories'] );
+		$this->assertStringContainsString( 'cleanup_preview', $encoded );
+		$this->assertStringContainsString( 'preview_supported_sites', $encoded );
+		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
+		$this->assertStringNotContainsString( 'Client 1', $encoded );
+		$this->assertStringNotContainsString( 'uploader_temp_artifacts', $encoded );
+	}
+
+	/**
 	 * Attention-history diagnostics are aggregate-only and support safe.
 	 *
 	 * @return void
@@ -541,47 +611,51 @@ class DiagnosticsTest extends TestCase {
 	}
 
 	/**
-	 * Support action summaries include rollback-preview counts as aggregates only.
+	 * Support action summaries include preview-only action counts as aggregates only.
 	 *
 	 * @return void
 	 */
-	public function test_support_action_summary_includes_rollback_preview_count() {
+	public function test_support_action_summary_includes_preview_only_action_counts() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Test_Harness();
 		$actions = $harness->support_action_summary(
 			array(
-				'total'                     => 6,
+				'total'                     => 7,
 				'client_reconciled'         => 5,
 				'stale'                     => 1,
 				'awaiting_confirmation'     => 2,
 				'schedule_apply'            => 3,
 				'schedule_rollback_preview' => 2,
+				'cleanup_preview'           => 1,
 				'rollback_metadata'         => 1,
 				'latest_updated_at'         => '2026-09-21 16:00:00',
 			)
 		);
 
-		$this->assertSame( 6, $actions['total'] );
+		$this->assertSame( 7, $actions['total'] );
 		$this->assertSame( 3, $actions['schedule_apply'] );
 		$this->assertSame( 2, $actions['schedule_rollback_preview'] );
+		$this->assertSame( 1, $actions['cleanup_preview'] );
 		$this->assertSame( 1, $actions['rollback_metadata'] );
 		$this->assertArrayNotHasKey( 'redacted_context_json', $actions );
 		$this->assertArrayNotHasKey( 'source_apply_action_id', $actions );
 	}
 
 	/**
-	 * Support action summaries keep rollback-preview counts non-negative.
+	 * Support action summaries keep preview-only action counts non-negative.
 	 *
 	 * @return void
 	 */
-	public function test_support_action_summary_bounds_rollback_preview_count() {
+	public function test_support_action_summary_bounds_preview_only_action_counts() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Test_Harness();
 		$actions = $harness->support_action_summary(
 			array(
 				'schedule_rollback_preview' => -4,
+				'cleanup_preview'           => -2,
 			)
 		);
 
 		$this->assertSame( 0, $actions['schedule_rollback_preview'] );
+		$this->assertSame( 0, $actions['cleanup_preview'] );
 	}
 
 	/**

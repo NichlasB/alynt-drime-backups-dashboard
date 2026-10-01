@@ -196,6 +196,49 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions {
 	}
 
 	/**
+	 * Handles a non-mutating Cleanup Preview request.
+	 *
+	 * @since 0.1.51
+	 *
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function handle_cleanup_preview_action() {
+		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_cleanup_preview' );
+
+		if ( is_wp_error( $nonce ) ) {
+			return $nonce;
+		}
+
+		$site_id      = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
+		$requested_by = function_exists( 'get_current_user_id' ) ? absint( get_current_user_id() ) : 0;
+		$result       = $this->remote_action_dispatcher->request_cleanup_preview( $site_id, $requested_by );
+
+		$this->record_admin_audit_action(
+			'cleanup_preview',
+			is_wp_error( $result ) ? 'failed' : 'succeeded',
+			array(
+				'dashboard_site_id' => $site_id,
+				'action_type'       => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::ACTION_CLEANUP_PREVIEW,
+				'remote_state'      => is_array( $result ) && isset( $result['remote_state'] ) ? sanitize_key( (string) $result['remote_state'] ) : '',
+				'error_code'        => is_wp_error( $result ) ? $result->get_error_code() : '',
+			)
+		);
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		if ( $this->remote_action_should_poll_after_dispatch( $result ) ) {
+			$poll_result = $site_id > 0 ? $this->poller->check_status_now( $site_id ) : new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+
+			$result['poll_after_dispatch'] = ! is_wp_error( $poll_result );
+			$result['poll_error_code']     = is_wp_error( $poll_result ) ? $poll_result->get_error_code() : '';
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Returns whether a dispatch response should be followed by a read-only poll.
 	 *
 	 * @param array<string,mixed> $result Dispatch result.

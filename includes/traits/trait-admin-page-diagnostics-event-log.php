@@ -177,6 +177,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 		$labels = array(
 			'check_status_now'          => __( 'Check Now', 'alynt-drime-backups-dashboard' ),
 			'clear_diagnostics_events'  => __( 'Clear Diagnostics Events', 'alynt-drime-backups-dashboard' ),
+			'cleanup_preview'           => __( 'Cleanup Preview', 'alynt-drime-backups-dashboard' ),
 			'create_pending_site'       => __( 'Create Pairing Token', 'alynt-drime-backups-dashboard' ),
 			'pause_polling'             => __( 'Pause Polling', 'alynt-drime-backups-dashboard' ),
 			'preview_schedule_rollback' => __( 'Preview Schedule Rollback', 'alynt-drime-backups-dashboard' ),

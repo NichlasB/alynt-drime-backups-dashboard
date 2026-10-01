@@ -97,6 +97,7 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Action_Data {
 			'schedule_preview'          => $this->schedule_preview( isset( $action['schedule_preview'] ) ? $action['schedule_preview'] : array() ),
 			'schedule_apply'            => $this->schedule_apply( isset( $action['schedule_apply'] ) ? $action['schedule_apply'] : array() ),
 			'schedule_rollback_preview' => $this->schedule_rollback_preview( isset( $action['schedule_rollback_preview'] ) ? $action['schedule_rollback_preview'] : array() ),
+			'cleanup_preview'           => $this->cleanup_preview( isset( $action['cleanup_preview'] ) ? $action['cleanup_preview'] : array() ),
 		);
 	}
 

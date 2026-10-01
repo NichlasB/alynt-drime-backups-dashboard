@@ -127,6 +127,25 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Dispatcher {
 
 		return $this->result;
 	}
+
+	/**
+	 * Records cleanup preview request.
+	 *
+	 * @param int $site_id Site ID.
+	 * @param int $requested_by User ID.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public function request_cleanup_preview( $site_id, $requested_by = 0 ) {
+		$this->calls[] = array(
+			'site_id'      => (int) $site_id,
+			'requested_by' => (int) $requested_by,
+		);
+
+		return array(
+			'action'       => 'cleanup_preview',
+			'remote_state' => 'accepted',
+		);
+	}
 }
 
 /**
@@ -509,6 +528,38 @@ class AdminPageActionsTest extends TestCase {
 		$this->assertSame( array( array( 'site_id' => 42, 'requested_by' => 77 ) ), $harness->remote_action_dispatcher->calls );
 		$this->assertSame( array( 42 ), $harness->poller->calls );
 		$this->assertSame( 'request_backup_now', $harness->event_log->audit_calls[0]['action'] );
+	}
+
+	/**
+	 * Cleanup Preview delegates after nonce validation and performs a read-only follow-up poll.
+	 *
+	 * @return void
+	 */
+	public function test_valid_cleanup_preview_nonce_delegates_and_polls_after_acceptance() {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = 'alynt_drime_backups_dashboard_cleanup_preview';
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+
+		$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		$harness = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+
+		$_POST = array(
+			'alynt_drime_backups_dashboard_action' => 'cleanup_preview',
+			'_wpnonce'                            => 'valid',
+			'dashboard_site_id'                   => '42',
+		);
+
+		$result = $harness->handle_for_test();
+
+		$this->assertIsArray( $result );
+		$this->assertSame( 'cleanup_preview', $result['action'] );
+		$this->assertTrue( $result['poll_after_dispatch'] );
+		$this->assertSame( array( array( 'site_id' => 42, 'requested_by' => 77 ) ), $harness->remote_action_dispatcher->calls );
+		$this->assertSame( array( 42 ), $harness->poller->calls );
+		$this->assertSame( 'cleanup_preview', $harness->event_log->audit_calls[0]['action'] );
+		$this->assertSame( 'cleanup_preview', $harness->event_log->audit_calls[0]['context']['action_type'] );
 	}
 
 	/**

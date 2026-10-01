@@ -61,6 +61,13 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				'rollback_preview_hidden_sites'    => 0,
 				'rollback_apply_advertised_sites'  => 0,
 			),
+			'cleanup_preview'     => array(
+				'reporting_sites'                    => 0,
+				'preview_supported_sites'            => 0,
+				'unavailable_sites'                  => 0,
+				'apply_or_mutation_advertised_sites' => 0,
+				'supported_categories'               => 0,
+			),
 		);
 
 		foreach ( $sites as $site ) {
@@ -119,6 +126,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 
 			foreach ( $schedule_counts as $key => $value ) {
 				$counts['schedule_management'][ $key ] += $value;
+			}
+
+			$cleanup_counts = $this->cleanup_preview_diagnostics( $snapshot );
+
+			foreach ( $cleanup_counts as $key => $value ) {
+				$counts['cleanup_preview'][ $key ] += $value;
 			}
 		}
 

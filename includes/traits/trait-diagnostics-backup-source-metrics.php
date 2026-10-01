@@ -123,6 +123,63 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 	}
 
 	/**
+	 * Builds support-safe aggregate cleanup-preview diagnostics from one snapshot.
+	 *
+	 * @since 0.1.51
+	 *
+	 * @param array<string,mixed>|null $snapshot Snapshot.
+	 * @return array<string,int>
+	 */
+	private function cleanup_preview_diagnostics( $snapshot ) {
+		$counts = array(
+			'reporting_sites'                    => 0,
+			'preview_supported_sites'            => 0,
+			'unavailable_sites'                  => 0,
+			'apply_or_mutation_advertised_sites' => 0,
+			'supported_categories'               => 0,
+		);
+
+		if ( empty( $snapshot ) || ! is_array( $snapshot ) ) {
+			return $counts;
+		}
+
+		$payload        = $this->diagnostic_payload_from_snapshot( $snapshot );
+		$remote_actions = isset( $payload['remote_actions'] ) && is_array( $payload['remote_actions'] ) ? $payload['remote_actions'] : array();
+
+		if ( empty( $remote_actions['cleanup_management'] ) || ! is_array( $remote_actions['cleanup_management'] ) ) {
+			$counts['unavailable_sites'] = 1;
+			return $counts;
+		}
+
+		$cleanup_management             = $remote_actions['cleanup_management'];
+		$counts['reporting_sites']      = 1;
+		$categories                     = isset( $cleanup_management['supported_categories'] ) && is_array( $cleanup_management['supported_categories'] ) ? $cleanup_management['supported_categories'] : array();
+		$counts['supported_categories'] = count( $categories );
+
+		if (
+			! empty( $cleanup_management['enabled'] )
+			&& ! empty( $cleanup_management['preview_supported'] )
+			&& empty( $cleanup_management['apply_supported'] )
+		) {
+			$counts['preview_supported_sites'] = 1;
+		} else {
+			$counts['unavailable_sites'] = 1;
+		}
+
+		if (
+			! empty( $cleanup_management['apply_supported'] )
+			|| ! empty( $cleanup_management['remote_cleanup_available'] )
+			|| ! empty( $cleanup_management['cleanup_apply_available'] )
+			|| ! empty( $cleanup_management['drime_cleanup_available'] )
+			|| ! empty( $cleanup_management['backup_deletion_available'] )
+		) {
+			$counts['apply_or_mutation_advertised_sites'] = 1;
+		}
+
+		return $counts;
+	}
+
+	/**
 	 * Gets a decoded payload from a diagnostics snapshot.
 	 *
 	 * @param array<string,mixed> $snapshot Snapshot.

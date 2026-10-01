@@ -655,6 +655,106 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Cleanup-preview history renders support-safe category/count details.
+	 *
+	 * @return void
+	 */
+	public function test_remote_action_history_renders_cleanup_preview_details() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
+		$history  = array(
+			array(
+				'action_type'           => 'cleanup_preview',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-29 12:00:00',
+				'client_result_summary' => 'Cleanup preview is ready. Nothing was deleted.',
+				'redacted_context_json' => wp_json_encode(
+					array(
+						'cleanup_preview' => array(
+							'total_eligible_count' => 2,
+							'total_approx_bytes'   => 2048,
+							'expires_at'           => '2026-09-29T12:15:00+00:00',
+							'categories'           => array(
+								array(
+									'category'       => 'uploader_temp_artifacts',
+									'eligible_count' => 2,
+									'approx_bytes'   => 2048,
+									'age_band'       => 'older_than_24h',
+									'reason_code'    => 'safe_local_uploader_owned_temp_artifacts',
+								),
+							),
+						),
+					)
+				),
+			),
+		);
+		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
+
+		$this->assertStringContainsString( 'Cleanup Preview', $html );
+		$this->assertStringContainsString( 'Preview: 2 eligible temporary items; approx 2 KB', $html );
+		$this->assertStringContainsString( 'Uploader temporary artifacts: 2 eligible; approx 2 KB; age older_than_24h; reason safe_local_uploader_owned_temp_artifacts', $html );
+		$this->assertStringContainsString( 'Preview expires 2026-09-29 12:15 UTC', $html );
+		$this->assertStringContainsString( 'No cleanup, delete, retention, restore, credential, or Drime action was requested', $html );
+		$this->assertStringNotContainsString( 'C:\\', $html );
+		$this->assertStringNotContainsString( '/home/', $html );
+	}
+
+	/**
+	 * Cleanup-preview panel renders only when the latest capability explicitly supports it.
+	 *
+	 * @return void
+	 */
+	public function test_cleanup_preview_panel_renders_preview_only_control_when_supported() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version'    => 2,
+					'enabled'             => true,
+					'key_id'              => 'ak_test',
+					'allowed_actions'     => array( 'scan_upload_now', 'cleanup_preview' ),
+					'sodium_available'    => true,
+					'cleanup_management'  => array(
+						'protocol_version'        => 2,
+						'capability_version'      => 1,
+						'enabled'                 => true,
+						'preview_supported'       => true,
+						'apply_supported'         => false,
+						'scope'                   => 'safe_local_uploader_owned',
+						'supported_categories'    => array( 'uploader_temp_artifacts' ),
+						'max_preview_age_seconds' => 900,
+					),
+				),
+			),
+		);
+		$html     = $harness->cleanup_preview_panel_html( $site, $snapshot );
+
+		$this->assertStringContainsString( 'Cleanup Preview', $html );
+		$this->assertStringContainsString( 'Capability reported', $html );
+		$this->assertStringContainsString( 'Preview Cleanup', $html );
+		$this->assertStringContainsString( 'value="cleanup_preview"', $html );
+		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_cleanup_preview', $html );
+		$this->assertStringContainsString( 'no cleanup or delete action is requested', $html );
+		$this->assertStringNotContainsString( 'Apply Cleanup', $html );
+		$this->assertStringNotContainsString( 'Delete', $html );
+	}
+
+	/**
+	 * Cleanup-preview panel is hidden for clients that do not advertise support.
+	 *
+	 * @return void
+	 */
+	public function test_cleanup_preview_panel_is_hidden_without_capability() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->cleanup_preview_panel_html( $this->remote_action_history_site(), $this->remote_action_history_snapshot() );
+
+		$this->assertSame( '', $html );
+	}
+
+	/**
 	 * The schedule panel renders rollback preview only after successful apply evidence.
 	 *
 	 * @return void
@@ -1167,6 +1267,7 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Management_Form_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Label_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Detail_Helpers;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Cleanup_Preview_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Status_History_Detail_Helpers;
 
@@ -1300,6 +1401,19 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 
 		ob_start();
 		$this->render_schedule_management_panel( $snapshot, $site, $history );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes V2.4 cleanup-preview panel markup.
+	 *
+	 * @param array<string,mixed>      $site Site row.
+	 * @param array<string,mixed>|null $snapshot Snapshot row.
+	 * @return string
+	 */
+	public function cleanup_preview_panel_html( array $site, $snapshot ) {
+		ob_start();
+		$this->render_cleanup_preview_panel( $site, $snapshot );
 		return (string) ob_get_clean();
 	}
 

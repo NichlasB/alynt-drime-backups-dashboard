@@ -1,6 +1,6 @@
 # V2.4 Cleanup Preview Implementation Plan
 
-Status: planning-only implementation slice. This document narrows V2.4 to the non-mutating `cleanup_preview` action only. It does not approve `cleanup_apply`, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard-side Drime credentials, release, deployment, or live enablement.
+Status: dashboard-side local implementation slice completed and validated; release/deployment/live enablement remain separate gates. This document narrows V2.4 to the non-mutating `cleanup_preview` action only. It does not approve `cleanup_apply`, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard-side Drime credentials, release, deployment, or live enablement.
 
 Related artifacts:
 
@@ -105,7 +105,9 @@ Exit criteria:
 
 ### Slice 3 — Dashboard Capability Consumption And UI
 
-Implement in dashboard after uploader proof:
+Implementation status: completed locally in the dashboard codebase after the companion uploader proof. The dashboard now sanitizes optional `remote_actions.cleanup_management`, hides controls unless cleanup preview is explicitly supported by the latest client report, dispatches a fixed signed `cleanup_preview` request from Site Detail only, renders support-safe cleanup preview history details, and includes cleanup-preview aggregate counts in Diagnostics/support output. The slice remains unreleased and undeployed until a separate release gate.
+
+Implemented dashboard behavior:
 
 1. Sanitize optional `remote_actions.cleanup_management`.
 2. Show a Site Detail `Cleanup Preview` section only when the latest client capability explicitly supports it.

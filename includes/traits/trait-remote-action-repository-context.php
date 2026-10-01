@@ -85,6 +85,10 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Context {
 			$context['schedule_rollback_preview'] = $this->safe_schedule_rollback_preview_context( $client_action['schedule_rollback_preview'] );
 		}
 
+		if ( ! empty( $client_action['cleanup_preview'] ) && is_array( $client_action['cleanup_preview'] ) ) {
+			$context['cleanup_preview'] = $this->safe_cleanup_preview_context( $client_action['cleanup_preview'] );
+		}
+
 		$encoded = wp_json_encode( $context, JSON_UNESCAPED_SLASHES );
 
 		return false === $encoded ? '' : (string) $encoded;
@@ -206,6 +210,50 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Context {
 			'preview_created_at'                    => isset( $preview['preview_created_at'] ) ? sanitize_text_field( (string) $preview['preview_created_at'] ) : '',
 			'preview_expires_at'                    => isset( $preview['preview_expires_at'] ) ? sanitize_text_field( (string) $preview['preview_expires_at'] ) : '',
 		);
+	}
+
+	/**
+	 * Sanitizes cleanup-preview context for local dashboard storage.
+	 *
+	 * @param array<string,mixed> $preview Cleanup preview.
+	 * @return array<string,mixed>
+	 */
+	private function safe_cleanup_preview_context( array $preview ) {
+		$clean = array(
+			'preview_action_id'    => isset( $preview['preview_action_id'] ) ? $this->sanitize_uuid( (string) $preview['preview_action_id'] ) : '',
+			'preview_fingerprint'  => isset( $preview['preview_fingerprint'] ) ? $this->sha256_or_empty( (string) $preview['preview_fingerprint'] ) : '',
+			'capability_version'   => isset( $preview['capability_version'] ) ? absint( $preview['capability_version'] ) : 0,
+			'scope'                => Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::CLEANUP_SCOPE_SAFE_LOCAL === ( isset( $preview['scope'] ) ? sanitize_key( (string) $preview['scope'] ) : '' ) ? Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::CLEANUP_SCOPE_SAFE_LOCAL : '',
+			'preview_created_at'   => isset( $preview['preview_created_at'] ) ? sanitize_text_field( (string) $preview['preview_created_at'] ) : '',
+			'expires_at'           => isset( $preview['expires_at'] ) ? sanitize_text_field( (string) $preview['expires_at'] ) : '',
+			'total_eligible_count' => isset( $preview['total_eligible_count'] ) ? max( 0, (int) $preview['total_eligible_count'] ) : 0,
+			'total_approx_bytes'   => isset( $preview['total_approx_bytes'] ) ? max( 0, (int) $preview['total_approx_bytes'] ) : 0,
+			'apply_supported'      => false,
+			'categories'           => array(),
+		);
+
+		$categories = isset( $preview['categories'] ) && is_array( $preview['categories'] ) ? $preview['categories'] : array();
+
+		foreach ( array_slice( $categories, 0, Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::MAX_CLEANUP_CATEGORIES ) as $category ) {
+			if ( ! is_array( $category ) ) {
+				continue;
+			}
+
+			$category_id = isset( $category['category'] ) ? sanitize_key( (string) $category['category'] ) : '';
+			if ( Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities::CLEANUP_CATEGORY_UPLOADER_TEMP !== $category_id ) {
+				continue;
+			}
+
+			$clean['categories'][] = array(
+				'category'       => $category_id,
+				'eligible_count' => isset( $category['eligible_count'] ) ? max( 0, (int) $category['eligible_count'] ) : 0,
+				'approx_bytes'   => isset( $category['approx_bytes'] ) ? max( 0, (int) $category['approx_bytes'] ) : 0,
+				'age_band'       => isset( $category['age_band'] ) ? sanitize_key( (string) $category['age_band'] ) : '',
+				'reason_code'    => isset( $category['reason_code'] ) ? sanitize_key( (string) $category['reason_code'] ) : '',
+			);
+		}
+
+		return $clean;
 	}
 
 	/**
