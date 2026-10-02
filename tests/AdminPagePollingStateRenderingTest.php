@@ -696,7 +696,7 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Preview: 2 eligible temporary items; approx 2 KB', $html );
 		$this->assertStringContainsString( 'Uploader temporary artifacts: 2 eligible; approx 2 KB; age older_than_24h; reason safe_local_uploader_owned_temp_artifacts', $html );
 		$this->assertStringContainsString( 'Preview expires 2026-09-29 12:15 UTC', $html );
-		$this->assertStringContainsString( 'No cleanup, delete, retention, restore, credential, or Drime action was requested', $html );
+		$this->assertStringContainsString( 'Evidence only: no cleanup apply, delete, retention, restore, credential, or Drime action was requested', $html );
 		$this->assertStringNotContainsString( 'C:\\', $html );
 		$this->assertStringNotContainsString( '/home/', $html );
 	}
@@ -735,6 +735,8 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Cleanup Preview', $html );
 		$this->assertStringContainsString( 'Capability reported', $html );
 		$this->assertStringContainsString( 'Preview Cleanup', $html );
+		$this->assertStringContainsString( 'Cleanup apply is intentionally unavailable in this release', $html );
+		$this->assertStringContainsString( 'preview-only evidence; cleanup apply remains unavailable', $html );
 		$this->assertStringContainsString( 'value="cleanup_preview"', $html );
 		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_cleanup_preview', $html );
 		$this->assertStringContainsString( 'no cleanup or delete action is requested', $html );

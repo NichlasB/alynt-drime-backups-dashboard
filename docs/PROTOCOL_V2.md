@@ -1,6 +1,6 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, and locally implemented dashboard-side V2.4 non-mutating `cleanup_preview` scope. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, schedule-preview action, and guarded Schedule Apply have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `cleanup_preview` is implemented locally as a preview-only dashboard/uploader boundary, but is not approved for dashboard release/deploy/live enablement in this document.
+Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, and implemented V2.4 non-mutating `cleanup_preview` scope. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, schedule-preview action, guarded Schedule Apply, and preview-only Cleanup Preview have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `cleanup_preview` is released as a preview-only dashboard/uploader boundary. `cleanup_apply` remains reserved and is not approved by this document.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
@@ -134,7 +134,7 @@ Dashboard ingestion rules:
 
 ### Cleanup Preview Capability Reporting
 
-V2.4 may add an optional `remote_actions.cleanup_management` object to the authenticated status payload after a separate uploader implementation and release gate. The companion uploader and dashboard local implementation slices support this preview-only capability, but dashboard release/deploy/live enablement remains gated separately. This is capability reporting for local cleanup preview only unless a later approved action type is added.
+V2.4 may add an optional `remote_actions.cleanup_management` object to the authenticated status payload. The companion uploader and dashboard implementation slices support this preview-only capability after explicit client opt-in. This is capability reporting for local cleanup preview only unless a later approved action type is added.
 
 Dashboard ingestion rules:
 
@@ -432,7 +432,7 @@ The V2.4 design reserves the following cleanup action names:
 - `cleanup_preview`
 - `cleanup_apply`
 
-`cleanup_preview` is the first non-mutating V2.4 action and is limited to support-safe aggregate evidence for client-owned Alynt uploader temporary artifacts. The dashboard/uploader implementation remains release/deploy/live gated separately. `cleanup_apply` remains reserved and must be rejected until separately implemented and approved.
+`cleanup_preview` is the first non-mutating V2.4 action and is limited to support-safe aggregate evidence for client-owned Alynt uploader temporary artifacts. `cleanup_apply` remains reserved and must be rejected until separately implemented and approved.
 
 ## Action Response
 

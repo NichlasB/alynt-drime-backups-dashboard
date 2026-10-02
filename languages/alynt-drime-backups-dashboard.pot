@@ -1124,6 +1124,10 @@ msgstr ""
 msgid "V2.4 Cleanup Preview asks the client uploader to estimate safe, uploader-owned temporary artifacts only. It does not delete files, clean Drime, change retention, restore backups, or expose filesystem paths."
 msgstr ""
 
+#: includes/traits/trait-admin-page-cleanup-preview-helpers.php:36
+msgid "Cleanup apply is intentionally unavailable in this release. Preview results are evidence only; the dashboard cannot use them to delete files or mutate Drime."
+msgstr ""
+
 #: includes/traits/trait-admin-page-cleanup-preview-helpers.php:38
 #: includes/traits/trait-admin-page-request-backup-detail-helpers.php:38
 msgid "Capability reported"
@@ -1156,8 +1160,8 @@ msgstr ""
 msgid "The latest client report says cleanup preview is available, but this dashboard record no longer has the encrypted signing key. Regenerate the V2 opt-in token and run Check Now."
 msgstr ""
 
-#: includes/traits/trait-admin-page-cleanup-preview-helpers.php:106
-msgid "The latest client report says cleanup preview is available for uploader-owned temporary artifacts. This is preview-only and cannot delete anything."
+#: includes/traits/trait-admin-page-cleanup-preview-helpers.php:107
+msgid "The latest client report says cleanup preview is available for uploader-owned temporary artifacts. This is preview-only evidence; cleanup apply remains unavailable."
 msgstr ""
 
 #: includes/traits/trait-admin-page-cleanup-preview-helpers.php:113
@@ -2061,7 +2065,7 @@ msgid "Preview expires %s"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:328
-msgid "No cleanup, delete, retention, restore, credential, or Drime action was requested"
+msgid "Evidence only: no cleanup apply, delete, retention, restore, credential, or Drime action was requested"
 msgstr ""
 
 #: includes/traits/trait-admin-page-remote-action-history-helpers.php:341

@@ -184,6 +184,8 @@ Cleanup-preview implementation status: the non-mutating `cleanup_preview` sub-sl
 
 Cleanup-apply decision: `docs/V2_4_CLEANUP_APPLY_DECISION.md` defers `cleanup_apply` because the current preview evidence proves safe visibility but not enough recurring cleanup need to justify a destructive runtime action. The next safe V2.4 work should remain preview-only observability polish or a different non-destructive planning pass unless later preview evidence shows recurring, material, safely removable uploader-owned artifacts.
 
+Cleanup-preview observability polish status: implemented locally as a dashboard-only UI/copy hardening slice after the cleanup-apply deferral decision. Site Detail now explicitly states that cleanup apply is unavailable in this release and that preview results are evidence only; Remote Action History cleanup-preview details use the same evidence-only framing. This does not change protocol behavior, dispatch, storage, polling, classification, cleanup capability gating, client actions, Drime behavior, release, deploy, or live-site state.
+
 Recommended next boundary:
 
 - keep V2.4 at `cleanup_preview` unless a separate high-risk cleanup-apply planning decision is explicitly approved;

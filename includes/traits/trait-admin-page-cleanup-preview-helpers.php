@@ -33,6 +33,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Cleanup_Preview_Helpers {
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Cleanup Preview', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
 		echo '<p>' . esc_html__( 'V2.4 Cleanup Preview asks the client uploader to estimate safe, uploader-owned temporary artifacts only. It does not delete files, clean Drime, change retention, restore backups, or expose filesystem paths.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Cleanup apply is intentionally unavailable in this release. Preview results are evidence only; the dashboard cannot use them to delete files or mutate Drime.', 'alynt-drime-backups-dashboard' ) . '</p>';
 
 		if ( $availability['available'] ) {
 			echo '<p><span class="adbd-status-pill is-working">' . esc_html__( 'Capability reported', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
@@ -103,7 +104,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Cleanup_Preview_Helpers {
 			return array(
 				'reported'  => true,
 				'available' => true,
-				'message'   => __( 'The latest client report says cleanup preview is available for uploader-owned temporary artifacts. This is preview-only and cannot delete anything.', 'alynt-drime-backups-dashboard' ),
+				'message'   => __( 'The latest client report says cleanup preview is available for uploader-owned temporary artifacts. This is preview-only evidence; cleanup apply remains unavailable.', 'alynt-drime-backups-dashboard' ),
 			);
 		}
 

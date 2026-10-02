@@ -325,7 +325,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Action_History_Helpers {
 			);
 		}
 
-		$parts[] = __( 'No cleanup, delete, retention, restore, credential, or Drime action was requested', 'alynt-drime-backups-dashboard' );
+		$parts[] = __( 'Evidence only: no cleanup apply, delete, retention, restore, credential, or Drime action was requested', 'alynt-drime-backups-dashboard' );
 
 		return implode( '; ', array_filter( $parts ) );
 	}
