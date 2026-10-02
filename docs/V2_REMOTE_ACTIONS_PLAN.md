@@ -29,6 +29,7 @@ V2 protocol, threat-model, and planning artifacts:
 - `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`
 - `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`
 - `docs/V2_4_CLEANUP_APPLY_DECISION.md`
+- `docs/V2_6_RESTORE_PREPARATION_EVIDENCE_DESIGN.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -189,6 +190,8 @@ Recommended constraints:
 Purpose: identify, validate, and stage a restore candidate without overwriting production data.
 
 Risk: higher-risk gated phase. It can be non-destructive when limited to staging/validation, but it is restore-readiness-sensitive and can mislead operators if evidence is incomplete.
+
+Design artifact: `docs/V2_6_RESTORE_PREPARATION_EVIDENCE_DESIGN.md` narrows the next restore-adjacent direction to support-safe readiness evidence only. The recommended first slice is dashboard-side sanitization/display of optional `restore_readiness` summaries. Restore execution, staging on production, package download/extraction, database imports, arbitrary filesystem browsing, dashboard-side Drime credentials, and production data mutation remain out of scope.
 
 Recommended constraints:
 
