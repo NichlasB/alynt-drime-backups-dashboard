@@ -1,6 +1,6 @@
 # V2.4 Cleanup Preview Implementation Plan
 
-Status: dashboard-side local implementation slice completed and validated; release/deployment/live enablement remain separate gates. This document narrows V2.4 to the non-mutating `cleanup_preview` action only. It does not approve `cleanup_apply`, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard-side Drime credentials, release, deployment, or live enablement.
+Status: non-mutating `cleanup_preview` is implemented, released, deployed, and proven as preview-only through dashboard `0.1.51` and uploader `0.5.24`. This document narrows V2.4 to the non-mutating `cleanup_preview` action only. It does not approve `cleanup_apply`, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard-side Drime credentials, or any mutating cleanup runtime behavior.
 
 Related artifacts:
 
@@ -38,7 +38,7 @@ Included:
 - dashboard action-history rendering for preview results;
 - support-safe diagnostics aggregates for cleanup preview capability/action counts;
 - focused tests in both repositories;
-- a low-risk local/disposable proof after implementation, before any release.
+- a low-risk local/disposable proof after implementation, before release, followed by explicit release/deploy gates and active-client preview-only observation.
 
 Excluded:
 
@@ -105,7 +105,7 @@ Exit criteria:
 
 ### Slice 3 — Dashboard Capability Consumption And UI
 
-Implementation status: completed locally in the dashboard codebase after the companion uploader proof. The dashboard now sanitizes optional `remote_actions.cleanup_management`, hides controls unless cleanup preview is explicitly supported by the latest client report, dispatches a fixed signed `cleanup_preview` request from Site Detail only, renders support-safe cleanup preview history details, and includes cleanup-preview aggregate counts in Diagnostics/support output. The slice remains unreleased and undeployed until a separate release gate.
+Implementation status: completed, released, deployed, and proven after the companion uploader proof. The dashboard sanitizes optional `remote_actions.cleanup_management`, hides controls unless cleanup preview is explicitly supported by the latest client report, dispatches a fixed signed `cleanup_preview` request from Site Detail only, renders support-safe cleanup preview history details, and includes cleanup-preview aggregate counts in Diagnostics/support output.
 
 Implemented dashboard behavior:
 
@@ -123,21 +123,21 @@ Exit criteria:
 - action history remains support-safe;
 - no apply/delete button exists.
 
-### Slice 4 — Local Proof And Release Readiness
+### Slice 4 — Local Proof, Release, And Active-Site Observation
 
-Before release:
+Completed release path:
 
-1. Run ds2 feature reviews that apply for both repositories.
-2. Run targeted ds3 pre-release reviews before any release.
-3. Test a disposable or explicitly approved low-risk site with preview-only support enabled.
-4. Confirm preview does not mutate local artifacts or registry state.
-5. Confirm normal dashboard polling and backup freshness classification are unaffected.
+1. Ran applicable ds2 feature reviews and targeted ds3 pre-release reviews before release.
+2. Tested an explicitly approved low-risk site with preview-only support enabled.
+3. Confirmed preview does not mutate local artifacts or registry state.
+4. Confirmed normal dashboard polling and backup freshness classification are unaffected.
+5. Confirmed the active dashboard client set advertises preview support only after the `0.5.24` rollout.
 
 Exit criteria:
 
-- one preview-only proof returns either support-safe aggregate evidence or a concrete fail-closed reason;
+- one preview-only proof returned either support-safe aggregate evidence or a concrete fail-closed reason;
 - no cleanup apply is available;
-- no live rollout occurs without a separate release/deploy gate.
+- the separate release/deploy gate was completed, and active-site observation confirmed preview-only support without mutating cleanup behavior.
 
 ## Dashboard Request Shape
 
@@ -261,7 +261,7 @@ Required before implementation:
 - approve protocol/threat-model documentation updates;
 - confirm companion uploader repo target and restore-point recommendation;
 - approve dashboard implementation after uploader capability proof;
-- approve any release/deploy/pilot separately.
+- approve any future mutating cleanup, Drime retention, backup deletion, restore, arbitrary filesystem browsing, or credential-related planning separately.
 
 Required before `cleanup_apply` planning:
 
