@@ -10,7 +10,9 @@ Current V2.3 stabilization decision: the already released dashboard-side, non-mu
 
 Current V2.4 state: the non-mutating `cleanup_preview` runtime path has been implemented, released, deployed, and proven as preview-only through dashboard `0.1.51` and uploader `0.5.24`. Active clients advertise support for `safe_local_uploader_owned` / `uploader_temp_artifacts` preview evidence only; cleanup apply, Drime cleanup, backup deletion, restore actions, credential actions, path exposure, arbitrary filesystem browsing, and dashboard-side Drime credentials remain unavailable.
 
-Next recommended V2 step: do not add another runtime control by default. If development continues beyond the proven V2.4 cleanup-preview line, use a new high-risk design/planning gate to decide whether client-local cleanup apply is worth implementing at all. Do not combine cleanup apply with Drime retention, backup-set deletion, restore, arbitrary filesystem browsing, or dashboard Drime credentials.
+Current V2.6 state: local dashboard-side `restore_readiness` status evidence consumption is in progress as a read-only, additive display slice. It sanitizes optional client-reported source readiness summaries and can render Site Detail evidence without restore controls, restore dispatch, package download/staging, Drime mutation, dashboard-side Drime credentials, paths, filenames, backup IDs, package names, signed URLs, SQL, or production data changes.
+
+Next recommended V2 step: complete and validate the dashboard-only Restore Readiness Evidence Consumer slice before considering any companion uploader producer work. Do not add restore preparation runtime actions or restore execution from this slice. If development continues after the dashboard consumer, use a separate client-side design gate for producing support-safe `restore_readiness` evidence and keep cleanup apply, Drime retention, backup-set deletion, restore execution, arbitrary filesystem browsing, and dashboard Drime credentials out of scope.
 
 V2 protocol, threat-model, and planning artifacts:
 

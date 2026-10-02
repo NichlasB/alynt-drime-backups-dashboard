@@ -87,6 +87,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail {
 		$this->render_request_backup_now_panel( $site, $snapshot, $action_history );
 		$this->render_schedule_management_panel( $snapshot, $site, $action_history );
 		$this->render_cleanup_preview_panel( $site, $snapshot );
+		$this->render_restore_readiness_panel( $snapshot );
 		$this->render_source_policy_panel( $site, $snapshot );
 		$this->render_latest_snapshot_summary( $snapshot, $site );
 		$this->render_attention_recovery_history( $history );

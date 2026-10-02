@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	use Alynt_Drime_Backups_Dashboard_Status_Payload_Validator_Backup_Sources;
+	use Alynt_Drime_Backups_Dashboard_Status_Payload_Validator_Restore_Readiness;
 	use Alynt_Drime_Backups_Dashboard_Status_Payload_Validator_Sanitizers;
 
 	const SUPPORTED_SCHEMA_VERSION  = 1;
@@ -133,6 +134,12 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 
 		if ( ! empty( $backup_sources ) ) {
 			$validated['backup_sources'] = $backup_sources;
+		}
+
+		$restore_readiness = $this->restore_readiness( isset( $payload['restore_readiness'] ) ? $payload['restore_readiness'] : array() );
+
+		if ( ! empty( $restore_readiness['candidates'] ) ) {
+			$validated['restore_readiness'] = $restore_readiness;
 		}
 
 		$remote_actions = $this->remote_action_capabilities->sanitize( isset( $payload['remote_actions'] ) ? $payload['remote_actions'] : array() );

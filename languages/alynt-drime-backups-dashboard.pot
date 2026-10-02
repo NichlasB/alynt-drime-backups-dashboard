@@ -3238,3 +3238,100 @@ msgstr ""
 #: includes/traits/trait-status-classifier-helpers.php:93
 msgid "One or more backup sources report stale or missing upload evidence."
 msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:29
+msgid "Restore Readiness Evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:30
+msgid "This is client-reported evidence only. The dashboard cannot restore this site, download backup packages, stage files, import databases, browse paths, or mutate Drime."
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:32
+msgid "Overall state"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:33
+msgid "Evidence generated"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:37
+msgid "No source-level restore candidates were reported. Treat restore readiness as not verified."
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:54
+msgid "Latest backup finished"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:55
+msgid "Components"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:56
+msgid "Checksum"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:57
+msgid "Manifest"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:58
+msgid "Sidecar"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:59
+msgid "Candidate reference"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:59
+msgid "Opaque client reference reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:66
+msgid "Missing, unknown, or incomplete restore evidence means “not verified,” not “ready.” Use the manual restore runbook before attempting any restore outside this dashboard."
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:132
+msgid "Server runner"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:139
+msgid "Unknown source"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:152
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:207
+msgid "Evidence available"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:153
+msgid "Incomplete"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:155
+msgid "Complete"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:156
+msgid "Partial"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:157
+msgid "Missing"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:158
+msgid "Verified"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:160
+msgid "Compatible"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:161
+msgid "Present"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:210
+msgid "Not verified"
+msgstr ""

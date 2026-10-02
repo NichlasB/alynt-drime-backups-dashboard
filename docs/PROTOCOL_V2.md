@@ -1,10 +1,10 @@
 # Alynt Drime Backups Dashboard Protocol v2
 
-Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, and implemented V2.4 non-mutating `cleanup_preview` scope. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, schedule-preview action, guarded Schedule Apply, and preview-only Cleanup Preview have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `cleanup_preview` is released as a preview-only dashboard/uploader boundary. `cleanup_apply` remains reserved and is not approved by this document.
+Status: V2.1/V2.2 protocol baseline with implemented V2.3 schedule capability reporting, implemented non-mutating `schedule_preview`, guarded `schedule_apply` for `alynt_scan_upload` cadence changes only, implemented V2.4 non-mutating `cleanup_preview` scope, and a local dashboard-side V2.6 restore-readiness evidence consumer. The action opt-in token foundation, dashboard signed dispatch, client action-intent endpoint, dashboard-side action-history reconciliation, preview-only schedule capability, schedule-preview action, guarded Schedule Apply, and preview-only Cleanup Preview have been implemented, released, and deployed to the dashboard host. `schedule_apply` remains disabled by default on clients and requires separate local Schedule Apply opt-in before the dashboard can show apply controls. `cleanup_preview` is released as a preview-only dashboard/uploader boundary. `cleanup_apply` remains reserved and is not approved by this document. Restore-readiness evidence is status-payload-only and does not approve restore preparation runtime actions or restore execution.
 
 This document defines the proposed cross-plugin protocol for the first remote-action slice between Alynt Drime Backups Dashboard and Alynt Drime Backups Uploader.
 
-Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, planning-only rollback readiness gates are tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, V2.4 cleanup/retention design is tracked in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`, and non-mutating cleanup-preview implementation planning is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`.
+Implementation planning for signed dispatch is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`. The action-history/audit hardening slice is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`. V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, implemented schedule preview is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded schedule apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata planning is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, planning-only rollback readiness gates are tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, V2.4 cleanup/retention design is tracked in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`, non-mutating cleanup-preview implementation planning is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`, and V2.6 restore-readiness evidence planning is tracked in `docs/V2_6_RESTORE_PREPARATION_EVIDENCE_DESIGN.md`.
 
 Version 2 is additive to the version 1 read-only pairing and polling protocol. A site may remain fully valid as a v1-only monitored site without supporting this protocol.
 
@@ -19,6 +19,7 @@ Version 2 is additive to the version 1 read-only pairing and polling protocol. A
 - Fresh server-runner or WPvivid backup creation is not part of the initial V2.1 action unless a later client capability explicitly declares and safely implements it.
 - V2.3 started with schedule capability reporting, preview-only display, and non-mutating `schedule_preview`. The current mutating V2.3 action is guarded `schedule_apply` for `alynt_scan_upload` cadence changes only. Applying a schedule requires a fresh successful preview, client-side revalidation, a separate local Schedule Apply opt-in, and release/deploy approval gates. Non-mutating `schedule_rollback_preview` is implemented and released on the dashboard as a preview-only request shape for clients that explicitly advertise it. Rolling back schedule changes with `schedule_rollback` requires later protocol updates and separate approval gates.
 - V2.4 must start with non-mutating `cleanup_preview` only. It may report support-safe aggregate cleanup eligibility for client-owned Alynt uploader temporary artifacts, but must not delete files, delete Drime objects, delete backup sets, browse arbitrary files, restore data, mutate schedules, or expose raw paths/object identifiers. `cleanup_apply` remains reserved and must not be advertised, dispatched, or accepted until a later protocol/threat-model and approval gate explicitly approve it.
+- V2.6 restore-readiness evidence is optional status-payload evidence only. It may report support-safe source-level readiness states, but must not request, advertise, dispatch, or execute restore preparation or restore execution. The dashboard must not receive raw paths, filenames, package names, backup IDs, Drime object IDs, signed URLs, SQL, credentials, package internals, or arbitrary restore targets.
 
 ## Actors And Responsibilities
 
@@ -146,6 +147,47 @@ Dashboard ingestion rules:
 - Treat `apply_supported: true` as unsupported/canary evidence until a later `cleanup_apply` protocol and threat-model update is approved.
 - Display capability as unavailable when Sodium, V2 action opt-in, or cleanup capability reporting is unavailable.
 - Reject or ignore raw paths, filenames, glob patterns, regexes, raw retention dates, arbitrary thresholds, package names, backup IDs, Drime identifiers, credentials, shell commands, SQL, URLs, signed URLs, raw registry payloads, or arbitrary delete criteria.
+
+### Restore Readiness Evidence Reporting
+
+V2.6 may add an optional top-level `restore_readiness` object to the authenticated status payload. This is read-only evidence reporting only. It does not require V2 remote-action opt-in and does not create a restore action type.
+
+Recommended shape:
+
+```json
+{
+  "restore_readiness": {
+    "schema_version": 1,
+    "generated_at": "2026-10-02T12:00:00Z",
+    "overall_state": "evidence_available",
+    "candidates": [
+      {
+        "source": "server",
+        "candidate_ref": "opaque-client-reference",
+        "latest_backup_finished_at": "2026-10-02T01:30:00Z",
+        "component_state": "complete",
+        "checksum_state": "verified",
+        "manifest_state": "compatible",
+        "sidecar_state": "present",
+        "age_seconds": 37800,
+        "warnings": []
+      }
+    ]
+  }
+}
+```
+
+Dashboard ingestion rules:
+
+- Treat `restore_readiness` as optional and backward-compatible.
+- Accept only documented scalar fields, bounded warning-code arrays, and bounded candidate records.
+- Accept only source keys `server` and `wpvivid`.
+- Accept only allowlisted state labels. Unknown state labels sanitize to `unknown`.
+- Treat missing, partial, unknown, stale, or incompatible evidence as `not verified`, not ready.
+- Keep `candidate_ref` opaque and display only that an opaque client reference exists. Do not display or infer raw filenames, paths, package names, Drime object IDs, backup IDs, signed URLs, or package internals from it.
+- Do not use restore-readiness evidence to change backup freshness classification.
+- Do not render restore controls from this evidence.
+- Reject or ignore raw paths, filenames, package names, backup IDs, Drime identifiers, credentials, shell commands, SQL, URLs, signed URLs, package internals, arbitrary restore targets, or raw response bodies.
 
 ### Cleanup Preview Action
 
