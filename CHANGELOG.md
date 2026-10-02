@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.52 - 2026-10-02
+
+### Added
+
+- Added optional display-only restore-readiness evidence on Site Detail when clients report sanitized source-level restore candidate metadata.
+- Added support-safe restore-readiness protocol, threat-model, implementation-plan, validator, rendering, and regression-test coverage.
+
+### Security
+
+- Preserved the restore boundary: this release does not restore, stage files, download backup packages, import databases, browse paths, expose raw candidate references, store dashboard Drime credentials, or mutate Drime/client state.
+
 ## 0.1.51 - 2026-10-01
 
 ### Added
