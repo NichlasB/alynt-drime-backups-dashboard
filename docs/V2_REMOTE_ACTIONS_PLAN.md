@@ -28,6 +28,7 @@ V2 protocol, threat-model, and planning artifacts:
 - `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`
 - `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`
 - `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`
+- `docs/V2_4_CLEANUP_APPLY_DECISION.md`
 
 Current implementation baseline: the dashboard/uploader pair now has the V2.1 action opt-in token foundation, including dashboard-generated `adb2a` tokens, encrypted dashboard action private-key storage, client-side public-key storage, redacted capability reporting, signed dashboard dispatch, and the client action-intent endpoint. The first live pilot on `purecleanse.net` accepted a signed `scan_upload_now` request, completed the client worker successfully, and confirmed the one-hour client rate-limit guard on a follow-up request.
 
@@ -158,7 +159,7 @@ Purpose: clean local outbox/staging artifacts or request remote retention cleanu
 
 Risk: higher-risk gated phase. This is destructive or semi-destructive and must not be implemented until V2.1 and V2.2 are proven.
 
-Design artifact: `docs/V2_4_CLEANUP_RETENTION_DESIGN.md` defines the current decision boundary. Implementation sequencing for the completed non-mutating first sub-slice is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`. The implemented first V2.4 runtime path is narrower than the broad title: client-owned local cleanup preview for Alynt uploader-owned temporary artifacts only. Cleanup apply, Drime retention, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard-side Drime credentials remain deferred.
+Design artifact: `docs/V2_4_CLEANUP_RETENTION_DESIGN.md` defines the current decision boundary. Implementation sequencing for the completed non-mutating first sub-slice is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`. The planning-only cleanup-apply decision is tracked in `docs/V2_4_CLEANUP_APPLY_DECISION.md`. The implemented first V2.4 runtime path is narrower than the broad title: client-owned local cleanup preview for Alynt uploader-owned temporary artifacts only. Cleanup apply, Drime retention, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard-side Drime credentials remain deferred.
 
 Recommended constraints:
 
