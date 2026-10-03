@@ -85,6 +85,64 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Restore_Readiness_Evidence {
 	}
 
 	/**
+	 * Builds compact escaped restore-readiness evidence for Sites table rows.
+	 *
+	 * @param array<string,mixed> $payload Latest decoded payload.
+	 * @return string
+	 */
+	private function restore_readiness_row_hint( array $payload ) {
+		$readiness = $this->restore_readiness_from_payload( $payload );
+
+		if ( empty( $readiness ) ) {
+			return '';
+		}
+
+		$overall_state = isset( $readiness['overall_state'] ) ? (string) $readiness['overall_state'] : '';
+		$html          = '<div class="adbd-restore-readiness-row-hint">';
+		$html         .= '<div class="adbd-source-health is-' . esc_attr( $this->restore_readiness_overall_tone( $overall_state ) ) . '"><span class="adbd-source-health-label">' . esc_html__( 'Restore evidence:', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $this->restore_readiness_state_label( $overall_state ) ) . '</div>';
+
+		if ( empty( $readiness['candidates'] ) || ! is_array( $readiness['candidates'] ) ) {
+			$html .= '<span class="adbd-row-meta">' . esc_html__( 'Candidate evidence: not reported', 'alynt-drime-backups-dashboard' ) . '</span></div>';
+			return $html;
+		}
+
+		$html .= '<ul class="adbd-source-summary adbd-restore-readiness-summary">';
+
+		foreach ( $readiness['candidates'] as $candidate ) {
+			if ( ! is_array( $candidate ) ) {
+				continue;
+			}
+
+			$source   = isset( $candidate['source'] ) ? (string) $candidate['source'] : '';
+			$checksum = isset( $candidate['checksum_state'] ) ? (string) $candidate['checksum_state'] : '';
+			$manifest = isset( $candidate['manifest_state'] ) ? (string) $candidate['manifest_state'] : '';
+			$checksum = sprintf(
+				/* translators: %s: checksum evidence state. */
+				__( 'Checksum: %s', 'alynt-drime-backups-dashboard' ),
+				$this->restore_readiness_state_label( $checksum )
+			);
+			$manifest = sprintf(
+				/* translators: %s: manifest evidence state. */
+				__( 'Manifest: %s', 'alynt-drime-backups-dashboard' ),
+				$this->restore_readiness_state_label( $manifest )
+			);
+
+			$html .= '<li>';
+			$html .= '<span class="adbd-source-line-label">' . esc_html( $this->restore_readiness_source_label( $source ) ) . '</span>';
+			$html .= '<span class="adbd-source-compact-parts">';
+			$html .= '<span class="adbd-source-freshness is-' . esc_attr( $this->restore_readiness_candidate_tone( $candidate ) ) . '">' . esc_html( $this->restore_readiness_candidate_summary( $candidate ) ) . '</span>';
+			$html .= '<span>' . esc_html( $checksum ) . '</span>';
+			$html .= '<span>' . esc_html( $manifest ) . '</span>';
+			$html .= '</span>';
+			$html .= '</li>';
+		}
+
+		$html .= '</ul></div>';
+
+		return $html;
+	}
+
+	/**
 	 * Renders restore-readiness warnings as support-safe codes.
 	 *
 	 * @param array<string,mixed> $candidate Candidate evidence.
@@ -134,6 +192,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Restore_Readiness_Evidence {
 	 */
 	private function restore_readiness_state_label( $state ) {
 		$labels = array(
+			'not_reported'       => __( 'Not reported', 'alynt-drime-backups-dashboard' ),
 			'evidence_available' => __( 'Evidence available', 'alynt-drime-backups-dashboard' ),
 			'incomplete'         => __( 'Incomplete', 'alynt-drime-backups-dashboard' ),
 			'stale'              => __( 'Stale', 'alynt-drime-backups-dashboard' ),
@@ -145,11 +204,28 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Restore_Readiness_Evidence {
 			'failed'             => __( 'Failed', 'alynt-drime-backups-dashboard' ),
 			'compatible'         => __( 'Compatible', 'alynt-drime-backups-dashboard' ),
 			'present'            => __( 'Present', 'alynt-drime-backups-dashboard' ),
-			'not_reported'       => __( 'Not reported', 'alynt-drime-backups-dashboard' ),
 			'unknown'            => __( 'Unknown', 'alynt-drime-backups-dashboard' ),
 		);
 
 		return isset( $labels[ $state ] ) ? $labels[ $state ] : __( 'Unknown', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Gets overall row-hint tone for restore-readiness evidence.
+	 *
+	 * @param string $state Overall state.
+	 * @return string
+	 */
+	private function restore_readiness_overall_tone( $state ) {
+		if ( 'evidence_available' === $state ) {
+			return 'ok';
+		}
+
+		if ( in_array( $state, array( 'incomplete', 'stale', 'incompatible' ), true ) ) {
+			return 'warning';
+		}
+
+		return 'unknown';
 	}
 
 	/**

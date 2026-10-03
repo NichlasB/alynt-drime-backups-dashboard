@@ -3336,6 +3336,26 @@ msgstr ""
 msgid "Missing, unknown, or incomplete restore evidence means “not verified,” not “ready.” Use the manual restore runbook before attempting any restore outside this dashboard."
 msgstr ""
 
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:102
+msgid "Restore evidence:"
+msgstr ""
+
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:105
+msgid "Candidate evidence: not reported"
+msgstr ""
+
+#. translators: %s: checksum evidence state.
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:121
+#, php-format
+msgid "Checksum: %s"
+msgstr ""
+
+#. translators: %s: manifest evidence state.
+#: includes/traits/trait-admin-page-restore-readiness-evidence.php:126
+#, php-format
+msgid "Manifest: %s"
+msgstr ""
+
 #: includes/traits/trait-admin-page-restore-readiness-evidence.php:132
 msgid "Server runner"
 msgstr ""

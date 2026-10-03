@@ -130,6 +130,24 @@
 	font-size: 12px;
 }
 
+.adbd-wrap .adbd-restore-readiness-row-hint {
+	margin-block-start: 10px;
+	padding-block-start: 8px;
+	border-block-start: 1px solid var(--adbd-border);
+}
+
+.adbd-wrap .adbd-restore-readiness-summary {
+	margin-block-start: 6px;
+}
+
+.adbd-wrap .adbd-restore-readiness-summary .adbd-source-freshness.is-working {
+	color: var(--adbd-success);
+}
+
+.adbd-wrap .adbd-restore-readiness-summary .adbd-source-freshness.is-pending {
+	color: var(--adbd-warning);
+}
+
 .adbd-wrap .adbd-history-detail-summary {
 	display: block;
 	font-weight: 500;
