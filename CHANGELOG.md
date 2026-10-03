@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.55 - 2026-10-03
+
+### Added
+
+- Added a support-safe Diagnostics restore-readiness summary row so operators can quickly understand whether reporting sites have complete, incomplete, stale, mixed, incompatible, unknown, or unavailable restore evidence.
+- Added source-level restore-readiness Diagnostics counts for Server runner and WPvivid candidates, including reported, complete, and incomplete totals.
+
+### Security
+
+- Preserved the restore boundary: Diagnostics summaries and source counts do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, restore controls, or restore guarantees.
+
 ## 0.1.54 - 2026-10-03
 
 ### Added
