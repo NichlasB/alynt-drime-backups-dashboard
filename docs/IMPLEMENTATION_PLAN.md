@@ -176,6 +176,20 @@ Acceptance criteria:
 - Rendering tests cover the compact default summary and the retained full support-safe detail text.
 - No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, rollback, or new remote-action behavior is introduced.
 
+### Remote Action History Cleanup Detail Structure Slice
+
+After repeated remote-action UI additions, the remote-action history helper briefly exceeded the preferred production-file size threshold. Keep the behavior stable but split cleanup-preview detail formatting into its own focused trait so the table rendering and generic action labels remain easier to maintain.
+
+Implementation status: implemented locally as a structure-only slice. Cleanup-preview history detail helpers now live in `includes/traits/trait-admin-page-remote-action-history-cleanup-details.php`, loaded before the main remote-action-history helper. The change preserves existing cleanup-preview detail text, action labels, table markup, filtering, disclosure behavior, redaction, dispatch, protocol behavior, schema, credentials, Drime behavior, backup creation, restore, cleanup/delete, release, deployment, and live-site state.
+
+Acceptance criteria:
+
+- The remote-action-history helper returns below the preferred production-file size threshold.
+- Cleanup-preview Remote Action History details render exactly through the existing helper calls.
+- The new trait is loaded before the main helper in the plugin bootstrap.
+- Targeted Remote Action History rendering tests pass.
+- No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, or new remote-action behavior is introduced.
+
 ### V2.4 Cleanup And Retention Design Slice
 
 Implementation status: design-only decision record created in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`. The recommended first V2.4 direction is a narrowly scoped, client-owned local cleanup preview/apply model for Alynt uploader-owned temporary artifacts only. Runtime implementation, release, deploy, live enablement, Drime deletion, remote retention mutation, backup-set deletion, restore, arbitrary filesystem browsing, and dashboard Drime credential storage remain unavailable until later protocol/threat-model updates and explicit approval gates.
