@@ -174,6 +174,12 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 						'reported_candidates'   => 28,
 						'complete_candidates'   => 8,
 						'incomplete_candidates' => 20,
+						'server_candidates'     => 14,
+						'server_complete'       => 8,
+						'server_incomplete'     => 6,
+						'wpvivid_candidates'    => 14,
+						'wpvivid_complete'      => 0,
+						'wpvivid_incomplete'    => 14,
 					),
 				),
 				'summaries' => array(
@@ -200,6 +206,10 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Mixed restore evidence across reporting sites', $html );
 		$this->assertStringContainsString( 'Sites reporting evidence', $html );
 		$this->assertStringContainsString( 'Reported source candidates', $html );
+		$this->assertStringContainsString( 'Server runner candidates', $html );
+		$this->assertStringContainsString( 'WPvivid candidates', $html );
+		$this->assertStringContainsString( '14 reported · 8 complete · 6 incomplete', $html );
+		$this->assertStringContainsString( '14 reported · 0 complete · 14 incomplete', $html );
 		$this->assertStringContainsString( 'they are not a restore guarantee', $html );
 		$this->assertStringContainsString( '<td>28</td>', $html );
 		$this->assertStringContainsString( '<td>3</td>', $html );

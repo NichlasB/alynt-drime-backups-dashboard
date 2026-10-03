@@ -198,6 +198,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 			'reported_candidates'   => 0,
 			'complete_candidates'   => 0,
 			'incomplete_candidates' => 0,
+			'server_candidates'     => 0,
+			'server_complete'       => 0,
+			'server_incomplete'     => 0,
+			'wpvivid_candidates'    => 0,
+			'wpvivid_complete'      => 0,
+			'wpvivid_incomplete'    => 0,
 		);
 
 		if ( empty( $snapshot ) || ! is_array( $snapshot ) ) {
@@ -244,16 +250,23 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics {
 			$checksum_state  = isset( $candidate['checksum_state'] ) ? sanitize_key( $candidate['checksum_state'] ) : 'unknown';
 			$manifest_state  = isset( $candidate['manifest_state'] ) ? sanitize_key( $candidate['manifest_state'] ) : 'unknown';
 			$sidecar_state   = isset( $candidate['sidecar_state'] ) ? sanitize_key( $candidate['sidecar_state'] ) : 'unknown';
-
-			if (
+			$source          = isset( $candidate['source'] ) ? sanitize_key( $candidate['source'] ) : '';
+			$is_complete     = (
 				'complete' === $component_state
 				&& 'verified' === $checksum_state
 				&& 'compatible' === $manifest_state
 				&& 'present' === $sidecar_state
-			) {
+			);
+
+			if ( $is_complete ) {
 				++$counts['complete_candidates'];
 			} else {
 				++$counts['incomplete_candidates'];
+			}
+
+			if ( in_array( $source, array( 'server', 'wpvivid' ), true ) ) {
+				++$counts[ $source . '_candidates' ];
+				++$counts[ $source . ( $is_complete ? '_complete' : '_incomplete' ) ];
 			}
 		}
 

@@ -192,6 +192,8 @@ Restore-readiness Sites-row hint status: implemented locally as a display-only f
 
 Restore-readiness Diagnostics summary status: implemented locally as a small display-only polish slice after the Sites-row hints. The Diagnostics restore-readiness aggregate panel now includes one operator-facing summary row, such as "Evidence incomplete across reporting sites," so operators can scan fleet readiness posture before reading individual aggregate counts. This slice reuses existing support-safe aggregate counts only, does not store new data, does not change the status payload schema, does not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or raw payloads, and does not add restore controls or imply restore guarantees.
 
+Restore-readiness source-level Diagnostics status: implemented locally as a follow-up display-only aggregate slice. Diagnostics now counts server-runner and WPvivid restore-readiness candidates separately so operators can see which backup source is missing complete restore evidence across the fleet. This slice uses only the existing sanitized `restore_readiness.candidates[].source` and state fields, remains aggregate-only and support-safe, and does not expose site labels, domains, candidate references, paths, filenames, package names, Drime identifiers, credentials, raw payloads, restore controls, or restore guarantees.
+
 Recommended next boundary:
 
 - keep V2.4 at `cleanup_preview` unless a separate high-risk cleanup-apply planning decision is explicitly approved;

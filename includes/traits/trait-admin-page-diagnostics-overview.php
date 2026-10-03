@@ -101,6 +101,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_detail_row( __( 'Reported source candidates', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'reported_candidates' ) );
 		$this->render_detail_row( __( 'Complete source candidates', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'complete_candidates' ) );
 		$this->render_detail_row( __( 'Incomplete source candidates', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'incomplete_candidates' ) );
+		$this->render_detail_row( __( 'Server runner candidates', 'alynt-drime-backups-dashboard' ), $this->restore_readiness_source_count_label( $restore_readiness, 'server' ) );
+		$this->render_detail_row( __( 'WPvivid candidates', 'alynt-drime-backups-dashboard' ), $this->restore_readiness_source_count_label( $restore_readiness, 'wpvivid' ) );
 		echo '</tbody></table>';
 		echo '<p class="description">' . esc_html__( 'These support-safe counts summarize optional restore-readiness evidence from latest client reports. They do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or restore controls, and they are not a restore guarantee.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 
@@ -160,6 +162,34 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		}
 
 		return __( 'Not enough restore evidence to summarize', 'alynt-drime-backups-dashboard' );
+	}
+
+	/**
+	 * Formats aggregate restore-readiness candidate counts for one source.
+	 *
+	 * @since 0.1.55
+	 *
+	 * @param array<string,mixed> $restore_readiness Restore-readiness aggregate counts.
+	 * @param string              $source Source key.
+	 * @return string
+	 */
+	private function restore_readiness_source_count_label( array $restore_readiness, $source ) {
+		$source     = sanitize_key( (string) $source );
+		$total      = $this->diagnostic_int( $restore_readiness, $source . '_candidates' );
+		$complete   = $this->diagnostic_int( $restore_readiness, $source . '_complete' );
+		$incomplete = $this->diagnostic_int( $restore_readiness, $source . '_incomplete' );
+
+		if ( 0 === $total ) {
+			return __( '0 reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		return sprintf(
+			/* translators: 1: total candidates. 2: complete candidates. 3: incomplete candidates. */
+			__( '%1$d reported · %2$d complete · %3$d incomplete', 'alynt-drime-backups-dashboard' ),
+			$total,
+			$complete,
+			$incomplete
+		);
 	}
 
 	/**

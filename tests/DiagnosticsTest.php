@@ -539,8 +539,16 @@ class DiagnosticsTest extends TestCase {
 		$this->assertSame( 3, $result['counts']['restore_readiness']['reported_candidates'] );
 		$this->assertSame( 1, $result['counts']['restore_readiness']['complete_candidates'] );
 		$this->assertSame( 2, $result['counts']['restore_readiness']['incomplete_candidates'] );
+		$this->assertSame( 2, $result['counts']['restore_readiness']['server_candidates'] );
+		$this->assertSame( 1, $result['counts']['restore_readiness']['server_complete'] );
+		$this->assertSame( 1, $result['counts']['restore_readiness']['server_incomplete'] );
+		$this->assertSame( 1, $result['counts']['restore_readiness']['wpvivid_candidates'] );
+		$this->assertSame( 0, $result['counts']['restore_readiness']['wpvivid_complete'] );
+		$this->assertSame( 1, $result['counts']['restore_readiness']['wpvivid_incomplete'] );
 		$this->assertStringContainsString( 'restore_readiness', $encoded );
 		$this->assertStringContainsString( 'reported_candidates', $encoded );
+		$this->assertStringContainsString( 'server_candidates', $encoded );
+		$this->assertStringContainsString( 'wpvivid_candidates', $encoded );
 		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
 		$this->assertStringNotContainsString( 'Client 1', $encoded );
 		$this->assertStringNotContainsString( 'opaque-do-not-export', $encoded );

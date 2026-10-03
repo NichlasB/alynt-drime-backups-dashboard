@@ -148,6 +148,10 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			$restore_readiness_counts = $this->restore_readiness_diagnostics( $snapshot );
 
 			foreach ( $restore_readiness_counts as $key => $value ) {
+				if ( ! isset( $counts['restore_readiness'][ $key ] ) ) {
+					$counts['restore_readiness'][ $key ] = 0;
+				}
+
 				$counts['restore_readiness'][ $key ] += $value;
 			}
 		}

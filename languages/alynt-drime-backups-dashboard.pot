@@ -3321,7 +3321,24 @@ msgid "Incomplete source candidates"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:104
+msgid "Server runner candidates"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:105
+msgid "WPvivid candidates"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:104
 msgid "These support-safe counts summarize optional restore-readiness evidence from latest client reports. They do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or restore controls, and they are not a restore guarantee."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:183
+msgid "0 reported"
+msgstr ""
+
+#. translators: 1: total candidates. 2: complete candidates. 3: incomplete candidates.
+#: includes/traits/trait-admin-page-diagnostics-overview.php:188
+msgid "%1$d reported · %2$d complete · %3$d incomplete"
 msgstr ""
 
 #: includes/traits/trait-admin-page-restore-readiness-evidence.php:30
