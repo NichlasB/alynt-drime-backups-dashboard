@@ -197,6 +197,7 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Recent attention transitions', $html );
 		$this->assertStringContainsString( 'These aggregate counts come from retained redacted snapshot status history only.', $html );
 		$this->assertStringContainsString( 'Restore Readiness Evidence', $html );
+		$this->assertStringContainsString( 'Mixed restore evidence across reporting sites', $html );
 		$this->assertStringContainsString( 'Sites reporting evidence', $html );
 		$this->assertStringContainsString( 'Reported source candidates', $html );
 		$this->assertStringContainsString( 'they are not a restore guarantee', $html );

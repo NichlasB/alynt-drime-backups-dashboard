@@ -91,6 +91,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Restore Readiness Evidence', 'alynt-drime-backups-dashboard' ) . '</h3>';
 		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Restore readiness evidence diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
+		$this->render_detail_row( __( 'Summary', 'alynt-drime-backups-dashboard' ), $this->restore_readiness_summary_label( $restore_readiness ) );
 		$this->render_detail_row( __( 'Sites reporting evidence', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'reporting_sites' ) );
 		$this->render_detail_row( __( 'Sites with evidence available', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'evidence_sites' ) );
 		$this->render_detail_row( __( 'Sites with incomplete evidence', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'incomplete_sites' ) );
@@ -108,6 +109,57 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_event_log_diagnostics( $logging );
 		$this->render_support_copy_output( $support );
 		echo '</section>';
+	}
+
+	/**
+	 * Gets an operator-facing summary label for restore-readiness aggregates.
+	 *
+	 * @since 0.1.55
+	 *
+	 * @param array<string,mixed> $restore_readiness Restore-readiness aggregate counts.
+	 * @return string
+	 */
+	private function restore_readiness_summary_label( array $restore_readiness ) {
+		$reporting    = $this->diagnostic_int( $restore_readiness, 'reporting_sites' );
+		$available    = $this->diagnostic_int( $restore_readiness, 'evidence_sites' );
+		$incomplete   = $this->diagnostic_int( $restore_readiness, 'incomplete_sites' );
+		$stale        = $this->diagnostic_int( $restore_readiness, 'stale_sites' );
+		$incompatible = $this->diagnostic_int( $restore_readiness, 'incompatible_sites' );
+		$unknown      = $this->diagnostic_int( $restore_readiness, 'unknown_sites' );
+
+		if ( 0 === $reporting ) {
+			return __( 'No restore evidence reported yet', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $incompatible > 0 ) {
+			return __( 'Incompatible restore evidence reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $stale > 0 ) {
+			return __( 'Stale restore evidence reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $incomplete > 0 && $available > 0 ) {
+			return __( 'Mixed restore evidence across reporting sites', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $incomplete > 0 ) {
+			return __( 'Evidence incomplete across reporting sites', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $unknown > 0 ) {
+			return __( 'Unknown restore evidence states reported', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $available === $reporting ) {
+			return __( 'Evidence available across reporting sites', 'alynt-drime-backups-dashboard' );
+		}
+
+		if ( $available > 0 ) {
+			return __( 'Evidence available for some reporting sites', 'alynt-drime-backups-dashboard' );
+		}
+
+		return __( 'Not enough restore evidence to summarize', 'alynt-drime-backups-dashboard' );
 	}
 
 	/**

@@ -190,6 +190,8 @@ Restore-preparation evidence status: planning-only design created in `docs/V2_6_
 
 Restore-readiness Sites-row hint status: implemented locally as a display-only follow-up to the evidence consumer and Diagnostics aggregate slices. The Sites tab now shows a compact `Restore evidence` hint when the latest sanitized client payload includes optional `restore_readiness` evidence. The hint summarizes the overall evidence state and source-level candidate states without exposing candidate references, paths, filenames, package names, Drime identifiers, credentials, or restore controls. The detailed evidence remains on Site Detail, and the hint does not affect classification, polling, protocol behavior, schema, credentials, Drime behavior, backup creation, restore, cleanup/delete, release, deploy, or live-site state.
 
+Restore-readiness Diagnostics summary status: implemented locally as a small display-only polish slice after the Sites-row hints. The Diagnostics restore-readiness aggregate panel now includes one operator-facing summary row, such as "Evidence incomplete across reporting sites," so operators can scan fleet readiness posture before reading individual aggregate counts. This slice reuses existing support-safe aggregate counts only, does not store new data, does not change the status payload schema, does not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or raw payloads, and does not add restore controls or imply restore guarantees.
+
 Recommended next boundary:
 
 - keep V2.4 at `cleanup_preview` unless a separate high-risk cleanup-apply planning decision is explicitly approved;

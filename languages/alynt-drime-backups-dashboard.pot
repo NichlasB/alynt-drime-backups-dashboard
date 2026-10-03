@@ -3248,6 +3248,42 @@ msgstr ""
 msgid "Restore readiness evidence diagnostics"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview.php:131
+msgid "No restore evidence reported yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:135
+msgid "Incompatible restore evidence reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:139
+msgid "Stale restore evidence reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:143
+msgid "Mixed restore evidence across reporting sites"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:147
+msgid "Evidence incomplete across reporting sites"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:151
+msgid "Unknown restore evidence states reported"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:155
+msgid "Evidence available across reporting sites"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:159
+msgid "Evidence available for some reporting sites"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:162
+msgid "Not enough restore evidence to summarize"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:94
 msgid "Sites reporting evidence"
 msgstr ""
