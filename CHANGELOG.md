@@ -4,9 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.53 - 2026-10-03
+
 ### Added
 
 - Added support-safe Diagnostics and support-copy aggregate counts for optional restore-readiness evidence, including reporting sites, evidence states, and complete/incomplete source candidate totals.
+
+### Changed
+
+- Removed optional watch-only npm development helpers that depended on a vulnerable `braces` transitive package while preserving the supported build, lint, test, POT, and deploy scripts.
 
 ### Security
 
