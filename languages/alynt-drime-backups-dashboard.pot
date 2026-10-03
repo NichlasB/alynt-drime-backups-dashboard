@@ -3239,8 +3239,53 @@ msgstr ""
 msgid "One or more backup sources report stale or missing upload evidence."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview.php:92
 #: includes/traits/trait-admin-page-restore-readiness-evidence.php:29
 msgid "Restore Readiness Evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:93
+msgid "Restore readiness evidence diagnostics"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:94
+msgid "Sites reporting evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:95
+msgid "Sites with evidence available"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:96
+msgid "Sites with incomplete evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:97
+msgid "Sites with stale evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:98
+msgid "Sites with incompatible evidence"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:99
+msgid "Unknown evidence states"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:100
+msgid "Reported source candidates"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:101
+msgid "Complete source candidates"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:102
+msgid "Incomplete source candidates"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:104
+msgid "These support-safe counts summarize optional restore-readiness evidence from latest client reports. They do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or restore controls, and they are not a restore guarantee."
 msgstr ""
 
 #: includes/traits/trait-admin-page-restore-readiness-evidence.php:30

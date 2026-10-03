@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added support-safe Diagnostics and support-copy aggregate counts for optional restore-readiness evidence, including reporting sites, evidence states, and complete/incomplete source candidate totals.
+
+### Security
+
+- Preserved the restore boundary: the Diagnostics aggregates do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, restore controls, or restore guarantees.
+
 ## 0.1.52 - 2026-10-02
 
 ### Added

@@ -164,6 +164,17 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 						'repeated_attention_records'  => 1,
 						'recent_attention_transitions' => 3,
 					),
+					'restore_readiness'  => array(
+						'reporting_sites'       => 14,
+						'evidence_sites'        => 8,
+						'incomplete_sites'      => 6,
+						'stale_sites'           => 0,
+						'incompatible_sites'    => 0,
+						'unknown_sites'         => 0,
+						'reported_candidates'   => 28,
+						'complete_candidates'   => 8,
+						'incomplete_candidates' => 20,
+					),
 				),
 				'summaries' => array(
 					'attention_history' => 'repeated_attention_seen',
@@ -185,6 +196,11 @@ class AdminPageDiagnosticsRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Repeated attention records', $html );
 		$this->assertStringContainsString( 'Recent attention transitions', $html );
 		$this->assertStringContainsString( 'These aggregate counts come from retained redacted snapshot status history only.', $html );
+		$this->assertStringContainsString( 'Restore Readiness Evidence', $html );
+		$this->assertStringContainsString( 'Sites reporting evidence', $html );
+		$this->assertStringContainsString( 'Reported source candidates', $html );
+		$this->assertStringContainsString( 'they are not a restore guarantee', $html );
+		$this->assertStringContainsString( '<td>28</td>', $html );
 		$this->assertStringContainsString( '<td>3</td>', $html );
 	}
 

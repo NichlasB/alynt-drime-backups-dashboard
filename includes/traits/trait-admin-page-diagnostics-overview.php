@@ -30,6 +30,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$support           = isset( $diagnostics['support'] ) && is_array( $diagnostics['support'] ) ? $diagnostics['support'] : array();
 		$states            = isset( $counts['record_states'] ) && is_array( $counts['record_states'] ) ? $counts['record_states'] : array();
 		$attention_history = isset( $counts['attention_history'] ) && is_array( $counts['attention_history'] ) ? $counts['attention_history'] : array();
+		$restore_readiness = isset( $counts['restore_readiness'] ) && is_array( $counts['restore_readiness'] ) ? $counts['restore_readiness'] : array();
 		$summaries         = isset( $diagnostics['summaries'] ) && is_array( $diagnostics['summaries'] ) ? $diagnostics['summaries'] : array();
 
 		echo '<section aria-labelledby="adbd-diagnostics-heading">';
@@ -87,6 +88,20 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_detail_row( __( 'Recent attention transitions', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $attention_history, 'recent_attention_transitions' ) );
 		echo '</tbody></table>';
 		echo '<p class="description">' . esc_html__( 'These aggregate counts come from retained redacted snapshot status history only. They do not list client domains, labels, raw payloads, paths, credentials, Drime identifiers, or remote-action details.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+
+		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Restore Readiness Evidence', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Restore readiness evidence diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
+		$this->render_detail_row( __( 'Sites reporting evidence', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'reporting_sites' ) );
+		$this->render_detail_row( __( 'Sites with evidence available', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'evidence_sites' ) );
+		$this->render_detail_row( __( 'Sites with incomplete evidence', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'incomplete_sites' ) );
+		$this->render_detail_row( __( 'Sites with stale evidence', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'stale_sites' ) );
+		$this->render_detail_row( __( 'Sites with incompatible evidence', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'incompatible_sites' ) );
+		$this->render_detail_row( __( 'Unknown evidence states', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'unknown_sites' ) );
+		$this->render_detail_row( __( 'Reported source candidates', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'reported_candidates' ) );
+		$this->render_detail_row( __( 'Complete source candidates', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'complete_candidates' ) );
+		$this->render_detail_row( __( 'Incomplete source candidates', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $restore_readiness, 'incomplete_candidates' ) );
+		echo '</tbody></table>';
+		echo '<p class="description">' . esc_html__( 'These support-safe counts summarize optional restore-readiness evidence from latest client reports. They do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or restore controls, and they are not a restore guarantee.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 
 		$this->render_status_count_table( isset( $counts['statuses'] ) && is_array( $counts['statuses'] ) ? $counts['statuses'] : array() );
 		$this->render_recent_poll_outcomes( $recent );

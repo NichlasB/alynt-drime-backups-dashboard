@@ -68,6 +68,17 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				'apply_or_mutation_advertised_sites' => 0,
 				'supported_categories'               => 0,
 			),
+			'restore_readiness'   => array(
+				'reporting_sites'       => 0,
+				'evidence_sites'        => 0,
+				'incomplete_sites'      => 0,
+				'stale_sites'           => 0,
+				'incompatible_sites'    => 0,
+				'unknown_sites'         => 0,
+				'reported_candidates'   => 0,
+				'complete_candidates'   => 0,
+				'incomplete_candidates' => 0,
+			),
 		);
 
 		foreach ( $sites as $site ) {
@@ -132,6 +143,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 
 			foreach ( $cleanup_counts as $key => $value ) {
 				$counts['cleanup_preview'][ $key ] += $value;
+			}
+
+			$restore_readiness_counts = $this->restore_readiness_diagnostics( $snapshot );
+
+			foreach ( $restore_readiness_counts as $key => $value ) {
+				$counts['restore_readiness'][ $key ] += $value;
 			}
 		}
 
