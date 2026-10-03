@@ -10,7 +10,7 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - Previous published release: `v0.1.55`
 - Candidate purpose: release a low-risk docs/structure patch after the `0.1.55` restore-readiness release: roadmap reconciliation, cleanup-preview Remote Action History helper split, and retained attention/recovery Diagnostics metrics helper split.
 - Boundary: release-prep source/docs/package metadata only. This candidate does not deploy/update `control-sitesmanage`, create backups, restore, delete, clean up, change WPvivid/server-runner schedules, execute rollback, change credentials, store Drime API credentials, run arbitrary commands, expose restore candidate references, or perform database/server actions.
-- Current checklist note: rows updated on 2026-10-03 reflect the current `0.1.56` release candidate after local structure validation, release-prep metadata update, local PHPUnit/PHPCS/build checks, and pending package verification. The full DS3 pre-release workflow was not rerun because this candidate is a small docs/structure-only patch built on already-pushed commits with passing GitHub CI and no runtime behavior changes.
+- Current checklist note: rows updated on 2026-10-03 reflect the current `0.1.56` release candidate after local structure validation, release-prep metadata update, local PHPUnit/PHPCS/build checks, and package verification. The full DS3 pre-release workflow was not rerun because this candidate is a small docs/structure-only patch built on already-pushed commits with passing GitHub CI and no runtime behavior changes.
 
 ## Prerequisites
 
@@ -56,15 +56,15 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] Composer audit passed: no security vulnerability advisories found.
 - [x] `git diff --check` passed.
 - [x] Translation-template coverage checked for this patch release. No new strings were introduced; full POT regeneration was not rerun because local WP-CLI scanning currently fails in this environment.
-- [ ] Release ZIP audit passed for `0.1.56`.
-- [ ] GitHub release created for `v0.1.56` and release asset uploaded.
+- [x] Release ZIP audit passed for `0.1.56`; ZIP has a single `alynt-drime-backups-dashboard/` root, runtime-only contents, version metadata aligned to `0.1.56`, and the expected `@since 0.1.56` helper-trait metadata.
+- [x] GitHub release created for `v0.1.56` and release asset uploaded.
 - [ ] Updater install/update smoke verification not yet run for `0.1.56`.
 - [ ] Live dashboard deployment/update on `control-sitesmanage` not yet performed.
 
 ## Open Items
 
-- [ ] Commit `0.1.56` release-prep metadata changes.
-- [ ] Push local `0.1.56` release commit to `origin/master` and verify CI.
-- [ ] Tag/publish `v0.1.56` and verify release asset packaging after CI passes.
-- [ ] Run release ZIP audit for `0.1.56`.
+- [x] Commit `0.1.56` release-prep metadata changes.
+- [x] Push local `0.1.56` release commit to `origin/master` and verify CI.
+- [x] Tag/publish `v0.1.56` and verify release asset packaging after CI passes.
+- [x] Run release ZIP audit for `0.1.56`.
 - [ ] Deploy/update dashboard plugin on `control-sitesmanage` only after live-site approval.
