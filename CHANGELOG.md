@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.56 - 2026-10-03
+
 ### Changed
 
 - Reconciled restore-readiness roadmap docs after the `0.1.55` release so Site Detail, Sites-row, and Diagnostics visibility work is marked released/deployed/monitored and further restore-adjacent work is explicitly separated from restore execution.
