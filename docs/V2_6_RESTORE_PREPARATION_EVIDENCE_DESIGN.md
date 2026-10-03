@@ -1,6 +1,6 @@
 # V2.6 Restore Preparation Evidence Design
 
-Status: planning-only design record. This document does not approve implementation, release, deployment, live enablement, restore preparation runtime actions, restore execution, backup deletion, Drime mutation, arbitrary filesystem browsing, dashboard-side Drime credentials, or production data changes.
+Status: first evidence/display line completed. The dashboard-side read-only evidence consumer, Site Detail display, compact Sites-row hints, Diagnostics summary row, and source-level Diagnostics aggregates are implemented, released, deployed, and post-release monitored through dashboard `0.1.55`. This document still does not approve restore preparation runtime actions, restore execution, backup deletion, Drime mutation, arbitrary filesystem browsing, dashboard-side Drime credentials, or production data changes.
 
 Related artifacts:
 
@@ -129,11 +129,14 @@ Site Detail:
 Sites list:
 
 - do not add row-level restore controls;
-- optionally add a compact read-only readiness hint later only if Site Detail proves useful.
+- show a compact read-only `Restore evidence` hint when sanitized evidence is present;
+- keep the hint support-safe and bounded to overall/source evidence states;
+- do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, or restore controls.
 
 Diagnostics/support copy:
 
 - aggregate counts only, such as sites with evidence, missing evidence, incomplete evidence, and incompatible evidence;
+- include an operator-facing overall summary row and source-level Server/WPvivid aggregate counts;
 - do not include domains, paths, object IDs, filenames, or candidate refs in support copy unless a later privacy review explicitly approves a redacted export field.
 
 ## Safety Boundaries
@@ -200,8 +203,10 @@ Before restore execution:
 
 ## Recommended Next Step
 
-If this planning direction is accepted, the next implementation slice should be read-only and additive:
+This planning direction was accepted, and the first implementation line is complete:
 
 **Restore Readiness Evidence Consumer** — dashboard-side sanitization and display of optional `restore_readiness` summaries, with no client actions and no restore controls.
 
-Do not proceed to restore execution from this design.
+Completed follow-up visibility slices include compact Sites-row hints, Diagnostics summary wording, and source-level Diagnostics aggregate counts, all released and post-release monitored through dashboard `0.1.55`.
+
+Do not proceed to restore execution from this design. Any next restore-adjacent work must start as a separate approved planning decision and must not add restore-preparation runtime actions, staging, download/import behavior, path browsing, Drime credentials, production mutation, or restore controls.
