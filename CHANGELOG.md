@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.54 - 2026-10-03
+
+### Added
+
+- Added compact Sites-row restore evidence hints when clients report optional restore-readiness summaries.
+- Kept detailed restore-readiness evidence on Site Detail while adding at-a-glance Sites-tab visibility.
+
+### Security
+
+- Preserved the restore boundary: Sites-row hints do not expose candidate references, paths, filenames, package names, Drime identifiers, credentials, restore controls, or restore guarantees.
+
 ## 0.1.53 - 2026-10-03
 
 ### Added
