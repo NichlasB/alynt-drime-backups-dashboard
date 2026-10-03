@@ -86,6 +86,7 @@ require_once dirname( __DIR__ ) . '/includes/traits/trait-poller-status-check.ph
 require_once dirname( __DIR__ ) . '/includes/class-poller.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-scheduler.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-support.php';
+require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-attention-history-metrics.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-site-metrics.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-diagnostics-site-metric-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/class-diagnostics.php';

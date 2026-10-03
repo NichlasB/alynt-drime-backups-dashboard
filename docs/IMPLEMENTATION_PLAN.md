@@ -347,6 +347,19 @@ Acceptance criteria:
 - Existing Diagnostics, snapshot, and rendering tests pass, with added coverage for the aggregate.
 - No live-site, release, deploy, push, schema, protocol, credential, Drime, backup, restore, delete, cleanup, rollback, or new remote-action behavior is introduced.
 
+### Diagnostics Attention History Metrics Structure Slice
+
+After the broader file-structure pass, `trait-diagnostics-site-metrics.php` became the largest remaining production helper. Keep behavior stable but split the retained Attention/Recovery History aggregate helpers into their own focused trait so site count/polling metrics and retained-history transition logic remain easier to maintain independently.
+
+Implementation status: implemented locally as a structure-only slice. Attention/recovery aggregate helpers now live in `includes/traits/trait-diagnostics-attention-history-metrics.php`, loaded before the main site-metrics trait. The change preserves existing Diagnostics/support-copy counts, summary codes, site status counting, polling metrics, backup-source metrics, schedule/cleanup/restore aggregates, redaction, protocol behavior, schema, credentials, Drime behavior, backup creation, restore, cleanup/delete, release, deployment, and live-site state.
+
+Acceptance criteria:
+
+- `trait-diagnostics-site-metrics.php` is comfortably below the preferred production-file size threshold.
+- Attention/recovery Diagnostics and support-copy aggregate tests continue to pass.
+- The new trait is loaded before the main site-metrics trait in the plugin bootstrap.
+- No live-site, release, deployment, push, protocol, schema, credential, Drime, backup, restore, delete, cleanup, or new remote-action behavior is introduced.
+
 Suggested tests:
 
 - Snapshot/repository transition derivation returns bounded, chronological, meaningful changes and ignores repeated same-status snapshots.
