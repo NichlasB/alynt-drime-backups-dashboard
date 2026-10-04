@@ -745,6 +745,80 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Cleanup-preview panel renders latest sanitized preview evidence when reported.
+	 *
+	 * @return void
+	 */
+	public function test_cleanup_preview_panel_renders_latest_preview_evidence_summary() {
+		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$site     = $this->remote_action_history_site();
+		$snapshot = array(
+			'decoded_payload' => array(
+				'remote_actions' => array(
+					'protocol_version'    => 2,
+					'enabled'             => true,
+					'key_id'              => 'ak_test',
+					'allowed_actions'     => array( 'scan_upload_now', 'cleanup_preview', 'cleanup_apply' ),
+					'sodium_available'    => true,
+					'cleanup_management'  => array(
+						'protocol_version'        => 2,
+						'capability_version'      => 1,
+						'enabled'                 => true,
+						'preview_supported'       => true,
+						'apply_supported'         => false,
+						'scope'                   => 'safe_local_uploader_owned',
+						'supported_categories'    => array( 'uploader_temp_artifacts', 'server_backups' ),
+						'max_preview_age_seconds' => 900,
+					),
+					'last_action'         => array(
+						'action_id'       => '44444444-4444-4444-8444-444444444444',
+						'action_type'     => 'cleanup_preview',
+						'state'           => 'succeeded',
+						'code'            => 'cleanup_preview_ready',
+						'summary'         => 'Cleanup preview is ready. Nothing was deleted.',
+						'cleanup_preview' => array(
+							'preview_action_id'    => '44444444-4444-4444-8444-444444444444',
+							'preview_fingerprint'  => str_repeat( 'e', 64 ),
+							'capability_version'   => 1,
+							'scope'                => 'safe_local_uploader_owned',
+							'preview_created_at'   => '2026-09-29T12:00:00+00:00',
+							'expires_at'           => '2026-09-29T12:15:00+00:00',
+							'total_eligible_count' => 2,
+							'total_approx_bytes'   => 2048,
+							'apply_supported'      => true,
+							'categories'           => array(
+								array(
+									'category'       => 'uploader_temp_artifacts',
+									'eligible_count' => 2,
+									'approx_bytes'   => 2048,
+									'age_band'       => 'older_than_24h',
+									'reason_code'    => 'safe_local_uploader_owned_temp_artifacts',
+								),
+								array(
+									'category'       => 'server_backups',
+									'eligible_count' => 99,
+									'approx_bytes'   => 999999,
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+		$html     = $harness->cleanup_preview_panel_html( $site, $snapshot );
+
+		$this->assertStringContainsString( 'Latest preview evidence', $html );
+		$this->assertStringContainsString( '2 eligible temporary items; approx 2 KB', $html );
+		$this->assertStringContainsString( 'Uploader temporary artifacts', $html );
+		$this->assertStringContainsString( '2 eligible; approx 2 KB; age older_than_24h; reason safe_local_uploader_owned_temp_artifacts', $html );
+		$this->assertStringContainsString( 'Evidence only: no cleanup apply, delete, retention, restore, credential, or Drime action is available.', $html );
+		$this->assertStringNotContainsString( 'server_backups', $html );
+		$this->assertStringNotContainsString( '99 eligible', $html );
+		$this->assertStringNotContainsString( 'Apply Cleanup', $html );
+		$this->assertStringNotContainsString( '/home/', $html );
+	}
+
+	/**
 	 * Cleanup-preview panel is hidden for clients that do not advertise support.
 	 *
 	 * @return void

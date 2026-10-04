@@ -35,6 +35,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Cleanup_Preview_Helpers {
 		echo '<p>' . esc_html__( 'V2.4 Cleanup Preview asks the client uploader to estimate safe, uploader-owned temporary artifacts only. It does not delete files, clean Drime, change retention, restore backups, or expose filesystem paths.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '<p class="description">' . esc_html__( 'Cleanup apply is intentionally unavailable in this release. Preview results are evidence only; the dashboard cannot use them to delete files or mutate Drime.', 'alynt-drime-backups-dashboard' ) . '</p>';
 
+		$this->render_cleanup_preview_latest_evidence( $payload );
+
 		if ( $availability['available'] ) {
 			echo '<p><span class="adbd-status-pill is-working">' . esc_html__( 'Capability reported', 'alynt-drime-backups-dashboard' ) . '</span> ' . esc_html( $availability['message'] ) . '</p>';
 			$this->render_cleanup_preview_form( $site );
@@ -62,6 +64,87 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Cleanup_Preview_Helpers {
 			<span id="<?php echo esc_attr( $description_id ); ?>" class="description"><?php esc_html_e( 'Sends one signed preview-only intent for uploader-owned temporary artifacts. The client may accept, reject, rate-limit, or report busy; no cleanup or delete action is requested.', 'alynt-drime-backups-dashboard' ); ?></span>
 		</form>
 		<?php
+	}
+
+	/**
+	 * Renders the latest redacted cleanup-preview evidence from the client report.
+	 *
+	 * @param array<string,mixed> $payload Latest decoded snapshot payload.
+	 * @return void
+	 */
+	private function render_cleanup_preview_latest_evidence( array $payload ) {
+		$preview = $this->cleanup_preview_latest_evidence( $payload );
+
+		if ( empty( $preview ) ) {
+			return;
+		}
+
+		echo '<div class="adbd-detail-title"><h4>' . esc_html__( 'Latest preview evidence', 'alynt-drime-backups-dashboard' ) . '</h4></div>';
+		echo '<dl class="adbd-detail-list">';
+		$this->render_detail_item(
+			__( 'Summary', 'alynt-drime-backups-dashboard' ),
+			sprintf(
+				/* translators: 1: eligible item count, 2: approximate byte label. */
+				__( '%1$d eligible temporary items; approx %2$s', 'alynt-drime-backups-dashboard' ),
+				isset( $preview['total_eligible_count'] ) ? max( 0, (int) $preview['total_eligible_count'] ) : 0,
+				$this->remote_action_bytes_label( isset( $preview['total_approx_bytes'] ) ? (int) $preview['total_approx_bytes'] : 0 )
+			)
+		);
+
+		if ( ! empty( $preview['preview_created_at'] ) ) {
+			$this->render_detail_item( __( 'Preview created', 'alynt-drime-backups-dashboard' ), $this->datetime_label( (string) $preview['preview_created_at'] ) );
+		}
+
+		if ( ! empty( $preview['expires_at'] ) ) {
+			$this->render_detail_item( __( 'Preview expires', 'alynt-drime-backups-dashboard' ), $this->datetime_label( (string) $preview['expires_at'] ) );
+		}
+
+		$categories = isset( $preview['categories'] ) && is_array( $preview['categories'] ) ? $preview['categories'] : array();
+		foreach ( $categories as $category ) {
+			if ( ! is_array( $category ) ) {
+				continue;
+			}
+
+			$this->render_detail_item(
+				$this->cleanup_category_label( isset( $category['category'] ) ? (string) $category['category'] : '' ),
+				sprintf(
+					/* translators: 1: eligible item count, 2: approximate byte label, 3: age band, 4: reason code. */
+					__( '%1$d eligible; approx %2$s; age %3$s; reason %4$s', 'alynt-drime-backups-dashboard' ),
+					isset( $category['eligible_count'] ) ? max( 0, (int) $category['eligible_count'] ) : 0,
+					$this->remote_action_bytes_label( isset( $category['approx_bytes'] ) ? (int) $category['approx_bytes'] : 0 ),
+					isset( $category['age_band'] ) && '' !== (string) $category['age_band'] ? sanitize_key( (string) $category['age_band'] ) : __( 'unknown', 'alynt-drime-backups-dashboard' ),
+					isset( $category['reason_code'] ) && '' !== (string) $category['reason_code'] ? sanitize_key( (string) $category['reason_code'] ) : __( 'not reported', 'alynt-drime-backups-dashboard' )
+				)
+			);
+		}
+
+		$this->render_detail_item( __( 'Boundary', 'alynt-drime-backups-dashboard' ), __( 'Evidence only: no cleanup apply, delete, retention, restore, credential, or Drime action is available.', 'alynt-drime-backups-dashboard' ) );
+		echo '</dl>';
+	}
+
+	/**
+	 * Gets the latest sanitized cleanup-preview evidence from a decoded payload.
+	 *
+	 * @param array<string,mixed> $payload Latest decoded snapshot payload.
+	 * @return array<string,mixed>
+	 */
+	private function cleanup_preview_latest_evidence( array $payload ) {
+		$remote_actions = isset( $payload['remote_actions'] ) && is_array( $payload['remote_actions'] ) ? $payload['remote_actions'] : array();
+		$capabilities   = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$clean          = $capabilities->sanitize( $remote_actions );
+
+		if ( is_wp_error( $clean ) || empty( $clean['last_action'] ) || ! is_array( $clean['last_action'] ) ) {
+			return array();
+		}
+
+		$last_action = $clean['last_action'];
+		$action_type = isset( $last_action['action_type'] ) ? (string) $last_action['action_type'] : '';
+
+		if ( 'cleanup_preview' !== $action_type || empty( $last_action['cleanup_preview'] ) || ! is_array( $last_action['cleanup_preview'] ) ) {
+			return array();
+		}
+
+		return $last_action['cleanup_preview'];
 	}
 
 	/**
