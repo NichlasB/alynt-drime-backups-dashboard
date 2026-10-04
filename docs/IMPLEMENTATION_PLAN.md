@@ -43,6 +43,25 @@ Required gates:
 7. Treat rollback metadata capture as a separate stabilization/readiness slice from rollback execution. Capturing support-safe metadata may be designed before a `schedule_rollback` action exists, but `schedule_rollback` must remain unavailable until a later protocol/threat-model and release gate are approved.
 8. Treat `schedule_rollback_preview` as the next possible runtime design step before any mutating rollback action. Do not implement `schedule_rollback` directly from metadata capture without a non-mutating preview design, updated protocol/threat model, explicit user approval, tests proving stale/current-state rejection, and a separate release/deploy gate.
 
+### Remote Action Repository Context Structure Slice
+
+The remote-action repository has accumulated several support-safe context sanitizers as Request Backup Now, Schedule Preview, Schedule Apply, Schedule Rollback Preview, and Cleanup Preview were added. The next safe structure-only cleanup is to separate remote-action context sanitization from context merge/redaction helpers without changing storage shape, dispatch behavior, protocol behavior, database schema, UI output, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Remote-action context sanitizers now live in a dedicated repository context-sanitizers trait while the original context trait retains merge/redaction/count/timestamp helpers. No release, deployment, push, protocol change, database change, UI change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Implementation target:
+
+- move schedule-preview, schedule-apply, rollback-metadata, rollback-preview, and cleanup-preview context sanitizers into a dedicated repository context-sanitizers trait;
+- leave redacted-context handling, client-action context merging, client-action count sanitization, and client-action timestamp selection in the existing context trait;
+- preserve the existing repository public surface, stored JSON keys, redaction policy, allowlisted context fields, preview-only cleanup boundary, rollback-preview non-mutating boundary, and fail-closed sanitizer defaults;
+- keep the slice local-only until separately approved for push/release.
+
+Acceptance criteria:
+
+- targeted remote-action repository tests pass with unchanged behavior;
+- PHP syntax, lint, build, and whitespace checks pass;
+- no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.

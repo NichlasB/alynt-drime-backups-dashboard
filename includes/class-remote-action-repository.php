@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
 
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Sanitizers;
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Context_Sanitizers;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Context;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Lookups;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Rollback_Preview_Lookups;
