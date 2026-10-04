@@ -1,6 +1,6 @@
 # V2.4 Cleanup Preview Implementation Plan
 
-Status: non-mutating `cleanup_preview` is implemented, released, deployed, and proven as preview-only through dashboard `0.1.51` and uploader `0.5.24`. This document narrows V2.4 to the non-mutating `cleanup_preview` action only. It does not approve `cleanup_apply`, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard-side Drime credentials, or any mutating cleanup runtime behavior.
+Status: non-mutating `cleanup_preview` is implemented, released, deployed, and proven as preview-only through dashboard `0.1.51` and uploader `0.5.24`; dashboard `0.1.57` adds display-only latest cleanup-preview evidence on Site Detail when clients report sanitized preview results. This document narrows V2.4 to the non-mutating `cleanup_preview` action and support-safe evidence display only. It does not approve `cleanup_apply`, Drime deletion, backup-set deletion, restore behavior, arbitrary filesystem browsing, dashboard-side Drime credentials, or any mutating cleanup runtime behavior.
 
 Related artifacts:
 
@@ -105,7 +105,7 @@ Exit criteria:
 
 ### Slice 3 — Dashboard Capability Consumption And UI
 
-Implementation status: completed, released, deployed, and proven after the companion uploader proof. The dashboard sanitizes optional `remote_actions.cleanup_management`, hides controls unless cleanup preview is explicitly supported by the latest client report, dispatches a fixed signed `cleanup_preview` request from Site Detail only, renders support-safe cleanup preview history details, and includes cleanup-preview aggregate counts in Diagnostics/support output.
+Implementation status: completed, released, deployed, and proven after the companion uploader proof, with display-only latest preview evidence added in dashboard `0.1.57`. The dashboard sanitizes optional `remote_actions.cleanup_management`, hides controls unless cleanup preview is explicitly supported by the latest client report, dispatches a fixed signed `cleanup_preview` request from Site Detail only, renders support-safe cleanup preview history details, includes cleanup-preview aggregate counts in Diagnostics/support output, and shows the latest sanitized preview summary when present in the latest status payload.
 
 Implemented dashboard behavior:
 
@@ -116,6 +116,7 @@ Implemented dashboard behavior:
 5. Render Remote Action History entries as `Cleanup Preview`.
 6. Show category/count/byte/age-band/reason summaries without raw paths or object identifiers.
 7. Add Diagnostics/support-safe aggregate counts for cleanup-preview support/action states.
+8. Show display-only latest cleanup-preview evidence on Site Detail when the latest sanitized client status payload includes it, while hiding that evidence panel when it is absent.
 
 Exit criteria:
 
