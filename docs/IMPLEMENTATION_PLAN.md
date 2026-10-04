@@ -110,6 +110,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Diagnostics Test Harness Structure Slice
+
+The next largest PHPUnit structure hotspot is `DiagnosticsTest`, which mixes diagnostics assertions with reusable fake repository classes and support-summary harness code. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file while leaving diagnostics assertions, fixtures, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Diagnostics fake site/snapshot repositories and the support-summary harness now live in `tests/support/diagnostics-test-harness.php`, and `tests/DiagnosticsTest.php` requires that support file while keeping the existing test methods and fixture builders. No production PHP, assets, UI strings, Diagnostics output, support-copy shape, protocol behavior, database schema, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `DiagnosticsTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.
