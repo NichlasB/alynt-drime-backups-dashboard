@@ -98,6 +98,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Admin Polling-State Rendering Test Harness Structure Slice
+
+After the production-file cleanup pass, the largest remaining structure pressure is in PHPUnit rendering tests rather than runtime dashboard code. The `AdminPagePollingStateRenderingTest` file includes many intentionally broad admin-rendering assertions plus reusable harness and repository test-double classes. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file without changing assertions, fixtures, production code, protocol behavior, database schema, UI output, or live-site state.
+
+Implementation status: implemented locally as a test-only split. The polling-state rendering harness and remote-action repository test double now live in `tests/support/admin-page-polling-state-rendering-test-harness.php`, and `tests/AdminPagePollingStateRenderingTest.php` requires that support file while keeping the existing test methods and fixtures. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `AdminPagePollingStateRenderingTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.
