@@ -86,6 +86,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Diagnostics Restore Readiness Metrics Structure Slice
+
+The diagnostics backup-source metrics trait accumulated restore-readiness aggregate counting after restore-readiness evidence was added. The next safe structure-only cleanup is to move restore-readiness aggregate counting into a dedicated diagnostics metrics trait without changing collected counts, support-copy JSON shape, Diagnostics output, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Restore-readiness site/source candidate aggregation now lives in a dedicated diagnostics restore-readiness metrics trait, composed by the existing site metrics trait alongside backup-source, cleanup-preview, schedule-management, and attention-history metrics. No release, deployment, push, protocol change, database change, UI copy change, support-copy shape change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- diagnostics aggregate tests pass with unchanged restore-readiness counts;
+- PHP syntax, lint, build, and whitespace checks pass;
+- no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.

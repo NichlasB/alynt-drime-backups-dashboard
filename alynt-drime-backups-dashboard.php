@@ -119,6 +119,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-diagnostics-scheduler.php',
 	'includes/traits/trait-diagnostics-support.php',
 	'includes/traits/trait-diagnostics-backup-source-metrics.php',
+	'includes/traits/trait-diagnostics-restore-readiness-metrics.php',
 	'includes/traits/trait-diagnostics-attention-history-metrics.php',
 	'includes/traits/trait-diagnostics-site-metrics.php',
 	'includes/traits/trait-diagnostics-site-metric-helpers.php',

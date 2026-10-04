@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Backup_Source_Metrics;
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Restore_Readiness_Metrics;
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Attention_History_Metrics;
 
 	/**
