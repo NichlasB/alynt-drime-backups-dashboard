@@ -74,6 +74,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Diagnostics Overview Admin Helper Structure Slice
+
+The Diagnostics overview renderer has accumulated support-safe summary labels, runtime identity rendering, and cache-busted refresh helpers alongside the main screen shell. The next safe structure-only cleanup is to separate those helpers from the main overview renderer without changing Diagnostics output, support-copy behavior, scheduler diagnostics, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Restore-readiness labels, source-count formatting, runtime identity rendering, attention-history labels, and Diagnostics freshness/refresh URL helpers now live in a dedicated Diagnostics overview helpers trait. The original overview trait keeps the redacted Diagnostics screen shell and composes the helper trait. No release, deployment, push, protocol change, database change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- diagnostics rendering tests pass with unchanged output;
+- PHP syntax, lint, build, and whitespace checks pass;
+- no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.

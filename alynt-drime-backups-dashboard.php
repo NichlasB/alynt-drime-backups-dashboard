@@ -145,6 +145,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-admin-page-remote-actions.php',
 	'includes/traits/trait-admin-page-action-notices.php',
 	'includes/traits/trait-admin-page-actions.php',
+	'includes/traits/trait-admin-page-diagnostics-overview-helpers.php',
 	'includes/traits/trait-admin-page-diagnostics-overview.php',
 	'includes/traits/trait-admin-page-diagnostics-settings.php',
 	'includes/traits/trait-admin-page-diagnostics-event-log.php',
