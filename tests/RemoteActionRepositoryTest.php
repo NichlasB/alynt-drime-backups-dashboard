@@ -13,6 +13,8 @@ require_once __DIR__ . '/support/remote-action-repository-test-harness.php';
  * Tests dashboard-owned remote action storage.
  */
 class RemoteActionRepositoryTest extends TestCase {
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Test_Fixtures;
+
 	/**
 	 * Previous wpdb.
 	 *
@@ -61,7 +63,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_create_request_stores_redacted_action_context() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 		$action_id  = $repository->create_request(
 			44,
 			'scan_upload_now',
@@ -100,7 +102,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_mark_state_sanitizes_unknown_state() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 
 		$this->assertTrue( $repository->mark_state( 321, 'restore_now', 'raw code', 'Done', 30 ) );
 		$this->assertSame( array( 'id' => 321 ), $this->wpdb->updated_where );
@@ -115,7 +117,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_mark_client_report_stores_sanitized_reconciliation_fields() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 
 		$this->assertTrue(
 			$repository->mark_client_report(
@@ -160,11 +162,8 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_mark_client_report_preserves_schedule_apply_details() {
-		$repository      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
-		$this->wpdb->row = array(
-			'id'                    => 321,
-			'redacted_context_json' => wp_json_encode( array() ),
-		);
+		$repository      = $this->remote_action_repository();
+		$this->wpdb->row = $this->empty_remote_action_row();
 
 		$this->assertTrue(
 			$repository->mark_client_report(
@@ -234,11 +233,8 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_mark_client_report_preserves_schedule_rollback_preview_details() {
-		$repository      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
-		$this->wpdb->row = array(
-			'id'                    => 321,
-			'redacted_context_json' => wp_json_encode( array() ),
-		);
+		$repository      = $this->remote_action_repository();
+		$this->wpdb->row = $this->empty_remote_action_row();
 
 		$this->assertTrue(
 			$repository->mark_client_report(
@@ -293,7 +289,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_support_summary_counts_schedule_apply_rollback_metadata() {
-		$repository      = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository      = $this->remote_action_repository();
 		$this->wpdb->row = array(
 			'total'                      => 4,
 			'client_reconciled'          => 3,
@@ -323,7 +319,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_cleanup_retention_deletes_completed_actions_in_bounded_batches() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 		$cutoff     = gmdate( 'Y-m-d H:i:s', time() - ( 90 * 86400 ) );
 
 		$this->assertSame( 2, $repository->cleanup_retention( 90, 500 ) );
@@ -340,7 +336,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_mark_unconfirmed_actions_stale_is_site_scoped() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 
 		$this->assertSame( 2, $repository->mark_unconfirmed_actions_stale_for_site( 44, '2026-08-20 12:05:00' ) );
 		$this->assertStringContainsString( "state = 'stale'", $this->wpdb->last_query );
@@ -355,7 +351,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_fresh_schedule_preview_rejects_expired_preview() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 		$preview_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
 
 		$this->wpdb->row = array(
@@ -415,7 +411,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_successful_schedule_apply_for_rollback_preview_returns_safe_request_data() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository = $this->remote_action_repository();
 		$apply_id   = '33333333-3333-4333-8333-333333333333';
 
 		$this->wpdb->row = array(
@@ -487,7 +483,7 @@ class RemoteActionRepositoryTest extends TestCase {
 	 * @return void
 	 */
 	public function test_latest_and_recent_queries_are_site_scoped() {
-		$repository       = new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+		$repository       = $this->remote_action_repository();
 		$this->wpdb->row  = array( 'id' => 9, 'dashboard_site_id' => 44 );
 		$this->wpdb->rows = array( array( 'id' => 9, 'dashboard_site_id' => 44 ) );
 

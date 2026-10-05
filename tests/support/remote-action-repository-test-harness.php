@@ -182,3 +182,29 @@ class Alynt_Drime_Backups_Dashboard_Test_Remote_Action_WPDB {
 		return 2;
 	}
 }
+
+/**
+ * Shared remote action repository test fixtures.
+ */
+trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Test_Fixtures {
+	/**
+	 * Creates a fresh repository under test.
+	 *
+	 * @return Alynt_Drime_Backups_Dashboard_Remote_Action_Repository
+	 */
+	private function remote_action_repository() {
+		return new Alynt_Drime_Backups_Dashboard_Remote_Action_Repository();
+	}
+
+	/**
+	 * Returns a stored action row with no existing redacted context.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function empty_remote_action_row() {
+		return array(
+			'id'                    => 321,
+			'redacted_context_json' => wp_json_encode( array() ),
+		);
+	}
+}

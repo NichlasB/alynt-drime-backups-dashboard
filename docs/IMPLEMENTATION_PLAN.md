@@ -181,6 +181,20 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+
+### Remote Action Repository Test Fixture Structure Slice
+
+`RemoteActionRepositoryTest` retained repeated repository construction and small stored-action row fixtures after the remote-action repository harness split. The next safe test-only cleanup is to move those reusable test fixtures into the existing repository support file while leaving all remote-action repository assertions, production code, storage shape, protocol behavior, database schema, UI output, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only fixture split. The repository factory and empty stored-action row fixture now live in `tests/support/remote-action-repository-test-harness.php` as a dedicated fixture trait, and `tests/RemoteActionRepositoryTest.php` uses that trait while keeping the existing test methods and expected repository behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Validation scope:
+
+- syntax-check the remote-action repository test and support harness;
+- run the targeted `RemoteActionRepositoryTest` suite;
+- run the full local test suite, lint, build, and whitespace checks;
+- confirm the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Remote Action Dispatcher Test Harness Structure Slice
 
 The next largest PHPUnit structure hotspot is `RemoteActionDispatcherTest`, which mixes signed-dispatch assertions with reusable wpdb, credential-vault, signer, and remote-action repository test doubles. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file while leaving dispatcher assertions, fixtures, production code, protocol behavior, schema, dispatch behavior, signing behavior, transport behavior, and live-site state unchanged.
