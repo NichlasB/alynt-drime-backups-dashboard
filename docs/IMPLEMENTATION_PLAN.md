@@ -157,6 +157,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Admin Polling-State Rendering Test Class Split Slice
+
+The initial polling-state rendering harness split left `AdminPagePollingStateRenderingTest` as a broad assertion file covering polling controls, site-detail local record guidance, request-backup UI, remote-action history, schedule rollback-preview, and cleanup-preview rendering. The next safe test-only cleanup is to split those assertions into focused rendering test classes while preserving every existing assertion, fixture value, production helper call, UI string expectation, protocol boundary, and live-site behavior.
+
+Implementation status: implemented locally as a test-only split. Core polling row controls remain in `tests/AdminPagePollingStateRenderingTest.php`. Site-detail local record and attention/recovery rendering moved to `tests/AdminPageSiteDetailLocalRecordRenderingTest.php`. V2 request-backup rendering moved to `tests/AdminPageRequestBackupRenderingTest.php`. Remote-action history details and filters moved to dedicated remote-action history test classes. Schedule rollback-preview and cleanup-preview rendering moved to `tests/AdminPageScheduleCleanupRenderingTest.php`, with shared remote-action fixtures in `tests/support/admin-page-remote-action-rendering-fixtures.php` and shared bootstrap loading in `tests/support/admin-page-polling-state-rendering-bootstrap.php`.
+
+Acceptance criteria:
+
+- focused split rendering coverage passes with the same assertions;
+- no split test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Harness Structure Slice
 
 The next largest PHPUnit structure hotspot is `DiagnosticsTest`, which mixes diagnostics assertions with reusable fake repository classes and support-summary harness code. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file while leaving diagnostics assertions, fixtures, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
