@@ -91,6 +91,35 @@ if ( dashboard ) {
 		} );
 	} );
 
+	dashboard.querySelectorAll( '.adbd-download-button' ).forEach( ( button ) => {
+		button.hidden = false;
+		button.addEventListener( 'click', () => {
+			const field = document.getElementById( button.dataset.downloadTarget || '' );
+
+			if ( ! field ) {
+				return;
+			}
+
+			try {
+				const blob = new Blob( [ field.value ], { type: 'application/json' } );
+				const url = window.URL.createObjectURL( blob );
+				const link = document.createElement( 'a' );
+
+				link.href = url;
+				link.download = button.dataset.downloadFilename || 'alynt-drime-dashboard-support-summary.json';
+				link.hidden = true;
+				document.body.appendChild( link );
+				link.click();
+				link.remove();
+				window.URL.revokeObjectURL( url );
+
+				announceCopyResult( button, button.dataset.successMessage );
+			} catch ( error ) {
+				announceCopyResult( button, button.dataset.errorMessage );
+			}
+		} );
+	} );
+
 	dashboard.querySelectorAll( 'form' ).forEach( ( form ) => {
 		form.addEventListener( 'submit', ( event ) => {
 			const button = event.submitter;

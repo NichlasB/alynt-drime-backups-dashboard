@@ -1894,6 +1894,18 @@ msgstr ""
 msgid "Copy Support Summary"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-support-output.php:35
+msgid "Redacted support summary downloaded."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-support-output.php:35
+msgid "The summary could not be downloaded automatically. Use Copy Support Summary instead."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-support-output.php:35
+msgid "Download Support Summary"
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-tables.php:26
 msgid "Status Distribution"
 msgstr ""

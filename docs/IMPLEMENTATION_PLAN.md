@@ -98,6 +98,27 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Diagnostics Support Summary Export UI Slice
+
+The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.
+
+Implementation target:
+
+- add a secondary `Download Support Summary` control next to the existing copy action;
+- keep the control hidden until dashboard JavaScript is available, matching the existing copy-button progressive-enhancement pattern;
+- generate the downloaded file entirely from the existing redacted textarea content in the browser;
+- announce download success/failure through the existing support-copy live status region;
+- preserve the existing redaction boundary: no client domains, site labels, pairing tokens, polling secrets, authorization headers, raw payloads, raw response bodies, Drime credentials, or remote command output.
+
+Acceptance criteria:
+
+- Diagnostics renders both copy and download controls for the redacted support summary;
+- JavaScript-only download uses the existing redacted textarea content and a stable support-summary filename;
+- failures are announced with operator-friendly fallback copy;
+- targeted Diagnostics rendering tests cover the new controls;
+- lint, build, tests, and whitespace checks pass;
+- no live-site change, release, deployment, protocol change, database write, remote-action permission, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or raw payload exposure is introduced.
+
 ### Admin Polling-State Rendering Test Harness Structure Slice
 
 After the production-file cleanup pass, the largest remaining structure pressure is in PHPUnit rendering tests rather than runtime dashboard code. The `AdminPagePollingStateRenderingTest` file includes many intentionally broad admin-rendering assertions plus reusable harness and repository test-double classes. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file without changing assertions, fixtures, production code, protocol behavior, database schema, UI output, or live-site state.
