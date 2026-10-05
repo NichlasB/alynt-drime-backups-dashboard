@@ -134,6 +134,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Admin Page Actions Test Harness Structure Slice
+
+The next largest PHPUnit structure hotspot is `AdminPageActionsTest`, which mixes admin action assertions with reusable WordPress shims, enrollment manager, dispatcher, poller, event-log, site-repository test doubles, and the private-action harness. The next safe test-only cleanup is to move those reusable support definitions into a dedicated test support file while leaving admin action assertions, fixtures, production code, nonce behavior, action dispatch behavior, polling behavior, archive/pause behavior, protocol behavior, schema, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Admin action WordPress shims, fake collaborators, and the action harness now live in `tests/support/admin-page-actions-test-harness.php`, and `tests/AdminPageActionsTest.php` requires that support file while keeping the existing test methods and fixtures. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `AdminPageActionsTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.
