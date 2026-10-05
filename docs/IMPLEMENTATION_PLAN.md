@@ -182,6 +182,20 @@ Acceptance criteria:
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
 
+
+### Enrollment REST Controller Test Harness Structure Slice
+
+`EnrollmentRestControllerTest` retained WordPress transient shims, a fake site repository, and reusable controller/payload/request fixtures alongside enrollment assertions. The next safe test-only cleanup is to move those shims and fixtures into a dedicated support harness while leaving enrollment assertions, production REST code, pairing/security behavior, storage shape, protocol behavior, database schema, UI output, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only harness split. Enrollment REST transient shims, the fake repository, and reusable controller/payload/request fixtures now live in `tests/support/enrollment-rest-controller-test-harness.php`, and `tests/EnrollmentRestControllerTest.php` requires that support file while keeping the existing test methods and expected controller behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Validation scope:
+
+- syntax-check the enrollment REST controller test and support harness;
+- run the targeted `EnrollmentRestControllerTest` suite;
+- run the full local test suite, lint, build, and whitespace checks;
+- confirm the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Status Payload Validator Test Fixture Structure Slice
 
 `StatusPayloadValidatorTest` retained reusable valid status-payload and backup-source builders alongside validation assertions. The next safe test-only cleanup is to move those shared fixtures, plus validator construction, into a dedicated test support file while leaving validation assertions, production validator code, sanitized payload shape, protocol behavior, schema handling, UI output, and live-site state unchanged.
