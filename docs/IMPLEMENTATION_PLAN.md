@@ -146,6 +146,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Poller Test Harness Structure Slice
+
+The next largest PHPUnit structure hotspot is `PollerTest`, which mixes poller assertions with reusable production dependency loads, fake site/snapshot repositories, and a fake remote-action reconciler. The next safe test-only cleanup is to move those reusable support definitions into a dedicated test support file while leaving poller assertions, fixtures, scheduling behavior, status-check behavior, snapshot recording behavior, remote-action reconciliation behavior, production code, protocol behavior, schema, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Poller dependency loads, fake repositories, and the remote-action reconciler test double now live in `tests/support/poller-test-harness.php`, and `tests/PollerTest.php` requires that support file while keeping the existing test methods and fixtures. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `PollerTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### V2.3 Schedule Rollback Preview Design Slice
 
 Implementation status: design complete in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`. Dashboard-side non-mutating dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`. They remain capability-gated and hidden unless the latest client status explicitly advertises `schedule_rollback_preview`. Client-side release/enablement is disabled by default and one explicitly approved PureCleanse pilot proof was completed on 2026-09-30. Broad enablement and mutating `schedule_rollback` runtime behavior remain unavailable.
