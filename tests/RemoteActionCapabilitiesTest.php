@@ -7,17 +7,21 @@
 
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . '/support/remote-action-capabilities-test-fixtures.php';
+
 /**
  * Tests V2 remote-action capability sanitization.
  */
 class RemoteActionCapabilitiesTest extends TestCase {
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Test_Fixtures;
+
 	/**
 	 * Valid capability summaries are allowlisted and bounded.
 	 *
 	 * @return void
 	 */
 	public function test_capabilities_are_allowlisted_and_support_detection_is_explicit() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version'             => 2,
@@ -39,20 +43,15 @@ class RemoteActionCapabilitiesTest extends TestCase {
 					'apply_supported'    => false,
 					'rollback_supported' => false,
 					'schedules'          => array(
-						array(
-							'schedule_id'                    => 'alynt_scan_upload',
-							'label'                          => 'Alynt scan/upload',
-							'owner'                          => 'alynt_uploader',
-							'manageable'                     => true,
-							'current_cadence'                => 'every_15_minutes',
-							'current_interval_seconds'       => 900,
-							'current_next_run_at'            => '2026-06-25T16:45:00+00:00',
-							'supported_cadences'             => array( 'every_15_minutes', 'every_15_minutes' ),
-							'minimum_interval_seconds'       => 900,
-							'can_disable'                    => false,
-							'requires_high_friction_disable' => true,
-							'rollback_supported'             => true,
-							'extra_field'                    => 'ignored',
+						$this->alynt_scan_upload_schedule(
+							array(
+								'current_interval_seconds'       => 900,
+								'current_next_run_at'            => '2026-06-25T16:45:00+00:00',
+								'supported_cadences'             => array( 'every_15_minutes', 'every_15_minutes' ),
+								'requires_high_friction_disable' => true,
+								'rollback_supported'             => true,
+								'extra_field'                    => 'ignored',
+							)
 						),
 					),
 				),
@@ -104,7 +103,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_schedule_management_preview_ignores_unsupported_schedules() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version'     => 2,
@@ -124,14 +123,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 							'supported_cadences'       => array( 'daily' ),
 							'minimum_interval_seconds' => 86400,
 						),
-						array(
-							'schedule_id'              => 'alynt_scan_upload',
-							'label'                    => 'Alynt scan/upload',
-							'owner'                    => 'alynt_uploader',
-							'current_cadence'          => 'every_15_minutes',
-							'supported_cadences'       => array( 'every_15_minutes' ),
-							'minimum_interval_seconds' => 900,
-						),
+						$this->alynt_scan_upload_schedule(),
 					),
 				),
 			)
@@ -149,7 +141,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_last_action_code_aliases_are_normalized() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version' => 2,
@@ -182,7 +174,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_schedule_apply_next_run_alias_is_normalized() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version' => 2,
@@ -245,7 +237,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_schedule_rollback_preview_is_sanitized_without_enabling_rollback() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version'     => 2,
@@ -261,15 +253,13 @@ class RemoteActionCapabilitiesTest extends TestCase {
 					'rollback_preview_supported' => true,
 					'rollback_supported'         => false,
 					'schedules'                  => array(
-						array(
-							'schedule_id'                    => 'alynt_scan_upload',
-							'label'                          => 'Alynt scan/upload',
-							'owner'                          => 'alynt_uploader',
-							'manageable'                     => true,
-							'current_cadence'                => 'every_30_minutes',
-							'supported_cadences'             => array( 'every_15_minutes', 'every_30_minutes' ),
-							'rollback_preview_supported'     => true,
-							'rollback_supported'             => true,
+						$this->alynt_scan_upload_schedule(
+							array(
+								'current_cadence'            => 'every_30_minutes',
+								'supported_cadences'         => array( 'every_15_minutes', 'every_30_minutes' ),
+								'rollback_preview_supported' => true,
+								'rollback_supported'         => true,
+							)
 						),
 					),
 				),
@@ -322,7 +312,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_cleanup_preview_is_sanitized_without_enabling_cleanup_apply() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version'    => 2,
@@ -397,7 +387,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_schedule_management_preview_does_not_enable_apply_or_rollback() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version'     => 2,
@@ -410,14 +400,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 					'apply_supported'    => true,
 					'rollback_supported' => true,
 					'schedules'          => array(
-						array(
-							'schedule_id'              => 'alynt_scan_upload',
-							'label'                    => 'Alynt scan/upload',
-							'owner'                    => 'alynt_uploader',
-							'current_cadence'          => 'every_15_minutes',
-							'supported_cadences'       => array( 'every_15_minutes' ),
-							'minimum_interval_seconds' => 900,
-						),
+						$this->alynt_scan_upload_schedule(),
 					),
 				),
 			)
@@ -437,7 +420,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_schedule_apply_support_requires_action_and_client_policy() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version'     => 2,
@@ -452,15 +435,10 @@ class RemoteActionCapabilitiesTest extends TestCase {
 					'apply_supported'    => true,
 					'rollback_supported' => false,
 					'schedules'          => array(
-						array(
-							'schedule_id'              => 'alynt_scan_upload',
-							'label'                    => 'Alynt scan/upload',
-							'owner'                    => 'alynt_uploader',
-							'manageable'               => true,
-							'current_cadence'          => 'every_15_minutes',
-							'supported_cadences'       => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
-							'minimum_interval_seconds' => 900,
-							'can_disable'              => false,
+						$this->alynt_scan_upload_schedule(
+							array(
+								'supported_cadences' => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
+							)
 						),
 					),
 				),
@@ -501,7 +479,7 @@ class RemoteActionCapabilitiesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_forbidden_capability_fields_are_rejected() {
-		$capabilities = new Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities();
+		$capabilities = $this->remote_action_capabilities();
 		$result       = $capabilities->sanitize(
 			array(
 				'protocol_version' => 2,

@@ -229,6 +229,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Remote Action Capabilities Test Fixture Structure Slice
+
+`RemoteActionCapabilitiesTest` still repeated remote-action capability construction and Alynt scan/upload schedule summary fixtures across schedule preview, schedule apply, rollback-preview, cleanup-preview, and forbidden-field tests. The next safe test-only cleanup is to move those reusable fixture builders into a dedicated test support trait while leaving capability assertions, edge-case payloads, production code, protocol behavior, schema, sanitization behavior, support decisions, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Remote-action capability fixture builders now live in `tests/support/remote-action-capabilities-test-fixtures.php`, and `tests/RemoteActionCapabilitiesTest.php` uses that trait while keeping the existing test methods and expected sanitization/support decisions. No production PHP, assets, UI strings, protocol behavior, database schema, sanitization behavior, remote-action permission change, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `RemoteActionCapabilitiesTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Status Classifier Test Fixture Structure Slice
 
 `StatusClassifierTest` remains one of the larger PHPUnit files because it combines classifier assertions with reusable site, snapshot, healthy-payload, and source-summary fixture builders. The next safe test-only cleanup is to move those fixture builders into a dedicated test support trait while leaving classifier assertions, fixtures, production code, protocol behavior, schema, classification behavior, and live-site state unchanged.
