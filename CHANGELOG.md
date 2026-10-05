@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.58 - 2026-10-05
+
+### Added
+
+- Added a Diagnostics Support Copy download control so operators can save the already-redacted support summary as JSON without selecting the textarea manually.
+
+### Security
+
+- Preserved the Diagnostics redaction boundary: the download uses only the already-rendered support-safe summary and does not add a server endpoint, protocol change, database write, remote action, raw payload exposure, credential handling, Drime behavior, or live-site mutation.
+
 ## 0.1.56 - 2026-10-03
 
 ### Changed
