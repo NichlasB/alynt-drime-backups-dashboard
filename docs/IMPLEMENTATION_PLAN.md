@@ -170,6 +170,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Status Classifier Test Class Split Slice
+
+`StatusClassifierTest` remained the largest PHPUnit file after the admin rendering cleanup. It mixed baseline dashboard classification, generic backup-source evidence handling, WPvivid freshness policy windows, and WPvivid source-policy/no-evidence behavior in one file. The next safe test-only cleanup is to split those assertions into focused classifier test classes while preserving existing fixture builders, expected categories, messages, payloads, source-policy behavior, production classifier code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Baseline snapshot/status rules remain in `tests/StatusClassifierTest.php`. Generic backup-source evidence coverage moved to `tests/StatusClassifierSourceEvidenceTest.php`. WPvivid freshness-window coverage moved to `tests/StatusClassifierWpvividFreshnessTest.php`. WPvivid upload-evidence/source-policy coverage moved to `tests/StatusClassifierWpvividPolicyTest.php`. Shared classifier dependencies now load through `tests/support/status-classifier-test-bootstrap.php`, while the existing fixture trait remains in `tests/support/status-classifier-test-fixtures.php`.
+
+Acceptance criteria:
+
+- focused `StatusClassifier` coverage passes with the same assertions;
+- no split status-classifier test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Harness Structure Slice
 
 The next largest PHPUnit structure hotspot is `DiagnosticsTest`, which mixes diagnostics assertions with reusable fake repository classes and support-summary harness code. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file while leaving diagnostics assertions, fixtures, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
