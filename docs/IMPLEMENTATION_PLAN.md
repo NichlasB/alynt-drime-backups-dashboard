@@ -234,6 +234,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Dispatcher Test Class Split Slice
+
+`RemoteActionDispatcherTest` remained one of the largest PHPUnit files after the capabilities cleanup. It mixed core scan/upload intent dispatch, schedule preview/apply/rollback-preview dispatch, pre-dispatch rejection paths, client response reconciliation, rate limiting, and safe-transport same-origin/private-resolution coverage in one file. The next safe test-only cleanup is to split those assertions into focused dispatcher test classes while preserving existing fake HTTP clients, fake DNS resolver behavior, fake repository behavior, expected signed intent bodies, redaction expectations, production dispatcher code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Core scan/upload dispatch acceptance remains in `tests/RemoteActionDispatcherTest.php`. Schedule preview/apply/rollback-preview dispatch coverage moved to `tests/RemoteActionDispatcherScheduleDispatchTest.php`. Pre-dispatch rejection coverage moved to `tests/RemoteActionDispatcherRejectionTest.php`. Client response mismatch/rate-limit handling moved to `tests/RemoteActionDispatcherClientResponseTest.php`. Same-origin and private-resolution safe-transport coverage moved to `tests/RemoteActionDispatcherTransportTest.php`. Shared dispatcher shims and fake wpdb setup now load through `tests/support/remote-action-dispatcher-test-bootstrap.php`, while the existing dispatcher fixture/fake classes remain in `tests/support/remote-action-dispatcher-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `RemoteActionDispatcher` coverage passes with the same assertions;
+- no split remote-action dispatcher test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
