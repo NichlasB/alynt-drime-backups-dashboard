@@ -193,6 +193,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Remote Action Dispatcher Test Fixture Structure Slice
+
+`RemoteActionDispatcherTest` still retained dispatcher, site-row, and snapshot-row fixture builders after the initial dispatcher harness split. The next safe test-only cleanup is to move those fixture builders into the existing dispatcher test support file while leaving signed-dispatch assertions, fake collaborator behavior, production code, protocol behavior, schema, dispatch behavior, signing behavior, transport behavior, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Dispatcher fixture builders now live in `tests/support/remote-action-dispatcher-test-harness.php` as a dedicated fixture trait, and `tests/RemoteActionDispatcherTest.php` uses that trait while keeping the existing test methods and dispatch assertions. No production PHP, assets, UI strings, protocol behavior, database schema, dispatch behavior, remote-action permission change, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `RemoteActionDispatcherTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Admin Page Actions Test Harness Structure Slice
 
 The next largest PHPUnit structure hotspot is `AdminPageActionsTest`, which mixes admin action assertions with reusable WordPress shims, enrollment manager, dispatcher, poller, event-log, site-repository test doubles, and the private-action harness. The next safe test-only cleanup is to move those reusable support definitions into a dedicated test support file while leaving admin action assertions, fixtures, production code, nonce behavior, action dispatch behavior, polling behavior, archive/pause behavior, protocol behavior, schema, and live-site state unchanged.
