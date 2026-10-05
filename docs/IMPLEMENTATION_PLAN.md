@@ -182,6 +182,19 @@ Acceptance criteria:
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
 
+### Status Payload Validator Test Fixture Structure Slice
+
+`StatusPayloadValidatorTest` retained reusable valid status-payload and backup-source builders alongside validation assertions. The next safe test-only cleanup is to move those shared fixtures, plus validator construction, into a dedicated test support file while leaving validation assertions, production validator code, sanitized payload shape, protocol behavior, schema handling, UI output, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only fixture split. Status payload validator fixtures now live in `tests/support/status-payload-validator-test-fixtures.php` as a dedicated fixture trait, and `tests/StatusPayloadValidatorTest.php` requires that support file while keeping the existing test methods and expected validator behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Validation scope:
+
+- syntax-check the status payload validator test and support fixture;
+- run the targeted `StatusPayloadValidatorTest` suite;
+- run the full local test suite, lint, build, and whitespace checks;
+- confirm the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Remote Action Repository Test Fixture Structure Slice
 
 `RemoteActionRepositoryTest` retained repeated repository construction and small stored-action row fixtures after the remote-action repository harness split. The next safe test-only cleanup is to move those reusable test fixtures into the existing repository support file while leaving all remote-action repository assertions, production code, storage shape, protocol behavior, database schema, UI output, and live-site state unchanged.
