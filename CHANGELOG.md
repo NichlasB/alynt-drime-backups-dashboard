@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.59 - 2026-10-05
+
+### Changed
+
+- Reconciled the implementation plan after the `0.1.58` release so Diagnostics Support Summary export is marked released, deployed, and post-release monitored.
+- Split remote-action capability support checks into a focused helper trait without changing capability parsing, support decisions, dispatch behavior, protocol behavior, database schema, UI output, or live-site state.
+- Split remote-action schedule result sanitizers into a focused helper trait without changing sanitized output, remote-action permissions, protocol behavior, database schema, UI output, or live-site state.
+
 ## 0.1.58 - 2026-10-05
 
 ### Added
