@@ -181,7 +181,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Admin Diagnostics Rendering Test Harness Structure Slice
 
+`AdminPageDiagnosticsRenderingTest` retained diagnostics rendering harness classes and a diagnostics service stub below the rendering assertions. The next safe test-only cleanup is to move those harness classes into a dedicated support file while leaving rendering assertions, production diagnostics traits, UI output, protocol behavior, database schema, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only harness split. Diagnostics rendering harnesses and the overview service stub now live in `tests/support/admin-page-diagnostics-rendering-test-harness.php`, and `tests/AdminPageDiagnosticsRenderingTest.php` requires that support file while keeping the existing rendering assertions and expected markup behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Validation scope:
+
+- syntax-check the admin diagnostics rendering test and support harness;
+- run the targeted `AdminPageDiagnosticsRenderingTest` suite;
+- run the full local test suite, lint, build, and whitespace checks;
+- confirm the split remains test-only and does not alter runtime class loading or release behavior.
 
 ### Enrollment REST Controller Test Harness Structure Slice
 
