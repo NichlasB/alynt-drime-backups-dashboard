@@ -28,6 +28,7 @@ V2 protocol, threat-model, and planning artifacts:
 - `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`
 - `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`
 - `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`
+- `docs/V2_3_SCHEDULE_ROLLBACK_DECISION.md`
 - `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`
 - `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`
 - `docs/V2_4_CLEANUP_APPLY_DECISION.md`
@@ -244,7 +245,7 @@ Keep separate from backup operations. If needed later, design it as a dedicated 
 4. V2.3 passive schedule capability display, then non-mutating `schedule_preview`, then guarded `schedule_apply`.
 5. V2.3 rollback metadata capture/readiness without `schedule_rollback` execution.
 6. V2.3 `schedule_rollback_preview` pilot proof completed on PureCleanse after a separate client enablement and approval gate.
-7. V2.3 `schedule_rollback` only after rollback preview proof and a separate apply approval gate.
+7. V2.3 `schedule_rollback` remains deferred by `docs/V2_3_SCHEDULE_ROLLBACK_DECISION.md`; only reconsider it through a fresh runtime design, protocol/threat-model update, and separate approval gate.
 8. V2.4 cleanup dry-run/apply for local artifacts only as a higher-risk gated phase.
 9. V2.5 remote retention/delete planning after inventory evidence is mature as a higher-risk gated phase.
 10. V2.6 restore preparation as a higher-risk gated phase.
