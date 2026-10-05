@@ -169,6 +169,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Diagnostics Test Fixture Structure Slice
+
+`DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Diagnostics fixture builders now live in `tests/support/diagnostics-test-harness.php` as a dedicated fixture trait, and `tests/DiagnosticsTest.php` uses that trait while keeping the existing test methods and expected diagnostics/support-summary assertions. No production PHP, assets, UI strings, Diagnostics output, support-copy shape, protocol behavior, database schema, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `DiagnosticsTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Remote Action Dispatcher Test Harness Structure Slice
 
 The next largest PHPUnit structure hotspot is `RemoteActionDispatcherTest`, which mixes signed-dispatch assertions with reusable wpdb, credential-vault, signer, and remote-action repository test doubles. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file while leaving dispatcher assertions, fixtures, production code, protocol behavior, schema, dispatch behavior, signing behavior, transport behavior, and live-site state unchanged.
