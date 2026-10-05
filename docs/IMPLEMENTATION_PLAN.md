@@ -74,6 +74,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Remote Action Capabilities Schedule Result Structure Slice
+
+The remote-action capability action-data trait accumulated both action-history summary sanitization and schedule preview/apply/rollback-preview result sanitizers. The next safe structure-only cleanup is to separate schedule result sanitizers from the action-history summary sanitizer without changing sanitized output, support decisions, dispatch behavior, protocol behavior, database schema, UI output, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Schedule preview, schedule apply, evidence-only rollback metadata, schedule rollback preview, and schedule warning sanitizers now live in a dedicated capabilities schedule-results trait. The action-data trait retains forbidden-field scanning, allowed-action sanitization, and last-action summary assembly. No release, deployment, push, protocol change, database change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- focused remote-action capability tests pass with unchanged schedule result sanitization;
+- PHP syntax, lint, build, and whitespace checks pass;
+- no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### Schedule Rollback Preview Admin Helper Structure Slice
 
 The admin Schedule Rollback Preview helper remains bounded and non-mutating, but the form-rendering trait accumulated readiness state, action-history lookup, and operator-message branching. The next safe structure-only cleanup is to separate rollback-preview readiness/selection helpers from the form renderer without changing UI output, capability checks, dispatch behavior, stored action history, protocol behavior, database schema, or live-site state.

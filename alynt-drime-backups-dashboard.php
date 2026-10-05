@@ -84,6 +84,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-remote-action-capabilities-public.php',
 	'includes/traits/trait-remote-action-capabilities-support.php',
 	'includes/traits/trait-remote-action-capabilities-action-data.php',
+	'includes/traits/trait-remote-action-capabilities-schedule-results.php',
 	'includes/traits/trait-remote-action-capabilities-schedules.php',
 	'includes/traits/trait-remote-action-capabilities-cleanup.php',
 	'includes/class-remote-action-capabilities.php',
