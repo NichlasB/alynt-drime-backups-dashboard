@@ -269,6 +269,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Poller Test Fixture Structure Slice
+
+`PollerTest` retains poller construction, enrolled-site row, and valid status-payload builders after its harness split. Move those three private builders verbatim into `tests/support/poller-test-fixtures.php`. Separate the two scheduled batch tests into `tests/PollerScheduledPollingTest.php`, sharing the same harness and fixture trait, while retaining every test method and assertion. Keep production code, schedules, status payloads, polling behavior, storage, and release contents unchanged.
+
+Implementation status: implemented and validated locally as a test-only fixture extraction and manual/scheduled test-class split. `PollerTest.php` is 233 lines, `PollerScheduledPollingTest.php` is 89 lines, and the fixture trait is 94 lines. All 12 moved/retained methods match the committed baseline exactly after newline normalization. The focused `--filter Poller` run passes 11 tests/52 assertions; the full suite retains 237 tests/1,285 assertions and 2 existing skips. PHP syntax, lint, build, and whitespace checks pass, with no runtime or generated-file changes.
+
+Validation scope:
+
+- compare the extracted builders and retained test methods against the committed baseline;
+- syntax-check all three changed PHP files and run both poller test classes;
+- run full tests, lint, build, and whitespace checks;
+- confirm no runtime or generated files changed.
+
 ### Poller Test Harness Structure Slice
 
 The next largest PHPUnit structure hotspot is `PollerTest`, which mixes poller assertions with reusable production dependency loads, fake site/snapshot repositories, and a fake remote-action reconciler. The next safe test-only cleanup is to move those reusable support definitions into a dedicated test support file while leaving poller assertions, fixtures, scheduling behavior, status-check behavior, snapshot recording behavior, remote-action reconciliation behavior, production code, protocol behavior, schema, and live-site state unchanged.

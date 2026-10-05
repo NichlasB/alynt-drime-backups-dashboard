@@ -8,11 +8,14 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/support/poller-test-harness.php';
+require_once __DIR__ . '/support/poller-test-fixtures.php';
 
 /**
  * Tests manual status checks.
  */
 class PollerTest extends TestCase {
+	use Alynt_Drime_Backups_Dashboard_Test_Poller_Fixtures;
+
 	/**
 	 * Successful manual poll records snapshot and activates the site.
 	 *
@@ -53,77 +56,6 @@ class PollerTest extends TestCase {
 		$this->assertSame( '0.5.3', $sites->success['plugin_version'] );
 		$this->assertNotEmpty( $sites->success['next_poll_at'] );
 		$this->assertSame( array(), $sites->failure );
-	}
-
-	/**
-	 * Scheduled polling processes only the bounded due-site batch.
-	 *
-	 * @return void
-	 */
-	public function test_scheduled_poll_processes_bounded_due_site_batch() {
-		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
-		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
-			array(
-				$this->site( $vault, array( 'id' => 77 ) ),
-				$this->site( $vault, array( 'id' => 78 ) ),
-				$this->site( $vault, array( 'id' => 79 ) ),
-			)
-		);
-		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
-		$calls     = 0;
-
-		$http_client = function () use ( &$calls ) {
-			++$calls;
-
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
-		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
-
-		$result = $poller->poll_sites( 2 );
-
-		$this->assertSame( 2, $sites->due_query['limit'] );
-		$this->assertSame( 2, $calls );
-		$this->assertSame( 2, $result['processed'] );
-		$this->assertSame( 2, $result['success'] );
-		$this->assertSame( 0, $result['failure'] );
-		$this->assertCount( 2, $sites->successes );
-	}
-
-	/**
-	 * Scheduled polling uses the tuned default batch size when no override is supplied.
-	 *
-	 * @return void
-	 */
-	public function test_scheduled_poll_uses_default_batch_size_without_override() {
-		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
-		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
-			array(
-				$this->site( $vault, array( 'id' => 77 ) ),
-			)
-		);
-		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
-
-		$http_client = function () {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
-		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
-
-		$result = $poller->poll_sites();
-
-		$this->assertSame( Alynt_Drime_Backups_Dashboard_Poller::DEFAULT_BATCH_SIZE, $sites->due_query['limit'] );
-		$this->assertSame( 20, $sites->due_query['limit'] );
-		$this->assertSame( 1, $result['processed'] );
-		$this->assertSame( 1, $result['success'] );
 	}
 
 	/**
@@ -297,88 +229,5 @@ class PollerTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'poll_failure_store_failed', $result->get_error_code() );
 		$this->assertSame( 'transport_failed', $result->get_error_data()['original_error_code'] );
-	}
-
-	/**
-	 * Creates a poller.
-	 *
-	 * @param Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository     $sites Sites.
-	 * @param Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository $snapshots Snapshots.
-	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault                $vault Vault.
-	 * @param callable                                                      $http_client HTTP client.
-	 * @return Alynt_Drime_Backups_Dashboard_Poller
-	 */
-	private function poller( $sites, $snapshots, $vault, $http_client ) {
-		return new Alynt_Drime_Backups_Dashboard_Poller(
-			$sites,
-			$snapshots,
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier(),
-			$vault,
-			new Alynt_Drime_Backups_Dashboard_Safe_Transport(
-				new Alynt_Drime_Backups_Dashboard_Origin_Validator(),
-				function () {
-					return array( '93.184.216.34' );
-				}
-			),
-			new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator(),
-			$http_client,
-			null,
-			new Alynt_Drime_Backups_Dashboard_Test_Poller_Remote_Action_Reconciler()
-		);
-	}
-
-	/**
-	 * Creates a dashboard site row.
-	 *
-	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault $vault Vault.
-	 * @return array<string,mixed>
-	 */
-	private function site( $vault, $overrides = array() ) {
-		$public_id = isset( $overrides['public_id'] ) ? (string) $overrides['public_id'] : '00000000-0000-4000-8000-000000000000';
-		$site      = array(
-			'id'                         => 77,
-			'public_id'                  => $public_id,
-			'expected_origin'            => 'https://client.example.com',
-			'site_uuid'                  => '11111111-1111-4111-8111-111111111111',
-			'polling_key_id'             => 'pk_example_0000000000000000',
-			'polling_secret_ciphertext'  => $vault->encrypt( str_repeat( 'S', 43 ), 'site:' . $public_id ),
-			'enrollment_status'          => 'awaiting_first_poll',
-			'overall_status'             => 'pending',
-			'consecutive_failures'       => 0,
-		);
-
-		return array_merge( $site, $overrides );
-	}
-
-	/**
-	 * Creates a valid status payload.
-	 *
-	 * @return array<string,mixed>
-	 */
-	private function payload() {
-		return array(
-			'schema_version'              => 1,
-			'site_uuid'                   => '11111111-1111-4111-8111-111111111111',
-			'plugin_version'              => '0.5.3',
-			'queue_count'                 => 0,
-			'uploaded_count'              => 1,
-			'failed_count'                => 0,
-			'active_upload'               => false,
-			'auto_scan_enabled'           => true,
-			'server_cron_expected'        => false,
-			'server_outbox_configured'    => true,
-			'server_outbox_readable'      => true,
-			'wpvivid_override_configured' => false,
-			'old_wpvivid_uploader_active' => false,
-			'wp_cron_disabled'            => false,
-			'cron_status'                 => 'ok',
-			'cron_reason'                 => 'Scheduled scans are available.',
-			'warning_count'               => 0,
-			'warnings'                    => array(),
-			'last_runner'                 => 'wp_cron',
-			'last_runner_at'              => 1786305600,
-			'last_scheduled_scan_at'      => 1786305600,
-			'last_wp_cli_scan_at'         => 0,
-		);
 	}
 }
