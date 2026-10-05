@@ -221,6 +221,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Capabilities Test Class Split Slice
+
+`RemoteActionCapabilitiesTest` remained the largest PHPUnit file after the repository cleanup. It mixed base allowlist/forbidden-field sanitization, schedule-management policy support, schedule result alias normalization, rollback-preview support, and cleanup-preview support in one file. The next safe test-only cleanup is to split those assertions into focused capability test classes while preserving existing fixture builders, expected sanitized shapes, allowlist behavior, support-helper expectations, production capability code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Base capability allowlist and forbidden-field coverage remains in `tests/RemoteActionCapabilitiesTest.php`. Schedule-management policy coverage moved to `tests/RemoteActionCapabilitiesScheduleManagementTest.php`. Schedule result alias coverage moved to `tests/RemoteActionCapabilitiesScheduleResultsTest.php`. Rollback-preview capability coverage moved to `tests/RemoteActionCapabilitiesScheduleRollbackTest.php`. Cleanup-preview capability coverage moved to `tests/RemoteActionCapabilitiesCleanupTest.php`, while shared fixture builders remain in `tests/support/remote-action-capabilities-test-fixtures.php`.
+
+Acceptance criteria:
+
+- focused `RemoteActionCapabilities` coverage passes with the same assertions;
+- no split remote-action capabilities test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
