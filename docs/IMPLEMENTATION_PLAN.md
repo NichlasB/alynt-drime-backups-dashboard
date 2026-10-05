@@ -62,6 +62,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Remote Action Capabilities Support Structure Slice
+
+The remote-action capability sanitizer accumulated both payload sanitization and public support-detection helpers as Request Backup Now, Schedule Preview, Schedule Apply, Schedule Rollback Preview, and Cleanup Preview were added. The next safe structure-only cleanup is to separate support-detection helpers from the public sanitizer trait without changing sanitized output, support decisions, dispatch behavior, protocol behavior, database schema, UI output, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Remote-action support detection for `scan_upload_now`, schedule-management preview, schedule preview, schedule apply, and schedule rollback preview now lives in a dedicated capabilities support trait. The public sanitizer trait retains payload sanitization and action/state sanitizers, and the capability class composes the new support trait alongside the existing sanitizer traits. No release, deployment, push, protocol change, database change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- focused remote-action capability tests pass with unchanged support decisions;
+- PHP syntax, lint, build, and whitespace checks pass;
+- no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### Schedule Rollback Preview Admin Helper Structure Slice
 
 The admin Schedule Rollback Preview helper remains bounded and non-mutating, but the form-rendering trait accumulated readiness state, action-history lookup, and operator-message branching. The next safe structure-only cleanup is to separate rollback-preview readiness/selection helpers from the form renderer without changing UI output, capability checks, dispatch behavior, stored action history, protocol behavior, database schema, or live-site state.

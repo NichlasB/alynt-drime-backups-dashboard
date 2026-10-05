@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities {
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Public;
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Support;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Action_Data;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Schedules;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Cleanup;
