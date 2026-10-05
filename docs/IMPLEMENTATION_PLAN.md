@@ -208,6 +208,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Repository Test Class Split Slice
+
+`RemoteActionRepositoryTest` remained one of the largest PHPUnit files after the diagnostics cleanup. It mixed dashboard-owned request/state writes, client report reconciliation, support-summary aggregates, retention/staleness maintenance, schedule preview/apply lookup, rollback-preview readiness, and site-scoped query coverage in one file. The next safe test-only cleanup is to split those assertions into focused repository test classes while preserving existing fake wpdb behavior, fixture helpers, expected SQL shapes, redacted context expectations, production repository code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Core request/state write coverage remains in `tests/RemoteActionRepositoryTest.php`. Client report and support-summary context coverage moved to `tests/RemoteActionRepositoryClientReportTest.php`. Retention cleanup and stale reconciliation coverage moved to `tests/RemoteActionRepositoryMaintenanceTest.php`. Schedule preview/apply lookup and site-scoped query coverage moved to `tests/RemoteActionRepositoryScheduleLookupTest.php`. Shared repository dependencies and fake wpdb setup now load through `tests/support/remote-action-repository-test-bootstrap.php`, while the existing fake wpdb and fixture helpers remain in `tests/support/remote-action-repository-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `RemoteActionRepository` coverage passes with the same assertions;
+- no split remote-action repository test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
