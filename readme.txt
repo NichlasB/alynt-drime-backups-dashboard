@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.61
+Stable tag: 0.1.62
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.62 adds dashboard-local retained-record removal planning and display-only readiness evidence for archived local records. It adds Site Detail preview evidence, support-safe Diagnostics aggregate counts, and compact archived-row readiness hints without adding any permanent remove/delete control, confirmation form, database write, remote action, client-site mutation, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, or live-site state change.
 
 Version 0.1.61 is a maintenance patch that records the deployed 0.1.60 rollout state, documents the patch-release planning gate, and continues test-support structure cleanup without changing dashboard runtime behavior.
 
@@ -51,6 +53,13 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.62 =
+* Added a planning-only design for future dashboard-local retained-record permanent removal while keeping implementation gated.
+* Added display-only Site Detail local removal preview evidence for archived retained records.
+* Added support-safe Diagnostics aggregate local removal-readiness counts for archived records.
+* Added compact archived-row local removal-readiness hints in the Archived Local Records view.
+* Preserved the dashboard-local removal boundary: no permanent remove/delete control, confirmation form, POST handler, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.61 =
 * Reconciled the implementation plan with the deployed 0.1.60 dashboard rollout state and post-poll health evidence.

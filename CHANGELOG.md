@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.62 - 2026-10-06
+
 ### Added
 
 - Added a planning-only design for a future dashboard-local retained-record permanent removal flow, explicitly keeping implementation gated because it would be a destructive local database action.
 - Added a Site Detail Local Removal Preview for archived retained records so operators can see future-removal eligibility and retained snapshot/action row counts without any delete or confirmation action.
+- Added support-safe Diagnostics aggregate local removal-readiness counts for archived records so operators can see ready, blocked, retained snapshot, retained action, and non-terminal action totals without opening each record.
+- Added compact archived-row local removal-readiness hints in the Archived Local Records view.
 
 ### Changed
 
@@ -16,6 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Security
 
 - Preserved the current runtime boundary: the retained-record preview is display-only and adds no database write, delete control, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state change.
+- Preserved the dashboard-local removal boundary: `0.1.62` adds only planning and display/readiness evidence. It does not add a permanent remove/delete control, confirmation form, POST handler, database write, remote action, client-site mutation, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, or live-site state change.
 
 ## 0.1.61 - 2026-10-06
 
