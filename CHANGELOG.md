@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Reconciled the implementation plan with the deployed `0.1.62` dashboard rollout state and post-poll health evidence.
 - Refreshed hook reference wording so it names the current `0.1.62` release line.
+- Recorded that permanent local retained-record removal remains feasible but deferred by default until there is a concrete operational, data-minimization, performance, or compliance need.
 
 ## 0.1.62 - 2026-10-06
 

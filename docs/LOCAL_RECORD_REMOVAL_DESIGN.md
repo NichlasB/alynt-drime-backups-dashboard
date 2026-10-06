@@ -8,6 +8,19 @@ The dashboard currently keeps revoked and expired-pending records for audit/hist
 
 The recommended direction is to treat permanent removal as a separate high-friction local maintenance action, not as a normal Sites-row control.
 
+## Current Decision
+
+As of 2026-10-06, do not treat permanent local removal as the default next implementation slice. Archive/unarchive plus display-only removal-readiness evidence is the safer operational baseline because it keeps old records out of normal monitoring views while preserving dashboard-owned audit/history.
+
+Re-open implementation planning only if there is a concrete operational reason, such as:
+
+- archived retained records are creating real operator clutter even in archived views;
+- dashboard-owned retained data volume creates measurable database or performance pressure;
+- clearly abandoned test/duplicate records need a formal data-minimization path;
+- compliance or retention policy requires a deliberate dashboard-local purge workflow.
+
+Until one of those conditions is met, keep permanent removal deferred. Future implementation remains feasible, but it must enter through the approval gate below because it would introduce a destructive dashboard-local database action.
+
 ## Scope
 
 In scope for a future implementation:
