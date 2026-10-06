@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Reconciled the implementation plan with the deployed `0.1.62` dashboard rollout state and post-poll health evidence.
+
 ## 0.1.62 - 2026-10-06
 
 ### Added
