@@ -667,6 +667,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, Site Detail rendering behavior, attention/recovery history behavior, archive/unarchive behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Local Removal Rendering Test Class Split Slice
+
+`AdminPageSiteDetailLocalRecordRenderingTest` still grouped local polling controls, revoked-record guidance, archive/unarchive controls, and local-removal preview rendering after the attention-history split. The next safe test-only cleanup is to move local-removal preview and row-hint assertions into a focused class while preserving the same rendering helpers, archived-record eligibility behavior, preview-only copy, dependent-count output, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Local polling control, revoked guidance, and archive/unarchive coverage remains in `tests/AdminPageSiteDetailLocalRecordRenderingTest.php`. Local Removal Preview panel assertions and compact archived-row readiness hint assertions moved to `tests/AdminPageLocalRemovalRenderingTest.php`, with a shared terminal archived-record fixture. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused Site Detail local-record and local-removal rendering coverage passes with the same assertions;
+- no split local-record rendering class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, Site Detail rendering behavior, local-removal preview behavior, archive/unarchive behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Admin Page Cleanup Preview Rendering Test Class Split Slice
 
 `AdminPageScheduleCleanupRenderingTest` still grouped cleanup-preview panel rendering with schedule rollback-preview rendering. The next safe test-only cleanup is to move cleanup-preview assertions into a focused class while preserving the same cleanup capability gating, preview-only copy, latest preview evidence display, support-safe category filtering, rollback-preview rendering, and live-site state.

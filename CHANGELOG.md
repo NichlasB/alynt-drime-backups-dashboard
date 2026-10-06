@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Split remote-action repository client-report payload fixtures into a focused test-support trait without changing runtime behavior.
+- Split Site Detail local-removal preview rendering assertions into a focused test class without changing runtime behavior.
 
 ### Security
 
