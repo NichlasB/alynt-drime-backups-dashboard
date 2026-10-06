@@ -416,6 +416,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, backup-source evidence rendering, source-policy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Poller Failure Test Class Split Slice
+
+`PollerTest` still grouped the successful manual poll path with invalid payload, missing credential, transport backoff, snapshot-storage failure, success-persistence failure, and failure-persistence failure paths. The next safe test-only cleanup is to move the failure/storage assertions into a focused poller failure class while preserving the same poller behavior, safe transport boundary, snapshot recording behavior, failure counter/backoff behavior, storage error surfacing, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Successful manual poll coverage remains in `tests/PollerTest.php`. Invalid payload, missing credentials, failure backoff, snapshot storage failure, poll success storage failure, and poll failure storage failure coverage moved to `tests/PollerFailureTest.php`. Shared poller fixtures and repository doubles continue to load through `tests/support/poller-test-harness.php` and `tests/support/poller-test-fixtures.php`.
+
+Acceptance criteria:
+
+- focused `Poller` coverage passes with the same 11 tests and 52 assertions;
+- no split poller test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
