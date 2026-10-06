@@ -52,6 +52,77 @@ if ( ! function_exists( 'get_current_user_id' ) ) {
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-actions.php';
 
 /**
+ * Shared admin action test setup.
+ */
+trait Alynt_Drime_Backups_Dashboard_Admin_Action_Test_Case {
+	/**
+	 * Original POST data.
+	 *
+	 * @var array<string,mixed>
+	 */
+	private $previous_post = array();
+
+	/**
+	 * Resets globals.
+	 *
+	 * @return void
+	 */
+	protected function setUp(): void {
+		parent::setUp();
+
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+		global $alynt_drime_backups_dashboard_test_current_user_id;
+
+		$this->previous_post = $_POST;
+		$_POST              = array();
+
+		$alynt_drime_backups_dashboard_test_nonce_action    = '';
+		$alynt_drime_backups_dashboard_test_nonce_value     = '';
+		$alynt_drime_backups_dashboard_test_current_user_id = 77;
+	}
+
+	/**
+	 * Restores globals.
+	 *
+	 * @return void
+	 */
+	protected function tearDown(): void {
+		$_POST = $this->previous_post;
+
+		parent::tearDown();
+	}
+
+	/**
+	 * Sets the valid nonce action/value for the next request.
+	 *
+	 * @param string $action Nonce action.
+	 * @return void
+	 */
+	private function set_valid_nonce( $action ) {
+		global $alynt_drime_backups_dashboard_test_nonce_action;
+		global $alynt_drime_backups_dashboard_test_nonce_value;
+
+		$alynt_drime_backups_dashboard_test_nonce_action = $action;
+		$alynt_drime_backups_dashboard_test_nonce_value  = 'valid';
+	}
+
+	/**
+	 * Creates an admin action harness.
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager|null $manager Optional manager.
+	 * @return Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness
+	 */
+	private function admin_action_harness( $manager = null ) {
+		if ( null === $manager ) {
+			$manager = new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager();
+		}
+
+		return new Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness( $manager );
+	}
+}
+
+/**
  * Fake enrollment manager for admin action tests.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Enrollment_Manager {

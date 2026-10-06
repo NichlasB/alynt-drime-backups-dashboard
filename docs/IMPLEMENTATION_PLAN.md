@@ -260,6 +260,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Admin Page Actions Test Class Split Slice
+
+`AdminPageActionsTest` still grouped pending-site creation, remote action dispatch, dashboard-local polling state changes, local archive/unarchive behavior, nonce validation, and unknown-action handling into one large test file. The next safe test-only cleanup is to split those assertions into action-family test classes while preserving the same admin action harness, nonce/current-user shims, production trait behavior, audit expectations, read-only remote-action boundaries, local archive/polling behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Pending-site creation, expired nonce recovery, and unknown-action coverage remains in `tests/AdminPageActionsTest.php`. Request Backup Now and Cleanup Preview admin action coverage moved to `tests/AdminPageRemoteActionsTest.php`. Pause/resume polling and revoked-pause rejection coverage moved to `tests/AdminPagePollingActionsTest.php`. Local archive/unarchive coverage moved to `tests/AdminPageArchiveActionsTest.php`. Shared POST reset, nonce setup, and harness construction now live in the existing `tests/support/admin-page-actions-test-harness.php` support file.
+
+Acceptance criteria:
+
+- focused `AdminPage*Actions` coverage passes with the same 12 tests and 61 assertions;
+- no split admin page action test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, admin behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
