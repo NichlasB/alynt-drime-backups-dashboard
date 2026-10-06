@@ -1156,6 +1156,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Diagnostics Audit Support Harness Reuse Slice
+
+The diagnostics audit support test duplicated option shims, diagnostics includes, and local empty fake repositories that are already available through shared event-log and diagnostics test harnesses. Keep the support-summary assertions unchanged and have `tests/DiagnosticsAuditSupportTest.php` reuse the shared bootstrap plus empty diagnostics repository doubles.
+
+Implementation status: implemented locally as a test-only structure cleanup. The focused test now relies on `tests/support/event-log-test-harness.php` for option shims and event-log setup, `tests/support/diagnostics-test-bootstrap.php` for diagnostics wiring, and the shared diagnostics fake repositories with empty fixture arrays.
+
+Acceptance criteria:
+
+- Focused `DiagnosticsAuditSupportTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics output, support-copy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
