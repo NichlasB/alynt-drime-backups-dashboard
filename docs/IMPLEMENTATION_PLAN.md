@@ -429,6 +429,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Poller Storage Failure Test Class Split Slice
+
+`PollerFailureTest` still mixed transport/credential failure behavior with persistence failure behavior after the first poller split. The next safe test-only cleanup is to move snapshot-storage, success-persistence, and failure-persistence assertions into a focused storage failure class while preserving the same poller behavior, safe transport boundary, snapshot recording behavior, failure counter/backoff behavior, storage error surfacing, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Invalid payload, missing credentials, and failure backoff coverage remains in `tests/PollerFailureTest.php`. Snapshot storage failure, poll success storage failure, and poll failure storage failure coverage moved to `tests/PollerStorageFailureTest.php`. Shared poller fixtures now include the deterministic test credential vault and successful HTTP client helper used by both failure-focused classes.
+
+Acceptance criteria:
+
+- focused `Poller` failure/storage coverage passes with the same observable assertions;
+- no split poller failure test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Admin Page Site Detail Attention History Test Class Split Slice
 
 `AdminPageSiteDetailLocalRecordRenderingTest` still grouped Site Detail attention/recovery history rendering with local polling controls, revoked-record guidance, and archive/unarchive controls. The next safe test-only cleanup is to move attention/recovery history assertions into a focused Site Detail history rendering class while preserving the same admin rendering helpers, bounded transition behavior, empty-state copy, local-only control copy, archive behavior, and live-site state.

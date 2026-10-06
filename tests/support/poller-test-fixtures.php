@@ -10,6 +10,15 @@
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Poller_Fixtures {
 	/**
+	 * Creates a deterministic credential vault for poller tests.
+	 *
+	 * @return Alynt_Drime_Backups_Dashboard_Credential_Vault
+	 */
+	private function vault() {
+		return new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+	}
+
+	/**
 	 * Creates a poller.
 	 *
 	 * @param Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository     $sites Sites.
@@ -90,5 +99,27 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Fixtures {
 			'last_scheduled_scan_at'      => 1786305600,
 			'last_wp_cli_scan_at'         => 0,
 		);
+	}
+
+	/**
+	 * Creates a successful status HTTP client fixture.
+	 *
+	 * @param array<string,mixed> $payload_overrides Payload overrides.
+	 * @return callable
+	 */
+	private function successful_http_client( array $payload_overrides = array() ) {
+		return function () use ( $payload_overrides ) {
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode(
+					array_merge(
+						$this->payload(),
+						$payload_overrides
+					)
+				),
+			);
+		};
 	}
 }
