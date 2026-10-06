@@ -2,13 +2,13 @@
 
 ## Alynt Drime Backups Dashboard Hooks
 
-Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in the current `0.1.61` release line.
+Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in the current `0.1.62` release line.
 
 The hooks below are internal WordPress integration points owned by the plugin. Treat them as implementation details unless a future release explicitly documents them as public extension points.
 
 ## Public Extension Hooks
 
-None in the current `0.1.61` release line.
+None in the current `0.1.62` release line.
 
 ## WordPress Lifecycle Hooks
 
