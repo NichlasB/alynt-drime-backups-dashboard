@@ -194,6 +194,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Remote Action Repository Schedule Apply Lookup Structure Slice
+
+The remote-action repository lookup trait accumulated general row lookups, recent-history queries, redacted-context decoding, and the guarded schedule-apply preview freshness validator. The next safe structure-only cleanup is to separate the schedule-apply preview lookup validator from general action-row queries without changing validation semantics, WP_Error codes/messages, stored action data, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. The guarded `fresh_schedule_preview_for_apply()` validator now lives in `includes/traits/trait-remote-action-repository-schedule-apply-lookups.php`. The existing lookup trait composes the new schedule-apply lookup trait and retains public-ID lookup, latest/recent history queries, internal row lookup, and redacted-context decoding. No release, deployment, push, protocol change, database schema change, SQL behavior change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- remote-action repository schedule lookup and schedule dispatch/apply tests pass with unchanged preview freshness and apply-guard behavior;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, SQL behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Support Summary Export UI Slice
 
 The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.
