@@ -247,6 +247,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Status Payload Validator Test Class Split Slice
+
+`StatusPayloadValidatorTest` still grouped base schema validation, backup-source sanitization, remote-action capability sanitization, and restore-readiness sanitization into one test file. The next safe test-only cleanup is to split those assertion groups into focused validator test classes while preserving the same shared fixture data, validator production code, allowlist/security behavior, protocol behavior, schema handling, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Base schema, version, path-field rejection, and UUID mismatch coverage remains in `tests/StatusPayloadValidatorTest.php`. Backup-source sanitization and forbidden nested source coverage moved to `tests/StatusPayloadValidatorBackupSourcesTest.php`. Remote-action capability sanitization and forbidden remote-action field coverage moved to `tests/StatusPayloadValidatorRemoteActionsTest.php`. Restore-readiness sanitization moved to `tests/StatusPayloadValidatorRestoreReadinessTest.php`. Shared validator includes and fixture loading now run through `tests/support/status-payload-validator-test-bootstrap.php`, while the existing fixture trait remains in `tests/support/status-payload-validator-test-fixtures.php`.
+
+Acceptance criteria:
+
+- focused `StatusPayloadValidator` coverage passes with the same 10 tests and 63 assertions;
+- no split status payload validator test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
