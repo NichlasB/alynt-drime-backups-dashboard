@@ -273,6 +273,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, admin behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Schedule Management Test Class Split Slice
+
+`AdminPageScheduleManagementTest` still grouped Site Detail schedule-management panel rendering, apply-gated controls, rollback-preview readiness/evidence, compact Sites-row hints, missing-capability states, payload fixtures, and harness classes into one large test file. The next safe test-only cleanup is to split those concerns into focused schedule rendering test classes while preserving the same schedule-management production helpers, read-only preview boundaries, apply/rollback-preview gating, support-copy strings, row-hint behavior, protocol assumptions, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Preview-only/apply-gated panel rendering and missing-capability panel coverage remains in `tests/AdminPageScheduleManagementTest.php`. Rollback-preview waiting/ready/evidence coverage moved to `tests/AdminPageScheduleRollbackPreviewTest.php`. Compact Sites-row schedule hint coverage moved to `tests/AdminPageScheduleRowHintTest.php`. Shared payload fixtures, rendering harness, and fake remote-action repository now live in `tests/support/admin-page-schedule-management-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `AdminPageSchedule` coverage passes with the same schedule assertions;
+- no split schedule-management test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, admin behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
