@@ -208,6 +208,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Diagnostics Backup Source Aggregate Test Class Split Slice
+
+`DiagnosticsTest` still mixed core polling/record-state diagnostics with backup-source aggregate diagnostics after the broader diagnostics split. The next safe test-only cleanup is to move backup-source aggregate assertions into a focused diagnostics class while preserving the same diagnostics service behavior, support-copy JSON shape, redaction expectations, source aggregate counts, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Core polling and record-state diagnostics coverage remains in `tests/DiagnosticsTest.php`. Backup-source reporting/stale/no-upload-evidence aggregate coverage moved to `tests/DiagnosticsBackupSourceAggregatesTest.php`. The shared diagnostics fixture trait now exposes `collect_diagnostics()` for focused diagnostics test classes.
+
+Acceptance criteria:
+
+- focused diagnostics backup-source aggregate coverage passes with the same observable assertions;
+- no split diagnostics test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, diagnostics collection behavior, support-copy JSON shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Repository Test Class Split Slice
 
 `RemoteActionRepositoryTest` remained one of the largest PHPUnit files after the diagnostics cleanup. It mixed dashboard-owned request/state writes, client report reconciliation, support-summary aggregates, retention/staleness maintenance, schedule preview/apply lookup, rollback-preview readiness, and site-scoped query coverage in one file. The next safe test-only cleanup is to split those assertions into focused repository test classes while preserving existing fake wpdb behavior, fixture helpers, expected SQL shapes, redacted context expectations, production repository code, protocol behavior, and live-site state.

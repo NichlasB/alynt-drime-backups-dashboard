@@ -76,6 +76,23 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Test_Fixtures {
 			'observed_at'    => $observed_at,
 		);
 	}
+
+	/**
+	 * Collects diagnostics for focused site/snapshot fixtures.
+	 *
+	 * @param array<int,array<string,mixed>> $sites Sites.
+	 * @param array<int,array<string,mixed>> $snapshots Latest snapshots keyed by site ID.
+	 * @return array<string,mixed>
+	 */
+	private function collect_diagnostics( array $sites, array $snapshots = array() ) {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository( $sites ),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( $snapshots ),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		return $diagnostics->collect();
+	}
 }
 
 /**
