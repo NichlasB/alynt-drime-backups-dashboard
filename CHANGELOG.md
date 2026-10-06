@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Reconciled the implementation plan with the deployed `0.1.60` dashboard rollout state and post-poll health evidence.
+- Continued test-support structure cleanup by splitting the enrollment REST repository double and remote-action repository `wpdb` double into focused support files without changing runtime behavior.
+- Recorded the remote-action summary docblock cleanup and the post-`0.1.60` support-file split boundaries in the implementation plan.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no production PHP behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule change, credential handling, Drime behavior, live-site behavior, release behavior, or deployment behavior was introduced.
+
 ## 0.1.60 - 2026-10-06
 
 ### Changed
