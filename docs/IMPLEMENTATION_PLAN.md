@@ -783,6 +783,18 @@ Validation scope:
 - run the full local test suite, lint, build, and whitespace checks;
 - confirm the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Admin Diagnostics Overview Fixture Structure Slice
+
+`AdminPageDiagnosticsOverviewRenderingTest` retained a large inline diagnostics payload fixture for record-state, restore-readiness, attention-history, and local-removal aggregate rendering. The next safe test-only cleanup is to move that reusable payload into a dedicated support fixture trait while leaving rendering assertions, production diagnostics traits, UI output, support-copy shape, protocol behavior, database schema, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only fixture split. The diagnostics overview aggregate payload now lives in `tests/support/admin-page-diagnostics-overview-fixtures.php`, and `tests/AdminPageDiagnosticsOverviewRenderingTest.php` uses that trait while keeping the existing rendering assertions and expected markup behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `AdminPageDiagnosticsOverviewRenderingTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, Diagnostics rendering behavior, support-copy shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Enrollment REST Controller Test Harness Structure Slice
 
 `EnrollmentRestControllerTest` retained WordPress transient shims, a fake site repository, and reusable controller/payload/request fixtures alongside enrollment assertions. The next safe test-only cleanup is to move those shims and fixtures into a dedicated support harness while leaving enrollment assertions, production REST code, pairing/security behavior, storage shape, protocol behavior, database schema, UI output, and live-site state unchanged.
