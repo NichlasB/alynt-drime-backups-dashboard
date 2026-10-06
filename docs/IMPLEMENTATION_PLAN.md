@@ -1168,6 +1168,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics output, support-copy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Status Classifier Baseline Fixture Helper Slice
+
+The baseline status classifier test repeated the same active-site snapshot classification call for several payload-only assertions. Keep the classification assertions unchanged and add a private `classify_payload()` helper inside `tests/StatusClassifierTest.php` for the cases that use the default active site, default snapshot capture time, and fixed test clock.
+
+Implementation status: implemented locally as a test-only structure cleanup. The helper centralizes the default active-site classifier call while leaving special pending and stale-snapshot scenarios explicit.
+
+Acceptance criteria:
+
+- Focused `StatusClassifierTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, classification behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
