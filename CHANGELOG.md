@@ -22,6 +22,16 @@ All notable changes to this project will be documented in this file.
 
 - Preserved the Diagnostics redaction boundary: the download uses only the already-rendered support-safe summary and does not add a server endpoint, protocol change, database write, remote action, raw payload exposure, credential handling, Drime behavior, or live-site mutation.
 
+## 0.1.57 - 2026-10-04
+
+### Added
+
+- Added display-only latest cleanup-preview evidence on Site Detail when clients report sanitized V2.4 cleanup-preview results.
+
+### Security
+
+- Preserved the read-only cleanup boundary: no cleanup apply, deletion, retention change, restore, credential, Drime, filesystem-path, protocol, or schema behavior is added.
+
 ## 0.1.56 - 2026-10-03
 
 ### Changed
