@@ -33,6 +33,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$states            = isset( $counts['record_states'] ) && is_array( $counts['record_states'] ) ? $counts['record_states'] : array();
 		$attention_history = isset( $counts['attention_history'] ) && is_array( $counts['attention_history'] ) ? $counts['attention_history'] : array();
 		$restore_readiness = isset( $counts['restore_readiness'] ) && is_array( $counts['restore_readiness'] ) ? $counts['restore_readiness'] : array();
+		$local_removal     = isset( $counts['local_removal'] ) && is_array( $counts['local_removal'] ) ? $counts['local_removal'] : array();
 		$summaries         = isset( $diagnostics['summaries'] ) && is_array( $diagnostics['summaries'] ) ? $diagnostics['summaries'] : array();
 
 		echo '<section aria-labelledby="adbd-diagnostics-heading">';
@@ -80,6 +81,17 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview {
 		$this->render_detail_row( __( 'Other or unknown enrollment records', 'alynt-drime-backups-dashboard' ), (string) ( $this->diagnostic_int( $states, 'other' ) + $this->diagnostic_int( $states, 'unknown' ) ) );
 		$this->render_detail_row( __( 'Sites with recorded failures', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $counts, 'with_failures' ) );
 		echo '</tbody></table></div></div>';
+
+		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Local Removal Readiness', 'alynt-drime-backups-dashboard' ) . '</h3>';
+		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Local removal readiness diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';
+		$this->render_detail_row( __( 'Archived records evaluated', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $local_removal, 'archived_records' ) );
+		$this->render_detail_row( __( 'Future-removal ready records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $local_removal, 'ready_records' ) );
+		$this->render_detail_row( __( 'Blocked retained records', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $local_removal, 'blocked_records' ) );
+		$this->render_detail_row( __( 'Retained snapshot rows', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $local_removal, 'retained_snapshot_rows' ) );
+		$this->render_detail_row( __( 'Retained action history rows', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $local_removal, 'retained_action_rows' ) );
+		$this->render_detail_row( __( 'Non-terminal action rows', 'alynt-drime-backups-dashboard' ), (string) $this->diagnostic_int( $local_removal, 'non_terminal_action_rows' ) );
+		echo '</tbody></table>';
+		echo '<p class="description">' . esc_html__( 'Preview-only aggregate evidence for archived local dashboard records. Permanent local removal is still unavailable; this panel does not delete data, contact client sites, change backups, alter Drime, or change client settings.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 
 		echo '<div class="adbd-panel"><h3>' . esc_html__( 'Attention / Recovery History', 'alynt-drime-backups-dashboard' ) . '</h3>';
 		echo '<table class="widefat striped adbd-detail-table" aria-label="' . esc_attr__( 'Attention and recovery history diagnostics', 'alynt-drime-backups-dashboard' ) . '"><tbody>';

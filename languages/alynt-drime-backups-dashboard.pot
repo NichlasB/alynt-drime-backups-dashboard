@@ -1643,6 +1643,42 @@ msgid "Sites with recorded failures"
 msgstr ""
 
 #: includes/traits/trait-admin-page-diagnostics-overview.php:82
+msgid "Local Removal Readiness"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:83
+msgid "Local removal readiness diagnostics"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:84
+msgid "Archived records evaluated"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:85
+msgid "Future-removal ready records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:86
+msgid "Blocked retained records"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:87
+msgid "Retained snapshot rows"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:88
+msgid "Retained action history rows"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:89
+msgid "Non-terminal action rows"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:91
+msgid "Preview-only aggregate evidence for archived local dashboard records. Permanent local removal is still unavailable; this panel does not delete data, contact client sites, change backups, alter Drime, or change client settings."
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview.php:82
 #: includes/traits/trait-admin-page-status-history-detail-helpers.php:74
 msgid "Attention / Recovery History"
 msgstr ""

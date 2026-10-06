@@ -81,6 +81,14 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 				'complete_candidates'   => 0,
 				'incomplete_candidates' => 0,
 			),
+			'local_removal'       => array(
+				'archived_records'         => 0,
+				'ready_records'            => 0,
+				'blocked_records'          => 0,
+				'retained_snapshot_rows'   => 0,
+				'retained_action_rows'     => 0,
+				'non_terminal_action_rows' => 0,
+			),
 		);
 
 		foreach ( $sites as $site ) {
@@ -103,6 +111,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			++$counts['record_states'][ $state ];
 
 			if ( ! empty( $site['archived_at'] ) ) {
+				$local_removal_counts = $this->local_removal_readiness_diagnostics( $site );
+
+				foreach ( $local_removal_counts as $key => $value ) {
+					$counts['local_removal'][ $key ] += $value;
+				}
+
 				++$counts['not_polling'];
 				continue;
 			}

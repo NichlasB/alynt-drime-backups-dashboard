@@ -1745,6 +1745,27 @@ Acceptance criteria for a future implementation:
 - Audit events and support output remain redacted and do not expose labels/domains beyond existing support-safe policy.
 - No client-site contact, Drime mutation, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential rotation, release, deployment, or live-site behavior is introduced without a separate approval gate.
 
+### Diagnostics Local Removal Readiness Slice
+
+After the Site Detail removal-preview slice, operators can inspect one archived retained record at a time, but Diagnostics still only reports the total archived-record count. The next safe local-only feature is fleet-level support-safe readiness evidence for retained local records, without adding removal controls or deleting anything.
+
+Implementation target:
+
+- Add a Diagnostics aggregate for archived retained local records that are ready for a future local-removal confirmation versus blocked.
+- Count retained snapshot rows, retained action-history rows, and non-terminal action rows across archived retained records.
+- Reuse the same support-safe eligibility boundary as the Site Detail preview: archived only, revoked or expired-pending only, no polling credentials, no action signing credentials, no next scheduled poll, no paused state, and no non-terminal action history.
+- Render the aggregate on Diagnostics as preview/readiness evidence only.
+- Include the aggregate in the existing redacted support summary through the `counts` object without adding domains, labels, raw payloads, credentials, paths, Drime identifiers, or row-level details.
+- Do not add a remove/delete button, confirmation form, POST handler, schema change, SQL write, remote action, client-site contact, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, release, deployment, or live-site state change.
+
+Acceptance criteria:
+
+- Diagnostics shows archived retained records evaluated, future-removal-ready records, blocked records, retained snapshot rows, retained action-history rows, and non-terminal action rows.
+- Support summary includes only aggregate counts.
+- Tests cover the aggregate counts and visible Diagnostics rendering.
+- Permanent local removal remains unavailable and no destructive workflow is introduced.
+- PHP syntax, targeted tests, full tests, lint, build, and whitespace checks pass before commit.
+
 ### Settings And Hooks Documentation Alignment Slice
 
 The Settings and Hook reference docs still contained stale release-line wording after the `0.1.61` rollout and later planning slices. This created a small operator-doc mismatch: the hook reference still named `0.1.28`, and the settings overview understated the current split between administrator-configurable local policy/settings options and internal options.

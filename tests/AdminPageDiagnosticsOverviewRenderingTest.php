@@ -77,6 +77,14 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 						'wpvivid_complete'      => 0,
 						'wpvivid_incomplete'    => 14,
 					),
+					'local_removal'       => array(
+						'archived_records'         => 2,
+						'ready_records'            => 1,
+						'blocked_records'          => 1,
+						'retained_snapshot_rows'   => 6,
+						'retained_action_rows'     => 4,
+						'non_terminal_action_rows' => 1,
+					),
 				),
 				'summaries' => array(
 					'attention_history' => 'repeated_attention_seen',
@@ -107,6 +115,14 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 		$this->assertStringContainsString( '14 reported · 8 complete · 6 incomplete', $html );
 		$this->assertStringContainsString( '14 reported · 0 complete · 14 incomplete', $html );
 		$this->assertStringContainsString( 'they are not a restore guarantee', $html );
+		$this->assertStringContainsString( 'Local Removal Readiness', $html );
+		$this->assertStringContainsString( 'Archived records evaluated', $html );
+		$this->assertStringContainsString( 'Future-removal ready records', $html );
+		$this->assertStringContainsString( 'Blocked retained records', $html );
+		$this->assertStringContainsString( 'Retained snapshot rows', $html );
+		$this->assertStringContainsString( 'Retained action history rows', $html );
+		$this->assertStringContainsString( 'Non-terminal action rows', $html );
+		$this->assertStringContainsString( 'Permanent local removal is still unavailable', $html );
 		$this->assertStringContainsString( '<td>28</td>', $html );
 		$this->assertStringContainsString( '<td>3</td>', $html );
 	}
