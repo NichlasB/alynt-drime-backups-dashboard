@@ -1264,6 +1264,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, dispatcher behavior, safe transport behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Admin Page Action Test Double Support Split Slice
+
+The admin page action test-double support file still grouped enrollment, remote-action, poller, event-log, and site repository collaborators together. Keep the existing loader path stable while splitting those doubles into narrower support files.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/admin-page-actions-test-doubles.php` now loads enrollment, remote/poller, event-log, and site repository fake collaborator files. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused admin action coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, admin action behavior, polling behavior, archive behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
