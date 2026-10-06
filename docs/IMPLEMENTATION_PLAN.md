@@ -24,6 +24,20 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`, but remain hidden unless a latest client capability report explicitly advertises rollback-preview support. One PureCleanse rollback-preview pilot was completed on 2026-09-30 with temporary client-local opt-in, a guarded `every_15_minutes -> every_30_minutes` apply, non-mutating rollback preview evidence, restoration to `every_15_minutes`, and opt-in disabled again. Broad rollback-preview enablement and any mutating `schedule_rollback` runtime behavior remain unavailable without separate approval gates.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
 
+## Patch Release Planning Gate For 0.1.61
+
+The post-`0.1.60` local branch contains a small maintenance-only patch candidate:
+
+- `01ba9b0` — remote-action repository summary docblock cleanup;
+- `11346f7` — implementation-plan rollout-state synchronization for deployed dashboard `0.1.60`;
+- `6eccf02` — enrollment REST repository test double split;
+- `07b4063` — remote-action repository fake `wpdb` test double split;
+- `de13286` — Unreleased changelog coverage for the post-`0.1.60` local maintenance line.
+
+Recommended release shape: package these as dashboard `0.1.61` only if the operator wants a housekeeping patch release. The candidate is documentation/test-support/formatting focused and should not require client rollout changes. Before any actual release, run the normal approval-gated release workflow, including version bump, package validation, GitHub release creation, updater smoke checks, and explicit approval before any `control-sitesmanage` deployment.
+
+This planning gate is local-only. It does not bump versions, create a tag, create a release, deploy to `control-sitesmanage`, change live files, change database state, alter pairing, change credentials, run backup/restore/cleanup actions, or mutate any client site.
+
 ## Toolkit Workflow Gates For Future V2 Schedule Slices
 
 Future schedule-management work must use the `wp-plugin-toolkit` routing rather than ad-hoc implementation. Treat each new schedule slice as Phase 4 feature work until it becomes a release candidate.
