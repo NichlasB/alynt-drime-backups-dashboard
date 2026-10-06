@@ -1,146 +1,126 @@
 # Alynt Drime Backups Dashboard
 
-Read-only central monitoring dashboard for WordPress sites running Alynt Drime Backups Uploader.
+Central WordPress admin dashboard for monitoring sites that run **Alynt Drime Backups Uploader**.
 
-This repository is the separate dashboard plugin package. The current dashboard host is `control-sitesmanage` in `live-only` mode. Version 1 remains read-only monitoring. V2.1 adds one separately opted-in, bounded remote action: asking a client uploader to scan for ready backup packages and upload eligible items using its own local settings and Drime credentials. Version 0.1.61 is a maintenance patch that records the deployed 0.1.60 rollout state, documents the patch-release planning gate, and continues test-support structure cleanup without changing dashboard runtime behavior. Version 0.1.60 is a structure/test/documentation patch that continues focused helper and PHPUnit support splits, reconciles release-history metadata, and records the current file-structure baseline without changing behavior. Version 0.1.59 is a structure/documentation patch that reconciles the `0.1.58` release status and splits remote-action capability support checks plus schedule result sanitizers into focused helper traits without changing behavior. Version 0.1.58 adds a Diagnostics Support Copy download control for the already-redacted JSON summary. Version 0.1.57 adds display-only latest cleanup-preview proof evidence on Site Detail. Version 0.1.56 is a structure/documentation patch that reconciles restore-readiness roadmap status after 0.1.55 and splits cleanup-preview Remote Action History details plus retained attention/recovery Diagnostics metrics into focused helper traits without changing behavior. Version 0.1.55 adds a support-safe Diagnostics restore-readiness summary and source-level candidate counts while continuing to hide candidate references, paths, filenames, package names, Drime identifiers, credentials, restore controls, and restore guarantees. Version 0.1.54 adds compact Sites-row restore evidence hints from optional restore-readiness summaries while continuing to hide candidate references, paths, filenames, package names, Drime identifiers, credentials, restore controls, and restore guarantees. Version 0.1.53 adds support-safe Diagnostics aggregate counts for optional restore-readiness evidence while continuing to hide candidate references, paths, filenames, package names, Drime identifiers, credentials, restore controls, and restore guarantees. Version 0.1.52 adds optional display-only restore-readiness evidence on Site Detail when clients report sanitized source-level restore candidate metadata, without adding restore execution, file staging, backup-package download, database import, path browsing, raw candidate reference display, dashboard Drime credential storage, or Drime/client mutation. Version 0.1.50 adds a support-safe Dashboard Runtime panel to Diagnostics so operators can confirm the installed dashboard version and protocol/schema contract from the UI. Version 0.1.49 adds display-only latest rollback-preview proof evidence in Site Detail Schedule Management when dashboard-local action history contains a successful rollback-preview result. Version 0.1.48 adds support-safe Diagnostics aggregate counts and readable summaries for retained attention/recovery snapshot history. Version 0.1.47 adds a Site Detail Attention / Recovery History panel from retained redacted snapshot summaries so transient attention states that later recover are easier to understand. Version 0.1.46 adds compact rollback-preview readiness pills and reconciles completed roadmap status without changing behavior or adding remote powers. Version 0.1.45 is a structure-cleanup patch that splits Diagnostics local actions and Site Detail local record panels into focused traits without changing behavior. Version 0.1.44 adds explicit Site Detail rollback-preview readiness states and support-safe Diagnostics aggregate counts for rollback-preview support visibility. Version 0.1.43 adds non-mutating Schedule Rollback Preview dispatch and Site Detail controls for clients that separately advertise rollback-preview support and have fresh support-safe rollback metadata from a successful Schedule Apply action. Version 0.1.42 adds compact Sites-row source reason lines so operators can see why evidence is fresh, policy-valid, optional, stale, missing, or queued without opening Site Detail. Version 0.1.41 adds Site Detail Remote Action History filters and compacts long action-detail rows while keeping support-safe details available behind native disclosure. Version 0.1.40 clarifies V2.3 Schedule Apply history and operator copy so pending client cadence evidence is not shown as a known `Unknown → target` transition and apply is described as changing only the Alynt uploader scan cadence. Version 0.1.33 clarifies Diagnostics polling summaries with aggregate dashboard record-state counts, version 0.1.32 clarifies the V2.3 Schedule Apply rollback boundary so operators see that apply changes only future Alynt scan/upload cadence and rollback remains unavailable in this release, and version 0.1.31 polishes compact Sites-tab backup evidence age labels so non-round upload ages stay easy to scan. Version 0.1.30 makes Sites-tab backup evidence easier to scan with compact backup-health summaries and short per-source rows. Version 0.1.29 includes scheduled-maintenance cleanup wiring, diagnostics no-op handling, targeted signer coverage, detail-view history reuse, and accessible copy-field labels, while version 0.1.28 includes dashboard-local scheduled polling pause/resume controls and friendlier Diagnostics operator action-history labels. Version 0.1.25 includes V2.2 dashboard-side action-history reconciliation and audit hardening without adding new remote powers, patch fixes so newly dispatched action rows use the same public action UUID reported by clients and same-origin dashboard self-actions can pass managed-host loopback/private DNS resolution safely, a dashboard-owned WPvivid external/optional monitoring policy for sites that intentionally handle WPvivid backups outside Alynt-uploaded evidence, V2.3 Alynt scan/upload schedule visibility plus guarded preview/apply workflow, and clearer Schedule Apply history details. Schedule Apply remains hidden unless a client reports its separate local Schedule Apply opt-in.
+The dashboard is intentionally conservative: its core job is to show whether enrolled sites are reporting backup health, backup evidence, source freshness, action history, diagnostics, and restore-readiness evidence without giving the dashboard broad control over client sites or Drime.
 
-## v1 Boundary
+## What this plugin does
 
-- Dashboard-generated one-time pairing token.
-- Client-site opt-in before any status endpoint is enabled.
-- Dashboard polling of a fixed read-only client status endpoint.
-- No remote backup, restore, delete, cleanup, settings, credential, Drime token, or arbitrary command actions.
+- Creates local dashboard records for client sites.
+- Generates one-time pairing tokens for explicit client-site opt-in.
+- Polls enrolled clients through a fixed authenticated read-only status endpoint.
+- Shows fleet-level backup status on the Sites and Attention tabs.
+- Shows detailed per-site evidence on Site Detail screens.
+- Tracks redacted status snapshots, source freshness, inventory counts, and action history.
+- Provides support-safe Diagnostics summaries and export/download controls.
+- Displays optional restore-readiness evidence when clients report sanitized source-level metadata.
 
-## V2.1 Boundary
+## Safety boundaries
 
-- Requires V1 pairing first.
-- Requires a separate dashboard-generated `adb2a` action opt-in token pasted on the client site.
-- Uses per-site signed action intents with short expiry, idempotency, and client-side rate/lock enforcement.
-- Allows only `scan_upload_now`: the client scans for ready backup packages and schedules eligible uploads.
-- Does not create fresh WPvivid/server-runner backups, restore, delete, clean up, change schedules/settings, expose filesystem paths, or store Drime API credentials in the dashboard.
+The dashboard must stay narrow by design.
 
-## V2.3 Schedule Boundary
+It does **not**:
 
-- Schedule visibility and `schedule_preview` are redacted, support-safe extensions to V2 action reporting.
-- `schedule_apply` is limited to one target: the Alynt uploader scan cadence reported as `alynt_scan_upload`.
-- Apply requires a fresh successful matching preview, a signed V2 action intent, client-side revalidation, and the client's separate local Schedule Apply opt-in.
-- Apply changes only future Alynt uploader scan cadence. It does not create a backup immediately and does not change the upload-worker cadence.
-- Schedule Rollback Preview is non-mutating support evidence only and requires separate client-advertised support plus fresh safe rollback metadata from a successful Schedule Apply action.
-- No rollback execution, WPvivid schedule changes, server-runner schedule changes, Drime credential storage, backup creation, restore, delete, cleanup, arbitrary cron, or arbitrary command actions are included.
+- store client Drime API credentials;
+- browse arbitrary filesystem paths;
+- expose raw backup package paths, filenames, candidate references, or Drime identifiers;
+- create fresh WPvivid or server-runner backups;
+- restore data;
+- delete backups;
+- clean up local or Drime data;
+- run arbitrary commands;
+- mutate client settings without a separately designed and approved capability.
 
-## Package Identity
+Version 1 monitoring remains read-only relative to client sites and Drime. Later V2 capabilities are opt-in, signed, bounded, client-validated, and documented separately.
 
-- Plugin name: `Alynt Drime Backups Dashboard`
-- Slug/folder: `alynt-drime-backups-dashboard`
-- Main file: `alynt-drime-backups-dashboard.php`
-- Text domain: `alynt-drime-backups-dashboard`
-- Composer package: `alynt/alynt-drime-backups-dashboard`
-- GitHub Plugin URI: `NichlasB/alynt-drime-backups-dashboard`
-- PHP class prefix: `Alynt_Drime_Backups_Dashboard_`
-- Function/option/action prefix: `alynt_drime_backups_dashboard_`
-- Constant prefix: `ALYNT_DRIME_BACKUPS_DASHBOARD_`
+## Current capability areas
 
-## Current Status
+### Monitoring
 
-Version 0.1.61 currently includes:
+- Sites, Attention, and Site Detail screens.
+- Manual **Check Now** for enrolled sites.
+- Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and local retention cleanup.
+- Local-only dashboard actions such as revoke, archive/unarchive, and pause/resume polling.
 
-- WordPress plugin header and requirement gate.
-- Local custom table migration hooks for dashboard-owned sites and snapshots.
-- Admin page under Tools > Drime Backups Dashboard for creating local pending enrollments and displaying one-time pairing tokens.
-- Protocol-v1 pairing-token helper primitives with public-HTTPS origin validation.
-- Local dashboard-record revocation scaffolding that does not contact client sites.
-- Credential-vault foundation for encrypted dashboard-side polling credential storage.
-- Safe transport foundation that prepares the fixed read-only status request without executing outbound HTTP.
-- Protocol-v1 REST enrollment endpoint for authenticated uploader opt-in completion.
-- Manual **Check Now** for enrolled sites using the fixed authenticated read-only status route.
-- Scheduled read-only polling with bounded batches, locks, jitter, retry backoff, and local retention cleanup for snapshots and remote-action history.
-- Responsive, WordPress-native Sites, Attention, and Site Detail views with status summaries, polling evidence, accessible status badges, bounded recent snapshot history, and local-only revoke/check actions.
-- Site Detail Attention / Recovery History derived from retained redacted snapshot summary fields so transient attention states that later recover are easier to understand.
-- Redacted admin Diagnostics tab for scheduler state, retention defaults, polling counts, recent safe poll outcomes, and progressively enhanced support-copy/export controls, including clipboard copy and JSON download for the already-redacted support summary.
-- A support-safe Diagnostics Dashboard Runtime panel showing the installed dashboard version and protocol/schema contract without exposing site identifiers or secrets.
-- Aggregate Diagnostics record-state counts that distinguish total dashboard records from active polling records, pending pairings, awaiting-first-poll records, and locally revoked records.
-- Support-safe Diagnostics aggregate counts and readable summaries for retained attention/recovery snapshot history.
-- Optional structured diagnostics logging, disabled by default, with a bounded redacted local event buffer for support troubleshooting.
-- Always-on, bounded, redacted operator action history for dashboard-local actions such as pairing-token creation, local revocation, manual **Check Now**, and diagnostics changes.
-- Optional dashboard-side display of redacted per-source backup freshness and inventory evidence from schema-1 uploader status payloads.
-- Redacted WPvivid source-activity hints that distinguish local WPvivid activity evidence from Alynt upload proof.
-- At-a-glance Sites-row source summaries for Server and WPvivid freshness, current package counts, latest backup/package time, and latest upload time when clients report that evidence.
-- Compact Sites-row source reason lines explaining why source evidence is fresh, policy-valid, optional, stale, missing, or queued.
-- A dashboard-owned per-site WPvivid external/optional monitoring policy that changes classification/display only and does not contact client sites, mutate WPvivid, create backups, or touch Drime.
-- V2.1 dashboard-generated action opt-in tokens, encrypted dashboard-side signing-key storage, signed `Request Backup Now` dispatch, and redacted remote-action history for the single `scan_upload_now` action.
-- V2.2 dashboard-side reconciliation of sanitized client `remote_actions.last_action` evidence into matching dashboard action records for the same site, with stale-action detection, clearer Site Detail action-history columns, compact Sites-row latest-client-action hints, and support-safe Diagnostics aggregates.
-- Site Detail Remote Action History filters for action type and dashboard state, plus compact default detail cells for long schedule/action rows with full support-safe detail retained behind native disclosure.
-- V2.3 schedule visibility for the Alynt scan/upload schedule capability, with Site Detail schedule posture, compact Sites-row hints, support-safe Diagnostics aggregates, signed non-mutating preview, and guarded apply dispatch from a fresh matching preview. This does not disable, roll back, change WPvivid or server-runner schedules, create backups, restore, delete, clean up, or change credentials.
-- V2.3 non-mutating Schedule Rollback Preview dispatch and Site Detail controls for clients that separately advertise rollback-preview support and have fresh support-safe rollback metadata from a successful Schedule Apply action. This does not execute rollback or mutate schedules.
-- Explicit Site Detail rollback-preview readiness states and support-safe Diagnostics aggregate counts for rollback-preview-supported sites, rollback-preview-hidden sites, and rollback-apply-advertised canary evidence.
-- Display-only latest rollback-preview proof evidence in Site Detail Schedule Management when dashboard-local action history contains a successful rollback-preview result.
-- Optional display-only restore-readiness evidence on Site Detail when clients report sanitized source-level restore candidate metadata.
-- Support-safe Diagnostics and support-copy aggregate counts for optional restore-readiness evidence, including reporting sites, evidence states, and complete/incomplete source candidate totals.
-- A support-safe Diagnostics restore-readiness summary row for complete, incomplete, stale, mixed, incompatible, unknown, or unavailable evidence.
-- Source-level restore-readiness Diagnostics counts for Server runner and WPvivid candidates.
-- Compact Sites-row restore evidence hints when clients report optional restore-readiness summaries, without exposing raw candidate details or adding restore controls.
-- Structure cleanup that keeps behavior unchanged while splitting Diagnostics local actions and Site Detail local record panels into focused traits.
-- Same-origin dashboard self-action dispatch support for the bounded V2.1 action when managed-host DNS resolves the dashboard's own public hostname to loopback/private addresses, while preserving public-IP enforcement for non-self client action destinations.
-- Credential-aware Sites-tab manual-check state copy for active, pending, revoked, and missing-credential rows.
-- Sites-tab layout protection for action buttons and hiding of superseded revoked duplicate rows when a healthy active enrollment exists for the same origin.
-- Harmless per-request cache-busting for read-only status polling so managed page caches cannot serve stale authenticated status payloads.
-- Implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
-- Approved Phase 3 protocol contract in `docs/PROTOCOL_V1.md`.
-- Approved Phase 3 threat model in `docs/THREAT_MODEL_V1.md`.
-- Future v2 remote-actions planning in `docs/V2_REMOTE_ACTIONS_PLAN.md`.
-- Settings reference in `docs/SETTINGS.md`.
-- Hook reference in `docs/HOOKS.md`.
+### Backup evidence
 
-Before broad implementation work, create or verify a restore point. For the new dashboard repo, use a baseline commit after this scaffold and then create an external restore point before adding enrollment, polling, or schema migrations. For companion uploader changes, run the toolkit restore-point prompt against the uploader repository first.
+- Compact Sites-row backup-health summaries.
+- Server runner and WPvivid source summaries.
+- Freshness windows, latest activity, upload evidence, package counts, queued counts, and warning states when clients report them.
+- Dashboard-owned WPvivid external/optional policy for sites where WPvivid is intentionally managed outside Alynt-uploaded evidence.
 
-## Development
+### Diagnostics
 
-### Requirements
+- Scheduler state and polling health.
+- Record-state counts.
+- Attention/recovery aggregate evidence.
+- Restore-readiness aggregate evidence.
+- Runtime/version contract panel.
+- Redacted support-copy JSON and download controls.
 
-- WordPress 6.0 or higher.
-- PHP 7.4 or higher.
-- Composer dependencies installed for local linting and tests.
-- Node.js/npm for optional asset-build and deployment helper scripts.
+### V2 remote-action visibility
 
-### Installation
+The dashboard can show and reconcile redacted action history for supported V2 clients.
+
+Currently implemented action areas include:
+
+- **Request Backup Now**: sends a signed `scan_upload_now` intent after separate client-side action opt-in. The client scans for ready packages and uploads eligible items using its own existing settings and Drime credentials.
+- **Schedule Preview / Apply**: limited to the Alynt uploader scan cadence, guarded by fresh preview evidence and separate client-side opt-in.
+- **Schedule Rollback Preview**: non-mutating support evidence only. It does not execute rollback or change schedules.
+- **Cleanup Preview**: non-mutating evidence only. Cleanup apply remains unavailable.
+
+These actions do not grant general remote control.
+
+### Restore-readiness evidence
+
+When clients report optional sanitized restore-readiness metadata, the dashboard can display:
+
+- Site Detail restore-readiness evidence;
+- compact Sites-row restore evidence hints;
+- support-safe Diagnostics aggregate counts;
+- source-level candidate totals for Server runner and WPvivid.
+
+This is evidence only. It does not download, stage, unpack, import, restore, delete, or guarantee recoverability.
+
+## Typical operator flow
+
+1. Install and activate the dashboard plugin.
+2. Create a pending dashboard record for a client origin.
+3. Copy the one-time V1 pairing token.
+4. Paste the token on the client uploader site to opt in.
+5. Wait for the first valid read-only poll.
+6. Monitor backup health from the Sites and Attention tabs.
+7. Use Site Detail and Diagnostics when a site needs investigation.
+8. For V2-capable clients, generate separate action opt-in tokens only when that bounded capability is needed.
+
+## Installation
 
 1. Copy the `alynt-drime-backups-dashboard` folder to `wp-content/plugins/`.
 2. Activate **Alynt Drime Backups Dashboard** from the WordPress Plugins screen.
 3. Open **Tools > Drime Backups Dashboard** in WordPress admin.
 
-### Usage
+## Requirements
 
-Use the dashboard to generate one-time V1 pairing tokens, complete client-site opt-in enrollment, and monitor read-only client backup status snapshots. For V2-capable paired clients, a dashboard administrator can generate a separate one-time action opt-in token, use **Request Backup Now** to send one signed `scan_upload_now` intent, preview the Alynt scan/upload schedule, and apply one previewed Alynt uploader scan cadence change when the client has separately opted in. The dashboard still does not create fresh backups, restore, delete, clean up, change WPvivid/server-runner schedules, change settings, store Drime credentials, or run arbitrary commands.
+- WordPress 6.0 or higher.
+- PHP 7.4 or higher.
+- Composer dependencies installed for local linting and tests.
+- Node.js/npm for asset-build and release helper scripts.
 
-Diagnostics live under **Tools > Drime Backups Dashboard > Diagnostics**. Structured diagnostics logging is disabled by default. When an administrator explicitly enables it, the plugin stores a bounded local event buffer with redaction applied before persistence/export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials are not stored in diagnostics events.
+## Package identity
 
-### FAQ
+| Item | Value |
+| --- | --- |
+| Plugin name | `Alynt Drime Backups Dashboard` |
+| Slug/folder | `alynt-drime-backups-dashboard` |
+| Main file | `alynt-drime-backups-dashboard.php` |
+| Text domain | `alynt-drime-backups-dashboard` |
+| Composer package | `alynt/alynt-drime-backups-dashboard` |
+| GitHub Plugin URI | `NichlasB/alynt-drime-backups-dashboard` |
+| PHP class prefix | `Alynt_Drime_Backups_Dashboard_` |
+| Function/option/action prefix | `alynt_drime_backups_dashboard_` |
+| Constant prefix | `ALYNT_DRIME_BACKUPS_DASHBOARD_` |
 
-#### Can the dashboard run backups, restores, or cleanup on client sites?
-
-Version 1 cannot run any remote actions. V2.1 adds only a bounded **Request Backup Now** action after separate client-side opt-in. That action asks the client uploader to scan for ready packages and upload eligible items; it does not create fresh WPvivid/server-runner backups and cannot restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands. V2.2 only hardens action-history reconciliation, audit visibility, stale-action evidence, and support-safe diagnostics for that existing action. V2.3 Schedule Apply can change only future Alynt uploader scan cadence after a fresh preview and separate client-local opt-in. Schedule Rollback Preview is non-mutating support evidence only and does not execute rollback or change schedules.
-
-#### What happens when I generate a pairing token?
-
-The dashboard creates a pending local enrollment for the expected client origin and displays a one-time pairing credential. The client site must opt in by submitting the enrollment payload back to the dashboard REST endpoint before the dashboard can poll status.
-
-#### Does diagnostics logging store secrets?
-
-No. Diagnostics logging is disabled by default and redacts sensitive fields before local persistence or export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials must not be stored.
-
-#### Where are implementation details documented?
-
-See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md` for the V2.1 signed-action boundary, `docs/V2_REMOTE_ACTIONS_PLAN.md` for later remote-operation planning, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
-
-### Changelog Summary
-
-See `CHANGELOG.md` for the current changelog and release notes.
-
-### License
-
-GPL-2.0-or-later. See `LICENSE`.
-
-### Local Checks
+## Development
 
 Run the configured checks before packaging:
 
@@ -152,14 +132,48 @@ npm run build
 
 For targeted PHP syntax checks during development, run `php -l` against changed PHP files. The configured lint script covers the committed PHP paths.
 
-## Release Packaging
+## Release packaging
 
 Alynt Plugin Updater distribution uses GitHub release assets from `NichlasB/alynt-drime-backups-dashboard`.
 
 - Release tags use `vX.Y.Z`.
-- The release workflow packages `alynt-drime-backups-dashboard-X.Y.Z.zip`.
+- Release assets are named `alynt-drime-backups-dashboard-X.Y.Z.zip`.
 - The ZIP top-level folder is `alynt-drime-backups-dashboard/`.
 - CI builds runtime assets with `npm ci` and `npm run build`.
 - Composer dependencies are development-only; release packages exclude `vendor/`.
 - Release packages exclude test suites, source assets, build scripts, Composer/npm manifests, local deployment helpers, and internal engineering docs.
 - Release publication, release-asset validation, and WordPress updater runtime acceptance remain separate approval-gated workflows.
+
+## Documentation map
+
+- `CHANGELOG.md` — release history and current release notes.
+- `docs/IMPLEMENTATION_PLAN.md` — implementation roadmap and completed slices.
+- `docs/PROTOCOL_V1.md` — read-only dashboard/uploader pairing and polling contract.
+- `docs/THREAT_MODEL_V1.md` — V1 monitoring threat model.
+- `docs/PROTOCOL_V2.md` — signed V2 action protocol.
+- `docs/THREAT_MODEL_V2.md` — V2 action threat model.
+- `docs/V2_REMOTE_ACTIONS_PLAN.md` — future remote-operation planning.
+- `docs/SETTINGS.md` — stored options and configuration ownership.
+- `docs/HOOKS.md` — hook ownership and extension-point notes.
+
+## FAQ
+
+### Can the dashboard run backups, restores, or cleanup on client sites?
+
+Not as a general remote-control system. V1 is read-only monitoring. V2.1 adds only a bounded **Request Backup Now** action after separate client-side opt-in; that asks the client uploader to scan for ready packages and upload eligible items. It does not create fresh WPvivid/server-runner backups, restore, delete, clean up, change settings, expose Drime credentials, or run arbitrary commands.
+
+### What happens when I generate a pairing token?
+
+The dashboard creates a pending local enrollment for the expected client origin and displays a one-time pairing credential. The client site must opt in by submitting the enrollment payload back to the dashboard REST endpoint before the dashboard can poll status.
+
+### Does diagnostics logging store secrets?
+
+No. Diagnostics logging is disabled by default and redacts sensitive fields before local persistence or export. Pairing tokens, polling secrets, authorization headers, cookies, nonces, raw payloads, raw response bodies, filesystem paths, SQL, salts, and Drime credentials must not be stored.
+
+### Where are detailed release notes?
+
+Use `CHANGELOG.md`. The README is intentionally kept as a short landing page rather than a release-history archive.
+
+## License
+
+GPL-2.0-or-later. See `LICENSE`.

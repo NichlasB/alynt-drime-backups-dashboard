@@ -1829,6 +1829,19 @@ Acceptance criteria:
 - Documentation distinguishes dashboard REST routes from outbound signed client action requests.
 - No PHP, schema, protocol, UI, database, credential, Drime, backup, restore, cleanup/delete, release, deployment, or live-site behavior changes are introduced.
 
+### README Operator Entry Point Slice
+
+The repository README had become a release-history archive, making the top-level project entry point hard to scan. The next safe documentation-only cleanup is to turn it back into a concise operator/developer overview while keeping detailed release history in `CHANGELOG.md` and detailed roadmap state in this implementation plan.
+
+Implementation status: implemented locally as a README-only documentation cleanup. `README.md` now summarizes the dashboard purpose, safety boundaries, monitoring surfaces, V2 action limits, restore-readiness evidence posture, typical operator flow, installation requirements, package identity, development checks, release packaging, documentation map, FAQ, and license. It removes the long inline release-history narrative from the README and points readers to `CHANGELOG.md` for detailed release notes. No runtime PHP, asset, translation string, schema, protocol, UI behavior, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state changed.
+
+Acceptance criteria:
+
+- README gives a concise current overview instead of a long release-history archive.
+- README keeps the dashboard read-only/safety boundaries explicit.
+- README points detailed release history to `CHANGELOG.md` and roadmap details to `docs/IMPLEMENTATION_PLAN.md`.
+- No PHP, asset, schema, protocol, UI, database, credential, Drime, backup, restore, cleanup/delete, release, deployment, or live-site behavior changes are introduced.
+
 ### Schedule Row Hint Clarity Slice
 
 The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.
