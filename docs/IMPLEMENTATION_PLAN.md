@@ -295,7 +295,7 @@ Acceptance criteria:
 
 The next largest PHPUnit structure hotspot is `DiagnosticsTest`, which mixes diagnostics assertions with reusable fake repository classes and support-summary harness code. The next safe test-only cleanup is to move those reusable support classes into a dedicated test support file while leaving diagnostics assertions, fixtures, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
 
-Implementation status: implemented locally as a test-only split. Diagnostics fake site/snapshot repositories and the support-summary harness now live in `tests/support/diagnostics-test-harness.php`, and `tests/DiagnosticsTest.php` requires that support file while keeping the existing test methods and fixture builders. No production PHP, assets, UI strings, Diagnostics output, support-copy shape, protocol behavior, database schema, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+Implementation status: implemented locally as a test-only split. Diagnostics fake site/snapshot repositories now live in `tests/support/diagnostics-test-repositories.php`, while fixture builders and the support-summary harness stay in `tests/support/diagnostics-test-harness.php`. Diagnostics tests load those support files while keeping the existing test methods and fixture expectations. No production PHP, assets, UI strings, Diagnostics output, support-copy shape, protocol behavior, database schema, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
 
 Acceptance criteria:
 
