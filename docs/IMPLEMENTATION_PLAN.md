@@ -381,11 +381,24 @@ Acceptance criteria:
 
 `DiagnosticsRemoteActionAggregatesTest` still grouped remote-action capability aggregates and restore-readiness evidence aggregates in one file. The next safe test-only cleanup is to move restore-readiness aggregate assertions into a focused diagnostics test class while preserving the same diagnostics service behavior, support-copy JSON shape, redaction expectations, source-level restore-readiness counts, and live-site state.
 
-Implementation status: implemented locally as a test-only split. Schedule-management and cleanup-preview aggregate coverage remains in `tests/DiagnosticsRemoteActionAggregatesTest.php`. Restore-readiness aggregate/source count coverage moved to `tests/DiagnosticsRestoreReadinessAggregatesTest.php`. Shared diagnostics fixtures and repository test doubles continue to load through `tests/support/diagnostics-test-bootstrap.php`.
+Implementation status: implemented locally as a test-only split. Schedule-management aggregate coverage remains in `tests/DiagnosticsRemoteActionAggregatesTest.php`. Cleanup-preview aggregate coverage moved to `tests/DiagnosticsCleanupPreviewAggregatesTest.php`. Restore-readiness aggregate/source count coverage moved to `tests/DiagnosticsRestoreReadinessAggregatesTest.php`. Shared diagnostics fixtures and repository test doubles continue to load through `tests/support/diagnostics-test-bootstrap.php`.
 
 Acceptance criteria:
 
 - focused diagnostics aggregate coverage passes with the same 3 tests and 43 assertions;
+- no split diagnostics aggregate test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, diagnostics collection behavior, support-copy JSON shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
+### Diagnostics Cleanup Preview Aggregate Test Class Split Slice
+
+`DiagnosticsRemoteActionAggregatesTest` still grouped schedule-management and cleanup-preview aggregate diagnostics after the restore-readiness split. The next safe test-only cleanup is to move cleanup-preview aggregate assertions into a focused diagnostics test class while preserving the same diagnostics service behavior, support-copy JSON shape, redaction expectations, cleanup-preview aggregate counts, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Schedule-management aggregate coverage remains in `tests/DiagnosticsRemoteActionAggregatesTest.php`. Cleanup-preview aggregate coverage moved to `tests/DiagnosticsCleanupPreviewAggregatesTest.php`. Shared diagnostics fixtures and repository test doubles continue to load through `tests/support/diagnostics-test-bootstrap.php`.
+
+Acceptance criteria:
+
+- focused diagnostics aggregate coverage passes with the same assertions;
 - no split diagnostics aggregate test class remains oversized from this source file;
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, diagnostics collection behavior, support-copy JSON shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
