@@ -816,6 +816,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Admin Rendering Remote Action Double Structure Slice
+
+The admin rendering test support still mixed the polling-state rendering harness with a remote-action repository double used only by schedule rollback-preview rendering assertions. The next safe test-only cleanup is to move that remote-action double into its own support file while leaving rendering assertions, fixtures, production helper calls, protocol behavior, schema, remote-action behavior, database state, release behavior, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. The admin rendering remote-action repository double now lives in `tests/support/admin-page-rendering-remote-action-double.php`, and the shared admin rendering bootstrap requires that support file alongside the existing polling-state rendering harness and remote-action rendering fixtures. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused admin rendering coverage that uses the rollback-preview action double passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading or release behavior.
+
 ### Status Classifier Test Fixture Structure Slice
 
 `StatusClassifierTest` remains one of the larger PHPUnit files because it combines classifier assertions with reusable site, snapshot, healthy-payload, and source-summary fixture builders. The next safe test-only cleanup is to move those fixture builders into a dedicated test support trait while leaving classifier assertions, fixtures, production code, protocol behavior, schema, classification behavior, and live-site state unchanged.
