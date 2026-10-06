@@ -403,6 +403,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, classifier behavior, source evidence policy, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Backup Source Evidence Test Harness Split Slice
+
+`AdminPageBackupSourceEvidenceTest` still embedded its reusable rendering harness, source-policy setup, fixture loader, and production-helper includes below the evidence assertions. The next safe test-only cleanup is to move that reusable support code into a dedicated support file while preserving the same compact/detail evidence assertions, source-policy behavior, WPvivid policy copy, warning copy, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. Backup-source evidence assertions remain in `tests/AdminPageBackupSourceEvidenceTest.php`. The rendering harness, fixture loader trait, production helper includes, and source-policy setup now live in `tests/support/admin-page-backup-source-evidence-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `AdminPageBackupSourceEvidence` coverage passes with the same 5 tests and 49 assertions;
+- the assertion file remains focused on backup-source evidence behavior rather than support setup;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, backup-source evidence rendering, source-policy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
