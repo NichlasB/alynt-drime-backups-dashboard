@@ -312,6 +312,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, reconciler behavior, repository behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Diagnostics Rendering Test Class Split Slice
+
+`AdminPageDiagnosticsRenderingTest` still grouped action-history rendering, operator-friendly audit labels, Diagnostics overview aggregate sections, generated-at/refresh evidence, runtime identity copy, and diagnostics rendering harness includes into one larger test file. The next safe test-only cleanup is to split action-history rendering from Diagnostics overview rendering while preserving the same admin rendering helpers, support-safe copy, runtime identity evidence, diagnostics aggregation display, audit labels, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Action-history empty-state and audit-label coverage remains in `tests/AdminPageDiagnosticsRenderingTest.php`. Diagnostics overview aggregate, freshness, and runtime identity coverage moved to `tests/AdminPageDiagnosticsOverviewRenderingTest.php`. Shared diagnostics rendering includes now live in `tests/support/admin-page-diagnostics-rendering-test-harness.php` with the existing rendering harness classes.
+
+Acceptance criteria:
+
+- focused `AdminPageDiagnostics` coverage passes with the same 7 tests and 49 assertions;
+- no split diagnostics rendering test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, admin rendering behavior, Diagnostics output, support-copy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
