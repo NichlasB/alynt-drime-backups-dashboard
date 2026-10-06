@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.60 - 2026-10-06
+
+### Changed
+
+- Continued the file-structure cleanup pass with focused production helper splits and broad PHPUnit/support harness splits without changing dashboard runtime behavior.
+- Reconciled release-history metadata and implementation-plan status for completed rollback-preview proof and current source-size baseline.
+- Recorded that current non-build source and test-support files are below the earlier large-file risk threshold so future structure work can avoid speculative security-sensitive refactors.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no new remote actions, backup creation, restore, cleanup/delete, schedule rollback, credential handling, Drime behavior, database schema, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.59 - 2026-10-05
 
 ### Changed
