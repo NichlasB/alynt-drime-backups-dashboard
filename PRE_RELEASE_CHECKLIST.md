@@ -52,15 +52,15 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] Composer audit passed for `0.1.62`: no security vulnerability advisories found.
 - [x] `git diff --check` passed for `0.1.62`.
 - [x] Translation-template coverage checked for this patch release. New strings were added manually because local `wp` is not available on PATH; POT header aligned to `0.1.62`.
-- [ ] Release ZIP audit for `0.1.62`.
-- [ ] GitHub release created for `v0.1.62`.
+- [x] Release ZIP audit passed for `0.1.62`: release asset `alynt-drime-backups-dashboard-0.1.62.zip` uploaded by Build Release run `37510850974`, SHA-256 digest `515c368d4d16a353956818a4d18e7e99ab4a05abb9508590d9d29a9939d569bf`, single top-level plugin folder, no excluded source/dev folders, and expected plugin/readme/POT/dist metadata present at `0.1.62`.
+- [x] GitHub release created for `v0.1.62`: https://github.com/NichlasB/alynt-drime-backups-dashboard/releases/tag/v0.1.62.
 - [ ] Updater install/update smoke verification not yet run for `0.1.62`.
 - [ ] Live dashboard deployment/update on `control-sitesmanage` not yet performed.
 
 ## Open Items
 
-- [ ] Commit `0.1.62` release-prep metadata changes.
-- [ ] Push local `0.1.62` release commit to `origin/master` and verify CI.
-- [ ] Tag/publish `v0.1.62` and verify release asset packaging after CI passes.
-- [ ] Run release ZIP audit for `0.1.62`.
+- [x] Commit `0.1.62` release-prep metadata changes: `996c658`.
+- [x] Push local `0.1.62` release commit to `origin/master` and verify CI: run `37510595089` passed.
+- [x] Tag/publish `v0.1.62` and verify release asset packaging after CI passes: release workflow run `37510850974` passed.
+- [x] Run release ZIP audit for `0.1.62`.
 - [ ] Deploy/update dashboard plugin on `control-sitesmanage` only after live-site approval and fresh restore point.
