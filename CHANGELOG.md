@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added a planning-only design for a future dashboard-local retained-record permanent removal flow, explicitly keeping implementation gated because it would be a destructive local database action.
+
+### Security
+
+- Preserved the current runtime boundary: no PHP behavior, schema, SQL, UI control, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state was changed.
+
 ## 0.1.61 - 2026-10-06
 
 ### Changed

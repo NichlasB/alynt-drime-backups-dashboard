@@ -6,7 +6,7 @@ This is now the canonical implementation plan for the dashboard repository. The 
 
 Phase 3 protocol details are tracked in `docs/PROTOCOL_V1.md` and `docs/THREAT_MODEL_V1.md`. V2.1 action-request protocol details are tracked in `docs/PROTOCOL_V2.md` and `docs/THREAT_MODEL_V2.md`.
 
-Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded V2.3 schedule-apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata capture is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, the planning-only schedule rollback readiness gate is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, the non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, the planning-only schedule rollback execution decision is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_DECISION.md`, the design-only V2.4 cleanup/retention decision record is tracked in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`, the V2.4 cleanup-preview implementation plan is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`, the V2.4 cleanup-apply decision is tracked in `docs/V2_4_CLEANUP_APPLY_DECISION.md`, and the V2.6 restore-preparation evidence design is tracked in `docs/V2_6_RESTORE_PREPARATION_EVIDENCE_DESIGN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, and other remote-control concepts out of the v1 acceptance boundary until a separate protocol and threat model are approved.
+Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTIONS_PLAN.md`. The first V2.1 design artifact is tracked in `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`, signed dispatch implementation planning is tracked in `docs/V2_1_SIGNED_DISPATCH_IMPLEMENTATION_PLAN.md`, V2.2 action-history/audit hardening is tracked in `docs/V2_2_REMOTE_ACTION_HISTORY_AUDIT_PLAN.md`, V2.3 schedule-management design is tracked in `docs/V2_3_SCHEDULE_MANAGEMENT_DESIGN.md`, V2.3 preview-only capability implementation planning is tracked in `docs/V2_3_PREVIEW_ONLY_IMPLEMENTATION_PLAN.md`, the non-mutating V2.3 schedule-preview action implementation is tracked in `docs/V2_3_SCHEDULE_PREVIEW_IMPLEMENTATION_PLAN.md`, guarded V2.3 schedule-apply implementation is tracked in `docs/V2_3_SCHEDULE_APPLY_IMPLEMENTATION_PLAN.md`, rollback-readiness metadata capture is tracked in `docs/V2_3_ROLLBACK_METADATA_CAPTURE_PLAN.md`, the planning-only schedule rollback readiness gate is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`, the non-mutating rollback-preview design is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`, the planning-only schedule rollback execution decision is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_DECISION.md`, the design-only V2.4 cleanup/retention decision record is tracked in `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`, the V2.4 cleanup-preview implementation plan is tracked in `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`, the V2.4 cleanup-apply decision is tracked in `docs/V2_4_CLEANUP_APPLY_DECISION.md`, and the V2.6 restore-preparation evidence design is tracked in `docs/V2_6_RESTORE_PREPARATION_EVIDENCE_DESIGN.md`. Dashboard-local retained-record removal planning is tracked in `docs/LOCAL_RECORD_REMOVAL_DESIGN.md`. These documents do not change the v1 read-only contract; they exist to keep backup execution, restore, cleanup, settings mutation, credential rotation, permanent dashboard-record removal, and other remote-control or destructive concepts out of the v1 acceptance boundary until a separate protocol, design, and approval gate are satisfied.
 
 ## Current State And Safety Boundary
 
@@ -1718,6 +1718,32 @@ Acceptance criteria:
 - Diagnostics/support copy distinguishes active/polling records, revoked records, and archived local records without exposing secrets.
 - Tests cover archive eligibility, archive/unarchive action handling, Sites filtering, and revoked/archived Site Detail guidance.
 - No remote action, credential reuse, backup creation, restore, cleanup/delete, protocol change, or live-site behavior is introduced.
+
+### Local Retained Record Removal Design Slice
+
+After archive/unarchive shipped, the remaining dashboard-local record-management question is whether operators should ever be able to permanently remove retained local records. This is intentionally separate from archive/unarchive because it would be destructive to dashboard-owned history, snapshots, and action records even though it would not contact a client site or Drime.
+
+Implementation status: design-only planning is complete in `docs/LOCAL_RECORD_REMOVAL_DESIGN.md`. The recommended future direction is archived-only, preview-first, confirmation-gated local removal for revoked or expired-pending records with no polling credentials, no action signing credentials, no scheduled polling state, and no non-terminal action history. No runtime PHP, schema, SQL, UI control, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state changed in this planning slice.
+
+Future implementation target:
+
+- Keep permanent removal unavailable until explicitly approved as a destructive dashboard-local database action.
+- Render no permanent-remove control on the default Sites table.
+- Limit any future control to archived records and/or archived Site Detail screens.
+- Require a support-safe preview before confirmation, including dependent row counts for site, snapshot, and action rows.
+- Re-check eligibility at confirmation time rather than trusting the preview.
+- Delete only dashboard-owned rows for the selected dashboard site ID.
+- Record redacted audit outcomes for preview and confirmation attempts.
+- Preserve uninstall behavior and the existing archive/unarchive flow.
+
+Acceptance criteria for a future implementation:
+
+- Active, awaiting-first-poll, paused, unarchived, credentialed, or non-terminal-action records cannot be removed.
+- Eligible archived revoked or expired-pending records can be previewed without deleting data.
+- Confirmation requires a fresh nonce, capability check, typed confirmation phrase, and current eligibility re-check.
+- Confirmation deletes only the selected dashboard-owned site, snapshot, and action rows.
+- Audit events and support output remain redacted and do not expose labels/domains beyond existing support-safe policy.
+- No client-site contact, Drime mutation, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential rotation, release, deployment, or live-site behavior is introduced without a separate approval gate.
 
 ### Schedule Row Hint Clarity Slice
 
