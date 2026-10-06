@@ -1204,6 +1204,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, admin action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Dispatcher Test Double Structure Slice
+
+The remote action dispatcher test harness still mixed dispatcher fixture builders with fake wpdb, credential vault, signer, and repository collaborators in one support file. Keep the dispatcher assertions unchanged and move those fake collaborators into a dedicated test support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. Dispatcher fake collaborators now live in `tests/support/remote-action-dispatcher-test-doubles.php`, while `tests/support/remote-action-dispatcher-test-harness.php` keeps the shared dispatcher fixture builders. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused remote-action dispatcher coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, dispatcher behavior, safe transport behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
