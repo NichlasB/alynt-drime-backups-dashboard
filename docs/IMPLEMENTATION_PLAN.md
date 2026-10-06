@@ -299,6 +299,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, repository behavior, SQL behavior, schema behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Remote Action Reconciler Test Class Split Slice
+
+`RemoteActionReconcilerTest` still grouped successful client-action reconciliation, result alias normalization, mismatch/fallback/downgrade/older-report guard behavior, stale maintenance, fake repository behavior, and payload fixtures into one larger test file. The next safe test-only cleanup is to split those concerns into focused reconciler test classes while preserving the same fake repository semantics, reconciler production class, state-transition guards, result alias behavior, stale maintenance behavior, status payload assumptions, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Successful reconciliation and alias normalization coverage remains in `tests/RemoteActionReconcilerTest.php`. Mismatch, sanitizer fallback, terminal-downgrade, and older-report guard coverage moved to `tests/RemoteActionReconcilerGuardsTest.php`. Missing-last-action stale maintenance coverage moved to `tests/RemoteActionReconcilerMaintenanceTest.php`. Shared fake repository and payload fixtures now live in `tests/support/remote-action-reconciler-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `RemoteActionReconciler` coverage passes with the same 7 tests and 23 assertions;
+- no split remote action reconciler test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, reconciler behavior, repository behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
