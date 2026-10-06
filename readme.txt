@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.63
+Stable tag: 0.1.64
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.64 is a maintenance patch that continues safe test-support structure cleanup and reconciles the local-removal readiness roadmap wording without changing dashboard runtime behavior.
 
 Version 0.1.63 is a maintenance patch that modernizes the README as a concise operator/developer entry point and continues safe structure cleanup for diagnostics and test-support helpers without changing dashboard runtime behavior.
 
@@ -55,6 +57,13 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.64 =
+* Split remote-action repository client-report payload fixtures into a focused test-support trait without changing runtime behavior.
+* Split Site Detail local-removal preview rendering assertions into a focused test class without changing runtime behavior.
+* Split Diagnostics overview aggregate payload fixtures into a focused test-support trait without changing runtime behavior.
+* Reconciled implementation-plan wording so the deployed 0.1.62 Diagnostics local-removal readiness aggregate and archived-row readiness hint slices are marked implemented, released, and deployed.
+* Preserved existing dashboard boundaries: no production PHP behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, release behavior, or deployment behavior was introduced.
 
 = 0.1.63 =
 * Modernized the README as a concise operator/developer entry point while keeping detailed release history in the changelog.

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+No unreleased changes.
+
+## 0.1.64 - 2026-10-06
+
 ### Changed
 
 - Split remote-action repository client-report payload fixtures into a focused test-support trait without changing runtime behavior.
