@@ -286,6 +286,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, admin behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Site Repository Test Class Split Slice
+
+`SiteRepositoryTest` still grouped active pending lookup reads, revocation/enrollment write guards, dashboard-local polling runtime writes, fake wpdb behavior, current-time shims, and shared wpdb lifecycle setup into one large test file. The next safe test-only cleanup is to split those repository concerns into focused read/write test classes while preserving the same fake wpdb semantics, repository production classes, SQL expectations, changed-row guards, current-time behavior, database schema assumptions, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Active pending lookup read coverage remains in `tests/SiteRepositoryTest.php`. Dashboard-local pause/resume runtime write coverage moved to `tests/SiteRepositoryRuntimeWritesTest.php`. Revocation and pending-first-poll enrollment write guard coverage moved to `tests/SiteRepositoryEnrollmentWritesTest.php`. Shared fake wpdb, WordPress shims, repository includes, and wpdb lifecycle setup now live in `tests/support/site-repository-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `SiteRepository` coverage passes with the same 6 tests and 28 assertions;
+- no split site repository test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, repository behavior, SQL behavior, schema behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
