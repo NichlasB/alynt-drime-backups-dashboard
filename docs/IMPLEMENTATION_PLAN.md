@@ -1240,6 +1240,18 @@ Acceptance criteria:
 - Bootstrap still loads the same shim definitions before plugin loading.
 - No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Poller Test Double Structure Slice
+
+The poller test harness mixed production poller dependencies with fake site repository, snapshot repository, and remote-action reconciler collaborators. Keep the poller assertions unchanged and move those fake collaborators into a dedicated test support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. Poller fake collaborators now live in `tests/support/poller-test-doubles.php`, while `tests/support/poller-test-harness.php` keeps production poller dependency loading and then loads the doubles. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused poller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, poller behavior, scheduling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
