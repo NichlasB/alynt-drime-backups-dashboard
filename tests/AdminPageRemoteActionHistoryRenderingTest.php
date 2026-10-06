@@ -22,24 +22,8 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 	 */
 	public function test_remote_action_history_renders_schedule_apply_details() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'id'                            => 7,
-			'enrollment_status'             => 'active',
-			'polling_key_id'                => 'key-id',
-			'has_polling_secret'            => '1',
-			'action_key_id'                 => 'ak_test',
-			'action_private_key_ciphertext' => 'ciphertext',
-		);
-		$snapshot = array(
-			'decoded_payload' => array(
-				'remote_actions' => array(
-					'protocol_version'   => 2,
-					'enabled'            => true,
-					'allowed_actions'    => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
-					'sodium_available'   => true,
-				),
-			),
-		);
+		$site    = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
 		$history  = array(
 			array(
 				'action_type'           => 'schedule_apply',
@@ -126,24 +110,8 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 	 */
 	public function test_remote_action_history_marks_pending_schedule_cadence_report() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'id'                            => 7,
-			'enrollment_status'             => 'active',
-			'polling_key_id'                => 'key-id',
-			'has_polling_secret'            => '1',
-			'action_key_id'                 => 'ak_test',
-			'action_private_key_ciphertext' => 'ciphertext',
-		);
-		$snapshot = array(
-			'decoded_payload' => array(
-				'remote_actions' => array(
-					'protocol_version' => 2,
-					'enabled'          => true,
-					'allowed_actions'  => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
-					'sodium_available' => true,
-				),
-			),
-		);
+		$site    = $this->remote_action_history_site();
+		$snapshot = $this->remote_action_history_snapshot();
 		$history  = array(
 			array(
 				'action_type'           => 'schedule_preview',

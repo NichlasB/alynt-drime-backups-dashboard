@@ -1144,6 +1144,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, transport behavior, protocol, schema, credential storage, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action History Rendering Fixture Reuse Slice
+
+The remote-action history rendering test had reusable V2-capable site and snapshot fixtures available in the shared rendering fixture trait, but two schedule-history cases still duplicated those arrays inline. Keep all rendering assertions unchanged and reuse `remote_action_history_site()` plus `remote_action_history_snapshot()` consistently in `tests/AdminPageRemoteActionHistoryRenderingTest.php`.
+
+Implementation status: implemented locally as a test-only structure cleanup. The change removes duplicate fixture declarations from the focused test and leaves the shared harness, production rendering helpers, action history output, protocol, and capability logic unchanged.
+
+Acceptance criteria:
+
+- Focused `AdminPageRemoteActionHistoryRenderingTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
