@@ -377,6 +377,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, diagnostics collection behavior, support-copy JSON shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Enrollment REST Controller Rejection Test Class Split Slice
+
+`EnrollmentRestControllerTest` still grouped successful enrollment, stored credential/ciphertext assertions, permission and route-argument checks, and all rejection/rate-limit cases in one file. The next safe test-only cleanup is to move rejection-path assertions into a focused class while preserving the same enrollment controller behavior, bearer token boundary, origin/endpoint validation, pairing expiration handling, rate-limit behavior, stored credential expectations, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Successful enrollment, bounded version storage, permission callback, and route-argument coverage remains in `tests/EnrollmentRestControllerTest.php`. Wrong-secret, repeated-invalid/rate-limited, origin mismatch, endpoint mismatch, unsupported schema, and expired-pairing coverage moved to `tests/EnrollmentRestControllerRejectionTest.php`. Shared controller fixtures and repository doubles continue to load through `tests/support/enrollment-rest-controller-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `EnrollmentRestController` coverage passes with the same 10 tests and 88 assertions;
+- no split enrollment REST controller test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, enrollment REST behavior, route contracts, origin validation, pairing or credential behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
