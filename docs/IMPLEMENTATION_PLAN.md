@@ -494,6 +494,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, event log behavior, redaction behavior, settings behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Action Audit Test Harness Split Slice
+
+`AdminPageActionAuditTest` still embedded WordPress URL/nonce shims, fake enrollment manager/event-log classes, and the admin-actions harness above the audit assertion. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same create-pending-site audit behavior, token redaction assertions, nonce behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. The audit assertion remains in `tests/AdminPageActionAuditTest.php`. URL/nonce shims, fake collaborators, and the admin action harness now load through `tests/support/admin-page-action-audit-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `AdminPageActionAuditTest` coverage passes with the same 1 test and 8 assertions;
+- the assertion file remains focused on audit behavior rather than support setup;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, admin action behavior, audit behavior, nonce behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
