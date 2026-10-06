@@ -1180,6 +1180,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, classification behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Client Report Fixture Helper Slice
+
+The remote action repository client-report test repeated the same repository setup, empty action row fixture, `mark_client_report()` assertion, and redacted-context decode for multiple report-preservation cases. Keep the client report payloads and assertions unchanged and add a private `client_report_context()` helper inside `tests/RemoteActionRepositoryClientReportTest.php`.
+
+Implementation status: implemented locally as a test-only structure cleanup. The helper centralizes the repository/report/decode flow while preserving each schedule apply and rollback-preview report fixture exactly where it is asserted.
+
+Acceptance criteria:
+
+- Focused `RemoteActionRepositoryClientReportTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
