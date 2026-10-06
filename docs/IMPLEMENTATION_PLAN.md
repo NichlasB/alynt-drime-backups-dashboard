@@ -1096,6 +1096,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, UI, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Restore Readiness Rendering Harness Structure Slice
+
+The restore-readiness rendering test mixed assertions and a private rendering harness in one file. Keep the evidence-only rendering assertions unchanged and move the harness class into `tests/support/admin-page-restore-readiness-test-harness.php` so the test file remains focused on expected UI output.
+
+Implementation status: implemented locally as a test-only structure cleanup. The new support harness owns the trait includes, snapshot decoding shim, detail-list renderer, and markup capture helpers used by `tests/AdminPageRestoreReadinessEvidenceTest.php`.
+
+Acceptance criteria:
+
+- Focused `AdminPageRestoreReadinessEvidenceTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
