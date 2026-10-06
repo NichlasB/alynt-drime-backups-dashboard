@@ -8,6 +8,7 @@
 require_once dirname( __DIR__, 2 ) . '/includes/class-origin-validator.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-pairing-tokens.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-reads.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-local-state-writes.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-writes.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-runtime-writes.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-site-repository.php';

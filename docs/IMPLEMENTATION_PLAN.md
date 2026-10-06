@@ -158,6 +158,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Site Repository Local State Write Structure Slice
+
+The site repository write trait accumulated pending-site creation, local revocation, dashboard-local archive/unarchive writes, dashboard-local polling pause/resume writes, and enrollment completion. The next safe structure-only cleanup is to separate local archive and polling-state writes into a dedicated trait without changing SQL data shape, changed-row semantics, enrollment behavior, polling behavior, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Dashboard-local `archive_local`, `unarchive_local`, `pause_polling`, and `resume_polling` writes now live in `includes/traits/trait-site-repository-local-state-writes.php`. The existing site repository write trait composes the new local-state write trait and keeps pending creation, local revocation, and enrollment completion. No release, deployment, push, protocol change, database schema change, SQL behavior change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- site repository and dashboard local-action tests pass with unchanged archive/polling state behavior;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, SQL behavior, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Support Summary Export UI Slice
 
 The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.

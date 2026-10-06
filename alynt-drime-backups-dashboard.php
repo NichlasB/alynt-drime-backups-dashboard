@@ -75,6 +75,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/class-origin-validator.php',
 	'includes/class-credential-vault.php',
 	'includes/traits/trait-site-repository-reads.php',
+	'includes/traits/trait-site-repository-local-state-writes.php',
 	'includes/traits/trait-site-repository-writes.php',
 	'includes/traits/trait-site-repository-runtime-writes.php',
 	'includes/class-site-repository.php',
