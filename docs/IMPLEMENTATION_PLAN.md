@@ -338,6 +338,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, admin rendering behavior, Sites-list filtering behavior, archive visibility behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Safe Transport Test Class Split Slice
+
+`SafeTransportTest` still grouped fixed read-only request preparation, unsafe destination rejection, authorization shape validation, DNS/private-resolution safety, same-origin self-polling behavior, injected HTTP fetch handling, JSON/HTTP/timeout/oversize errors, and shared transport factory setup into one larger test file. The next safe test-only cleanup is to split request preparation from fetch/response handling while preserving the same safe transport production code, origin validation behavior, private-address guardrails, same-origin exception behavior, response limits, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Request preparation and destination/auth safety coverage remains in `tests/SafeTransportTest.php`. Injected HTTP fetch, JSON validation, timeout, HTTP status, and oversize response handling moved to `tests/SafeTransportFetchTest.php`. Shared transport factory setup now lives in `tests/support/safe-transport-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `SafeTransport` coverage passes with the same 10 tests and 31 assertions;
+- no split safe transport test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, transport behavior, origin validation behavior, same-origin self-polling behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
