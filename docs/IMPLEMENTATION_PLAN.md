@@ -1108,6 +1108,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Polling State Rendering Fixture Helper Slice
+
+The polling-state rendering test repeatedly declared the same active enrolled site row before overriding one or two fields for pending, revoked, paused, archived, and missing-credential cases. Keep the rendering assertions unchanged and add a private `polling_site()` fixture helper inside `tests/AdminPagePollingStateRenderingTest.php` so each case emphasizes only the state under test.
+
+Implementation status: implemented locally as a test-only structure cleanup. The helper provides default active polling fields and each test merges only its state-specific overrides; no production rendering helper changed.
+
+Acceptance criteria:
+
+- Focused `AdminPagePollingStateRenderingTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
