@@ -1704,6 +1704,18 @@ Acceptance criteria:
 - Missing schedule capability renders no row hint.
 - Existing Site Detail schedule controls and action dispatch behavior remain unchanged.
 
+### Enrollment REST Controller Repository Double Structure Slice
+
+The enrollment REST controller test harness still grouped transient shims, fixture builders, and the fake site repository in one support file. Keep the existing harness loader stable while moving the repository double into a focused support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. The fake enrollment REST site repository now lives in `tests/support/enrollment-rest-controller-repository-double.php`, and `tests/support/enrollment-rest-controller-test-harness.php` requires it before defining the transient shims and fixture helpers. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused enrollment REST controller rejection coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
