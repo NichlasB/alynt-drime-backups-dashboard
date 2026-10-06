@@ -98,6 +98,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Schedule Management Action Form Helper Structure Slice
+
+The schedule-management panel renderer accumulated the non-mutating preview form, guarded apply form, and latest-preview lookup helpers alongside panel and compact row-hint rendering. The next safe structure-only cleanup is to separate preview/apply form rendering into a dedicated helper trait without changing UI output, capability checks, dispatch behavior, stored action history, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Schedule preview form rendering, guarded schedule apply form rendering, and latest successful schedule-preview lookup now live in `includes/traits/trait-admin-page-schedule-management-action-forms.php`. The existing schedule-management form helper keeps the panel renderer and compact Sites-row hint and composes the new action-form trait plus rollback-preview helpers. No release, deployment, push, protocol change, database change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- schedule-management rendering tests pass with unchanged preview/apply form behavior;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Overview Admin Helper Structure Slice
 
 The Diagnostics overview renderer has accumulated support-safe summary labels, runtime identity rendering, and cache-busted refresh helpers alongside the main screen shell. The next safe structure-only cleanup is to separate those helpers from the main overview renderer without changing Diagnostics output, support-copy behavior, scheduler diagnostics, protocol behavior, database schema, or live-site state.

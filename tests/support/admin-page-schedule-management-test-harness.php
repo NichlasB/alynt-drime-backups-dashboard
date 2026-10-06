@@ -15,6 +15,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-s
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-schedule-management-action-forms.php';
 
 /**
  * Shared schedule-management payload fixtures.

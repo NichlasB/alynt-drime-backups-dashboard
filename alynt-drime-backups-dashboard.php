@@ -166,6 +166,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php',
 	'includes/traits/trait-admin-page-schedule-rollback-preview-readiness.php',
 	'includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php',
+	'includes/traits/trait-admin-page-schedule-management-action-forms.php',
 	'includes/traits/trait-admin-page-schedule-management-form-helpers.php',
 	'includes/traits/trait-admin-page-schedule-label-helpers.php',
 	'includes/traits/trait-admin-page-request-backup-detail-helpers.php',
