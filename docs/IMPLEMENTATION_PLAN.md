@@ -182,6 +182,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Remote Action History Label Helper Structure Slice
+
+The remote-action history helper accumulated table rendering, details disclosure rendering, action labels, state labels, client-report labels, result labels, and last-action extraction used by adjacent detail panels. The next safe structure-only cleanup is to separate label/result helpers from the history table renderer without changing action-history output, stored action data, result summaries, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Remote-action action labels, state labels, latest-client-action extraction, client-report labels, and result labels now live in `includes/traits/trait-admin-page-remote-action-history-labels.php`. The existing remote-action history helper composes the new label trait and retains table rendering, filters, details disclosure, summary detail selection, and compact action-count details. No release, deployment, push, protocol change, database schema change, SQL behavior change, UI copy change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- remote-action history and request-backup rendering tests pass with unchanged labels, client-report text, result summaries, and details output;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Support Summary Export UI Slice
 
 The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.
