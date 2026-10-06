@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.62
+Stable tag: 0.1.63
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.63 is a maintenance patch that modernizes the README as a concise operator/developer entry point and continues safe structure cleanup for diagnostics and test-support helpers without changing dashboard runtime behavior.
 
 Version 0.1.62 adds dashboard-local retained-record removal planning and display-only readiness evidence for archived local records. It adds Site Detail preview evidence, support-safe Diagnostics aggregate counts, and compact archived-row readiness hints without adding any permanent remove/delete control, confirmation form, database write, remote action, client-site mutation, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, or live-site state change.
 
@@ -53,6 +55,14 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.63 =
+* Modernized the README as a concise operator/developer entry point while keeping detailed release history in the changelog.
+* Reconciled implementation-plan status after the 0.1.62 dashboard rollout and post-poll health evidence.
+* Recorded that permanent local retained-record removal remains deferred by default until there is a concrete operational, data-minimization, performance, or compliance need.
+* Split polling-state rendering counting doubles out of the test harness without changing runtime behavior.
+* Split diagnostics local-removal readiness metric helpers into a focused trait without changing runtime behavior.
+* Preserved existing dashboard boundaries: no UI string behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, release behavior, or deployment behavior was introduced by the structure/doc cleanup.
 
 = 0.1.62 =
 * Added a planning-only design for future dashboard-local retained-record permanent removal while keeping implementation gated.

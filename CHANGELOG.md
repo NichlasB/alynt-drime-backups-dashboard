@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+No unreleased changes.
+
+## 0.1.63 - 2026-10-06
+
 ### Changed
 
 - Reconciled the implementation plan with the deployed `0.1.62` dashboard rollout state and post-poll health evidence.
@@ -12,6 +16,10 @@ All notable changes to this project will be documented in this file.
 - Modernized the README as a concise operator/developer entry point while keeping detailed release history in the changelog.
 - Split polling-state rendering counting doubles out of the test harness without changing runtime behavior.
 - Split diagnostics local-removal readiness metric helpers into a focused trait without changing runtime behavior.
+
+### Security
+
+- Preserved existing dashboard boundaries: no UI string behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, release behavior, or deployment behavior was introduced by the structure/doc cleanup.
 
 ## 0.1.62 - 2026-10-06
 
