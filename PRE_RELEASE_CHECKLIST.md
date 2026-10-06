@@ -10,7 +10,7 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - Previous published release: `v0.1.60`
 - Candidate purpose: release a low-risk maintenance patch after the deployed `0.1.60` dashboard release: rollout-state documentation, remote-action summary docblock cleanup, focused enrollment REST and remote-action repository test-support splits, Unreleased changelog coverage, and a documented patch-release planning gate.
 - Boundary: release-prep source/docs/package metadata only. This candidate does not deploy/update `control-sitesmanage`, create backups, restore, delete, clean up, change WPvivid/server-runner schedules, execute rollback, change credentials, store Drime API credentials, run arbitrary commands, expose restore candidate references, or perform database/server actions.
-- Current checklist note: rows updated on 2026-10-06 reflect the current `0.1.61` maintenance release candidate after local release-prep metadata updates, local PHPUnit/PHPCS/build checks, npm audit, Composer audit, and whitespace validation. The full DS3 pre-release workflow was not rerun because this candidate is a small documentation/test-support/formatting patch built on already-pushed commits with passing GitHub CI and no runtime behavior changes.
+- Current checklist note: rows updated on 2026-10-06 reflect the published `0.1.61` maintenance release after local release-prep metadata updates, local PHPUnit/PHPCS/build checks, npm audit, Composer audit, whitespace validation, passing GitHub CI, release workflow completion, and release ZIP audit. The full DS3 pre-release workflow was not rerun because this candidate is a small documentation/test-support/formatting patch built on already-pushed commits with passing GitHub CI and no runtime behavior changes.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] 08 Uninstall Review: no new persistent table/option/schedule ownership added in this slice.
 - [x] 09 I18N Review: no new translatable strings were introduced. The POT release header was aligned to `0.1.61`; no runtime string extraction changes were needed.
 - [x] 10 Accessibility Review: Diagnostics rows use existing semantic table markup and do not add custom keyboard controls.
-- [x] 11 Code Quality Review: local release-prep PHPUnit, PHPCS, build, npm audit, Composer audit, and whitespace checks passed for the current candidate; CI and package audit are pending after push/release.
+- [x] 11 Code Quality Review: local release-prep PHPUnit, PHPCS, build, npm audit, Composer audit, whitespace checks, GitHub CI, release workflow, and package audit passed for the current candidate.
 - [x] 12 Documentation Review: checklist, readme, README, changelog, and implementation-plan wording describe `0.1.61` as maintenance-only and preserve the existing dashboard boundaries.
 - [x] 13 Security Audit: no new remote action, credential, Drime token, backup creation, restore, cleanup/delete, rollback execution, arbitrary command, database, or live-site behavior was introduced.
 
@@ -52,15 +52,15 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] Composer audit passed: no security vulnerability advisories found.
 - [x] `git diff --check` passed.
 - [x] Translation-template coverage checked for this patch release. No new strings were introduced; POT header aligned to `0.1.61`.
-- [ ] Release ZIP audit not yet run for `0.1.61`; pending release asset creation.
-- [ ] GitHub release not yet created for `v0.1.61`.
+- [x] Release ZIP audit passed for `0.1.61`: release asset `alynt-drime-backups-dashboard-0.1.61.zip` uploaded by Build Release run `37495303398`, SHA-256 digest `ac6a9310fa2a21d38d098c2d5a57dde2bc383ecf777b84f7797d5104ad2daa12`, single top-level plugin folder, no excluded source/dev folders, and expected plugin/readme/POT/dist metadata present at `0.1.61`.
+- [x] GitHub release created for `v0.1.61`: https://github.com/NichlasB/alynt-drime-backups-dashboard/releases/tag/v0.1.61.
 - [ ] Updater install/update smoke verification not yet run for `0.1.61`.
 - [ ] Live dashboard deployment/update on `control-sitesmanage` not yet performed.
 
 ## Open Items
 
-- [ ] Commit `0.1.61` release-prep metadata changes.
-- [ ] Push local `0.1.61` release commit to `origin/master` and verify CI.
-- [ ] Tag/publish `v0.1.61` and verify release asset packaging after CI passes.
-- [ ] Run release ZIP audit for `0.1.61`.
+- [x] Commit `0.1.61` release-prep metadata changes: `6bd88d1`.
+- [x] Push local `0.1.61` release commit to `origin/master` and verify CI: run `37494661298` passed.
+- [x] Tag/publish `v0.1.61` and verify release asset packaging after CI passes: release workflow run `37495303398` passed.
+- [x] Run release ZIP audit for `0.1.61`.
 - [ ] Deploy/update dashboard plugin on `control-sitesmanage` only after live-site approval.
