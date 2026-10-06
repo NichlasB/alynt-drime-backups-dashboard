@@ -325,6 +325,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, admin rendering behavior, Diagnostics output, support-copy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Sites List Test Harness Split Slice
+
+`AdminPageSitesListTest` still embedded its Sites-list rendering harness, fake Sites repository, fake snapshots repository, fake classifier, and `wp_list_pluck()` shim in the assertion file. The next safe test-only cleanup is to move that support code into a dedicated test harness while preserving the same visible-row filtering assertions, archived visibility behavior, Attention count behavior, production Sites-list trait behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. Sites-list assertions remain in `tests/AdminPageSitesListTest.php`. The Sites-list harness, fake repositories/classifier, and `wp_list_pluck()` shim now live in `tests/support/admin-page-sites-list-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `AdminPageSitesList` coverage passes with the same 2 tests and 7 assertions;
+- the assertion file remains focused on Sites-list behavior rather than support setup;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, admin rendering behavior, Sites-list filtering behavior, archive visibility behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
