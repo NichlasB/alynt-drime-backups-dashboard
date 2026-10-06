@@ -128,6 +128,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-diagnostics-attention-history-metrics.php',
 	'includes/traits/trait-diagnostics-site-metrics.php',
 	'includes/traits/trait-diagnostics-site-metric-helpers.php',
+	'includes/traits/trait-diagnostics-local-removal-metric-helpers.php',
 	'includes/class-diagnostics.php',
 	'includes/traits/trait-status-payload-validator-backup-sources.php',
 	'includes/traits/trait-status-payload-validator-restore-readiness.php',

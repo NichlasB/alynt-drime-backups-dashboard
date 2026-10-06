@@ -34,6 +34,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-support
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-attention-history-metrics.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-site-metrics.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-site-metric-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-local-removal-metric-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-diagnostics.php';
 require_once __DIR__ . '/diagnostics-test-repositories.php';
 require_once __DIR__ . '/diagnostics-test-harness.php';

@@ -1861,6 +1861,26 @@ Acceptance criteria:
 - Local-record rendering tests keep using the same counting doubles without assertion or behavior changes.
 - Targeted polling/local-record rendering tests, full tests, lint, build, and whitespace checks pass before commit.
 
+### Diagnostics Local Removal Metric Helpers Split Slice
+
+The diagnostics site metric helper trait mixed general polling/site helper methods with local-removal readiness/counting helpers. The next safe structure-only cleanup was to separate the local-removal diagnostics helpers into their own trait while preserving the existing aggregate counts, support-copy shape, Diagnostics output, protocol behavior, database schema, and live-site state.
+
+Implementation status: implemented locally as a structure-only split. `local_removal_readiness_diagnostics()`, `local_removal_readiness_blocking_reason()`, `is_expired_pending_local_record()`, and `count_repository_rows_for_site()` now live in `includes/traits/trait-diagnostics-local-removal-metric-helpers.php`, and `Alynt_Drime_Backups_Dashboard_Diagnostics` composes the new trait alongside the existing site metric helper trait. Method names, return arrays, readiness boundary, repository-counting behavior, and support-safe aggregate output are unchanged. No UI strings, protocol behavior, database schema, remote-action behavior, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, or live-site state was changed.
+
+Implementation target:
+
+- Move `local_removal_readiness_diagnostics()`, `local_removal_readiness_blocking_reason()`, `is_expired_pending_local_record()`, and `count_repository_rows_for_site()` into a dedicated diagnostics local-removal metric helpers trait.
+- Compose the new trait into `Alynt_Drime_Backups_Dashboard_Diagnostics` alongside the existing diagnostics site metric helpers.
+- Load the new trait from the main plugin bootstrap and diagnostics test bootstrap before `class-diagnostics.php`.
+- Keep method names, return arrays, readiness boundary, repository-counting behavior, and support-safe aggregate output unchanged.
+- Do not change UI strings, protocol behavior, database schema, remote-action behavior, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, or live-site state.
+
+Acceptance criteria:
+
+- The general diagnostics site metric helper trait is smaller and focused on polling/site helper utilities.
+- Diagnostics local-removal readiness aggregate tests continue to pass without assertion changes.
+- PHP syntax, targeted diagnostics tests, full tests, lint, build, and whitespace checks pass before commit.
+
 ### Schedule Row Hint Clarity Slice
 
 The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.
