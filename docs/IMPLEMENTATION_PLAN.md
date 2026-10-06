@@ -43,6 +43,18 @@ Required gates:
 7. Treat rollback metadata capture as a separate stabilization/readiness slice from rollback execution. Capturing support-safe metadata may be designed before a `schedule_rollback` action exists, but `schedule_rollback` must remain unavailable until a later protocol/threat-model and release gate are approved.
 8. Treat `schedule_rollback_preview` as the next possible runtime design step before any mutating rollback action. Do not implement `schedule_rollback` directly from metadata capture without a non-mutating preview design, updated protocol/threat model, explicit user approval, tests proving stale/current-state rejection, and a separate release/deploy gate.
 
+### File Structure Baseline Checkpoint
+
+Implementation status: completed locally as a documentation checkpoint. A source-size scan excluding generated `build/` release artifacts and `vendor/` dependencies shows the current dashboard plugin source and test-support files are below the earlier large-file risk threshold; the largest non-build PHP file is the root plugin loader at roughly 229 lines, and the largest runtime support classes/traits are roughly 214 lines or less. Historical files under `build/` may still contain older oversized release-stage copies and should not drive new refactors.
+
+The next structure pass should therefore avoid speculative runtime refactors merely to reduce line counts. Prefer small, evidence-backed slices where a clean seam exists, especially test-support/docs-only cleanup or a focused ds2/ds3 file-structure review before touching security-sensitive runtime code such as credential storage, safe transport, enrollment, dispatcher signing, or schedule/rollback behavior.
+
+Acceptance criteria:
+
+- current source-size evidence is recorded in the implementation plan;
+- generated release-stage artifacts are not treated as current source bloat;
+- no runtime PHP, UI output, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state changes are introduced.
+
 ### Remote Action Repository Context Structure Slice
 
 The remote-action repository has accumulated several support-safe context sanitizers as Request Backup Now, Schedule Preview, Schedule Apply, Schedule Rollback Preview, and Cleanup Preview were added. The next safe structure-only cleanup is to separate remote-action context sanitization from context merge/redaction helpers without changing storage shape, dispatch behavior, protocol behavior, database schema, UI output, or live-site state.
