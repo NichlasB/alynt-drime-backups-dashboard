@@ -242,6 +242,19 @@ All notable changes to this project will be documented in this file.
 - Added Site Detail guidance for locally revoked dashboard records so operators understand audit retention, re-enrollment requirements, and the absence of permanent local removal in this release.
 - Clarified Sites-row schedule capability hints so preview-only clients and apply-gated clients are distinguishable without adding row-level schedule controls.
 
+## 0.1.35 - 2026-09-19
+
+### Added
+
+- Added Diagnostics generated-at freshness evidence and a cache-busted refresh link.
+- Sent no-cache headers for the dashboard admin page to reduce stale admin renders.
+
+## 0.1.34 - 2026-09-18
+
+### Changed
+
+- Increased the scheduled dashboard polling batch size so the current enrolled fleet can be refreshed in one normal scheduled run while keeping bounded repository caps and explicit runtime limits intact.
+
 ## 0.1.33 - 2026-09-18
 
 ### Changed

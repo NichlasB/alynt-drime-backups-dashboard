@@ -1312,6 +1312,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, runtime behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, uninstall, live-site, release, deploy, or remote-action behavior changes.
 
+### Historical Release Metadata Second Consistency Slice
+
+The published GitHub release list also includes `0.1.34` and `0.1.35`, while both local release-history files jumped from `0.1.33` to `0.1.36`. Align `CHANGELOG.md` and `readme.txt` with the existing published release notes without changing runtime behavior or preparing a new release.
+
+Implementation status: implemented locally as a documentation/metadata cleanup. `CHANGELOG.md` and `readme.txt` now include the published `0.1.34` scheduled-poll batch-size entry and the published `0.1.35` Diagnostics freshness/cache-control entry. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, filesystem-path exposure, cache behavior, polling behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- `CHANGELOG.md`, `readme.txt`, and GitHub release history no longer disagree about the `0.1.34` and `0.1.35` release entries.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, runtime behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, polling, cache, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.

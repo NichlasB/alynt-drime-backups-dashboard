@@ -156,6 +156,13 @@ See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCO
 * Added Site Detail guidance for locally revoked dashboard records.
 * Clarified Sites-row schedule hints for preview-only versus apply-gated clients without adding row-level schedule controls.
 
+= 0.1.35 =
+* Added Diagnostics generated-at freshness evidence and a cache-busted refresh link.
+* Sent no-cache headers for the dashboard admin page to reduce stale admin renders.
+
+= 0.1.34 =
+* Increased the scheduled dashboard polling batch size so the current enrolled fleet can be refreshed in one normal scheduled run while keeping bounded repository caps and explicit runtime limits intact.
+
 = 0.1.33 =
 * Clarified Diagnostics polling summaries with aggregate dashboard record-state counts.
 
