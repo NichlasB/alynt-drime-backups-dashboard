@@ -69,9 +69,9 @@ Required gates:
 
 ### File Structure Baseline Checkpoint
 
-Implementation status: completed locally as a documentation checkpoint. A source-size scan excluding generated `build/` release artifacts and `vendor/` dependencies shows the current dashboard plugin source and test-support files are below the earlier large-file risk threshold; the largest non-build PHP file is the root plugin loader at roughly 229 lines, and the largest runtime support classes/traits are roughly 214 lines or less. Historical files under `build/` may still contain older oversized release-stage copies and should not drive new refactors.
+Implementation status: completed locally as a documentation checkpoint and refreshed after dashboard `0.1.61`. A source-size scan excluding generated `build/` release artifacts and `vendor/` dependencies shows the current dashboard plugin source and test-support files are below the earlier large-file risk threshold; the largest current production PHP file is `includes/class-credential-vault.php` at roughly 258 lines, and the largest current test/support PHP files are under 200 lines. Historical files under `build/` may still contain older oversized release-stage copies and should not drive new refactors.
 
-The next structure pass should therefore avoid speculative runtime refactors merely to reduce line counts. Prefer small, evidence-backed slices where a clean seam exists, especially test-support/docs-only cleanup or a focused ds2/ds3 file-structure review before touching security-sensitive runtime code such as credential storage, safe transport, enrollment, dispatcher signing, or schedule/rollback behavior.
+The next structure pass should therefore avoid speculative runtime refactors merely to reduce line counts. Prefer small, evidence-backed slices where a clean seam exists, especially test-support/docs-only cleanup or a focused ds2/ds3 file-structure review before touching security-sensitive runtime code such as credential storage, safe transport, enrollment, dispatcher signing, or schedule/rollback behavior. Files near the top of the current size list should be refactored only when a behavior slice exposes a real maintenance, testing, or review problem.
 
 Acceptance criteria:
 
