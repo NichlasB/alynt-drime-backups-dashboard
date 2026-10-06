@@ -455,6 +455,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, cleanup-preview rendering, schedule rollback-preview rendering, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Enrollment Manager Test Harness Split Slice
+
+`EnrollmentManagerTest` still embedded its fake site repository, production includes, and display-token secret helper alongside pending-enrollment assertions. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same pending enrollment behavior, display-once token assertions, duplicate pending guard, origin/label validation, storage-failure behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. Pending-enrollment assertions remain in `tests/EnrollmentManagerTest.php`. The fake site repository, production includes, and token-secret helper trait now live in `tests/support/enrollment-manager-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `EnrollmentManager` coverage passes with the same 5 tests and 23 assertions;
+- the assertion file remains focused on pending-enrollment behavior rather than support setup;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, enrollment behavior, pairing token behavior, origin validation, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
