@@ -481,6 +481,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, Request Backup rendering, row hint behavior, remote-action behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Event Log Test Harness Split Slice
+
+`EventLogTest` still embedded WordPress option shims, event-log production includes, and option-storage test globals above the event log assertions. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same settings, threshold, redaction, clear/no-op behavior, option autoload assertions, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. Event log assertions remain in `tests/EventLogTest.php`. WordPress option shims, event-log includes, and shared option-storage setup now load through `tests/support/event-log-test-harness.php`.
+
+Acceptance criteria:
+
+- focused `EventLogTest` coverage passes with the same 5 tests and 23 assertions;
+- the assertion file remains focused on event log behavior rather than support setup;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, event log behavior, redaction behavior, settings behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.
