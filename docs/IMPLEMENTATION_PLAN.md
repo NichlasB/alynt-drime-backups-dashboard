@@ -1391,7 +1391,7 @@ Acceptance criteria:
 
 The poller test harness mixed production poller dependencies with fake site repository, snapshot repository, and remote-action reconciler collaborators. Keep the poller assertions unchanged and move those fake collaborators into a dedicated test support file.
 
-Implementation status: implemented locally as a test-only structure cleanup. Poller fake collaborators now live in `tests/support/poller-test-doubles.php`, while `tests/support/poller-test-harness.php` keeps production poller dependency loading and then loads the doubles. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+Implementation status: implemented locally as a test-only structure cleanup. Poller fake collaborators were moved out of the production-dependency harness; the fake site repository now lives in `tests/support/poller-test-site-repository.php`, and the remaining fake snapshot repository plus remote-action reconciler stay in `tests/support/poller-test-doubles.php`. `tests/support/poller-test-harness.php` keeps production poller dependency loading and then loads the test doubles. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
 
 Acceptance criteria:
 
