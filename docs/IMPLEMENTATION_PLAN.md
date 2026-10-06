@@ -218,6 +218,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Diagnostics Support Section Helper Structure Slice
+
+The diagnostics support trait accumulated top-level support-copy assembly plus section-specific reducers for diagnostic summary labels, remote-action aggregates, logging aggregates, and recent safe outcomes. The next safe structure-only cleanup is to separate those support-copy section reducers into a dedicated helper trait without changing support-copy JSON shape, redaction boundaries, diagnostic counts, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Diagnostic summary labels, remote-action support aggregates, logging support aggregates, and recent support-safe outcome reducers now live in `includes/traits/trait-diagnostics-support-sections.php`. The existing diagnostics support trait composes the new section helper trait and retains public support-summary entrypoints and top-level support-summary assembly. No release, deployment, push, protocol change, database schema change, SQL behavior change, UI copy change, support-copy shape change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- diagnostics support-summary tests pass with unchanged support-copy JSON fields, redaction boundaries, logging aggregates, action aggregates, and recent safe outcomes;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, support-copy JSON shape, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Support Summary Export UI Slice
 
 The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.

@@ -29,6 +29,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-poller-locks.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-poller-status-check.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-poller.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-scheduler.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-support-sections.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-support.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-attention-history-metrics.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-diagnostics-site-metrics.php';
