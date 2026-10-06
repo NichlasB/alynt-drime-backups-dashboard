@@ -21,50 +21,43 @@ class DiagnosticsTest extends TestCase {
 	 * @return void
 	 */
 	public function test_collect_counts_polling_states() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site(
-						1,
-						array(
-							'overall_status'          => 'working',
-							'next_poll_at'            => '2020-01-01 00:00:00',
-							'last_poll_attempt_at'    => '2026-08-10 08:00:00',
-							'last_seen_at'            => '2026-08-10 08:00:00',
-							'consecutive_failures'    => 1,
-							'last_error_code'         => 'transport_failed',
-							'last_error_summary'      => 'Client status endpoint unavailable.',
-							'polling_key_id'          => 'pk_example_0000000000000000',
-							'polling_secret_ciphertext' => 'adbv1.ciphertext',
-						)
-					),
-					$this->site(
-						2,
-						array(
-							'enrollment_status' => 'awaiting_first_poll',
-							'overall_status'    => 'pending',
-							'polling_key_id'    => '',
-						)
-					),
-					$this->site(
-						3,
-						array(
-							'overall_status' => 'working',
-							'paused_at'      => '2026-08-10 08:05:00',
-						)
-					),
-				)
+		$result = $this->collect_diagnostics(
+			array(
+				$this->site(
+					1,
+					array(
+						'overall_status'            => 'working',
+						'next_poll_at'              => '2020-01-01 00:00:00',
+						'last_poll_attempt_at'      => '2026-08-10 08:00:00',
+						'last_seen_at'              => '2026-08-10 08:00:00',
+						'consecutive_failures'      => 1,
+						'last_error_code'           => 'transport_failed',
+						'last_error_summary'        => 'Client status endpoint unavailable.',
+						'polling_key_id'            => 'pk_example_0000000000000000',
+						'polling_secret_ciphertext' => 'adbv1.ciphertext',
+					)
+				),
+				$this->site(
+					2,
+					array(
+						'enrollment_status' => 'awaiting_first_poll',
+						'overall_status'    => 'pending',
+						'polling_key_id'    => '',
+					)
+				),
+				$this->site(
+					3,
+					array(
+						'overall_status' => 'working',
+						'paused_at'      => '2026-08-10 08:05:00',
+					)
+				),
 			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
-				array(
-					1 => $this->snapshot(),
-					3 => $this->snapshot(),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+			array(
+				1 => $this->snapshot(),
+				3 => $this->snapshot(),
+			)
 		);
-
-		$result = $diagnostics->collect();
 
 		$this->assertSame( 3, $result['counts']['total_sites'] );
 		$this->assertSame( 1, $result['counts']['polling_ready'] );
@@ -88,49 +81,44 @@ class DiagnosticsTest extends TestCase {
 	 * @return void
 	 */
 	public function test_record_state_diagnostics_explain_non_polling_records() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site(
-						1,
-						array(
-							'enrollment_status' => 'pending',
-							'overall_status'    => 'pending',
-							'polling_key_id'    => '',
-						)
-					),
-					$this->site(
-						2,
-						array(
-							'enrollment_status' => 'revoked',
-							'overall_status'    => 'pending',
-							'polling_key_id'    => '',
-						)
-					),
-					$this->site(
-						3,
-						array(
-							'enrollment_status' => '',
-							'overall_status'    => 'pending',
-							'polling_key_id'    => '',
-						)
-					),
-					$this->site(
-						4,
-						array(
-							'enrollment_status' => 'revoked',
-							'overall_status'    => 'pending',
-							'polling_key_id'    => '',
-							'archived_at'       => '2026-09-19 18:30:00',
-						)
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( array() ),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		$result = $this->collect_diagnostics(
+			array(
+				$this->site(
+					1,
+					array(
+						'enrollment_status' => 'pending',
+						'overall_status'    => 'pending',
+						'polling_key_id'    => '',
+					)
+				),
+				$this->site(
+					2,
+					array(
+						'enrollment_status' => 'revoked',
+						'overall_status'    => 'pending',
+						'polling_key_id'    => '',
+					)
+				),
+				$this->site(
+					3,
+					array(
+						'enrollment_status' => '',
+						'overall_status'    => 'pending',
+						'polling_key_id'    => '',
+					)
+				),
+				$this->site(
+					4,
+					array(
+						'enrollment_status' => 'revoked',
+						'overall_status'    => 'pending',
+						'polling_key_id'    => '',
+						'archived_at'       => '2026-09-19 18:30:00',
+					)
+				),
+			)
 		);
 
-		$result  = $diagnostics->collect();
 		$encoded = wp_json_encode( $result['support'] );
 
 		$this->assertSame( 4, $result['counts']['total_sites'] );
@@ -152,32 +140,26 @@ class DiagnosticsTest extends TestCase {
 	 * @return void
 	 */
 	public function test_backup_source_diagnostics_are_aggregate_only() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site( 1 ),
-				)
+		$result = $this->collect_diagnostics(
+			array(
+				$this->site( 1 ),
 			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
-				array(
-					1 => $this->snapshot(
-						array(
-							'backup_sources' => array(
-								'server'  => array(
-									'freshness_status' => 'stale',
-								),
-								'wpvivid' => array(
-									'freshness_status' => 'no_upload_evidence',
-								),
+			array(
+				1 => $this->snapshot(
+					array(
+						'backup_sources' => array(
+							'server'  => array(
+								'freshness_status' => 'stale',
 							),
-						)
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+							'wpvivid' => array(
+								'freshness_status' => 'no_upload_evidence',
+							),
+						),
+					)
+				),
+			)
 		);
 
-		$result  = $diagnostics->collect();
 		$encoded = wp_json_encode( $result['support'] );
 
 		$this->assertSame( 1, $result['counts']['backup_sources']['reporting_sites'] );
@@ -186,6 +168,23 @@ class DiagnosticsTest extends TestCase {
 		$this->assertStringContainsString( 'backup_sources', $encoded );
 		$this->assertStringNotContainsString( 'client1.example.com', $encoded );
 		$this->assertStringNotContainsString( 'Client 1', $encoded );
+	}
+
+	/**
+	 * Collects diagnostics for focused site/snapshot fixtures.
+	 *
+	 * @param array<int,array<string,mixed>> $sites Sites.
+	 * @param array<int,array<string,mixed>> $snapshots Latest snapshots keyed by site ID.
+	 * @return array<string,mixed>
+	 */
+	private function collect_diagnostics( array $sites, array $snapshots = array() ) {
+		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository( $sites ),
+			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( $snapshots ),
+			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		);
+
+		return $diagnostics->collect();
 	}
 
 }
