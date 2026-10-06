@@ -1276,6 +1276,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, admin action behavior, polling behavior, archive behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Readme Release Metadata Alignment Slice
+
+The plugin readme still identified `0.1.57` as the stable tag even though the latest packaged dashboard release is `0.1.59`. Align the readme stable tag, headline version wording, and changelog with the released `0.1.58` and `0.1.59` notes without changing plugin runtime behavior or preparing a new release.
+
+Implementation status: implemented locally as a documentation/metadata cleanup. `readme.txt` now lists stable tag `0.1.59`, updates the headline release wording to `0.1.59`, and adds missing `0.1.58` and `0.1.59` changelog entries. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Readme metadata matches the latest existing dashboard release.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, runtime behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
