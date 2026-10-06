@@ -62,6 +62,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/class-remote-action-capabilities
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-attention-recovery-history-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-status-history-detail-helpers.php';
+require_once __DIR__ . '/admin-page-polling-state-rendering-counting-doubles.php';
 require_once __DIR__ . '/admin-page-polling-state-rendering-test-harness.php';
 require_once __DIR__ . '/admin-page-rendering-remote-action-double.php';
 require_once __DIR__ . '/admin-page-remote-action-rendering-fixtures.php';

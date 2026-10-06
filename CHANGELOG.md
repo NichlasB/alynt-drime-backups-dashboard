@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Refreshed hook reference wording so it names the current `0.1.62` release line.
 - Recorded that permanent local retained-record removal remains feasible but deferred by default until there is a concrete operational, data-minimization, performance, or compliance need.
 - Modernized the README as a concise operator/developer entry point while keeping detailed release history in the changelog.
+- Split polling-state rendering counting doubles out of the test harness without changing runtime behavior.
 
 ## 0.1.62 - 2026-10-06
 

@@ -1842,6 +1842,25 @@ Acceptance criteria:
 - README points detailed release history to `CHANGELOG.md` and roadmap details to `docs/IMPLEMENTATION_PLAN.md`.
 - No PHP, asset, schema, protocol, UI, database, credential, Drime, backup, restore, cleanup/delete, release, deployment, or live-site behavior changes are introduced.
 
+### Admin Page Polling-State Counting Doubles Split Slice
+
+The polling-state rendering support harness became the largest remaining non-build PHP file after the broader file-structure cleanup pass. The next safe test-only structure cleanup was to move the local-record counting repository doubles into their own support file while leaving the harness assertions, production traits, UI output, protocol behavior, database schema, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only support split. The counting snapshot repository double and counting remote-action repository double now live in `tests/support/admin-page-polling-state-rendering-counting-doubles.php`, and the polling-state rendering bootstrap loads that file before the harness. Class names, constructor signatures, count semantics, and exposed harness helper behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state was changed.
+
+Implementation target:
+
+- Move the counting snapshot repository double and counting remote-action repository double from `tests/support/admin-page-polling-state-rendering-test-harness.php` into a dedicated support file.
+- Load that support file from the existing polling-state rendering bootstrap before the harness.
+- Keep class names, constructor signatures, count semantics, and exposed harness helper behavior unchanged.
+- Do not change production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state.
+
+Acceptance criteria:
+
+- The polling-state rendering harness is smaller and focused on harness methods.
+- Local-record rendering tests keep using the same counting doubles without assertion or behavior changes.
+- Targeted polling/local-record rendering tests, full tests, lint, build, and whitespace checks pass before commit.
+
 ### Schedule Row Hint Clarity Slice
 
 The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.
