@@ -5,8 +5,6 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list.php';
-
 if ( ! function_exists( 'wp_list_pluck' ) ) {
 	/**
 	 * Minimal wp_list_pluck() test double.
@@ -24,6 +22,9 @@ if ( ! function_exists( 'wp_list_pluck' ) ) {
 		);
 	}
 }
+
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list-context.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list.php';
 
 /**
  * Harness exposing private Sites-list helpers.

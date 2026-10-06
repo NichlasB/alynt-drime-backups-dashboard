@@ -155,6 +155,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-admin-page-diagnostics-tables.php',
 	'includes/traits/trait-admin-page-diagnostics-support-output.php',
 	'includes/traits/trait-admin-page-diagnostics.php',
+	'includes/traits/trait-admin-page-sites-list-context.php',
 	'includes/traits/trait-admin-page-sites-list.php',
 	'includes/traits/trait-admin-page-add-site.php',
 	'includes/traits/trait-admin-page-attention.php',

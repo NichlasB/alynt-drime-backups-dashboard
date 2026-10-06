@@ -146,6 +146,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Sites List Context Helper Structure Slice
+
+The Sites list renderer accumulated request-local status context building, duplicate revoked-row filtering, Attention count calculation, and archived-record visibility helpers alongside the visible screen shell. The next safe structure-only cleanup is to separate Sites-list context helpers from the renderer without changing Sites tab output, status classification, archived-record behavior, duplicate-row filtering, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Sites-list context building, superseded revoked-row filtering, expected-origin normalization, Attention count lookup, and archived visibility detection now live in `includes/traits/trait-admin-page-sites-list-context.php`. The existing Sites-list renderer composes the new context trait and keeps the screen shell, intro copy, summary/table rendering, and archived-record toggle. No release, deployment, push, protocol change, database change, UI copy change, support-copy shape change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- Sites-list context tests pass with unchanged visible/archived context and Attention count behavior;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Support Summary Export UI Slice
 
 The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.
