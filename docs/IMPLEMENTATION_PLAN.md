@@ -1216,6 +1216,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, dispatcher behavior, safe transport behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Test Bootstrap WordPress Shim Structure Slice
+
+The global PHPUnit bootstrap still mixed path constants, Composer/plugin loading, and every minimal WordPress shim in one file. Keep the bootstrap load order and shim behavior unchanged while moving the reusable WordPress function/class shims into a dedicated support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. Minimal WordPress function and `WP_Error` shims now live in `tests/support/wordpress-shims.php`, while `tests/bootstrap.php` keeps repository path constants, Composer autoloading, shim support loading, and plugin loading. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- Bootstrap still loads Composer, WordPress shims, and the plugin in the same effective order.
+- No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
