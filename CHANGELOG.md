@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-No unreleased changes.
+### Changed
+
+- Split remote-action repository client-report payload fixtures into a focused test-support trait without changing runtime behavior.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no production PHP behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, release behavior, or deployment behavior was introduced.
 
 ## 0.1.63 - 2026-10-06
 

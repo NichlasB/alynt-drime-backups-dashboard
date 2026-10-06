@@ -894,6 +894,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Repository Client Report Fixture Structure Slice
+
+`RemoteActionRepositoryClientReportTest` still grouped support-safe client report assertions with bulky schedule-apply and schedule-rollback-preview report payloads. The next safe test-only cleanup is to move those reusable payload fixtures into a dedicated support trait while preserving repository assertions, sanitization expectations, support-summary behavior, production code, protocol behavior, schema, and live-site state.
+
+Implementation status: implemented locally as a test-only fixture split. Schedule Apply and Schedule Rollback Preview client-report payload builders now live in `tests/support/remote-action-repository-client-report-fixtures.php`, and `tests/RemoteActionRepositoryClientReportTest.php` uses that trait while keeping the existing test methods and expected support-safe context assertions. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `RemoteActionRepositoryClientReportTest` coverage passes unchanged;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, remote-action repository behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Capabilities Test Fixture Structure Slice
 
 `RemoteActionCapabilitiesTest` still repeated remote-action capability construction and Alynt scan/upload schedule summary fixtures across schedule preview, schedule apply, rollback-preview, cleanup-preview, and forbidden-field tests. The next safe test-only cleanup is to move those reusable fixture builders into a dedicated test support trait while leaving capability assertions, edge-case payloads, production code, protocol behavior, schema, sanitization behavior, support decisions, and live-site state unchanged.
