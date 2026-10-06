@@ -1084,6 +1084,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No live-site, release, deployment, protocol, schema, credential, Drime, backup, restore, delete, cleanup, schedule, or remote-action behavior is introduced.
 
+### Event Log Audit Harness Reuse Slice
+
+The audit-history test still carried a local copy of the event-log option shims and direct include list after the shared event-log harness existed. Keep audit behavior unchanged and move the one audit-specific current-user shim into `tests/support/event-log-test-harness.php`, then have `tests/EventLogAuditTest.php` reuse that harness like the main event-log test.
+
+Implementation status: implemented locally as a test-only structure cleanup. The shared harness now provides the option shims, current-user shim, and event-log includes needed by both event-log test files, while the audit test retains its own fixture reset values and assertions.
+
+Acceptance criteria:
+
+- Focused `EventLogAudit` and `EventLogTest` coverage passes.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, UI, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
