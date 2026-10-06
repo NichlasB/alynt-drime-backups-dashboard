@@ -6,6 +6,7 @@
  */
 
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-restore-readiness-labels.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-restore-readiness-evidence.php';
 
 /**

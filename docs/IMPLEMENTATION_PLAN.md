@@ -122,6 +122,18 @@ Acceptance criteria:
 - PHP syntax, lint, build, and whitespace checks pass;
 - no new UI strings, translation changes, protocol changes, database writes, remote-action permissions, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Restore Readiness Evidence Label Helper Structure Slice
+
+The restore-readiness evidence renderer accumulated panel rendering, Sites-row hint rendering, warning rendering, labels, and tone helpers after the V2.6 evidence consumer shipped. The next safe structure-only cleanup is to separate restore-readiness label/tone helpers from the evidence renderer without changing UI output, support-safe copy, status payload assumptions, protocol behavior, database schema, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. Restore-readiness source labels, state labels, overall row-hint tone, candidate tone, and candidate summary helpers now live in `includes/traits/trait-admin-page-restore-readiness-labels.php`. The existing evidence renderer composes the new helper trait and keeps panel, row-hint, payload extraction, and warning rendering. No release, deployment, push, protocol change, database change, UI copy change, support-copy shape change, remote-action permission change, backup creation, restore, cleanup/delete, credential handling, Drime behavior, or live-site change was introduced by this slice.
+
+Acceptance criteria:
+
+- restore-readiness evidence rendering tests pass with unchanged output expectations;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains structure-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Support Summary Export UI Slice
 
 The Diagnostics Support Copy panel already renders a redacted JSON summary and clipboard helper for support handoff. The next safe operator-facing polish is to add a client-side download/export control that saves the already-rendered redacted summary as a `.json` file, without adding a server endpoint, changing support-copy shape, storing data, or exposing any non-redacted values.
