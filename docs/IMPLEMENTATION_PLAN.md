@@ -1072,6 +1072,18 @@ Acceptance criteria:
 - Sites list and site detail views show whether the WPvivid expected freshness is schedule-detected or using the dashboard fallback.
 - The dashboard remains read-only, receives no Drime API credentials, and performs no remote actions.
 
+### Status Classifier WPvivid Freshness Fixture Helper Slice
+
+The WPvivid freshness classifier tests repeated the same full healthy payload plus stale WPvivid source fixture across four policy-window assertions. Keep the production classifier unchanged and reduce the test maintenance surface by extracting the repeated stale-WPvivid fixture setup into a private helper inside `tests/StatusClassifierWpvividFreshnessTest.php`.
+
+Implementation status: implemented locally as a test-only structure cleanup. The helper builds the common healthy/server payload, merges WPvivid-specific stale overrides, and preserves the existing dashboard fallback and schedule-detected freshness assertions without changing production code, protocol, storage, UI, credentials, Drime behavior, backup/restore behavior, or remote actions.
+
+Acceptance criteria:
+
+- The focused `StatusClassifierWpvividFreshness` test coverage passes with the same behavior assertions.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No live-site, release, deployment, protocol, schema, credential, Drime, backup, restore, delete, cleanup, schedule, or remote-action behavior is introduced.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
