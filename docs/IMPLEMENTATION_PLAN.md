@@ -1826,6 +1826,8 @@ Implementation target:
 - Include the aggregate in the existing redacted support summary through the `counts` object without adding domains, labels, raw payloads, credentials, paths, Drime identifiers, or row-level details.
 - Do not add a remove/delete button, confirmation form, POST handler, schema change, SQL write, remote action, client-site contact, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, release, deployment, or live-site state change.
 
+Implementation status: implemented, released, and deployed through dashboard `0.1.62` as display-only Diagnostics/support-copy readiness evidence for archived retained local records. Diagnostics reports evaluated, ready, blocked, retained snapshot, retained action-history, and non-terminal action counts while preserving the preview-only boundary. No permanent remove/delete control, confirmation form, POST handler, database write, remote action, client-site contact, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, or live-site mutation was introduced by this slice.
+
 Acceptance criteria:
 
 - Diagnostics shows archived retained records evaluated, future-removal-ready records, blocked records, retained snapshot rows, retained action-history rows, and non-terminal action rows.
@@ -1845,6 +1847,8 @@ Implementation target:
 - Keep the hint display-only: no remove/delete button, no confirmation form, no POST handler, and no database write.
 - Preserve the same eligibility boundary: archived only, revoked or expired-pending only, no polling credentials, no action signing credentials, no next scheduled poll, no paused state, and no non-terminal action history.
 - Do not change default active Sites rows, scheduled polling, support-copy JSON shape, protocol behavior, remote actions, credential handling, cleanup/delete, backup creation, restore, release, deployment, or live-site state.
+
+Implementation status: implemented, released, and deployed through dashboard `0.1.62` as a display-only Archived Local Records row hint. Archived rows now show compact ready/blocked local-removal readiness evidence with retained snapshot/action/non-terminal counts, reusing the existing Site Detail preview eligibility boundary and without adding a remove/delete button, confirmation form, POST handler, database write, remote action, client-site contact, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, or live-site mutation.
 
 Acceptance criteria:
 

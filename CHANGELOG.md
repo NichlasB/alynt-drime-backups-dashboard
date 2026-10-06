@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Split remote-action repository client-report payload fixtures into a focused test-support trait without changing runtime behavior.
 - Split Site Detail local-removal preview rendering assertions into a focused test class without changing runtime behavior.
 - Split Diagnostics overview aggregate payload fixtures into a focused test-support trait without changing runtime behavior.
+- Reconciled the implementation plan so the deployed `0.1.62` Diagnostics local-removal readiness aggregate and archived-row readiness hint slices are marked implemented, released, and deployed.
 
 ### Security
 
