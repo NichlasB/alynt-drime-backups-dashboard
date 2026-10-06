@@ -1132,6 +1132,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Poller Failure Fixture Helper Slice
+
+The poller failure-path test repeatedly created the same deterministic credential vault and successful status HTTP response fixtures before changing only the failure trigger under test. Keep all failure assertions unchanged and add private helpers in `tests/PollerFailureTest.php` for the deterministic vault and successful HTTP client fixture.
+
+Implementation status: implemented locally as a test-only structure cleanup. The helpers centralize the repeated key material and success-response payload construction while preserving each failure scenario's explicit site, snapshot, and repository setup.
+
+Acceptance criteria:
+
+- Focused `PollerFailureTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, transport behavior, protocol, schema, credential storage, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.

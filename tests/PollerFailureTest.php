@@ -22,24 +22,14 @@ class PollerFailureTest extends TestCase {
 	 * @return void
 	 */
 	public function test_invalid_payload_marks_failure_without_snapshot() {
-		$vault      = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault      = $this->vault();
 		$sites      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
 		$snapshots  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
-		$http_client = function () {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode(
-					array_merge(
-						$this->payload(),
-						array(
-							'site_uuid' => '22222222-2222-4222-8222-222222222222',
-						)
-					)
-				),
-			);
-		};
+		$http_client = $this->successful_http_client(
+			array(
+				'site_uuid' => '22222222-2222-4222-8222-222222222222',
+			)
+		);
 		$poller     = $this->poller( $sites, $snapshots, $vault, $http_client );
 
 		$result = $poller->check_status_now( 77 );
@@ -71,7 +61,7 @@ class PollerFailureTest extends TestCase {
 		$http_client = function () {
 			$this->fail( 'HTTP client should not be called without credentials.' );
 		};
-		$poller     = $this->poller( $sites, $snapshots, new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) ), $http_client );
+		$poller     = $this->poller( $sites, $snapshots, $this->vault(), $http_client );
 
 		$result = $poller->check_status_now( 77 );
 
@@ -87,7 +77,7 @@ class PollerFailureTest extends TestCase {
 	 * @return void
 	 */
 	public function test_failure_backoff_increments_consecutive_failures() {
-		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault = $this->vault();
 		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
 			$this->site(
 				$vault,
@@ -118,18 +108,11 @@ class PollerFailureTest extends TestCase {
 	 * @return void
 	 */
 	public function test_snapshot_storage_failure_stops_success_notice() {
-		$vault                    = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault                    = $this->vault();
 		$sites                    = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
 		$snapshots                = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
 		$snapshots->record_result = new WP_Error( 'snapshot_store_failed', 'Snapshot could not be stored.' );
-		$http_client              = function () {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
+		$http_client              = $this->successful_http_client();
 		$poller                   = $this->poller( $sites, $snapshots, $vault, $http_client );
 
 		$result = $poller->check_status_now( 77 );
@@ -146,18 +129,11 @@ class PollerFailureTest extends TestCase {
 	 * @return void
 	 */
 	public function test_poll_success_storage_failure_is_returned() {
-		$vault                      = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault                      = $this->vault();
 		$sites                      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
 		$sites->mark_success_result = false;
 		$snapshots                  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
-		$http_client                = function () {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
+		$http_client                = $this->successful_http_client();
 		$poller                     = $this->poller( $sites, $snapshots, $vault, $http_client );
 
 		$result = $poller->check_status_now( 77 );
@@ -173,7 +149,7 @@ class PollerFailureTest extends TestCase {
 	 * @return void
 	 */
 	public function test_poll_failure_storage_failure_is_returned() {
-		$vault                      = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault                      = $this->vault();
 		$sites                      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $this->site( $vault ) );
 		$sites->mark_failure_result = false;
 		$snapshots                  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
@@ -187,5 +163,36 @@ class PollerFailureTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'poll_failure_store_failed', $result->get_error_code() );
 		$this->assertSame( 'transport_failed', $result->get_error_data()['original_error_code'] );
+	}
+
+	/**
+	 * Creates a deterministic credential vault for poller tests.
+	 *
+	 * @return Alynt_Drime_Backups_Dashboard_Credential_Vault
+	 */
+	private function vault() {
+		return new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+	}
+
+	/**
+	 * Creates a successful status HTTP client fixture.
+	 *
+	 * @param array<string,mixed> $payload_overrides Payload overrides.
+	 * @return callable
+	 */
+	private function successful_http_client( array $payload_overrides = array() ) {
+		return function () use ( $payload_overrides ) {
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode(
+					array_merge(
+						$this->payload(),
+						$payload_overrides
+					)
+				),
+			);
+		};
 	}
 }
