@@ -828,6 +828,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Remote Action Repository WPDB Double Support Split Slice
+
+The remote action repository test harness still grouped WordPress shims, shared fixture helpers, and the fake `wpdb` class in one support file. Keep the existing bootstrap/harness loader stable while moving the fake database collaborator into a focused support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. The fake `wpdb` collaborator now lives in `tests/support/remote-action-repository-wpdb-double.php`, and `tests/support/remote-action-repository-test-harness.php` requires it before defining WordPress shims and fixture helpers. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused remote action repository coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Remote Action Capabilities Test Fixture Structure Slice
 
 `RemoteActionCapabilitiesTest` still repeated remote-action capability construction and Alynt scan/upload schedule summary fixtures across schedule preview, schedule apply, rollback-preview, cleanup-preview, and forbidden-field tests. The next safe test-only cleanup is to move those reusable fixture builders into a dedicated test support trait while leaving capability assertions, edge-case payloads, production code, protocol behavior, schema, sanitization behavior, support decisions, and live-site state unchanged.
