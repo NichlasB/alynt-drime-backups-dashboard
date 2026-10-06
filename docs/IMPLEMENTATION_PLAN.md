@@ -468,6 +468,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, enrollment behavior, pairing token behavior, origin validation, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Request Backup Row Hint Test Class Split Slice
+
+`AdminPageRequestBackupRenderingTest` still grouped compact Sites-row V2.1 hints with Site Detail Request Backup panel rendering. The next safe test-only cleanup is to move row-hint assertions into a focused class while preserving the same V2.1 capability copy, latest client action hint, opt-in-needed hint, detail-panel form gating, action-history rendering, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Site Detail Request Backup panel coverage remains in `tests/AdminPageRequestBackupRenderingTest.php`. Compact row hint coverage moved to `tests/AdminPageRequestBackupRowHintRenderingTest.php`. Shared rendering fixtures continue to load through `tests/support/admin-page-polling-state-rendering-bootstrap.php`.
+
+Acceptance criteria:
+
+- focused `AdminPageRequestBackup` rendering coverage passes with the same 7 tests and 28 assertions;
+- no split Request Backup rendering test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, Request Backup rendering, row hint behavior, remote-action behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Fixture Structure Slice
 
 `DiagnosticsTest` still retained reusable site, snapshot, and snapshot-history fixture builders after the initial diagnostics support harness split. The next safe test-only cleanup is to move those fixture builders into the existing diagnostics test support file while leaving diagnostics assertions, fake repositories, support-summary harness behavior, production code, protocol behavior, schema, Diagnostics output, support-copy shape, and live-site state unchanged.

@@ -14,32 +14,6 @@ require_once __DIR__ . '/support/admin-page-polling-state-rendering-bootstrap.ph
  */
 class AdminPageRequestBackupRenderingTest extends TestCase {
 	/**
-	 * Sites rows show a compact V2.1 eligibility hint from redacted capability evidence.
-	 *
-	 * @return void
-	 */
-	public function test_request_backup_now_row_hint_reports_capability_without_rendering_action_form() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'enrollment_status'  => 'active',
-			'polling_key_id'     => 'key-id',
-			'has_polling_secret' => '1',
-		);
-		$payload = array(
-			'remote_actions' => array(
-				'protocol_version'   => 2,
-				'enabled'            => true,
-				'allowed_actions'    => array( 'scan_upload_now' ),
-				'sodium_available'   => true,
-			),
-		);
-		$html    = $harness->request_backup_row_hint_html( $site, $payload );
-
-		$this->assertStringContainsString( 'Request Backup: capability reported', $html );
-		$this->assertStringNotContainsString( '<form', $html );
-	}
-
-	/**
 	 * The V2.1 detail panel renders a signed dispatch form when capability is present.
 	 *
 	 * @return void
@@ -99,35 +73,6 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Scan completed safely.', $html );
 		$this->assertStringContainsString( 'Found 2; Queued 0; Known 1; Attempts 1; Failed 0', $html );
 		$this->assertStringNotContainsString( 'private', strtolower( $html ) );
-	}
-
-	/**
-	 * Sites rows include a compact latest-client-action hint from sanitized payload evidence.
-	 *
-	 * @return void
-	 */
-	public function test_request_backup_now_row_hint_includes_latest_client_action_state() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'enrollment_status'  => 'active',
-			'polling_key_id'     => 'key-id',
-			'has_polling_secret' => '1',
-		);
-		$payload = array(
-			'remote_actions' => array(
-				'protocol_version' => 2,
-				'enabled'          => true,
-				'allowed_actions'  => array( 'scan_upload_now' ),
-				'sodium_available' => true,
-				'last_action'      => array(
-					'action_id'   => 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
-					'action_type' => 'scan_upload_now',
-					'state'       => 'rate_limited',
-				),
-			),
-		);
-
-		$this->assertStringContainsString( 'latest client action: Rate limited', $harness->request_backup_row_hint_html( $site, $payload ) );
 	}
 
 	/**
@@ -219,7 +164,6 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 
 		$this->assertStringContainsString( 'understands V2.1 remote actions', $html );
 		$this->assertStringContainsString( 'Generate V2 Opt-In Token', $html );
-		$this->assertStringContainsString( 'Request Backup: opt-in needed', $harness->request_backup_row_hint_html( $site, $payload ) );
 	}
 
 }
