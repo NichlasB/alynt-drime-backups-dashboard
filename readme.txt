@@ -159,6 +159,22 @@ See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCO
 = 0.1.33 =
 * Clarified Diagnostics polling summaries with aggregate dashboard record-state counts.
 
+= 0.1.32 =
+* Clarified V2.3 Schedule Apply wording so operators see that changes are limited to future Alynt scan/upload cadence and rollback remains unavailable in this release.
+
+= 0.1.31 =
+* Rounded compact Sites-tab backup source upload ages to readable minute/hour/day labels instead of raw seconds.
+
+= 0.1.30 =
+* Made Sites-tab backup evidence more compact with an at-a-glance backup-health summary and short per-source rows while keeping detailed reasons on Site Detail.
+
+= 0.1.29 =
+* Added targeted remote-action signer regression coverage for unsupported PHP Sodium runtimes and malformed signature material.
+* Reused already-loaded Site Detail remote-action history when rendering V2 action panels, reducing duplicate repository reads.
+* Added accessible names to display-once pairing-token and V2 action opt-in token copy fields.
+* Treated clearing an already-empty diagnostics event buffer as a successful no-op.
+* Wired scheduled maintenance to run completed remote-action retention cleanup alongside snapshot retention cleanup.
+
 = 0.1.28 =
 * Polished Diagnostics operator action history so audit rows use operator-friendly action labels instead of raw action slugs.
 * Updated Operator Action History helper text to include scheduled polling pause/resume controls.

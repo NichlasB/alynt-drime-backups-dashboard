@@ -416,6 +416,19 @@ All notable changes to this project will be documented in this file.
 - Hardened dashboard activation so failed cron scheduling is reported instead of silently leaving polling or cleanup unscheduled.
 - Hardened uninstall safety: rollback copies discovered by WordPress now exit before touching dashboard state, and canonical plugin deletion preserves dashboard records by default. A permanent dashboard-data purge now requires an explicit `wp-config.php` constant.
 
+## 0.1.14 - 2026-08-20
+
+### Fixed
+
+- Hardened uninstall safety so WordPress-discovered rollback copies exit before touching canonical dashboard state.
+- Preserved dashboard records by default during normal canonical plugin deletion.
+- Required the explicit `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` `wp-config.php` constant for permanent dashboard-data removal.
+- Documented safe rollback archive placement outside `wp-content/plugins`.
+
+### Security
+
+- Preserved the read-only dashboard boundary and added no remote actions.
+
 ## 0.1.13 - 2026-08-19
 
 ### Added

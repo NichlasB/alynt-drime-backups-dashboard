@@ -1300,6 +1300,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, runtime behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Historical Release Metadata Consistency Slice
+
+The local WordPress readme and Markdown changelog still had a few older historical version-list mismatches after the latest metadata alignment pass: `readme.txt` lacked entries for the published `0.1.29` through `0.1.32` releases, while `CHANGELOG.md` folded the existing `0.1.14` uninstall-safety release into the later `0.1.15` notes instead of listing it as its own published release. Align those historical entries with the existing GitHub release notes without changing runtime behavior or preparing a new release.
+
+Implementation status: implemented locally as a documentation/metadata cleanup. `readme.txt` now includes the published `0.1.29`, `0.1.30`, `0.1.31`, and `0.1.32` entries, and `CHANGELOG.md` now includes the published `0.1.14` uninstall-safety entry as its own release. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, filesystem-path exposure, uninstall behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- `CHANGELOG.md`, `readme.txt`, and GitHub release history no longer disagree about the `0.1.14` and `0.1.29` through `0.1.32` release entries.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, runtime behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, uninstall, live-site, release, deploy, or remote-action behavior changes.
+
 ### Historical Failed-Count Status Policy Slice
 
 Operational `0.5.16` rollout showed another alert-noise case: some clients correctly report queue `0`, no active upload, warning_count `0`, and fresh or policy-valid source evidence, while still carrying historical `failed_count=1` in the uploader registry from an older server-source failure that later recovered or was superseded by newer successful uploads.
