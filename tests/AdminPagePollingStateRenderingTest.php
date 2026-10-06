@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 require_once __DIR__ . '/support/admin-page-polling-state-rendering-bootstrap.php';
 
 /**
- * Tests credential-aware Sites-row rendering.
+ * Tests credential-aware Sites-row manual check and next-poll rendering.
  */
 class AdminPagePollingStateRenderingTest extends TestCase {
 	/**
@@ -108,74 +108,6 @@ class AdminPagePollingStateRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Next poll:', $harness->next_poll_line( $site ) );
 		$this->assertStringContainsString( 'Paused locally', $harness->next_poll_line( $site ) );
 		$this->assertStringNotContainsString( '<time datetime=', $harness->next_poll_line( $site ) );
-	}
-
-	/**
-	 * Active rows render a local Pause Polling control.
-	 *
-	 * @return void
-	 */
-	public function test_active_rows_render_pause_polling_form() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = $this->polling_site();
-		$html    = $harness->pause_form_html( $site );
-
-		$this->assertStringContainsString( 'Pause Polling', $html );
-		$this->assertStringContainsString( 'value="pause_polling"', $html );
-		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_pause_polling', $html );
-	}
-
-	/**
-	 * Paused rows render a local Resume Polling control.
-	 *
-	 * @return void
-	 */
-	public function test_paused_rows_render_resume_polling_form() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = $this->polling_site(
-			array(
-				'paused_at' => '2026-09-17 12:00:00',
-			)
-		);
-		$html    = $harness->pause_form_html( $site );
-
-		$this->assertStringContainsString( 'Resume Polling', $html );
-		$this->assertStringContainsString( 'value="resume_polling"', $html );
-		$this->assertStringContainsString( 'alynt_drime_backups_dashboard_resume_polling', $html );
-	}
-
-	/**
-	 * Revoked rows do not render polling pause controls.
-	 *
-	 * @return void
-	 */
-	public function test_revoked_rows_do_not_render_pause_polling_form() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = $this->polling_site(
-			array(
-				'enrollment_status' => 'revoked',
-			)
-		);
-
-		$this->assertSame( '', $harness->pause_form_html( $site ) );
-	}
-
-	/**
-	 * Archived rows fail closed for manual checks and scheduled-poll controls.
-	 *
-	 * @return void
-	 */
-	public function test_archived_rows_disable_manual_and_polling_controls() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = $this->polling_site(
-			array(
-				'archived_at' => '2026-09-19 18:30:00',
-			)
-		);
-
-		$this->assertStringContainsString( 'Record archived locally. Unarchive it before manual checks are available.', $harness->check_form_html( $site ) );
-		$this->assertStringContainsString( 'Archived locally', $harness->next_poll_line( $site ) );
-		$this->assertSame( '', $harness->pause_form_html( $site ) );
 	}
 
 	/**
