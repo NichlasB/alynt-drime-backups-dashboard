@@ -1766,6 +1766,25 @@ Acceptance criteria:
 - Permanent local removal remains unavailable and no destructive workflow is introduced.
 - PHP syntax, targeted tests, full tests, lint, build, and whitespace checks pass before commit.
 
+### Archived Row Local Removal Readiness Hint Slice
+
+After Diagnostics gained fleet-level local removal-readiness aggregates, the archived-records table can safely show the same readiness boundary at row level so operators do not need to open every retained record merely to see whether it is ready for a future separate confirmation gate.
+
+Implementation target:
+
+- Render a compact local-removal readiness hint only for archived rows in the Sites/Archived Local Records table.
+- Reuse the existing Site Detail preview eligibility logic and retained row counts.
+- Keep the hint display-only: no remove/delete button, no confirmation form, no POST handler, and no database write.
+- Preserve the same eligibility boundary: archived only, revoked or expired-pending only, no polling credentials, no action signing credentials, no next scheduled poll, no paused state, and no non-terminal action history.
+- Do not change default active Sites rows, scheduled polling, support-copy JSON shape, protocol behavior, remote actions, credential handling, cleanup/delete, backup creation, restore, release, deployment, or live-site state.
+
+Acceptance criteria:
+
+- Archived rows show a compact ready/blocked local-removal hint with retained snapshot/action/non-terminal counts.
+- Unarchived rows render no local-removal hint.
+- Tests cover the compact row hint and confirm no form/control is introduced.
+- PHP syntax, targeted tests, full tests, lint, build, and whitespace checks pass before commit.
+
 ### Settings And Hooks Documentation Alignment Slice
 
 The Settings and Hook reference docs still contained stale release-line wording after the `0.1.61` rollout and later planning slices. This created a small operator-doc mismatch: the hook reference still named `0.1.28`, and the settings overview understated the current split between administrator-configurable local policy/settings options and internal options.

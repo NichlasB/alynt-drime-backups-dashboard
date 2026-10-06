@@ -151,6 +151,36 @@ class AdminPageSiteDetailLocalRecordRenderingTest extends TestCase {
 	}
 
 	/**
+	 * Archived rows can show compact local removal-readiness hints.
+	 *
+	 * @return void
+	 */
+	public function test_archived_row_hint_shows_local_removal_readiness_counts() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
+		$html    = $harness->retained_record_removal_row_hint_html(
+			array(
+				'id'                            => 7,
+				'enrollment_status'             => 'revoked',
+				'archived_at'                   => '2026-09-19 18:30:00',
+				'polling_key_id'                => '',
+				'polling_secret_ciphertext'     => '',
+				'has_polling_secret'            => '0',
+				'action_key_id'                 => '',
+				'action_private_key_ciphertext' => '',
+				'next_poll_at'                  => '',
+				'paused_at'                     => '',
+			),
+			3,
+			2,
+			0
+		);
+
+		$this->assertStringContainsString( 'Local removal: ready for future gate', $html );
+		$this->assertStringContainsString( 'Snapshots 3 · actions 2 · non-terminal 0', $html );
+		$this->assertStringNotContainsString( '<form', $html );
+	}
+
+	/**
 	 * Unarchived records do not show the future removal preview.
 	 *
 	 * @return void

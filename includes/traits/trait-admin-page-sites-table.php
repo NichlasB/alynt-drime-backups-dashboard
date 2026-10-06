@@ -77,6 +77,8 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_Table {
 				echo '<span class="description">' . esc_html__( 'No validated snapshot is stored yet.', 'alynt-drime-backups-dashboard' ) . '</span>';
 			}
 
+			echo $this->retained_record_removal_row_hint( $site, $site_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns escaped local-removal readiness markup.
+
 			echo '</td>';
 			echo '<td data-label="' . esc_attr__( 'Freshness', 'alynt-drime-backups-dashboard' ) . '">' . $this->time_html( isset( $site['last_seen_at'] ) ? $site['last_seen_at'] : '' ) . $this->next_poll_html( $site ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- time_html() and next_poll_html() return escaped markup.
 			echo '<td data-label="' . esc_attr__( 'Actions', 'alynt-drime-backups-dashboard' ) . '"><div class="adbd-row-actions"><a class="button" href="' . esc_url( $url ) . '">' . esc_html__( 'View', 'alynt-drime-backups-dashboard' ) . '</a>';

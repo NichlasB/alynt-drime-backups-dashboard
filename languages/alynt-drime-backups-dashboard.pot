@@ -2950,6 +2950,20 @@ msgstr ""
 msgid "Preview only. Permanent local removal is not available in this release, and this panel does not delete data, contact the client site, change backups, alter Drime, or change client settings."
 msgstr ""
 
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:108
+msgid "Local removal: ready for future gate"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:109
+msgid "Local removal: blocked"
+msgstr ""
+
+#. translators: 1: retained snapshot count, 2: retained action-history count, 3: non-terminal action count.
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:112
+#, php-format
+msgid "Snapshots %1$s · actions %2$s · non-terminal %3$s"
+msgstr ""
+
 #: includes/traits/trait-admin-page-site-detail-local-record-panels.php:81
 msgid "Future removal eligibility"
 msgstr ""

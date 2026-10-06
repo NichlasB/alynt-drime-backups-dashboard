@@ -92,6 +92,33 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Site_Detail_Local_Record_Panels {
 	}
 
 	/**
+	 * Builds a compact row hint for archived retained-record removal readiness.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param int                 $site_id Site ID.
+	 * @return string
+	 */
+	private function retained_record_removal_row_hint( array $site, $site_id ) {
+		if ( empty( $site['archived_at'] ) ) {
+			return '';
+		}
+
+		$preview = $this->local_record_removal_preview( $site, $site_id );
+		$label   = $preview['eligible']
+			? __( 'Local removal: ready for future gate', 'alynt-drime-backups-dashboard' )
+			: __( 'Local removal: blocked', 'alynt-drime-backups-dashboard' );
+		$counts  = sprintf(
+			/* translators: 1: retained snapshot count, 2: retained action-history count, 3: non-terminal action count. */
+			__( 'Snapshots %1$s · actions %2$s · non-terminal %3$s', 'alynt-drime-backups-dashboard' ),
+			number_format_i18n( $preview['snapshot_count'] ),
+			number_format_i18n( $preview['action_count'] ),
+			number_format_i18n( $preview['non_terminal_action_count'] )
+		);
+
+		return '<span class="description adbd-row-meta"><strong>' . esc_html( $label ) . '</strong><br>' . esc_html( $counts ) . '</span>';
+	}
+
+	/**
 	 * Builds a read-only local removal preview for one site.
 	 *
 	 * @param array<string,mixed> $site Site row.
