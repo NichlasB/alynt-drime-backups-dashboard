@@ -31,6 +31,13 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public $remote_actions;
 
 	/**
+	 * Snapshot repository test double.
+	 *
+	 * @var object|null
+	 */
+	public $snapshots;
+
+	/**
 	 * Exposes check-status action markup.
 	 *
 	 * @param array<string,mixed> $site Site row.
@@ -87,6 +94,23 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public function archive_record_panel_html( array $site ) {
 		ob_start();
 		$this->render_archive_record_panel( $site, isset( $site['id'] ) ? (int) $site['id'] : 7 );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Exposes local removal-preview markup.
+	 *
+	 * @param array<string,mixed> $site Site row.
+	 * @param int                 $snapshot_count Snapshot count.
+	 * @param int                 $action_count Action history row count.
+	 * @param int                 $non_terminal_action_count Non-terminal action row count.
+	 * @return string
+	 */
+	public function retained_record_removal_preview_panel_html( array $site, $snapshot_count = 0, $action_count = 0, $non_terminal_action_count = 0 ) {
+		$this->snapshots       = new Alynt_Drime_Backups_Dashboard_Counting_Snapshot_Repository_Test_Double( $snapshot_count );
+		$this->remote_actions  = new Alynt_Drime_Backups_Dashboard_Counting_Remote_Action_Repository_Test_Double( $action_count, $non_terminal_action_count );
+		ob_start();
+		$this->render_retained_record_removal_preview_panel( $site, isset( $site['id'] ) ? (int) $site['id'] : 7 );
 		return (string) ob_get_clean();
 	}
 
@@ -187,5 +211,92 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	 */
 	private function render_backup_sources_detail( array $payload ) {
 		unset( $payload );
+	}
+}
+
+/**
+ * Counts snapshot rows for local record rendering tests.
+ */
+class Alynt_Drime_Backups_Dashboard_Counting_Snapshot_Repository_Test_Double {
+	/**
+	 * Snapshot count.
+	 *
+	 * @var int
+	 */
+	private $count;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param int $count Snapshot count.
+	 */
+	public function __construct( $count ) {
+		$this->count = max( 0, (int) $count );
+	}
+
+	/**
+	 * Counts rows for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return int
+	 */
+	public function count_for_site( $site_id ) {
+		unset( $site_id );
+
+		return $this->count;
+	}
+}
+
+/**
+ * Counts remote-action rows for local record rendering tests.
+ */
+class Alynt_Drime_Backups_Dashboard_Counting_Remote_Action_Repository_Test_Double {
+	/**
+	 * Action row count.
+	 *
+	 * @var int
+	 */
+	private $count;
+
+	/**
+	 * Non-terminal action row count.
+	 *
+	 * @var int
+	 */
+	private $non_terminal_count;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param int $count Action row count.
+	 * @param int $non_terminal_count Non-terminal action row count.
+	 */
+	public function __construct( $count, $non_terminal_count ) {
+		$this->count              = max( 0, (int) $count );
+		$this->non_terminal_count = max( 0, (int) $non_terminal_count );
+	}
+
+	/**
+	 * Counts rows for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return int
+	 */
+	public function count_for_site( $site_id ) {
+		unset( $site_id );
+
+		return $this->count;
+	}
+
+	/**
+	 * Counts non-terminal rows for one site.
+	 *
+	 * @param int $site_id Site ID.
+	 * @return int
+	 */
+	public function count_non_terminal_for_site( $site_id ) {
+		unset( $site_id );
+
+		return $this->non_terminal_count;
 	}
 }

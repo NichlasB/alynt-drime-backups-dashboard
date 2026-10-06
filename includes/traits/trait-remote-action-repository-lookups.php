@@ -127,6 +127,62 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Lookups {
 	}
 
 	/**
+	 * Counts remote action rows retained for one site.
+	 *
+	 * @since 0.1.62
+	 *
+	 * @param int $site_id Site ID.
+	 * @return int
+	 */
+	public function count_for_site( $site_id ) {
+		global $wpdb;
+
+		$site_id = absint( $site_id );
+
+		if ( 0 === $site_id ) {
+			return 0;
+		}
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::actions_table();
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository reads a plugin-owned custom table; callers own caching decisions.
+		return (int) $wpdb->get_var(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is produced by Storage for a plugin-owned custom table.
+				"SELECT COUNT(*) FROM {$table} WHERE dashboard_site_id = %d",
+				$site_id
+			)
+		);
+	}
+
+	/**
+	 * Counts non-terminal remote action rows retained for one site.
+	 *
+	 * @since 0.1.62
+	 *
+	 * @param int $site_id Site ID.
+	 * @return int
+	 */
+	public function count_non_terminal_for_site( $site_id ) {
+		global $wpdb;
+
+		$site_id = absint( $site_id );
+
+		if ( 0 === $site_id ) {
+			return 0;
+		}
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::actions_table();
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Repository reads a plugin-owned custom table; callers own caching decisions.
+		return (int) $wpdb->get_var(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is produced by Storage for a plugin-owned custom table.
+				"SELECT COUNT(*) FROM {$table} WHERE dashboard_site_id = %d AND state IN ('queued_for_dispatch', 'accepted', 'running')",
+				$site_id
+			)
+		);
+	}
+
+	/**
 	 * Reads one action row by internal ID.
 	 *
 	 * @param int $action_id Action ID.

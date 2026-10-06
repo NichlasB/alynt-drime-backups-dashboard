@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added a planning-only design for a future dashboard-local retained-record permanent removal flow, explicitly keeping implementation gated because it would be a destructive local database action.
+- Added a Site Detail Local Removal Preview for archived retained records so operators can see future-removal eligibility and retained snapshot/action row counts without any delete or confirmation action.
 
 ### Changed
 
@@ -14,7 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Security
 
-- Preserved the current runtime boundary: no PHP behavior, schema, SQL, UI control, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state was changed.
+- Preserved the current runtime boundary: the retained-record preview is display-only and adds no database write, delete control, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state change.
 
 ## 0.1.61 - 2026-10-06
 

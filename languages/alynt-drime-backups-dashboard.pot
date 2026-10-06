@@ -2906,19 +2906,87 @@ msgstr ""
 msgid "Archive hides this local record from the default Sites view while retaining it for audit/history. It does not delete data, contact the client site, change backups, alter Drime, or reuse credentials."
 msgstr ""
 
-#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:77
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:78
+msgid "Local Removal Preview"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:79
+msgid "Preview only. Permanent local removal is not available in this release, and this panel does not delete data, contact the client site, change backups, alter Drime, or change client settings."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:81
+msgid "Future removal eligibility"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:81
+msgid "Eligible for future removal"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:81
+msgid "Not eligible yet"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:82
+msgid "Reason"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:83
+msgid "Retained snapshots"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:84
+msgid "Retained action history rows"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:85
+msgid "Non-terminal action rows"
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:107
+msgid "Archived, terminal, and credential-free. A future removal workflow could safely present a separate confirmation gate for this dashboard-local record."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:125
+msgid "Only archived records can be evaluated for future local removal."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:129
+msgid "Only revoked records and expired pending records can be considered for future local removal."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:133
+msgid "Polling credentials are still present. Revoke the record before considering future local removal."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:137
+msgid "Remote-action signing credentials are still present. Revocation must clear them before local removal can be considered."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:141
+msgid "A next poll time is still stored. Future removal should require the record to be fully unscheduled."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:145
+msgid "The record is paused rather than fully terminal. Revoke or expire it before local removal can be considered."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:149
+msgid "One or more retained action rows are still non-terminal. Future removal should wait until action history is terminal."
+msgstr ""
+
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:209
 msgid "Archive Local Record"
 msgstr ""
 
-#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:77
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:209
 msgid "Unarchive Local Record"
 msgstr ""
 
-#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:78
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:210
 msgid "Archiving…"
 msgstr ""
 
-#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:78
+#: includes/traits/trait-admin-page-site-detail-local-record-panels.php:210
 msgid "Unarchiving…"
 msgstr ""
 
