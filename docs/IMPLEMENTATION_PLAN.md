@@ -1745,6 +1745,19 @@ Acceptance criteria for a future implementation:
 - Audit events and support output remain redacted and do not expose labels/domains beyond existing support-safe policy.
 - No client-site contact, Drime mutation, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential rotation, release, deployment, or live-site behavior is introduced without a separate approval gate.
 
+### Settings And Hooks Documentation Alignment Slice
+
+The Settings and Hook reference docs still contained stale release-line wording after the `0.1.61` rollout and later planning slices. This created a small operator-doc mismatch: the hook reference still named `0.1.28`, and the settings overview understated the current split between administrator-configurable local policy/settings options and internal options.
+
+Implementation status: implemented locally as a documentation-only alignment. `docs/HOOKS.md` now states that no public custom extension hooks exist in the current `0.1.61` release line and clarifies that V2.1+ action dispatch uses signed outbound client requests rather than public dashboard REST routes. `docs/SETTINGS.md` now describes two administrator-configurable local policy/settings options, three internal local options, autoload-disabled source-policy storage, and custom tables that also store encrypted action signing keys and bounded V2.1+ action history. No runtime PHP, schema, SQL, UI control, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state changed.
+
+Acceptance criteria:
+
+- Settings documentation matches currently stored dashboard options and table-owned state.
+- Hook documentation no longer references the stale `0.1.28` line.
+- Documentation distinguishes dashboard REST routes from outbound signed client action requests.
+- No PHP, schema, protocol, UI, database, credential, Drime, backup, restore, cleanup/delete, release, deployment, or live-site behavior changes are introduced.
+
 ### Schedule Row Hint Clarity Slice
 
 The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.

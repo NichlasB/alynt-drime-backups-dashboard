@@ -2,13 +2,13 @@
 
 ## Alynt Drime Backups Dashboard Hooks
 
-Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in version 0.1.28.
+Alynt Drime Backups Dashboard does not expose public custom extension actions or filters in the current `0.1.61` release line.
 
 The hooks below are internal WordPress integration points owned by the plugin. Treat them as implementation details unless a future release explicitly documents them as public extension points.
 
 ## Public Extension Hooks
 
-None in version 0.1.28.
+None in the current `0.1.61` release line.
 
 ## WordPress Lifecycle Hooks
 
@@ -56,6 +56,8 @@ Polling uses the fixed authenticated client status route and stores normalized l
 | `/wp-json/alynt-drime-backups-dashboard/v1/enroll` | `POST` | Completes client-site opt-in enrollment using a dashboard-generated pairing token. |
 
 The enrollment route validates the one-time pairing token, expected client origin, protocol version, and status schema version before storing encrypted dashboard-side polling credentials. It does not enable V2.1 actions; those require a separate `adb2a` action opt-in token after V1 pairing.
+
+V2.1+ action dispatch uses signed outbound requests to opted-in client-site endpoints. Those client routes are not registered by the dashboard plugin and are not public dashboard REST routes.
 
 ## Maintenance Rules
 

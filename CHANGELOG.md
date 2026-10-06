@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Added a planning-only design for a future dashboard-local retained-record permanent removal flow, explicitly keeping implementation gated because it would be a destructive local database action.
 
+### Changed
+
+- Aligned Settings and Hook reference documentation with the current `0.1.61` release line, stored option set, custom table ownership, and dashboard REST route boundary.
+
 ### Security
 
 - Preserved the current runtime boundary: no PHP behavior, schema, SQL, UI control, database write, remote action, backup creation, restore, cleanup/delete apply, credential handling, Drime behavior, release, deployment, or live-site state was changed.
