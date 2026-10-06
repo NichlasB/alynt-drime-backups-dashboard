@@ -11,14 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- *
-Handles remote action support summaries and retention cleanup.
+ * Handles remote action support summaries and retention cleanup.
  *
  * @since 0.1.26
  */
 trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Summary {
-
-
 	/**
 	 * Builds support-safe aggregate action-history diagnostics.
 	 *

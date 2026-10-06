@@ -55,6 +55,18 @@ Acceptance criteria:
 - generated release-stage artifacts are not treated as current source bloat;
 - no runtime PHP, UI output, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state changes are introduced.
 
+### Remote Action Repository Summary Docblock Cleanup Slice
+
+The current source-size baseline does not justify broad runtime refactors. A tiny safe code-quality cleanup was still available in the remote-action repository summary trait: its class-level docblock had malformed spacing from earlier structure splits.
+
+Implementation status: implemented locally as a docblock/formatting-only cleanup. `includes/traits/trait-remote-action-repository-summary.php` now has a normal trait description docblock and removes extra blank lines before the first method. No runtime PHP logic, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- the changed PHP file passes syntax checks;
+- full tests, lint, build, and whitespace checks pass;
+- the slice remains formatting-only and does not alter runtime behavior, UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Repository Context Structure Slice
 
 The remote-action repository has accumulated several support-safe context sanitizers as Request Backup Now, Schedule Preview, Schedule Apply, Schedule Rollback Preview, and Cleanup Preview were added. The next safe structure-only cleanup is to separate remote-action context sanitization from context merge/redaction helpers without changing storage shape, dispatch behavior, protocol behavior, database schema, UI output, or live-site state.
