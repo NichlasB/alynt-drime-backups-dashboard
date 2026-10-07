@@ -1985,6 +1985,25 @@ Acceptance criteria:
 - Schedule-management and schedule rollback-preview rendering tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Admin Sites List Test Double Split Slice
+
+The Sites-list test harness still grouped harness exposure methods with fake Sites, snapshots, and classifier collaborators. The next safe test-only structure cleanup is to move those fake collaborators into their own support file while leaving the harness entry point, fixtures, assertions, and production Sites-list rendering behavior unchanged.
+
+Implementation target:
+
+- Move `Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Sites`, `Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Snapshots`, and `Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Classifier` from `tests/support/admin-page-sites-list-test-harness.php` into a focused support file.
+- Require the new support file from the existing Sites-list harness so tests can keep requiring the same harness entry point.
+- Keep fake class names, method signatures, fixture rows, classifier category behavior, harness public methods, and test assertions unchanged.
+- Do not change production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state.
+
+Implementation status: implemented locally as a test-only support split. Sites-list fake collaborators now live in `tests/support/admin-page-sites-list-test-doubles.php`, and the existing Sites-list harness loads them before defining the harness class. Fake class names, method signatures, fixture rows, classifier category behavior, harness public methods, and test assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- The Sites-list harness is smaller and focused on exposing rendering/context helpers.
+- Sites-list tests pass without assertion changes.
+- Full tests, lint, build, and whitespace checks pass before commit.
+
 ### Diagnostics Local Removal Metric Helpers Split Slice
 
 The diagnostics site metric helper trait mixed general polling/site helper methods with local-removal readiness/counting helpers. The next safe structure-only cleanup was to separate the local-removal diagnostics helpers into their own trait while preserving the existing aggregate counts, support-copy shape, Diagnostics output, protocol behavior, database schema, and live-site state.
