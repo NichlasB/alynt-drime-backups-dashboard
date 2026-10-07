@@ -2366,6 +2366,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Schedule Management Payload Fixture Split Slice
+
+The admin schedule-management test harness still grouped reusable schedule-management payload fixtures and the rendering harness together. Keep `tests/support/admin-page-schedule-management-test-harness.php` as the stable loader while moving the payload fixture trait into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The reusable schedule-management payload fixture now lives in `tests/support/admin-page-schedule-management-payload-fixtures.php`, and the existing schedule-management test harness loads it before defining the rendering harness. Current tests keep requiring the same loader path, trait name, class name, and fixture method names. Existing schedule-management rendering assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused admin schedule-management, row-hint, and rollback-preview coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, schedule behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
