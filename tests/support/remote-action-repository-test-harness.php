@@ -9,6 +9,7 @@ if ( ! defined( 'ARRAY_A' ) ) {
 	define( 'ARRAY_A', 'ARRAY_A' );
 }
 
+require_once __DIR__ . '/remote-action-repository-wpdb-query-methods.php';
 require_once __DIR__ . '/remote-action-repository-wpdb-double.php';
 
 if ( ! function_exists( 'current_time' ) ) {

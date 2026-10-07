@@ -1000,6 +1000,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Repository WPDB Query Helper Split Slice
+
+The remote action repository fake `wpdb` collaborator still grouped insert/update capture with prepared-query and read-result shims. The next safe test-only structure cleanup is to move the query/read shims into a focused support trait while preserving the fake class name, property names, SQL capture behavior, row fixtures, repository assertions, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. Query/read helpers now live in `tests/support/remote-action-repository-wpdb-query-methods.php`, and `tests/support/remote-action-repository-wpdb-double.php` composes that trait while retaining insert/update capture. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused remote action repository coverage passes unchanged;
+- the fake `wpdb` support class remains focused on insert/update capture while query/read helpers are isolated;
+- full dashboard tests, lint, build, and whitespace checks continue to pass;
+- no production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Remote Action Repository Client Report Fixture Structure Slice
 
 `RemoteActionRepositoryClientReportTest` still grouped support-safe client report assertions with bulky schedule-apply and schedule-rollback-preview report payloads. The next safe test-only cleanup is to move those reusable payload fixtures into a dedicated support trait while preserving repository assertions, sanitization expectations, support-summary behavior, production code, protocol behavior, schema, and live-site state.
