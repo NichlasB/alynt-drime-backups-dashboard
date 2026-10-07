@@ -2330,6 +2330,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, schedule behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
 
+### Poller Status Payload Fixture Split Slice
+
+The poller test fixture trait still grouped poller collaborator builders, site-row builders, reusable status payloads, and successful HTTP response fixtures together. Keep `tests/support/poller-test-fixtures.php` as the stable loader while moving status payload and HTTP response fixtures into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Poller status payload and successful HTTP client fixtures now live in `tests/support/poller-status-payload-fixtures.php`, and the existing poller fixture trait composes them so current tests keep using the same loader, trait, and fixture method names. Existing poller assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused poller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
