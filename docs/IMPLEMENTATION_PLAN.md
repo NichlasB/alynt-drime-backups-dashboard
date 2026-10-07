@@ -2294,6 +2294,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Diagnostics Support Summary Test Harness Split Slice
+
+The diagnostics test harness still grouped shared diagnostics fixture builders and the support-summary action aggregate harness together. Keep `tests/support/diagnostics-test-harness.php` as the stable loader while moving the support-summary harness into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The support-summary action aggregate harness now lives in `tests/support/diagnostics-support-summary-test-harness.php`, and the existing diagnostics test harness loads it before defining the shared fixture builders. Existing test files keep requiring the same loader path, harness class names and public methods are unchanged, and diagnostics/support-summary assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused Diagnostics support-summary coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
