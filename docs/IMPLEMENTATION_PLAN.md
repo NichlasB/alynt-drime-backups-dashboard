@@ -2245,6 +2245,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Admin Diagnostics Overview Harness Split Slice
+
+After the Diagnostics overview service stub split, the diagnostics rendering harness still grouped the action-history rendering harness and overview rendering harness together. Keep `tests/support/admin-page-diagnostics-rendering-test-harness.php` as the stable loader while moving the overview rendering harness into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The Diagnostics overview rendering harness now lives in `tests/support/admin-page-diagnostics-overview-test-harness.php`, and the existing diagnostics rendering harness loads it before defining the action-history rendering harness. Existing test files keep requiring the same loader path, harness class names and public methods are unchanged, and rendered output/assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused Diagnostics overview rendering coverage passes unchanged.
+- Focused Diagnostics action-history rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
