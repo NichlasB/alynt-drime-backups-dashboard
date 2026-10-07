@@ -2354,6 +2354,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote Action Dispatcher Schedule Lookup Double Split Slice
+
+The remote-action dispatcher action repository double still grouped fixed schedule-preview/apply lookup responses with request/state recording helpers. Keep `tests/support/remote-action-dispatcher-actions-double.php` as the stable loader while moving schedule lookup responses into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Fixed schedule apply and rollback-preview lookup responses now live in `tests/support/remote-action-dispatcher-schedule-lookup-double.php`, and the existing dispatcher action repository double composes them while retaining the same class name and public methods. Existing dispatcher tests keep requiring the same loader path and assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action dispatcher coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
