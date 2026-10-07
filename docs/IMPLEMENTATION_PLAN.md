@@ -16,7 +16,7 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Dashboard pending-enrollment token generation: implemented.
 - Uploader dashboard endpoint: implemented in the companion uploader plugin and enabled only after explicit client-site opt-in.
 - Current host: `control-sitesmanage live-only`.
-- Live rollout state: dashboard `0.1.65` is deployed to `https://control.sitesmanage.com` after explicit approval and a fresh restore point. Dashboard `0.1.64` remains a published GitHub release asset that was superseded by the deployed `0.1.65` maintenance line. Future updater acceptance, live deployment, and post-deploy monitoring remain separate approval-gated workflows.
+- Live rollout state: dashboard `0.1.65` is deployed to `https://control.sitesmanage.com` after explicit approval and a fresh restore point. Dashboard `0.1.66` is a published GitHub release asset but has not been deployed; updater acceptance, live deployment, and post-deploy monitoring remain separate approval-gated workflows.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
 - V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability.
@@ -24,11 +24,11 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`, but remain hidden unless a latest client capability report explicitly advertises rollback-preview support. One PureCleanse rollback-preview pilot was completed on 2026-09-30 with temporary client-local opt-in, a guarded `every_15_minutes -> every_30_minutes` apply, non-mutating rollback preview evidence, restoration to `every_15_minutes`, and opt-in disabled again. Broad rollback-preview enablement and any mutating `schedule_rollback` runtime behavior remain unavailable without separate approval gates.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
 
-## Dashboard 0.1.66 Patch Release Plan
+## Dashboard 0.1.66 Release Record
 
-Dashboard `0.1.66` is the recommended next patch release if the current maintenance-only line is approved for packaging. The release should remain a docs/test-support structure release only; it should not introduce runtime behavior, UI output, protocol, database schema, remote-action permission, backup, restore, cleanup/delete, credential, Drime, live-site, or deployment behavior changes.
+Dashboard `0.1.66` was released as a maintenance-only docs/test-support structure patch. It does not introduce runtime behavior, UI output, protocol, database schema, remote-action permission, backup, restore, cleanup/delete, credential, Drime, live-site, or deployment behavior changes.
 
-Planned commit scope since deployed `0.1.65`:
+Commit scope since deployed `0.1.65`:
 
 - `72f13b0` — record dashboard release `0.1.65`;
 - `ea65f43` — split Sites-list test doubles;
@@ -41,21 +41,20 @@ Planned commit scope since deployed `0.1.65`:
 - `8a4112d` — split poller repository write helpers;
 - `12adcbe` — split remote-action fake `wpdb` query helpers;
 - `66883cb` — split WordPress admin shims.
+- `c300e40` — plan dashboard `0.1.66` patch release;
+- `bac2b26` — dashboard `0.1.66` version and release metadata update.
 
-Release-prep plan after explicit release approval:
+Release evidence:
 
-1. Bump dashboard metadata from `0.1.65` to `0.1.66` in the plugin header, version constant, `package.json`, `readme.txt`, changelog, and translation template metadata.
-2. Run targeted syntax checks for touched metadata files when applicable, then full PHPUnit, PHPCS lint, build, and whitespace checks.
-3. Commit the release-prep metadata update and push it.
-4. Verify CI on the release-prep commit.
-5. Create tag/release `v0.1.66`, build the release ZIP, and audit the archive for one top-level plugin folder, expected runtime metadata, excluded dev/source folders, and packaged PHP syntax.
-6. Stop before updater acceptance or `control-sitesmanage` deployment unless a separate explicit live approval and fresh restore point are provided.
-
-Current readiness evidence:
-
-- local validation passed after the latest support splits: full PHPUnit, PHPCS lint, build, and whitespace checks;
-- GitHub CI passed on `master` through `66883cb` for PHP 7.4 and PHP 8.3;
-- repository metadata still reports `0.1.65`; no `0.1.66` version bump, tag, release asset, updater acceptance, live deployment, or live-site change has been made.
+- release candidate version metadata is `0.1.66` in the plugin header, version constant, package metadata, readme stable tag, changelog, and translation template metadata;
+- GitHub tag and release: `v0.1.66`;
+- release asset: `alynt-drime-backups-dashboard-0.1.66.zip`;
+- release asset SHA256: `8d1ab2a193a698a48ae30d7b2881ef710cab4e0691d6718c2ca7df6defa373af`;
+- CI passed for release-prep commit `bac2b26`;
+- Build Release run `37626551416` passed and uploaded the release asset;
+- ZIP audit confirmed one top-level plugin folder, 141 runtime files, no excluded source/dev folders, expected runtime metadata at `0.1.66`, and packaged PHP syntax passed for 136 PHP files.
+- no production UI output, protocol behavior, database schema, remote-action behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior is introduced by this maintenance line;
+- updater acceptance, `control-sitesmanage` deployment, and post-deploy scheduled-poll monitoring remain separate approval-gated workflows.
 
 ## Dashboard 0.1.65 Release Record
 
