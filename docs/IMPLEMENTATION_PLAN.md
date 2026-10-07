@@ -1944,6 +1944,26 @@ Acceptance criteria:
 - Diagnostics local-removal readiness aggregate tests continue to pass without assertion changes.
 - PHP syntax, targeted diagnostics tests, full tests, lint, build, and whitespace checks pass before commit.
 
+### Site Detail Local Removal Preview Helper Split Slice
+
+The Site Detail local-record panel trait mixed panel rendering, archive/unarchive form rendering, row-hint rendering, and local-removal preview eligibility helpers. The next safe structure-only cleanup is to separate the preview eligibility/counting helpers into their own admin trait while preserving the existing display-only preview boundary.
+
+Implementation target:
+
+- Move `local_record_removal_preview()`, `local_record_removal_blocking_reason()`, `is_expired_pending_local_record()`, and `count_repository_rows_for_site()` into a dedicated Site Detail local-removal preview helper trait.
+- Compose the new helper trait into the existing Site Detail local-record panel trait.
+- Load the new trait before the local-record panel trait in the plugin bootstrap.
+- Keep method names, return arrays, readiness boundary, repository-counting behavior, rendered panel output, and compact archived-row hint output unchanged.
+- Do not add remove/delete controls, confirmation forms, POST handlers, database writes, UI string changes, protocol behavior, remote-action behavior, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, or live-site state.
+
+Implementation status: implemented locally as a structure-only split. The Site Detail local-removal preview helpers now live in `includes/traits/trait-admin-page-site-detail-local-removal-preview.php`, and the existing local-record panels trait composes the new helper trait. Method names, return arrays, readiness boundary, repository-counting behavior, rendered panel output, and compact archived-row hint output are unchanged. No remove/delete controls, confirmation forms, POST handlers, database writes, UI string changes, protocol behavior, remote-action behavior, backup creation, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, or live-site state changed.
+
+Acceptance criteria:
+
+- The Site Detail local-record panel trait is smaller and focused on panel/form/row-hint rendering.
+- Archived local-removal preview and row-hint rendering tests continue to pass without assertion changes.
+- PHP syntax, targeted local-record rendering tests, full tests, lint, build, and whitespace checks pass before commit.
+
 ### Schedule Row Hint Clarity Slice
 
 The Sites table includes compact schedule-management hints when a client reports V2.3 schedule capability. The hint should distinguish preview-only capability from guarded apply-capable clients without adding row-level schedule controls.
