@@ -35,5 +35,6 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-poller-scheduling.p
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-poller-locks.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-poller-status-check.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-poller.php';
+require_once __DIR__ . '/poller-test-site-repository-write-methods.php';
 require_once __DIR__ . '/poller-test-site-repository.php';
 require_once __DIR__ . '/poller-test-doubles.php';

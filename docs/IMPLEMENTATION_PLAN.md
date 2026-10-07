@@ -722,6 +722,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Poller Site Repository Write Helper Split Slice
+
+The shared poller site-repository test double still grouped due-site fixture setup with fake success/failure write-result capture. The next safe test-only support cleanup is to move the write-result capture properties and methods into a focused support trait while preserving the same fake repository class name, due-site behavior, success/failure result capture, poller assertions, and live-site state.
+
+Implementation status: implemented locally as a test-only support split. Success/failure write capture now lives in `tests/support/poller-test-site-repository-write-methods.php`, and `tests/support/poller-test-site-repository.php` composes that trait while retaining site lookup and due-for-poll fixture behavior. No production PHP, assets, UI strings, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `Poller` coverage passes with the same observable assertions;
+- the poller site-repository test double remains focused on fixture setup and due-site reads;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Admin Page Site Detail Attention History Test Class Split Slice
 
 `AdminPageSiteDetailLocalRecordRenderingTest` still grouped Site Detail attention/recovery history rendering with local polling controls, revoked-record guidance, and archive/unarchive controls. The next safe test-only cleanup is to move attention/recovery history assertions into a focused Site Detail history rendering class while preserving the same admin rendering helpers, bounded transition behavior, empty-state copy, local-only control copy, archive behavior, and live-site state.
