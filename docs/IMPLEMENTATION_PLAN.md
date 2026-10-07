@@ -858,6 +858,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, admin action behavior, audit behavior, nonce behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Action Audit WordPress Shim Split Slice
+
+After the action audit harness split, the audit harness still grouped audit-specific `home_url()` and `wp_verify_nonce()` shims with fake enrollment/event-log collaborators and the concrete audit action handler harness. Keep the existing audit harness loader stable while moving those local WordPress shims into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The audit-specific `home_url()` and `wp_verify_nonce()` shims now live in `tests/support/admin-page-action-audit-wordpress-shims.php`, and `tests/support/admin-page-action-audit-test-harness.php` loads them before the production action trait and fake collaborators. Shim behavior, nonce globals, fake collaborator behavior, harness class name, exposed handler method, audit assertions, and production admin action behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused `AdminPageActionAuditTest` coverage passes unchanged;
+- full dashboard tests, lint, build, and whitespace checks continue to pass;
+- the split remains test-only and does not alter runtime class loading, production files, admin action behavior, audit behavior, nonce behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Uninstall Safety Test Harness Split Slice
 
 `UninstallSafetyTest` still embedded WordPress lifecycle shims and a minimal `$wpdb` test double above uninstall behavior assertions. The next safe test-only cleanup is to move reusable uninstall support setup into a dedicated support file while preserving the same rollback-copy guard, default data-preservation checks, explicit purge-constant assertions, and live-site state.
