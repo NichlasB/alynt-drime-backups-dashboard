@@ -1596,6 +1596,18 @@ Acceptance criteria:
 - Bootstrap still loads the same shim definitions before plugin loading.
 - No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### WordPress Formatting Shim Support Split Slice
+
+The WordPress formatting shim support file still grouped i18n, escaping, sanitization, unslashing, and JSON encoding shims together. Keep `tests/support/wordpress-shims-formatting.php` as the stable loader path while splitting those definitions into focused support files in the same effective load order.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/wordpress-shims-formatting.php` now loads `wordpress-shims-i18n.php`, `wordpress-shims-escaping.php`, and `wordpress-shims-sanitization.php`. Translation shims load before escaped translation helpers, and sanitization/encoding helpers retain their existing behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- Bootstrap still loads the same shim definitions before plugin loading.
+- No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Poller Test Double Structure Slice
 
 The poller test harness mixed production poller dependencies with fake site repository, snapshot repository, and remote-action reconciler collaborators. Keep the poller assertions unchanged and move those fake collaborators into a dedicated test support file.
