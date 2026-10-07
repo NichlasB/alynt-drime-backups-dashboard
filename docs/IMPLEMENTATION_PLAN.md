@@ -2233,6 +2233,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Enrollment REST Controller Transient Shim Split Slice
+
+After the repository double split, the enrollment REST controller test harness still grouped local WordPress transient shims with shared controller fixture builders. Keep the existing harness loader stable while moving the transient shims into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The `get_transient()`, `set_transient()`, and `delete_transient()` shims now live in `tests/support/enrollment-rest-controller-transient-shims.php`, and `tests/support/enrollment-rest-controller-test-harness.php` loads them before defining shared controller fixtures. Test transient globals, fixture helper names, controller construction, repository double behavior, assertions, and production enrollment behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused enrollment REST controller success and rejection coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Admin Diagnostics Overview Service Stub Split Slice
 
 The diagnostics rendering harness still grouped action-history rendering helpers, Diagnostics overview rendering helpers, and the fake Diagnostics service used by overview rendering tests. Keep the existing harness loader stable while moving the overview service stub into a focused support file.
