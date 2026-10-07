@@ -2318,6 +2318,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Schedule Management Rendering Fixture Split Slice
+
+The admin remote-action rendering fixture file still grouped generic V2 action-history fixtures and the larger schedule-management capability snapshot fixture together. Keep `tests/support/admin-page-remote-action-rendering-fixtures.php` as the stable loader while moving the schedule-management snapshot fixture into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. The reusable schedule-management rendering snapshot now lives in `tests/support/admin-page-schedule-management-rendering-fixtures.php`, and the existing admin remote-action rendering fixture trait composes it so current tests keep using the same loader, trait, and fixture method names. Existing rendering assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused admin schedule/cleanup rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, schedule behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
