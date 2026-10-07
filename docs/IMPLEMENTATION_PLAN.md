@@ -1620,6 +1620,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, admin action behavior, polling behavior, archive behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Admin Page Action WordPress Shim Support Split Slice
+
+The admin page action test harness still grouped shared testcase setup, the minimal action handler harness, and local WordPress shim functions in one support file. Keep the existing harness loader path stable while moving the admin-action-specific WordPress shims into a focused support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/admin-page-actions-test-harness.php` now loads `tests/support/admin-page-actions-wordpress-shims.php` before the production action trait and fake collaborators. The `home_url()`, `wp_verify_nonce()`, and `get_current_user_id()` shim behavior, nonce globals, current-user global, harness setup, and admin-action assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused admin action coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, admin action behavior, nonce behavior, current-user behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Readme Release Metadata Alignment Slice
 
 The plugin readme still identified `0.1.57` as the stable tag even though the latest packaged dashboard release is `0.1.59`. Align the readme stable tag, headline version wording, and changelog with the released `0.1.58` and `0.1.59` notes without changing plugin runtime behavior or preparing a new release.
