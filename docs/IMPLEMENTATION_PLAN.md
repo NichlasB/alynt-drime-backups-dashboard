@@ -24,6 +24,39 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`, but remain hidden unless a latest client capability report explicitly advertises rollback-preview support. One PureCleanse rollback-preview pilot was completed on 2026-09-30 with temporary client-local opt-in, a guarded `every_15_minutes -> every_30_minutes` apply, non-mutating rollback preview evidence, restoration to `every_15_minutes`, and opt-in disabled again. Broad rollback-preview enablement and any mutating `schedule_rollback` runtime behavior remain unavailable without separate approval gates.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
 
+## Dashboard 0.1.66 Patch Release Plan
+
+Dashboard `0.1.66` is the recommended next patch release if the current maintenance-only line is approved for packaging. The release should remain a docs/test-support structure release only; it should not introduce runtime behavior, UI output, protocol, database schema, remote-action permission, backup, restore, cleanup/delete, credential, Drime, live-site, or deployment behavior changes.
+
+Planned commit scope since deployed `0.1.65`:
+
+- `72f13b0` — record dashboard release `0.1.65`;
+- `ea65f43` — split Sites-list test doubles;
+- `9d34797` — sync dashboard `0.1.65` deployment state;
+- `79449c6` — split site repository fake `wpdb` support;
+- `df63628` — split admin-action WordPress shims;
+- `e9f2c3d` — split polling-state remote-action render helpers;
+- `a55c721` — split diagnostics remote-action repository double;
+- `98b2d3b` — split WordPress formatting shims;
+- `8a4112d` — split poller repository write helpers;
+- `12adcbe` — split remote-action fake `wpdb` query helpers;
+- `66883cb` — split WordPress admin shims.
+
+Release-prep plan after explicit release approval:
+
+1. Bump dashboard metadata from `0.1.65` to `0.1.66` in the plugin header, version constant, `package.json`, `readme.txt`, changelog, and translation template metadata.
+2. Run targeted syntax checks for touched metadata files when applicable, then full PHPUnit, PHPCS lint, build, and whitespace checks.
+3. Commit the release-prep metadata update and push it.
+4. Verify CI on the release-prep commit.
+5. Create tag/release `v0.1.66`, build the release ZIP, and audit the archive for one top-level plugin folder, expected runtime metadata, excluded dev/source folders, and packaged PHP syntax.
+6. Stop before updater acceptance or `control-sitesmanage` deployment unless a separate explicit live approval and fresh restore point are provided.
+
+Current readiness evidence:
+
+- local validation passed after the latest support splits: full PHPUnit, PHPCS lint, build, and whitespace checks;
+- GitHub CI passed on `master` through `66883cb` for PHP 7.4 and PHP 8.3;
+- repository metadata still reports `0.1.65`; no `0.1.66` version bump, tag, release asset, updater acceptance, live deployment, or live-site change has been made.
+
 ## Dashboard 0.1.65 Release Record
 
 Dashboard `0.1.65` was released as a maintenance-only structure/test-support patch:
