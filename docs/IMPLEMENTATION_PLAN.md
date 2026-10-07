@@ -1924,6 +1924,26 @@ Acceptance criteria:
 - Local-record rendering tests keep using the same counting doubles without assertion or behavior changes.
 - Targeted polling/local-record rendering tests, full tests, lint, build, and whitespace checks pass before commit.
 
+### Admin Page Polling-State Local Record Methods Split Slice
+
+After the counting doubles split, the polling-state rendering support harness still grouped local-record exposure methods with the broader polling, request-backup, schedule, cleanup, and history exposure methods. The next safe test-only structure cleanup is to move the local-record exposure methods into their own support trait while leaving production traits, rendered output, assertions, and test method names unchanged.
+
+Implementation target:
+
+- Move `revoked_record_guidance_html()`, `archive_record_panel_html()`, `retained_record_removal_preview_panel_html()`, and `retained_record_removal_row_hint_html()` from `tests/support/admin-page-polling-state-rendering-test-harness.php` into a dedicated test-support trait.
+- Load the new support trait from the existing polling-state rendering bootstrap before the harness class.
+- Compose the new trait into `Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness`.
+- Keep public method names, signatures, repository-double setup, rendered output, assertions, and production trait usage unchanged.
+- Do not change production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state.
+
+Implementation status: implemented locally as a test-only support split. Local-record rendering exposure methods now live in `tests/support/admin-page-polling-state-rendering-local-record-methods.php`, and the polling-state rendering bootstrap loads the new trait before the harness class. Public method names, signatures, repository-double setup, rendered output, assertions, and production trait usage are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- The polling-state rendering harness is smaller and less mixed.
+- Existing local-record rendering tests pass without assertion changes.
+- Full tests, lint, build, and whitespace checks pass before commit.
+
 ### Diagnostics Local Removal Metric Helpers Split Slice
 
 The diagnostics site metric helper trait mixed general polling/site helper methods with local-removal readiness/counting helpers. The next safe structure-only cleanup was to separate the local-removal diagnostics helpers into their own trait while preserving the existing aggregate counts, support-copy shape, Diagnostics output, protocol behavior, database schema, and live-site state.
