@@ -1964,6 +1964,24 @@ Acceptance criteria:
 - Diagnostics local-removal readiness aggregate tests continue to pass without assertion changes.
 - PHP syntax, targeted diagnostics tests, full tests, lint, build, and whitespace checks pass before commit.
 
+### Diagnostics Local Removal Readiness Test Split Slice
+
+The broad diagnostics test file still grouped polling-state, record-state, and local-removal readiness coverage. The next safe test-only structure cleanup is to move the local-removal readiness aggregate scenario into a focused diagnostics test file without changing fixtures, assertions, production diagnostics, support-copy shape, or runtime behavior.
+
+Implementation target:
+
+- Move `test_local_removal_readiness_counts_archived_records()` from `tests/DiagnosticsTest.php` into a new focused `tests/DiagnosticsLocalRemovalReadinessTest.php` file.
+- Keep the existing diagnostics test bootstrap, fixture trait, fixture data, assertions, support-safe expectations, and test method name unchanged.
+- Leave production diagnostics, repositories, UI output, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, and live-site state unchanged.
+
+Implementation status: implemented locally as a test-only split. Local-removal readiness aggregate coverage now lives in `tests/DiagnosticsLocalRemovalReadinessTest.php`, while `tests/DiagnosticsTest.php` keeps the broader polling-state and record-state diagnostics coverage. The diagnostics bootstrap, fixture trait, fixture data, assertions, support-safe expectations, and test method name are unchanged. No production diagnostics, repositories, UI output, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- The broad diagnostics test file is smaller and less mixed.
+- Focused local-removal diagnostics tests pass without assertion changes.
+- Full tests, lint, build, and whitespace checks pass before commit.
+
 ### Site Detail Local Removal Preview Helper Split Slice
 
 The Site Detail local-record panel trait mixed panel rendering, archive/unarchive form rendering, row-hint rendering, and local-removal preview eligibility helpers. The next safe structure-only cleanup is to separate the preview eligibility/counting helpers into their own admin trait while preserving the existing display-only preview boundary.
