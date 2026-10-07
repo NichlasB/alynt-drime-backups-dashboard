@@ -15,6 +15,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-de
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostic-formatters.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-overview.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-event-log.php';
+require_once __DIR__ . '/admin-page-diagnostics-overview-service-stub.php';
 
 /**
  * Harness exposing private diagnostics rendering helpers.
@@ -117,35 +118,5 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness {
 	 */
 	private function render_support_copy_output( array $support ) {
 		unset( $support );
-	}
-}
-
-/**
- * Fake diagnostics service for overview rendering tests.
- */
-class Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Service_Stub {
-	/**
-	 * Diagnostics payload.
-	 *
-	 * @var array<string,mixed>
-	 */
-	private $diagnostics;
-
-	/**
-	 * Constructor.
-	 *
-	 * @param array<string,mixed> $diagnostics Diagnostics payload.
-	 */
-	public function __construct( array $diagnostics ) {
-		$this->diagnostics = $diagnostics;
-	}
-
-	/**
-	 * Returns the diagnostics payload.
-	 *
-	 * @return array<string,mixed>
-	 */
-	public function collect() {
-		return $this->diagnostics;
 	}
 }

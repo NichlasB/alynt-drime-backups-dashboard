@@ -2233,6 +2233,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Admin Diagnostics Overview Service Stub Split Slice
+
+The diagnostics rendering harness still grouped action-history rendering helpers, Diagnostics overview rendering helpers, and the fake Diagnostics service used by overview rendering tests. Keep the existing harness loader stable while moving the overview service stub into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The fake Diagnostics overview service now lives in `tests/support/admin-page-diagnostics-overview-service-stub.php`, and `tests/support/admin-page-diagnostics-rendering-test-harness.php` loads it before defining the overview rendering harness. Harness class names, public methods, fixture payloads, rendered output, assertions, and production diagnostics behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused Diagnostics overview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
