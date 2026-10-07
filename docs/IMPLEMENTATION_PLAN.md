@@ -1944,6 +1944,25 @@ Acceptance criteria:
 - Existing local-record rendering tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Admin Schedule Management Action Repository Double Split Slice
+
+The schedule-management rendering harness still grouped payload fixtures, rendering exposure methods, and the fake remote-action repository used for schedule apply and rollback-preview rendering coverage. The next safe test-only structure cleanup is to move the fake action repository into its own support file without changing test fixtures, assertions, rendering behavior, or production code.
+
+Implementation target:
+
+- Move `Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions` from `tests/support/admin-page-schedule-management-test-harness.php` into a focused support file.
+- Require the new support file from the existing schedule-management harness so test files can keep requiring the same harness entry point.
+- Keep fake repository class name, method signatures, returned rows, fixture IDs, fingerprints, cadence values, WP_Error behavior, and test assertions unchanged.
+- Do not change production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state.
+
+Implementation status: implemented locally as a test-only support split. The fake schedule-management action repository now lives in `tests/support/admin-page-schedule-management-actions-double.php`, and the existing schedule-management harness loads it before defining payload fixtures and rendering exposure methods. The fake repository class name, method signatures, returned rows, fixture IDs, fingerprints, cadence values, WP_Error behavior, and test assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- The schedule-management rendering harness is smaller and focused on fixtures/rendering exposure.
+- Schedule-management and schedule rollback-preview rendering tests pass without assertion changes.
+- Full tests, lint, build, and whitespace checks pass before commit.
+
 ### Diagnostics Local Removal Metric Helpers Split Slice
 
 The diagnostics site metric helper trait mixed general polling/site helper methods with local-removal readiness/counting helpers. The next safe structure-only cleanup was to separate the local-removal diagnostics helpers into their own trait while preserving the existing aggregate counts, support-copy shape, Diagnostics output, protocol behavior, database schema, and live-site state.
