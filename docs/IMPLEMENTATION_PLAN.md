@@ -1990,6 +1990,26 @@ Acceptance criteria:
 - Existing local-record rendering tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Admin Page Polling-State Remote Action Methods Split Slice
+
+After the local-record methods split, the polling-state rendering support harness still grouped request-backup, schedule-management, and cleanup-preview exposure methods with the basic polling/detail exposure methods. The next safe test-only structure cleanup is to move those remote-action exposure methods into their own support trait while leaving production traits, rendered output, assertions, fixture values, and test method names unchanged.
+
+Implementation target:
+
+- Move `request_backup_row_hint_html()`, `request_backup_panel_html()`, `schedule_management_panel_html()`, and `cleanup_preview_panel_html()` from `tests/support/admin-page-polling-state-rendering-test-harness.php` into a dedicated test-support trait.
+- Load the new support trait from the existing polling-state rendering bootstrap before the harness class.
+- Compose the new trait into `Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness`.
+- Keep public method names, signatures, remote-action repository setup, rendered output, assertions, and production trait usage unchanged.
+- Do not change production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state.
+
+Implementation status: implemented locally as a test-only support split. Request-backup, schedule-management, and cleanup-preview rendering exposure methods now live in `tests/support/admin-page-polling-state-rendering-remote-action-methods.php`, and the polling-state rendering bootstrap loads the new trait before the harness class. Public method names, signatures, remote-action repository setup, rendered output, assertions, and production trait usage are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- The polling-state rendering harness is smaller and focused on basic polling/detail exposure methods.
+- Existing request-backup, schedule-management, and cleanup-preview rendering tests pass without assertion changes.
+- Full tests, lint, build, and whitespace checks pass before commit.
+
 ### Admin Schedule Management Action Repository Double Split Slice
 
 The schedule-management rendering harness still grouped payload fixtures, rendering exposure methods, and the fake remote-action repository used for schedule apply and rollback-preview rendering coverage. The next safe test-only structure cleanup is to move the fake action repository into its own support file without changing test fixtures, assertions, rendering behavior, or production code.
