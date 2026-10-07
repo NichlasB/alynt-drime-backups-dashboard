@@ -1,0 +1,121 @@
+<?php
+/**
+ * Site repository fake wpdb test double.
+ *
+ * @package Alynt_Drime_Backups_Dashboard
+ */
+
+/**
+ * Fake wpdb for site repository tests.
+ */
+class Alynt_Drime_Backups_Dashboard_Test_Site_WPDB {
+	/**
+	 * Table prefix.
+	 *
+	 * @var string
+	 */
+	public $prefix = 'wp_';
+
+	/**
+	 * Prepared arguments.
+	 *
+	 * @var array<int,mixed>
+	 */
+	public $prepared_args = array();
+
+	/**
+	 * Last query.
+	 *
+	 * @var string
+	 */
+	public $last_query = '';
+
+	/**
+	 * Last output mode.
+	 *
+	 * @var string
+	 */
+	public $last_output = '';
+
+	/**
+	 * Result returned by update().
+	 *
+	 * @var int|false
+	 */
+	public $update_result = 1;
+
+	/**
+	 * Last updated table.
+	 *
+	 * @var string
+	 */
+	public $updated_table = '';
+
+	/**
+	 * Last updated data.
+	 *
+	 * @var array<string,mixed>
+	 */
+	public $updated_data = array();
+
+	/**
+	 * Last update where clause.
+	 *
+	 * @var array<string,mixed>
+	 */
+	public $updated_where = array();
+
+	/**
+	 * Row returned by get_row().
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	public $row = null;
+
+	/**
+	 * Prepares a query.
+	 *
+	 * @param string $query Query.
+	 * @param mixed  ...$args Arguments.
+	 * @return string
+	 */
+	public function prepare( $query, ...$args ) {
+		$this->prepared_args = $args;
+
+		return $query;
+	}
+
+	/**
+	 * Gets a fake row.
+	 *
+	 * @param string $query  Query.
+	 * @param string $output Output mode.
+	 * @return array<string,mixed>|null
+	 */
+	public function get_row( $query, $output = OBJECT ) {
+		$this->last_query  = $query;
+		$this->last_output = $output;
+
+		return $this->row;
+	}
+
+	/**
+	 * Updates a fake row.
+	 *
+	 * @param string              $table        Table.
+	 * @param array<string,mixed> $data         Data.
+	 * @param array<string,mixed> $where        Where clause.
+	 * @param array<int,string>   $format       Data format.
+	 * @param array<int,string>   $where_format Where format.
+	 * @return int|false
+	 */
+	public function update( $table, $data, $where, $format = null, $where_format = null ) {
+		unset( $format, $where_format );
+
+		$this->updated_table = $table;
+		$this->updated_data  = $data;
+		$this->updated_where = $where;
+
+		return $this->update_result;
+	}
+}

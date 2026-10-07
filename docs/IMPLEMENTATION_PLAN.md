@@ -542,6 +542,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, repository behavior, SQL behavior, schema behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Site Repository WPDB Double Support Split Slice
+
+The shared site repository test harness still grouped WordPress shims, production repository includes, fake `wpdb` behavior, and per-test lifecycle setup into one support file. The next safe test-only structure cleanup is to move the fake `wpdb` collaborator into a focused support file while preserving the existing harness entry point, fake class name, prepared-query capture, row/update fixtures, SQL expectations, changed-row guards, and repository assertions.
+
+Implementation status: implemented locally as a test-only support split. The fake `Alynt_Drime_Backups_Dashboard_Test_Site_WPDB` collaborator now lives in `tests/support/site-repository-wpdb-double.php`, and `tests/support/site-repository-test-harness.php` loads it after the repository production includes while keeping WordPress shims and wpdb lifecycle setup in the harness. No production PHP, assets, UI strings, protocol behavior, database schema, repository SQL behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- The site repository harness is smaller and focused on shims/includes/lifecycle setup.
+- Site repository read/write/runtime tests pass without assertion changes.
+- Full tests, lint, build, and whitespace checks pass before commit.
+
 ### Remote Action Reconciler Test Class Split Slice
 
 `RemoteActionReconcilerTest` still grouped successful client-action reconciliation, result alias normalization, mismatch/fallback/downgrade/older-report guard behavior, stale maintenance, fake repository behavior, and payload fixtures into one larger test file. The next safe test-only cleanup is to split those concerns into focused reconciler test classes while preserving the same fake repository semantics, reconciler production class, state-transition guards, result alias behavior, stale maintenance behavior, status payload assumptions, and live-site state.
