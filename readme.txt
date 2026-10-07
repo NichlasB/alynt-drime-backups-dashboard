@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.64
+Stable tag: 0.1.65
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.65 is a maintenance patch that continues safe local-removal and schedule-management helper/test-support structure cleanup without changing dashboard runtime behavior.
 
 Version 0.1.64 is a maintenance patch that continues safe test-support structure cleanup and reconciles the local-removal readiness roadmap wording without changing dashboard runtime behavior.
 
@@ -57,6 +59,13 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.65 =
+* Split Site Detail local-removal preview eligibility/counting helpers into a focused admin helper trait without changing rendered output or runtime behavior.
+* Split polling-state local-record rendering exposure methods into a focused test-support trait without changing assertions or production behavior.
+* Split local-removal readiness diagnostics coverage into a focused test file without changing assertions or production behavior.
+* Split the schedule-management fake action repository into a focused test-support file without changing assertions or production behavior.
+* Preserved existing dashboard boundaries: no UI string behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.64 =
 * Split remote-action repository client-report payload fixtures into a focused test-support trait without changing runtime behavior.

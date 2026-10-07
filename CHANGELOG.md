@@ -6,6 +6,19 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes.
 
+## 0.1.65 - 2026-10-07
+
+### Changed
+
+- Split Site Detail local-removal preview eligibility/counting helpers into a focused admin helper trait without changing rendered output or runtime behavior.
+- Split polling-state local-record rendering exposure methods into a focused test-support trait without changing assertions or production behavior.
+- Split local-removal readiness diagnostics coverage into a focused test file without changing assertions or production behavior.
+- Split the schedule-management fake action repository into a focused test-support file without changing assertions or production behavior.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no UI string behavior, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.64 - 2026-10-06
 
 ### Changed
