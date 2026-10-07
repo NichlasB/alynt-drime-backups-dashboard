@@ -2306,6 +2306,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Dispatcher Snapshot Fixture Split Slice
+
+The remote-action dispatcher test harness still grouped dispatcher builders, site-row builders, and the large remote-action snapshot payload builder together. Keep `tests/support/remote-action-dispatcher-test-harness.php` as the stable loader while moving the snapshot payload fixture into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. The remote-action snapshot payload fixture now lives in `tests/support/remote-action-dispatcher-snapshot-fixtures.php`, and the existing dispatcher test harness composes it through the same public fixture trait used by existing tests. Existing test files keep requiring the same loader path, fixture method names remain unchanged, and dispatcher assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action dispatcher coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
