@@ -425,6 +425,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Diagnostics Remote Action Repository Double Split Slice
+
+The shared diagnostics repository support file still grouped fake site, snapshot, and remote-action repositories together. The next safe test-only structure cleanup is to move the diagnostics remote-action repository double into its own support file while leaving the existing diagnostics bootstrap, fixture data, aggregate counts, support-summary behavior, and assertions unchanged.
+
+Implementation status: implemented locally as a test-only support split. The fake `Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Remote_Action_Repository` collaborator now lives in `tests/support/diagnostics-test-remote-action-repository.php`, and `tests/support/diagnostics-test-bootstrap.php` loads it after the site/snapshot repository doubles. Class name, constructor signature, count semantics, and empty support-summary behavior are unchanged. No production PHP, assets, UI strings, Diagnostics output, support-copy shape, protocol behavior, database schema, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused diagnostics remote-action aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks pass before commit.
+- The split remains test-only and does not alter runtime class loading, production files, diagnostics behavior, support-copy JSON shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Test Class Split Slice
 
 After the diagnostics harness and fixture cleanup, `DiagnosticsTest` remained an oversized assertion file covering polling/record counts, source aggregates, remote-action aggregate diagnostics, attention history, recent poll outcomes, support-summary redaction, and support action summaries. The next safe test-only cleanup is to split those assertions into focused diagnostics test classes while preserving existing fixtures, fake repositories, support-summary harness behavior, expected aggregate counts, redaction expectations, production diagnostics code, protocol behavior, and live-site state.
