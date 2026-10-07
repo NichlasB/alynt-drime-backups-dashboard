@@ -1634,6 +1634,18 @@ Acceptance criteria:
 - Bootstrap still loads the same shim definitions before plugin loading.
 - No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### WordPress Admin Shim Support Split Slice
+
+The WordPress core shim support file still grouped generic plugin/path/hook shims with admin URL, query-argument, management-page, and nocache-header shims. Keep `tests/support/wordpress-shims.php` as the stable loader and move admin/url response helpers into a focused support file without changing effective shim behavior.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/wordpress-shims.php` now loads `wordpress-shims-admin.php` after formatting shims, while `wordpress-shims-core.php` retains generic plugin/path/hook shims. The admin URL, query-argument, management-page, and nocache-header shim behavior is unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- Bootstrap still loads the same shim definitions before plugin loading.
+- No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Poller Test Double Structure Slice
 
 The poller test harness mixed production poller dependencies with fake site repository, snapshot repository, and remote-action reconciler collaborators. Keep the poller assertions unchanged and move those fake collaborators into a dedicated test support file.

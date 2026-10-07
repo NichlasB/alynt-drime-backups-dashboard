@@ -7,4 +7,5 @@
 
 require_once __DIR__ . '/wordpress-shims-core.php';
 require_once __DIR__ . '/wordpress-shims-formatting.php';
+require_once __DIR__ . '/wordpress-shims-admin.php';
 require_once __DIR__ . '/wordpress-shims-errors.php';
