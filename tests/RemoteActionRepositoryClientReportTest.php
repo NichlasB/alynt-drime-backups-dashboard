@@ -72,16 +72,7 @@ class RemoteActionRepositoryClientReportTest extends TestCase {
 	 */
 	public function test_support_summary_counts_schedule_apply_rollback_metadata() {
 		$repository      = $this->remote_action_repository();
-		$this->wpdb->row = array(
-			'total'                      => 4,
-			'client_reconciled'          => 3,
-			'stale'                      => 1,
-			'awaiting_confirmation'      => 1,
-			'schedule_apply'             => 2,
-			'schedule_rollback_preview'  => 1,
-			'rollback_metadata_captured' => 1,
-			'latest_updated_at'          => '2026-09-15 19:24:12',
-		);
+		$this->wpdb->row = $this->rollback_metadata_support_summary_row();
 
 		$summary = $repository->support_summary();
 

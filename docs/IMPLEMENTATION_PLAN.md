@@ -2632,6 +2632,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, SQL behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Repository Support Summary Fixture Split Slice
+
+The client-report repository test still grouped the support-summary aggregate row directly inside the rollback-readiness support-summary assertion method. Keep `tests/RemoteActionRepositoryClientReportTest.php` focused on support-summary assertions while moving the reusable aggregate row into the existing client-report fixture trait.
+
+Implementation status: implemented locally as a test-only support split. The rollback metadata support-summary row fixture now lives in `tests/support/remote-action-repository-client-report-fixtures.php`, and `tests/RemoteActionRepositoryClientReportTest.php` reuses that helper while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, SQL behavior, support-summary behavior, remote-action behavior, schedule apply behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action repository client-report coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, SQL behavior, support-summary behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
