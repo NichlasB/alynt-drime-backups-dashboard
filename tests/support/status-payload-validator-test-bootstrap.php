@@ -9,4 +9,5 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-status-payload-vali
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-status-payload-validator-restore-readiness.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-status-payload-validator-sanitizers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-status-payload-validator.php';
+require_once __DIR__ . '/status-payload-validator-backup-source-fixtures.php';
 require_once __DIR__ . '/status-payload-validator-test-fixtures.php';
