@@ -11,6 +11,7 @@ if ( ! defined( 'ARRAY_A' ) ) {
 
 require_once __DIR__ . '/remote-action-repository-wpdb-query-methods.php';
 require_once __DIR__ . '/remote-action-repository-wpdb-double.php';
+require_once __DIR__ . '/remote-action-repository-schedule-rollback-fixtures.php';
 require_once __DIR__ . '/remote-action-repository-schedule-fixtures.php';
 
 if ( ! function_exists( 'current_time' ) ) {
