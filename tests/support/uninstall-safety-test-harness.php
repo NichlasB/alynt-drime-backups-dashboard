@@ -5,6 +5,8 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/uninstall-safety-wpdb-double.php';
+
 if ( ! function_exists( 'wp_clear_scheduled_hook' ) ) {
 	/**
 	 * Records an unscheduled hook for lifecycle tests.
@@ -40,64 +42,5 @@ if ( ! function_exists( 'delete_option' ) ) {
 	function delete_option( $option ) {
 		Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Test::$deleted_options[] = $option;
 		return true;
-	}
-}
-
-/**
- * Minimal database double for uninstall regression coverage.
- */
-class Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Wpdb {
-	/**
-	 * WordPress table prefix.
-	 *
-	 * @var string
-	 */
-	public $prefix = 'wp_';
-
-	/**
-	 * WordPress options table name.
-	 *
-	 * @var string
-	 */
-	public $options = 'wp_options';
-
-	/**
-	 * Captured database queries.
-	 *
-	 * @var string[]
-	 */
-	public $queries = array();
-
-	/**
-	 * Returns a LIKE-safe value for test purposes.
-	 *
-	 * @param string $value Value.
-	 * @return string
-	 */
-	public function esc_like( $value ) {
-		return $value;
-	}
-
-	/**
-	 * Returns the query because test values do not affect query classification.
-	 *
-	 * @param string $query Query.
-	 * @param mixed  ...$values Prepared values.
-	 * @return string
-	 */
-	public function prepare( $query, ...$values ) {
-		unset( $values );
-		return $query;
-	}
-
-	/**
-	 * Captures a database query.
-	 *
-	 * @param string $query Query.
-	 * @return int
-	 */
-	public function query( $query ) {
-		$this->queries[] = $query;
-		return 1;
 	}
 }
