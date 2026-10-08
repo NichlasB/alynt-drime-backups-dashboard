@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.67
+Stable tag: 0.1.68
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.68 is a maintenance patch that continues safe diagnostics test-support fixture cleanup after 0.1.67 without changing dashboard runtime behavior.
 
 Version 0.1.67 is a maintenance patch that continues safe test-support structure cleanup after 0.1.66 without changing dashboard runtime behavior.
 
@@ -63,6 +65,10 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.68 =
+* Split diagnostics overview, restore-readiness, and schedule-management aggregate fixture builders into focused test-support files without changing runtime behavior.
+* Preserved existing dashboard boundaries: no UI output, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.67 =
 * Split diagnostics, enrollment, polling, remote-action dispatcher/reconciler, schedule-management, action-audit, admin-action, and uninstall test-support helpers into focused files without changing runtime behavior.
