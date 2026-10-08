@@ -16,13 +16,44 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - Dashboard pending-enrollment token generation: implemented.
 - Uploader dashboard endpoint: implemented in the companion uploader plugin and enabled only after explicit client-site opt-in.
 - Current host: `control-sitesmanage live-only`.
-- Live rollout state: dashboard `0.1.65` is deployed to `https://control.sitesmanage.com` after explicit approval and a fresh restore point. Dashboard `0.1.66`, `0.1.67`, and `0.1.68` are published GitHub release assets but have not been deployed; updater acceptance, live deployment, and post-deploy monitoring remain separate approval-gated workflows.
+- Live rollout state: dashboard `0.1.65` is deployed to `https://control.sitesmanage.com` after explicit approval and a fresh restore point. Dashboard `0.1.66`, `0.1.67`, `0.1.68`, and `0.1.69` are published GitHub release assets but have not been deployed; updater acceptance, live deployment, and post-deploy monitoring remain separate approval-gated workflows.
 - Version 1 is read-only relative to client sites and Drime. It may create and update its own dashboard registry, polling credentials, status history, and schedules, but it must not change client settings, create or delete backups, restore data, clean up files, or mutate Drime.
 - Dashboard-local operator action history is allowed in v1 because it records only dashboard-owned actions and redacted context. It does not grant remote-action capability.
 - V2.1 Request Backup Now has an opt-in token foundation, signed dashboard dispatch, and client action-intent endpoint implemented and released. The first action remains `scan_upload_now`, meaning the client scans for ready backup packages and uploads eligible items using its own existing settings. Fresh WPvivid or server-runner backup creation remains deferred until a client declares and proves a separate safe local capability.
 - V2.2 remote-action history/audit hardening is implemented, released, and deployed. It hardens dashboard/client reconciliation, stale-action evidence, Site Detail action history, compact Sites-row action hints, Diagnostics aggregates, and support-safe export fields before any V2.3+ higher-risk action class.
 - V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`, but remain hidden unless a latest client capability report explicitly advertises rollback-preview support. One PureCleanse rollback-preview pilot was completed on 2026-09-30 with temporary client-local opt-in, a guarded `every_15_minutes -> every_30_minutes` apply, non-mutating rollback preview evidence, restoration to `every_15_minutes`, and opt-in disabled again. Broad rollback-preview enablement and any mutating `schedule_rollback` runtime behavior remain unavailable without separate approval gates.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
+
+## Dashboard 0.1.69 Release Record
+
+Dashboard `0.1.69` was released as a maintenance-only test-support fixture cleanup patch. It does not introduce runtime behavior, UI output, protocol, database schema, remote-action permission, backup, restore, cleanup/delete, credential, Drime, live-site, or deployment behavior changes.
+
+Commit scope since `0.1.68`:
+
+- `398160d` — record dashboard release `0.1.68`;
+- `d76c36c` — split cleanup diagnostics fixtures;
+- `284a1d3` — split local removal diagnostics fixtures;
+- `3e3c756` — split remote-action capability fixtures;
+- `d917267` — split cleanup capability fixtures;
+- `ef7effe` — split rollback capability fixtures;
+- `dd1859d` — split schedule apply capability fixtures;
+- `39e1548` — split schedule lookup repository fixtures;
+- `c013b2e` — split client reconciliation fixtures;
+- `abf5dc5` — split support summary fixtures;
+- `497f282` — split schedule result fixtures;
+- `35bb058` — dashboard `0.1.69` version and release metadata update.
+
+Release evidence:
+
+- release candidate version metadata is `0.1.69` in the plugin header, version constant, package metadata, readme stable tag, readme changelog, and translation template metadata;
+- GitHub tag and release: `v0.1.69`;
+- release asset: `alynt-drime-backups-dashboard-0.1.69.zip`;
+- release asset SHA256: `a854f2c46f5a46ed80e57984bbe5765e847d00d450b8b26acf5bd87f5e126a45`;
+- CI passed for release-prep commit `35bb058` in run `37831189593`;
+- Build Release run `37831352377` passed and uploaded the release asset;
+- ZIP audit confirmed one top-level plugin folder, 141 runtime files, no excluded source/dev folders, expected runtime metadata at `0.1.69`, and packaged PHP syntax passed for 136 PHP files.
+- no production UI output, protocol behavior, database schema, remote-action behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior is introduced by this maintenance line;
+- updater acceptance, `control-sitesmanage` deployment, and post-deploy scheduled-poll monitoring remain separate approval-gated workflows.
 
 ## Dashboard 0.1.68 Release Record
 
