@@ -2390,6 +2390,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Snapshot Repository Double Split Slice
+
+The diagnostics repository support file still grouped the fake diagnostics site repository and fake diagnostics snapshot repository together. Keep `tests/support/diagnostics-test-repositories.php` as the stable loader while moving the snapshot repository double into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The fake diagnostics snapshot repository now lives in `tests/support/diagnostics-snapshot-repository-double.php`, and the existing diagnostics repository support file loads it before defining the fake site repository. Current tests keep requiring the same bootstrap path, class names, and fixture behavior. Existing diagnostics assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused diagnostics coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
