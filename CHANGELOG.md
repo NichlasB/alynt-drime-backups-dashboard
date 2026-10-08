@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes.
 
+## 0.1.71 - 2026-10-08
+
+### Changed
+
+- Clarified the Diagnostics Runtime panel with a display-only capability-gate row explaining that remote-action controls appear only when the latest client report advertises the specific supported action capability.
+- Added support-safe remote-action boundary evidence to the Diagnostics Support Summary export.
+- Split rollback-preview capability fixture builders into a focused test-support trait without changing runtime behavior.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.70 - 2026-10-08
 
 ### Changed

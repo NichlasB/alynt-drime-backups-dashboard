@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.70
+Stable tag: 0.1.71
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.71 clarifies Diagnostics remote-action capability gating in the UI and support summary while continuing safe remote-action test-support fixture cleanup without changing dashboard runtime behavior.
 
 Version 0.1.70 adds display-only Diagnostics Runtime boundary copy and continues safe remote-action test-support fixture cleanup without changing dashboard runtime behavior.
 
@@ -69,6 +71,12 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.71 =
+* Clarified the Diagnostics Runtime panel with a display-only capability-gate row explaining that remote-action controls appear only when the latest client report advertises the specific supported action capability.
+* Added support-safe remote-action boundary evidence to the Diagnostics Support Summary export.
+* Split rollback-preview capability fixture builders into a focused test-support trait without changing runtime behavior.
+* Preserved existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.70 =
 * Added a display-only Diagnostics Runtime boundary row stating that remote actions are limited to explicitly opted-in signed client actions and that the dashboard stores no Drime API credentials.
