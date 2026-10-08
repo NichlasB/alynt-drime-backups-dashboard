@@ -2536,6 +2536,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Cleanup-Preview Fixture Split Slice
+
+The cleanup-preview aggregate test still grouped site rows, snapshot rows, and remote-action cleanup-management payloads directly inside the assertion method. Keep `tests/DiagnosticsCleanupPreviewAggregatesTest.php` focused on aggregate/support-copy assertions while moving the cleanup-preview site/snapshot/payload fixtures into a dedicated support trait.
+
+Implementation status: implemented locally as a test-only support split. Cleanup-preview site, snapshot, and payload fixture builders now live in `tests/support/diagnostics-cleanup-preview-fixtures.php`, and the focused aggregate test composes that trait while reusing the existing diagnostics collector helper. The assertion method, expected aggregate counts, support-safe redaction checks, production diagnostics behavior, and support-copy shape remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused cleanup-preview aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

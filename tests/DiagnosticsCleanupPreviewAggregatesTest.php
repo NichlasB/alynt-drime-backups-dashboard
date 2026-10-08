@@ -8,12 +8,14 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/support/diagnostics-test-bootstrap.php';
+require_once __DIR__ . '/support/diagnostics-cleanup-preview-fixtures.php';
 
 /**
  * Tests support-safe cleanup-preview aggregate diagnostics.
  */
 class DiagnosticsCleanupPreviewAggregatesTest extends TestCase {
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Test_Fixtures;
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Cleanup_Preview_Fixtures;
 
 	/**
 	 * Cleanup-preview diagnostics are aggregate-only.
@@ -21,56 +23,7 @@ class DiagnosticsCleanupPreviewAggregatesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_cleanup_preview_diagnostics_are_aggregate_only() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site( 1 ),
-					$this->site( 2 ),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
-				array(
-					1 => $this->snapshot(
-						array(
-							'remote_actions' => array(
-								'protocol_version'   => 2,
-								'enabled'            => true,
-								'cleanup_management' => array(
-									'protocol_version'        => 2,
-									'capability_version'      => 1,
-									'enabled'                 => true,
-									'preview_supported'       => true,
-									'apply_supported'         => false,
-									'scope'                   => 'safe_local_uploader_owned',
-									'supported_categories'    => array( 'uploader_temp_artifacts' ),
-									'max_preview_age_seconds' => 900,
-								),
-							),
-						)
-					),
-					2 => $this->snapshot(
-						array(
-							'remote_actions' => array(
-								'protocol_version'        => 2,
-								'enabled'                 => true,
-								'cleanup_management'      => array(
-									'protocol_version'         => 2,
-									'enabled'                  => true,
-									'preview_supported'        => true,
-									'apply_supported'          => true,
-									'cleanup_apply_available'  => true,
-									'scope'                    => 'safe_local_uploader_owned',
-									'supported_categories'     => array( 'uploader_temp_artifacts' ),
-								),
-							),
-						)
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
-		);
-
-		$result  = $diagnostics->collect();
+		$result  = $this->collect_diagnostics( $this->cleanup_preview_sites(), $this->cleanup_preview_snapshots() );
 		$encoded = wp_json_encode( $result['support'] );
 
 		$this->assertSame( 2, $result['counts']['cleanup_preview']['reporting_sites'] );
