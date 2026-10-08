@@ -2584,6 +2584,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, cleanup behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Schedule Rollback Capability Fixture Split Slice
+
+The schedule rollback-preview capability test still grouped a larger rollback-preview capability/result payload directly inside the main sanitizer assertion method. Keep `tests/RemoteActionCapabilitiesScheduleRollbackTest.php` focused on rollback-preview sanitizer assertions while moving the reusable rollback-preview capability fixture into the existing remote-action capabilities fixture trait.
+
+Implementation status: implemented locally as a test-only support split. The representative schedule rollback-preview capability summary now lives in `tests/support/remote-action-capabilities-test-fixtures.php`, and `tests/RemoteActionCapabilitiesScheduleRollbackTest.php` reuses that fixture while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, cleanup behavior, rollback behavior, release behavior, deployment state, backups, restore, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused schedule rollback-preview capability sanitization coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, schedule rollback behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
