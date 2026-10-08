@@ -1926,6 +1926,10 @@ msgstr ""
 msgid "Copy this redacted summary when support needs scheduler and polling context. It intentionally omits client domains, site labels, pairing tokens, polling secrets, authorization headers, raw payloads, and raw response bodies."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-support-output.php:30
+msgid "The remote-action boundary evidence in this summary is informational only; it does not grant new client actions or store Drime API credentials in the dashboard."
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-support-output.php:31
 msgid "The support summary could not be prepared. Please try again after refreshing the page."
 msgstr ""

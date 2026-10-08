@@ -27,6 +27,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Support_Output {
 
 		echo '<div class="adbd-panel adbd-support-panel"><h3>' . esc_html__( 'Support Copy', 'alynt-drime-backups-dashboard' ) . '</h3><div class="adbd-panel-body">';
 		echo '<p>' . esc_html__( 'Copy this redacted summary when support needs scheduler and polling context. It intentionally omits client domains, site labels, pairing tokens, polling secrets, authorization headers, raw payloads, and raw response bodies.', 'alynt-drime-backups-dashboard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'The remote-action boundary evidence in this summary is informational only; it does not grant new client actions or store Drime API credentials in the dashboard.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		if ( false === $encoded ) {
 			echo '<div class="notice notice-error inline" role="alert"><p>' . esc_html__( 'The support summary could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 		}

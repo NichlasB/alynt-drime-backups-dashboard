@@ -350,6 +350,19 @@ Acceptance criteria:
 - Full tests, lint, build, and whitespace checks pass.
 - No UI strings, translation changes, protocol behavior, database writes, action capability, action dispatch behavior, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Diagnostics Support Copy Boundary Explanation Slice
+
+The Diagnostics Support Summary export now includes remote-action boundary evidence. A small UI follow-up is to explain beside the copy/download controls that this evidence is informational only and does not grant new client actions or store Drime API credentials in the dashboard.
+
+Implementation status: implemented locally as display-only help text in the Support Copy panel. The copy clarifies the support-summary boundary evidence while preserving the existing redacted export, action capability gates, protocol behavior, database schema, dispatch behavior, credential handling, Drime behavior, release behavior, deployment state, live-site behavior, and client-site behavior.
+
+Acceptance criteria:
+
+- Support Copy rendering tests cover the new boundary-explanation text.
+- Translation template includes the new display-only string.
+- Focused Support Copy rendering tests, full tests, lint, build, and whitespace checks pass.
+- No protocol behavior, database writes, action capability, action dispatch behavior, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### Remote Action Repository Summary Docblock Cleanup Slice
 
 The current source-size baseline does not justify broad runtime refactors. A tiny safe code-quality cleanup was still available in the remote-action repository summary trait: its class-level docblock had malformed spacing from earlier structure splits.

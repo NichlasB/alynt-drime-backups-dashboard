@@ -42,6 +42,9 @@ class AdminPageDiagnosticsSupportOutputTest extends TestCase {
 		);
 
 		$this->assertStringContainsString( 'Support Copy', $html );
+		$this->assertStringContainsString( 'remote-action boundary evidence', $html );
+		$this->assertStringContainsString( 'does not grant new client actions', $html );
+		$this->assertStringContainsString( 'store Drime API credentials', $html );
 		$this->assertStringContainsString( 'id="adbd-support-copy"', $html );
 		$this->assertStringContainsString( 'Copy Support Summary', $html );
 		$this->assertStringContainsString( 'Download Support Summary', $html );
