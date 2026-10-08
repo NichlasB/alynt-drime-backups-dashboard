@@ -650,6 +650,10 @@ Acceptance criteria:
 
 Implementation status: implemented locally as a test-only split. Baseline snapshot/status rules remain in `tests/StatusClassifierTest.php`. Generic backup-source evidence coverage moved to `tests/StatusClassifierSourceEvidenceTest.php`. WPvivid freshness-window coverage moved to `tests/StatusClassifierWpvividFreshnessTest.php`. WPvivid upload-evidence/source-policy coverage moved to `tests/StatusClassifierWpvividPolicyTest.php`. Shared classifier dependencies now load through `tests/support/status-classifier-test-bootstrap.php`, while the existing fixture trait remains in `tests/support/status-classifier-test-fixtures.php`.
 
+### Status Classifier Backup Source Fixture Split Slice
+
+Implementation status: implemented locally as a test-support-only split. The reusable backup-source source-summary fixture builder now lives in `tests/support/status-classifier-backup-source-fixtures.php`. The existing status-classifier fixture trait composes the new backup-source fixture trait and retains active-site, snapshot, and healthy-payload builders. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, classifier behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
 Acceptance criteria:
 
 - focused `StatusClassifier` coverage passes with the same assertions;
