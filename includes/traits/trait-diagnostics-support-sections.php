@@ -77,6 +77,12 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Sections {
 			'cleanup_preview'           => isset( $remote_actions['cleanup_preview'] ) ? max( 0, (int) $remote_actions['cleanup_preview'] ) : 0,
 			'rollback_metadata'         => isset( $remote_actions['rollback_metadata'] ) ? max( 0, (int) $remote_actions['rollback_metadata'] ) : 0,
 			'latest_updated_at'         => isset( $remote_actions['latest_updated_at'] ) ? sanitize_text_field( (string) $remote_actions['latest_updated_at'] ) : '',
+			'boundary'                  => array(
+				'signed_client_actions_only'         => true,
+				'requires_explicit_client_opt_in'    => true,
+				'requires_latest_client_capability'  => true,
+				'dashboard_stores_drime_credentials' => false,
+			),
 		);
 	}
 

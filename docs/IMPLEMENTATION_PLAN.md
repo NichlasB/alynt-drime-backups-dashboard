@@ -314,6 +314,18 @@ Acceptance criteria:
 - Focused Diagnostics rendering tests, full tests, lint, build, and whitespace checks pass.
 - No protocol behavior, database writes, action capability, action dispatch behavior, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Diagnostics Support Remote-Action Boundary Evidence Slice
+
+The Diagnostics Support Summary already exports support-safe aggregate remote-action counts. A small follow-up product-readability improvement is to include machine-readable boundary evidence in that aggregate section so support reviews can confirm that dashboard remote actions remain signed, explicitly opted in, capability-gated by the latest client report, and independent of Drime API credentials.
+
+Implementation status: implemented locally as a support-safe export metadata slice. The `actions` section now includes a static `boundary` object with booleans for signed-client-actions-only, explicit client opt-in, latest client capability gating, and dashboard Drime credential storage. This does not include site labels, domains, paths, raw payloads, action contexts, credentials, tokens, Drime identifiers, protocol changes, capability changes, dispatch changes, database schema changes, live-site changes, or client-site changes.
+
+Acceptance criteria:
+
+- Support-summary action aggregate tests cover the new boundary evidence.
+- Full tests, lint, build, and whitespace checks pass.
+- No UI strings, translation changes, protocol behavior, database writes, action capability, action dispatch behavior, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### Remote Action Repository Summary Docblock Cleanup Slice
 
 The current source-size baseline does not justify broad runtime refactors. A tiny safe code-quality cleanup was still available in the remote-action repository summary trait: its class-level docblock had malformed spacing from earlier structure splits.

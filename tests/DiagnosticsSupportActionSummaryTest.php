@@ -41,6 +41,10 @@ class DiagnosticsSupportActionSummaryTest extends TestCase {
 		$this->assertSame( 2, $actions['schedule_rollback_preview'] );
 		$this->assertSame( 1, $actions['cleanup_preview'] );
 		$this->assertSame( 1, $actions['rollback_metadata'] );
+		$this->assertTrue( $actions['boundary']['signed_client_actions_only'] );
+		$this->assertTrue( $actions['boundary']['requires_explicit_client_opt_in'] );
+		$this->assertTrue( $actions['boundary']['requires_latest_client_capability'] );
+		$this->assertFalse( $actions['boundary']['dashboard_stores_drime_credentials'] );
 		$this->assertArrayNotHasKey( 'redacted_context_json', $actions );
 		$this->assertArrayNotHasKey( 'source_apply_action_id', $actions );
 	}
