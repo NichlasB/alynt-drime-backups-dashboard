@@ -7,11 +7,14 @@
 
 require_once __DIR__ . '/enrollment-rest-controller-repository-double.php';
 require_once __DIR__ . '/enrollment-rest-controller-transient-shims.php';
+require_once __DIR__ . '/enrollment-rest-controller-request-fixtures.php';
 
 /**
  * Shared enrollment REST controller fixtures.
  */
 trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller_Test_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Enrollment_REST_Request_Fixtures;
+
 	/**
 	 * Creates the controller.
 	 *
@@ -64,41 +67,5 @@ trait Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller_Test_Fixtures {
 			),
 			$overrides
 		);
-	}
-
-	/**
-	 * Creates a minimal REST request test double.
-	 *
-	 * @param string $authorization Authorization header.
-	 * @return object
-	 */
-	private function request_with_authorization( $authorization ) {
-		return new class( $authorization ) {
-			/**
-			 * Authorization header.
-			 *
-			 * @var string
-			 */
-			private $authorization;
-
-			/**
-			 * Constructor.
-			 *
-			 * @param string $authorization Authorization header.
-			 */
-			public function __construct( $authorization ) {
-				$this->authorization = (string) $authorization;
-			}
-
-			/**
-			 * Gets a header.
-			 *
-			 * @param string $name Header name.
-			 * @return string
-			 */
-			public function get_header( $name ) {
-				return 'authorization' === strtolower( (string) $name ) ? $this->authorization : '';
-			}
-		};
 	}
 }

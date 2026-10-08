@@ -2402,6 +2402,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Enrollment REST Request Fixture Split Slice
+
+The enrollment REST controller test harness still grouped controller/site/payload fixtures with the minimal REST request authorization test double. Keep `tests/support/enrollment-rest-controller-test-harness.php` as the stable loader while moving the request double helper into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. The minimal REST request authorization fixture now lives in `tests/support/enrollment-rest-controller-request-fixtures.php`, and the existing enrollment controller fixture trait composes it while retaining the same trait name and helper method. Current tests keep requiring the same loader path and enrollment assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused enrollment REST controller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
