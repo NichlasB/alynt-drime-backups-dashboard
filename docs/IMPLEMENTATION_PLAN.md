@@ -2596,6 +2596,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, schedule rollback behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Schedule Apply Capability Fixture Split Slice
+
+The schedule-management capability test still grouped the larger schedule-apply capability/result payload directly inside its schedule-apply support assertion method. Keep `tests/RemoteActionCapabilitiesScheduleManagementTest.php` focused on schedule-management support assertions while moving the reusable schedule-apply capability fixture into the existing remote-action capabilities fixture trait.
+
+Implementation status: implemented locally as a test-only support split. The representative schedule-apply capability summary now lives in `tests/support/remote-action-capabilities-test-fixtures.php`, and `tests/RemoteActionCapabilitiesScheduleManagementTest.php` reuses that fixture while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused schedule-management capability coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, schedule apply behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
