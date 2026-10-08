@@ -2620,6 +2620,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, SQL behavior, schedule apply behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Repository Client Reconciliation Fixture Split Slice
+
+The base remote-action repository test still grouped a client reconciliation report payload directly inside the sanitized reconciliation assertion method. Keep `tests/RemoteActionRepositoryTest.php` focused on repository write assertions while moving the reusable client reconciliation payload into the existing remote-action repository fixture trait.
+
+Implementation status: implemented locally as a test-only support split. The client reconciliation report fixture now lives in `tests/support/remote-action-repository-test-harness.php`, and `tests/RemoteActionRepositoryTest.php` reuses that helper while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, SQL behavior, remote-action behavior, schedule apply behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action repository write coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, SQL behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

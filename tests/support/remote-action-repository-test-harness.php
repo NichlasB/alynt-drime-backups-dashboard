@@ -167,4 +167,26 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Test_Fixtures {
 			),
 		);
 	}
+
+	/**
+	 * Returns a client reconciliation report with unsafe count fields.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function client_reconciliation_report() {
+		return array(
+			'state'          => 'succeeded',
+			'updated_at'     => '2026-08-20T12:04:00+00:00',
+			'result_code'    => 'action_succeeded',
+			'result_summary' => '<b>Scan completed safely.</b>',
+			'counts'         => array(
+				'found'            => 4,
+				'queued'           => 1,
+				'already_known'    => 2,
+				'upload_attempted' => 1,
+				'failed'           => -1,
+				'local_path'       => '/private/path',
+			),
+		);
+	}
 }

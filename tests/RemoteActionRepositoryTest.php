@@ -81,20 +81,7 @@ class RemoteActionRepositoryTest extends TestCase {
 		$this->assertTrue(
 			$repository->mark_client_report(
 				321,
-				array(
-					'state'          => 'succeeded',
-					'updated_at'     => '2026-08-20T12:04:00+00:00',
-					'result_code'    => 'action_succeeded',
-					'result_summary' => '<b>Scan completed safely.</b>',
-					'counts'         => array(
-						'found'            => 4,
-						'queued'           => 1,
-						'already_known'    => 2,
-						'upload_attempted' => 1,
-						'failed'           => -1,
-						'local_path'       => '/private/path',
-					),
-				),
+				$this->client_reconciliation_report(),
 				'2026-08-20 12:05:00'
 			)
 		);
