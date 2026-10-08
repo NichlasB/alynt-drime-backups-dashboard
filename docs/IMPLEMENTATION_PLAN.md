@@ -2378,6 +2378,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, schedule behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Polling-State Rendering Helper Stub Split Slice
+
+The admin polling-state rendering test harness still grouped public test-exposure methods with minimal helper stubs required by composed admin rendering traits. Keep `tests/support/admin-page-polling-state-rendering-test-harness.php` as the stable loader while moving those helper stubs into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Minimal decoded-snapshot and backup-source renderer stubs now live in `tests/support/admin-page-polling-state-rendering-helper-stubs.php`, and the existing polling-state rendering harness composes them while retaining the same harness class and public test methods. Current tests keep requiring the same loader path and rendering assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused admin polling-state rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:

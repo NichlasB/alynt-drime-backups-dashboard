@@ -5,6 +5,8 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-polling-state-rendering-helper-stubs.php';
+
 /**
  * Harness exposing private polling-state rendering helpers.
  */
@@ -24,6 +26,9 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Status_History_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Local_Record_Methods;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Remote_Action_Methods;
+	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Helper_Stubs {
+		Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Helper_Stubs::decoded_snapshot_payload insteadof Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
+	}
 
 	/**
 	 * Remote action repository test double.
@@ -95,25 +100,5 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	 */
 	public function next_poll_line( array $site ) {
 		return $this->next_poll_html( $site );
-	}
-
-	/**
-	 * Minimal snapshot decoder needed by the included helper trait.
-	 *
-	 * @param array<string,mixed> $snapshot Snapshot row.
-	 * @return array<string,mixed>
-	 */
-	private function decoded_snapshot_payload( array $snapshot ) {
-		return isset( $snapshot['decoded_payload'] ) && is_array( $snapshot['decoded_payload'] ) ? $snapshot['decoded_payload'] : array();
-	}
-
-	/**
-	 * Minimal backup source detail renderer needed by the included helper trait.
-	 *
-	 * @param array<string,mixed> $payload Payload.
-	 * @return void
-	 */
-	private function render_backup_sources_detail( array $payload ) {
-		unset( $payload );
 	}
 }
