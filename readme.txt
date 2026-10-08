@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.69
+Stable tag: 0.1.70
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.70 adds display-only Diagnostics Runtime boundary copy and continues safe remote-action test-support fixture cleanup without changing dashboard runtime behavior.
 
 Version 0.1.69 is a maintenance patch that continues safe remote-action test-support fixture cleanup after 0.1.68 without changing dashboard runtime behavior.
 
@@ -67,6 +69,11 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.70 =
+* Added a display-only Diagnostics Runtime boundary row stating that remote actions are limited to explicitly opted-in signed client actions and that the dashboard stores no Drime API credentials.
+* Split remote-action capability cleanup and schedule fixture builders into focused test-support traits without changing runtime behavior.
+* Preserved existing dashboard boundaries: no protocol behavior, database schema, remote action capability, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.69 =
 * Split remote-action capability, repository schedule lookup, client reconciliation, support-summary, and schedule-result fixture builders into focused test-support helpers without changing runtime behavior.

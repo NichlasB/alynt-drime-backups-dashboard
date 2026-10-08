@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes.
 
+## 0.1.70 - 2026-10-08
+
+### Changed
+
+- Added a display-only Diagnostics Runtime boundary row stating that remote actions are limited to explicitly opted-in signed client actions and that the dashboard stores no Drime API credentials.
+- Split remote-action capability cleanup and schedule fixture builders into focused test-support traits without changing runtime behavior.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no protocol behavior, database schema, remote action capability, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.69 - 2026-10-08
 
 ### Changed
