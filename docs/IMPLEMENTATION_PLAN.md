@@ -301,6 +301,19 @@ Acceptance criteria:
 - generated release-stage artifacts are not treated as current source bloat;
 - no runtime PHP, UI output, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state changes are introduced.
 
+### Diagnostics Remote-Action Capability Gate Copy Slice
+
+The Diagnostics Runtime panel already exposes support-safe installed version, protocol/schema identity, and a remote-action boundary note. A small product-readability improvement is to make the existing capability-gated UI model explicit in the same panel, so operators can distinguish "remote actions are not globally available" from "controls appear only after a latest client report advertises a specific supported capability."
+
+Implementation status: implemented locally as a display-only Diagnostics copy slice. The Dashboard Runtime panel now includes a support-safe `Capability gate` row explaining that remote-action controls appear only when the latest client report advertises the specific supported action capability. This does not change capability detection, action dispatch, protocol behavior, database schema, UI control availability, remote-action permissions, backups, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, release behavior, deployment state, live-site behavior, or client-site behavior.
+
+Acceptance criteria:
+
+- Diagnostics Runtime rendering tests cover the new capability-gate row.
+- Translation template includes the new display-only strings.
+- Focused Diagnostics rendering tests, full tests, lint, build, and whitespace checks pass.
+- No protocol behavior, database writes, action capability, action dispatch behavior, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
+
 ### Remote Action Repository Summary Docblock Cleanup Slice
 
 The current source-size baseline does not justify broad runtime refactors. A tiny safe code-quality cleanup was still available in the remote-action repository summary trait: its class-level docblock had malformed spacing from earlier structure splits.

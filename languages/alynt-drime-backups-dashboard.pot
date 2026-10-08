@@ -1844,6 +1844,14 @@ msgstr ""
 msgid "Only explicitly opted-in signed client actions are available; the dashboard stores no Drime API credentials."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:123
+msgid "Capability gate"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:123
+msgid "Remote-action controls appear only when the latest client report advertises the specific supported action capability."
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:219
 msgid "This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies."
 msgstr ""

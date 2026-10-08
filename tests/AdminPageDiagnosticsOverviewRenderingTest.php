@@ -114,6 +114,8 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Remote-action boundary', $html );
 		$this->assertStringContainsString( 'Only explicitly opted-in signed client actions are available', $html );
 		$this->assertStringContainsString( 'the dashboard stores no Drime API credentials', $html );
+		$this->assertStringContainsString( 'Capability gate', $html );
+		$this->assertStringContainsString( 'controls appear only when the latest client report advertises', $html );
 		$this->assertStringContainsString( 'support-safe identity check', $html );
 	}
 }
