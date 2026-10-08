@@ -2687,6 +2687,25 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, schedule-result behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Capabilities Support Trait Split Slice
+
+The shared remote-action capabilities fixture trait became the largest remaining editable PHP support file after multiple focused fixture moves. Keep `tests/support/remote-action-capabilities-test-fixtures.php` as the stable loader required by current tests while splitting cleanup-preview and schedule-management fixture groups into focused support traits.
+
+Implementation status: implemented locally as a test-only support split. Cleanup-preview capability fixtures now live in `tests/support/remote-action-capabilities-cleanup-fixtures.php`, schedule/rollback/schedule-result fixtures now live in `tests/support/remote-action-capabilities-schedule-fixtures.php`, and the existing `tests/support/remote-action-capabilities-test-fixtures.php` loader composes those focused traits while retaining the original trait name, helper names, require path, and fixture values. Focused RemoteActionCapabilities coverage passes unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Implementation notes:
+
+- move cleanup-preview capability fixture builders into a dedicated cleanup support trait;
+- move Alynt schedule, schedule-apply, rollback-preview, and schedule-result alias fixture builders into a dedicated schedule support trait;
+- keep the original trait name, helper method names, fixture values, and test require paths stable;
+- do not touch production code or runtime behavior.
+
+Acceptance criteria:
+
+- Focused remote-action capabilities, cleanup, schedule-management, schedule-rollback, and schedule-result tests pass unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
