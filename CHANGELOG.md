@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes.
 
+## 0.1.72 - 2026-10-08
+
+### Changed
+
+- Added display-only Support Copy help text explaining that remote-action boundary evidence is informational only, does not grant new client actions, and does not store Drime API credentials in the dashboard.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.71 - 2026-10-08
 
 ### Changed
