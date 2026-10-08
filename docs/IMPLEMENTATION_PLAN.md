@@ -2414,6 +2414,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Action Audit Doubles Split Slice
+
+The admin action-audit test harness still grouped the fake enrollment manager, fake event log, and trait-action harness together. Keep `tests/support/admin-page-action-audit-test-harness.php` as the stable loader while moving the two doubles into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The fake enrollment manager and event log now live in `tests/support/admin-page-action-audit-doubles.php`, and the existing action-audit harness loads them before defining the trait-action harness. Current tests keep requiring the same loader path, class names, and helper behavior. Existing action-audit assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused admin action-audit coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, audit behavior, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
