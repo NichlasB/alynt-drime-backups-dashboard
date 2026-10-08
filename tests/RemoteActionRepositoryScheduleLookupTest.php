@@ -25,48 +25,12 @@ class RemoteActionRepositoryScheduleLookupTest extends TestCase {
 		$repository = $this->remote_action_repository();
 		$preview_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
 
-		$this->wpdb->row = array(
-			'id'                    => 321,
-			'public_id'             => $preview_id,
-			'dashboard_site_id'     => 44,
-			'action_type'           => 'schedule_preview',
-			'state'                 => 'succeeded',
-			'completed_at'          => '2026-08-20 12:00:00',
-			'redacted_context_json' => wp_json_encode(
-				array(
-					'schedule_preview' => array(
-						'preview_action_id'    => $preview_id,
-						'preview_fingerprint'  => str_repeat( 'a', 64 ),
-						'schedule_id'          => 'alynt_scan_upload',
-						'current_cadence'      => 'every_15_minutes',
-						'proposed_cadence'     => 'every_30_minutes',
-						'capability_version'   => 1,
-						'preview_expires_at'   => '2026-08-20T12:05:00+00:00',
-						'would_change'         => true,
-						'apply_supported'      => true,
-						'rollback_supported'   => false,
-					),
-				)
-			),
-		);
+		$this->wpdb->row = $this->expired_schedule_preview_row( $preview_id );
 
 		$result = $repository->fresh_schedule_preview_for_apply(
 			44,
 			$preview_id,
-			array(
-				'allowed_actions'      => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' ),
-				'schedule_management' => array(
-					'schedules'         => array(
-						array(
-							'id'                 => 'alynt_scan_upload',
-							'apply_supported'    => true,
-							'supported_cadences' => array( 'every_30_minutes' ),
-						),
-					),
-					'apply_supported'   => true,
-					'preview_supported' => true,
-				),
-			),
+			$this->schedule_apply_lookup_capabilities(),
 			'2026-08-20 12:06:00'
 		);
 
@@ -85,55 +49,12 @@ class RemoteActionRepositoryScheduleLookupTest extends TestCase {
 		$repository = $this->remote_action_repository();
 		$apply_id   = '33333333-3333-4333-8333-333333333333';
 
-		$this->wpdb->row = array(
-			'id'                    => 321,
-			'public_id'             => $apply_id,
-			'dashboard_site_id'     => 44,
-			'action_type'           => 'schedule_apply',
-			'state'                 => 'succeeded',
-			'completed_at'          => '2026-09-15 18:24:12',
-			'redacted_context_json' => wp_json_encode(
-				array(
-					'schedule_apply' => array(
-						'schedule_id'        => 'alynt_scan_upload',
-						'previous_cadence'   => 'every_15_minutes',
-						'applied_cadence'    => 'every_30_minutes',
-						'capability_version' => 1,
-						'rollback_metadata'  => array(
-							'captured'                      => true,
-							'source_action_id'              => $apply_id,
-							'schedule_id'                   => 'alynt_scan_upload',
-							'previous_cadence'              => 'every_15_minutes',
-							'applied_cadence'               => 'every_30_minutes',
-							'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
-							'expires_at'                    => '2026-09-15T19:24:12+00:00',
-						),
-					),
-				)
-			),
-		);
+		$this->wpdb->row = $this->successful_schedule_apply_row( $apply_id );
 
 		$result = $repository->successful_schedule_apply_for_rollback_preview(
 			44,
 			$apply_id,
-			array(
-				'enabled'          => true,
-				'sodium_available' => true,
-				'allowed_actions'  => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply', 'schedule_rollback_preview' ),
-				'schedule_management' => array(
-					'enabled'                    => true,
-					'rollback_preview_supported' => true,
-					'rollback_supported'         => false,
-					'schedules'                  => array(
-						array(
-							'schedule_id'                => 'alynt_scan_upload',
-							'manageable'                 => true,
-							'rollback_preview_supported' => true,
-							'rollback_supported'         => false,
-						),
-					),
-				),
-			),
+			$this->schedule_rollback_preview_lookup_capabilities(),
 			'2026-09-15 19:00:00'
 		);
 

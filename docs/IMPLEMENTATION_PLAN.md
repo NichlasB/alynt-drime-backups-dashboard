@@ -2608,6 +2608,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, schedule apply behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Repository Schedule Lookup Fixture Split Slice
+
+The schedule lookup repository test still grouped expired schedule-preview rows, successful schedule-apply rows, and sanitized capability arrays directly inside the lookup assertion methods. Keep `tests/RemoteActionRepositoryScheduleLookupTest.php` focused on repository lookup assertions while moving reusable schedule lookup rows and capability fixtures into the existing remote-action repository test fixture trait.
+
+Implementation status: implemented locally as a test-only support split. Expired schedule-preview rows, schedule-apply lookup capabilities, successful schedule-apply rows, and rollback-preview lookup capabilities now live in `tests/support/remote-action-repository-test-harness.php`, and `tests/RemoteActionRepositoryScheduleLookupTest.php` reuses those helpers while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, SQL behavior, remote-action behavior, schedule apply behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused schedule lookup repository coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, SQL behavior, schedule apply behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
