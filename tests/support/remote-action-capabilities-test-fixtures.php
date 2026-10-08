@@ -6,6 +6,7 @@
  */
 
 require_once __DIR__ . '/remote-action-capabilities-cleanup-fixtures.php';
+require_once __DIR__ . '/remote-action-capabilities-rollback-fixtures.php';
 require_once __DIR__ . '/remote-action-capabilities-schedule-fixtures.php';
 
 /**
@@ -13,6 +14,7 @@ require_once __DIR__ . '/remote-action-capabilities-schedule-fixtures.php';
  */
 trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Test_Fixtures {
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Cleanup_Fixtures;
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Rollback_Fixtures;
 	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Schedule_Fixtures;
 
 	/**

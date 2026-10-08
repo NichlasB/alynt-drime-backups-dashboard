@@ -2714,12 +2714,13 @@ Acceptance criteria:
 
 The shared remote-action capabilities fixture trait became the largest remaining editable PHP support file after multiple focused fixture moves. Keep `tests/support/remote-action-capabilities-test-fixtures.php` as the stable loader required by current tests while splitting cleanup-preview and schedule-management fixture groups into focused support traits.
 
-Implementation status: implemented locally as a test-only support split. Cleanup-preview capability fixtures now live in `tests/support/remote-action-capabilities-cleanup-fixtures.php`, schedule/rollback/schedule-result fixtures now live in `tests/support/remote-action-capabilities-schedule-fixtures.php`, and the existing `tests/support/remote-action-capabilities-test-fixtures.php` loader composes those focused traits while retaining the original trait name, helper names, require path, and fixture values. Focused RemoteActionCapabilities coverage passes unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+Implementation status: implemented locally as a test-only support split. Cleanup-preview capability fixtures now live in `tests/support/remote-action-capabilities-cleanup-fixtures.php`, schedule and schedule-result fixtures now live in `tests/support/remote-action-capabilities-schedule-fixtures.php`, rollback-preview fixtures now live in `tests/support/remote-action-capabilities-rollback-fixtures.php`, and the existing `tests/support/remote-action-capabilities-test-fixtures.php` loader composes those focused traits while retaining the original trait name, helper names, require path, and fixture values. Focused RemoteActionCapabilities coverage passes unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
 
 Implementation notes:
 
 - move cleanup-preview capability fixture builders into a dedicated cleanup support trait;
-- move Alynt schedule, schedule-apply, rollback-preview, and schedule-result alias fixture builders into a dedicated schedule support trait;
+- move Alynt schedule, schedule-apply, and schedule-result alias fixture builders into a dedicated schedule support trait;
+- move rollback-preview fixture builders into a dedicated rollback support trait;
 - keep the original trait name, helper method names, fixture values, and test require paths stable;
 - do not touch production code or runtime behavior.
 
