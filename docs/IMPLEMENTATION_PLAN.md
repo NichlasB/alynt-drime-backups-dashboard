@@ -2644,6 +2644,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, SQL behavior, support-summary behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Schedule Result Fixture Split Slice
+
+The schedule-result capability test still grouped schedule-preview and schedule-apply latest-action alias payloads directly inside the sanitizer assertion methods. Keep `tests/RemoteActionCapabilitiesScheduleResultsTest.php` focused on alias normalization assertions while moving reusable schedule-result payloads into the existing remote-action capabilities fixture trait.
+
+Implementation status: implemented locally as a test-only support split. Schedule-preview alias and schedule-apply alias summary fixtures now live in `tests/support/remote-action-capabilities-test-fixtures.php`, and `tests/RemoteActionCapabilitiesScheduleResultsTest.php` reuses those helpers while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, support-summary behavior, remote-action behavior, schedule apply behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused schedule-result capability coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, schedule-result behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
