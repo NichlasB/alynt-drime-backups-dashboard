@@ -5,6 +5,7 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-diagnostics-overview-aggregate-count-fixtures.php';
 require_once __DIR__ . '/admin-page-diagnostics-overview-count-fixtures.php';
 
 /**
