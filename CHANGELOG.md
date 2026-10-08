@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes.
 
+## 0.1.69 - 2026-10-08
+
+### Changed
+
+- Split remote-action capability, repository schedule lookup, client reconciliation, support-summary, and schedule-result fixture builders into focused test-support helpers without changing runtime behavior.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no UI output, protocol behavior, database schema, remote action, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.65 - 2026-10-07
 
 ### Changed
