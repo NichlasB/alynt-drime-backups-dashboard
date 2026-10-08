@@ -1836,6 +1836,14 @@ msgstr ""
 msgid "Protocol v%1$s / Status schema v%2$s"
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:122
+msgid "Remote-action boundary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:122
+msgid "Only explicitly opted-in signed client actions are available; the dashboard stores no Drime API credentials."
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:219
 msgid "This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies."
 msgstr ""

@@ -111,6 +111,9 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Installed version', $html );
 		$this->assertStringContainsString( ALYNT_DRIME_BACKUPS_DASHBOARD_VERSION, $html );
 		$this->assertStringContainsString( 'Protocol v1 / Status schema v1', $html );
+		$this->assertStringContainsString( 'Remote-action boundary', $html );
+		$this->assertStringContainsString( 'Only explicitly opted-in signed client actions are available', $html );
+		$this->assertStringContainsString( 'the dashboard stores no Drime API credentials', $html );
 		$this->assertStringContainsString( 'support-safe identity check', $html );
 	}
 }

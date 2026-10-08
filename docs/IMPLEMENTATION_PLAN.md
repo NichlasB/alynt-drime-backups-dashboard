@@ -2706,6 +2706,24 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Diagnostics Runtime Boundary Visibility Slice
+
+The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
+
+Implementation status: implemented locally as a display-only Diagnostics Runtime visibility slice. The Diagnostics Runtime panel now includes a `Remote-action boundary` row stating that only explicitly opted-in signed client actions are available and that the dashboard stores no Drime API credentials. Focused Diagnostics overview rendering coverage confirms the row and copy. No setting, endpoint, database write, remote action, credential path, backup, restore, cleanup/delete apply, schedule apply/rollback behavior, deployment behavior, live-site behavior, or client-site behavior was added.
+
+Implementation notes:
+
+- Add a Diagnostics Runtime row labeled `Remote-action boundary`.
+- State that only explicitly opted-in signed client actions are available and that the dashboard stores no Drime API credentials.
+- Keep this as display-only UI copy; do not add a new setting, endpoint, database write, remote action, credential path, backup, restore, cleanup/delete apply, schedule apply/rollback behavior, deployment behavior, live-site behavior, or client-site behavior.
+
+Acceptance criteria:
+
+- Diagnostics overview rendering coverage confirms the new runtime-boundary row and copy.
+- Full dashboard tests, lint, build, translation template coverage, and whitespace checks pass.
+- No protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
