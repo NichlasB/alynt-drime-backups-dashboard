@@ -738,6 +738,10 @@ Acceptance criteria:
 
 Implementation status: implemented locally as a test-only split. Base capability allowlist and forbidden-field coverage remains in `tests/RemoteActionCapabilitiesTest.php`. Schedule-management policy coverage moved to `tests/RemoteActionCapabilitiesScheduleManagementTest.php`. Schedule result alias coverage moved to `tests/RemoteActionCapabilitiesScheduleResultsTest.php`. Rollback-preview capability coverage moved to `tests/RemoteActionCapabilitiesScheduleRollbackTest.php`. Cleanup-preview capability coverage moved to `tests/RemoteActionCapabilitiesCleanupTest.php`, while shared fixture builders remain in `tests/support/remote-action-capabilities-test-fixtures.php`.
 
+### Remote Action Capabilities Schedule Alias Fixture Split Slice
+
+Implementation status: implemented locally as a test-support-only split. Schedule latest-action alias fixture builders now live in `tests/support/remote-action-capabilities-schedule-alias-fixtures.php`. The existing schedule capability fixture trait composes the new alias fixture trait and retains schedule capability summary builders. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.
+
 Acceptance criteria:
 
 - focused `RemoteActionCapabilities` coverage passes with the same assertions;
