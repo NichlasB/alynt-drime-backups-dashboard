@@ -8,12 +8,14 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/support/diagnostics-test-bootstrap.php';
+require_once __DIR__ . '/support/diagnostics-restore-readiness-fixtures.php';
 
 /**
  * Tests support-safe restore-readiness aggregate diagnostics.
  */
 class DiagnosticsRestoreReadinessAggregatesTest extends TestCase {
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Test_Fixtures;
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Restore_Readiness_Fixtures;
 
 	/**
 	 * Restore-readiness diagnostics are aggregate-only and evidence-only.
@@ -21,65 +23,7 @@ class DiagnosticsRestoreReadinessAggregatesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_restore_readiness_diagnostics_are_aggregate_only() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site( 1 ),
-					$this->site( 2 ),
-					$this->site( 3 ),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
-				array(
-					1 => $this->snapshot(
-						array(
-							'restore_readiness' => array(
-								'overall_state' => 'evidence_available',
-								'candidates'    => array(
-									array(
-										'source'          => 'server',
-										'candidate_ref'   => 'opaque-do-not-export',
-										'component_state' => 'complete',
-										'checksum_state'  => 'verified',
-										'manifest_state'  => 'compatible',
-										'sidecar_state'   => 'present',
-									),
-									array(
-										'source'          => 'wpvivid',
-										'candidate_ref'   => 'opaque-do-not-export-2',
-										'component_state' => 'unknown',
-										'checksum_state'  => 'not_reported',
-										'manifest_state'  => 'not_reported',
-										'sidecar_state'   => 'not_reported',
-									),
-								),
-							),
-						)
-					),
-					2 => $this->snapshot(),
-					3 => $this->snapshot(
-						array(
-							'restore_readiness' => array(
-								'overall_state' => 'incomplete',
-								'candidates'    => array(
-									array(
-										'source'          => 'server',
-										'candidate_ref'   => 'another-opaque-ref',
-										'component_state' => 'partial',
-										'checksum_state'  => 'unknown',
-										'manifest_state'  => 'unknown',
-										'sidecar_state'   => 'missing',
-									),
-								),
-							),
-						)
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
-		);
-
-		$result  = $diagnostics->collect();
+		$result  = $this->collect_diagnostics( $this->restore_readiness_sites(), $this->restore_readiness_snapshots() );
 		$encoded = wp_json_encode( $result['support'] );
 
 		$this->assertSame( 2, $result['counts']['restore_readiness']['reporting_sites'] );

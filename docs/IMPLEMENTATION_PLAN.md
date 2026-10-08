@@ -2488,6 +2488,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Restore-Readiness Fixture Split Slice
+
+The restore-readiness aggregate test still grouped site rows, snapshot rows, and restore-readiness candidate payloads directly inside the assertion method. Keep `tests/DiagnosticsRestoreReadinessAggregatesTest.php` focused on aggregate/support-copy assertions while moving the restore-readiness site/snapshot/candidate fixtures into a dedicated support trait.
+
+Implementation status: implemented locally as a test-only support split. Restore-readiness site, snapshot, and candidate fixture builders now live in `tests/support/diagnostics-restore-readiness-fixtures.php`, and the focused aggregate test composes that trait while reusing the existing diagnostics collector helper. The assertion method, expected aggregate counts, support-safe redaction checks, production diagnostics behavior, and support-copy shape remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused restore-readiness aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
