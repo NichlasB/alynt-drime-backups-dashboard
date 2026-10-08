@@ -2548,6 +2548,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Local-Removal Fixture Split Slice
+
+The local-removal readiness aggregate test still grouped archived local-record site rows, retained snapshot histories, retained action counts, and non-terminal action counts directly inside the assertion method. Keep `tests/DiagnosticsLocalRemovalReadinessTest.php` focused on aggregate/support-copy assertions while moving the local-removal fixture builders into a dedicated support trait.
+
+Implementation status: implemented locally as a test-only support split. Archived local-record site rows, retained snapshot histories, retained action counts, and non-terminal action counts now live in `tests/support/diagnostics-local-removal-fixtures.php`, and the focused aggregate test composes that trait while reusing the existing diagnostics collector helper. The assertion method, expected aggregate counts, support-safe redaction checks, production diagnostics behavior, and support-copy shape remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused local-removal readiness aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
