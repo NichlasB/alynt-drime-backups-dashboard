@@ -14,6 +14,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-for
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostic-formatters.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-overview.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-audit-history.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-event-log.php';
 require_once __DIR__ . '/admin-page-diagnostics-overview-test-harness.php';
 

@@ -385,6 +385,18 @@ Acceptance criteria:
 - Focused Support Copy rendering tests, full tests, lint, build, and whitespace checks pass.
 - No protocol behavior, database writes, action capability, action dispatch behavior, backup creation, restore, cleanup/delete, credential handling, Drime behavior, deployment, or live-site change is introduced.
 
+### Diagnostics Audit History Helper Structure Slice
+
+The diagnostics event-log renderer also owned local operator audit-history rendering and label helpers. The next safe structure-only cleanup is to keep the structured event-log export/table renderer focused while moving audit-history rendering helpers into a dedicated trait.
+
+Implementation status: implemented locally as a structure-only split. Operator audit-history diagnostics rendering, audit table rendering, and audit actor/action label helpers now live in `includes/traits/trait-admin-page-diagnostics-audit-history.php`. The existing diagnostics event-log trait composes the new helper trait and retains structured event-log summary/export/table rendering. No UI text, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- the changed/new PHP files pass syntax checks;
+- focused diagnostics rendering tests, full tests, lint, build, and whitespace checks pass;
+- the slice remains structure-only and does not alter UI copy, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Repository Summary Docblock Cleanup Slice
 
 The current source-size baseline does not justify broad runtime refactors. A tiny safe code-quality cleanup was still available in the remote-action repository summary trait: its class-level docblock had malformed spacing from earlier structure splits.
