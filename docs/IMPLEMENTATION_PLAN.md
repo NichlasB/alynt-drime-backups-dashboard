@@ -2572,6 +2572,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Cleanup Capability Fixture Split Slice
+
+The cleanup-preview capability test still grouped a larger cleanup-preview capability/result payload directly inside the main sanitizer assertion method. Keep `tests/RemoteActionCapabilitiesCleanupTest.php` focused on cleanup-preview sanitizer assertions while moving the reusable cleanup-preview capability fixture into the existing remote-action capabilities fixture trait.
+
+Implementation status: implemented locally as a test-only support split. The representative cleanup-preview capability summary now lives in `tests/support/remote-action-capabilities-test-fixtures.php`, and `tests/RemoteActionCapabilitiesCleanupTest.php` reuses that fixture while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, cleanup apply behavior, release behavior, deployment state, backups, restore, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused cleanup-preview capability sanitization coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, cleanup behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
