@@ -2476,6 +2476,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, uninstall behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Overview Count Fixture Split Slice
+
+The diagnostics overview rendering fixture still grouped scheduler, record-state, attention-history, restore-readiness, and local-removal count arrays inside one broad fixture builder. Keep `tests/support/admin-page-diagnostics-overview-fixtures.php` as the stable loader while moving the count and scheduler fixture builders into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Scheduler and count fixture builders now live in `tests/support/admin-page-diagnostics-overview-count-fixtures.php`, and the existing diagnostics overview fixture trait composes the new trait while retaining `record_state_polling_summary_diagnostics()` as the public test fixture helper. Current tests keep requiring the same loader path, fixture method name, fixture values, rendered-output assertions, and production diagnostics overview behavior. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused diagnostics overview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
