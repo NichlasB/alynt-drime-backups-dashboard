@@ -720,6 +720,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Repository Schedule Fixture Split Slice
+
+The shared remote-action repository fixture harness still mixed generic repository fixtures with schedule-preview, schedule-apply, and schedule-rollback-preview lookup fixtures. The next safe test-support cleanup is to keep schedule-specific lookup fixtures in their own support trait while preserving the same focused repository tests and fake wpdb behavior.
+
+Implementation status: implemented locally as a test-support-only split. Schedule-preview, schedule-apply, and schedule-rollback-preview repository fixture builders now live in `tests/support/remote-action-repository-schedule-fixtures.php`. The existing remote-action repository test harness composes the new fixture trait and retains generic repository construction, empty-row, and client reconciliation fixtures. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused `RemoteActionRepository` coverage passes with the same assertions;
+- full tests, lint, build, and whitespace checks pass;
+- the split remains test-support-only and does not alter runtime class loading, production files, protocol behavior, database behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Capabilities Test Class Split Slice
 
 `RemoteActionCapabilitiesTest` remained the largest PHPUnit file after the repository cleanup. It mixed base allowlist/forbidden-field sanitization, schedule-management policy support, schedule result alias normalization, rollback-preview support, and cleanup-preview support in one file. The next safe test-only cleanup is to split those assertions into focused capability test classes while preserving existing fixture builders, expected sanitized shapes, allowlist behavior, support-helper expectations, production capability code, protocol behavior, and live-site state.
