@@ -2560,6 +2560,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Capabilities Fixture Split Slice
+
+The remote-action capabilities test still grouped a representative valid capability summary directly inside the main allowlist assertion method. Keep `tests/RemoteActionCapabilitiesTest.php` focused on sanitizer assertions while moving the reusable capability-summary fixture into the existing capabilities fixture trait.
+
+Implementation status: implemented locally as a test-only support split. The representative valid remote-action capability summary now lives in `tests/support/remote-action-capabilities-test-fixtures.php`, and `tests/RemoteActionCapabilitiesTest.php` reuses that fixture while preserving every assertion and fixture value. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action capability sanitization coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
