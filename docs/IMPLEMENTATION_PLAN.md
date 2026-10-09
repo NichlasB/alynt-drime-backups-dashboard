@@ -673,6 +673,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Diagnostics Snapshot Fixture Split Slice
+
+The diagnostics core fixture support still grouped reusable site-row builders with snapshot payload and retained-history row builders. Keep `tests/support/diagnostics-core-fixtures.php` as the stable diagnostics fixture loader while moving snapshot-related builders into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Snapshot payload and retained snapshot-row builders now live in `tests/support/diagnostics-snapshot-fixtures.php`, and the core diagnostics fixture trait composes that trait while retaining the same `site()`, `snapshot()`, and `snapshot_row()` fixture method names and values. Existing diagnostics tests keep requiring the same harness path and assertion expectations remain unchanged. No production PHP, assets, UI strings, Diagnostics output, support-copy shape, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused Diagnostics coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Remote Action Repository Double Split Slice
 
 The shared diagnostics repository support file still grouped fake site, snapshot, and remote-action repositories together. The next safe test-only structure cleanup is to move the diagnostics remote-action repository double into its own support file while leaving the existing diagnostics bootstrap, fixture data, aggregate counts, support-summary behavior, and assertions unchanged.
