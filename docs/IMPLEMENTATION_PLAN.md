@@ -2990,6 +2990,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Poller Scheduled HTTP Client Fixture Helper Slice
+
+After the captured HTTP helper cleanup, `PollerScheduledPollingTest` still duplicated deterministic vault construction and successful status HTTP callbacks for scheduled-polling assertions. Keep bounded-batch and default-batch assertions unchanged while reusing the shared poller fixture helpers.
+
+Implementation status: implemented locally as a test-only support cleanup. `tests/support/poller-http-client-fixtures.php` now exposes `successful_counting_http_client()` for scheduled-poll tests that need to assert the number of HTTP calls. `tests/PollerScheduledPollingTest.php` now uses the shared `vault()`, `successful_counting_http_client()`, and `successful_http_client()` helpers while retaining the same due-query, processed-count, success-count, and default batch-size assertions. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `PollerScheduledPollingTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Reconciler Repository Double Split Slice
 
 The remote-action reconciler test harness still grouped the fake action repository double and shared reconciler payload fixtures together. Keep `tests/support/remote-action-reconciler-test-harness.php` as the stable loader while moving the repository double into a focused support file.

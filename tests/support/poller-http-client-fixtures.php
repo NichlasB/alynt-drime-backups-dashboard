@@ -58,4 +58,29 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Http_Client_Fixtures {
 			);
 		};
 	}
+
+	/**
+	 * Creates a successful status HTTP client fixture and counts calls.
+	 *
+	 * @param int                 $calls Number of observed calls.
+	 * @param array<string,mixed> $payload_overrides Payload overrides.
+	 * @return callable
+	 */
+	private function successful_counting_http_client( &$calls, array $payload_overrides = array() ) {
+		return function () use ( &$calls, $payload_overrides ) {
+			++$calls;
+
+			return array(
+				'response' => array(
+					'code' => 200,
+				),
+				'body'     => wp_json_encode(
+					array_merge(
+						$this->payload(),
+						$payload_overrides
+					)
+				),
+			);
+		};
+	}
 }

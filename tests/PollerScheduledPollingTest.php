@@ -22,7 +22,7 @@ class PollerScheduledPollingTest extends TestCase {
 	 * @return void
 	 */
 	public function test_scheduled_poll_processes_bounded_due_site_batch() {
-		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault = $this->vault();
 		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
 			array(
 				$this->site( $vault, array( 'id' => 77 ) ),
@@ -33,16 +33,7 @@ class PollerScheduledPollingTest extends TestCase {
 		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
 		$calls     = 0;
 
-		$http_client = function () use ( &$calls ) {
-			++$calls;
-
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
+		$http_client = $this->successful_counting_http_client( $calls );
 		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
 
 		$result = $poller->poll_sites( 2 );
@@ -61,7 +52,7 @@ class PollerScheduledPollingTest extends TestCase {
 	 * @return void
 	 */
 	public function test_scheduled_poll_uses_default_batch_size_without_override() {
-		$vault = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault = $this->vault();
 		$sites = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository(
 			array(
 				$this->site( $vault, array( 'id' => 77 ) ),
@@ -69,14 +60,7 @@ class PollerScheduledPollingTest extends TestCase {
 		);
 		$snapshots = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
 
-		$http_client = function () {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
+		$http_client = $this->successful_http_client();
 		$poller      = $this->poller( $sites, $snapshots, $vault, $http_client );
 
 		$result = $poller->poll_sites();
