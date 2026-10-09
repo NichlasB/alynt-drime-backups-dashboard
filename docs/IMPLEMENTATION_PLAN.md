@@ -1381,6 +1381,18 @@ Acceptance criteria:
 - full dashboard tests, lint, build, and whitespace checks continue to pass;
 - no production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Repository WordPress Shim Support Split Slice
+
+After the repository `wpdb` helper splits, the shared remote-action repository harness still grouped local WordPress shims with fake database support and reusable fixture helpers. Keep `tests/support/remote-action-repository-test-harness.php` as the stable loader while moving the local `ARRAY_A` and `current_time()` shims into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. Remote-action repository WordPress shims now live in `tests/support/remote-action-repository-wordpress-shims.php`, and the existing repository test harness loads them before fake `wpdb` support and fixture traits. Shim behavior, fake current time, fake database behavior, repository fixtures, repository assertions, and SQL expectations are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, repository behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action repository coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, repository behavior, SQL behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Repository Client Report Fixture Structure Slice
 
 `RemoteActionRepositoryClientReportTest` still grouped support-safe client report assertions with bulky schedule-apply and schedule-rollback-preview report payloads. The next safe test-only cleanup is to move those reusable payload fixtures into a dedicated support trait while preserving repository assertions, sanitization expectations, support-summary behavior, production code, protocol behavior, schema, and live-site state.

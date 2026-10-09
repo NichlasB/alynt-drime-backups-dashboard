@@ -5,28 +5,11 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-if ( ! defined( 'ARRAY_A' ) ) {
-	define( 'ARRAY_A', 'ARRAY_A' );
-}
-
+require_once __DIR__ . '/remote-action-repository-wordpress-shims.php';
 require_once __DIR__ . '/remote-action-repository-wpdb-query-methods.php';
 require_once __DIR__ . '/remote-action-repository-wpdb-double.php';
 require_once __DIR__ . '/remote-action-repository-schedule-rollback-fixtures.php';
 require_once __DIR__ . '/remote-action-repository-schedule-fixtures.php';
-
-if ( ! function_exists( 'current_time' ) ) {
-	/**
-	 * Test current_time shim.
-	 *
-	 * @param string $type Type.
-	 * @param bool   $gmt GMT.
-	 * @return string
-	 */
-	function current_time( $type, $gmt = false ) {
-		unset( $type, $gmt );
-		return '2099-01-01 00:00:00';
-	}
-}
 
 /**
  * Shared remote action repository test fixtures.
