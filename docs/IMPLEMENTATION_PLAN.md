@@ -799,6 +799,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Capabilities Third-Party Schedule Fixture Helper Slice
+
+After the schedule fixture splits, `RemoteActionCapabilitiesScheduleManagementTest` still embedded an unsupported third-party schedule row inline to prove the sanitizer ignores non-Alynt schedules. Keep the sanitizer assertion unchanged while moving that unsupported schedule fixture into the shared schedule fixture trait.
+
+Implementation status: implemented locally as a test-support-only cleanup. `tests/support/remote-action-capabilities-schedule-fixtures.php` now exposes `third_party_schedule()`, and `tests/RemoteActionCapabilitiesScheduleManagementTest.php` uses it beside the existing `alynt_scan_upload_schedule()` fixture. The unsupported schedule shape, sanitized output assertions, preview-support assertions, and production capability behavior are unchanged. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused schedule-management capability coverage passes unchanged.
+- Full tests, lint, build, and whitespace checks pass.
+- The cleanup remains test-support-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Capabilities Schedule Apply Alias Fixture Split Slice
 
 Implementation status: implemented locally as a test-support-only split. Schedule-apply latest-action alias fixture builders now live in `tests/support/remote-action-capabilities-schedule-apply-alias-fixtures.php`. The existing schedule alias fixture trait composes the new apply-alias fixture trait and retains schedule-preview alias builders. Current capability tests keep requiring the same shared fixture loader and expected sanitized output remains unchanged. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.

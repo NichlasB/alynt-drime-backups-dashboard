@@ -34,13 +34,7 @@ class RemoteActionCapabilitiesScheduleManagementTest extends TestCase {
 					'apply_supported'    => false,
 					'rollback_supported' => false,
 					'schedules'          => array(
-						array(
-							'schedule_id'              => 'third_party_schedule',
-							'label'                    => 'Third-party schedule',
-							'current_cadence'          => 'daily',
-							'supported_cadences'       => array( 'daily' ),
-							'minimum_interval_seconds' => 86400,
-						),
+						$this->third_party_schedule(),
 						$this->alynt_scan_upload_schedule(),
 					),
 				),

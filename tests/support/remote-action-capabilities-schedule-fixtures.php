@@ -36,4 +36,18 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Schedule_Fixtures
 		);
 	}
 
+	/**
+	 * Builds an unsupported third-party schedule fixture.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function third_party_schedule() {
+		return array(
+			'schedule_id'              => 'third_party_schedule',
+			'label'                    => 'Third-party schedule',
+			'current_cadence'          => 'daily',
+			'supported_cadences'       => array( 'daily' ),
+			'minimum_interval_seconds' => 86400,
+		);
+	}
 }
