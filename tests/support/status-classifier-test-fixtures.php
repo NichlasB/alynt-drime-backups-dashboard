@@ -65,9 +65,19 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Test_Fixtures {
 	 * @return array<string,mixed>
 	 */
 	private function classify_payload( array $payload ) {
+		return $this->classify_snapshot( $this->snapshot( $payload ) );
+	}
+
+	/**
+	 * Classifies an active-site snapshot row at the default fixture time.
+	 *
+	 * @param array<string,mixed> $snapshot Snapshot row.
+	 * @return array<string,mixed>
+	 */
+	private function classify_snapshot( array $snapshot ) {
 		return $this->classifier->classify(
 			$this->active_site(),
-			$this->snapshot( $payload ),
+			$snapshot,
 			1700000300
 		);
 	}

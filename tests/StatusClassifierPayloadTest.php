@@ -37,8 +37,7 @@ class StatusClassifierPayloadTest extends TestCase {
 	 * @return void
 	 */
 	public function test_payload_json_snapshot_is_decoded() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
+		$result = $this->classify_snapshot(
 			array(
 				'schema_version' => 1,
 				'payload_json'   => wp_json_encode(
@@ -50,8 +49,7 @@ class StatusClassifierPayloadTest extends TestCase {
 					)
 				),
 				'observed_at'    => '2023-11-14 22:15:00',
-			),
-			1700000300
+			)
 		);
 
 		$this->assertSame( 'needs_attention', $result['category'] );
@@ -63,14 +61,12 @@ class StatusClassifierPayloadTest extends TestCase {
 	 * @return void
 	 */
 	public function test_malformed_payload_json_is_not_reporting() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
+		$result = $this->classify_snapshot(
 			array(
 				'schema_version' => 1,
 				'payload_json'   => '{"schema_version":1,',
 				'observed_at'    => '2023-11-14 22:15:00',
-			),
-			1700000300
+			)
 		);
 
 		$this->assertSame( 'not_reporting', $result['category'] );
@@ -83,11 +79,7 @@ class StatusClassifierPayloadTest extends TestCase {
 	 * @return void
 	 */
 	public function test_empty_decoded_payload_is_not_reporting() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot( array() ),
-			1700000300
-		);
+		$result = $this->classify_payload( array() );
 
 		$this->assertSame( 'not_reporting', $result['category'] );
 		$this->assertStringContainsString( 'could not be decoded', $result['message'] );

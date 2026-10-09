@@ -3634,6 +3634,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Classifier Snapshot Helper Reuse Slice
+
+The payload decoding classifier test still repeated the same active-site/default-time classifier wrapper for raw snapshot rows. Keep payload decoding assertions focused by moving that raw snapshot classification wrapper into the shared status-classifier fixture trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/status-classifier-test-fixtures.php` now provides `classify_snapshot()`, `classify_payload()` delegates through it, and `tests/StatusClassifierPayloadTest.php` reuses the shared helpers for JSON snapshot decoding, malformed JSON, and empty decoded payload coverage. The raw snapshot rows, decoded payloads, default classification timestamp, categories, and messages remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-classifier payload decoding coverage passes unchanged.
+- Focused classifier fixture consumers continue to pass unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
