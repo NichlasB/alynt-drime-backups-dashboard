@@ -34,6 +34,22 @@ trait Alynt_Drime_Backups_Dashboard_Safe_Transport_Test_Fixtures {
 	}
 
 	/**
+	 * Creates an HTTP response fixture.
+	 *
+	 * @param int    $status HTTP status.
+	 * @param string $body Response body.
+	 * @return array<string,mixed>
+	 */
+	private function http_response( $status = 200, $body = '{"schema_version":1}' ) {
+		return array(
+			'response' => array(
+				'code' => $status,
+			),
+			'body'     => $body,
+		);
+	}
+
+	/**
 	 * Creates a transport with a public resolver by default.
 	 *
 	 * @param callable|null $resolver Resolver.

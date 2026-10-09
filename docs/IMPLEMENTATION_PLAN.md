@@ -3721,6 +3721,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Safe Transport HTTP Response Fixture Helper Slice
+
+The Safe Transport fetch tests repeated small HTTP response arrays in multiple callbacks. Keep the fetch tests focused on transport behavior by moving deterministic response construction into the existing transport test harness.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/safe-transport-test-harness.php` now provides `http_response()`, and `tests/SafeTransportFetchTest.php` reuses it for valid JSON, invalid JSON, HTTP status, and oversized body coverage while preserving the same response codes, bodies, callback assertions, error codes, and decoded payload expectations. No production PHP, assets, UI strings, protocol behavior, database schema, transport behavior, origin validation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused Safe Transport fetch coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, transport behavior, origin validation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

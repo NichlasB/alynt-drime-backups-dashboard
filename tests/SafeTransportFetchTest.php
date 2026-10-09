@@ -30,12 +30,7 @@ class SafeTransportFetchTest extends TestCase {
 				$this->assertStringContainsString( '_adbd_cache_bust=', $url );
 				$this->assertSame( 'GET', $args['method'] );
 
-				return array(
-					'response' => array(
-						'code' => 200,
-					),
-					'body'     => '{"schema_version":1}',
-				);
+				return $this->http_response();
 			}
 		);
 
@@ -53,12 +48,7 @@ class SafeTransportFetchTest extends TestCase {
 			$this->status_site(),
 			$this->polling_authorization(),
 			function () {
-				return array(
-					'response' => array(
-						'code' => 200,
-					),
-					'body'     => 'not json',
-				);
+				return $this->http_response( 200, 'not json' );
 			}
 		);
 
@@ -96,12 +86,7 @@ class SafeTransportFetchTest extends TestCase {
 			$this->status_site(),
 			$this->polling_authorization(),
 			function () {
-				return array(
-					'response' => array(
-						'code' => 503,
-					),
-					'body'     => '',
-				);
+				return $this->http_response( 503, '' );
 			}
 		);
 
@@ -121,12 +106,7 @@ class SafeTransportFetchTest extends TestCase {
 			$this->status_site(),
 			$this->polling_authorization(),
 			function () {
-				return array(
-					'response' => array(
-						'code' => 200,
-					),
-					'body'     => str_repeat( ' ', Alynt_Drime_Backups_Dashboard_Safe_Transport::MAX_RESPONSE_SIZE_BYTES + 1 ),
-				);
+				return $this->http_response( 200, str_repeat( ' ', Alynt_Drime_Backups_Dashboard_Safe_Transport::MAX_RESPONSE_SIZE_BYTES + 1 ) );
 			}
 		);
 
