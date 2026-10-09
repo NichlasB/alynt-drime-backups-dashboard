@@ -2822,6 +2822,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote Action Dispatcher Action State Double Split Slice
+
+After the schedule lookup split, the remote-action dispatcher action repository double still grouped request/state recording helpers with the fixed repository loader. Keep `tests/support/remote-action-dispatcher-actions-double.php` as the stable loader while moving request/state recording methods into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Request creation and state/dispatch recording methods now live in `tests/support/remote-action-dispatcher-action-state-double.php`, and the existing dispatcher action repository double composes them alongside the focused schedule lookup trait. The fake class name, public properties, method signatures, returned IDs, captured request/state behavior, schedule lookup behavior, and existing dispatcher assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action dispatcher coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Schedule Management Payload Fixture Split Slice
 
 The admin schedule-management test harness still grouped reusable schedule-management payload fixtures and the rendering harness together. Keep `tests/support/admin-page-schedule-management-test-harness.php` as the stable loader while moving the payload fixture trait into a focused support file.
