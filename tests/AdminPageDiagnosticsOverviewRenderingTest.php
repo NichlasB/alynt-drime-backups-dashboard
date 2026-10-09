@@ -116,6 +116,8 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'the dashboard stores no Drime API credentials', $html );
 		$this->assertStringContainsString( 'Capability gate', $html );
 		$this->assertStringContainsString( 'controls appear only when the latest client report advertises', $html );
+		$this->assertStringContainsString( 'Diagnostics boundary', $html );
+		$this->assertStringContainsString( 'does not poll clients, run remote actions, change schedules, or mutate backups', $html );
 		$this->assertStringContainsString( 'support-safe identity check', $html );
 	}
 }

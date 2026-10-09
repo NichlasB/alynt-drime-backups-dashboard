@@ -1852,6 +1852,14 @@ msgstr ""
 msgid "Remote-action controls appear only when the latest client report advertises the specific supported action capability."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:124
+msgid "Diagnostics boundary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:124
+msgid "Refreshing or exporting Diagnostics reads support-safe dashboard data only; it does not poll clients, run remote actions, change schedules, or mutate backups."
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:219
 msgid "This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies."
 msgstr ""

@@ -3733,6 +3733,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, transport behavior, origin validation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Diagnostics Runtime Read-Only Boundary Slice
+
+The Diagnostics Runtime panel already shows plugin identity, polling contract, remote-action boundary, and capability gating. Add one more support-safe row that makes the Diagnostics view's own read-only boundary explicit so operators can refresh or export diagnostics without wondering whether that action polls clients or mutates remote state.
+
+Implementation status: implemented locally as a display-only Diagnostics Runtime readiness slice. The Diagnostics Runtime panel now includes a `Diagnostics boundary` row stating that refreshing/exporting Diagnostics reads support-safe dashboard data only and does not poll clients, run remote actions, change schedules, or mutate backups. Focused Diagnostics overview rendering coverage confirms the row and copy. No setting, endpoint, database write, client poll, remote action, credential path, backup, restore, cleanup/delete apply, schedule apply/rollback behavior, deployment behavior, live-site behavior, or client-site behavior was added.
+
+Acceptance criteria:
+
+- Diagnostics overview rendering coverage confirms the new Diagnostics boundary row and copy.
+- Translation template, full dashboard tests, lint, build, and whitespace checks pass.
+- No setting, endpoint, database write, client poll, remote action, credential path, backup, restore, cleanup/delete apply, schedule apply/rollback behavior, deployment behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
