@@ -3672,6 +3672,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Payload Validator Core Helper Reuse Slice
+
+The core payload-validator test still constructed a validator inline for each assertion even though the shared validator fixture trait now owns default validation. Keep the test focused on allowlist, bounding, forbidden-field, and UUID-mismatch assertions by routing validation through shared helpers.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/status-payload-validator-test-fixtures.php` now provides `validate_payload_for_site_uuid()`, `validate_payload()` delegates through it, and `tests/StatusPayloadValidatorTest.php` reuses the shared helpers while preserving the same payloads, fixture UUIDs, sanitized values, error codes, and assertions. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused core status-payload validator coverage passes unchanged.
+- Existing shared validator fixture consumers continue to pass unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

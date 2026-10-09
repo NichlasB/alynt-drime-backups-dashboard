@@ -21,15 +21,13 @@ class StatusPayloadValidatorTest extends TestCase {
 	 * @return void
 	 */
 	public function test_valid_payload_is_allowlisted() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
 					'unexpected_future_field' => 'ignored',
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertIsArray( $result );
@@ -45,15 +43,13 @@ class StatusPayloadValidatorTest extends TestCase {
 	 * @return void
 	 */
 	public function test_overlong_plugin_version_is_bounded() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
 					'plugin_version' => str_repeat( '9', 100 ),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertIsArray( $result );
@@ -66,15 +62,13 @@ class StatusPayloadValidatorTest extends TestCase {
 	 * @return void
 	 */
 	public function test_forbidden_path_field_is_rejected() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
 					'server_outbox_path' => '/var/www/site/private/backups',
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertInstanceOf( WP_Error::class, $result );
@@ -87,8 +81,7 @@ class StatusPayloadValidatorTest extends TestCase {
 	 * @return void
 	 */
 	public function test_site_uuid_mismatch_is_rejected() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload_for_site_uuid(
 			$this->payload(),
 			'22222222-2222-4222-8222-222222222222'
 		);
