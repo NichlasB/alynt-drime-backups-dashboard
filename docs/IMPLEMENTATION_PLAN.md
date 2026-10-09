@@ -3622,6 +3622,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Classifier WPvivid Freshness Helper Reuse Slice
+
+The WPvivid freshness classifier test still rebuilt the active-site classification wrapper and backup-source payload structure even though shared status-classifier fixtures now provide both helpers. Keep the test focused on freshness policy boundaries by reusing the shared classifier and backup-source fixture helpers.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/StatusClassifierWpvividFreshnessTest.php` now uses `classify_payload()` and `backup_sources_payload()` for stale WPvivid freshness coverage while preserving the same source warning payload, freshness windows, schedule-policy fixtures, default classification timestamp, categories, and messages. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused WPvivid freshness classifier coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

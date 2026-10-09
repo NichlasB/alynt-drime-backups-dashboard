@@ -116,35 +116,27 @@ class StatusClassifierWpvividFreshnessTest extends TestCase {
 	 * @return array<string,mixed>
 	 */
 	private function classify_wpvivid_stale_payload( array $wpvivid_overrides ) {
-		return $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot(
-				array_merge(
-					$this->healthy_payload(),
-					array(
-						'backup_sources' => array(
-							'server'  => $this->source_payload(),
-							'wpvivid' => array_merge(
-								$this->source_payload(),
-								array(
-									'source_key'               => 'wpvivid',
-									'source_label'             => 'WPvivid',
-									'freshness_status'         => 'stale',
-									'freshness_window_seconds' => 129600,
-									'warnings'                 => array(
-										array(
-											'code'    => 'source_latest_upload_stale',
-											'message' => 'The latest uploaded backup evidence is older than the default freshness window.',
-										),
+		return $this->classify_payload(
+			array_merge(
+				$this->healthy_payload(),
+				array(
+					'backup_sources' => $this->backup_sources_payload(
+						array_merge(
+							array(
+								'freshness_status'         => 'stale',
+								'freshness_window_seconds' => 129600,
+								'warnings'                 => array(
+									array(
+										'code'    => 'source_latest_upload_stale',
+										'message' => 'The latest uploaded backup evidence is older than the default freshness window.',
 									),
 								),
-								$wpvivid_overrides
 							),
-						),
-					)
+							$wpvivid_overrides
+						)
+					),
 				)
-			),
-			1700000300
+			)
 		);
 	}
 
