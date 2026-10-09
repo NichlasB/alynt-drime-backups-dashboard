@@ -21,8 +21,7 @@ class StatusPayloadValidatorRestoreReadinessTest extends TestCase {
 	 * @return void
 	 */
 	public function test_restore_readiness_is_allowlisted_and_sanitized() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
@@ -58,8 +57,7 @@ class StatusPayloadValidatorRestoreReadinessTest extends TestCase {
 						),
 					),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertIsArray( $result );

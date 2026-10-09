@@ -3685,6 +3685,30 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Payload Validator Remote Actions Helper Reuse Slice
+
+The remote-action payload-validator test still constructed a validator inline for default-site validation after the shared validator helper became available. Keep the test focused on remote-action capability allowlisting and forbidden-field rejection by reusing the shared default validation helper.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/StatusPayloadValidatorRemoteActionsTest.php` now uses `validate_payload()` for remote-action capability sanitization and forbidden-field coverage while preserving the same remote-action payloads, schedule-management fixtures, sanitized allowed-action expectations, rejected path-mode field, error code, and assertions. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action status-payload validator coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Status Payload Validator Restore Readiness Helper Reuse Slice
+
+The restore-readiness payload-validator test still constructed a validator inline for default-site validation after the shared validator helper became available. Keep the test focused on read-only restore-readiness evidence sanitization by reusing the shared default validation helper.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/StatusPayloadValidatorRestoreReadinessTest.php` now uses `validate_payload()` for restore-readiness evidence sanitization while preserving the same candidate payloads, unsupported-candidate filtering, candidate-ref sanitization, state normalization, warning allowlist, and assertions. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, restore-readiness behavior, release behavior, deployment state, backups, restore controls, restore preparation, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused restore-readiness status-payload validator coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, restore-readiness behavior, release behavior, deployment state, backups, restore controls, restore preparation, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

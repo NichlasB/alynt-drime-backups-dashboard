@@ -21,8 +21,7 @@ class StatusPayloadValidatorRemoteActionsTest extends TestCase {
 	 * @return void
 	 */
 	public function test_remote_action_capabilities_are_allowlisted_and_sanitized() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
@@ -59,8 +58,7 @@ class StatusPayloadValidatorRemoteActionsTest extends TestCase {
 						'extra_field'                 => 'ignored',
 					),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertIsArray( $result );
@@ -83,8 +81,7 @@ class StatusPayloadValidatorRemoteActionsTest extends TestCase {
 	 * @return void
 	 */
 	public function test_remote_action_forbidden_field_is_rejected() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
@@ -97,8 +94,7 @@ class StatusPayloadValidatorRemoteActionsTest extends TestCase {
 						),
 					),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertInstanceOf( WP_Error::class, $result );
