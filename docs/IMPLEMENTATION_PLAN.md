@@ -999,6 +999,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, polling behavior, snapshot storage behavior, failure backoff behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Polling-State Counting Double Split Slice
+
+The admin polling-state rendering support file still grouped snapshot and remote-action counting repository doubles in one helper. The next safe test-only support cleanup is to keep the stable `admin-page-polling-state-rendering-counting-doubles.php` loader for snapshot counting while moving remote-action counting into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. Snapshot counting remains in `tests/support/admin-page-polling-state-rendering-counting-doubles.php`, and remote-action counting lives in `tests/support/admin-page-polling-state-rendering-remote-action-counting-double.php`, loaded through the existing counting-doubles support path. Local record rendering helpers, test class require paths, assertion expectations, production rendering code, remote-action behavior, polling behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, and live-site state remain unchanged.
+
+Acceptance criteria:
+
+- focused admin polling-state/local-record rendering coverage passes unchanged;
+- full tests, lint, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, UI output, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state.
+
 ### Admin Page Site Detail Attention History Test Class Split Slice
 
 `AdminPageSiteDetailLocalRecordRenderingTest` still grouped Site Detail attention/recovery history rendering with local polling controls, revoked-record guidance, and archive/unarchive controls. The next safe test-only cleanup is to move attention/recovery history assertions into a focused Site Detail history rendering class while preserving the same admin rendering helpers, bounded transition behavior, empty-state copy, local-only control copy, archive behavior, and live-site state.
