@@ -1292,7 +1292,7 @@ Acceptance criteria:
 
 The remote action repository fake `wpdb` collaborator still grouped insert/update capture with prepared-query and read-result shims. The next safe test-only structure cleanup is to move the query/read shims into a focused support trait while preserving the fake class name, property names, SQL capture behavior, row fixtures, repository assertions, and live-site state.
 
-Implementation status: implemented locally as a test-only support split. Query/read helpers now live in `tests/support/remote-action-repository-wpdb-query-methods.php`, and `tests/support/remote-action-repository-wpdb-double.php` composes that trait while retaining insert/update capture. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+Implementation status: implemented locally as a test-only support split. Query/read helpers now live in `tests/support/remote-action-repository-wpdb-query-methods.php`, insert/update capture now lives in `tests/support/remote-action-repository-wpdb-write-methods.php`, and `tests/support/remote-action-repository-wpdb-double.php` composes those traits while retaining the same fake class name and public state. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
 
 Acceptance criteria:
 
