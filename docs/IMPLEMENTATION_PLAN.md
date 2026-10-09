@@ -3610,6 +3610,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Payload Validator Default UUID Helper Slice
+
+The backup-source payload-validator tests repeated validator construction and the same fixture site UUID for each validation call. Keep the tests focused on backup-source sanitization expectations by moving that default validation wrapper into the shared status-payload validator fixture trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/status-payload-validator-test-fixtures.php` now provides `validate_payload()`, and `tests/StatusPayloadValidatorBackupSourcesTest.php` reuses it while preserving the same default fixture UUID, input payloads, backup-source allowlist checks, bounds checks, forbidden-field rejection, and error-code assertions. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-payload validator backup-source coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

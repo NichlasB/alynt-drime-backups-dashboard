@@ -51,4 +51,17 @@ trait Alynt_Drime_Backups_Dashboard_Status_Payload_Validator_Test_Fixtures {
 			'last_wp_cli_scan_at'         => 0,
 		);
 	}
+
+	/**
+	 * Validates a payload with the default fixture site UUID.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function validate_payload( array $payload ) {
+		return $this->status_payload_validator()->validate(
+			$payload,
+			'11111111-1111-4111-8111-111111111111'
+		);
+	}
 }

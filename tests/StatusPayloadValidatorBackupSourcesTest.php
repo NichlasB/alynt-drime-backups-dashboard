@@ -21,8 +21,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_backup_sources_are_allowlisted_and_sanitized() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
@@ -54,8 +53,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 						),
 					),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertIsArray( $result );
@@ -91,8 +89,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 			);
 		}
 
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
@@ -109,8 +106,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 						),
 					),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertIsArray( $result );
@@ -129,8 +125,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 	 * @return void
 	 */
 	public function test_forbidden_nested_backup_source_field_is_rejected() {
-		$validator = $this->status_payload_validator();
-		$result    = $validator->validate(
+		$result = $this->validate_payload(
 			array_merge(
 				$this->payload(),
 				array(
@@ -142,8 +137,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 						),
 					),
 				)
-			),
-			'11111111-1111-4111-8111-111111111111'
+			)
 		);
 
 		$this->assertInstanceOf( WP_Error::class, $result );
