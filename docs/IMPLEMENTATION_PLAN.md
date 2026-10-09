@@ -2540,6 +2540,18 @@ Acceptance criteria:
 - Focused local-removal diagnostics tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Diagnostics Local Removal Action Count Fixture Split Slice
+
+The local-removal readiness fixture support file still grouped archived site fixtures, snapshot history fixtures, retained action-count fixtures, and non-terminal action-count fixtures in one trait. Keep `tests/support/diagnostics-local-removal-fixtures.php` as the stable loader while moving the action-count fixture helpers into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Retained and non-terminal local-removal action-count fixtures now live in `tests/support/diagnostics-local-removal-action-count-fixtures.php`, and the existing local-removal readiness fixture trait composes that focused trait alongside the site fixture trait. Fixture values, helper names, diagnostics assertions, support-safe aggregate behavior, and production diagnostics behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused local-removal diagnostics tests pass unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Site Detail Local Removal Preview Helper Split Slice
 
 The Site Detail local-record panel trait mixed panel rendering, archive/unarchive form rendering, row-hint rendering, and local-removal preview eligibility helpers. The next safe structure-only cleanup is to separate the preview eligibility/counting helpers into their own admin trait while preserving the existing display-only preview boundary.
