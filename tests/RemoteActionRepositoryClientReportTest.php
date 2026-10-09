@@ -8,6 +8,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/support/remote-action-repository-test-bootstrap.php';
+require_once __DIR__ . '/support/remote-action-repository-client-report-rollback-summary-fixtures.php';
 require_once __DIR__ . '/support/remote-action-repository-client-report-rollback-fixtures.php';
 require_once __DIR__ . '/support/remote-action-repository-client-report-fixtures.php';
 

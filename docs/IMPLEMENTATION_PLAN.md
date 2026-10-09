@@ -3194,6 +3194,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, SQL behavior, support-summary behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote-Action Repository Rollback Summary Fixture Trait Split Slice
+
+After the support-summary fixture split, the rollback client-report fixture trait still grouped rollback-preview payload construction with rollback-readiness aggregate summary row data. Keep the existing client-report fixture loader and test assertions stable while moving the aggregate support-summary row helper into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. The rollback metadata support-summary row helper now lives in `tests/support/remote-action-repository-client-report-rollback-summary-fixtures.php`, and the existing rollback client-report fixture trait composes that focused trait while preserving helper names, fixture values, client-report assertions, and support-summary assertions. `tests/RemoteActionRepositoryClientReportTest.php` loads the focused summary fixture before the rollback fixture. No production PHP, assets, UI strings, protocol behavior, database schema, SQL behavior, support-summary behavior, remote-action behavior, schedule apply behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action repository client-report coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, SQL behavior, support-summary behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote-Action Schedule Result Fixture Split Slice
 
 The schedule-result capability test still grouped schedule-preview and schedule-apply latest-action alias payloads directly inside the sanitizer assertion methods. Keep `tests/RemoteActionCapabilitiesScheduleResultsTest.php` focused on alias normalization assertions while moving reusable schedule-result payloads into the existing remote-action capabilities fixture trait.
