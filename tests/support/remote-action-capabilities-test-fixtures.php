@@ -8,6 +8,7 @@
 require_once __DIR__ . '/remote-action-capabilities-base-fixtures.php';
 require_once __DIR__ . '/remote-action-capabilities-cleanup-fixtures.php';
 require_once __DIR__ . '/remote-action-capabilities-rollback-fixtures.php';
+require_once __DIR__ . '/remote-action-capabilities-schedule-apply-alias-fixtures.php';
 require_once __DIR__ . '/remote-action-capabilities-schedule-alias-fixtures.php';
 require_once __DIR__ . '/remote-action-capabilities-schedule-apply-fixtures.php';
 require_once __DIR__ . '/remote-action-capabilities-schedule-fixtures.php';
