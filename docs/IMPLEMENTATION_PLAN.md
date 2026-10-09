@@ -1962,7 +1962,7 @@ Acceptance criteria:
 
 The admin page action test-double support file still grouped enrollment, remote-action, poller, event-log, and site repository collaborators together. Keep the existing loader path stable while splitting those doubles into narrower support files.
 
-Implementation status: implemented locally as a test-only structure cleanup. `tests/support/admin-page-actions-test-doubles.php` now loads enrollment, remote/poller, event-log, and site repository fake collaborator files. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/admin-page-actions-test-doubles.php` now loads enrollment, remote-action dispatcher, poller, event-log, and site repository fake collaborator files; the poller double lives in `tests/support/admin-page-actions-poller-double.php` and is loaded through the stable remote-doubles path. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, polling behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
 
 Acceptance criteria:
 
