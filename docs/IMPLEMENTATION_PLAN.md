@@ -1330,6 +1330,18 @@ Validation scope:
 - run the full local test suite, lint, build, and whitespace checks;
 - confirm the split remains test-only and does not alter runtime class loading or release behavior.
 
+### Status Payload Validator Backup Source Fixture Override Slice
+
+After the payload-validator fixture split, `StatusPayloadValidatorBackupSourcesTest` still repeated `array_merge( source_payload(), ... )` setup for allowlist, enum-boundary, warning-boundary, and forbidden-field assertions. Keep validator behavior unchanged and let the shared backup-source fixture accept source overrides directly.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/status-payload-validator-backup-source-fixtures.php` now accepts optional overrides in `source_payload()`, and `tests/StatusPayloadValidatorBackupSourcesTest.php` reuses that helper for server and WPvivid source payload variants. Sanitized field assertions, warning bounds, schedule-policy redaction expectations, forbidden-field rejection, payload shape, and fixture values remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, validator behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `StatusPayloadValidatorBackupSourcesTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, validator behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, remote-action, or client-site behavior changes.
+
 ### Remote Action Repository Test Fixture Structure Slice
 
 `RemoteActionRepositoryTest` retained repeated repository construction and small stored-action row fixtures after the remote-action repository harness split. The next safe test-only cleanup is to move those reusable test fixtures into the existing repository support file while leaving all remote-action repository assertions, production code, storage shape, protocol behavior, database schema, UI output, and live-site state unchanged.

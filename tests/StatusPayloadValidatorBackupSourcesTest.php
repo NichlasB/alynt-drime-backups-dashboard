@@ -27,15 +27,13 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 				$this->payload(),
 				array(
 					'backup_sources' => array(
-						'server'      => array_merge(
-							$this->source_payload(),
+						'server'      => $this->source_payload(
 							array(
 								'source_label' => '<b>Server runner</b>',
 								'extra_field'  => 'ignored',
 							)
 						),
-						'wpvivid'     => array_merge(
-							$this->source_payload(),
+						'wpvivid'     => $this->source_payload(
 							array(
 								'source_key'       => 'wpvivid',
 								'freshness_status' => 'fresh',
@@ -99,8 +97,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 				$this->payload(),
 				array(
 					'backup_sources' => array(
-						'server' => array_merge(
-							$this->source_payload(),
+						'server' => $this->source_payload(
 							array(
 								'source_label'              => str_repeat( 'S', 120 ),
 								'latest_remote_status'      => 'uploaded_elsewhere',
@@ -138,8 +135,7 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 				$this->payload(),
 				array(
 					'backup_sources' => array(
-						'server' => array_merge(
-							$this->source_payload(),
+						'server' => $this->source_payload(
 							array(
 								'remote_index_path' => '/var/backups/private.remote-index.json',
 							)
