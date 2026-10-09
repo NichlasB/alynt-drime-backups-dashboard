@@ -3166,6 +3166,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Remote-Action Capabilities Cleanup Latest-Action Fixture Split Slice
+
+After the cleanup fixture split, the cleanup capability fixture still embedded the cleanup-preview latest-action payload inside the top-level cleanup capability summary builder. Keep `tests/support/remote-action-capabilities-cleanup-fixtures.php` as the stable cleanup fixture trait while moving the nested latest-action payload into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. The cleanup-preview latest-action fixture now lives in `tests/support/remote-action-capabilities-cleanup-last-action-fixtures.php`, and the existing cleanup capability summary composes that trait while retaining the same `cleanup_preview_capability_summary()` method name, fixture values, sanitized output expectations, and focused cleanup capability assertions. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action capabilities cleanup coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
