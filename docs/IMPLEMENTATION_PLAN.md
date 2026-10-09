@@ -974,6 +974,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, transport behavior, origin validation behavior, same-origin self-polling behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Safe Transport Fetch Fixture Helper Slice
+
+After the fetch test split, `SafeTransportFetchTest` still repeated the same status-site origin fixture and deterministic polling authorization header across every response-handling assertion. Keep safe transport behavior and response assertions unchanged while centralizing those request fixtures in the existing safe-transport test harness.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/safe-transport-test-harness.php` now exposes `status_site()` and `polling_authorization()` helpers, and `tests/SafeTransportFetchTest.php` uses them for the successful JSON, non-JSON, timeout, HTTP status, and oversized-response cases. No production PHP, assets, UI strings, transport behavior, origin validation behavior, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `SafeTransportFetchTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, transport behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Page Remote Action History Rendering Test Class Split Slice
 
 `AdminPageRemoteActionHistoryRenderingTest` still grouped schedule apply history, schedule rollback-preview history, cleanup-preview evidence details, pending schedule-cadence report handling, and compact short-count detail rendering in one test file. The next safe test-only cleanup is to split non-schedule history detail assertions into a focused class while preserving the same admin rendering helpers, support-safe copy, disclosure behavior, evidence-only cleanup framing, schedule-management wording, and live-site state.

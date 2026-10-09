@@ -13,6 +13,27 @@ require_once dirname( __DIR__, 2 ) . '/includes/class-safe-transport.php';
  */
 trait Alynt_Drime_Backups_Dashboard_Safe_Transport_Test_Fixtures {
 	/**
+	 * Creates a status-fetch site fixture.
+	 *
+	 * @param string $origin Expected origin.
+	 * @return array<string,string>
+	 */
+	private function status_site( $origin = 'https://client.example.com' ) {
+		return array(
+			'expected_origin' => $origin,
+		);
+	}
+
+	/**
+	 * Creates a deterministic polling authorization header fixture.
+	 *
+	 * @return string
+	 */
+	private function polling_authorization() {
+		return 'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 );
+	}
+
+	/**
 	 * Creates a transport with a public resolver by default.
 	 *
 	 * @param callable|null $resolver Resolver.

@@ -23,10 +23,8 @@ class SafeTransportFetchTest extends TestCase {
 	public function test_fetch_status_payload_uses_injected_http_client() {
 		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			$this->status_site(),
+			$this->polling_authorization(),
 			function ( $url, $args ) {
 				$this->assertStringStartsWith( 'https://client.example.com/wp-json/alynt-drime-backups-uploader/v1/status?', $url );
 				$this->assertStringContainsString( '_adbd_cache_bust=', $url );
@@ -52,10 +50,8 @@ class SafeTransportFetchTest extends TestCase {
 	public function test_fetch_status_payload_rejects_non_json_response() {
 		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			$this->status_site(),
+			$this->polling_authorization(),
 			function () {
 				return array(
 					'response' => array(
@@ -78,10 +74,8 @@ class SafeTransportFetchTest extends TestCase {
 	public function test_fetch_status_payload_returns_timeout_error() {
 		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			$this->status_site(),
+			$this->polling_authorization(),
 			function () {
 				return new WP_Error( 'http_request_failed', 'cURL error 28: Operation timed out after 10000 milliseconds.' );
 			}
@@ -99,10 +93,8 @@ class SafeTransportFetchTest extends TestCase {
 	public function test_fetch_status_payload_returns_http_status_error() {
 		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			$this->status_site(),
+			$this->polling_authorization(),
 			function () {
 				return array(
 					'response' => array(
@@ -126,10 +118,8 @@ class SafeTransportFetchTest extends TestCase {
 	public function test_fetch_status_payload_rejects_oversized_response_body() {
 		$transport = $this->transport();
 		$result    = $transport->fetch_status_payload(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 ),
+			$this->status_site(),
+			$this->polling_authorization(),
 			function () {
 				return array(
 					'response' => array(
