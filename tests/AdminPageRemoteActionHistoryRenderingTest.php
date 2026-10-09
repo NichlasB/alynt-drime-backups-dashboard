@@ -141,25 +141,4 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$this->assertStringNotContainsString( 'Unknown → every 15 minutes', $html );
 	}
 
-	/**
-	 * Builds a remote-action history row fixture.
-	 *
-	 * @param array<string,mixed> $overrides Row overrides.
-	 * @param array<string,mixed> $context Redacted context payload.
-	 * @return array<string,mixed>
-	 */
-	private function history_row( array $overrides, array $context ) {
-		return array_merge(
-			array(
-				'action_type'           => 'scan_upload_now',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-09-15 18:00:00',
-				'client_result_summary' => '',
-				'redacted_context_json' => wp_json_encode( $context ),
-			),
-			$overrides
-		);
-	}
-
 }

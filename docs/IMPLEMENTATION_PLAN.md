@@ -3526,6 +3526,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, backup behavior, release behavior, deployment state, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Remote Action History Row Fixture Helper Move Slice
+
+The remote-action history rendering detail test still owned a generic `history_row()` helper even though the broader remote-action rendering fixture trait already provides shared history rows, site fixtures, and snapshots. Keep the assertion class focused on schedule-detail rendering while moving the generic encoded-context row helper into the shared rendering fixture trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. The `history_row()` helper now lives in `tests/support/admin-page-remote-action-rendering-fixtures.php`, and `tests/AdminPageRemoteActionHistoryRenderingTest.php` reuses it through the existing fixture trait while preserving the same action defaults, encoded redacted context payloads, schedule apply details, rollback-preview details, pending-cadence wording, and assertions. No production PHP, assets, UI strings, protocol behavior, database schema, Remote Action History behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action history rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Remote Action History behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
