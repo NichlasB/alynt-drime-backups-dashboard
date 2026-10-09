@@ -23,10 +23,8 @@ class SafeTransportTest extends TestCase {
 	public function test_prepare_status_request_builds_fixed_read_only_get() {
 		$transport = $this->transport();
 		$request   = $transport->prepare_status_request(
-			array(
-				'expected_origin' => 'https://Client.Example.com/',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 )
+			$this->status_site( 'https://Client.Example.com/' ),
+			$this->polling_authorization()
 		);
 
 		$this->assertIsArray( $request );
@@ -48,10 +46,8 @@ class SafeTransportTest extends TestCase {
 	public function test_prepare_status_request_rejects_unsafe_destination() {
 		$transport = $this->transport();
 		$result    = $transport->prepare_status_request(
-			array(
-				'expected_origin' => 'http://127.0.0.1',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 )
+			$this->status_site( 'http://127.0.0.1' ),
+			$this->polling_authorization()
 		);
 
 		$this->assertInstanceOf( WP_Error::class, $result );
@@ -66,9 +62,7 @@ class SafeTransportTest extends TestCase {
 	public function test_prepare_status_request_rejects_invalid_authorization_shape() {
 		$transport = $this->transport();
 		$result    = $transport->prepare_status_request(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
+			$this->status_site(),
 			'Bearer not-the-v1-scheme'
 		);
 
@@ -88,10 +82,8 @@ class SafeTransportTest extends TestCase {
 			}
 		);
 		$result    = $transport->prepare_status_request(
-			array(
-				'expected_origin' => 'https://client.example.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 )
+			$this->status_site(),
+			$this->polling_authorization()
 		);
 
 		$this->assertInstanceOf( WP_Error::class, $result );
@@ -110,10 +102,8 @@ class SafeTransportTest extends TestCase {
 			}
 		);
 		$request   = $transport->prepare_status_request(
-			array(
-				'expected_origin' => 'https://control.sitesmanage.com',
-			),
-			'Bearer adb-poll-v1.pk_example_0000000000000000.' . str_repeat( 'A', 43 )
+			$this->status_site( 'https://control.sitesmanage.com' ),
+			$this->polling_authorization()
 		);
 
 		$this->assertIsArray( $request );
