@@ -874,6 +874,18 @@ Acceptance criteria:
 - Site repository read/write/runtime tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Site Repository WPDB Read Helper Split Slice
+
+After the site repository `wpdb` double split, the fake database class still grouped prepared-query capture and row reads with public test state while write behavior already lived in a focused support trait. Keep `tests/support/site-repository-wpdb-double.php` as the stable fake class loader while moving read/query methods into their own support trait.
+
+Implementation status: implemented locally as a test-only support split. `prepare()` and `get_row()` now live in `tests/support/site-repository-wpdb-read-methods.php`, and `Alynt_Drime_Backups_Dashboard_Test_Site_WPDB` composes that trait alongside the existing write-method trait. The fake class name, public properties, prepared-argument capture, row fixture behavior, SQL expectations, changed-row guards, repository assertions, and harness loader are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, repository SQL behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Site repository read/write/runtime tests pass without assertion changes.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, repository behavior, SQL behavior, schema behavior, protocol, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Site Repository WordPress Shim Support Split Slice
 
 After the `wpdb` double split, the shared site repository test harness still grouped local WordPress shims with production repository includes and per-test database lifecycle setup. Keep `tests/support/site-repository-test-harness.php` as the stable loader while moving the local `ARRAY_A` and `current_time()` shims into a focused support file.
