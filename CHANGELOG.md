@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 No unreleased changes.
 
+## 0.1.73 - 2026-10-09
+
+### Changed
+
+- Added display-only Diagnostics Runtime help text clarifying that Diagnostics refresh/export reads support-safe dashboard data only and does not poll clients, run remote actions, change schedules, or mutate backups.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.72 - 2026-10-08
 
 ### Changed
