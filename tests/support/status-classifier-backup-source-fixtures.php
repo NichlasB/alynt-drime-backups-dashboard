@@ -12,24 +12,28 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Backup_Source_Fixtures {
 	/**
 	 * Builds a source summary payload.
 	 *
+	 * @param array<string,mixed> $overrides Source overrides.
 	 * @return array<string,mixed>
 	 */
-	private function source_payload() {
-		return array(
-			'source_key'                => 'server',
-			'source_label'              => 'Server',
-			'configured'                => true,
-			'has_upload_evidence'       => true,
-			'queued_count'              => 0,
-			'uploaded_count'            => 1,
-			'failed_count'              => 0,
-			'remote_registry_count'     => 1,
-			'latest_uploaded_at'        => 1700000000,
-			'latest_inventory_count'    => 1,
-			'latest_inventory_evidence' => 'local_upload_registry',
-			'freshness_status'          => 'fresh',
-			'warning_count'             => 0,
-			'warnings'                  => array(),
+	private function source_payload( array $overrides = array() ) {
+		return array_merge(
+			array(
+				'source_key'                => 'server',
+				'source_label'              => 'Server',
+				'configured'                => true,
+				'has_upload_evidence'       => true,
+				'queued_count'              => 0,
+				'uploaded_count'            => 1,
+				'failed_count'              => 0,
+				'remote_registry_count'     => 1,
+				'latest_uploaded_at'        => 1700000000,
+				'latest_inventory_count'    => 1,
+				'latest_inventory_evidence' => 'local_upload_registry',
+				'freshness_status'          => 'fresh',
+				'warning_count'             => 0,
+				'warnings'                  => array(),
+			),
+			$overrides
 		);
 	}
 
@@ -42,10 +46,7 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Backup_Source_Fixtures {
 	 */
 	private function backup_sources_payload( array $wpvivid_overrides = array(), array $server_overrides = array() ) {
 		return array(
-			'server'  => array_merge(
-				$this->source_payload(),
-				$server_overrides
-			),
+			'server'  => $this->source_payload( $server_overrides ),
 			'wpvivid' => $this->wpvivid_source_payload( $wpvivid_overrides ),
 		);
 	}
@@ -57,13 +58,14 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Backup_Source_Fixtures {
 	 * @return array<string,mixed>
 	 */
 	private function wpvivid_source_payload( array $overrides = array() ) {
-		return array_merge(
-			$this->source_payload(),
-			array(
-				'source_key'   => 'wpvivid',
-				'source_label' => 'WPvivid',
-			),
-			$overrides
+		return $this->source_payload(
+			array_merge(
+				array(
+					'source_key'   => 'wpvivid',
+					'source_label' => 'WPvivid',
+				),
+				$overrides
+			)
 		);
 	}
 }

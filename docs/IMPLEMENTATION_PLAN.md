@@ -1918,6 +1918,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, classifier behavior, source-policy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, remote-action, or client-site behavior changes.
 
+### Status Classifier Source Evidence Fixture Reuse Slice
+
+After the classifier source fixture helpers were reused by baseline and WPvivid policy tests, the generic source-evidence classifier tests still hand-merged source summary arrays for queue-warning, stale-source, and not-configured evidence cases. Keep the production classifier unchanged and let the shared source helper accept source overrides directly.
+
+Implementation status: implemented locally as a test-only structure cleanup. `source_payload()` now accepts optional overrides, and `tests/StatusClassifierSourceEvidenceTest.php` uses that helper instead of local `array_merge()` source fixtures. `backup_sources_payload()` and `wpvivid_source_payload()` continue to build the same server/WPvivid source summaries with caller overrides winning. Existing source-evidence assertions, fixture values, and classifier categories are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, remote-action behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `StatusClassifierSourceEvidenceTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, classifier behavior, source-policy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, remote-action, or client-site behavior changes.
+
 ### Event Log Audit Harness Reuse Slice
 
 The audit-history test still carried a local copy of the event-log option shims and direct include list after the shared event-log harness existed. Keep audit behavior unchanged and move the one audit-specific current-user shim into `tests/support/event-log-test-harness.php`, then have `tests/EventLogAuditTest.php` reuse that harness like the main event-log test.

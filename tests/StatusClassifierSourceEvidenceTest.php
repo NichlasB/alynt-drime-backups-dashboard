@@ -44,13 +44,12 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 					$this->healthy_payload(),
 					array(
 						'backup_sources' => array(
-							'server' => array_merge(
-								$this->source_payload(),
+							'server' => $this->source_payload(
 								array(
-									'queued_count'      => 1,
-									'freshness_status'  => 'fresh',
-									'warning_count'     => 1,
-									'warnings'          => array(
+									'queued_count'     => 1,
+									'freshness_status' => 'fresh',
+									'warning_count'    => 1,
+									'warnings'         => array(
 										array(
 											'code'    => 'source_queue_not_empty',
 											'message' => 'Queued package waiting to upload.',
@@ -81,8 +80,7 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 					$this->healthy_payload(),
 					array(
 						'backup_sources' => array(
-							'server' => array_merge(
-								$this->source_payload(),
+							'server' => $this->source_payload(
 								array(
 									'freshness_status' => 'stale',
 								)
@@ -135,16 +133,14 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 						'server_outbox_configured'    => true,
 						'wpvivid_override_configured' => true,
 						'backup_sources'              => array(
-							'server'  => array_merge(
-								$this->source_payload(),
+							'server'  => $this->source_payload(
 								array(
 									'configured'          => false,
 									'has_upload_evidence' => false,
 									'freshness_status'    => 'not_configured',
 								)
 							),
-							'wpvivid' => array_merge(
-								$this->source_payload(),
+							'wpvivid' => $this->source_payload(
 								array(
 									'configured'          => false,
 									'has_upload_evidence' => false,
