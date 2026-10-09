@@ -25,16 +25,9 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 			array_merge(
 				$this->payload(),
 				array(
-					'backup_sources' => array(
-						'server'      => $this->source_payload(
+					'backup_sources' => array_merge(
+						$this->backup_sources_payload(
 							array(
-								'source_label' => '<b>Server runner</b>',
-								'extra_field'  => 'ignored',
-							)
-						),
-						'wpvivid'     => $this->source_payload(
-							array(
-								'source_key'       => 'wpvivid',
 								'freshness_status' => 'fresh',
 								'schedule_policy'  => array(
 									'detected'              => true,
@@ -46,11 +39,17 @@ class StatusPayloadValidatorBackupSourcesTest extends TestCase {
 									'policy_window_seconds' => 777600,
 									'raw_option'            => 'ignored',
 								),
+							),
+							array(
+								'source_label' => '<b>Server runner</b>',
+								'extra_field'  => 'ignored',
 							)
 						),
-						'unsupported' => array(
-							'configured' => true,
-						),
+						array(
+							'unsupported' => array(
+								'configured' => true,
+							),
+						)
 					),
 				)
 			)

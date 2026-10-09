@@ -3660,6 +3660,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Payload Validator Backup Sources Helper Reuse Slice
+
+The backup-source payload-validator test still assembled server/WPvivid source maps inline even though its support fixture already owns individual source payload construction. Keep the test focused on allowlisting and sanitization assertions by adding validator-specific backup-sources and WPvivid source helpers.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/status-payload-validator-backup-source-fixtures.php` now provides `backup_sources_payload()` and `wpvivid_source_payload()`, and `tests/StatusPayloadValidatorBackupSourcesTest.php` reuses them for allowlisted server/WPvivid coverage while preserving the same source payload values, unsupported-source input, schedule-policy sanitization expectations, bounds checks, forbidden-field rejection, and error-code assertions. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-payload validator backup-source coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
