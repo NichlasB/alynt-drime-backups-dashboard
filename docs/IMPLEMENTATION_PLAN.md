@@ -2954,6 +2954,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Poller Captured HTTP Client Fixture Helper Slice
+
+After the HTTP client fixture split, the successful manual-poll test still created a one-off HTTP callback to capture request details while returning the same successful status payload response shape already covered by the shared fixture trait. Keep poller behavior and request assertions unchanged while centralizing the captured-response test double.
+
+Implementation status: implemented locally as a test-only support cleanup. `tests/support/poller-http-client-fixtures.php` now exposes `successful_capturing_http_client()` for tests that need both a successful status response and request capture. `tests/PollerTest.php` uses that helper while retaining its URL, cache-bust, method, authorization, snapshot, and site-update assertions. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `PollerTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Reconciler Repository Double Split Slice
 
 The remote-action reconciler test harness still grouped the fake action repository double and shared reconciler payload fixtures together. Keep `tests/support/remote-action-reconciler-test-harness.php` as the stable loader while moving the repository double into a focused support file.

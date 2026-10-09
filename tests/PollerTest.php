@@ -27,19 +27,7 @@ class PollerTest extends TestCase {
 		$sites      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $site );
 		$snapshots  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();
 		$captured   = array();
-		$http_client = function ( $url, $args ) use ( &$captured ) {
-			$captured = array(
-				'url'  => $url,
-				'args' => $args,
-			);
-
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode( $this->payload() ),
-			);
-		};
+		$http_client = $this->successful_capturing_http_client( $captured );
 		$poller     = $this->poller( $sites, $snapshots, $vault, $http_client );
 
 		$result = $poller->check_status_now( 77 );
