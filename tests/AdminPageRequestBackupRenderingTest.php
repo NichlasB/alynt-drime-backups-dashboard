@@ -22,25 +22,7 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site    = $this->request_backup_site();
 		$snapshot = $this->request_backup_snapshot();
-		$history  = array(
-			array(
-				'action_type'           => 'scan_upload_now',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-08-20 12:00:00',
-				'result_summary'        => 'Stored locally only.',
-				'client_result_summary' => 'Scan completed safely.',
-				'client_counts_json'    => wp_json_encode(
-					array(
-						'found'            => 2,
-						'queued'           => 0,
-						'already_known'    => 1,
-						'upload_attempted' => 1,
-						'failed'           => 0,
-					)
-				),
-			),
-		);
+		$history  = array( $this->request_backup_history_row() );
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
 
 		$this->assertStringContainsString( 'Request Backup Now', $html );
@@ -164,6 +146,31 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 					),
 					$remote_action_overrides
 				),
+			),
+		);
+	}
+
+	/**
+	 * Builds a successful request-backup history row fixture.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function request_backup_history_row() {
+		return array(
+			'action_type'           => 'scan_upload_now',
+			'state'                 => 'succeeded',
+			'client_state'          => 'succeeded',
+			'requested_at'          => '2026-08-20 12:00:00',
+			'result_summary'        => 'Stored locally only.',
+			'client_result_summary' => 'Scan completed safely.',
+			'client_counts_json'    => wp_json_encode(
+				array(
+					'found'            => 2,
+					'queued'           => 0,
+					'already_known'    => 1,
+					'upload_attempted' => 1,
+					'failed'           => 0,
+				)
 			),
 		);
 	}

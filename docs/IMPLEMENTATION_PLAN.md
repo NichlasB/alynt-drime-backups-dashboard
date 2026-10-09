@@ -3502,6 +3502,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Request Backup Rendering History Fixture Helper Slice
+
+The request-backup rendering test still embedded a successful remote-action history row directly inside the primary assertion. Keep the test class focused on rendering assertions while moving that deterministic action-history row into a small local fixture helper.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/AdminPageRequestBackupRenderingTest.php` now builds the successful request-backup history row through a helper while preserving the same action type, state, client state, timestamps, summaries, count payload, rendered history assertions, and V2.1 request-backup UI coverage. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, backup behavior, release behavior, deployment state, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused request-backup rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, backup behavior, release behavior, deployment state, restore, cleanup/delete apply, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
