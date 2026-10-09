@@ -3562,6 +3562,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Cleanup Preview Rendering Snapshot Fixture Move Slice
+
+The cleanup-preview rendering test still owned a reusable cleanup-preview remote-action snapshot helper even though the shared remote-action rendering fixture trait already supports related Site Detail history and snapshot fixtures. Keep the cleanup-preview test focused on rendering assertions while moving the deterministic snapshot builder into the shared fixture trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `cleanup_preview_snapshot()` now lives in `tests/support/admin-page-remote-action-rendering-fixtures.php`, and `tests/AdminPageCleanupPreviewRenderingTest.php` reuses it through the existing trait while preserving the same remote-action payload defaults, cleanup-management defaults, latest preview evidence fixture, supported/unsupported capability coverage, and preview-only assertions. No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused cleanup-preview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
