@@ -2954,6 +2954,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Enrollment REST Site/Payload Fixture Split Slice
+
+After the request fixture split, the enrollment REST controller test harness still grouped controller construction with pending-site and enrollment payload builders. Keep `tests/support/enrollment-rest-controller-test-harness.php` as the stable loader while moving site/payload construction into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Pending enrollment site-row and enrollment payload builders now live in `tests/support/enrollment-rest-controller-site-payload-fixtures.php`, and the existing enrollment REST fixture trait composes them alongside request fixtures while retaining the same loader path, trait name, `pending_site()` helper, `payload()` helper, fixture values, and enrollment assertions. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused enrollment REST controller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, enrollment behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Action Audit Doubles Split Slice
 
 The admin action-audit test harness still grouped the fake enrollment manager, fake event log, and trait-action harness together. Keep `tests/support/admin-page-action-audit-test-harness.php` as the stable loader while moving the two doubles into a focused support file.
