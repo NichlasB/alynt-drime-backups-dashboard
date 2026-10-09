@@ -3026,6 +3026,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Poller Successful HTTP Response Fixture Helper Slice
+
+After adding captured and counting HTTP client helpers, `tests/support/poller-http-client-fixtures.php` repeated the same successful status response array in each helper. Keep the existing helper names and test behavior unchanged while centralizing the response payload construction inside the fixture trait.
+
+Implementation status: implemented locally as a test-only support cleanup. The poller HTTP fixture trait now uses `successful_http_response()` from `successful_http_client()`, `successful_capturing_http_client()`, and `successful_counting_http_client()`. The successful response code, payload override behavior, request capture behavior, and call-count behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused poller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Reconciler Repository Double Split Slice
 
 The remote-action reconciler test harness still grouped the fake action repository double and shared reconciler payload fixtures together. Keep `tests/support/remote-action-reconciler-test-harness.php` as the stable loader while moving the repository double into a focused support file.

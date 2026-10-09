@@ -17,17 +17,7 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Http_Client_Fixtures {
 	 */
 	private function successful_http_client( array $payload_overrides = array() ) {
 		return function () use ( $payload_overrides ) {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode(
-					array_merge(
-						$this->payload(),
-						$payload_overrides
-					)
-				),
-			);
+			return $this->successful_http_response( $payload_overrides );
 		};
 	}
 
@@ -45,17 +35,7 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Http_Client_Fixtures {
 				'args' => $args,
 			);
 
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode(
-					array_merge(
-						$this->payload(),
-						$payload_overrides
-					)
-				),
-			);
+			return $this->successful_http_response( $payload_overrides );
 		};
 	}
 
@@ -70,17 +50,27 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Http_Client_Fixtures {
 		return function () use ( &$calls, $payload_overrides ) {
 			++$calls;
 
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode(
-					array_merge(
-						$this->payload(),
-						$payload_overrides
-					)
-				),
-			);
+			return $this->successful_http_response( $payload_overrides );
 		};
+	}
+
+	/**
+	 * Creates a successful status HTTP response fixture.
+	 *
+	 * @param array<string,mixed> $payload_overrides Payload overrides.
+	 * @return array<string,mixed>
+	 */
+	private function successful_http_response( array $payload_overrides = array() ) {
+		return array(
+			'response' => array(
+				'code' => 200,
+			),
+			'body'     => wp_json_encode(
+				array_merge(
+					$this->payload(),
+					$payload_overrides
+				)
+			),
+		);
 	}
 }
