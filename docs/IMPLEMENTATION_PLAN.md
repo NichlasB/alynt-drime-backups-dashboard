@@ -2810,6 +2810,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote Action Reconciler Client Report Methods Split Slice
+
+After the repository double split, the fake remote-action reconciler repository still grouped client-report lookup/recording helpers with stale-maintenance helpers. Keep `tests/support/remote-action-reconciler-action-repository-double.php` as the stable fake repository loader while moving client-report lookup and recording methods into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Public-ID lookup and client-report recording methods now live in `tests/support/remote-action-reconciler-client-report-methods.php`, and the existing fake repository composes them alongside the stale-maintenance trait. The fake class name, public properties, method signatures, lookup capture, client-report capture, stale-maintenance behavior, and existing reconciler assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action reconciler coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Dispatcher Schedule Lookup Double Split Slice
 
 The remote-action dispatcher action repository double still grouped fixed schedule-preview/apply lookup responses with request/state recording helpers. Keep `tests/support/remote-action-dispatcher-actions-double.php` as the stable loader while moving schedule lookup responses into a focused support trait.
