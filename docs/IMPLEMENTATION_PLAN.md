@@ -798,6 +798,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Dispatcher WordPress Shim Bootstrap Split Slice
+
+After the dispatcher test-class split, `tests/support/remote-action-dispatcher-test-bootstrap.php` still grouped local WordPress shims with the fake `wpdb` lifecycle setup trait. Keep the dispatcher bootstrap path stable while moving the local `ARRAY_A`, `current_time()`, and `home_url()` shims into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. Dispatcher-local WordPress shims now live in `tests/support/remote-action-dispatcher-wordpress-shims.php`, and the existing dispatcher test bootstrap loads them before the shared dispatcher harness and fake `wpdb` setup trait. Shim behavior, fake current time, fake control origin, dispatcher fixtures, fake `wpdb` setup, and dispatcher assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, dispatcher behavior, safe transport behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action dispatcher coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, dispatcher behavior, safe transport behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Status Payload Validator Test Class Split Slice
 
 `StatusPayloadValidatorTest` still grouped base schema validation, backup-source sanitization, remote-action capability sanitization, and restore-readiness sanitization into one test file. The next safe test-only cleanup is to split those assertion groups into focused validator test classes while preserving the same shared fixture data, validator production code, allowlist/security behavior, protocol behavior, schema handling, and live-site state.
