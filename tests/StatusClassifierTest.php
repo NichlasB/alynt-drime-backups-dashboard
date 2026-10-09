@@ -153,18 +153,4 @@ class StatusClassifierTest extends TestCase {
 		$this->assertSame( 'working', $result['category'] );
 	}
 
-	/**
-	 * Classifies an active-site snapshot payload at the default fixture time.
-	 *
-	 * @param array<string,mixed> $payload Payload.
-	 * @return array<string,mixed>
-	 */
-	private function classify_payload( array $payload ) {
-		return $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot( $payload ),
-			1700000300
-		);
-	}
-
 }
