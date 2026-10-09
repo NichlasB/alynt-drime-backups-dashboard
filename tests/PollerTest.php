@@ -22,7 +22,7 @@ class PollerTest extends TestCase {
 	 * @return void
 	 */
 	public function test_check_status_now_records_snapshot_and_marks_success() {
-		$vault      = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
+		$vault      = $this->vault();
 		$site       = $this->site( $vault );
 		$sites      = new Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository( $site );
 		$snapshots  = new Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository();

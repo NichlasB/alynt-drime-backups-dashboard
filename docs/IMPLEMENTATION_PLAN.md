@@ -3062,6 +3062,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Poller Manual Test Vault Fixture Helper Slice
+
+After the scheduled poller fixture cleanup, `PollerTest` still constructed the deterministic credential vault inline even though the shared poller fixture trait already exposes `vault()`. Keep the manual poll assertions unchanged while reusing the shared vault fixture.
+
+Implementation status: implemented locally as a test-only readability cleanup. `tests/PollerTest.php` now uses the shared `vault()` helper before building its site row, repositories, captured HTTP client, and poller instance. Snapshot, request, authorization, success, plugin-version, next-poll, and no-failure assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `PollerTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Reconciler Repository Double Split Slice
 
 The remote-action reconciler test harness still grouped the fake action repository double and shared reconciler payload fixtures together. Keep `tests/support/remote-action-reconciler-test-harness.php` as the stable loader while moving the repository double into a focused support file.
