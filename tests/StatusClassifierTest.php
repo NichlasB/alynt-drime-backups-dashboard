@@ -116,22 +116,14 @@ class StatusClassifierTest extends TestCase {
 				$this->healthy_payload(),
 				array(
 					'failed_count'   => 1,
-					'backup_sources' => array(
-						'server'  => array_merge(
-							$this->source_payload(),
-							array(
-								'failed_count' => 1,
-							)
+					'backup_sources' => $this->backup_sources_payload(
+						array(
+							'failed_count'   => 0,
+							'queued_count'   => 0,
+							'uploaded_count' => 1,
 						),
-						'wpvivid' => array_merge(
-							$this->source_payload(),
-							array(
-								'source_key'     => 'wpvivid',
-								'source_label'   => 'WPvivid',
-								'failed_count'   => 0,
-								'queued_count'   => 0,
-								'uploaded_count' => 1,
-							)
+						array(
+							'failed_count' => 1,
 						),
 					),
 				)

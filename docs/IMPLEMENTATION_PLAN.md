@@ -1906,6 +1906,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, classifier behavior, source-policy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, remote-action, or client-site behavior changes.
 
+### Status Classifier Baseline Backup Source Fixture Reuse Slice
+
+After adding shared WPvivid/source fixture helpers, the baseline classifier test still carried an inline server/WPvivid source payload for the historical failed-count assertion. Keep the production classifier unchanged and reuse the shared helper so baseline and WPvivid policy tests build source fixtures through the same support path.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/StatusClassifierTest.php` now uses `backup_sources_payload()` for the historical failed-count source fixture, preserving the same server failed-count override, healthy WPvivid current evidence, expected `Working` category, and assertion value. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, remote-action behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `StatusClassifierTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, classifier behavior, source-policy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, remote-action, or client-site behavior changes.
+
 ### Event Log Audit Harness Reuse Slice
 
 The audit-history test still carried a local copy of the event-log option shims and direct include list after the shared event-log harness existed. Keep audit behavior unchanged and move the one audit-specific current-user shim into `tests/support/event-log-test-harness.php`, then have `tests/EventLogAuditTest.php` reuse that harness like the main event-log test.
