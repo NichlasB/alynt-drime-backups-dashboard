@@ -37,24 +37,20 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 	 * @return void
 	 */
 	public function test_configured_wpvivid_without_upload_evidence_needs_attention() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot(
-				array_merge(
-					$this->healthy_payload(),
-					array(
-						'backup_sources' => $this->backup_sources_payload(
-							array(
-								'has_upload_evidence'    => false,
-								'freshness_status'       => 'no_upload_evidence',
-								'latest_uploaded_at'     => 0,
-								'latest_inventory_count' => 0,
-							)
-						),
-					)
+		$result = $this->classify_payload(
+			array_merge(
+				$this->healthy_payload(),
+				array(
+					'backup_sources' => $this->backup_sources_payload(
+						array(
+							'has_upload_evidence'    => false,
+							'freshness_status'       => 'no_upload_evidence',
+							'latest_uploaded_at'     => 0,
+							'latest_inventory_count' => 0,
+						)
+					),
 				)
-			),
-			1700000300
+			)
 		);
 
 		$this->assertSame( 'needs_attention', $result['category'] );
@@ -66,15 +62,7 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 	 * @return void
 	 */
 	public function test_external_optional_wpvivid_missing_upload_evidence_is_working() {
-		$classifier = new Alynt_Drime_Backups_Dashboard_Status_Classifier(
-			new Alynt_Drime_Backups_Dashboard_Source_Policy(
-				array(
-					'12' => array(
-						'wpvivid' => 'external_optional',
-					),
-				)
-			)
-		);
+		$classifier = $this->external_optional_classifier();
 
 		$result = $classifier->classify(
 			array_merge(
@@ -117,15 +105,7 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 	 * @return void
 	 */
 	public function test_external_optional_wpvivid_failed_upload_still_needs_attention() {
-		$classifier = new Alynt_Drime_Backups_Dashboard_Status_Classifier(
-			new Alynt_Drime_Backups_Dashboard_Source_Policy(
-				array(
-					'12' => array(
-						'wpvivid' => 'external_optional',
-					),
-				)
-			)
-		);
+		$classifier = $this->external_optional_classifier();
 
 		$result = $classifier->classify(
 			array_merge(
@@ -152,6 +132,23 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 		);
 
 		$this->assertSame( 'needs_attention', $result['category'] );
+	}
+
+	/**
+	 * Builds a classifier with WPvivid marked as external optional for site 12.
+	 *
+	 * @return Alynt_Drime_Backups_Dashboard_Status_Classifier
+	 */
+	private function external_optional_classifier() {
+		return new Alynt_Drime_Backups_Dashboard_Status_Classifier(
+			new Alynt_Drime_Backups_Dashboard_Source_Policy(
+				array(
+					'12' => array(
+						'wpvivid' => 'external_optional',
+					),
+				)
+			)
+		);
 	}
 
 }

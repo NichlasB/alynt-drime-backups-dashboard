@@ -3598,6 +3598,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Classifier WPvivid Policy Helper Reuse Slice
+
+The WPvivid policy classifier test repeated both the default active-site classification wrapper and the external-optional source-policy classifier construction. Keep the tests focused on source-policy outcomes by reusing the shared classification helper where possible and centralizing the external-optional classifier fixture.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/StatusClassifierWpvividPolicyTest.php` now uses `classify_payload()` for default configured WPvivid upload-evidence coverage and a local `external_optional_classifier()` helper for site-12 external-optional policy cases. The payloads, source-policy mapping, site ID, timestamps, category expectations, and failure/working behavior remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused WPvivid policy classifier coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
