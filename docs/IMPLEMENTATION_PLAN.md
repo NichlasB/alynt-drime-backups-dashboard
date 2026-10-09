@@ -1942,6 +1942,18 @@ Acceptance criteria:
 - Bootstrap still loads the same shim definitions before plugin loading.
 - No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### WordPress Error Shim Class Split Slice
+
+The WordPress error shim support file still grouped the `WP_Error` class shim with the `is_wp_error()` helper shim. Keep `tests/support/wordpress-shims-errors.php` as the stable error-shim loader while moving the class definition into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The minimal `WP_Error` class shim now lives in `tests/support/wordpress-shims-error-class.php`, and `tests/support/wordpress-shims-errors.php` requires it before defining `is_wp_error()`. The shared `tests/support/wordpress-shims.php` loader path, effective shim order, class/function behavior, and existing tests remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- Bootstrap still loads the same error shim behavior before plugin loading.
+- No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### WordPress Formatting Shim Support Split Slice
 
 The WordPress formatting shim support file still grouped i18n, escaping, sanitization, unslashing, and JSON encoding shims together. Keep `tests/support/wordpress-shims-formatting.php` as the stable loader path while splitting those definitions into focused support files in the same effective load order.
