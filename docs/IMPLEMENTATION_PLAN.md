@@ -1095,6 +1095,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, enrollment behavior, pairing token behavior, origin validation, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Enrollment Manager Repository Double Split Slice
+
+The enrollment manager support harness still grouped production includes, the fake site repository, and the token-secret helper trait in one loader file. Keep `tests/support/enrollment-manager-test-harness.php` as the stable test entry point while moving the repository double into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. `Alynt_Drime_Backups_Dashboard_Test_Site_Repository` now lives in `tests/support/enrollment-manager-site-repository-double.php`, and `tests/support/enrollment-manager-test-harness.php` loads it after the production enrollment manager dependencies. The fake repository class name, insert capture, create-result override, active-pending fixture behavior, token-secret helper, and enrollment assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused enrollment manager coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, enrollment behavior, pairing token behavior, origin validation, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Page Request Backup Row Hint Test Class Split Slice
 
 `AdminPageRequestBackupRenderingTest` still grouped compact Sites-row V2.1 hints with Site Detail Request Backup panel rendering. The next safe test-only cleanup is to move row-hint assertions into a focused class while preserving the same V2.1 capability copy, latest client action hint, opt-in-needed hint, detail-panel form gating, action-history rendering, and live-site state.
