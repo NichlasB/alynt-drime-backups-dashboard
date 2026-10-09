@@ -2990,6 +2990,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Schedule-Management Payload Fixture Split Slice
+
+After the schedule-management fixture split, the support trait still grouped site/snapshot row builders with the larger remote-action schedule-management payload builder. Keep `tests/support/diagnostics-schedule-management-fixtures.php` as the stable aggregate fixture loader while moving payload construction into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Schedule-management payload construction now lives in `tests/support/diagnostics-schedule-management-payload-fixtures.php`, and the stable schedule-management fixture trait composes that payload trait while retaining the same public fixture methods, payload values, aggregate assertions, support-safe redaction checks, production diagnostics behavior, and support-copy shape. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused schedule-management aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Cleanup-Preview Fixture Split Slice
 
 The cleanup-preview aggregate test still grouped site rows, snapshot rows, and remote-action cleanup-management payloads directly inside the assertion method. Keep `tests/DiagnosticsCleanupPreviewAggregatesTest.php` focused on aggregate/support-copy assertions while moving the cleanup-preview site/snapshot/payload fixtures into a dedicated support trait.
