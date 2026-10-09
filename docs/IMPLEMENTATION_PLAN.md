@@ -1978,6 +1978,18 @@ Acceptance criteria:
 - Bootstrap still loads the same shim definitions before plugin loading.
 - No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### WordPress JSON Shim Support Split Slice
+
+The WordPress sanitization shim support file still grouped sanitization/unslashing helpers with the JSON encoding helper. Keep `tests/support/wordpress-shims-sanitization.php` as the stable loader path while moving the JSON shim into a focused support file.
+
+Implementation status: implemented locally as a test-only structure cleanup. The minimal `wp_json_encode()` shim now lives in `tests/support/wordpress-shims-json.php`, and `tests/support/wordpress-shims-sanitization.php` loads it before defining sanitization helpers. The effective formatting shim loader path and JSON encoding behavior are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- Bootstrap still loads the same JSON shim behavior before plugin loading.
+- No production code, bootstrap behavior, shim behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### WordPress Admin Shim Support Split Slice
 
 The WordPress core shim support file still grouped generic plugin/path/hook shims with admin URL, query-argument, management-page, and nocache-header shims. Keep `tests/support/wordpress-shims.php` as the stable loader and move admin/url response helpers into a focused support file without changing effective shim behavior.

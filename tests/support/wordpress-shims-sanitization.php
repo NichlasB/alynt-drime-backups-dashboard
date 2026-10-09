@@ -1,9 +1,11 @@
 <?php
 /**
- * Minimal sanitization and encoding WordPress shims for pure unit tests.
+ * Minimal sanitization WordPress shims for pure unit tests.
  *
  * @package Alynt_Drime_Backups_Dashboard
  */
+
+require_once __DIR__ . '/wordpress-shims-json.php';
 
 if ( ! function_exists( 'absint' ) ) {
 	/**
@@ -62,19 +64,5 @@ if ( ! function_exists( 'wp_unslash' ) ) {
 	 */
 	function wp_unslash( $value ) {
 		return $value;
-	}
-}
-
-if ( ! function_exists( 'wp_json_encode' ) ) {
-	/**
-	 * Minimal wp_json_encode shim.
-	 *
-	 * @param mixed $value Value to encode.
-	 * @param int   $flags Flags.
-	 * @param int   $depth Depth.
-	 * @return string|false
-	 */
-	function wp_json_encode( $value, $flags = 0, $depth = 512 ) {
-		return json_encode( $value, $flags, $depth );
 	}
 }
