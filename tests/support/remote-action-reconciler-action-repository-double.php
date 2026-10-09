@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/remote-action-reconciler-stale-methods.php';
+
 /**
  * Fake action repository for reconciliation tests.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Reconciler_Action_Repository extends Alynt_Drime_Backups_Dashboard_Remote_Action_Repository {
+	use Alynt_Drime_Backups_Dashboard_Test_Reconciler_Stale_Methods;
+
 	/**
 	 * Stored row.
 	 *
@@ -29,13 +33,6 @@ class Alynt_Drime_Backups_Dashboard_Test_Reconciler_Action_Repository extends Al
 	 * @var array<string,mixed>
 	 */
 	public $client_report = array();
-
-	/**
-	 * Stale update count.
-	 *
-	 * @var int
-	 */
-	public $stale = 0;
 
 	/**
 	 * Constructor.
@@ -74,18 +71,5 @@ class Alynt_Drime_Backups_Dashboard_Test_Reconciler_Action_Repository extends Al
 		);
 
 		return true;
-	}
-
-	/**
-	 * Marks stale actions.
-	 *
-	 * @param int         $site_id Site ID.
-	 * @param string|null $now Now.
-	 * @return int
-	 */
-	public function mark_unconfirmed_actions_stale_for_site( $site_id, $now = null ) {
-		unset( $site_id, $now );
-
-		return $this->stale;
 	}
 }
