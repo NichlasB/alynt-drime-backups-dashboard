@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/diagnostics-local-removal-site-fixtures.php';
+
 /**
  * Shared local-removal readiness fixture builders.
  */
 trait Alynt_Drime_Backups_Dashboard_Diagnostics_Local_Removal_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Local_Removal_Site_Fixtures;
+
 	/**
 	 * Creates local-removal readiness test sites.
 	 *
@@ -69,27 +73,6 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Local_Removal_Fixtures {
 	private function local_removal_non_terminal_action_counts() {
 		return array(
 			2 => 1,
-		);
-	}
-
-	/**
-	 * Creates an archived revoked local record.
-	 *
-	 * @param int    $site_id Site ID.
-	 * @param string $archived_at Archived timestamp.
-	 * @return array<string,mixed>
-	 */
-	private function archived_revoked_site( $site_id, $archived_at ) {
-		return $this->site(
-			$site_id,
-			array(
-				'enrollment_status'         => 'revoked',
-				'overall_status'            => 'pending',
-				'polling_key_id'            => '',
-				'polling_secret_ciphertext' => '',
-				'next_poll_at'              => '',
-				'archived_at'               => $archived_at,
-			)
 		);
 	}
 }
