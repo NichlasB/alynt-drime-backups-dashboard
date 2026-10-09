@@ -20,24 +20,8 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 	 */
 	public function test_request_backup_now_panel_renders_dispatch_form_and_safe_history() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'id'                           => 7,
-			'enrollment_status'  => 'active',
-			'polling_key_id'     => 'key-id',
-			'has_polling_secret' => '1',
-			'action_key_id'                => 'ak_test',
-			'action_private_key_ciphertext' => 'ciphertext',
-		);
-		$snapshot = array(
-			'decoded_payload' => array(
-				'remote_actions' => array(
-					'protocol_version'   => 2,
-					'enabled'            => true,
-					'allowed_actions'    => array( 'scan_upload_now' ),
-					'sodium_available'   => true,
-				),
-			),
-		);
+		$site    = $this->request_backup_site();
+		$snapshot = $this->request_backup_snapshot();
 		$history  = array(
 			array(
 				'action_type'           => 'scan_upload_now',
@@ -82,24 +66,13 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 	 */
 	public function test_request_backup_now_panel_requires_local_signing_key_when_detail_fields_are_loaded() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'id'                            => 7,
-			'enrollment_status'             => 'active',
-			'polling_key_id'                => 'key-id',
-			'has_polling_secret'            => '1',
-			'action_key_id'                 => '',
-			'action_private_key_ciphertext' => '',
+		$site    = $this->request_backup_site(
+			array(
+				'action_key_id'                 => '',
+				'action_private_key_ciphertext' => '',
+			)
 		);
-		$snapshot = array(
-			'decoded_payload' => array(
-				'remote_actions' => array(
-					'protocol_version' => 2,
-					'enabled'          => true,
-					'allowed_actions'  => array( 'scan_upload_now' ),
-					'sodium_available' => true,
-				),
-			),
-		);
+		$snapshot = $this->request_backup_snapshot();
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, array() );
 
 		$this->assertStringContainsString( 'encrypted signing key', $html );
@@ -113,11 +86,7 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 	 */
 	public function test_request_backup_now_panel_explains_missing_capability() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'enrollment_status'  => 'active',
-			'polling_key_id'     => 'key-id',
-			'has_polling_secret' => '1',
-		);
+		$site    = $this->request_backup_site();
 		$html    = $harness->request_backup_panel_html(
 			$site,
 			array(
@@ -141,29 +110,62 @@ class AdminPageRequestBackupRenderingTest extends TestCase {
 	 */
 	public function test_request_backup_now_panel_explains_disabled_v2_capability() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = array(
-			'enrollment_status'  => 'active',
-			'polling_key_id'     => 'key-id',
-			'has_polling_secret' => '1',
-		);
-		$payload = array(
-			'remote_actions' => array(
-				'protocol_version'   => 2,
-				'enabled'            => false,
-				'allowed_actions'    => array(),
-				'sodium_available'   => true,
-			),
-		);
+		$site    = $this->request_backup_site();
 		$html    = $harness->request_backup_panel_html(
 			$site,
-			array(
-				'decoded_payload' => $payload,
+			$this->request_backup_snapshot(
+				array(
+					'enabled'         => false,
+					'allowed_actions' => array(),
+				)
 			),
 			array()
 		);
 
 		$this->assertStringContainsString( 'understands V2.1 remote actions', $html );
 		$this->assertStringContainsString( 'Generate V2 Opt-In Token', $html );
+	}
+
+	/**
+	 * Builds a request-backup detail site row fixture.
+	 *
+	 * @param array<string,mixed> $overrides Site row overrides.
+	 * @return array<string,mixed>
+	 */
+	private function request_backup_site( array $overrides = array() ) {
+		return array_merge(
+			array(
+				'id'                            => 7,
+				'enrollment_status'             => 'active',
+				'polling_key_id'                => 'key-id',
+				'has_polling_secret'            => '1',
+				'action_key_id'                 => 'ak_test',
+				'action_private_key_ciphertext' => 'ciphertext',
+			),
+			$overrides
+		);
+	}
+
+	/**
+	 * Builds a request-backup remote-action snapshot fixture.
+	 *
+	 * @param array<string,mixed> $remote_action_overrides Remote-action overrides.
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function request_backup_snapshot( array $remote_action_overrides = array() ) {
+		return array(
+			'decoded_payload' => array(
+				'remote_actions' => array_merge(
+					array(
+						'protocol_version' => 2,
+						'enabled'          => true,
+						'allowed_actions'  => array( 'scan_upload_now' ),
+						'sodium_available' => true,
+					),
+					$remote_action_overrides
+				),
+			),
+		);
 	}
 
 }
