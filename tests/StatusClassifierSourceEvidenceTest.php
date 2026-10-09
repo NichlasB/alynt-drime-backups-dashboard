@@ -37,31 +37,27 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 	 * @return void
 	 */
 	public function test_source_queue_warning_alone_is_working() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot(
-				array_merge(
-					$this->healthy_payload(),
-					array(
-						'backup_sources' => array(
-							'server' => $this->source_payload(
-								array(
-									'queued_count'     => 1,
-									'freshness_status' => 'fresh',
-									'warning_count'    => 1,
-									'warnings'         => array(
-										array(
-											'code'    => 'source_queue_not_empty',
-											'message' => 'Queued package waiting to upload.',
-										),
+		$result = $this->classify_payload(
+			array_merge(
+				$this->healthy_payload(),
+				array(
+					'backup_sources' => array(
+						'server' => $this->source_payload(
+							array(
+								'queued_count'     => 1,
+								'freshness_status' => 'fresh',
+								'warning_count'    => 1,
+								'warnings'         => array(
+									array(
+										'code'    => 'source_queue_not_empty',
+										'message' => 'Queued package waiting to upload.',
 									),
-								)
-							),
+								),
+							)
 						),
-					)
+					),
 				)
-			),
-			1700000300
+			)
 		);
 
 		$this->assertSame( 'working', $result['category'] );
@@ -73,23 +69,19 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 	 * @return void
 	 */
 	public function test_stale_backup_source_needs_attention() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot(
-				array_merge(
-					$this->healthy_payload(),
-					array(
-						'backup_sources' => array(
-							'server' => $this->source_payload(
-								array(
-									'freshness_status' => 'stale',
-								)
-							),
+		$result = $this->classify_payload(
+			array_merge(
+				$this->healthy_payload(),
+				array(
+					'backup_sources' => array(
+						'server' => $this->source_payload(
+							array(
+								'freshness_status' => 'stale',
+							)
 						),
-					)
+					),
 				)
-			),
-			1700000300
+			)
 		);
 
 		$this->assertSame( 'needs_attention', $result['category'] );
@@ -102,17 +94,13 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 	 * @return void
 	 */
 	public function test_no_known_source_is_not_configured() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot(
-				array(
-					'schema_version'              => 1,
-					'server_outbox_configured'    => false,
-					'wpvivid_override_configured' => false,
-					'old_wpvivid_uploader_active' => false,
-				)
-			),
-			1700000300
+		$result = $this->classify_payload(
+			array(
+				'schema_version'              => 1,
+				'server_outbox_configured'    => false,
+				'wpvivid_override_configured' => false,
+				'old_wpvivid_uploader_active' => false,
+			)
 		);
 
 		$this->assertSame( 'not_configured', $result['category'] );
@@ -124,34 +112,30 @@ class StatusClassifierSourceEvidenceTest extends TestCase {
 	 * @return void
 	 */
 	public function test_backup_sources_can_prove_not_configured() {
-		$result = $this->classifier->classify(
-			$this->active_site(),
-			$this->snapshot(
-				array_merge(
-					$this->healthy_payload(),
-					array(
-						'server_outbox_configured'    => true,
-						'wpvivid_override_configured' => true,
-						'backup_sources'              => array(
-							'server'  => $this->source_payload(
-								array(
-									'configured'          => false,
-									'has_upload_evidence' => false,
-									'freshness_status'    => 'not_configured',
-								)
-							),
-							'wpvivid' => $this->source_payload(
-								array(
-									'configured'          => false,
-									'has_upload_evidence' => false,
-									'freshness_status'    => 'not_configured',
-								)
-							),
+		$result = $this->classify_payload(
+			array_merge(
+				$this->healthy_payload(),
+				array(
+					'server_outbox_configured'    => true,
+					'wpvivid_override_configured' => true,
+					'backup_sources'              => array(
+						'server'  => $this->source_payload(
+							array(
+								'configured'          => false,
+								'has_upload_evidence' => false,
+								'freshness_status'    => 'not_configured',
+							)
 						),
-					)
+						'wpvivid' => $this->source_payload(
+							array(
+								'configured'          => false,
+								'has_upload_evidence' => false,
+								'freshness_status'    => 'not_configured',
+							)
+						),
+					),
 				)
-			),
-			1700000300
+			)
 		);
 
 		$this->assertSame( 'not_configured', $result['category'] );
