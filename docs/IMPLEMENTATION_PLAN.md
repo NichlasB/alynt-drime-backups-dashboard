@@ -2750,6 +2750,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Diagnostics Restore-Readiness Snapshot Fixture Split Slice
+
+The restore-readiness aggregate support trait still grouped site-row fixtures with the larger snapshot payload fixtures. Keep `tests/support/diagnostics-restore-readiness-fixtures.php` as the stable loader while moving restore-readiness snapshot payloads into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Restore-readiness snapshot builders now live in `tests/support/diagnostics-restore-readiness-snapshot-fixtures.php`, and the stable restore-readiness fixture trait composes that trait alongside the candidate fixture trait while retaining the same public fixture methods and values. The aggregate assertions, expected counts, redaction checks, production diagnostics behavior, and support-copy shape remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused restore-readiness aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, diagnostics behavior, support-copy shape, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Schedule-Management Fixture Split Slice
 
 The schedule-management aggregate test still grouped site rows, snapshot rows, and remote-action schedule-management payloads directly inside the assertion method. Keep `tests/DiagnosticsRemoteActionAggregatesTest.php` focused on aggregate/support-copy assertions while moving the schedule-management site/snapshot/payload fixtures into a dedicated support trait.
