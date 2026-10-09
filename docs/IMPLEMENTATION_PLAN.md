@@ -1321,6 +1321,18 @@ Acceptance criteria:
 - full dashboard tests, lint, build, and whitespace checks continue to pass;
 - no production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action Repository WPDB Read Helper Split Slice
+
+The remote-action repository fake `wpdb` query helper still grouped prepared-query capture and read-result shims. The next safe test-only structure cleanup is to move row/row-list fixtures and read methods into their own support trait while keeping the stable query helper loader path.
+
+Implementation status: implemented locally as a test-only support split. Read-result state and `get_row()` / `get_results()` shims now live in `tests/support/remote-action-repository-wpdb-read-methods.php`, and `tests/support/remote-action-repository-wpdb-query-methods.php` requires and composes that trait while retaining prepared-query and generic-query capture. The fake `wpdb` class name, public properties, SQL capture behavior, row fixtures, repository assertions, and shared harness loader remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused remote-action repository coverage passes unchanged;
+- full dashboard tests, lint, build, and whitespace checks continue to pass;
+- no production code, repository behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
+
 ### Remote Action Repository Client Report Fixture Structure Slice
 
 `RemoteActionRepositoryClientReportTest` still grouped support-safe client report assertions with bulky schedule-apply and schedule-rollback-preview report payloads. The next safe test-only cleanup is to move those reusable payload fixtures into a dedicated support trait while preserving repository assertions, sanitization expectations, support-summary behavior, production code, protocol behavior, schema, and live-site state.

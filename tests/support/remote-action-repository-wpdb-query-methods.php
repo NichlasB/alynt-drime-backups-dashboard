@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/remote-action-repository-wpdb-read-methods.php';
+
 /**
  * Provides query/read shims for the remote-action repository wpdb double.
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Remote_Action_WPDB_Query_Methods {
+	use Alynt_Drime_Backups_Dashboard_Test_Remote_Action_WPDB_Read_Methods;
+
 	/**
 	 * Prepared query.
 	 *
@@ -24,20 +28,6 @@ trait Alynt_Drime_Backups_Dashboard_Test_Remote_Action_WPDB_Query_Methods {
 	public $prepared_args = array();
 
 	/**
-	 * Result row.
-	 *
-	 * @var array<string,mixed>|null
-	 */
-	public $row = null;
-
-	/**
-	 * Result rows.
-	 *
-	 * @var array<int,array<string,mixed>>
-	 */
-	public $rows = array();
-
-	/**
 	 * Query preparation shim.
 	 *
 	 * @param string $query Query.
@@ -49,33 +39,6 @@ trait Alynt_Drime_Backups_Dashboard_Test_Remote_Action_WPDB_Query_Methods {
 		$this->prepared_args = $args;
 
 		return $query;
-	}
-
-	/**
-	 * Row retrieval shim.
-	 *
-	 * @param string $query Query.
-	 * @param string $output Output type.
-	 * @return array<string,mixed>|null
-	 */
-	public function get_row( $query, $output = ARRAY_A ) {
-		unset( $output );
-		$this->last_query = $query;
-
-		return $this->row;
-	}
-
-	/**
-	 * Row list retrieval shim.
-	 *
-	 * @param string $query Query.
-	 * @param string $output Output type.
-	 * @return array<int,array<string,mixed>>
-	 */
-	public function get_results( $query, $output = ARRAY_A ) {
-		unset( $query, $output );
-
-		return $this->rows;
 	}
 
 	/**
