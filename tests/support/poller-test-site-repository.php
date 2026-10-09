@@ -5,10 +5,13 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/poller-test-site-repository-due-methods.php';
+
 /**
  * Fake site repository for poller tests.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Drime_Backups_Dashboard_Site_Repository {
+	use Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository_Due_Methods;
 	use Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository_Write_Methods;
 
 	/**
@@ -24,20 +27,6 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	 * @var array<int,array<string,mixed>>
 	 */
 	public $sites = array();
-
-	/**
-	 * Due sites.
-	 *
-	 * @var array<int,array<string,mixed>>
-	 */
-	public $due_sites = array();
-
-	/**
-	 * Last due-for-poll query.
-	 *
-	 * @var array<string,mixed>
-	 */
-	public $due_query = array();
 
 	/**
 	 * Constructor.
@@ -69,21 +58,5 @@ class Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository extends Alynt_Dr
 	 */
 	public function get( $site_id ) {
 		return isset( $this->sites[ (int) $site_id ] ) ? $this->sites[ (int) $site_id ] : null;
-	}
-
-	/**
-	 * Gets due sites.
-	 *
-	 * @param int    $limit Limit.
-	 * @param string $now Now.
-	 * @return array<int,array<string,mixed>>
-	 */
-	public function due_for_poll( $limit = 5, $now = '' ) {
-		$this->due_query = array(
-			'limit' => $limit,
-			'now'   => $now,
-		);
-
-		return array_slice( $this->due_sites, 0, (int) $limit );
 	}
 }
