@@ -2543,6 +2543,18 @@ Acceptance criteria:
 - Schedule-management and schedule rollback-preview rendering tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Admin Schedule Management Action Lookup Double Split Slice
+
+After the action repository double split, the fake schedule-management action repository still grouped recent-history responses with fresh schedule-apply and rollback-preview lookup responses. Keep `tests/support/admin-page-schedule-management-actions-double.php` as the stable fake repository loader while moving schedule lookup responses into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Schedule preview/apply lookup responses now live in `tests/support/admin-page-schedule-management-action-lookups.php`, and `Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions` composes that trait while retaining the recent-history fixture method in the stable fake repository file. The fake repository class name, method signatures, returned rows, fixture IDs, fingerprints, cadence values, WP_Error behavior, and schedule-management rendering assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused schedule-management and rollback-preview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, schedule-management rendering behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Sites List Test Double Split Slice
 
 The Sites-list test harness still grouped harness exposure methods with fake Sites, snapshots, and classifier collaborators. The next safe test-only structure cleanup is to move those fake collaborators into their own support file while leaving the harness entry point, fixtures, assertions, and production Sites-list rendering behavior unchanged.
