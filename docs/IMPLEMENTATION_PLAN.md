@@ -3647,6 +3647,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Classifier Site Snapshot Helper Reuse Slice
+
+The baseline status-classifier test still repeated direct classifier calls for site/snapshot/time combinations that differ from the default active-site payload helper. Keep those state-transition assertions focused by adding a shared site/snapshot classification wrapper.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/status-classifier-test-fixtures.php` now provides `classify_site_snapshot()`, and `tests/StatusClassifierTest.php` reuses it for pending-site and stale-snapshot coverage while preserving the same site rows, snapshot rows, timestamps, categories, and messages. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused baseline status-classifier coverage passes unchanged.
+- Existing shared fixture consumers continue to pass unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

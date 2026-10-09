@@ -37,7 +37,7 @@ class StatusClassifierTest extends TestCase {
 	 * @return void
 	 */
 	public function test_pending_site_stays_pending() {
-		$result = $this->classifier->classify(
+		$result = $this->classify_site_snapshot(
 			array(
 				'status'    => 'pending',
 				'paused_at' => null,
@@ -72,7 +72,7 @@ class StatusClassifierTest extends TestCase {
 	 * @return void
 	 */
 	public function test_stale_snapshot_is_not_reporting() {
-		$result = $this->classifier->classify(
+		$result = $this->classify_site_snapshot(
 			$this->active_site( '2023-11-14 22:13:20' ),
 			$this->snapshot(
 				array(
