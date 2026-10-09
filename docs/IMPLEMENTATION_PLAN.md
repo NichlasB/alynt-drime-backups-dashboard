@@ -2654,6 +2654,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, schedule behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Remote Action Context Fixture Split Slice
+
+The admin remote-action rendering fixture file still grouped reusable V2 site/snapshot context fixtures with remote-action history row fixtures. Keep `tests/support/admin-page-remote-action-rendering-fixtures.php` as the stable loader while moving the generic V2 context fixtures into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Reusable V2-capable site and snapshot context builders now live in `tests/support/admin-page-remote-action-context-fixtures.php`, and the existing admin remote-action rendering fixture trait composes that trait alongside the schedule-management rendering fixture trait. Current tests keep requiring the same loader path, fixture method names, fixture values, rendered-output assertions, and production rendering behavior. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, schedule behavior, protocol, schema, credential, Drime, backup, restore, cleanup, live-site, release, deploy, or client-site behavior changes.
+
 ### Poller Status Payload Fixture Split Slice
 
 The poller test fixture trait still grouped poller collaborator builders, site-row builders, reusable status payloads, and successful HTTP response fixtures together. Keep `tests/support/poller-test-fixtures.php` as the stable loader while moving status payload and HTTP response fixtures into a focused support trait.
