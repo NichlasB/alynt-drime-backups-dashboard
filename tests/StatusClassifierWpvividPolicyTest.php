@@ -43,19 +43,13 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 				array_merge(
 					$this->healthy_payload(),
 					array(
-						'backup_sources' => array(
-							'server'  => $this->source_payload(),
-							'wpvivid' => array_merge(
-								$this->source_payload(),
-								array(
-									'source_key'           => 'wpvivid',
-									'source_label'         => 'WPvivid',
-									'has_upload_evidence'  => false,
-									'freshness_status'     => 'no_upload_evidence',
-									'latest_uploaded_at'   => 0,
-									'latest_inventory_count' => 0,
-								)
-							),
+						'backup_sources' => $this->backup_sources_payload(
+							array(
+								'has_upload_evidence'    => false,
+								'freshness_status'       => 'no_upload_evidence',
+								'latest_uploaded_at'     => 0,
+								'latest_inventory_count' => 0,
+							)
 						),
 					)
 				)
@@ -93,26 +87,20 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 				array_merge(
 					$this->healthy_payload(),
 					array(
-						'backup_sources' => array(
-							'server'  => $this->source_payload(),
-							'wpvivid' => array_merge(
-								$this->source_payload(),
-								array(
-									'source_key'             => 'wpvivid',
-									'source_label'           => 'WPvivid',
-									'has_upload_evidence'    => false,
-									'freshness_status'       => 'no_upload_evidence',
-									'latest_uploaded_at'     => 0,
-									'latest_inventory_count' => 0,
-									'warning_count'          => 1,
-									'warnings'                => array(
-										array(
-											'code'    => 'source_no_upload_evidence',
-											'message' => 'No uploaded backup evidence has been recorded for this source.',
-										),
+						'backup_sources' => $this->backup_sources_payload(
+							array(
+								'has_upload_evidence'    => false,
+								'freshness_status'       => 'no_upload_evidence',
+								'latest_uploaded_at'     => 0,
+								'latest_inventory_count' => 0,
+								'warning_count'          => 1,
+								'warnings'                => array(
+									array(
+										'code'    => 'source_no_upload_evidence',
+										'message' => 'No uploaded backup evidence has been recorded for this source.',
 									),
-								)
-							),
+								),
+							)
 						),
 					)
 				)
@@ -150,18 +138,12 @@ class StatusClassifierWpvividPolicyTest extends TestCase {
 				array_merge(
 					$this->healthy_payload(),
 					array(
-						'backup_sources' => array(
-							'server'  => $this->source_payload(),
-							'wpvivid' => array_merge(
-								$this->source_payload(),
-								array(
-									'source_key'       => 'wpvivid',
-									'source_label'     => 'WPvivid',
-									'queued_count'     => 1,
-									'failed_count'     => 1,
-									'freshness_status' => 'no_upload_evidence',
-								)
-							),
+						'backup_sources' => $this->backup_sources_payload(
+							array(
+								'queued_count'     => 1,
+								'failed_count'     => 1,
+								'freshness_status' => 'no_upload_evidence',
+							)
 						),
 					)
 				)

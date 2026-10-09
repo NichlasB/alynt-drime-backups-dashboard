@@ -32,4 +32,38 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Backup_Source_Fixtures {
 			'warnings'                  => array(),
 		);
 	}
+
+	/**
+	 * Builds a backup sources payload with server and WPvivid source summaries.
+	 *
+	 * @param array<string,mixed> $wpvivid_overrides WPvivid source overrides.
+	 * @param array<string,mixed> $server_overrides Server source overrides.
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function backup_sources_payload( array $wpvivid_overrides = array(), array $server_overrides = array() ) {
+		return array(
+			'server'  => array_merge(
+				$this->source_payload(),
+				$server_overrides
+			),
+			'wpvivid' => $this->wpvivid_source_payload( $wpvivid_overrides ),
+		);
+	}
+
+	/**
+	 * Builds a WPvivid source summary payload.
+	 *
+	 * @param array<string,mixed> $overrides Source overrides.
+	 * @return array<string,mixed>
+	 */
+	private function wpvivid_source_payload( array $overrides = array() ) {
+		return array_merge(
+			$this->source_payload(),
+			array(
+				'source_key'   => 'wpvivid',
+				'source_label' => 'WPvivid',
+			),
+			$overrides
+		);
+	}
 }
