@@ -22,10 +22,7 @@ class EnrollmentManagerTest extends TestCase {
 	 */
 	public function test_create_pending_site_returns_display_token_and_stores_only_verifier() {
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
-		$manager    = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
-			$repository,
-			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
-		);
+		$manager    = $this->manager( $repository );
 
 		$result = $manager->create_pending_site(
 			array(
@@ -58,10 +55,7 @@ class EnrollmentManagerTest extends TestCase {
 	 */
 	public function test_create_pending_site_rejects_unsafe_client_origin() {
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
-		$manager    = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
-			$repository,
-			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
-		);
+		$manager    = $this->manager( $repository );
 
 		$result = $manager->create_pending_site(
 			array(
@@ -84,10 +78,7 @@ class EnrollmentManagerTest extends TestCase {
 	 */
 	public function test_create_pending_site_rejects_overlong_label() {
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
-		$manager    = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
-			$repository,
-			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
-		);
+		$manager    = $this->manager( $repository );
 
 		$result = $manager->create_pending_site(
 			array(
@@ -114,10 +105,7 @@ class EnrollmentManagerTest extends TestCase {
 			'id'              => 44,
 			'expected_origin' => 'https://client.example.com',
 		);
-		$manager                    = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
-			$repository,
-			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
-		);
+		$manager                    = $this->manager( $repository );
 
 		$result = $manager->create_pending_site(
 			array(
@@ -141,10 +129,7 @@ class EnrollmentManagerTest extends TestCase {
 	public function test_create_pending_site_returns_error_when_storage_fails() {
 		$repository                = new Alynt_Drime_Backups_Dashboard_Test_Site_Repository();
 		$repository->create_result = new WP_Error( 'site_create_failed', 'Could not store site.' );
-		$manager                   = new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
-			$repository,
-			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
-		);
+		$manager                   = $this->manager( $repository );
 
 		$result = $manager->create_pending_site(
 			array(

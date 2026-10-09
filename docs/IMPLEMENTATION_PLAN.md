@@ -3586,6 +3586,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Enrollment Manager Harness Helper Slice
+
+The enrollment manager test repeated the same manager construction with a test repository and origin validator in each case. Keep the test assertions focused on enrollment outcomes by moving that construction into the existing enrollment manager fixture trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/support/enrollment-manager-test-harness.php` now provides a `manager()` helper, and `tests/EnrollmentManagerTest.php` reuses it while preserving the same repository doubles, origin validator, input payloads, display-token assertions, duplicate-pending behavior, storage-failure behavior, and error-code expectations. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused enrollment manager coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

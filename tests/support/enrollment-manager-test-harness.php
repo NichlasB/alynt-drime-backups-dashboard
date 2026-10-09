@@ -20,6 +20,19 @@ require_once __DIR__ . '/enrollment-manager-site-repository-double.php';
  */
 trait Alynt_Drime_Backups_Dashboard_Enrollment_Manager_Test_Fixtures {
 	/**
+	 * Builds an enrollment manager for a test repository.
+	 *
+	 * @param Alynt_Drime_Backups_Dashboard_Test_Site_Repository $repository Site repository double.
+	 * @return Alynt_Drime_Backups_Dashboard_Enrollment_Manager
+	 */
+	private function manager( Alynt_Drime_Backups_Dashboard_Test_Site_Repository $repository ) {
+		return new Alynt_Drime_Backups_Dashboard_Enrollment_Manager(
+			$repository,
+			new Alynt_Drime_Backups_Dashboard_Origin_Validator()
+		);
+	}
+
+	/**
 	 * Extracts the plaintext secret from a display token for test assertions.
 	 *
 	 * @param string $token Pairing token.
