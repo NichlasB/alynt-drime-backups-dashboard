@@ -1926,7 +1926,7 @@ Acceptance criteria:
 
 The WordPress core shim support file still grouped generic plugin/path/hook shims with admin URL, query-argument, management-page, and nocache-header shims. Keep `tests/support/wordpress-shims.php` as the stable loader and move admin/url response helpers into a focused support file without changing effective shim behavior.
 
-Implementation status: implemented locally as a test-only structure cleanup. `tests/support/wordpress-shims.php` now loads `wordpress-shims-admin.php` after formatting shims, while `wordpress-shims-core.php` retains generic plugin/path/hook shims. The admin URL, query-argument, management-page, and nocache-header shim behavior is unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/wordpress-shims.php` now loads `wordpress-shims-hooks.php` after core path/plugin helpers and `wordpress-shims-admin.php` after formatting shims. `wordpress-shims-core.php` retains generic plugin/path helpers. Hook registration, admin URL, query-argument, management-page, and nocache-header shim behavior is unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
 
 Acceptance criteria:
 
