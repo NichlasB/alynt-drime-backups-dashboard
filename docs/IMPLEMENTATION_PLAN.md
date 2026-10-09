@@ -2942,6 +2942,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Polling-State Rendering WordPress Shim Split Slice
+
+After the polling-state rendering helper split, the shared rendering bootstrap still embedded minimal WordPress shim functions alongside support-file loading. Keep `tests/support/admin-page-polling-state-rendering-bootstrap.php` as the stable loader while moving the rendering-only WordPress shims into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. Minimal `wp_nonce_field()`, `esc_html_e()`, `esc_attr_e()`, and `number_format_i18n()` shims now live in `tests/support/admin-page-polling-state-rendering-wordpress-shims.php`, and the existing polling-state rendering bootstrap requires that file before loading production traits and rendering support doubles. Current tests keep requiring the same bootstrap path, rendered output and assertions remain unchanged, and no production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused polling-state rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Snapshot Repository Double Split Slice
 
 The diagnostics repository support file still grouped the fake diagnostics site repository and fake diagnostics snapshot repository together. Keep `tests/support/diagnostics-test-repositories.php` as the stable loader while moving the snapshot repository double into a focused support file.
