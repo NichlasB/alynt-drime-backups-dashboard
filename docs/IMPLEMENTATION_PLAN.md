@@ -2110,6 +2110,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, admin action behavior, polling behavior, archive behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Admin Page Action Test Case Helper Split Slice
+
+After the handler harness split, the shared admin action test-case trait still grouped PHPUnit global lifecycle setup with request helper methods. Keep `tests/support/admin-page-actions-test-harness.php` as the stable loader while moving the nonce setter and handler factory into a focused helper trait.
+
+Implementation status: implemented locally as a test-only support split. `set_valid_nonce()` and `admin_action_harness()` now live in `tests/support/admin-page-actions-test-case-helpers.php`, and `Alynt_Drime_Backups_Dashboard_Admin_Action_Test_Case` composes that helper trait while keeping POST/global lifecycle setup in the stable harness file. Helper names, nonce global behavior, default manager creation, handler harness construction, and admin-action assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused admin action, remote-action, archive, and polling-action coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, admin action behavior, nonce behavior, polling behavior, archive behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Page Action WordPress Shim Support Split Slice
 
 The admin page action test harness still grouped shared testcase setup, the minimal action handler harness, and local WordPress shim functions in one support file. Keep the existing harness loader path stable while moving the admin-action-specific WordPress shims into a focused support file.
