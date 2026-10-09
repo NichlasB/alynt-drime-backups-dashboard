@@ -2870,6 +2870,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote Action Dispatcher Accepted HTTP Fixture Helper Slice
+
+After the dispatcher schedule fixture splits, `RemoteActionDispatcherScheduleDispatchTest` still repeated the same accepted HTTP response callback across schedule preview, schedule apply, and schedule rollback-preview dispatch assertions. Keep the dispatcher behavior and signed request assertions unchanged while centralizing the repeated accepted-response test double.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/RemoteActionDispatcherScheduleDispatchTest.php` now uses `accepted_http_response()` to capture request details and return the same protocol-2 accepted response shape for schedule preview, apply, and rollback-preview dispatch tests. Each test still provides its own response summary and preserves the legacy preview `code`/`summary` field names where required. Request body assertions, redacted context assertions, action repository capture assertions, and non-mutating rollback-preview assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `RemoteActionDispatcherScheduleDispatchTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Schedule Management Rendering Fixture Split Slice
 
 The admin remote-action rendering fixture file still grouped generic V2 action-history fixtures and the larger schedule-management capability snapshot fixture together. Keep `tests/support/admin-page-remote-action-rendering-fixtures.php` as the stable loader while moving the schedule-management snapshot fixture into a focused support trait.

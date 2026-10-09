@@ -18,29 +18,12 @@ class RemoteActionDispatcherScheduleDispatchTest extends TestCase {
 
 	public function test_schedule_preview_dispatch_posts_signed_preview_intent() {
 		$captured = array();
-		$http     = function ( $url, $args ) use ( &$captured ) {
-			$captured = array(
-				'url'  => $url,
-				'args' => $args,
-			);
-			$body     = json_decode( $args['body'], true );
-
-			return array(
-				'response' => array(
-					'code' => 202,
-				),
-				'body'     => wp_json_encode(
-					array(
-						'protocol_version' => 2,
-						'action_id'        => $body['action_id'],
-						'state'            => 'accepted',
-						'code'             => 'action_accepted',
-						'summary'          => 'Schedule preview accepted safely.',
-						'retry_after'      => 0,
-					)
-				),
-			);
-		};
+		$http     = $this->accepted_http_response(
+			$captured,
+			'Schedule preview accepted safely.',
+			'code',
+			'summary'
+		);
 
 		$result = $this->dispatcher( $http )->request_schedule_preview( 9, 'alynt_scan_upload', 'every_30_minutes', 7 );
 
@@ -68,29 +51,7 @@ class RemoteActionDispatcherScheduleDispatchTest extends TestCase {
 		);
 		$actions              = new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions();
 		$captured             = array();
-		$http                 = function ( $url, $args ) use ( &$captured ) {
-			$captured = array(
-				'url'  => $url,
-				'args' => $args,
-			);
-			$body     = json_decode( $args['body'], true );
-
-			return array(
-				'response' => array(
-					'code' => 202,
-				),
-				'body'     => wp_json_encode(
-					array(
-						'protocol_version' => 2,
-						'action_id'        => $body['action_id'],
-						'state'            => 'accepted',
-						'result_code'      => 'action_accepted',
-						'result_summary'   => 'Schedule apply accepted safely.',
-						'retry_after'      => 0,
-					)
-				),
-			);
-		};
+		$http                 = $this->accepted_http_response( $captured, 'Schedule apply accepted safely.' );
 
 		$result = $this->dispatcher( $http, null, $actions )->request_schedule_apply( 9, '22222222-2222-4222-8222-222222222222', 7 );
 
@@ -119,29 +80,7 @@ class RemoteActionDispatcherScheduleDispatchTest extends TestCase {
 		);
 		$actions              = new Alynt_Drime_Backups_Dashboard_Test_Dispatcher_Actions();
 		$captured             = array();
-		$http                 = function ( $url, $args ) use ( &$captured ) {
-			$captured = array(
-				'url'  => $url,
-				'args' => $args,
-			);
-			$body     = json_decode( $args['body'], true );
-
-			return array(
-				'response' => array(
-					'code' => 202,
-				),
-				'body'     => wp_json_encode(
-					array(
-						'protocol_version' => 2,
-						'action_id'        => $body['action_id'],
-						'state'            => 'accepted',
-						'result_code'      => 'action_accepted',
-						'result_summary'   => 'Schedule rollback preview accepted safely.',
-						'retry_after'      => 0,
-					)
-				),
-			);
-		};
+		$http                 = $this->accepted_http_response( $captured, 'Schedule rollback preview accepted safely.' );
 
 		$result = $this->dispatcher( $http, null, $actions )->request_schedule_rollback_preview( 9, '33333333-3333-4333-8333-333333333333', 7 );
 
@@ -160,5 +99,40 @@ class RemoteActionDispatcherScheduleDispatchTest extends TestCase {
 		$this->assertTrue( $actions->requests[0]['context']['preview_only'] );
 		$this->assertTrue( $actions->requests[0]['context']['non_mutating'] );
 		$this->assertStringNotContainsString( 'private-key', wp_json_encode( $request_body ) );
+	}
+
+	/**
+	 * Builds an accepted remote-action HTTP response callback.
+	 *
+	 * @param array<string,mixed> $captured Captured request details.
+	 * @param string              $summary Response summary.
+	 * @param string              $code_key Result code field name.
+	 * @param string              $summary_key Result summary field name.
+	 * @return callable
+	 */
+	private function accepted_http_response( array &$captured, $summary, $code_key = 'result_code', $summary_key = 'result_summary' ) {
+		return function ( $url, $args ) use ( &$captured, $summary, $code_key, $summary_key ) {
+			$captured = array(
+				'url'  => $url,
+				'args' => $args,
+			);
+			$body     = json_decode( $args['body'], true );
+
+			return array(
+				'response' => array(
+					'code' => 202,
+				),
+				'body'     => wp_json_encode(
+					array(
+						'protocol_version' => 2,
+						'action_id'        => $body['action_id'],
+						'state'            => 'accepted',
+						$code_key          => 'action_accepted',
+						$summary_key       => $summary,
+						'retry_after'      => 0,
+					)
+				),
+			);
+		};
 	}
 }
