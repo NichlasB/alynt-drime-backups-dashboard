@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/remote-action-repository-schedule-rollback-capabilities.php';
+
 /**
  * Shared remote action repository schedule rollback fixtures.
  */
 trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Schedule_Rollback_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Schedule_Rollback_Capabilities;
+
 	/**
 	 * Returns a successful schedule-apply row with rollback metadata.
 	 *
@@ -41,32 +45,6 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Schedule_Rollback_F
 						),
 					),
 				)
-			),
-		);
-	}
-
-	/**
-	 * Returns sanitized capabilities that support rollback preview for tests.
-	 *
-	 * @return array<string,mixed>
-	 */
-	private function schedule_rollback_preview_lookup_capabilities() {
-		return array(
-			'enabled'             => true,
-			'sodium_available'    => true,
-			'allowed_actions'     => array( 'scan_upload_now', 'schedule_preview', 'schedule_apply', 'schedule_rollback_preview' ),
-			'schedule_management' => array(
-				'enabled'                    => true,
-				'rollback_preview_supported' => true,
-				'rollback_supported'         => false,
-				'schedules'                  => array(
-					array(
-						'schedule_id'                => 'alynt_scan_upload',
-						'manageable'                 => true,
-						'rollback_preview_supported' => true,
-						'rollback_supported'         => false,
-					),
-				),
 			),
 		);
 	}
