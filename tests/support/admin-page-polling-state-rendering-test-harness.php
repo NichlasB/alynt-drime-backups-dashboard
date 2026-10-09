@@ -6,6 +6,7 @@
  */
 
 require_once __DIR__ . '/admin-page-polling-state-rendering-helper-stubs.php';
+require_once __DIR__ . '/admin-page-polling-state-rendering-history-methods.php';
 
 /**
  * Harness exposing private polling-state rendering helpers.
@@ -26,6 +27,7 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Status_History_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Local_Record_Methods;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Remote_Action_Methods;
+	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_History_Methods;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Helper_Stubs {
 		Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Helper_Stubs::decoded_snapshot_payload insteadof Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	}
@@ -77,18 +79,6 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	public function pause_panel_html( array $site ) {
 		ob_start();
 		$this->render_polling_pause_panel( $site );
-		return (string) ob_get_clean();
-	}
-
-	/**
-	 * Exposes attention/recovery history markup.
-	 *
-	 * @param array<int,array<string,mixed>> $history Snapshot history rows.
-	 * @return string
-	 */
-	public function attention_recovery_history_html( array $history ) {
-		ob_start();
-		$this->render_attention_recovery_history( $history );
 		return (string) ob_get_clean();
 	}
 
