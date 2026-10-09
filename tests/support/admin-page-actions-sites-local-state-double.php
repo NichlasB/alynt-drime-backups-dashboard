@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-actions-sites-archive-state-double.php';
+
 /**
  * Fake site repository local-state behavior.
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites_Local_State {
+	use Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites_Archive_State;
+
 	/**
 	 * Pause calls.
 	 *
@@ -24,20 +28,6 @@ trait Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites_Local_State {
 	public $resume_calls = array();
 
 	/**
-	 * Archive calls.
-	 *
-	 * @var array<int,int>
-	 */
-	public $archive_calls = array();
-
-	/**
-	 * Unarchive calls.
-	 *
-	 * @var array<int,int>
-	 */
-	public $unarchive_calls = array();
-
-	/**
 	 * Pause result.
 	 *
 	 * @var bool
@@ -50,20 +40,6 @@ trait Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites_Local_State {
 	 * @var bool
 	 */
 	public $resume_result = true;
-
-	/**
-	 * Archive result.
-	 *
-	 * @var bool
-	 */
-	public $archive_result = true;
-
-	/**
-	 * Unarchive result.
-	 *
-	 * @var bool
-	 */
-	public $unarchive_result = true;
 
 	/**
 	 * Records pause.
@@ -87,29 +63,5 @@ trait Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites_Local_State {
 		$this->resume_calls[] = (int) $site_id;
 
 		return $this->resume_result;
-	}
-
-	/**
-	 * Records archive.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function archive_local( $site_id ) {
-		$this->archive_calls[] = (int) $site_id;
-
-		return $this->archive_result;
-	}
-
-	/**
-	 * Records unarchive.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function unarchive_local( $site_id ) {
-		$this->unarchive_calls[] = (int) $site_id;
-
-		return $this->unarchive_result;
 	}
 }
