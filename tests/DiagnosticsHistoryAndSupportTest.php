@@ -21,44 +21,38 @@ class DiagnosticsHistoryAndSupportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_attention_history_diagnostics_are_aggregate_only() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site( 1 ),
-					$this->site( 2 ),
-					$this->site(
-						3,
-						array(
-							'archived_at' => '2026-09-29 10:00:00',
-						)
-					),
-				)
+		$result = $this->collect_diagnostics(
+			array(
+				$this->site( 1 ),
+				$this->site( 2 ),
+				$this->site(
+					3,
+					array(
+						'archived_at' => '2026-09-29 10:00:00',
+					)
+				),
 			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository(
-				array(),
-				array(
-					1 => array(
-						$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
-						$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
-						$this->snapshot_row( 'working', '2026-09-29 09:00:00' ),
-					),
-					2 => array(
-						$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
-						$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
-						$this->snapshot_row( 'working', '2026-09-29 09:00:00' ),
-						$this->snapshot_row( 'not_reporting', '2026-09-29 08:00:00' ),
-						$this->snapshot_row( 'working', '2026-09-29 07:00:00' ),
-					),
-					3 => array(
-						$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
-						$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+			array(),
+			array(
+				1 => array(
+					$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
+					$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
+					$this->snapshot_row( 'working', '2026-09-29 09:00:00' ),
+				),
+				2 => array(
+					$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
+					$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
+					$this->snapshot_row( 'working', '2026-09-29 09:00:00' ),
+					$this->snapshot_row( 'not_reporting', '2026-09-29 08:00:00' ),
+					$this->snapshot_row( 'working', '2026-09-29 07:00:00' ),
+				),
+				3 => array(
+					$this->snapshot_row( 'working', '2026-09-29 11:00:00' ),
+					$this->snapshot_row( 'needs_attention', '2026-09-29 10:00:00' ),
+				),
+			)
 		);
 
-		$result  = $diagnostics->collect();
 		$encoded = wp_json_encode( $result['support'] );
 
 		$this->assertSame( 2, $result['counts']['attention_history']['records_with_history'] );
@@ -81,27 +75,22 @@ class DiagnosticsHistoryAndSupportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_recent_poll_outcomes_are_redacted() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site(
-						1,
-						array(
-							'last_poll_attempt_at'      => '2026-08-10 08:00:00',
-							'last_seen_at'              => '2026-08-10 08:00:00',
-							'polling_key_id'            => 'pk_example_0000000000000000',
-							'polling_secret_ciphertext' => 'adbv1.secret-ciphertext',
-							'pairing_secret_hash'       => str_repeat( 'a', 64 ),
-							'latest_payload_json'       => '{"unsafe":"raw"}',
-						)
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( array() ),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		$result = $this->collect_diagnostics(
+			array(
+				$this->site(
+					1,
+					array(
+						'last_poll_attempt_at'      => '2026-08-10 08:00:00',
+						'last_seen_at'              => '2026-08-10 08:00:00',
+						'polling_key_id'            => 'pk_example_0000000000000000',
+						'polling_secret_ciphertext' => 'adbv1.secret-ciphertext',
+						'pairing_secret_hash'       => str_repeat( 'a', 64 ),
+						'latest_payload_json'       => '{"unsafe":"raw"}',
+					)
+				),
+			)
 		);
 
-		$result  = $diagnostics->collect();
 		$encoded = wp_json_encode( $result['recent'] );
 
 		$this->assertNotFalse( $encoded );
@@ -118,32 +107,27 @@ class DiagnosticsHistoryAndSupportTest extends TestCase {
 	 * @return void
 	 */
 	public function test_support_summary_is_support_safe() {
-		$diagnostics = new Alynt_Drime_Backups_Dashboard_Diagnostics(
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Site_Repository(
-				array(
-					$this->site(
-						9,
-						array(
-							'site_label'                 => 'Very Private Client',
-							'expected_origin'            => 'https://private-client.example.com',
-							'last_poll_attempt_at'       => '2026-08-10 08:00:00',
-							'last_seen_at'               => '2026-08-10 08:00:00',
-							'next_poll_at'               => '2026-08-10 08:15:00',
-							'polling_key_id'             => 'pk_example_private',
-							'polling_secret_ciphertext'  => 'adbv1.private-ciphertext',
-							'pairing_secret_hash'        => str_repeat( 'b', 64 ),
-							'latest_payload_json'        => '{"raw":"payload"}',
-							'last_error_code'            => 'transport_failed',
-							'last_error_summary'         => 'Sanitized failure summary.',
-						)
-					),
-				)
-			),
-			new Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_Repository( array() ),
-			new Alynt_Drime_Backups_Dashboard_Status_Classifier()
+		$result = $this->collect_diagnostics(
+			array(
+				$this->site(
+					9,
+					array(
+						'site_label'                => 'Very Private Client',
+						'expected_origin'           => 'https://private-client.example.com',
+						'last_poll_attempt_at'      => '2026-08-10 08:00:00',
+						'last_seen_at'              => '2026-08-10 08:00:00',
+						'next_poll_at'              => '2026-08-10 08:15:00',
+						'polling_key_id'            => 'pk_example_private',
+						'polling_secret_ciphertext' => 'adbv1.private-ciphertext',
+						'pairing_secret_hash'       => str_repeat( 'b', 64 ),
+						'latest_payload_json'       => '{"raw":"payload"}',
+						'last_error_code'           => 'transport_failed',
+						'last_error_summary'        => 'Sanitized failure summary.',
+					)
+				),
+			)
 		);
 
-		$result  = $diagnostics->collect();
 		$encoded = wp_json_encode( $result['support'] );
 
 		$this->assertNotFalse( $encoded );

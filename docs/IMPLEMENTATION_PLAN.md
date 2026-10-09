@@ -3550,6 +3550,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Diagnostics History Collector Helper Reuse Slice
+
+The diagnostics history/support test still repeated diagnostics object construction even though the shared diagnostics fixture trait already provides a collector helper for focused site, snapshot, history, and action-count fixtures. Keep the test focused on redaction and aggregate assertions by reusing the existing collector helper.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/DiagnosticsHistoryAndSupportTest.php` now uses `collect_diagnostics()` for attention-history, recent poll outcome, and support-summary redaction coverage while preserving the same site rows, retained snapshot histories, secret-bearing fields, aggregate expectations, support-safe JSON assertions, and redaction checks. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused diagnostics history/support coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
