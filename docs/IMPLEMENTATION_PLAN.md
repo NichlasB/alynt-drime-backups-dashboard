@@ -1978,6 +1978,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, poller behavior, scheduling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Poller Reconciler Double Split Slice
+
+The poller test-double loader still grouped the fake snapshot repository with the fake remote-action reconciler. Keep `tests/support/poller-test-doubles.php` as the stable loader while moving the reconciler collaborator into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The fake remote-action reconciler now lives in `tests/support/poller-test-reconciler-double.php`, and `tests/support/poller-test-doubles.php` requires it while retaining the fake snapshot repository. Current poller tests keep requiring the same harness and double loader path, class names, fixture behavior, and assertions. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, snapshot storage behavior, remote-action reconciliation behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused poller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Dispatcher Test Double Support Split Slice
 
 The remote action dispatcher test-double support file still grouped fake database, fake crypto, and fake action-repository collaborators together. Keep the existing loader path stable while splitting those doubles into narrower support files.
