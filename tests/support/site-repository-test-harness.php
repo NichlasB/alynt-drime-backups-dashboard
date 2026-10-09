@@ -5,25 +5,7 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-if ( ! defined( 'ARRAY_A' ) ) {
-	define( 'ARRAY_A', 'ARRAY_A' );
-}
-
-if ( ! function_exists( 'current_time' ) ) {
-	/**
-	 * Test current_time shim.
-	 *
-	 * @param string $type Type.
-	 * @param bool   $gmt  Whether to use GMT.
-	 * @return string
-	 */
-	function current_time( $type, $gmt = false ) {
-		unset( $type, $gmt );
-
-		return '2099-01-01 00:00:00';
-	}
-}
-
+require_once __DIR__ . '/site-repository-wordpress-shims.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-storage.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-reads.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-local-state-writes.php';

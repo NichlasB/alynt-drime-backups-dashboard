@@ -862,6 +862,18 @@ Acceptance criteria:
 - Site repository read/write/runtime tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Site Repository WordPress Shim Support Split Slice
+
+After the `wpdb` double split, the shared site repository test harness still grouped local WordPress shims with production repository includes and per-test database lifecycle setup. Keep `tests/support/site-repository-test-harness.php` as the stable loader while moving the local `ARRAY_A` and `current_time()` shims into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. Site repository WordPress shims now live in `tests/support/site-repository-wordpress-shims.php`, and `tests/support/site-repository-test-harness.php` loads them before production repository includes and the fake `wpdb` double. Shim behavior, fake current time, repository includes, lifecycle setup, repository assertions, and SQL expectations are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, repository SQL behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Site repository read/write/runtime tests pass without assertion changes.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, repository behavior, SQL behavior, schema behavior, protocol, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Reconciler Test Class Split Slice
 
 `RemoteActionReconcilerTest` still grouped successful client-action reconciliation, result alias normalization, mismatch/fallback/downgrade/older-report guard behavior, stale maintenance, fake repository behavior, and payload fixtures into one larger test file. The next safe test-only cleanup is to split those concerns into focused reconciler test classes while preserving the same fake repository semantics, reconciler production class, state-transition guards, result alias behavior, stale maintenance behavior, status payload assumptions, and live-site state.
