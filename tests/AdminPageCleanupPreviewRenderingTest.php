@@ -23,27 +23,7 @@ class AdminPageCleanupPreviewRenderingTest extends TestCase {
 	public function test_cleanup_preview_panel_renders_preview_only_control_when_supported() {
 		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site     = $this->remote_action_history_site();
-		$snapshot = array(
-			'decoded_payload' => array(
-				'remote_actions' => array(
-					'protocol_version'   => 2,
-					'enabled'            => true,
-					'key_id'             => 'ak_test',
-					'allowed_actions'    => array( 'scan_upload_now', 'cleanup_preview' ),
-					'sodium_available'   => true,
-					'cleanup_management' => array(
-						'protocol_version'        => 2,
-						'capability_version'      => 1,
-						'enabled'                 => true,
-						'preview_supported'       => true,
-						'apply_supported'         => false,
-						'scope'                   => 'safe_local_uploader_owned',
-						'supported_categories'    => array( 'uploader_temp_artifacts' ),
-						'max_preview_age_seconds' => 900,
-					),
-				),
-			),
-		);
+		$snapshot = $this->cleanup_preview_snapshot();
 		$html     = $harness->cleanup_preview_panel_html( $site, $snapshot );
 
 		$this->assertStringContainsString( 'Cleanup Preview', $html );
@@ -66,58 +46,47 @@ class AdminPageCleanupPreviewRenderingTest extends TestCase {
 	public function test_cleanup_preview_panel_renders_latest_preview_evidence_summary() {
 		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site     = $this->remote_action_history_site();
-		$snapshot = array(
-			'decoded_payload' => array(
-				'remote_actions' => array(
-					'protocol_version'   => 2,
-					'enabled'            => true,
-					'key_id'             => 'ak_test',
-					'allowed_actions'    => array( 'scan_upload_now', 'cleanup_preview', 'cleanup_apply' ),
-					'sodium_available'   => true,
-					'cleanup_management' => array(
-						'protocol_version'        => 2,
-						'capability_version'      => 1,
-						'enabled'                 => true,
-						'preview_supported'       => true,
-						'apply_supported'         => false,
-						'scope'                   => 'safe_local_uploader_owned',
-						'supported_categories'    => array( 'uploader_temp_artifacts', 'server_backups' ),
-						'max_preview_age_seconds' => 900,
-					),
-					'last_action'        => array(
-						'action_id'       => '44444444-4444-4444-8444-444444444444',
-						'action_type'     => 'cleanup_preview',
-						'state'           => 'succeeded',
-						'code'            => 'cleanup_preview_ready',
-						'summary'         => 'Cleanup preview is ready. Nothing was deleted.',
-						'cleanup_preview' => array(
-							'preview_action_id'    => '44444444-4444-4444-8444-444444444444',
-							'preview_fingerprint'  => str_repeat( 'e', 64 ),
-							'capability_version'   => 1,
-							'scope'                => 'safe_local_uploader_owned',
-							'preview_created_at'   => '2026-09-29T12:00:00+00:00',
-							'expires_at'           => '2026-09-29T12:15:00+00:00',
-							'total_eligible_count' => 2,
-							'total_approx_bytes'   => 2048,
-							'apply_supported'      => true,
-							'categories'           => array(
-								array(
-									'category'       => 'uploader_temp_artifacts',
-									'eligible_count' => 2,
-									'approx_bytes'   => 2048,
-									'age_band'       => 'older_than_24h',
-									'reason_code'    => 'safe_local_uploader_owned_temp_artifacts',
-								),
-								array(
-									'category'       => 'server_backups',
-									'eligible_count' => 99,
-									'approx_bytes'   => 999999,
-								),
+		$snapshot = $this->cleanup_preview_snapshot(
+			array(
+				'allowed_actions' => array( 'scan_upload_now', 'cleanup_preview', 'cleanup_apply' ),
+			),
+			array(
+				'supported_categories' => array( 'uploader_temp_artifacts', 'server_backups' ),
+			),
+			array(
+				'last_action' => array(
+					'action_id'       => '44444444-4444-4444-8444-444444444444',
+					'action_type'     => 'cleanup_preview',
+					'state'           => 'succeeded',
+					'code'            => 'cleanup_preview_ready',
+					'summary'         => 'Cleanup preview is ready. Nothing was deleted.',
+					'cleanup_preview' => array(
+						'preview_action_id'    => '44444444-4444-4444-8444-444444444444',
+						'preview_fingerprint'  => str_repeat( 'e', 64 ),
+						'capability_version'   => 1,
+						'scope'                => 'safe_local_uploader_owned',
+						'preview_created_at'   => '2026-09-29T12:00:00+00:00',
+						'expires_at'           => '2026-09-29T12:15:00+00:00',
+						'total_eligible_count' => 2,
+						'total_approx_bytes'   => 2048,
+						'apply_supported'      => true,
+						'categories'           => array(
+							array(
+								'category'       => 'uploader_temp_artifacts',
+								'eligible_count' => 2,
+								'approx_bytes'   => 2048,
+								'age_band'       => 'older_than_24h',
+								'reason_code'    => 'safe_local_uploader_owned_temp_artifacts',
+							),
+							array(
+								'category'       => 'server_backups',
+								'eligible_count' => 99,
+								'approx_bytes'   => 999999,
 							),
 						),
 					),
 				),
-			),
+			)
 		);
 		$html     = $harness->cleanup_preview_panel_html( $site, $snapshot );
 
@@ -142,5 +111,48 @@ class AdminPageCleanupPreviewRenderingTest extends TestCase {
 		$html    = $harness->cleanup_preview_panel_html( $this->remote_action_history_site(), $this->remote_action_history_snapshot() );
 
 		$this->assertSame( '', $html );
+	}
+
+	/**
+	 * Builds a cleanup-preview snapshot fixture.
+	 *
+	 * @param array<string,mixed> $remote_action_overrides Remote-action overrides.
+	 * @param array<string,mixed> $cleanup_overrides Cleanup management overrides.
+	 * @param array<string,mixed> $additional_remote_action_data Additional remote-action data.
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function cleanup_preview_snapshot(
+		array $remote_action_overrides = array(),
+		array $cleanup_overrides = array(),
+		array $additional_remote_action_data = array()
+	) {
+		return array(
+			'decoded_payload' => array(
+				'remote_actions' => array_merge(
+					array(
+						'protocol_version'   => 2,
+						'enabled'            => true,
+						'key_id'             => 'ak_test',
+						'allowed_actions'    => array( 'scan_upload_now', 'cleanup_preview' ),
+						'sodium_available'   => true,
+						'cleanup_management' => array_merge(
+							array(
+								'protocol_version'        => 2,
+								'capability_version'      => 1,
+								'enabled'                 => true,
+								'preview_supported'       => true,
+								'apply_supported'         => false,
+								'scope'                   => 'safe_local_uploader_owned',
+								'supported_categories'    => array( 'uploader_temp_artifacts' ),
+								'max_preview_age_seconds' => 900,
+							),
+							$cleanup_overrides
+						),
+					),
+					$remote_action_overrides,
+					$additional_remote_action_data
+				),
+			),
+		);
 	}
 }

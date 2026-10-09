@@ -1154,6 +1154,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, cleanup-preview rendering, schedule rollback-preview rendering, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Cleanup Preview Snapshot Fixture Helper Slice
+
+After the cleanup-preview rendering test class split, `AdminPageCleanupPreviewRenderingTest` still rebuilt the same V2 cleanup-management snapshot envelope in multiple assertions. Keep cleanup-preview rendering unchanged and add a private snapshot helper for capability and latest-preview evidence cases.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/AdminPageCleanupPreviewRenderingTest.php` now uses `cleanup_preview_snapshot()` to build the V2 remote-action cleanup capability envelope, with explicit overrides for allowed actions, supported categories, and latest sanitized preview evidence. The preview-only control assertions, latest evidence assertions, support-safe category filtering, hidden-without-capability assertion, and fixture values are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, cleanup-preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `AdminPageCleanupPreviewRenderingTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, cleanup-preview behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Enrollment Manager Test Harness Split Slice
 
 `EnrollmentManagerTest` still embedded its fake site repository, production includes, and display-token secret helper alongside pending-enrollment assertions. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same pending enrollment behavior, display-once token assertions, duplicate pending guard, origin/label validation, storage-failure behavior, and live-site state.
