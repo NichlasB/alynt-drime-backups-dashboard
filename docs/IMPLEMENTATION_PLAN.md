@@ -1215,6 +1215,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, enrollment behavior, pairing token behavior, origin validation, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Pairing Tokens Frozen Fixture Helper Slice
+
+`PairingTokensTest` repeated the same frozen protocol-v1 token construction for both version-prefix and payload-shape assertions. Keep pairing token behavior and decoded payload assertions unchanged while centralizing that frozen fixture in the test file.
+
+Implementation status: implemented locally as a test-only readability cleanup. `tests/PairingTokensTest.php` now uses `frozen_protocol_v1_token()` for the deterministic enrollment ID, dashboard origin, client origin, secret, and expiry fixture. No production PHP, token format behavior, token creation behavior, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `PairingTokensTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, enrollment behavior, pairing token behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Enrollment Manager Repository Double Split Slice
 
 The enrollment manager support harness still grouped production includes, the fake site repository, and the token-secret helper trait in one loader file. Keep `tests/support/enrollment-manager-test-harness.php` as the stable test entry point while moving the repository double into a focused support file.

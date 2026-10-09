@@ -19,13 +19,7 @@ class PairingTokensTest extends TestCase {
 	 * @return void
 	 */
 	public function test_format_token_uses_version_prefix() {
-		$token = Alynt_Drime_Backups_Dashboard_Pairing_Tokens::format_token(
-			'00000000-0000-4000-8000-000000000000',
-			'https://control.sitesmanage.com',
-			'https://client.example.com',
-			str_repeat( 'A', 43 ),
-			strtotime( '2099-01-01T00:00:00Z' )
-		);
+		$token = $this->frozen_protocol_v1_token();
 
 		$this->assertStringStartsWith( 'adb1.', $token );
 	}
@@ -36,13 +30,7 @@ class PairingTokensTest extends TestCase {
 	 * @return void
 	 */
 	public function test_format_token_uses_protocol_v1_payload_shape() {
-		$token   = Alynt_Drime_Backups_Dashboard_Pairing_Tokens::format_token(
-			'00000000-0000-4000-8000-000000000000',
-			'https://control.sitesmanage.com',
-			'https://client.example.com',
-			str_repeat( 'A', 43 ),
-			strtotime( '2099-01-01T00:00:00Z' )
-		);
+		$token   = $this->frozen_protocol_v1_token();
 		$payload = $this->decode_token( $token );
 
 		$this->assertSame( 1, $payload['protocol_version'] );
@@ -82,6 +70,21 @@ class PairingTokensTest extends TestCase {
 		$secret = Alynt_Drime_Backups_Dashboard_Pairing_Tokens::create_secret();
 
 		$this->assertMatchesRegularExpression( '/^[A-Za-z0-9_-]+$/', $secret );
+	}
+
+	/**
+	 * Creates a frozen protocol-v1 pairing token fixture.
+	 *
+	 * @return string
+	 */
+	private function frozen_protocol_v1_token() {
+		return Alynt_Drime_Backups_Dashboard_Pairing_Tokens::format_token(
+			'00000000-0000-4000-8000-000000000000',
+			'https://control.sitesmanage.com',
+			'https://client.example.com',
+			str_repeat( 'A', 43 ),
+			strtotime( '2099-01-01T00:00:00Z' )
+		);
 	}
 
 	/**
