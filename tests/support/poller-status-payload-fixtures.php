@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/poller-http-client-fixtures.php';
+
 /**
  * Builds status payload and HTTP response fixtures for poller tests.
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Poller_Status_Payload_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Test_Poller_Http_Client_Fixtures;
+
 	/**
 	 * Creates a valid status payload.
 	 *
@@ -39,27 +43,5 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Status_Payload_Fixtures {
 			'last_scheduled_scan_at'      => 1786305600,
 			'last_wp_cli_scan_at'         => 0,
 		);
-	}
-
-	/**
-	 * Creates a successful status HTTP client fixture.
-	 *
-	 * @param array<string,mixed> $payload_overrides Payload overrides.
-	 * @return callable
-	 */
-	private function successful_http_client( array $payload_overrides = array() ) {
-		return function () use ( $payload_overrides ) {
-			return array(
-				'response' => array(
-					'code' => 200,
-				),
-				'body'     => wp_json_encode(
-					array_merge(
-						$this->payload(),
-						$payload_overrides
-					)
-				),
-			);
-		};
 	}
 }

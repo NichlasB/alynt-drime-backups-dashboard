@@ -2834,6 +2834,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Poller HTTP Client Fixture Split Slice
+
+After the status payload split, the status payload fixture trait still grouped raw status payload construction with the successful HTTP client fixture. Keep `tests/support/poller-status-payload-fixtures.php` as the stable status fixture loader while moving HTTP response construction into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. The successful status HTTP client fixture now lives in `tests/support/poller-http-client-fixtures.php`, and the existing status payload fixture trait composes it while retaining the same `payload()` helper, `successful_http_client()` helper, response shape, payload values, and poller assertions. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused poller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Remote Action Reconciler Repository Double Split Slice
 
 The remote-action reconciler test harness still grouped the fake action repository double and shared reconciler payload fixtures together. Keep `tests/support/remote-action-reconciler-test-harness.php` as the stable loader while moving the repository double into a focused support file.
