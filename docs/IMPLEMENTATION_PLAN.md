@@ -3490,6 +3490,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, schedule apply/rollback behavior, cleanup behavior, release behavior, deployment state, backups, restore, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Enrollment REST Secret Fixture Helper Slice
+
+The enrollment REST rejection tests still repeated deterministic pairing-secret and bearer-header construction inline. Keep `tests/support/enrollment-rest-controller-site-payload-fixtures.php` as the stable enrollment REST fixture trait while adding small reusable secret helpers for rejection scenarios.
+
+Implementation status: implemented locally as a test-only fixture cleanup. The shared enrollment REST site/payload fixture trait now provides deterministic pairing-secret and bearer-header helpers, and `tests/EnrollmentRestControllerRejectionTest.php` reuses them while preserving the same pending-site rows, invalid-secret scenarios, rate-limit behavior, authentication flow, expected error codes, and storage assertions. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused enrollment REST rejection coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

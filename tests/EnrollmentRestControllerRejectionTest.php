@@ -47,10 +47,10 @@ class EnrollmentRestControllerRejectionTest extends TestCase {
 	 * @return void
 	 */
 	public function test_wrong_secret_is_rejected() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( str_repeat( 'A', 43 ) ) );
+		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $this->pairing_secret() ) );
 		$controller = $this->controller( $repository );
 
-		$result = $controller->handle_enrollment( $this->payload(), 'Bearer ' . str_repeat( 'B', 43 ), strtotime( '2099-01-01T00:00:00Z' ) );
+		$result = $controller->handle_enrollment( $this->payload(), $this->bearer_secret( 'B' ), strtotime( '2099-01-01T00:00:00Z' ) );
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'pairing_invalid', $result->get_error_code() );
@@ -63,17 +63,17 @@ class EnrollmentRestControllerRejectionTest extends TestCase {
 	 * @return void
 	 */
 	public function test_repeated_invalid_pairing_attempts_are_rate_limited() {
-		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( str_repeat( 'A', 43 ) ) );
+		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $this->pairing_secret() ) );
 		$controller = $this->controller( $repository );
 
 		for ( $attempt = 0; $attempt < Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller::RATE_LIMIT_FAILURE_THRESHOLD; $attempt++ ) {
-			$result = $controller->handle_enrollment( $this->payload(), 'Bearer ' . str_repeat( 'B', 43 ), strtotime( '2099-01-01T00:00:00Z' ) );
+			$result = $controller->handle_enrollment( $this->payload(), $this->bearer_secret( 'B' ), strtotime( '2099-01-01T00:00:00Z' ) );
 
 			$this->assertInstanceOf( WP_Error::class, $result );
 			$this->assertSame( 'pairing_invalid', $result->get_error_code() );
 		}
 
-		$result = $controller->handle_enrollment( $this->payload(), 'Bearer ' . str_repeat( 'C', 43 ), strtotime( '2099-01-01T00:00:00Z' ) );
+		$result = $controller->handle_enrollment( $this->payload(), $this->bearer_secret( 'C' ), strtotime( '2099-01-01T00:00:00Z' ) );
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'rate_limited', $result->get_error_code() );
@@ -87,7 +87,7 @@ class EnrollmentRestControllerRejectionTest extends TestCase {
 	 * @return void
 	 */
 	public function test_origin_mismatch_is_rejected() {
-		$secret     = str_repeat( 'A', 43 );
+		$secret     = $this->pairing_secret();
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $secret ) );
 		$controller = $this->controller( $repository );
 		$payload    = $this->payload(
@@ -110,7 +110,7 @@ class EnrollmentRestControllerRejectionTest extends TestCase {
 	 * @return void
 	 */
 	public function test_endpoint_mismatch_is_rejected() {
-		$secret     = str_repeat( 'A', 43 );
+		$secret     = $this->pairing_secret();
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $secret ) );
 		$controller = $this->controller( $repository );
 		$payload    = $this->payload(
@@ -132,7 +132,7 @@ class EnrollmentRestControllerRejectionTest extends TestCase {
 	 * @return void
 	 */
 	public function test_unsupported_schema_is_rejected() {
-		$secret     = str_repeat( 'A', 43 );
+		$secret     = $this->pairing_secret();
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $secret ) );
 		$controller = $this->controller( $repository );
 
@@ -149,7 +149,7 @@ class EnrollmentRestControllerRejectionTest extends TestCase {
 	 * @return void
 	 */
 	public function test_expired_pairing_is_rejected() {
-		$secret     = str_repeat( 'A', 43 );
+		$secret     = $this->pairing_secret();
 		$repository = new Alynt_Drime_Backups_Dashboard_Test_Enrollment_REST_Repository( $this->pending_site( $secret, '2020-01-01 00:00:00' ) );
 		$controller = $this->controller( $repository );
 
