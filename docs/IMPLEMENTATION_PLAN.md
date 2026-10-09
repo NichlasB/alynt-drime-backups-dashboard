@@ -2618,6 +2618,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote Action Dispatcher Schedule Fixture Split Slice
+
+The dispatcher snapshot fixture still grouped top-level remote-action capability fields with the larger nested schedule-management payload. Keep `tests/support/remote-action-dispatcher-snapshot-fixtures.php` as the stable snapshot fixture loader while moving the schedule-management payload builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Dispatcher schedule-management payload builders now live in `tests/support/remote-action-dispatcher-schedule-fixtures.php`, and the snapshot fixture trait composes that trait while retaining the same `snapshot_row()` fixture method, fixture values, payload shape, and dispatcher assertions. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused remote-action dispatcher coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Schedule Management Rendering Fixture Split Slice
 
 The admin remote-action rendering fixture file still grouped generic V2 action-history fixtures and the larger schedule-management capability snapshot fixture together. Keep `tests/support/admin-page-remote-action-rendering-fixtures.php` as the stable loader while moving the schedule-management snapshot fixture into a focused support trait.
