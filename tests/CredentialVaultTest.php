@@ -19,8 +19,8 @@ class CredentialVaultTest extends TestCase {
 	 * @return void
 	 */
 	public function test_encrypt_decrypt_round_trip_does_not_store_plaintext() {
-		$vault  = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
-		$secret = 'polling-secret-' . str_repeat( 'A', 32 );
+		$vault  = $this->vault();
+		$secret = $this->polling_secret( 'A' );
 
 		$stored = $vault->encrypt( $secret );
 
@@ -36,10 +36,10 @@ class CredentialVaultTest extends TestCase {
 	 * @return void
 	 */
 	public function test_decrypt_fails_closed_when_key_material_changes() {
-		$vault  = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
-		$stored = $vault->encrypt( 'polling-secret-' . str_repeat( 'B', 32 ) );
+		$vault  = $this->vault();
+		$stored = $vault->encrypt( $this->polling_secret( 'B' ) );
 
-		$other  = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'z', 64 ) );
+		$other  = $this->vault( 'z' );
 		$result = $other->decrypt( $stored );
 
 		$this->assertInstanceOf( WP_Error::class, $result );
@@ -53,7 +53,7 @@ class CredentialVaultTest extends TestCase {
 	 */
 	public function test_encrypt_requires_secret_material() {
 		$vault  = new Alynt_Drime_Backups_Dashboard_Credential_Vault( 'short' );
-		$result = $vault->encrypt( 'polling-secret-' . str_repeat( 'C', 32 ) );
+		$result = $vault->encrypt( $this->polling_secret( 'C' ) );
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'credential_key_unavailable', $result->get_error_code() );
@@ -65,12 +65,32 @@ class CredentialVaultTest extends TestCase {
 	 * @return void
 	 */
 	public function test_context_mismatch_fails_closed() {
-		$vault  = new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( 'k', 64 ) );
-		$stored = $vault->encrypt( 'polling-secret-' . str_repeat( 'D', 32 ), 'polling' );
+		$vault  = $this->vault();
+		$stored = $vault->encrypt( $this->polling_secret( 'D' ), 'polling' );
 
 		$result = $vault->decrypt( $stored, 'other' );
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'credential_ciphertext_invalid', $result->get_error_code() );
+	}
+
+	/**
+	 * Creates a deterministic vault.
+	 *
+	 * @param string $material Repeated key material character.
+	 * @return Alynt_Drime_Backups_Dashboard_Credential_Vault
+	 */
+	private function vault( $material = 'k' ) {
+		return new Alynt_Drime_Backups_Dashboard_Credential_Vault( str_repeat( $material, 64 ) );
+	}
+
+	/**
+	 * Creates a deterministic polling secret.
+	 *
+	 * @param string $material Repeated secret material character.
+	 * @return string
+	 */
+	private function polling_secret( $material ) {
+		return 'polling-secret-' . str_repeat( $material, 32 );
 	}
 }

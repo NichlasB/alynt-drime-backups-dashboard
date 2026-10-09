@@ -998,6 +998,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, transport behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Credential Vault Test Fixture Helper Slice
+
+`CredentialVaultTest` repeated deterministic key material and polling-secret construction across round-trip, fail-closed, short-key, and context-mismatch assertions. Keep the credential-vault implementation and every assertion unchanged while moving repeated test data construction into local private helpers.
+
+Implementation status: implemented locally as a test-only readability cleanup. `tests/CredentialVaultTest.php` now uses `vault()` and `polling_secret()` helpers for deterministic test key material and polling secret values. No production PHP, credential vault behavior, encryption/decryption behavior, error codes, protocol behavior, database schema, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `CredentialVaultTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, credential behavior, protocol, schema, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Admin Page Remote Action History Rendering Test Class Split Slice
 
 `AdminPageRemoteActionHistoryRenderingTest` still grouped schedule apply history, schedule rollback-preview history, cleanup-preview evidence details, pending schedule-cadence report handling, and compact short-count detail rendering in one test file. The next safe test-only cleanup is to split non-schedule history detail assertions into a focused class while preserving the same admin rendering helpers, support-safe copy, disclosure behavior, evidence-only cleanup framing, schedule-management wording, and live-site state.
