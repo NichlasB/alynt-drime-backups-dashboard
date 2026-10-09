@@ -951,7 +951,7 @@ Acceptance criteria:
 
 `AdminPageBackupSourceEvidenceTest` still embedded its reusable rendering harness, source-policy setup, fixture loader, and production-helper includes below the evidence assertions. The next safe test-only cleanup is to move that reusable support code into a dedicated support file while preserving the same compact/detail evidence assertions, source-policy behavior, WPvivid policy copy, warning copy, and live-site state.
 
-Implementation status: implemented locally as a test-only support split. Backup-source evidence assertions remain in `tests/AdminPageBackupSourceEvidenceTest.php`. The rendering harness, fixture loader trait, production helper includes, and source-policy setup now live in `tests/support/admin-page-backup-source-evidence-test-harness.php`.
+Implementation status: implemented locally as a test-only support split. Backup-source evidence assertions remain in `tests/AdminPageBackupSourceEvidenceTest.php`. The rendering harness, production helper includes, and source-policy setup live in `tests/support/admin-page-backup-source-evidence-test-harness.php`; the JSON fixture loader trait now lives in `tests/support/admin-page-backup-source-evidence-fixtures.php` and is loaded through the stable harness require path.
 
 Acceptance criteria:
 

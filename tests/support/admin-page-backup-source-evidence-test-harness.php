@@ -13,25 +13,7 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-s
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-operator-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-policy-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
-
-/**
- * Fixture helpers for admin backup source evidence tests.
- */
-trait Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Fixtures {
-	/**
-	 * Loads the validated uploader-shaped schema-1 fixture.
-	 *
-	 * @return array<string,mixed>
-	 */
-	private function fixture_payload() {
-		$fixture = file_get_contents( dirname( __DIR__ ) . '/fixtures/uploader-backup-sources-schema1.json' );
-		$payload = json_decode( (string) $fixture, true );
-
-		$this->assertIsArray( $payload );
-
-		return $payload;
-	}
-}
+require_once __DIR__ . '/admin-page-backup-source-evidence-fixtures.php';
 
 /**
  * Harness exposing private admin rendering helpers for focused tests.
