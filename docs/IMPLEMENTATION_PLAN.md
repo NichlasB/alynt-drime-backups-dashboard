@@ -760,6 +760,18 @@ Acceptance criteria:
 - Full tests, lint, build, and whitespace checks pass.
 - The split remains test-support-only and does not alter runtime class loading, production files, protocol behavior, database behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Repository Schedule Apply Capability Fixture Split Slice
+
+After the schedule rollback capability split, the schedule fixture trait still grouped expired schedule-preview action row fixtures with sanitized schedule-apply capability lookup fixtures. Keep `tests/support/remote-action-repository-schedule-fixtures.php` as the stable schedule fixture loader while moving schedule-apply capability lookup data into a focused support trait.
+
+Implementation status: implemented locally as a test-support-only split. Schedule-apply capability lookup fixtures now live in `tests/support/remote-action-repository-schedule-apply-capabilities.php`, and the existing schedule fixture trait composes that trait alongside rollback fixture helpers while retaining the same public loader path, fixture method names, fixture payloads, and repository lookup assertions. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused `RemoteActionRepositoryScheduleLookup` coverage passes with the same assertions.
+- Full tests, lint, build, and whitespace checks pass.
+- The split remains test-support-only and does not alter runtime class loading, production files, protocol behavior, database behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Capabilities Test Class Split Slice
 
 `RemoteActionCapabilitiesTest` remained the largest PHPUnit file after the repository cleanup. It mixed base allowlist/forbidden-field sanitization, schedule-management policy support, schedule result alias normalization, rollback-preview support, and cleanup-preview support in one file. The next safe test-only cleanup is to split those assertions into focused capability test classes while preserving existing fixture builders, expected sanitized shapes, allowlist behavior, support-helper expectations, production capability code, protocol behavior, and live-site state.
