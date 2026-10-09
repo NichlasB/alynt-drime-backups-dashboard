@@ -821,6 +821,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Capabilities Schedule Apply Rollback Metadata Fixture Helper Slice
+
+After the schedule-apply alias fixture split, the alias fixture still embedded a large rollback-metadata payload inside the schedule-apply summary. Keep the sanitized output and schedule-result assertions unchanged while moving that nested payload into a focused helper.
+
+Implementation status: implemented locally as a test-support-only cleanup. `tests/support/remote-action-capabilities-schedule-apply-alias-fixtures.php` now builds the schedule-apply rollback metadata through `schedule_apply_rollback_metadata()`, while `schedule_apply_alias_summary()` retains the same top-level latest-action fixture and values. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- Focused schedule-result alias capability coverage passes unchanged.
+- Full tests, lint, build, and whitespace checks pass.
+- The cleanup remains test-support-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Dispatcher Test Class Split Slice
 
 `RemoteActionDispatcherTest` remained one of the largest PHPUnit files after the capabilities cleanup. It mixed core scan/upload intent dispatch, schedule preview/apply/rollback-preview dispatch, pre-dispatch rejection paths, client response reconciliation, rate limiting, and safe-transport same-origin/private-resolution coverage in one file. The next safe test-only cleanup is to split those assertions into focused dispatcher test classes while preserving existing fake HTTP clients, fake DNS resolver behavior, fake repository behavior, expected signed intent bodies, redaction expectations, production dispatcher code, protocol behavior, and live-site state.
