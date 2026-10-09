@@ -2014,6 +2014,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, UI behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or remote-action behavior changes.
 
+### Remote Action History Rendering Row Fixture Helper Slice
+
+After the site/snapshot fixture reuse slice, `AdminPageRemoteActionHistoryRenderingTest` still repeated the same successful action-history row structure and redacted context encoding across schedule apply, rollback-preview, and pending-cadence assertions. Keep all rendering assertions unchanged and add a small helper for the repeated history-row shape.
+
+Implementation status: implemented locally as a test-only structure cleanup. `tests/AdminPageRemoteActionHistoryRenderingTest.php` now uses `history_row()` to build successful remote-action history rows with encoded redacted context while each test still supplies the action type, request time, client summary, and action-specific context payload explicitly. Rendered labels, detail disclosure output, schedule wording, rollback-preview wording, pending-cadence wording, and assertions are unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, Remote Action History behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused `AdminPageRemoteActionHistoryRenderingTest` coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Remote Action History behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Audit Support Harness Reuse Slice
 
 The diagnostics audit support test duplicated option shims, diagnostics includes, and local empty fake repositories that are already available through shared event-log and diagnostics test harnesses. Keep the support-summary assertions unchanged and have `tests/DiagnosticsAuditSupportTest.php` reuse the shared bootstrap plus empty diagnostics repository doubles.

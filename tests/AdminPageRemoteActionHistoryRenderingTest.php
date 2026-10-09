@@ -25,26 +25,24 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$site    = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
 		$history  = array(
-			array(
-				'action_type'           => 'schedule_apply',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-09-15 18:23:43',
-				'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_apply' => array(
-							'previous_cadence' => 'every_15_minutes',
-							'applied_cadence'  => 'every_30_minutes',
-							'new_next_run_at'  => '2026-09-15T18:53:55+00:00',
-							'rollback_metadata' => array(
-								'captured'  => true,
-								'available' => false,
-								'reason'    => 'schedule_rollback_runtime_not_implemented',
-								'expires_at' => '2026-09-15T19:24:12+00:00',
-							),
+			$this->history_row(
+				array(
+					'action_type'           => 'schedule_apply',
+					'requested_at'          => '2026-09-15 18:23:43',
+					'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
+				),
+				array(
+					'schedule_apply' => array(
+						'previous_cadence'  => 'every_15_minutes',
+						'applied_cadence'   => 'every_30_minutes',
+						'new_next_run_at'   => '2026-09-15T18:53:55+00:00',
+						'rollback_metadata' => array(
+							'captured'  => true,
+							'available' => false,
+							'reason'    => 'schedule_rollback_runtime_not_implemented',
+							'expires_at' => '2026-09-15T19:24:12+00:00',
 						),
-					)
+					),
 				),
 			),
 		);
@@ -72,23 +70,21 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$site     = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
 		$history  = array(
-			array(
-				'action_type'           => 'schedule_rollback_preview',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-09-15 19:00:00',
-				'client_result_summary' => 'Schedule rollback preview is ready. No schedule was changed.',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_rollback_preview' => array(
-							'schedule_id'                   => 'alynt_scan_upload',
-							'current_cadence'               => 'every_30_minutes',
-							'rollback_cadence'              => 'every_15_minutes',
-							'current_next_run_at'           => '2026-09-15T19:30:00+00:00',
-							'rollback_next_run_estimate_at' => '2026-09-15T19:15:00+00:00',
-							'would_change'                  => true,
-						),
-					)
+			$this->history_row(
+				array(
+					'action_type'           => 'schedule_rollback_preview',
+					'requested_at'          => '2026-09-15 19:00:00',
+					'client_result_summary' => 'Schedule rollback preview is ready. No schedule was changed.',
+				),
+				array(
+					'schedule_rollback_preview' => array(
+						'schedule_id'                   => 'alynt_scan_upload',
+						'current_cadence'               => 'every_30_minutes',
+						'rollback_cadence'              => 'every_15_minutes',
+						'current_next_run_at'           => '2026-09-15T19:30:00+00:00',
+						'rollback_next_run_estimate_at' => '2026-09-15T19:15:00+00:00',
+						'would_change'                  => true,
+					),
 				),
 			),
 		);
@@ -113,32 +109,28 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$site    = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
 		$history  = array(
-			array(
-				'action_type'           => 'schedule_preview',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-09-15 18:10:00',
-				'client_result_summary' => 'Schedule preview completed for Alynt scan/upload.',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_preview' => array(
-							'proposed_cadence' => 'every_15_minutes',
-						),
-					)
+			$this->history_row(
+				array(
+					'action_type'           => 'schedule_preview',
+					'requested_at'          => '2026-09-15 18:10:00',
+					'client_result_summary' => 'Schedule preview completed for Alynt scan/upload.',
+				),
+				array(
+					'schedule_preview' => array(
+						'proposed_cadence' => 'every_15_minutes',
+					),
 				),
 			),
-			array(
-				'action_type'           => 'schedule_apply',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-09-15 18:20:00',
-				'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_apply' => array(
-							'applied_cadence' => 'every_15_minutes',
-						),
-					)
+			$this->history_row(
+				array(
+					'action_type'           => 'schedule_apply',
+					'requested_at'          => '2026-09-15 18:20:00',
+					'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
+				),
+				array(
+					'schedule_apply' => array(
+						'applied_cadence' => 'every_15_minutes',
+					),
 				),
 			),
 		);
@@ -147,6 +139,27 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'Preview target: every 15 minutes; current cadence pending client report', $html );
 		$this->assertStringContainsString( 'Applied cadence: every 15 minutes; previous cadence pending client report', $html );
 		$this->assertStringNotContainsString( 'Unknown → every 15 minutes', $html );
+	}
+
+	/**
+	 * Builds a remote-action history row fixture.
+	 *
+	 * @param array<string,mixed> $overrides Row overrides.
+	 * @param array<string,mixed> $context Redacted context payload.
+	 * @return array<string,mixed>
+	 */
+	private function history_row( array $overrides, array $context ) {
+		return array_merge(
+			array(
+				'action_type'           => 'scan_upload_now',
+				'state'                 => 'succeeded',
+				'client_state'          => 'succeeded',
+				'requested_at'          => '2026-09-15 18:00:00',
+				'client_result_summary' => '',
+				'redacted_context_json' => wp_json_encode( $context ),
+			),
+			$overrides
+		);
 	}
 
 }
