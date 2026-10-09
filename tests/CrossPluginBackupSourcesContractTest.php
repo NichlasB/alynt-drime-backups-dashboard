@@ -24,9 +24,7 @@ class CrossPluginBackupSourcesContractTest extends TestCase {
 	 * @return void
 	 */
 	public function test_uploader_backup_sources_fixture_is_accepted() {
-		$payload   = $this->fixture_payload();
-		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
-		$result    = $validator->validate( $payload, (string) $payload['site_uuid'] );
+		$result = $this->validate_contract_payload( $this->fixture_payload() );
 
 		$this->assertIsArray( $result );
 		$this->assertSame( array( 'server', 'wpvivid' ), array_keys( $result['backup_sources'] ) );
@@ -42,21 +40,7 @@ class CrossPluginBackupSourcesContractTest extends TestCase {
 	 * @return void
 	 */
 	public function test_uploader_fresh_queue_only_fixture_classifies_as_working() {
-		$payload   = $this->validated_fixture_payload();
-		$now       = time();
-		$classifer = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
-		$result    = $classifer->classify(
-			array(
-				'status'       => 'active',
-				'last_seen_at' => $now,
-			),
-			array(
-				'schema_version'  => 1,
-				'observed_at'     => $now,
-				'decoded_payload' => $payload,
-			),
-			$now
-		);
+		$result = $this->classify_contract_payload( $this->validated_fixture_payload() );
 
 		$this->assertSame( 'working', $result['category'] );
 	}
@@ -76,20 +60,7 @@ class CrossPluginBackupSourcesContractTest extends TestCase {
 				'message' => 'The latest uploaded backup evidence is older than the default freshness window.',
 			),
 		);
-		$now                                                       = time();
-		$classifer                                                 = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
-		$result                                                    = $classifer->classify(
-			array(
-				'status'       => 'active',
-				'last_seen_at' => $now,
-			),
-			array(
-				'schema_version'  => 1,
-				'observed_at'     => $now,
-				'decoded_payload' => $payload,
-			),
-			$now
-		);
+		$result                                                    = $this->classify_contract_payload( $payload );
 
 		$this->assertSame( 'needs_attention', $result['category'] );
 	}
@@ -102,8 +73,7 @@ class CrossPluginBackupSourcesContractTest extends TestCase {
 	public function test_nested_forbidden_uploader_contract_field_is_rejected() {
 		$payload                                                = $this->fixture_payload();
 		$payload['backup_sources']['server']['remote_index_path'] = '/var/backups/should-not-pass.json';
-		$validator                                              = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
-		$result                                                 = $validator->validate( $payload, (string) $payload['site_uuid'] );
+		$result                                                 = $this->validate_contract_payload( $payload );
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'payload_invalid', $result->get_error_code() );
@@ -129,13 +99,47 @@ class CrossPluginBackupSourcesContractTest extends TestCase {
 	 * @return array<string,mixed>
 	 */
 	private function validated_fixture_payload() {
-		$payload   = $this->fixture_payload();
-		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
-		$result    = $validator->validate( $payload, (string) $payload['site_uuid'] );
+		$result = $this->validate_contract_payload( $this->fixture_payload() );
 
 		$this->assertIsArray( $result );
 
 		return $result;
+	}
+
+	/**
+	 * Validates a contract payload against its embedded site UUID.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	private function validate_contract_payload( array $payload ) {
+		$validator = new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator();
+
+		return $validator->validate( $payload, (string) $payload['site_uuid'] );
+	}
+
+	/**
+	 * Classifies a validated contract payload at the current fixture time.
+	 *
+	 * @param array<string,mixed> $payload Payload.
+	 * @return array<string,mixed>
+	 */
+	private function classify_contract_payload( array $payload ) {
+		$now        = time();
+		$classifier = new Alynt_Drime_Backups_Dashboard_Status_Classifier();
+
+		return $classifier->classify(
+			array(
+				'status'       => 'active',
+				'last_seen_at' => $now,
+			),
+			array(
+				'schema_version'  => 1,
+				'observed_at'     => $now,
+				'decoded_payload' => $payload,
+			),
+			$now
+		);
 	}
 
 	/**

@@ -3709,6 +3709,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, restore-readiness behavior, release behavior, deployment state, backups, restore controls, restore preparation, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Cross-Plugin Backup Sources Contract Helper Reuse Slice
+
+The cross-plugin backup-sources contract test repeated local validator and classifier setup around the uploader-shaped fixture. Keep the contract assertions focused by moving those wrappers into local helper methods while preserving the standalone contract-test dependencies.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `tests/CrossPluginBackupSourcesContractTest.php` now uses `validate_contract_payload()` and `classify_contract_payload()` helpers for uploader-shaped schema-1 fixture validation and classification while preserving the same fixture file, embedded site UUID validation, source evidence assertions, forbidden-field rejection, category expectations, and no-forbidden-key audit. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused cross-plugin backup-source contract coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
