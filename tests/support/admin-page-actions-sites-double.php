@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-actions-sites-local-state-double.php';
+
 /**
  * Fake site repository.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
+	use Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites_Local_State;
+
 	/**
 	 * Current site row.
 	 *
@@ -18,62 +22,6 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
 		'id'                => 42,
 		'enrollment_status' => 'active',
 	);
-
-	/**
-	 * Pause calls.
-	 *
-	 * @var array<int,int>
-	 */
-	public $pause_calls = array();
-
-	/**
-	 * Resume calls.
-	 *
-	 * @var array<int,int>
-	 */
-	public $resume_calls = array();
-
-	/**
-	 * Archive calls.
-	 *
-	 * @var array<int,int>
-	 */
-	public $archive_calls = array();
-
-	/**
-	 * Unarchive calls.
-	 *
-	 * @var array<int,int>
-	 */
-	public $unarchive_calls = array();
-
-	/**
-	 * Pause result.
-	 *
-	 * @var bool
-	 */
-	public $pause_result = true;
-
-	/**
-	 * Resume result.
-	 *
-	 * @var bool
-	 */
-	public $resume_result = true;
-
-	/**
-	 * Archive result.
-	 *
-	 * @var bool
-	 */
-	public $archive_result = true;
-
-	/**
-	 * Unarchive result.
-	 *
-	 * @var bool
-	 */
-	public $unarchive_result = true;
 
 	/**
 	 * Gets a site.
@@ -87,53 +35,5 @@ class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Sites {
 		}
 
 		return $this->site;
-	}
-
-	/**
-	 * Records pause.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function pause_polling( $site_id ) {
-		$this->pause_calls[] = (int) $site_id;
-
-		return $this->pause_result;
-	}
-
-	/**
-	 * Records resume.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function resume_polling( $site_id ) {
-		$this->resume_calls[] = (int) $site_id;
-
-		return $this->resume_result;
-	}
-
-	/**
-	 * Records archive.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function archive_local( $site_id ) {
-		$this->archive_calls[] = (int) $site_id;
-
-		return $this->archive_result;
-	}
-
-	/**
-	 * Records unarchive.
-	 *
-	 * @param int $site_id Site ID.
-	 * @return bool
-	 */
-	public function unarchive_local( $site_id ) {
-		$this->unarchive_calls[] = (int) $site_id;
-
-		return $this->unarchive_result;
 	}
 }
