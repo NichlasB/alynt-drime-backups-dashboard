@@ -2610,6 +2610,18 @@ Acceptance criteria:
 - Sites-list tests pass without assertion changes.
 - Full tests, lint, build, and whitespace checks pass before commit.
 
+### Admin Sites List WordPress Shim Split Slice
+
+After the Sites-list double split, the Sites-list harness still embedded the minimal `wp_list_pluck()` test shim. Keep `tests/support/admin-page-sites-list-test-harness.php` as the stable test loader while moving the WordPress shim into a focused support file.
+
+Implementation status: implemented locally as a test-only support split. The Sites-list `wp_list_pluck()` shim now lives in `tests/support/admin-page-sites-list-wordpress-shims.php`, and the existing harness loads it before composing production Sites-list traits and test doubles. The harness class name, helper exposure methods, fake collaborator behavior, fixture rows, and Sites-list assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Sites-list tests pass without assertion changes.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Sites-list behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Local Removal Metric Helpers Split Slice
 
 The diagnostics site metric helper trait mixed general polling/site helper methods with local-removal readiness/counting helpers. The next safe structure-only cleanup was to separate the local-removal diagnostics helpers into their own trait while preserving the existing aggregate counts, support-copy shape, Diagnostics output, protocol behavior, database schema, and live-site state.

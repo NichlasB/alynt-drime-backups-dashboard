@@ -5,26 +5,9 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-if ( ! function_exists( 'wp_list_pluck' ) ) {
-	/**
-	 * Minimal wp_list_pluck() test double.
-	 *
-	 * @param array<int,array<string,mixed>> $list List.
-	 * @param string                         $field Field name.
-	 * @return array<int,mixed>
-	 */
-	function wp_list_pluck( $list, $field ) {
-		return array_map(
-			static function ( $item ) use ( $field ) {
-				return isset( $item[ $field ] ) ? $item[ $field ] : null;
-			},
-			$list
-		);
-	}
-}
-
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list-context.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list.php';
+require_once __DIR__ . '/admin-page-sites-list-wordpress-shims.php';
 require_once __DIR__ . '/admin-page-sites-list-exposure-methods.php';
 require_once __DIR__ . '/admin-page-sites-list-test-doubles.php';
 
