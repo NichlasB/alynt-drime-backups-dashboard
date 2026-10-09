@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/remote-action-dispatcher-wpdb-write-methods.php';
+
 /**
  * Fake wpdb for dispatcher tests.
  */
 class Alynt_Drime_Backups_Dashboard_Test_Dispatcher_WPDB {
+	use Alynt_Drime_Backups_Dashboard_Test_Dispatcher_WPDB_Write_Methods;
+
 	/**
 	 * Prefix.
 	 *
@@ -38,20 +42,6 @@ class Alynt_Drime_Backups_Dashboard_Test_Dispatcher_WPDB {
 	public $snapshot = array();
 
 	/**
-	 * Inserted action.
-	 *
-	 * @var array<string,mixed>
-	 */
-	public $inserted_data = array();
-
-	/**
-	 * Update calls.
-	 *
-	 * @var array<int,array<string,mixed>>
-	 */
-	public $updates = array();
-
-	/**
 	 * Prepares SQL.
 	 *
 	 * @param string $query Query.
@@ -78,37 +68,5 @@ class Alynt_Drime_Backups_Dashboard_Test_Dispatcher_WPDB {
 		}
 
 		return empty( $this->site ) ? null : $this->site;
-	}
-
-	/**
-	 * Inserts a row.
-	 *
-	 * @param string              $table Table.
-	 * @param array<string,mixed> $data Data.
-	 * @return int
-	 */
-	public function insert( $table, $data ) {
-		unset( $table );
-		$this->inserted_data = $data;
-
-		return 1;
-	}
-
-	/**
-	 * Updates a row.
-	 *
-	 * @param string              $table Table.
-	 * @param array<string,mixed> $data Data.
-	 * @param array<string,mixed> $where Where.
-	 * @return int
-	 */
-	public function update( $table, $data, $where ) {
-		unset( $table );
-		$this->updates[] = array(
-			'data'  => $data,
-			'where' => $where,
-		);
-
-		return 1;
 	}
 }

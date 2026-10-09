@@ -1938,7 +1938,7 @@ Acceptance criteria:
 
 The remote action dispatcher test-double support file still grouped fake database, fake crypto, and fake action-repository collaborators together. Keep the existing loader path stable while splitting those doubles into narrower support files.
 
-Implementation status: implemented locally as a test-only structure cleanup. `tests/support/remote-action-dispatcher-test-doubles.php` now loads `remote-action-dispatcher-wpdb-double.php`, `remote-action-dispatcher-crypto-doubles.php`, and `remote-action-dispatcher-actions-double.php`. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
+Implementation status: implemented locally as a test-only structure cleanup. `tests/support/remote-action-dispatcher-test-doubles.php` now loads `remote-action-dispatcher-wpdb-double.php`, `remote-action-dispatcher-crypto-doubles.php`, and `remote-action-dispatcher-actions-double.php`. The dispatcher wpdb double keeps its stable class name while insert/update recording behavior now lives in `tests/support/remote-action-dispatcher-wpdb-write-methods.php`. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
 
 Acceptance criteria:
 
