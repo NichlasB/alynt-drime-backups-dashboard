@@ -7,6 +7,7 @@
 
 require_once __DIR__ . '/admin-page-polling-state-rendering-helper-stubs.php';
 require_once __DIR__ . '/admin-page-polling-state-rendering-history-methods.php';
+require_once __DIR__ . '/admin-page-polling-state-rendering-basic-methods.php';
 
 /**
  * Harness exposing private polling-state rendering helpers.
@@ -28,6 +29,7 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Local_Record_Methods;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Remote_Action_Methods;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_History_Methods;
+	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Basic_Methods;
 	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Helper_Stubs {
 		Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Helper_Stubs::decoded_snapshot_payload insteadof Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	}
@@ -45,50 +47,4 @@ class Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness {
 	 * @var object|null
 	 */
 	public $snapshots;
-
-	/**
-	 * Exposes check-status action markup.
-	 *
-	 * @param array<string,mixed> $site Site row.
-	 * @return string
-	 */
-	public function check_form_html( array $site ) {
-		ob_start();
-		$this->render_check_status_form( $site, 7, false );
-		return (string) ob_get_clean();
-	}
-
-	/**
-	 * Exposes scheduled polling pause/resume markup.
-	 *
-	 * @param array<string,mixed> $site Site row.
-	 * @return string
-	 */
-	public function pause_form_html( array $site ) {
-		ob_start();
-		$this->render_polling_pause_form( $site, 7 );
-		return (string) ob_get_clean();
-	}
-
-	/**
-	 * Exposes scheduled polling control panel markup.
-	 *
-	 * @param array<string,mixed> $site Site row.
-	 * @return string
-	 */
-	public function pause_panel_html( array $site ) {
-		ob_start();
-		$this->render_polling_pause_panel( $site );
-		return (string) ob_get_clean();
-	}
-
-	/**
-	 * Exposes next-poll markup.
-	 *
-	 * @param array<string,mixed> $site Site row.
-	 * @return string
-	 */
-	public function next_poll_line( array $site ) {
-		return $this->next_poll_html( $site );
-	}
 }

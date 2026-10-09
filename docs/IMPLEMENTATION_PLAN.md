@@ -2634,6 +2634,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Polling-State Basic Methods Split Slice
+
+After the helper-stub split, the polling-state rendering harness still contained the remaining basic public test-exposure methods for check-status controls, polling pause controls, and next-poll markup. The next safe test-only cleanup is to keep the stable harness loader while moving those basic exposure methods into a focused support trait.
+
+Implementation status: implemented locally as a test-only support split. Basic polling exposure methods now live in `tests/support/admin-page-polling-state-rendering-basic-methods.php`, and `tests/support/admin-page-polling-state-rendering-test-harness.php` composes that trait while retaining the same harness class, public method names, signatures, fixture behavior, and rendered output. Current tests keep requiring the same loader path and rendering assertions remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- Focused polling-state and polling-control rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, polling behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Diagnostics Snapshot Repository Double Split Slice
 
 The diagnostics repository support file still grouped the fake diagnostics site repository and fake diagnostics snapshot repository together. Keep `tests/support/diagnostics-test-repositories.php` as the stable loader while moving the snapshot repository double into a focused support file.
