@@ -1080,7 +1080,7 @@ Acceptance criteria:
 
 `EventLogTest` still embedded WordPress option shims, event-log production includes, and option-storage test globals above the event log assertions. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same settings, threshold, redaction, clear/no-op behavior, option autoload assertions, and live-site state.
 
-Implementation status: implemented locally as a test-only support split. Event log assertions remain in `tests/EventLogTest.php`. WordPress option shims, event-log includes, and shared option-storage setup now load through `tests/support/event-log-test-harness.php`.
+Implementation status: implemented locally as a test-only support split. Event log assertions remain in `tests/EventLogTest.php`. WordPress option shims now live in `tests/support/event-log-option-shims.php`, while event-log includes, the audit current-user shim, and shared option-storage setup continue to load through `tests/support/event-log-test-harness.php`.
 
 Acceptance criteria:
 
