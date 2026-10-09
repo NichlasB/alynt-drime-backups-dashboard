@@ -753,6 +753,16 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Remote Action Capabilities Schedule Apply Fixture Split Slice
+
+Implementation status: implemented locally as a test-support-only split. The schedule-apply capability summary fixture now lives in `tests/support/remote-action-capabilities-schedule-apply-fixtures.php`. The existing schedule capability fixture trait composes the new apply fixture trait and retains the reusable Alynt scan/upload schedule builder. Current capability tests keep requiring the same shared fixture loader and expected sanitized output remains unchanged. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, remote-action behavior, release, deployment, backup, restore, cleanup/delete, schedule apply/rollback behavior, credential handling, Drime behavior, or live-site state was changed.
+
+Acceptance criteria:
+
+- focused schedule-management capability coverage passes with the same assertions;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Remote Action Dispatcher Test Class Split Slice
 
 `RemoteActionDispatcherTest` remained one of the largest PHPUnit files after the capabilities cleanup. It mixed core scan/upload intent dispatch, schedule preview/apply/rollback-preview dispatch, pre-dispatch rejection paths, client response reconciliation, rate limiting, and safe-transport same-origin/private-resolution coverage in one file. The next safe test-only cleanup is to split those assertions into focused dispatcher test classes while preserving existing fake HTTP clients, fake DNS resolver behavior, fake repository behavior, expected signed intent bodies, redaction expectations, production dispatcher code, protocol behavior, and live-site state.
