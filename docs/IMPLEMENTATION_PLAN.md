@@ -3729,6 +3729,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Remote Action History Fixture Trait Split Slice
+
+After cleanup-preview fixture extraction, `tests/support/admin-page-remote-action-rendering-fixtures.php` still owned generic remote-action history row builders used by history list, filter, and detail rendering tests. Keep the aggregate fixture trait as the stable include point while moving generic history-row builders into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. Generic history-list rows, context-bearing history row construction, and scan/upload history rows now live in `tests/support/admin-page-remote-action-history-fixtures.php`; the existing remote-action rendering fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action history rendering, history filter, and history detail coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Status Classifier Source Evidence Helper Reuse Slice
 
 After moving the generic classify-at-default-time helper into the shared classifier fixture trait, the source-evidence classifier tests can reuse it instead of repeating the same active-site, snapshot, and fixture timestamp wrapper in each assertion.
