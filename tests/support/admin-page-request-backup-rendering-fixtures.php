@@ -30,6 +30,43 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Rendering_Fixtures
 	}
 
 	/**
+	 * Builds a compact request-backup row site fixture.
+	 *
+	 * @param array<string,mixed> $overrides Site row overrides.
+	 * @return array<string,mixed>
+	 */
+	private function request_backup_row_site( array $overrides = array() ) {
+		return array_merge(
+			array(
+				'enrollment_status'  => 'active',
+				'polling_key_id'     => 'key-id',
+				'has_polling_secret' => '1',
+			),
+			$overrides
+		);
+	}
+
+	/**
+	 * Builds a request-backup remote-action payload fixture.
+	 *
+	 * @param array<string,mixed> $remote_action_overrides Remote-action overrides.
+	 * @return array<string,array<string,mixed>>
+	 */
+	private function request_backup_payload( array $remote_action_overrides = array() ) {
+		return array(
+			'remote_actions' => array_merge(
+				array(
+					'protocol_version' => 2,
+					'enabled'          => true,
+					'allowed_actions'  => array( 'scan_upload_now' ),
+					'sodium_available' => true,
+				),
+				$remote_action_overrides
+			),
+		);
+	}
+
+	/**
 	 * Builds a request-backup remote-action snapshot fixture.
 	 *
 	 * @param array<string,mixed> $remote_action_overrides Remote-action overrides.
@@ -37,17 +74,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Request_Backup_Rendering_Fixtures
 	 */
 	private function request_backup_snapshot( array $remote_action_overrides = array() ) {
 		return array(
-			'decoded_payload' => array(
-				'remote_actions' => array_merge(
-					array(
-						'protocol_version' => 2,
-						'enabled'          => true,
-						'allowed_actions'  => array( 'scan_upload_now' ),
-						'sodium_available' => true,
-					),
-					$remote_action_overrides
-				),
-			),
+			'decoded_payload' => $this->request_backup_payload( $remote_action_overrides ),
 		);
 	}
 

@@ -1335,6 +1335,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, Request Backup behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Page Request Backup Row Hint Fixture Helper Reuse Slice
+
+After the row-hint split and detail-panel fixture cleanup, `AdminPageRequestBackupRowHintRenderingTest` still repeated the same active compact row site and V2.1 remote-action payload setup across row-hint assertions. Keep row-hint tests focused by extending the existing Request Backup rendering fixture trait with compact row-site and payload builders.
+
+Implementation status: implemented locally as a test-only fixture helper reuse. `tests/support/admin-page-request-backup-rendering-fixtures.php` now provides `request_backup_row_site()` and `request_backup_payload()`, `request_backup_snapshot()` reuses the payload builder, and `tests/AdminPageRequestBackupRowHintRenderingTest.php` reuses the shared fixture trait while preserving the same capability-reported, latest-client-action, and opt-in-needed assertions. No production PHP, assets, UI strings, protocol behavior, database schema, Request Backup rendering behavior, row-hint behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused Request Backup row-hint rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, Request Backup behavior, row-hint behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ### Event Log Test Harness Split Slice
 
 `EventLogTest` still embedded WordPress option shims, event-log production includes, and option-storage test globals above the event log assertions. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same settings, threshold, redaction, clear/no-op behavior, option autoload assertions, and live-site state.
