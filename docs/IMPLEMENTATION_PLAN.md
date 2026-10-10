@@ -1285,6 +1285,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, cleanup-preview behavior, remote-action history behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule execution, live-site, release, deploy, or client-site behavior changes.
 
+### Scan Upload History Row Fixture Helper Slice
+
+Remote-action history detail rendering still carried an inline successful `scan_upload_now` row with short count details to prove small count summaries stay flat instead of opening a disclosure. Keep the non-schedule history detail test focused by moving that row into the shared remote-action rendering fixture trait.
+
+Implementation status: implemented locally as a test-only fixture helper reuse. `tests/support/admin-page-remote-action-rendering-fixtures.php` now provides `scan_upload_history_row()`, and `tests/AdminPageRemoteActionHistoryDetailRenderingTest.php` reuses it while preserving the same found/queued/known/attempted/failed counts, flat summary assertion, and no-disclosure assertion. No production PHP, assets, UI strings, protocol behavior, database schema, scan/upload action behavior, remote-action history rendering behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback execution, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action history detail rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, scan/upload action behavior, remote-action history behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule execution, live-site, release, deploy, or client-site behavior changes.
+
 ### Schedule Rollback Preview History Fixture Helper Slice
 
 After the cleanup-preview split, schedule rollback-preview rendering coverage still repeated a successful Schedule Apply history row with rollback metadata in multiple tests. Keep the non-mutating rollback-preview assertions focused by moving that canonical history row into a shared schedule-management history fixture trait.

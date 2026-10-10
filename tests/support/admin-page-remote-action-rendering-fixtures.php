@@ -150,6 +150,30 @@ trait Alynt_Drime_Backups_Dashboard_Test_Remote_Action_Rendering_Fixtures {
 	}
 
 	/**
+	 * Builds a short scan/upload history row fixture.
+	 *
+	 * @return array<string,mixed>
+	 */
+	private function scan_upload_history_row() {
+		return array(
+			'action_type'           => 'scan_upload_now',
+			'state'                 => 'succeeded',
+			'client_state'          => 'succeeded',
+			'requested_at'          => '2026-09-15 18:00:00',
+			'client_result_summary' => 'Scan completed safely.',
+			'client_counts_json'    => wp_json_encode(
+				array(
+					'found'            => 2,
+					'queued'           => 0,
+					'already_known'    => 1,
+					'upload_attempted' => 1,
+					'failed'           => 0,
+				)
+			),
+		);
+	}
+
+	/**
 	 * Builds cleanup-preview evidence.
 	 *
 	 * @param bool $include_unsafe_category Whether to include an unsafe category for filtering assertions.
