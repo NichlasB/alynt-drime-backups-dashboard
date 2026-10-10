@@ -24,28 +24,7 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site    = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
-		$history  = array(
-			$this->history_row(
-				array(
-					'action_type'           => 'schedule_apply',
-					'requested_at'          => '2026-09-15 18:23:43',
-					'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
-				),
-				array(
-					'schedule_apply' => array(
-						'previous_cadence'  => 'every_15_minutes',
-						'applied_cadence'   => 'every_30_minutes',
-						'new_next_run_at'   => '2026-09-15T18:53:55+00:00',
-						'rollback_metadata' => array(
-							'captured'  => true,
-							'available' => false,
-							'reason'    => 'schedule_rollback_runtime_not_implemented',
-							'expires_at' => '2026-09-15T19:24:12+00:00',
-						),
-					),
-				),
-			),
-		);
+		$history  = array( $this->successful_schedule_apply_detail_history_row() );
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
 
 		$this->assertStringContainsString( 'Schedule Apply', $html );
