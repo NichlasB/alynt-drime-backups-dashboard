@@ -3765,6 +3765,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, pending schedule rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Cleanup Preview Evidence Fixture Trait Split Slice
+
+The cleanup-preview rendering fixture file still grouped the reusable cleanup-preview evidence payload builder with snapshot, latest-action, and history-row builders. Keep the existing rendering fixture trait as the stable include point while moving the evidence payload into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `cleanup_preview_evidence()` now lives in `tests/support/admin-page-cleanup-preview-evidence-fixtures.php`; the cleanup-preview rendering fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused cleanup-preview rendering and remote-action history detail coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Status Classifier Source Evidence Helper Reuse Slice
 
 After moving the generic classify-at-default-time helper into the shared classifier fixture trait, the source-evidence classifier tests can reuse it instead of repeating the same active-site, snapshot, and fixture timestamp wrapper in each assertion.
