@@ -58,24 +58,7 @@ class AdminPageScheduleRollbackPreviewTest extends TestCase {
 	public function test_schedule_panel_renders_latest_rollback_preview_evidence_when_preview_is_hidden() {
 		$harness                 = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
 		$harness->remote_actions = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions();
-		$history                 = array(
-			array(
-				'public_id'             => '44444444-4444-4444-8444-444444444444',
-				'action_type'           => 'schedule_rollback_preview',
-				'state'                 => 'succeeded',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_rollback_preview' => array(
-							'schedule_id'        => 'alynt_scan_upload',
-							'current_cadence'    => 'every_30_minutes',
-							'rollback_cadence'   => 'every_15_minutes',
-							'would_change'       => true,
-							'rollback_supported' => false,
-						),
-					)
-				),
-			),
-		);
+		$history                 = array( $this->successful_schedule_rollback_preview_history_row() );
 		$html                    = $harness->panel_html( $this->payload( true, false ), $history );
 
 		$this->assertStringContainsString( 'Latest rollback preview', $html );

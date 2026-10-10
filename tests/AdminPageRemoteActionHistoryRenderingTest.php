@@ -69,25 +69,7 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site     = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
-		$history  = array(
-			$this->history_row(
-				array(
-					'action_type'           => 'schedule_rollback_preview',
-					'requested_at'          => '2026-09-15 19:00:00',
-					'client_result_summary' => 'Schedule rollback preview is ready. No schedule was changed.',
-				),
-				array(
-					'schedule_rollback_preview' => array(
-						'schedule_id'                   => 'alynt_scan_upload',
-						'current_cadence'               => 'every_30_minutes',
-						'rollback_cadence'              => 'every_15_minutes',
-						'current_next_run_at'           => '2026-09-15T19:30:00+00:00',
-						'rollback_next_run_estimate_at' => '2026-09-15T19:15:00+00:00',
-						'would_change'                  => true,
-					),
-				),
-			),
-		);
+		$history  = array( $this->successful_schedule_rollback_preview_history_row() );
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
 
 		$this->assertStringContainsString( 'Schedule Rollback Preview', $html );
