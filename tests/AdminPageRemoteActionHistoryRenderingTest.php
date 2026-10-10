@@ -69,32 +69,7 @@ class AdminPageRemoteActionHistoryRenderingTest extends TestCase {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site    = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
-		$history  = array(
-			$this->history_row(
-				array(
-					'action_type'           => 'schedule_preview',
-					'requested_at'          => '2026-09-15 18:10:00',
-					'client_result_summary' => 'Schedule preview completed for Alynt scan/upload.',
-				),
-				array(
-					'schedule_preview' => array(
-						'proposed_cadence' => 'every_15_minutes',
-					),
-				),
-			),
-			$this->history_row(
-				array(
-					'action_type'           => 'schedule_apply',
-					'requested_at'          => '2026-09-15 18:20:00',
-					'client_result_summary' => 'Schedule apply completed for Alynt scan/upload.',
-				),
-				array(
-					'schedule_apply' => array(
-						'applied_cadence' => 'every_15_minutes',
-					),
-				),
-			),
-		);
+		$history  = $this->pending_schedule_cadence_history_rows();
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
 
 		$this->assertStringContainsString( 'Preview target: every 15 minutes; current cadence pending client report', $html );

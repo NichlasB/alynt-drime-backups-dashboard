@@ -1309,6 +1309,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, schedule apply behavior, remote-action history behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule execution, live-site, release, deploy, or client-site behavior changes.
 
+### Schedule Pending Cadence History Fixture Helper Slice
+
+Remote-action history rendering also repeated paired Schedule Preview and Schedule Apply rows that intentionally omit current/previous cadence evidence to prove the UI does not render an `Unknown → cadence` transition. Keep that edge-case assertion readable by moving the paired rows into the shared schedule-management history fixture trait.
+
+Implementation status: implemented locally as a test-only fixture helper reuse. `tests/support/admin-page-schedule-management-history-fixtures.php` now provides `pending_schedule_cadence_history_rows()`, and `tests/AdminPageRemoteActionHistoryRenderingTest.php` reuses it while preserving the same pending current-cadence, pending previous-cadence, and no-unknown-transition assertions. No production PHP, assets, UI strings, protocol behavior, database schema, schedule preview/apply behavior, remote-action history rendering behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback execution, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action history rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, schedule preview/apply behavior, remote-action history behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule execution, live-site, release, deploy, or client-site behavior changes.
+
 ### Schedule Rollback Preview Evidence Fixture Helper Slice
 
 Schedule rollback-preview rendering tests also repeated a successful rollback-preview evidence row for the latest-preview panel and remote-action history details. Keep preview-only rollback evidence assertions focused by extending the shared schedule-management history fixture trait with a canonical successful rollback-preview row.
