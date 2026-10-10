@@ -3789,6 +3789,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, Request Backup Now behavior, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Request Backup Payload Fixture Trait Split Slice
+
+The request-backup rendering fixture file still grouped site-row helpers with the request-backup remote-action payload and snapshot builders used by detail and row-hint rendering tests. Keep the existing request-backup rendering fixture trait as the stable include point while moving payload/snapshot builders into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `request_backup_payload()` and `request_backup_snapshot()` now live in `tests/support/admin-page-request-backup-payload-fixtures.php`; the request-backup rendering fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, Request Backup Now behavior, compact row-hint behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused request-backup detail and row-hint rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Request Backup Now behavior, compact row-hint behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Status Classifier Source Evidence Helper Reuse Slice
 
 After moving the generic classify-at-default-time helper into the shared classifier fixture trait, the source-evidence classifier tests can reuse it instead of repeating the same active-site, snapshot, and fixture timestamp wrapper in each assertion.
