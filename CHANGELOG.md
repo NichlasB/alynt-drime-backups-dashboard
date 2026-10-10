@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-No unreleased changes.
+### Changed
+
+- Reconciled the implementation plan with the completed dashboard `0.1.73` live deployment and post-deploy scheduled-poll verification.
+- Split the snapshot repository `wpdb` test double into focused test-support coverage without changing runtime behavior.
 
 ## 0.1.73 - 2026-10-09
 
