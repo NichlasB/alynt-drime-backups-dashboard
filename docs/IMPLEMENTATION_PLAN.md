@@ -3741,6 +3741,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Schedule Rollback History Fixture Trait Split Slice
+
+The schedule-management history fixture file still grouped Schedule Apply, Schedule Rollback Preview, and pending-cadence history rows. Keep the existing schedule-management fixture trait as the stable include point while moving rollback-preview-specific history rows into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `successful_schedule_rollback_preview_history_row()` now lives in `tests/support/admin-page-schedule-rollback-history-fixtures.php`; the existing schedule-management history fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, schedule rollback-preview rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused schedule rollback-preview and remote-action history rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, schedule rollback-preview rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Status Classifier Source Evidence Helper Reuse Slice
 
 After moving the generic classify-at-default-time helper into the shared classifier fixture trait, the source-evidence classifier tests can reuse it instead of repeating the same active-site, snapshot, and fixture timestamp wrapper in each assertion.
