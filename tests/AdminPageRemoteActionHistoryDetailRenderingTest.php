@@ -24,33 +24,7 @@ class AdminPageRemoteActionHistoryDetailRenderingTest extends TestCase {
 		$harness  = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
 		$site     = $this->remote_action_history_site();
 		$snapshot = $this->remote_action_history_snapshot();
-		$history  = array(
-			array(
-				'action_type'           => 'cleanup_preview',
-				'state'                 => 'succeeded',
-				'client_state'          => 'succeeded',
-				'requested_at'          => '2026-09-29 12:00:00',
-				'client_result_summary' => 'Cleanup preview is ready. Nothing was deleted.',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'cleanup_preview' => array(
-							'total_eligible_count' => 2,
-							'total_approx_bytes'   => 2048,
-							'expires_at'           => '2026-09-29T12:15:00+00:00',
-							'categories'           => array(
-								array(
-									'category'       => 'uploader_temp_artifacts',
-									'eligible_count' => 2,
-									'approx_bytes'   => 2048,
-									'age_band'       => 'older_than_24h',
-									'reason_code'    => 'safe_local_uploader_owned_temp_artifacts',
-								),
-							),
-						),
-					)
-				),
-			),
-		);
+		$history  = array( $this->cleanup_preview_history_row() );
 		$html     = $harness->request_backup_panel_html( $site, $snapshot, $history );
 
 		$this->assertStringContainsString( 'Cleanup Preview', $html );

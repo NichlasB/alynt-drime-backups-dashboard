@@ -1273,6 +1273,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, cleanup-preview behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Cleanup Preview Evidence Fixture Helper Slice
+
+Cleanup-preview rendering tests repeated the same support-safe cleanup evidence across the latest-preview panel and remote-action history detail coverage. Keep the assertions focused by moving the canonical cleanup-preview action summary, history row, and category evidence into the shared remote-action rendering fixture trait.
+
+Implementation status: implemented locally as a test-only fixture helper reuse. `tests/support/admin-page-remote-action-rendering-fixtures.php` now provides `cleanup_preview_last_action_summary()`, `cleanup_preview_history_row()`, and `cleanup_preview_evidence()`, and both `tests/AdminPageCleanupPreviewRenderingTest.php` and `tests/AdminPageRemoteActionHistoryDetailRenderingTest.php` reuse them while preserving the same eligible counts, byte totals, expiry timestamp, safe category filtering, unsafe category suppression, preview-only copy, and no-cleanup-apply assertions. No production PHP, assets, UI strings, protocol behavior, database schema, cleanup-preview behavior, remote-action history rendering behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback execution, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused cleanup-preview and remote-action history detail rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, cleanup-preview behavior, remote-action history behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule execution, live-site, release, deploy, or client-site behavior changes.
+
 ### Schedule Rollback Preview History Fixture Helper Slice
 
 After the cleanup-preview split, schedule rollback-preview rendering coverage still repeated a successful Schedule Apply history row with rollback metadata in multiple tests. Keep the non-mutating rollback-preview assertions focused by moving that canonical history row into a shared schedule-management history fixture trait.
