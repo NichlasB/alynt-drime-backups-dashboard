@@ -64,23 +64,7 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 	 */
 	public function test_overview_renders_diagnostics_freshness_notice() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness();
-		$html    = $harness->overview_html(
-			array(
-				'scheduler' => array(
-					'current_utc'           => '2026-09-19 10:53:22',
-					'poll_hook'             => 'alynt_drime_backups_dashboard_poll_sites',
-					'poll_schedule_state'   => 'scheduled',
-					'poll_next_at'          => '2026-09-19 11:06:29',
-					'poll_interval_seconds' => 900,
-					'poll_batch_size'       => 20,
-					'stale_after_seconds'   => 3600,
-				),
-				'counts'    => array(),
-				'recent'    => array(),
-				'logging'   => array(),
-				'support'   => array(),
-			)
-		);
+		$html    = $harness->overview_html( $this->freshness_notice_diagnostics() );
 
 		$this->assertStringContainsString( 'Generated at 2026-09-19 10:53:22 UTC.', $html );
 		$this->assertStringContainsString( 'Refresh diagnostics', $html );
@@ -95,17 +79,7 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 	 */
 	public function test_overview_renders_dashboard_runtime_identity() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Harness();
-		$html    = $harness->overview_html(
-			array(
-				'scheduler' => array(
-					'current_utc' => '2026-09-30 19:30:00',
-				),
-				'counts'    => array(),
-				'recent'    => array(),
-				'logging'   => array(),
-				'support'   => array(),
-			)
-		);
+		$html    = $harness->overview_html( $this->runtime_identity_diagnostics() );
 
 		$this->assertStringContainsString( 'Dashboard Runtime', $html );
 		$this->assertStringContainsString( 'Installed version', $html );

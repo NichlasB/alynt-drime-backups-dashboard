@@ -1423,6 +1423,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, Diagnostics rendering behavior, support-copy shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Diagnostics Overview Small Fixture Helper Reuse Slice
+
+`AdminPageDiagnosticsOverviewRenderingTest` still retained small inline scheduler-only diagnostics payloads for freshness and runtime identity rendering after the larger overview payload split. Keep those assertions focused by moving the repeated empty diagnostics shell and the two scheduler-only scenarios into the existing diagnostics overview fixture trait.
+
+Implementation status: implemented locally as a test-only fixture helper reuse. `tests/support/admin-page-diagnostics-overview-fixtures.php` now provides `freshness_notice_diagnostics()`, `runtime_identity_diagnostics()`, and the shared `scheduler_only_diagnostics()` helper, and `tests/AdminPageDiagnosticsOverviewRenderingTest.php` uses those helpers while preserving the same generated-at, cache-busted refresh, dashboard runtime identity, diagnostics boundary, deployment boundary, and support-safe identity assertions. No production PHP, assets, UI strings, protocol behavior, database schema, Diagnostics rendering behavior, support-copy shape, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, schedule apply/rollback behavior, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused diagnostics overview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Diagnostics rendering behavior, support-copy shape, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, schedule apply/rollback behavior, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Enrollment REST Controller Test Harness Structure Slice
 
 `EnrollmentRestControllerTest` retained WordPress transient shims, a fake site repository, and reusable controller/payload/request fixtures alongside enrollment assertions. The next safe test-only cleanup is to move those shims and fixtures into a dedicated support harness while leaving enrollment assertions, production REST code, pairing/security behavior, storage shape, protocol behavior, database schema, UI output, and live-site state unchanged.
