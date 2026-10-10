@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.73
+Stable tag: 0.1.74
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.74 adds display-only Diagnostics Runtime copy clarifying that Diagnostics does not deploy, update, roll back, or install dashboard packages and that live-site changes remain separately approval-gated.
 
 Version 0.1.73 adds display-only Diagnostics Runtime help text clarifying that Diagnostics refresh/export reads support-safe dashboard data only and does not poll clients, run remote actions, change schedules, or mutate backups.
 
@@ -75,6 +77,12 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.74 =
+
+* Added display-only Diagnostics Runtime copy clarifying that Diagnostics does not deploy, update, roll back, or install dashboard packages and that live-site changes remain separately approval-gated.
+* Reconciled the implementation plan with the completed dashboard 0.1.73 live deployment and post-deploy scheduled-poll verification.
+* Split the snapshot repository wpdb test double into focused test-support coverage without changing runtime behavior.
 
 = 0.1.73 =
 * Added display-only Diagnostics Runtime help text clarifying that Diagnostics refresh/export reads support-safe dashboard data only and does not poll clients, run remote actions, change schedules, or mutate backups.
