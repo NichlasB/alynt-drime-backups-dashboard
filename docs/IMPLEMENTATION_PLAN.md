@@ -3753,6 +3753,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, schedule rollback-preview rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Pending Schedule History Fixture Trait Split Slice
+
+The schedule-management history fixture file still owned pending-cadence history rows used by the remote-action history rendering tests. Keep the existing schedule-management fixture trait as the stable include point while moving pending-cadence rows into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `pending_schedule_cadence_history_rows()` now lives in `tests/support/admin-page-pending-schedule-history-fixtures.php`; the existing schedule-management history fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, pending schedule rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action history rendering coverage for pending schedule cadence passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, pending schedule rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Status Classifier Source Evidence Helper Reuse Slice
 
 After moving the generic classify-at-default-time helper into the shared classifier fixture trait, the source-evidence classifier tests can reuse it instead of repeating the same active-site, snapshot, and fixture timestamp wrapper in each assertion.
