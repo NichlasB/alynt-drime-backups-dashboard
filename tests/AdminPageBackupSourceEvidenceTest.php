@@ -21,7 +21,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 	 * @return void
 	 */
 	public function test_sites_table_compact_evidence_includes_source_timestamps() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
+		$harness = $this->backup_source_evidence_harness();
 		$payload = $this->fixture_payload();
 
 		$payload['backup_sources']['server']['latest_upload_age_seconds']  = 53442;
@@ -55,7 +55,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 	 * @return void
 	 */
 	public function test_detail_evidence_separates_backup_package_and_upload_timestamps() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
+		$harness = $this->backup_source_evidence_harness();
 		$html    = $harness->detail_html( $this->fixture_payload() );
 
 		$this->assertSame( 2, substr_count( $html, 'Latest backup/package' ) );
@@ -80,7 +80,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$payload['backup_sources']['wpvivid']['latest_upload_age_seconds'] = 172800;
 		$payload['backup_sources']['wpvivid']['freshness_window_seconds']  = 129600;
 
-		$harness      = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
+		$harness      = $this->backup_source_evidence_harness();
 		$compact_html = $harness->compact_html( $payload );
 		$detail_html  = $harness->detail_html( $payload );
 
@@ -99,19 +99,9 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 	 */
 	public function test_external_optional_wpvivid_policy_displays_explicitly() {
 		$payload = $this->fixture_payload();
-		$site    = array(
-			'id' => 12,
-		);
+		$site    = $this->fixture_site();
 
-		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness(
-			new Alynt_Drime_Backups_Dashboard_Source_Policy(
-				array(
-					'12' => array(
-						'wpvivid' => 'external_optional',
-					),
-				)
-			)
-		);
+		$harness = $this->backup_source_evidence_harness( $this->fixture_source_policy( 12, 'wpvivid', 'external_optional' ) );
 
 		$compact_html = $harness->compact_html( $payload, $site );
 		$detail_html  = $harness->detail_html( $payload, $site );
@@ -144,7 +134,7 @@ class AdminPageBackupSourceEvidenceTest extends TestCase {
 		$payload['backup_sources']['wpvivid']['has_upload_evidence']      = false;
 		$payload['backup_sources']['wpvivid']['warnings']                 = array();
 
-		$harness = new Alynt_Drime_Backups_Dashboard_Backup_Source_Evidence_Test_Harness();
+		$harness = $this->backup_source_evidence_harness();
 		$html    = $harness->compact_html( $payload );
 
 		$this->assertStringContainsString( 'Backups:', $html );
