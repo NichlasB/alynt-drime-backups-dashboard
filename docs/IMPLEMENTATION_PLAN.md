@@ -1273,6 +1273,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, cleanup-preview behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Schedule Rollback Preview History Fixture Helper Slice
+
+After the cleanup-preview split, schedule rollback-preview rendering coverage still repeated a successful Schedule Apply history row with rollback metadata in multiple tests. Keep the non-mutating rollback-preview assertions focused by moving that canonical history row into a shared schedule-management history fixture trait.
+
+Implementation status: implemented locally as a test-only fixture helper reuse. `tests/support/admin-page-schedule-management-history-fixtures.php` now provides `successful_schedule_apply_history_row()`, and both `tests/AdminPageScheduleCleanupRenderingTest.php` and `tests/AdminPageScheduleRollbackPreviewTest.php` reuse it through their existing fixture traits. The ready/waiting/hidden rollback-preview assertions, source apply action id, rollback metadata fingerprint, schedule id, cadence evidence, and non-mutating copy remain unchanged. No production PHP, assets, UI strings, protocol behavior, database schema, rollback-preview behavior, schedule apply behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback execution, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused schedule rollback-preview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production code, rollback-preview behavior, schedule apply behavior, remote-action behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule execution, live-site, release, deploy, or client-site behavior changes.
+
 ### Enrollment Manager Test Harness Split Slice
 
 `EnrollmentManagerTest` still embedded its fake site repository, production includes, and display-token secret helper alongside pending-enrollment assertions. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same pending enrollment behavior, display-once token assertions, duplicate pending guard, origin/label validation, storage-failure behavior, and live-site state.

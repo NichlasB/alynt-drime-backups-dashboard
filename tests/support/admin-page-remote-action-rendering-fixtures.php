@@ -6,6 +6,7 @@
  */
 
 require_once __DIR__ . '/admin-page-remote-action-context-fixtures.php';
+require_once __DIR__ . '/admin-page-schedule-management-history-fixtures.php';
 require_once __DIR__ . '/admin-page-schedule-management-rendering-fixtures.php';
 
 /**
@@ -13,6 +14,7 @@ require_once __DIR__ . '/admin-page-schedule-management-rendering-fixtures.php';
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Remote_Action_Rendering_Fixtures {
 	use Alynt_Drime_Backups_Dashboard_Test_Remote_Action_Context_Fixtures;
+	use Alynt_Drime_Backups_Dashboard_Schedule_Management_History_Fixtures;
 	use Alynt_Drime_Backups_Dashboard_Test_Schedule_Management_Rendering_Fixtures;
 
 	/**

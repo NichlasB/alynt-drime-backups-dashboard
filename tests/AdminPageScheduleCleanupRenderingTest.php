@@ -22,27 +22,7 @@ class AdminPageScheduleCleanupRenderingTest extends TestCase {
 	 */
 	public function test_schedule_management_panel_renders_non_mutating_rollback_preview_form() {
 		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$history = array(
-			array(
-				'public_id'             => '33333333-3333-4333-8333-333333333333',
-				'action_type'           => 'schedule_apply',
-				'state'                 => 'succeeded',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_apply' => array(
-							'schedule_id'     => 'alynt_scan_upload',
-							'previous_cadence' => 'every_15_minutes',
-							'applied_cadence'  => 'every_30_minutes',
-							'rollback_metadata' => array(
-								'captured'                      => true,
-								'schedule_id'                   => 'alynt_scan_upload',
-								'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
-							),
-						),
-					)
-				),
-			),
-		);
+		$history = array( $this->successful_schedule_apply_history_row() );
 		$html    = $harness->schedule_management_panel_html(
 			$this->remote_action_history_site(),
 			$this->schedule_management_snapshot( true ),

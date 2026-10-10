@@ -39,23 +39,7 @@ class AdminPageScheduleRollbackPreviewTest extends TestCase {
 	public function test_schedule_rollback_preview_readiness_shows_ready_with_apply_metadata() {
 		$harness                 = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Harness();
 		$harness->remote_actions = new Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Actions();
-		$history                 = array(
-			array(
-				'public_id'             => '33333333-3333-4333-8333-333333333333',
-				'action_type'           => 'schedule_apply',
-				'state'                 => 'succeeded',
-				'redacted_context_json' => wp_json_encode(
-					array(
-						'schedule_apply' => array(
-							'schedule_id'       => 'alynt_scan_upload',
-							'rollback_metadata' => array(
-								'captured' => true,
-							),
-						),
-					)
-				),
-			),
-		);
+		$history                 = array( $this->successful_schedule_apply_history_row() );
 		$html                    = $harness->panel_html( $this->payload( true, true ), $history );
 
 		$this->assertStringContainsString( 'adbd-status-pill is-ready', $html );

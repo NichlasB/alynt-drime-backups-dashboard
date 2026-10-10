@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-schedule-management-history-fixtures.php';
+
 /**
  * Shared schedule-management payload fixtures.
  */
 trait Alynt_Drime_Backups_Dashboard_Schedule_Management_Test_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Schedule_Management_History_Fixtures;
+
 	/**
 	 * Creates a sanitized snapshot payload with preview-only schedule capability.
 	 *
