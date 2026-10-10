@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Reconciled the implementation plan with the completed dashboard `0.1.73` live deployment and post-deploy scheduled-poll verification.
+- Added display-only Diagnostics Runtime copy clarifying that Diagnostics does not deploy, update, roll back, or install dashboard packages and that live-site changes remain separately approval-gated.
 - Split the snapshot repository `wpdb` test double into focused test-support coverage without changing runtime behavior.
 
 ## 0.1.73 - 2026-10-09

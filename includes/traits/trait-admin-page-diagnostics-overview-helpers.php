@@ -122,6 +122,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Overview_Helpers {
 		$this->render_detail_row( __( 'Remote-action boundary', 'alynt-drime-backups-dashboard' ), __( 'Only explicitly opted-in signed client actions are available; the dashboard stores no Drime API credentials.', 'alynt-drime-backups-dashboard' ) );
 		$this->render_detail_row( __( 'Capability gate', 'alynt-drime-backups-dashboard' ), __( 'Remote-action controls appear only when the latest client report advertises the specific supported action capability.', 'alynt-drime-backups-dashboard' ) );
 		$this->render_detail_row( __( 'Diagnostics boundary', 'alynt-drime-backups-dashboard' ), __( 'Refreshing or exporting Diagnostics reads support-safe dashboard data only; it does not poll clients, run remote actions, change schedules, or mutate backups.', 'alynt-drime-backups-dashboard' ) );
+		$this->render_detail_row( __( 'Deployment boundary', 'alynt-drime-backups-dashboard' ), __( 'Diagnostics does not deploy, update, roll back, or install dashboard packages; live-site changes stay behind the separate deployment approval gate.', 'alynt-drime-backups-dashboard' ) );
 		echo '</tbody></table>';
 		echo '<p class="description">' . esc_html__( 'This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 	}

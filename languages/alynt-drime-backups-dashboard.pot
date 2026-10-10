@@ -1860,6 +1860,14 @@ msgstr ""
 msgid "Refreshing or exporting Diagnostics reads support-safe dashboard data only; it does not poll clients, run remote actions, change schedules, or mutate backups."
 msgstr ""
 
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:125
+msgid "Deployment boundary"
+msgstr ""
+
+#: includes/traits/trait-admin-page-diagnostics-overview-helpers.php:125
+msgid "Diagnostics does not deploy, update, roll back, or install dashboard packages; live-site changes stay behind the separate deployment approval gate."
+msgstr ""
+
 #: includes/traits/trait-admin-page-diagnostics-overview.php:219
 msgid "This support-safe identity check helps confirm which dashboard build generated the Diagnostics view without exposing site labels, domains, paths, credentials, tokens, raw payloads, or response bodies."
 msgstr ""

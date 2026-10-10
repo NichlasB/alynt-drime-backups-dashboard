@@ -118,6 +118,8 @@ class AdminPageDiagnosticsOverviewRenderingTest extends TestCase {
 		$this->assertStringContainsString( 'controls appear only when the latest client report advertises', $html );
 		$this->assertStringContainsString( 'Diagnostics boundary', $html );
 		$this->assertStringContainsString( 'does not poll clients, run remote actions, change schedules, or mutate backups', $html );
+		$this->assertStringContainsString( 'Deployment boundary', $html );
+		$this->assertStringContainsString( 'live-site changes stay behind the separate deployment approval gate', $html );
 		$this->assertStringContainsString( 'support-safe identity check', $html );
 	}
 }
