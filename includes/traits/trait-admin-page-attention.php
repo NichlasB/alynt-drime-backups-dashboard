@@ -78,6 +78,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Attention {
 				)
 			)
 		);
+		echo '<p class="description">' . esc_html__( 'This queue uses the latest stored local snapshots. Use Check Now to request a fresh read-only status report for a specific site.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		echo '<ol class="adbd-attention-list">';
 
 		foreach ( $attention as $site ) {

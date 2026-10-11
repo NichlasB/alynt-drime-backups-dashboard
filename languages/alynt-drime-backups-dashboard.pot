@@ -726,11 +726,15 @@ msgid_plural "%d sites need someone to review their latest evidence. The list is
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/traits/trait-admin-page-attention.php:106
+#: includes/traits/trait-admin-page-attention.php:91
+msgid "This queue uses the latest stored local snapshots. Use Check Now to request a fresh read-only status report for a specific site."
+msgstr ""
+
+#: includes/traits/trait-admin-page-attention.php:107
 msgid "Latest evidence:"
 msgstr ""
 
-#: includes/traits/trait-admin-page-attention.php:108
+#: includes/traits/trait-admin-page-attention.php:109
 msgid "View Site"
 msgstr ""
 

@@ -36,4 +36,24 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Classifier {
 			'category' => isset( $site['category'] ) ? $site['category'] : 'working',
 		);
 	}
+
+	/**
+	 * Returns a readable label for fixture categories.
+	 *
+	 * @param string $category Status category.
+	 * @return string
+	 */
+	public function label( $category ) {
+		$labels = array(
+			'working'         => 'Working',
+			'pending'         => 'Pending',
+			'paused'          => 'Paused',
+			'incompatible'    => 'Incompatible',
+			'not_reporting'   => 'Not reporting',
+			'needs_attention' => 'Needs attention',
+			'not_configured'  => 'Not configured',
+		);
+
+		return isset( $labels[ $category ] ) ? $labels[ $category ] : (string) $category;
+	}
 }

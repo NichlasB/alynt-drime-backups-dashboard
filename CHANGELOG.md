@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Clarified the Attention tab empty state so operators can distinguish no active enrolled sites from active sites whose latest local snapshots are currently quiet.
 - Added display-only Sites summary copy explaining that the Attention metric includes active records classified as needs attention, not reporting, incompatible, or not configured.
+- Clarified that non-empty Attention queue rows are based on latest stored local snapshots and that Check Now requests a fresh read-only status report.
 
 ### Security
 

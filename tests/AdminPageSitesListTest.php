@@ -132,6 +132,24 @@ class AdminPageSitesListTest extends TestCase {
 	}
 
 	/**
+	 * Non-empty Attention queue explains that rows are based on stored snapshots.
+	 *
+	 * @return void
+	 */
+	public function test_attention_queue_explains_stored_snapshot_basis() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Harness();
+
+		$html = $harness->attention_html();
+
+		$this->assertStringContainsString( '1 site needs someone to review its latest evidence.', $html );
+		$this->assertStringContainsString(
+			'This queue uses the latest stored local snapshots. Use Check Now to request a fresh read-only status report for a specific site.',
+			$html
+		);
+		$this->assertStringNotContainsString( 'No active sites currently need attention', $html );
+	}
+
+	/**
 	 * Sites summary explains what the Attention metric includes.
 	 *
 	 * @return void

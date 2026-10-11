@@ -5,6 +5,10 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/wordpress-shims-admin.php';
+require_once __DIR__ . '/wordpress-shims-escaping.php';
+require_once __DIR__ . '/wordpress-shims-sanitization.php';
+
 if ( ! function_exists( 'wp_list_pluck' ) ) {
 	/**
 	 * Minimal wp_list_pluck() test double.
