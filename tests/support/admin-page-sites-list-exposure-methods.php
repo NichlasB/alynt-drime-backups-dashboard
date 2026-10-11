@@ -48,4 +48,18 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Exposure_Methods {
 		$this->render_attention_shell();
 		return (string) ob_get_clean();
 	}
+
+	/**
+	 * Exposes Sites status summary markup.
+	 *
+	 * @param array<string,int> $counts Status counts.
+	 * @param int               $total Total sites.
+	 * @param int               $attention Attention count.
+	 * @return string
+	 */
+	public function status_summary_html( array $counts, $total, $attention ) {
+		ob_start();
+		$this->render_status_summary( $counts, $total, $attention );
+		return (string) ob_get_clean();
+	}
 }

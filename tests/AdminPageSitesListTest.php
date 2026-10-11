@@ -130,4 +130,29 @@ class AdminPageSitesListTest extends TestCase {
 		$this->assertStringContainsString( 'Latest local snapshots for active sites are not classified as needs attention, not reporting, incompatible, or not configured.', $html );
 		$this->assertStringNotContainsString( 'No active sites enrolled yet', $html );
 	}
+
+	/**
+	 * Sites summary explains what the Attention metric includes.
+	 *
+	 * @return void
+	 */
+	public function test_sites_status_summary_explains_attention_metric() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Harness();
+		$html    = $harness->status_summary_html(
+			array(
+				'working'         => 2,
+				'pending'         => 0,
+				'paused'          => 1,
+				'incompatible'    => 1,
+				'not_reporting'   => 1,
+				'needs_attention' => 1,
+				'not_configured'  => 1,
+			),
+			6,
+			4
+		);
+
+		$this->assertStringContainsString( 'Site status summary', $html );
+		$this->assertStringContainsString( 'Attention includes active records whose latest local snapshot is classified as needs attention, not reporting, incompatible, or not configured.', $html );
+	}
 }

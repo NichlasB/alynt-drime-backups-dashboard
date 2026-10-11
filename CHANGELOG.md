@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Clarified the Attention tab empty state so operators can distinguish no active enrolled sites from active sites whose latest local snapshots are currently quiet.
+- Added display-only Sites summary copy explaining that the Attention metric includes active records classified as needs attention, not reporting, incompatible, or not configured.
 
 ### Security
 

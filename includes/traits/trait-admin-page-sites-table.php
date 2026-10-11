@@ -134,5 +134,6 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_Table {
 		}
 
 		echo '</div>';
+		echo '<p class="description adbd-status-summary-note">' . esc_html__( 'Attention includes active records whose latest local snapshot is classified as needs attention, not reporting, incompatible, or not configured.', 'alynt-drime-backups-dashboard' ) . '</p>';
 	}
 }

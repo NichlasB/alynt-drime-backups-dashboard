@@ -3346,6 +3346,10 @@ msgstr ""
 msgid "Site status summary"
 msgstr ""
 
+#: includes/traits/trait-admin-page-sites-table.php:137
+msgid "Attention includes active records whose latest local snapshot is classified as needs attention, not reporting, incompatible, or not configured."
+msgstr ""
+
 #: includes/traits/trait-admin-page-status-formatters.php:74
 msgid "Next step: complete client opt-in pairing, then wait for the first read-only status check."
 msgstr ""
