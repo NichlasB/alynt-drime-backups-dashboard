@@ -113,6 +113,10 @@ Mocks must not bypass the boundary being claimed as tested. Flaky tests require 
 
 Run `npm run check:structure` during release-readiness or file-structure review passes. The guard fails when runtime include files exceed 300 lines or test support helpers exceed 150 lines, and prints the largest files in each group for quick review. The limits are intentionally conservative enough to flag renewed bloat while avoiding mechanical splits of cohesive classes, shims, doubles, and narrowly scoped fixtures.
 
+## Dependency Audit Guard
+
+Run `npm audit --audit-level=moderate` and `php ./composer.phar audit` during release-readiness passes. CI runs the equivalent npm and Composer audits on every push and pull request so dependency advisories are caught before packaging.
+
 ## Risk Tiers And Authorization
 
 The user or repository policy assigns the maximum tier. The agent cannot promote itself.

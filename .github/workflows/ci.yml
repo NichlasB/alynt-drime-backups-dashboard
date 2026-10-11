@@ -39,6 +39,9 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Audit Composer dependencies
+        run: composer audit
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -47,6 +50,9 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
+
+      - name: Audit npm dependencies
+        run: npm audit --audit-level=moderate
 
       - name: Build assets
         run: npm run build
