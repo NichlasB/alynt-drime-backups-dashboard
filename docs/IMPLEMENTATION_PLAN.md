@@ -1212,6 +1212,19 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, backup-source evidence rendering, source-policy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Admin Page Attention Rendering Test Class Split Slice
+
+`AdminPageSitesListTest` still grouped Sites-list row filtering/context assertions with Attention queue and Sites status-summary rendering assertions. The next safe test-only cleanup is to move Attention/summary rendering assertions into a focused class while preserving the same Sites-list harness, Attention empty-state copy, stored-snapshot queue explanation, Attention metric explanation, archive visibility behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Superseded revoked-row filtering and archived/visible context coverage remain in `tests/AdminPageSitesListTest.php`. Attention empty-state, non-empty queue basis, and Sites status-summary Attention metric coverage moved to `tests/AdminPageAttentionRenderingTest.php`. Shared harness loading continues through `tests/support/admin-page-sites-list-test-harness.php`. No production PHP, assets, UI strings, protocol behavior, database schema, Sites-list rendering behavior, Attention rendering behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused Sites-list and Attention rendering coverage passes with the same observable assertions;
+- the Sites-list filtering/context test class remains focused on row/context behavior;
+- PHP syntax, lint, full tests, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, Sites-list rendering behavior, Attention rendering behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Poller Failure Test Class Split Slice
 
 `PollerTest` still grouped the successful manual poll path with invalid payload, missing credential, transport backoff, snapshot-storage failure, success-persistence failure, and failure-persistence failure paths. The next safe test-only cleanup is to move the failure/storage assertions into a focused poller failure class while preserving the same poller behavior, safe transport boundary, snapshot recording behavior, failure counter/backoff behavior, storage error surfacing, and live-site state.
