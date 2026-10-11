@@ -24,6 +24,32 @@ Future remote-operation planning is tracked separately in `docs/V2_REMOTE_ACTION
 - V2.3 schedule management remains a higher-risk gated phase because it can change persistent client backup behavior. The preview-only `alynt_scan_upload` schedule capability slice and non-mutating signed `schedule_preview` action are implemented, released, and deployed through dashboard `0.1.22` and uploader `0.5.18`. The guarded `schedule_apply` slice for `alynt_scan_upload` cadence changes only is implemented, released, and deployed through dashboard `0.1.25` and uploader `0.5.19`, with the client-side Schedule Apply policy still disabled by default and enabled only per explicitly approved client site. Display-only Sites-row schedule hints distinguish preview-only and apply-gated clients without adding row-level controls. Rollback-readiness metadata capture/display is implemented and proven on the `purecleanse.net` pilot as evidence-only. Dashboard-side non-mutating `schedule_rollback_preview` dispatch/UI controls, audit labels, action-history summaries, and Diagnostics support aggregates are released and deployed through dashboard `0.1.43`, but remain hidden unless a latest client capability report explicitly advertises rollback-preview support. One PureCleanse rollback-preview pilot was completed on 2026-09-30 with temporary client-local opt-in, a guarded `every_15_minutes -> every_30_minutes` apply, non-mutating rollback preview evidence, restoration to `every_15_minutes`, and opt-in disabled again. Broad rollback-preview enablement and any mutating `schedule_rollback` runtime behavior remain unavailable without separate approval gates.
 - A follow-up dashboard self-action safety patch allows exact same-origin V2.1 action dispatch when the enrolled client origin equals the dashboard's own normalized public HTTPS origin and managed-host DNS resolves that origin to loopback/private addresses. Public-IP enforcement remains required for every non-same-origin client action destination.
 
+## Dashboard 0.1.75 Release Record
+
+Dashboard `0.1.75` was released as a small operator-scanability and release-readiness patch. It clarifies the Attention tab empty states so no active enrolled sites is distinct from a quiet active queue, adds display-only Sites summary copy explaining what the Attention metric includes, and clarifies that non-empty Attention queue rows are based on latest stored local snapshots while Check Now requests a fresh read-only status report. It also adds the dashboard structure guard to CI and release packaging and includes safe test-support fixture/helper cleanup accumulated after `0.1.74`; those cleanup changes preserve existing dashboard behavior and do not add runtime capabilities.
+
+Commit scope since `0.1.74`:
+
+- `5217a15` through `ac7f5ce` — record completed dashboard `0.1.74` release, deployment, and post-deploy monitoring evidence;
+- `00feb4c` through `02a9b04` — continue safe test-support fixture/helper cleanup without changing runtime behavior;
+- `79132e1` through `ff28224` — add and enforce the dashboard structure guard in CI and release packaging;
+- `05ba14c` — clarify Attention empty states for no active enrolled sites versus quiet active rows;
+- `d8f71bb` — explain the Sites status-summary Attention metric;
+- `6d90c63` — clarify that non-empty Attention queue rows use latest stored local snapshots and Check Now requests a fresh read-only status report;
+- `05d184e` — dashboard `0.1.75` version and release metadata update.
+
+Release evidence:
+
+- release candidate version metadata is `0.1.75` in the plugin header, version constant, package metadata, readme stable tag, readme changelog, and translation template metadata;
+- GitHub tag and release: `v0.1.75`;
+- release asset: `alynt-drime-backups-dashboard-0.1.75.zip`;
+- release asset SHA256: `6f0a1ed709de8bd4e9baadcd08c3bdecdfb61e7989ff5440d077f7bb6c94e647`;
+- CI passed for release-prep commit `05d184e` in run `38161052614`;
+- Build Release run `38161155194` passed and uploaded the release asset;
+- ZIP audit confirmed one top-level plugin folder, 142 runtime files, no excluded source/dev folders, expected runtime metadata at `0.1.75`, packaged `assets/dist/admin/index.js` and `assets/dist/admin/index.css`, and packaged PHP syntax passed for 137 PHP files.
+- no protocol behavior, database schema, remote-action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior is introduced by this patch line;
+- updater acceptance, `control-sitesmanage` deployment, and post-deploy scheduled-poll monitoring remain separate approval-gated workflows and have not been performed for `0.1.75`.
+
 ## Dashboard 0.1.74 Release Record
 
 Dashboard `0.1.74` was released as a small Diagnostics deployment-boundary clarity and release-readiness patch. It adds display-only Diagnostics Runtime copy clarifying that Diagnostics does not deploy, update, roll back, or install dashboard packages, and that live-site changes remain separately approval-gated. It also includes safe local-only implementation-plan reconciliation and snapshot repository test-support cleanup accumulated after `0.1.73`; those cleanup changes preserve the existing dashboard behavior and do not add runtime capabilities.
