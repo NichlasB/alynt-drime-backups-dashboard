@@ -4414,6 +4414,19 @@ Acceptance criteria:
 - Translation template, full dashboard tests, lint, build, and whitespace checks pass.
 - No setting, endpoint, database write, client poll, remote action, package install/update/rollback, credential path, backup, restore, cleanup/delete apply, schedule apply/rollback behavior, deployment behavior, live-site behavior, or client-site behavior changes.
 
+### Restore Readiness and Diagnostics Test Class Split Slice
+
+`AdminPageRestoreReadinessEvidenceTest` still grouped Site Detail restore-readiness evidence panel coverage with compact Sites-row hint coverage, and `DiagnosticsTest` still grouped polling-state diagnostic counts with support-safe record-state aggregate coverage. Keep those assertions easier to scan by moving the compact row-hint and record-state aggregate cases into dedicated test classes while preserving the same harnesses and fixtures.
+
+Implementation status: implemented locally as a test-only split. Site Detail restore-readiness evidence and missing-evidence coverage remain in `tests/AdminPageRestoreReadinessEvidenceTest.php`, while compact Sites-row restore-readiness hint coverage moved to `tests/AdminPageRestoreReadinessRowHintTest.php`. Polling-state diagnostics coverage remains in `tests/DiagnosticsTest.php`, while support-safe record-state aggregate coverage moved to `tests/DiagnosticsRecordStateTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, diagnostics behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused restore-readiness evidence and row-hint rendering coverage passes unchanged.
+- Focused diagnostics polling-state and record-state aggregate coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, diagnostics behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
