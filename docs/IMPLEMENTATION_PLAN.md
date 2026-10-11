@@ -3801,6 +3801,42 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, poller behavior, HTTP transport behavior, scheduler behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Classifier Source Fixture Split Slice
+
+The status-classifier backup-source fixture still grouped the base source payload builder with two-source convenience wrappers. Keep `tests/support/status-classifier-backup-source-fixtures.php` as the stable include point while moving the base source payload builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `source_payload()` now lives in `tests/support/status-classifier-source-fixtures.php`; the existing status-classifier backup-source fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-classifier coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Schedule Apply Rollback Metadata Alias Fixture Split Slice
+
+The schedule-apply alias fixture still grouped the latest-action alias summary with rollback-metadata alias construction. Keep `tests/support/remote-action-capabilities-schedule-apply-alias-fixtures.php` as the stable include point while moving the rollback-metadata alias builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `schedule_apply_rollback_metadata()` now lives in `tests/support/remote-action-capabilities-schedule-apply-rollback-metadata-fixtures.php`; the existing schedule-apply alias fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action capability sanitization behavior, Schedule Apply behavior, rollback-preview behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action capability schedule-result coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action capability sanitization behavior, Schedule Apply behavior, rollback-preview behavior, rollback behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Enrollment REST Secret Fixture Split Slice
+
+The enrollment REST controller site/payload fixture still grouped deterministic pairing-secret helpers with site and payload builders. Keep `tests/support/enrollment-rest-controller-site-payload-fixtures.php` as the stable include point while moving the secret/header helpers into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `pairing_secret()` and `bearer_secret()` now live in `tests/support/enrollment-rest-controller-secret-fixtures.php`; the existing enrollment REST site/payload fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused enrollment REST controller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Remote Action History Row Fixture Split Slice
 
 After the remote-action history fixture extraction, `tests/support/admin-page-remote-action-history-fixtures.php` still grouped generic history-list rows with the context-bearing row factory and scan/upload detail row. Keep the existing remote-action history fixture trait as the stable include point while moving the row factory and scan/upload row into focused support traits.
