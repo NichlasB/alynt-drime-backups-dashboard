@@ -1187,6 +1187,32 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, enrollment REST behavior, route contracts, origin validation, pairing or credential behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Enrollment REST Controller Auth Rejection Test Class Split Slice
+
+`EnrollmentRestControllerRejectionTest` still grouped pairing-authentication and rate-limit failures with payload/origin/schema/expiry validation failures after the first enrollment split. The next safe test-only cleanup is to move wrong-secret and repeated-invalid/rate-limited assertions into a focused class while preserving the same controller fixtures, bearer token boundary, transient rate-limit behavior, repository storage expectations, production controller code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Origin mismatch, endpoint mismatch, unsupported schema, and expired-pairing coverage remain in `tests/EnrollmentRestControllerRejectionTest.php`. Wrong-secret and repeated-invalid/rate-limited coverage moved to `tests/EnrollmentRestControllerAuthRejectionTest.php`. Shared controller fixtures and repository doubles continue to load through `tests/support/enrollment-rest-controller-test-harness.php`. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment REST behavior, route contracts, pairing behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused enrollment rejection/auth coverage passes with the same observable assertions;
+- `EnrollmentRestControllerRejectionTest` remains focused on authenticated payload/origin/schema/expiry rejection behavior;
+- PHP syntax, lint, full tests, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, enrollment REST behavior, route contracts, origin validation, pairing or credential behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
+### Enrollment REST Controller Route Test Class Split Slice
+
+`EnrollmentRestControllerTest` still grouped successful enrollment storage/credential assertions with permission callback and route-argument contract assertions. The next safe test-only cleanup is to move the public route contract assertions into a focused class while preserving the same controller fixtures, permission callback behavior, sanitizer/validator coverage, production controller code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Successful enrollment and bounded uploader-version storage coverage remain in `tests/EnrollmentRestControllerTest.php`. Permission callback and route-argument sanitizer/validator coverage moved to `tests/EnrollmentRestControllerRouteTest.php`. Shared controller fixtures and repository doubles continue to load through `tests/support/enrollment-rest-controller-test-harness.php`. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment REST behavior, route contracts, pairing behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused enrollment success/storage and route-contract coverage passes with the same observable assertions;
+- `EnrollmentRestControllerTest` remains focused on successful enrollment storage behavior;
+- PHP syntax, lint, full tests, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, enrollment REST behavior, route contracts, origin validation, pairing or credential behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Status Classifier Payload Decoding Test Class Split Slice
 
 `StatusClassifierTest` still grouped baseline status categories, source queue/failure behavior, and stored `payload_json` decoding/fail-closed cases in one file. The next safe test-only cleanup is to move payload decoding assertions into a focused class while preserving the same classifier behavior, malformed-payload handling, fail-closed status messages, source evidence policy, and live-site state.
