@@ -3741,6 +3741,42 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Status Payload Validator Source Fixture Split Slice
+
+The status-payload validator backup-source fixture still grouped the base backup-source payload builder with two-source convenience wrappers. Keep `tests/support/status-payload-validator-backup-source-fixtures.php` as the stable include point while moving the base source payload builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `source_payload()` now lives in `tests/support/status-payload-validator-source-fixtures.php`; the existing status-payload validator backup-source fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, status payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-payload validator backup-source coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, status payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Status Payload Validator Payload Fixture Split Slice
+
+The status-payload validator test fixture still grouped the base valid payload builder with validator construction and validation helper methods. Keep `tests/support/status-payload-validator-test-fixtures.php` as the stable include point while moving the base valid payload builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `payload()` now lives in `tests/support/status-payload-validator-payload-fixtures.php`; the existing status-payload validator test fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, status payload validation behavior, backup-source behavior, restore-readiness behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-payload validator coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, status payload validation behavior, backup-source behavior, restore-readiness behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Remote Action History Row Fixture Split Slice
+
+After the remote-action history fixture extraction, `tests/support/admin-page-remote-action-history-fixtures.php` still grouped generic history-list rows with the context-bearing row factory and scan/upload detail row. Keep the existing remote-action history fixture trait as the stable include point while moving the row factory and scan/upload row into focused support traits.
+
+Implementation status: implemented locally as a test-only fixture split. `history_row()` now lives in `tests/support/admin-page-remote-action-history-row-fixtures.php`, and `scan_upload_history_row()` now lives in `tests/support/admin-page-scan-upload-history-fixtures.php`; the existing remote-action history fixture trait composes those focused traits so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action history rendering, history filter, and history detail coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action history rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Schedule Rollback History Fixture Trait Split Slice
 
 The schedule-management history fixture file still grouped Schedule Apply, Schedule Rollback Preview, and pending-cadence history rows. Keep the existing schedule-management fixture trait as the stable include point while moving rollback-preview-specific history rows into a focused support trait.
