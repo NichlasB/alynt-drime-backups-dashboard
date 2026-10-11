@@ -1199,6 +1199,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production code, backup-source evidence rendering, source-policy behavior, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Admin Page Backup Source Evidence Detail Test Class Split Slice
+
+`AdminPageBackupSourceEvidenceTest` still grouped compact Sites-row evidence assertions with Site Detail evidence and source-policy assertions after the harness cleanup. The next safe test-only cleanup is to move detail/policy assertions into a focused class while preserving the same backup-source rendering helpers, fixture payloads, source-policy behavior, WPvivid policy copy, warning copy, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Compact Sites-row source summaries and compact warning summaries remain in `tests/AdminPageBackupSourceEvidenceTest.php`. Site Detail timestamp evidence, WPvivid within-policy rendering, and external/optional source-policy rendering moved to `tests/AdminPageBackupSourceEvidenceDetailTest.php`. Shared fixtures and harness loading continue through `tests/support/admin-page-backup-source-evidence-test-harness.php`. No production PHP, assets, UI strings, protocol behavior, database schema, backup-source evidence rendering, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused backup-source evidence coverage passes with the same assertions;
+- no split backup-source evidence rendering test class remains oversized from this source file;
+- PHP syntax, lint, full tests, build, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, backup-source evidence rendering, source-policy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Poller Failure Test Class Split Slice
 
 `PollerTest` still grouped the successful manual poll path with invalid payload, missing credential, transport backoff, snapshot-storage failure, success-persistence failure, and failure-persistence failure paths. The next safe test-only cleanup is to move the failure/storage assertions into a focused poller failure class while preserving the same poller behavior, safe transport boundary, snapshot recording behavior, failure counter/backoff behavior, storage error surfacing, and live-site state.
