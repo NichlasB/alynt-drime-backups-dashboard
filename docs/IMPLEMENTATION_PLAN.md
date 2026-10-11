@@ -4427,6 +4427,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, diagnostics behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Remote Action Signer Failure Test Class Split Slice
+
+`RemoteActionSignerTest` still grouped canonical JSON and sodium round-trip coverage with fail-closed runtime/key/signature validation coverage. Keep signer behavior easier to scan by moving failure-path assertions into a dedicated class while preserving the same signer doubles, skipped-runtime handling, error-code expectations, and signature verification inputs.
+
+Implementation status: implemented locally as a test-only split. Canonical JSON and available-runtime round-trip coverage remain in `tests/RemoteActionSignerTest.php`, while unsupported-runtime, malformed signature material, and invalid private-key coverage moved to `tests/RemoteActionSignerFailureTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, signing behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action signer success and failure-path coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, signing behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
