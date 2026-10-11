@@ -19,6 +19,20 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Sites {
 	public $calls = array();
 
 	/**
+	 * Visible rows override.
+	 *
+	 * @var array<int,array<string,mixed>>|null
+	 */
+	public $visible_rows = null;
+
+	/**
+	 * Archived rows override.
+	 *
+	 * @var array<int,array<string,mixed>>|null
+	 */
+	public $archived_rows = null;
+
+	/**
 	 * Returns rows by archive visibility mode.
 	 *
 	 * @param array<string,mixed> $args Arguments.
@@ -30,6 +44,10 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Sites {
 		$archived      = isset( $args['archived'] ) ? $args['archived'] : 'include';
 
 		if ( 'only' === $archived ) {
+			if ( is_array( $this->archived_rows ) ) {
+				return $this->archived_rows;
+			}
+
 			return array(
 				array(
 					'id'                => 3,
@@ -39,6 +57,10 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Sites {
 					'archived_at'       => '2026-09-19 18:30:00',
 				),
 			);
+		}
+
+		if ( is_array( $this->visible_rows ) ) {
+			return $this->visible_rows;
 		}
 
 		return array(

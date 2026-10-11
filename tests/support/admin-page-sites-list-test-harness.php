@@ -7,6 +7,7 @@
 
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list-context.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list.php';
+require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-attention.php';
 require_once __DIR__ . '/admin-page-sites-list-wordpress-shims.php';
 require_once __DIR__ . '/admin-page-sites-list-exposure-methods.php';
 require_once __DIR__ . '/admin-page-sites-list-test-doubles.php';
@@ -17,6 +18,9 @@ require_once __DIR__ . '/admin-page-sites-list-test-doubles.php';
 class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Exposure_Methods;
+	use Alynt_Drime_Backups_Dashboard_Admin_Page_Attention;
+
+	const MENU_SLUG = 'alynt-drime-backups-dashboard';
 
 	/**
 	 * Fake sites repository.

@@ -22,3 +22,16 @@ if ( ! function_exists( 'wp_list_pluck' ) ) {
 		);
 	}
 }
+
+if ( ! function_exists( 'esc_html__' ) ) {
+	/**
+	 * Minimal esc_html__() test double.
+	 *
+	 * @param string $text Text.
+	 * @param string $domain Domain.
+	 * @return string
+	 */
+	function esc_html__( $text, $domain = 'default' ) {
+		return htmlspecialchars( $text, ENT_QUOTES, 'UTF-8' );
+	}
+}

@@ -90,4 +90,44 @@ class AdminPageSitesListTest extends TestCase {
 		);
 		$this->assertSame( 1, $harness->attention_count_for_test() );
 	}
+
+	/**
+	 * Attention empty state distinguishes no enrollment from healthy active rows.
+	 *
+	 * @return void
+	 */
+	public function test_attention_empty_state_explains_no_active_sites() {
+		$harness                     = new Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Harness();
+		$harness->sites->visible_rows = array();
+
+		$html = $harness->attention_html();
+
+		$this->assertStringContainsString( 'No active sites enrolled yet', $html );
+		$this->assertStringContainsString( 'Pair a client site before the Attention queue can show backup evidence that needs review.', $html );
+		$this->assertStringNotContainsString( 'No active sites currently need attention', $html );
+	}
+
+	/**
+	 * Attention empty state explains quiet active rows without implying a live poll.
+	 *
+	 * @return void
+	 */
+	public function test_attention_empty_state_explains_quiet_active_sites() {
+		$harness                     = new Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Harness();
+		$harness->sites->visible_rows = array(
+			array(
+				'id'                => 7,
+				'expected_origin'   => 'https://quiet.example.test',
+				'enrollment_status' => 'active',
+				'category'          => 'working',
+				'archived_at'       => '',
+			),
+		);
+
+		$html = $harness->attention_html();
+
+		$this->assertStringContainsString( 'No active sites currently need attention', $html );
+		$this->assertStringContainsString( 'Latest local snapshots for active sites are not classified as needs attention, not reporting, incompatible, or not configured.', $html );
+		$this->assertStringNotContainsString( 'No active sites enrolled yet', $html );
+	}
 }

@@ -37,4 +37,15 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Exposure_Methods {
 	public function attention_count_for_test() {
 		return $this->attention_count();
 	}
+
+	/**
+	 * Exposes Attention shell markup.
+	 *
+	 * @return string
+	 */
+	public function attention_html() {
+		ob_start();
+		$this->render_attention_shell();
+		return (string) ob_get_clean();
+	}
 }

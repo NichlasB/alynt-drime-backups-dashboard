@@ -702,27 +702,35 @@ msgstr ""
 msgid "Attention"
 msgstr ""
 
-#: includes/traits/trait-admin-page-attention.php:62
-msgid "No sites currently need attention"
+#: includes/traits/trait-admin-page-attention.php:63
+msgid "No active sites enrolled yet"
 msgstr ""
 
-#: includes/traits/trait-admin-page-attention.php:62
-msgid "No latest local snapshot is classified as needs attention, not reporting, incompatible, or not configured."
+#: includes/traits/trait-admin-page-attention.php:63
+msgid "Pair a client site before the Attention queue can show backup evidence that needs review."
+msgstr ""
+
+#: includes/traits/trait-admin-page-attention.php:65
+msgid "No active sites currently need attention"
+msgstr ""
+
+#: includes/traits/trait-admin-page-attention.php:65
+msgid "Latest local snapshots for active sites are not classified as needs attention, not reporting, incompatible, or not configured."
 msgstr ""
 
 #. translators: %d: number of sites needing attention.
-#: includes/traits/trait-admin-page-attention.php:72
+#: includes/traits/trait-admin-page-attention.php:82
 #, php-format
 msgid "%d site needs someone to review its latest evidence."
 msgid_plural "%d sites need someone to review their latest evidence. The list is ordered by status priority."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/traits/trait-admin-page-attention.php:96
+#: includes/traits/trait-admin-page-attention.php:106
 msgid "Latest evidence:"
 msgstr ""
 
-#: includes/traits/trait-admin-page-attention.php:98
+#: includes/traits/trait-admin-page-attention.php:108
 msgid "View Site"
 msgstr ""
 

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Clarified the Attention tab empty state so operators can distinguish no active enrolled sites from active sites whose latest local snapshots are currently quiet.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.74 - 2026-10-10
 
 ### Changed
