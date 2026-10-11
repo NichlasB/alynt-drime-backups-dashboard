@@ -811,6 +811,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
 
+### Diagnostics Support Redaction Test Class Split Slice
+
+`DiagnosticsHistoryAndSupportTest` still grouped attention-history aggregate assertions with recent diagnostics and support-summary redaction assertions after the broader diagnostics split. The next safe test-only cleanup is to move redaction assertions into a focused class while preserving the same diagnostics fixtures, support-safe JSON expectations, secret-bearing field redaction, production diagnostics code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Attention-history aggregate coverage remains in `tests/DiagnosticsHistoryAndSupportTest.php`. Recent poll outcome redaction and support-summary client/secret redaction coverage moved to `tests/DiagnosticsSupportRedactionTest.php`. Shared diagnostics fixtures continue to load through `tests/support/diagnostics-test-bootstrap.php`. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics behavior, support-copy shape, polling behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- focused diagnostics history and redaction coverage passes unchanged;
+- full dashboard tests, lint, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, diagnostics behavior, support-copy JSON shape, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete, credentials, Drime behavior, or live-site state.
+
 ### Diagnostics Backup Source Aggregate Test Class Split Slice
 
 `DiagnosticsTest` still mixed core polling/record-state diagnostics with backup-source aggregate diagnostics after the broader diagnostics split. The next safe test-only cleanup is to move backup-source aggregate assertions into a focused diagnostics class while preserving the same diagnostics service behavior, support-copy JSON shape, redaction expectations, source aggregate counts, and live-site state.
@@ -4255,6 +4267,18 @@ Acceptance criteria:
 
 - Focused status-payload validator backup-source coverage passes unchanged.
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Status Payload Validator Backup Source Hardening Test Class Split Slice
+
+`StatusPayloadValidatorBackupSourcesTest` still grouped accepted/sanitized backup-source payload assertions with bounds and forbidden-field hardening assertions. The next safe test-only cleanup is to move backup-source hardening assertions into a focused class while preserving the same validator fixtures, source payload builders, sanitized field expectations, warning bounds, forbidden-field rejection, production validator code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Allowlisted server/WPvivid backup-source sanitization coverage remains in `tests/StatusPayloadValidatorBackupSourcesTest.php`. Warning-volume bounds, unknown enum clearing, source-label bounds, and nested forbidden-field rejection moved to `tests/StatusPayloadValidatorBackupSourceHardeningTest.php`. Shared validator fixtures continue to load through `tests/support/status-payload-validator-test-bootstrap.php`. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-payload validator backup-source coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
 ### Status Payload Validator Core Helper Reuse Slice
