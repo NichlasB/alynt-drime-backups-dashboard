@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.74
+Stable tag: 0.1.75
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.75 clarifies the Attention and Sites summaries so operators can distinguish no enrollment, quiet latest local snapshots, and active records that need attention. It also adds a release-package structure guard and continues safe test-support cleanup without changing runtime behavior.
 
 Version 0.1.74 adds display-only Diagnostics Runtime copy clarifying that Diagnostics does not deploy, update, roll back, or install dashboard packages and that live-site changes remain separately approval-gated.
 
@@ -77,6 +79,14 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.75 =
+
+* Clarified the Attention tab empty state so operators can distinguish no active enrolled sites from active sites whose latest local snapshots are currently quiet.
+* Added display-only Sites summary copy explaining that the Attention metric includes active records classified as needs attention, not reporting, incompatible, or not configured.
+* Clarified that non-empty Attention queue rows are based on latest stored local snapshots and that Check Now requests a fresh read-only status report.
+* Added a CI and release-package structure guard and continued safe test-support fixture/helper cleanup without changing runtime behavior.
+* Preserved existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.74 =
 
