@@ -7,6 +7,7 @@
 
 require_once __DIR__ . '/status-classifier-classification-fixtures.php';
 require_once __DIR__ . '/status-classifier-payload-fixtures.php';
+require_once __DIR__ . '/status-classifier-site-fixtures.php';
 
 /**
  * Shared fixture builders for status classifier tests.
@@ -15,19 +16,6 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Test_Fixtures {
 	use Alynt_Drime_Backups_Dashboard_Status_Classifier_Backup_Source_Fixtures;
 	use Alynt_Drime_Backups_Dashboard_Status_Classifier_Classification_Fixtures;
 	use Alynt_Drime_Backups_Dashboard_Status_Classifier_Payload_Fixtures;
-
-	/**
-	 * Builds an active site row.
-	 *
-	 * @param string $last_seen Last seen date.
-	 * @return array<string,mixed>
-	 */
-	private function active_site( $last_seen = '2023-11-14 22:15:00' ) {
-		return array(
-			'status'       => 'working',
-			'paused_at'    => null,
-			'last_seen_at' => $last_seen,
-		);
-	}
+	use Alynt_Drime_Backups_Dashboard_Status_Classifier_Site_Fixtures;
 
 }
