@@ -1550,6 +1550,18 @@ Acceptance criteria:
 - PHP syntax, lint, full tests, build, and whitespace checks pass;
 - the split remains test-only and does not alter runtime class loading, production files, event log behavior, redaction behavior, settings behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
 
+### Event Log Storage Test Class Split Slice
+
+`EventLogTest` still grouped settings, threshold/redaction, and storage-maintenance assertions after the harness split. The next safe test-only cleanup is to move clear/no-op storage assertions into a focused class while preserving the same option shims, event-log settings behavior, redaction behavior, storage clear behavior, production event-log code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Disabled-by-default, settings sanitization, threshold, and redaction coverage remain in `tests/EventLogTest.php`. Clear and clear-empty no-op coverage moved to `tests/EventLogStorageTest.php`. Shared event-log dependencies and option shims continue to load through `tests/support/event-log-test-harness.php`. No production PHP, assets, UI strings, protocol behavior, database schema, event-log behavior, redaction behavior, settings behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- focused event-log settings/redaction and storage coverage passes unchanged;
+- full dashboard tests, lint, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, event log behavior, redaction behavior, settings behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Admin Page Action Audit Test Harness Split Slice
 
 `AdminPageActionAuditTest` still embedded WordPress URL/nonce shims, fake enrollment manager/event-log classes, and the admin-actions harness above the audit assertion. The next safe test-only cleanup is to move reusable support setup into a dedicated support file while preserving the same create-pending-site audit behavior, token redaction assertions, nonce behavior, and live-site state.
@@ -4181,6 +4193,18 @@ Acceptance criteria:
 
 - Focused status-classifier source-evidence coverage passes unchanged.
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Status Classifier Source Configuration Test Class Split Slice
+
+`StatusClassifierSourceEvidenceTest` still grouped configured-source queue/stale evidence behavior with no-source and source-summary not-configured behavior. The next safe test-only cleanup is to move source-configuration assertions into a focused class while preserving the same classifier fixtures, category expectations, source payload builders, production classifier code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Queue-only source warning and stale configured-source evidence coverage remain in `tests/StatusClassifierSourceEvidenceTest.php`. No known source and source-summary positively not-configured coverage moved to `tests/StatusClassifierSourceConfigurationTest.php`. Shared classifier fixtures continue to load through `tests/support/status-classifier-test-bootstrap.php`. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused status-classifier source-evidence and source-configuration coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
 ### Enrollment Manager Harness Helper Slice
