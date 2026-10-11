@@ -4306,6 +4306,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Cross-Plugin Backup Sources Classification Test Class Split Slice
+
+`CrossPluginBackupSourcesContractTest` still grouped dashboard validation/sanitization contract assertions with dashboard classification assertions for the uploader-shaped fixture. The next safe test-only cleanup is to move classification assertions into a focused class while preserving the same fixture file, embedded site UUID validation, source evidence assertions, forbidden-field rejection, category expectations, production validator/classifier code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Uploader-shaped fixture acceptance, forbidden-key audit, and nested forbidden-field rejection coverage remain in `tests/CrossPluginBackupSourcesContractTest.php`. Queue-only/fresh and stale-source classification coverage moved to `tests/CrossPluginBackupSourcesClassificationTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused cross-plugin backup-source validation and classification coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, payload validation behavior, classifier behavior, backup-source behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Backup Source Evidence Harness Helper Reuse Slice
 
 The backup-source evidence rendering test repeated rendering harness construction and a one-site source-policy fixture inline. Keep compact/detail evidence assertions focused by moving harness creation, minimal fixture site rows, and one-site source-policy setup into the shared backup-source evidence fixture trait.
