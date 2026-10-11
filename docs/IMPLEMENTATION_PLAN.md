@@ -3777,6 +3777,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Cleanup Preview Snapshot Fixture Trait Split Slice
+
+After cleanup-preview evidence fixture extraction, the cleanup-preview rendering fixture file still grouped the remote-action snapshot builder with latest-action and history-row helpers. Keep the existing rendering fixture trait as the stable include point while moving snapshot construction into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `cleanup_preview_snapshot()` now lives in `tests/support/admin-page-cleanup-preview-snapshot-fixtures.php`; the cleanup-preview rendering fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused cleanup-preview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Cleanup Preview behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Request Backup History Fixture Trait Split Slice
 
 The request-backup rendering fixture file still grouped detail/row/snapshot builders with the successful request-backup history row. Keep the existing request-backup rendering fixture trait as the stable include point while moving the history row into a focused support trait.
