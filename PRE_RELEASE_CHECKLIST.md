@@ -19,6 +19,10 @@ Use this checklist to track release-candidate readiness for the `Alynt Drime Bac
 - [x] Updater compatibility present: GitHub Plugin URI and prior GitHub release/update flow established through previous dashboard releases.
 - [x] Restore point/rollback baseline available through local Git history and current `v0.1.61` release/tag. No live-site, database, deployment, or destructive action was performed in this pass.
 
+## Reusable Release-Readiness Checks
+
+- Run `npm run check:structure` during file-structure and release-readiness passes. This fails if runtime include files exceed 300 lines or test support helpers exceed 150 lines, and prints the largest files for quick review.
+
 ## Current Feature Workflow Tracking
 
 - [x] Current `0.1.62` patch scope is implemented in commits `deac3d1`, `a3573ea`, `7aa27c6`, and `1534231`, plus the release-prep metadata commit in this repository.
