@@ -51,6 +51,9 @@ jobs:
       - name: Build assets
         run: npm run build
 
+      - name: Check file structure
+        run: npm run check:structure
+
       - name: Run PHPUnit
         run: npm test
 
