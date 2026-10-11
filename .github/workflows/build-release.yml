@@ -35,7 +35,9 @@ jobs:
       - name: Install npm dependencies and build assets
         run: |
           npm ci
+          npm audit --audit-level=moderate
           npm run build
+          npm run check:structure
 
       - name: Create plugin zip
         id: package
