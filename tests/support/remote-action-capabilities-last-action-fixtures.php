@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/remote-action-capabilities-count-fixtures.php';
+
 /**
  * Shared latest-action fixture builders for remote action capability tests.
  */
 trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Last_Action_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Count_Fixtures;
+
 	/**
 	 * Builds a representative valid latest-action summary.
 	 *
@@ -23,13 +27,7 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Capabilities_Last_Action_Fixtu
 			'completed_at'   => '2026-08-20T12:01:00+00:00',
 			'result_code'    => 'ok',
 			'result_summary' => str_repeat( 'A', 200 ),
-			'counts'         => array(
-				'found'            => 3,
-				'queued'           => 1,
-				'already_known'    => 2,
-				'upload_attempted' => 1,
-				'failed'           => -3,
-			),
+			'counts'         => $this->valid_remote_action_last_action_counts(),
 			'extra_field'    => 'ignored',
 		);
 	}

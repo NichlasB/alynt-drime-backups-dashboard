@@ -3873,6 +3873,42 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics overview behavior, record-state diagnostics behavior, attention-history diagnostics behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Schedule Management Allowed Actions Fixture Split Slice
+
+The admin schedule-management fixtures still duplicated allowed-action list construction across the detail rendering and schedule-management payload fixtures. Keep the existing fixture traits as stable include points while moving the allowed-actions builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `schedule_management_allowed_actions()` now lives in `tests/support/admin-page-schedule-management-action-fixtures.php`; both existing admin schedule-management fixture traits compose that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, schedule-management rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused schedule-management rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, schedule-management rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Schedule Management Schedule Row Fixture Split Slice
+
+The admin schedule-management fixtures still repeated the Alynt scan/upload schedule row shape across rendering and payload fixtures. Keep the existing fixture traits as stable include points while moving the schedule row builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `alynt_scan_upload_schedule_row()` now lives in `tests/support/admin-page-schedule-management-schedule-fixtures.php`; both existing admin schedule-management fixture traits compose that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, schedule-management rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused schedule-management rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, schedule-management rendering behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Remote Action Capability Count Fixture Split Slice
+
+The remote-action capability latest-action fixture still embedded the representative latest-action count payload inline. Keep `tests/support/remote-action-capabilities-last-action-fixtures.php` as the stable include point while moving the count payload builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `valid_remote_action_last_action_counts()` now lives in `tests/support/remote-action-capabilities-count-fixtures.php`; the existing latest-action fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, remote-action capability sanitization behavior, Request Backup behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action capability coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, remote-action capability sanitization behavior, Request Backup behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Remote Action History Row Fixture Split Slice
 
 After the remote-action history fixture extraction, `tests/support/admin-page-remote-action-history-fixtures.php` still grouped generic history-list rows with the context-bearing row factory and scan/upload detail row. Keep the existing remote-action history fixture trait as the stable include point while moving the row factory and scan/upload row into focused support traits.

@@ -5,10 +5,16 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-schedule-management-action-fixtures.php';
+require_once __DIR__ . '/admin-page-schedule-management-schedule-fixtures.php';
+
 /**
  * Provides reusable schedule-management snapshots.
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Schedule_Management_Rendering_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Schedule_Management_Action_Fixtures;
+	use Alynt_Drime_Backups_Dashboard_Schedule_Management_Schedule_Fixtures;
+
 	/**
 	 * Gets a reusable schedule-management snapshot.
 	 *
@@ -16,18 +22,12 @@ trait Alynt_Drime_Backups_Dashboard_Test_Schedule_Management_Rendering_Fixtures 
 	 * @return array<string,mixed>
 	 */
 	private function schedule_management_snapshot( $rollback_preview_supported ) {
-		$allowed_actions = array( 'scan_upload_now', 'schedule_preview', 'schedule_apply' );
-
-		if ( $rollback_preview_supported ) {
-			$allowed_actions[] = 'schedule_rollback_preview';
-		}
-
 		return array(
 			'decoded_payload' => array(
 				'remote_actions' => array(
 					'protocol_version'    => 2,
 					'enabled'             => true,
-					'allowed_actions'     => $allowed_actions,
+					'allowed_actions'     => $this->schedule_management_allowed_actions( true, $rollback_preview_supported ),
 					'sodium_available'    => true,
 					'schedule_management' => array(
 						'protocol_version'           => 2,
@@ -38,20 +38,11 @@ trait Alynt_Drime_Backups_Dashboard_Test_Schedule_Management_Rendering_Fixtures 
 						'rollback_preview_supported' => $rollback_preview_supported,
 						'rollback_supported'         => false,
 						'schedules'                  => array(
-							array(
-								'schedule_id'                    => 'alynt_scan_upload',
-								'label'                          => 'Alynt scan/upload',
-								'owner'                          => 'alynt_uploader',
-								'manageable'                     => true,
-								'current_cadence'                => 'every_30_minutes',
-								'current_interval_seconds'       => 1800,
-								'current_next_run_at'            => '2026-09-15T18:53:55+00:00',
-								'supported_cadences'             => array( 'every_15_minutes', 'every_30_minutes', 'hourly' ),
-								'minimum_interval_seconds'       => 900,
-								'can_disable'                    => false,
-								'requires_high_friction_disable' => true,
-								'rollback_preview_supported'     => $rollback_preview_supported,
-								'rollback_supported'             => false,
+							$this->alynt_scan_upload_schedule_row(
+								$rollback_preview_supported,
+								'every_30_minutes',
+								1800,
+								'2026-09-15T18:53:55+00:00'
 							),
 						),
 					),
