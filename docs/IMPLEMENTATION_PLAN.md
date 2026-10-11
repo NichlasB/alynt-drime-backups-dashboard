@@ -3765,6 +3765,42 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, status payload validation behavior, backup-source behavior, restore-readiness behavior, remote-action behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Diagnostics Overview Scheduler-Only Fixture Split Slice
+
+The diagnostics overview fixture still grouped full record-state diagnostics with scheduler-only payload construction for freshness/runtime rendering tests. Keep `tests/support/admin-page-diagnostics-overview-fixtures.php` as the stable include point while moving the scheduler-only diagnostics payload builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `scheduler_only_diagnostics()` now lives in `tests/support/admin-page-diagnostics-overview-scheduler-only-fixtures.php`; the existing diagnostics overview fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics overview behavior, runtime-boundary rendering behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused diagnostics overview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics overview behavior, runtime-boundary rendering behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Schedule Apply History Fixture Split Slice
+
+The schedule-management history fixture still grouped Schedule Apply rows with the aggregate schedule-management history composition, while pending and rollback rows already had focused support traits. Keep `tests/support/admin-page-schedule-management-history-fixtures.php` as the stable include point while moving Schedule Apply history rows into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `successful_schedule_apply_history_row()` and `successful_schedule_apply_detail_history_row()` now live in `tests/support/admin-page-schedule-apply-history-fixtures.php`; the existing schedule-management history fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, Schedule Apply rendering behavior, rollback-preview rendering behavior, remote-action history behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused Schedule Apply cleanup, rollback-preview, and remote-action history rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Schedule Apply rendering behavior, rollback-preview rendering behavior, remote-action history behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Poller HTTP Response Fixture Split Slice
+
+The poller HTTP client fixture still grouped closure-based client doubles with the reusable successful HTTP response builder. Keep `tests/support/poller-http-client-fixtures.php` as the stable include point while moving the response builder into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `successful_http_response()` now lives in `tests/support/poller-http-response-fixtures.php`; the existing poller HTTP client fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, poller behavior, HTTP transport behavior, scheduler behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused poller coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, poller behavior, HTTP transport behavior, scheduler behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Remote Action History Row Fixture Split Slice
 
 After the remote-action history fixture extraction, `tests/support/admin-page-remote-action-history-fixtures.php` still grouped generic history-list rows with the context-bearing row factory and scan/upload detail row. Keep the existing remote-action history fixture trait as the stable include point while moving the row factory and scan/upload row into focused support traits.

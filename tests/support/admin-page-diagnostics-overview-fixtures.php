@@ -7,12 +7,14 @@
 
 require_once __DIR__ . '/admin-page-diagnostics-overview-aggregate-count-fixtures.php';
 require_once __DIR__ . '/admin-page-diagnostics-overview-count-fixtures.php';
+require_once __DIR__ . '/admin-page-diagnostics-overview-scheduler-only-fixtures.php';
 
 /**
  * Shared diagnostics overview rendering fixtures.
  */
 trait Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Fixtures {
 	use Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Count_Fixtures;
+	use Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Scheduler_Only_Fixtures;
 
 	/**
 	 * Returns diagnostics data with record-state, restore, and local-removal aggregates.
@@ -61,22 +63,6 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Overview_Test_Fixtures {
 			array(
 				'current_utc' => '2026-09-30 19:30:00',
 			)
-		);
-	}
-
-	/**
-	 * Returns an otherwise-empty diagnostics payload with scheduler data.
-	 *
-	 * @param array<string,mixed> $scheduler Scheduler diagnostics.
-	 * @return array<string,mixed>
-	 */
-	private function scheduler_only_diagnostics( $scheduler ) {
-		return array(
-			'scheduler' => $scheduler,
-			'counts'    => array(),
-			'recent'    => array(),
-			'logging'   => array(),
-			'support'   => array(),
 		);
 	}
 }
