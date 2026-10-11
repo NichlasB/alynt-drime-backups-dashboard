@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-schedule-apply-metadata-fixtures.php';
+
 /**
  * Shared schedule-apply history fixtures.
  */
 trait Alynt_Drime_Backups_Dashboard_Schedule_Apply_History_Fixtures {
+	use Alynt_Drime_Backups_Dashboard_Schedule_Apply_Metadata_Fixtures;
+
 	/**
 	 * Builds a successful Schedule Apply row with rollback-preview metadata.
 	 *
@@ -26,11 +30,7 @@ trait Alynt_Drime_Backups_Dashboard_Schedule_Apply_History_Fixtures {
 						'schedule_id'       => 'alynt_scan_upload',
 						'previous_cadence'  => 'every_15_minutes',
 						'applied_cadence'   => 'every_30_minutes',
-						'rollback_metadata' => array(
-							'captured'                      => true,
-							'schedule_id'                   => 'alynt_scan_upload',
-							'rollback_metadata_fingerprint' => str_repeat( 'b', 64 ),
-						),
+						'rollback_metadata' => $this->schedule_apply_history_rollback_metadata(),
 					),
 				)
 			),
@@ -54,12 +54,7 @@ trait Alynt_Drime_Backups_Dashboard_Schedule_Apply_History_Fixtures {
 						'previous_cadence'  => 'every_15_minutes',
 						'applied_cadence'   => 'every_30_minutes',
 						'new_next_run_at'   => '2026-09-15T18:53:55+00:00',
-						'rollback_metadata' => array(
-							'captured'  => true,
-							'available' => false,
-							'reason'    => 'schedule_rollback_runtime_not_implemented',
-							'expires_at' => '2026-09-15T19:24:12+00:00',
-						),
+						'rollback_metadata' => $this->schedule_apply_detail_rollback_metadata(),
 					),
 				)
 			),

@@ -5,10 +5,14 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
+require_once __DIR__ . '/admin-page-polling-state-rendering-retained-record-methods.php';
+
 /**
  * Exposes local-record rendering helpers for polling-state harness tests.
  */
 trait Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Local_Record_Methods {
+	use Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Retained_Record_Methods;
+
 	/**
 	 * Exposes revoked-record guidance markup.
 	 *
@@ -43,8 +47,7 @@ trait Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Local_Record_Methods
 	 * @return string
 	 */
 	public function retained_record_removal_preview_panel_html( array $site, $snapshot_count = 0, $action_count = 0, $non_terminal_action_count = 0 ) {
-		$this->snapshots       = new Alynt_Drime_Backups_Dashboard_Counting_Snapshot_Repository_Test_Double( $snapshot_count );
-		$this->remote_actions  = new Alynt_Drime_Backups_Dashboard_Counting_Remote_Action_Repository_Test_Double( $action_count, $non_terminal_action_count );
+		$this->configure_retained_record_counts( $snapshot_count, $action_count, $non_terminal_action_count );
 		ob_start();
 		$this->render_retained_record_removal_preview_panel( $site, isset( $site['id'] ) ? (int) $site['id'] : 7 );
 		return (string) ob_get_clean();
@@ -60,8 +63,7 @@ trait Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Local_Record_Methods
 	 * @return string
 	 */
 	public function retained_record_removal_row_hint_html( array $site, $snapshot_count = 0, $action_count = 0, $non_terminal_action_count = 0 ) {
-		$this->snapshots      = new Alynt_Drime_Backups_Dashboard_Counting_Snapshot_Repository_Test_Double( $snapshot_count );
-		$this->remote_actions = new Alynt_Drime_Backups_Dashboard_Counting_Remote_Action_Repository_Test_Double( $action_count, $non_terminal_action_count );
+		$this->configure_retained_record_counts( $snapshot_count, $action_count, $non_terminal_action_count );
 
 		return $this->retained_record_removal_row_hint( $site, isset( $site['id'] ) ? (int) $site['id'] : 7 );
 	}

@@ -3837,6 +3837,42 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing behavior, credential behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Schedule Apply Metadata Fixture Split Slice
+
+The Schedule Apply history fixture still grouped history row construction with nested rollback-metadata payloads. Keep `tests/support/admin-page-schedule-apply-history-fixtures.php` as the stable include point while moving the rollback metadata builders into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `schedule_apply_history_rollback_metadata()` and `schedule_apply_detail_rollback_metadata()` now live in `tests/support/admin-page-schedule-apply-metadata-fixtures.php`; the existing Schedule Apply history fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, Schedule Apply rendering behavior, rollback-preview rendering behavior, remote-action history behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused Schedule Apply cleanup, rollback-preview, and remote-action history rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, Schedule Apply rendering behavior, rollback-preview rendering behavior, remote-action history behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Retained Record Rendering Count Setup Fixture Split Slice
+
+The polling-state rendering local-record helper still duplicated counting repository setup for retained-record removal preview and row-hint rendering. Keep `tests/support/admin-page-polling-state-rendering-local-record-methods.php` as the stable include point while moving that count setup into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture cleanup. `configure_retained_record_counts()` now lives in `tests/support/admin-page-polling-state-rendering-retained-record-methods.php`; the existing local-record rendering helper trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, retained-record removal behavior, archive behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused local-record rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, retained-record removal behavior, archive behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
+### Diagnostics Overview State Count Fixture Split Slice
+
+The diagnostics overview count fixture still grouped top-level count payload construction with record-state and attention-history count builders. Keep `tests/support/admin-page-diagnostics-overview-count-fixtures.php` as the stable include point while moving the state-count builders into a focused support trait.
+
+Implementation status: implemented locally as a test-only fixture split. `overview_record_state_counts()` and `overview_attention_history_counts()` now live in `tests/support/admin-page-diagnostics-overview-state-count-fixtures.php`; the existing diagnostics overview count fixture trait composes that focused trait so current tests keep the same helper surface. No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics overview behavior, record-state diagnostics behavior, attention-history diagnostics behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused diagnostics overview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, diagnostics overview behavior, record-state diagnostics behavior, attention-history diagnostics behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Remote Action History Row Fixture Split Slice
 
 After the remote-action history fixture extraction, `tests/support/admin-page-remote-action-history-fixtures.php` still grouped generic history-list rows with the context-bearing row factory and scan/upload detail row. Keep the existing remote-action history fixture trait as the stable include point while moving the row factory and scan/upload row into focused support traits.
