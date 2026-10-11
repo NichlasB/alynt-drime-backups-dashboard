@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "check:structure": "node scripts/check-structure.mjs",
     "dev": "node scripts/build.mjs --watch",
     "deploy": "bash deploy.sh",
     "lint": "npm run lint:php",

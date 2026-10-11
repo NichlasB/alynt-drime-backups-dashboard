@@ -109,6 +109,10 @@ Use the lowest-cost layer that faithfully proves the contract:
 
 Mocks must not bypass the boundary being claimed as tested. Flaky tests require diagnosis; retries are not a default fix.
 
+## File Structure Guard
+
+Run `npm run check:structure` during release-readiness or file-structure review passes. The guard fails when runtime include files exceed 300 lines or test support helpers exceed 150 lines, and prints the largest files in each group for quick review. The limits are intentionally conservative enough to flag renewed bloat while avoiding mechanical splits of cohesive classes, shims, doubles, and narrowly scoped fixtures.
+
 ## Risk Tiers And Authorization
 
 The user or repository policy assigns the maximum tier. The agent cannot promote itself.
