@@ -725,6 +725,32 @@ Acceptance criteria:
 
 Implementation status: implemented locally as a test-only split. Baseline snapshot/status rules remain in `tests/StatusClassifierTest.php`. Generic backup-source evidence coverage moved to `tests/StatusClassifierSourceEvidenceTest.php`. WPvivid freshness-window coverage moved to `tests/StatusClassifierWpvividFreshnessTest.php`. WPvivid upload-evidence/source-policy coverage moved to `tests/StatusClassifierWpvividPolicyTest.php`. Shared classifier dependencies now load through `tests/support/status-classifier-test-bootstrap.php`, while the existing fixture trait remains in `tests/support/status-classifier-test-fixtures.php`.
 
+### Status Classifier Queue Test Class Split Slice
+
+`StatusClassifierTest` still grouped baseline pending/schema/staleness classification with queue and failed-upload state classification after the first classifier split. The next safe test-only cleanup is to move queue/upload-state assertions into a focused class while preserving the same payload fixtures, expected categories, source-health behavior, production classifier code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Pending-site, unsupported-schema, and stale-snapshot baseline classification remain in `tests/StatusClassifierTest.php`. Failed current uploads, historical failed counts with healthy source evidence, and queue-only working-state coverage moved to `tests/StatusClassifierQueueTest.php`. Shared classifier dependencies and fixtures continue to load through `tests/support/status-classifier-test-bootstrap.php`. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused baseline and queue classifier coverage passes with the same observable assertions;
+- `StatusClassifierTest` remains focused on baseline site/snapshot classification;
+- PHP syntax, lint, full tests, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, classifier behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
+### Status Classifier WPvivid External Policy Test Class Split Slice
+
+`StatusClassifierWpvividPolicyTest` still grouped configured-WPvivid missing-evidence behavior with external/optional WPvivid source-policy behavior. The next safe test-only cleanup is to move external/optional WPvivid policy assertions into a focused class while preserving the same payload fixtures, expected categories, source-policy behavior, production classifier code, protocol behavior, and live-site state.
+
+Implementation status: implemented locally as a test-only split. Configured WPvivid missing upload-evidence classification remains in `tests/StatusClassifierWpvividPolicyTest.php`. External/optional WPvivid missing-evidence suppression and failed-upload escalation coverage moved to `tests/StatusClassifierWpvividExternalPolicyTest.php`. Shared classifier dependencies and fixtures continue to load through `tests/support/status-classifier-test-bootstrap.php`. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, source-policy behavior, release behavior, deployment state, backups, restore, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, or live-site state changed.
+
+Acceptance criteria:
+
+- focused WPvivid policy and external/optional policy coverage passes with the same observable assertions;
+- `StatusClassifierWpvividPolicyTest` remains focused on configured-source missing evidence;
+- PHP syntax, lint, full tests, build, structure guard, and whitespace checks pass;
+- the split remains test-only and does not alter runtime class loading, production files, classifier behavior, source-policy behavior, protocol behavior, release behavior, deployment state, backups, restore, cleanup/delete apply behavior, credentials, Drime behavior, or live-site state.
+
 ### Status Classifier Backup Source Fixture Split Slice
 
 Implementation status: implemented locally as a test-support-only split. The reusable backup-source source-summary fixture builder now lives in `tests/support/status-classifier-backup-source-fixtures.php`. The existing status-classifier fixture trait composes the new backup-source fixture trait and retains active-site, snapshot, and healthy-payload builders. No production PHP, UI output, translation string, protocol behavior, database schema, SQL behavior, support-copy JSON shape, classifier behavior, release, deployment, backup, restore, cleanup/delete, credential handling, Drime behavior, or live-site state was changed.
