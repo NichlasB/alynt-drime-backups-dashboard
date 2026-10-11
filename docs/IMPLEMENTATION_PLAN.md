@@ -4439,6 +4439,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, remote-action behavior, signing behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Enrollment Manager Validation Test Class Split Slice
+
+`EnrollmentManagerTest` still grouped pending-site success/storage behavior with rejected-input validation coverage. Keep enrollment behavior easier to scan by moving validation assertions into a dedicated class while preserving the same manager fixture, repository double, origin validator behavior, rejected payloads, and error-code expectations.
+
+Implementation status: implemented locally as a test-only split. Display-once token storage, duplicate active-pending origin, and storage-failure coverage remain in `tests/EnrollmentManagerTest.php`, while unsafe client origin and overlong label coverage moved to `tests/EnrollmentManagerValidationTest.php`. Shared enrollment manager fixtures continue to load through `tests/support/enrollment-manager-test-harness.php`. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused enrollment manager success/storage and validation coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
