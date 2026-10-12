@@ -4524,6 +4524,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, validation behavior, uninstall behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Remote Action Repository and Reconciler Guard Test Split Batch
+
+Some remaining remote-action tests still grouped client-report preservation with aggregate support summaries, and grouped content/state guard checks with timestamp guard checks. Keep remote-action test intent easier to scan by moving support-summary aggregation and temporal reconciliation guard coverage into focused classes while preserving the same fixtures, doubles, stored rows, and assertions.
+
+Implementation status: implemented locally as a test-only split. Client schedule apply and rollback-preview report context preservation remains in `tests/RemoteActionRepositoryClientReportTest.php`, while rollback-readiness support summary aggregation moved to `tests/RemoteActionRepositorySupportSummaryTest.php`. Mismatched type, sanitizer fallback, and terminal-downgrade reconciliation guards remain in `tests/RemoteActionReconcilerGuardsTest.php`, while older-client-report timestamp guard coverage moved to `tests/RemoteActionReconcilerTemporalGuardTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, repository behavior, reconciler behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action client-report and support-summary coverage passes unchanged.
+- Focused remote-action reconciler guard and temporal-guard coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, repository behavior, reconciler behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

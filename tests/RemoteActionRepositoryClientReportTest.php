@@ -68,27 +68,6 @@ class RemoteActionRepositoryClientReportTest extends TestCase {
 	}
 
 	/**
-	 * Support summaries count rollback-readiness evidence without exposing details.
-	 *
-	 * @return void
-	 */
-	public function test_support_summary_counts_schedule_apply_rollback_metadata() {
-		$repository      = $this->remote_action_repository();
-		$this->wpdb->row = $this->rollback_metadata_support_summary_row();
-
-		$summary = $repository->support_summary();
-
-		$this->assertSame( 4, $summary['total'] );
-		$this->assertSame( 2, $summary['schedule_apply'] );
-		$this->assertSame( 1, $summary['schedule_rollback_preview'] );
-		$this->assertSame( 1, $summary['rollback_metadata'] );
-		$this->assertStringContainsString( "action_type = 'schedule_apply'", $this->wpdb->last_query );
-		$this->assertStringContainsString( "action_type = 'schedule_rollback_preview'", $this->wpdb->last_query );
-		$this->assertStringContainsString( 'rollback_metadata', $this->wpdb->last_query );
-		$this->assertArrayNotHasKey( 'redacted_context_json', $summary );
-	}
-
-	/**
 	 * Marks a client report and returns the stored redacted context.
 	 *
 	 * @param array<string,mixed> $report Client report.
