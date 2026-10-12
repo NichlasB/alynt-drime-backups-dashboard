@@ -4493,6 +4493,20 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, enrollment behavior, remote-action behavior, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Transport, Request Backup, and Diagnostics Test Split Batch
+
+Some remaining tests still grouped success-path rendering/fetching assertions with unavailable or failure variants. Keep test intent easier to scan by moving Safe Transport failure response handling, Request Backup unavailable states, and Diagnostics rollback audit-label rendering into dedicated classes while preserving the same fixtures, harnesses, inputs, and assertions.
+
+Implementation status: implemented locally as a test-only split. Successful Safe Transport fetch coverage remains in `tests/SafeTransportFetchTest.php`, while non-JSON, timeout, HTTP status, and oversized-response coverage moved to `tests/SafeTransportFetchFailureTest.php`. Request Backup dispatch-form and missing-signing-key coverage remains in `tests/AdminPageRequestBackupRenderingTest.php`, while missing/disabled V2 capability coverage moved to `tests/AdminPageRequestBackupUnavailableRenderingTest.php`. Diagnostics empty/polling action-history label coverage remains in `tests/AdminPageDiagnosticsRenderingTest.php`, while rollback-preview action label coverage moved to `tests/AdminPageDiagnosticsRollbackRenderingTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, transport behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused Safe Transport fetch success and failure coverage passes unchanged.
+- Focused Request Backup available and unavailable rendering coverage passes unchanged.
+- Focused Diagnostics action-history and rollback-preview rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, transport behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
