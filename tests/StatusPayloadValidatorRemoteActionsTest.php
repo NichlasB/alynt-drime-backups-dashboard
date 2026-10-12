@@ -75,29 +75,4 @@ class StatusPayloadValidatorRemoteActionsTest extends TestCase {
 		$this->assertArrayNotHasKey( 'extra_field', $result['remote_actions']['schedule_management']['schedules'][0] );
 	}
 
-	/**
-	 * Remote-action summaries containing secrets or path-mode fields are rejected.
-	 *
-	 * @return void
-	 */
-	public function test_remote_action_forbidden_field_is_rejected() {
-		$result = $this->validate_payload(
-			array_merge(
-				$this->payload(),
-				array(
-					'remote_actions' => array(
-						'protocol_version' => 2,
-						'enabled'          => true,
-						'last_action'      => array(
-							'action_id' => '11111111-1111-4111-8111-111111111111',
-							'file'      => '/private/backup.zip',
-						),
-					),
-				)
-			)
-		);
-
-		$this->assertInstanceOf( WP_Error::class, $result );
-		$this->assertSame( 'payload_invalid', $result->get_error_code() );
-	}
 }

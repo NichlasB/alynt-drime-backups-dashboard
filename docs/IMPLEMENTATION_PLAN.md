@@ -4510,6 +4510,20 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, transport behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Validator, Uninstall, and Remote Action Security Test Split Batch
+
+Some remaining tests still grouped normalization/success assertions with lower-level rejection or security guard coverage. Keep test intent easier to scan by moving origin DNS/IP resolution, explicit uninstall purge-constant verification, and remote-action forbidden-field validation into dedicated classes while preserving the same fixtures, inputs, and assertions.
+
+Implementation status: implemented locally as a test-only split. Public HTTPS origin normalization and unsafe origin string coverage remains in `tests/OriginValidatorTest.php`, while DNS/IP resolution coverage moved to `tests/OriginValidatorResolutionTest.php`. Rollback-copy and default canonical uninstall preservation coverage remains in `tests/UninstallSafetyTest.php`, while explicit purge-constant guard coverage moved to `tests/UninstallPurgeGuardTest.php`. Remote-action capability sanitization coverage remains in `tests/StatusPayloadValidatorRemoteActionsTest.php`, while forbidden path-mode field rejection moved to `tests/StatusPayloadValidatorRemoteActionSecurityTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, validation behavior, uninstall behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused origin normalization and resolution coverage passes unchanged.
+- Focused uninstall safety and purge-guard coverage passes unchanged.
+- Focused remote-action payload sanitization and security rejection coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, validation behavior, uninstall behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
