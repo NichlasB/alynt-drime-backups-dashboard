@@ -4465,6 +4465,20 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, remote-action behavior, rendering behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Polling, Local Removal, and Audit Test Split Maintenance Batch
+
+Several rendering and event-log test classes still grouped availability, eligibility, and summary assertions with their primary happy-path coverage. Keep test intent easier to scan by moving unavailable polling states, local-removal eligibility variants, and audit-summary aggregation into focused classes while preserving the same harnesses, shims, fixtures, inputs, and assertions.
+
+Implementation status: implemented locally as a test-only split. Active polling/manual-check rendering remains in `tests/AdminPagePollingStateRenderingTest.php`, while revoked, pending, missing-credential, and paused next-poll/manual-check copy moved to `tests/AdminPagePollingStateUnavailableRenderingTest.php`. Local-removal preview panel and unarchived empty-state coverage remains in `tests/AdminPageLocalRemovalRenderingTest.php`, while compact readiness and non-terminal blocked eligibility coverage moved to `tests/AdminPageLocalRemovalEligibilityRenderingTest.php`. Audit event persistence, redaction, and diagnostics-clearing behavior remains in `tests/EventLogAuditTest.php`, while audit-summary aggregation moved to `tests/EventLogAuditSummaryTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused polling-state available and unavailable rendering coverage passes unchanged.
+- Focused local-removal preview and eligibility rendering coverage passes unchanged.
+- Focused event-log audit and audit-summary coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.

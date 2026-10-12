@@ -38,25 +38,6 @@ class AdminPageLocalRemovalRenderingTest extends TestCase {
 	}
 
 	/**
-	 * Archived rows can show compact local removal-readiness hints.
-	 *
-	 * @return void
-	 */
-	public function test_archived_row_hint_shows_local_removal_readiness_counts() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$html    = $harness->retained_record_removal_row_hint_html(
-			$this->archived_terminal_site(),
-			3,
-			2,
-			0
-		);
-
-		$this->assertStringContainsString( 'Local removal: ready for future gate', $html );
-		$this->assertStringContainsString( 'Snapshots 3 · actions 2 · non-terminal 0', $html );
-		$this->assertStringNotContainsString( '<form', $html );
-	}
-
-	/**
 	 * Unarchived records do not show the future removal preview.
 	 *
 	 * @return void
@@ -72,27 +53,6 @@ class AdminPageLocalRemovalRenderingTest extends TestCase {
 		);
 
 		$this->assertSame( '', $html );
-	}
-
-	/**
-	 * Archived records with non-terminal action history are not eligible yet.
-	 *
-	 * @return void
-	 */
-	public function test_archived_site_detail_removal_preview_blocks_non_terminal_actions() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$html    = $harness->retained_record_removal_preview_panel_html(
-			$this->archived_terminal_site(),
-			0,
-			4,
-			1
-		);
-
-		$this->assertStringContainsString( 'Not eligible yet', $html );
-		$this->assertStringContainsString( 'One or more retained action rows are still non-terminal', $html );
-		$this->assertStringContainsString( 'Non-terminal action rows', $html );
-		$this->assertStringContainsString( '<dd>1</dd>', $html );
-		$this->assertStringNotContainsString( '<form', $html );
 	}
 
 	/**

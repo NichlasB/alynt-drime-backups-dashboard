@@ -110,25 +110,4 @@ class EventLogAuditTest extends TestCase {
 		$this->assertCount( 1, $log->recent_audit_events() );
 	}
 
-	/**
-	 * Audit summary reports bounded aggregate counts.
-	 *
-	 * @return void
-	 */
-	public function test_audit_summary_counts_actions_and_outcomes() {
-		$log = new Alynt_Drime_Backups_Dashboard_Event_Log();
-
-		$log->audit_action( 'check_status_now', 'failed' );
-		$log->audit_action( 'check_status_now', 'succeeded' );
-		$log->audit_action( 'revoke_local', 'succeeded' );
-
-		$summary = $log->audit_summary();
-
-		$this->assertSame( 3, $summary['total'] );
-		$this->assertNotEmpty( $summary['last_action_at'] );
-		$this->assertSame( 2, $summary['actions']['check_status_now'] );
-		$this->assertSame( 1, $summary['actions']['revoke_local'] );
-		$this->assertSame( 1, $summary['outcomes']['failed'] );
-		$this->assertSame( 2, $summary['outcomes']['succeeded'] );
-	}
 }
