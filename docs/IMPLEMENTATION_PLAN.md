@@ -4555,6 +4555,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, translation template coverage, and whitespace checks pass.
 - No protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### GitHub Actions Runner Pinning Release-Readiness Slice
+
+GitHub Actions started warning that `ubuntu-latest` will migrate to a newer image beginning October 19, 2026. Pin the dashboard CI and release-package workflows to an explicit Ubuntu runner so routine validation and release asset generation remain deterministic through that migration window.
+
+Implementation status: implemented locally as a workflow-only release-readiness slice. `.github/workflows/ci.yml` and `.github/workflows/build-release.yml` now use `ubuntu-24.04` instead of `ubuntu-latest`. This does not change dashboard runtime PHP, assets, UI strings, protocol behavior, database schema, package contents, remote-action behavior, release publication behavior, deployment behavior, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior.
+
+Acceptance criteria:
+
+- CI workflow runs on an explicit Ubuntu image for both PHP matrix jobs.
+- Release-package workflow runs on the same explicit Ubuntu image.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release-publication, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
