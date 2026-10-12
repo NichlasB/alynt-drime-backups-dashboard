@@ -4479,6 +4479,20 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Test Support Bootstrap and Archive Control Split Batch
+
+Some remaining tests still owned broad inline bootstrapping or adjacent rendering assertions. Keep test files smaller and easier to scan by moving opt-in manager doubles into support, centralizing enrollment REST controller bootstrapping, and separating Site Detail archive/unarchive control coverage from local-record guidance coverage.
+
+Implementation status: implemented locally as a test-only support/readability cleanup. `tests/support/remote-action-opt-in-manager-test-doubles.php` now owns the deterministic action opt-in signer and site repository doubles. `tests/support/enrollment-rest-controller-bootstrap.php` now owns enrollment REST controller include wiring for the enrollment REST test classes. `tests/AdminPageSiteDetailArchiveControlRenderingTest.php` now owns local archive/unarchive control rendering coverage, while `tests/AdminPageSiteDetailLocalRecordRenderingTest.php` stays focused on polling-control boundary and revoked-record guidance copy. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, enrollment behavior, remote-action behavior, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action opt-in manager coverage passes unchanged.
+- Focused enrollment REST controller coverage passes unchanged through the shared bootstrap.
+- Focused Site Detail local-record and archive-control rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, enrollment behavior, remote-action behavior, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
