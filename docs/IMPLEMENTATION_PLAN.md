@@ -4451,6 +4451,20 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
 
+### Focused Test Class Split Maintenance Batch
+
+Several test classes still grouped adjacent but distinct assertions after the previous structure cleanup pass. Keep test intent easier to scan by moving detected WPvivid schedule-policy freshness cases, schedule rollback-preview dispatch, and attention-history bounds coverage into focused classes while preserving the same fixtures, harnesses, inputs, and assertions.
+
+Implementation status: implemented locally as a test-only split. Dashboard-default WPvivid freshness window coverage remains in `tests/StatusClassifierWpvividFreshnessTest.php`, while detected schedule-policy coverage moved to `tests/StatusClassifierWpvividSchedulePolicyTest.php`. Schedule preview/apply dispatch coverage remains in `tests/RemoteActionDispatcherScheduleDispatchTest.php`, while non-mutating rollback-preview dispatch coverage moved to `tests/RemoteActionDispatcherScheduleRollbackPreviewTest.php`. Attention/recovery transition and empty-state rendering remains in `tests/AdminPageSiteDetailAttentionHistoryRenderingTest.php`, while bounded-transition coverage moved to `tests/AdminPageSiteDetailAttentionHistoryBoundsTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, remote-action behavior, rendering behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused WPvivid freshness and schedule-policy coverage passes unchanged.
+- Focused schedule preview/apply and rollback-preview dispatch coverage passes unchanged.
+- Focused attention-history rendering and bounds coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No production PHP, assets, UI strings, protocol behavior, database schema, classifier behavior, remote-action behavior, rendering behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changes.
+
 ### Diagnostics Runtime Boundary Visibility Slice
 
 The Diagnostics Runtime panel already shows the installed dashboard version and polling contract, but it does not explicitly restate the current safety boundary. Add a small support-safe row that makes the runtime boundary visible to operators without changing capabilities or behavior.
