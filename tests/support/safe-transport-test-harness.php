@@ -8,6 +8,19 @@
 require_once dirname( __DIR__, 2 ) . '/includes/class-origin-validator.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-safe-transport.php';
 
+if ( ! function_exists( 'home_url' ) ) {
+	/**
+	 * Test home_url shim for same-origin transport checks.
+	 *
+	 * @param string $path   Path.
+	 * @param string $scheme Scheme.
+	 * @return string
+	 */
+	function home_url( $path = '', $scheme = null ) {
+		return 'https://control.sitesmanage.com' . $path;
+	}
+}
+
 /**
  * Shared Safe Transport test fixtures.
  */

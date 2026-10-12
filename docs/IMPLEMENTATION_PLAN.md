@@ -4499,9 +4499,12 @@ Some remaining tests still grouped success-path rendering/fetching assertions wi
 
 Implementation status: implemented locally as a test-only split. Successful Safe Transport fetch coverage remains in `tests/SafeTransportFetchTest.php`, while non-JSON, timeout, HTTP status, and oversized-response coverage moved to `tests/SafeTransportFetchFailureTest.php`. Request Backup dispatch-form and missing-signing-key coverage remains in `tests/AdminPageRequestBackupRenderingTest.php`, while missing/disabled V2 capability coverage moved to `tests/AdminPageRequestBackupUnavailableRenderingTest.php`. Diagnostics empty/polling action-history label coverage remains in `tests/AdminPageDiagnosticsRenderingTest.php`, while rollback-preview action label coverage moved to `tests/AdminPageDiagnosticsRollbackRenderingTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, transport behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
 
+Follow-up implementation status: implemented locally as a test-only split. Safe Transport request-preparation success and same-origin loopback coverage remains in `tests/SafeTransportTest.php`, while unsafe-origin, invalid-authorization-shape, and private-resolution rejection coverage moved to `tests/SafeTransportRequestRejectionTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, transport behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
 Acceptance criteria:
 
 - Focused Safe Transport fetch success and failure coverage passes unchanged.
+- Focused Safe Transport request-preparation success and rejection coverage passes unchanged.
 - Focused Request Backup available and unavailable rendering coverage passes unchanged.
 - Focused Diagnostics action-history and rollback-preview rendering coverage passes unchanged.
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
