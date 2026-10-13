@@ -93,6 +93,7 @@ class AdminPageAttentionRenderingTest extends TestCase {
 		);
 
 		$this->assertStringContainsString( 'Site status summary', $html );
+		$this->assertStringContainsString( 'Working means the latest stored local snapshot is not classified for operator review; it is not a live connection or backup guarantee.', $html );
 		$this->assertStringContainsString( 'Attention includes active records whose latest local snapshot is classified as needs attention, not reporting, incompatible, or not configured.', $html );
 	}
 }

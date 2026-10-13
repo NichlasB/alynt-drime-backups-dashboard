@@ -4568,6 +4568,19 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No dashboard runtime, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release-publication, deploy, or client-site behavior changes.
 
+### Sites Status Summary Working-State Clarity Slice
+
+The Sites summary already explains what the Attention metric includes, but the adjacent Working count can still be read as a live connection or backup guarantee. Add concise display-only copy that states Working is based on the latest stored local snapshot and means the row is not currently classified for operator review.
+
+Implementation status: implemented locally as a display-only Sites summary copy slice. The Sites status summary note now states that Working is based on the latest stored local snapshot, is not a live connection or backup guarantee, and keeps the existing Attention metric explanation. Focused rendering coverage confirms both pieces of copy. No status classification logic, polling behavior, snapshot storage, protocol behavior, database schema, remote-action behavior, release behavior, deployment behavior, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Sites status-summary rendering coverage confirms the Working-state explanation.
+- Existing Attention metric explanation remains visible.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No status classification, polling, snapshot, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
