@@ -4618,6 +4618,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No dashboard runtime, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release-publication, deploy, or client-site behavior changes.
 
+### Event Log Settings Test Split Slice
+
+`EventLogTest` still grouped event persistence/redaction behavior with settings/default-state assertions. Keep the event-log tests easier to scan by moving settings/default-state coverage into a focused class while preserving the same event-log harness, option shims, inputs, and assertions.
+
+Implementation status: implemented locally as a test-only split. Event threshold/redaction storage coverage remains in `tests/EventLogTest.php`, while disabled-by-default and settings sanitization/autoload coverage moved to `tests/EventLogSettingsTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, event-log behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused event-log storage/redaction and settings coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, event-log behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
