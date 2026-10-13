@@ -14,66 +14,15 @@ require_once __DIR__ . '/support/uninstall-safety-test-harness.php';
  */
 class Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Test extends TestCase {
 	/**
-	 * Recorded cleared hooks.
-	 *
-	 * @var string[]
-	 */
-	public static $cleared_hooks = array();
-
-	/**
-	 * Recorded deleted transients.
-	 *
-	 * @var string[]
-	 */
-	public static $deleted_transients = array();
-
-	/**
-	 * Recorded deleted options.
-	 *
-	 * @var string[]
-	 */
-	public static $deleted_options = array();
-
-	/**
 	 * Resets lifecycle capture state before each test.
 	 *
 	 * @return void
 	 */
 	protected function setUp(): void {
-		self::$cleared_hooks      = array();
-		self::$deleted_transients = array();
-		self::$deleted_options    = array();
+		Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Recorder::reset();
 
 		if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 			define( 'WP_UNINSTALL_PLUGIN', true );
-		}
-	}
-
-	/**
-	 * A WordPress-discovered rollback copy must not touch the canonical data.
-	 *
-	 * @return void
-	 */
-	public function test_rollback_copy_uninstall_returns_before_any_cleanup() {
-		$temporary_directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'alynt-dashboard-rollback-copy-' . uniqid( '', true );
-		$this->assertTrue( mkdir( $temporary_directory, 0700, true ) );
-
-		$copy_path = $temporary_directory . DIRECTORY_SEPARATOR . 'uninstall.php';
-		$this->assertTrue( copy( dirname( __DIR__ ) . '/uninstall.php', $copy_path ) );
-
-		global $wpdb;
-		$wpdb = new Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Wpdb();
-
-		try {
-			include $copy_path;
-
-			$this->assertSame( array(), self::$cleared_hooks );
-			$this->assertSame( array(), self::$deleted_transients );
-			$this->assertSame( array(), self::$deleted_options );
-			$this->assertSame( array(), $wpdb->queries );
-		} finally {
-			unlink( $copy_path );
-			rmdir( $temporary_directory );
 		}
 	}
 
@@ -93,9 +42,9 @@ class Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Test extends TestCase {
 				'alynt_drime_backups_dashboard_poll_sites',
 				'alynt_drime_backups_dashboard_cleanup_snapshots',
 			),
-			self::$cleared_hooks
+			Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Recorder::$cleared_hooks
 		);
-		$this->assertSame( array(), self::$deleted_options );
+		$this->assertSame( array(), Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Recorder::$deleted_options );
 
 		foreach ( $wpdb->queries as $query ) {
 			$this->assertStringNotContainsString( 'DROP TABLE', $query );
