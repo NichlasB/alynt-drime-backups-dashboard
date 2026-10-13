@@ -90,24 +90,4 @@ class EventLogAuditTest extends TestCase {
 		$this->assertStringNotContainsString( 'Bearer secret', $encoded );
 	}
 
-	/**
-	 * Clearing optional diagnostics does not clear the separate audit history.
-	 *
-	 * @return void
-	 */
-	public function test_clear_diagnostics_events_preserves_audit_history() {
-		$log = new Alynt_Drime_Backups_Dashboard_Event_Log();
-		$log->update_settings( array( 'enabled' => true ) );
-		$log->log( 'critical', 'cron', 'poll_failed', 'Poll failed.' );
-		$log->audit_action( 'clear_diagnostics_events', 'succeeded' );
-
-		$this->assertNotEmpty( $log->recent_events() );
-		$this->assertNotEmpty( $log->recent_audit_events() );
-
-		$this->assertTrue( $log->clear() );
-
-		$this->assertSame( array(), $log->recent_events() );
-		$this->assertCount( 1, $log->recent_audit_events() );
-	}
-
 }

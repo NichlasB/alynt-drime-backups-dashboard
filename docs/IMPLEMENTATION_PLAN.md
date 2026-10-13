@@ -4642,6 +4642,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No dashboard runtime, protocol, schema, rendering behavior, polling behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Event Log Audit Persistence Test Split Slice
+
+`EventLogAuditTest` still grouped always-on audit storage/redaction coverage with the separate guard that clearing optional diagnostics preserves audit history. Keep audit-history persistence boundaries easier to scan by moving the clear-preserves-audit assertion into a focused class while preserving the same event-log harness, option shims, actor ID, and assertions.
+
+Implementation status: implemented locally as a test-only split. Audit storage and redaction coverage remains in `tests/EventLogAuditTest.php`, while diagnostics-clear audit-preservation coverage moved to `tests/EventLogAuditPersistenceTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, event-log behavior, audit-history behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused audit storage/redaction and audit-preservation coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, event-log behavior, audit-history behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
