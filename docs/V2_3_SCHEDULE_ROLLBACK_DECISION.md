@@ -55,6 +55,12 @@ A future `schedule_rollback` design may be considered only if all of the followi
 - protocol and threat-model docs are updated before code implementation;
 - tests prove stale/current-state rejection, missing metadata rejection, unsupported schedule rejection, unsafe cadence rejection, rate limiting, idempotency, and no raw path/credential/Drime exposure.
 
+## Design Evaluation Opened On 2026-10-13
+
+The user explicitly approved the design-only `V2.3 Schedule Rollback Runtime Design` slice. Its artifact is `docs/V2_3_SCHEDULE_ROLLBACK_RUNTIME_DESIGN.md`, with candidate-only protocol and threat-model additions. This opens evaluation; it does not supersede the runtime deferral above or assert repeated operational demand.
+
+Source inspection identified next-run-bound fingerprint expiry, single-consumption/revision requirements, and clear-then-schedule persistence recovery as prerequisites. The recommended next gated slice is **V2.3 Schedule Rollback Safety Foundation**, client-first local implementation and proof with rollback execution still rejected. Endpoint execution, dashboard controls, client enablement, releases, deployment, and live schedule mutation require later explicit approval.
+
 ## Non-Goals
 
 This decision does not approve:

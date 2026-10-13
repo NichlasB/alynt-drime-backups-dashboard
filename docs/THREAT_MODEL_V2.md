@@ -76,6 +76,25 @@ This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and st
 | Cleanup stale preview apply | A future cleanup apply uses stale preview evidence after local state changed. | `cleanup_apply` is reserved; any future apply must require a fresh preview fingerprint, expiry, client revalidation, idempotency, and locks. | Future cleanup apply tests. |
 | Cleanup scope creep | Cleanup grows into arbitrary filesystem browsing, Drime deletion, backup-set deletion, restore, or remote retention mutation. | First runtime candidate is `cleanup_preview` only for allowlisted uploader-owned categories; Drime/delete/restore behavior requires separate protocol, threat model, and release gates. | Static review, payload validation, and future action allowlist tests. |
 
+## Schedule Rollback Execution Candidate Threats (Design Only)
+
+`docs/V2_3_SCHEDULE_ROLLBACK_RUNTIME_DESIGN.md` was opened with user approval for design only on 2026-10-13. The controls below are future requirements, not implemented mitigations. `schedule_rollback` remains reserved/rejected, and no execution opt-in or control is enabled by this text.
+
+| Threat | Required candidate control | Proof before runtime approval |
+| --- | --- | --- |
+| Legacy preview becomes mutation authority | Separate execution capability/contract marker and disabled-by-default execution opt-in; reject legacy metadata/previews. | Old client/preview, missing/version-mismatched capability, revoked opt-in tests. |
+| Expiry changes between acceptance and execution | Revalidate the earliest metadata/preview/preview-age/intent deadline in the worker immediately before write; malformed/missing time fails closed. | Exact deadline and delayed queue tests. |
+| Ordinary cron progression is mistaken for stable state | Keep cadence-plus-next-run fingerprint checks; reject normal next-run advancement rather than weakening comparison to cadence alone. | Preview then normal scan event advancement. |
+| Schedule changes away and back or enrollment changes | Bind metadata/preview to a client-owned monotonic revision and enrollment/key context, plus the current fingerprint. | Intervening apply/local edit, disable/re-enable, re-pair and key replacement cases. |
+| Different action IDs reuse one source apply | Durable single-use claim of source metadata under the schedule lock; exact duplicates return original result; success consumes all previews of that source. | Concurrent distinct IDs, exact/conflicting duplicates, retention/pruning cases. |
+| Schedule writer races after validation | Coordinate remote/local schedule writers and cron advancement; an action lock alone or final read followed by an unprotected write is insufficient. | Isolated WordPress concurrency proof preserving unrelated events. |
+| Old event is removed but replacement fails | Durable pre-write journal, bounded guarded recovery, verified actual-state result; never claim success solely from acceptance. | Clear/schedule/recovery failures with real WordPress APIs. |
+| Crash or transport timeout triggers another mutation | Restart reconciliation against journal and actual state; block uncertain source; normal polling reconciles the same action without automatic retry. | Crash at each operation phase, timeout and delayed result tests. |
+| Readiness warnings or no-change source create unsafe rollback | Require changed successful apply, enabled scan, safe owned event shape and supported target cadence; blocking warnings cannot be overridden. | No-change apply, scan disabled, missing/duplicate/unsupported event tests. |
+| Recovery journal leaks local internals or is pruned unresolved | Keep journal client-local and bounded; preserve unresolved records; dashboard stores only safe outcome evidence. | Store retention plus logs/history/Diagnostics/export redaction tests. |
+
+The current source uses a next-run-bound fingerprint and a clear-then-schedule cadence helper. Their concurrency and recovery semantics must be proven in the separately approved **V2.3 Schedule Rollback Safety Foundation** before execution is authorized. The candidate does not claim protection against a fully compromised client; success remains a client operational report, and normal backup freshness evidence stays independent.
+
 ## Abuse Cases Explicitly Out Of Scope For V2.1
 
 These must remain impossible in V2.1 code and UI:

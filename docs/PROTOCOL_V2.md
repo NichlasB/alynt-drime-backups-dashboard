@@ -286,6 +286,20 @@ Rules:
 - The response may include schedule ID, label, owner, current cadence, applied cadence, rollback cadence, current next run, rollback next-run estimate, `would_change`, warning codes, support-safe result codes, preview fingerprint, source apply action ID, and metadata expiry.
 - The response must not include raw cron, raw crontab, raw WP-Cron arrays, raw WPvivid options, usernames, paths, package names, Drime IDs, credentials, or arbitrary client-local internals.
 
+### Schedule Rollback Execution Candidate (Design Only)
+
+The user approved opening `docs/V2_3_SCHEDULE_ROLLBACK_RUNTIME_DESIGN.md` as a design-only slice on 2026-10-13. The following is a candidate contract, not an activated protocol extension. Existing clients must continue to reject `schedule_rollback`, omit it from `allowed_actions`, and report rollback execution unsupported. Approval of this design work does not approve runtime code, client opt-in, release, deployment, or schedule mutation.
+
+The candidate retains the current signed protocol-v2 envelope and fixed action route. It proposes a separate `schedule_management.rollback_execution` capability with `contract_version: 1`, `enabled`, `requires_fresh_preview: true`, and a maximum preview age of 900 seconds. Existing `capability_version: 1` alone does not authorize execution. Execution-ready metadata and previews must also declare `rollback_contract_version: 1`; legacy preview/readiness evidence remains non-executable.
+
+Proposed `schedule_rollback` request fields are exactly `schedule_id`, `source_apply_action_id`, `preview_action_id`, `preview_fingerprint`, `rollback_metadata_fingerprint`, `capability_version`, and `rollback_contract_version`. Only `alynt_scan_upload` is eligible. UUIDs, 64-hex hashes, versions, and field types require strict validation. No target cadence or next-run timestamp is supplied by the dashboard; the client derives the target from its own successful changed apply and fresh matching preview.
+
+The future client must require separate disabled-by-default execution opt-in, fresh evidence and intent at worker execution, matching enrollment/revision/current-state bindings, and a durable single-use source claim. Effective expiry is the earliest metadata, preview, 900-second preview-age, or intent deadline. Retain strict cadence-plus-next-run fingerprint semantics: normal cron advancement invalidates the candidate. A later change away and back must also invalidate it through a client-owned revision. Exact idempotent duplicates return the recorded result; new action IDs cannot reuse a consumed source. Uncertain outcomes prohibit automatic retry.
+
+Candidate result context is restricted to schedule/version/source/preview references, safe cadence labels, new next-run timestamp, `changed`, `recovery_state`, and warning codes. Candidate recovery states and terminal result codes are defined in the dedicated design. These are not new allowlisted fields or result codes in current runtime. No raw cron/options/paths/packages/commands/backup IDs/Drime IDs/credentials or journal contents may be transported or exported.
+
+Before activating this contract, the separately approved **V2.3 Schedule Rollback Safety Foundation** must prove concurrent schedule-writer coordination, durable claims/journaling, failure recovery, and restart reconciliation. Both plugins then require shared fixtures and approved protocol/threat-model updates before execution code. No database schema or storage change is authorized here.
+
 ### Schedule Apply Action
 
 The V2.3 Schedule Apply slice may allow a signed `schedule_apply` action for `alynt_scan_upload` only. `schedule_apply` is mutating: it asks the client to apply one already-previewed cadence change after revalidating the preview against current local schedule state.

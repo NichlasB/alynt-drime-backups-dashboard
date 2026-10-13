@@ -16,6 +16,8 @@ Next recommended V2 step: do not continue restore-adjacent runtime work by defau
 
 V2 protocol, threat-model, and planning artifacts:
 
+The design-only **V2.3 Schedule Rollback Runtime Design** evaluation was approved on 2026-10-13 and is tracked in `docs/V2_3_SCHEDULE_ROLLBACK_RUNTIME_DESIGN.md`. Its protocol and threat-model additions remain candidates, not runtime authorization. The next gated slice is **V2.3 Schedule Rollback Safety Foundation**, client-first local safety proof; `schedule_rollback` execution remains deferred until concurrency, evidence binding, single consumption, recovery, and product justification pass review.
+
 - `docs/PROTOCOL_V2.md`
 - `docs/THREAT_MODEL_V2.md`
 - `docs/V2_1_REQUEST_BACKUP_NOW_DESIGN.md`
@@ -29,6 +31,7 @@ V2 protocol, threat-model, and planning artifacts:
 - `docs/V2_3_SCHEDULE_ROLLBACK_READINESS_PLAN.md`
 - `docs/V2_3_SCHEDULE_ROLLBACK_PREVIEW_DESIGN.md`
 - `docs/V2_3_SCHEDULE_ROLLBACK_DECISION.md`
+- `docs/V2_3_SCHEDULE_ROLLBACK_RUNTIME_DESIGN.md`
 - `docs/V2_4_CLEANUP_RETENTION_DESIGN.md`
 - `docs/V2_4_CLEANUP_PREVIEW_IMPLEMENTATION_PLAN.md`
 - `docs/V2_4_CLEANUP_APPLY_DECISION.md`
