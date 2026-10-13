@@ -141,10 +141,20 @@ Use real isolated WordPress scheduling APIs for persistence/concurrency/restart 
 4. **Release/package and deployment:** review both plugins, packages, compatibility and recovery runbook; uploader first with execution opt-in off. Site deployment and enablement remain separate approvals.
 5. **One live pilot:** select a low-risk site at that time, require fresh restore points and explicit schedule-mutation scope, prove preview/rollback/reconciliation, verify intended cadence and subsequent scan scheduling, and disable temporary opt-in. The historical PureCleanse preview approval does not authorize this pilot. Broad rollout requires further approval.
 
-Completion of this document means the design is reviewable, not that the runtime requirements are implemented or tested. The next gated slice is **V2.3 Schedule Rollback Safety Foundation**, local-only and client-first; full rollback execution remains deferred until its evidence passes.
+Completion of this document means the design is reviewable, not that the runtime requirements are implemented or tested. The separately approved follow-ups below record current progress; full rollback execution remains deferred until the foundation evidence passes.
 
 ## Safety Foundation Follow-Up (2026-10-13)
 
 The user approved the local-only Safety Foundation. The companion uploader implemented bounded persistence-failure detection and explicit worker rejection of reserved actions, with regression tests; no rollback execution or execution-ready capability/evidence markers were added. See uploader `docs/V2_3_SCHEDULE_ROLLBACK_SAFETY_FOUNDATION.md` for the source inventory and proof limits.
 
-The existing read/write option lock and 50-record history cannot establish atomic source consumption or protect unresolved recovery journals. Option API readback is not a concurrency/durability proof. The foundation is therefore incomplete pending the next gated **V2.3 Rollback Atomic Storage and Cron Coordination** slice: approve a concrete storage contract and isolated WordPress/database proof scope before further persistence integration. Existing rollback runtime deferral remains in force.
+The existing read/write option lock and 50-record history cannot establish atomic source consumption or protect unresolved recovery journals. Option API readback is not a concurrency/durability proof. This led to the separately approved dedicated-storage follow-up below. Existing rollback runtime deferral remains in force.
+
+## Atomic-Storage Proof Follow-Up (2026-10-13)
+
+The user approved **V2.3 Rollback Atomic Storage and Cron Coordination**, including the dedicated non-autoloaded safety option and isolated `plugin-tester local-only` database/concurrency proof. The uploader now contains dormant exact-byte CAS storage, strict versioned scalar evidence, source consumption, owner/revision binding, protected phases/capacity and a narrowly scoped scan-event replacement guard. It registers no production hooks, creates no option automatically, and does not change protocol or enable rollback. See uploader `docs/V2_3_ATOMIC_STORAGE_PROOF.md` for exact checks and limits.
+
+Real MariaDB/WordPress fixture evidence proved two competing PHP processes have one claim winner, authoritative cache-independent reads, cache invalidation, generic failed-write closure, expired journal reconstruction protection, and stale scoped cron replacement rejection. The owned synthetic table was removed; actual site cron and safety option were unchanged. Persistent distributed caching and process crashes at every runtime write boundary remain unproven.
+
+The proof also demonstrated a blocking counterexample: core `_set_cron_array()` can unconditionally overwrite the result of a successful guarded cron replacement. Client-owned CAS/mutexes do not coordinate nonparticipating writers. Do not claim full coordination or wire runtime execution on that basis.
+
+Recommended next gated slice: **V2.3 Shared WP-Cron Writer Coordination Design/Prototype**, local-only and rollback-disabled. Review core/uploader writer paths, prototype any cooperative boundary only on the isolated fixture, and test unrelated-plugin stale writes and fail-closed behavior. Broad option interception affects other plugins and requires separately reviewed scope; no global production hook, remote control, live site, release, deployment or actual cadence mutation is authorized here. If no bounded strategy preserves legitimate unrelated writes, retain execution deferral.
