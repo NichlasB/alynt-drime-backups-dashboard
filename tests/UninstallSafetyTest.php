@@ -12,7 +12,7 @@ require_once __DIR__ . '/support/uninstall-safety-test-harness.php';
 /**
  * Tests that uninstall cannot erase persistent dashboard data by accident.
  */
-class Alynt_Drime_Backups_Dashboard_Uninstall_Safety_Test extends TestCase {
+class UninstallSafetyTest extends TestCase {
 	/**
 	 * Resets lifecycle capture state before each test.
 	 *

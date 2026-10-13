@@ -12,7 +12,7 @@ require_once __DIR__ . '/support/uninstall-safety-test-harness.php';
 /**
  * Tests that rollback-copy uninstall files cannot erase canonical data.
  */
-class Alynt_Drime_Backups_Dashboard_Uninstall_Rollback_Copy_Safety_Test extends TestCase {
+class UninstallRollbackCopySafetyTest extends TestCase {
 	/**
 	 * Resets lifecycle capture state before each test.
 	 *

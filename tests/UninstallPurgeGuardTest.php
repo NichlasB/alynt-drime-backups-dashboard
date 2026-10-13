@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests that permanent uninstall purging remains explicitly gated.
  */
-class Alynt_Drime_Backups_Dashboard_Uninstall_Purge_Guard_Test extends TestCase {
+class UninstallPurgeGuardTest extends TestCase {
 	/**
 	 * Permanent data removal remains an intentional deployment-time decision.
 	 *
