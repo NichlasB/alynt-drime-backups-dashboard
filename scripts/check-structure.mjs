@@ -16,6 +16,13 @@ const checks = [
     maxLines: 150,
     label: 'test support helper',
   },
+  {
+    directory: 'tests',
+    pattern: /\.php$/,
+    maxLines: 150,
+    label: 'test class',
+    exclude: /^tests[\\/]support[\\/]/,
+  },
 ];
 
 function phpFiles(directory, pattern) {
@@ -53,6 +60,7 @@ const failures = [];
 
 for (const check of checks) {
   const files = phpFiles(check.directory, check.pattern)
+    .filter((path) => !check.exclude || !check.exclude.test(relative(repoRoot, path)))
     .map((path) => ({
       path,
       lines: countLines(path),

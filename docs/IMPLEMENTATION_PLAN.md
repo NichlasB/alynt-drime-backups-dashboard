@@ -4606,6 +4606,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No status classification, polling, snapshot, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Test Class Structure Guard Slice
+
+The dashboard structure guard already enforces runtime include and test-support helper line limits. Add ordinary PHPUnit test classes to the same guard output so future test bloat is visible before individual test files become difficult to scan.
+
+Implementation status: implemented locally as a tooling-only release-readiness slice. `scripts/check-structure.mjs` now checks root-level `tests/*.php` test classes with a 150-line limit while excluding `tests/support/` helpers from that category. This does not change dashboard runtime PHP, assets, UI strings, protocol behavior, database schema, package contents, remote-action behavior, release publication behavior, deployment behavior, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior.
+
+Acceptance criteria:
+
+- Structure guard output reports ordinary test-class size alongside runtime includes and test-support helpers.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, credential, Drime, backup, restore, cleanup, schedule, live-site, release-publication, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
