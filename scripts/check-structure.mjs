@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { basename, join, relative } from 'node:path';
 
 const repoRoot = process.cwd();
 
@@ -77,12 +77,45 @@ for (const check of checks) {
   console.log(`${check.label}: ${files.length} files, max ${check.maxLines} lines, largest: ${largest.join(', ')}`);
 }
 
+const testClassFiles = phpFiles('tests', /\.php$/)
+  .filter((path) => !/^tests[\\/]support[\\/]/.test(relative(repoRoot, path)))
+  .filter((path) => /Test\.php$/.test(path))
+  .map((path) => {
+    const content = readFileSync(path, 'utf8');
+    const match = content.match(/class\s+([A-Za-z0-9_]+)\s+extends\s+TestCase/);
+
+    return {
+      path,
+      actual: match ? match[1] : '',
+      expected: basename(path, '.php'),
+    };
+  });
+
+const mismatchedTestClasses = testClassFiles.filter(
+  (file) => file.actual !== file.expected
+);
+
+if (mismatchedTestClasses.length > 0) {
+  failures.push({
+    check: {
+      label: 'test class name',
+    },
+    mismatched: mismatchedTestClasses,
+  });
+}
+
+console.log(`test class names: ${testClassFiles.length} files checked`);
+
 if (failures.length > 0) {
   console.error('\nStructure check failed:');
 
   for (const failure of failures) {
-    for (const file of failure.oversized) {
+    for (const file of failure.oversized || []) {
       console.error(`- ${relative(repoRoot, file.path)} has ${file.lines} lines; ${failure.check.label} limit is ${failure.check.maxLines}.`);
+    }
+
+    for (const file of failure.mismatched || []) {
+      console.error(`- ${relative(repoRoot, file.path)} declares ${file.actual || 'no TestCase class'}; expected ${file.expected}.`);
     }
   }
 
