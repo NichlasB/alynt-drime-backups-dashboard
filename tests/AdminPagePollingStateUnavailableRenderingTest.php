@@ -74,26 +74,6 @@ class AdminPagePollingStateUnavailableRenderingTest extends TestCase {
 	}
 
 	/**
-	 * Paused rows show local paused next-poll copy while keeping manual checks available.
-	 *
-	 * @return void
-	 */
-	public function test_paused_rows_show_paused_polling_copy_and_manual_check_button() {
-		$harness = new Alynt_Drime_Backups_Dashboard_Polling_State_Rendering_Test_Harness();
-		$site    = $this->polling_site(
-			array(
-				'paused_at'    => '2026-09-17 12:00:00',
-				'next_poll_at' => '',
-			)
-		);
-
-		$this->assertStringContainsString( 'Check Now', $harness->check_form_html( $site ) );
-		$this->assertStringContainsString( 'Next poll:', $harness->next_poll_line( $site ) );
-		$this->assertStringContainsString( 'Paused locally', $harness->next_poll_line( $site ) );
-		$this->assertStringNotContainsString( '<time datetime=', $harness->next_poll_line( $site ) );
-	}
-
-	/**
 	 * Returns a default active polling site row with optional overrides.
 	 *
 	 * @param array<string,mixed> $overrides Site row overrides.

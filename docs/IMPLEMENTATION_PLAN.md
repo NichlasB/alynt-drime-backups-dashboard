@@ -4630,6 +4630,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No dashboard runtime, protocol, schema, event-log behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Polling Paused-State Rendering Test Split Slice
+
+`AdminPagePollingStateUnavailableRenderingTest` grouped revoked, pending, missing-credential, and paused next-poll/manual-check rendering. Keep the unavailable-state test focused by moving paused-row coverage into a dedicated class while preserving the same rendering harness, site-row input, and assertions.
+
+Implementation status: implemented locally as a test-only split. Revoked, pending, and missing-credential unavailable-state coverage remains in `tests/AdminPagePollingStateUnavailableRenderingTest.php`, while paused-row manual-check and next-poll copy coverage moved to `tests/AdminPagePollingStatePausedRenderingTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, rendering behavior, polling behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused unavailable-state and paused-state polling rendering coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, rendering behavior, polling behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
