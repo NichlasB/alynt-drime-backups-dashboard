@@ -13,11 +13,14 @@ require_once dirname( __DIR__ ) . '/includes/class-status-payload-validator.php'
 require_once dirname( __DIR__ ) . '/includes/traits/trait-status-classifier-backup-sources.php';
 require_once dirname( __DIR__ ) . '/includes/traits/trait-status-classifier-helpers.php';
 require_once dirname( __DIR__ ) . '/includes/class-status-classifier.php';
+require_once __DIR__ . '/support/cross-plugin-backup-sources-contract-fixtures.php';
 
 /**
  * Tests dashboard compatibility with uploader-produced backup_sources payloads.
  */
 class CrossPluginBackupSourcesContractTest extends TestCase {
+	use Alynt_Drime_Backups_Dashboard_Cross_Plugin_Backup_Sources_Contract_Fixtures;
+
 	/**
 	 * Dashboard accepts the uploader schema-1 backup source fixture.
 	 *
@@ -46,33 +49,6 @@ class CrossPluginBackupSourcesContractTest extends TestCase {
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertSame( 'payload_invalid', $result->get_error_code() );
-	}
-
-	/**
-	 * Loads the uploader-shaped schema-1 fixture.
-	 *
-	 * @return array<string,mixed>
-	 */
-	private function fixture_payload() {
-		$fixture = file_get_contents( __DIR__ . '/fixtures/uploader-backup-sources-schema1.json' );
-		$payload = json_decode( (string) $fixture, true );
-
-		$this->assertIsArray( $payload );
-
-		return $payload;
-	}
-
-	/**
-	 * Loads and validates the uploader-shaped schema-1 fixture.
-	 *
-	 * @return array<string,mixed>
-	 */
-	private function validated_fixture_payload() {
-		$result = $this->validate_contract_payload( $this->fixture_payload() );
-
-		$this->assertIsArray( $result );
-
-		return $result;
 	}
 
 	/**
