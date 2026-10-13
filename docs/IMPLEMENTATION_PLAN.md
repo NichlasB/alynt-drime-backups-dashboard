@@ -4654,6 +4654,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No dashboard runtime, protocol, schema, event-log behavior, audit-history behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Enrollment REST Pairing Expiry Test Split Slice
+
+`EnrollmentRestControllerRejectionTest` still grouped request-shape rejection cases with the separate expired-pairing-token guard. Keep enrollment rejection coverage easier to scan by moving pairing-expiry behavior into a focused class while preserving the same controller bootstrap, transient reset, repository double, pending-site fixture, and assertions.
+
+Implementation status: implemented locally as a test-only split. Origin, endpoint, and unsupported-schema rejection coverage remains in `tests/EnrollmentRestControllerRejectionTest.php`, while expired-pairing-token coverage moved to `tests/EnrollmentRestControllerPairingExpiryTest.php`. No production PHP, assets, UI strings, protocol behavior, database schema, enrollment behavior, pairing-token behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused enrollment request-shape rejection and pairing-expiry coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, enrollment behavior, pairing-token behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
