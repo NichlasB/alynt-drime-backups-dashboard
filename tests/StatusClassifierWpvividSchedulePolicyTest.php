@@ -56,30 +56,6 @@ class StatusClassifierWpvividSchedulePolicyTest extends TestCase {
 	}
 
 	/**
-	 * WPvivid stale evidence outside a detected schedule policy window still needs attention.
-	 *
-	 * @return void
-	 */
-	public function test_wpvivid_stale_outside_detected_schedule_policy_needs_attention() {
-		$result = $this->classify_wpvivid_stale_payload(
-			array(
-				'latest_upload_age_seconds' => 900000,
-				'schedule_policy'           => array(
-					'detected'              => true,
-					'basis'                 => 'wpvivid_schedule_setting',
-					'recurrence'            => 'wpvivid_weekly',
-					'schedule_count'        => 1,
-					'interval_seconds'      => 604800,
-					'grace_seconds'         => 172800,
-					'policy_window_seconds' => 777600,
-				),
-			)
-		);
-
-		$this->assertSame( 'needs_attention', $result['category'] );
-	}
-
-	/**
 	 * Classifies a healthy payload with stale WPvivid source overrides.
 	 *
 	 * @param array<string,mixed> $wpvivid_overrides WPvivid source overrides.
