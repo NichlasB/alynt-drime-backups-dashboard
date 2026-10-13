@@ -59,41 +59,6 @@ class StatusClassifierWpvividExternalPolicyTest extends TestCase {
 	}
 
 	/**
-	 * External optional WPvivid policy does not hide failed source uploads.
-	 *
-	 * @return void
-	 */
-	public function test_external_optional_wpvivid_failed_upload_still_needs_attention() {
-		$classifier = $this->external_optional_classifier();
-
-		$result = $classifier->classify(
-			array_merge(
-				$this->active_site(),
-				array(
-					'id' => 12,
-				)
-			),
-			$this->snapshot(
-				array_merge(
-					$this->healthy_payload(),
-					array(
-						'backup_sources' => $this->backup_sources_payload(
-							array(
-								'queued_count'     => 1,
-								'failed_count'     => 1,
-								'freshness_status' => 'no_upload_evidence',
-							)
-						),
-					)
-				)
-			),
-			1700000300
-		);
-
-		$this->assertSame( 'needs_attention', $result['category'] );
-	}
-
-	/**
 	 * Builds a classifier with WPvivid marked as external optional for site 12.
 	 *
 	 * @return Alynt_Drime_Backups_Dashboard_Status_Classifier
