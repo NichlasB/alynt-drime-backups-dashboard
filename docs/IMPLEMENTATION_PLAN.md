@@ -4666,6 +4666,18 @@ Acceptance criteria:
 - Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
 - No dashboard runtime, protocol, schema, enrollment behavior, pairing-token behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
 
+### Remote Action Repository Client Report Test Move Slice
+
+`RemoteActionRepositoryTest` still grouped dashboard-owned request/state-write coverage with generic client-report reconciliation storage. Keep repository tests easier to scan by moving that generic client-report assertion into the existing client-report-focused class while preserving the same repository fixture, WPDB double, client report payload, and assertions.
+
+Implementation status: implemented locally as a test-only move. Request creation and state-sanitization coverage remains in `tests/RemoteActionRepositoryTest.php`, while generic client-report reconciliation field coverage moved to `tests/RemoteActionRepositoryClientReportTest.php` alongside schedule apply and rollback-preview client-report context coverage. No production PHP, assets, UI strings, protocol behavior, database schema, repository behavior, reconciler behavior, remote-action behavior, release behavior, deployment state, backups, restore controls, cleanup/delete apply, schedule apply/rollback, credentials, Drime behavior, live-site behavior, or client-site behavior changed.
+
+Acceptance criteria:
+
+- Focused remote-action repository write and client-report coverage passes unchanged.
+- Full dashboard tests, lint, build, structure guard, and whitespace checks continue to pass.
+- No dashboard runtime, protocol, schema, repository behavior, reconciler behavior, remote-action behavior, credential, Drime, backup, restore, cleanup, schedule, live-site, release, deploy, or client-site behavior changes.
+
 ## Version 1 Non-Goals
 
 Do not add any dashboard-to-client or dashboard-to-Drime mutation:
