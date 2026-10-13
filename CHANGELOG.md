@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.76 - 2026-10-13
+
+### Changed
+
+- Clarified the Sites status summary so Working is explicitly described as latest stored local snapshot evidence, not a live connection or backup guarantee.
+- Pinned GitHub Actions CI and release-package workflows to `ubuntu-24.04` so validation and release packaging remain deterministic through the `ubuntu-latest` migration window.
+- Continued safe focused test-structure cleanup without changing runtime behavior.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.75 - 2026-10-11
 
 ### Changed

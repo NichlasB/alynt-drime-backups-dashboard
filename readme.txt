@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.75
+Stable tag: 0.1.76
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.76 clarifies the Sites summary Working count so operators understand it is based on the latest stored local snapshot rather than a live connection or backup guarantee. It also pins GitHub Actions workflow runners to `ubuntu-24.04` for deterministic CI/release packaging and continues safe test-support cleanup without changing runtime behavior.
 
 Version 0.1.75 clarifies the Attention and Sites summaries so operators can distinguish no enrollment, quiet latest local snapshots, and active records that need attention. It also adds a release-package structure guard and continues safe test-support cleanup without changing runtime behavior.
 
