@@ -142,3 +142,9 @@ Use real isolated WordPress scheduling APIs for persistence/concurrency/restart 
 5. **One live pilot:** select a low-risk site at that time, require fresh restore points and explicit schedule-mutation scope, prove preview/rollback/reconciliation, verify intended cadence and subsequent scan scheduling, and disable temporary opt-in. The historical PureCleanse preview approval does not authorize this pilot. Broad rollout requires further approval.
 
 Completion of this document means the design is reviewable, not that the runtime requirements are implemented or tested. The next gated slice is **V2.3 Schedule Rollback Safety Foundation**, local-only and client-first; full rollback execution remains deferred until its evidence passes.
+
+## Safety Foundation Follow-Up (2026-10-13)
+
+The user approved the local-only Safety Foundation. The companion uploader implemented bounded persistence-failure detection and explicit worker rejection of reserved actions, with regression tests; no rollback execution or execution-ready capability/evidence markers were added. See uploader `docs/V2_3_SCHEDULE_ROLLBACK_SAFETY_FOUNDATION.md` for the source inventory and proof limits.
+
+The existing read/write option lock and 50-record history cannot establish atomic source consumption or protect unresolved recovery journals. Option API readback is not a concurrency/durability proof. The foundation is therefore incomplete pending the next gated **V2.3 Rollback Atomic Storage and Cron Coordination** slice: approve a concrete storage contract and isolated WordPress/database proof scope before further persistence integration. Existing rollback runtime deferral remains in force.

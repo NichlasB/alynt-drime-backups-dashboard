@@ -572,6 +572,7 @@ Dashboard requirements:
 | `action_busy` | Client | A backup/upload/action lock is already active. |
 | `action_rate_limited` | Client | Minimum interval has not elapsed. |
 | `action_queue_failed` | Client | Client could not record or queue local work. |
+| `action_state_store_failed` | Client | Local-only safety prerequisite: expected action state could not be read back; return HTTP 500 without claiming a successful outcome. No worker is queued when acceptance could not be stored. Not yet released/deployed by this slice. |
 | `schedule_capability_invalid` | Dashboard | Schedule capability payload was malformed, unsafe, or incompatible. |
 | `schedule_management_unavailable` | Dashboard | Client does not currently expose supported schedule-management capability. |
 | `action_dispatch_failed` | Dashboard | Dashboard could not send the signed intent safely. |
