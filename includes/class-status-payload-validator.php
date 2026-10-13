@@ -88,9 +88,10 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 	 *
 	 * @param array<string,mixed> $payload Raw decoded payload.
 	 * @param string              $expected_site_uuid Expected site UUID.
+	 * @param string              $expected_action_key_id Persisted action-key ID; empty omits optional authority evidence.
 	 * @return array<string,mixed>|WP_Error
 	 */
-	public function validate( array $payload, $expected_site_uuid ) {
+	public function validate( array $payload, $expected_site_uuid, $expected_action_key_id = '' ) {
 		if ( $this->contains_forbidden_field( $payload ) ) {
 			return new WP_Error( 'payload_invalid', __( 'The client status payload contains a forbidden field.', 'alynt-drime-backups-dashboard' ) );
 		}
@@ -140,6 +141,13 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 
 		if ( ! empty( $restore_readiness['candidates'] ) ) {
 			$validated['restore_readiness'] = $restore_readiness;
+		}
+
+		if ( isset( $payload['cadence_authority'] ) ) {
+			$authority = ( new Alynt_Drime_Backups_Dashboard_Cadence_Authority_Evidence() )->status( $payload['cadence_authority'], $site_uuid, $expected_action_key_id );
+			if ( ! empty( $authority ) ) {
+				$validated['cadence_authority'] = $authority;
+			}
 		}
 
 		$remote_actions = $this->remote_action_capabilities->sanitize( isset( $payload['remote_actions'] ) ? $payload['remote_actions'] : array() );

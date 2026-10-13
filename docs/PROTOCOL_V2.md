@@ -591,6 +591,10 @@ All error summaries must be operator-safe and must not include raw exception tex
 
 ## Implementation Gate
 
+### Approved dormant authority evidence contract (2026-10-13)
+
+`docs/V2_3_CADENCE_AUTHORITY_EVIDENCE.md` defines the separately versioned optional `cadence_authority` status namespace and explicit `model_change_preview` inspection contract. This is **not** a change to any existing schedule action, preview, legacy fingerprint, action allowlist or capability version. Strict enrollment UUID/persisted action-key binding, native model provenance, freshness/revision/source-consumption checks and literal-false dispatch/execution flags are required. Positive `safety_checks_passed` is not `eligible`; these projections neither authenticate a signed intent nor authorize a mutation. Production uploader injection, authority creation, worker/dispatch wiring and actual Schedule Apply/rollback integration remain unavailable pending separate approval. Unknown/invalid extensions are omitted; legacy status continues unchanged.
+
 Do not implement this protocol until:
 
 - `docs/THREAT_MODEL_V2.md` is approved;

@@ -44,7 +44,7 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Status_Check {
 			return $raw_payload;
 		}
 
-		$payload = $this->validator->validate( $raw_payload, isset( $site['site_uuid'] ) ? (string) $site['site_uuid'] : '' );
+		$payload = $this->validator->validate( $raw_payload, isset( $site['site_uuid'] ) ? (string) $site['site_uuid'] : '', isset( $site['action_key_id'] ) ? (string) $site['action_key_id'] : '' );
 
 		if ( is_wp_error( $payload ) ) {
 			if ( ! $this->mark_poll_failure( $site, $payload->get_error_code(), $payload->get_error_message() ) ) {

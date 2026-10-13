@@ -134,6 +134,7 @@ $alynt_drime_backups_dashboard_includes = array(
 	'includes/traits/trait-status-payload-validator-restore-readiness.php',
 	'includes/traits/trait-status-payload-validator-sanitizers.php',
 	'includes/class-status-payload-validator.php',
+	'includes/class-cadence-authority-evidence.php',
 	'includes/class-pairing-tokens.php',
 	'includes/class-enrollment-manager.php',
 	'includes/traits/trait-enrollment-rest-responses.php',

@@ -237,6 +237,10 @@ Cross-plugin:
 
 ## Approval Gate
 
+### Dormant authority evidence review (2026-10-13)
+
+See `docs/V2_3_CADENCE_AUTHORITY_EVIDENCE.md` for the approved local-only evidence boundary. Native commit provenance must not be inferred from migrated legacy hashes. Read local pairing/keys and authority rather than trusting request snapshots; require dashboard expectations from persisted enrollment, not remote key claims. Fail closed on rotation/revocation, opt-out, stale/consumed/expired sources, pending work, changed observations, unsupported versions or inconsistent flags. Export no binding, credential, journal, ownership or raw model. Optional evidence does not enter action capabilities. Consistency fingerprints are not authentication; positive inspection cannot promise atomic future eligibility or start a worker. Production injection, real authority activation, signed-action provenance and start/side-effect/completion safety require later approved proof.
+
 Before any V2 runtime implementation:
 
 - approve `docs/PROTOCOL_V2.md`;
