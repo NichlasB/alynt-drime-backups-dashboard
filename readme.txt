@@ -4,7 +4,7 @@ Tags: backups, monitoring, dashboard
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.76
+Stable tag: 0.1.77
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Read-only central monitoring dashboard for Alynt Drime backup uploader sites.
 == Description ==
 
 Alynt Drime Backups Dashboard is planned as a read-only central status dashboard for client sites running Alynt Drime Backups Uploader.
+
+Version 0.1.77 adds a CI structure guard for root-level PHPUnit test-class names and continues safe focused test-class splits without changing runtime behavior. It also backfills the WordPress readme changelog with the already-published 0.1.76 release notes.
 
 Version 0.1.76 clarifies the Sites summary Working count so operators understand it is based on the latest stored local snapshot rather than a live connection or backup guarantee. It also pins GitHub Actions workflow runners to `ubuntu-24.04` for deterministic CI/release packaging and continues safe test-support cleanup without changing runtime behavior.
 
@@ -81,6 +83,20 @@ No, not by default. Standard uninstall clears dashboard scheduler and transient 
 See `docs/IMPLEMENTATION_PLAN.md` for the implementation sequence, `docs/PROTOCOL_V1.md` for the read-only dashboard/uploader contract, `docs/THREAT_MODEL_V1.md` for the security model, `docs/SETTINGS.md` for stored options, and `docs/HOOKS.md` for hook ownership.
 
 == Changelog ==
+
+= 0.1.77 =
+
+* Added a CI structure guard for root-level PHPUnit test-class names so future test splits keep file names and class names aligned before release packaging.
+* Continued safe focused PHPUnit test-class splits for polling states, event-log settings/audit persistence, enrollment pairing expiry, remote-action client-report details, schedule-apply dispatch, WPvivid schedule/external policies, pairing-token creation, cross-plugin backup-source contracts, and uninstall rollback-copy coverage.
+* Backfilled the WordPress readme changelog with the already-published 0.1.76 release notes while preparing the 0.1.77 package metadata.
+* Preserved existing dashboard boundaries: no production PHP behavior, UI strings, protocol behavior, database schema, remote-action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
+= 0.1.76 =
+
+* Clarified the Sites status summary so Working is explicitly described as latest stored local snapshot evidence, not a live connection or backup guarantee.
+* Pinned GitHub Actions CI and release-package workflows to ubuntu-24.04 so validation and release packaging remain deterministic through the ubuntu-latest migration window.
+* Continued safe focused test-structure cleanup without changing runtime behavior.
+* Preserved existing dashboard boundaries: no protocol behavior, database schema, remote action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
 
 = 0.1.75 =
 

@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.1.77 - 2026-10-13
+
+### Changed
+
+- Added a CI structure guard for root-level PHPUnit test-class names so future test splits keep file names and class names aligned before release packaging.
+- Continued safe focused PHPUnit test-class splits for polling states, event-log settings/audit persistence, enrollment pairing expiry, remote-action client-report details, schedule-apply dispatch, WPvivid schedule/external policies, pairing-token creation, cross-plugin backup-source contracts, and uninstall rollback-copy coverage.
+- Backfilled the WordPress readme changelog with the already-published `0.1.76` release notes while preparing the `0.1.77` package metadata.
+
+### Security
+
+- Preserved the existing dashboard boundaries: no production PHP behavior, UI strings, protocol behavior, database schema, remote-action capability, action dispatch behavior, backup creation, restore, cleanup/delete, schedule apply/rollback, credential handling, Drime behavior, live-site behavior, or deployment behavior was introduced.
+
 ## 0.1.76 - 2026-10-13
 
 ### Changed
