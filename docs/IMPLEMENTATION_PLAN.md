@@ -9,7 +9,7 @@ Approved R3 repository-only/dormant foundation; uploader owns
 four-purpose bounded nonce grammar, complete schema-8/settings/schema-2/all-ten
 eligibility and private once-attempted registration blueprint now implemented.
 Public owner stays unavailable with no authoritative reader or continuation.
-New isolated **10 / 251**, related **250 / 2926**, four assertion-killed/restored
+New isolated **10 / 261**, related **250 / 2936**, four assertion-killed/restored
 controls; no claim of actual WordPress authentication, storage or commit proof.
 
 Implementation-plan progress: fixed construction/eligibility milestone advanced;

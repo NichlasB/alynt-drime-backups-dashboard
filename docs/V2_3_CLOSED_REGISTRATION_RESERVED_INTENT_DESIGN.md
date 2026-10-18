@@ -157,7 +157,7 @@ four-purpose forms, fixed core guards, complete eligibility and PRIVATE once-onl
 registration blueprint construction. Public issue/consume remain unavailable:
 there is no authoritative reader, caller-frame port or public nonce/UUID/blueprint
 export. Reservation/receipt grammar is guarded, not a producer or native consume
-path. New **10 / 251**, related **250 / 2926**, four restored behavioral controls
+path. New **10 / 261**, related **250 / 2936**, four restored behavioral controls
 are pure/isolated API evidence, NOT genuine core/storage/physical transaction proof.
 Next gated slice: **Plugin Tester local-only V2.3 Closed Registration Construction
 and Eligibility Owned Proof**, with exact target/disposable fixture confirmation;
