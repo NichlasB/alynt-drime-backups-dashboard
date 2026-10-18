@@ -16,8 +16,14 @@ groups; separate original guard proof rerun: 266 / eleven. Three owned tables an
 their disposable users/session fixtures are removed; all 77 application tables
 retain independent inventory/checksums. Synthetic schema-6/8 genesis is not an
 authenticated event or transaction proof. Source-scoped reviews and validation
-are recorded in the uploader report; final full-suite/exact-head CI receipts must
-be read there after execution, not inferred from this plan pointer.
+are recorded in the uploader report. Uploader implementation
+`170dadd5f9753589cf60104a5e9fcfbf218dc3e7` passed
+[Quality 39136635955](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39136635955),
+PHP 7.4/8.3 each **1373 / 11692**, no skips, plus Node/build/audit. Companion
+`75c48ca9b185b44b69931d59a35a2c76a99f2086` passed
+[CI 39136635214](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39136635214),
+each **299 / 1430**, no skips. Final receipt-only heads are separately verified
+in the handoff; no earlier-head result substitutes for them.
 
 Implementation-plan progress: fixed native planning observation/session ownership
 now has physical evidence. Native locking/writer admission is still gated. No
