@@ -40,6 +40,19 @@ fixed trusted construction, fixture-lane rejection, real serialized target/cache
 policy and subsequent proof before implementing real-domain receipts; keep grants,
 production wiring, activation and rollback disabled.
 
+Publication status: uploader proof `7578a4d8b0360105658967e15aa2a2e5c016a233`
+passed [Quality 39119232692](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39119232692),
+PHP 7.4/8.3 each **1121 / 9351**, no skips, including new proof syntax coverage
+and all quality/build jobs. Dashboard plan
+`907a409b7358a13e54bd8dbec5ee006ac864add9` passed
+[CI 39119242469](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39119242469),
+each PHP job **299 / 1430**, no skips, with all other gates green. Both repos
+were clean/synced. Integrated fixture/core/native proof and publication are
+complete, not real-domain construction or production readiness. The next exact
+gate is the local-only trusted real-domain construction/provenance design named
+above; no maintenance/release substitute is warranted. This receipt-only
+follow-up needs final exact-head CI before handoff, without recursive records.
+
 This document is the implementation plan for the separate **Alynt Drime Backups Dashboard** WordPress plugin.
 
 This is now the canonical implementation plan for the dashboard repository. The earlier uploader-side copy remains historical context only and does not make the dashboard part of Alynt Drime Backups Uploader.
