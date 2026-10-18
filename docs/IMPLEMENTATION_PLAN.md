@@ -1,5 +1,43 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Cache Compatibility Fix and Genuine-Core Guard Proof — Passed (2026-10-18)
+
+The user approved the exact local-only compatibility fix and proof rerun. Uploader
+`docs/V2_3_FIXED_CORE_GUARD_PROOF.md` owns the complete evidence. The dormant frame
+now recognizes only strict `false`/`null` native cache states, retaining all unknown,
+external-cache and drop-in refusals. Native cache state was not normalized.
+Thirteen added regression cases protect null/false versus unsupported values and
+post-nonce changes; targeted **210 / 1832**, no skips, passes. The null case fails
+against the old predicate, and six assertions kill a temporary loose-falsy mutant;
+the strict implementation was restored before final validation/native proof.
+
+The genuine WordPress 7.1.2 / PHP 8.5.1 worker passed **266 checks in eleven groups**,
+including positive guards, real nonce domains, malformed/stale intent, warm-cache
+revocations and post-nonce context loss. Its receipt confirms untouched native
+cache type NULL. Every public result stays unavailable; no protected application
+reads, write handles, grants, storage admission, dispatch, activation or rollback.
+All **77 application tables** matched independent before/after checksums and actual
+options/users/usermeta digests matched. Three owned tables (31 fixture options,
+3 users, 9 usermeta rows) were previewed, removed and verified absent. One separate
+audit preflight aborted before fixture creation; a read-only checksum sweep and
+one bounded complete rerun passed. No cause is claimed for the transient abort.
+
+Source-scoped canonical Feature Light and final Feature Security reviewed the
+changed/directly affected boundary; no further issue found. No bloat/UI workflow
+trigger, full pre-release claim, package, release, live/client/Drime mutation or
+production wiring change. Versions remain dashboard 0.1.77 / uploader 0.5.25.
+
+Implementation-plan progress: the native compatibility and genuine-core guard
+acceptance gate is resolved, not protected raw observation, native transactions,
+durable admission, effective scan stop or production readiness.
+**Recommended next gated slice: local-only V2.3 Authoritative Raw Observation and
+Native Backend Admission Integration Design**, design-only, before any reader/
+backend implementation or SQL proof. Specify trusted coherent raw reads, native
+connection/transaction ownership, private admission lifetime, uncertain outcomes
+and the later disposable acceptance matrix. Keep application writes, production
+wiring, grants, activation and rollback disabled. Historical blocked records below
+are retained as evidence and superseded only by this bounded completed follow-up.
+
 ## V2.3 Genuine-Core Request Guard Proof — Blocked (2026-10-18)
 
 The user approved and explicitly confirmed Plugin Tester local-only owned

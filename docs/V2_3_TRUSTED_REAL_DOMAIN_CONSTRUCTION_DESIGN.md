@@ -1,5 +1,15 @@
 # V2.3 Trusted Real-Domain Closed-Writer Construction and Provenance Integration Design
 
+2026-10-18 current follow-up: the approved dormant false/null compatibility fix
+and confirmed owned-fixture rerun passed **266 genuine-core guard checks**, with
+native flag still NULL, 77-table preservation and owned cleanup. Uploader
+`docs/V2_3_FIXED_CORE_GUARD_PROOF.md` owns red-to-green/mutation/runtime/review
+evidence and limits. The prior blocked record below is historical. This does not
+certify raw observation, native backend/transactions or storage admission.
+The exact next gate is **local-only V2.3 Authoritative Raw Observation and Native
+Backend Admission Integration Design**, design-only, as specified in the current
+implementation-plan milestone. No production wiring, grants, activation or rollback.
+
 2026-10-18 genuine-core proof follow-up: uploader
 `docs/V2_3_FIXED_CORE_GUARD_PROOF.md` records a **blocked**, not passed, native
 frame control: the genuine built-in-cache getter returned null while the dormant
