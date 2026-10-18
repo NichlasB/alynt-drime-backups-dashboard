@@ -341,3 +341,22 @@ handling; no tests/assertions/skips, dependencies, generated assets, workflow,
 runtime, versions or uploader files changed. No executable test is added for
 unimplemented design behavior. Final staged ownership/diff review and exact-commit
 publication CI are the remaining completion gates, recorded only after success.
+
+## Publication receipt
+
+Design `336b813db6874256d5e8ce0e353a26930f7b93c5` is committed/pushed to
+`origin/master`. Exact-commit [CI 39122315239](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39122315239)
+passed PHP 7.4/8.3, each **299 tests / 1430 assertions**, no skips, plus full
+Composer validation/audit, npm audit, build, structure and PHPCS. Final staged
+source/ownership/whitespace/privacy and gate review found only three dashboard
+documents. Uploader remains unchanged at
+`10f96b629bc509a6e0836b8ab7480a37cf80e122`; both repositories were clean/synced.
+
+The approved design milestone and publication gate are complete, not schema-8/
+codec/factory implementation or production readiness. The single recommended next
+approval is **local-only V2.3 Real-Domain Closed Provenance and Serialized-Target
+Safety Foundation**, pure test-loaded data/codec candidates with in-memory fixtures
+only as bounded above. No actual site/users/options/cron, real handles, grants,
+production wiring, activation, rollback, versions, package or release changed.
+This receipt-only follow-up requires final exact-head CI before handoff; no
+recursive receipt commit or additional site proof is needed.

@@ -43,6 +43,18 @@ uploader, site/SQL, fixtures, tests, dependency, generated or version changes.
 Exact-commit CI remains the publication gate, not evidence of the new candidate
 runtime. Next meaningful approval remains the pure non-admitting foundation above.
 
+Publication complete: design `336b813db6874256d5e8ce0e353a26930f7b93c5` passed
+[CI 39122315239](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39122315239),
+PHP 7.4/8.3 each **299 / 1430**, no skips, plus all validation/lint/structure/
+build/audit gates. Only three dashboard documents changed; uploader stayed clean/
+synced and unchanged at `10f96b629bc509a6e0836b8ab7480a37cf80e122`. This advances
+the construction/provenance design item and reaches the explicit **Real-Domain
+Closed Provenance and Serialized-Target Safety Foundation** implementation gate,
+not active real authentication or runtime permission. Grants, wiring, activation,
+rollback, site/database state and versions remain unchanged/disabled. Final
+exact-head CI for this receipt-only follow-up is required before handoff; no
+recursive records or maintenance/release work are needed.
+
 ## Approved V2.3 Admission Isolated Storage and Authenticated Request Proof (2026-10-18)
 
 Approved exact Plugin Tester local-only target and owned disposable users/storage,
