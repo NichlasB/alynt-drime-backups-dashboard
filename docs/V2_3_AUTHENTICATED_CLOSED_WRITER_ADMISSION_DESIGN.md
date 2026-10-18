@@ -7,8 +7,13 @@ fixture schema 7. It specifies fixed genuine-core construction, issuance scope,
 non-promoting receipts, a primitive serialized-target byte patch and raw-authority/
 cache/effective-state gates. Earlier real schema/action/provider candidates below
 are historical where refined by that document; no runtime/public contract changed.
-The next implementation approval is the non-admitting real-domain data/serialized
-target foundation, not production wiring, a grant, activation or rollback.
+The non-admitting real-domain data/serialized-target foundation is now approved
+and implemented in the uploader (see its `docs/V2_3_REAL_DOMAIN_DATA_FOUNDATION.md`
+and the current implementation-plan milestone for executed evidence). Real-shaped
+records remain synthetic data, not authenticated events or write admission. The
+next construction approval is **local-only V2.3 Fixed Genuine-Core Closed-Writer
+Request Construction Safety Foundation**, not production wiring, a grant,
+activation, rollback or unapproved actual site/storage proof.
 
 Follow-up 2026-10-18: the approved integrated Plugin Tester proof passed 18 grouped
 checks using genuine core authentication and owned native SQL with the unchanged

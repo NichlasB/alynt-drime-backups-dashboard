@@ -1,5 +1,17 @@
 # V2.3 Trusted Real-Domain Closed-Writer Construction and Provenance Integration Design
 
+Implementation follow-up 2026-10-18: the user approved the **local-only V2.3
+Real-Domain Closed Provenance and Serialized-Target Safety Foundation**. Uploader
+`docs/V2_3_REAL_DOMAIN_DATA_FOUNDATION.md` records the implemented test-loaded
+schema-8 data model and bounded primitive byte-span codec, focused 98-test evidence
+and proof limits. Outputs remain candidate-only/non-admitting; real-shaped records
+do not certify genuine authenticated events. Existing schema-6/7 definitions and
+production bootstrap/wiring remain unchanged. No actual users/options/SQL/cron,
+real handles, grants, activation or rollback are enabled. Full QA/publication are
+recorded only after execution. The historical next-foundation recommendation below
+is now superseded by **local-only V2.3 Fixed Genuine-Core Closed-Writer Request
+Construction Safety Foundation**, without actual site/storage proof or wiring.
+
 Approved 2026-10-18, local repository **design only**, through validation, commit,
 push and exact-head CI. Source checkpoints: dashboard
 `93e73fde9bd3544ff19a40c50461b27cd39b9d07`, uploader

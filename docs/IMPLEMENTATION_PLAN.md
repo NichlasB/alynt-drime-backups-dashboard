@@ -1,5 +1,39 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved V2.3 Real-Domain Data and Serialized-Target Foundation (2026-10-18)
+
+Approved local-only implementation, in-memory fixtures only, through validation,
+commit/push and exact-head CI. Uploader adds test-loaded, default-off, non-admitting
+schema-8 data validation/closed candidates and a bounded primitive settings codec;
+dashboard changes only these plan/design records. Existing schema-6/7 readers,
+request/bootstrap wiring, versions, dependencies and generated assets are unchanged.
+See uploader `docs/V2_3_REAL_DOMAIN_DATA_FOUNDATION.md` for source/evidence details.
+
+The codec preserves all bytes except the existing root scan Boolean. The model
+keeps frozen legacy provenance, disjoint new authenticated/internal data roles,
+contiguous counters/history, reserved identities and bounded recovery capacity.
+Data consistency is not authentication: outputs explicitly deny admission,
+dispatch and execution. No genuine-core real factory/handle, backend, site/SQL/
+user fixture, production wiring, grant, activation or rollback is introduced.
+
+Focused new selection passed **98 tests / 1089 assertions**, no skips; syntax
+passed 14 new PHP files and full uploader PHPCS passed 161 files with the existing
+nonfatal compatibility deprecation. Build/runner verification/syntax and three
+Node development-tool tests passed. Strict Composer validation and zero-advisory
+Composer/npm audits passed. Dashboard full **299 / 1423**, two existing Windows
+skips, PHPCS (138 files), structure/build and dependency checks passed. Uploader
+full-suite and publication results remain pending, not inferred from prior CI.
+
+Implementation-plan progress: this advances the V2.3 strict real-shaped provenance
+and serialized-target item to a non-admitting data foundation, reaching the next
+gated trusted-construction boundary, not an endless maintenance lane.
+**Recommended next gated slice: local-only V2.3 Fixed Genuine-Core Closed-Writer
+Request Construction Safety Foundation**, separate real contract/dormant fixed
+owner and private lifetime, zero-IO construction and no production registration,
+storage/target writes, grants, activation or rollback. Actual Plugin Tester users/
+storage/SQL proof requires separately confirmed owned disposable scope. No release
+or deployment is recommended for this dormant foundation alone.
+
 ## Approved V2.3 Trusted Real-Domain Construction and Provenance Design (2026-10-18)
 
 Approved local-only design through validation/commit/push/CI. Dashboard documents
