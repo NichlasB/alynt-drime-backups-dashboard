@@ -1,5 +1,36 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Native Closed-Begin Transaction Foundation and Owned Failure Proof — 2026-10-18
+
+Approved R3 Plugin Tester local-only owned safety-row milestone. Uploader owns
+`docs/V2_3_NATIVE_CLOSED_BEGIN_PROOF.md`; explicit feature bases uploader
+`d24d738e7090fbecb9088288c23fa53abcf77719`, dashboard
+`3eb84ac6e9045d33fc45badc18b8bafddb87a43b`. The dormant owner has no public
+execution method or production registration. Fresh private native ownership,
+locked schema/metadata revalidation, safety-first/settings-second locks and exact
+safety-only CAS now have genuine storage evidence. Unknown transaction outcomes
+poison/close without replay; no target write or continuation is enabled.
+
+Owned native proof **169 checks / 12 groups**; unchanged planning observer
+**122 / eight** and genuine-core guard **266 / eleven** rerun. All three fixture
+tables/users removed and all **77 application-table checksums unchanged**.
+Eight final-source counterfactual controls discriminate missing guards, locks,
+metadata, exact/binary CAS, rollback, uncertainty latching and hooks under locks.
+One transitive WordPress-validator callback risk was found/fixed with genuine
+RED/GREEN proof: prepare before BEGIN/final auth, then compare the exact validated
+tuples under locks. Protocol COMMIT-ack loss simulation is not actual wire loss.
+Targeted tests **256 / 2390**, no skips; full/exact-head publication receipts are
+owned by the uploader report after successful execution.
+
+Implementation-plan progress: V2.3 now has physical closed-begin safety-row
+transaction proof. Dashboard runtime remains unchanged/read-only. No application
+state, settings write, production wiring, grants, activation, schedule rollback,
+package, release, deploy or live change. **Recommended next gated slice: Plugin
+Tester local-only V2.3 Fixed Native Paired Disable Completion and Locked Receipt
+Resolution Foundation/Owned Atomicity Proof**, including private one-use
+continuation and explicit disposable safety **and settings** row write/cleanup
+approval. Do not stretch the present safety-row-only authority across that gate.
+
 ## V2.3 Fixed Native Raw Observation and Session-Ownership Proof — Completed (2026-10-18)
 
 Approved Plugin Tester local-only R3 milestone; uploader owns

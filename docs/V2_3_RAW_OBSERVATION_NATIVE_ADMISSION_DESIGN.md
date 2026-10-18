@@ -1,12 +1,15 @@
 # V2.3 Authoritative Raw Observation and Native Backend Admission Integration Design
 
-Current follow-up 2026-10-18: the separately approved dormant contract foundation
-and Plugin Tester fixed native planning-reader/session-ownership proof now exist.
-Uploader `docs/V2_3_NATIVE_RAW_OBSERVATION_PROOF.md` owns the actual 122-check native
-evidence, separate 266-check guard proof and preservation/cleanup audits. Public
-requests remain unavailable; native transaction/write admission is unimplemented.
-No physical fact is inferred from simulations. The latest implementation-plan
-heading supersedes the historical recommendation at the end of this design.
+Current follow-up 2026-10-18: separately approved dormant contracts, native
+planning observation and native closed-begin safety-row foundation now exist.
+Uploader `docs/V2_3_NATIVE_CLOSED_BEGIN_PROOF.md` owns the 169-check owned native
+closed-begin proof, 122-check observer/266-check guard reruns and independent
+preservation/cleanup audits; publication receipts are recorded after verification.
+Legacy validator calls are prepared before BEGIN/final auth; exact validated
+tuples are rechecked under locks. Public requests remain unavailable, with no
+public write API, paired target write, continuation or receipt resolution.
+Real COMMIT-ack wire loss is not inferred from the protocol simulations. The
+latest implementation-plan heading supersedes historical recommendations below.
 
 Date: 2026-10-18. Status: approved **design-only** boundary; no reader, connection,
 backend, transaction or admission implementation is authorized by this record.
