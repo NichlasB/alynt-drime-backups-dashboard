@@ -1,5 +1,15 @@
 # V2.3 Authenticated Closed-Writer Admission and Provenance Integration Design
 
+Design follow-up 2026-10-18: the approved
+[Trusted Real-Domain Construction and Provenance Design](V2_3_TRUSTED_REAL_DOMAIN_CONSTRUCTION_DESIGN.md)
+refines the candidate real lane into separate schema 8, without changing implemented
+fixture schema 7. It specifies fixed genuine-core construction, issuance scope,
+non-promoting receipts, a primitive serialized-target byte patch and raw-authority/
+cache/effective-state gates. Earlier real schema/action/provider candidates below
+are historical where refined by that document; no runtime/public contract changed.
+The next implementation approval is the non-admitting real-domain data/serialized
+target foundation, not production wiring, a grant, activation or rollback.
+
 Follow-up 2026-10-18: the approved integrated Plugin Tester proof passed 18 grouped
 checks using genuine core authentication and owned native SQL with the unchanged
 schema-7 **fixture lane**. Independent cleanup/preservation audits passed. See

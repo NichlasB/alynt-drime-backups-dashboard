@@ -1,5 +1,48 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved V2.3 Trusted Real-Domain Construction and Provenance Design (2026-10-18)
+
+Approved local-only design through validation/commit/push/CI. Dashboard documents
+only; uploader source is read-only. No LocalWP/site/SQL/fixtures, runtime, grants,
+production wiring, activation, rollback, versions, release or deploy changes.
+Clean source checkpoints are the recovery points. See
+[V2_3_TRUSTED_REAL_DOMAIN_CONSTRUCTION_DESIGN.md](V2_3_TRUSTED_REAL_DOMAIN_CONSTRUCTION_DESIGN.md).
+
+Plan: inspect actual admission/provenance/settings/reader/writer boundaries and the
+integrated fixture proof; specify fixed real construction, strict non-promoting
+successor and safe serialized target/cache policy; review adversarial/lifecycle
+limits; validate unchanged regressions and dashboard QA; commit/push and verify
+exact-head CI. This is explicitly approved R3 design, not active-feature clearance.
+
+Design decision: reserve a separate real-domain schema-8 candidate, leaving fixture
+schema 7 and older validators untouched. Use a fixed genuine-core owner with no
+injected auth/provider ports, strict original intent and a private one-shot
+continuation; define a bounded non-instantiating serialized-array codec that changes
+only the root Boolean's byte span. No fixture provenance promotion, defaults or
+identity repair. Cache invalidation is not coherence, and stored-disable success
+does not prove running scans/uploads stopped; participating writer/reader/lifecycle
+and effective-state behavior remain production integration gates.
+
+Implementation-plan progress: real construction/provenance and serialized target/
+cache decisions are specified, not implemented. **Recommended next gated slice:
+local-only V2.3 Real-Domain Closed Provenance and Serialized-Target Safety
+Foundation**, test-loaded non-admitting data/codec logic and in-memory fixtures
+only. Keep genuine-core real factory/handles, SQL/site fixtures, backend/wiring,
+grants, activation and rollback absent/disabled. Validate this design before
+claiming publication complete; no maintenance/release substitute is warranted.
+
+Local validation: unchanged uploader admission/provenance/settings/connection/
+context selection passed **474 tests / 5019 assertions**, no skips, plus full
+PHPCS (155 files, existing nonfatal compatibility deprecation). Dashboard full
+**299 / 1423**, two existing Windows skips, PHPCS (138 files), structure/build,
+strict Composer validation and zero-vulnerability dependency audits passed.
+Twenty-six uploader references and two relative design links resolved. Focused
+review covers auth/role freshness, provenance, parsing/privacy, concurrency/cache,
+failure/recovery and lifecycle. Only three dashboard documents change; no runtime,
+uploader, site/SQL, fixtures, tests, dependency, generated or version changes.
+Exact-commit CI remains the publication gate, not evidence of the new candidate
+runtime. Next meaningful approval remains the pure non-admitting foundation above.
+
 ## Approved V2.3 Admission Isolated Storage and Authenticated Request Proof (2026-10-18)
 
 Approved exact Plugin Tester local-only target and owned disposable users/storage,
