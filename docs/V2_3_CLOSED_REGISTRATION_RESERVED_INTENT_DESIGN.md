@@ -39,6 +39,17 @@ no public effect selector or generic registration/write/resolve callback port.
 
 ## Source-backed boundaries
 
+### Approved captured-frame construction proof — 2026-10-18
+
+Uploader `docs/V2_3_REGISTRATION_CONSTRUCTION_OWNED_PROOF.md` now owns genuine
+core construction/eligibility proof (**851 / 10**) on approved disposable Plugin
+Tester users/storage, with all **77** application checksums unchanged and fixtures
+removed. Synthetic stored schema-eight/schema-two history is not authenticated
+prior admission; test capture is not the proposed fixed authorizing reader. No
+runtime source, production wiring or native transaction/apply changed. Next gated
+slice is **Plugin Tester local-only V2.3 Fixed Registration Native Reader and
+Guarded Construction Integration**, private/read-only with public unavailable.
+
 All `includes/` paths below are relative to the separate uploader repository.
 
 | Inspected source | Current limit / design consequence |

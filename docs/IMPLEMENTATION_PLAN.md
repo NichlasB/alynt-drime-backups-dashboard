@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Registration Construction / Eligibility Owned Proof — 2026-10-18
+
+Approved R3 Plugin Tester local-only, owned disposable users/storage/cleanup.
+Uploader `docs/V2_3_REGISTRATION_CONSTRUCTION_OWNED_PROOF.md` owns genuine core
+**851 / 10**, unchanged guard **266 / 11**, three restored assertion-killed
+controls and independent **77** unchanged application-table checksums/fixture
+absence. Excluded uploader `5ac87ad27764bdd8d9a7001ca366892406277402`, dashboard
+`76d45ff8b476a195bf2dd57d6fab65579de2773f`. Dashboard changes records only.
+
+Implementation-plan progress: genuine auth/nonce/UUID plus captured isolated-frame
+eligibility now proved; not an authoritative reader, authenticated prior history,
+native transaction or execution. **Recommended next gated slice: Plugin Tester
+local-only V2.3 Fixed Registration Native Reader and Guarded Construction
+Integration**, private all-ten read-only capture after auth/renewed construction;
+owned-fixture approval required. Public unavailable, existing application state,
+production wiring/grants/activation/ledger writes/effects/rollback stay untouched.
+
 ## V2.3 Closed Registration Fixed Construction / Eligibility — 2026-10-18
 
 Approved R3 repository-only/dormant foundation; uploader owns
