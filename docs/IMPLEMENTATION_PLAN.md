@@ -31,6 +31,18 @@ before packaging/publishing this work; this checkpoint does not replace it.
 Dashboard scope is three plan/design records only; runtime/REST/cron/storage
 contracts and version 0.1.77 are unchanged. No package, release, tag or deployment.
 
+Checkpoint publication verified: uploader
+`fc89f8042fd5c14619d26b044f31b9900b5abf53` passed exact-commit
+[Quality 39128484439](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39128484439),
+PHP 7.4/8.3 each **1318 / 11103**, no skips; dashboard
+`78ed14a8b99a026915b602565d23aea53f07b91b` passed
+[CI 39128488111](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39128488111),
+each **299 / 1430**, no skips, all other quality gates green. The owning report
+records F1-F3 fixes, eleven assertion-killed counterfactuals, source-scoped Clean
+07A/final Feature Security and full proof limits. No genuine WordPress/auth/SQL
+proof is inferred. This receipt-only follow-up requires its own exact-head CI
+before handoff, with no recursive receipt commit or new milestone/site action.
+
 ## Approved V2.3 Fixed Genuine-Core Request Construction Foundation (2026-10-18)
 
 Approved repo-only R3 implementation through validation/commit/push/exact-head CI.
