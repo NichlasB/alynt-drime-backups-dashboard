@@ -312,12 +312,15 @@ Executed repository-only checks on 2026-10-18:
 
 | Check | Result / limits |
 |---|---|
-| Uploader `php vendor/bin/phpunit --do-not-cache-result --filter 'ScanEffectFenceContractTest|CachePublicationContractTest|QueueTest|ScannerTest|SettingsTest|SerializedSettings|CadenceAuthorityEntryPointPolicy|NativePairedBoundary|NativeClosedBeginBoundary'` | **116 tests / 1210 assertions**, no skips, 1.429s. Existing isolated tests, not new native/WordPress/cache/participant proof. |
+| Uploader targeted PHPUnit command below | **116 tests / 1210 assertions**, no skips, 1.429s. Existing isolated tests, not new native/WordPress/cache/participant proof. |
 | Dashboard `php vendor/bin/phpunit --do-not-cache-result` | **299 / 1423**, two existing unrelated Windows skips; no local no-skip claim. |
 | Dashboard `npm run lint`, `npm run check:structure`, `npm run build` | WPCS **138 files**, structure/build pass; no generated change. |
 | Dashboard `php composer.phar validate --strict`, `php composer.phar audit`, `npm audit --audit-level=moderate` | Valid manifest and no advisories/vulnerabilities; dependencies unchanged. |
 | Reference/diff review | **26** distinct quoted uploader source paths and the relative predecessor design link resolve. Row names checked against actual constants/native selectors. Only owning design, predecessor cross-reference and two plans change; no source/tests/bootstrap/assets/schema/version changes. |
 | Source safety | Uploader restore workflow Option A/check: clean/synced master at excluded base, checkpoint eligible, existing external September 20 archive. No backup/restore/archive/branch created. |
+
+Uploader targeted command:
+`php vendor/bin/phpunit --do-not-cache-result --filter 'ScanEffectFenceContractTest|CachePublicationContractTest|QueueTest|ScannerTest|SettingsTest|SerializedSettings|CadenceAuthorityEntryPointPolicy|NativePairedBoundary|NativeClosedBeginBoundary'`.
 
 No new runtime tests are appropriate for an unimplemented design. Existing native
 physical proof totals are historical, not rerun. No site, Novamira, SQL, fixture,
@@ -326,3 +329,14 @@ both repositories must pass before completion; earlier-head results do not repla
 the final-head checks. Design review clarified cancellation versus effect receipt,
 historical commit versus later bytes/outward authorization, and original intent
 deadline versus per-invocation acceptance budget; no implementation was changed.
+
+Design/plan head `ba453c1b1e30347a051dcd7cf38da668677755bb` passes exact-head
+[dashboard CI 39147920829](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39147920829):
+PHP 7.4/8.3 each **299 tests / 1430 assertions**, no skips, plus lint/structure/
+build/manifest/audits. Companion plan head
+`a73f558969af5c397862b03ae38cbb00fbab4fd7` passes exact-head
+[uploader Quality 39147921360](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39147921360):
+PHP 7.4/8.3 each **1403 / 12481**, no skips, plus Node/build/audit. These are
+unchanged-code regression results, not execution/proof of proposed native contracts.
+This documentation-only receipt/Markdown-table follow-up is independently pushed
+and its final exact-head CI verified at handoff; previous-head CI is not substituted.
