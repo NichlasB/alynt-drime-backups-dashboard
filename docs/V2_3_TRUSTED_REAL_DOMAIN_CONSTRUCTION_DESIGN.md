@@ -1,5 +1,13 @@
 # V2.3 Trusted Real-Domain Closed-Writer Construction and Provenance Integration Design
 
+2026-10-18 source-scoped canonical checkpoint: uploader
+`docs/V2_3_CLOSED_WRITER_SOURCE_REVIEW.md` owns the combined data/serialized-target
+and fixed-request review, explicit pre-feature baselines, test fixes and proof
+limits. Non-vacuous isolated decisions are not genuine core authentication or
+storage admission; all definitions stay dormant and public requests unavailable.
+No design contract changes. The next gated slice remains the confirmed owned-
+fixture Plugin Tester Fixed Genuine-Core Closed-Writer Request Guard Proof.
+
 Fixed-owner follow-up 2026-10-18: the separately approved **local-only V2.3 Fixed
 Genuine-Core Closed-Writer Request Construction Safety Foundation** implements a
 separate real-purpose request contract, zero-IO private/final owner and fixed core

@@ -1,5 +1,12 @@
 # V2.3 Authenticated Closed-Writer Admission and Provenance Integration Design
 
+2026-10-18 canonical source-scoped review: see uploader
+`docs/V2_3_CLOSED_WRITER_SOURCE_REVIEW.md` and the dashboard implementation-plan
+checkpoint. The two completed foundations remain non-admitting/unregistered;
+stronger isolated tests do not establish genuine authentication, native storage
+or transactional proof. No existing dashboard/public contract is changed and no
+new milestone is started. Full pre-release review remains a later candidate gate.
+
 Design follow-up 2026-10-18: the approved
 [Trusted Real-Domain Construction and Provenance Design](V2_3_TRUSTED_REAL_DOMAIN_CONSTRUCTION_DESIGN.md)
 refines the candidate real lane into separate schema 8, without changing implemented

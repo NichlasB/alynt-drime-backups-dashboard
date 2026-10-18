@@ -1,5 +1,36 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Canonical Source-Scoped Closed-Writer Checkpoint (2026-10-18)
+
+Approved review boundary: uploader `10f96b629bc509a6e0836b8ab7480a37cf80e122`
+through initial head `53451aa7e3abb3631249b457d2fb7005a7ca8de0`, plus checkpoint
+fixes; dashboard `e93b18791842ec36eee79bf68735a5ead71739ac` through initial
+head `7589cc87f4230bf9731b20008921dfa9c21ed87e`, plus these companion records.
+This covers both completed foundations, not a documentation-only tail.
+Owning report: uploader `docs/V2_3_CLOSED_WRITER_SOURCE_REVIEW.md`.
+
+Canonical Feature Light, source-scoped DS3 03/04/06/07 then 07A were applied.
+No bloat split is justified; UI/UX does not apply. Three test-evidence findings
+are addressed: non-vacuous guard decisions/ordering and protected-IO traps,
+failed child-result cleanup, and exact shared traversal-budget controls. No
+runtime fix or new public contract is needed. All public requests still return
+unavailable, and data candidates still deny admission/dispatch/execution.
+Final validation/security/publication receipts belong to the owning report.
+
+Implementation-plan progress: the two dormant foundations reach a canonical
+source-review checkpoint, not authentication/storage acceptance or a new runtime
+milestone. **Recommended next gated slice: Plugin Tester local-only V2.3 Fixed
+Genuine-Core Closed-Writer Request Guard Proof**, with explicitly confirmed owned
+disposable user/session/role-option fixture storage and independent cleanup/
+preservation audit. No actual WordPress/users/database operations, cache eviction,
+application options/cron changes, wiring, grants, activation or rollback were run
+by this checkpoint. No Database Review or physical transaction proof is claimed.
+The full pre-release workflow is still required on the next coherent candidate
+before packaging/publishing this work; this checkpoint does not replace it.
+
+Dashboard scope is three plan/design records only; runtime/REST/cron/storage
+contracts and version 0.1.77 are unchanged. No package, release, tag or deployment.
+
 ## Approved V2.3 Fixed Genuine-Core Request Construction Foundation (2026-10-18)
 
 Approved repo-only R3 implementation through validation/commit/push/exact-head CI.
