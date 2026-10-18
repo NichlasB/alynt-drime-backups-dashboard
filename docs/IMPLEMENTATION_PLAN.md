@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Scan-Effect Ledger / Fixed Target Codec Foundation — 2026-10-18
+
+Approved R3 repository-only, dormant/test-loaded **in-memory only**. Uploader owns
+`docs/V2_3_CLOSED_SCAN_EFFECT_CODEC_FOUNDATION.md`; excluded baselines uploader
+`a73f558969af5c397862b03ae38cbb00fbab4fd7`, dashboard
+`d2482d07fd0060ec5d2fd9fc3a81266e032e0312`. Fixed ten-row exact tuple manifest,
+closed ledger/reserves/receipts and snapshot/queue typed byte deltas now have
+positive and adversarial tests, not production admission. F1 exact failed-record
+requeue and F2 root enrollment binding fixed. New tests **23 / 259**, related
+**103 / 1231**, nine assertion-killed/restored controls; owning record holds focused
+canonical reviews, proof limits and exact-head CI. No native/runtime proof inferred.
+
+Implementation-plan progress: fixed-row/closed-ledger/typed-delta implementation
+item advances; next meaningful native/fixture boundary reached. Dashboard changes
+only plan/design records; no source/public contract/version, actual reader/cache/
+storage/fixture/site/database, wiring/grants/activation/cancellation/rollback or
+release/package/deploy change. **Recommended next gated slice: Plugin Tester
+local-only V2.3 Fixed Scan-Effect Manifest and Closed Target Observation Proof**,
+dormant fixed ten-row native read-only observer with owned disposable fixtures and
+cleanup, requiring exact LocalWP target/scope confirmation. Keep application state,
+production wiring and actual effect execution untouched/disabled.
+
 ## V2.3 Native Scan-Effect Storage / Participant Integration Design — 2026-10-18
 
 Approved R3 repository-only **design-only**. The

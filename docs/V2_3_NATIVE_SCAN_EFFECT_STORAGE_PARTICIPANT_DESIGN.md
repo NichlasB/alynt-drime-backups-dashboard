@@ -306,6 +306,27 @@ Keep current owners/parsers/schema-8 meaning unchanged; no actual readers/cache/
 storage/fixtures, production wiring, grants, activation, cancellation or rollback.
 Owned native proof and real participant changes require subsequent explicit scope.
 
+## Subsequent closed data foundation — 2026-10-18
+
+The approved next milestone is implemented in companion uploader
+`docs/V2_3_CLOSED_SCAN_EFFECT_CODEC_FOUNDATION.md` against excluded uploader
+`a73f558969af5c397862b03ae38cbb00fbab4fd7` and dashboard
+`d2482d07fd0060ec5d2fd9fc3a81266e032e0312`. Fixed manifest, closed ledger/reserve
+grammar and snapshot/queue typed byte-span deltas are dormant/test-loaded pure
+components, not the native owner or real participants proposed above. The owning
+record defines exact closed context encoding and F1/F2 regression fixes, focused
+canonical reviews, resource/proof limits and exact-head CI. No schema-8, parser,
+native two-row owner, production wiring or application state change.
+
+Pure **23 / 259** and related **103 / 1231**, no skips, plus nine assertion-killed/
+restored controls do not prove native locking, commit, core authorization, cache
+convergence or physical stop. No actual reader/cache/SQL/fixture/site operation.
+Historical design validation below stays historical. Recommended next gated slice:
+**Plugin Tester local-only V2.3 Fixed Scan-Effect Manifest and Closed Target
+Observation Proof**, dormant fixed native read-only observer with separately
+approved owned disposable ten-row fixtures/cleanup, existing application state and
+production wiring untouched, grants/activation/cancellation/rollback disabled.
+
 ## Validation and publication
 
 Executed repository-only checks on 2026-10-18:
