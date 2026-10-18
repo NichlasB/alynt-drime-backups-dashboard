@@ -14,6 +14,14 @@ Closed-Writer Request Guard Proof**, with explicitly confirmed disposable auth/
 role-option scope and independent cleanup audit, not production wiring or writes.
 Current execution/publication evidence is in the implementation-plan milestone;
 historical recommendations below are superseded where this follow-up applies.
+Publication verified: uploader `b988fdcee6989213310c0352e153ee85c428325d` passed
+[Quality 39125400334](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39125400334),
+PHP 7.4/8.3 each **1289 / 10924**, no skips; dashboard
+`65a9f07a2e1ca3a3c38bce009cc4a63bcff955ae` passed
+[CI 39125407792](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39125407792),
+each **299 / 1430**, no skips, with all other quality gates green. No physical
+auth/SQL proof or production state is certified; final verification-only follow-up
+requires exact-head CI before handoff.
 
 Implementation follow-up 2026-10-18: the user approved the **local-only V2.3
 Real-Domain Closed Provenance and Serialized-Target Safety Foundation**. Uploader

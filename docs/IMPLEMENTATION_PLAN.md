@@ -29,8 +29,8 @@ Focused new selection passed **69 tests / 470 assertions**, no skips. Syntax pas
 ten new PHP files; full uploader PHPCS (164 files), build/runner verification/
 syntax, three Node dev-tool tests, strict Composer validation and zero-advisory
 dependency audits passed. Dashboard full **299 / 1423**, two existing Windows
-skips, PHPCS (138 files), structure/build and dependency checks passed. Uploader
-full suite and exact-head publication remain pending, not inferred from prior CI.
+skips, PHPCS (138 files), structure/build and dependency checks passed. Exact-
+commit full-suite publication evidence is recorded below, not inferred from prior CI.
 
 Implementation-plan progress: the trusted-construction item now has a dormant fixed
 request owner/grammar and private inspection lifetime. It does not yet have actual
@@ -39,9 +39,23 @@ is a separately approved genuine-core proof, not maintenance or a dormant releas
 **Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Genuine-Core
 Closed-Writer Request Guard Proof**, with confirmed owned disposable users/session/
 role-option fixtures and independent cleanup/preservation audit. Keep actual users/
-options/cron untouched, storage admission/writes, production wiring, grants,
+options/cron untouched, application storage admission/writes, production wiring, grants,
 activation and rollback disabled. Raw observation/native backend integration
 remains a later explicit gate; no deploy or package is recommended here.
+
+Publication complete: uploader `b988fdcee6989213310c0352e153ee85c428325d` passed
+[Quality 39125400334](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39125400334),
+PHP 7.4/8.3 each **1289 / 10924**, no skips, plus all lint/runner/build/audit gates.
+Dashboard `65a9f07a2e1ca3a3c38bce009cc4a63bcff955ae` passed
+[CI 39125407792](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39125407792),
+each **299 / 1430**, no skips, with all other quality gates green. Both repos were
+clean/synced; no existing runtime/bootstrap/version/dependency/generated contracts
+or actual site state changed. The scoped R3 foundation is complete, not actual
+authentication/storage admission or production clearance. Final exact-head CI is
+required for this verification-only follow-up before handoff, with no recursive
+receipt commits. The next meaningful approval remains the exact Plugin Tester
+guard proof above, including explicitly approved disposable fixture setup/cleanup
+only and independent actual-state preservation audit; no application writes.
 
 ## Approved V2.3 Real-Domain Data and Serialized-Target Foundation (2026-10-18)
 
