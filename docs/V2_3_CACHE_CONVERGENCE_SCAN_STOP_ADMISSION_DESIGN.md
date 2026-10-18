@@ -141,8 +141,9 @@ Conceptual ordering (not new methods/fields or executable authority):
 1. Trusted construction selects the actual entry point. Authenticate the local
    command separately; background work relies on a separately proven durable
    grant, never an administrator cookie cached from an earlier request. Current
-   closed-only schemas cannot supply such a grant: every actual admission remains
-   unavailable. Never reinterpret `authenticated_grant=null` as implicit consent.
+   closed-only schemas cannot supply such a grant: actual admission through the
+   new authority lane remains unavailable, not existing legacy behavior. Never
+   reinterpret `authenticated_grant=null` as implicit consent.
 2. Before producer/snapshot work, atomically register one owned operation against
    supported current mode, permission generation, enrollment and immutable intent.
    Refuse unknown/pending foreign work, but recognize this operation's own claim
@@ -280,3 +281,16 @@ API, SQL, fixtures, LocalWP or live access occurred; therefore the Novamira site
 operation path was not invoked. This approval does not renew prior fixture scope
 for future effect storage operations. Exact pushed-head CI must pass before the
 publication handoff; earlier-head results do not substitute for it.
+
+Design/plan publication: dashboard master
+`467e30881f6e88451f8eb1011b5f3c6a6a2810b6` passes exact-head
+[CI 39145076026](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39145076026),
+PHP 7.4 and 8.3 each **299 tests / 1430 assertions**, no skips, plus coding
+standards/structure/build/manifest/audits. Uploader companion-plan master
+`7679bfbfaed2c7e5c947cf42cfe8c0670d6fdbc3` passes exact-head
+[Quality 39145083300](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39145083300),
+both PHP versions and Node/build/audit; full-suite totals are verified from its
+completed log at handoff. This is regression coverage of unchanged code, not
+proof of the proposed protocol. The final documentation-only dashboard head is
+independently checked after pushing this receipt and the legacy-lane wording
+clarification; no earlier-head CI substitutes for that final check.
