@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Registration / Reserved Intent Native Integration Design — 2026-10-18
+
+Approved R3 **repository-only/design-only**. The
+[owning design](V2_3_CLOSED_REGISTRATION_RESERVED_INTENT_DESIGN.md) covers excluded
+dashboard `262315397f98926c059e1fb591a6b574203f9ad7`, uploader
+`f010f40c06a29d80fdf2a92c1d41aa62f4d6f250`. Separate proposed schema-2 closed-proof
+domain preserves schema-1/checkpoint semantics; trusted once-reserved identities,
+own-versus-foreign pending operations, separate register/reserve/observe purposes,
+ledger-only native obligations and non-authorizing unknown-outcome lookup defined.
+No active variant, automatic conversion/provisioning, receipt-based retry or effect
+permission. Native/real-core/capacity claims require later discriminating proof.
+
+Implementation-plan progress: identity/provenance/reserved-intent integration now
+has a concrete closed design, not more maintenance or runtime implementation.
+Both repositories change docs only; no site/SQL/fixtures/users/options/cron, source/
+schema installation, versions, grants/wiring/activation/cancellation/rollback or
+package/release/deploy. Historical toolkit/whole-plugin readiness stays historical.
+**Recommended next gated slice: local-only V2.3 Closed Registration and Reserved
+Intent Contract Safety Foundation**, in-memory dormant codec/successor/reserve/
+lookup models and adversarial controls; no actual construction/auth/storage/site
+operations or execution. Explicit approval required for the new contract code.
+
 ## V2.3 Closed Scan-Effect Ledger Transaction / Owned Failure Proof — 2026-10-18
 
 Approved R3 **Plugin Tester local-only**, continuing confirmed disposable fixture

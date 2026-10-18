@@ -370,6 +370,23 @@ Design**, design-only trusted identities/provenance/closed reservation and
 unknown-outcome resolution; no storage/site operations, grants/wiring/activation/
 cancellation/rollback or packaging/deploy. New trust contract needs approval.
 
+## Subsequent closed registration / intent design — 2026-10-18
+
+The separately approved repository-only
+[closed registration/reserved-intent design](V2_3_CLOSED_REGISTRATION_RESERVED_INTENT_DESIGN.md)
+refines trusted identities, provenance, separate ledger-only transitions and
+unknown-outcome observation. It proposes a NEW schema-2 closed-proof domain, not
+promotion of the synthetic schema-1 scheduled tag, active consent, migration or
+production provisioning. Existing checkpoint/owners/codecs and all runtime wiring
+remain unchanged. Current schema-8/null grant still cannot admit real scheduled
+registration. Historical native/codec results above are not new-domain proof.
+
+Implementation-plan progress: the next trust boundary is specified. Recommended
+next gated slice: **local-only V2.3 Closed Registration and Reserved Intent Contract
+Safety Foundation**, dormant in-memory only, before separately approved real
+construction/native owned fixtures; no grants, effects, activation, cancellation,
+rollback or storage/site operations in that foundation.
+
 ## Validation and publication
 
 Executed repository-only checks on 2026-10-18:
