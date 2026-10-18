@@ -1,5 +1,12 @@
 # V2.3 Authoritative Raw Observation and Native Backend Admission Integration Design
 
+Current follow-up 2026-10-18: the separately approved dormant in-memory foundation
+is implemented in uploader `docs/V2_3_RAW_OBSERVATION_CONTRACT_FOUNDATION.md`.
+It proves data/decision contracts only, leaving the fixed public owner unavailable
+and actual reader/native session/SQL unimplemented. Its next gated native
+observation/session-ownership proof supersedes the historical recommendation at
+the end of this design; no physical fact is inferred from the simulations.
+
 Date: 2026-10-18. Status: approved **design-only** boundary; no reader, connection,
 backend, transaction or admission implementation is authorized by this record.
 Risk: R3 authentication/storage/concurrency design, explicitly approved by the user.

@@ -1,5 +1,12 @@
 # V2.3 Trusted Real-Domain Closed-Writer Construction and Provenance Integration Design
 
+2026-10-18 current foundation: uploader
+`docs/V2_3_RAW_OBSERVATION_CONTRACT_FOUNDATION.md` owns the separately approved
+in-memory exact-observation/private-binding and simulated session contract evidence.
+The request owner and production loader are unchanged; native storage/auth-session
+facts remain unproven. The current implementation-plan entry names the next
+confirmed owned-fixture native observation/session proof, not real admission.
+
 2026-10-18 current design-only follow-up:
 [Raw Observation and Native Admission Integration Design](V2_3_RAW_OBSERVATION_NATIVE_ADMISSION_DESIGN.md)
 specifies exact bounded row/coherence contracts, private storage-session ownership,

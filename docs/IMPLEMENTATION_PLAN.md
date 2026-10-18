@@ -1,5 +1,39 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Raw Observation and Native-Session Contract Foundation — Completed (2026-10-18)
+
+The user approved the design's repository-only in-memory foundation. Uploader
+`docs/V2_3_RAW_OBSERVATION_CONTRACT_FOUNDATION.md` owns implementation, non-vacuous
+tests, mutation controls, focused review and verification evidence. Strict bounded
+JSON/exact row coherence, a private raw/scope/session fingerprint separate from
+semantic context v1, and a single-use simulated transaction lifecycle are now
+test-loaded definitions. Every disposition is non-authorizing; the fixed request
+owner/public unavailable results and production loading are unchanged.
+
+Publication: uploader `2aea0f2129927226780633c2be441889cff04d3b` is clean/synced
+on master. Its [exact-head Quality CI](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39132961696)
+passed PHP 7.4/8.3, each **1369 tests / 11664 assertions**, no skips, plus Node
+build/audit. Final new-contract suite **38 / 481**, related boundary suite
+**248 / 2313**, no skips; five temporary guard-removal mutants were killed and
+all four runtime source hashes restored exactly. The supplemental local full run
+launched before four added boundary methods finished **1365 / 11497**, four
+existing Windows skips; it does not replace the final exact-head CI suite.
+Uploader lint (168), build/runner/Node and strict Composer/npm audits pass;
+dashboard local tests **299 / 1423** (two existing Windows skips), lint (138),
+structure/build pass. No generated changes. Canonical source-scoped Feature Light
+and final Feature Security completed; no whole-plugin/Database Review claim.
+
+Implementation-plan progress: the raw-observation/lifetime contract gap advances;
+physical reads, native/auth session fencing, real admission and effective stop
+remain gated. No connection, SQL, site/user/database/option/cron operation, fixture
+storage, grants, production wiring, activation or rollback is implemented/executed.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Native Raw
+Observation and Session-Ownership Implementation/Proof**, with separate exact
+target/owned authentication/options fixture confirmation, creation/cleanup and
+independent preservation audit. Prove a fixed bounded reader and session fences
+against owned tables; keep existing application state, paired writes, wiring,
+grants, activation and rollback untouched. More maintenance is not a substitute.
+
 ## V2.3 Raw Observation and Native Admission Integration Design — Completed (2026-10-18)
 
 The user approved the design-only follow-up after the genuine-core guard proof.
