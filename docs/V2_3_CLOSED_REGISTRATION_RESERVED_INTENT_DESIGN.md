@@ -314,4 +314,24 @@ and the owning design's predecessor link exist. Final scope is dashboard three
 design/plan documents and uploader one plan document only; no dependency,
 runtime/generated asset, test, version or toolkit checklist changes. No native,
 authentication/session, SQL, physical transaction or new schema capacity proof
-executed. Exact-head CI publication receipts follow after the pushes complete.
+executed.
+
+Publication receipts, exact pushed heads verified 2026-10-18:
+
+- Dashboard design/plan `e999a2ace8e1f2cbea8c27d63256fa64a714b41a`:
+  [CI 39159480398](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39159480398)
+  **success**, PHP 7.4 and 8.3 each **299 tests / 1430 assertions**, no skips;
+  lint/structure/build/manifest/audits passed.
+- Uploader plan `1c0dc5b80ffcfbc9b556c57d73d2d3cfa18348cb`:
+  [Quality 39159488936](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39159488936)
+  **success**, PHP 7.4 and 8.3 each **1440 tests / 12865 assertions**, no skips;
+  lint/proof-script syntax and Node dev-tool/build/runner/audit jobs passed.
+- This receipt-only dashboard follow-up changes no reviewed contract or source.
+  Its final exact-head CI is checked separately at handoff; the runs above are
+  evidence for the named commits, not an assertion that a later commit ran them.
+- Toolkit remains unchanged at `dc5bc89a507494217ee934150c98edcbdb01181c`;
+  no canonical review/checklist or historical whole-plugin row refreshed.
+
+The registration/reservation implementation remains the next approval boundary.
+Green unchanged-code CI does not prove the proposed new protocol, capacity,
+authentication, physical transactions or live release readiness.
