@@ -1,5 +1,48 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved V2.3 Fixed Genuine-Core Request Construction Foundation (2026-10-18)
+
+Approved repo-only R3 implementation through validation/commit/push/exact-head CI.
+Uploader adds a separate real-purpose request grammar, fixed private/final owner
+and private core guard definitions; dashboard changes only plan/design records.
+See uploader `docs/V2_3_FIXED_CORE_REQUEST_FOUNDATION.md`. Recovery checkpoints:
+uploader `f60b81c123d2d9f5a472515655d5645b217304ce`, dashboard
+`ed6db353ee7b7904a3a839da025dae66421200a1`, both clean/synced before work.
+
+Construction is zero-IO and accepts no provider/auth/context/clock/enablement ports.
+Explicitly test-loaded only; no production registration. Exact real issuance/
+command/receipt actions and original bounded forms are separate from fixture nonce
+domains. Fixed guards check same local actor/session, current user metadata and
+role definitions, genuine core capability/nonce call routing and stable single-site
+metadata. Private request lifetime blocks re-entry and clears in finally; copying/
+serialization cannot turn data into a handle. Unsupported custom role/user/cache/
+database environments refuse instead of substituting stale or weaker authority.
+
+Every issue/consume result remains redacted **unavailable**, storage/dispatch/
+execution false: no authoritative reader/backend, actionable issuance, schema-8
+receipt, transaction continuation, storage write, grants, activation or rollback.
+No LocalWP/site/SQL/users/options/cron/cache were touched; core-shaped unit shims
+are not genuine WordPress authentication, connection or persistence proof. Existing
+validators, bootstrap, versions, dependencies and generated assets are unchanged.
+
+Focused new selection passed **69 tests / 470 assertions**, no skips. Syntax passed
+ten new PHP files; full uploader PHPCS (164 files), build/runner verification/
+syntax, three Node dev-tool tests, strict Composer validation and zero-advisory
+dependency audits passed. Dashboard full **299 / 1423**, two existing Windows
+skips, PHPCS (138 files), structure/build and dependency checks passed. Uploader
+full suite and exact-head publication remain pending, not inferred from prior CI.
+
+Implementation-plan progress: the trusted-construction item now has a dormant fixed
+request owner/grammar and private inspection lifetime. It does not yet have actual
+core-authenticated admission or any storage capability; the meaningful next step
+is a separately approved genuine-core proof, not maintenance or a dormant release.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Genuine-Core
+Closed-Writer Request Guard Proof**, with confirmed owned disposable users/session/
+role-option fixtures and independent cleanup/preservation audit. Keep actual users/
+options/cron untouched, storage admission/writes, production wiring, grants,
+activation and rollback disabled. Raw observation/native backend integration
+remains a later explicit gate; no deploy or package is recommended here.
+
 ## Approved V2.3 Real-Domain Data and Serialized-Target Foundation (2026-10-18)
 
 Approved local-only implementation, in-memory fixtures only, through validation,
