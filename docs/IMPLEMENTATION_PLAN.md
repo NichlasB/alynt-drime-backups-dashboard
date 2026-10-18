@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Scan-Effect / Cache-Publication Contract Foundation — 2026-10-18
+
+Approved R3 repository-only, dormant/test-loaded **in-memory only**. Uploader owns
+`docs/V2_3_SCAN_EFFECT_CACHE_CONTRACT_FOUNDATION.md` and two bounded pure models
+with non-vacuous positive/negative ordering tests. Excluded source review bases:
+uploader `7679bfbfaed2c7e5c947cf42cfe8c0670d6fdbc3`, dashboard
+`f530a2e204119b29fbcaf834cb7034f6d080233a`. Owned scan-effect registration,
+generation/target fencing and terminal barriers are distinct from post-commit
+fixed-scope cache observations. Neither candidate quiescence nor eviction is
+permission, native confirmation or cross-process convergence.
+
+Implementation-plan progress: the open cache/effective-scan-stop item advances
+through the approved non-authorizing contract foundation; native persistence and
+actual participants remain gated. Uploader record owns focused canonical review,
+guard-removal and exact-head CI evidence. Dashboard changes only these records;
+production wiring, application state, actual reader/cache/storage/fixture operations,
+grants, activation and rollback remain untouched/disabled. No package/release/deploy.
+**Recommended next gated slice: local-only V2.3 Native Scan-Effect Storage and
+Participant Integration Design**, design-only fixed registration/snapshot/queue
+codecs/caps/lock order, exact CAS/receipts and complete producer/writer participation
+before any new native sink, actual cache or worker proof approval.
+
 ## V2.3 Cache Convergence / Effective Scan-Stop Admission Design — 2026-10-18
 
 Approved R3 local-only **design-only** milestone. The

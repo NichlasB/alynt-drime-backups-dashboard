@@ -263,6 +263,19 @@ core/cache/worker proof are subsequent separately scoped approvals, not bundled.
 
 ## Validation and publication
 
+### Subsequent approved contract foundation — 2026-10-18
+
+The next in-memory milestone is now implemented in uploader; owning record:
+`docs/V2_3_SCAN_EFFECT_CACHE_CONTRACT_FOUNDATION.md`. Two dormant test-loaded
+models cover bounded synthetic scan-effect/closure ordering and separate fixed-scope
+post-commit cache observations. They do not alter or prove the native/storage/cache/
+worker requirements above. Production loading, schemas, readers, actual cache/SQL/
+fixture operations, grants, activation and rollback remain unchanged/disabled.
+The preferred next gate is design-only **V2.3 Native Scan-Effect Storage and
+Participant Integration Design**, specifying physical row/codec/lock/capacity and
+full writer participation contracts before additional runtime approval. Historical
+validation below remains evidence of this earlier design, not the new models.
+
 Executed repository-only validation on 2026-10-18:
 
 | Command/check | Result and limits |
