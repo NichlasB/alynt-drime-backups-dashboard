@@ -348,6 +348,28 @@ owned ledger-fixture writes only. Separate approval; actual snapshot/queue effec
 application state, wiring, grants, activation, cancellation and rollback disabled.
 Historical design and preceding pure-foundation evidence remains historical.
 
+## Subsequent ledger-only native transaction proof — 2026-10-18
+
+Uploader `docs/V2_3_NATIVE_SCAN_LEDGER_TRANSACTION_PROOF.md` owns the approved
+Plugin Tester local-only all-ten transaction and ledger-only owned fixture proof.
+Excluded uploader `c86cea98e5a0e2f9f5bbc1396b4e08b7f7591a2f`, dashboard
+`fdc4398414f7cdb06c9e5691901caf5f71640849`. Closed checkpoint increments ONLY
+ledger revision, preserving records/slots/reserves; it does not implement the
+registration, identity construction, receipt/effect or cancellation proposed above.
+One-shot genuine guards, exact full-context intent and CAS/readback/acknowledgement
+proof **740 / 13**, ten killed/restored controls, unchanged guard **266 / 11** and
+observer **245 / 11**. Every owned fixture removed; all **77 application-table
+checksums unchanged**. Unknown ack is explicitly a protocol simulation on two real
+SQL outcomes, not physical dropped-wire/crash proof. Source-scoped reviews and
+exact-head QA/CI belong to the owning record; historical evidence stays historical.
+
+Implementation-plan progress: native ledger transaction boundary proved without
+effect execution or production integration. Recommended next gated slice:
+**local-only V2.3 Closed Registration and Reserved Intent Native Integration
+Design**, design-only trusted identities/provenance/closed reservation and
+unknown-outcome resolution; no storage/site operations, grants/wiring/activation/
+cancellation/rollback or packaging/deploy. New trust contract needs approval.
+
 ## Validation and publication
 
 Executed repository-only checks on 2026-10-18:

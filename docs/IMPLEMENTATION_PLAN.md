@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Scan-Effect Ledger Transaction / Owned Failure Proof — 2026-10-18
+
+Approved R3 **Plugin Tester local-only**, continuing confirmed disposable fixture
+scope with native ledger-only writes. Uploader owns
+`docs/V2_3_NATIVE_SCAN_LEDGER_TRANSACTION_PROOF.md`, excluded uploader
+`c86cea98e5a0e2f9f5bbc1396b4e08b7f7591a2f`, dashboard
+`fdc4398414f7cdb06c9e5691901caf5f71640849`. Dormant strict intent/context, private
+one-shot owner, all-ten locks, exact ledger CAS/full readback and acknowledged
+commit/rollback-or-poison; closed revision-only successor preserves history and
+reserves, not actual registration. F1 encoding and F2 exact request-bound
+regressions fixed. New pure/API **7 / 60**, related **44 / 500**; genuine
+**740 / 13**, guard **266 / 11** and
+observer **245 / 11**; ten killed/restored controls. All **77 application-table
+checksums unchanged** and fixtures removed. Owning record holds canonical focused
+reviews, final QA/exact-head CI and proof limits; no lost-wire/crash claim.
+
+Implementation-plan progress: native transaction/ledger-only milestone advances,
+next meaningful registration/intent trust decision reached. Dashboard docs only;
+no public/source/version, application/snapshot/queue, production wiring, grant,
+activation/cancellation/rollback or package/release/deploy change.
+**Recommended next gated slice: local-only V2.3 Closed Registration and Reserved
+Intent Native Integration Design**, design-only trusted once-reserved identities,
+closed transitions/provenance and unknown-outcome resolution before new native
+writes. Keep storage/site operations and actual execution disabled; explicit
+approval required for the new trust contract.
+
 ## V2.3 Fixed Manifest / Closed Target Native Observation Proof — 2026-10-18
 
 Approved R3 **Plugin Tester local-only**; exact target and three owned disposable
