@@ -1,5 +1,15 @@
 # V2.3 Trusted Real-Domain Closed-Writer Construction and Provenance Integration Design
 
+2026-10-18 genuine-core proof follow-up: uploader
+`docs/V2_3_FIXED_CORE_GUARD_PROOF.md` records a **blocked**, not passed, native
+frame control: the genuine built-in-cache getter returned null while the dormant
+predicate requires literal false. All 77 application tables were preserved and
+owned fixtures removed. No design/guard policy was changed under proof-only
+approval. The next gated slice is the local-only Native Cache-Flag Compatibility
+Fix and Guard-Proof Rerun described in the implementation plan; raw observation/
+native-backend integration is not admitted. Historical recommendations below
+are superseded by this finding, not refreshed into runtime acceptance.
+
 2026-10-18 source-scoped canonical checkpoint: uploader
 `docs/V2_3_CLOSED_WRITER_SOURCE_REVIEW.md` owns the combined data/serialized-target
 and fixed-request review, explicit pre-feature baselines, test fixes and proof

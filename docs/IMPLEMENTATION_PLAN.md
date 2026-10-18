@@ -1,5 +1,35 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Genuine-Core Request Guard Proof — Blocked (2026-10-18)
+
+The user approved and explicitly confirmed Plugin Tester local-only owned
+disposable authentication/storage fixtures plus cleanup/preservation audits.
+Owning uploader report: `docs/V2_3_FIXED_CORE_GUARD_PROOF.md`. The developer-only
+native full-core worker reached the real frame inspection without loading site
+plugins/theme or actual configuration. It exposed a concrete mismatch: genuine
+WordPress 7.1.2's built-in cache getter returns unset `null`, but the dormant
+frame requires literal `false`. The meaningful positive frame control failed;
+later authentication/nonce/revocation assertions are prepared, **not verified**.
+No cache-flag normalization or guard bypass was used to manufacture a pass.
+
+Independent MySQL before/after inventory/checksums matched all **77 application
+tables**. Actual options/users/usermeta digests matched. Exactly three owned
+tables were previewed, removed and verified absent; final fixture preview was
+31 options, 3 disposable users and 7 metadata rows. Existing application users,
+options, cron, settings/safety and production wiring were untouched.
+
+Implementation-plan progress: native environment verification identified an
+R3 compatibility blocker missed by core-shaped unit shims; the proof is not
+complete and raw observation/native-backend integration must not start.
+**Recommended next gated slice: local-only V2.3 Native Cache-Flag Compatibility
+Fix and Guard-Proof Rerun**: narrowly admit genuine unset-null/literal-false cache
+states while retaining unknown/external/drop-in refusal, add non-vacuous regression
+controls, rerun the confirmed owned-fixture proof and independent audits, then
+validation/commit/push/exact-head CI. This proof-only approval did not authorize
+changing that dormant authorization predicate. Keep every public result unavailable,
+application writes, grants, wiring, activation and rollback disabled. No package,
+release, deploy, Database Review, transaction proof or full-plugin acceptance.
+
 ## V2.3 Canonical Source-Scoped Closed-Writer Checkpoint (2026-10-18)
 
 Approved review boundary: uploader `10f96b629bc509a6e0836b8ab7480a37cf80e122`
