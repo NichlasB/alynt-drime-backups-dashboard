@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Registration Native Reader / Guarded Construction — 2026-10-18
+
+Approved R3 Plugin Tester local-only with owned fixtures/cleanup. Uploader owns
+`docs/V2_3_REGISTRATION_NATIVE_READER_PROOF.md`; excluded uploader
+`010e15d420735c73839aeaf14a50c5b7b8332a20`, dashboard
+`24c19d88c018f3d296fa1d95922aafb5ab6b26c0`. Private twenty-read capture connected
+to complete eligibility/UUID/nonce construction; genuine **700 / 11**, unchanged
+constructor **851 / 10** and guard **266 / 11**, all **77** application checksums
+unchanged, fixtures removed. F1 auth-session adoption and F2 bulk-autoload ordering
+fixed; three restored assertion-killed controls, targeted **253 / 2954**, no skips.
+
+Implementation-plan progress: read-to-construction integration proved, not native
+write admission or an atomic/current snapshot. Dashboard changes records only.
+**Recommended next gated slice: local-only V2.3 Closed Registration Native Admission
+and Locked Revalidation Design**, design-only command handoff, all-ten locking,
+ledger-only transition/receipt and unknown-outcome rules. Public endpoints, actual
+state/production wiring, storage writes, grants/activation/effects/rollback stay off.
+
 ## V2.3 Closed Registration Construction / Eligibility Owned Proof — 2026-10-18
 
 Approved R3 Plugin Tester local-only, owned disposable users/storage/cleanup.

@@ -39,6 +39,19 @@ no public effect selector or generic registration/write/resolve callback port.
 
 ## Source-backed boundaries
 
+### Approved dormant native read-to-construction integration — 2026-10-18
+
+Uploader `docs/V2_3_REGISTRATION_NATIVE_READER_PROOF.md` owns genuine **700 / 11**
+for private guarded native two-sweep capture -> complete existing constructor.
+F1 borrowed-session adoption and F2 hidden protected bulk-autoload fetching during
+core authorization fixed only within the new private lane; shared guard unchanged.
+All **77** application checksums unchanged, owned fixtures removed; no public
+endpoint, production require or native write. A deliberate post-sweep fixture change
+proves captured bytes can be stale even when a non-authorizing blueprint is formed.
+Next gated slice: **local-only V2.3 Closed Registration Native Admission and Locked
+Revalidation Design**, design-only same-stack handoff/all-ten locked comparison and
+ledger-only receipt. This is not approval to commit captured candidate data.
+
 ### Approved captured-frame construction proof — 2026-10-18
 
 Uploader `docs/V2_3_REGISTRATION_CONSTRUCTION_OWNED_PROOF.md` now owns genuine
