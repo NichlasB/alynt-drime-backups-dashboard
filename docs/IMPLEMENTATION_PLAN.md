@@ -9,7 +9,8 @@ Approved R3 **repository-only, new proofs in-memory only**. Uploader owns
 and separately purposed historical candidate lookup implemented dormant/test-only.
 Retained registration dependency enables full context reconstruction; strict
 one-pending/no-terminal profile and both-transition headroom enforced. Pure new
-**10 / 168**, related **156 / 2083**, five restored assertion-killed controls.
+**11 / 178**, related **157 / 2093**, five restored assertion-killed controls;
+reservation-reference RED/GREEN fix rejects aliases before hash normalization.
 
 Implementation-plan progress: closed data registration/reservation now executable,
 not real authentication, eligibility, receipt commit or native execution proof.

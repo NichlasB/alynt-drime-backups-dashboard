@@ -75,7 +75,7 @@ pass both pure transitions. Future terminal/three-effect capacity, actual full-f
 eligibility, authentication, UUID issuance, native transactions and genuine storage
 proof remain unimplemented. No production loading or old schema changes.
 
-New tests **10 / 168**, related **156 / 2083**, five assertion-killed/restored
+New tests **11 / 178**, related **157 / 2093**, five assertion-killed/restored
 controls. Owning record contains source-scoped light/final security and exact QA/CI.
 Recommended next gated slice: **local-only V2.3 Closed Registration Fixed Request
 Construction and Eligibility Safety Foundation**, dormant/test-only; new trust
