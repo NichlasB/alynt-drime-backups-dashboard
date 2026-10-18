@@ -1,5 +1,18 @@
 # V2.3 Authoritative Raw Observation and Native Backend Admission Integration Design
 
+Latest approved follow-up 2026-10-18: dormant native paired disable completion
+and separately authenticated locked receipt resolution now have owned Plugin
+Tester evidence. Uploader `docs/V2_3_NATIVE_PAIRED_COMPLETION_PROOF.md` owns the
+335-check/11-group result, six counterfactual controls, preservation/cleanup,
+canonical source-scoped reviews and publication receipts. Private continuation
+originates only after confirmed begin; full post-begin tuples are rechecked under
+locks. Pair failure cannot leave a half-write, uncertain outcomes never replay,
+and receipt absence stays unresolved after a genuine two-row barrier. Historical
+facts are not current cached/effective state. Public runtime stays unavailable
+and unregistered; application state/wiring/grants/activation/rollback stay disabled.
+The latest plan heading supersedes historical recommendations below. Next gate:
+design cache convergence and effective scan-stop/lifecycle admission, not release.
+
 Current follow-up 2026-10-18: separately approved dormant contracts, native
 planning observation and native closed-begin safety-row foundation now exist.
 Uploader `docs/V2_3_NATIVE_CLOSED_BEGIN_PROOF.md` owns the 169-check owned native
