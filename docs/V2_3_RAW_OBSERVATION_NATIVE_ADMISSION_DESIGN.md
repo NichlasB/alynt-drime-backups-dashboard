@@ -1,5 +1,13 @@
 # V2.3 Authoritative Raw Observation and Native Backend Admission Integration Design
 
+Latest design follow-up 2026-10-18:
+[Cache Convergence and Effective Scan-Stop Lifecycle Admission Integration Design](V2_3_CACHE_CONVERGENCE_SCAN_STOP_ADMISSION_DESIGN.md)
+now maps actual whole-option/cache writers, producer snapshot effects before
+enqueue, shared effect fencing, scoped legacy/authority stop semantics and
+unresolved/lifecycle participation gates. This is design-only, not cache publication,
+scan-stop proof, grant or runtime integration. The latest implementation-plan
+heading owns the next separately approved dormant contract-foundation gate.
+
 Latest approved follow-up 2026-10-18: dormant native paired disable completion
 and separately authenticated locked receipt resolution now have owned Plugin
 Tester evidence. Uploader `docs/V2_3_NATIVE_PAIRED_COMPLETION_PROOF.md` owns the

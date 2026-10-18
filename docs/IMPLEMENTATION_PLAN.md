@@ -1,5 +1,35 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Cache Convergence / Effective Scan-Stop Admission Design — 2026-10-18
+
+Approved R3 local-only **design-only** milestone. The
+[owning integration design](V2_3_CACHE_CONVERGENCE_SCAN_STOP_ADMISSION_DESIGN.md)
+maps actual uploader cache/settings/connection writers, scheduled/admin/CLI/remote
+scan callers, producer snapshot persistence, queue sinks and independent upload/
+retention/lifecycle paths. Explicit excluded baselines: dashboard
+`3ab57b6fe74ca64eb185d813555a4ca28b036e2a`, uploader
+`b253a60b94b9baa0fc0c38920c633b01b3907b79`.
+
+Decisions: raw authority is decisive; post-commit fixed-key eviction is never
+permission or a receipt. Whole-option edits, including nonsemantic polling/error
+updates, must not resurrect stale permission. A future durable operation
+registration and serialized producer-snapshot/queue effect boundary must order
+effects against closure; checking before uncoordinated option writes is insufficient.
+Stored closure, publication, closed admission, draining and verified quiescence
+remain distinct. Legacy manual scan semantics and independent uploads are not
+silently converted into an emergency stop; preparing/draining authority never
+falls back to legacy. Unsupported participant/lifecycle/cache profiles stay gated.
+
+Implementation-plan progress: cache/effective-state integration decisions now
+have a concrete source and acceptance map; no runtime, schemas, grants, activation,
+rollback, application state or production wiring changes. No site/SQL/fixture/
+cache operation, package, release or deploy. Existing native proof is historical,
+not rerun by this design; local regressions and exact-head CI are recorded in the
+owning design after execution. **Recommended next gated slice: local-only V2.3
+Scan-Effect Fencing and Post-Commit Cache-Publication Contract Safety Foundation**,
+dormant/test-loaded in-memory model only, with non-authorizing positive controls;
+actual readers/cache calls/storage writes/fixtures/wiring/execution remain disabled.
+
 ## V2.3 Native Paired Completion / Locked Receipt Resolution Proof — 2026-10-18
 
 Approved R3 Plugin Tester local-only disposable safety/settings fixtures only.
