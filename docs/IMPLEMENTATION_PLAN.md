@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Native Scan-Effect Storage / Participant Integration Design — 2026-10-18
+
+Approved R3 repository-only **design-only**. The
+[owning design](V2_3_NATIVE_SCAN_EFFECT_STORAGE_PARTICIPANT_DESIGN.md) selects a
+fixed ten-row manifest/global lock order, separate closed ledger domain and explicit
+byte/node/history/terminal reserves, typed exact target deltas and all-writer
+participation. Actual queue/producer/registry/settings/connection sources are
+mapped; independent uploads are not cancelled or authorized by scan closure.
+Current schema 8 has no active grant; the native two-row owner remains unchanged.
+Excluded bases: dashboard `12792bdc8fd3974916a609a100f3ba426a2c574f`, uploader
+`63cfeefd988f37923527410f08d32e7d99d06276`.
+
+Implementation-plan progress: concrete physical contract/participant decisions
+advance the open scan-stop integration item, not maintenance/release churn. No
+runtime/schema/option creation, reader/cache/SQL/fixture/site operation, wiring,
+grants/activation/rollback or release/package/deploy change. **Recommended next
+gated slice: local-only V2.3 Closed Scan-Effect Ledger and Fixed Target Codec Safety
+Foundation**, dormant/test-loaded in-memory grammar/manifest/snapshot-queue delta
+codecs and discriminating tests only; native and real participant proof stay gated.
+
 ## V2.3 Scan-Effect / Cache-Publication Contract Foundation — 2026-10-18
 
 Approved R3 repository-only, dormant/test-loaded **in-memory only**. Uploader owns

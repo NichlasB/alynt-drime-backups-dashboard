@@ -263,6 +263,14 @@ core/cache/worker proof are subsequent separately scoped approvals, not bundled.
 
 ## Validation and publication
 
+The subsequently approved design-only
+[native storage/participant design](V2_3_NATIVE_SCAN_EFFECT_STORAGE_PARTICIPANT_DESIGN.md)
+now specifies fixed row ownership/order, closed ledger/receipt capacity, exact
+snapshot/queue deltas and participating upload/settings/connection writers.
+These are proposed contracts only; existing source/schemas/native owners and all
+runtime/activation boundaries above remain unchanged. See its own validation and
+next gated closed-codec implementation recommendation rather than historical gates.
+
 ### Subsequent approved contract foundation — 2026-10-18
 
 The next in-memory milestone is now implemented in uploader; owning record:
