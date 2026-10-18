@@ -54,6 +54,33 @@ All `includes/` paths below are relative to the separate uploader repository.
 
 ## Proposed exact closed records and limits
 
+### Approved in-memory contract refinement — 2026-10-18
+
+The subsequent approved Contract Safety Foundation is owned by uploader
+`docs/V2_3_CLOSED_REGISTRATION_CONTRACT_FOUNDATION.md`, excluded uploader
+`1c0dc5b80ffcfbc9b556c57d73d2d3cfa18348cb` and dashboard
+`156e762f20f119f02a83866684c9835ddfcfefd1`. It implements data consistency only.
+The exact operation below now retains `registration_dependency_digest` so the
+original frame-label/context can be reconstructed; this fixes a missing data
+dependency, not authenticated provenance. Pure scope additionally pins origin
+creation time. Reservation uses original operation times and its once-reserved
+command ID/revision, making the stored receipt reconstructable without storing a
+second arbitrary envelope. Both supported transitions retain revision headroom.
+
+Only zero/one pending operation is supported; no terminal protocol/import or
+16-operation history is implemented. Registration conservatively reserves 1536
+record bytes for the supported WPvivid intent hashes/bookkeeping receipt/syntax,
+in addition to the existing root closure/incoming reserves. Worst scalar shapes
+pass both pure transitions. Future terminal/three-effect capacity, actual full-frame
+eligibility, authentication, UUID issuance, native transactions and genuine storage
+proof remain unimplemented. No production loading or old schema changes.
+
+New tests **10 / 168**, related **156 / 2083**, five assertion-killed/restored
+controls. Owning record contains source-scoped light/final security and exact QA/CI.
+Recommended next gated slice: **local-only V2.3 Closed Registration Fixed Request
+Construction and Eligibility Safety Foundation**, dormant/test-only; new trust
+boundary needs approval. Storage writes, wiring, grants and execution stay disabled.
+
 Use the same fixed ledger option/ten-row manifest; no new table or added dependency.
 Schema-2 root key order: `schema_version`, `domain`, `site_uuid`,
 `enrollment_binding`, `authority_generation`, `ledger_revision`,
@@ -71,6 +98,7 @@ closed profile is deliberately unsuitable for production provisioning or upgrade
 that lifecycle/restore/downgrade decision remains gated. Do not widen legacy codecs.
 
 Operation key order: `operation_id`, `command`, `provenance`, `context_digest`,
+`registration_dependency_digest`,
 `entry_point`, `generation`, `participant_digest`, `issued_at`, `expires_at`,
 `registration_revision`, `reservation_command_ids`, `phase`, `effects`,
 `terminal_id`, `resolution_id`, `registration_receipt`, `reservation_receipt`,

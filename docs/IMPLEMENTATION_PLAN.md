@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Registration / Reserved Intent Contract Foundation — 2026-10-18
+
+Approved R3 **repository-only, new proofs in-memory only**. Uploader owns
+`docs/V2_3_CLOSED_REGISTRATION_CONTRACT_FOUNDATION.md`, excluded uploader
+`1c0dc5b80ffcfbc9b556c57d73d2d3cfa18348cb`, dashboard
+`156e762f20f119f02a83866684c9835ddfcfefd1`. Closed schema-2 codec/bounded successors
+and separately purposed historical candidate lookup implemented dormant/test-only.
+Retained registration dependency enables full context reconstruction; strict
+one-pending/no-terminal profile and both-transition headroom enforced. Pure new
+**10 / 168**, related **156 / 2083**, five restored assertion-killed controls.
+
+Implementation-plan progress: closed data registration/reservation now executable,
+not real authentication, eligibility, receipt commit or native execution proof.
+Dashboard changes design/plan records only; no sites, SQL, actual options/users/
+cron, runtime loading, grants/wiring/activation/effects/cancellation/rollback or
+package/release/deploy. **Recommended next gated slice: local-only V2.3 Closed
+Registration Fixed Request Construction and Eligibility Safety Foundation**,
+dormant fixed construction/full eligibility binding; authentication boundary needs
+new approval. Storage writes and runtime wiring remain disabled.
+
 ## V2.3 Closed Registration / Reserved Intent Native Integration Design — 2026-10-18
 
 Approved R3 **repository-only/design-only**. The
