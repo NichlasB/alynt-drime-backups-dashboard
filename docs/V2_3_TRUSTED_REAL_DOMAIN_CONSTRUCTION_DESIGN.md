@@ -1,5 +1,15 @@
 # V2.3 Trusted Real-Domain Closed-Writer Construction and Provenance Integration Design
 
+2026-10-18 current design-only follow-up:
+[Raw Observation and Native Admission Integration Design](V2_3_RAW_OBSERVATION_NATIVE_ADMISSION_DESIGN.md)
+specifies exact bounded row/coherence contracts, private storage-session ownership,
+separate passive auth-session fencing and unknown-commit resolution barriers.
+It refines the single-connection rule to mean both storage rows on one private
+session, never transaction control on the application's authentication handle.
+No reader/backend/SQL is implemented or run. The next gate is the dormant in-memory
+Fixed Raw Observation and Native-Session Admission Contract Safety Foundation named
+in that record; historical next-gate pointers below are superseded, not erased.
+
 2026-10-18 current follow-up: the approved dormant false/null compatibility fix
 and confirmed owned-fixture rerun passed **266 genuine-core guard checks**, with
 native flag still NULL, 77-table preservation and owned cleanup. Uploader

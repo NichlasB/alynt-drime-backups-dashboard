@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Raw Observation and Native Admission Integration Design — Completed (2026-10-18)
+
+The user approved the design-only follow-up after the genuine-core guard proof.
+[Owning design](V2_3_RAW_OBSERVATION_NATIVE_ADMISSION_DESIGN.md) records the exact
+dashboard/uploader baselines, inspected runtime/fixture boundary, coherent bounded
+raw observations, separate private native storage-session ownership, passive idle
+fencing for genuine WordPress authorization, atomic closed-writer protocol and
+unknown-commit reconciliation barrier. No reader/backend or SQL is implemented or
+executed; no uploader source, production wiring or public contract is changed.
+
+Implementation-plan progress: the raw/native ownership and admission design gap
+is specified, including non-vacuous acceptance gates; actual observation, native
+construction/transactions, effective scan stop and product/ops admission remain gated.
+**Recommended next gated slice: local-only V2.3 Fixed Raw Observation and Native-
+Session Admission Contract Safety Foundation**, one coherent dormant, in-memory-only
+uploader foundation for exact-row/coherence/private-binding and session/admission
+lifetime contracts. Keep the public owner unavailable and actual connection/SQL,
+fixtures, grants, wiring, activation and rollback disabled. The design's later
+native adapter and owned schema-8 integrated proof require separate approval; the
+prior guard and schema-7 fixture evidence does not establish those physical facts.
+
 ## V2.3 Cache Compatibility Fix and Genuine-Core Guard Proof — Passed (2026-10-18)
 
 The user approved the exact local-only compatibility fix and proof rerun. Uploader

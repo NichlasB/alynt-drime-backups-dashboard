@@ -1,5 +1,15 @@
 # V2.3 Authenticated Closed-Writer Admission and Provenance Integration Design
 
+2026-10-18 current design-only follow-up:
+[Raw Observation and Native Admission Integration Design](V2_3_RAW_OBSERVATION_NATIVE_ADMISSION_DESIGN.md)
+owns the bounded raw/native integration policy and later acceptance matrix. It
+keeps semantic context v1 unchanged, separates private physical observation binding,
+requires owned non-reconnecting storage sessions and fences ambient auth sessions.
+It also requires a locking resolution barrier after an unknown commit. No runtime
+or public contract changed; no SQL, native adapter or admission proof ran here.
+The exact next approval is its dormant in-memory Fixed Raw Observation and Native-
+Session Admission Contract Safety Foundation, superseding historical pointers below.
+
 2026-10-18 canonical source-scoped review: see uploader
 `docs/V2_3_CLOSED_WRITER_SOURCE_REVIEW.md` and the dashboard implementation-plan
 checkpoint. The two completed foundations remain non-admitting/unregistered;
