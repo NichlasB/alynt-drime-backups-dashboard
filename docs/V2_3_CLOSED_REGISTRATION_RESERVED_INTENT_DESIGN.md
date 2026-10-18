@@ -151,6 +151,18 @@ All bookkeeping increments only ledger_revision, never permission generation.
 
 ## Fixed trusted construction and intent domains
 
+Approved construction foundation (2026-10-18), uploader owner
+`docs/V2_3_REGISTRATION_CONSTRUCTION_FOUNDATION.md`, now implements strict bounded
+four-purpose forms, fixed core guards, complete eligibility and PRIVATE once-only
+registration blueprint construction. Public issue/consume remain unavailable:
+there is no authoritative reader, caller-frame port or public nonce/UUID/blueprint
+export. Reservation/receipt grammar is guarded, not a producer or native consume
+path. New **10 / 251**, related **250 / 2926**, four restored behavioral controls
+are pure/isolated API evidence, NOT genuine core/storage/physical transaction proof.
+Next gated slice: **Plugin Tester local-only V2.3 Closed Registration Construction
+and Eligibility Owned Proof**, with exact target/disposable fixture confirmation;
+no application state, production wiring, grants, activation or execution changes.
+
 Future final/private factory is no-IO at construction, dormant/test-loaded, no
 bootstrap/admin/REST/AJAX/cron/CLI registration. No public provider, enablement,
 actor, target, clock, source or write-handle port. Private PHP visibility is not

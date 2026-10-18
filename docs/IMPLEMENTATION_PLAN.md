@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Registration Fixed Construction / Eligibility — 2026-10-18
+
+Approved R3 repository-only/dormant foundation; uploader owns
+`docs/V2_3_REGISTRATION_CONSTRUCTION_FOUNDATION.md`, excluded uploader
+`20f78f94b795dc6537d1c5bb464b29da27d78dcd`, dashboard
+`1aa763a4af95ff7292541744fd92991cd2ba3e80`. Fixed genuine-core guard requirements,
+four-purpose bounded nonce grammar, complete schema-8/settings/schema-2/all-ten
+eligibility and private once-attempted registration blueprint now implemented.
+Public owner stays unavailable with no authoritative reader or continuation.
+New isolated **10 / 251**, related **250 / 2926**, four assertion-killed/restored
+controls; no claim of actual WordPress authentication, storage or commit proof.
+
+Implementation-plan progress: fixed construction/eligibility milestone advanced;
+dashboard changes plan/design records only, no runtime/site/options/users/cron,
+storage writes, grants/wiring/activation/effects/cancellation/rollback or release.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Closed Registration
+Construction and Eligibility Owned Proof**, separately confirmed target and owned
+disposable fixture creation/cleanup; existing application state/wiring untouched.
+
 ## V2.3 Closed Registration / Reserved Intent Contract Foundation — 2026-10-18
 
 Approved R3 **repository-only, new proofs in-memory only**. Uploader owns
