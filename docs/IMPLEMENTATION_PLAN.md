@@ -1,5 +1,33 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Native Raw Observation and Session-Ownership Proof — Completed (2026-10-18)
+
+Approved Plugin Tester local-only R3 milestone; uploader owns
+`docs/V2_3_NATIVE_RAW_OBSERVATION_PROOF.md`. Explicit uploader review base
+`e95edd01961ceb8b09bed2bf7bf48b1331a398b4`, companion base
+`7d67804b25a70c0ac579a2ffcc6c7af55390c055`. The new dormant observer combines
+genuine core authorization, passive auth-session idle fences, private read-only
+native ownership and four bounded repeated raw reads. Public unavailable results,
+existing request/schema/nonce contracts and both production loaders stay unchanged.
+It does not resolve receipts or admit work. Dashboard runtime remains read-only.
+
+Genuine WordPress 7.1.2/PHP 8.5.1/MariaDB 10.6.23 owned proof: 122 checks / eight
+groups; separate original guard proof rerun: 266 / eleven. Three owned tables and
+their disposable users/session fixtures are removed; all 77 application tables
+retain independent inventory/checksums. Synthetic schema-6/8 genesis is not an
+authenticated event or transaction proof. Source-scoped reviews and validation
+are recorded in the uploader report; final full-suite/exact-head CI receipts must
+be read there after execution, not inferred from this plan pointer.
+
+Implementation-plan progress: fixed native planning observation/session ownership
+now has physical evidence. Native locking/writer admission is still gated. No
+application-state, paired write, production wiring, grants, activation, rollback,
+package/release/deploy or live changes. **Recommended next gated slice: Plugin
+Tester local-only V2.3 Fixed Native Closed-Begin Transaction Safety Foundation and
+Owned Failure Proof**. Reuse the existing wider design; require explicit owned
+native safety-row write/cleanup approval. Paired target writes, actual application
+state, production wiring and all execution remain disabled.
+
 ## V2.3 Raw Observation and Native-Session Contract Foundation — Completed (2026-10-18)
 
 The user approved the design's repository-only in-memory foundation. Uploader

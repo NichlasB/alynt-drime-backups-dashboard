@@ -1,11 +1,12 @@
 # V2.3 Authoritative Raw Observation and Native Backend Admission Integration Design
 
-Current follow-up 2026-10-18: the separately approved dormant in-memory foundation
-is implemented in uploader `docs/V2_3_RAW_OBSERVATION_CONTRACT_FOUNDATION.md`.
-It proves data/decision contracts only, leaving the fixed public owner unavailable
-and actual reader/native session/SQL unimplemented. Its next gated native
-observation/session-ownership proof supersedes the historical recommendation at
-the end of this design; no physical fact is inferred from the simulations.
+Current follow-up 2026-10-18: the separately approved dormant contract foundation
+and Plugin Tester fixed native planning-reader/session-ownership proof now exist.
+Uploader `docs/V2_3_NATIVE_RAW_OBSERVATION_PROOF.md` owns the actual 122-check native
+evidence, separate 266-check guard proof and preservation/cleanup audits. Public
+requests remain unavailable; native transaction/write admission is unimplemented.
+No physical fact is inferred from simulations. The latest implementation-plan
+heading supersedes the historical recommendation at the end of this design.
 
 Date: 2026-10-18. Status: approved **design-only** boundary; no reader, connection,
 backend, transaction or admission implementation is authorized by this record.
@@ -329,7 +330,21 @@ No executable tests are added for an unimplemented design. Uploader remains
 read-only; versions remain dashboard 0.1.77 / uploader 0.5.25. No site, SQL, native
 connection, fixture, browser, release or deployment operation runs in this slice.
 
-## Next gated slice
+## Executed follow-up boundary — 2026-10-18
+
+The approved contract foundation and then separately confirmed Plugin Tester
+native planning-reader/session-ownership proof now exist. Uploader
+`docs/V2_3_NATIVE_RAW_OBSERVATION_PROOF.md` owns the exact source baseline, 122-check
+native proof, separate 266-check genuine-core guard rerun, fixture cleanup and
+77-table preservation audit. This is only read-only planning observation, not
+native transaction admission, receipt resolution, authenticated schema-8 provenance
+or paired-write/concurrency proof. Those broader acceptance requirements above
+remain unimplemented. See the latest implementation-plan heading for the next
+Fixed Native Closed-Begin Transaction Safety Foundation and Owned Failure Proof
+gate; owned safety-row SQL writes require separate explicit approval, and paired
+target writes/application state/production wiring/execution remain excluded.
+
+## Historical next gated slice at design completion
 
 Recommend approving **local-only V2.3 Fixed Raw Observation and Native-Session
 Admission Contract Safety Foundation**: implement the missing bounded exact-row/
