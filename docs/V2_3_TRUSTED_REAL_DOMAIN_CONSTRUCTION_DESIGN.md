@@ -3,12 +3,18 @@
 Implementation follow-up 2026-10-18: the user approved the **local-only V2.3
 Real-Domain Closed Provenance and Serialized-Target Safety Foundation**. Uploader
 `docs/V2_3_REAL_DOMAIN_DATA_FOUNDATION.md` records the implemented test-loaded
-schema-8 data model and bounded primitive byte-span codec, focused 98-test evidence
+schema-8 data model and bounded primitive byte-span codec, focused 99-test evidence
 and proof limits. Outputs remain candidate-only/non-admitting; real-shaped records
 do not certify genuine authenticated events. Existing schema-6/7 definitions and
 production bootstrap/wiring remain unchanged. No actual users/options/SQL/cron,
-real handles, grants, activation or rollback are enabled. Full QA/publication are
-recorded only after execution. The historical next-foundation recommendation below
+real handles, grants, activation or rollback are enabled. Initial implementation
+CI passed uploader PHP 7.4/8.3 each **1219 / 10440** with no skips ([Quality
+39123850277](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39123850277));
+dashboard plan CI passed each **299 / 1430**, no skips ([CI
+39123856687](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39123856687)).
+The final bounded-traversal guard adds one test and requires final exact-head CI,
+as recorded in the implementation plan; no prior design CI substitutes for it.
+The historical next-foundation recommendation below
 is now superseded by **local-only V2.3 Fixed Genuine-Core Closed-Writer Request
 Construction Safety Foundation**, without actual site/storage proof or wiring.
 

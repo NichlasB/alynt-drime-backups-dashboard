@@ -16,13 +16,15 @@ Data consistency is not authentication: outputs explicitly deny admission,
 dispatch and execution. No genuine-core real factory/handle, backend, site/SQL/
 user fixture, production wiring, grant, activation or rollback is introduced.
 
-Focused new selection passed **98 tests / 1089 assertions**, no skips; syntax
+Final focused new selection passed **99 tests / 1103 assertions**, no skips; syntax
 passed 14 new PHP files and full uploader PHPCS passed 161 files with the existing
 nonfatal compatibility deprecation. Build/runner verification/syntax and three
 Node development-tool tests passed. Strict Composer validation and zero-advisory
 Composer/npm audits passed. Dashboard full **299 / 1423**, two existing Windows
 skips, PHPCS (138 files), structure/build and dependency checks passed. Uploader
-full-suite and publication results remain pending, not inferred from prior CI.
+publication evidence is recorded below, not inferred from prior design CI.
+Final source review additionally bounds pure-data traversal
+before encoding; no source/receipt validity result acquires admission.
 
 Implementation-plan progress: this advances the V2.3 strict real-shaped provenance
 and serialized-target item to a non-admitting data foundation, reaching the next
@@ -33,6 +35,16 @@ owner and private lifetime, zero-IO construction and no production registration,
 storage/target writes, grants, activation or rollback. Actual Plugin Tester users/
 storage/SQL proof requires separately confirmed owned disposable scope. No release
 or deployment is recommended for this dormant foundation alone.
+
+Initial publication verified: uploader `08420f74ef04fb7f9c76624f0b0821ced599c493`
+passed [Quality 39123850277](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39123850277),
+PHP 7.4/8.3 each **1219 / 10440**, no skips, plus all lint/runner/build/audit gates.
+Dashboard `9a63c40f6074f811a576f8033049e0f051533782` passed
+[CI 39123856687](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39123856687),
+each **299 / 1430**, no skips, plus all other quality gates. The final pure traversal
+guard adds one test after these implementation-CI counts; final exact-head CI is
+required for that guard and these verification records before handoff, without
+recursive receipt commits. Scope remains dormant/in-memory, no site or release.
 
 ## Approved V2.3 Trusted Real-Domain Construction and Provenance Design (2026-10-18)
 
