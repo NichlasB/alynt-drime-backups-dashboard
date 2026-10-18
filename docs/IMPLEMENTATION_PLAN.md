@@ -19,8 +19,14 @@ metadata, exact/binary CAS, rollback, uncertainty latching and hooks under locks
 One transitive WordPress-validator callback risk was found/fixed with genuine
 RED/GREEN proof: prepare before BEGIN/final auth, then compare the exact validated
 tuples under locks. Protocol COMMIT-ack loss simulation is not actual wire loss.
-Targeted tests **256 / 2390**, no skips; full/exact-head publication receipts are
-owned by the uploader report after successful execution.
+Targeted tests **256 / 2390**, no skips. Uploader implementation
+`1d0bae360fef5db9a73934704ae4dd9a025f3a66` passes exact-head
+[Quality 39139673150](https://github.com/NichlasB/alynt-drime-backups-uploader/actions/runs/39139673150),
+PHP 7.4/8.3 each **1377 / 11741**, no skips, plus Node/build/audits. Dashboard
+planning `4a2319d5023a43045c936b19bb34ebbbf1b0d411` passes
+[CI 39139685042](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/39139685042),
+each **299 / 1430**, no skips. Final receipt-only heads are verified separately;
+the owning uploader report records local full-suite and review proof limits.
 
 Implementation-plan progress: V2.3 now has physical closed-begin safety-row
 transaction proof. Dashboard runtime remains unchanged/read-only. No application
