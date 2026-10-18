@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Manifest / Closed Target Native Observation Proof — 2026-10-18
+
+Approved R3 **Plugin Tester local-only**; exact target and three owned disposable
+tables/authentication fixtures/cleanup confirmed. Uploader owns
+`docs/V2_3_NATIVE_SCAN_OBSERVATION_PROOF.md`; excluded uploader
+`08a47072e934b28f0fae0eb996e6648d1b3270df`, dashboard
+`e867c6d256938d4c20a2f4885904fc9c566c1f34`. Dormant separate nonce domain, fresh
+core guards, private server-read-only twenty-read fixed manifest and closed-codec
+observation; public unavailable. Genuine **245 / 11**, guard **266 / 11**, prior
+observer **122 / 8**, eight valid restored controls; all **77 application-table
+checksums unchanged**, no fixtures retained. Pure/API **7 / 65**, related **41 / 468**,
+no skips. Owning record holds canonical source-scoped reviews and exact-head CI.
+
+Implementation-plan progress: native observation milestone complete; next meaningful
+transaction/write decision reached. No dashboard source/public contract/version,
+application state, production wiring, grants, activation, cancellation or rollback
+change; no package/release/deploy. **Recommended next gated slice: Plugin Tester
+local-only V2.3 Closed Scan-Effect Ledger Transaction Foundation and Owned Failure
+Proof**, fixed all-ten locks/closed bounded ledger successor/exact CAS/readback/
+commit, owned ledger-fixture writes only; no actual application/snapshot/queue
+effects and separate explicit approval required.
+
 ## V2.3 Closed Scan-Effect Ledger / Fixed Target Codec Foundation — 2026-10-18
 
 Approved R3 repository-only, dormant/test-loaded **in-memory only**. Uploader owns

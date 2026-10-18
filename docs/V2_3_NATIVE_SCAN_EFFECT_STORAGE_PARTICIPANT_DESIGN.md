@@ -327,6 +327,27 @@ Observation Proof**, dormant fixed native read-only observer with separately
 approved owned disposable ten-row fixtures/cleanup, existing application state and
 production wiring untouched, grants/activation/cancellation/rollback disabled.
 
+## Subsequent native observation proof — 2026-10-18
+
+Uploader `docs/V2_3_NATIVE_SCAN_OBSERVATION_PROOF.md` owns the approved Plugin Tester
+local-only fixed ten-row observer and three-table owned fixture proof. Excluded
+uploader `08a47072e934b28f0fae0eb996e6648d1b3270df`, dashboard
+`e867c6d256938d4c20a2f4885904fc9c566c1f34`. Genuine guarded private observation
+**245 / 11 groups**, eight valid restored controls, unchanged guard **266 / 11**
+and prior observer **122 / 8** rerun. Every run removed owned fixtures and preserved
+all **77 application-table checksums**. Public support flags remain false; no
+production loading, actual application state or schema-8/grant meaning change.
+These are native read/profile/nonce/refusal results, not locking, atomic snapshot,
+CAS/commit, complete runtime eligibility, cache convergence or physical scan-stop.
+
+Implementation-plan progress: the initial observation boundary now has genuine
+evidence. Recommended next gated slice: **Plugin Tester local-only V2.3 Closed
+Scan-Effect Ledger Transaction Foundation and Owned Failure Proof**, fixed ten-row
+locks and closed bounded ledger successor/CAS/readback/acknowledged commit with
+owned ledger-fixture writes only. Separate approval; actual snapshot/queue effects,
+application state, wiring, grants, activation, cancellation and rollback disabled.
+Historical design and preceding pure-foundation evidence remains historical.
+
 ## Validation and publication
 
 Executed repository-only checks on 2026-10-18:
