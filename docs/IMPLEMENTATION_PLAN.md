@@ -1,5 +1,45 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved V2.3 Admission Isolated Storage and Authenticated Request Proof (2026-10-18)
+
+Approved exact Plugin Tester local-only target and owned disposable users/storage,
+including native LocalWP SQL and independent preservation/cleanup audits. Implement
+the integrated genuine-core request plus schema-7 fixture/native SQL proof in the
+uploader developer harness, not a production handler. Preserve existing validators,
+fixture provenance and synthetic JSON target scope. Actual users/options/cron,
+production wiring, authenticated grants, activation, rollback and versions remain
+untouched/disabled. Uploader evidence: `docs/V2_3_ADMISSION_ISOLATED_PROOF.md`.
+Validate, commit/push and verify exact-head CI; record only executed evidence.
+Real-domain trusted construction, production serialized target/cache providers and
+participating writer/lifecycle effects remain separate gates, not inferred from
+genuine authentication of a fixture-domain proof request. No release is warranted.
+
+Execution status: the integrated harness passed **18 grouped genuine-core/native
+SQL checks**, including role/session loss, guarded observations, non-promoting
+schema-7 fixture storage, atomic target/completion, failure/acknowledgement,
+independent-process recovery fencing, actual lock waits/expiry and pre/post-COMMIT
+termination. Final cleanup previewed/removed 19 disposable rows across four owned
+tables. Independent MySQL audits matched all actual users/options/cron hashes and
+counts (545 / 2 / 71 options/users/usermeta), with no safety option or probe tables
+remaining. Production code, actual users/options/cron, grants, wiring, activation,
+rollback and versions are unchanged. This proves the durable fixture bridge, not
+reserved real-domain receipt construction or a production cache/settings provider.
+
+Local QA: uploader 331 focused tests / 4270 assertions without skips and full
+1121 / 9297 with four existing Windows skips (12:34.169), plus PHPCS, syntax,
+build/runner/developer-tool/Composer/audit checks passed. Dashboard 299 / 1423
+with two existing Windows skips, PHPCS, structure/build/Composer/audits passed.
+No existing tests or runtime/generated/dependency/version files changed. CI adds
+only syntax coverage for the developer proof, never automatic SQL execution.
+
+Implementation-plan progress: integrated genuine-core admission/owned storage proof
+and local QA are complete; exact-head publication CI remains. The next meaningful
+boundary is **local-only V2.3 Trusted Real-Domain Closed-Writer Construction and
+Provenance Integration Design**, not more maintenance or a dormant release. Define
+fixed trusted construction, fixture-lane rejection, real serialized target/cache
+policy and subsequent proof before implementing real-domain receipts; keep grants,
+production wiring, activation and rollback disabled.
+
 This document is the implementation plan for the separate **Alynt Drime Backups Dashboard** WordPress plugin.
 
 This is now the canonical implementation plan for the dashboard repository. The earlier uploader-side copy remains historical context only and does not make the dashboard part of Alynt Drime Backups Uploader.

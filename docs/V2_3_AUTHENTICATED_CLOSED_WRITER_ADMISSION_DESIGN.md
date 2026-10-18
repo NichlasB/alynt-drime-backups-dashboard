@@ -1,5 +1,15 @@
 # V2.3 Authenticated Closed-Writer Admission and Provenance Integration Design
 
+Follow-up 2026-10-18: the approved integrated Plugin Tester proof passed 18 grouped
+checks using genuine core authentication and owned native SQL with the unchanged
+schema-7 **fixture lane**. Independent cleanup/preservation audits passed. See
+uploader `docs/V2_3_ADMISSION_ISOLATED_PROOF.md` and the current implementation-plan
+milestone for executed evidence and limits. Historical recommendations below are
+superseded by the next **local-only V2.3 Trusted Real-Domain Closed-Writer
+Construction and Provenance Integration Design** gate. No fixture receipt is
+promoted, no real-domain constructor is certified and no production wiring/grant/
+activation/rollback is enabled.
+
 Approved local-only/design-only on 2026-10-17. Inspected baselines: dashboard `4e19fa8cba588673f990b7d1c058ff3a29853b84`, uploader `162185ff41a878f5db19468b6e6d1036f033148b`. This refines the [successor/writer design](V2_3_AUTHENTICATED_CONSENT_SUCCESSOR_WRITER_DESIGN.md) after the uploader's isolated SQL/process proof. All names, fields, layouts and operations below are **candidate requirements**, not existing APIs, accepted wire contracts or deployed behavior.
 
 ## Approved Plan and Decision
