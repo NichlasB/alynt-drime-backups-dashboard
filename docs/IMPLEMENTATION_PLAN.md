@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Registration Admission Plan / One-Shot Handoff — 2026-10-19
+
+Approved R3 repository-only/dormant, in-memory tests only. Uploader owns
+`docs/V2_3_REGISTRATION_ADMISSION_PLAN_FOUNDATION.md`; excluded uploader
+`81fc2617d466b4c31db26021223f30727de1325d`, dashboard
+`e26d282b4d2929322348474f0138986da59aa575`. Immutable fully eligible candidate,
+all-ten exact tuple/proposal/context comparison and consumed private data lifetime
+implemented. New **9 / 346**, related **262 / 3300**, no skips; six restored
+assertion-killed controls, canonical focused Feature Light/final Security.
+
+Implementation-plan progress: admission-plan/handoff contracts now executable;
+not genuine auth/native origin, locking or durable receipt proof. Dashboard records
+only; existing source/production wiring, actual state/storage writes/public
+endpoints/grants/activation/effects/rollback remain untouched/disabled.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Closed Registration
+Native Admission and Owned Ledger Commit Proof**, dormant genuine guarded all-ten
+locks and one owned schema-2 ledger-fixture commit with failure/cleanup controls.
+Exact local target/fixture/write approval required; no application-state writes.
+
 ## V2.3 Closed Registration Native Admission / Locked Revalidation Design — 2026-10-19
 
 Approved R3 **repository-only/design-only**. The

@@ -36,6 +36,18 @@ synthetic history can authorize storage or scheduled scanning.
 
 ## Source map and proof limits
 
+### Approved candidate plan / data handoff implementation — 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_ADMISSION_PLAN_FOUNDATION.md` now owns the dormant
+immutable candidate/equality and consumed private DATA lifetime. New in-memory
+**9 / 346**, related **262 / 3300**, six restored assertion-killed controls.
+No actual auth/native handle/IO, genuine owner-origin or locking/commit proof;
+existing reader/constructor/guards and production loading unchanged. The pure
+factory is not the proposed native coordinator and its output cannot be imported
+into the handoff. Next gated slice is **Plugin Tester local-only V2.3 Closed
+Registration Native Admission and Owned Ledger Commit Proof**, requiring exact
+owned-fixture/write approval, not authorized by the in-memory-only implementation.
+
 All source paths in this document are uploader-relative; none are changed here.
 
 | Source | Existing fact / consequence |
