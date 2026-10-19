@@ -1,5 +1,24 @@
 # V2.3 Guarded Registration Receipt Observation and In-Flight Closure Design
 
+## Progress checkpoint — genuine owned origin/read construction, 2026-10-19
+
+Approved Plugin Tester local-only proof now recorded in uploader
+`docs/V2_3_REGISTRATION_OBSERVATION_AUTH_PROOF.md`; excluded uploader
+`48416bd7d9d206a95bdf6268b5c52c7f0b04f31d`, dashboard
+`188a87a63c7284667a3ef49540bfd672ed5feac7`. Genuine fixed private two-sweep capture
+feeds SAME-owner origin retention, then independently guarded fresh read construction
+with native physical auth-session pinning. **984 / 12 groups**, eight restored
+assertion-killed controls; all **77** application tables unchanged, all fixtures
+removed. API/DATA **34 / 974**, related **299 / 4343**; source-scoped Light/Bloat/
+final Security, not release readiness or a Database/physical barrier review claim.
+
+No native observation transaction/locks/receipt classification, ingress closure or
+production activation implemented. Current read construction consumes origin; the
+next gated slice is **local-only V2.3 Registration Observation Native Barrier and
+Private Handoff Design** to specify trusted non-exporting context/nonce/deadline
+handoff into the all-ten zero-DML observer. Design only, no new SQL/fixtures/writes
+or wiring. The later barrier and durable closure requirements below still govern.
+
 ## Progress checkpoint — own origin retention / guarded construction, 2026-10-19
 
 The approved repository-only dormant API foundation is implemented in uploader
