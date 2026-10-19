@@ -1,5 +1,24 @@
 # V2.3 Registration Observation Native Barrier and Private Handoff Design
 
+## Progress checkpoint — guarded private API integration, 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_OBSERVATION_GUARDED_HANDOFF_FOUNDATION.md` now owns
+the approved isolated-API same-owner handoff integration; excluded uploader
+`ba213031937078f226ed9d9e5b6efe6899d7fddb`, dashboard
+`6deb33ef615a7f0cac0afa7adaad19936bfd18d7`. Own guarded construction facts staged
+before origin cleanup, independent read guards renewed before claim/after finish,
+original clocks and consuming construction-only cleanup preserved. New
+**14 / 1701**, related **336 / 7087**, no skips; **10** assertion-killed/restored
+controls. Canonical source-scoped Light/Bloat/final Security only. All results
+remain candidate-only, no native/execution qualification or production wiring.
+
+Next gated slice: **Plugin Tester local-only V2.3 Guarded Observation Private
+Handoff Owned Authentication and Cleanup Proof**, exact owned users/ten-row
+fixtures/testing/cleanup, genuine core boundary/cleanup, no observer transaction,
+admission write or application-state change. This requires fresh site/fixture
+approval; neither genuine authentication nor the native barrier is established by
+API doubles. Lower checkpoints/design remain scoped historical records.
+
 ## Progress checkpoint — private handoff / candidate DATA, 2026-10-19
 
 Approved in-memory foundation now implemented in uploader

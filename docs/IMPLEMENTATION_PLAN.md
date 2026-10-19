@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Guarded Observation Private Handoff Integration — 2026-10-19
+
+Approved R3 repository-only/dormant, new isolated API tests only. Uploader owns
+`docs/V2_3_REGISTRATION_OBSERVATION_GUARDED_HANDOFF_FOUNDATION.md`; excluded uploader
+`ba213031937078f226ed9d9e5b6efe6899d7fddb`, dashboard
+`6deb33ef615a7f0cac0afa7adaad19936bfd18d7`. Own guarded read facts transferred
+before cleanup through a fixed private one-shot path; both nonce domains renewed
+before claim/after finish, original clocks and construction-only cleanup retained.
+New **14 / 1701**, observation **71 / 3718**, related **336 / 7087**, no skips;
+**10** assertion-killed/exactly restored controls, canonical source-scoped Light/
+Bloat/final Security. No genuine auth/physical/storage or whole-release proof.
+
+Implementation-plan progress: guarded API handoff now executable; next lane is
+owned runtime evidence, not generic cleanup. Dashboard records only, production
+wiring/native execution/grants/activation/rollback disabled. **Recommended next
+gated slice: Plugin Tester local-only V2.3 Guarded Observation Private Handoff
+Owned Authentication and Cleanup Proof**, confirmed exact local target/owned
+users/ten-row fixtures/testing/cleanup; preserve existing application state, no
+observer transaction/barrier/admission write. Separate site/fixture approval needed.
+
 ## V2.3 Registration Observation Private Handoff / Barrier Result Foundation — 2026-10-19
 
 Approved R3 repository-only/dormant, new tests in-memory only. Uploader owns
