@@ -253,3 +253,19 @@ Safety Foundation**, in-memory only, one-shot bounded retention/phase/loss/resul
 contracts with non-vacuous controls. No WordPress/auth/storage/native execution or
 wiring. New explicit approval required. Guarded composition, owned admission-write
 proof, durable closure and rollout remain later gates.
+
+## Guarded lifecycle owner owned-auth checkpoint — 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_LIFECYCLE_OWNER_AUTH_PROOF.md` records the separately
+approved exact-target Plugin Tester proof: genuine core4564/7, eight assertion-killed/
+SHA256-restored controls, all77 application checksums unchanged and owned fixtures
+removed. Fixed original actor/proposal identities/clock survive the six independent
+preparation guards then clear; no native transaction or production wiring enabled.
+This complements isolated API tests, not native capture/admission/release proof.
+
+The next gated design is **Fixed Native Admission Join and Lifecycle Outcome
+Integration**: map the existing standalone native transaction into the original
+fixed root before its cleanup, without constructing a second proposal or treating
+its boolean as no-write/uncertainty evidence. Preserve original-before-DML facts,
+release and one-shot loss/transfer semantics from this design. Design-only approval
+does not authorize storage writes, fixtures, native execution or production wiring.

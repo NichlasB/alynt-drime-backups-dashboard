@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Guarded Lifecycle Owner Owned Authentication / Cleanup — 2026-10-19
+
+Approved R3 Plugin Tester local-only, exact target and owned disposable users/
+storage/testing/cleanup confirmed. Uploader owns
+`docs/V2_3_REGISTRATION_LIFECYCLE_OWNER_AUTH_PROOF.md`; coherent review bases remain
+uploader1259bbd/dashboard1c26c58, covering fixed-owner foundation plus proof.
+Genuine core **4564 checks / 7 groups**, eight assertion-killed/SHA256-restored
+controls; all77 application table checksums unchanged, three owned tables removed
+every run. Transaction-free predecessors guard266/11/construction851/10 pass;
+related381/10690 no skips. Runtime source/production wiring/native transactions,
+grants/activation/effects/schedule rollback unchanged/disabled. No package/release.
+
+Implementation-plan progress: fixed retained-owner genuine auth/cleanup gap is
+closed for the owned local profile; next meaningful item is the gated native join.
+**Recommended next gated slice: local-only V2.3 Fixed Native Admission Join and
+Lifecycle Outcome Integration Design**, design-only. Preserve the exact original
+proposal/ten IDs before DML; define same-root sent/commit/uncertain/release facts
+without calling the standalone constructor twice or inferring no-write from false.
+No storage writes/native execution/fixtures/wiring in that design; fresh approval.
+
 ## V2.3 Fixed Admission-Origin Retention / Guarded Lifecycle Owner — 2026-10-19
 
 Approved R3 repository-only, isolated API tests only. Uploader owns
