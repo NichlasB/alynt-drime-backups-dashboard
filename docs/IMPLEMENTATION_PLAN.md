@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Uncertain Admission Origin / Observation Lifecycle Design — 2026-10-19
+
+Approved R3 repository-only **design-only**. Owning contract:
+[admission/observation lifecycle](V2_3_REGISTRATION_ADMISSION_OBSERVATION_LIFECYCLE_DESIGN.md).
+Excluded coherent baselines: uploader `ca20a8b639d18e966ec17eaecda99b672f014e05`,
+dashboard `f436bd83dc9d817331dd41f321549d04a984389f`. Single fixed private root,
+original provenance before DML, separate read issuance/nonce domains, one-shot
+consumption, uncertainty/loss semantics and bounded clocks specified. Existing
+standalone contracts/source/tests/versions unchanged; no WordPress, fixtures,
+database writes, production wiring, grants/activation or rollback.
+
+Implementation-plan progress: genuine admission-origin lifecycle gap advanced to
+a source-backed design; synthetic contention is not upgraded into recovery proof.
+**Recommended next gated slice: local-only V2.3 Admission-Origin Lifecycle DATA
+Safety Foundation**, in-memory only, bounded one-shot retention/phase/loss and
+non-authorizing results with non-vacuous controls. Separate explicit approval
+required; no genuine authentication/storage/native execution authorized.
+
 ## V2.3 Native Registration Observation Contention / Failure Proof — 2026-10-19
 
 Approved R3 Plugin Tester local-only, exact target and owned fixture writes,
