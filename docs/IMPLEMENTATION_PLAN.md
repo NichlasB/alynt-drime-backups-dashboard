@@ -9,8 +9,9 @@ machine: independent attempt/send/raw-ack/affected-row/readback/idle facts, posi
 client release and current acceptance. Known commit survives later close/auth
 failure without authorizing continuation; unknown BEGIN/rollback remain unsupported.
 Shared original/context/all-ten-ID/packet/clock validators reused unchanged.
-New15/1662, nine assertion-killed/SHA256-restored semantic controls; under-arity
-consumption regression fixed. Canonical source-scoped Light/Bloat/final Security.
+New15/1663, ten assertion-killed/SHA256-restored semantic controls; under-arity
+consumption and CI-discovered PHP7.4 constant placement fixed. Canonical
+source-scoped Light/Bloat/final Security rerun after the bounded compatibility fix.
 No WordPress/authentication/storage/native execution/production wiring/activation/
 rollback, package/release/deploy. Exact-head CI evidence lives in the toolkit record.
 
