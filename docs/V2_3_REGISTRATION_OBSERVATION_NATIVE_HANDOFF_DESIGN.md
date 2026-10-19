@@ -1,5 +1,21 @@
 # V2.3 Registration Observation Native Barrier and Private Handoff Design
 
+## Progress checkpoint — owned genuine handoff auth/cleanup, 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_OBSERVATION_HANDOFF_AUTH_PROOF.md` now owns the
+approved Plugin Tester local-only genuine-core candidate handoff proof: **2946/8**,
+ten assertion-killed/exactly restored controls, all **77** application tables
+unchanged and three owned fixture tables removed on every run. Current complete
+history is synthetic candidate DATA; native observer transactions remain disabled.
+No production wiring, admission writes, grants/activation/effects/rollback changed.
+
+Next gated slice: **Plugin Tester local-only V2.3 Fixed Native Registration
+Observation Barrier Foundation and Owned Zero-DML Proof**, fixed read-only all-ten
+transaction/locking/close and owned fixtures/cleanup per this design, preserving
+application state. Requires new explicit transaction-scope approval. No native
+barrier, physical-session, uncertain-admission or durable ingress-closure proof
+follows from genuine authentication alone. Lower checkpoints remain historical.
+
 ## Progress checkpoint — guarded private API integration, 2026-10-19
 
 Uploader `docs/V2_3_REGISTRATION_OBSERVATION_GUARDED_HANDOFF_FOUNDATION.md` now owns
