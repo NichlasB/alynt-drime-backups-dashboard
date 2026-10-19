@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Registration Native Admission / Locked Revalidation Design — 2026-10-19
+
+Approved R3 **repository-only/design-only**. The
+[owning design](V2_3_CLOSED_REGISTRATION_NATIVE_ADMISSION_DESIGN.md) covers excluded
+dashboard `a2621078d7181f4d576f2a01781a63e15758cf93`, uploader
+`ace53355aabc1c530e200a62f5cb61e3b08bdd9d`. Private same-stack one-shot handoff,
+separate issuance/command domains, complete locked tuple equality, ledger-only
+schema-2 successor/receipt, original budget/40-read ceiling and no-replay outcome
+rules defined. Core auth revocation is not serialized by options locks; capture
+or post-commit auth cannot be sold as current-at-COMMIT authority.
+
+Implementation-plan progress: next native admission contract specified, not
+implemented; no site/SQL/fixtures, runtime/tests/schema/version, storage writes,
+public endpoints/wiring/grants/activation/effects/rollback or release changes.
+**Recommended next gated slice: local-only V2.3 Closed Registration Admission Plan
+and One-Shot Handoff Safety Foundation**, dormant in-memory plan/equality/lifetime
+contracts and behavioral controls only; actual auth/native/storage/site operations
+and execution remain disabled. New trust-contract implementation needs approval.
+
 ## V2.3 Registration Native Reader / Guarded Construction — 2026-10-18
 
 Approved R3 Plugin Tester local-only with owned fixtures/cleanup. Uploader owns

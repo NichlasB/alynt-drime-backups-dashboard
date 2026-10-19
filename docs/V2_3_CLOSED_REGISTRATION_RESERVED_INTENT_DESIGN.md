@@ -39,6 +39,17 @@ no public effect selector or generic registration/write/resolve callback port.
 
 ## Source-backed boundaries
 
+### Approved native admission / locked revalidation design — 2026-10-19
+
+[Native admission design](V2_3_CLOSED_REGISTRATION_NATIVE_ADMISSION_DESIGN.md)
+now owns the next source-backed handoff/transaction proposal. It explicitly
+separates captured blueprint data from a private one-shot coordinator, pins both
+nonce domains/original budget and defines all-ten exact locked comparison before
+one ledger-only registration delta. It also limits auth/current-at-commit and ABA
+claims. Design only: no code, native transaction, site/fixture or write performed.
+Next gate is **local-only V2.3 Closed Registration Admission Plan and One-Shot
+Handoff Safety Foundation**, in-memory contracts only, not native write approval.
+
 ### Approved dormant native read-to-construction integration — 2026-10-18
 
 Uploader `docs/V2_3_REGISTRATION_NATIVE_READER_PROOF.md` owns genuine **700 / 11**
