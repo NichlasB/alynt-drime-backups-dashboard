@@ -31,6 +31,22 @@ the current owner still permits the first registration in that mode.
 
 ## Source-backed boundary
 
+### Approved origin/result DATA foundation — 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_OBSERVATION_FOUNDATION.md` owns the dormant pure
+origin/read-grammar/result and simulated one-shot lifetime implementation. New
+**15 / 285**, related **280 / 3654**, no skips; ten assertion-killed/exactly restored
+controls. Existing request/history/codecs/guards/native owners/production wiring
+unchanged. No actual authentication, UUID issuance, native handle/storage/site/
+fixture, closure migration/writes, grants/activation/execution/rollback operation.
+The origin remains synthetic DATA, not genuine provenance or a barrier certificate.
+
+The prospective protocol below remains normative for later genuine integration;
+this milestone does not implement its private origin retention seam or native
+observer. Next gated slice: **local-only V2.3 Observation Origin Retention and
+Guarded Request Construction Safety Foundation**, dormant isolated-API integration
+before separately approved genuine core/native owned-fixture proof.
+
 All paths in this table are uploader-relative and remain unchanged here.
 
 | Source | Existing fact / consequence for this design |
