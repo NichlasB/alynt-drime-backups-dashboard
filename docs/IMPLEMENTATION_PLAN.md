@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Native Admission Outcome Capture Foundation — 2026-10-19
+
+Approved R3 repository-only, isolated API tests only. Uploader owns
+`docs/V2_3_NATIVE_ADMISSION_OUTCOME_CAPTURE_FOUNDATION.md`; excluded coherent bases
+uploaderdc449c7/dashboard2a91447. Fixed attempt/send/raw-ack/readback/idle/cleanup
+observation sites are dormant and private. False/interrupted API returns stay
+unknown; reserve before prepare, require successful bind/final session and budget
+before DML. Positive COMMIT facts survive later cleanup poisoning without authority.
+Exact owned writer pinned; no cleanup query/close on substituted or borrowed handles.
+One cleanup, sealed capture, outer erase; current acceptance remains unknown.
+Shared session and retained lifecycle/auth owner unchanged; production loading off.
+New local11/230 plus542 worker checks/8 groups; twelve assertion-killed/SHA256-
+restored controls; related407/12583 no skips. Canonical source-scoped Light/Bloat/
+final Security. No actual auth/storage/native/site/production execution or wiring,
+package/release/deploy. Full exact-head CI evidence lives in the toolkit entry.
+
+Implementation-plan progress: source observation and ownership seams advanced;
+genuine native/auth/session behavior is still gated, not proved by API doubles.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Native
+Admission Outcome Capture Owned Failure and Cleanup Proof**, exact confirmed local
+target and owned disposable users/storage/testing/cleanup only, preserving existing
+state. Fresh approval required for actual authentication/native storage execution;
+production wiring/grants/activation/diagnostics/schedule rollback remain disabled.
+
 ## V2.3 Admission Outcome / Release DATA Safety Foundation — 2026-10-19
 
 Approved R3 repository-only, in-memory tests only. Uploader owns

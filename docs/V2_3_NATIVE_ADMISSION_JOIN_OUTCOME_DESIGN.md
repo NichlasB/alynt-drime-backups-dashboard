@@ -1,5 +1,12 @@
 # V2.3 Fixed Native Admission Join and Lifecycle Outcome Integration Design
 
+Native capture successor (2026-10-19): uploader
+`docs/V2_3_NATIVE_ADMISSION_OUTCOME_CAPTURE_FOUNDATION.md` implements dormant fixed
+observation/cleanup seams with isolated API doubles only. Actual authentication,
+storage/native execution and production wiring remain disabled. The next gate is
+the implementation plan's **Plugin Tester owned failure/cleanup proof**; original-
+root provenance and native admission-to-observation joining remain unestablished.
+
 Implementation successor (2026-10-19): approved repository-only
 **Admission Outcome and Release DATA Safety Foundation**, owned by uploader
 `docs/V2_3_ADMISSION_OUTCOME_RELEASE_DATA_FOUNDATION.md`. Separate synthetic
