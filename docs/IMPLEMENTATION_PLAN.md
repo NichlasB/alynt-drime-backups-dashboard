@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Observation Origin Retention / Guarded Construction — 2026-10-19
+
+Approved R3 repository-only/dormant, isolated API tests only. Uploader owns
+`docs/V2_3_REGISTRATION_OBSERVATION_CONSTRUCTION_FOUNDATION.md`; excluded uploader
+`fd1d99be0dd35211c38aade64a6c4797f94d904d`, dashboard
+`ee4931230ab7090e05a0613314d7949a5da01ecc`. Own origin retention, separate fresh
+read issuance/full nonce guards, one-shot lookup and private cleanup implemented.
+New **16 / 618**, related **296 / 4272**, no skips, eight exactly restored
+assertion-killed controls. Canonical source-scoped Light/final Security; no genuine
+WordPress/native/storage proof or whole-plugin readiness refresh.
+
+Implementation-plan progress: own-origin/read construction now executable at API
+layer, not native observation/closure/activation. Dashboard records only; actual
+application state/existing source/production wiring/grants/activation/effects/
+rollback untouched. **Recommended next gated slice: Plugin Tester local-only V2.3
+Observation Origin Retention and Guarded Construction Owned Authentication Proof**,
+exact owned users/ten-row fixture creation/testing/cleanup, genuine core private
+capture/auth/nonce/autoload proof; no admission writes/native observer transaction.
+Separate exact target/fixture approval required, not generic maintenance work.
+
 ## V2.3 Registration Observation Origin / Result Foundation — 2026-10-19
 
 Approved R3 repository-only/dormant, in-memory new tests only. Uploader owns

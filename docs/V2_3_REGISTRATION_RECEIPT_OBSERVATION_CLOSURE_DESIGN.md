@@ -1,5 +1,25 @@
 # V2.3 Guarded Registration Receipt Observation and In-Flight Closure Design
 
+## Progress checkpoint — own origin retention / guarded construction, 2026-10-19
+
+The approved repository-only dormant API foundation is implemented in uploader
+`docs/V2_3_REGISTRATION_OBSERVATION_CONSTRUCTION_FOUNDATION.md`, against excluded
+uploader `fd1d99be0dd35211c38aade64a6c4797f94d904d` and dashboard
+`ee4931230ab7090e05a0613314d7949a5da01ecc`. It retains its own guarded construction's
+minimal origin (never imports caller origin), then independently guards fresh read
+issuance/full receipt nonce and one lookup ID. No native attempt is invoked or
+certified; private blueprints never claim barrier/closure/retry authority.
+
+New isolated API **16 / 618**, related **296 / 4272**, no skips; eight restored
+assertion-killed controls, canonical source-scoped Light/final Security. Actual
+WordPress users/nonce/session/bulk-autoload/capture and physical storage remain
+unproved by these tests. Existing native owners/production wiring unchanged.
+Next gated slice: **Plugin Tester local-only V2.3 Observation Origin Retention and
+Guarded Construction Owned Authentication Proof**, exact owned users/ten-row
+fixtures/testing/cleanup, no admission writes or native observer transaction.
+The design below still governs later native barrier and durable ingress closure;
+neither is implemented or authorized by this checkpoint.
+
 Approved 2026-10-19, R3 **repository-only/design-only**. Dashboard owns this
 contract; companion uploader would implement it. Excluded review bases: dashboard
 `7165b9df616ee2ee33f64ace5b90bc79797b86f6`, uploader
