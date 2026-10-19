@@ -1,5 +1,24 @@
 # V2.3 Registration Observation Native Barrier and Private Handoff Design
 
+## Progress checkpoint — private handoff / candidate DATA, 2026-10-19
+
+Approved in-memory foundation now implemented in uploader
+`docs/V2_3_REGISTRATION_OBSERVATION_HANDOFF_FOUNDATION.md`; excluded uploader
+`d6318fa547f77754976a0fe813b9d251a28d1576`, dashboard
+`91c51c41bfac0a1739a5081525ca062d5e655826`. Bounded one-shot private DATA handoff
+and complete pending-aware current-frame candidate classification: **23 / 1045**
+new, related **322 / 5388**, no skips; **11** assertion-killed/exactly restored
+controls. Canonical source-scoped Light/Bloat/final Security, not native/physical
+proof or whole-plugin release readiness. Existing source/wiring unchanged.
+
+No genuine constructor-to-handoff integration or native barrier implemented.
+Next gated slice: **local-only V2.3 Guarded Observation Private Handoff Integration
+Safety Foundation**, isolated API tests only, own original facts transferred
+before cleanup without weakening the existing construction-only path. No actual
+WordPress/native/storage operations or qualification, grants/activation/rollback.
+The original design below still governs later genuine/native proof boundaries;
+its original next-gate section is historical, not a claim that integration exists.
+
 Approved 2026-10-19, R3 **repository-only/design-only**. Dashboard owns this
 contract; uploader owns the dormant construction and future observer. Excluded
 review baselines are uploader `e6b24f18a4b9060ce0362abf7e93a50e227d17b8` and
