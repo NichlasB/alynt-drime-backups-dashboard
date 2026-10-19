@@ -36,6 +36,26 @@ synthetic history can authorize storage or scheduled scanning.
 
 ## Source map and proof limits
 
+### Approved owned native admission implementation/proof — 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_NATIVE_ADMISSION_PROOF.md` now owns the separate
+dormant private native coordinator and explicitly selected Plugin Tester proof.
+Exact local target/owned fixture creation/testing/cleanup and ledger-only native
+writes approved. Genuine **2766 / 14**, eight assertion-killed/restored controls;
+native checkpoint **740 / 13**, reader **700 / 11**, guard **266 / 11**, closed-BEGIN
+**169 / 12** rerun green. Every run preserved **77** application checksums and
+removed all three owned fixture tables. Source-scoped canonical reviews/QA/limits
+recorded there; no production caller/public surface or effects enabled.
+
+The prospective wording below preserves the original design baseline, not a claim
+that this completed isolated milestone is still unimplemented. Actual schema-2
+closed registration CAS/readback/acknowledged commit is proved; unknown protocol
+simulations are not real lost-wire/crash proof. Auth revocation, ABA and production
+participant limits below still apply. Next gated slice is **local-only V2.3 Guarded
+Registration Receipt Observation and In-Flight Closure Design**, repository/design
+only, before implementing the missing guarded observer/delayed-work contract.
+Application state, wiring, grants/activation/execution/rollback stay untouched.
+
 ### Approved candidate plan / data handoff implementation — 2026-10-19
 
 Uploader `docs/V2_3_REGISTRATION_ADMISSION_PLAN_FOUNDATION.md` now owns the dormant

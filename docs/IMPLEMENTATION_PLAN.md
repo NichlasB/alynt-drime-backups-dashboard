@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Native Closed Registration Admission / Owned Ledger Proof — 2026-10-19
+
+Approved R3 Plugin Tester local-only with exact owned fixture/cleanup scope and
+native admission writes confined to owned ledger. Uploader owns
+`docs/V2_3_REGISTRATION_NATIVE_ADMISSION_PROOF.md`; excluded uploader
+`1470a4024de1bce257f9610c313b708861dbea17`, dashboard
+`f571596bcd4b363008c82dd3a7b358d5a7bd5326`. Private genuine capture/construction,
+independent issuance/command guards, all-ten locks/exact comparison, one ledger
+CAS/readback/acknowledged closed receipt implemented. Genuine **2766 / 14**, eight
+assertion-killed/restored controls, all **77** application checksums unchanged,
+every fixture removed; related local **265 / 3369**, no skips. Owner records
+source-scoped Light/Bloat/05/07/07A/final Security and limits, not release readiness.
+
+Implementation-plan progress: actual native closed registration admission proved;
+dashboard records only. No public endpoints/application state/production wiring/
+grants/activation/effects/rollback/release changes. **Recommended next gated slice:
+local-only V2.3 Guarded Registration Receipt Observation and In-Flight Closure
+Design**, repository/design-only trusted read purpose/all-ten barrier, historical
+presence versus not-observed and delayed-work rules. Approval required; no safe
+retry/quiescence, auth-valid-at-COMMIT or lost-wire/crash guarantee inferred.
+
 ## V2.3 Closed Registration Admission Plan / One-Shot Handoff — 2026-10-19
 
 Approved R3 repository-only/dormant, in-memory tests only. Uploader owns
