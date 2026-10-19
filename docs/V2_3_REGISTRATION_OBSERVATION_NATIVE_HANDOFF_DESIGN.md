@@ -1,5 +1,22 @@
 # V2.3 Registration Observation Native Barrier and Private Handoff Design
 
+## Progress checkpoint — owned contention/failure proof, 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_OBSERVATION_CONTENTION_PROOF.md` records approved
+Plugin Tester local-only **611/9**, five assertion-killed/exactly restored controls,
+all77 application checksums preserved and three owned tables removed. Actual
+participating-writer commit/rollback, row-lock timeout, owned observer disconnect,
+post-barrier commit, unread native ack primitives, real deadline and peer EOF
+cleanup now have permanent proof. No production runtime/wiring changes.
+
+Next gated slice: **local-only V2.3 Uncertain Admission Origin Retention and
+Observation Lifecycle Integration Design**, same-owner provenance retained before
+real admission/uncertain outcomes, loss/expiry/consumption and bounded proof plan.
+Design-only, no SQL/storage writes/fixtures/endpoints/wiring/grants/activation/
+rollback; new explicit approval required. Current synthetic history is not genuine
+uncertain admission recovery; actual packet loss/server crash, durable closure,
+safe retry and production readiness remain unproved. Lower checkpoints are history.
+
 ## Progress checkpoint — fixed native observer / owned proof, 2026-10-19
 
 Uploader `docs/V2_3_REGISTRATION_OBSERVATION_NATIVE_BARRIER_PROOF.md` records the

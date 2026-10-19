@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Native Registration Observation Contention / Failure Proof — 2026-10-19
+
+Approved R3 Plugin Tester local-only, exact target and owned fixture writes,
+bounded failures and cleanup confirmed. Uploader owns
+`docs/V2_3_REGISTRATION_OBSERVATION_CONTENTION_PROOF.md`; excluded uploader
+`ff02e7380e9e2bf310f2eafc9af4b02eae33279d`, dashboard
+`6a48e7dda2b5504d65c43a9a3f23873e1a7219ba`. Genuine/physical **611 checks / 9 groups**:
+participating-writer delayed commit/rollback, actual row timeout, owned observer
+disconnect, commit after captured absence, unreaped native acknowledgements,
+real original deadline and peer EOF cleanup. Five assertion-killed/byte-exactly
+restored controls; all77 application checksums unchanged, three fixtures removed.
+Related346/7210 no skips; predecessor barrier4247/9 and core guard266/11 pass.
+All production runtime/wiring, grants/activation/effects/schedule rollback unchanged.
+
+Implementation-plan progress: approved native contention/failure gap advanced;
+next meaningful lane is gated admission-origin lifecycle design, not maintenance.
+**Recommended next gated slice: local-only V2.3 Uncertain Admission Origin Retention
+and Observation Lifecycle Integration Design**, exact same-owner provenance before
+real admission/uncertain outcomes and loss/expiry/consumption rules. Design-only,
+no SQL/storage writes/fixtures/endpoints/wiring, new explicit approval required.
+Synthetic writer history, unread-ack primitives and owned disconnect do not prove
+real uncertain-admission recovery, lost COMMIT wire acknowledgement, server crash,
+durable ingress closure, safe retry or production readiness. Absence remains
+point-in-time even when a writer commits before the private result returns.
+
 ## V2.3 Fixed Native Registration Observation Barrier — 2026-10-19
 
 Approved R3 Plugin Tester local-only, exact target/read-only locking transaction
