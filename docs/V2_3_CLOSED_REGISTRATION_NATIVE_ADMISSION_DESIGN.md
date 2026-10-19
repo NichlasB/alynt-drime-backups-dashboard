@@ -36,6 +36,19 @@ synthetic history can authorize storage or scheduled scanning.
 
 ## Source map and proof limits
 
+### Approved observation and closure successor design — 2026-10-19
+
+The repository-only
+[receipt observation/in-flight closure design](V2_3_REGISTRATION_RECEIPT_OBSERVATION_CLOSURE_DESIGN.md)
+now specifies retained trusted origin, fresh independent read issuance/full nonce,
+all-ten zero-DML barrier, non-vacuous pending-history lookup and exact result limits.
+Missing receipt/expiry cannot close delayed work. A future explicitly versioned
+durable registration-ingress fence is a separate write/participant gate, not the
+existing schema-2 closed flag, global authority closure or quiescence proof.
+No source/site/storage/fixture or production wiring/activation/rollback changes.
+Next gated slice: **local-only V2.3 Registration Observation Origin and Result
+Safety Foundation**, dormant repository-only in-memory DATA/lifetime contracts.
+
 ### Approved owned native admission implementation/proof — 2026-10-19
 
 Uploader `docs/V2_3_REGISTRATION_NATIVE_ADMISSION_PROOF.md` now owns the separate

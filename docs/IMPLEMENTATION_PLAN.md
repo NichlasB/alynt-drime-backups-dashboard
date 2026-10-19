@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Registration Receipt Observation / In-Flight Closure Design — 2026-10-19
+
+Approved R3 **repository-only/design-only**. The
+[owning design](V2_3_REGISTRATION_RECEIPT_OBSERVATION_CLOSURE_DESIGN.md) covers
+excluded dashboard `7165b9df616ee2ee33f64ace5b90bc79797b86f6`, uploader
+`df89d677db990fc909f2e53bf4d67876afb31060`. Private retained origin, independent
+fresh read issuance/full nonce, all-ten zero-DML barrier and exact historical versus
+not-observed results defined. Observation accepts valid retained pending history,
+not registration's empty-slot predicate. Durable versioned ingress closure is a
+separate mutation; schema-2 closed=true, absence and expiry do not close delayed work.
+
+Implementation-plan progress: observation/origin/closure boundary now specified,
+not implemented or physically proved. No source/tests/site/SQL/fixtures/runtime/
+schema/version, production wiring/grants/activation/effects/rollback/release changes.
+**Recommended next gated slice: local-only V2.3 Registration Observation Origin
+and Result Safety Foundation**, dormant in-memory origin/read-intent/result/lifetime
+contracts and non-vacuous tests; no actual auth/native/storage or closure writes.
+New trust-data contract implementation requires approval, not generic cleanup.
+
 ## V2.3 Native Closed Registration Admission / Owned Ledger Proof — 2026-10-19
 
 Approved R3 Plugin Tester local-only with exact owned fixture/cleanup scope and
