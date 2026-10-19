@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Admission-Origin Retention / Guarded Lifecycle Owner — 2026-10-19
+
+Approved R3 repository-only, isolated API tests only. Uploader owns
+`docs/V2_3_REGISTRATION_LIFECYCLE_OWNER_FOUNDATION.md`; excluded uploader
+`1259bbdec189992fcd625524ac8ae11a2bad9807`, dashboard
+`1c26c5892615a738d053e1a27079eee0c5fc106c`. Fixed same-stack single construction,
+original actor/context/all-ten IDs retained before final issuance/command guards,
+unrenewed real clock and unconditional cleanup. Stateless packet extraction has
+exact unchanged method bodies. New13/1072; related381/10690, no skips; eight
+assertion-killed/exactly restored controls. Canonical source-scoped Light/Bloat/
+final Security; no native execution or production wiring/authority enabled.
+
+Implementation-plan progress: guarded fixed-owner preparation is executable;
+genuine authentication/cleanup remains unproved by isolated API doubles.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Admission-Origin
+Retention and Guarded Lifecycle Owner Owned Authentication and Cleanup Proof**,
+confirmed exact target/owned disposable users/storage/testing/cleanup only,
+preserve application state. Native admission/observer transactions, production
+wiring/grants/activation/rollback remain disabled. New site/fixture approval needed.
+
 ## V2.3 Admission-Origin Lifecycle DATA Safety Foundation — 2026-10-19
 
 Approved R3 repository-only, in-memory tests only. Uploader owns
