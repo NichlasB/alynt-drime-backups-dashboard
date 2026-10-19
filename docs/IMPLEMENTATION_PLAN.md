@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Admission-Origin Lifecycle DATA Safety Foundation — 2026-10-19
+
+Approved R3 repository-only, in-memory tests only. Uploader owns
+`docs/V2_3_REGISTRATION_ADMISSION_LIFECYCLE_FOUNDATION.md`; excluded coherent
+baselines uploader `ed6791fdd6eab49fb01c5e389dbc7d2033c49cd3`, dashboard
+`05fac9ef375ae8d5c8c10ddd9affbf8c31cc9fd4`. Original proposal/all-ten IDs before
+modeled DML, uncertainty-versus-boolean, one-shot transfer/loss and separate root/
+phase clocks implemented as non-authorizing DATA. New22/2408; related368/9618,
+no skips; eight assertion-killed/SHA256-restored controls. Canonical source-scoped
+Light/Bloat/final Security only, not a whole-plugin or physical proof refresh.
+
+Implementation-plan progress: lifecycle DATA now executable; actual same-owner
+admission-origin provenance/auth/storage release are still unproved/unwired.
+**Recommended next gated slice: local-only V2.3 Fixed Admission-Origin Retention
+and Guarded Lifecycle Owner Safety Foundation**, dormant fixed-owner guarded
+composition with isolated API tests only. Explicit approval required for genuine
+request/authorization integration source; no actual storage/native execution,
+production wiring/grants/activation/rollback. No release/package/deploy authorized.
+
 ## V2.3 Uncertain Admission Origin / Observation Lifecycle Design — 2026-10-19
 
 Approved R3 repository-only **design-only**. Owning contract:

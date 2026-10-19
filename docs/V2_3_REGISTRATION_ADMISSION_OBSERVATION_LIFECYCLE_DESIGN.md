@@ -1,5 +1,19 @@
 # V2.3 Uncertain Admission Origin Retention and Observation Lifecycle Design
 
+## Successor DATA checkpoint — 2026-10-19
+
+The separately approved in-memory foundation is owned by uploader
+`docs/V2_3_REGISTRATION_ADMISSION_LIFECYCLE_FOUNDATION.md`: bounded one-shot origin/
+IDs, modeled sent/ack ordering, uncertainty/loss and original clocks,22/2408 new
+tests and eight assertion-killed/exactly restored controls. This advances only the
+DATA gate described below; it does not establish genuine origin/auth/native
+release or enable storage/wiring/activation/rollback. The original design and
+historical validation below remain unchanged. Current next approval is the fixed
+admission-origin retention and guarded lifecycle owner safety foundation, isolated
+API tests only; owned native execution/proof is a later separate gate.
+
+## Original design checkpoint
+
 2026-10-19. Approved R3 **repository-only, design-only** checkpoint. Storage
 writes, WordPress/user/database operations, fixtures, production wiring, grants,
 activation, dispatch and schedule rollback remain disabled/unchanged. This design
