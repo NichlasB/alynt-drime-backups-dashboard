@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Registration Observation Native Barrier / Private Handoff Design — 2026-10-19
+
+Approved R3 repository-only/design-only. The
+[owning design](V2_3_REGISTRATION_OBSERVATION_NATIVE_HANDOFF_DESIGN.md) covers
+excluded uploader `e6b24f18a4b9060ce0362abf7e93a50e227d17b8`, dashboard
+`d964231688d1deecc8c0132c81df0f78b935433c`. Specifies same-owner consumed handoff
+before origin cleanup, independent small/full nonce guards and original deadline,
+fixed all-ten zero-DML native barrier, pending-aware full-frame validation and
+private qualified results. Neither old pre-write frame equality nor absence as
+closure is valid. No source/tests/site operations or runtime behavior changed.
+
+Implementation-plan progress: observation's next ownership/barrier contract is
+designed, not implemented; the safe design lane reaches a new implementation
+gate. **Recommended next gated slice: local-only V2.3 Registration Observation
+Private Handoff and Barrier Result Safety Foundation**, in-memory DATA contracts
+and non-vacuous candidate tests only; no native certification, actual WordPress/
+storage operations, wiring, grants, activation or rollback. Separate explicit
+implementation approval required; genuine native/owned proof follows later.
+
 ## V2.3 Observation Origin / Guarded Construction Owned Authentication — 2026-10-19
 
 Approved R3 Plugin Tester local-only with exact owned fixture/cleanup confirmation.

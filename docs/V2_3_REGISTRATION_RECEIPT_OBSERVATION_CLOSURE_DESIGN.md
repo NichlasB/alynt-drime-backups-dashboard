@@ -1,5 +1,23 @@
 # V2.3 Guarded Registration Receipt Observation and In-Flight Closure Design
 
+## Progress checkpoint — native barrier / private handoff design, 2026-10-19
+
+The approved repository-only [native handoff design](V2_3_REGISTRATION_OBSERVATION_NATIVE_HANDOFF_DESIGN.md)
+now resolves the consuming construction-to-observer gap against excluded uploader
+`e6b24f18a4b9060ce0362abf7e93a50e227d17b8` and dashboard
+`d964231688d1deecc8c0132c81df0f78b935433c`. It specifies a fixed private same-owner
+handoff before cleanup, independent read nonce domains/original clocks, all-ten
+zero-DML native barrier, pending-aware current-frame validation and owner-only
+result qualification. Existing construction-only cleanup must remain unchanged;
+valid historical registration need not equal its old pre-write frame. Absence at
+the barrier is not closure, quiescence or retry authority.
+
+Design only: no observer source, SQL/fixtures/site access, wiring or activation.
+Next gated slice: **local-only V2.3 Registration Observation Private Handoff and
+Barrier Result Safety Foundation**, bounded in-memory DATA contracts and semantic
+tests only; genuine WordPress/native proof separately gated. The lower historical
+checkpoints remain evidence of their respective scopes, not this native proof.
+
 ## Progress checkpoint — genuine owned origin/read construction, 2026-10-19
 
 Approved Plugin Tester local-only proof now recorded in uploader
