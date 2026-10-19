@@ -1,5 +1,16 @@
 # V2.3 Uncertain Admission Origin Retention and Observation Lifecycle Design
 
+## Concrete native join/outcome refinement — 2026-10-19
+
+The approved design-only [fixed native join/outcome contract](V2_3_NATIVE_ADMISSION_JOIN_OUTCOME_DESIGN.md)
+maps original-before-DML retention into narrow native helper reuse, separate send/
+ack/idle/historical/cleanup/current-auth facts and conservative diagnostic admission.
+It preserves this parent's one-root/read policy and historical records; it does not
+enable transactions or claim real uncertain-admission provenance. Current next gate
+is in-memory-only Admission Outcome and Release DATA Safety Foundation, not another
+constructor or a resumed preparation boolean. All implementation/proof gates below
+remain scoped to their original checkpoints, not blanket permission to execute.
+
 ## Successor DATA checkpoint — 2026-10-19
 
 The separately approved in-memory foundation is owned by uploader

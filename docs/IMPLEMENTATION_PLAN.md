@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Native Admission Join / Lifecycle Outcome Design — 2026-10-19
+
+Approved R3 repository-only, design-only. Owner:
+[native join/outcome design](V2_3_NATIVE_ADMISSION_JOIN_OUTCOME_DESIGN.md), source
+baselines uploader e2d7a3e/dashboard5d4f288. One root captures/constructs/retains
+original IDs before native DML; narrow private reuse, no nested consuming wrappers.
+Separate attempt/send/ack/idle facts, historical outcome, client close and current
+auth; cleanup cannot convert a commit to no-write or turn close into quiescence.
+Unknown BEGIN/rollback remain unsupported; diagnostics need positive release and
+all current guards. Original writer10/read10/root20 limits are not renewed.
+Source/tests/versions/production wiring unchanged; no WordPress/SQL/fixtures/native
+execution, package/release/deploy. Existing proof remains a separate evidence layer.
+
+Implementation-plan progress: concrete native join/outcome gap advanced to an
+implementation-ready design; next meaningful lane is gated DATA implementation.
+**Recommended next gated slice: local-only V2.3 Admission Outcome and Release DATA
+Safety Foundation**, in-memory only, separate send/ack/release facts and conservative
+refusal matrix with non-vacuous controls. No auth/storage/native/wiring/grants/
+activation/rollback; fresh approval required. No maintenance-only diversion.
+
 ## V2.3 Guarded Lifecycle Owner Owned Authentication / Cleanup — 2026-10-19
 
 Approved R3 Plugin Tester local-only, exact target and owned disposable users/
