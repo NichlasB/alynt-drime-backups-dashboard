@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Native Registration Observation Barrier — 2026-10-19
+
+Approved R3 Plugin Tester local-only, exact target/read-only locking transaction
+and owned fixture cleanup confirmed. Uploader owns
+`docs/V2_3_REGISTRATION_OBSERVATION_NATIVE_BARRIER_PROOF.md`. Genuine proof
+**4247 checks / 9 groups**, eleven assertion-killed/exactly restored controls:
+one ten-row locking sweep, genuine auth/nonces/physical pinning, zero-DML status,
+acknowledged close, missing-row owned rollback, complete pending-aware validation.
+Separate NOWAIT primitive proves all ten locks held/released, not writer recovery.
+All77 application table checksums unchanged, three owned tables removed every run.
+
+Implementation-plan progress: fixed native observation barrier implemented and
+owned-proven; no production wiring/grants/activation/effects/rollback enabled.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Native Registration
+Observation Contention and Failure Proof**, bounded participating-writer/late-commit/
+timeout/owned-session failure tests on disposable fixtures, deterministic control,
+cleanup and state reconciliation. New explicit approval required. No uncertain
+admission recovery, durable closure, retry safety or production readiness claimed.
+
 ## V2.3 Guarded Handoff Owned Authentication / Cleanup — 2026-10-19
 
 Approved R3 Plugin Tester local-only, exact target and owned users/storage/cleanup

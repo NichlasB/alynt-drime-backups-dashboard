@@ -1,5 +1,23 @@
 # V2.3 Registration Observation Native Barrier and Private Handoff Design
 
+## Progress checkpoint — fixed native observer / owned proof, 2026-10-19
+
+Uploader `docs/V2_3_REGISTRATION_OBSERVATION_NATIVE_BARRIER_PROOF.md` records the
+approved implementation and Plugin Tester local-only evidence: **4247/9**, eleven
+assertion-killed/exactly restored controls, all77 application checksums unchanged,
+three owned tables removed every run. Fixed ten-row locking sweep, independent
+genuine guards/physical identity, zero-DML status, acknowledged close and pending-
+aware results now exist privately. Separate NOWAIT primitive proves actual locks;
+synthetic history is not an uncertain-admission recovery origin. Production wiring,
+grants/activation/effects/rollback remain disabled. Lower design/progress statements
+that say unimplemented are historical, not the current barrier implementation state.
+
+Next gated slice: **Plugin Tester local-only V2.3 Native Registration Observation
+Contention and Failure Proof**, bounded disposable participating-writer, delayed-
+commit/timeout/owned-session failure scope with deterministic coordination and
+cleanup. Requires new explicit approval. No global quiescence, durable closure,
+safe retry, lost-wire/crash or production-readiness conclusion follows yet.
+
 ## Progress checkpoint — owned genuine handoff auth/cleanup, 2026-10-19
 
 Uploader `docs/V2_3_REGISTRATION_OBSERVATION_HANDOFF_AUTH_PROOF.md` now owns the
