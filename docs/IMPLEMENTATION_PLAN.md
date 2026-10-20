@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Native-Profile / Control Transcript Foundation — 2026-10-20
+
+Approved R3 repository-only/synthetic fixtures only. Uploader owns
+`docs/V2_3_SOCKET_FREE_NATIVE_PROFILE_CONTROL_FOUNDATION.md`: strict bounded
+candidate handshake, passive exact-COMMIT/OK observation with synthetic accounting,
+three distinct role lifetimes, canonical one-shot control messages and two virtual
+clock domains/original-window/fragmented-BIND ACK guards. Seven test-only MJS files,
+111 scoped/full226 Node tests; six red-to-green helper defects fixed and one weak
+negative strengthened using six assertion-killed/exact-hash-restored controls.
+Old decoder/relay/runtime/wiring unchanged. Excluded bases uploadera78bc9c and
+dashboard8e2053f include the coherent governing design/source, not a docs tail.
+Canonical source-scoped Light/Bloat/07 then07A/final Security; no whole-plugin,
+Database, real authentication/IPC/native transaction/delivery or release proof.
+
+Implementation-plan progress: executable pure witness/control contract complete;
+the next meaningful step crosses the owned-process experiment approval gate.
+**Recommended next gated slice: local-only V2.3 Windows Owned-Process Stdio
+Feasibility and Cleanup Proof**, owned child pipes/process cleanup only, no
+WordPress/database/networking/native sessions/suppression. Keep production wiring,
+grants, activation/effects/rollback disabled; no packaging/release/deployment.
+
 ## V2.3 Native-Profile Witness / Private Control-Channel Design — 2026-10-20
 
 Approved R3 repository-only/design-only. Owning record:

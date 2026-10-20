@@ -1,5 +1,13 @@
 # V2.3 Native-Profile Witness Selection and Private Control-Channel Integration Design
 
+Successor2026-10-20: approved synthetic-only foundation implemented in uploader
+`docs/V2_3_SOCKET_FREE_NATIVE_PROFILE_CONTROL_FOUNDATION.md`; old decoder, native
+relay and production wiring unchanged.111 scoped/full226 Node tests, source-scoped
+canonical reviews and related isolated checks; exact-head CI evidence in toolkit.
+Next approval is **Windows Owned-Process Stdio Feasibility and Cleanup Proof**,
+no WordPress/database/network/native sessions/suppression. The historical design
+and native proof limits below remain unchanged; no IPC/native compatibility inferred.
+
 2026-10-20. Approved R3 **repository-only, design-only**. Dashboard owns this design
 and plan/parent pointers. Uploader is read-only at
 `a78bc9c7e460f78d17dafb44e1608b8c074ca562`; dashboard starts
