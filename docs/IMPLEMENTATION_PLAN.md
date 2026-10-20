@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Retained-Origin Native Outcome Qualification/Lifecycle Closure Design — 2026-10-20
+
+Approved R3 repository-only/design-only. Owning design:
+`docs/V2_3_RETAINED_ORIGIN_OUTCOME_QUALIFICATION_DESIGN.md`. Source context is the
+whole original join foundation/proof, excluded uploader4e597a6/dashboard9d967cc;
+task starts uploader6fb3119/dashboarda7aa0cb/toolkitd94c6f2. Uploader remains read-only.
+Sealed native history cannot accept later auth events: specify an independent
+private once-only postrelease qualification record, exact raw/ack/owner consistency
+and reuse of existing pure origin/outcome validators. Known commit history survives
+late rejection; uncertain diagnostics remain explicitly vetoed. Local lifecycle
+closure means consumed/erased memory, never durable closure/server quiescence/retry.
+Keep original<10-second clock, all ten IDs, nine/ten nonce order and full writer pin
+through final callbacks; erase handles before callbacks and remaining DATA after.
+No source/native/auth/storage/site/users/fixtures/production wiring or release work.
+Canonical source-scoped Light/final Security; no changed PHP/JS/CSS, no UI/UX or
+formal Database/DS3 completion. Regression/CI evidence belongs in toolkit entry,
+not historical whole-plugin readiness. Existing tests do not execute this design.
+
+Implementation-plan progress: the sealed-history/current-qualification composition
+and closed-first policy are specified; the next meaningful item is gated DATA
+implementation, not maintenance or observer activation.
+**Recommended next gated slice: local-only V2.3 Sealed Native Outcome Normalization
+and Closed Qualification DATA Safety Foundation**, in-memory tests only. Require
+fresh approval; keep actual authentication, storage, native execution, production
+wiring, grants, observation, activation and rollback disabled.
+
 ## V2.3 Single-Root Native Admission Join Owned Proof — 2026-10-20
 
 Approved R3 Plugin Tester local-only, exact target and owned disposable users/

@@ -1,5 +1,15 @@
 # V2.3 Fixed Native Admission Join and Lifecycle Outcome Integration Design
 
+Qualification/closure design successor2026-10-20:
+`V2_3_RETAINED_ORIGIN_OUTCOME_QUALIFICATION_DESIGN.md` resolves the sealed capture/
+later auth gap with separate private qualification, exact conservative raw-ack
+normalization and a closed-only first lane. Clarifies that owned native handles
+erase before final callbacks, while private writer-pin/nonce material remains
+until final continuity checks, then erases. This is design-only, no runtime fix or
+expanded authority; uncertain diagnostics/read transfer remain disabled. The next
+gate is the implementation plan's in-memory **Sealed Native Outcome Normalization
+and Closed Qualification DATA Safety Foundation**; no native or site execution.
+
 Owned single-root proof successor2026-10-20: uploader
 `docs/V2_3_SINGLE_ROOT_NATIVE_ADMISSION_JOIN_OWNED_PROOF.md` records actual
 `admit_retained()` original/all-ten-ID native receipt continuity and refusal/cleanup,
