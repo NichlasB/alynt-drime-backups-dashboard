@@ -225,3 +225,23 @@ and Source-Identity Safety Foundation**, isolated API tests only. Implement the
 fixed proof composition/manifest, passive wrapper/projection and semantic controls,
 without actual authentication, WordPress bootstrap, storage, networking/IPC/native
 experiments or production wiring. No new production qualifier, schema or endpoint.
+
+## Approved foundation successor — 2026-10-20
+
+Uploader owns `docs/V2_3_QUALIFICATION_OBSERVATION_SOURCE_IDENTITY_FOUNDATION.md`:
+fixed final composition, complete production/proof/projection source pins, private
+passive alias observation, sticky replay/reentry invalidation and exact result/throw
+transparency. New37/607 isolated tests include actual committed/uncertain qualifier
+returns over synthetic state; six counterfactual receipt oracle checks and67 missing
+method/14 descriptor controls are not actual-source mutation or native evidence.
+Early malformed root zero-entry/IO refusal is separate from positive private-alias
+tests; no full authenticated/native request on the new class has run. Original source,
+guards/clock/cleanup/erasure/wiring unchanged. Source-scoped canonical review and
+validation/publication evidence in owner/toolkit, not whole-plugin readiness.
+
+The next gate is **local-only V2.3 Fixed Qualification Observation Worker and Private
+Transcript Safety Foundation**, isolated API/synthetic-message tests only: fixed
+manifest-before-entry, private extraction/clear and separate bounded strict domain.
+No actual authentication/storage/IPC/networking/native experiment or production
+activation is authorized by that foundation. Genuine proof still needs its own
+explicit Plugin Tester target/owned-scope approval; historical170/2 is not refreshed.
