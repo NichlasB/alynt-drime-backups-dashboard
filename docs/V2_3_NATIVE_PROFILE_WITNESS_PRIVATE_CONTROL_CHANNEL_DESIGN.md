@@ -1,5 +1,15 @@
 # V2.3 Native-Profile Witness Selection and Private Control-Channel Integration Design
 
+Successor design2026-10-20:
+[Post-COMMIT validation drain/finalization](V2_3_POST_COMMIT_VALIDATION_DRAIN_DESIGN.md)
+explicitly supersedes only the no-extra-writer-traffic-after-selected-OK completion
+rule below. The real unchanged owner requires post-ack session/policy SELECTs;
+the first native integration attempt therefore failed overall and remains blocked.
+The new design specifies a bounded fixed two-query drain, exact frame-credit and
+terminal cleanup reconciliation, not relaxed selection or arbitrary traffic.
+No helper/native experiment/storage/wiring/suppression changes in that design;
+historical proof limits below remain historical, not reverified or enlarged.
+
 Successor physical step2026-10-20: uploader
 `docs/V2_3_WINDOWS_OWNED_STDIO_PROOF.md` proves standalone Windows owned stdio
 141 checks/15 groups with complete owned cleanup, no WordPress/database/networking/

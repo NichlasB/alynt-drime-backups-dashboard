@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Post-COMMIT Validation Drain / Observation Finalization Design — 2026-10-20
+
+Approved local-only/design-only; owning record:
+[Post-COMMIT design](V2_3_POST_COMMIT_VALIDATION_DRAIN_DESIGN.md).
+The previous Plugin Tester observation attempt failed overall despite genuine
+positive admission/root binding/selected COMMIT-OK egress and safe cleanup: the
+unchanged owner requires post-ack session/policy SELECTs, which the narrow witness
+rejects. That proof remains blocked and its uploader draft uncommitted/unpublished.
+No native experiment is rerun or historical partial evidence enlarged here.
+
+Design fixes the contract gap with a separate exact two-query/one-row-each drain,
+strict candidate packet/count/byte grammar and normal QUIT, preserving immutable
+selected-frame facts, per-frame egress credits, original clock/role/nonce guards,
+observer-failure isolation and FINAL-versus-cleanup reconciliation. No runtime,
+SQL/storage/wiring/suppression implementation; source-scoped Light/final Security
+only, not parser/Database/whole-plugin release-readiness proof.
+
+Implementation-plan progress: bounded postamble design specified; native observation
+still requires a tested foundation and separately approved fresh local proof.
+**Recommended next gated slice: local-only V2.3 Socket-Free Post-COMMIT Validation
+Drain and Observation Finalization Safety Foundation**, synthetic bytes/virtual
+clocks only, actual IPC/network/auth/storage/native execution/suppression/wiring disabled.
+
 ## V2.3 Windows Owned-Process Stdio Feasibility / Cleanup Proof — 2026-10-20
 
 Approved R3 owned child pipes/processes only; uploader owns
