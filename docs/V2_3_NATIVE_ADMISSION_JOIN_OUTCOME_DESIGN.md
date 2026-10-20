@@ -1,5 +1,12 @@
 # V2.3 Fixed Native Admission Join and Lifecycle Outcome Integration Design
 
+Owned capture proof successor2026-10-20: uploader
+`docs/V2_3_NATIVE_ADMISSION_OUTCOME_CAPTURE_OWNED_PROOF.md` records genuine owned
+native/authentication/failure/cleanup2028/9 and separate primitive limits. This does
+not establish original retained-root provenance or join admission to observation.
+The next gate is the plan's isolated-API **Single-Root Retained-Origin Native
+Admission Join Safety Foundation**; production wiring remains disabled.
+
 Native capture successor (2026-10-19): uploader
 `docs/V2_3_NATIVE_ADMISSION_OUTCOME_CAPTURE_FOUNDATION.md` implements dormant fixed
 observation/cleanup seams with isolated API doubles only. Actual authentication,
