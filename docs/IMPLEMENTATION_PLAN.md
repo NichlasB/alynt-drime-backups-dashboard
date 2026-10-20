@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Commit Witness Decoder Foundation — 2026-10-20
+
+Approved R3 repository-only/synthetic bytes only. Uploader owns
+`docs/V2_3_SOCKET_FREE_COMMIT_WITNESS_DECODER_FOUNDATION.md`: two test-only MJS
+helpers, two tests and one invented-byte fixture. Selected bounded handshake/
+exact-COMMIT/OK grammar, opaque one-shot identity/writer binding and virtual-clock
+guards; all native/auth/forwarding/delivery/storage/retry/execution claims false.
+No transparent relay or intermediate native traffic support inferred. Initial80
+tests, two red/green helper hardening regressions, final87 targeted/full Node90;
+eight assertion-killed/exact-SHA256-restored controls. Scoped 07 then07A and
+Feature Light/Bloat/final Security; no whole-plugin readiness or native proof.
+Excluded bases uploaderae8c0f4/dashboard89108c9 cover coherent design/source,
+not a docs tail. Runtime PHP, dependencies, CI configuration and wiring unchanged;
+no network, application storage, native/site/WordPress operation, grant, observer,
+activation/effect/rollback/package/release/tag/deploy. Existing watcher temp-file
+tests remain separate from the new in-memory decoder tests.
+
+Implementation-plan progress: concrete synthetic decoder milestone implemented;
+the next meaningful step crosses the owned native fixture/listener approval gate.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Owned Relay Supervisor
+and No-Fault Pass-Through Proof**, fresh exact target/owned users-storage/listener/
+socket cleanup scope. Prove positive unchanged native identity and byte-exact
+pass-through first; no response suppression/lost-ack experiment or production wiring.
+
 ## V2.3 Owned Native Uncertainty Witness Feasibility Design — 2026-10-20
 
 Approved R3 repository-only/design-only. Owning design:
