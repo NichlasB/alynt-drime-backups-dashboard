@@ -1,5 +1,13 @@
 # V2.3 Native-Profile Witness Selection and Private Control-Channel Integration Design
 
+Successor physical step2026-10-20: uploader
+`docs/V2_3_WINDOWS_OWNED_STDIO_PROOF.md` proves standalone Windows owned stdio
+141 checks/15 groups with complete owned cleanup, no WordPress/database/networking/
+native SQL. Bounded one-byte PHP reads avoid the observed seven-byte tail stall.
+This is C:/php PHP8.5.1, not a bundled-runtime/native-root integration claim.
+Next gate: separately confirmed Plugin Tester observation-only native witness/
+private stdio integration, bundled-runtime pipe preflight first; no suppression.
+
 Successor2026-10-20: approved synthetic-only foundation implemented in uploader
 `docs/V2_3_SOCKET_FREE_NATIVE_PROFILE_CONTROL_FOUNDATION.md`; old decoder, native
 relay and production wiring unchanged.111 scoped/full226 Node tests, source-scoped

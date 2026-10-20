@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Windows Owned-Process Stdio Feasibility / Cleanup Proof — 2026-10-20
+
+Approved R3 owned child pipes/processes only; uploader owns
+`docs/V2_3_WINDOWS_OWNED_STDIO_PROOF.md`. Standalone Windows26200/Node24.12.0/
+`C:/php/php.exe` PHP8.5.1, no ini/WordPress/database/network/native SQL session.
+141 checks/15 actual process groups: positive fragmented/flush/EOF exchanges,
+concurrent stderr drain, malformed/overflow/partial/exit, blocked input/output,
+watchdog/late ACK and final-with-trailing-input refusal. Every owned child exited/
+closed/pipes destroyed; pending input callback settled. Found/fixed blocking7-byte
+fread tail assumption with bounded one-byte reads. Eleven pure regressions/full237
+Node, six assertion-killed/exact-hash-restored controls; CI physical cases remain
+explicit Windows opt-in, not inferred from Linux tests. Runtime/old relay/wiring
+unchanged; source-scoped canonical reviews, not whole-plugin/Database readiness.
+Explicit excluded bases uploaderd59f4ae/dashboard26dcd0f cover complete new feature.
+
+Implementation-plan progress: standalone pipe feasibility complete, not genuine
+native-profile/root/nonce integration or transport-loss proof. **Recommended next
+gated slice: Plugin Tester local-only V2.3 Observation-Only Native Witness and
+Private Stdio Integration / Owned Cleanup Proof**, fresh exact target/owned scope;
+preflight its resolved bundled PHP pipes before any WordPress/database fixture.
+Keep suppression/production wiring/grants/activation/effects/rollback disabled.
+
 ## V2.3 Socket-Free Native-Profile / Control Transcript Foundation — 2026-10-20
 
 Approved R3 repository-only/synthetic fixtures only. Uploader owns
