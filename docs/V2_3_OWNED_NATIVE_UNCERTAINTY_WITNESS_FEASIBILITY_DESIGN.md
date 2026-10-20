@@ -1,5 +1,13 @@
 # V2.3 Owned Native Uncertainty Witness Feasibility Design
 
+Later design successor2026-10-20:
+[Selected COMMIT response-loss / uncertainty witness](V2_3_SELECTED_COMMIT_RESPONSE_LOSS_WITNESS_DESIGN.md)
+builds on the separately completed passive native proof. It selects exact real-OK
+discard plus only owned-writer pair close, not a timed open quarantine; defines
+dual>=6s eligibility, exact zero-write/conservation and bounded unresolved cleanup
+gates. No suppression/native experiment is implemented or authorized by that design.
+Next gate is the socket-free loss eligibility/accounting foundation, synthetic only.
+
 Design successor2026-10-20:
 [native-profile selection and private control channel](V2_3_NATIVE_PROFILE_WITNESS_PRIVATE_CONTROL_CHANNEL_DESIGN.md)
 defines observation-only native-profile candidates, original-root pre-BEGIN pair

@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Selected COMMIT Response-Loss / Uncertainty Witness Design — 2026-10-20
+
+Approved local-only/design-only; owning record:
+[response-loss witness design](V2_3_SELECTED_COMMIT_RESPONSE_LOSS_WITNESS_DESIGN.md).
+Selects a future one-shot exact server-OK discard plus close of only the bound
+writer pair, not timed withholding or a relaxed passive-success predicate. Original
+root/guards/policy,>=6s eligibility at request and complete response, exact frame
+credits/zero target write attempts, permanent no-replay after cut, separate v2
+private transcript and independent audit/cleanup conjuncts specified. No runtime,
+native experiment/storage write/suppression/wiring implementation. Existing native
+supervisors are not loss-ready; bounded unresolved handoff is an acceptance gate.
+
+Server acknowledgement, withheld reply, client refusal, stored proposal and cleanup
+stay distinct; no real private qualification/uncertainty DATA, durability, retry or
+current authority claim. Historical242/2/141/15/266/11/77-table proof is not rerun.
+Explicit coherent excluded bases uploaderf11ba9c/dashboardd222004; uploader665ec48
+read-only, versions unchanged. Source-scoped Light/final Security only; no formal
+DS3/Database/UI/UX/whole-plugin readiness refresh or new native evidence.
+
+Implementation-plan progress: the next uncertainty experiment now has a concrete
+falsifiable design and bounded prerequisite, not a generic maintenance queue.
+**Recommended next gated slice: local-only V2.3 Socket-Free Selected Response-Loss
+Eligibility and Accounting Safety Foundation**, synthetic bytes/messages/virtual
+clocks only; keep networking/IPC/WordPress/native execution/storage writes/actual
+suppression/production wiring/grants/activation/rollback disabled.
+
 ## V2.3 Native Observation / Private Stdio Hardening Proof — 2026-10-20
 
 Approved R3 exact-confirmed Plugin Tester local-only owned fixtures/listeners/process
