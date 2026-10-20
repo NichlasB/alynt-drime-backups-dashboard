@@ -1,5 +1,33 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Selected COMMIT Response-Loss / Owned Cleanup Proof — 2026-10-20
+
+Approved exact-confirmed Plugin Tester local-only owned fixtures/listeners/processes
+and one freshly authorized loss attempt after harness correction. Uploader owns
+`docs/V2_3_SELECTED_RESPONSE_LOSS_OWNED_PROOF.md`: initial failed attempt preserved,
+actual cleanup-contract regression and redacted diagnostics corrected, no production
+change. Fresh preflight141/15, genuine guards266/11, bounded owned process-tree and
+unresolved-listener10/2 prerequisites pass before no-fault242/2 and selected170/2.
+Exactly11 framed response bytes withheld/zero target writes; three pairs/six conserved
+streams, original request/proposal/guard/erasure assertions complete. Independent
+cleanup: sessions absent, ten locks available, three tables absent, all77 application
+checksums unchanged; separate mysql confirms zero fixtures/zero owned processes.
+Private qualification remains unproven; no durability/retry/authority claim.
+
+Source-scoped canonical Light/Bloat/03/04/07/06/07A/final Feature Security, local
+26 targeted/full472 Node and related isolated PHP174/10181 pass. Source-only
+snapshots/hashes and proof/review limits in owner; exact-head CI in toolkit. Excluded
+coherent bases uploader174a6a97/dashboard776a4f19, not a docs-only tail. Versions
+unchanged; no package/release/deploy or runtime/dashboard contract change.
+
+Implementation-plan progress: actual response-loss/client-refusal/proposal/cleanup
+proof advances the uncertainty lane; next work is a new private-provenance decision.
+**Recommended next gated slice: local-only V2.3 Real Uncertain-COMMIT Qualification
+Provenance and Observation Design**, design-only. Specify genuine private-result
+evidence without exposing handles, importing external relay receipts or weakening
+guard/erasure policy. Keep storage writes/native experiments/production wiring,
+grants/activation/rollback disabled.
+
 ## V2.3 Socket-Free Selected Response-Loss Eligibility / Accounting Foundation — 2026-10-20
 
 Approved repository-only synthetic bytes/messages/virtual clocks. Uploader owns

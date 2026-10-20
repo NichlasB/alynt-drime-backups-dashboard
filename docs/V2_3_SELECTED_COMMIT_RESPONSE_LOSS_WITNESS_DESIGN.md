@@ -1,5 +1,14 @@
 # V2.3 Selected COMMIT Response-Loss and Uncertainty Witness Design
 
+Native successor: uploader `docs/V2_3_SELECTED_RESPONSE_LOSS_OWNED_PROOF.md`
+records the separately approved Plugin Tester owned proof: no-fault242/2 then one
+fresh selected170/2 after a corrected harness-only cleanup-phase expectation;
+exact11 withheld framed bytes/zero target writes, original proposal/guards/erasure
+and independent77-table preservation/fixture cleanup verified. The first failed
+attempt remains historical. External witness is complete, not private qualification
+DATA, durability or retry authority. Next gate is design-only Real Uncertain-COMMIT
+Qualification Provenance and Observation; no production wiring or deployment.
+
 Successor: approved socket-free eligibility/accounting foundation implemented in
 uploader `docs/V2_3_SOCKET_FREE_SELECTED_RESPONSE_LOSS_FOUNDATION.md`, synthetic
 bytes/messages/virtual clocks only (115 scoped/full446 Node tests, eight in-memory
