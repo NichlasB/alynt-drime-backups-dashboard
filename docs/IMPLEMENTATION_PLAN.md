@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Selected Response-Loss Eligibility / Accounting Foundation — 2026-10-20
+
+Approved repository-only synthetic bytes/messages/virtual clocks. Uploader owns
+`docs/V2_3_SOCKET_FREE_SELECTED_RESPONSE_LOSS_FOUNDATION.md`: separate pure witness,
+v2 transcript and closed candidate receipt; exact request/response private credits,
+original6s eligibility, callback-race refusal, irreversible simulated11-byte cut,
+zero target write attempts, six-stream conservation, bounded queue/frame/clock and
+independent final/cleanup conjunction. Old passive/v1 helpers and production source
+unchanged. Scoped115/full446 Node pass, eight actual-source in-memory assertion-killed
+controls; related isolated PHP173/10171 (not native proof). Canonical source-scoped
+Light/Bloat/03/07/06/07A/final Security; exact-head publication evidence in toolkit.
+No WordPress/native/auth/storage/IPC/response-loss/Database/whole-plugin claim.
+Versions unchanged; no release or deploy. Source-only snapshot201235/13180 and
+SHA256 in owning record; no site/database backup. Explicit excluded coherent bases
+uploader665ec48/dashboard776a4f19 cover this foundation plus governing design.
+
+Implementation-plan progress: selected-response-loss eligibility/accounting has a
+tested socket-free foundation; the next meaningful item is the gated native proof.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Selected COMMIT
+Response-Loss and Owned Cleanup Proof**, fresh exact-target/owned-scope confirmation.
+First prove bounded unresolved worker/pump/pipe handoff, no-fault transparency and
+failure isolation before any one-response discard/owned writer-pair close. Preserve
+application state/production wiring; grants/activation/rollback remain disabled.
+
 ## V2.3 Selected COMMIT Response-Loss / Uncertainty Witness Design — 2026-10-20
 
 Approved local-only/design-only; owning record:

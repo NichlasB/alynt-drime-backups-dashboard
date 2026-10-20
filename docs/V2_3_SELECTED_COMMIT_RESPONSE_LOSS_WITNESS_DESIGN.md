@@ -1,5 +1,12 @@
 # V2.3 Selected COMMIT Response-Loss and Uncertainty Witness Design
 
+Successor: approved socket-free eligibility/accounting foundation implemented in
+uploader `docs/V2_3_SOCKET_FREE_SELECTED_RESPONSE_LOSS_FOUNDATION.md`, synthetic
+bytes/messages/virtual clocks only (115 scoped/full446 Node tests, eight in-memory
+assertion-killed controls). Separate v2 grammar/model, not a native loss experiment
+or private qualification proof. Next native gate includes bounded unresolved-worker/
+pump/pipe handoff before any selected response cut; no production wiring change.
+
 2026-10-20. Approved R3 **repository-only, design-only**. No native experiment,
 WordPress bootstrap/authentication/SQL, storage write, fixture/user/table, listener,
 socket/stdio/process-failure run, suppression, production wiring, grants, activation,
