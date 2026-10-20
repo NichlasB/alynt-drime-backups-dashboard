@@ -1,5 +1,12 @@
 # V2.3 Uncertain Native Outcome Provenance and Guarded Failure Qualification Design
 
+Feasibility successor2026-10-20:
+[Owned Native Uncertainty Witness Feasibility Design](V2_3_OWNED_NATIVE_UNCERTAINTY_WITNESS_FEASIBILITY_DESIGN.md)
+selects a conditional test-only exact-writer/real-COMMIT-OK withholding candidate,
+not an implemented relay or lost-wire proof. Server identity need not equal listener
+port, but the existing supervisor is not relay-ready. Next gate is a socket-free
+test-only decoder foundation, not a native experiment or runtime authority change.
+
 Owned-proof successor2026-10-20: uploader
 `docs/V2_3_NATIVE_FAILURE_CLOSED_QUALIFICATION_OWNED_PROOF.md` records actual
 Plugin Tester joined5756/27, native outcome2028/9, genuine guard266/11 and77

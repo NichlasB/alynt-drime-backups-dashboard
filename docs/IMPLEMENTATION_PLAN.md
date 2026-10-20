@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Owned Native Uncertainty Witness Feasibility Design — 2026-10-20
+
+Approved R3 repository-only/design-only. Owning design:
+`docs/V2_3_OWNED_NATIVE_UNCERTAINTY_WITNESS_FEASIBILITY_DESIGN.md`. Uploader remains
+read-only; coherent excluded bases95360a8/54889b5 cover failure design/source/proof
+and this successor. Conditional path: test-only bounded loopback byte relay,
+original server identity/handshake preserved, exact owned writer bound by genuine
+thread plus socket lifetime, real COMMIT OK observed but zero response bytes
+delivered to the client. Current worker is not relay-ready; no endpoint/profile
+checks weakened. Independent witness/audit never enters private runtime results or
+grants. No real lost-ack/quiescence/retry proof from source research or transcripts.
+First concrete gate is a socket-free test-only decoder, then separately approved
+relay/supervisor/native proof with exact target/fixture/listener cleanup scope.
+Canonical source-scoped Light/final Security; no changed PHP/JS/CSS, UI, storage,
+authentication, WordPress/LocalWP operations, native experiments, wiring, grants,
+observer execution, activation/effects/rollback/package/release/tag/deploy.
+
+Implementation-plan progress: uncertainty-witness feasibility and falsifiable
+acceptance gates are specified; safe-local work reaches the next test-only milestone.
+**Recommended next gated slice: local-only V2.3 Socket-Free Commit Witness Decoder
+Safety Foundation**, synthetic byte fixtures only, actual network/auth/storage/
+native execution and production wiring disabled. No additional runtime DATA layer.
+
 ## V2.3 Fixed Native Failure/Closed Qualification Owned Proof — 2026-10-20
 
 Approved R3 exact Plugin Tester local-only target and owned disposable users/
