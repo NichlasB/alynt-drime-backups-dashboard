@@ -1,5 +1,14 @@
 # V2.3 Owned Native Uncertainty Witness Feasibility Design
 
+Native no-fault successor2026-10-20: uploader
+`docs/V2_3_OWNED_RELAY_NO_FAULT_PROOF.md`, exact-confirmed owned Plugin Tester
+scope225/2, three real role/pair identities, six complete/equal byte streams,
+listener/session/fixture cleanup and77 unchanged application checksums. Actual
+native negotiation differs from the synthetic witness profile; neither decoder
+compatibility nor selected COMMIT/OK/lost-ack/zero-delivery proof follows. Next gate:
+local-only V2.3 Native-Profile Witness Selection and Private Control-Channel
+Integration Design, design-only; suppression and production wiring remain disabled.
+
 Source-foundation successor2026-10-20: uploader
 `docs/V2_3_SOCKET_FREE_COMMIT_WITNESS_DECODER_FOUNDATION.md` records selected
 synthetic transcript grammar, two constructor hardening fixes,87 targeted/full

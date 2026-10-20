@@ -1,5 +1,32 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Owned Relay Supervisor / No-Fault Proof — 2026-10-20
+
+Approved R3 exact-confirmed Plugin Tester local-only owned fixtures/listener/
+socket cleanup. Uploader owns `docs/V2_3_OWNED_RELAY_NO_FAULT_PROOF.md`. Complete
+feature excluded bases uploader47f7e68/dashboard4f0750d; runtime PHP, existing direct
+worker and socket-free decoder unchanged. Separate bounded loopback relay and
+full-core worker prove225 checks/2 groups, real positive admission, three exact
+native session lifetimes, six complete/equal streams and256878 bytes; listener/
+socket/server-session cleanup precedes owned-only DROP. All77 application checksums
+unchanged. Direct guard266/11 and join5756/27 pass. Pure Node25/full115 and six
+assertion-killed/exact-hash-restored controls. Canonical source-scoped Light/Bloat/
+07 then07A/final Security, not whole-plugin or Database Review.
+
+Native server greeting/extended capabilities, mysqlnd LOCAL_FILES advertisement
+and wpdb database-later negotiation differ from the selected synthetic witness
+grammar. Transparent relay supports the observed no-fault profile without changing
+that decoder or runtime guards; this does not prove selected COMMIT/OK or lost ack.
+No response suppression/arming/production wiring/grants/observer execution/
+activation/effects/rollback/package/release/tag/deploy.
+
+Implementation-plan progress: genuine no-fault owned transport/cleanup milestone
+completed; next meaningful work requires a new witness-integration design gate.
+**Recommended next gated slice: local-only V2.3 Native-Profile Witness Selection
+and Private Control-Channel Integration Design**, design-only, because native
+negotiation and pre-BEGIN pair binding are not yet integrated into a COMMIT witness.
+Keep storage writes/native experiments/production wiring/response suppression disabled.
+
 ## V2.3 Socket-Free Commit Witness Decoder Foundation — 2026-10-20
 
 Approved R3 repository-only/synthetic bytes only. Uploader owns
