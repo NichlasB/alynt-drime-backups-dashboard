@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Post-COMMIT Drain / Finalization Foundation — 2026-10-20
+
+Approved synthetic bytes/virtual clocks only; uploader owns
+`docs/V2_3_SOCKET_FREE_POST_COMMIT_DRAIN_FOUNDATION.md`. Three new pure helpers,
+two tests and independent fixture: exact two-query candidate drain/row/EOF/QUIT,
+explicit full-profile successor, original root/role clocks, partial-frame budgets,
+exact per-frame forwarding credits and provisional-final/cleanup conjunction.
+69 targeted/full306 Node tests pass, eight assertion-killed/byte-restored controls;
+one reentrant-sink refusal propagation defect fixed with actual red/green evidence.
+Source-scoped Light/Bloat/07/06/07A/final Security, no native/Database/whole-plugin
+claim. Old strict helper/tests and production source unchanged; earlier native draft
+preserved byte-for-byte and unpublished, no new native experiment/IPC/storage/wiring.
+Explicit excluded feature bases uploaderf11ba9c/dashboard378cc98.
+
+Implementation-plan progress: bounded model foundation complete; genuine integration
+still needs passive-adapter hardening and separately approved fresh owned proof.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Observation-Only
+Native Witness/Private Stdio Integration Hardening and Owned Cleanup Proof**,
+fresh exact target/owned fixtures/listeners/process confirmation; keep suppression,
+production wiring, activation and rollback disabled.
+
 ## V2.3 Post-COMMIT Validation Drain / Observation Finalization Design — 2026-10-20
 
 Approved local-only/design-only; owning record:

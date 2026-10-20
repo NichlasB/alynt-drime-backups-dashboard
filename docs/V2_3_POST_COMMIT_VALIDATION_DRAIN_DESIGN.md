@@ -1,5 +1,12 @@
 # V2.3 Post-COMMIT Session-Validation Drain and Observation Finalization Design
 
+Successor foundation2026-10-20: uploader
+`docs/V2_3_SOCKET_FREE_POST_COMMIT_DRAIN_FOUNDATION.md` implements the bounded pure
+model/virtual-clock tests,69 targeted/full306 Node and eight restored semantic
+controls. No actual IPC/native/storage/suppression/wiring change or repeat proof;
+the blocked native draft stays preserved/unpublished. Next gate is passive native
+adapter hardening plus a freshly approved exact Plugin Tester owned cleanup proof.
+
 2026-10-20. Approved **local-only, design-only** successor. Documentation only;
 no native/pipe experiment, WordPress bootstrap/authentication/SQL, fixture, storage
 write, listener, process-failure test, suppression, production wiring, grant,
