@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Qualification Observation Worker / Private Transcript Foundation — 2026-10-20
+
+Approved isolated-only successor; uploader owns
+`docs/V2_3_QUALIFICATION_WORKER_PRIVATE_TRANSCRIPT_FOUNDATION.md`. Source-gated
+fixed owner, private consumed extraction/receipt clearing and separate strict
+4096-byte synthetic transcript. Original slots inspected, never cleared to force
+success; actual result copied, never reclassified. Original three source pins and
+production wiring unchanged. Private request entry remains unconditionally closed.
+
+New31/7884, related125/12735 isolated tests pass: four actual qualifier outcomes
+over privileged synthetic post-root fixtures, missing/retained/forged evidence,
+causal no-root entry, every truncation, bounded canonical framing and replay.
+Root invocation/erasure, authentication/native/IPC proof flags remain false; no
+physical cleanup/storage/transaction claim. Canonical source-scoped Light/Bloat/
+03/07/06/07A/final Security outcomes, explicit coherent bases and snapshots in owner;
+full QA/exact-head CI in toolkit. Dashboard plan/design records only, no affected
+runtime contract. No WordPress/site/storage/native/IPC experiment or release/deploy.
+
+Implementation-plan progress: fixed isolated extraction/transcript protection
+advances the observation-proof milestone; executable native request remains gated.
+**Recommended next gated slice: local-only V2.3 Fixed Qualification Worker
+Request-Entry and Private Stdio Integration Design**, design-only. Specify genuine
+root/guards/original clocks, private handoff, independent cleanup/audit and a
+distinct native-proof domain. Keep actual authentication/storage/native/IPC and
+production wiring disabled; do not promote synthetic proof flags to native claims.
+
 ## V2.3 Test-Only Qualification Observation / Source Identity Foundation — 2026-10-20
 
 Approved verification repair: uploader's PHP7.4/PHP8 ampersand token identities

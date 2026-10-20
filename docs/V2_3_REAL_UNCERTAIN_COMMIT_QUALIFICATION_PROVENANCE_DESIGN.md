@@ -251,3 +251,35 @@ manifest-before-entry, private extraction/clear and separate bounded strict doma
 No actual authentication/storage/IPC/networking/native experiment or production
 activation is authorized by that foundation. Genuine proof still needs its own
 explicit Plugin Tester target/owned-scope approval; historical170/2 is not refreshed.
+
+## Approved fixed worker/private transcript foundation — 2026-10-20
+
+Uploader owner: `docs/V2_3_QUALIFICATION_WORKER_PRIVATE_TRANSCRIPT_FOUNDATION.md`.
+Complete source gate now covers fixed worker and transcript in addition to the
+unchanged production/composition/projection pins. Fixed final owner construction;
+private extraction consumes and erases observer receipt before validation, checks
+original slots without clearing them to manufacture evidence, then discards refs.
+Private request entry unconditionally refuses without invoking the original root.
+
+Separate `alynt.qualification-observation.isolated.v1` exact one-frame grammar,
+4096 bytes/depth8, distinct64-hex attempt/root/pair labels, version/sequence1 and
+fixed pins. Actual9-field receipt/13-field result copied; no external classification
+input or authority. All root invocation/erasure/authentication/native/IPC proof
+flags remain false. Parser acceptance is structural, not trusted source provenance,
+OS EOF/exit, real clocks, guard counts or physical cleanup proof.
+
+New31/7884 and related125/12735 isolated tests pass, including committed/uncertain
+actual qualifier results on synthetic post-root state, missing/retained/forged
+evidence, causal no-root entry and all truncations. Privileged fixture Reflection
+and manual final-state mirroring are explicit limits, not genuine request proof.
+Canonical scoped Light/Bloat/03/07/06/07A/final Security and full QA/publication
+evidence in owner/toolkit. No dashboard runtime/contract change or new native run.
+
+Implementation-plan progress: isolated extraction and separate transcript are
+protected; real uncertain-request observation remains unproven.
+**Recommended next gated slice: local-only V2.3 Fixed Qualification Worker
+Request-Entry and Private Stdio Integration Design**, design-only. Define genuine
+fixed entry/guards/original clocks, private handoff and independent cleanup/audit
+conjuncts under a distinct native-proof domain; keep actual authentication,
+WordPress/storage/native/IPC experiments and production wiring disabled. Do not
+flip isolated false flags to native proof or relax existing strict v1/v2 grammars.
