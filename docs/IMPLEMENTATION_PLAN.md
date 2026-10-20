@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Native Failure Boundary/Closed Qualification Foundation — 2026-10-20
+
+Approved R3 repository-only/isolated API tests only. Uploader owns
+`docs/V2_3_FIXED_NATIVE_FAILURE_CLOSED_QUALIFICATION_FOUNDATION.md`. Coherent
+excluded bases uploader95360a8/dashboard54889b5 cover this source foundation and
+its approved design, not a verification tail. Only shared-root runtime change is
+the narrow transaction-call catch: a throw joins the existing normal false branch,
+cleanup and once-only closed qualification. No exception-derived classification,
+new failure current guards or catch/finally fallback. Capture/SQL/session/DATA and
+production wiring unchanged. New43/1032, related173/10171 no skips; eleven meaningful
+assertion-killed/exact-hash-restored controls. Root and native bodies are composed
+over extension-free API doubles; not actual auth/native/unknown-wire proof.
+Canonical source-scoped Light/Bloat/final Security; no formal Database/whole-plugin
+readiness refresh. No WordPress/LocalWP/storage/native/site/users/physical fixtures,
+grants/observation/activation/rollback/package/release/tag/deploy.
+
+Implementation-plan progress: closed exception-path source composition now has
+non-vacuous isolated evidence; next meaningful work is the gated owned proof.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Native Failure
+Boundary and Closed Qualification Owned Failure and Cleanup Proof**, exact target
+and owned disposable users/storage/testing/cleanup confirmation required. Preserve
+existing application state/wiring; no transport disruption/service restart/process
+termination inferred, and grants/observation/activation/rollback remain disabled.
+
 ## V2.3 Uncertain Native Outcome/Guarded Failure Qualification Design — 2026-10-20
 
 Approved R3 repository-only/design-only. Owning design:
