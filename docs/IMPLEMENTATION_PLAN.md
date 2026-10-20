@@ -1,5 +1,32 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Uncertain Native Outcome/Guarded Failure Qualification Design — 2026-10-20
+
+Approved R3 repository-only/design-only. Owning design:
+`docs/V2_3_UNCERTAIN_NATIVE_OUTCOME_FAILURE_QUALIFICATION_DESIGN.md`. Coherent
+excluded bases uploader4e597a6/dashboard9d967cc cover the original-root join,
+sealed qualification and owned proofs; earlier native capture dependencies read
+directly. Uploader remains read-only. Current normal false transaction return
+qualifies closed history, but a thrown call goes directly to outer refusal/erase.
+Specify a narrow transaction-call boundary and one normal-flow cleanup/qualification
+epilogue; no catch/finally promotion, new failure auth callbacks or public result.
+False/throw is not server rejection; unknown BEGIN/rollback stays unsupported,
+COMMIT ack without verified idle stays uncertain. Current guards remain unknown
+on native failure, diagnostic/retry/observer authority stays vetoed. Source/API
+faults are not real lost-wire evidence; independent bounded native proof would
+need a later exact target/fixture/transport approval. Known5056/20 proof is not
+retroactively uncertain provenance. Canonical source-scoped Light/final Security;
+no changed runtime/tests, storage writes, actual auth/native/site work, production
+wiring, grants, observation, activation, rollback, package/release/tag/deploy.
+
+Implementation-plan progress: uncertainty provenance requirements and the precise
+closed exception-path composition gap are specified; next meaningful work is gated
+source integration, not another maintenance or redundant DATA layer.
+**Recommended next gated slice: local-only V2.3 Fixed Native Failure Boundary and
+Closed Qualification Safety Foundation**, isolated API tests only, fresh approval.
+Keep actual authentication/storage/native execution/wiring/grants/observation/
+activation/rollback disabled.
+
 ## V2.3 Fixed Sealed Qualification/Guarded Lifecycle Closure Owned Proof — 2026-10-20
 
 Approved R3 Plugin Tester local-only, exact target and owned disposable users/

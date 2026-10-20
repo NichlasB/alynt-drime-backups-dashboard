@@ -1,5 +1,13 @@
 # V2.3 Retained-Origin Native Outcome Qualification and Lifecycle Closure Integration Design
 
+Uncertain-failure design successor2026-10-20:
+[Uncertain Native Outcome Provenance and Guarded Failure Qualification Design](V2_3_UNCERTAIN_NATIVE_OUTCOME_FAILURE_QUALIFICATION_DESIGN.md)
+specifies the closed transaction-exception bridge and later real unknown-wire
+evidence requirements. It does not add current guards after native failure or
+open diagnostics/retries/observation. Uploader remains unchanged; source composition
+and physical uncertainty proof require separate approvals. Historical contracts
+and proof limits below are preserved.
+
 Owned-proof successor2026-10-20: uploader
 `docs/V2_3_FIXED_SEALED_QUALIFICATION_LIFECYCLE_OWNED_PROOF.md` records actual
 known-commit/late-denial composition5056/20, seven restored native semantic controls
