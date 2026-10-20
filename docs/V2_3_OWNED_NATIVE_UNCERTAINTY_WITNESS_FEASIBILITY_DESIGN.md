@@ -1,5 +1,12 @@
 # V2.3 Owned Native Uncertainty Witness Feasibility Design
 
+Design successor2026-10-20:
+[native-profile selection and private control channel](V2_3_NATIVE_PROFILE_WITNESS_PRIVATE_CONTROL_CHANNEL_DESIGN.md)
+defines observation-only native-profile candidates, original-root pre-BEGIN pair
+binding, conservative independent clocks and explicit Windows pipe feasibility
+gates. No implementation/native experiment/suppression/wiring. Next concrete gate:
+socket-free native-profile selection/control transcript foundation, synthetic only.
+
 Native no-fault successor2026-10-20: uploader
 `docs/V2_3_OWNED_RELAY_NO_FAULT_PROOF.md`, exact-confirmed owned Plugin Tester
 scope225/2, three real role/pair identities, six complete/equal byte streams,

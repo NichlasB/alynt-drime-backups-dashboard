@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Native-Profile Witness / Private Control-Channel Design — 2026-10-20
+
+Approved R3 repository-only/design-only. Owning record:
+`docs/V2_3_NATIVE_PROFILE_WITNESS_PRIVATE_CONTROL_CHANNEL_DESIGN.md`. Excluded
+bases uploader47f7e68/dashboard4f0750d cover the coherent no-fault feature and this
+successor; uploader remains read-only ata78bc9c. Proposed strict candidate handshake
+and passive exact-COMMIT/idle-OK selector preserve opaque intermediate traffic and
+normal egress. One-shot inherited-stdio BOOT/ROOT/BIND/BOUND/FINAL ties the original
+pre-BEGIN writer to its live pair, not post-hoc IDs or nonce-callback authority.
+Separate clock domains/conservative pre-root deadline, no late ACK or budget reset;
+Windows bounded pipe I/O still requires an owned no-WordPress/no-DB feasibility proof.
+Historical native225/2/77 checksums are not rerun or enlarged by this design.
+Canonical source-scoped Light/final Security only; no executable source or whole-
+plugin readiness change. No native/IPC/storage/site experiment, suppression,
+production wiring, grants, observer execution, activation/effects/rollback/release.
+
+Implementation-plan progress: next witness-integration contract and acceptance
+gates specified; next concrete work is a bounded pure test-helper foundation.
+**Recommended next gated slice: local-only V2.3 Socket-Free Native-Profile Selection
+and Control Transcript Safety Foundation**, synthetic bytes/messages/virtual clocks
+only, actual IPC/network/authentication/storage/native execution/suppression/wiring
+disabled. Follow with separately approved owned pipe proof before native integration.
+
 ## V2.3 Owned Relay Supervisor / No-Fault Proof — 2026-10-20
 
 Approved R3 exact-confirmed Plugin Tester local-only owned fixtures/listener/
