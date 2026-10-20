@@ -1,5 +1,13 @@
 # V2.3 Fixed Native Admission Join and Lifecycle Outcome Integration Design
 
+Single-root source successor2026-10-20: uploader
+`docs/V2_3_SINGLE_ROOT_NATIVE_ADMISSION_JOIN_FOUNDATION.md` adds dormant private
+same-root retention/forwarding with isolated API tests only (50/3033, seven restored
+controls). It does not establish genuine joined authentication, physical admission
+or original native provenance. Next gate is the implementation plan's **Single-Root
+Retained-Origin Native Admission Join Owned Authentication, Failure and Cleanup
+Proof** on confirmed Plugin Tester fixtures; production wiring stays disabled.
+
 Owned capture proof successor2026-10-20: uploader
 `docs/V2_3_NATIVE_ADMISSION_OUTCOME_CAPTURE_OWNED_PROOF.md` records genuine owned
 native/authentication/failure/cleanup2028/9 and separate primitive limits. This does

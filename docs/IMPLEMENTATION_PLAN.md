@@ -1,5 +1,34 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Single-Root Retained-Origin Native Admission Join Foundation — 2026-10-20
+
+Approved R3 repository-only, isolated API tests only. Uploader owns
+`docs/V2_3_SINGLE_ROOT_NATIVE_ADMISSION_JOIN_FOUNDATION.md`; explicit coherent
+excluded bases uploader4e597a6/dashboard9d967cc. Two fixed private entries delegate
+to one shared root, never nested consuming wrappers. Joined mode retains minimal
+origin/complete historical collision set/all ten original IDs after command auth,
+before writer creation/BEGIN, under the original ten-second clock; exact writer/
+origin pins checked before forwarding and after release/final guards. Reentry
+poisons and all root exits erase. Standalone nine guards/public facade preserved;
+joined ten guards. Native outcome facts remain separate/non-authorizing, no read
+fallback/current acceptance inferred. Production loading/wiring unchanged.
+
+New50/3033, related457/15616 no skips; seven assertion-killed/exact-SHA256-restored
+controls, including a disconnected actual-entry contract. Actual source root/
+constructor/guard/retention/budget with **API doubles**, not genuine WordPress,
+native DML/transaction/physical cleanup. Canonical source-scoped Light/Bloat/final
+Security; no actual auth/storage/native/site/users/fixtures, grants/activation/
+observation/schedule rollback/package/release/deploy. Exact-head CI in toolkit.
+
+Implementation-plan progress: fixed same-root origin/native-forwarding source gap
+advanced with falsifiable isolated evidence. The next meaningful lane is gated
+physical proof, not maintenance; genuine joined provenance remains unestablished.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Single-Root
+Retained-Origin Native Admission Join Owned Authentication, Failure and Cleanup
+Proof**, exact confirmed target and owned disposable users/storage/testing/cleanup.
+Fresh approval required; preserve existing state and keep production wiring,
+grants, observation, activation and schedule rollback disabled.
+
 ## V2.3 Fixed Native Admission Outcome Capture Owned Proof — 2026-10-20
 
 Approved R3 Plugin Tester local-only; exact target and owned disposable users/
