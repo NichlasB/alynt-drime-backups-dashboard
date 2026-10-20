@@ -1,5 +1,12 @@
 # V2.3 Selected COMMIT Response-Loss and Uncertainty Witness Design
 
+Design successor: [real uncertain-COMMIT qualification provenance/observation](V2_3_REAL_UNCERTAIN_COMMIT_QUALIFICATION_PROVENANCE_DESIGN.md)
+selects fixed proof-only composition/private actual-return observation and complete
+source/state manifest checks. This is explicitly not direct observation of the
+unchanged final class; no runtime hook/getter or weaker erasure. Design only;
+isolated observer/source-identity foundation is the next gated slice, no new native
+attempt, storage write, production wiring or qualification authority enabled.
+
 Native successor: uploader `docs/V2_3_SELECTED_RESPONSE_LOSS_OWNED_PROOF.md`
 records the separately approved Plugin Tester owned proof: no-fault242/2 then one
 fresh selected170/2 after a corrected harness-only cleanup-phase expectation;

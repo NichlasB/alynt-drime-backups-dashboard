@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Real Uncertain-COMMIT Qualification Provenance / Observation Design — 2026-10-20
+
+Approved repository-only/design-only; owner:
+[qualification provenance design](V2_3_REAL_UNCERTAIN_COMMIT_QUALIFICATION_PROVENANCE_DESIGN.md).
+Actual response-loss witness remains historical170/2, not a new experiment or proof
+of the erased private qualifier return. Select fixed test-only composition reusing
+unchanged production trait bodies, a private alias/wrapper observing the actual
+return, full method/state/source manifests and bounded no-authority projection.
+Original guard order/pin/clock/cleanup/erase remain unchanged; no new production
+hook/getter, reflected replay, source rewrite, result fabrication or external
+relay/audit receipt fed into classification. Composition evidence is explicitly
+not direct observation of the unchanged final class; no generic DATA layer added.
+
+Three dashboard docs only; uploader9d3c9d10 remains read-only. Coherent excluded
+review bases uploader174a6a97/dashboard776a4f19. Source-only dashboard snapshot/hash,
+future isolated/native acceptance matrices and proof limits in owner. Canonical
+Light/final focused Security; no executable bloat/UI/UX/DS3/Database/whole-plugin
+readiness claim. No native/IPC/WordPress/auth/storage action, package/release/deploy.
+
+Implementation-plan progress: concrete private-result observation design selected;
+next meaningful slice is source-identity/observer proof support, not maintenance.
+**Recommended next gated slice: local-only V2.3 Test-Only Qualification Observation
+and Source-Identity Safety Foundation**, isolated API tests only. Keep actual
+authentication/storage/WordPress bootstrap/networking/IPC/native experiments and
+production wiring/grants/activation/rollback disabled; implement no runtime port.
+
 ## V2.3 Selected COMMIT Response-Loss / Owned Cleanup Proof — 2026-10-20
 
 Approved exact-confirmed Plugin Tester local-only owned fixtures/listeners/processes
