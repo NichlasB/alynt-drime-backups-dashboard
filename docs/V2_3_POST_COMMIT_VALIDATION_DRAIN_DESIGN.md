@@ -1,5 +1,12 @@
 # V2.3 Post-COMMIT Session-Validation Drain and Observation Finalization Design
 
+Later approved native successor2026-10-20: uploader owns
+`docs/V2_3_NATIVE_OBSERVATION_STDIO_HARDENING_PROOF.md`. Exact passive drain/credits/
+exception isolation/FINAL join now pass genuine242/2, bundled stdio141/15 and guard
+266/11 with owned cleanup/all77 application checksums unchanged. Production wiring
+and suppression remain disabled. This design's earlier blocked-state evidence below
+is historical; the current plan records the next design-only uncertainty gate.
+
 Successor foundation2026-10-20: uploader
 `docs/V2_3_SOCKET_FREE_POST_COMMIT_DRAIN_FOUNDATION.md` implements the bounded pure
 model/virtual-clock tests,69 targeted/full306 Node and eight restored semantic

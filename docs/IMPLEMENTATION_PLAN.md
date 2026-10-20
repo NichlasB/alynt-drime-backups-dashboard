@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Native Observation / Private Stdio Hardening Proof — 2026-10-20
+
+Approved R3 exact-confirmed Plugin Tester local-only owned fixtures/listeners/process
+cleanup. Uploader owns `docs/V2_3_NATIVE_OBSERVATION_STDIO_HARDENING_PROOF.md`.
+Previously unpublished native draft now hardened: exact two-query post-COMMIT drain,
+per-frame credits, passive exception membrane, provisional FINAL joined to actual
+observation, worker/pipe/session guards before owned DROP. Production PHP, wiring
+and suppression unchanged. Bundled preflight141/15; genuine native242/2, private
+1241-byte channel, strict three profiles/COMMIT-idle-OK egress, six equal streams/
+256878 bytes; sessions absent before cleanup/all77 application checksums unchanged.
+Genuine guard266/11 also passes. New25 pure/API tests/full331 Node, six in-memory
+assertion-killed controls, related isolated PHP173/10171. Canonical source-scoped
+Light/Bloat/07/06/07A/final Security, exact-head CI in toolkit, no whole-plugin/
+Database/lost-ack/uncertainty/retry/physical-all-failure claim. Explicit excluded
+coherent bases uploaderf11ba9c/dashboardd222004; versions unchanged.
+
+Implementation-plan progress: approved acknowledged-success observation integration
+completed; the next meaningful work crosses the uncertainty design/experiment gate.
+**Recommended next gated slice: local-only V2.3 Selected COMMIT Response-Loss and
+Uncertainty Witness Design**, design-only. Specify owned lost-ack/failure-isolation/
+cleanup and provenance gates before any suppression experiment; keep native
+experiments/storage writes, production wiring, grants, activation and rollback disabled.
+
 ## V2.3 Socket-Free Post-COMMIT Drain / Finalization Foundation — 2026-10-20
 
 Approved synthetic bytes/virtual clocks only; uploader owns
