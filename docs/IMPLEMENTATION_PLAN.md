@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Native Failure/Closed Qualification Owned Proof — 2026-10-20
+
+Approved R3 exact Plugin Tester local-only target and owned disposable users/
+storage/testing/cleanup. Uploader owns
+`docs/V2_3_NATIVE_FAILURE_CLOSED_QUALIFICATION_OWNED_PROOF.md`. Coherent excluded
+bases uploader95360a8/dashboard54889b5 cover design/source/proof, not a docs tail.
+Actual joined mode5756 checks/27 groups adds strict-exception/raw-false lock
+timeouts at first/middle/last dependencies and explicit owned-client-close fault.
+Independent native error-policy/NOWAIT witnesses, exact eight failure guards,
+original pin, zero DML, lock/client release, borrowed auth, erase/replay verified.
+Four assertion-killed/exact-hash-restored controls; optional synthetic-close
+mutation blocked/not run. Predecessor native outcome2028/9 and genuine guard266/11
+pass; all77 application checksums unchanged and owned fixtures removed every run.
+Private qualification count/result is isolated-source evidence, not inferred from
+native refusal/final consumed latch. No lost-wire/crash/unknown-COMMIT/quiescence/
+safe-retry or diagnostic grant claim. Runtime includes/wiring unchanged; no public
+endpoint, grants, observation execution, activation, effects, rollback or release.
+Canonical source-scoped Light/Bloat/final Security, not whole-plugin/Database Review.
+
+Implementation-plan progress: bounded genuine failure/cleanup composition is
+proved; the safe-local lane has reached the next gated uncertainty-witness decision.
+**Recommended next gated slice: local-only V2.3 Owned Native Uncertainty Witness
+Feasibility Design**, design-only approval before selecting any lost-ack experiment;
+keep storage writes/native experiments/production wiring/authority disabled.
+
 ## V2.3 Fixed Native Failure Boundary/Closed Qualification Foundation — 2026-10-20
 
 Approved R3 repository-only/isolated API tests only. Uploader owns

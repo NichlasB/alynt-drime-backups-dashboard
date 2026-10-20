@@ -1,5 +1,14 @@
 # V2.3 Uncertain Native Outcome Provenance and Guarded Failure Qualification Design
 
+Owned-proof successor2026-10-20: uploader
+`docs/V2_3_NATIVE_FAILURE_CLOSED_QUALIFICATION_OWNED_PROOF.md` records actual
+Plugin Tester joined5756/27, native outcome2028/9, genuine guard266/11 and77
+unchanged application checksums/owned cleanup. Strict/raw-false bounded SQL failures
+are genuine; exact private failure qualification remains isolated-source evidence,
+not a native exported certificate. Four meaningful controls restored; no runtime
+includes/wiring change. Real lost-ack provenance remains unproved. Next gate is
+the design-only Owned Native Uncertainty Witness Feasibility Design, not execution.
+
 Source-integration successor2026-10-20: uploader
 `docs/V2_3_FIXED_NATIVE_FAILURE_CLOSED_QUALIFICATION_FOUNDATION.md` records the
 approved narrow native-call failure bridge, composed isolated API43/1032 and
