@@ -228,6 +228,12 @@ experiments or production wiring. No new production qualifier, schema or endpoin
 
 ## Approved foundation successor — 2026-10-20
 
+Approved verification repair retains complete manifest guards while canonicalizing
+PHP-version ampersand token representation; bounded test-only memory configuration
+and actual low-headroom refusal regressions leave the production guard unchanged.
+Repaired isolated41/619 and affected78/818 pass; prior failed CI/local history and
+full revalidation outcomes are retained in uploader owner/toolkit. No native proof.
+
 Uploader owns `docs/V2_3_QUALIFICATION_OBSERVATION_SOURCE_IDENTITY_FOUNDATION.md`:
 fixed final composition, complete production/proof/projection source pins, private
 passive alias observation, sticky replay/reentry invalidation and exact result/throw

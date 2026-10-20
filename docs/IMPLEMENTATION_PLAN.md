@@ -2,6 +2,14 @@
 
 ## V2.3 Test-Only Qualification Observation / Source Identity Foundation — 2026-10-20
 
+Approved verification repair: uploader's PHP7.4/PHP8 ampersand token identities
+canonicalized without dropping syntax or reference metadata; all other manifest
+descriptors/projection pin unchanged. Test-only256M budget plus real low-headroom
+refusal controls repair Windows suite resource mismatch, production guard untouched.
+Repaired targeted41/619 and affected78/818 pass; full Windows/exact-head CI outcomes
+in toolkit. Initial failed publication remains failed history in owning record.
+No new milestone, runtime/storage/native execution or wiring change authorized.
+
 Approved repository-only/isolated API foundation; uploader owns
 `docs/V2_3_QUALIFICATION_OBSERVATION_SOURCE_IDENTITY_FOUNDATION.md`. Fixed final
 proof composition reuses actual traits with one private qualifier alias/wrapper,
