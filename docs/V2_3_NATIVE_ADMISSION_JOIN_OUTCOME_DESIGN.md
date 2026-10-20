@@ -1,5 +1,16 @@
 # V2.3 Fixed Native Admission Join and Lifecycle Outcome Integration Design
 
+Owned single-root proof successor2026-10-20: uploader
+`docs/V2_3_SINGLE_ROOT_NATIVE_ADMISSION_JOIN_OWNED_PROOF.md` records actual
+`admit_retained()` original/all-ten-ID native receipt continuity and refusal/cleanup,
+2750 checks/10 groups, seven restored semantic controls,77 application checksums
+unchanged/all owned fixtures removed. No runtime source or production wiring change.
+This proves the owned positive/known-failure join, not real uncertain wire outcomes,
+current-acceptance certification, native classification or an observer continuation.
+Next gate: plan's design-only **Retained-Origin Native Outcome Qualification and
+Lifecycle Closure Integration Design**; storage/native execution/wiring/grants/
+observation/activation/rollback stay disabled for that design slice.
+
 Single-root source successor2026-10-20: uploader
 `docs/V2_3_SINGLE_ROOT_NATIVE_ADMISSION_JOIN_FOUNDATION.md` adds dormant private
 same-root retention/forwarding with isolated API tests only (50/3033, seven restored
