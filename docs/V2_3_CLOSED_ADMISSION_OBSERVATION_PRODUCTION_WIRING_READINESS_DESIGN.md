@@ -1,5 +1,15 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Approved isolated successor: uploader
+docs/V2_3_SAME_ROOT_LIFECYCLE_INTEGRATION_FOUNDATION.md owns the new dormant
+same-root coordinator and positive/refusal tests with IO/physical API doubles.
+All six native boundaries remain fixed unavailable; existing source-pinned
+native root/worker, public facades and runtime loader unchanged. This advances
+R1 orchestration, not genuine/native joining or production readiness. Next
+separately gated slice: design-only Same-Root Fixed Native Boundary Integration
+Design. No storage/native/wiring/grant/activation/rollback action is authorized.
+The original readiness decision and future acceptance requirements below remain.
+
 2026-10-21. Approved repository-only, design-only (R1). Dashboard owns this design;
 uploader source is inspected read-only. No WordPress/authentication, SQL/storage
 writes, native experiments, fixtures, services, listeners or process-failure tests.

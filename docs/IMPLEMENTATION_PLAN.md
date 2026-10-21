@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Same-Root Closed Admission/Observation Lifecycle Integration Foundation — 2026-10-21
+
+Approved local-only, isolated API tests only; uploader owns
+docs/V2_3_SAME_ROOT_LIFECYCLE_INTEGRATION_FOUNDATION.md. New fixed dormant
+coordinator retains its own origin before the attempt boundary, qualifies sealed
+history without promoting refusal, erases writer material before fresh read
+authorization, and consumes one guarded private handoff/candidate observation.
+Four nonce domains, exact20-check sequence, unchanged admission10s/read10s inside
+original20s, final erasure and cleanup-reentry refusal. All native/physical/IO
+boundaries remain fixed unavailable; tests double only those boundaries while
+reusing actual orchestration/guard/validator code. This is not actual native or
+WordPress proof, production activation, safe retry or rollback.
+
+Original source-pinned root/worker/transcript and production includes unchanged.
+Canonical scoped reviews and actual local/exact-head publication evidence in
+uploader owner/toolkit, not historical whole-plugin release-readiness rows.
+No storage/site/fixture/native/wiring/grant/activation/rollback/version/package/
+release/deploy action. Implementation-plan progress: dormant R1 ownership/order
+integration advances; native boundaries and production readiness remain open.
+**Recommended next gated slice: local-only V2.3 Same-Root Fixed Native Boundary
+Integration Design**, design-only, to map existing native helpers into one
+resource owner without native experiments, writes or production wiring.
+
 ## V2.3 Closed Admission/Observation Production-Wiring Readiness Design — 2026-10-21
 
 Approved repository-only/design-only; owner:
