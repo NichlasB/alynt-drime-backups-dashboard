@@ -1,5 +1,19 @@
 # V2.3 Same-Root Native Adapter Selected COMMIT Response-Loss and Uncertainty Qualification Design
 
+Accepted no-fault successor (2026-10-21): uploader
+docs/V2_3_NATIVE_QUALIFICATION_NO_FAULT_OWNED_PROOF.md. Exact confirmed Plugin
+Tester owned proof now joins genuine prelude266/11, original24-guard committed
+qualification, accepted private FINAL, both exact drains, four-role/eight-stream
+transparency and independent cleanup/all77 application checksums unchanged.
+Two failed predecessor attempts and harness-only EOF/projection repairs remain
+explicit in that record. No selected loss, uncertainty proof or production wiring.
+Next separate gate: Plugin Tester local-only **Same-Root Native Qualification
+Selected COMMIT Response-Loss Integration and Owned Cleanup Proof**, with a NEW
+fixed selected harness/source closure, fresh genuine guard/no-fault prerequisites
+before one separately approved selected attempt, and owned fixtures/listeners/
+process cleanup. R1 uncertainty remains open; R2-R7 remain NO-GO. The design and
+foundation history below describe their original scopes, not current permissions.
+
 Approved isolated successor: uploader
 docs/V2_3_SOCKET_FREE_NATIVE_QUALIFICATION_FOUNDATION.md. New passive observation
 composition/source gate, eight-frame/two-binding byte grammar and four-role
