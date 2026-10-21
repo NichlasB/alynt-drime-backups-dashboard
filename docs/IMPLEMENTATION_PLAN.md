@@ -1,5 +1,33 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Selected Qualification Observation / Transcript Foundation — 2026-10-21
+
+Approved isolated-only successor; uploader owns
+`docs/V2_3_SELECTED_QUALIFICATION_SOCKET_FREE_FOUNDATION.md`. Separate final/private
+dormant worker, original source-pinned composition, false-root consumed observation
+and strict selected-v1 PHP/Node grammar. Virtual-clock duplex lifecycle, source
+identity/order/role/size/EOF predicates, unchanged original five/three no-fault pins.
+Existing no-fault worker/runner/protocol and all production includes unchanged.
+
+Actual reused qualifier uncertain positive over synthetic state, missing/false
+observer refusal, retained-slot no-repair and explicit no-root entry tests. All
+root/callback/guard/finally facts in these fixtures are seeded/mirrored, not genuine
+authentication/native evidence. Eight in-memory helper-only semantic controls are
+assertion-killed and disk hashes unchanged. Real proof flags remain false even
+when the synthetic transcript matches; no actual cut/cleanup/authority is inferred.
+
+Canonical scoped reviews/local QA and exact-head publication evidence in owner/
+toolkit; no UI/UX/Database/whole-plugin readiness refresh. No native/WordPress/
+storage/fixture/IPC/suppression/site/wiring/version/package/release/deploy action.
+
+Implementation-plan progress: selected uncertainty observation/transcript contract
+advances at the isolated layer; native uncertain qualification is still unproven.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Qualification
+Worker Selected COMMIT Response-Loss and Uncertain Observation Owned Proof**,
+fresh exact target and owned users/storage/listeners/processes/cleanup approval.
+Genuine prelude and fresh no-fault transparency/cleanup must pass before one cut;
+preserve existing application state and keep production wiring disabled.
+
 ## V2.3 Fixed Qualification Selected Loss / Uncertain Observation Integration Design — 2026-10-21
 
 Approved repository-only/design-only; owner:

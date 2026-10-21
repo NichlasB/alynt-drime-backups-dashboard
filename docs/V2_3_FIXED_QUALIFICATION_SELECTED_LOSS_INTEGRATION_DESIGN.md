@@ -1,5 +1,15 @@
 # V2.3 Fixed Qualification Worker Selected COMMIT Response-Loss and Uncertain Observation Integration Design
 
+Approved isolated successor: uploader
+`docs/V2_3_SELECTED_QUALIFICATION_SOCKET_FREE_FOUNDATION.md` owns the socket-free
+selected worker/grammars/source pins/virtual-clock transcript. Native entry stays
+permanently closed; actual qualifier positive uses synthetic state and manually
+mirrored finally, not genuine root/guard/erasure proof. Original five/three source
+pins and no-fault implementation unchanged. Helper-only semantic controls do not
+establish native uncertainty. The next gated slice is the separately confirmed
+Plugin Tester selected qualification owned proof; no native/suppression/wiring
+action is authorized by that completed foundation. Original design remains below.
+
 2026-10-21. Approved **repository-only, design-only**. This document specifies a
 future test harness, not permission to implement or execute it. No WordPress
 bootstrap/authentication, SQL/storage write, fixture, native request, listener,
