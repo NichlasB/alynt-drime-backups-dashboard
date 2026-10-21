@@ -1,5 +1,15 @@
 # V2.3 Same-Root Fixed Native Boundary Integration Design
 
+Approved isolated implementation successor: uploader
+docs/V2_3_SAME_ROOT_NATIVE_BOUNDARY_ADAPTER_FOUNDATION.md. Fixed native primitive
+composition and phase/guard/release integration now implemented behind a literal
+unavailable entry, with extension-free API tests only; source-pinned predecessors
+and production wiring unchanged. Next separate gate is the Plugin Tester local-
+only Same-Root Native Adapter Genuine Guard and No-Fault Owned Cleanup Proof,
+with exact target and disposable users/storage/one-ledger-CAS/cleanup approval.
+No actual native or WordPress proof is supplied by the API tests. The approved
+design and its historical verification below remain unchanged.
+
 2026-10-21. Approved repository-only/design-only. Dashboard owns this record;
 uploader0.5.25 is inspected read-only, dashboard0.1.77 unchanged. R1 document
 change describing a future R3 authentication/storage integration, not approval

@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Same-Root Fixed Native Boundary Adapter Foundation — 2026-10-21
+
+Approved local-only, isolated API tests only; uploader owns
+docs/V2_3_SAME_ROOT_NATIVE_BOUNDARY_ADAPTER_FOUNDATION.md. New dormant native
+composition reuses fixed transaction/outcome/barrier primitives, with separate
+phase cleanup receipts, both post-setup mutation/read checks before BEGIN,
+confirmed barrier close before DATA parsing and fresh post-close checks.
+Original40+10 projection/one-ledger-CAS bounds preserved. New final class entry
+returns false before actual authentication/native IO; no loader/caller wiring.
+Positive/refusal API tests are extension-free, not physical/native proof.
+
+Original source-pinned owners/workers unchanged. No actual WordPress/storage/
+native/site/fixture/permission/wiring/grant/activation/rollback/version/package/
+release/deploy action. Implementation-plan progress: R1 dormant native adapter
+implemented; genuine same-root native proof and production readiness remain open.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Same-Root Native
+Adapter Genuine Guard and No-Fault Owned Cleanup Proof**, exact target/owned
+users/storage/one-ledger-CAS/cleanup approval required. Keep production wiring
+and final unavailable entry unchanged; no selected response-loss experiment yet.
+
 ## V2.3 Same-Root Fixed Native Boundary Integration Design — 2026-10-21
 
 Approved design-only; owner:
