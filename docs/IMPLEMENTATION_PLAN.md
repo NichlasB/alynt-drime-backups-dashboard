@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed Admission/Observation Production-Wiring Readiness Design — 2026-10-21
+
+Approved repository-only/design-only; owner:
+[production-wiring readiness design](V2_3_CLOSED_ADMISSION_OBSERVATION_PRODUCTION_WIRING_READINESS_DESIGN.md).
+Source inventory confirms production loader/facades remain closed, admission
+erases origin on return, sealed qualification does not authorize diagnostics,
+and the independent observer requires its own original capture. Native selected
+qualification is proven only at its recorded instrumented-composition boundary.
+
+Decision: NO-GO for production wiring. Specify one same-root private lifecycle,
+own pre-DML origin, actual writer release, fresh separate read authorization,
+original bounds, once-only handoff and finally erasure. Reuse existing validators;
+do not rebuild another synthetic DATA machine or promote an uncertain result.
+Separate closed provisioning/profile/lifecycle gates from later grants, common
+scan/enqueue fencing and rollback execution. No source/runtime/schema/version/
+site/storage/native/wiring/grant/activation/rollback/package/release/deploy change.
+
+Implementation-plan progress: the closed admission/observation integration gate
+is now source-mapped and specified; production readiness is not established.
+**Recommended next gated slice: local-only V2.3 Same-Root Closed Admission/
+Observation Lifecycle Integration Safety Foundation**, dormant isolated API
+tests only, with actual authentication/storage/native execution and production
+wiring disabled. Explicit approval is needed for this new integration; no generic
+maintenance batch is warranted to avoid that product decision.
+
 ## V2.3 Selected Qualification Native Uncertainty / Owned Cleanup Proof — 2026-10-21
 
 Approved Plugin Tester local-only target and owned disposable users/storage/

@@ -1,5 +1,13 @@
 # V2.3 Fixed Qualification Worker Selected COMMIT Response-Loss and Uncertain Observation Integration Design
 
+Approved design-only successor:
+[Closed Admission/Observation Production-Wiring Readiness Design](V2_3_CLOSED_ADMISSION_OBSERVATION_PRODUCTION_WIRING_READINESS_DESIGN.md).
+It inventories actual private owners and the missing same-root diagnostic join;
+NO-GO for production wiring. The next separately gated slice is the dormant
+Same-Root Closed Admission/Observation Lifecycle Integration Safety Foundation,
+isolated API tests only. No storage/native/wiring/grant/activation/rollback action
+is authorized by that design. The proof and original design below remain historical.
+
 Approved native successor completed on the separately confirmed Plugin Tester
 local-only target. Uploader docs/V2_3_SELECTED_QUALIFICATION_NATIVE_OWNED_PROOF.md
 owns the failed prerequisite, approved harness repair, fresh genuine/no-fault
