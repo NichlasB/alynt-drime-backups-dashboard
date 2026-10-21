@@ -1,5 +1,21 @@
 # V2.3 Same-Root Native Adapter Selected COMMIT Response-Loss and Uncertainty Qualification Design
 
+Latest accepted successor (2026-10-21): uploader
+docs/V2_3_NATIVE_QUALIFICATION_SELECTED_LOSS_OWNED_PROOF.md. One approved/confirmed
+Plugin Tester local-only invocation passed fresh guard266/11 and same-composition
+committed no-fault prerequisites before the single selected writer response loss.
+Actual original uncertain qualification and registered_closed native observation
+joined with24 guards/four domains, fresh closed barrier,11 bytes withheld/zero
+target writes,4 roles/8 conserved streams/other7 equal, and independent cleanup.
+All77 application checksums unchanged; sessions/locks/tables/processes reconciled.
+Production entry/wiring/grants/activation/rollback remain disabled. This proves
+the normal successful barrier AFTER uncertainty, not combined barrier contention,
+timeout/failure or durability/safe retry. Next separate gate: local-only V2.3
+**Same-Root Uncertain Admission Barrier Contention and Failure Qualification
+Design**, design-only, no storage/native experiment/suppression/wiring. R1 failure
+obligation and R2-R7 remain open. Older next-step paragraphs below are historical
+scopes, not current permission or a request to repeat this accepted experiment.
+
 Accepted no-fault successor (2026-10-21): uploader
 docs/V2_3_NATIVE_QUALIFICATION_NO_FAULT_OWNED_PROOF.md. Exact confirmed Plugin
 Tester owned proof now joins genuine prelude266/11, original24-guard committed

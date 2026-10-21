@@ -1,5 +1,34 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Same-Root Native Qualification Selected-Loss Owned Proof — 2026-10-21
+
+Approved/confirmed Plugin Tester local-only proof accepted on one invocation.
+Uploader owns docs/V2_3_NATIVE_QUALIFICATION_SELECTED_LOSS_OWNED_PROOF.md;
+coherent excluded source base12272362356922028d000600109c59db6c2235b8.
+Fresh tree/bounded cleanup10/2, genuine guard prelude266/11 and same-composition
+committed no-fault transparency/cleanup passed before any loss. Selected writer
+COMMIT request credited; exact11-byte response withheld with zero downstream
+attempts/completions. Actual original uncertain qualification joined to original
+registered_closed native result/fresh closed barrier:24 guards/four domains,
+40+10 reads/one ledger CAS/two metadata/two zero-DML checks. Four roles/eight
+conserved streams, other seven equal; exact barrier drain and all original slots
+erased. Owned sessions/tables/processes absent,10 locks available; all77 existing
+application checksums unchanged before AND after owned DROP. No application or
+production-wiring change; no retry, grant, activation, rollback or release.
+
+Implementation-plan progress: R1 same-root committed/uncertain normal-barrier
+proof advances; joined uncertain-admission barrier contention/timeout/failure
+remains unproven. Old standalone contention and successful fresh-barrier proofs
+are not evidence of that combined failure path. R2-R7 remain NO-GO.
+**Recommended next gated slice: local-only V2.3 Same-Root Uncertain Admission
+Barrier Contention and Failure Qualification Design**, design-only; specify
+remaining refusal/closure, bounded contention/failure and independent cleanup
+obligations. Keep storage writes, native execution/response suppression, production
+wiring, grants, activation and rollback disabled. Separate approval is needed for
+the new boundary. No generic cleanup or patch packaging is the next plan item.
+Publication/exact-head CI evidence belongs to the source-scoped toolkit section;
+historical whole-plugin release-readiness rows and versions remain unchanged.
+
 ## V2.3 Same-Root Native Qualification No-Fault Owned Proof — 2026-10-21
 
 Approved/confirmed Plugin Tester local-only, owned disposable users/storage,
