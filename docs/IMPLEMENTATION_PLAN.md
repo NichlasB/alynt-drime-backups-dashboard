@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Same-Root Native Qualification Foundation — 2026-10-21
+
+Approved isolated API tests/synthetic bytes/virtual protocol clocks only. Uploader
+owns docs/V2_3_SOCKET_FREE_NATIVE_QUALIFICATION_FOUNDATION.md: new fixed passive
+qualifier/factory observation composition, source/reflection manifest, strict
+eight-frame/two-binding transcript and four-role/eight-stream synthetic accounting.
+Actual final and new fixed owner entries remain unavailable; production loader,
+native primitives and old pins unchanged. Positive committed/uncertain roots and all24 denied guards are API
+evidence; new real native/private-channel/SQL-profile proof is NOT established.
+No WordPress/authentication/database/native/listener/suppression/wiring/grant/
+activation/rollback/version/package/release/deploy action. Ordinary unit-process
+fixtures are not the new private native stdio channel.
+
+Implementation-plan progress: R1 observation/transcript foundation implemented;
+genuine new-composition relay/uncertainty proof and R2-R7 readiness remain open.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Same-Root Native
+Qualification No-Fault Private Stdio Integration and Owned Cleanup Proof**,
+with new fixed worker/channel/native trace adapter, fresh genuine guard prelude,
+same-composition no-fault transparency and owned cleanup. Separate exact-target/
+owned users/storage/listeners/processes approval required. Keep suppression,
+selected-loss experiments, final unavailable entry and production wiring disabled.
+
 ## V2.3 Same-Root Native Adapter Selected-Loss Qualification Design — 2026-10-21
 
 Approved repository-only/design-only; owner:

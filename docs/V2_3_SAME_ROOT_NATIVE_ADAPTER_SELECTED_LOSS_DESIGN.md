@@ -1,5 +1,14 @@
 # V2.3 Same-Root Native Adapter Selected COMMIT Response-Loss and Uncertainty Qualification Design
 
+Approved isolated successor: uploader
+docs/V2_3_SOCKET_FREE_NATIVE_QUALIFICATION_FOUNDATION.md. New passive observation
+composition/source gate, eight-frame/two-binding byte grammar and four-role
+synthetic accounting now implemented; actual final entry/loader/old pins unchanged.
+These are isolated API/virtual-clock contracts, not genuine authentication,
+native SQL trace, private stdio or physical proof. Next separate gate: Plugin
+Tester local-only Same-Root Native Qualification No-Fault Private Stdio Integration
+and Owned Cleanup Proof, with suppression and production wiring still disabled.
+
 2026-10-21. Approved repository-only/design-only. Dashboard owns this record;
 uploader0.5.25 is inspected read-only, dashboard0.1.77 unchanged. No WordPress,
 authentication, SQL/storage writes, fixtures, native experiments, networking,
