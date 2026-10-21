@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Same-Root Uncertain Barrier Contention/Failure Design — 2026-10-21
+
+Approved repository-only/design-only; owner:
+[uncertain barrier contention/failure design](V2_3_SAME_ROOT_UNCERTAIN_BARRIER_CONTENTION_FAILURE_DESIGN.md).
+Specify original uncertain qualification versus fresh barrier outcome versus
+independent negative-proof completion. Preserve false barrier receipt after
+rollback/close; require genuine owned wait evidence, exact failed-path prefix,
+no retry or false-to-success promotion, separate new transcript/source identity,
+bounded blocker/monitor accounting and independent application/cleanup audits.
+Existing selected positive proof and standalone contention proof do not jointly
+prove this new path. No runtime/test/manifest/version/native/storage/wiring edit.
+
+Implementation-plan progress: R1 combined failure acceptance designed, not yet
+implemented/proven; R2-R7 remain NO-GO. Safe-local queue reaches a new gated
+test-composition contract, not another cleanup/package task.
+**Recommended next gated slice: local-only V2.3 Socket-Free Same-Root Uncertain
+Barrier Contention and Failure Qualification Safety Foundation**, isolated API
+tests/synthetic bytes/virtual clocks only, no authentication/IPC/storage/native
+execution/suppression/wiring/grants/activation/rollback. Separate approval needed.
+Exact-head QA/CI evidence belongs to the source-scoped toolkit checklist;
+historical whole-plugin readiness and predecessor next-gate records stay intact.
+
 ## V2.3 Same-Root Native Qualification Selected-Loss Owned Proof — 2026-10-21
 
 Approved/confirmed Plugin Tester local-only proof accepted on one invocation.

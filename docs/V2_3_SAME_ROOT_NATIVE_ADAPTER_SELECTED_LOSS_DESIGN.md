@@ -1,5 +1,13 @@
 # V2.3 Same-Root Native Adapter Selected COMMIT Response-Loss and Uncertainty Qualification Design
 
+Latest design successor (2026-10-21):
+[same-root uncertain barrier contention/failure design](V2_3_SAME_ROOT_UNCERTAIN_BARRIER_CONTENTION_FAILURE_DESIGN.md).
+Approved design-only acceptance/ownership contract; no new failure experiment or
+runtime implementation. Next separate gate is its socket-free safety foundation,
+isolated API/synthetic bytes/virtual clocks only. Storage/native execution,
+suppression and production wiring remain disabled. R1 combined failure proof
+and R2-R7 remain open; prior next-gate paragraphs below are historical.
+
 Latest accepted successor (2026-10-21): uploader
 docs/V2_3_NATIVE_QUALIFICATION_SELECTED_LOSS_OWNED_PROOF.md. One approved/confirmed
 Plugin Tester local-only invocation passed fresh guard266/11 and same-composition
