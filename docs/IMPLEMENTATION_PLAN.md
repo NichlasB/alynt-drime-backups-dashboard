@@ -1,5 +1,40 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Selected Qualification Native Uncertainty / Owned Cleanup Proof — 2026-10-21
+
+Approved Plugin Tester local-only target and owned disposable users/storage/
+listeners/processes/cleanup; uploader owner:
+docs/V2_3_SELECTED_QUALIFICATION_NATIVE_OWNED_PROOF.md. The first invocation
+stopped on a harness wait defect before selection; that failure remains recorded.
+Separately approved correction uses24s within unchanged28s join cap, pre-spawn
+budget validation and finally-owned child/pipe settlement.
+
+Fresh independent genuine prelude266/11 and fresh no-fault qualification/cleanup
+passed before one selected attempt. Same source-pinned composition/original
+retained root: actual false return,8 pre/0 post nonce guards,40 projections/one
+owned DML attempt, one actual qualifier entry/return, uncertain history/current
+acceptance false, actual client-release claim true, original slots empty.
+Exact11-byte response suffix withheld, zero target write attempts/completions;
+three pairs/six conserved streams. Private EOF/exit0/close/pipes/listener/pumps
+resolved. Each lifetime independently audited original proposal/other-nine rows,
+borrowed auth, absent sessions, ten locks, removed marker-owned fixtures and all77
+application checksums unchanged. Post-check: zero fixture/session/process residue.
+
+Original five/three identities, no-fault worker/runner/grammar, production includes
+and dormant isolated entry unchanged. This proves instrumented composition
+qualification, not direct final-class export, timeout/crash durability, authority,
+safe retry or rollback. Authority/retry/storage/dispatch/execution flags stay false.
+No wiring/grant/activation/version/package/release/tag/deploy or live/client action.
+Canonical scoped reviews/limits and exact-head publication receipts belong to the
+uploader owner/toolkit; no historical whole-plugin readiness refresh.
+
+Implementation-plan progress: real uncertain-qualification provenance advanced;
+the safe-local proof lane is complete at this boundary.
+**Recommended next gated slice: local-only V2.3 Closed Admission/Observation
+Production-Wiring Readiness Design**, design-only. Inventory actual request,
+lifecycle, storage and authorization owners and decide remaining integration
+gates without wiring, grants, writes, native experiments, activation or rollback.
+
 ## V2.3 Socket-Free Selected Qualification Observation / Transcript Foundation — 2026-10-21
 
 Approved isolated-only successor; uploader owns

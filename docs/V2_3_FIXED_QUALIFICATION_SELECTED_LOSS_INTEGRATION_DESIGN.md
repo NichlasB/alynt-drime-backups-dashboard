@@ -1,5 +1,15 @@
 # V2.3 Fixed Qualification Worker Selected COMMIT Response-Loss and Uncertain Observation Integration Design
 
+Approved native successor completed on the separately confirmed Plugin Tester
+local-only target. Uploader docs/V2_3_SELECTED_QUALIFICATION_NATIVE_OWNED_PROOF.md
+owns the failed prerequisite, approved harness repair, fresh genuine/no-fault
+prerequisites and one successful selected attempt. Actual same-composition
+uncertain qualification/external11-byte loss join independent physical cleanup
+and all77 unchanged application checksums. No final-class export or production
+authority claim. Original pins/guards/limits/wiring remain unchanged. Next gate:
+design-only Closed Admission/Observation Production-Wiring Readiness Design.
+The original approved design below remains historical.
+
 Approved isolated successor: uploader
 `docs/V2_3_SELECTED_QUALIFICATION_SOCKET_FREE_FOUNDATION.md` owns the socket-free
 selected worker/grammars/source pins/virtual-clock transcript. Native entry stays
