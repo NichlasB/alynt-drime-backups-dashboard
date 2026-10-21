@@ -283,3 +283,28 @@ fixed entry/guards/original clocks, private handoff and independent cleanup/audi
 conjuncts under a distinct native-proof domain; keep actual authentication,
 WordPress/storage/native/IPC experiments and production wiring disabled. Do not
 flip isolated false flags to native proof or relax existing strict v1/v2 grammars.
+
+## Approved fixed request-entry/private stdio design — 2026-10-21
+
+Owner: [fixed request-entry/private stdio design](V2_3_FIXED_QUALIFICATION_REQUEST_STDIO_DESIGN.md).
+Separate fixed proof-only native worker selected; existing isolated worker stays
+closed. One original retained root on its own source-pinned composition; private
+late pair binding, actual qualifier observation and consumed extraction after
+original finally, no external owner/proposal/result or artificial slot clearing.
+Existing join runner cannot substitute a different owner. No native implementation
+or experiment performed by this design; uploaderf339a459 remains byte-unchanged.
+
+Reserve a distinct native-v1 no-fault six-frame domain with original budgets,
+strict fields/caps and independent real EOF/exit/pipe/session/lock/fixture/
+application reconciliation. Parsed FINAL/source claims are not authentication,
+physical cleanup, final-class execution, durability or authority. Old protocols
+and synthetic false proof flags unchanged. Canonical scoped Light/final Security
+and fresh isolated125/12735/Node472 QA in owner; publication evidence in toolkit.
+
+Implementation-plan progress: concrete fixed entry/late-pair/stdio design selected;
+genuine observation remains unproven. **Recommended next gated slice: Plugin Tester
+local-only V2.3 Fixed Qualification Worker Genuine Request and No-Fault Private
+Stdio Integration Proof**, isolated implementation first, then exact-confirmed
+owned fixtures/users/listeners/processes and cleanup. Preserve actual application
+state and production wiring; no response suppression or selected attempt until
+separate later approval and successful no-fault transparency/cleanup.

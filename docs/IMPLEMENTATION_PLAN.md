@@ -1,5 +1,36 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Qualification Request-Entry / Private Stdio Integration Design — 2026-10-21
+
+Approved repository-only/design-only; owner:
+[fixed request-entry/private stdio design](V2_3_FIXED_QUALIFICATION_REQUEST_STDIO_DESIGN.md).
+Existing isolated worker/grammar remain permanently closed/synthetic. Select a
+separate fixed proof-only native worker, same owned source-pinned composition,
+one original retained request, private late writer-pair binding and post-root
+consumed extraction without repairing original slots. Existing join helper cannot
+silently replace the owned instance; callback assertions need independent sticky
+evidence outside the original refusal catch. No source/auth/clock/erasure bypass.
+
+Reserved distinct native-v1 no-fault six-frame grammar, exact bounded fields,
+original10s/first4s-bind/1s-ack budgets and independent EOF/exit/pipe/session/lock/
+fixture/application audits. No parsed FINAL or copied source hash is authority.
+Current isolated false proof flags and old v1/v2 grammars unchanged. Selected loss
+requires its own later approval after no-fault transparency/cleanup.
+
+Three dashboard docs only; uploaderf339a459 unchanged. Canonical Light/final
+focused Security, coherent excluded bases9d3c9d10/4a84f89 and source-only snapshot
+in owner; fresh isolated qualification125/12735 and Node472 pass. Dashboard local
+QA/exact-head CI recorded in toolkit. No UI/UX/DS3/Database/full-release readiness
+claim; no WordPress/site/storage/native/IPC experiment, package/release/deploy.
+
+Implementation-plan progress: genuine-entry/private handoff design resolves the
+late-pair gap; actual native qualification remains the next meaningful boundary.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Fixed Qualification
+Worker Genuine Request and No-Fault Private Stdio Integration Proof**, isolated
+implementation first, then separately confirmed owned users/storage/listeners/
+process testing/cleanup. Preserve application state and wiring; keep suppression,
+grants, activation and rollback disabled. No new selected response-loss attempt.
+
 ## V2.3 Fixed Qualification Observation Worker / Private Transcript Foundation — 2026-10-20
 
 Approved isolated-only successor; uploader owns
