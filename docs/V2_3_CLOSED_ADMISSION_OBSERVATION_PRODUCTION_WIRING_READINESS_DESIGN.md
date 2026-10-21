@@ -1,5 +1,14 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 prerequisite (2026-10-21): uploader
+docs/V2_3_UNCERTAIN_BARRIER_NO_FAULT_OWNED_PROOF.md establishes the new passive
+terminal owner's genuine authentication and committed no-fault integration with
+independent owned cleanup/application preservation. It does NOT establish this
+owner's real uncertain/wait/timeout path or change the production NO-GO below.
+Next gated slice is Plugin Tester local-only Terminal-Owner Selected-Uncertain
+Control and Bounded Barrier Contention/Timeout Owned Proof,requiring new owned
+locking/selected-response-discard/cleanup approval. Production wiring stays off.
+
 Approved design-only successor:
 [Same-Root Fixed Native Boundary Integration Design](V2_3_SAME_ROOT_FIXED_NATIVE_BOUNDARY_INTEGRATION_DESIGN.md)
 maps fixed native helpers and specifies separate ownership, post-setup guards,
@@ -157,7 +166,7 @@ because its storage is closed and internally consistent.
 
 | Gate | Required before a production integration proposal; current disposition |
 |---|---|
-| R1 Same-root closed lifecycle | Original committed/uncertain normal-barrier join now has accepted fixed CLI owned proof (uploader docs/V2_3_NATIVE_QUALIFICATION_SELECTED_LOSS_OWNED_PROOF.md). Combined uncertain-admission contention/failure remains unproven; [design-only acceptance contract](V2_3_SAME_ROOT_UNCERTAIN_BARRIER_CONTENTION_FAILURE_DESIGN.md) specifies the remaining gate. Independent standalone contention receipts are not evidence of that combined path. No public wiring/readiness claim. |
+| R1 Same-root closed lifecycle | Original committed/uncertain normal-barrier join has accepted fixed CLI proof (uploader docs/V2_3_NATIVE_QUALIFICATION_SELECTED_LOSS_OWNED_PROOF.md); the new passive terminal owner additionally has genuine/committed no-fault proof (docs/V2_3_UNCERTAIN_BARRIER_NO_FAULT_OWNED_PROOF.md in uploader). Combined uncertain-admission contention/failure remains unproven; [acceptance contract](V2_3_SAME_ROOT_UNCERTAIN_BARRIER_CONTENTION_FAILURE_DESIGN.md) specifies the remaining gate. Independent standalone contention receipts are not evidence of that combined path. No public wiring/readiness claim. |
 | R2 Real authenticated entry | Fixed local capability/nonce domains, exact method/body/bounds, current blog/context and same-request provenance. Decide entry surface separately; no public REST/AJAX/admin hook or remote action is added here. Default unavailable/no protected reads must remain until approved integration. No grant from pairing or remote-action opt-in. |
 | R3 Storage provisioning and coherence | Explicit reviewed closed-state creation/version/migration policy, absent/duplicate/autoloaded/malformed/oversized rows blocked, exact metadata and serialization. Native admission updates only its one existing ledger row; it cannot create missing rows. No opportunistic setup on status/read, reset, cache-based authority or adoption of fixture tables. Direct SQL and WordPress/object-cache readers need an explicit consistency/invalidation policy. |
 | R4 Supported native target | Prove the exact intended runtime/profile under separate target approval; unsupported DB_HOST/socket/driver/server/version remains unavailable. No production credential probing, compatibility expansion or host check in this design. |

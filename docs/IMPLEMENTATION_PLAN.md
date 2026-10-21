@@ -1,5 +1,33 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Uncertain Barrier Terminal Owner Genuine/No-Fault Owned Proof — 2026-10-21
+
+Approved/confirmed Plugin Tester local-only owned users/storage/listeners/
+processes and cleanup. Uploader owns
+docs/V2_3_UNCERTAIN_BARRIER_NO_FAULT_OWNED_PROOF.md. New fixed CLI composition
+uses the accepted passive terminal trait, separate source/channel identity and
+committed-only FINAL, without altering historical pins or production wiring.
+One fresh attempt passed: genuine guard prelude266/11, new worker958 checks/
+10 early denials,24 guards/four nonce domains,original registered_closed result,
+actual committed qualifier and matching once-only terminal capture. Both COMMIT
+responses/eight streams delivered unchanged,40/10/1/2/2 counters,6283 channel
+bytes. Independent cleanup:owned sessions/processes/tables absent,10 locks free,
+all77 application checksums unchanged before AND after previewed fixture DROP.
+No response suppression,contention,live change,grant,activation or rollback.
+
+Implementation-plan progress: R1 new terminal-owner genuine/no-fault prerequisite
+physically established; actual uncertain-admission plus barrier wait/timeout/
+failure still unproven,R2-R7 NO-GO. Local/exact-head publication evidence belongs
+to the source-scoped toolkit checklist; historical release-readiness unchanged.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Terminal-Owner
+Selected-Uncertain Control and Bounded Barrier Contention/Timeout Owned Proof**.
+Existing design supplies the acceptance contract; new approval must cover fixed
+selected/negative source/channel integration,direct owned blocker/monitor,
+isolated/cleanup prerequisites,fresh no-fault and selected-uncertain controls
+before bounded resolved-wait/timeout cases. Selected response discard/fixture
+row locks cross a new operational gate. Preserve application state,original
+guards/limits;production wiring,grants,activation and rollback stay disabled.
+
 ## V2.3 Socket-Free Uncertain Barrier Failure Foundation — 2026-10-21
 
 Approved isolated API tests/synthetic bytes/virtual clocks only. Uploader owns

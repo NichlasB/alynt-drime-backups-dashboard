@@ -1,5 +1,16 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest native successor (2026-10-21): uploader
+docs/V2_3_UNCERTAIN_BARRIER_NO_FAULT_OWNED_PROOF.md owns the NEW terminal owner's
+genuine authentication/committed no-fault proof and independent cleanup. One
+accepted attempt,958 worker checks/10 denials,24 guards; suppression and contention
+disabled,all77 application checksums unchanged. This closes only the new owner's
+no-fault prerequisite,not actual uncertain/wait/timeout qualification. Next gate:
+Plugin Tester local-only Terminal-Owner Selected-Uncertain Control and Bounded
+Barrier Contention/Timeout Owned Proof,with new source/channel/helper,fixture
+locking/response-discard and cleanup approval. Existing design governs that
+next proof;no new native experiment or production wiring is authorized here.
+
 Latest isolated successor (2026-10-21): uploader
 docs/V2_3_SOCKET_FREE_UNCERTAIN_BARRIER_FOUNDATION.md implements the approved
 socket-free terminal/API/byte contracts. No real wait, private native IPC or
