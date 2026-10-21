@@ -1,5 +1,41 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Qualification Genuine Request / No-Fault Owned Proof — 2026-10-21
+
+Approved Plugin Tester local-only proof; uploader owns
+`docs/V2_3_QUALIFICATION_NATIVE_NO_FAULT_PROOF.md`. This is the successor to the
+fixed request-entry/private stdio design below, not production activation.
+Earlier failures remain historical. A passive diagnostic found the unchanged
+4096-frame relay cap exhausted by independent guard-prelude traffic; isolation
+preserved every guard, source comparison, timeout and resource bound.
+
+Separate genuine-core prelude **266 checks/11 groups**, with its own process,
+fixture prefix and independent cleanup, passed before a fresh qualification
+relay/fixture lifetime. The **one** newly approved no-fault attempt then passed:
+same source-pinned owned composition/original retained root, actual true return,
+8 pre/2 post guards,40 protected projections/one disposable-ledger DML attempt,
+one actual qualifier entry/return and actual committed/current-acceptance result.
+Original slots empty, exact private EOF/process/pipes and native profile/drain;
+three pairs/6 byte-equal streams, per-pair1404/897/1434 frames below4096.
+Both lifetimes: sessions absent, ten locks available, owned tables/users removed,
+all77 application checksums/original digests unchanged. Independent post-check:
+77 tables/zero fixtures/zero owned proof processes. No suppression or wiring.
+
+Canonical source-scoped Light/Bloat/03/04/06/07/07A/final Feature Security and
+isolated validation are owned by the uploader record; local/CI publication evidence
+is recorded in the toolkit, never inferred from old runs. Dashboard changes are
+two plan/design documents only. Uploader0.5.25/dashboard0.1.77 unchanged, not an RC;
+no Database Review/full-release refresh, package/release/tag/deploy or client action.
+Original final-class direct execution and real uncertain qualification are not
+established by this instrumented no-fault composition proof.
+
+Implementation-plan progress: genuine same-root no-fault qualification and physical
+cleanup milestone advanced; the next meaningful boundary remains gated.
+**Recommended next gated slice: local-only V2.3 Fixed Qualification Worker
+Selected COMMIT Response-Loss and Uncertain Observation Integration Design**,
+design-only approval. Keep further native experiments, storage writes, response
+suppression, production wiring, grants, activation and rollback disabled.
+
 ## V2.3 Fixed Qualification Request-Entry / Private Stdio Integration Design — 2026-10-21
 
 Approved repository-only/design-only; owner:
