@@ -1,5 +1,12 @@
 # V2.3 Same-Root Fixed Native Boundary Integration Design
 
+Successor owned no-fault evidence: uploader
+docs/V2_3_SAME_ROOT_NATIVE_ADAPTER_OWNED_PROOF.md (2026-10-21), approved exact
+Plugin Tester target/fixtures. New fixed proof composition, genuine guards and
+one real fixture-ledger CAS/barrier/cleanup;2214 checks/15 groups,77 application
+checksums unchanged. The final unavailable entry/production wiring stay closed.
+Real uncertain-COMMIT and physical-failure proof remain separate approval gates.
+
 Approved isolated implementation successor: uploader
 docs/V2_3_SAME_ROOT_NATIVE_BOUNDARY_ADAPTER_FOUNDATION.md. Fixed native primitive
 composition and phase/guard/release integration now implemented behind a literal
