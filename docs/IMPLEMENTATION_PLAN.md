@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Same-Root Native Adapter Selected-Loss Qualification Design — 2026-10-21
+
+Approved repository-only/design-only; owner:
+[selected-loss qualification design](V2_3_SAME_ROOT_NATIVE_ADAPTER_SELECTED_LOSS_DESIGN.md).
+Specify a NEW fixed passive qualifier/factory observation composition, four-role/
+eight-stream registry, two idle bindings at guards9/21 and strict new transcript.
+Do not reuse the legacy admission-only false/8+0 predicate for this24-guard native
+root. Actual uncertain qualification, fresh closed native observation, exact
+11-byte witness/accounting and independent preservation/cleanup are conjunctive.
+Original clocks, guards and native limits unchanged; no runtime implementation.
+
+Implementation-plan progress: R1 uncertainty proof integration contract advances,
+not its physical proof; R2-R7 readiness and production wiring remain NO-GO.
+No authentication/storage/native/fixture/listener/suppression/wiring/grant/
+activation/rollback/version/package/release/deploy action. **Recommended next
+gated slice: local-only V2.3 Socket-Free Same-Root Native Qualification Observation
+and Transcript Safety Foundation**, isolated API tests/synthetic bytes/virtual
+clocks only; keep IPC, authentication, storage, native execution, suppression
+and production wiring disabled. Separate native prerequisite/proof approval later.
+
 ## V2.3 Same-Root Native Adapter Genuine Guard and No-Fault Owned Proof — 2026-10-21
 
 Approved/confirmed Plugin Tester local-only, owned disposable users/storage,

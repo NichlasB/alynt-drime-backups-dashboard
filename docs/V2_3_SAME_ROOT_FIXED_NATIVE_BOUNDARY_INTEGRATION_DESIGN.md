@@ -1,5 +1,13 @@
 # V2.3 Same-Root Fixed Native Boundary Integration Design
 
+Approved design-only successor:
+[Same-Root Native Adapter Selected-Loss Qualification Design](V2_3_SAME_ROOT_NATIVE_ADAPTER_SELECTED_LOSS_DESIGN.md).
+Defines new four-role/two-binding private proof semantics for actual uncertain
+qualification followed by a fresh native observation, not the legacy false/8+0
+admission-only proof. No native experiment, storage write, response suppression,
+source/manifest/worker or production wiring change. Next gate is the socket-free
+Same-Root Native Qualification Observation and Transcript Safety Foundation.
+
 Successor owned no-fault evidence: uploader
 docs/V2_3_SAME_ROOT_NATIVE_ADAPTER_OWNED_PROOF.md (2026-10-21), approved exact
 Plugin Tester target/fixtures. New fixed proof composition, genuine guards and
