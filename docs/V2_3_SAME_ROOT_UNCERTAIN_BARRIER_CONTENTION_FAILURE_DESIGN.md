@@ -1,5 +1,13 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest isolated successor (2026-10-21): uploader
+docs/V2_3_SOCKET_FREE_UNCERTAIN_BARRIER_FOUNDATION.md implements the approved
+socket-free terminal/API/byte contracts. No real wait, private native IPC or
+physical failure/cleanup proof. Next gate is new terminal-owner genuine
+authentication and no-fault integration/owned cleanup, not selected loss or
+contention. Production wiring remains disabled; original design permission and
+next-gate statements below are historical, not authority for native operations.
+
 2026-10-21. Approved **design-only**, repository records only. No executable,
 test, manifest, schema, version or public contract changes. Storage writes,
 authentication, WordPress operations, native execution, experiments, response

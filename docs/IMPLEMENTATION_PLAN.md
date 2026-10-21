@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Uncertain Barrier Failure Foundation — 2026-10-21
+
+Approved isolated API tests/synthetic bytes/virtual clocks only. Uploader owns
+docs/V2_3_SOCKET_FREE_UNCERTAIN_BARRIER_FOUNDATION.md: new passive original-root
+terminal capture, bounded positive/refused DATA, separate canonical six-frame
+contention model, virtual byte-credit accounting and candidate timeout/rollback
+drain. Definition-only owner and production entry remain literal-false; original
+source pins, native primitives, loader and public surface unchanged. No actual
+authentication/WordPress/storage/native/private-channel/suppression/wiring action.
+
+Implementation-plan progress: R1 isolated failure contract implemented; actual
+new-composition genuine/no-fault and joined uncertain contention/failure evidence
+still missing, R2-R7 NO-GO. No generic cleanup or release/package task is next.
+**Recommended next gated slice: Plugin Tester local-only V2.3 Uncertain Barrier
+Terminal Owner Genuine Authentication and No-Fault Integration/Owned Cleanup
+Proof**, with separate exact-target/owned users/storage/listeners/processes and
+cleanup approval. No blocker contention/selected loss, production wiring,
+grant, activation or rollback. Physical failure proof stays later gated.
+Validation and exact-head publication evidence: source-scoped toolkit checklist;
+historical whole-plugin release-readiness rows unchanged.
+
 ## V2.3 Same-Root Uncertain Barrier Contention/Failure Design — 2026-10-21
 
 Approved repository-only/design-only; owner:
