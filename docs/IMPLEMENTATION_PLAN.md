@@ -1,5 +1,32 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Qualification Selected Loss / Uncertain Observation Integration Design — 2026-10-21
+
+Approved repository-only/design-only; owner:
+[selected qualification integration design](V2_3_FIXED_QUALIFICATION_SELECTED_LOSS_INTEGRATION_DESIGN.md).
+Preserve proven native no-fault worker/grammar and original source identities.
+Select a separate fixed selected worker/transcript, same original retained root
+and actual qualifier, false-root consumed observation and exact8/0 guards/40/1 IO.
+No old join helper may replace the owned composition or reinterpret false as success.
+
+External exact11-byte COMMIT reply loss/zero target writes, actual uncertain result,
+copied client-release boolean, source erasure, private EOF/process settlement and
+independent ledger/session/lock/fixture/application audit are separate conjuncts.
+Selected writer has no successful drain expectation; only its exact withheld
+suffix is excepted from equality. Original guards, budgets, resource caps and
+independently isolated genuine prelude/no-fault prerequisites remain mandatory.
+
+Three dashboard documents only; uploader9a608fed unchanged, no runtime contract or
+version change. Canonical source-scoped Light/final Feature Security and validation
+limits in owner/toolkit, no native/site/storage/suppression/wiring/release action.
+
+Implementation-plan progress: selected uncertainty integration design advances
+the open provenance milestone; actual selected qualification remains unproven.
+**Recommended next gated slice: local-only V2.3 Socket-Free Selected Qualification
+Observation and Transcript Safety Foundation**, isolated API/synthetic bytes and
+virtual clocks only. Keep native entry dormant, authentication/storage/IPC/native
+experiments, response suppression, production wiring, activation and rollback disabled.
+
 ## V2.3 Fixed Qualification Genuine Request / No-Fault Owned Proof — 2026-10-21
 
 Approved Plugin Tester local-only proof; uploader owns

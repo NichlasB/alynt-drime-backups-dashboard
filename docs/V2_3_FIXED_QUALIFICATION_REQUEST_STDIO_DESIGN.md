@@ -1,5 +1,13 @@
 # V2.3 Fixed Qualification Worker Request-Entry and Private Stdio Integration Design
 
+Design successor: [selected COMMIT response-loss / uncertain observation integration](V2_3_FIXED_QUALIFICATION_SELECTED_LOSS_INTEGRATION_DESIGN.md).
+Following the separately approved successful no-fault proof, this design selects
+a distinct fixed selected worker/grammar and false-root actual observation path,
+not a selected mode in the proven no-fault runner. Exact reply-loss accounting,
+unchanged guards/clocks/erasure and independent cleanup remain mandatory. It is
+design-only; no native experiment, suppression or production wiring is enabled.
+Next gate is the socket-free selected qualification observation/transcript foundation.
+
 2026-10-21. Approved **repository-only, design-only**. No executable change,
 WordPress bootstrap/authentication, storage/SQL, fixture, process/pipe/socket,
 native transaction or response-loss experiment. Production wiring, grants,
