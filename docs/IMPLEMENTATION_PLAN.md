@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Same-Root Fixed Native Boundary Integration Design — 2026-10-21
+
+Approved design-only; owner:
+[fixed native boundary integration](V2_3_SAME_ROOT_FIXED_NATIVE_BOUNDARY_INTEGRATION_DESIGN.md).
+Maps six unavailable boundaries to fixed existing native helpers under one new
+dormant composition, with separate capture/admission/barrier ownership. Explicit
+post-writer-setup mutation rechecks and post-barrier-setup read rechecks precede
+BEGIN; acknowledged zero-DML barrier and confirmed close precede DATA parsing
+and fresh post-close authorization. Terminal cleanup cannot reopen, resend or
+reuse erased writer outcome state. Original bounds/profile/one-ledger-write
+contract preserved; candidate absence is not native barrier or retry evidence.
+
+Three dashboard docs only, uploader source inspected read-only. No storage,
+WordPress/native/fixture/wiring/grant/activation/rollback/version/package/release/
+deploy action. Implementation-plan progress: R1 native ownership/guard/release
+joins now specified; actual native integration and production readiness remain
+open. **Recommended next gated slice: local-only V2.3 Same-Root Fixed Native
+Boundary Adapter Safety Foundation**, dormant isolated API tests only, with
+actual authentication/storage/native execution and production wiring disabled.
+
 ## V2.3 Same-Root Closed Admission/Observation Lifecycle Integration Foundation — 2026-10-21
 
 Approved local-only, isolated API tests only; uploader owns

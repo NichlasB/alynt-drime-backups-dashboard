@@ -1,5 +1,13 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Approved design-only successor:
+[Same-Root Fixed Native Boundary Integration Design](V2_3_SAME_ROOT_FIXED_NATIVE_BOUNDARY_INTEGRATION_DESIGN.md)
+maps fixed native helpers and specifies separate ownership, post-setup guards,
+acknowledged barrier release before parsing and terminal cleanup without repeat IO.
+No native helper or production wiring installed. Its next separately gated slice
+is the dormant Same-Root Fixed Native Boundary Adapter Safety Foundation with
+isolated API tests only. The historical decisions below remain unchanged.
+
 Approved isolated successor: uploader
 docs/V2_3_SAME_ROOT_LIFECYCLE_INTEGRATION_FOUNDATION.md owns the new dormant
 same-root coordinator and positive/refusal tests with IO/physical API doubles.
