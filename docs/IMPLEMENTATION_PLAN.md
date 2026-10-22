@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Exact-Wait Witness Window Design — 2026-10-22
+
+See [owning design](V2_3_EXACT_WAIT_WITNESS_WINDOW_EXECUTE_COORDINATION_DESIGN.md).
+Design-only source review identifies20ms monitor polling versus MariaDB10.6.23's
+strict100ms cache idle rule,and polling before actual safety execute. This is a
+source-backed risk,not retrospective native root-cause proof. Preferred future
+design:arm once,retain original2.5s deadline,trigger only after original credited
+upstream first safety execute,125ms minimum quiet gaps,unchanged exact match and
+query/traffic/time limits. No implementation,native rerun or site access here.
+
+Implementation-plan progress:R1 cache/coordination design advances;physical exact
+wait/released acceptance BLOCKED,R2-R7 NO-GO. Recommended next gated slice:local-only
+V2.3 Socket-Free Cache-Aware Wait-Witness Scheduling and Execute-Credit Safety
+Foundation,synthetic bytes/virtual clocks only. No real timers/IPC/networking,
+WordPress,storage,native execution or production wiring in that foundation.
+
 ## V2.3 Passive Barrier Progress Diagnostics Successor — 2026-10-22
 
 Uploader owns docs/V2_3_BARRIER_PROGRESS_DIAGNOSTICS_OWNED_PROOF.md. Approved

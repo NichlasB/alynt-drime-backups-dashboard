@@ -1,5 +1,14 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 design-only successor (2026-10-22):
+[exact-wait window/execute coordination](V2_3_EXACT_WAIT_WITNESS_WINDOW_EXECUTE_COORDINATION_DESIGN.md).
+Source-backed cache/early-poll risks,not a new native proof. Proposed one arm
+deadline,credited first safety execute and125ms quiet gaps keep original budgets
+and matching-wait predicate. No runtime/contract/version/wiring change;native seal
+unchanged. R1 physical exact-wait/released acceptance BLOCKED,R2-R7 NO-GO. Next
+gated slice:local-only socket-free cache-aware scheduling/execute-credit foundation,
+synthetic bytes/virtual clocks only,no real timers/IPC/network/storage/native use.
+
 Latest R1 passive barrier diagnostic successor (2026-10-22):uploader
 docs/V2_3_BARRIER_PROGRESS_DIAGNOSTICS_OWNED_PROOF.md. Genuine/no-fault/selected
 uncertain controls pass;released fails missing exact wait,held NOT RUN,no retry.

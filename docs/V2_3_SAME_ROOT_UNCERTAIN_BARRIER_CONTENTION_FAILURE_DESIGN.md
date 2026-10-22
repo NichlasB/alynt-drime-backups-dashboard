@@ -1,5 +1,14 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest design-only successor (2026-10-22):
+[exact-wait window/execute coordination](V2_3_EXACT_WAIT_WITNESS_WINDOW_EXECUTE_COORDINATION_DESIGN.md).
+Version-pinned cache idle behavior and early polling identified as source risks,
+not proven native cause. Future single arm deadline/post-write credited safety
+trigger/125ms quiet gap preserves exact identity and existing caps. No harness
+edit,source reseal,site operation or experiment. R1 physical qualification remains
+BLOCKED,R2-R7 NO-GO. Next approval:socket-free cache-aware scheduling/execute-credit
+DATA foundation,synthetic bytes/virtual clocks only;real integration stays gated.
+
 Latest passive barrier diagnostic successor (2026-10-22):uploader
 docs/V2_3_BARRIER_PROGRESS_DIAGNOSTICS_OWNED_PROOF.md. Fresh genuine/no-fault/
 selected uncertain controls pass;released fails matching wait witness after22
