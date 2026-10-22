@@ -1,5 +1,15 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+R2 design successor (2026-10-22):[entry surface and request policy](V2_3_REAL_AUTHENTICATED_CLOSED_ENTRY_REQUEST_POLICY_DESIGN.md)
+selects future uploader-local authenticated admin-post POST,strict unique bounded
+form,distinct GET small-nonce issuer,four domains and original same-request
+authorization/release/cleanup. No hook/loader/entry activation or runtime change;
+nonce/latch is not cross-request deduplication. R2 design selected,not integrated;
+R3-R7 gated,production NO-GO. Next gated slice:local-only V2.3 Closed Entry Ingress
+and Request-Policy Safety Foundation (R2),synthetic bytes/isolated API tests only;
+actual authentication,storage/native execution,wiring/grants/activation/rollback
+disabled. R1 historical fixed-local joined acceptance does not prove HTTP ingress.
+
 Latest R1 joined qualification (2026-10-22):uploader owns
 docs/V2_3_BLOCKER_ROLLBACK_ACK_CORRECTION_OWNED_PROOF.md. Strict numeric projection
 repairs ON/string1 mismatch without relaxing guards. Fresh prerequisites and ONE
@@ -280,7 +290,7 @@ because its storage is closed and internally consistent.
 | Gate | Required before a production integration proposal; current disposition |
 |---|---|
 | R1 Same-root closed lifecycle | Fixed Plugin Tester combined uncertain-admission contention/failure acceptance now satisfied: uploader docs/V2_3_BLOCKER_ROLLBACK_ACK_CORRECTION_OWNED_PROOF.md records fresh genuine/no-fault/selected controls, released actual wait/acknowledged release/successful original barrier and held actual wait/exact1205/rollback refusal suffix with independent cleanup. This is joined fixed-composition evidence under the [acceptance contract](V2_3_SAME_ROOT_UNCERTAIN_BARRIER_CONTENTION_FAILURE_DESIGN.md),not standalone synthetic receipts. No public wiring,other-host compatibility or production-readiness claim. |
-| R2 Real authenticated entry | Fixed local capability/nonce domains, exact method/body/bounds, current blog/context and same-request provenance. Decide entry surface separately; no public REST/AJAX/admin hook or remote action is added here. Default unavailable/no protected reads must remain until approved integration. No grant from pairing or remote-action opt-in. |
+| R2 Real authenticated entry | [Approved design](V2_3_REAL_AUTHENTICATED_CLOSED_ENTRY_REQUEST_POLICY_DESIGN.md) selects uploader-local authenticated admin-post POST,strict raw/posted form agreement,separate GET small-nonce issuer,current capability/cookie/blog guards and four existing nonce domains. Design only:ingress/policy implementation,genuine HTTP proof and later wiring remain gated;no hook/REST/AJAX/remote action installed. Public/native entries remain unavailable. Pairing,remote opt-in,nonce or in-request latch supplies neither authority nor cross-HTTP exactly-once. |
 | R3 Storage provisioning and coherence | Explicit reviewed closed-state creation/version/migration policy, absent/duplicate/autoloaded/malformed/oversized rows blocked, exact metadata and serialization. Native admission updates only its one existing ledger row; it cannot create missing rows. No opportunistic setup on status/read, reset, cache-based authority or adoption of fixture tables. Direct SQL and WordPress/object-cache readers need an explicit consistency/invalidation policy. |
 | R4 Supported native target | Prove the exact intended runtime/profile under separate target approval; unsupported DB_HOST/socket/driver/server/version remains unavailable. No production credential probing, compatibility expansion or host check in this design. |
 | R5 Closed lifecycle operations | Define revoke/re-pair/settings change, concurrent workers, deactivate/reinstall/downgrade/uninstall and capacity/retention ownership before shipping the closed surface. User/session state is outside the ten option locks. Do not equate lifecycle closure with process cancellation. |

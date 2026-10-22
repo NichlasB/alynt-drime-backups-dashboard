@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Real Authenticated Closed Entry Policy Design (R2) — 2026-10-22
+
+See [owning design](V2_3_REAL_AUTHENTICATED_CLOSED_ENTRY_REQUEST_POLICY_DESIGN.md).
+Select future uploader-local authenticated admin-post POST,exact four wire keys,
+bounded duplicate-aware raw ingress/one domain unslash,separate GET small-nonce
+issuer and genuine POST guards/four nonce domains. No public lookup,remote/REST/
+AJAX/CLI surface,nonce replay guarantee or automatic retry. No runtime change.
+
+Implementation-plan progress:R2 policy selected,not implemented;R1 fixed local
+proof retained,production NO-GO,R3-R7 gated. Next gated slice:local-only V2.3
+Closed Entry Ingress and Request-Policy Safety Foundation (R2),synthetic bytes/
+isolated API tests only. Keep actual authentication,storage/native execution,
+hooks/loader/wiring,grants,activation and rollback disabled.
+
 ## V2.3 Blocker Rollback Correction / Joined Proof — 2026-10-22
 
 Uploader owns docs/V2_3_BLOCKER_ROLLBACK_ACK_CORRECTION_OWNED_PROOF.md. Strict
