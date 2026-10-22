@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Blocker Rollback Correction / Joined Proof — 2026-10-22
+
+Uploader owns docs/V2_3_BLOCKER_ROLLBACK_ACK_CORRECTION_OWNED_PROOF.md. Strict
+numeric projection repairs ON/string1 mismatch;13 actual-branch regressions.
+Fresh one ordered proof passes:genuine266/11,no-fault controls960/24,
+selected/released960/24 and held936/22 exact1205/rollback refusal. Both actual
+owned waits,acknowledged rollback and independent cleanup pass;77 checksums
+unchanged,zero residue. No dashboard runtime/version/contract/wiring change.
+
+Implementation-plan progress:R1 combined contention/failure acceptance satisfied
+for fixed Plugin Tester composition;production NO-GO,R2-R7 gated. Next gated
+slice:local-only V2.3 Real Authenticated Closed Entry Surface and Request Policy
+Design (R2),design-only with writes,native execution,public wiring,grants,
+activation and rollback disabled. Do not substitute generic maintenance.
+
 ## V2.3 Cache-Aware Exact-Wait Owned Attempt — 2026-10-22
 
 Uploader owns docs/V2_3_CACHE_AWARE_EXACT_WAIT_OWNED_PROOF.md. Fresh genuine266/11,

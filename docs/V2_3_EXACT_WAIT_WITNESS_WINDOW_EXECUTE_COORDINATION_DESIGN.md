@@ -1,5 +1,16 @@
 # V2.3 Exact-Wait Witness Window and First-Safety-Execute Coordination Design
 
+Successful corrected successor (2026-10-22):uploader owns
+docs/V2_3_BLOCKER_ROLLBACK_ACK_CORRECTION_OWNED_PROOF.md. Numeric projection fixes
+ON/string1 mismatch;strict raw acknowledgement/closed-state guards preserved.
+Fresh prerequisites and ONE released960/24/held936/22 ordered proof pass with
+actual exact wait on query1 each,acknowledged blocker rollback and expected held
+1205/refusal suffix. Full owned cleanup/77 unchanged checksums,zero residue.
+R1 fixed-composition combined acceptance satisfied,not production readiness;
+R2-R7 gated. Next gated slice:design-only local V2.3 Real Authenticated Closed
+Entry Surface and Request Policy Design (R2);writes,native execution,wiring,
+grants,activation and rollback stay disabled. Earlier failed proof is historical.
+
 Owned exact-wait attempt (2026-10-22):uploader owns
 docs/V2_3_CACHE_AWARE_EXACT_WAIT_OWNED_PROOF.md. Exact owned wait observed on one
 cache-spaced query;original released worker960/24/barrier COMMIT/drain passes.
