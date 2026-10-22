@@ -1,5 +1,15 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 bootstrap successor (2026-10-22): uploader
+docs/V2_3_HELPER_BOOTSTRAP_OWNED_PROOF.md. UB10 repaired;actual PHP dependency
+regressions and fresh genuine/no-fault/selected uncertain controls pass. Both
+direct helpers now start;released case fails after22 guards without accepted
+wait/rollback witness,held NOT RUN. Independent cleanup/77 checksums preserved,
+zero final residue,no retry. R1 joined wait/timeout BLOCKED,R2-R7 NO-GO. Next gated
+approval:support-safe direct-helper lock/wait stage diagnostics,source-backed
+regressions,fresh prerequisites and ONE new ordered local proof. Physical cause
+unresolved;production guards,budgets,wiring,grants,activation and rollback unchanged.
+
 Latest R1 startup/recovery successor (2026-10-22): uploader
 docs/V2_3_HELPER_STARTUP_RECOVERY_OWNED_PROOF.md. Approved63-file helper path/
 ownership repair recovered exact retained fixtures;fresh genuine/no-fault and

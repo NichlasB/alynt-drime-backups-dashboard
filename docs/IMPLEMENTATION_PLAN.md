@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Helper Bootstrap Repair and Ordered Proof Successor — 2026-10-22
+
+Uploader owns docs/V2_3_HELPER_BOOTSTRAP_OWNED_PROOF.md. UB10 fixed with unchanged
+production guards:ABSPATH before transitive manifest,duplicate declaration uses
+require_once. Actual PHP prefix positive/negative regressions3/134,related53/1195
+and52 Node groups pass. Frozen63-file closure;fresh genuine266/11,no-fault960/24
+and selected uncertain960/24 pass. Both direct helpers now start;released case
+fails after22 guards without actual wait/rollback witness. Held NOT RUN,no retry.
+All owned cleanup passed,77 application checksums/digests preserved before/after
+DROP;zero final fixture/session/transaction/process residue. Dashboard docs only.
+
+Implementation-plan progress:R1 bootstrap/dependency protection advances;joined
+wait/timeout remains BLOCKED,R2-R7 NO-GO. Recommended next gated slice:harness-only
+support-safe direct-helper lock/wait stage diagnostics,source-backed regressions,
+fresh prerequisites and ONE new ordered proof on same confirmed local Plugin
+Tester. Exact physical failure is unresolved;preserve guards,budgets,state and
+disabled wiring. Generic maintenance is not the next meaningful plan milestone.
+
 ## V2.3 Windows Helper Startup/Recovery Successor — 2026-10-22
 
 Uploader owns docs/V2_3_HELPER_STARTUP_RECOVERY_OWNED_PROOF.md. Approved63-file

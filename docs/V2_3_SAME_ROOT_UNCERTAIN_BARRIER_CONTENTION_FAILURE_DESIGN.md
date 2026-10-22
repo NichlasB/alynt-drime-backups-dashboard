@@ -1,5 +1,15 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest approved bootstrap successor (2026-10-22): uploader
+docs/V2_3_HELPER_BOOTSTRAP_OWNED_PROOF.md. UB10 repaired with actual PHP dependency
+regressions3/134;fresh genuine/no-fault/selected uncertain controls pass. Both
+direct helpers start;released-contention fails after22 guards,no accepted wait/
+rollback witness. Held NOT RUN. All cleanup/77 app checksums preserved before and
+after DROP,zero final residue;no retry or production change. R1 joined wait/timeout
+BLOCKED,R2-R7 NO-GO. Next gated slice:support-safe helper lock/wait stage diagnostics
+and source-backed regressions,fresh prerequisites and ONE new ordered local proof.
+No physical index/timeout cause established;do not weaken guards/budgets/wiring.
+
 Latest approved startup/recovery successor (2026-10-22): uploader
 docs/V2_3_HELPER_STARTUP_RECOVERY_OWNED_PROOF.md. Fixed canonical path/owner-before-
 start,exact retained fixture recovery with current77 checksum/digest preservation.
