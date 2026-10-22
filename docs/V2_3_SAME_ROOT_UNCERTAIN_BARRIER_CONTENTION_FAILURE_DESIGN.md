@@ -1,5 +1,17 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest approved startup/recovery successor (2026-10-22): uploader
+docs/V2_3_HELPER_STARTUP_RECOVERY_OWNED_PROOF.md. Fixed canonical path/owner-before-
+start,exact retained fixture recovery with current77 checksum/digest preservation.
+Fresh genuine/no-fault/selected uncertain terminal passed. Released helper closes
+before HELLO/relay/worker;new initial cleanup passed8/0/0 rows,77 application
+checksums preserved. Held NOT RUN;no final fixtures/sessions/transactions/native
+processes. UB10 manifest require before ABSPATH confirmed socket-free exit0;
+no production guard removal or retry. R1 wait/timeout BLOCKED,R2-R7 NO-GO.
+Next gated slice: harness-only socket-free helper bootstrap/include-order repair,
+source-backed actual PHP dependency preflight,fresh prerequisites and ONE new
+ordered proof on same confirmed local target. Guards/budgets/wiring unchanged.
+
 Latest approved repair successor (2026-10-22): uploader
 docs/V2_3_METADATA_ROLE_REPAIR_OWNED_PROOF.md. UB6/UB7 corrected with source-backed
 RED2/GREEN26 and62-file closure. Fresh genuine/no-fault and selected uncertain

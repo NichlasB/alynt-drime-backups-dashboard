@@ -1,5 +1,16 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 startup/recovery successor (2026-10-22): uploader
+docs/V2_3_HELPER_STARTUP_RECOVERY_OWNED_PROOF.md. Approved63-file helper path/
+ownership repair recovered exact retained fixtures;fresh genuine/no-fault and
+selected uncertain terminal passed. Released helper exits before HELLO due to
+manifest-before-ABSPATH include order;new pre-worker initial cleanup passed,
+77 application checksums preserved,no final fixture/session/process residue.
+Held NOT RUN;R1 joined contention/timeout BLOCKED,R2-R7 NO-GO. Next gated approval:
+harness-only socket-free helper bootstrap/include-order repair,actual PHP source-
+dependency preflight/regressions,fresh prerequisites and ONE new ordered local
+proof. Original production guards,limits and disabled wiring remain unchanged.
+
 Latest R1 repair successor (2026-10-22): uploader
 docs/V2_3_METADATA_ROLE_REPAIR_OWNED_PROOF.md. New62-file harness/source-backed
 repair now passes genuine/no-fault AND selected uncertain terminal with cleanup

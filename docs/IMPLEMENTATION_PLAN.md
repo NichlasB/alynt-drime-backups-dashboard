@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Windows Helper Startup/Recovery Successor — 2026-10-22
+
+Uploader owns docs/V2_3_HELPER_STARTUP_RECOVERY_OWNED_PROOF.md. Approved63-file
+test-only repair canonicalizes fixed helper argv and retains owner before async
+start. Exact retained fixtures recovered,77 application checksums/digests preserved
+against CURRENT recovery baseline (not a restored historical baseline). Fresh
+guard266/11,no-fault960/24 and selected uncertain960/24 passed. Released failed
+direct_closed before HELLO/relay/worker;new initial cleanup PASSED8/0/0 rows,
+original-lifetime77 checksums preserved. Held NOT RUN. Zero final owned fixtures/
+sessions/transactions/native processes;no retry,dashboard runtime/wiring unchanged.
+
+Implementation-plan progress:R1 startup-failure cleanup/recovery advances;joined
+contention/timeout BLOCKED by UB10 helper manifest-before-ABSPATH include order,
+source-only exit0/no continuation reproduced. R2-R7 NO-GO. Recommended next gated
+slice: harness-only socket-free helper bootstrap/include-order repair,actual PHP
+dependency preflight/regressions,fresh prerequisites and ONE new ordered proof on
+the same confirmed local target. Preserve guards/budgets/state and disabled wiring.
+
 ## V2.3 Metadata/Safety Repair and Ordered Proof Successor — 2026-10-22
 
 Uploader owns docs/V2_3_METADATA_ROLE_REPAIR_OWNED_PROOF.md. Approved62-file
