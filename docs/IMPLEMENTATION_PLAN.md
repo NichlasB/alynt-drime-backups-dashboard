@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Direct-Helper Wait Diagnostics Successor — 2026-10-22
+
+Uploader owns docs/V2_3_HELPER_WAIT_DIAGNOSTICS_OWNED_PROOF.md. Approved65-file
+failure-only diagnostics preserve native statements/guards/budgets. Source-backed
+PHP3/140 and7 Node groups;related56/1335 and59 Node pass. Fresh genuine266/11,
+no-fault960/24 and selected uncertain960/24 pass. Released failed after22 guards;
+first helper failure monitor/watch_missing/helper_wait_missing/code0. No actual
+wait/rollback witness or successful barrier;held NOT RUN,no retry. All owned
+cleanup/77 checksums preserved before/after DROP,zero final residue. Docs only.
+
+Implementation-plan progress:R1 observability advances;joined wait/timeout BLOCKED,
+R2-R7 NO-GO. Exact next gated slice:harness-only passive barrier-progress/failure
+diagnostics and source-backed pre-BEGIN/first-safety-read regressions,fresh
+prerequisites and ONE ordered local Plugin Tester proof. Missing monitor witness
+is not a proven timeout/index cause. Preserve primitives,guards,budgets,state and
+disabled wiring;generic maintenance is not the next meaningful plan milestone.
+
 ## V2.3 Helper Bootstrap Repair and Ordered Proof Successor — 2026-10-22
 
 Uploader owns docs/V2_3_HELPER_BOOTSTRAP_OWNED_PROOF.md. UB10 fixed with unchanged

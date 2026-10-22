@@ -1,5 +1,16 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 diagnostic successor (2026-10-22):uploader
+docs/V2_3_HELPER_WAIT_DIAGNOSTICS_OWNED_PROOF.md. Failure-only helper stage/reason/
+code diagnostics and fresh genuine/no-fault/selected uncertain controls pass.
+Released fails after22 guards with monitor/watch_missing/helper_wait_missing/code0;
+no actual wait or successful barrier,held NOT RUN. Independent cleanup/77 app
+checksums preserved,zero final residue,no retry. R1 observability advances but
+joined wait/timeout BLOCKED,R2-R7 NO-GO. Next gated approval:passive harness-only
+barrier-progress/failure diagnostics and source-backed pre-BEGIN/first-safety-read
+regressions,fresh prerequisites and ONE ordered local proof. No timeout/index
+cause inferred;production primitives,guards,budgets,wiring and execution unchanged.
+
 Latest R1 bootstrap successor (2026-10-22): uploader
 docs/V2_3_HELPER_BOOTSTRAP_OWNED_PROOF.md. UB10 repaired;actual PHP dependency
 regressions and fresh genuine/no-fault/selected uncertain controls pass. Both

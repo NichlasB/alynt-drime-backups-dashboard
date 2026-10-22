@@ -1,5 +1,16 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest approved diagnostic successor (2026-10-22):uploader
+docs/V2_3_HELPER_WAIT_DIAGNOSTICS_OWNED_PROOF.md. Fixed failure-only vocabulary,
+source-backed tests and fresh genuine/no-fault/selected uncertain controls pass.
+Released fails after22 guards;actual first helper failure is monitor/watch_missing/
+helper_wait_missing/code0,not a measured database timeout/index cause. Held NOT
+RUN,no retry;independent cleanup/77 app checksums preserved,zero final residue.
+R1 observability advances,joined wait/timeout BLOCKED,R2-R7 NO-GO. Next gated slice:
+passive harness-only barrier-progress/failure diagnostics and source-backed
+pre-BEGIN/first-safety-read tests,fresh prerequisites and ONE new ordered local
+proof. Preserve production primitives,guards,budgets and disabled wiring.
+
 Latest approved bootstrap successor (2026-10-22): uploader
 docs/V2_3_HELPER_BOOTSTRAP_OWNED_PROOF.md. UB10 repaired with actual PHP dependency
 regressions3/134;fresh genuine/no-fault/selected uncertain controls pass. Both
