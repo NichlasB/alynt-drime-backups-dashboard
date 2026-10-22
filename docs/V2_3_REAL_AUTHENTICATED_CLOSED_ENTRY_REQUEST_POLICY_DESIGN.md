@@ -1,5 +1,14 @@
 # V2.3 Real Authenticated Closed Entry Surface and Request Policy Design (R2)
 
+Successor implementation record (2026-10-22):uploader owns
+docs/V2_3_CLOSED_ENTRY_INGRESS_POLICY_FOUNDATION.md. Strict dormant ingress and
+fixed policy DATA are now implemented with synthetic bytes/isolated APIs only.
+This does not establish genuine authentication,actual HTTP framing,nonce issuance
+or native/public wiring. The design below remains the prospective full contract;
+its original validation is historical. Current next gated slice:local-only V2.3
+Fixed Genuine Closed-Entry Request Owner and Bounded Raw Reader Integration
+Design (R2),design-only;no storage/native execution or production wiring.
+
 2026-10-22. Approved repository-only,DESIGN ONLY. No executable/test/config,
 WordPress/user/database,fixture,listener/process,native experiment or site change.
 Storage writes,public registration,wiring,grants,activation and rollback remain
