@@ -1,5 +1,11 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest socket-free successor (2026-10-22):uploader
+docs/V2_3_SOCKET_FREE_CACHE_AWARE_WAIT_WITNESS_FOUNDATION.md. Dormant DATA v2
+contract/credit/virtual window,31 new tests/11 semantic controls;no native source
+change,experiment or wiring. R1 physical qualification BLOCKED,R2-R7 NO-GO. Next
+gate:private stdio/relay integration and owned no-fault proof,not selected loss.
+
 Latest design-only successor (2026-10-22):
 [exact-wait window/execute coordination](V2_3_EXACT_WAIT_WITNESS_WINDOW_EXECUTE_COORDINATION_DESIGN.md).
 Version-pinned cache idle behavior and early polling identified as source risks,

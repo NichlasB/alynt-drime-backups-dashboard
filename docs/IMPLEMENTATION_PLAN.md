@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Cache-Aware Wait-Witness Foundation — 2026-10-22
+
+Uploader owns docs/V2_3_SOCKET_FREE_CACHE_AWARE_WAIT_WITNESS_FOUNDATION.md.
+Dormant v2 DATA contract,exact-table/consumed synthetic execute credit and virtual
+125ms/unchanged2.5s window.31 new Node checks/11 assertion-killed controls;full
+Node793/793,targeted PHP3/71. No native integration,storage,WordPress,source reseal
+or production wiring. This is not actual callback/cache/SQL/wait evidence.
+
+Implementation-plan progress:R1 model advances;physical qualification BLOCKED,
+R2-R7 NO-GO. Next gated slice:Plugin Tester local-only V2.3 Cache-Aware Wait-Witness
+Private Stdio/Relay Integration and Owned No-Fault Cleanup Proof. Fresh exact
+target/owned-fixture confirmation required;selected loss/contention stays gated.
+
 ## V2.3 Exact-Wait Witness Window Design — 2026-10-22
 
 See [owning design](V2_3_EXACT_WAIT_WITNESS_WINDOW_EXECUTE_COORDINATION_DESIGN.md).

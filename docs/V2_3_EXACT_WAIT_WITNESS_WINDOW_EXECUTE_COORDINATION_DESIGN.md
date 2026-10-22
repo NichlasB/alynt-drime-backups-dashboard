@@ -1,5 +1,12 @@
 # V2.3 Exact-Wait Witness Window and First-Safety-Execute Coordination Design
 
+Socket-free successor (2026-10-22):uploader owns
+docs/V2_3_SOCKET_FREE_CACHE_AWARE_WAIT_WITNESS_FOUNDATION.md. Separate v2 synthetic
+grammar/credit/virtual window;31 new tests/11 assertion-killed controls. Original
+native source/seal unchanged;no actual registry/stdio/cache/wait proof. R1 physical
+qualification BLOCKED. Next gated private stdio/relay integration and owned
+no-fault cleanup proof requires fresh exact local target/fixture confirmation.
+
 2026-10-22. Approved DESIGN ONLY. No implementation,native experiment,WordPress
 bootstrap,SQL,fixture,listener/process,storage write or production-wiring change.
 Versions remain dashboard0.1.77/uploader0.5.25. Grants,activation and rollback stay

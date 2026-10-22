@@ -1,5 +1,12 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 socket-free foundation (2026-10-22):uploader
+docs/V2_3_SOCKET_FREE_CACHE_AWARE_WAIT_WITNESS_FOUNDATION.md. Separate synthetic v2
+scheduling/credit model passes31 new tests/11 semantic controls;original native
+source/seal and production contracts/wiring untouched. Physical acceptance remains
+BLOCKED,R2-R7 NO-GO. Next gated private stdio/relay integration/owned no-fault proof
+requires fresh target/fixture confirmation;no selected-loss/contention permission.
+
 Latest R1 design-only successor (2026-10-22):
 [exact-wait window/execute coordination](V2_3_EXACT_WAIT_WITNESS_WINDOW_EXECUTE_COORDINATION_DESIGN.md).
 Source-backed cache/early-poll risks,not a new native proof. Proposed one arm
