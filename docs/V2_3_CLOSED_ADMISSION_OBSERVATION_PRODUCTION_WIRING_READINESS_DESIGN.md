@@ -1,5 +1,16 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 attempted proof (2026-10-22): uploader
+docs/V2_3_UNCERTAIN_BARRIER_NATIVE_OWNED_PROOF.md. Fresh61-file composition's
+genuine/no-fault prerequisite passed;selected control FAILED before barrier bind
+at a harness metadata/safety statement-ID mismatch. No joined wait/timeout case,
+native negative suffix or final uncertain terminal proved. Cleanup complete,
+all77 application checksums preserved;no retry or production change. R1 BLOCKED,
+R2-R7 NO-GO. Exact next gated slice is a harness-only compiled statement-role
+correction/source-backed regressions plus fresh prerequisites and ONE new ordered
+selected/contention/timeout proof on the confirmed Plugin Tester local-only target.
+Additional native-attempt approval required;no production-wiring approval implied.
+
 Latest R1 prerequisite (2026-10-21): uploader
 docs/V2_3_UNCERTAIN_BARRIER_NO_FAULT_OWNED_PROOF.md establishes the new passive
 terminal owner's genuine authentication and committed no-fault integration with

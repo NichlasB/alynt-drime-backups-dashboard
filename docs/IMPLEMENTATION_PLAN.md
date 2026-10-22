@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Terminal-Owner Selected/Contended Proof Blocker — 2026-10-22
+
+Approved/confirmed Plugin Tester local-only owned proof,not live/dashboard runtime.
+Uploader owns docs/V2_3_UNCERTAIN_BARRIER_NATIVE_OWNED_PROOF.md. New61-file
+test-only source closure;fresh genuine guard266/11 and same-composition no-fault
+960 checks/24 guards passed. Fresh selected control FAILED before idle barrier
+binding: new registry misclassifies legitimate prepared metadata executions as
+first safety-row execution. Existing synthetic registry fixture omitted that
+traffic;its success is not native proof. One exact11-byte writer response withheld,
+no extracted final qualifier/terminal. Resolved-wait/timeout cases NOT RUN;no
+blocker/monitor launched. All owned lifetimes cleaned;77 application checksums
+unchanged before/after DROP,10 locks available,zero remaining sessions/fixtures/
+processes. No retry,production source/wiring/grant/activation/rollback change.
+
+Implementation-plan progress:R1 new-composition no-fault prerequisite advances;
+selected/joined wait/timeout BLOCKED,R2-R7 NO-GO. Source-scoped QA/CI is separate
+from native acceptance. **Recommended next gated slice: harness-only compiled
+metadata/safety statement-role correction,source-backed pre-BEGIN/post-safety
+regressions,fresh prerequisites and ONE fresh ordered terminal-owner selected/
+contention/timeout proof invocation on the same confirmed Plugin Tester local-only
+target.** Additional native-attempt approval required;preserve guards/limits and
+application state. Safe-local generic maintenance is not the next plan milestone.
+
 ## V2.3 Uncertain Barrier Terminal Owner Genuine/No-Fault Owned Proof — 2026-10-21
 
 Approved/confirmed Plugin Tester local-only owned users/storage/listeners/

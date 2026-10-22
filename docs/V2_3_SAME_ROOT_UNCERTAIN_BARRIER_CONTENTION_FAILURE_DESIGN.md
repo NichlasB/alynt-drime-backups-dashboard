@@ -1,5 +1,18 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest attempted integration (2026-10-22): uploader
+docs/V2_3_UNCERTAIN_BARRIER_NATIVE_OWNED_PROOF.md. Fresh same-composition no-fault
+passed960 worker checks/24 guards after genuine guard266/11;selected control then
+FAILED at harness barrier_execute before binding21. Registry conflates compiled
+metadata and safety-row statement IDs;synthetic positive fixture omitted metadata
+traffic. One exact11-byte writer response withheld is not final qualification.
+Resolved-wait/timeout NOT RUN,no direct helpers launched;all owned cleanup and77
+application checksums verified. No retry/post-failure repair,production unchanged.
+R1 remains BLOCKED,R2-R7 NO-GO. Next approval: harness-only metadata/safety role
+tracking correction,source-backed pre-BEGIN/post-safety tests,fresh prerequisites
+and ONE new ordered selected/contention/timeout proof on confirmed Plugin Tester.
+Do not reinterpret the acceptance design below or relax its guards/budgets.
+
 Latest native successor (2026-10-21): uploader
 docs/V2_3_UNCERTAIN_BARRIER_NO_FAULT_OWNED_PROOF.md owns the NEW terminal owner's
 genuine authentication/committed no-fault proof and independent cleanup. One
