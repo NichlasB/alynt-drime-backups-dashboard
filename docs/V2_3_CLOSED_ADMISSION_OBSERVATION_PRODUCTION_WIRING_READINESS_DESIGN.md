@@ -1,5 +1,14 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 native no-fault integration (2026-10-22):uploader
+docs/V2_3_CACHE_AWARE_NO_FAULT_OWNED_PROOF.md. Fresh guard266/11 and original/
+integrated no-fault960/24 each pass;actual execute credit,17 cache-spaced queries,
+honest expiry and full owned cleanup/77 unchanged application checksums. NOT
+matched-wait/uncertain/released/held acceptance. R1 physical qualification BLOCKED,
+R2-R7 NO-GO. Next gated slice:Plugin Tester local-only V2.3 Cache-Aware Exact-Wait
+Released/Held Integration and One Ordered Qualification/Owned Cleanup Proof,with
+fresh guard/no-fault prerequisites and target/fixture confirmation. No wiring.
+
 Latest R1 socket-free foundation (2026-10-22):uploader
 docs/V2_3_SOCKET_FREE_CACHE_AWARE_WAIT_WITNESS_FOUNDATION.md. Separate synthetic v2
 scheduling/credit model passes31 new tests/11 semantic controls;original native

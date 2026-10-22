@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Cache-Aware Native No-Fault Integration — 2026-10-22
+
+Uploader owns docs/V2_3_CACHE_AWARE_NO_FAULT_OWNED_PROOF.md. Fresh guard266/11,
+original no-fault960/24 and ONE integrated no-fault960/24 pass. Actual safety
+credit,17 cache-spaced queries and honest no-match expiry;not physical wait or
+uncertain qualification. All owned fixtures removed;77 checksums unchanged.
+No dashboard runtime/contract/version change.
+
+Implementation-plan progress:R1 private-stdio/relay no-fault evidence advances;
+exact-wait/released/held qualification BLOCKED,R2-R7 NO-GO. Next gated slice:Plugin
+Tester local-only V2.3 Cache-Aware Exact-Wait Released/Held Integration and One
+Ordered Qualification/Owned Cleanup Proof,with fresh guard/no-fault prerequisites
+and target/fixture confirmation. Wiring/activation/rollback disabled.
+
 ## V2.3 Socket-Free Cache-Aware Wait-Witness Foundation — 2026-10-22
 
 Uploader owns docs/V2_3_SOCKET_FREE_CACHE_AWARE_WAIT_WITNESS_FOUNDATION.md.
