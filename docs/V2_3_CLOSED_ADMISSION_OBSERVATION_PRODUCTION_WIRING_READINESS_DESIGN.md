@@ -1,5 +1,16 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 passive barrier diagnostic successor (2026-10-22):uploader
+docs/V2_3_BARRIER_PROGRESS_DIAGNOSTICS_OWNED_PROOF.md. Genuine/no-fault/selected
+uncertain controls pass;released fails missing exact wait,held NOT RUN,no retry.
+BEGIN/first safety execute/native1205 and post-root rolled_back/one read observed,
+not matched requester/blocker/table/index proof. Independent cleanup/77 checksums
+preserved,zero residue. Original native composition/primitives/guards/budgets and
+disabled wiring untouched. R1 localization advances,joined acceptance BLOCKED,
+R2-R7 NO-GO. Next gated approval:design-only V2.3 Exact-Wait Witness Window and
+First-Safety-Execute Coordination Design;no native experiments,storage writes,
+wiring,grants,activation or rollback. Timeout alone cannot waive exact wait proof.
+
 Latest R1 diagnostic successor (2026-10-22):uploader
 docs/V2_3_HELPER_WAIT_DIAGNOSTICS_OWNED_PROOF.md. Failure-only helper stage/reason/
 code diagnostics and fresh genuine/no-fault/selected uncertain controls pass.

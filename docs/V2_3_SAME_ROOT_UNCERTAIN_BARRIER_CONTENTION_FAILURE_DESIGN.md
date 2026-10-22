@@ -1,5 +1,16 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest passive barrier diagnostic successor (2026-10-22):uploader
+docs/V2_3_BARRIER_PROGRESS_DIAGNOSTICS_OWNED_PROOF.md. Fresh genuine/no-fault/
+selected uncertain controls pass;released fails matching wait witness after22
+guards. New observed BEGIN/first safety execute/native1205 and rolled_back/one
+read exclude pre-BEGIN refusal,not missing requester/blocker/table/index proof.
+Held NOT RUN,no retry;all owned cleanup/77 checksums preserved,zero final residue.
+R1 localization advances,joined acceptance BLOCKED,R2-R7 NO-GO. Next gated slice:
+design-only V2.3 Exact-Wait Witness Window and First-Safety-Execute Coordination
+Design;evaluate visibility/arming/timing under original budgets. No experiments,
+storage writes,production wiring or predicate relaxation authorized by that design.
+
 Latest approved diagnostic successor (2026-10-22):uploader
 docs/V2_3_HELPER_WAIT_DIAGNOSTICS_OWNED_PROOF.md. Fixed failure-only vocabulary,
 source-backed tests and fresh genuine/no-fault/selected uncertain controls pass.
