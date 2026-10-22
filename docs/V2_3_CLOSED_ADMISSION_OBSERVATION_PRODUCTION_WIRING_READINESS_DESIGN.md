@@ -1,5 +1,16 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 exact-wait attempt (2026-10-22):uploader owns
+docs/V2_3_CACHE_AWARE_EXACT_WAIT_OWNED_PROOF.md. Fresh genuine/no-fault/selected
+controls pass. Released observes exact owned wait and successful original worker
+barrier,but blocker refuses rollback verification;combined qualification Blocked,
+held NOT RUN,no retry. Independent cleanup/77 checksums unchanged,zero residue.
+Precise rollback predicate cause unproven. R1 complete released/held remains
+Blocked,R2-R7 NO-GO. Next gated approval:Plugin Tester local-only V2.3 Harness-Only
+Blocker Rollback Acknowledgement Diagnostics/Correction and One Fresh Ordered
+Qualification/Owned Cleanup Proof,with fresh prerequisites and unchanged guards/
+budgets. No production wiring,permission,activation or rollback execution change.
+
 Latest R1 native no-fault integration (2026-10-22):uploader
 docs/V2_3_CACHE_AWARE_NO_FAULT_OWNED_PROOF.md. Fresh guard266/11 and original/
 integrated no-fault960/24 each pass;actual execute credit,17 cache-spaced queries,

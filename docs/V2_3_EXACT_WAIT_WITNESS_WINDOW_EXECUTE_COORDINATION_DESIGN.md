@@ -1,5 +1,16 @@
 # V2.3 Exact-Wait Witness Window and First-Safety-Execute Coordination Design
 
+Owned exact-wait attempt (2026-10-22):uploader owns
+docs/V2_3_CACHE_AWARE_EXACT_WAIT_OWNED_PROOF.md. Exact owned wait observed on one
+cache-spaced query;original released worker960/24/barrier COMMIT/drain passes.
+Blocker refuses rollback verification,so combined proof Blocked;held NOT RUN,no
+retry. Fresh genuine/no-fault/selected controls and independent cleanup pass,
+77 application checksums unchanged,zero residue. No inferred predicate root cause.
+Next gated slice:Plugin Tester local-only V2.3 Harness-Only Blocker Rollback
+Acknowledgement Diagnostics/Correction and One Fresh Ordered Qualification/Owned
+Cleanup Proof,with fresh prerequisites. Original guards/budgets and disabled
+production wiring remain unchanged;R1 complete released/held Blocked,R2-R7 NO-GO.
+
 Native no-fault successor (2026-10-22):uploader owns
 docs/V2_3_CACHE_AWARE_NO_FAULT_OWNED_PROOF.md. Separate source closure,actual
 credited safety execute,private monitor17 cache-spaced queries and honest expiry;
