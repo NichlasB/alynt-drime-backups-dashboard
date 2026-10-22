@@ -1,5 +1,16 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R1 repair successor (2026-10-22): uploader
+docs/V2_3_METADATA_ROLE_REPAIR_OWNED_PROOF.md. New62-file harness/source-backed
+repair now passes genuine/no-fault AND selected uncertain terminal with cleanup
+and77 application checksums preserved. Released helper fails direct_ack before
+relay/worker;held NOT RUN. Three exact owned pre-worker fixture tables retained;
+no complete invocation cleanup or final released-case checksum claim. R1 joined
+wait/timeout acceptance BLOCKED,R2-R7 NO-GO. Next gated approval is harness-only
+Windows helper target-path/pre-worker ownership and cleanup recovery correction,
+source-backed tests,exact retained-fixture recovery,fresh prerequisites and ONE
+new ordered local proof. No production wiring,grants,activation or rollback change.
+
 Latest R1 attempted proof (2026-10-22): uploader
 docs/V2_3_UNCERTAIN_BARRIER_NATIVE_OWNED_PROOF.md. Fresh61-file composition's
 genuine/no-fault prerequisite passed;selected control FAILED before barrier bind

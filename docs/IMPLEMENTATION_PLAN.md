@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Metadata/Safety Repair and Ordered Proof Successor — 2026-10-22
+
+Uploader owns docs/V2_3_METADATA_ROLE_REPAIR_OWNED_PROOF.md. Approved62-file
+harness repair:source-backed RED2/GREEN26,related64 Node tests. Fresh genuine
+guard266/11,no-fault960/24 and selected-uncertain terminal960/24 passed with
+independent cleanup/77 application checksums preserved. Released case failed
+direct_ack before relay/worker startup;held NOT RUN. Three exact owned tables
+wp_alynt_core_probe_7f3e5973b625_{options,users,usermeta} retained (8/0/0 rows);
+zero other DB sessions/transactions or owned processes. No whole-attempt cleanup
+or final released-case application checksum claim. No dashboard runtime change.
+
+Implementation-plan progress:R1 selected-uncertain acceptance advances;joined
+contention/timeout and fixture recovery BLOCKED,R2-R7 NO-GO. Recommended next
+gated slice: harness-only Windows helper path/pre-worker ownership and cleanup
+recovery correction,source-backed tests,exact retained-fixture recovery,fresh
+prerequisites and ONE new ordered proof on confirmed local Plugin Tester.
+New approval required;preserve guards/budgets/state and disabled production wiring.
+
 ## V2.3 Terminal-Owner Selected/Contended Proof Blocker — 2026-10-22
 
 Approved/confirmed Plugin Tester local-only owned proof,not live/dashboard runtime.

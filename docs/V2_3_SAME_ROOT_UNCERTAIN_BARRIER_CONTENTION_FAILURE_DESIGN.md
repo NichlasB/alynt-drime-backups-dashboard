@@ -1,5 +1,17 @@
 # V2.3 Same-Root Uncertain Admission Barrier Contention and Failure Qualification Design
 
+Latest approved repair successor (2026-10-22): uploader
+docs/V2_3_METADATA_ROLE_REPAIR_OWNED_PROOF.md. UB6/UB7 corrected with source-backed
+RED2/GREEN26 and62-file closure. Fresh genuine/no-fault and selected uncertain
+terminal passed with independent cleanup;released helper startup failed direct_ack
+before relay/worker,held NOT RUN. Exact three pre-worker fixture tables retained
+(options8/users0/usermeta0),no other DB sessions/transactions or owned processes.
+No final released-case checksum/whole-attempt cleanup claim. R1 joined wait/timeout
+BLOCKED,R2-R7 NO-GO. Next approval: harness-only Windows helper target-path and
+pre-worker ownership/cleanup recovery correction,source-backed regressions,exact
+retained-fixture recovery,fresh prerequisites and ONE new ordered proof on the
+same confirmed local target. Original guards/budgets and disabled wiring unchanged.
+
 Latest attempted integration (2026-10-22): uploader
 docs/V2_3_UNCERTAIN_BARRIER_NATIVE_OWNED_PROOF.md. Fresh same-composition no-fault
 passed960 worker checks/24 guards after genuine guard266/11;selected control then
