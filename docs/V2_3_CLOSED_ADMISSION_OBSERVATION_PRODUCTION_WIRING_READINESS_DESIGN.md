@@ -1,5 +1,14 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R2 design (2026-10-23):[buffered input / genuine HTTP integration](V2_3_BUFFERED_INPUT_GENUINE_HTTP_INTEGRATION_DESIGN.md)
+selects forward-only buffered candidate, separately qualified framing/resources/
+worker settlement and future same-source actual Tools/admin-post owner proof.
+No profile admitted,source gate changed or actual HTTP/WordPress/native operation.
+R2 design advances;profile qualification/integrated HTTP roots remain Blocked,
+production NO-GO,R3-R7 gated. Next gated slice:local-only V2.3 Buffered Closed-Entry
+Reader and Profile-Admission Boundary Safety Foundation (R2),isolated API/IO only,
+entry_available=false,actual auth/storage/native execution/ingress/wiring disabled.
+
 Latest R2 owned proof (2026-10-23): uploader owns
 docs/V2_3_CLOSED_ENTRY_GENUINE_AUTH_INPUT_PROFILE_OWNED_PROOF.md.17 genuine-core
 private helper cases/8963 checks pass with complete owned cleanup/all77 application

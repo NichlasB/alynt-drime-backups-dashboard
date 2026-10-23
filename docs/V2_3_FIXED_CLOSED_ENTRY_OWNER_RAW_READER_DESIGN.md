@@ -1,5 +1,13 @@
 # V2.3 Fixed Genuine Closed-Entry Request Owner and Bounded Raw Reader Integration Design (R2)
 
+Design successor (2026-10-23):[buffered input / genuine HTTP integration](V2_3_BUFFERED_INPUT_GENUINE_HTTP_INTEGRATION_DESIGN.md)
+separates forward-only buffered use, external profile qualification and genuine
+same-source owner roots. Current reader/entry gate unchanged; no profile installed,
+HTTP/WordPress work or ingress activation. Next gated slice:local-only Buffered
+Closed-Entry Reader and Profile-Admission Boundary Safety Foundation (R2),isolated
+API/IO only with entry_available=false. Original design below is historical;
+production NO-GO,R3-R7 remain gated.
+
 Owned proof successor (2026-10-23): uploader owns
 docs/V2_3_CLOSED_ENTRY_GENUINE_AUTH_INPUT_PROFILE_OWNED_PROOF.md. Genuine core
 private helpers pass17 cases/8963 checks;full cleanup/all77 application checksums

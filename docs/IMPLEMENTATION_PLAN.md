@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Buffered Input / Genuine HTTP Integration Design (R2) — 2026-10-23
+
+See [owning design](V2_3_BUFFERED_INPUT_GENUINE_HTTP_INTEGRATION_DESIGN.md).
+Select forward-only use of a buffered candidate without equating seek capability
+to profile trust. Separate algorithm, external framing/resource/worker-settlement
+qualification and actual same-source Tools GET/admin-post owner proof. No runtime,
+contract,version,WordPress/storage/native/configuration or production-ingress change.
+
+Implementation-plan progress:R2 integration decisions advance; supported profile
+and integrated HTTP roots remain Blocked,production NO-GO,R3-R7 gated. Recommended
+next gated slice:local-only V2.3 Buffered Closed-Entry Reader and Profile-Admission
+Boundary Safety Foundation (R2),isolated API/IO tests only,entry_available=false,
+actual authentication/storage/native execution/production ingress/wiring disabled.
+
 ## V2.3 Closed-Entry Genuine Auth / Input-Profile Owned Proof (R2) — 2026-10-23
 
 Uploader owns docs/V2_3_CLOSED_ENTRY_GENUINE_AUTH_INPUT_PROFILE_OWNED_PROOF.md.
