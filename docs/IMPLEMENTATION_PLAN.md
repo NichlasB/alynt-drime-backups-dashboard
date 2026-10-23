@@ -4,7 +4,7 @@
 
 Uploader owns docs/V2_3_SOCKET_FREE_HTTP_CGI_SOURCE_PREPARATION.md. Tasks5-8 compose
 original-epoch budgets,strict header policy,bounded body and fixed CGI bytes;
-61 new isolated tests,ten assertion-killed controls and canonical source-scoped
+62 new isolated tests,ten assertion-killed controls and canonical source-scoped
 error/performance/edge/adversarial/final security reviews. No actual HTTP/native
 experiment,WordPress/auth/storage operation,dashboard runtime/contract/version
 change,production ingress,grants,activation or rollback. Exact-head publication
