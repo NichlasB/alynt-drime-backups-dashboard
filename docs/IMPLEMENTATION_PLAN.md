@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Closed-Entry Owner / Raw Reader Design (R2) — 2026-10-23
+
+See [owning design](V2_3_FIXED_CLOSED_ENTRY_OWNER_RAW_READER_DESIGN.md). Fixed
+private owner earns real transport facts,original identity and request-wide
+consumption;bounded one-open reader distinguishes clean completion from short
+reads/errors. Separate GET issuer does not weaken POST guards. No source change.
+
+Implementation-plan progress:R2 integration decisions selected,not genuine
+HTTP/auth/profile proof;production NO-GO,R3-R7 gated. Recommended next gated slice:
+local-only V2.3 Fixed Closed-Entry Owner and Bounded Reader Safety Foundation
+(R2),isolated API/IO tests only;no real auth,storage/native execution or wiring.
+
 ## V2.3 Closed Entry Ingress / Request-Policy Foundation (R2) — 2026-10-22
 
 Uploader owns docs/V2_3_CLOSED_ENTRY_INGRESS_POLICY_FOUNDATION.md. Dormant strict

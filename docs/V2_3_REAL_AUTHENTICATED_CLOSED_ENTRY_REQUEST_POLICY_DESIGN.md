@@ -1,5 +1,12 @@
 # V2.3 Real Authenticated Closed Entry Surface and Request Policy Design (R2)
 
+2026-10-23 successor: [fixed owner/raw-reader integration design](V2_3_FIXED_CLOSED_ENTRY_OWNER_RAW_READER_DESIGN.md)
+selects earned transport facts,request-wide original identity/lifetime and a
+separate GET issuer. Documentation only;no genuine auth/IO or public wiring.
+Current next gated slice:local-only V2.3 Fixed Closed-Entry Owner and Bounded
+Reader Safety Foundation (R2),isolated API/IO tests only. Earlier next-step text
+below is historical;storage/native execution,wiring,activation/rollback stay off.
+
 Successor implementation record (2026-10-22):uploader owns
 docs/V2_3_CLOSED_ENTRY_INGRESS_POLICY_FOUNDATION.md. Strict dormant ingress and
 fixed policy DATA are now implemented with synthetic bytes/isolated APIs only.
