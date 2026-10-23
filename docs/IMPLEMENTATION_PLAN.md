@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Closed-Entry Owner / Bounded Reader Foundation (R2) — 2026-10-23
+
+Uploader owns docs/V2_3_FIXED_CLOSED_ENTRY_OWNER_READER_FOUNDATION.md: actual fixed
+private POST/GET owner and bounded reader, original identity/transport/deadlines,
+request-wide latch/poisoning, role-only fences and isolated API/IO regressions.
+Three draft issues fixed with RED/GREEN; thirteen assertion-killed controls.
+No dashboard runtime/contracts/version change, actual auth/storage/native work,
+public ingress/loader/hook, production wiring, grants, activation or rollback.
+
+Implementation-plan progress:R2 source/protocol foundation advances, not genuine
+auth/HTTP input-profile support; production NO-GO, R3-R7 gated. Recommended next
+gated slice:Plugin Tester local-only V2.3 Fixed Closed-Entry Owner Genuine
+Authentication and Input-Profile Feasibility / Owned Cleanup Proof (R2), with
+exact target/owned disposable user-fixture confirmation; ingress stays disabled.
+
 ## V2.3 Fixed Closed-Entry Owner / Raw Reader Design (R2) — 2026-10-23
 
 See [owning design](V2_3_FIXED_CLOSED_ENTRY_OWNER_RAW_READER_DESIGN.md). Fixed

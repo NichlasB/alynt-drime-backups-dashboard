@@ -1,5 +1,15 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R2 foundation (2026-10-23): uploader owns
+docs/V2_3_FIXED_CLOSED_ENTRY_OWNER_READER_FOUNDATION.md. Actual fixed private owner/
+bounded reader with isolated API/IO positive/negative protocol tests; no production
+entry, loader/hooks, actual auth/storage/native work or dashboard runtime change.
+Genuine core/HTTP input-profile support remains unproved; unavailable gate stays
+false. R2 source advances, production NO-GO and R3-R7 remain gated. Recommended
+next gated slice:Plugin Tester local-only V2.3 Fixed Closed-Entry Owner Genuine
+Authentication and Input-Profile Feasibility / Owned Cleanup Proof (R2), with exact
+target/owned disposable user-fixture confirmation and production wiring disabled.
+
 R2 design successor (2026-10-22):[entry surface and request policy](V2_3_REAL_AUTHENTICATED_CLOSED_ENTRY_REQUEST_POLICY_DESIGN.md)
 selects future uploader-local authenticated admin-post POST,strict unique bounded
 form,distinct GET small-nonce issuer,four domains and original same-request

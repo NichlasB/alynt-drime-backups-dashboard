@@ -1,5 +1,16 @@
 # V2.3 Fixed Genuine Closed-Entry Request Owner and Bounded Raw Reader Integration Design (R2)
 
+Implementation successor (2026-10-23): uploader owns
+docs/V2_3_FIXED_CLOSED_ENTRY_OWNER_READER_FOUNDATION.md. Fixed dormant private
+POST/GET source, bounded original raw reader and isolated API/IO protocol tests;
+three draft regressions fixed and thirteen semantic controls. No real auth,
+WordPress/storage/native execution or public wiring. Actual entry remains false:
+server/SAPI framing/buffering/IO and genuine authentication require separately
+approved proof. Next gated slice:Plugin Tester local-only V2.3 Fixed Closed-Entry
+Owner Genuine Authentication and Input-Profile Feasibility / Owned Cleanup Proof
+(R2), exact target/owned user-fixture confirmation. Original design below remains
+historical design-only evidence; R3-R7 and production NO-GO remain unchanged.
+
 2026-10-23. Approved repository-only, **design only**. No executable, test,
 configuration, WordPress, database, native experiment or site change. Storage,
 native execution, public registration, production wiring, grants, activation and
