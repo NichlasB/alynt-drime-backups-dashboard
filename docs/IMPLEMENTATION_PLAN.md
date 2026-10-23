@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Dedicated Buffered HTTP/CGI Supervision Design (R2) — 2026-10-23
+
+See [owning design](V2_3_DEDICATED_BUFFERED_HTTP_CGI_SUPERVISION_DESIGN.md).
+Task4 selects a test-only fixed candidate,original connection epoch/cleanup reserve,
+strict semantic HTTP policy,bounded body and isolated CGI handoff. Four meaningful
+safe-local support tasks remain in this batch;no new native experiment is included.
+
+Implementation-plan progress:R2 gate B design advances,not physical HTTP/profile
+qualification. Continue through original-budget,header,body and composition/review
+tasks without repeated approval. entry_available=false,production wiring/native
+feature execution off,R3-R7 gated. Next operational gate is isolated disposable
+fixed HTTP-to-CGI supervision/resource-limit and owned cleanup proof after source QA.
+
 ## V2.3 Isolated CGI Termination / Cleanup Proof (R2) — 2026-10-23
 
 Uploader owns docs/V2_3_ISOLATED_CGI_TERMINATION_OWNED_PROOF.md. Ordered5-case
