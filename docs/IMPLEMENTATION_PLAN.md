@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free HTTP/CGI Source Preparation Milestone (R2) — 2026-10-23
+
+Uploader owns docs/V2_3_SOCKET_FREE_HTTP_CGI_SOURCE_PREPARATION.md. Tasks5-8 compose
+original-epoch budgets,strict header policy,bounded body and fixed CGI bytes;
+61 new isolated tests,ten assertion-killed controls and canonical source-scoped
+error/performance/edge/adversarial/final security reviews. No actual HTTP/native
+experiment,WordPress/auth/storage operation,dashboard runtime/contract/version
+change,production ingress,grants,activation or rollback. Exact-head publication
+verification per task is recorded in toolkit;requested remaining-five reaches8/8.
+
+Implementation-plan progress:R2 gate B's source-preparation milestone advances,
+not HTTP/profile qualification. Recommended next gated slice:isolated disposable
+fixed HTTP-to-CGI supervision no-fault/resource-limit and owned cleanup proof(R2),
+with explicit owned temporary configs/listeners/processes/files scope. Existing
+LocalWP services/application state/wiring preserved;entry_available=false,R3-R7 gated.
+
 ## V2.3 Dedicated Buffered HTTP/CGI Supervision Design (R2) — 2026-10-23
 
 See [owning design](V2_3_DEDICATED_BUFFERED_HTTP_CGI_SUPERVISION_DESIGN.md).
