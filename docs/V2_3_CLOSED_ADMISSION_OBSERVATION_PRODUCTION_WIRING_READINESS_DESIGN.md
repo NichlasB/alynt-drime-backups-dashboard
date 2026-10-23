@@ -1,5 +1,14 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R2 owned proof (2026-10-23): uploader owns
+docs/V2_3_CLOSED_ENTRY_GENUINE_AUTH_INPUT_PROFILE_OWNED_PROOF.md.17 genuine-core
+private helper cases/8963 checks pass with complete owned cleanup/all77 application
+checksums unchanged. HTTP measurements reveal unsupported seekable input;no
+source guard/profile acceptance,production hook/ingress or configuration change.
+R2 integrated HTTP root/Tools request and hard input profile remain Blocked.
+Recommended next gated slice:design-only V2.3 Buffered Input Profile and Genuine
+Closed-Entry HTTP Integration Design (R2). Production NO-GO;R3-R7 still gated.
+
 Latest R2 foundation (2026-10-23): uploader owns
 docs/V2_3_FIXED_CLOSED_ENTRY_OWNER_READER_FOUNDATION.md. Actual fixed private owner/
 bounded reader with isolated API/IO positive/negative protocol tests; no production

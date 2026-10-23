@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Closed-Entry Genuine Auth / Input-Profile Owned Proof (R2) — 2026-10-23
+
+Uploader owns docs/V2_3_CLOSED_ENTRY_GENUINE_AUTH_INPUT_PROFILE_OWNED_PROOF.md.
+17 genuine helper cases/8963 checks pass;51 owned tables and HTTP stub removed,
+all77 application checksums unchanged. Four bounded HTTP observations show
+seekable=true;current reader requires false and refuses. Server/input ceilings
+do not establish the required bounded profile. No dashboard runtime/contract or
+version change;production ingress/native execution/wiring remain disabled.
+
+Implementation-plan progress:R2 helper/auth/cleanup evidence advances,not genuine
+Tools routing/integrated HTTP entry;profile support Blocked,production NO-GO,
+R3-R7 gated. Recommended next gated slice:design-only V2.3 Buffered Input Profile
+and Genuine Closed-Entry HTTP Integration Design (R2),no guard/server change,
+WordPress/native experiment or ingress activation.
+
 ## V2.3 Fixed Closed-Entry Owner / Bounded Reader Foundation (R2) — 2026-10-23
 
 Uploader owns docs/V2_3_FIXED_CLOSED_ENTRY_OWNER_READER_FOUNDATION.md: actual fixed
