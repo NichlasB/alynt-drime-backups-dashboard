@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Isolated CGI Termination / Cleanup Proof (R2) — 2026-10-23
+
+Uploader owns docs/V2_3_ISOLATED_CGI_TERMINATION_OWNED_PROOF.md. Ordered5-case
+standalone proof passes with independently verified worker/console/listener/pipe/
+file cleanup. Fatal/disconnect do not end the worker;incomplete input requires
+external termination.10 existing config hashes/5 listener identities unchanged;
+no WP/SQL/application work,dashboard runtime/contracts/version change or release.
+
+Implementation-plan progress:R2 gate B isolated feasibility advances,not ordinary
+profile or integrated HTTP qualification. Batch3/8 after publication;meaningful
+lane now reaches a resource/worker architecture decision. Recommended next gated
+slice:design-only V2.3 Dedicated Buffered HTTP/CGI Supervision and Pre-Root Resource
+Profile Design (R2),before further HTTP/configuration experiments. entry_available
+remains false,production NO-GO,native feature execution/wiring off,R3-R7 gated.
+
 ## V2.3 Buffered Input Profile Feasibility Analysis (R2) — 2026-10-23
 
 See [source-scoped review](V2_3_BUFFERED_INPUT_PROFILE_FEASIBILITY_REVIEW.md).
