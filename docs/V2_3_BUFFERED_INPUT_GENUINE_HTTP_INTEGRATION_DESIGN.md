@@ -1,5 +1,14 @@
 # V2.3 Buffered Input Profile and Genuine Closed-Entry HTTP Integration Design (R2)
 
+Gate A successor (2026-10-23):uploader owns
+docs/V2_3_BUFFERED_CLOSED_ENTRY_READER_FOUNDATION.md. Strict buffered candidate in
+the existing private reader with isolated regressions;entry_available=false and
+production/native wiring unchanged. Historical design below remains design-only.
+Next meaningful gate B:Plugin Tester local-only Buffered Input Profile Qualification
+Feasibility and Owned Cleanup Proof (R2),hard IO/worker settlement feasibility
+first,not more benign probes or source churn. Exact operational scope separately
+approved;no supported profile or positive genuine HTTP owner root claimed.
+
 2026-10-23. Approved **design-only**, repository documentation. No executable,
 test, server/PHP configuration, WordPress, SQL, fixture, HTTP request or native
 experiment change/run. Storage writes, production ingress/loader/hooks, native

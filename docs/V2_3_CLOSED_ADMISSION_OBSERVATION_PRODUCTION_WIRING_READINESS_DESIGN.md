@@ -1,5 +1,15 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R2 gate A foundation (2026-10-23):uploader owns
+docs/V2_3_BUFFERED_CLOSED_ENTRY_READER_FOUNDATION.md. Strict buffered private
+reader metadata plus isolated positive/negative/semantic controls;fixed forward
+use/budgets and entry_available=false. No actual auth/storage/HTTP/WordPress/native
+or production wiring change. R2 algorithm advances,profile qualification/integrated
+roots remain Blocked,production NO-GO,R3-R7 gated. Next gated slice:Plugin Tester
+local-only Buffered Input Profile Qualification Feasibility and Owned Cleanup
+Proof (R2),hard IO/worker-settlement feasibility first;exact target/scope approval
+needed before owned experiments or site/configuration/fixture changes.
+
 Latest R2 design (2026-10-23):[buffered input / genuine HTTP integration](V2_3_BUFFERED_INPUT_GENUINE_HTTP_INTEGRATION_DESIGN.md)
 selects forward-only buffered candidate, separately qualified framing/resources/
 worker settlement and future same-source actual Tools/admin-post owner proof.

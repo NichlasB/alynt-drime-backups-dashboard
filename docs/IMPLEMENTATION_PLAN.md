@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Buffered Closed-Entry Reader Foundation (R2) — 2026-10-23
+
+Uploader owns docs/V2_3_BUFFERED_CLOSED_ENTRY_READER_FOUNDATION.md. Strict buffered
+metadata in the dormant private reader,15 new isolated cases/five semantic controls,
+same forward-only budgets. entry_available=false,production loading/native gates
+unchanged. No dashboard runtime/contract/version or actual site/native operation.
+
+Implementation-plan progress:R2 gate A advances;profile qualification/integrated
+HTTP roots remain Blocked,production NO-GO,R3-R7 gated. Recommended next gated
+slice:Plugin Tester local-only V2.3 Buffered Input Profile Qualification Feasibility
+and Owned Cleanup Proof (R2),hard IO/worker-settlement feasibility before any new
+owned experiment. Safe-local meaningful lane reaches that operational gate,not
+eight invented maintenance tasks;site/configuration/fixture scope needs approval.
+
 ## V2.3 Buffered Input / Genuine HTTP Integration Design (R2) — 2026-10-23
 
 See [owning design](V2_3_BUFFERED_INPUT_GENUINE_HTTP_INTEGRATION_DESIGN.md).
