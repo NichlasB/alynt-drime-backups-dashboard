@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Owned Read-Only Core Projection / Privilege Proof — 2026-10-24
+
+Uploader owns docs/V2_3_READ_ONLY_CORE_PROJECTION_OWNED_PROOF.md. Fresh confirmed
+R3 owned proof passes4groups994checks after documented seed/collation harness
+repairs and cleanup. Database-enforced view-only reads,13 real privilege denials,
+unsafe-view assertion kill and genuine cold-core bulk/fallback positives;77 existing
+application/permission checksums match,owned views/accounts/tables removed.
+No dashboard runtime/contract/version,admission or production wiring change.
+
+Implementation-plan progress:R2 advances beyond first bulk-read refusal for the
+owned projection only. Bootstrap remains Blocked at wp_attachment_pages_enabled;
+no HTTP/auth/owner/minimum-WP proof. Recommended next gated slice:design-only V2.3
+Fixed Core Projection Dependency Manifest and Cold Bootstrap Completion Design,
+reviewing the finite8-key boundary before any whitelist expansion or new native
+experiment. Keep storage writes,admission,wiring,feature grants,activation and
+rollback disabled;R3-R7 independent. No release/deploy.
+
 ## V2.3 Pre-Owner Read Contract / Isolated Authentication Profile Design (R2) — 2026-10-24
 
 See [owning design](V2_3_PRE_OWNER_READ_CONTRACT_ISOLATED_AUTH_PROFILE_DESIGN.md).
