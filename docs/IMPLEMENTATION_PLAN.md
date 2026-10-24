@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Bootstrap Closure: Absent-Theme Pattern Cache NO-GO — 2026-10-24
+
+See [source-pinned review](V2_3_BOOTSTRAP_CLOSURE_PATTERN_CACHE_NO_GO.md).
+Repository-only review finds an unavoidable persistent-writer call IF the unchanged
+absent-theme/default-development-mode profile reaches init pattern registration.
+Core returns a nonempty theme-path list, rejects nonexistent-theme cache reads,
+then writes empty patterns. P/N preseeding cannot avoid it. No runtime failure
+observed;actual worker stops earlier. Exhaustive catalog/profile proof Blocked.
+
+Implementation-plan progress:R2 feasibility now has a concrete veto,not another
+incremental allowlist experiment. Recommended next gated slice:design-only V2.3
+Core-Supported Theme Development Profile Decision and Bootstrap Closure Revision
+(R2),evaluate fixed private-worker theme development mode and its full effects
+before any implementation/native request. Existing policy/config/storage/native/
+wiring/grants/activation/rollback remain unchanged/disabled;no package/deploy.
+
 ## V2.3 Complete Bootstrap Read/Absence / Write-Free Design — 2026-10-24
 
 See [owning design](V2_3_COMPLETE_BOOTSTRAP_READ_ABSENCE_WRITE_FREE_DESIGN.md).
