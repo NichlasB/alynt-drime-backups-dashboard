@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Projection Catalog / Shutdown Transcript Foundation — 2026-10-24
+
+Uploader owns docs/V2_3_FIXED_PROJECTION_SHUTDOWN_FOUNDATION.md, two socket-free
+test-only helpers and permanent isolated PHP/Node tests. Approved29P/7N/32-row
+catalog and monotonic bounded transcript have positive modeled completion and
+guard-bypass negatives; actual eight-key native worker/operator stays unchanged.
+No dashboard executable, public contract, site/state, native or wiring change.
+
+Implementation-plan progress:R2 catalog/shutdown contract implementation advances;
+complete source/object-lifetime/resource and physical qualification remains
+Blocked. Recommended next gated slice:design-only V2.3 Complete Bootstrap
+Include, Object-Lifetime and Resource Closure Design, keeping storage writes,
+native execution and production wiring disabled. No package/release/deploy.
+
 ## V2.3 Fixed Theme-Mode Projection / Full-Shutdown Evidence Design — 2026-10-24
 
 See [owning design](V2_3_THEME_MODE_PROJECTION_SHUTDOWN_EVIDENCE_DESIGN.md).

@@ -1,5 +1,11 @@
 # V2.3 Fixed Theme-Mode Projection and Full-Shutdown Evidence Design
 
+Successor implementation (separately approved2026-10-24): uploader owns
+docs/V2_3_FIXED_PROJECTION_SHUTDOWN_FOUNDATION.md. The catalog/transcript are now
+socket-free isolated-test helpers only; the historical design evidence below
+does not become native proof. Expanded worker/full-shutdown/source/resource/
+physical qualification and production wiring remain closed.
+
 2026-10-24. Explicitly approved DESIGN ONLY. Dashboard owns this design; uploader
 owns the unchanged private proof scripts. R0 source/design analysis, R1 Markdown
 publication. No executable/test/config/policy/dependency/version change, actual
