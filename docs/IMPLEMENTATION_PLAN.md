@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Include / Object-Lifetime / Resource Closure Design — 2026-10-24
+
+See [owning design](V2_3_BOOTSTRAP_INCLUDE_LIFETIME_RESOURCE_CLOSURE_DESIGN.md).
+Design-only finite artifact/edge/callback/lifetime/cost ledger, not a native GO.
+Fresh official7.1.2 ZIP has1512 PHP files (superseding prior1900 discovery count),
+2270 non-PHP files/468 directories. Key source hashes match;eleven top-level
+constructor sites and twelve destructor-definition files are seeds,not complete
+instance reachability. Repeated includes/callbacks,resource close and teardown
+costs need independent evidence. Actual synthetic1900 counter guard is unchanged.
+
+Implementation-plan progress:R2 closure obligations designed;complete source/
+resource/native audit remains Blocked. Recommended next gated slice:repository-
+only V2.3 Pinned Bootstrap Reachability, Lifetime and Effect/Cost Audit,using
+pinned public text before any native revision. Storage writes/native execution/
+production wiring remain disabled;no executable/test/profile/version change.
+
 ## V2.3 Fixed Projection Catalog / Shutdown Transcript Foundation — 2026-10-24
 
 Uploader owns docs/V2_3_FIXED_PROJECTION_SHUTDOWN_FOUNDATION.md, two socket-free

@@ -1,5 +1,10 @@
 # V2.3 Fixed Theme-Mode Projection and Full-Shutdown Evidence Design
 
+Source/resource successor: [complete closure design](V2_3_BOOTSTRAP_INCLUDE_LIFETIME_RESOURCE_CLOSURE_DESIGN.md).
+Fresh measured archive inventory is1512 PHP files,not the historical1900 count
+below. This correction does not change the synthetic counter domain or establish
+complete native/source qualification;all executable guards remain unchanged.
+
 Successor implementation (separately approved2026-10-24): uploader owns
 docs/V2_3_FIXED_PROJECTION_SHUTDOWN_FOUNDATION.md. The catalog/transcript are now
 socket-free isolated-test helpers only; the historical design evidence below

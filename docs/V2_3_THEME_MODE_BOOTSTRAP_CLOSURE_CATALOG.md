@@ -1,5 +1,9 @@
 # V2.3 Theme-Mode Bootstrap Closure Catalog and Resource Review
 
+Inventory correction2026-10-24: [complete closure design](V2_3_BOOTSTRAP_INCLUDE_LIFETIME_RESOURCE_CLOSURE_DESIGN.md)
+records1512 PHP members in the freshly measured pinned ZIP;the earlier1900 PHP-
+member discovery claim below is superseded,not a native limit or qualification.
+
 Successor: [fixed projection/full-shutdown evidence design](V2_3_THEME_MODE_PROJECTION_SHUTDOWN_EVIDENCE_DESIGN.md).
 The successor resolves specific callback/provider branches and specifies a
 post-core candidate plus supervisor exit/EOF verdict;this catalog remains a
