@@ -279,7 +279,8 @@ Preservation commands executed this task:
   exercise native WordPress or create permanent regression coverage.
 - Eight new public identities and combined15-support-file digest matched the
   in-memory sources. Source ZIP/memory/process disposed/exited. No source files
-  extracted/saved;no current site/ports/registry/service/SQL/auth/native operation.
+  extracted/saved. Required static workflow/registry documents were read;no site,
+  ports,LocalWP metadata,service,SQL,authentication or native operation was run.
 - 43 local Markdown targets across plan/catalog/design checked;docs-only and
   whitespace checks pass. No tests changed or thresholds/skips weakened.
 
