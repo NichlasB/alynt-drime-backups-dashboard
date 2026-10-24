@@ -10,6 +10,9 @@ Excluded coherent review bases:dashboard `0bedf240094ec04d01e845707f3a3618218f28
 uploader `20ee1c5c4f8e6a8bf8e26c29840527b4eeb0e714`, toolkit
 `cc3e58e7c0f35b2b61208c1f28f574d2aa879ec2`.
 Parent:[fixed profile/HTTP design](V2_3_FIXED_PROFILE_ADMISSION_GENUINE_HTTP_INTEGRATION_DESIGN.md).
+Successor:[finite dependency / cold-bootstrap design](V2_3_FIXED_CORE_PROJECTION_DEPENDENCY_MANIFEST_DESIGN.md),
+after the owned projection proof;it does not change this historical eight-key
+contract or authorize a new native operation.
 Measured predecessor:uploader `docs/V2_3_PRE_OWNER_BOOTSTRAP_CONTAINMENT_OWNED_PROOF.md`.
 Its208checks/two owned profiles and preservation results are historical evidence,
 not rerun or reclassified by this design.
