@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Theme Development Profile Decision / Closure Revision — 2026-10-24
+
+See [owning design](V2_3_THEME_DEVELOPMENT_PROFILE_CLOSURE_DESIGN.md).
+Design-only selection:fixed private7.1.2 worker theme-development mode,absent
+content/theme and unchanged strict guards. This avoids the one absent-theme
+pattern-cache writer statically;existing-theme cached arrays can still DELETE.
+1900 public PHP entries/seven direct-reference files inventoried;other theme-cache
+bypasses/recomputation and6.0 differences recorded,not runtime qualification.
+
+Implementation-plan progress:R2 profile decision Complete;full candidate graph/
+P-N/effect/resource closure and native/auth/HTTP proof remain Blocked. Next action:
+repository-only Theme-Mode Bootstrap Closure Catalog and Resource Review before
+any harness change,not a new site-approval gate. No actual constants/storage/native/
+wiring/grants/activation/rollback change;old default profile remains NO-GO.
+
 ## V2.3 Bootstrap Closure: Absent-Theme Pattern Cache NO-GO — 2026-10-24
 
 See [source-pinned review](V2_3_BOOTSTRAP_CLOSURE_PATTERN_CACHE_NO_GO.md).

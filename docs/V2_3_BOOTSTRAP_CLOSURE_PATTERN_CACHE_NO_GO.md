@@ -1,5 +1,9 @@
 # V2.3 Bootstrap Closure Review: Absent-Theme Pattern Cache NO-GO
 
+Successor: [core-supported theme-mode design](V2_3_THEME_DEVELOPMENT_PROFILE_CLOSURE_DESIGN.md)
+selects a conditional private-worker candidate only. Default-mode NO-GO remains;
+no runtime constant, policy, fixture or wiring is changed by that design.
+
 2026-10-24. Repository-only source/effect and fixture-prerequisite review following
 the [complete read/absence contract design](V2_3_COMPLETE_BOOTSTRAP_READ_ABSENCE_WRITE_FREE_DESIGN.md).
 Outcome: **fixed absent-content/default-development-mode candidate NO-GO**.
