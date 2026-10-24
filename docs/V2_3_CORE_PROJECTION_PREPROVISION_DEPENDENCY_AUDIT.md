@@ -1,5 +1,9 @@
 # V2.3 Core Projection Pre-Provisioning Dependency Audit
 
+Successor: [complete read/absence and write-free feasibility design](V2_3_COMPLETE_BOOTSTRAP_READ_ABSENCE_WRITE_FREE_DESIGN.md).
+Its public-source comparison corroborates the12 recorded identities; it does not
+rerun this audit/proof or turn the rejected nine-option candidate into a GO.
+
 2026-10-24. **Audit complete; finite nine-option candidate NO-GO. Native owned
 qualification / cleanup proof Blocked, not executed.** The approved audit-first
 condition prevented provisioning; this is not a passing bootstrap/native proof.
