@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Profile Admission / Genuine HTTP Integration Design (R2) — 2026-10-24
+
+See [owning design](V2_3_FIXED_PROFILE_ADMISSION_GENUINE_HTTP_INTEGRATION_DESIGN.md).
+Separate fixed probe evidence from real Tools/admin-post/cookie/framing parity,
+external deployment assurance from local admission, and pre-owner bootstrap/cache
+reads from owner fences. Choose canary-backed bootstrap-first feasibility before
+any availability-bit/route bridge change;WP6.0/all-options fallback remains explicit.
+Documentation only,no executable/configuration/WordPress/SQL/native operation,
+version,production wiring,grants,activation or rollback change.
+
+Implementation-plan progress:R2 integration decisions advance;genuine owner/profile
+qualification stays Blocked. Recommended next gated slice:Plugin Tester local-only
+V2.3 Pre-Owner Bootstrap Read-Containment and Route Feasibility Owned Proof(R2),with
+fresh exact target/owned disposable fixture scope and independent cleanup. Prove
+safe controls plus early protected-read denial;blocked core routing is not a valid
+auth success. entry_available=false,original owner10s/20s and R3-R7 gates unchanged.
+
 ## V2.3 Disposable Fixed HTTP/CGI Owned Proof Milestone (R2) — 2026-10-24
 
 Uploader owns docs/V2_3_HTTP_CGI_OWNED_INTEGRATION_PROOF.md. Original-epoch

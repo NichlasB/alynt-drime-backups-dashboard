@@ -1,5 +1,13 @@
 # V2.3 Closed Admission/Observation Production-Wiring Readiness Design
 
+Latest R2 design successor(2026-10-24):[fixed profile admission/genuine HTTP design](V2_3_FIXED_PROFILE_ADMISSION_GENUINE_HTTP_INTEGRATION_DESIGN.md).
+No admission/wiring change. Bootstrap-first canary/cold-cache feasibility is next,
+not promoting probe receipts or owner-only fences to protected-read guarantees.
+Exact next gated slice:Plugin Tester local-only V2.3 Pre-Owner Bootstrap
+Read-Containment and Route Feasibility Owned Proof(R2),with owned disposable
+fixture/cleanup approval. Genuine routing/profile admission and WP6.0 runtime
+containment remain Blocked;entry_available=false,production NO-GO,R3-R7 gated.
+
 Latest R2 standalone runtime successor(2026-10-24):uploader owns
 docs/V2_3_HTTP_CGI_OWNED_INTEGRATION_PROOF.md. Fresh ordered12-case disposable
 HTTP/CGI framing/resource/cleanup proof passed;existing services/configurations

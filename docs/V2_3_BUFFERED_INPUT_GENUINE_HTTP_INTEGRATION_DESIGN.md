@@ -1,5 +1,11 @@
 # V2.3 Buffered Input Profile and Genuine Closed-Entry HTTP Integration Design (R2)
 
+Design successor(2026-10-24):[fixed profile admission/genuine HTTP integration](V2_3_FIXED_PROFILE_ADMISSION_GENUINE_HTTP_INTEGRATION_DESIGN.md).
+Standalone12-case HTTP/CGI proof does not qualify owner routes/cookies/GET framing
+or pre-owner protected reads. Next gated step is owned bootstrap/canary/cold-cache
+route feasibility,not changing entry_available or admitting ordinary LocalWP.
+No runtime or operational authorization is added by the design successor.
+
 Gate B read-only analysis successor (2026-10-23):[profile feasibility review](V2_3_BUFFERED_INPUT_PROFILE_FEASIBILITY_REVIEW.md).
 Confirmed config/process discovery and upstream timer semantics reviewed;no
 HTTP/SQL/fixture/configuration mutation. Qualification remains Blocked on concrete
