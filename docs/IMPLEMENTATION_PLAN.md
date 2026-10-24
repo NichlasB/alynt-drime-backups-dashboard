@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Theme-Mode Projection / Full-Shutdown Evidence Design — 2026-10-24
+
+See [owning design](V2_3_THEME_MODE_PROJECTION_SHUTDOWN_EVIDENCE_DESIGN.md).
+Design-only fixed29P/7N catalog,32-row fixture total and synthetic1779 value bytes;
+fifteen support callbacks/three metadata transforms and fixed empty AI-provider
+branch reviewed. Post-core PHP finalizer includes core cache close;candidate is
+not success until parent observes process/pipe closure and required preservation/
+cleanup. Late activity,missing/reordered evidence and caught violations refuse.
+
+Implementation-plan progress:R2 projection/shutdown evidence contract designed,
+not implemented or native qualified. Full include/destructor/resource/physical
+and authenticated HTTP/minimum-version proof remain Blocked. Recommended next
+gated slice:local-only V2.3 Fixed Projection Catalog and Shutdown Transcript Safety
+Foundation,in-memory/virtual-clock and isolated API tests only. Actual auth,
+storage,native execution,wiring,grants/activation/rollback unchanged/disabled.
+
 ## V2.3 Theme-Mode Bootstrap Catalog / Resource Review — 2026-10-24
 
 See [owning catalog](V2_3_THEME_MODE_BOOTSTRAP_CLOSURE_CATALOG.md).

@@ -1,5 +1,10 @@
 # V2.3 Theme-Mode Bootstrap Closure Catalog and Resource Review
 
+Successor: [fixed projection/full-shutdown evidence design](V2_3_THEME_MODE_PROJECTION_SHUTDOWN_EVIDENCE_DESIGN.md).
+The successor resolves specific callback/provider branches and specifies a
+post-core candidate plus supervisor exit/EOF verdict;this catalog remains a
+historical provisional review,not native or complete source qualification.
+
 2026-10-24. Repository-only review, not a qualified bootstrap or permission to
 implement/run one. Dashboard owns this record; uploader owns the dormant proof
 scripts. No executable, fixture, actual option, account, permission, native,
