@@ -1,5 +1,10 @@
 # V2.3 Core-Supported Theme Development Profile Decision and Bootstrap Closure Revision
 
+Subsequent source review: [theme-mode closure catalog/resource findings](V2_3_THEME_MODE_BOOTSTRAP_CLOSURE_CATALOG.md).
+Provisional29P/7N names consume32 owned options rows including canaries/marker;
+shutdown-finalized observation and full graph/resource closure remain unearned.
+This parent is historical candidate selection,not implementation/native approval.
+
 2026-10-24. Explicitly approved **design-only** repository work. Select one fixed
 private-worker candidate for further source closure, NOT a qualified runtime.
 No PHP/test/script/config, WordPress, LocalWP, database, fixture, permission,

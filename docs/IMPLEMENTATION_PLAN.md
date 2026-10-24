@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Theme-Mode Bootstrap Catalog / Resource Review — 2026-10-24
+
+See [owning catalog](V2_3_THEME_MODE_BOOTSTRAP_CLOSURE_CATALOG.md).
+Repository-only source review records phase/effect paths and provisional29P/7N
+domains, exact widget names/current format and six cron prerequisites. P29 plus
+two canaries/owner marker exhausts the32-row cleanup ceiling;64 review names do
+not enlarge it. Existing receipt ends before shutdown. No new unavoidable writer
+proved, but dynamic/include/factory traversal and full resource bounds remain open.
+
+Implementation-plan progress:R2 catalog/resource review advances the finite
+candidate,not an exhaustive closure or runtime qualification. Recommended next
+gated slice:design-only V2.3 Fixed Theme-Mode Projection and Full-Shutdown Evidence
+Design;resolve the remaining graph and finalization/resource contract before any
+harness/native revision. Actual eight-key policy,constants,storage,wiring,grants,
+activation/rollback unchanged/disabled. No package/release/deploy.
+
 ## V2.3 Theme Development Profile Decision / Closure Revision — 2026-10-24
 
 See [owning design](V2_3_THEME_DEVELOPMENT_PROFILE_CLOSURE_DESIGN.md).
