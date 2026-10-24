@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Pre-Owner Read Contract / Isolated Authentication Profile Design (R2) — 2026-10-24
+
+See [owning design](V2_3_PRE_OWNER_READ_CONTRACT_ISOLATED_AUTH_PROFILE_DESIGN.md).
+Ordinary Tools/admin-post remains unsupported under strict early value containment.
+Select a separately owned read-only DB projection test profile with positive-key
+views,populated canaries,separate limited invoker/definer principals and no root
+secret in the worker. No capability,core/bootstrap,owner availability or state
+change is implemented;WP6.0 and genuine HTTP/auth/profile support remain unearned.
+
+Implementation-plan progress:R2 reaches a concrete capability-separation proof
+gate,not repeated ordinary-route retries or a relaxed read contract. Recommended
+next gated slice:Plugin Tester local-only V2.3 Owned Read-Only Core Projection
+Feasibility and Privilege-Denial Proof(R2),with fresh target confirmation and owned
+tables/views,TWO disposable DB principals,permission setup and previewed cleanup.
+Separate approval required;current design keeps storage writes,native experiments,
+admission,wiring,feature grants,activation and rollback disabled. R3-R7 independent.
+
 ## V2.3 Pre-Owner Bootstrap Containment Owned Proof (R2) — 2026-10-24
 
 Uploader owns docs/V2_3_PRE_OWNER_BOOTSTRAP_CONTAINMENT_OWNED_PROOF.md.

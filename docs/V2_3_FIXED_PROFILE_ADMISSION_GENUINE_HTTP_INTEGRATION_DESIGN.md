@@ -1,5 +1,11 @@
 # V2.3 Fixed Profile Admission and Genuine Closed-Entry HTTP Integration Design (R2)
 
+2026-10-24 successor decision:the owned pre-owner proof found an installation-check
+bulk-read dependency before routing. The [read contract/isolated profile design](V2_3_PRE_OWNER_READ_CONTRACT_ISOLATED_AUTH_PROFILE_DESIGN.md)
+keeps ordinary routes unsupported and selects a separately gated read-only database
+projection investigation. This does not change the historical design/proof result,
+enable admission or authorize account/permission/native operations.
+
 2026-10-24. Approved design-only repository work. No executable, dependency,
 server/PHP configuration, fixture, WordPress, database, HTTP or native experiment
 change/run. Production wiring, admission, grants, activation and rollback remain
