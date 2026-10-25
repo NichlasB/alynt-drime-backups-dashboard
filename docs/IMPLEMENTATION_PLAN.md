@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Distinct Absence and Cost Ledger — 2026-10-25
+
+Uploader owns docs/V2_3_DISTINCT_ABSENCE_COST_LEDGER_FOUNDATION.md. Eight safe-local
+implementation/test-support/review tasks add a bounded pure model: distinct exact
+successful misses, paired read intents/results, API/cache work, separate driver/
+verifier lanes and original-epoch completion. Actual worker/storage/native/wiring
+unchanged; no physical qualification. Plan progress: design modeled with semantic
+guard controls; A1-A4 remain open. Next: repository-only Driver/Session Observation
+Feasibility and Provenance Integration Design, before any real observation/proof.
+
 ## V2.3 Revised Read/Absence and Driver Cost Admission Design — 2026-10-25
 
 See [owning design](V2_3_REVISED_PROJECTION_READ_ABSENCE_DRIVER_COST_DESIGN.md).

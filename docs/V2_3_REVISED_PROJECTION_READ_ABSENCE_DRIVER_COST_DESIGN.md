@@ -1,5 +1,12 @@
 # V2.3 Revised Projection Read/Absence and Driver Cost Admission Design
 
+Successor (2026-10-25): uploader
+docs/V2_3_DISTINCT_ABSENCE_COST_LEDGER_FOUNDATION.md implements the socket-free
+fixed event model with all native/absence/driver/resource/wiring claims false.
+This is not actual observer/worker integration or physical qualification. Next:
+repository-only Driver/Session Observation Feasibility and Provenance Integration
+Design; existing runtime/native worker/storage/wiring remain unchanged.
+
 2026-10-25. Approved repository-only DESIGN. No implementation, actual worker,
 storage, native execution or production wiring change. Uploader0.5.25 and
 dashboard0.1.77 unchanged; no package/release/deploy. Risk R0 analysis/R1 records.
