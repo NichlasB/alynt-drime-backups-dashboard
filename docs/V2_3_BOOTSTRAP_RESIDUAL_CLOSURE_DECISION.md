@@ -128,3 +128,37 @@ users, cookies, passwords, actual options or native transaction were touched.
 Validation: inspected actual early-return ordering and the get_data_by empty guard
 as text; no fake current user, mocked authentication result or new success path.
 Scoped Light/focused Security retains A1/A4 and the independent Task2 blocker.
+
+## Task 4 — Translation discovery and missing-file load boundary
+
+Pinned l10n.php30-80 reads WPLANG through the single-site option branch, then
+chooses en_US for an empty locale. determine_locale124-177 dispatches pre/final
+filters and chooses get_user_locale in admin;94-111 may access the current user's
+locale before falling back. It is not a constant en_US function or free of the
+anonymous/capability/configuration obligations in Task3.
+
+Textdomain registry180-220 normalizes the path, calls its pre-lookup filter,
+checks translation_files object cache, then on a cold miss performs TWO globs
+(*.mo and *.l10n.php) and caches the resulting array. This is not a transient or
+option-table writer under genuine nonpersistent cache. A cache hit still incurs
+the filter/cache lookup; a repeated path need not repeat the two globs. Different
+normalized paths have different cache keys. Absent files mean zero matched entries,
+not zero probes, cache allocation or filter work. No short-circuit filter is added.
+
+load_default_textdomain952-975 unloads the domain and attempts both locale and
+admin-locale loads under admin=true. load_textdomain790-845 initializes/sets the
+translation controller and tries PHP/MO alternatives through filtered paths.
+Controller load_file101-125 calls realpath and refuses false BEFORE constructing
+WP_Translation_File. Thus stable absent paths exclude translation-file creation
+on that edge, but not controller allocation/filter/probe work. Missing-file refusal
+cannot be claimed if source/config or filters redirect a path during execution.
+
+The JIT default-domain guard l10n1423-1431 returns before plugin/theme path
+discovery for 'default'; it does not suppress explicit load_default_textdomain.
+Other domains/custom registered paths and language-directory aliases remain
+separate cases. No translation PHP file was evaluated or installed file inspected.
+
+Result: the missing-file creation boundary and cold per-path two-glob cost are
+source-resolved, conditionally; total locale/filter/path multiplicity and physical
+absence/source ownership remain open. A1/A3/A4 narrow but are not closed. Scoped
+Light/focused Security finds no introduced code defect; native/catalog stays NO-GO.

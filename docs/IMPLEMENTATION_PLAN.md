@@ -14,6 +14,8 @@ option read outside29P/7N,even with empty widget instances. Catalog/worker uncha
 this now independently blocks candidate completeness,not just missing evidence.
 Task3 traces genuine anonymous validator/empty-user early guards and keeps their
 filter/action/capability suffix separate from authenticated request proof.
+Task4 separates cold per-path translation globs/cache allocation from missing-
+file refusal before translation resource creation;physical predicates stay open.
 
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 
