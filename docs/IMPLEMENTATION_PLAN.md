@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Fixed Projection Session/Profile Read-Only Audit — 2026-10-25
+
+See [owning audit](V2_3_PROJECTION_SESSION_PROFILE_READ_ONLY_AUDIT.md). Confirmed
+Plugin Tester local-only file/configuration inspection, no SQL/auth/native runs.
+Installed wpdb connects without a database then selects it after setup; current
+synthetic handshake-schema profile does not cover this path. Installed marker
+7.1.3/selected PHP8.5.12 differ from older pins; no running profile attestation.
+Plan advances a concrete compatibility counterexample, not native GO. Next gated
+slice: design-only Genuine wpdb Session/Setup Profile and Source-Rebaseline Design.
+
 ## V2.3 Projection Observer Adapter Safe-Local Batch — 2026-10-25
 
 See [owning design/batch](V2_3_PROJECTION_OBSERVER_ADAPTER_DESIGN.md). Task1 fixes

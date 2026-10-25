@@ -1,5 +1,12 @@
 # V2.3 Fixed Projection Observer Adapter and Session Provenance Integration Design
 
+Read-only audit completed2026-10-25: [source/profile findings](V2_3_PROJECTION_SESSION_PROFILE_READ_ONLY_AUDIT.md).
+Confirmed installed wpdb post-connect setup/database selection does not match
+the fixed handshake-schema candidate. Current installed/configured version facts
+require a source rebaseline; no negotiated profile or authentication was observed.
+Next gate is design-only Genuine wpdb Session/Setup Profile and Source-Rebaseline
+Design, not native proof or changing genuine core/driver to fit old synthetic bytes.
+
 Batch reconciliation2026-10-25 (task8): uploader owns
 docs/V2_3_PROJECTION_OBSERVER_FOUNDATION.md. Tasks2-7 implement/test the fixed
 synthetic composition, no actual observer attachment. Final readiness is native
