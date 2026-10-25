@@ -18,6 +18,8 @@ Task4 separates cold per-path translation globs/cache allocation from missing-
 file refusal before translation resource creation;physical predicates stay open.
 Task5 establishes two direct initial taxonomy/post-type invocations and separates
 REST initialization function from lazy server/action dispatch;no visit-set bound.
+Task6 resolves one HTML-token captured destructor target and disabled-cron order;
+buffer/driver/engine teardown and instance reachability remain independent gates.
 
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 

@@ -202,3 +202,41 @@ edges; a full per-phase callback/SCC/inner-work bound remains open. Source revie
 does not remove callbacks or change core registration order to shrink the proof.
 Scoped Light/focused Security: no introduced executable issue or fabricated whole-
 graph completion. Task2's missing sidebar dependency remains an independent NO-GO.
+
+## Task 6 — Shutdown suffix and a concrete captured destructor target
+
+Pinned settings166 registers shutdown_action_hook. load1302-1311 dispatches
+shutdown before wp_cache_close; genuine cache342-344 returns true. The registered
+buffer flusher functions5578-5582 captures ob_get_level then calls ob_end_flush
+once per captured level. Buffer count/handlers and their retained references must
+be part of source/config admission; cache close does not flush/clear all objects.
+
+cron1020-1031 may register _wp_cron on shutdown rather than run jobs immediately;
+1048-1056 returns for DISABLE_WP_CRON before ready-job lookup. This closes THAT
+disabled path, not other shutdown callbacks, a custom cache close or engine work.
+wpdb4049-4062 closes an actual mysqli handle and clears readiness on success.
+It is not equivalent to core cache close, nor may the old worker's early close
+be reused as proof that later callbacks remain inside the active query fence.
+
+The HTML-token lifetime obligation is now more concrete: processor438-440 stores
+a closure calling parent::release_bookmark;1072-1076 passes it to token creation.
+Token99-115 retains and invokes that callable in its destructor. The inherited
+tag-processor1393-1411 release body is a bookmark-table mutation, not a generic
+external callback. This resolves this callback origin/target, NOT whether a parser
+instance is reachable from bootstrap or its token/capture/cycle peak. Other token
+construction sites may supply null/different origins and need their own record.
+Nyholm Stream75-97 closes a retained resource via fclose then detach; an unknown
+wrapper is not assumed to be a memory stream. No destructors were executed here.
+
+The [PHP destructor rules](https://www.php.net/manual/en/language.oop5.decon.php)
+and [shutdown rules](https://www.php.net/manual/en/function.register-shutdown-function.php)
+require retaining a separate engine/process suffix: callbacks may append shutdown
+work; exit can prevent later callbacks; max_execution_time is not a supervisor
+deadline. Last-reference destruction is not tied to one chosen final marker.
+The future parent must still earn normal core/cache return, sticky post-candidate
+fences, process closure and both EOFs under the original epoch, plus owned cleanup.
+
+Result: one captured destructor target and disabled-cron ordering are resolved;
+full instance/resource reachability and installed buffer/source predicates remain
+open. No forced GC/unset, callback removal, source hash certificate, early handle
+close or exit0-only success. Scoped Light/focused Security retains native NO-GO.
