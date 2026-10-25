@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Genuine wpdb Setup DATA Foundation — 2026-10-25
+
+Uploader owns docs/V2_3_WPDB_SETUP_DATA_FOUNDATION.md: eight finite repository-only
+tasks implement fixed reference evidence and typed ordered setup/schema/lifetime
+modeling, with semantic guard controls and static dormancy checks. No dashboard
+runtime contract, worker/storage/auth/native/wiring change. Plan advances the
+genuine-wpdb successor DATA contract, not actual source/session authority. A1-A4
+and native GO remain Blocked. Next: repository-only Genuine wpdb Setup Wire Grammar
+and Profile Residual Design, before a successor parser or owned native proof.
+
 ## V2.3 Genuine wpdb Session/Setup and Source-Rebaseline Design — 2026-10-25
 
 See [owning design](V2_3_GENUINE_WPDB_SESSION_SETUP_REBASELINE_DESIGN.md). Separate

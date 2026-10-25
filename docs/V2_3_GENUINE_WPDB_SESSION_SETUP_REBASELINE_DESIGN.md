@@ -1,5 +1,12 @@
 # V2.3 Genuine wpdb Session/Setup Profile and Source-Rebaseline Design
 
+Successor2026-10-25: uploader `docs/V2_3_WPDB_SETUP_DATA_FOUNDATION.md` implements
+the finite eight-task synthetic DATA foundation. Separate source evidence,
+typed setup/result/schema order, private epoch, accounting and terminal enums;
+no old-profile translation or actual native admission. Next residual is a
+repository-only Genuine wpdb Setup Wire Grammar and Profile Residual Design.
+This does not refresh the dated installed audit or close A1-A4.
+
 2026-10-25. Approved DESIGN ONLY: R0 source analysis/R1 Markdown publication.
 Dashboard0.1.77/uploader0.5.25 and minimum compatibility unchanged. Excluded
 coherent review bases: dashboard98c8ba73e1414a0d5c8c5b6cc3a31982f86f7287,
