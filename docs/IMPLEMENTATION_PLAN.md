@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Setup Observation Admission and Source-Ownership Closure Design — 2026-10-25
+
+See [owning design](V2_3_SETUP_OBSERVATION_ADMISSION_SOURCE_OWNERSHIP_DESIGN.md).
+Design-only source graph versus lifetime lease, separate-principal sealed-image
+candidate, real session/profile admission and refusal/cleanup requirements. No
+implementation/permissions/SQL/native/wiring change. A1-A4/native GO remain Blocked.
+Next meaningful gate: Plugin Tester local-only Fixed Source-Image Ownership
+Feasibility and Denial Proof, explicit R3 owned filesystem/principal/permission
+scope; no WordPress or database execution. Do not infer ownership from model pins.
+
 ## V2.3 Setup Wire Grammar and Profile Residuals — 2026-10-25
 
 Uploader owns docs/V2_3_WPDB_SETUP_WIRE_FOUNDATION.md. Eight finite repository-only
