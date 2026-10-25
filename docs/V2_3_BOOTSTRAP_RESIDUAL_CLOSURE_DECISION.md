@@ -92,3 +92,39 @@ Validation: inspected eager call ordering and both admin/front-end option branch
 as text against the archive pin; this is source evidence, not genuine widget or
 database proof. Scoped Light/focused Security: no new executable/security defect;
 one confirmed admission dependency recorded without weakening its guard.
+
+## Task 3 — Anonymous identity: early guards versus authenticated proof
+
+Pinned user.php3805-3854 dispatches determine_current_user with false before
+wp_set_current_user(0). Default-filters520-522 registers the three genuine
+validators: auth cookie, logged-in cookie and application password. Empty cookies
+make pluggable.php1013-1049 return false at1035 before cookie-field parsing;
+wp_validate_auth_cookie782-795 dispatches auth_cookie_malformed and returns before
+user lookup/session-token verification. That action remains part of the callback
+graph, not an omitted zero-cost step. Logged-in validation user.php589-599 also
+returns early for the admin/empty-cookie predicate.
+
+Application-password validation user.php521-543 checks availability BEFORE its
+missing PHP_AUTH_USER/PW guard. Availability/environment/filter work therefore
+cannot be erased by saying credentials are absent. Authentication at536 is
+excluded only under the exact missing-server-fields predicate; no validator is
+replaced, disabled or invoked by this analysis.
+
+wp_set_current_user27-49 constructs WP_User(0,'') and then setup_userdata and
+set_current_user. WP_User131-170 takes get_data_by('login','');203-226 rejects the
+empty value BEFORE cache/SQL lookup and does not call init/for_site on that false
+result. This closes that direct empty-user lookup edge, not every subsequent
+capability or user-metadata caller. kses_init2606-2612 removes filters, tests
+current_user_can('unfiltered_html') and may add filters; it is not a no-op or a
+role assignment. The footnotes/capability action suffix remains separately scoped.
+
+Result: several direct credential/user-lookup branches are source-excluded for
+the empty profile, but all validator filters/action/capability helper effects and
+installed empty inputs still need closure/attestation. Neither anonymous WP_User0
+nor isolated tests establish genuine authenticated request success, nonce-domain
+separation or absence of every protected read before authorization. No fixture
+users, cookies, passwords, actual options or native transaction were touched.
+
+Validation: inspected actual early-return ordering and the get_data_by empty guard
+as text; no fake current user, mocked authentication result or new success path.
+Scoped Light/focused Security retains A1/A4 and the independent Task2 blocker.

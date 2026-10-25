@@ -12,6 +12,8 @@ Implementation-plan progress:A1-A4 residual evidence advances,not native GO.
 Task2 confirms an eager Recent Comments ->is_active_widget ->sidebars_widgets
 option read outside29P/7N,even with empty widget instances. Catalog/worker unchanged;
 this now independently blocks candidate completeness,not just missing evidence.
+Task3 traces genuine anonymous validator/empty-user early guards and keeps their
+filter/action/capability suffix separate from authenticated request proof.
 
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 
