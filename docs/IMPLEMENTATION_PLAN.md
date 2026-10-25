@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Bootstrap Residual Closure Safe-Local Batch — 2026-10-25
+
+See [decision and residual ledger](V2_3_BOOTSTRAP_RESIDUAL_CLOSURE_DECISION.md).
+Task1 fixes the admission decision:retain NO-GO,close explicit source residuals
+and keep numerical memory policy unassigned rather than importing PHPUnit256M.
+Tasks2-8 target widgets,anonymous user,translations,registry dispatch,teardown,
+query/cache accounting and final admission reconciliation. Repository/public-
+source only;no native execution,application storage,permissions or wiring change.
+Implementation-plan progress:A1-A4 residual evidence advances,not native GO.
+
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 
 See [owning audit](V2_3_PINNED_BOOTSTRAP_REACHABILITY_LIFETIME_COST_AUDIT.md).
