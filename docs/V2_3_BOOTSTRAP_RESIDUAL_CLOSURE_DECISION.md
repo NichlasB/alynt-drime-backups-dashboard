@@ -162,3 +162,43 @@ Result: the missing-file creation boundary and cold per-path two-glob cost are
 source-resolved, conditionally; total locale/filter/path multiplicity and physical
 absence/source ownership remain open. A1/A3/A4 narrow but are not closed. Scoped
 Light/focused Security finds no introduced code defect; native/catalog stays NO-GO.
+
+## Task 5 — Phase dispatch, repeated registries and lazy REST
+
+Pinned settings565-566 calls create_initial_taxonomies/post_types before
+plugins_loaded630; then sanitize_comment_cookies643, setup_theme705,
+after_setup_theme757, WP::init766, init779 and wp_loaded801. The no-content
+predicate excludes plugin/theme loop bodies, not the unconditional phase actions.
+Default-filters591/683 also registers those two create_initial functions at init0.
+Therefore each has TWO direct invocations on the normal no-locale-switch path,
+not one because its source file was included once. A change_locale action could
+add more; it requires a separate reachable dispatch, not an automatic third call.
+
+post.php20 begins reset_default_labels and registration without an early
+already-initialized return. taxonomy.php25-61 resets labels; before init it uses
+false rewrites, inside init it computes rewrites and repeatedly requests category_base/
+tag_base. N misses may become cache hits, but the option APIs/filters still run.
+For absent category_base/tag_base each expression calls get_option twice (the
+truthy ternary arm is excluded); this is four API calls in that rewrite setup,
+not four new SQL queries. Allocations/replacements and label/filter traversals
+must be counted separately from final registry size or distinct hook identities.
+
+Important naming distinction: rest_api_init() (rest-api208-230), hooked to init,
+registers rewrites/query var. It does NOT fire the 'rest_api_init' action. The
+latter is dispatched in rest_get_server629-657 AFTER its filtered server-class
+factory. Hence registering default REST routes/settings callbacks does not
+establish that they or controllers execute during this root. Conversely, an
+unreviewed rest_get_server caller cannot be excluded by this name distinction.
+
+plugin.php488-525 increments action counts BEFORE dispatch, invokes 'all' handlers
+if present, then the hook object. Hook328-365/375-382 traverses callback priorities
+and invokes exact accepted arguments. add_filter91-117 indexes by callback identity
+within priority and can resort active iterations. Re-registering an identical key
+may replace it; a new object callback is not necessarily that same key. No generic
+one-visit or fixed-static-list bound follows from a visited-file set.
+
+Result: repeated registry invocation and lazy REST dispatch are source-resolved
+edges; a full per-phase callback/SCC/inner-work bound remains open. Source review
+does not remove callbacks or change core registration order to shrink the proof.
+Scoped Light/focused Security: no introduced executable issue or fabricated whole-
+graph completion. Task2's missing sidebar dependency remains an independent NO-GO.
