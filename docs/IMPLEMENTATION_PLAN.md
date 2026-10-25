@@ -7,6 +7,11 @@ the eight-task synthetic-only scope: detached bytes, session consistency, ordere
 forwarding credits, terminal closure, resources, adversarial tests and readiness.
 No actual worker/storage/native/wiring change; actual authentication/provenance
 and A1-A4 remain Blocked. Next native proof requires exact target/fixture approval.
+Tasks2-8 complete the synthetic ownership/session/credit/EOF/resource composition,
+non-vacuous guard controls and static dormancy/readiness reconciliation. Final
+exact-head CI ledger is source-scoped in toolkit evidence. Next gated action is
+the Plugin Tester local-only Fixed Projection Session/Profile Read-Only Feasibility
+Audit, before any owned native proof; no SQL/authentication/fixtures/wiring change.
 
 ## V2.3 Socket-Free Projection Zero-Row / Provenance Foundation — 2026-10-25
 

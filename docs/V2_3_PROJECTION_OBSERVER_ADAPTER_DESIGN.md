@@ -1,5 +1,15 @@
 # V2.3 Fixed Projection Observer Adapter and Session Provenance Integration Design
 
+Batch reconciliation2026-10-25 (task8): uploader owns
+docs/V2_3_PROJECTION_OBSERVER_FOUNDATION.md. Tasks2-7 implement/test the fixed
+synthetic composition, no actual observer attachment. Final readiness is native
+NO-GO, not a new permission to run the proof proposed below. Preferred next gate
+is now **Plugin Tester local-only Fixed Projection Session/Profile Read-Only
+Feasibility Audit**, exact target confirmation, no SQL/authentication/fixture/
+permission/listener/native operation. Installed profile is not established by
+invented fixtures; any later owned native proof requires a new qualified plan.
+The original task1 design decision follows as historical scope, not proof approval.
+
 2026-10-25. Autonomous safe-local batch, task1/8. R0 analysis/R1 publication;
 subsequent bounded synthetic code R2. Dashboard0.1.77/uploader0.5.25 unchanged.
 Excluded coherent bases: dashboardb68a704d6934ed1ed7cdbc258346266c2d46c097,
