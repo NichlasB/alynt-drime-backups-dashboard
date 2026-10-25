@@ -277,3 +277,82 @@ no complete replacement total or budget increase is asserted here.
 Result: query/driver/cache observability limits are now concrete, not a completed
 whole-request cost. No SQL, connection, privilege or source-operator change ran.
 Scoped Light/focused Security: no new executable issue or broadened SQL authority.
+
+## Task 8 — Versioned sidebar-absence proposal and admission reconciliation
+
+Preferred next repository implementation: a NEW test-only versioned29P/8N
+catalog domain adding exactly sidebars_widgets as genuine absence, with the old
+29P/7N model/identity explicitly distinguished. Do not silently change v1's label
+digest, expected count or acceptance assertion. The current compiled catalog,
+native eight-key worker, SQL observer and all production contracts stay untouched
+in this design batch. No source-complete/native certificate is issued.
+
+Why absence rather than a new present row: wp_get_sidebars_widgets1039 explicitly
+accepts its empty-array default and the inspected is_active_widget loop then has
+no entries. A positive sidebars option is not required by THIS edge. N adds no
+present source row, preserving29P+two canaries+owner=32. Actual absent backing rows,
+binary/collation behavior and the permitted absence query still require later
+owned physical proof; filtering a present value out of a view does not establish
+backing-store absence. No fake empty return, pre-option cache priming, widget/hook
+removal, canary trimming or broader read wildcard is an acceptable substitute.
+
+Required model tests for that next slice: a positive exact29P/8N literal fixture;
+deleting/aliasing/duplicating/changing the new name fails; stale29P/7N evidence
+cannot masquerade as the new profile; a present sidebar value cannot satisfy
+absence; names outside the exact domain refuse. Keep negative native-readiness
+tests and the honest modeled_only result. Tests must exercise actual helpers and
+fail when the new name/version/absence guard is bypassed, not merely expect every
+input unavailable. This proposal does not prescribe a generic parser/framework.
+
+The revised cost worksheet must add the newly permitted cold miss to option-only
+subtotals while retaining all repeated API/filter work and direct driver setup.
+It must still refuse if total bounds or native memory policy remain unknown;
+neither a synthetic trace nor the source below supplies those physical limits.
+
+| Parent finding | New result | Still not established |
+|---|---|---|
+|A1 source/calls|Concrete eager sidebar counterexample; anonymous early guards; lazy REST distinction; repeated registry calls|Complete transitive callback/include/autoload/error closure and revised-domain compatibility|
+|A2 lifetime|One HTML-token callback origin/target; actual buffer/cache/driver suffix distinguished|All instantiated/inherited/captured/native resources, stable source/buffers and full engine/process closure|
+|A3 resources|Two globs per cold path; repeated API versus SQL; driver statements versus query-filter/num_queries|Whole-request query/inner-work/heap/time totals and approved native memory policy|
+|A4 installed ownership|Public source pin and raw member records only|Installed tree/config/SAPI/extensions/empty request/cold cache/absence and anti-substitution ownership|
+
+Implementation-plan progress: eight distinct source/design deliverables address
+the existing R2 residuals; no claim of eight runtime features or complete bootstrap
+qualification. The independent source lanes are narrowed, not exhausted; native
+admission remains NO-GO. Recommended next action: implement the test-only versioned
+29P/8N sidebar-absence catalog and adversarial regressions in its owning uploader
+repository, without changing the actual worker or production wiring. Native,
+storage/fixture/privilege and deployment transitions require separate authority.
+
+Batch review: canonical source-scoped Feature Light and final focused Feature
+Security cover this cohesive record, plan and parent correction against the
+96cdd00 base. No executable/security fix or new regression test claimed; source
+counterexample and honest readiness limits are documentation outcomes. No bloat/
+UI/UX trigger, Database Review, physical proof or whole-plugin pre-release refresh.
+All eight slices execute existing dashboard PHPUnit plus whitespace checks;
+Markdown targets checked for each later slice and final batch. PHPCS138/structure
+passed once for the final batch. Local299/1423 includes two existing Sodium skips;
+exact-head PHP7.4/8.3 CI results/log counts belong in toolkit source-scoped evidence.
+No uploader edit/native run or package/release/deploy. Compatibility unchanged.
+
+### Additional raw source identities inspected in this batch
+
+Archive SHA256 is pinned above; these hashes are raw uncompressed member bytes,
+not installed-source attestations or a claim that every statement was reviewed.
+
+| Member | Bytes | SHA256 |
+|---|---:|---|
+|wp-includes/widgets/class-wp-widget-recent-comments.php|6918|80A93831407C18C3DE00BBFABC4745499CD1ACE7B7F19D55C07C239F5EEC511F|
+|wp-includes/user.php|180301|C837321FBF722F89A080324F3C742B0C44E5853C9BD6D305CB894B5F664FC6CC|
+|wp-includes/pluggable.php|127919|3A2482A65B50D62EBAE75A728BE98B78985D3A3F5A3E007CB2D0C1338BF05777|
+|wp-includes/class-wp-user.php|23189|A6330B51EC04DBFE0B968A1130148AEDB63E28B64FC533F24C1DA563E11D5FE2|
+|wp-includes/l10n.php|71415|43C9AF6B687EE3EB92608FEA4697EBE7B62B3D45490A7657EFCE71033AC82ED7|
+|wp-includes/l10n/class-wp-translation-controller.php|12971|E8A2D90C35C23780EF1A7DE8E2995D625B7B6D20D9543438056BE52FD4ABFBEC|
+|wp-includes/post.php|305215|522AE4AD3DD9E367840CD235CDE9FE6FF01AE1E4DD96906C7B5DC0EDBE81A56B|
+|wp-includes/taxonomy.php|178307|281F7AA456CB28BD09B1476B61EE7D9614DB78DE013F31667141A42C07E31C7B|
+|wp-includes/rest-api.php|102951|9C4AF1341E37DE253323CF7C28DA1424F41DECC2154904E2B71A4E71C9CDD70C|
+|wp-includes/class-wp-hook.php|17584|B839C0E5672246BCA8DB1AB781EC8835F7732F253C375A237CBF6EC536E8D12E|
+|wp-includes/plugin.php|37123|D70B9E18D34AB3FE46E15548A5E8E089EA5920832F06A4D89A9D64B2F7938B0D|
+|wp-includes/class-wpdb.php|121437|E15403E90032DD0508811301505E491D4212DE5152581A98F51B744A1A3903BD|
+|wp-includes/html-api/class-wp-html-processor.php|213919|A5C63913428050F39F3BED0461F90D13E214495F7E68F17E349C5C52D4084C6E|
+|wp-includes/html-api/class-wp-html-tag-processor.php|178828|E2D3C1511D02A60637AD94B9A2D6A76DA234D55F4F86C9D1A6BF016A26C69BD6|

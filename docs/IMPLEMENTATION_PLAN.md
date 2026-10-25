@@ -22,6 +22,9 @@ Task6 resolves one HTML-token captured destructor target and disabled-cron order
 buffer/driver/engine teardown and instance reachability remain independent gates.
 Task7 distinguishes direct driver/session statements,filter attempts,num_queries
 visits and genuine cache misses;none alone certifies completed queries/zero DML.
+Task8 designs a new test-only29P/8N sidebar-absence domain and guard-killing tests,
+not a silent v1 change or native GO. Next action:implement that versioned model/
+regression slice in uploader,keeping actual worker/storage/wiring unchanged.
 
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 
