@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Genuine wpdb Session/Setup and Source-Rebaseline Design — 2026-10-25
+
+See [owning design](V2_3_GENUINE_WPDB_SESSION_SETUP_REBASELINE_DESIGN.md). Separate
+versioned source/session/setup/result identities, post-connect schema selection,
+mode-result branches and source-reuse predicates; no old-mask translation or
+wholesale evidence refresh. Seven public reference members pinned, not installed
+or transitive/native closure. Existing code/workers/storage/wiring unchanged.
+Plan advances the compatibility design; A1-A4/native GO remain Blocked. Next gate:
+local-only Genuine wpdb Source-Profile Catalog and Setup Admission DATA Safety
+Foundation, in-memory only, before a successor parser or owned native proof.
+
 ## V2.3 Fixed Projection Session/Profile Read-Only Audit — 2026-10-25
 
 See [owning audit](V2_3_PROJECTION_SESSION_PROFILE_READ_ONLY_AUDIT.md). Confirmed

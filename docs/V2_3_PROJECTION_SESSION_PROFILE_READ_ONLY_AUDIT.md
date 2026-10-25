@@ -1,5 +1,11 @@
 # V2.3 Fixed Projection Session/Profile Read-Only Feasibility Audit
 
+Design successor2026-10-25: [genuine wpdb setup/source rebaseline](V2_3_GENUINE_WPDB_SESSION_SETUP_REBASELINE_DESIGN.md)
+specifies separate versioned identities, post-connect selection and result-aware
+setup, without changing old synthetic guards or claiming full rebaseline/native
+GO. This audit remains dated installed/configuration evidence, not refreshed by
+the repository-only successor design.
+
 2026-10-25. Complete for the approved read-only audit scope; native qualification
 remains NO-GO. R0 inspection/R1 documentation publication only. No parser repair
 or new implementation milestone. Versions dashboard0.1.77/uploader0.5.25 unchanged.
