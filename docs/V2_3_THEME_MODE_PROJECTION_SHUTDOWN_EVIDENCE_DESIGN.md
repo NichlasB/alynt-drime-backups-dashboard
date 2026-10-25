@@ -1,5 +1,10 @@
 # V2.3 Fixed Theme-Mode Projection and Full-Shutdown Evidence Design
 
+Successor (2026-10-25): [revised read/absence and driver cost admission design](V2_3_REVISED_PROJECTION_READ_ABSENCE_DRIVER_COST_DESIGN.md).
+Conditional9/10 option-only SELECT subtotal for eight distinct cold misses is not
+a whole-request cap. Session/driver effects and successful absence require separate
+evidence; actual model/native worker and production wiring remain unchanged.
+
 Source/resource successor: [complete closure design](V2_3_BOOTSTRAP_INCLUDE_LIFETIME_RESOURCE_CLOSURE_DESIGN.md).
 Fresh measured archive inventory is1512 PHP files,not the historical1900 count
 below. This correction does not change the synthetic counter domain or establish

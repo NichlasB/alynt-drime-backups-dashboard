@@ -278,6 +278,10 @@ Result: query/driver/cache observability limits are now concrete, not a complete
 whole-request cost. No SQL, connection, privilege or source-operator change ran.
 Scoped Light/focused Security: no new executable issue or broadened SQL authority.
 
+Successor (2026-10-25): [revised read/absence and driver admission design](V2_3_REVISED_PROJECTION_READ_ABSENCE_DRIVER_COST_DESIGN.md)
+separates successful distinct-name absence from default/cache/counter evidence and
+driver replay from query-filter visits. Design-only; actual worker remains unchanged.
+
 ## Task 8 — Versioned sidebar-absence proposal and admission reconciliation
 
 Preferred next repository implementation: a NEW test-only versioned29P/8N

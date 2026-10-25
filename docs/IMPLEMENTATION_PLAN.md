@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Revised Read/Absence and Driver Cost Admission Design — 2026-10-25
+
+See [owning design](V2_3_REVISED_PROJECTION_READ_ABSENCE_DRIVER_COST_DESIGN.md).
+Design only: distinct successful zero-row absence, API/cache work, data executions,
+driver/session effects and whole-request resources are separate evidence lanes.
+Conditional1+D/2+D (D<=8) is not a native cap; query-filter/num_queries do not
+attest all driver operations or successful results. Actual worker/storage/native
+execution/production wiring unchanged. Plan progress: admission design advances,
+A1-A4 still Blocked. Next: local-only Socket-Free Distinct Absence and Cost Ledger
+Safety Foundation, synthetic-only, before any physical qualification request.
+
 ## V2.3 Versioned Sidebar-Absence Model Foundation — 2026-10-25
 
 Uploader owns docs/V2_3_SIDEBAR_ABSENCE_MODEL_FOUNDATION.md. Eight safe-local
