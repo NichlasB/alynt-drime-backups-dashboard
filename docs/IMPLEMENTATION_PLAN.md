@@ -1,5 +1,13 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Projection Observer Adapter Safe-Local Batch — 2026-10-25
+
+See [owning design/batch](V2_3_PROJECTION_OBSERVER_ADAPTER_DESIGN.md). Task1 fixes
+the eight-task synthetic-only scope: detached bytes, session consistency, ordered
+forwarding credits, terminal closure, resources, adversarial tests and readiness.
+No actual worker/storage/native/wiring change; actual authentication/provenance
+and A1-A4 remain Blocked. Next native proof requires exact target/fixture approval.
+
 ## V2.3 Socket-Free Projection Zero-Row / Provenance Foundation — 2026-10-25
 
 Uploader owns docs/V2_3_PROJECTION_ZERO_ROW_PROVENANCE_FOUNDATION.md: separate
