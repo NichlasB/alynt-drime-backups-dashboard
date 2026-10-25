@@ -1,5 +1,10 @@
 # V2.3 Revised Projection Read/Absence and Driver Cost Admission Design
 
+Observation successor: [driver/session feasibility and provenance design](V2_3_DRIVER_SESSION_OBSERVATION_PROVENANCE_DESIGN.md)
+separates selected COMMIT/framing evidence from actual result completion and
+source/handle/backing/lifetime provenance. Design only; no worker/storage/native/
+wiring change or physical observation claim.
+
 Successor (2026-10-25): uploader
 docs/V2_3_DISTINCT_ABSENCE_COST_LEDGER_FOUNDATION.md implements the socket-free
 fixed event model with all native/absence/driver/resource/wiring claims false.

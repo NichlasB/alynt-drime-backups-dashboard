@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Driver/Session Observation and Provenance Design — 2026-10-25
+
+See [owning design](V2_3_DRIVER_SESSION_OBSERVATION_PROVENANCE_DESIGN.md).
+Existing relay/COMMIT witness is not a projection result observer. Source/pair/
+session/command/result/backing/cache/full-lifetime provenance must join without
+trusting model labels or promoting passive framing to general observation.
+Plan progress: feasibility boundaries specified; native GO remains Blocked.
+Next: local-only Socket-Free Projection Zero-Row Response and Provenance Safety
+Foundation, synthetic bytes/contexts/clocks only. Worker/storage/native/wiring unchanged.
+
 ## V2.3 Socket-Free Distinct Absence and Cost Ledger — 2026-10-25
 
 Uploader owns docs/V2_3_DISTINCT_ABSENCE_COST_LEDGER_FOUNDATION.md. Eight safe-local
