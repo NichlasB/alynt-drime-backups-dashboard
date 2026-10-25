@@ -1,5 +1,12 @@
 # V2.3 Driver/Session Observation Feasibility and Provenance Integration Design
 
+Successor implemented2026-10-25: uploader owns
+docs/V2_3_PROJECTION_ZERO_ROW_PROVENANCE_FOUNDATION.md. Separate test-only
+socket-free selected request/zero-row decoder and private synthetic provenance;
+this design's native limits/NO-GO remain. Next gated design: Fixed Projection
+Observer Adapter and Session Provenance Integration Design. Actual worker/storage/
+native execution/production wiring unchanged; historical design record follows.
+
 2026-10-25. Approved repository-only DESIGN, R0 analysis/R1 publication. No actual
 worker, storage, native execution or production wiring change. Versions remain
 dashboard0.1.77/uploader0.5.25; no package/release/tag/deploy or real admission.

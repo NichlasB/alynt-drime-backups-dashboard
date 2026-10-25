@@ -1,5 +1,14 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Socket-Free Projection Zero-Row / Provenance Foundation — 2026-10-25
+
+Uploader owns docs/V2_3_PROJECTION_ZERO_ROW_PROVENANCE_FOUNDATION.md: separate
+test-only response/private-context decoder, synthetic bytes/clocks only, no new
+dashboard runtime contract. Plan advances narrow response/provenance modeling;
+actual observation and A1-A4/native GO remain Blocked. Worker/storage/native/wiring
+unchanged. Next gated slice: design-only Fixed Projection Observer Adapter and
+Session Provenance Integration Design, before actual attachment/native proof.
+
 ## V2.3 Driver/Session Observation and Provenance Design — 2026-10-25
 
 See [owning design](V2_3_DRIVER_SESSION_OBSERVATION_PROVENANCE_DESIGN.md).
