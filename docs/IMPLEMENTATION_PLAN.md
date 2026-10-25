@@ -20,6 +20,8 @@ Task5 establishes two direct initial taxonomy/post-type invocations and separate
 REST initialization function from lazy server/action dispatch;no visit-set bound.
 Task6 resolves one HTML-token captured destructor target and disabled-cron order;
 buffer/driver/engine teardown and instance reachability remain independent gates.
+Task7 distinguishes direct driver/session statements,filter attempts,num_queries
+visits and genuine cache misses;none alone certifies completed queries/zero DML.
 
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 

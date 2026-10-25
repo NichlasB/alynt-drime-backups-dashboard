@@ -240,3 +240,40 @@ Result: one captured destructor target and disabled-cron ordering are resolved;
 full instance/resource reachability and installed buffer/source predicates remain
 open. No forced GC/unset, callback removal, source hash certificate, early handle
 close or exit0-only success. Scoped Light/focused Security retains native NO-GO.
+
+## Task 7 — Driver control, attempted queries and genuine cache accounting
+
+Pinned wpdb2214-2234 checks readiness before the query filter, then filters SQL
+before execution. A guard that counts filter visits measures those attempted
+application calls, including refused ones; it is not an all-driver-statement
+counter. _do_query2347-2356 increments num_queries after its optional mysqli_query
+call, even without a success predicate. That property is not a successful-result,
+transaction-completion or physical zero-DML certificate, regardless of a receipt
+label such as completed_data_queries. Existing receipt/protocol is not changed.
+
+Direct control paths bypass that filter/counter: set_charset916-937 may call
+mysqli_set_charset plus SET NAMES; set_sql_mode949-985 directly selects session
+sql_mode and conditionally sets it (empty/error result returns before SET);
+db_connect2033-2044 calls both and selects the database. Connection checking also
+has a direct DO1 probe. These are session/driver effects, not P/N option reads or
+application-row DML. They require their own finite control-statement/connection/
+retry accounting and original deadline, not an ad-hoc SELECT/SET wildcard or
+claim that read-only account privileges prohibit every session statement.
+
+option.php163-217 prioritizes alloptions, then notoptions, then options cache,
+then one missing-name SELECT and notoptions insertion. Repeated absent-name calls
+therefore still execute API/filter/cache work without necessarily repeating SQL.
+wp_load_alloptions600-645 can do autoload SELECT then fallback all-option SELECT
+before hydration; a bulk result, single-key result and genuine absence remain
+different evidence. No cached default may substitute for an unapproved name.
+
+Consequences for Task2: 'sidebars_widgets' remains an attempted out-of-domain
+read even when its eventual result would be absent/default empty. A future exact
+N8 model would add no present source row, so29P+two canaries+owner remains32, but
+its cold first miss and all repeated API work must be budgeted. Existing conditional
+8/9 option-only SQL arithmetic is no longer sufficient for that revised proposal;
+no complete replacement total or budget increase is asserted here.
+
+Result: query/driver/cache observability limits are now concrete, not a completed
+whole-request cost. No SQL, connection, privilege or source-operator change ran.
+Scoped Light/focused Security: no new executable issue or broadened SQL authority.
