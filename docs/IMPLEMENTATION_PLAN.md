@@ -1,5 +1,13 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Setup Wire Grammar and Profile Residuals — 2026-10-25
+
+Uploader owns docs/V2_3_WPDB_SETUP_WIRE_FOUNDATION.md. Eight finite repository-only
+tasks specify and exercise a separately named synthetic packet/result/request/
+ownership subset, not a negotiated genuine-wpdb profile. No dashboard runtime,
+actual worker/storage/auth/native/wiring change. Plan advances bounded result
+grammar; installed profile/source ownership and A1-A4/native GO remain Blocked.
+
 ## V2.3 Genuine wpdb Setup DATA Foundation — 2026-10-25
 
 Uploader owns docs/V2_3_WPDB_SETUP_DATA_FOUNDATION.md: eight finite repository-only
