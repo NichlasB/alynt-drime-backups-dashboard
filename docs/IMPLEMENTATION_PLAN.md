@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Versioned Sidebar-Absence Model Foundation — 2026-10-25
+
+Uploader owns docs/V2_3_SIDEBAR_ABSENCE_MODEL_FOUNDATION.md. Eight safe-local
+implementation/test-support/review tasks create fixed29P/8N catalog and matching
+authority-free transcript with explicit v1 separation, adversarial and guard-
+sensitivity evidence. No actual worker, storage or production wiring changes.
+Implementation-plan progress: sidebar counterexample modeled, not physical/native
+GO. Next: repository-only Revised Projection Read/Absence and Driver Cost Admission
+Design; A1-A4 source/lifetime/cost/installed ownership still require closure.
+
 ## V2.3 Bootstrap Residual Closure Safe-Local Batch — 2026-10-25
 
 See [decision and residual ledger](V2_3_BOOTSTRAP_RESIDUAL_CLOSURE_DECISION.md).
