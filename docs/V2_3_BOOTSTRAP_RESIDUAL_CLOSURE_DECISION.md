@@ -53,3 +53,42 @@ Security on this record and plan pointer; no new code/security defect, UI/bloat
 trigger, Database/physical proof or whole-plugin readiness claim. Targeted local
 Markdown/whitespace and existing dashboard PHPUnit are publication checks only.
 Exact-head CI outcomes belong in the source-scoped toolkit batch evidence.
+
+## Task 2 — Widget overrides: confirmed missing sidebar dependency
+
+Fresh pinned source: widgets/class-wp-widget-recent-comments.php24-37,
+6918 raw bytes, SHA256
+`80A93831407C18C3DE00BBFABC4745499CD1ACE7B7F19D55C07C239F5EEC511F`.
+Caller: wp_widgets_init constructs Recent Comments before widgets_init100 calls
+the factory's base registration. Constructor34 invokes is_active_widget BEFORE
+the right operand is_customize_preview, regardless of an empty widget instance.
+widgets.php916-938 immediately calls wp_get_sidebars_widgets;1021-1054 selects
+get_option('sidebars_widgets', array()) on the WP_ADMIN=true branch at1039.
+
+This option is in neither P29 nor N7. A missing row still requires an absence
+read; a default empty array is not permission to request that name. `_multiwidget`
+does not protect this constructor path. It is therefore a confirmed source-level
+counterexample to complete 29P/7N closure, not the tentative script-path concern
+that the parent audit correctly rejected. No WordPress or SQL execution ran.
+Do not claim this is necessarily the first refusal: another earlier unclosed edge
+could fail first. No unavoidable writer is established by this particular read.
+
+Other inspected constructors and the media/text/custom-HTML `_register_one`
+overrides register admin/footer/preview callbacks rather than enqueue/render them
+immediately. Media subclasses merge translated labels and compute admin URLs;
+Recent Posts/Comments retain legacy option names, but base migration/delete still
+requires the missing/old-format predicate. WP_Widget::is_preview339-342 consults
+the actual customizer global; it is not forced false by this audit. The constructor
+URL/translation helper effects remain transitive obligations, not literal-only work.
+
+Decision: retain native NO-GO and unchanged catalog/worker. A future exact absent-
+sidebar proposal would need a new versioned N domain and source-backed positive/
+negative model coverage; adding a present thirtieth row would exceed the current
+32-row fixture budget with both canaries/owner retained. Neither is applied here.
+Remaining source audits may proceed independently; they do not authorize setup,
+profile widening, hook removal, replacing the option API or suppressing reads.
+
+Validation: inspected eager call ordering and both admin/front-end option branches
+as text against the archive pin; this is source evidence, not genuine widget or
+database proof. Scoped Light/focused Security: no new executable/security defect;
+one confirmed admission dependency recorded without weakening its guard.

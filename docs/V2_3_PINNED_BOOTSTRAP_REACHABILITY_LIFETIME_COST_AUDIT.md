@@ -1,5 +1,10 @@
 # V2.3 Pinned Bootstrap Reachability, Lifetime and Effect/Cost Audit
 
+Successor correction: [residual decision, Task2](V2_3_BOOTSTRAP_RESIDUAL_CLOSURE_DECISION.md)
+establishes a constructor read of sidebars_widgets outside29P/7N. The historical
+"no newly required option established" finding below describes this audit's
+earlier limited scope, not the successor result. No catalog/worker widening.
+
 2026-10-25. Approved repository/public-source audit; R0 analysis, R1 Markdown
 publication. Dashboard owns this record; uploader owns the unchanged worker,
 operator and socket-free catalog/transcript. No PHP source was evaluated to

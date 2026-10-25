@@ -9,6 +9,9 @@ Tasks2-8 target widgets,anonymous user,translations,registry dispatch,teardown,
 query/cache accounting and final admission reconciliation. Repository/public-
 source only;no native execution,application storage,permissions or wiring change.
 Implementation-plan progress:A1-A4 residual evidence advances,not native GO.
+Task2 confirms an eager Recent Comments ->is_active_widget ->sidebars_widgets
+option read outside29P/7N,even with empty widget instances. Catalog/worker unchanged;
+this now independently blocks candidate completeness,not just missing evidence.
 
 ## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
 
