@@ -1,5 +1,12 @@
 # V2.3 Complete Bootstrap Include, Object-Lifetime and Resource Closure Design
 
+Successor evidence (2026-10-25):
+[pinned reachability/lifetime/effect-cost audit](V2_3_PINNED_BOOTSTRAP_REACHABILITY_LIFETIME_COST_AUDIT.md)
+fills conditional root/factory/registry records and finite-family subtotals.
+Its A1-A4 findings keep full source/lifetime/cumulative-resource/installed-source
+admission unresolved; this parent design is not upgraded to native readiness.
+The historical next-slice recommendation below is superseded by that audit.
+
 2026-10-24. Approved DESIGN ONLY. R0 public-source/design analysis, R1 Markdown
 publication. Dashboard owns this design; uploader owns the unchanged proof and
 socket-free helpers. No executable/test/config/protocol/dependency/version change,

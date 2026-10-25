@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Pinned Bootstrap Reachability / Lifetime / Effect-Cost Audit — 2026-10-25
+
+See [owning audit](V2_3_PINNED_BOOTSTRAP_REACHABILITY_LIFETIME_COST_AUDIT.md).
+Public-source only: populated immediate roots/factories/dispatch/lifetime ledger,
+86 dynamic+27 static+two special metadata registrations,17 support rows/15
+attribute callbacks,88 icon registrations. Conditional subtotals are not whole-
+request/include/heap bounds. Tentative script date-option edge disproved;no P/N
+widening or new unavoidable writer established. A1-A4 retain full call/lifetime/
+cumulative-resource/installed-source admission gaps; native qualification NO-GO.
+
+Implementation-plan progress:R2 source evidence advances,not complete source or
+native certification. Recommended next gated slice:design-only V2.3 Bootstrap
+Closure Completion and Resource Admission Decision,before a revised harness or
+physical proof. Actual eight-key worker,helpers/tests/budgets,storage writes,
+native execution and production wiring remain unchanged/disabled;no release.
+
 ## V2.3 Include / Object-Lifetime / Resource Closure Design — 2026-10-24
 
 See [owning design](V2_3_BOOTSTRAP_INCLUDE_LIFETIME_RESOURCE_CLOSURE_DESIGN.md).
