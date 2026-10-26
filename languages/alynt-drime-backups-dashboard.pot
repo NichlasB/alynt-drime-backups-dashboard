@@ -3196,7 +3196,7 @@ msgid "Review Local Revocation"
 msgstr ""
 
 #: includes/traits/trait-admin-page-site-formatters.php:34
-#: includes/traits/trait-diagnostics-site-metric-helpers.php:139
+#: includes/diagnostics/traits/trait-diagnostics-site-metric-helpers.php:139
 msgid "Unnamed site"
 msgstr ""
 

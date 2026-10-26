@@ -5,11 +5,11 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-require_once dirname( __DIR__, 2 ) . '/includes/class-event-log-redactor.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-storage.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-settings.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-reporting.php';
-require_once dirname( __DIR__, 2 ) . '/includes/class-event-log.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log-redactor.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-storage.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-settings.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-reporting.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-formatters.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostic-formatters.php';

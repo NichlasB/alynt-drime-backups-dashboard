@@ -12,11 +12,11 @@ require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-rea
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-writes.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-site-repository-runtime-writes.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-site-repository.php';
-require_once dirname( __DIR__, 2 ) . '/includes/class-event-log-redactor.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-storage.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-settings.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-reporting.php';
-require_once dirname( __DIR__, 2 ) . '/includes/class-event-log.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log-redactor.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-storage.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-settings.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-reporting.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-enrollment-rest-responses.php';
 require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-enrollment-rest-route-args.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-enrollment-rest-controller.php';

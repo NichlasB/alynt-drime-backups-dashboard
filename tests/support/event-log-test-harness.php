@@ -20,8 +20,8 @@ if ( ! function_exists( 'get_current_user_id' ) ) {
 	}
 }
 
-require_once dirname( __DIR__, 2 ) . '/includes/class-event-log-redactor.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-storage.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-settings.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-event-log-reporting.php';
-require_once dirname( __DIR__, 2 ) . '/includes/class-event-log.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log-redactor.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-storage.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-settings.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-reporting.php';
+require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log.php';
