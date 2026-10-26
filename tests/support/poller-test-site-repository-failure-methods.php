@@ -40,13 +40,14 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository_Failure_Methods 
 	 * @param int    $consecutive_failures Consecutive failures.
 	 * @return bool
 	 */
-	public function mark_poll_failure( $site_id, $error_code, $summary = '', $next_poll_at = '', $consecutive_failures = 1 ) {
+	public function mark_poll_failure( $site_id, $error_code, $summary = '', $next_poll_at = '', $consecutive_failures = 1, array $expected_site = array() ) {
 		$this->failure = array(
 			'site_id'              => $site_id,
 			'error_code'           => $error_code,
 			'summary'              => $summary,
 			'next_poll_at'         => $next_poll_at,
 			'consecutive_failures' => $consecutive_failures,
+			'expected_site'        => $expected_site,
 		);
 		$this->failures[] = $this->failure;
 

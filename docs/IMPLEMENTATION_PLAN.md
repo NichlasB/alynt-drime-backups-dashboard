@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Revocation-safe poll completion foundation — 2026-10-26
+
+Canonical05 repository inventory found a High stale-poll/revocation write race
+and a separate Medium ignored retention-error result. The approved
+[repository-only foundation](REVOCATION_SAFE_POLL_COMPLETION_FOUNDATION.md)
+fences success/failure completion by current enrollment and captured credentials,
+verifies legitimate unchanged writes, and preserves stale errors through the
+poller. Schema8/version0.1.77 remain unchanged. This is isolated API/source
+evidence, not physical database/concurrency qualification or completion of05.
+The Medium retention finding stays open. Next gate: **Plugin Tester local-only
+Revocation-Safe Poll Completion Conditional-Write, Zero-Row and Concurrent
+Revocation Owned Proof**, requiring separate approval/target/fixture confirmation.
+No site operation, schema change, release or deployment is approved here.
+After exact-head publication, cumulative safe-local product progress is3/8;
+prior organization and native proofs are not extra product tasks. This routing
+supersedes the dated resume05-inventory pointer below; deferred V2.3 stays parked.
+
 ## Pre-release schema failure safety — 2026-10-26
 
 See [approved repository foundation](SCHEMA_UPGRADE_FAILURE_SAFETY_FOUNDATION.md)

@@ -27,31 +27,19 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Status_Check {
 		$auth    = $this->polling_auth_scheme( $site );
 
 		if ( is_wp_error( $auth ) ) {
-			if ( ! $this->mark_poll_failure( $site, $auth->get_error_code(), $auth->get_error_message() ) ) {
-				return $this->poll_failure_storage_error( $site, $auth );
-			}
-			$this->log_poll_failure( $site, $auth );
-			return $auth;
+			return $this->record_poll_failure( $site, $auth );
 		}
 
 		$raw_payload = $this->transport->fetch_status_payload( $site, $auth, $this->http_client );
 
 		if ( is_wp_error( $raw_payload ) ) {
-			if ( ! $this->mark_poll_failure( $site, $raw_payload->get_error_code(), $raw_payload->get_error_message() ) ) {
-				return $this->poll_failure_storage_error( $site, $raw_payload );
-			}
-			$this->log_poll_failure( $site, $raw_payload );
-			return $raw_payload;
+			return $this->record_poll_failure( $site, $raw_payload );
 		}
 
 		$payload = $this->validator->validate( $raw_payload, isset( $site['site_uuid'] ) ? (string) $site['site_uuid'] : '', isset( $site['action_key_id'] ) ? (string) $site['action_key_id'] : '' );
 
 		if ( is_wp_error( $payload ) ) {
-			if ( ! $this->mark_poll_failure( $site, $payload->get_error_code(), $payload->get_error_message() ) ) {
-				return $this->poll_failure_storage_error( $site, $payload );
-			}
-			$this->log_poll_failure( $site, $payload );
-			return $payload;
+			return $this->record_poll_failure( $site, $payload );
 		}
 
 		$status   = $this->classifier->classify(
@@ -71,24 +59,26 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Status_Check {
 		$snapshot = $this->snapshots->record( $site_id, $payload, $status['category'] );
 
 		if ( is_wp_error( $snapshot ) ) {
-			$this->mark_poll_failure( $site, $snapshot->get_error_code(), $snapshot->get_error_message() );
-			$this->log_poll_failure( $site, $snapshot );
-			return $snapshot;
+			return $this->record_poll_failure( $site, $snapshot );
 		}
 
 		if ( $snapshot <= 0 ) {
 			$error = new WP_Error( 'snapshot_store_failed', __( 'The dashboard could not store the client status snapshot.', 'alynt-drime-backups-dashboard' ) );
-			$this->mark_poll_failure( $site, $error->get_error_code(), $error->get_error_message() );
-			$this->log_poll_failure( $site, $error );
-			return $error;
+			return $this->record_poll_failure( $site, $error );
 		}
 
 		$stored = $this->sites->mark_poll_success(
 			$site_id,
 			$status['category'],
 			isset( $payload['plugin_version'] ) ? (string) $payload['plugin_version'] : '',
-			$this->next_poll_after_success( $site )
+			$this->next_poll_after_success( $site ),
+			$site
 		);
+
+		if ( is_wp_error( $stored ) ) {
+			$this->log_poll_failure( $site, $stored );
+			return $stored;
+		}
 
 		if ( ! $stored ) {
 			$error = new WP_Error( 'poll_success_store_failed', __( 'The dashboard could not update the site after the status check. Please try again.', 'alynt-drime-backups-dashboard' ) );
@@ -139,40 +129,34 @@ trait Alynt_Drime_Backups_Dashboard_Poller_Status_Check {
 	}
 
 	/**
-	 * Marks a poll failure with retry metadata.
+	 * Records retry metadata and surfaces stale admission separately from storage failure.
 	 *
 	 * @param array<string,mixed> $site Site row.
-	 * @param string              $error_code Error code.
-	 * @param string              $summary Safe summary.
-	 * @return bool
-	 */
-	private function mark_poll_failure( array $site, $error_code, $summary ) {
-		$failures = isset( $site['consecutive_failures'] ) ? max( 0, (int) $site['consecutive_failures'] ) + 1 : 1;
-
-		return (bool) $this->sites->mark_poll_failure(
-			isset( $site['id'] ) ? (int) $site['id'] : 0,
-			$error_code,
-			$summary,
-			$this->next_poll_after_failure( $site, $failures ),
-			$failures
-		);
-	}
-
-	/**
-	 * Builds and logs an error when a failed poll cannot persist failure details.
-	 *
-	 * @param array<string,mixed> $site Site row.
-	 * @param WP_Error            $original_error Original poll error.
+	 * @param WP_Error            $original_error Original failure.
 	 * @return WP_Error
 	 */
-	private function poll_failure_storage_error( array $site, $original_error ) {
-		$error = new WP_Error(
-			'poll_failure_store_failed',
-			__( 'The status check failed, and the dashboard could not save the failure details.', 'alynt-drime-backups-dashboard' ),
-			array(
-				'original_error_code' => $original_error->get_error_code(),
-			)
+	private function record_poll_failure( array $site, $original_error ) {
+		$failures = isset( $site['consecutive_failures'] ) ? max( 0, (int) $site['consecutive_failures'] ) + 1 : 1;
+
+		$stored = $this->sites->mark_poll_failure(
+			isset( $site['id'] ) ? (int) $site['id'] : 0,
+			$original_error->get_error_code(),
+			$original_error->get_error_message(),
+			$this->next_poll_after_failure( $site, $failures ),
+			$failures,
+			$site
 		);
+
+		$error = is_wp_error( $stored ) ? $stored : $original_error;
+		if ( false === $stored ) {
+			$error = new WP_Error(
+				'poll_failure_store_failed',
+				__( 'The status check failed, and the dashboard could not save the failure details.', 'alynt-drime-backups-dashboard' ),
+				array(
+					'original_error_code' => $original_error->get_error_code(),
+				)
+			);
+		}
 
 		$this->log_poll_failure( $site, $error );
 

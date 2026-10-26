@@ -3474,15 +3474,15 @@ msgstr ""
 msgid "WordPress could not schedule dashboard maintenance events."
 msgstr ""
 
-#: includes/traits/trait-poller-status-check.php:94
+#: includes/traits/trait-poller-status-check.php:84
 msgid "The dashboard could not update the site after the status check. Please try again."
 msgstr ""
 
-#: includes/traits/trait-poller-status-check.php:129
+#: includes/traits/trait-poller-status-check.php:119
 msgid "The dashboard site does not have a polling credential yet."
 msgstr ""
 
-#: includes/traits/trait-poller-status-check.php:171
+#: includes/traits/trait-poller-status-check.php:154
 msgid "The status check failed, and the dashboard could not save the failure details."
 msgstr ""
 
@@ -3660,6 +3660,10 @@ msgstr ""
 
 #: includes/traits/trait-remote-action-repository-summary.php:121
 msgid "The dashboard could not clean up old remote action records."
+msgstr ""
+
+#: includes/traits/trait-site-repository-runtime-writes.php:196
+msgid "The status check was not applied because the site enrollment or polling credentials changed. Please refresh the site before trying again."
 msgstr ""
 
 #: includes/traits/trait-snapshot-repository-retention.php:57

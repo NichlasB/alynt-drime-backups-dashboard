@@ -43,12 +43,13 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Site_Repository_Write_Methods {
 	 * @param string $next_poll_at Next poll.
 	 * @return bool
 	 */
-	public function mark_poll_success( $site_id, $status, $plugin_version = '', $next_poll_at = '' ) {
+	public function mark_poll_success( $site_id, $status, $plugin_version = '', $next_poll_at = '', array $expected_site = array() ) {
 		$this->success = array(
 			'site_id'        => $site_id,
 			'status'         => $status,
 			'plugin_version' => $plugin_version,
 			'next_poll_at'   => $next_poll_at,
+			'expected_site'  => $expected_site,
 		);
 		$this->successes[] = $this->success;
 

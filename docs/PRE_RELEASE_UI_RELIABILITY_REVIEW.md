@@ -302,3 +302,31 @@ The narrowly owned lifecycle/data-preservation gate is closed;05 onward and
 final validation stay pending. Resume **05 Database Review, repository-only
 inventory first**. This is a separately approved proof, not an extra safe-local
 task; cumulative count remains2/8. Deferred V2.3 research remains parked.
+
+## Canonical05 findings and approved poll-completion foundation — 2026-10-26
+
+Read-only05 inventory at `d68db6247caa1992a43340e519440854e10c7468`: three custom
+tables,66 columns/24 indexes,38 direct runtime DB call sites, five persistent
+options/three transient families; no owned post/user metadata. High: ID-only
+poll success can reactivate a locally revoked row after capturing its old state.
+The isolated actual-method counterexample reproduced this (credentials stayed
+cleared; no remote access restoration was claimed). Medium: scheduled retention
+caller discards both repository WP_Error results. No schema/index change chosen.
+
+User separately approved the repository-only High repair. See the
+[implementation, scoped canonical reviews, red/green and semantic controls](REVOCATION_SAFE_POLL_COMPLETION_FOUNDATION.md).
+Success/failure write predicates now fence current enrollment/credential identity;
+verified zero-row no-op and explicit stale/error propagation have permanent
+isolated regressions. Local full363/1867, two unchanged Sodium skips; related61/321,
+no skips. New source is not covered by predecessor physical proof or predecessor
+CI.05 stays incomplete until physical qualification and the separate Medium
+finding are resolved;07/07A/feature reviews here are source-scoped only, not
+historical whole-plugin completion. Toolkit evidence is not silently republished
+under the earlier lifecycle-receipt-only approval.
+
+**Recommended next gated slice: Plugin Tester local-only Revocation-Safe Poll
+Completion Conditional-Write, Zero-Row and Concurrent Revocation Owned Proof**.
+Separate approval and exact target/owned fixture confirmation are required.
+No SQL/site/native operation, schema change, lifecycle rerun, package/release/tag
+or deployment ran. Main-work count becomes3/8 after push/exact-head CI; full
+release readiness and deferred V2.3 boundaries remain unchanged.

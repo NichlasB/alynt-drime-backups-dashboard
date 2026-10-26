@@ -31,9 +31,10 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Fixtures {
 	 * @param Alynt_Drime_Backups_Dashboard_Test_Poller_Snapshot_Repository $snapshots Snapshots.
 	 * @param Alynt_Drime_Backups_Dashboard_Credential_Vault                $vault Vault.
 	 * @param callable                                                      $http_client HTTP client.
+	 * @param Alynt_Drime_Backups_Dashboard_Remote_Action_Reconciler|null    $reconciler Optional observable reconciler.
 	 * @return Alynt_Drime_Backups_Dashboard_Poller
 	 */
-	private function poller( $sites, $snapshots, $vault, $http_client ) {
+	private function poller( $sites, $snapshots, $vault, $http_client, $reconciler = null ) {
 		return new Alynt_Drime_Backups_Dashboard_Poller(
 			$sites,
 			$snapshots,
@@ -48,7 +49,7 @@ trait Alynt_Drime_Backups_Dashboard_Test_Poller_Fixtures {
 			new Alynt_Drime_Backups_Dashboard_Status_Payload_Validator(),
 			$http_client,
 			null,
-			new Alynt_Drime_Backups_Dashboard_Test_Poller_Remote_Action_Reconciler()
+			$reconciler ?? new Alynt_Drime_Backups_Dashboard_Test_Poller_Remote_Action_Reconciler()
 		);
 	}
 }
