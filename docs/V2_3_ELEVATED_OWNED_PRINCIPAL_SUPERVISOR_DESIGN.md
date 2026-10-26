@@ -229,8 +229,16 @@ Those still require independently reviewed adapters and fresh exact local target
 fixture/elevation approval; this design grants none. All A1-A4/native GO stay Blocked.
 
 Implementation-plan progress: the missing elevated provisioning/cleanup boundary
-now has an explicit non-general-purpose handoff and failure contract. Next gated
-slice: **local-only V2.3 Supervisor Intent and Cleanup-Journal DATA Safety
-Foundation**, in-memory only. Freeze finite schemas/bounds, one-attempt lineage,
-ambiguous-creation/quarantine and cleanup-only refusal rules; no Windows imports,
-OS/IO adapters, elevation, authentication, accounts, storage, processes or wiring.
+now has an explicit non-general-purpose handoff and failure contract, but actual
+trusted identity/bootstrap availability is unresolved. Next gated slice:
+**Plugin Tester local-only Trusted Supervisor Identity and Protected Handoff
+Read-Only Feasibility Audit**. Resolve a human-designated distinct trusted
+administrator and a candidate protected staging/control parent using non-secret
+identity/path/security metadata only. Do not infer human trust from an account
+name, borrow tokens, solicit credentials or try authentication/elevation. No SQL,
+WordPress/bootstrap, fixtures/accounts/ACL writes, service changes or proof run.
+Fresh exact local target/host inspection scope must be confirmed first; a missing
+distinct trusted identity or protected bootstrap leaves this candidate NO-GO.
+Do not build more synthetic maintenance to avoid that decision. A bounded
+Supervisor Intent/Cleanup-Journal DATA foundation can follow only if feasibility
+supports proceeding and that later implementation scope is separately approved.

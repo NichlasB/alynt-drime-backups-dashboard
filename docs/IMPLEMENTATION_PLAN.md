@@ -7,8 +7,11 @@ only trusted staging/finite local supervisor, non-admin fixed probe, exact SID/
 object/handle ownership and cleanup-only recovery contract. Mutable repository
 code is not elevated; intent/journal labels do not grant authority or SAM atomicity.
 No implementation, site/host inspection, UAC, account/ACL/storage/native/wiring
-change. A1-A4/native GO stay Blocked. Next gated slice: local-only Supervisor Intent
-and Cleanup-Journal DATA Safety Foundation, in-memory only, with all OS adapters off.
+change. A1-A4/native GO stay Blocked. UAC alone is not the isolation boundary; a
+distinct human-controlled trusted administrator remains an unresolved prerequisite.
+Next gated slice: Plugin Tester local-only Trusted Supervisor Identity and Protected
+Handoff Read-Only Feasibility Audit, no authentication/UAC/SQL/fixture/ACL changes.
+Defer further DATA modeling until that actual prerequisite supports proceeding.
 
 ## V2.3 Source-Image Ownership Feasibility Preflight — 2026-10-26
 
