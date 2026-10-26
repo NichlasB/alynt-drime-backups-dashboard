@@ -6,7 +6,7 @@ Uploader owns docs/V2_3_SUPERVISOR_JOURNAL_DATA_FOUNDATION.md. Pure fixed DATA
 intent/event/owned-identity/recovery model with93 scoped tests and25 semantic
 controls, not a supervisor/OS adapter or actual journal. All actual authority and
 production wiring remain disabled; A1-A4/native GO stay Blocked. Initial Windows
-full Node exit assertion was not diagnosed; two unchanged1987-test repeats passed.
+full Node assertion was not diagnosed; two unchanged1987-test repeats passed.
 Next gated slice: repository-only Fixed Supervisor Windows Adapter and Protected
 Bootstrap Integration Design, design-only; no host/OS/storage/account mutation.
 
