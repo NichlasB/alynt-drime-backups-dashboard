@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Repository organization project active — 2026-10-26
+
+The user approved D2/U1/U2/U3 before returning to main work. See the
+[current migration map/evidence and saved checkpoint](REPOSITORY_ORGANIZATION_MIGRATION.md).
+D2 dashboard admin57 is byte-identically moved; source497ca13 passed exact-head
+CI40412188412 (PHP7.4/8.3 each375/1966, no skips; Node16/16 and all gates).
+After its docs closeout, finish uploader U1/U2/U3 and final reconciliation.
+Main work is held; cumulative product count remains4/8. Retention Cleanup,
+Latest-Snapshot Preservation and Failure-Reporting Owned Proof still needs
+separate approval/target confirmation. No site/proof/package/deploy operation
+or historical whole-plugin readiness refresh follows from organization.
+
 ## Scheduled retention failure reporting foundation — 2026-10-26
 
 The approved [repository-only foundation](SCHEDULED_RETENTION_FAILURE_REPORTING_FOUNDATION.md)

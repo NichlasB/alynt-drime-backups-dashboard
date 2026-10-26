@@ -390,3 +390,18 @@ local-only Retention Cleanup, Latest-Snapshot Preservation and Failure-Reporting
 Owned Proof**, with owned disposable tables/options and exact cleanup only,
 requiring new scope approval and exact-target confirmation. Preserve existing
 application state and wiring; no policy/schedule/schema/deploy change.
+
+## D2 approved path-only organization — 2026-10-26
+
+Main work is paused for the separately approved D2/U1/U2/U3 organization project.
+See [exact D2 map, source-scoped reviews and proof limits](REPOSITORY_ORGANIZATION_MIGRATION.md).
+57 byte-identical admin moves,12 literal-path consumers/101 substitutions,
+708 extractor-qualified POT location blocks;136 loader entries keep exact order.
+Source497ca137a0e4545edb0ede9ea4680130074030de passed
+[exact-head CI40412188412](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40412188412):
+PHP7.4/8.3 each375/1966, no skips/failures; Node16/16 and all repository gates.
+Local375/1959 has the same two known Sodium skips; structure/lint/build/audits
+and69 PHP syntax checks pass. Historical whole-plugin rows/proofs are preserved,
+not renewed; no SQL/native/browser/site/lifecycle/package/deploy ran. Product
+progress stays4/8. Finish approved uploader batches before returning to the
+unapproved retention-cleanup owned-proof gate, with existing state/wiring intact.
