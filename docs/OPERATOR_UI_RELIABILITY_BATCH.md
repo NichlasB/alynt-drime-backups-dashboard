@@ -45,7 +45,12 @@ server actions. No logging of support content, tokens or raw errors.
    the existing installed Chromium 1223, closed in finally. No profile/service
    changes, downloads, network or WordPress. Initial runner URL/executable-path
    mismatches were corrected explicitly, not claimed as browser test passes.
-5. Clipboard focus recovery: pending.
+   Exact-head CI: [40348978910](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40348978910), successful for `eca3e37e570767b3b7cf02bd3ad8ee41b02a6437`.
+5. Clipboard focus recovery: successful fallback restores the keyboard trigger;
+   failure keeps selected manual-copy text, and async completion cannot steal
+   focus from another control. Actual-source tests retain native value delivery.
+   Built-script Chromium keyboard/DOM focus check passed, clipboard API stubbed;
+   not native OS clipboard or WordPress proof.
 6. Download resource lifecycle: pending.
 7. Endpoint preview consistency: pending.
 8. Missing-target enhancement: pending.

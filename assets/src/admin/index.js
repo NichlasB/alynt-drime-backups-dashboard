@@ -56,6 +56,7 @@ if ( dashboard ) {
 			}
 
 			let copied = false;
+			const triggerHadFocus = document.activeElement === button;
 			const originalLabel = button.textContent;
 			const busyLabel = button.dataset.busyLabel || originalLabel;
 
@@ -82,6 +83,10 @@ if ( dashboard ) {
 				button.removeAttribute( 'aria-disabled' );
 				button.removeAttribute( 'aria-busy' );
 				button.textContent = originalLabel;
+				if ( copied && triggerHadFocus &&
+					[ button, field, document.body ].includes( document.activeElement ) ) {
+					button.focus( { preventScroll: true } );
+				}
 			}
 
 			announceCopyResult(
