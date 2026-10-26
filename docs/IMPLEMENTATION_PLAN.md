@@ -1,5 +1,11 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Operator UI Reliability — 2026-10-26
+
+See [bounded eight-task batch](OPERATOR_UI_RELIABILITY_BATCH.md). Active dashboard
+monitoring/support usability work, display-only and independent of deferred V2.3
+research. Preserve all action/authentication/polling boundaries; no site operations.
+
 ## Current V2.3 Product/Threat-Model Rebaseline — 2026-10-26
 
 See [current decision](V2_3_PRODUCT_THREAT_MODEL_REBASELINE.md). User-approved

@@ -30,9 +30,11 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Support_Output {
 		echo '<p class="description">' . esc_html__( 'The remote-action boundary evidence in this summary is informational only; it does not grant new client actions or store Drime API credentials in the dashboard.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		if ( false === $encoded ) {
 			echo '<div class="notice notice-error inline" role="alert"><p>' . esc_html__( 'The support summary could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+			echo '</div></div>';
+			return;
 		}
 		echo '<textarea id="adbd-support-copy" class="large-text code" rows="12" readonly="readonly" aria-label="' . esc_attr__( 'Redacted support summary', 'alynt-drime-backups-dashboard' ) . '">';
-		echo esc_textarea( false === $encoded ? '{}' : $encoded );
+		echo esc_textarea( $encoded );
 		echo '</textarea><p class="adbd-actions"><button type="button" class="button button-primary adbd-copy-button" hidden data-copy-target="adbd-support-copy" data-busy-label="' . esc_attr__( 'Copying…', 'alynt-drime-backups-dashboard' ) . '" data-success-message="' . esc_attr__( 'Redacted support summary copied to the clipboard.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The summary could not be copied automatically. Select it and copy it manually.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Copy Support Summary', 'alynt-drime-backups-dashboard' ) . '</button> <button type="button" class="button adbd-download-button" hidden data-download-target="adbd-support-copy" data-download-filename="alynt-drime-dashboard-support-summary.json" data-success-message="' . esc_attr__( 'Redacted support summary downloaded.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The summary could not be downloaded automatically. Use Copy Support Summary instead.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Download Support Summary', 'alynt-drime-backups-dashboard' ) . '</button></p><p class="adbd-copy-status" role="status" aria-live="polite"></p></div></div>';
 	}
 }

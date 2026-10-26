@@ -26,6 +26,22 @@ if ( ! function_exists( 'esc_textarea' ) ) {
  */
 class AdminPageDiagnosticsSupportOutputTest extends TestCase {
 	/**
+	 * Encoding failure must not offer a misleading empty export.
+	 *
+	 * @return void
+	 */
+	public function test_unencodable_summary_has_recovery_notice_without_export_controls() {
+		$harness = new Alynt_Drime_Backups_Dashboard_Diagnostics_Support_Output_Test_Harness();
+		$html    = $harness->support_copy_html( array( 'invalid_count' => INF ) );
+
+		$this->assertStringContainsString( 'role="alert"', $html );
+		$this->assertStringContainsString( 'refreshing the page', $html );
+		$this->assertStringNotContainsString( '<textarea', $html );
+		$this->assertStringNotContainsString( 'data-copy-target', $html );
+		$this->assertStringNotContainsString( 'data-download-target', $html );
+	}
+
+	/**
 	 * Support copy offers copy and download controls for the redacted JSON.
 	 *
 	 * @return void
