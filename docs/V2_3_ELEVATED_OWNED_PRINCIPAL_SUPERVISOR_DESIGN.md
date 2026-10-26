@@ -32,6 +32,18 @@ attest their own identity. A standard consumer account is not a general host or
 network sandbox: the fixed probe must contain no unrelated operations, and this
 proof must not be reused as permission to run arbitrary untrusted application code.
 
+UAC is a human consent mechanism here, not the source-isolation boundary. Microsoft
+classifies it as defense in depth in its
+[Windows servicing criteria](https://www.microsoft.com/en-us/msrc/windows-security-servicing-criteria).
+Design requirement: a filtered/elevated pair of the same administrator identity
+does not establish the proposed untrusted/trusted user boundary. The trusted
+bootstrap/supervisor identity must be distinct from both initiator and consumer,
+with independently qualified process/token/image access protection, or this
+candidate refuses. No persistent administrator account or host-policy change may
+be created to satisfy it. Availability of a suitable human-controlled trusted
+identity is unresolved; do not solicit its credentials in chat or silently lower
+the threat model when unavailable.
+
 ## Trusted handoff before any elevation
 
 Do not elevate a script/executable or import a module directly from the mutable
@@ -204,7 +216,8 @@ outside the sealed image with no ancestor authority. Review corrected journal
 placement so intent can precede proof-root creation and retained control records
 cannot be hidden by a zero-artifact claim. No executable defect/fix or test
 claimed. No meaningful Bloat/UI/UX trigger. Final focused Feature Security retains
-all operational gates; no new executable path or confirmed regression handoff.
+all operational gates; final clarification rejects same-identity UAC separation
+as the trust boundary. No new executable path or confirmed regression handoff.
 Historical whole-plugin/DS3/Database/physical/FULL rows are not refreshed.
 
 Pure DATA tests may validate closed bounded intents/journal transitions and exact
