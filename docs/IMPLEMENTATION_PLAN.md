@@ -8,10 +8,14 @@ DDL stay unchanged; installation completion/retry and caller failure handling
 are covered by isolated API tests. Separately approved
 [core-backed owned failure/retry proof](SCHEMA_UPGRADE_CORE_OWNED_PROOF.md)
 passed122/9,77/77 existing checksums unchanged, fixtures removed. Canonical04
-subsequently completed with no updates needed; see the owning review. The next
-main-work gate is the **Plugin Tester local-only Isolated Dashboard
-Activation/Deactivation/Uninstall Lifecycle and Data-Preservation Owned Proof**,
-still unapproved. No application migration/deploy or lifecycle operation approved.
+subsequently completed with no updates needed; see the owning review. Separately
+approved [isolated lifecycle/data-preservation owned proof](ISOLATED_LIFECYCLE_OWNED_PROOF.md)
+passed264 checks across three modes/four groups each, fixtures removed and77/77
+existing table checksums unchanged. This is genuine core-library lifecycle API
+proof in private storage, not installed-site/browser/authentication acceptance.
+Resume canonical05 Database Review repository-only; no application migration,
+installed-plugin lifecycle operation, release or deployment is approved. This
+current routing supersedes the dated lifecycle approval gates below.
 
 ## D1 Diagnostics/Event-Log Path Organization — 2026-10-26
 

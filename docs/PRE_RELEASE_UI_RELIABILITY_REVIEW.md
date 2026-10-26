@@ -277,3 +277,28 @@ package, tag, release or deployment. Product progress stays2/8; D2/U1/U2/U3 rema
 unapproved. **Recommended next gated slice: Plugin Tester local-only Isolated
 Dashboard Activation/Deactivation/Uninstall Lifecycle and Data-Preservation
 Owned Proof**, requiring separate scope approval and exact target confirmation.
+
+## Approved isolated lifecycle owned proof — 2026-10-26
+
+The dated lifecycle gate above was separately approved and the exact Plugin
+Tester local-only target/owned fixture scope freshly confirmed. See
+[native matrix, source identities and proof limits](ISOLATED_LIFECYCLE_OWNED_PROOF.md).
+Genuine core activation/deactivation/reactivation/uninstall APIs against a
+138-file byte-verified temporary runtime and private options/schema namespace:
+264 checks, three modes/four lifecycle groups each,544 query observations.
+Default/false uninstall preserves nonempty monitoring records/options; true
+purge operates on owned fixtures only. Unrelated fixture option/transient/cron
+sentinels survive. All owned tables/runtime-copy files removed; independent
+77/77 existing table checksums and exact inventory unchanged. No installed
+application plugin/user/options/cron or production wiring change.
+
+Local317/1611 with two existing Sodium skips; related9/102 and SQL-scope2/14 no
+skips, Node16/16 fail0/skip0, PHPCS144, structure/build/syntax passed. Manual tools
+remain outside production packages and CI never invokes the native proof.
+Publication receipt belongs to the toolkit checklist. No full installed-site,
+HTTP/admin capability, filesystem deletion, multisite/minimum-WP, concurrency,
+Database Review, final Security or FULL release-readiness claim follows from it.
+The narrowly owned lifecycle/data-preservation gate is closed;05 onward and
+final validation stay pending. Resume **05 Database Review, repository-only
+inventory first**. This is a separately approved proof, not an extra safe-local
+task; cumulative count remains2/8. Deferred V2.3 research remains parked.
