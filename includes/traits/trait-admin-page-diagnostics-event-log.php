@@ -48,12 +48,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log {
 		echo '<p>' . esc_html__( 'Copy this local, redacted event export only when support needs diagnostic event context. Secret-bearing keys are masked before storage and export.', 'alynt-drime-backups-dashboard' ) . '</p>';
 		if ( false === $export ) {
 			echo '<div class="notice notice-error inline" role="alert"><p>' . esc_html__( 'The redacted event export could not be prepared. Please try again after refreshing the page.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
+		} else {
+			echo '<textarea id="adbd-event-export" class="large-text code" rows="10" readonly="readonly" aria-label="' . esc_attr__( 'Redacted diagnostics event export', 'alynt-drime-backups-dashboard' ) . '">';
+			echo esc_textarea( $export );
+			echo '</textarea>';
+			echo '<p class="adbd-actions"><button type="button" class="button adbd-copy-button" hidden data-copy-target="adbd-event-export" data-busy-label="' . esc_attr__( 'Copying…', 'alynt-drime-backups-dashboard' ) . '" data-success-message="' . esc_attr__( 'Redacted event export copied to the clipboard.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The export could not be copied automatically. Select it and copy it manually.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Copy Event Export', 'alynt-drime-backups-dashboard' ) . '</button></p>';
+			echo '<p class="adbd-copy-status" role="status" aria-live="polite"></p>';
 		}
-		echo '<textarea id="adbd-event-export" class="large-text code" rows="10" readonly="readonly" aria-label="' . esc_attr__( 'Redacted diagnostics event export', 'alynt-drime-backups-dashboard' ) . '">';
-		echo esc_textarea( false === $export ? '[]' : $export );
-		echo '</textarea>';
-		echo '<p class="adbd-actions"><button type="button" class="button adbd-copy-button" hidden data-copy-target="adbd-event-export" data-busy-label="' . esc_attr__( 'Copying…', 'alynt-drime-backups-dashboard' ) . '" data-success-message="' . esc_attr__( 'Redacted event export copied to the clipboard.', 'alynt-drime-backups-dashboard' ) . '" data-error-message="' . esc_attr__( 'The export could not be copied automatically. Select it and copy it manually.', 'alynt-drime-backups-dashboard' ) . '">' . esc_html__( 'Copy Event Export', 'alynt-drime-backups-dashboard' ) . '</button></p>';
-		echo '<p class="adbd-copy-status" role="status" aria-live="polite"></p>';
 
 		if ( ! empty( $events ) ) {
 			$confirm_clear   = isset( $_GET['confirm_clear'] ) && '1' === sanitize_key( wp_unslash( $_GET['confirm_clear'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only presentation state.

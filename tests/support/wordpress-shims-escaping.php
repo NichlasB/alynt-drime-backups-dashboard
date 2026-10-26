@@ -17,6 +17,18 @@ if ( ! function_exists( 'esc_html' ) ) {
 	}
 }
 
+if ( ! function_exists( 'esc_textarea' ) ) {
+	/**
+	 * Minimal textarea escaping for isolated rendering tests.
+	 *
+	 * @param mixed $text Text.
+	 * @return string
+	 */
+	function esc_textarea( $text ) {
+		return htmlspecialchars( (string) $text, ENT_QUOTES, 'UTF-8' );
+	}
+}
+
 if ( ! function_exists( 'esc_attr' ) ) {
 	/**
 	 * Minimal esc_attr shim for pure unit tests.

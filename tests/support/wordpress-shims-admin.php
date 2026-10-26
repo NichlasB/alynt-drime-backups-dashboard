@@ -38,11 +38,16 @@ if ( ! function_exists( 'add_query_arg' ) ) {
 	/**
 	 * Minimal add_query_arg shim.
 	 *
-	 * @param array<string,string> $args Query args.
-	 * @param string               $url URL.
+	 * @param array<string,string>|string $args Query args or key.
+	 * @param string                      $url URL or value in the three-argument form.
+	 * @param string                      $target_url URL in the three-argument form.
 	 * @return string
 	 */
-	function add_query_arg( $args, $url = '' ) {
+	function add_query_arg( $args, $url = '', $target_url = '' ) {
+		if ( ! is_array( $args ) ) {
+			$args = array( (string) $args => $url );
+			$url  = $target_url;
+		}
 		$separator = false === strpos( $url, '?' ) ? '?' : '&';
 		return $url . $separator . http_build_query( $args, '', '&' );
 	}

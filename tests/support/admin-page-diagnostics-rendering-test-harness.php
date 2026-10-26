@@ -26,6 +26,36 @@ class Alynt_Drime_Backups_Dashboard_Diagnostics_Rendering_Test_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers;
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Diagnostics_Event_Log;
 
+	const MENU_SLUG = 'alynt-drime-backups-dashboard';
+
+	/**
+	 * Event-log read double, without option/database access.
+	 *
+	 * @var object
+	 */
+	public $event_log;
+
+	/**
+	 * Exposes the actual export renderer with a bounded read double.
+	 *
+	 * @param array $events Events returned by the read double.
+	 * @return string
+	 */
+	public function event_export_html( array $events ) {
+		$this->event_log = new class( $events ) {
+			private $events;
+			public function __construct( array $events ) {
+				$this->events = $events;
+			}
+			public function recent_events( $limit ) {
+				return array_slice( $this->events, 0, $limit );
+			}
+		};
+		ob_start();
+		$this->render_event_log_diagnostics( array( 'events' => $events ) );
+		return (string) ob_get_clean();
+	}
+
 	/**
 	 * Exposes audit-history markup.
 	 *
