@@ -1,5 +1,11 @@
 # V2.3 Schedule Rollback Runtime Design
 
+Current routing (2026-10-26): [approved product/threat-model reset](V2_3_PRODUCT_THREAT_MODEL_REBASELINE.md)
+retains rollback deferral and parks the Windows-native proof/toolchain branch.
+This candidate and its dated follow-ups remain technical evidence, not an active
+implementation queue. Existing runtime safety requirements remain unresolved where
+not proven; no old gate/profile is passed, waived or enabled by the reset.
+
 Status: design-only candidate, opened with user approval on 2026-10-13. Runtime implementation, protocol activation, client opt-in, release, deployment, and live proof are not approved. `schedule_rollback` remains reserved, rejected, and absent from runtime controls and `allowed_actions`.
 
 ## Product Decision

@@ -6,6 +6,17 @@ Scope: V2.1 `scan_upload_now`, V2.2 action-history/audit reconciliation, V2.3 pr
 
 This model is additive to `docs/THREAT_MODEL_V1.md`. V1 read-only pairing and status polling remain in force.
 
+## V2.3 Product Rebaseline — 2026-10-26
+
+The user-approved [rebaseline](V2_3_PRODUCT_THREAT_MODEL_REBASELINE.md) keeps
+rollback execution deferred and parks Windows-native proof/toolchain research.
+The threat/control tables below remain intact. Old native source/lifetime/
+resource/ownership guarantees remain Unproven/Blocked, not waived or passed.
+Any future ordinary WordPress trust/profile boundary requires explicit design
+and genuine integration evidence; it cannot silently relax protected-state
+authorization, replay, concurrency or uncertain-write handling. No runtime,
+capability, public contract, code/test guard or production wiring changes here.
+
 ## Assets
 
 | Asset | Protection goal |

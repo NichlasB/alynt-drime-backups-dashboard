@@ -4,6 +4,14 @@ Status: planning-only decision record.
 
 Date: 2026-10-05
 
+Current routing decision (2026-10-26): the user approved the
+[Product/Threat-Model Rebaseline](V2_3_PRODUCT_THREAT_MODEL_REBASELINE.md).
+Rollback execution stays deferred; Windows-native supervisor/bootstrap/toolchain
+research is parked. Dated next-slice recommendations below are historical, not
+instructions to restart that branch. Existing safety findings and blocked proof
+guarantees are retained. A concrete operator need must justify reopening runtime
+design; no capability, protocol, test or operational approval is changed here.
+
 This document records the next product decision after the completed non-mutating Schedule Rollback Preview proof. It does not approve runtime rollback execution, does not change dashboard or client behavior, and does not add protocol fields, UI controls, client opt-ins, deployment steps, or live-site changes.
 
 ## Current Baseline

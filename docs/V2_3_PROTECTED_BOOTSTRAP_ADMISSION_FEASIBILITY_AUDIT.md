@@ -1,5 +1,11 @@
 # V2.3 Protected Bootstrap Staging / Read-Only Supervisor Admission Feasibility Audit
 
+Current routing (2026-10-26): the approved
+[product/threat-model rebaseline](V2_3_PRODUCT_THREAT_MODEL_REBASELINE.md) parks
+this Windows-native branch. The next toolchain/staging recommendations below are
+historical and must not be resumed automatically. Audit findings and the blocked
+foundation/proof disposition remain unchanged; no new host qualification is claimed.
+
 2026-10-26. Approved Plugin Tester local-only staging/admission foundation and
 owned cleanup scope, explicitly audit first. **Foundation/native proof Blocked
 before fixtures, not completed or physically qualified.** Parent:
