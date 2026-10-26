@@ -7,8 +7,29 @@ and [owning FULL review](PRE_RELEASE_UI_RELIABILITY_REVIEW.md). Schema8 and its
 DDL stay unchanged; installation completion/retry and caller failure handling
 are covered by isolated API tests. Separately approved
 [core-backed owned failure/retry proof](SCHEMA_UPGRADE_CORE_OWNED_PROOF.md)
-passed122/9,77/77 existing checksums unchanged, fixtures removed. Resume ordered
-repository-only pre-release reviews at04; no application migration/deploy approved.
+passed122/9,77/77 existing checksums unchanged, fixtures removed. Canonical04
+subsequently completed with no updates needed; see the owning review. The next
+main-work gate is the **Plugin Tester local-only Isolated Dashboard
+Activation/Deactivation/Uninstall Lifecycle and Data-Preservation Owned Proof**,
+still unapproved. No application migration/deploy or lifecycle operation approved.
+
+## D1 Diagnostics/Event-Log Path Organization — 2026-10-26
+
+Approved D1 only:15 byte-identical source moves into `includes/diagnostics/` and
+its `traits/` subdirectory, preserving symbols, load order and behavior. Root
+loader/five test harness consumers and one extractor-verified POT reference were
+updated. Exact source head `d68184498a2b1a6e50494489deb18899ee0a121b` passed
+[CI40383732313](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40383732313).
+See the [current path map and scoped revalidation](PRE_RELEASE_UI_RELIABILITY_REVIEW.md#d1-diagnosticsevent-log-path-organization--2026-10-26).
+Dated implementation descriptions below retain their original paths/evidence;
+use that map for current navigation, not a rewritten historical acceptance claim.
+
+Organization is not product-feature completion: cumulative safe-local product
+progress remains2/8 plus the separately approved schema proof. D2 and uploader
+migrations remain unapproved. FULL release readiness/05 onward remain pending;
+native/Windows/V2.3 deferrals and production safeguards remain unchanged. Return
+to the lifecycle/data-preservation approval gate above, not another organization
+batch or site operation.
 
 ## Operator UI Reliability — 2026-10-26
 
