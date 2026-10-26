@@ -172,10 +172,17 @@ if ( dashboard ) {
 	if ( originField && endpointPreview ) {
 		const updateEndpointPreview = () => {
 			try {
-				const url = new URL( originField.value );
+				const origin = originField.value.trim();
+				const url = new URL( origin );
+				const host = url.hostname.replace( /\.+$/, '' );
+				// Display hint only: server validation and DNS safety remain authoritative.
+				const originShape = /^https:\/\/[a-z0-9.-]+(?::443)?\/?$/i.test( origin );
+				const hostShape = /^[a-z0-9][a-z0-9.-]*[a-z0-9]$/.test( host ) &&
+					host.length <= 253 && host.split( '.' ).every( ( label ) => label.length > 0 && label.length <= 63 ) &&
+					! /^(?:\d+\.){3}\d+$/.test( host ) && host !== 'localhost' && ! /(^|\.)local$/.test( host );
 
-				endpointPreview.textContent = url.protocol === 'https:'
-					? `${ url.origin }/wp-json/alynt-drime-backups-uploader/v1/status`
+				endpointPreview.textContent = originShape && hostShape
+					? `https://${ host }/wp-json/alynt-drime-backups-uploader/v1/status`
 					: endpointPreview.dataset.emptyLabel;
 			} catch ( error ) {
 				endpointPreview.textContent = endpointPreview.dataset.emptyLabel;

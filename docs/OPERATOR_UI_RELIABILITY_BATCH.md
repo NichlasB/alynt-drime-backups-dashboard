@@ -58,7 +58,11 @@ server actions. No logging of support content, tokens or raw errors.
    Content/type/filename are unchanged. No automatic retry or persistent storage.
    Independent Chromium received the synthetic blob download, suggested filename
    matched, download failure was null and owned anchor was removed; browser closed.
-7. Endpoint preview consistency: pending.
+   Exact-head CI: [40349404015](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40349404015), successful for `4ea568247a51125e9d08d2a2ffb1f05c02643bc1`.
+7. Endpoint preview consistency: failing tests reproduced credential/path stripping
+   and trailing-dot mismatch. Preview now requires a public-host-shaped HTTPS
+   origin with only optional root slash/default port. It never rewrites submitted
+   input, resolves DNS or replaces server validation. Server validator unchanged.
 8. Missing-target enhancement: pending.
 
 Each task requires local validation, its own commit/push and exact-head CI before
