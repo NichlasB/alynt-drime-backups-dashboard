@@ -315,3 +315,11 @@ completed log at handoff. This is regression coverage of unchanged code, not
 proof of the proposed protocol. The final documentation-only dashboard head is
 independently checked after pushing this receipt and the legacy-lane wording
 clarification; no earlier-head CI substitutes for that final check.
+
+## Path-only navigation note — 2026-10-26
+
+Historical uploader producer citations now resolve under includes/producers/:
+class-wpvivid-producer.php and trait-generic-outbox-producer-scan.php retain
+their basenames and bodies. See the [exact uploader mapping/evidence limits](REPOSITORY_ORGANIZATION_MIGRATION.md).
+This does not implement or physically qualify the proposed protocol, resume
+deferred V2.3 or authorize scan/cleanup/native/wiring execution. History is retained.

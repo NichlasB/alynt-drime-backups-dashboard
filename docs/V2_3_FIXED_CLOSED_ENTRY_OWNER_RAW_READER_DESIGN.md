@@ -281,3 +281,11 @@ private acquisition/guard/issuer branches without production injection ports;
 no real authentication,cache/storage changes,WordPress/native execution,public
 hook/loader,wiring,grants,activation or rollback. Then obtain separately approved
 genuine WordPress/server-profile evidence before considering actual HTTP support.
+
+## Path-only navigation note — 2026-10-26
+
+The uploader includes/class-admin-page.php citation above is historical. Its
+current path is includes/admin/class-admin-page.php; see the
+[organization map and proof limits](REPOSITORY_ORGANIZATION_MIGRATION.md).
+This does not refer to dashboard admin, renew this design's acceptance, reopen
+deferred V2.3 or authorize actual HTTP/native/wiring work. Original text is retained.

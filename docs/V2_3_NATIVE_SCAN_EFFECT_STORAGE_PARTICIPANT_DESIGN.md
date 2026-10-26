@@ -421,3 +421,12 @@ PHP 7.4/8.3 each **1403 / 12481**, no skips, plus Node/build/audit. These are
 unchanged-code regression results, not execution/proof of proposed native contracts.
 This documentation-only receipt/Markdown-table follow-up is independently pushed
 and its final exact-head CI verified at handoff; previous-head CI is not substituted.
+
+## Path-only navigation note — 2026-10-26
+
+Historical uploader class-wpvivid-producer.php, class-generic-outbox-producer.php
+and trait-generic-outbox-producer-scan.php citations now resolve beneath
+includes/producers/ with unchanged basenames/bodies. See the
+[organization map and evidence disposition](REPOSITORY_ORGANIZATION_MIGRATION.md).
+No proposed participant/transaction/native protocol is qualified or activated;
+original receipts/text and deferred V2.3/wiring boundaries remain unchanged.

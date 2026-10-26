@@ -271,3 +271,11 @@ and isolated policy/result boundaries with synthetic bytes/API tests;no actual
 authentication,WordPress/storage/native execution,hook/loader registration,
 public wiring,grants,activation or rollback. Positive parser/policy tests and
 removed-guard controls must earn their place;do not add an always-false wrapper.
+
+## Path-only navigation note — 2026-10-26
+
+The uploader includes/class-admin-page.php citation above is historical. Its
+current path is includes/admin/class-admin-page.php; see the
+[organization map and proof limits](REPOSITORY_ORGANIZATION_MIGRATION.md).
+This is not dashboard admin or renewed HTTP/authentication/native qualification.
+Original design text and deferred V2.3/wiring boundaries remain unchanged.
