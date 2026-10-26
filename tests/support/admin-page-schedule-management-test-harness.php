@@ -7,15 +7,15 @@
 
 require_once dirname( __DIR__, 2 ) . '/includes/class-remote-action-capabilities.php';
 require_once dirname( __DIR__, 2 ) . '/includes/class-remote-action-repository.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-formatters.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-evidence-helpers.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-compact-helpers.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-operator-helpers.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-backup-source-evidence.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-schedule-rollback-preview-evidence.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-schedule-rollback-preview-helpers.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-schedule-management-action-forms.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-backup-source-evidence-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-backup-source-compact-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-backup-source-operator-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-backup-source-evidence.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-basic-detail-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-schedule-rollback-preview-evidence.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-schedule-rollback-preview-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-schedule-management-action-forms.php';
 require_once __DIR__ . '/admin-page-schedule-management-actions-double.php';
 require_once __DIR__ . '/admin-page-schedule-management-payload-fixtures.php';
 

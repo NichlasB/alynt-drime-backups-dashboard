@@ -10,12 +10,12 @@ require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-l
 require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-settings.php';
 require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/traits/trait-event-log-reporting.php';
 require_once dirname( __DIR__, 2 ) . '/includes/diagnostics/class-event-log.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-formatters.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostic-formatters.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-overview.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-audit-history.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-diagnostics-event-log.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-basic-detail-helpers.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-diagnostic-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-diagnostics-overview.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-diagnostics-audit-history.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-diagnostics-event-log.php';
 require_once __DIR__ . '/admin-page-diagnostics-overview-test-harness.php';
 
 /**

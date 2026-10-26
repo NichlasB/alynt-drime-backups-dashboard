@@ -7,7 +7,7 @@
 
 require_once __DIR__ . '/admin-page-action-audit-wordpress-shims.php';
 require_once __DIR__ . '/admin-page-action-audit-doubles.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-actions.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-actions.php';
 
 /**
  * Harness exposing the private trait action handler.

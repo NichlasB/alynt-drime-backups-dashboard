@@ -7,7 +7,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-diagnostics-support-output.php';
+require_once dirname( __DIR__ ) . '/includes/admin/traits/trait-admin-page-diagnostics-support-output.php';
 
 if ( ! function_exists( 'esc_textarea' ) ) {
 	/**

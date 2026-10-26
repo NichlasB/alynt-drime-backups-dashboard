@@ -6,7 +6,7 @@
  */
 
 require_once __DIR__ . '/admin-page-actions-wordpress-shims.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-actions.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-actions.php';
 require_once __DIR__ . '/admin-page-actions-test-doubles.php';
 require_once __DIR__ . '/admin-page-actions-handler-harness.php';
 require_once __DIR__ . '/admin-page-actions-test-case-helpers.php';

@@ -7,8 +7,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-basic-detail-helpers.php';
-require_once dirname( __DIR__ ) . '/includes/traits/trait-admin-page-sites-table.php';
+require_once dirname( __DIR__ ) . '/includes/admin/traits/trait-admin-page-basic-detail-helpers.php';
+require_once dirname( __DIR__ ) . '/includes/admin/traits/trait-admin-page-sites-table.php';
 require_once __DIR__ . '/support/admin-page-sites-list-wordpress-shims.php';
 
 /** Tests the real payload decoder and both summary consumers. */

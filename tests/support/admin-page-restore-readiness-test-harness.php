@@ -5,9 +5,9 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-formatters.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-restore-readiness-labels.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-restore-readiness-evidence.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-restore-readiness-labels.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-restore-readiness-evidence.php';
 
 /**
  * Harness exposing private restore-readiness rendering helpers for focused tests.

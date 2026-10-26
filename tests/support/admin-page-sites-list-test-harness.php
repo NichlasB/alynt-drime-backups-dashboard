@@ -5,13 +5,13 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list-context.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-site-formatters.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-list.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-sites-table.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-status-formatters.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-attention.php';
-require_once dirname( __DIR__, 2 ) . '/includes/traits/trait-admin-page-time-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-sites-list-context.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-site-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-sites-list.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-sites-table.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-status-formatters.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-attention.php';
+require_once dirname( __DIR__, 2 ) . '/includes/admin/traits/trait-admin-page-time-formatters.php';
 require_once __DIR__ . '/admin-page-sites-list-wordpress-shims.php';
 require_once __DIR__ . '/admin-page-sites-list-exposure-methods.php';
 require_once __DIR__ . '/admin-page-sites-list-test-doubles.php';
