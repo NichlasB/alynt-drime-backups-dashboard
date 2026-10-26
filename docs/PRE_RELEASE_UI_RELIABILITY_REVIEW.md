@@ -359,3 +359,30 @@ multi-write atomicity/ABA/auth/browser/minimum-WP acceptance. Product count3/8
 is unchanged by this separately approved native proof. **Recommended next gated
 slice: repository-only Scheduled Retention Failure Reporting Safety Foundation**
 for the remaining Medium finding, with no cleanup execution or schedule/site work.
+
+## Approved scheduled-retention failure reporting foundation — 2026-10-26
+
+The preceding repository-only Medium repair was approved. See the
+[owning source-scoped implementation/review record](SCHEDULED_RETENTION_FAILURE_REPORTING_FOUNDATION.md)
+at baseline `41c1fcf8ac3b619392a70585d45be801947e50cb`. The actual owner now
+checks both cleanup results and reports safe fixed diagnostic fields through
+the existing opt-in logger, after both original batches have been attempted.
+SQL, retention/batch defaults, schema8/version0.1.77 and schedules are unchanged.
+No raw error text/data, automatic logging opt-in, retry or always-on audit path.
+
+Permanent API scope9/67 passed; clean unchanged-runtime RED matrix5/26 had three
+behavioral failures. Three restored semantic controls were assertion-killed.
+Local full375/1959, same two Sodium skips; Node16/16, PHPCS149, structure/build,
+manifest/audits (zero advisories), scoped extractor projection and diff checks
+passed. Canonical Light and final focused Security were source-scoped only;
+no UI/UX or whole-plugin review row was refreshed. Publication/exact-head CI
+remain pending; product count becomes4/8 only after successful verification.
+
+No genuine cleanup/DELETE/cron/storage/native/site operation ran. The source
+finding is repaired, but05/FULL/release readiness remain pending. Historical
+lifecycle proofs are not implicitly refreshed for the modified plugin owner.
+Uploader/toolkit are untouched. **Recommended next gated slice: Plugin Tester
+local-only Retention Cleanup, Latest-Snapshot Preservation and Failure-Reporting
+Owned Proof**, with owned disposable tables/options and exact cleanup only,
+requiring new scope approval and exact-target confirmation. Preserve existing
+application state and wiring; no policy/schedule/schema/deploy change.

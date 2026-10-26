@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Scheduled retention failure reporting foundation — 2026-10-26
+
+The approved [repository-only foundation](SCHEDULED_RETENTION_FAILURE_REPORTING_FOUNDATION.md)
+repairs canonical05's remaining Medium discarded-error finding. Both original
+cleanup batches still run once with unchanged arguments; only failures enter
+the shared opt-in diagnostic logger with fixed safe messages/codes, never raw
+repository error details. Success stays quiet; logging refusal cannot repeat
+cleanup. Local focused9/67 and full375/1959 pass (two known local Sodium skips).
+Publication/exact-head CI are pending; cumulative safe-local count remains3/8
+until verified, then4/8. No SQL/site/cleanup/schema/schedule operation ran.
+05 and FULL release readiness remain pending, not refreshed by isolated tests.
+This supersedes the dated approval pointer below. Next meaningful gated slice:
+**Plugin Tester local-only Retention Cleanup, Latest-Snapshot Preservation and
+Failure-Reporting Owned Proof**, requiring separate owned-fixture approval and
+exact local-target confirmation; preserve application state and wiring.
+Deferred V2.3 remains parked; no package/release/deploy is authorized.
+
 ## Revocation-safe poll completion foundation — 2026-10-26
 
 Canonical05 repository inventory found a High stale-poll/revocation write race

@@ -3658,6 +3658,7 @@ msgstr ""
 msgid "The dashboard could not store the remote action request."
 msgstr ""
 
+#: includes/class-plugin.php:149
 #: includes/traits/trait-remote-action-repository-summary.php:121
 msgid "The dashboard could not clean up old remote action records."
 msgstr ""
@@ -3666,6 +3667,7 @@ msgstr ""
 msgid "The status check was not applied because the site enrollment or polling credentials changed. Please refresh the site before trying again."
 msgstr ""
 
+#: includes/class-plugin.php:148
 #: includes/traits/trait-snapshot-repository-retention.php:57
 msgid "The dashboard could not clean up old status snapshots."
 msgstr ""
