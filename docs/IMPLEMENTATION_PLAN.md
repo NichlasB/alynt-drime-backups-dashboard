@@ -7,12 +7,14 @@ and a separate Medium ignored retention-error result. The approved
 [repository-only foundation](REVOCATION_SAFE_POLL_COMPLETION_FOUNDATION.md)
 fences success/failure completion by current enrollment and captured credentials,
 verifies legitimate unchanged writes, and preserves stale errors through the
-poller. Schema8/version0.1.77 remain unchanged. This is isolated API/source
-evidence, not physical database/concurrency qualification or completion of05.
-The Medium retention finding stays open. Next gate: **Plugin Tester local-only
-Revocation-Safe Poll Completion Conditional-Write, Zero-Row and Concurrent
-Revocation Owned Proof**, requiring separate approval/target/fixture confirmation.
-No site operation, schema change, release or deployment is approved here.
+poller. Schema8/version0.1.77 remain unchanged. Separately approved and confirmed
+[owned database proof](REVOCATION_SAFE_POLL_COMPLETION_OWNED_PROOF.md) passed269
+checks/eight groups with real wpdb/no-op/errors/ordered revocation, fixtures
+removed and77/77 application checksums unchanged. The High qualification gate is
+closed, not all of05. The Medium retention finding stays open. Next gated slice:
+**repository-only Scheduled Retention Failure Reporting Safety Foundation**,
+requiring approval of that separate error/storage boundary; no cleanup run,
+retention/schedule/schema change, site operation, release or deployment.
 Implementation head `281c94f802a6fe4749ad421200c10fdc96792256` passed
 [exact-head CI40397479255](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40397479255):
 PHP7.4/8.3 each363/1874, no skips; Node16/16 and all configured gates passed.

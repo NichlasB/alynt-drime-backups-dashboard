@@ -333,3 +333,26 @@ Separate approval and exact target/owned fixture confirmation are required.
 No SQL/site/native operation, schema change, lifecycle rerun, package/release/tag
 or deployment ran. Main-work count is3/8 after push/exact-head CI; full
 release readiness and deferred V2.3 boundaries remain unchanged.
+
+## Approved revocation-safe completion owned proof — 2026-10-26
+
+The preceding native gate was separately approved and Plugin Tester local-only
+target/owned fixture scope confirmed. See the [actual core/SQL/locking receipt](REVOCATION_SAFE_POLL_COMPLETION_OWNED_PROOF.md):
+269 checks/eight groups,261 parent+22 worker query observations, real prepared
+success/failure/first-poll/no-op, credential byte comparison, physical errors,
+readback-gap rejection, both ordered two-process revocation/completion paths
+and genuine held-lock timeout. Required wait witnesses remain intact; sampling
+was corrected for the source-documented MariaDB metadata cache, not relaxed.
+All owned tables/processes/temp markers removed; independent original77-table
+inventory/checksums unchanged. Production source/schema8/version0.1.77/wiring,
+application tables/options/users/cron and uploader/toolkit remain untouched.
+
+Local PHP366/1892 with the two known Sodium skips; related64/346 and new scope3/25
+no skips, Node16/16, PHPCS149, structure/build/syntax/manifest/audits passed.
+Scoped Light/Security and harness correction history belong to the proof record;
+no whole-plugin review row is refreshed and CI is not a native proof rerun.
+High write-fence qualification is closed, not full05/FULL/release readiness or
+multi-write atomicity/ABA/auth/browser/minimum-WP acceptance. Product count3/8
+is unchanged by this separately approved native proof. **Recommended next gated
+slice: repository-only Scheduled Retention Failure Reporting Safety Foundation**
+for the remaining Medium finding, with no cleanup execution or schedule/site work.

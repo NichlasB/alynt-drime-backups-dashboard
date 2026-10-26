@@ -1,5 +1,13 @@
 # Revocation-Safe Poll Completion Safety Foundation — 2026-10-26
 
+Current follow-up: the separately approved and exact-target-confirmed
+[owned core/database proof](REVOCATION_SAFE_POLL_COMPLETION_OWNED_PROOF.md)
+passed269/8, including real prepared/no-op/error/readback and ordered two-process
+revocation cases; fixtures removed and77/77 application checksums unchanged.
+The original source-only scope and proof gate below are historical, superseded
+only for that narrow physical qualification. Multi-write atomicity/ABA limits
+remain.05 stays pending for the separate Medium scheduled-retention error finding.
+
 ## Approval, baseline and scope
 
 Approved repository-only R3 repair of the High canonical05 finding: a captured
