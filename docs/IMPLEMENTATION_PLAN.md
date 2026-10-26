@@ -1,5 +1,13 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Pre-release schema failure safety — 2026-10-26
+
+See [approved repository foundation](SCHEMA_UPGRADE_FAILURE_SAFETY_FOUNDATION.md)
+and [owning FULL review](PRE_RELEASE_UI_RELIABILITY_REVIEW.md). Schema8 and its
+DDL stay unchanged; installation completion/retry and caller failure handling
+are covered by isolated API tests. Real core/database qualification is the next
+explicit owned-fixture gate; no application migration or deployment is approved.
+
 ## Operator UI Reliability — 2026-10-26
 
 See [bounded eight-task batch](OPERATOR_UI_RELIABILITY_BATCH.md). Active dashboard

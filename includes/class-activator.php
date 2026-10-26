@@ -24,7 +24,11 @@ class Alynt_Drime_Backups_Dashboard_Activator {
 	 * @return void
 	 */
 	public static function activate() {
-		Alynt_Drime_Backups_Dashboard_Storage::maybe_install();
+		$installed = Alynt_Drime_Backups_Dashboard_Storage::maybe_install();
+		if ( is_wp_error( $installed ) ) {
+			wp_die( esc_html( $installed->get_error_message() ) );
+			return;
+		}
 		$scheduled = Alynt_Drime_Backups_Dashboard_Poller::schedule_events();
 
 		if ( is_wp_error( $scheduled ) ) {

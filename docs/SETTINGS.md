@@ -20,6 +20,14 @@ Operator action history is stored separately from optional diagnostics logging. 
 
 ## Related Non-Option Storage
 
+Schema completion is recorded only after install/upgrade table-presence and
+read-only core comparison checks. Failed attempts return a safe error and remain
+retryable; a forced reinstall first invalidates a current marker. Failed storage
+setup pauses normal dashboard initialization and activation scheduling. Healthy
+current-version startup retains its fast path; it is not a schema-health audit.
+Core-backed database/lifecycle qualification of this source change is still
+pending; do not treat isolated API tests as installed-site acceptance.
+
 - Custom tables store dashboard-owned site enrollment records, encrypted polling credentials, encrypted V2.1 action signing keys, normalized read-only status snapshots, and bounded V2.1+ remote-action request/history records.
 - Transient locks coordinate bounded polling batches, per-site poll attempts, and bounded enrollment failure rate limits.
 - Uninstall cleanup removes transient locks, enrollment failure-rate-limit transients, and scheduled hooks without contacting client sites. Dashboard-owned tables and options are preserved by default because they contain the dashboard-side enrollment, polling, and action-history state. A permanent purge requires the explicit `ALYNT_DRIME_BACKUPS_DASHBOARD_PURGE_DATA_ON_UNINSTALL` constant in `wp-config.php`; copied rollback directories always exit before cleanup.

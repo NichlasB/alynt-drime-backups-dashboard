@@ -57,7 +57,11 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		Alynt_Drime_Backups_Dashboard_Storage::maybe_upgrade();
+		$installed = Alynt_Drime_Backups_Dashboard_Storage::maybe_upgrade();
+		if ( is_wp_error( $installed ) ) {
+			add_action( 'admin_notices', array( $this, 'storage_error_notice' ) );
+			return;
+		}
 
 		$sites                = new Alynt_Drime_Backups_Dashboard_Site_Repository();
 		$this->snapshots      = new Alynt_Drime_Backups_Dashboard_Snapshot_Repository();
@@ -85,6 +89,19 @@ class Alynt_Drime_Backups_Dashboard_Plugin {
 		$this->enrollment_rest_controller = new Alynt_Drime_Backups_Dashboard_Enrollment_REST_Controller( null, null, null, $event_log );
 
 		$this->hooks();
+	}
+
+	/**
+	 * Reports a failed storage update without enabling normal dashboard hooks.
+	 *
+	 * @return void
+	 */
+	public function storage_error_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		// Persistent configuration failure: keep visible until storage is repaired.
+		echo '<div class="notice notice-error" role="alert"><p>' . esc_html__( 'The dashboard could not finish its storage update. Please retry activation or contact support. Dashboard operations are paused until the update succeeds.', 'alynt-drime-backups-dashboard' ) . '</p></div>';
 	}
 
 	/**

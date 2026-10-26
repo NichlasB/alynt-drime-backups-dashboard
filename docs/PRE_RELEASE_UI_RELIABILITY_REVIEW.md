@@ -89,6 +89,14 @@ passed; current exact-head publication evidence belongs to the toolkit record.
 
 ## Genuine approval boundary: schema-upgrade failure handling
 
+Update2026-10-26: user approved the repository-only R3 foundation; see
+[implementation/evidence](SCHEMA_UPGRADE_FAILURE_SAFETY_FOUNDATION.md). The code
+repair and isolated positive/fault/retry controls now exist. The finding below
+is retained as its historical rationale, not the current implementation.
+FULL03 remains incomplete pending separately approved core-backed owned database
+proof; do not substitute isolated API results for installed-schema qualification.
+The next gate is that actual proof, no longer approval of the repository repair.
+
 03 is **incomplete / Awaiting Approval**, not passed. High source finding:
 `includes/class-storage.php:183` unconditionally updates the schema version after
 three dbDelta calls; `maybe_upgrade():193–200` trusts an equal marker and returns.

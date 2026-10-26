@@ -63,7 +63,7 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return void
+	 * @return true|WP_Error
 	 */
 	public static function maybe_install() {
 		global $wpdb;
@@ -75,8 +75,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		dbDelta(
-			"CREATE TABLE {$sites_table} (
+		$queries = array(
+			$sites_table     => "CREATE TABLE {$sites_table} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				public_id char(36) NOT NULL,
 				site_uuid char(36) NULL,
@@ -114,11 +114,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY poll_due (enrollment_status, paused_at, next_poll_at, id),
 				KEY archived_at (archived_at),
 				KEY last_seen_at (last_seen_at)
-			) {$charset_collate};"
-		);
-
-		dbDelta(
-			"CREATE TABLE {$snapshots_table} (
+			) {$charset_collate};",
+			$snapshots_table => "CREATE TABLE {$snapshots_table} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				dashboard_site_id bigint(20) unsigned NOT NULL,
 				schema_version smallint(5) unsigned NOT NULL DEFAULT 1,
@@ -138,11 +135,8 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY site_latest (dashboard_site_id, id),
 				KEY retention_cleanup (observed_at, id),
 				KEY overall_status (overall_status)
-			) {$charset_collate};"
-		);
-
-		dbDelta(
-			"CREATE TABLE {$actions_table} (
+			) {$charset_collate};",
+			$actions_table   => "CREATE TABLE {$actions_table} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				public_id char(36) NOT NULL,
 				dashboard_site_id bigint(20) unsigned NOT NULL,
@@ -177,10 +171,40 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 				KEY state_expires (state, expires_at),
 				KEY idempotency_key (idempotency_key),
 				KEY completed_at (completed_at, id)
-			) {$charset_collate};"
+			) {$charset_collate};",
 		);
 
-		update_option( self::OPTION_SCHEMA_VERSION, self::SCHEMA_VERSION, false );
+		try {
+			// Forced reinstallation must not leave a previously current marker on failure.
+			if ( self::SCHEMA_VERSION === self::installed_version() ) {
+				update_option( self::OPTION_SCHEMA_VERSION, '', false );
+				if ( self::SCHEMA_VERSION === self::installed_version() ) {
+					return self::installation_error();
+				}
+			}
+			foreach ( $queries as $query ) {
+				dbDelta( $query );
+			}
+			foreach ( $queries as $table => $query ) {
+				$exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- Upgrade-only schema verification, not a request cache.
+				if ( $table !== $exists || ! empty( $wpdb->last_error ) ) {
+					return self::installation_error();
+				}
+				// Planned-change strings are not success: the schema must now converge.
+				$remaining = dbDelta( $query, false );
+				if ( ! is_array( $remaining ) || array() !== $remaining || ! empty( $wpdb->last_error ) ) {
+					return self::installation_error();
+				}
+			}
+			update_option( self::OPTION_SCHEMA_VERSION, self::SCHEMA_VERSION, false );
+			if ( self::SCHEMA_VERSION !== self::installed_version() ) {
+				return self::installation_error();
+			}
+		} catch ( Throwable $error ) {
+			return self::installation_error();
+		}
+
+		return true;
 	}
 
 	/**
@@ -188,15 +212,34 @@ class Alynt_Drime_Backups_Dashboard_Storage {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @return void
+	 * @return true|WP_Error
 	 */
 	public static function maybe_upgrade() {
-		$stored_version = function_exists( 'get_option' ) ? (string) get_option( self::OPTION_SCHEMA_VERSION, '' ) : '';
+		$stored_version = self::installed_version();
 
 		if ( self::SCHEMA_VERSION === $stored_version ) {
-			return;
+			return true;
 		}
 
-		self::maybe_install();
+		return self::maybe_install();
+	}
+
+	/**
+	 * Reads the version without coercing corrupt compound option values.
+	 *
+	 * @return string
+	 */
+	private static function installed_version() {
+		$stored = function_exists( 'get_option' ) ? get_option( self::OPTION_SCHEMA_VERSION, '' ) : '';
+		return is_scalar( $stored ) ? (string) $stored : '';
+	}
+
+	/**
+	 * Returns a safe failure without exposing SQL or connection details.
+	 *
+	 * @return WP_Error
+	 */
+	private static function installation_error() {
+		return new WP_Error( 'dashboard_schema_install_failed', __( 'The dashboard could not finish its storage update. Please retry activation or contact support. Dashboard operations are paused until the update succeeds.', 'alynt-drime-backups-dashboard' ) );
 	}
 }
