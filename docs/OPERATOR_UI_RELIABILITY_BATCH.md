@@ -25,7 +25,10 @@ server actions. No logging of support content, tokens or raw errors.
 1. Support export: genuine JSON encoding failure (INF) first reproduced the
    misleading `{}` export. Failure now renders only the actionable refresh notice;
    valid JSON retains escaped textarea/copy/download. Targeted render regressions.
-2. Snapshot unreadability: pending.
+   Exact-head CI: [40347722572](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40347722572), successful for `8244141ac2aa091e750ee440c482a989658c8c98`.
+2. Snapshot unreadability: both consumers now label empty/unreadable payloads
+   unavailable; raw/pre-decoded genuine zero reports remain visible. Real decoder
+   and consumers tested; unrelated labels/action forms stubbed, no repository use.
 3. Absolute timestamp display: pending.
 4. Form processing lifecycle: pending.
 5. Clipboard focus recovery: pending.

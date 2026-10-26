@@ -61,6 +61,10 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Basic_Detail_Helpers {
 		}
 
 		$payload = $this->decoded_snapshot_payload( $snapshot );
+		if ( empty( $payload ) ) {
+			echo '<div class="adbd-panel-body"><p>' . esc_html__( 'Stored snapshot summary is unavailable. Refresh after the next scheduled report; do not interpret missing evidence as zero counts.', 'alynt-drime-backups-dashboard' ) . '</p></div></div>';
+			return;
+		}
 
 		echo '<dl class="adbd-detail-list adbd-evidence-list">';
 		$this->render_detail_item( __( 'Observed', 'alynt-drime-backups-dashboard' ), $this->time_html( isset( $snapshot['observed_at'] ) ? $snapshot['observed_at'] : '' ), true );
