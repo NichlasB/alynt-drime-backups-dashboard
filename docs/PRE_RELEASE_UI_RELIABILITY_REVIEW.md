@@ -134,3 +134,50 @@ database/lifecycle proof requires its own exact-target/owned-fixture authority.
 Do not start dependent04–13/07A or claim full readiness before this gate is resolved.
 04/05 prompts were read only to classify the boundary; neither completed. No
 package, release or tag reuse. Toolkit owns the exact resume/publication state.
+
+## Resumed04 WordPress Best Practices — 2026-10-26
+
+After263541f core-backed proof and exact-head CI succeeded, canonical04 Phase1
+resumed read-only against the current candidate.141 runtime/manual PHP files
+scanned (136 includes, root/uninstall,3 manual), plus directly related route,
+action, storage, fixture and tooling context; PHPCS/WPCS/PHPCompatibility remains
+configured for minimum WP6.0/PHP7.4. Manual scripts/tests are development-only,
+excluded by the actual Build Release rsync rule, not public WordPress endpoints.
+
+Summary: deprecated functions0; hook issues0; database API/preparation issues0;
+options/transients issues0; meta-key issues0; AJAX issues0; REST issues0; asset
+enqueue issues0; runtime path issues0; header/structure issues0; remaining coding
+violations0. **No updates needed**, complete under the canonical no-change rule,
+not a claim that later database/security/runtime reviews have passed.
+
+Evidence: deprecated-call scans across owned PHP (excluding dependencies) found
+none. Runtime callbacks are removable named methods registered in admin_menu,
+admin_enqueue_scripts,rest_api_init and prefixed cron hooks. No AJAX or post/user
+meta ownership. The enrollment REST namespace is versioned with explicit bearer
+permission callback, per-argument validation/sanitation and handler-side one-time
+pairing checks; client opt-in exchange deliberately is not a cookie/nonce form.
+Admin form action selection is sanitized before action-specific nonce/payload
+processing and capability-protected rendering; no authorization change selected.
+
+DDL uses dbDelta/charset/prefix, metadata LIKE values are escaped/prepared, query
+values use prepare or wpdb typed helpers; only closed internal identifiers are
+interpolated. Schema marker/policy/bounded redacted log options use defaults and
+autoload false. Enrollment hash keys/TTL and global/site poll-lock TTL are bounded;
+transient locks remain advisory, not falsely claimed atomic mutexes or durable
+authority. Assets have prefixed handles/version/footer and exact screen gating;
+no request-time hardcoded plugin filesystem path. The manual proof's fixed LocalWP
+path/owned SQL exceptions are intentional explicit-target development constraints.
+
+Full local PHP315/1597 (two pre-existing Sodium skips), Node16/16 fail0/skip0,
+PHPCS141, structure, build and dependency audits passed. Final release validation
+rows stay pending. No site operation repeated for04. Core-backed schema proof does
+not cover actual activation/deactivation/uninstall options/cron/data preservation;
+the repository's mandatory isolated lifecycle acceptance remains an R3 boundary
+before release.05 Database Review remains pending, not inferred complete here.
+
+Recommended next gated slice: **Plugin Tester local-only Isolated Dashboard
+Activation/Deactivation/Uninstall Lifecycle and Data-Preservation Owned Proof**.
+Use a separately approved disposable WordPress namespace/fixtures and exact
+cleanup; never activate/deactivate/uninstall or migrate the existing application
+installation. This is distinct from the four-table schema-only proof and requires
+fresh scope approval/target confirmation before lifecycle/fixture cron writes.
