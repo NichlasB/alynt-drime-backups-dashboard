@@ -318,8 +318,11 @@ User separately approved the repository-only High repair. See the
 Success/failure write predicates now fence current enrollment/credential identity;
 verified zero-row no-op and explicit stale/error propagation have permanent
 isolated regressions. Local full363/1867, two unchanged Sodium skips; related61/321,
-no skips. New source is not covered by predecessor physical proof or predecessor
-CI.05 stays incomplete until physical qualification and the separate Medium
+no skips. Implementation `281c94f802a6fe4749ad421200c10fdc96792256` passed
+[exact-head CI40397479255](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40397479255):
+PHP7.4/8.3 each363/1874, no skips/failures, Node16/16 and all configured gates.
+New source is not covered by predecessor physical proof.05 stays incomplete
+until physical qualification and the separate Medium
 finding are resolved;07/07A/feature reviews here are source-scoped only, not
 historical whole-plugin completion. Toolkit evidence is not silently republished
 under the earlier lifecycle-receipt-only approval.
@@ -328,5 +331,5 @@ under the earlier lifecycle-receipt-only approval.
 Completion Conditional-Write, Zero-Row and Concurrent Revocation Owned Proof**.
 Separate approval and exact target/owned fixture confirmation are required.
 No SQL/site/native operation, schema change, lifecycle rerun, package/release/tag
-or deployment ran. Main-work count becomes3/8 after push/exact-head CI; full
+or deployment ran. Main-work count is3/8 after push/exact-head CI; full
 release readiness and deferred V2.3 boundaries remain unchanged.

@@ -119,8 +119,15 @@ poller status check
 Node16/16, no failures/skips; PHPCS144 files, structure136 runtime includes/194
 support helpers/142 test files, deterministic asset build with no tracked output
 change, strict Composer manifest validation, Composer/npm audits with zero
-advisories, syntax and diff hygiene passed. Exact-head CI receipt is recorded at
-publication closeout; predecessor CI is not substituted for it.
+advisories, syntax and diff hygiene passed.
+
+Published implementation head `281c94f802a6fe4749ad421200c10fdc96792256` passed
+[exact-head CI40397479255](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40397479255).
+Actual PHP7.4 and8.3 logs each report363 tests/1874 assertions, no skips/failures;
+Node each16/16, fail0/skip0. Both matrix jobs passed strict Composer validation,
+dependency audits (zero advisories), build, structure and PHPCS144. The Sodium
+branches skipped by local PHP ran successfully there. Source-scoped foundation
+publication is complete; this is not the physical qualification below.
 
 ## Proof limits and next gate
 
@@ -145,6 +152,6 @@ confirmation, preserve existing application tables/options/users/cron and
 production wiring, exercise real prepared SQL/no-op/error/credential-change
 semantics and bounded ordered revocation/completion interleavings, then exact
 cleanup. Do not deploy/package this foundation before the remaining release
-review and physical qualification gates. Safe-local product progress becomes3/8
-only after this foundation is pushed and exact-head CI verified; organization
+review and physical qualification gates. Safe-local product progress is3/8
+after this foundation was pushed and exact-head CI verified; organization
 and separately approved native proofs do not inflate that count.
