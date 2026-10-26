@@ -49,6 +49,7 @@ export function adminFixture() {
 	const panel = { querySelector: () => status };
 	const status = { textContent: '' };
 	const dashboard = {
+		dataset: {},
 		querySelector: ( selector ) => selected.get( selector ) || null,
 		querySelectorAll: ( selector ) => groups.get( selector ) || [],
 	};

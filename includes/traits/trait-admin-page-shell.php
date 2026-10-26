@@ -32,7 +32,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Shell {
 		$result = $this->handle_post_action();
 
 		?>
-		<div class="wrap adbd-wrap">
+		<div class="wrap adbd-wrap" data-unavailable-message="<?php esc_attr_e( 'This field is no longer available. Refresh the page and try again.', 'alynt-drime-backups-dashboard' ); ?>">
 			<h1><?php esc_html_e( 'Drime Backups Dashboard', 'alynt-drime-backups-dashboard' ); ?></h1>
 
 			<div class="notice notice-info inline adbd-read-only-notice">

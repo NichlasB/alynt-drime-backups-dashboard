@@ -45,13 +45,23 @@ if ( dashboard ) {
 
 		return document.execCommand( 'copy' );
 	};
+	const enhancementField = ( button, key ) => {
+		const field = document.getElementById( button.dataset[ key ] || '' );
+		return field && typeof field.value === 'string' ? field : null;
+	};
+	const announceUnavailable = ( button ) => announceCopyResult(
+		button, dashboard.dataset.unavailableMessage || button.dataset.errorMessage
+	);
 
 	dashboard.querySelectorAll( '.adbd-copy-button' ).forEach( ( button ) => {
+		if ( button.disabled || ! enhancementField( button, 'copyTarget' ) ) return;
 		button.hidden = false;
 		button.addEventListener( 'click', async () => {
-			const field = document.getElementById( button.dataset.copyTarget || '' );
+			if ( button.disabled ) return;
+			const field = enhancementField( button, 'copyTarget' );
 
 			if ( ! field ) {
+				announceUnavailable( button );
 				return;
 			}
 
@@ -97,11 +107,14 @@ if ( dashboard ) {
 	} );
 
 	dashboard.querySelectorAll( '.adbd-download-button' ).forEach( ( button ) => {
+		if ( button.disabled || ! enhancementField( button, 'downloadTarget' ) ) return;
 		button.hidden = false;
 		button.addEventListener( 'click', () => {
-			const field = document.getElementById( button.dataset.downloadTarget || '' );
+			if ( button.disabled ) return;
+			const field = enhancementField( button, 'downloadTarget' );
 
 			if ( ! field ) {
+				announceUnavailable( button );
 				return;
 			}
 

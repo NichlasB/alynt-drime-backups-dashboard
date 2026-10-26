@@ -63,10 +63,71 @@ server actions. No logging of support content, tokens or raw errors.
    and trailing-dot mismatch. Preview now requires a public-host-shaped HTTPS
    origin with only optional root slash/default port. It never rewrites submitted
    input, resolves DNS or replaces server validation. Server validator unchanged.
-8. Missing-target enhancement: pending.
+   Exact-head CI: [40349591018](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40349591018), successful for `1ead68ef77b2caf67a84ceabe648b3dc29d4fc13`.
+8. Missing-target enhancement: failing tests reproduced dead controls and silently
+   missing targets. Reveal/bind only available string-valued fields and initially
+   enabled controls; reject disabled/repeated copy events. A disappearing field
+   uses the translated wrapper recovery message, never a misleading copy success.
 
 Each task requires local validation, its own commit/push and exact-head CI before
 counting complete. Run links are recorded after verification. Final source-scoped
 Light/UI/Error Handling/Security review and browser component evidence will
 distinguish DOM/API doubles from real WordPress acceptance. No database proof or
 whole-plugin review rows are refreshed by this batch.
+
+## Final source-scoped reviews and local validation
+
+Feature scope: six runtime UI files and directly affected tests/build/CI/records
+(20 files total). UI areas: admin evidence/support output, forms, notices, JS
+interactions and copy; no AJAX, REST, database, cron or remote implementation.
+Canonical Light → UI/UX + 03 Error Handling Phase 2 → final focused Security.
+Eight medium issues identified/auto-fixed, no manual design decisions or confirmed
+security defects in the changed paths. No new public contract or dependency.
+
+Baseline inventory (method/operation; original behavior), all Medium:
+
+| ID | Source | Original operation / impact | Recovery |
+|---|---|---|---|
+| 1 | diagnostics-support-output:render_support_copy_output | `false ? '{}' : $encoded` offered false export | Refresh notice, no controls |
+| 2 | basic-detail-helpers:render_latest_snapshot_summary; sites-table:render_sites_table | `$snapshot` alone allowed empty decoded counts | Explicit unavailable evidence |
+| 3 | time-formatters:time_html/datetime_label | Loose DateTime accepted relative/overflow values | Unavailable, absolute positives retained |
+| 4 | admin/index.js:form submit | Busy labels/disabled state never restored | Cancel/persisted pageshow restoration |
+| 5 | admin/index.js:fallbackCopy | Focus remained in selected textarea after success | Restore keyboard trigger, preserve failure selection |
+| 6 | admin/index.js:download click | Immediate revoke; errors leaked link/URL | Owned finally cleanup, delayed release |
+| 7 | admin/index.js:updateEndpointPreview | URL normalization silently stripped rejected parts | Display-only origin-shape hint |
+| 8 | admin/index.js:copy/download binding | Reveal before lookup, missing target silently returned | Hide unusable controls, translated recovery |
+
+03 summary: five original files scanned; one silent missing-target path, one
+loading-state recovery gap, two misleading evidence/empty states, one preview
+validation-feedback gap, and three export/focus/resource reliability gaps. Total
+eight; no new network, permission or destructive confirmation issues in scope.
+
+Light/structure: cohesive helpers, no new runtime files or abstraction framework;
+no meaningful bloat/duplication requiring the Bloat workflow. Existing structural
+guard passes. UI review keeps native classes, one primary action per existing
+region, translated/escaped messages and polite live regions. Persistent encoding
+failure stays non-dismissible until refresh (existing inline failure pattern).
+Focus restoration does not steal focus after async work. Form state restores only
+owned mutations, not arbitrary disabled controls. No client validation authority
+is added by the preview. No whole-dashboard accessibility/visual claim.
+
+Security gate: unchanged capability/nonce checks, fixed target-ID lookup, existing
+clipboard/download contents and fixed filename; textContent, escaped PHP output,
+no dynamic HTML or remote requests. No confirmed security defect requiring a new
+07A handoff. No storage/schema/file upload or permission changes.
+
+Local final checks: PHP 304 tests / 1489 assertions, two pre-existing Sodium skips;
+Node 16/16, no skips/failures; PHPCS, build, structure and diff checks passed;
+npm/Composer audits reported zero vulnerabilities/advisories. Generated dist is
+ignored and rebuilt rather than manually edited. Chromium component smoke has
+11 assertions, network aborted, isolated process closed; real DOM/focus/input
+and synthetic blob download, clipboard API stubbed. Not real WordPress,
+authentication, OS clipboard, actual BFCache navigation, database, physical
+transactions, installed-site acceptance, package or deployment proof.
+
+All eight commits require exact-head CI success; the toolkit source-scoped record
+owns final run links/counts after the last push. Implementation-plan progress:
+operator monitoring/support reliability advanced; V2.3 deferral unchanged.
+Recommended next action after eight verified tasks: run the canonical full
+pre-release workflow on this coherent UI reliability candidate before packaging
+or publishing. No live deployment approval is inferred.
