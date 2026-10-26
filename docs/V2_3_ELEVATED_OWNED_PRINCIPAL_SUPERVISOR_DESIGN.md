@@ -7,6 +7,10 @@ toolkit61d58bfd8373104281ccdf93348477d76c12abc8. Parents:
 [blocked feasibility preflight](V2_3_SOURCE_IMAGE_OWNERSHIP_FEASIBILITY_AUDIT.md)
 and [source-ownership contract](V2_3_SETUP_OBSERVATION_ADMISSION_SOURCE_OWNERSHIP_DESIGN.md).
 
+Successor: [trusted supervisor/handoff read-only audit](V2_3_TRUSTED_SUPERVISOR_HANDOFF_READ_ONLY_AUDIT.md)
+resolves candidate human designation/metadata only; no actual elevation, staging,
+logon, denial or cleanup proof. The design's physical prerequisites remain gated.
+
 ## Decision and authority split
 
 Specify a **fixed local-only supervisor plus a fixed non-administrative denial

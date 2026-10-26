@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Trusted Supervisor/Handoff Read-Only Audit — 2026-10-26
+
+See [owning audit](V2_3_TRUSTED_SUPERVISOR_HANDOFF_READ_ONLY_AUDIT.md). Confirmed
+Plugin Tester local-only; human designated the existing enabled local-admin
+candidate, distinct from execution/observed console identities. Static Program
+Files ACL is a more promising parent candidate than writable ProgramData; all
+prospective handoff paths absent. Metadata/human designation only, no authentication,
+UAC, account/ACL/fixture/WordPress/database/native/wiring change. A1-A4/native GO
+stay Blocked. Next gated slice: local-only Supervisor Intent and Cleanup-Journal
+DATA Safety Foundation, in-memory only; actual authority/OS adapters disabled.
+
 ## V2.3 Elevated Owned-Principal Supervisor Handoff Design — 2026-10-26
 
 See [owning design](V2_3_ELEVATED_OWNED_PRINCIPAL_SUPERVISOR_DESIGN.md). Repository-
