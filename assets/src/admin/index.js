@@ -105,22 +105,25 @@ if ( dashboard ) {
 				return;
 			}
 
+			let url;
+			let link;
 			try {
 				const blob = new Blob( [ field.value ], { type: 'application/json' } );
-				const url = window.URL.createObjectURL( blob );
-				const link = document.createElement( 'a' );
+				url = window.URL.createObjectURL( blob );
+				link = document.createElement( 'a' );
 
 				link.href = url;
 				link.download = button.dataset.downloadFilename || 'alynt-drime-dashboard-support-summary.json';
 				link.hidden = true;
 				document.body.appendChild( link );
 				link.click();
-				link.remove();
-				window.URL.revokeObjectURL( url );
-
 				announceCopyResult( button, button.dataset.successMessage );
 			} catch ( error ) {
 				announceCopyResult( button, button.dataset.errorMessage );
+			} finally {
+				// Allow the browser to consume the download before releasing our URL.
+				if ( url ) window.setTimeout( () => window.URL.revokeObjectURL( url ), 1000 );
+				if ( link ) link.remove();
 			}
 		} );
 	} );

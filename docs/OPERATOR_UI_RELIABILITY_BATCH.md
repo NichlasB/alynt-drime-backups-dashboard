@@ -51,7 +51,13 @@ server actions. No logging of support content, tokens or raw errors.
    focus from another control. Actual-source tests retain native value delivery.
    Built-script Chromium keyboard/DOM focus check passed, clipboard API stubbed;
    not native OS clipboard or WordPress proof.
-6. Download resource lifecycle: pending.
+   Exact-head CI: [40349182096](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40349182096), successful for `d640940430287b0f4ccc05f7d8fb1703862e6b86`.
+6. Download resource lifecycle: failing tests reproduced immediate URL revocation
+   and leaked URL/link on construction/click errors. Finally removes only the
+   owned link and delays owned URL release for browser consumption on all paths.
+   Content/type/filename are unchanged. No automatic retry or persistent storage.
+   Independent Chromium received the synthetic blob download, suggested filename
+   matched, download failure was null and owned anchor was removed; browser closed.
 7. Endpoint preview consistency: pending.
 8. Missing-target enhancement: pending.
 
