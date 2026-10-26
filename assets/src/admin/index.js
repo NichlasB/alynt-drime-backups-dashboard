@@ -120,18 +120,41 @@ if ( dashboard ) {
 		} );
 	} );
 
+	const busyForms = new Map();
+	const restoreForm = ( form ) => {
+		const state = busyForms.get( form );
+		if ( ! state ) return;
+		state.button.disabled = false;
+		state.button.textContent = state.label;
+		[ [ form, 'aria-busy', state.busy ], [ state.button, 'aria-disabled', state.disabled ] ]
+			.forEach( ( [ element, attribute, value ] ) => {
+				if ( value === null ) element.removeAttribute( attribute );
+				else element.setAttribute( attribute, value );
+			} );
+		busyForms.delete( form );
+	};
+	window.addEventListener( 'pageshow', ( event ) => {
+		if ( event.persisted ) busyForms.forEach( ( state, form ) => restoreForm( form ) );
+	} );
 	dashboard.querySelectorAll( 'form' ).forEach( ( form ) => {
 		form.addEventListener( 'submit', ( event ) => {
 			const button = event.submitter;
 
-			if ( ! button || ! button.dataset.busyLabel ) {
+			if ( event.defaultPrevented || ! button || button.disabled || ! button.dataset.busyLabel || busyForms.has( form ) ) {
 				return;
 			}
 
+			busyForms.set( form, {
+				button, label: button.textContent,
+				busy: form.getAttribute( 'aria-busy' ), disabled: button.getAttribute( 'aria-disabled' ),
+			} );
 			form.setAttribute( 'aria-busy', 'true' );
 			button.disabled = true;
 			button.setAttribute( 'aria-disabled', 'true' );
 			button.textContent = button.dataset.busyLabel;
+			window.setTimeout( () => {
+				if ( event.defaultPrevented ) restoreForm( form );
+			}, 0 );
 		} );
 	} );
 

@@ -34,7 +34,17 @@ server actions. No logging of support content, tokens or raw errors.
    now display unavailable, not fabricated freshness. SQL UTC/ISO offsets and
    fractions retain the actual instant. Private display-only parser, no stored
    date/protocol validation changes; failing `tomorrow` regression reproduced.
-4. Form processing lifecycle: pending.
+   Exact-head CI: [40348319029](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40348319029), successful for `11caad153f3b236c087fa8c501bd47ed2957f042`.
+4. Form processing lifecycle: regressions first failed for cancellation, BFCache
+   restoration and untouched disabled controls. Restore only this script's busy
+   state on cancelled submit or persisted pageshow; normal navigation stays busy.
+   Dependency-free Node tests execute actual JS against DOM/API doubles and now
+   run in CI; this does not establish WordPress submission/authentication proof.
+   Actual built-script Chromium component check passed for a cancelled submission.
+   Playwright MCP was profile-locked; used an independent headless process with
+   the existing installed Chromium 1223, closed in finally. No profile/service
+   changes, downloads, network or WordPress. Initial runner URL/executable-path
+   mismatches were corrected explicitly, not claimed as browser test passes.
 5. Clipboard focus recovery: pending.
 6. Download resource lifecycle: pending.
 7. Endpoint preview consistency: pending.

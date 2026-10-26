@@ -14,7 +14,8 @@
     "lint:fix": "php ./vendor/bin/phpcbf",
     "pot": "wp i18n make-pot . languages/alynt-drime-backups-dashboard.pot",
     "test:coverage": "php ./vendor/bin/phpunit --coverage-html=coverage/",
-    "test": "php ./vendor/bin/phpunit"
+    "test": "php ./vendor/bin/phpunit",
+    "test:admin": "node --test tests/node/*.test.mjs"
   },
   "license": "GPL-2.0-or-later",
   "devDependencies": {

@@ -63,5 +63,8 @@ jobs:
       - name: Run PHPUnit
         run: npm test
 
+      - name: Run admin interaction regressions
+        run: npm run test:admin
+
       - name: Run PHPCS
         run: npm run lint
