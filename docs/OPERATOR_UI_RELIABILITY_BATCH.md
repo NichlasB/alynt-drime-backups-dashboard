@@ -29,7 +29,11 @@ server actions. No logging of support content, tokens or raw errors.
 2. Snapshot unreadability: both consumers now label empty/unreadable payloads
    unavailable; raw/pre-decoded genuine zero reports remain visible. Real decoder
    and consumers tested; unrelated labels/action forms stubbed, no repository use.
-3. Absolute timestamp display: pending.
+   Exact-head CI: [40348087155](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40348087155), successful for `3d748b37a019e9337df26eda45c74f5981c1ce79`.
+3. Absolute timestamp display: relative expressions, incomplete/impossible dates
+   now display unavailable, not fabricated freshness. SQL UTC/ISO offsets and
+   fractions retain the actual instant. Private display-only parser, no stored
+   date/protocol validation changes; failing `tomorrow` regression reproduced.
 4. Form processing lifecycle: pending.
 5. Clipboard focus recovery: pending.
 6. Download resource lifecycle: pending.

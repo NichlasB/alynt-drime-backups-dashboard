@@ -23,17 +23,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters {
 	 * @return string
 	 */
 	private function time_html( $value ) {
-		if ( '' === (string) $value ) {
+		$date = $this->absolute_display_date( $value );
+		if ( null === $date ) {
 			return '<span aria-label="' . esc_attr__( 'Not available', 'alynt-drime-backups-dashboard' ) . '">-</span>';
 		}
 
-		try {
-			$date      = new DateTimeImmutable( (string) $value, new DateTimeZone( 'UTC' ) );
-			$timestamp = $date->getTimestamp();
-		} catch ( Exception $exception ) {
-			unset( $exception );
-			return esc_html( (string) $value );
-		}
+		$timestamp = $date->getTimestamp();
 
 		$date_format = function_exists( 'get_option' ) ? (string) get_option( 'date_format', 'Y-m-d' ) : 'Y-m-d';
 		$time_format = function_exists( 'get_option' ) ? (string) get_option( 'time_format', 'H:i' ) : 'H:i';
@@ -64,22 +59,35 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Time_Formatters {
 	 * @return string
 	 */
 	private function datetime_label( $value ) {
-		if ( '' === (string) $value ) {
+		$date = $this->absolute_display_date( $value );
+		if ( null === $date ) {
 			return '-';
 		}
 
-		try {
-			$date      = new DateTimeImmutable( (string) $value, new DateTimeZone( 'UTC' ) );
-			$timestamp = $date->getTimestamp();
-		} catch ( Exception $exception ) {
-			unset( $exception );
-			return (string) $value;
-		}
+		$timestamp = $date->getTimestamp();
 
 		$date_format = function_exists( 'get_option' ) ? (string) get_option( 'date_format', 'Y-m-d' ) : 'Y-m-d';
 		$time_format = function_exists( 'get_option' ) ? (string) get_option( 'time_format', 'H:i' ) : 'H:i';
 
 		return function_exists( 'wp_date' ) ? wp_date( $date_format . ', ' . $time_format, $timestamp ) : gmdate( 'Y-m-d H:i', $timestamp ) . ' UTC';
+	}
+
+	/**
+	 * Accepts complete absolute SQL/ISO timestamps for display only.
+	 *
+	 * @param string $value Stored timestamp, never a relative expression.
+	 * @return DateTimeImmutable|null
+	 */
+	private function absolute_display_date( $value ) {
+		if ( ! is_string( $value ) || ! preg_match( '/^(\d{4})-(\d{2})-(\d{2})[ T](?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?$/D', $value, $parts ) || ! checkdate( (int) $parts[2], (int) $parts[3], (int) $parts[1] ) ) {
+			return null;
+		}
+
+		try {
+			return new DateTimeImmutable( $value, new DateTimeZone( 'UTC' ) );
+		} catch ( Exception $exception ) {
+			return null;
+		}
 	}
 
 	/**
