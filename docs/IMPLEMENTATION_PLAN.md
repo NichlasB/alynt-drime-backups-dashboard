@@ -5,8 +5,10 @@
 See [approved repository foundation](SCHEMA_UPGRADE_FAILURE_SAFETY_FOUNDATION.md)
 and [owning FULL review](PRE_RELEASE_UI_RELIABILITY_REVIEW.md). Schema8 and its
 DDL stay unchanged; installation completion/retry and caller failure handling
-are covered by isolated API tests. Real core/database qualification is the next
-explicit owned-fixture gate; no application migration or deployment is approved.
+are covered by isolated API tests. Separately approved
+[core-backed owned failure/retry proof](SCHEMA_UPGRADE_CORE_OWNED_PROOF.md)
+passed122/9,77/77 existing checksums unchanged, fixtures removed. Resume ordered
+repository-only pre-release reviews at04; no application migration/deploy approved.
 
 ## Operator UI Reliability — 2026-10-26
 

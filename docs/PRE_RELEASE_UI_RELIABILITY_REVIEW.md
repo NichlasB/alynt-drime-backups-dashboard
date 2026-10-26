@@ -89,6 +89,16 @@ passed; current exact-head publication evidence belongs to the toolkit record.
 
 ## Genuine approval boundary: schema-upgrade failure handling
 
+Current outcome2026-10-26: the repository repair and separately approved,
+exact-target-confirmed [core-backed owned proof](SCHEMA_UPGRADE_CORE_OWNED_PROOF.md)
+are complete. FULL03 Phase2 now complete for its two confirmed findings (Medium
+failed export, High premature schema completion); no additional confirmed issue
+in the resumed affected-path review. Actual core/database122/9, seven physical
+DDL errors/retries,77/77 application checksums unchanged, fixtures removed. This
+does not certify all database/lifecycle/security/release behavior. Resume04 next.
+The dated gate/finding/recommendation paragraphs below are historical, superseded
+by this outcome, not permission to repeat site operations or claim FULL complete.
+
 Update2026-10-26: user approved the repository-only R3 foundation; see
 [implementation/evidence](SCHEMA_UPGRADE_FAILURE_SAFETY_FOUNDATION.md). The code
 repair and isolated positive/fault/retry controls now exist. The finding below

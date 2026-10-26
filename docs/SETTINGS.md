@@ -25,8 +25,9 @@ read-only core comparison checks. Failed attempts return a safe error and remain
 retryable; a forced reinstall first invalidates a current marker. Failed storage
 setup pauses normal dashboard initialization and activation scheduling. Healthy
 current-version startup retains its fast path; it is not a schema-health audit.
-Core-backed database/lifecycle qualification of this source change is still
-pending; do not treat isolated API tests as installed-site acceptance.
+Separately approved core-backed owned schema failure/retry qualification passed
+on WordPress7.1.3/PHP8.5.12/MariaDB10.6.23; full installed lifecycle acceptance
+remains distinct. See [proof and limits](SCHEMA_UPGRADE_CORE_OWNED_PROOF.md).
 
 - Custom tables store dashboard-owned site enrollment records, encrypted polling credentials, encrypted V2.1 action signing keys, normalized read-only status snapshots, and bounded V2.1+ remote-action request/history records.
 - Transient locks coordinate bounded polling batches, per-site poll attempts, and bounded enrollment failure rate limits.

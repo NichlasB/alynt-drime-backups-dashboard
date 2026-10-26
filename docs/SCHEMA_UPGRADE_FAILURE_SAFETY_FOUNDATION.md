@@ -1,5 +1,11 @@
 # Schema Upgrade Failure Detection and Retry Safety Foundation — 2026-10-26
 
+Current follow-up: separately approved and confirmed
+[core-backed owned proof](SCHEMA_UPGRADE_CORE_OWNED_PROOF.md) passed122/9 with
+77/77 application checksums unchanged and fixtures cleaned. The source-only
+evidence and pending-proof statements below remain the historical foundation
+record; the targeted FULL03 gate is now resolved, not full lifecycle readiness.
+
 ## Approved repository-only scope
 
 User explicitly approved the R3 storage-lifecycle slice after the FULL review's
