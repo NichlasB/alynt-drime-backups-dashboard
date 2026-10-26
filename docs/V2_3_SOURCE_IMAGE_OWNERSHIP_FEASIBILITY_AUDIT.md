@@ -6,6 +6,10 @@ before fixture creation**, not a completed denial proof. Owner contract:
 Review bases: dashboard0a7e44899cee8c781c20e3cea1ea85e8d2a387ff and
 uploader763a559d6ba0b23ca940696cb094b01cf79956fa. This change is documentation only.
 
+Successor: [supervisor/cleanup handoff design](V2_3_ELEVATED_OWNED_PRINCIPAL_SUPERVISOR_DESIGN.md)
+specifies the proposed trust boundary; it does not supply an elevated artifact,
+execute a proof or change this dated preflight's Blocked outcome.
+
 ## Target and permitted discovery
 
 The user freshly confirmed `plugin-tester`, `local-only`, LocalWP “Plugin Tester”,

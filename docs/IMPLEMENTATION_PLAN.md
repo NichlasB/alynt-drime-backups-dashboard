@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## V2.3 Elevated Owned-Principal Supervisor Handoff Design — 2026-10-26
+
+See [owning design](V2_3_ELEVATED_OWNED_PRINCIPAL_SUPERVISOR_DESIGN.md). Repository-
+only trusted staging/finite local supervisor, non-admin fixed probe, exact SID/
+object/handle ownership and cleanup-only recovery contract. Mutable repository
+code is not elevated; intent/journal labels do not grant authority or SAM atomicity.
+No implementation, site/host inspection, UAC, account/ACL/storage/native/wiring
+change. A1-A4/native GO stay Blocked. Next gated slice: local-only Supervisor Intent
+and Cleanup-Journal DATA Safety Foundation, in-memory only, with all OS adapters off.
+
 ## V2.3 Source-Image Ownership Feasibility Preflight — 2026-10-26
 
 See [owning audit](V2_3_SOURCE_IMAGE_OWNERSHIP_FEASIBILITY_AUDIT.md). Freshly
