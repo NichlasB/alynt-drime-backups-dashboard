@@ -349,6 +349,9 @@ application tables/options/users/cron and uploader/toolkit remain untouched.
 
 Local PHP366/1892 with the two known Sodium skips; related64/346 and new scope3/25
 no skips, Node16/16, PHPCS149, structure/build/syntax/manifest/audits passed.
+Published proof head `8e24339de8aff8a06758aad184166dddedf34e93` passed
+[exact-head CI40403141796](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40403141796):
+PHP7.4/8.3 each366/1899 without skips/failures; Node16/16 and all repository gates.
 Scoped Light/Security and harness correction history belong to the proof record;
 no whole-plugin review row is refreshed and CI is not a native proof rerun.
 High write-fence qualification is closed, not full05/FULL/release readiness or

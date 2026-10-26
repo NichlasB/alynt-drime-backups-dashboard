@@ -15,6 +15,9 @@ closed, not all of05. The Medium retention finding stays open. Next gated slice:
 **repository-only Scheduled Retention Failure Reporting Safety Foundation**,
 requiring approval of that separate error/storage boundary; no cleanup run,
 retention/schedule/schema change, site operation, release or deployment.
+Native-proof publication `8e24339de8aff8a06758aad184166dddedf34e93` passed
+[CI40403141796](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40403141796):
+PHP7.4/8.3 each366/1899, no skips; Node16/16 and all configured repository gates.
 Implementation head `281c94f802a6fe4749ad421200c10fdc96792256` passed
 [exact-head CI40397479255](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40397479255):
 PHP7.4/8.3 each363/1874, no skips; Node16/16 and all configured gates passed.

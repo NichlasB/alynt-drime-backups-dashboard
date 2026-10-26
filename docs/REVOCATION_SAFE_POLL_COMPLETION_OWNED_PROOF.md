@@ -145,8 +145,12 @@ two existing missing-Sodium signing skips, no failures/errors/warnings. New
 SQL-scope tests3/25. Node16/16 fail0/skip0, PHPCS149, structure, syntax, asset
 build without tracked output change, strict Composer validate and Composer/npm
 audits (zero advisories) passed. Native proof is manual-only; CI never invokes it.
-Exact-head CI/publication receipt is recorded at closeout, not inferred from the
-predecessor run. Runtime method SHA256 is unchanged:
+Published proof head `8e24339de8aff8a06758aad184166dddedf34e93` passed
+[exact-head CI40403141796](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40403141796).
+Actual PHP7.4/8.3 logs each report366 tests/1899 assertions, no skips/failures;
+Node each16/16 fail0/skip0, PHPCS149, build, structure, manifest validation and
+both dependency audits passed. CI did not repeat the native proof. Runtime
+method SHA256 is unchanged:
 `77C4C6514FE8B46BCDC498683586B32A6758CB7EC79594142E7A7E2932D16308`.
 Installed wpdb SHA256:
 `E15403E90032DD0508811301505E491D4212DE5152581A98F51B744A1A3903BD`;
