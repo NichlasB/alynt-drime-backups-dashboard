@@ -375,8 +375,12 @@ behavioral failures. Three restored semantic controls were assertion-killed.
 Local full375/1959, same two Sodium skips; Node16/16, PHPCS149, structure/build,
 manifest/audits (zero advisories), scoped extractor projection and diff checks
 passed. Canonical Light and final focused Security were source-scoped only;
-no UI/UX or whole-plugin review row was refreshed. Publication/exact-head CI
-remain pending; product count becomes4/8 only after successful verification.
+no UI/UX or whole-plugin review row was refreshed. Implementation head
+`3cb2e3e35845a37b96ef92caf30102f0ed1ee239` passed
+[exact-head CI40410192982](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40410192982):
+PHP7.4/8.3 each375/1966 with no skips/failures, Node16/16 and all configured
+repository gates. Cumulative safe-local product count is4/8; no native-proof or
+documentation-closeout count inflation.
 
 No genuine cleanup/DELETE/cron/storage/native/site operation ran. The source
 finding is repaired, but05/FULL/release readiness remain pending. Historical

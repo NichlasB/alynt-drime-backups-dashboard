@@ -8,8 +8,10 @@ cleanup batches still run once with unchanged arguments; only failures enter
 the shared opt-in diagnostic logger with fixed safe messages/codes, never raw
 repository error details. Success stays quiet; logging refusal cannot repeat
 cleanup. Local focused9/67 and full375/1959 pass (two known local Sodium skips).
-Publication/exact-head CI are pending; cumulative safe-local count remains3/8
-until verified, then4/8. No SQL/site/cleanup/schema/schedule operation ran.
+Implementation `3cb2e3e35845a37b96ef92caf30102f0ed1ee239` passed
+[exact-head CI40410192982](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40410192982):
+PHP7.4/8.3 each375/1966, no skips/failures; Node16/16 and all repository gates.
+Cumulative safe-local product count4/8. No SQL/site/cleanup/schema/schedule operation ran.
 05 and FULL release readiness remain pending, not refreshed by isolated tests.
 This supersedes the dated approval pointer below. Next meaningful gated slice:
 **Plugin Tester local-only Retention Cleanup, Latest-Snapshot Preservation and

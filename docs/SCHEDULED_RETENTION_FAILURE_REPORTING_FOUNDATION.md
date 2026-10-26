@@ -110,8 +110,14 @@ Validator confirmed831 baseline/tracked entries including header,832 in full
 extraction; unrelated historical missing-entry/reference drift is preserved.
 No new message or broad catalog regeneration is bundled.
 
-Publication and exact-head CI are pending; count this as the fourth of eight
-safe-local product tasks only after push and successful exact-head verification.
+Published implementation head `3cb2e3e35845a37b96ef92caf30102f0ed1ee239` passed
+[exact-head CI40410192982](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40410192982).
+Actual PHP7.4 and8.3 logs each report375 tests/1966 assertions, no skips/failures;
+Node each16/16, fail0/skip0. Both matrix jobs also passed strict Composer
+validation, dependency audits (zero advisories), build, structure and PHPCS149.
+The two locally skipped Sodium branches ran successfully there. This foundation
+is pushed and exact-head CI verified: cumulative safe-local product count4/8.
+Separately approved native proofs and evidence closeout are not extra tasks.
 
 ## Proof limits and recommended next gate
 
