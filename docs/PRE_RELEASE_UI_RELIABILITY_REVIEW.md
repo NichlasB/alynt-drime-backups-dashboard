@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 source-policy native adapter/integration design — 2026-10-27
+
+Separately approved [design-only compatibility and form contract](SOURCE_POLICY_NATIVE_ADAPTER_INTEGRATION_DESIGN.md).
+No actual UI/runtime/native/wiring change or browser/authentication proof.
+Defines same-observation mode/revision, capability/nonce/type/revision ordering,
+literal conditional outcomes vs legacy booleans, visible unsupported/conflict/
+uncertain handling and one shared future writer. Core query hidden replay is an
+explicit new proof limit; the manual candidate cannot be copied into production.
+Minimum-core/installed hook/cache profile and non-reconnect qualification remain
+gated. Existing isolated randomized255/592 and structure pass; CI pending.
+Whole07/07A/13/FULL and toolkit rows not refreshed; live race remains open.
+Next gated slice: repository-only Source-Policy Non-Reconnecting Native Adapter
+and Guarded Integration Safety Foundation, isolated tests only with actual
+authentication/storage/native execution and production factory wiring disabled.
+
 ## Approved07 source-policy native owned qualification — 2026-10-27
 
 Separately approved [native owned proof](SOURCE_POLICY_NATIVE_OWNED_PROOF.md):

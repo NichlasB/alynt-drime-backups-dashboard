@@ -21,6 +21,14 @@ production adapter/API or proof that the existing whole-option race is fixed.
 No runtime loader references it. Synthetic DATA remains caller-constructible,
 not authenticated provenance or a write-capable application handle.
 
+Later source-scoped design limit,2026-10-27: the
+[adapter integration design](SOURCE_POLICY_NATIVE_ADAPTER_INTEGRATION_DESIGN.md)
+identifies core wpdb query reconnect/reissue behavior. This proof did not test
+connection loss. Its no-retry statements describe candidate-level control flow,
+not a qualified absence of core/driver replay;236 query-filter observations are
+not a physical-attempt bound under disconnect. Preserve the actual passed CAS/
+syntax/lock/hook/cache evidence, but do not promote this candidate unchanged.
+
 ## Audit first and exact qualified profile
 
 Novamira HQ guide and complete inventory were read; exact local profile exists.

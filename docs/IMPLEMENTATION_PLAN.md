@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved source-policy native adapter/integration design — 2026-10-27
+
+Repository-only [compatibility/integration design](SOURCE_POLICY_NATIVE_ADAPTER_INTEGRATION_DESIGN.md)
+from clean/synced74885c601d2b1de5f28db66a24472e1ecfccab23; no code/test/site/storage/
+wiring change. Explicit minimum-core/current-profile qualification and unavailable
+profiles; one fixed non-reconnecting owner, same-observation mode/revision,
+strict conditional result strings and retained bool legacy wrapper using one
+writer. Newly records core query reconnect/reissue as an unqualified limit of
+the prior owned candidate, without invalidating its actual passed assertions.
+Related isolated randomized255/592 and structure pass; exact-head CI pending.
+Actual lost-update race remains open; whole07/07A/13/FULL pending, prior8/8 not
+inflated; uploader/toolkit unchanged. Recommended next gated slice: repository-only
+Source-Policy Non-Reconnecting Native Adapter and Guarded Integration Safety
+Foundation, isolated API/driver/IO tests only; actual authentication/storage/native
+execution, production factory wiring and site state disabled/unchanged.
+
 ## Approved source-policy native owned qualification — 2026-10-27
 
 Separately approved R3 [owned proof](SOURCE_POLICY_NATIVE_OWNED_PROOF.md), exact
