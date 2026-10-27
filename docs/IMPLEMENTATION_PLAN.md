@@ -9,7 +9,11 @@ profiles; one fixed non-reconnecting owner, same-observation mode/revision,
 strict conditional result strings and retained bool legacy wrapper using one
 writer. Newly records core query reconnect/reissue as an unqualified limit of
 the prior owned candidate, without invalidating its actual passed assertions.
-Related isolated randomized255/592 and structure pass; exact-head CI pending.
+Related isolated randomized255/592 and structure pass. Design
+81719db9896b52e1621f94b0bc9b9e12bad60413 passed
+[exact-head CI40579269577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40579269577):
+actual PHP7.4/8.3 job logs each1089/4557, no failures/skips; Node16/16/all configured
+gates and both audits pass, zero advisories. No proposed/native execution in CI.
 Actual lost-update race remains open; whole07/07A/13/FULL pending, prior8/8 not
 inflated; uploader/toolkit unchanged. Recommended next gated slice: repository-only
 Source-Policy Non-Reconnecting Native Adapter and Guarded Integration Safety

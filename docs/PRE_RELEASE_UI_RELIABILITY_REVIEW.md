@@ -9,7 +9,11 @@ literal conditional outcomes vs legacy booleans, visible unsupported/conflict/
 uncertain handling and one shared future writer. Core query hidden replay is an
 explicit new proof limit; the manual candidate cannot be copied into production.
 Minimum-core/installed hook/cache profile and non-reconnect qualification remain
-gated. Existing isolated randomized255/592 and structure pass; CI pending.
+gated. Existing isolated randomized255/592 and structure pass. Design
+81719db9896b52e1621f94b0bc9b9e12bad60413 passed
+[exact-head CI40579269577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40579269577):
+actual PHP7.4/8.3 logs each1089/4557, no failures/skips; Node16/16/all configured
+gates and both audits pass, zero advisories. No proposed/native execution in CI.
 Whole07/07A/13/FULL and toolkit rows not refreshed; live race remains open.
 Next gated slice: repository-only Source-Policy Non-Reconnecting Native Adapter
 and Guarded Integration Safety Foundation, isolated tests only with actual

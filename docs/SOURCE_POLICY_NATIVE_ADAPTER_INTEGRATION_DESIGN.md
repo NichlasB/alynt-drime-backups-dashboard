@@ -244,7 +244,12 @@ driver replay explicit, raw DATA separate from native outcomes, authorization
 before owner access and legacy/native mutations on one future path. No further
 design inconsistency found. This is documentation review, not canonical whole-
 plugin UI/UX/security completion or evidence of an implemented connection.
-Publication: exact-head CI pending, not inferred from historical/native success.
+Publication: design `81719db9896b52e1621f94b0bc9b9e12bad60413` passed
+[exact-head CI40579269577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40579269577).
+Actual job logs retrieved directly: PHP7.4/8.3 each1089 tests/4557 assertions,
+no failures/skips; Node16/16 per job; all configured gates pass and both audits
+report zero advisories. These isolated hosted suites do not execute the proposed
+adapter, a native/site proof or genuine authentication.
 Whole07/07A/13/FULL remain incomplete; historical checklist rows stay untouched.
 
 Implementation-plan progress: compatibility, driver replay, unsupported profiles,
