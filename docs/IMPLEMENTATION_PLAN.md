@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved archived count/scalar-fallback owned proof — 2026-10-27
+
+User separately approved and freshly confirmed exact Plugin Tester local-only
+target/two owned fixtures. See [physical evidence/limits](ARCHIVED_READINESS_COUNTS_OWNED_PROOF.md).
+Preflight7/3queries/zero fixtures; native888 checks/five groups,1078queries,
+12 planned owned read faults,0HTTP,1.097s. Real grouped/scalar/analytic equality,
+three independent state predicates, ARRAY_A error+last_error,50-site recovery,
+zero convention and positive six-field aggregate equality passed. Two fixtures
+containing190/335 synthetic rows removed;77/77 original checksums/inventory
+unchanged, zero retained owned tables. Runtime/readiness rules/wiring unchanged.
+Local435/2916 with two known Sodium skips, new manifest3/58; lint/build/structure/
+Node/audits pass. Publication/exact-head CI pending. Product remains7/8; proof/
+tests/evidence are not extra tasks. Canonical06 still open. Next safe-local slot:
+source-policy read-cost/freshness optimization design with isolated counterexamples
+only, no runtime/option/site writes, under standing batch authority. Do not infer
+cache-contract implementation, package/release/tag/deploy or toolkit publication.
+This route supersedes dated gates below; V2.3 remains parked.
+
 ## Approved archived readiness count batching foundation — 2026-10-27
 
 User approved repository-only implementation/validation/commit/push/exact-head CI.

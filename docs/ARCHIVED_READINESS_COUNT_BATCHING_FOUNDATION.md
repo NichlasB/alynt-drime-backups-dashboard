@@ -128,6 +128,9 @@ there is no data/schema rollback. PHP7.4 and existing architecture are retained.
 
 ## Exact resume point
 
+The native gate below was subsequently approved and completed; see
+[physical evidence and current resume](ARCHIVED_READINESS_COUNTS_OWNED_PROOF.md).
+
 Product progress is now **7/8** after exact-head CI success. Canonical06
 remains in progress; source-policy repeated sanitization is still open.
 Recommended next gated slice: **Plugin Tester local-only Archived Readiness
