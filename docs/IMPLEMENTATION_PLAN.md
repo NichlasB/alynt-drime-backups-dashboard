@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Review07 top-level payload shape rejection — 2026-10-27
+
+Separately approved R3 [payload shape foundation](STATUS_PAYLOAD_COMPOUND_SHAPE_REJECTION_FOUNDATION.md)
+from cleandc4db7c74958602cee0318dd4a08dfd22fa4d5a6. Fixed21-slot structural
+guards reject compounds before scalar conversion, preserving forbidden/schema/
+UUID precedence, scalar/missing/null compatibility and all structured extensions.
+New331/878, related randomized409/1095; full996/4293 with two known local Sodium
+skips, Node16/16, lint/structure/build/manifest/audits pass. Source-only scoped
+POT and focused Light/final Security recorded; no auth/site/native/storage/
+transport/wiring/endpoint/schema change. Exact-head CI pending. Fourth separately
+approved07 finding, not another batch; prior8/8 not inflated, toolkit/uploader
+unchanged. Whole07/07A/13/FULL incomplete. Recommended next gated slice:
+repository-only Source-Policy Concurrent Save and Conflict Contract Design,
+design-only with writes, native execution, wiring and all site state untouched.
+
 ## Approved Review07 remaining-concern disposition design — 2026-10-27
 
 Design-only [concurrency/payload disposition](REVIEW07_CONCURRENCY_PAYLOAD_DISPOSITION_DESIGN.md)

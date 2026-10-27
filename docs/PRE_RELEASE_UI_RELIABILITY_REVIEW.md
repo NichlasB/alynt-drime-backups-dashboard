@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 top-level payload shape disposition — 2026-10-27
+
+User separately approved the repository-only [21-slot compound-shape guard](STATUS_PAYLOAD_COMPOUND_SHAPE_REJECTION_FOUNDATION.md).
+Reject before coercion; preserve envelope error precedence, legacy scalars,
+missing/null semantics and supported structured extensions. Actual validator/
+poller isolated regressions new331/878, related randomized409/1095; full996/4293
+with two known Sodium skips, Node16/16 and configured local gates/audits pass.
+Scoped Light/final Security and source-only POT evidence recorded. Backend-only:
+no UI workflow/browser/site/auth/native/SQL or remote-action acceptance claimed.
+Exact-head CI pending. This supersedes only the dated payload implementation
+gate below; policy-save conflict design remains unresolved, other limits stay
+explicit, and whole07/07A/13/FULL remain pending. Exact next gated slice:
+repository-only Source-Policy Concurrent Save and Conflict Contract Design;
+no actual writes, native execution or production-wiring change.
+
 ## Approved07 concurrency/payload disposition design — 2026-10-27
 
 User approved [source-backed remaining-concern design](REVIEW07_CONCURRENCY_PAYLOAD_DISPOSITION_DESIGN.md).

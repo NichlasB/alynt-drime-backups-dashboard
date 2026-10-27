@@ -17,6 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Status_Payload_Validator_Sanitizers {
 	/**
+	 * Checks only shape; existing scalar normalization and missing/null defaults remain.
+	 *
+	 * @param array<string,mixed> $payload Raw decoded payload.
+	 * @param array<int,string>   $fields Fixed scalar field names.
+	 * @return bool
+	 */
+	private function fields_have_scalar_shapes( array $payload, array $fields ) {
+		foreach ( $fields as $field ) {
+			if ( isset( $payload[ $field ] ) && ! is_scalar( $payload[ $field ] ) ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Recursively detects forbidden keys anywhere in a payload.
 	 *
 	 * @param array<string,mixed> $payload Payload.

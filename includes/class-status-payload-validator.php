@@ -96,14 +96,40 @@ class Alynt_Drime_Backups_Dashboard_Status_Payload_Validator {
 			return new WP_Error( 'payload_invalid', __( 'The client status payload contains a forbidden field.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		if ( self::SUPPORTED_SCHEMA_VERSION !== absint( isset( $payload['schema_version'] ) ? $payload['schema_version'] : 0 ) ) {
+		if ( ! $this->fields_have_scalar_shapes( $payload, array( 'schema_version' ) ) || self::SUPPORTED_SCHEMA_VERSION !== absint( isset( $payload['schema_version'] ) ? $payload['schema_version'] : 0 ) ) {
 			return new WP_Error( 'schema_unsupported', __( 'The client status schema is not supported.', 'alynt-drime-backups-dashboard' ) );
 		}
 
-		$site_uuid = $this->sanitize_uuid( isset( $payload['site_uuid'] ) ? (string) $payload['site_uuid'] : '' );
+		$site_uuid = $this->fields_have_scalar_shapes( $payload, array( 'site_uuid' ) ) ? $this->sanitize_uuid( isset( $payload['site_uuid'] ) ? (string) $payload['site_uuid'] : '' ) : '';
 
 		if ( '' === $site_uuid || ! hash_equals( $this->sanitize_uuid( $expected_site_uuid ), $site_uuid ) ) {
 			return new WP_Error( 'site_uuid_mismatch', __( 'The client status payload does not match the enrolled site UUID.', 'alynt-drime-backups-dashboard' ) );
+		}
+
+		// Preserve envelope error precedence, then guard the remaining scalar conversions.
+		$scalar_fields = array(
+			'plugin_version',
+			'queue_count',
+			'uploaded_count',
+			'failed_count',
+			'active_upload',
+			'auto_scan_enabled',
+			'server_cron_expected',
+			'server_outbox_configured',
+			'server_outbox_readable',
+			'wpvivid_override_configured',
+			'old_wpvivid_uploader_active',
+			'wp_cron_disabled',
+			'cron_status',
+			'cron_reason',
+			'warning_count',
+			'last_runner',
+			'last_runner_at',
+			'last_scheduled_scan_at',
+			'last_wp_cli_scan_at',
+		);
+		if ( ! $this->fields_have_scalar_shapes( $payload, $scalar_fields ) ) {
+			return new WP_Error( 'payload_invalid', __( 'The client status payload contains an invalid field type.', 'alynt-drime-backups-dashboard' ) );
 		}
 
 		$validated = array(

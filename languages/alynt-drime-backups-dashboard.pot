@@ -341,20 +341,24 @@ msgstr ""
 msgid "Working"
 msgstr ""
 
-#: includes/class-status-payload-validator.php:95
+#: includes/class-status-payload-validator.php:96
 msgid "The client status payload contains a forbidden field."
 msgstr ""
 
-#: includes/class-status-payload-validator.php:99
+#: includes/class-status-payload-validator.php:100
 msgid "The client status schema is not supported."
 msgstr ""
 
-#: includes/class-status-payload-validator.php:105
+#: includes/class-status-payload-validator.php:106
 msgid "The client status payload does not match the enrolled site UUID."
 msgstr ""
 
-#: includes/class-status-payload-validator.php:156
+#: includes/class-status-payload-validator.php:190
 msgid "The client status payload is missing required fields."
+msgstr ""
+
+#: includes/class-status-payload-validator.php:132
+msgid "The client status payload contains an invalid field type."
 msgstr ""
 
 #: includes/admin/traits/trait-admin-page-action-notices.php:36
