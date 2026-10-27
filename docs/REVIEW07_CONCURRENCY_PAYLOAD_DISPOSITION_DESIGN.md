@@ -210,7 +210,14 @@ experiments were added to manufacture progress. Existing related isolated suites
 ran randomized, seed20261027:49 tests/245 assertions, no failures/skips.
 `npm run check:structure` passed (136 runtime/202 support/159 test files).
 All11 relative documentation links resolve; diff hygiene and the baseline-to-head
-non-document source identity check pass. Exact-head CI publication is pending; local
+non-document source identity check pass. All21 scalar names were checked against
+the actual validator allowlist; no runtime assertion or new test was substituted.
+Published design `2f21d61cdc4f993c51e5f162ac8ed853975f825f` passed
+[exact-head CI40559028471](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40559028471):
+PHP7.4/8.3 each665 tests/3422 assertions, no failures/skips; Node16/16 per job,
+all configured build/structure/lint/manifest checks and both audits passed,
+zero dependency advisories/vulnerabilities. Actual counts retrieved from both
+job logs; remote master matched the clean design head. These unchanged-code
 controls do not prove any proposed behavior. No whole-plugin checklist row is
 refreshed; toolkit stays read-only while canonical07 still has unresolved work.
 

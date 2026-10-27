@@ -8,8 +8,11 @@ dispositions: retain documented advisory locks/best-effort logs, keep policy
 lost-update handling unresolved, defer concurrent pending-origin serialization,
 and select narrow top-level payload compound-shape rejection while preserving
 legacy scalar compatibility. No runtime/test/storage/protocol/wiring/site change.
-Existing related randomized49/245, structure,11 relative links, source identity
-and diff checks pass; exact-head CI pending. This is a separately approved design, not
+Existing related randomized49/245, structure,11 relative links,21 scalar names,
+source identity and diff checks pass. Design2f21d61cdc4f993c51e5f162ac8ed853975f825f
+passed [exact-head CI40559028471](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40559028471):
+PHP7.4/8.3 each665/3422, no failures/skips; Node16/16/all configured gates,
+zero dependency advisories. Actual counts retrieved. This is a separately approved design, not
 another8-task batch or whole07 completion. Toolkit/uploader unchanged.
 Recommended next gated slice: repository-only Top-Level Status Payload
 Compound-Shape Rejection Safety Foundation,21 scalar slots, isolated tests only.

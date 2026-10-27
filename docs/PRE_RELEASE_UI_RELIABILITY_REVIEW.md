@@ -8,7 +8,11 @@ lost updates kept open separately from best-effort logs, duplicate pending-origi
 serialization deferred, and a21-slot compound-shape payload guard selected as the
 next bounded gated foundation. Existing scalar compatibility and structured
 extensions must remain; no runtime, tests, persistence, authority or site change.
-Related isolated49/245 randomized and structure pass; exact-head CI pending.
+Related isolated49/245 randomized, structure/source/link/scalar-inventory checks pass.
+Design2f21d61cdc4f993c51e5f162ac8ed853975f825f passed
+[exact-head CI40559028471](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40559028471):
+PHP7.4/8.3 each665/3422, no failures/skips; Node16/16/all configured gates,
+zero dependency advisories. Actual job-log counts retrieved; unchanged-code evidence only.
 No actual concurrency/authentication/WordPress/SQL/HTTP proof and no toolkit
 checklist refresh. Whole07/07A/13/FULL remain incomplete; policy conflict decision
 is still required before07 closeout. This supersedes dated next-slice pointers,
