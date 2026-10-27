@@ -108,8 +108,15 @@ isolated actual-handler coverage; whole07A still pending. Nonce/capability shims
 are not genuine WordPress authentication, and sentinel entry is not a successful
 credential, remote, schedule or database operation. No native evidence refreshed.
 
-Publication verification: pending exact-head CI; do not infer completion from
-local validation. Owning records will capture actual run/log counts.
+Published implementation `77f7e29901ea19d6c4654eba8b5bfcaee0863013` passed
+[exact-head CI40557709412](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40557709412):
+PHP7.4/8.3 each665 tests/3422 assertions, no failures/skips; Node16/16 per job,
+all configured build/structure/lint/manifest gates and both dependency audits
+passed with zero advisories/vulnerabilities. Actual counts retrieved from both
+job logs. Upstream Setup Node.js emitted a non-failing `url.parse()` deprecation;
+no application failure or new dependency finding. Clean remote master matched
+the implementation head. This evidence-only closeout changes no tested source
+or historical whole-plugin checklist rows and performs no site/native rerun.
 
 ## Implementation-plan progress and next gate
 

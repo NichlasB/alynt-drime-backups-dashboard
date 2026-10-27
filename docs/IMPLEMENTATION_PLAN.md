@@ -9,7 +9,11 @@ capability/nonces, accepted IDs and non-site forms retain existing behavior.
 New157/314, related randomized171/399; full665/3415 with two known local Sodium
 skips, Node16/16, lint/structure/build/manifest/audits pass. Scoped source-only
 POT reference, Feature Light/UI/Security recorded; no genuine auth/site/native/
-database/remote/schedule operation or wiring change. Exact-head CI pending.
+database/remote/schedule operation or wiring change. Implementation
+77f7e29901ea19d6c4654eba8b5bfcaee0863013 passed
+[exact-head CI40557709412](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40557709412):
+PHP7.4/8.3 each665/3422, no failures/skips; Node16/16/all configured gates,
+zero dependency advisories. Counts retrieved from both job logs.
 Third separately approved07 disposition; prior8/8 not inflated. Whole07/07A/13/
 FULL remain incomplete, toolkit/uploader unchanged. Recommended next gated slice:
 repository-only Review07 Remaining Concurrency and Payload-Compatibility

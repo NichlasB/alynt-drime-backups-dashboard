@@ -9,7 +9,10 @@ normalization and non-site forms. New157/314, related randomized171/399,
 full665/3415 with two known Sodium skips, Node16/16, lint/structure/build/
 manifest/audits pass. Scoped Feature Light/UI/final Security and generated POT
 reference evidence recorded; no real auth/WordPress/browser/SQL/native proof.
-Exact-head CI pending. This supersedes only this concern's dated unapproved
+Implementation77f7e29901ea19d6c4654eba8b5bfcaee0863013 passed
+[exact-head CI40557709412](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40557709412):
+PHP7.4/8.3 each665/3422, no failures/skips, Node16/16, all configured gates,
+zero dependency advisories. Actual counts retrieved. This supersedes only this concern's dated unapproved
 status below; four concurrency/compatibility concerns and whole07/07A/13/FULL
 remain pending. Next gated slice: repository-only Review07 Remaining Concurrency
 and Payload-Compatibility Disposition Design, no runtime or site changes.
