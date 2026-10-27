@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Review07 source-policy save/conflict design — 2026-10-27
+
+Design-only [save/conflict contract](SOURCE_POLICY_CONCURRENT_SAVE_CONTRACT_DESIGN.md)
+from clean/synced18a04e4e9d7bdd2d852cadae70f0b214884f4325. Select observed-map
+conditional saves, conservative same-/cross-site conflicts and zero hidden
+retry; retain existing option/normalization. Explicitly close WP_Error truthiness,
+missing-row/upsert, hook/cache and uncertainty requirements before native wiring.
+No runtime/test/storage/WordPress/schema/production change. Existing related
+randomized170/351, structure, source identity, five relative links and diff checks
+pass; exact-head CI pending. This is a separately approved design, not a repaired race or new8-task
+batch. Whole07/07A/13/FULL stay incomplete; toolkit/uploader unchanged.
+Recommended next gated slice: repository-only Source-Policy Conditional Save and
+Conflict Safety Foundation, in-memory contract/result tests and error-safe handler
+mapping only; native writer, form wiring, option/SQL writes and site state untouched.
+
 ## Approved Review07 top-level payload shape rejection — 2026-10-27
 
 Separately approved R3 [payload shape foundation](STATUS_PAYLOAD_COMPOUND_SHAPE_REJECTION_FOUNDATION.md)

@@ -1,5 +1,19 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 source-policy concurrent-save contract design — 2026-10-27
+
+User approved the repository-only [source-policy save/conflict design](SOURCE_POLICY_CONCURRENT_SAVE_CONTRACT_DESIGN.md).
+Existing whole-map lost update remains unresolved in runtime. Selected contract
+uses authoritative observation plus conditional mutation, explicit conflict/no-op/
+error/uncertainty and no automatic rebase. The current handler's && must not
+consume WP_Error as success. Native option creation, hooks and cache qualification
+remain mandatory gates; no production writer/API/UI/storage change occurs here.
+Related existing isolated170/351 randomized and structure pass; exact-head CI
+pending. No actual WordPress/SQL/auth/cache/concurrency proof or checklist refresh.
+Whole07/07A/13/FULL stay incomplete. Exact next gated slice: repository-only
+Source-Policy Conditional Save and Conflict Safety Foundation, in-memory contract/
+result tests and error-safe mapping; native/form wiring and real writes disabled.
+
 ## Approved07 top-level payload shape disposition — 2026-10-27
 
 User separately approved the repository-only [21-slot compound-shape guard](STATUS_PAYLOAD_COMPOUND_SHAPE_REJECTION_FOUNDATION.md).
