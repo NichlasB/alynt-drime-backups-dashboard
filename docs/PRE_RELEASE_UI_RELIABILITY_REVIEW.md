@@ -21,7 +21,11 @@ Timestamp disposition and full limits:
 [owning foundation](SNAPSHOT_FRESHNESS_TIMESTAMP_VALIDATION_FOUNDATION.md).
 Red54 tests/55 assertions:40 failures and one oversized numeric conversion error;
 final55/58, related107/255, full495/2995 with two known Sodium skips; Node16/16,
-syntax/lint/structure/build/manifest/audits pass. Publication/exact-head CI pending.
+syntax/lint/structure/build/manifest/audits pass. Published implementation
+d32ec1522656a59aaa609aaf148b78f66767a099 passed
+[exact-head CI40551305243](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40551305243):
+PHP7.4/8.3 each495/3002 with no skips/failures; Node16/16, all configured gates,
+zero audit advisories. Actual job-log counts retrieved; no native CI execution.
 No storage/schedule/auth/transport/wiring, native/site, release/package change.
 07/07A/13/FULL remain incomplete; source-scoped review is not whole-suite quality
 or installed WordPress acceptance. Prior dated outcomes below are preserved.

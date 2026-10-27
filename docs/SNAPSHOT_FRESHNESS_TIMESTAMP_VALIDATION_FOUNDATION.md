@@ -77,7 +77,13 @@ PHPCS; syntax/execution, not a false whole-test lint claim, cover the new test.
 These are isolated PHP/API-shim tests. No genuine WordPress authentication,
 options, SQL, fixture users/tables, cron, native transactions, browser/site/load
 or production clock experiment ran. Current source remains0.1.77, schema8.
-Publication and exact-head CI are pending, not inferred from local QA.
+Published implementation d32ec1522656a59aaa609aaf148b78f66767a099 passed
+[exact-head CI40551305243](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40551305243):
+PHP7.4/8.3 each495 tests/3002 assertions with no CI skips/failures, Node16/16
+per job with zero skips/failures, and all configured validation/build/lint/audit
+gates. Actual counts retrieved from both job logs; zero advisories/vulnerabilities.
+Remote master matched the clean implementation head. This record-only closeout
+does not change tested source or rerun native/WordPress operations.
 
 ## Focused reviews and remaining gates
 
