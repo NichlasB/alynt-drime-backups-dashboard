@@ -9,7 +9,10 @@ retry; retain existing option/normalization. Explicitly close WP_Error truthines
 missing-row/upsert, hook/cache and uncertainty requirements before native wiring.
 No runtime/test/storage/WordPress/schema/production change. Existing related
 randomized170/351, structure, source identity, five relative links and diff checks
-pass; exact-head CI pending. This is a separately approved design, not a repaired race or new8-task
+pass. Designff9b68c77ead7e954560a91eaf02d1c7a83c8f9f passed
+[exact-head CI40568429183](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40568429183):
+PHP7.4/8.3 each996/4300, no failures/skips; Node16/16/all configured gates,
+zero dependency advisories, actual job-log counts retrieved. This is a separately approved design, not a repaired race or new8-task
 batch. Whole07/07A/13/FULL stay incomplete; toolkit/uploader unchanged.
 Recommended next gated slice: repository-only Source-Policy Conditional Save and
 Conflict Safety Foundation, in-memory contract/result tests and error-safe handler

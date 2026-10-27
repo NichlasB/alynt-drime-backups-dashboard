@@ -237,8 +237,15 @@ isolated policy/classifier/request-boundary controls ran randomized seed20261027
 170 tests/351 assertions, no failures/skips. Structure passed (136 runtime,
 204 support,162 test files). These controls do not prove the proposed writer.
 All five relative links resolve; four primary-source web links were inspected.
-Diff hygiene and unchanged non-document source identity pass. Exact-head CI
-pending. No whole-plugin checklist refresh;
+Diff hygiene and unchanged non-document source identity pass. Published design
+`ff9b68c77ead7e954560a91eaf02d1c7a83c8f9f` passed
+[exact-head CI40568429183](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40568429183):
+PHP7.4/8.3 each996 tests/4300 assertions without failures/skips; Node16/16 per
+job, all configured build/structure/lint/manifest gates and both audits pass,
+zero dependency advisories/vulnerabilities. Actual counts retrieved from both
+job logs; clean remote master matched the design head. This evidence-only
+closeout changes no tested source and does not qualify any proposed behavior.
+No whole-plugin checklist refresh;
 toolkit stays read-only. Whole07/07A/13/FULL remain incomplete.
 
 ## Implementation-plan progress and next gate
