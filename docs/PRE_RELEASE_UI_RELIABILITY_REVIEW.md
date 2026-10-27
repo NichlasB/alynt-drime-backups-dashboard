@@ -1,5 +1,31 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Current07 Phase1 and approved timestamp disposition — 2026-10-27
+
+Repository-only canonical07 Phase1 at0b39a28 covered all12 categories/24 grouped
+scenarios: seven concerns (five Medium/two Low), no Critical/High defect
+established;17 other groups protected, intentionally limited or unsupported.
+No tests/native/site operations or edits were performed in that discovery turn.
+
+| Concern | Severity | Current disposition / regression layer |
+|---|---|---|
+| Relative/future/conflicting freshness dates | Medium | Separately approved foundation implemented; actual classifier fixed-clock DATA regressions, not storage/native clock proof |
+| Failed site-list read looks like empty installation | Medium | Unapproved next bounded slice; repository error/empty/populated plus render-contract tests needed |
+| Advisory poll lock acquisition/release ownership | Medium | Existing documented advisory limit; any stronger admission/ownership design and physical proof separately gated |
+| Whole-option policy/log update overlap | Medium | Unapproved persistence decision; logging already best-effort, no durable/atomic claim |
+| Compound POST site ID coerces to integer | Medium | Unapproved input-boundary slice; authorized handler must reject compound inputs before repository calls |
+| Concurrent duplicate pending-origin creation | Low | Serial duplicate check exists, not concurrent uniqueness; schema/admission redesign not authorized |
+| Malformed payload scalar coercion | Low | Contract/compatibility decision first, no silent tightening of unrelated client payload fields |
+
+Timestamp disposition and full limits:
+[owning foundation](SNAPSHOT_FRESHNESS_TIMESTAMP_VALIDATION_FOUNDATION.md).
+Red54 tests/55 assertions:40 failures and one oversized numeric conversion error;
+final55/58, related107/255, full495/2995 with two known Sodium skips; Node16/16,
+syntax/lint/structure/build/manifest/audits pass. Publication/exact-head CI pending.
+No storage/schedule/auth/transport/wiring, native/site, release/package change.
+07/07A/13/FULL remain incomplete; source-scoped review is not whole-suite quality
+or installed WordPress acceptance. Prior dated outcomes below are preserved.
+
 ## Phase 1 inventory and approved execution plan
 
 Target Alynt Drime Backups Dashboard, slug/text domain

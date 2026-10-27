@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Review07 snapshot freshness boundary — 2026-10-27
+
+User separately approved the repository-only
+[Snapshot Freshness Timestamp Validation Safety Foundation](SNAPSHOT_FRESHNESS_TIMESTAMP_VALIDATION_FOUNDATION.md).
+Baseline0b39a28e10e6795a44de9b0c82e8c650b26649c1 clean/synced. Supplied freshness
+values must be bounded absolute/non-future and independently fresh; missing
+legacy fields retain fallback, SQL dates are UTC. No storage/scheduling/auth/
+wiring/site/native change. Red54 cases:40 failures/one conversion error; final
+new55/58, related107/255 randomized, full495/2995 with the same two Sodium skips,
+Node16/16, lint/structure/build/manifest/audits pass. Publication/exact-head CI
+pending. Toolkit current06 reconciliation was published as c067eb6; old routing
+below is historical.07 Phase1's24 groups/seven concerns were reviewed read-only;
+only timestamp handling is approved/resolved here.07/07A/FULL remain incomplete.
+Prior autonomous ceiling stays8/8; this is a separately approved finding, not a
+new batch or a reason to reopen deferred V2.3. Recommended next gated slice:
+repository-only Failed Site-List Read Availability Safety Foundation, no site/
+database operations. See owning receipt for compatibility and proof limits.
+
 ## Final safe-local slot: source-policy optimization decision — 2026-10-27
 
 Standing batch authority used for the final worthwhile design/disposition task,

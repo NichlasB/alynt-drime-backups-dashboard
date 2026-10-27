@@ -41,7 +41,7 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Helpers {
 	}
 
 	/**
-	 * Determines whether the latest evidence is stale.
+	 * Requires every supplied freshness timestamp to be valid, non-future and fresh.
 	 *
 	 * @param array<string,mixed> $site Site row.
 	 * @param array<string,mixed> $snapshot Snapshot row.
@@ -54,15 +54,21 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Helpers {
 			isset( $snapshot['observed_at'] ) ? $snapshot['observed_at'] : ( isset( $snapshot['captured_at'] ) ? $snapshot['captured_at'] : '' ),
 		);
 
+		$has_timestamp = false;
 		foreach ( $candidates as $candidate ) {
+			// Missing legacy fields may fall back; supplied invalid values may not.
+			if ( null === $candidate || '' === $candidate ) {
+				continue;
+			}
 			$timestamp = $this->timestamp( $candidate );
 
-			if ( $timestamp > 0 ) {
-				return ( $now - $timestamp ) > self::DEFAULT_STALE_AFTER_SECONDS;
+			if ( $timestamp <= 0 || $timestamp > $now || ( $now - $timestamp ) > self::DEFAULT_STALE_AFTER_SECONDS ) {
+				return true;
 			}
+			$has_timestamp = true;
 		}
 
-		return true;
+		return ! $has_timestamp;
 	}
 
 	/**
@@ -154,22 +160,36 @@ trait Alynt_Drime_Backups_Dashboard_Status_Classifier_Helpers {
 	}
 
 	/**
-	 * Parses a timestamp.
+	 * Parses only bounded absolute freshness values, with SQL dates treated as UTC.
 	 *
-	 * @param mixed $value Timestamp-like value.
-	 * @return int
+	 * @param mixed $value Positive Unix seconds or a complete SQL/ISO timestamp.
+	 * @return int Zero when invalid; never interprets relative expressions.
 	 */
 	private function timestamp( $value ) {
-		if ( is_numeric( $value ) ) {
-			return (int) $value;
+		if ( is_int( $value ) ) {
+			return max( 0, $value );
 		}
 
-		if ( is_string( $value ) && '' !== $value ) {
-			$timestamp = strtotime( $value );
-
-			return false === $timestamp ? 0 : (int) $timestamp;
+		// The longest admitted SQL/ISO value has six fractional digits and an offset.
+		if ( ! is_string( $value ) || strlen( $value ) > 32 ) {
+			return 0;
 		}
 
-		return 0;
+		if ( preg_match( '/^[1-9][0-9]{0,18}$/D', $value ) ) {
+			$timestamp = filter_var( $value, FILTER_VALIDATE_INT );
+			return false === $timestamp ? 0 : $timestamp;
+		}
+
+		if ( ! preg_match( '/^(\d{4})-(\d{2})-(\d{2})[ T](?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?$/D', $value, $parts ) || ! checkdate( (int) $parts[2], (int) $parts[3], (int) $parts[1] ) ) {
+			return 0;
+		}
+
+		try {
+			$date = new DateTimeImmutable( $value, new DateTimeZone( 'UTC' ) );
+			return max( 0, $date->getTimestamp() );
+		} catch ( Throwable $error ) {
+			// Also handles an epoch outside the platform's integer range.
+			return 0;
+		}
 	}
 }
