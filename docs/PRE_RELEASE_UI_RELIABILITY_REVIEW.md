@@ -426,3 +426,25 @@ Main product count4/8 is unchanged. Return to the unapproved Plugin Tester local
 only Retention Cleanup, Latest-Snapshot Preservation and Failure-Reporting Owned
 Proof; require its own table/options scope approval and exact target confirmation.
 No real cleanup, WordPress/SQL/native/site/wiring/schedule/release/deploy ran here.
+
+## Separately approved retention owned proof — 2026-10-27
+
+The organization return gate was approved and exact Plugin Tester local-only
+target/owned tables/options scope confirmed. See [the native retention receipt](RETENTION_CLEANUP_OWNED_PROOF.md):
+214 checks/nine groups,344 observed queries,0.877s; actual prepared retention and
+strict cutoffs, per-site MAX(id) preservation, physical5000-row cap, callback
+defaults, each/both SQL failures, safe persisted non-autoload events, policy
+refusal and genuine option-write failure. Three disposable schema-only clones
+removed; independent77-table inventory/EXTENDED checksums unchanged. No application
+cleanup, installed request/cron/lifecycle, transaction/concurrency or broad release
+readiness is claimed. Runtime/schema8/version0.1.77/source wiring untouched.
+
+Initial stopped metadata-quote attempt was fully cleaned/reconciled before the
+exact owned variant/regression repair and fresh successful attempt. New socket-
+free manifest2/22 and two restored assertion-killed scope controls; local full
+377/1981 with two known Sodium skips, Node16/16, PHPCS155, structure/build/
+manifest/audits passed. Focused Light/final Security source-scoped only; no UI/UX
+or historical whole-plugin row refreshed. Publication/exact-head CI pending.
+After verification resume canonical05 repository-only inventory/finding closure;
+do not infer full05 complete from this proof alone. Toolkit/uploader remain
+untouched, V2.3 deferred, cumulative product count4/8 unchanged by native proof.

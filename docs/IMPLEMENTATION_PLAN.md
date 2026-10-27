@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved retention owned proof — 2026-10-27
+
+The next main-work gate was approved and Plugin Tester local-only target/owned
+fixture scope freshly confirmed. See [the genuine core/SQL/options receipt](RETENTION_CLEANUP_OWNED_PROOF.md):
+214 checks/nine groups,344 queries,0.877s, all three fixtures removed and77/77
+original table checksums unchanged. Actual bounded/latest/boundary/deletion,
+error persistence, policy, genuine callback and option-failure recovery passed.
+One harness metadata-quote compatibility correction was cleaned/reconciled,
+regression-covered and followed by a fresh namespace/preflight/successful run.
+No production/schema/version/schedule/wiring change or application cleanup.
+Publication/exact-head CI pending; after it passes, resume canonical05 repository-
+only inventory/finding reconciliation, not another native milestone or deferred
+V2.3. Shared toolkit/uploader stay untouched. No whole05/FULL completion inferred.
+Product count4/8 is unchanged by this separately approved native proof.
+This current routing supersedes the dated retention-proof approval gates below.
+
 ## Repository organization source closeout — 2026-10-26
 
 The user approved D2/U1/U2/U3 before returning to main work. See the

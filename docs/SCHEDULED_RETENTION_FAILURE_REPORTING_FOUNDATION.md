@@ -1,5 +1,11 @@
 # Scheduled Retention Failure Reporting Safety Foundation — 2026-10-26
 
+Current follow-up: the separately approved/target-confirmed
+[owned core/storage proof](RETENTION_CLEANUP_OWNED_PROOF.md) passed214 checks/nine
+groups, three fixtures removed and77/77 application checksums unchanged. The
+physical gate below is historical for this narrow scope; whole05/FULL and the
+proof's explicit limits remain, not refreshed by this note.
+
 ## Approval, baseline and scope
 
 Approved repository-only repair of the remaining Medium canonical05 finding:
