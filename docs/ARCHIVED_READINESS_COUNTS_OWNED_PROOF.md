@@ -39,8 +39,10 @@ absent before any CREATE. Empty InnoDB schema-only LIKE clones of the two fixed
 originals; no application rows copied.190 synthetic snapshots and335 synthetic
 action DATA rows, each insert checked; no real site/user/action request created.
 Fixtures cover51 sites, snapshot count60 beyond history caps, three non-terminal
-states, five terminal states despite client_state=running, sparse/empty/foreign
+states, five other state strings despite client_state=running, sparse/empty/foreign
 sites and zero/signed ID policies. No action was signed, dispatched or executed.
+The other strings are failed/rejected/stale plus completed/cancelled legacy or
+unknown-state DATA; this is not a claim to enumerate all valid terminal states.
 
 The finite manifest admits exact owned metadata/clone/INSERT/count/drop forms,
 three independent grouped/scalar count shapes, prepared ID bounds and at most50
@@ -92,7 +94,11 @@ mutation controls were attempted; production predicates stayed unchanged.
 Local full435/2916 with two known Sodium skips; related randomized seed20261027
 suite26/726 with no skips; lint/build/structure, Node16/16,
 strict Composer validation and npm/Composer audits passed; zero vulnerabilities/
-advisories, generated assets unchanged. Exact-head publication evidence pending.
+advisories, generated assets unchanged. Published proof
+5980b298ae4bff3b92e4c07ce85693dd1c809374 passed
+[exact-head CI40532441474](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40532441474):
+PHP7.4/8.3 each435/2923, no skips/failures; Node16/16, all configured gates.
+Actual counts retrieved from both job logs; CI does not rerun the native proof.
 
 Source review baseline060acfb through five manual files, one test and owning
 records. No production refactor/schema/credentials/permission/policy changes.

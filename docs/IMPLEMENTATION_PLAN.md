@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Final safe-local slot: source-policy optimization decision — 2026-10-27
+
+Standing batch authority used for the final worthwhile design/disposition task,
+not more site operations: [read-cost/freshness decision](SOURCE_POLICY_READ_COST_DECISION.md).
+Five isolated counterexample/control cases21 assertions validate raw reference/
+object aliasing risks and existing normalization behavior. No runtime/cache/
+option/observer contract was changed. Memoization is intentionally deferred:
+repeated processing is established, but no production CPU/latency impact justifies
+the freshness/hook/alias complexity. This is a decision, not a runtime fix or a
+new implementation obligation. Proof5980b298ae4bff3b92e4c07ce85693dd1c809374 passed
+[CI40532441474](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40532441474):
+PHP7.4/8.3 each435/2923 no skips/failures; Node16/16. Design publication/CI pending;
+safe-local progress remains7/8 until verified, then8/8. The eighth task is design/
+disposition; native proofs/tests/docs closeouts do not become additional tasks.
+Current06 inventory: two query findings repaired and physically qualified, CPU
+optimization deferred; no whole-plugin/checklist completion inferred. Next gated
+action at ceiling: toolkit-only PRE_RELEASE_CHECKLIST.md current06 reconciliation,
+including physical/source limits and deferral, historical rows preserved, exact
+canonical resume resolved before07 Edge Cases Phase1. No toolkit edits, release,
+package/tag/deploy or deferred V2.3 work. This route supersedes dated pointers.
+
 ## Approved archived count/scalar-fallback owned proof — 2026-10-27
 
 User separately approved and freshly confirmed exact Plugin Tester local-only
