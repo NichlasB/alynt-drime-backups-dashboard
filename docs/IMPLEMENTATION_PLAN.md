@@ -11,7 +11,12 @@ ordering and no persistent cache. Expected history round trips100 ->2, not a
 measured database latency result. Archived/zero exclusion, per-site10, summary
 projection, current highest-ID reads, retention, schema8/version0.1.77 and guards
 are preserved. No site/SQL/native operation or production-wiring change.
-Publication/exact-head CI pending; product progress remains5/8 until verified.
+Published source `4b17349b757bb38fc2c0061fd21cb54862fe3349` passed
+[exact-head CI40488402447](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40488402447):
+PHP7.4/8.3 each408/2181, no skips/failures; Node16/16, all configured gates.
+Local408/2174 with two known Sodium skips; related33/193 no skips, three
+assertion-killed/SHA-restored controls. Product progress6/8; proof/docs are not
+extra product tasks.
 Canonical06 remains in progress: archived COUNT batching and policy sanitization
 findings are not fixed by this slice. **Recommended next gated slice: Plugin
 Tester local-only Diagnostics Batched History Chronology and Aggregation Owned

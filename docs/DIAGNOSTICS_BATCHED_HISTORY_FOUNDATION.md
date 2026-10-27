@@ -124,7 +124,14 @@ Standalone new repository14/93; new Diagnostics4/17 (included in related/full).
 `php ./vendor/bin/phpcs`, `npm run check:structure`, Node16/16 via
 `npm run test:admin`, `npm run build`, strict Composer validation, npm audit and
 Composer audit passed; audits report zero vulnerabilities/advisories.
-Exact-head CI/publication is pending; no CI success is implied yet.
+Published source `4b17349b757bb38fc2c0061fd21cb54862fe3349` passed
+[exact-head CI40488402447](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40488402447):
+PHP7.4/8.3 each408 tests/2,181 assertions, no skips/failures; Node16/16 with no
+skips/failures; all configured lint/build/structure/manifest/audit gates passed.
+Actual counts were retrieved from both job logs, not inferred from local results.
+Remote master matched the clean source head. Product progress advances5/8 ->6/8
+for this one completed repository task; controls/tests/docs are not extra tasks.
+This documentation-only closeout does not change the tested runtime or tests.
 The build initially hit filesystem sandbox denial, then passed with
 scoped repository access; generated assets are unchanged. No dependencies added.
 
