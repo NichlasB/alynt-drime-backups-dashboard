@@ -13,8 +13,11 @@ deletion paths, exact state set and signed/absolute ID conventions are preserved
 No schema/version/credential/history/retention/wiring/site operation. New21 cases/
 648 assertions; local432/2858 with two known Sodium skips, related23/668 no skips;
 lint/build/structure/Node/audits pass. Optional runtime mutation was rejected before
-application and not bypassed; no mutation-control or native proof claim. Exact-
-head CI/publication pending; product remains6/8 until verified, then7/8.
+application and not bypassed; no mutation-control or native proof claim.
+Published source9168b9a965cf4c0be3cad9c7794c69cd2219c8c2 passed
+[exact-head CI40523417104](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40523417104):
+PHP7.4/8.3 each432/2865, no skips/failures; Node16/16, all configured gates.
+Product progress7/8; this documentation closeout does not change tested code.
 **Recommended next gated slice: Plugin Tester local-only Archived Readiness
 Grouped Count and Scalar-Fallback Owned Proof**, separate approval/fresh target
 confirmation, two owned schema-only snapshot/action fixtures and cleanup, no

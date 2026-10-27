@@ -108,8 +108,14 @@ Diagnostics removal helper155ADF6996E0DDBBD0820714FA72D426989F84F9C0E56447087244
 Full local PHPUnit432/2,858 with two known missing-Sodium skips; related randomized
 seed20261027 suite23/668 no skips. New21 cases/648 assertions. Lint, structure,
 Node16/16, build, strict Composer validation and npm/Composer audits passed;
-zero vulnerabilities/advisories, generated assets unchanged. Publication/exact-
-head CI is pending until the closeout record is added. No test expectation was
+zero vulnerabilities/advisories, generated assets unchanged. Published source
+9168b9a965cf4c0be3cad9c7794c69cd2219c8c2 passed
+[exact-head CI40523417104](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40523417104):
+PHP7.4/8.3 each432 tests/2,865 assertions, no skips/failures; Node16/16 and all
+configured gates. Counts/audit outcomes were retrieved from both job logs;
+remote master matched the clean source head. This record-only closeout does not
+change tested code; CI did not execute SQL/WordPress or the future native proof.
+No test expectation was
 lowered to obtain green; initial key-only/cipher-only fixture expectations were
 aligned with the existing paired credential rule before green validation.
 
@@ -122,7 +128,7 @@ there is no data/schema rollback. PHP7.4 and existing architecture are retained.
 
 ## Exact resume point
 
-Product progress advances6/8 ->7/8 only after exact-head CI succeeds. Canonical06
+Product progress is now **7/8** after exact-head CI success. Canonical06
 remains in progress; source-policy repeated sanitization is still open.
 Recommended next gated slice: **Plugin Tester local-only Archived Readiness
 Grouped Count and Scalar-Fallback Owned Proof**. Require separate approval and
