@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved non-reconnecting source-policy safety foundation — 2026-10-27
+
+Repository-only R3 [dormant foundation](SOURCE_POLICY_NON_RECONNECTING_INTEGRATION_FOUNDATION.md)
+from clean/synceda7e41ab44c740f63c1eb4ff255bdf55cc1eaf914. Closed construction,
+final no-reconnect/query/error boundaries, bounded profile/decode, conditional
+owner and capability/nonce/revision/result contracts; definitions not loaded by
+production. Actual native provider, initial connection, factory/facade/form/handler
+wiring remain absent/unchanged. Private fixture facts are DATA, not qualification.
+New isolated123/813, related randomized378/1405, full1212/5363 with two known local
+Sodium skips; Node16/16/all local gates/audits pass. Five assertion-killed controls,
+SHA256-restored; source-scoped reviews recorded. Exact-head CI pending. No site,
+native, real authentication/storage operation or batch-count inflation; uploader/
+toolkit unchanged. Whole07/07A/13/FULL and application lost-update fix remain open.
+Recommended next gated slice: Plugin Tester local-only Fixed Non-Reconnecting
+Connection Construction and Native Adapter Owned Qualification/Cleanup Proof,
+audit first with separately approved native/owned-fixture scope and fresh target
+confirmation; preserve application state and keep production wiring disconnected.
+
 ## Approved source-policy native adapter/integration design — 2026-10-27
 
 Repository-only [compatibility/integration design](SOURCE_POLICY_NATIVE_ADAPTER_INTEGRATION_DESIGN.md)

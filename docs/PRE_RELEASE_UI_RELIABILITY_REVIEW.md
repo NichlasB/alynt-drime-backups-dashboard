@@ -1,5 +1,22 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 non-reconnecting source-policy safety foundation — 2026-10-27
+
+[Dormant adapter/guard foundation](SOURCE_POLICY_NON_RECONNECTING_INTEGRATION_FOUNDATION.md)
+adds no actual UI/public request/factory wiring. Capability/nonce/type/revision/
+record ordering and strict saved/unchanged outcomes have isolated positive and
+rejection tests; no native constructor/provider/credential access or application
+writer is enabled. Model arrays/unknowns/errors cannot be coerced to success.
+New123/813, related378/1405, full1212/5363 with two baseline local Sodium skips,
+Node16/16/all local gates/audits pass; five assertion-killed/SHA256-restored
+controls. Scoped Light/structure discovery/final Security recorded, not genuine
+authentication/native/cache/UI acceptance. Exact-head CI pending. Real facade/
+form/handler/race unchanged; whole07/07A/13/FULL and toolkit rows not refreshed.
+Next gated slice: Plugin Tester local-only Fixed Non-Reconnecting Connection
+Construction and Native Adapter Owned Qualification/Cleanup Proof, audit first,
+separate native/owned-fixture approval and fresh target confirmation; application
+state and production wiring untouched.
+
 ## Approved07 source-policy native adapter/integration design — 2026-10-27
 
 Separately approved [design-only compatibility and form contract](SOURCE_POLICY_NATIVE_ADAPTER_INTEGRATION_DESIGN.md).
