@@ -9,7 +9,10 @@ valid empty/populated results and independent count availability preserved.
 New13/106, targeted19/125, related randomized25/154, full508/3101 with the same
 two Sodium skips; Node16/16, lint/structure/build/manifest/audits and source-only
 scoped POT update pass. No site/native/schema/write/auth/wiring change.
-Publication/exact-head CI pending.07 has two separately approved dispositions;
+Implementation410bf3aead9ffb0f2620ae4d8306e4fc4f26d9bc passed
+[exact-head CI40554954569](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40554954569):
+PHP7.4/8.3 each508/3108, no skips/failures; Node16/16/all configured gates.
+07 has two separately approved dispositions;
 other concerns and07A/FULL stay pending. Toolkit unchanged; prior8/8 ceiling not
 inflated. Exact next gated slice: repository-only Compound Request-ID Rejection
 Safety Foundation, isolated tests only, preserving all site state.

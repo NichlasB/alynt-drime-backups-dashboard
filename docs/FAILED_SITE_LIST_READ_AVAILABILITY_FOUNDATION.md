@@ -81,7 +81,12 @@ original blocks/order/non-location content and their two duplicate identities;
 or marked whole09 Complete. Both exact owned temporary config/projection files
 were removed. Source extraction is not language/runtime acceptance.
 
-Publication/exact-head CI pending; local QA is not a substitute for CI.
+Published implementation410bf3aead9ffb0f2620ae4d8306e4fc4f26d9bc passed
+[exact-head CI40554954569](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40554954569):
+PHP7.4/8.3 each508 tests/3108 assertions without skips/failures; Node16/16 per
+job, all configured gates, zero advisories/vulnerabilities. Actual counts read
+from both job logs; remote master matched the clean implementation head. This
+record-only closeout changes no tested source and performs no native/site rerun.
 
 ## Implementation-plan progress and next gate
 

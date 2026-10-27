@@ -8,8 +8,12 @@ Actual repository result capture plus request-local UI availability handles
 failed-empty reads without claiming zero/absence; independent archived count and
 Attention states preserve valid output. New13/106, full508/3101 with two known
 Sodium skips, Node16/16, lint/structure/build/audits pass; scoped source-only POT
-evidence recorded. No real SQL/WordPress/browser/auth or native proof. Publication/
-exact-head CI pending. Supersedes the dated unapproved status for this one finding
+evidence recorded. No real SQL/WordPress/browser/auth or native proof.
+Implementation410bf3aead9ffb0f2620ae4d8306e4fc4f26d9bc passed
+[exact-head CI40554954569](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40554954569):
+PHP7.4/8.3 each508/3108, no skips/failures; Node16/16 and all configured gates,
+zero audit advisories. Actual job-log counts retrieved. Supersedes the dated
+unapproved status for this one finding
 below, not other gates or whole07/07A/13/FULL readiness.
 
 ## Current07 Phase1 and approved timestamp disposition — 2026-10-27
