@@ -34,8 +34,13 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Context {
 				'archived' => 'only',
 				'limit'    => 500,
 			)
-		) : $this->without_superseded_revoked_sites( $this->sites->all( array( 'archived' => 'exclude' ) ) );
-		$snapshots = $this->snapshots->latest_by_site_ids( wp_list_pluck( $sites, 'id' ) );
+		) : $this->sites->all( array( 'archived' => 'exclude' ) );
+		$available = is_array( $sites ) && ! $this->sites->last_list_read_failed();
+		$sites     = $available ? $sites : array();
+		if ( $available && 'visible' === $visibility ) {
+			$sites = $this->without_superseded_revoked_sites( $sites );
+		}
+		$snapshots = $available ? $this->snapshots->latest_by_site_ids( wp_list_pluck( $sites, 'id' ) ) : array();
 		$statuses  = array();
 		$counts    = array(
 			'working'         => 0,
@@ -65,11 +70,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Context {
 		}
 
 		$this->site_status_context[ $visibility ] = array(
+			'available'       => $available,
 			'sites'           => $sites,
 			'snapshots'       => $snapshots,
 			'statuses'        => $statuses,
 			'counts'          => $counts,
-			'attention_count' => $attention_count,
+			'attention_count' => $available ? $attention_count : null,
 		);
 
 		return $this->site_status_context[ $visibility ];
@@ -134,12 +140,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Context {
 	/**
 	 * Counts sites represented by the Attention tab.
 	 *
-	 * @return int
+	 * @return int|null Null when the visible list could not be read.
 	 */
 	private function attention_count() {
 		$context = $this->site_status_context();
 
-		return isset( $context['attention_count'] ) ? (int) $context['attention_count'] : 0;
+		return isset( $context['attention_count'] ) ? (int) $context['attention_count'] : null;
 	}
 
 	/**

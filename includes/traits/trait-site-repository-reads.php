@@ -17,6 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Site_Repository_Reads {
 	/**
+	 * Captured outcome of this repository's most recent all() read.
+	 *
+	 * @var bool
+	 */
+	private $last_list_read_failed = false;
+
+	/**
+	 * Returns captured list availability, independent of subsequent wpdb queries.
+	 *
+	 * @return bool Inspect immediately after all(); no SQL details are exposed.
+	 */
+	public function last_list_read_failed() {
+		return $this->last_list_read_failed;
+	}
+
+	/**
 	 * Lists dashboard sites.
 	 *
 	 * @since 0.1.0
@@ -81,7 +97,10 @@ trait Alynt_Drime_Backups_Dashboard_Site_Repository_Reads {
 		$params[] = $limit;
 		$params[] = $offset;
 
-		return $wpdb->get_results( $wpdb->prepare( $sql, $params ), ARRAY_A );
+		$rows = $wpdb->get_results( $wpdb->prepare( $sql, $params ), ARRAY_A );
+		// ARRAY_A may return [] on SQL failure as well as on a successful empty read.
+		$this->last_list_read_failed = ! is_array( $rows ) || ! empty( $wpdb->last_error );
+		return is_array( $rows ) ? $rows : array();
 	}
 
 	/**

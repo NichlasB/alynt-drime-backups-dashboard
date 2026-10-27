@@ -11,6 +11,11 @@ require_once __DIR__ . '/admin-page-sites-list-test-collaborators.php';
  * Fake Sites repository.
  */
 class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Sites {
+	/** This row-only collaborator never simulates a database failure. */
+	public function last_list_read_failed() {
+		return false;
+	}
+
 	/**
 	 * Calls.
 	 *

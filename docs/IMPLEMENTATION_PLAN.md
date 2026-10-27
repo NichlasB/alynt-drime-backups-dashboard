@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Review07 site-list read availability — 2026-10-27
+
+[Failed Site-List Read Availability Safety Foundation](FAILED_SITE_LIST_READ_AVAILABILITY_FOUNDATION.md)
+approved from clean2b13143626693ad114b8976359c3864528c851b7. Captured per-list
+failure state prevents false empty/zero Sites, archived and Attention output;
+valid empty/populated results and independent count availability preserved.
+New13/106, targeted19/125, related randomized25/154, full508/3101 with the same
+two Sodium skips; Node16/16, lint/structure/build/manifest/audits and source-only
+scoped POT update pass. No site/native/schema/write/auth/wiring change.
+Publication/exact-head CI pending.07 has two separately approved dispositions;
+other concerns and07A/FULL stay pending. Toolkit unchanged; prior8/8 ceiling not
+inflated. Exact next gated slice: repository-only Compound Request-ID Rejection
+Safety Foundation, isolated tests only, preserving all site state.
+
 ## Approved Review07 snapshot freshness boundary — 2026-10-27
 
 User separately approved the repository-only

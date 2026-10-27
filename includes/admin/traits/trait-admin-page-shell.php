@@ -116,7 +116,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Shell {
 
 			$count_markup = '';
 
-			if ( 'attention' === $tab ) {
+			if ( 'attention' === $tab && null !== $attention_count ) {
 				$count_markup = sprintf(
 					'<span class="adbd-tab-count" aria-label="%1$s">%2$s</span>',
 					esc_attr(

@@ -1,5 +1,17 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 failed site-list availability disposition — 2026-10-27
+
+User separately approved the repository-only
+[failed-list foundation](FAILED_SITE_LIST_READ_AVAILABILITY_FOUNDATION.md).
+Actual repository result capture plus request-local UI availability handles
+failed-empty reads without claiming zero/absence; independent archived count and
+Attention states preserve valid output. New13/106, full508/3101 with two known
+Sodium skips, Node16/16, lint/structure/build/audits pass; scoped source-only POT
+evidence recorded. No real SQL/WordPress/browser/auth or native proof. Publication/
+exact-head CI pending. Supersedes the dated unapproved status for this one finding
+below, not other gates or whole07/07A/13/FULL readiness.
+
 ## Current07 Phase1 and approved timestamp disposition — 2026-10-27
 
 Repository-only canonical07 Phase1 at0b39a28 covered all12 categories/24 grouped

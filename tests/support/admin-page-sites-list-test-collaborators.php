@@ -9,6 +9,9 @@
  * Fake snapshots repository.
  */
 class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Snapshots {
+	/** @var array<array<int>> Observed read calls. */
+	public $calls = array();
+
 	/**
 	 * Returns empty snapshots keyed by site ID.
 	 *
@@ -16,6 +19,7 @@ class Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Test_Snapshots {
 	 * @return array<int,array<string,mixed>>
 	 */
 	public function latest_by_site_ids( array $site_ids ) {
+		$this->calls[] = $site_ids;
 		return array_fill_keys( $site_ids, array() );
 	}
 }

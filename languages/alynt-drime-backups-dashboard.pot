@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-13T13:32:00+00:00\n"
+"POT-Creation-Date: 2026-10-27T17:48:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: alynt-drime-backups-dashboard\n"
@@ -513,8 +513,8 @@ msgid "Your dashboard session has expired. Refresh the page and try again."
 msgstr ""
 
 #: includes/admin/traits/trait-admin-page-add-site.php:55
-#: includes/admin/traits/trait-admin-page-shell.php:97
 #: includes/admin/traits/trait-admin-page-sites-table.php:112
+#: includes/admin/traits/trait-admin-page-shell.php:97
 msgid "Add Site"
 msgstr ""
 
@@ -696,45 +696,45 @@ msgstr ""
 msgid "Only revoked records and expired pending records can be archived locally. Revoke active records first; active polling and credentials are not changed by archive controls."
 msgstr ""
 
+#: includes/admin/traits/trait-admin-page-sites-table.php:127
 #: includes/admin/traits/trait-admin-page-attention.php:59
 #: includes/admin/traits/trait-admin-page-shell.php:98
-#: includes/admin/traits/trait-admin-page-sites-table.php:127
 msgid "Attention"
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:63
+#: includes/admin/traits/trait-admin-page-attention.php:69
 msgid "No active sites enrolled yet"
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:63
+#: includes/admin/traits/trait-admin-page-attention.php:69
 msgid "Pair a client site before the Attention queue can show backup evidence that needs review."
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:65
+#: includes/admin/traits/trait-admin-page-attention.php:71
 msgid "No active sites currently need attention"
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:65
+#: includes/admin/traits/trait-admin-page-attention.php:71
 msgid "Latest local snapshots for active sites are not classified as needs attention, not reporting, incompatible, or not configured."
 msgstr ""
 
 #. translators: %d: number of sites needing attention.
-#: includes/admin/traits/trait-admin-page-attention.php:76
+#: includes/admin/traits/trait-admin-page-attention.php:82
 #, php-format
 msgid "%d site needs someone to review its latest evidence."
 msgid_plural "%d sites need someone to review their latest evidence. The list is ordered by status priority."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:81
+#: includes/admin/traits/trait-admin-page-attention.php:87
 msgid "This queue uses the latest stored local snapshots. Use Check Now to request a fresh read-only status report for a specific site."
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:101
+#: includes/admin/traits/trait-admin-page-attention.php:107
 msgid "Latest evidence:"
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-attention.php:103
+#: includes/admin/traits/trait-admin-page-attention.php:109
 msgid "View Site"
 msgstr ""
 
@@ -2014,7 +2014,7 @@ msgstr ""
 
 #: includes/admin/traits/trait-admin-page-diagnostics-tables.php:35
 #: includes/admin/traits/trait-admin-page-shell.php:96
-#: includes/admin/traits/trait-admin-page-sites-list.php:41
+#: includes/admin/traits/trait-admin-page-sites-list.php:33
 msgid "Sites"
 msgstr ""
 
@@ -3241,20 +3241,20 @@ msgstr ""
 msgid "Polling credential material is missing; a new client opt-in pairing may be required."
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-sites-list.php:41
+#: includes/admin/traits/trait-admin-page-sites-list.php:33
 msgid "Archived Local Records"
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-sites-list.php:47
+#: includes/admin/traits/trait-admin-page-sites-list.php:56
 msgid "No Archived Local Records"
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-sites-list.php:47
+#: includes/admin/traits/trait-admin-page-sites-list.php:56
 msgid "Archived dashboard records remain retained locally for audit/history. None are archived right now."
 msgstr ""
 
 #. translators: %d: number of archived dashboard records.
-#: includes/admin/traits/trait-admin-page-sites-list.php:60
+#: includes/admin/traits/trait-admin-page-sites-list.php:69
 #, php-format
 msgid "%d archived local dashboard record. Archived records are retained for audit/history and are not polled."
 msgid_plural "%d archived local dashboard records. Archived records are retained for audit/history and are not polled."
@@ -3262,30 +3262,30 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of dashboard sites.
-#: includes/admin/traits/trait-admin-page-sites-list.php:68
+#: includes/admin/traits/trait-admin-page-sites-list.php:77
 #, php-format
 msgid "%d paired client site. Status reflects its most recent redacted snapshot, not a live connection."
 msgid_plural "%d paired client sites. Status reflects each site's most recent redacted snapshot, not a live connection."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/traits/trait-admin-page-sites-list.php:77
+#: includes/admin/traits/trait-admin-page-sites-list.php:86
 msgid "Check Now re-polls the site's fixed authenticated read-only status endpoint. It does not start, stop, or alter a backup."
 msgstr ""
 
-#: includes/admin/traits/trait-admin-page-sites-list.php:103
+#: includes/admin/traits/trait-admin-page-sites-list.php:112
 msgid "Back to Active Sites"
 msgstr ""
 
 #. translators: %d: archived local dashboard record count.
-#: includes/admin/traits/trait-admin-page-sites-list.php:111
+#: includes/admin/traits/trait-admin-page-sites-list.php:123
 #, php-format
 msgid "View Archived Record (%d)"
 msgid_plural "View Archived Records (%d)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/traits/trait-admin-page-sites-list.php:117
+#: includes/admin/traits/trait-admin-page-sites-list.php:129
 msgid "Archive is dashboard-local visibility only; it does not contact client sites, change backups, or alter Drime."
 msgstr ""
 
@@ -3691,4 +3691,20 @@ msgstr ""
 
 #: includes/traits/trait-status-classifier-helpers.php:93
 msgid "One or more backup sources report stale or missing upload evidence."
+msgstr ""
+
+#: includes/admin/traits/trait-admin-page-sites-list.php:114
+msgid "View Archived Records"
+msgstr ""
+
+#: includes/admin/traits/trait-admin-page-sites-list.php:115
+msgid "Archived record count is unavailable. Reload this page to try again."
+msgstr ""
+
+#: includes/admin/traits/trait-admin-page-sites-list.php:138
+msgid "Site List Is Unavailable"
+msgstr ""
+
+#: includes/admin/traits/trait-admin-page-sites-list.php:138
+msgid "The dashboard could not read its local site records. This does not mean that no sites are paired. Reload this page to try again."
 msgstr ""

@@ -58,6 +58,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Attention {
 		echo '<section aria-labelledby="adbd-attention-heading">';
 		echo '<h2 id="adbd-attention-heading">' . esc_html__( 'Attention', 'alynt-drime-backups-dashboard' ) . '</h2>';
 
+		if ( ! $context['available'] ) {
+			$this->render_site_list_unavailable();
+			echo '</section>';
+			return;
+		}
+
 		if ( empty( $attention ) ) {
 			if ( empty( $sites ) ) {
 				echo '<div class="adbd-empty-state"><span class="dashicons dashicons-admin-site-alt3" aria-hidden="true"></span><h3>' . esc_html__( 'No active sites enrolled yet', 'alynt-drime-backups-dashboard' ) . '</h3><p>' . esc_html__( 'Pair a client site before the Attention queue can show backup evidence that needs review.', 'alynt-drime-backups-dashboard' ) . '</p></div>';

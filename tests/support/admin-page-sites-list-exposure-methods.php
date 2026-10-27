@@ -38,6 +38,20 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Sites_List_Exposure_Methods {
 		return $this->attention_count();
 	}
 
+	/** @return string Sites markup. */
+	public function sites_html() {
+		ob_start();
+		$this->render_sites_shell();
+		return (string) ob_get_clean();
+	}
+
+	/** @return string Navigation markup. */
+	public function tabs_html() {
+		ob_start();
+		$this->render_tabs( 'sites' );
+		return (string) ob_get_clean();
+	}
+
 	/**
 	 * Exposes Attention shell markup.
 	 *
