@@ -21,8 +21,10 @@ options. Manual proof/test/vendor SQL is not application runtime SQL.
 Three confirmed findings: High stale poll-completion write fence, Medium
 discarded retention results, Medium inconsistent current-snapshot identity.
 All have approved source repairs; earlier physical receipts qualify their named
-source images only. New current SELECT still lacks physical qualification.
-Whole05/FULL status remains **pending**, not Complete. No toolkit historical row
+source images only. The current SELECT now has separately approved
+[physical114/5 evidence](SNAPSHOT_LATEST_SELECTION_OWNED_PROOF.md); dated gate below
+is historical, not renewed native authority. Whole05 tracking/FULL remains
+**pending**, not silently Complete. No toolkit historical row
 is refreshed. No new SQL-injection/schema/missing-index defect confirmed by this
 source reconciliation; this is not a comprehensive final13 security judgment.
 

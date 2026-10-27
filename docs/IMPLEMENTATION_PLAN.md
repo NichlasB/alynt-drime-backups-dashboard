@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved current-snapshot owned proof — 2026-10-27
+
+User separately approved and freshly confirmed exact Plugin Tester local-only
+target/owned fixtures. See [native evidence/limits](SNAPSHOT_LATEST_SELECTION_OWNED_PROOF.md).
+Preflight8/3queries/zero fixtures; native114/five groups,75queries,0HTTP,0.179s;
+two schema-only fixtures removed,77/77 original physical checksums/inventory
+unchanged. Actual single/bulk/history SELECTs and closed public capability inputs
+qualified; positive private DATA lookup is not dispatch/auth/signing acceptance.
+No production/history/retention/schema/guard/wiring change or application mutation.
+Local390/2064 with two known Sodium skips, new2/25/related16/96 no skips; two
+manifest controls assertion-killed/SHA restored; Node/lint/build/structure/audits
+pass. Publication/exact-head CI pending. Product5/8 unchanged by native proof.
+Three confirmed05 findings have approved repairs and bounded physical evidence.
+**Next approval boundary: update, commit and push only shared toolkit
+PRE_RELEASE_CHECKLIST.md with canonical05 evidence reconciliation and exact resume
+at repository-only06 Performance Review.** No cross-repo publication authority
+inferred here; uploader/toolkit and historical release rows unchanged. V2.3
+parked; no package/release/tag/deploy. This route supersedes dated gates below.
+
 ## Approved snapshot latest-selection consistency — 2026-10-27
 
 The user approved the repository-only foundation identified during05 source

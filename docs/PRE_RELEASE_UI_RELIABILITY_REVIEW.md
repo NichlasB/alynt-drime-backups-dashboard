@@ -480,3 +480,21 @@ owned sites/snapshots/real SELECTs/cleanup, non-network isolated consumers only;
 separate approval/target confirmation before any operation.05/06/whole release
 readiness not silently advanced; installed qualification/toolkit publication gated.
 No new site/SQL/WordPress/HTTP operation, package/release/tag/deploy. V2.3 parked.
+
+## Approved snapshot selection owned proof — 2026-10-27
+
+Separate approval/fresh exact Plugin Tester local-only target confirmation; see
+[the physical receipt/limits](SNAPSHOT_LATEST_SELECTION_OWNED_PROOF.md). Native114/
+five groups,75queries,0HTTP,0.179s; two fixtures removed,77/77 original inventory/
+physical checksums unchanged. Prepared single/bulk/history and closed public
+capability reads passed; positive private DATA is not public dispatch/auth proof.
+No production/history/retention/schema/guard/wiring or application-state change.
+New scope2/25, related16/96 randomized, two assertion-killed/exact-SHA restored
+manifest controls; full390/2064 with same two Sodium skips; PHPCS160, Node16/16,
+syntax/structure/build/manifest/audits pass. Focused Light/final Security only,
+not historical whole-plugin refresh. Publication/exact-head CI pending. Confirmed
+05 findings now have source/physical qualifications at their recorded limits;
+shared toolkit canonical evidence publication still needs separate approval.
+Recommend updating/committing/pushing only its PRE_RELEASE_CHECKLIST.md with05
+reconciliation/resume06; do not silently advance ordered workflow or FULL rows.
+Product5/8 unchanged; uploader/toolkit untouched; V2.3 parked, no release/deploy.
