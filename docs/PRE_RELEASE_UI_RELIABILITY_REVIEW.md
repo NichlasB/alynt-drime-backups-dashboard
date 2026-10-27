@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 concurrency/payload disposition design — 2026-10-27
+
+User approved [source-backed remaining-concern design](REVIEW07_CONCURRENCY_PAYLOAD_DISPOSITION_DESIGN.md).
+Four concerns dispositioned, not fixed: advisory poll locks retained, policy
+lost updates kept open separately from best-effort logs, duplicate pending-origin
+serialization deferred, and a21-slot compound-shape payload guard selected as the
+next bounded gated foundation. Existing scalar compatibility and structured
+extensions must remain; no runtime, tests, persistence, authority or site change.
+Related isolated49/245 randomized and structure pass; exact-head CI pending.
+No actual concurrency/authentication/WordPress/SQL/HTTP proof and no toolkit
+checklist refresh. Whole07/07A/13/FULL remain incomplete; policy conflict decision
+is still required before07 closeout. This supersedes dated next-slice pointers,
+not historical evidence. Exact next gated slice: repository-only Top-Level Status
+Payload Compound-Shape Rejection Safety Foundation under the linked contract.
+
 ## Approved07 compound request-ID disposition — 2026-10-27
 
 User separately approved R3 repository-only [request-ID rejection](COMPOUND_REQUEST_ID_REJECTION_FOUNDATION.md).

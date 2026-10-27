@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Review07 remaining-concern disposition design — 2026-10-27
+
+Design-only [concurrency/payload disposition](REVIEW07_CONCURRENCY_PAYLOAD_DISPOSITION_DESIGN.md)
+from clean/syncedcf72f039f7f48535c729735b6358252ded7306ab. Four source-backed
+dispositions: retain documented advisory locks/best-effort logs, keep policy
+lost-update handling unresolved, defer concurrent pending-origin serialization,
+and select narrow top-level payload compound-shape rejection while preserving
+legacy scalar compatibility. No runtime/test/storage/protocol/wiring/site change.
+Existing related randomized49/245, structure,11 relative links, source identity
+and diff checks pass; exact-head CI pending. This is a separately approved design, not
+another8-task batch or whole07 completion. Toolkit/uploader unchanged.
+Recommended next gated slice: repository-only Top-Level Status Payload
+Compound-Shape Rejection Safety Foundation,21 scalar slots, isolated tests only.
+Source-policy concurrent-save contract still needs resolution before07 closeout;
+07A/13/FULL remain pending, V2.3 stays parked. See design for exact constraints.
+
 ## Approved Review07 compound request-ID rejection — 2026-10-27
 
 Separately approved R3 [request-ID foundation](COMPOUND_REQUEST_ID_REJECTION_FOUNDATION.md)
