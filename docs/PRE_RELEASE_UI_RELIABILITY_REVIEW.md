@@ -10,7 +10,11 @@ writer is enabled. Model arrays/unknowns/errors cannot be coerced to success.
 New123/813, related378/1405, full1212/5363 with two baseline local Sodium skips,
 Node16/16/all local gates/audits pass; five assertion-killed/SHA256-restored
 controls. Scoped Light/structure discovery/final Security recorded, not genuine
-authentication/native/cache/UI acceptance. Exact-head CI pending. Real facade/
+authentication/native/cache/UI acceptance. Implementation
+84efe8d40262af36a1b4e97d06936a816d6cfcb6 passed
+[exact-head CI40587584628](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40587584628):
+actual PHP7.4/8.3 each1212/5370, no failures/skips, Node16/16/all gates and zero
+advisories. Real facade/
 form/handler/race unchanged; whole07/07A/13/FULL and toolkit rows not refreshed.
 Next gated slice: Plugin Tester local-only Fixed Non-Reconnecting Connection
 Construction and Native Adapter Owned Qualification/Cleanup Proof, audit first,

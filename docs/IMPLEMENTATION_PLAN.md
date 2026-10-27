@@ -10,7 +10,11 @@ production. Actual native provider, initial connection, factory/facade/form/hand
 wiring remain absent/unchanged. Private fixture facts are DATA, not qualification.
 New isolated123/813, related randomized378/1405, full1212/5363 with two known local
 Sodium skips; Node16/16/all local gates/audits pass. Five assertion-killed controls,
-SHA256-restored; source-scoped reviews recorded. Exact-head CI pending. No site,
+SHA256-restored; source-scoped reviews recorded. Implementation
+84efe8d40262af36a1b4e97d06936a816d6cfcb6 passed
+[exact-head CI40587584628](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40587584628):
+actual PHP7.4/8.3 logs each1212/5370, no failures/skips, Node16/16/all gates and
+zero-advisory audits. No site,
 native, real authentication/storage operation or batch-count inflation; uploader/
 toolkit unchanged. Whole07/07A/13/FULL and application lost-update fix remain open.
 Recommended next gated slice: Plugin Tester local-only Fixed Non-Reconnecting

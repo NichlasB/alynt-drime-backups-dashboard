@@ -204,7 +204,12 @@ assertion-killed controls; genuine native/auth/cache evidence remains gated.
 Whole07/07A/13/FULL and historical toolkit checklist rows remain incomplete/
 unchanged. No security claim turns fixture DATA into native authorization.
 
-Publication: exact-head CI pending; do not infer it from local success.
+Publication: implementation `84efe8d40262af36a1b4e97d06936a816d6cfcb6` passed
+[exact-head CI40587584628](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40587584628).
+Actual job logs122483046355 (PHP7.4) and122483046017 (PHP8.3) each report
+1212 tests/5370 assertions, no failures/skips; Node16/16, all configured gates
+pass and Composer/npm audits report zero advisories. Hosted isolated tests do
+not establish genuine core/authentication/cache/driver or native qualification.
 
 ## Implementation-plan progress and exact next gate
 
