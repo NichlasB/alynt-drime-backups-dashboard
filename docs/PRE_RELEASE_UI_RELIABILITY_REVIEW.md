@@ -9,7 +9,11 @@ poller isolated regressions new331/878, related randomized409/1095; full996/4293
 with two known Sodium skips, Node16/16 and configured local gates/audits pass.
 Scoped Light/final Security and source-only POT evidence recorded. Backend-only:
 no UI workflow/browser/site/auth/native/SQL or remote-action acceptance claimed.
-Exact-head CI pending. This supersedes only the dated payload implementation
+Implementation8128ed5464c72a0c998b854ea38ec05a8ff73ce8 passed
+[exact-head CI40562539767](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40562539767):
+PHP7.4/8.3 each996/4300, no failures/skips; Node16/16/all configured gates,
+zero dependency advisories, actual job-log counts retrieved.
+This supersedes only the dated payload implementation
 gate below; policy-save conflict design remains unresolved, other limits stay
 explicit, and whole07/07A/13/FULL remain pending. Exact next gated slice:
 repository-only Source-Policy Concurrent Save and Conflict Contract Design;

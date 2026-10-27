@@ -9,7 +9,10 @@ UUID precedence, scalar/missing/null compatibility and all structured extensions
 New331/878, related randomized409/1095; full996/4293 with two known local Sodium
 skips, Node16/16, lint/structure/build/manifest/audits pass. Source-only scoped
 POT and focused Light/final Security recorded; no auth/site/native/storage/
-transport/wiring/endpoint/schema change. Exact-head CI pending. Fourth separately
+transport/wiring/endpoint/schema change. Implementation8128ed5464c72a0c998b854ea38ec05a8ff73ce8
+passed [exact-head CI40562539767](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40562539767):
+PHP7.4/8.3 each996/4300, no failures/skips; Node16/16/all configured gates,
+zero dependency advisories. Actual job-log counts retrieved. Fourth separately
 approved07 finding, not another batch; prior8/8 not inflated, toolkit/uploader
 unchanged. Whole07/07A/13/FULL incomplete. Recommended next gated slice:
 repository-only Source-Policy Concurrent Save and Conflict Contract Design,

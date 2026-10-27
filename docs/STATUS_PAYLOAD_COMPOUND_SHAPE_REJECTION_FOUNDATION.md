@@ -139,7 +139,13 @@ and unrelated catalog drift. Non-reference preservation plus exactly one message
 was mechanically verified. Owned config/POT removed; changed-PHP syntax and final
 diff/scope checks pass. Whole09 is not refreshed; no WordPress bootstrap.
 
-Publication: exact-head CI pending. Local checks do not establish CI completion.
+Published implementation `8128ed5464c72a0c998b854ea38ec05a8ff73ce8` passed
+[exact-head CI40562539767](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40562539767):
+PHP7.4/8.3 each996 tests/4300 assertions without failures/skips; Node16/16 per
+job, all configured build/structure/lint/manifest gates and both dependency audits
+passed with zero advisories/vulnerabilities. Actual counts retrieved from both
+job logs; clean remote master matched the implementation head. This record-only
+closeout changes no tested source and performs no native/site rerun.
 
 ## Implementation-plan progress and next gate
 
