@@ -167,6 +167,7 @@ msgstr ""
 #: includes/admin/traits/trait-admin-page-local-actions.php:161
 #: includes/admin/traits/trait-admin-page-remote-actions.php:82
 #: includes/admin/traits/trait-admin-page-remote-actions.php:125
+#: includes/admin/traits/trait-admin-page-actions.php:127
 #: includes/class-poller.php:192
 #: includes/class-remote-action-opt-in-manager.php:87
 #: includes/traits/trait-remote-action-dispatcher-actions.php:38

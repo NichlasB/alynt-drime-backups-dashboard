@@ -11,6 +11,12 @@
 class Alynt_Drime_Backups_Dashboard_Test_Admin_Action_Harness {
 	use Alynt_Drime_Backups_Dashboard_Admin_Page_Actions;
 
+	/** @var object|null Optional isolated action opt-in collaborator. */
+	public $action_opt_in_manager;
+
+	/** @var object|null Optional isolated monitoring-policy collaborator. */
+	public $source_policy;
+
 	/**
 	 * Enrollment manager.
 	 *

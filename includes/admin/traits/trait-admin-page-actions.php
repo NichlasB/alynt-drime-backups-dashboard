@@ -110,6 +110,27 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Actions {
 	}
 
 	/**
+	 * Verifies site-action intent before checking the uncoerced ID's form type.
+	 *
+	 * @param string $action Existing action-specific nonce domain.
+	 * @return true|WP_Error
+	 */
+	private function verify_site_action_request( $action ) {
+		$nonce = $this->verify_action_nonce( $action );
+		if ( is_wp_error( $nonce ) ) {
+			return $nonce;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Nonce checked above; inspect only raw type, without traversal or conversion. Existing handlers unslash accepted values.
+		$site_id = isset( $_POST['dashboard_site_id'] ) ? $_POST['dashboard_site_id'] : null;
+		if ( null !== $site_id && ! is_string( $site_id ) && ! is_int( $site_id ) ) {
+			return new WP_Error( 'site_not_found', __( 'The dashboard site record was not found.', 'alynt-drime-backups-dashboard' ) );
+		}
+		// Existing handlers retain their original missing-ID/unslash/absint behavior.
+		return true;
+	}
+
+	/**
 	 * Records a support-safe local operator action audit event when available.
 	 *
 	 * @param string              $action Action identifier.

@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Review07 compound request-ID rejection — 2026-10-27
+
+Separately approved R3 [request-ID foundation](COMPOUND_REQUEST_ID_REJECTION_FOUNDATION.md)
+from clean/synced5d186185b85e97a216bdfda684803829f04b0149. One nonce-first raw-type
+guard covers11 call sites/13 site-action routes before protected delegation;
+capability/nonces, accepted IDs and non-site forms retain existing behavior.
+New157/314, related randomized171/399; full665/3415 with two known local Sodium
+skips, Node16/16, lint/structure/build/manifest/audits pass. Scoped source-only
+POT reference, Feature Light/UI/Security recorded; no genuine auth/site/native/
+database/remote/schedule operation or wiring change. Exact-head CI pending.
+Third separately approved07 disposition; prior8/8 not inflated. Whole07/07A/13/
+FULL remain incomplete, toolkit/uploader unchanged. Recommended next gated slice:
+repository-only Review07 Remaining Concurrency and Payload-Compatibility
+Disposition Design, design-only with all runtime/site boundaries unchanged.
+
 ## Approved Review07 site-list read availability — 2026-10-27
 
 [Failed Site-List Read Availability Safety Foundation](FAILED_SITE_LIST_READ_AVAILABILITY_FOUNDATION.md)

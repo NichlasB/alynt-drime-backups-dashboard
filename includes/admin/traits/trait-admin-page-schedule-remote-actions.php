@@ -23,7 +23,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Remote_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_preview_schedule_change_action() {
-		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_preview_schedule_change' );
+		$nonce = $this->verify_site_action_request( 'alynt_drime_backups_dashboard_preview_schedule_change' );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;
@@ -57,7 +57,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Remote_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_apply_schedule_change_action() {
-		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_apply_schedule_change' );
+		$nonce = $this->verify_site_action_request( 'alynt_drime_backups_dashboard_apply_schedule_change' );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;
@@ -96,7 +96,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Schedule_Remote_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_preview_schedule_rollback_action() {
-		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_preview_schedule_rollback' );
+		$nonce = $this->verify_site_action_request( 'alynt_drime_backups_dashboard_preview_schedule_rollback' );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;

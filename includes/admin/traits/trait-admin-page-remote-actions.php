@@ -25,7 +25,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_generate_action_opt_in_token_action() {
-		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_generate_action_opt_in_token' );
+		$nonce = $this->verify_site_action_request( 'alynt_drime_backups_dashboard_generate_action_opt_in_token' );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;
@@ -53,7 +53,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_request_backup_now_action() {
-		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_request_backup_now' );
+		$nonce = $this->verify_site_action_request( 'alynt_drime_backups_dashboard_request_backup_now' );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;
@@ -96,7 +96,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Remote_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_cleanup_preview_action() {
-		$nonce = $this->verify_action_nonce( 'alynt_drime_backups_dashboard_cleanup_preview' );
+		$nonce = $this->verify_site_action_request( 'alynt_drime_backups_dashboard_cleanup_preview' );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;

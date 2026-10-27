@@ -51,7 +51,7 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Archive_Actions {
 	 * @return array<string,mixed>|WP_Error
 	 */
 	private function handle_archive_state_action( $action, $nonce_action, $archive ) {
-		$nonce = $this->verify_action_nonce( $nonce_action );
+		$nonce = $this->verify_site_action_request( $nonce_action );
 
 		if ( is_wp_error( $nonce ) ) {
 			return $nonce;

@@ -1,5 +1,19 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 compound request-ID disposition — 2026-10-27
+
+User separately approved R3 repository-only [request-ID rejection](COMPOUND_REQUEST_ID_REJECTION_FOUNDATION.md).
+Nonce-first raw-type guard rejects unsupported IDs before all13 routes'
+protected collaborators, preserving capability/action domains, accepted-ID
+normalization and non-site forms. New157/314, related randomized171/399,
+full665/3415 with two known Sodium skips, Node16/16, lint/structure/build/
+manifest/audits pass. Scoped Feature Light/UI/final Security and generated POT
+reference evidence recorded; no real auth/WordPress/browser/SQL/native proof.
+Exact-head CI pending. This supersedes only this concern's dated unapproved
+status below; four concurrency/compatibility concerns and whole07/07A/13/FULL
+remain pending. Next gated slice: repository-only Review07 Remaining Concurrency
+and Payload-Compatibility Disposition Design, no runtime or site changes.
+
 ## Approved07 failed site-list availability disposition — 2026-10-27
 
 User separately approved the repository-only
