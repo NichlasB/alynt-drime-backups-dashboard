@@ -11,12 +11,21 @@ tied/forward timestamps, site separation, empty/corrupt payloads and actual
 dispatcher acceptance/rejection using isolated API/IO doubles only. No site work.
 Initial8 cases7 failures; final new11+existing3 cases14/71 green, two assertion-
 killed/restored controls and randomized rerun. Full local388/2039 with two known
-Sodium skips; lint/build/structure/Node/audits pass. Publication/exact-head CI
-pending; product count becomes5/8 only after verification. No new native proof,
+Sodium skips; lint/build/structure/Node/audits pass. Published source
+`5db1040a5fd92cd94142db3a2b86ed4c519215e5` passed
+[exact-head CI40478156578](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40478156578):
+PHP7.4/8.3 each388/2046, no skips/failures; Node16/16, all configured gates.
+Product count5/8. No new native proof,
 schema/schedule/retention execution, remote action, package/release/tag/deploy.
-Then continue canonical05 repository-only complete inventory/finding reconciliation
-before06, not another synthetic/native milestone. Broader physical/installed
-qualification and shared toolkit publication stay separately gated; no whole05/
+Canonical05 source reconciliation continued: [complete tables/queries/options/
+relationships/dispositions](DATABASE_REVIEW_SOURCE_RECONCILIATION.md), no additional
+production/schema/index change chosen. **Next gated slice: Plugin Tester local-
+only Snapshot Latest-Selection Consistency and Capability-Input Owned Proof**,
+owned sites/snapshots fixtures, real SELECTs and exact cleanup, isolated capability
+consumers with no network; no retention DELETE/auth/users/lifecycle/schedules.
+Require separate scope approval and fresh exact target confirmation. No site task
+started. Further physical/installed qualification and shared toolkit publication
+stay separately gated before06; no whole05/
 07/07A/13/FULL completion. Uploader/toolkit unchanged, V2.3 stays parked.
 This current routing supersedes the dated approval gates below.
 

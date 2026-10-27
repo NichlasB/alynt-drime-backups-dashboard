@@ -138,17 +138,28 @@ for the next coherent release candidate; no release readiness inferred here.
 - Strict Composer manifest, Composer audit and npm moderate audit passed,
   zero vulnerability advisories; diff check passed. No dependency/config change.
 
-Publication and exact-head CI pending. No site/SQL/WordPress operation, auth,
-native proof, retention execution, package, release, tag or deployment ran.
+Source publication `5db1040a5fd92cd94142db3a2b86ed4c519215e5` passed
+[exact-head CI40478156578](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40478156578).
+Actual logs: PHP7.4/8.3 each388 tests/2046 assertions, no skips/failures;
+Node16/16, fail0/skip0; all configured gates passed. Evidence-only follow-up has
+separate exact-head verification at handoff. No site/SQL/WordPress operation,
+auth, native proof, retention execution, package, release, tag or deployment ran.
 
 ## Resume and proof limits
 
-This fixes the repository selection policy, not all of Database Review. Continue
-the already-authorized canonical05 repository-only inventory/finding reconciliation
-before06. Keep historical schema/lifecycle/poll/retention receipts at their actual
+This fixes the repository selection policy, not all of Database Review. The
+already-authorized canonical05 repository-only reconciliation continued and is
+recorded in [the full source inventory/dispositions](DATABASE_REVIEW_SOURCE_RECONCILIATION.md).
+No additional production fix/schema/index change was chosen. Next gate is
+**Plugin Tester local-only Snapshot Latest-Selection Consistency and Capability-
+Input Owned Proof**, scoped there: owned sites/snapshots only, real SELECTs and
+exact cleanup, isolated non-network capability consumers; no retention DELETE,
+auth/user/installed lifecycle/schedule/remote operations. Separate scope approval
+and fresh exact target confirmation required; no site task started here.
+Keep historical schema/lifecycle/poll/retention receipts at their actual
 source heads; the previous214/9 physical retention proof does not qualify the new
 single-site SELECT or installed capability path. Any needed owned database/runtime
 qualification requires separate scope approval and exact target confirmation.
 Shared toolkit evidence publication remains a separate approval boundary.
-Product progress becomes5/8 only after push/exact-head CI; do not count restore
+Product progress is5/8 after push/exact-head CI; do not count restore
 ZIPs, evidence docs, organization or previously separate native proofs as tasks.

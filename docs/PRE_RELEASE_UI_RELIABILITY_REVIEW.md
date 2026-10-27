@@ -470,7 +470,13 @@ controls assertion-killed and exact-SHA restored, randomized rerun green.
 Full local388/2039 (same two Sodium skips), Node16/16, PHPCS155, syntax/structure/
 build/strict manifest/audits/diff pass. Focused canonical Light,07 then07A and
 final Feature Security are source-scoped, not historical whole-plugin completion.
-Publication/exact-head CI pending; count5/8 only after verification. Resume
-canonical05 repository-only inventory/finding reconciliation before06; native
-query/installed qualification and toolkit publication require separate authority.
+Source5db1040a5fd92cd94142db3a2b86ed4c519215e5 passed
+[exact-head CI40478156578](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40478156578):
+PHP7.4/8.3 each388/2046, no skips/failures, Node16/16, all configured gates.
+Count5/8. [Full repository-only05 source reconciliation](DATABASE_REVIEW_SOURCE_RECONCILIATION.md)
+recorded; no additional source/schema/index fix chosen. Next gate: Plugin Tester
+local-only Snapshot Latest-Selection Consistency and Capability-Input Owned Proof,
+owned sites/snapshots/real SELECTs/cleanup, non-network isolated consumers only;
+separate approval/target confirmation before any operation.05/06/whole release
+readiness not silently advanced; installed qualification/toolkit publication gated.
 No new site/SQL/WordPress/HTTP operation, package/release/tag/deploy. V2.3 parked.
