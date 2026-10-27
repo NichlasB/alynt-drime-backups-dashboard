@@ -9,7 +9,10 @@ false legacy controls preserved. New76/234, related randomized238/569, full1072/
 4527 with two baseline Sodium skips; Node16/16 and local gates/audits pass.
 Comparison and zero-row model controls assertion-killed and SHA256-restored;
 source-only Light/UI/final Security and POT recorded, not browser/auth/SQL/native
-proof. Exact-head CI pending. Real lost-update fix, whole07/07A/13/FULL remain
+proof. Implementation57c9abbf42f2c6d1e0fbde7c34309619f3c155ef passed
+[exact-head CI40572272235](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40572272235):
+actual PHP7.4/8.3 logs each1072/4534, no failures/skips; Node16/16/all configured
+gates pass, zero dependency advisories. Real lost-update fix, whole07/07A/13/FULL remain
 incomplete; toolkit unchanged. Next gated slice: Plugin Tester local-only
 Source-Policy Native Option/Hook/Cache Feasibility and Owned Conditional-Write
 Proof, audit first with fresh target/owned fixture authority, production/form

@@ -162,11 +162,15 @@ No WordPress bootstrap or whole09 completion. The four complete blocks match
 qualified extractor output; all prior catalog content/order was mechanically
 verified unchanged after line-ending normalization. Exact owned config/POT removed.
 
-Publication: exact-head CI pending. Do not infer completion from local success.
+Publication: implementation `57c9abbf42f2c6d1e0fbde7c34309619f3c155ef` passed
+[exact-head CI40572272235](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40572272235).
+Actual job logs: PHP7.4/8.3 each1072 tests/4534 assertions, no failures/skips;
+Node16/16 and all configured gates pass, zero Composer/npm advisories.
+These hosted isolated suites do not qualify native WordPress option writes.
 
 ## Implementation-plan progress and next gate
 
-Approved in-memory foundation and safe handler boundary complete locally;
+Approved in-memory foundation and safe handler boundary implemented/pushed/CI-verified;
 whole-option persistence still requires genuine qualification/integration.
 Whole07/07A/13/FULL remain incomplete; no new autonomous batch count, native
 acceptance or toolkit checklist refresh. Earlier documented limits stay intact.

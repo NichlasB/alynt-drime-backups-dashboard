@@ -9,8 +9,12 @@ no native adapter or new form connection. Legacy store/factory/form unchanged,
 so the actual lost-update race is NOT fixed. New76/234, related randomized238/569,
 full1072/4527 with two known local Sodium skips; Node16/16 and local gates/audits
 pass. Two assertion-killed/SHA256-restored RAM controls; no SQL/core/cache/native
-proof. Scoped Light/UI/final Security and source-only POT recorded. Exact-head CI
-pending. Toolkit/uploader unchanged; prior8/8 not inflated;07/07A/13/FULL pending.
+proof. Scoped Light/UI/final Security and source-only POT recorded. Implementation
+57c9abbf42f2c6d1e0fbde7c34309619f3c155ef passed
+[exact-head CI40572272235](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40572272235):
+actual PHP7.4/8.3 logs each1072/4534, no failures/skips; Node16/16/all configured
+gates pass, zero dependency advisories. Toolkit/uploader unchanged;
+prior8/8 not inflated;07/07A/13/FULL pending.
 Recommended next gated slice: Plugin Tester local-only Source-Policy Native
 Option/Hook/Cache Feasibility and Owned Conditional-Write Proof, audit first,
 fresh target/owned-option approval; actual state and production/form wiring untouched.
