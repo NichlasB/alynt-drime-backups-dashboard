@@ -107,8 +107,13 @@ errors/warnings/risky tests. New2/25/related16/96 no skips; PHPCS160 runtime/man
 files, syntax for all five manual files, Node16/16, build/no tracked asset change,
 structure136runtime/196support/148test files/146class names, strict Composer
 manifest, Composer/npm audits0advisories and diff checks pass. Existing PHPCS
-excludes tests; no test-PHPCS claim or new config/dependency/skip. Publication/
-exact-head CI pending; CI never runs the native proof. Uploader/toolkit unchanged.
+excludes tests; no test-PHPCS claim or new config/dependency/skip. Published proof
+head `154232ca5478f2513fe374a38e9ffa5f316bef33` passed
+[exact-head CI40482247639](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40482247639):
+PHP7.4/8.3 each390 tests/2071 assertions, no skips/failures; Node16/16 fail0/skip0,
+all configured gates passed. Actual logs retrieved. Evidence-only follow-up has
+its own exact-head verification at handoff; CI never runs the native proof.
+Uploader/toolkit unchanged.
 
 Canonical05 source inventory reconciled against recorded schema122/9, lifecycle
 264, poll-fence269/8, retention214/9 and current-selector114/5 receipts, no

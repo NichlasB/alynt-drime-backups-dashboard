@@ -492,7 +492,10 @@ No production/history/retention/schema/guard/wiring or application-state change.
 New scope2/25, related16/96 randomized, two assertion-killed/exact-SHA restored
 manifest controls; full390/2064 with same two Sodium skips; PHPCS160, Node16/16,
 syntax/structure/build/manifest/audits pass. Focused Light/final Security only,
-not historical whole-plugin refresh. Publication/exact-head CI pending. Confirmed
+not historical whole-plugin refresh. Published proof
+154232ca5478f2513fe374a38e9ffa5f316bef33 passed
+[exact-head CI40482247639](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40482247639):
+PHP7.4/8.3 each390/2071 no skips/failures, Node16/16, all configured gates. Confirmed
 05 findings now have source/physical qualifications at their recorded limits;
 shared toolkit canonical evidence publication still needs separate approval.
 Recommend updating/committing/pushing only its PRE_RELEASE_CHECKLIST.md with05

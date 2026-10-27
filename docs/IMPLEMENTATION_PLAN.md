@@ -11,7 +11,10 @@ qualified; positive private DATA lookup is not dispatch/auth/signing acceptance.
 No production/history/retention/schema/guard/wiring change or application mutation.
 Local390/2064 with two known Sodium skips, new2/25/related16/96 no skips; two
 manifest controls assertion-killed/SHA restored; Node/lint/build/structure/audits
-pass. Publication/exact-head CI pending. Product5/8 unchanged by native proof.
+pass. Published proof154232ca5478f2513fe374a38e9ffa5f316bef33 passed
+[exact-head CI40482247639](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40482247639):
+PHP7.4/8.3 each390/2071 no skips/failures; Node16/16, all configured gates.
+Product5/8 unchanged by native proof.
 Three confirmed05 findings have approved repairs and bounded physical evidence.
 **Next approval boundary: update, commit and push only shared toolkit
 PRE_RELEASE_CHECKLIST.md with canonical05 evidence reconciliation and exact resume
