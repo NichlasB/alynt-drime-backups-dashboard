@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Diagnostics batched history owned proof — 2026-10-27
+
+User separately approved and freshly confirmed exact Plugin Tester local-only
+target/owned fixture scope. See [physical evidence and limits](DIAGNOSTICS_BATCHED_HISTORY_OWNED_PROOF.md).
+Preflight6/2queries/zero fixtures; native1348 checks/five groups,792queries,
+two deliberate owned SELECT failures,0HTTP,1.264s. Real51-site bulk/single/tail
+chronology, limits, projection,100/500-site budgets, positive aggregate oracle
+and old52-query equality passed. One657-row schema-only fixture removed;
+all77 original table checksums/inventory unchanged, zero retained owned tables.
+No runtime/schema/version/guard/wiring change or installed WordPress bootstrap.
+Local411/2210 with two known Sodium skips; related36/229, new manifest3/36 no
+skips; two assertion-killed/SHA-restored manifest controls; lint/build/Node/
+structure/audits pass. Publication/exact-head CI pending. Product remains6/8;
+native proof/tests/evidence are not extra product tasks. Canonical06 remains
+in progress. **Recommended next gated slice: repository-only Archived Local-
+Removal Readiness Count Batching Safety Foundation**, preserving exact per-site
+counts/failure conventions/all readiness reasons, no schema/site operations.
+Obtain the scoped decision before changing these removal-readiness inputs.
+Toolkit/uploader unchanged; no package/release/tag/deploy. This current route
+supersedes dated gates below; deferred V2.3 remains parked.
+
 ## Approved Diagnostics batched history foundation — 2026-10-27
 
 The user approved the repository-only canonical06 Phase2 history slice through

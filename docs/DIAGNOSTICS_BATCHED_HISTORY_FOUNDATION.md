@@ -146,7 +146,9 @@ reversion of this bounded foundation; no data or schema rollback required.
 
 ## Exact resume gate
 
-Recommended next gated slice: **Plugin Tester local-only Diagnostics Batched
+The following native gate was subsequently approved and completed; see the
+[owned physical proof and current resume point](DIAGNOSTICS_BATCHED_HISTORY_OWNED_PROOF.md).
+Historical requested slice: **Plugin Tester local-only Diagnostics Batched
 History Chronology and Aggregation Owned Proof**. Require separate approval and
 fresh exact target/owned-fixture confirmation before actual WordPress/database
 operations, disposable snapshot fixtures and exact cleanup. Qualify real prepared
