@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 source-policy conditional-save foundation — 2026-10-27
+
+Separately approved [DATA contract/error-safe handler foundation](SOURCE_POLICY_CONDITIONAL_SAVE_FOUNDATION.md).
+No native conditional writer/form wiring; existing store/factory/form unchanged.
+Model arrays/WP_Error/unknown values cannot become boolean handler success; true/
+false legacy controls preserved. New76/234, related randomized238/569, full1072/
+4527 with two baseline Sodium skips; Node16/16 and local gates/audits pass.
+Comparison and zero-row model controls assertion-killed and SHA256-restored;
+source-only Light/UI/final Security and POT recorded, not browser/auth/SQL/native
+proof. Exact-head CI pending. Real lost-update fix, whole07/07A/13/FULL remain
+incomplete; toolkit unchanged. Next gated slice: Plugin Tester local-only
+Source-Policy Native Option/Hook/Cache Feasibility and Owned Conditional-Write
+Proof, audit first with fresh target/owned fixture authority, production/form
+wiring and actual application state untouched.
+
 ## Approved07 source-policy concurrent-save contract design — 2026-10-27
 
 User approved the repository-only [source-policy save/conflict design](SOURCE_POLICY_CONCURRENT_SAVE_CONTRACT_DESIGN.md).

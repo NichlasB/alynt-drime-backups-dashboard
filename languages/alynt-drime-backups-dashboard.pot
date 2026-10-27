@@ -3713,3 +3713,19 @@ msgstr ""
 #: includes/admin/traits/trait-admin-page-sites-list.php:138
 msgid "The dashboard could not read its local site records. This does not mean that no sites are paired. Reload this page to try again."
 msgstr ""
+
+#: includes/admin/traits/trait-admin-page-local-actions.php:238
+msgid "This monitoring policy changed. Your change was not saved. Refresh the page, review the current policy, and try again."
+msgstr ""
+
+#: includes/admin/traits/trait-admin-page-local-actions.php:241
+msgid "The policy save could not be confirmed. It may have been saved. Refresh the page and check the current policy before making another change."
+msgstr ""
+
+#: includes/admin/traits/trait-admin-page-local-actions.php:246
+msgid "The monitoring policy could not be saved safely. Refresh the page and check the current policy before trying again."
+msgstr ""
+
+#: includes/class-source-policy-save-contract.php:217
+msgid "The monitoring policy could not be saved safely."
+msgstr ""

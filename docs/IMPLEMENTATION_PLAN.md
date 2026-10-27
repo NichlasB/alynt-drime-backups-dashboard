@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved source-policy conditional-save foundation — 2026-10-27
+
+Repository-only R3 [DATA/handler foundation](SOURCE_POLICY_CONDITIONAL_SAVE_FOUNDATION.md)
+from clean/synced2d41d6c72c9feaf5c30a30e987611ee64f11d7a7. Dormant observation/
+revision/planning/acknowledgement model and literal-boolean/error-safe handler;
+no native adapter or new form connection. Legacy store/factory/form unchanged,
+so the actual lost-update race is NOT fixed. New76/234, related randomized238/569,
+full1072/4527 with two known local Sodium skips; Node16/16 and local gates/audits
+pass. Two assertion-killed/SHA256-restored RAM controls; no SQL/core/cache/native
+proof. Scoped Light/UI/final Security and source-only POT recorded. Exact-head CI
+pending. Toolkit/uploader unchanged; prior8/8 not inflated;07/07A/13/FULL pending.
+Recommended next gated slice: Plugin Tester local-only Source-Policy Native
+Option/Hook/Cache Feasibility and Owned Conditional-Write Proof, audit first,
+fresh target/owned-option approval; actual state and production/form wiring untouched.
+
 ## Approved Review07 source-policy save/conflict design — 2026-10-27
 
 Design-only [save/conflict contract](SOURCE_POLICY_CONCURRENT_SAVE_CONTRACT_DESIGN.md)

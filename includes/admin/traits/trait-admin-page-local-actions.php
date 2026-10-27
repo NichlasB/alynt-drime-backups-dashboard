@@ -197,7 +197,12 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions {
 		$site_id    = isset( $_POST['dashboard_site_id'] ) ? absint( wp_unslash( $_POST['dashboard_site_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 		$source_key = isset( $_POST['source_key'] ) ? sanitize_key( wp_unslash( $_POST['source_key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
 		$mode       = isset( $_POST['source_mode'] ) ? sanitize_key( wp_unslash( $_POST['source_mode'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified by verify_action_nonce() above.
-		$success    = $site_id > 0 && $this->source_policy->set_source_mode( $site_id, $source_key, $mode );
+		$saved      = $site_id > 0 ? $this->source_policy->set_source_mode( $site_id, $source_key, $mode ) : false;
+		$error      = null;
+		if ( is_wp_error( $saved ) || ! is_bool( $saved ) ) {
+			$error = $this->source_policy_save_error( $saved );
+		}
+		$success = null === $error && true === $saved;
 
 		$this->record_admin_audit_action(
 			'update_source_policy',
@@ -209,11 +214,35 @@ trait Alynt_Drime_Backups_Dashboard_Admin_Page_Local_Actions {
 			)
 		);
 
+		if ( is_wp_error( $error ) ) {
+			return $error;
+		}
+
 		return array(
 			'action'     => 'update_source_policy',
 			'success'    => $success,
 			'source_key' => $source_key,
 			'mode'       => $mode,
 		);
+	}
+
+	/**
+	 * Maps only known error codes, never collaborator messages or private data.
+	 *
+	 * @param mixed $saved Unexpected result or WP_Error.
+	 * @return WP_Error
+	 */
+	private function source_policy_save_error( $saved ) {
+		$code = is_wp_error( $saved ) ? $saved->get_error_code() : '';
+		if ( 'source_policy_conflict' === $code ) {
+			return new WP_Error( $code, __( 'This monitoring policy changed. Your change was not saved. Refresh the page, review the current policy, and try again.', 'alynt-drime-backups-dashboard' ) );
+		}
+		if ( 'source_policy_write_uncertain' === $code ) {
+			return new WP_Error( $code, __( 'The policy save could not be confirmed. It may have been saved. Refresh the page and check the current policy before making another change.', 'alynt-drime-backups-dashboard' ) );
+		}
+		if ( ! in_array( $code, array( 'source_policy_unavailable', 'source_policy_invalid', 'source_policy_storage_error' ), true ) ) {
+			$code = 'source_policy_save_failed';
+		}
+		return new WP_Error( $code, __( 'The monitoring policy could not be saved safely. Refresh the page and check the current policy before trying again.', 'alynt-drime-backups-dashboard' ) );
 	}
 }
