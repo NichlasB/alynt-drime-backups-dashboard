@@ -444,7 +444,16 @@ exact owned variant/regression repair and fresh successful attempt. New socket-
 free manifest2/22 and two restored assertion-killed scope controls; local full
 377/1981 with two known Sodium skips, Node16/16, PHPCS155, structure/build/
 manifest/audits passed. Focused Light/final Security source-scoped only; no UI/UX
-or historical whole-plugin row refreshed. Publication/exact-head CI pending.
-After verification resume canonical05 repository-only inventory/finding closure;
+or historical whole-plugin row refreshed. Proof source head
+`cde65b8f46d766000fc0867a79c0c3651eae2900` passed
+[exact-head CI40475267406](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40475267406):
+PHP7.4/8.3 each377/1988, no skips/failures, Node16/16, all configured gates.
+Read-only05 reconciliation found current single-site observed_at/id selection
+inconsistent with fleet/retention MAX(id) for out-of-order timestamps; remote-
+action capability lookup consumes the single-site result. See the proof receipt
+for source locations and pure row counterexample (not SQL/installed runtime).
+Medium policy finding remains open. Recommend separately approved repository-only
+Snapshot Latest-Selection Consistency Safety Foundation; no behavioral fix under
+the completed retention-proof authority.05 inventory closure/06 stay pending;
 do not infer full05 complete from this proof alone. Toolkit/uploader remain
 untouched, V2.3 deferred, cumulative product count4/8 unchanged by native proof.

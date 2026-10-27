@@ -10,9 +10,19 @@ error persistence, policy, genuine callback and option-failure recovery passed.
 One harness metadata-quote compatibility correction was cleaned/reconciled,
 regression-covered and followed by a fresh namespace/preflight/successful run.
 No production/schema/version/schedule/wiring change or application cleanup.
-Publication/exact-head CI pending; after it passes, resume canonical05 repository-
-only inventory/finding reconciliation, not another native milestone or deferred
-V2.3. Shared toolkit/uploader stay untouched. No whole05/FULL completion inferred.
+Proof head `cde65b8f46d766000fc0867a79c0c3651eae2900` passed exact-head
+[CI40475267406](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40475267406):
+PHP7.4/8.3 each377/1988, no skips/failures; Node16/16, all configured gates.
+Read-only canonical05 reconciliation resumed and found single-site observed_at/id
+versus fleet/retention MAX(id) selection divergence for out-of-order timestamps.
+It also affects remote-action capability input; see the linked proof's new
+source-backed counterexample and limits. No source/query/test policy changed.
+**Next gated slice: repository-only Snapshot Latest-Selection Consistency Safety
+Foundation**, aligning current lookup to highest ID while preserving chronological
+history, retention SQL, schema and all guards; isolated tests only, no remote/site
+execution. Separate approval is required for this trust-input policy correction.
+Canonical05 inventory/finding closure and06 remain pending. Shared toolkit/uploader
+stay untouched; deferred V2.3 stays parked. No whole05/FULL completion inferred.
 Product count4/8 is unchanged by this separately approved native proof.
 This current routing supersedes the dated retention-proof approval gates below.
 

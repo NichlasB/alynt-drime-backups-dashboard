@@ -135,7 +135,11 @@ structure136 runtime/195 support/145 test files, build, strict Composer manifest
 Composer/npm audits (zero advisories), syntax and diff checks passed. No tracked
 asset changed. Native proof is deliberately outside CI/application/package paths;
 CI executes only isolated tests/lint/Node/build, never this local SQL command.
-Publication and exact-head matrix CI are pending.
+Published proof head `cde65b8f46d766000fc0867a79c0c3651eae2900` passed
+[exact-head CI40475267406](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40475267406).
+Actual logs: PHP7.4/8.3 each377 tests/1988 assertions, no skips/failures;
+Node16/16, fail0/skip0, all configured gates successful. CI does not rerun SQL.
+This evidence-only follow-up has its own exact-head verification at handoff.
 
 ## Proof limits and resume
 
@@ -147,10 +151,41 @@ historical whole-plugin/lifecycle/native/package rows. Existing V2.3 stays parke
 Shared toolkit and uploader are not modified. No whole canonical05/FULL completion
 is inferred solely from this scoped proof.
 
-After publication/exact-head CI, resume the existing **canonical05 repository-only
-inventory/finding reconciliation** before advancing to06. The High poll fence has
+Publication is verified. The existing **canonical05 repository-only
+inventory/finding reconciliation** resumed before advancing to06. The High poll fence has
 its separate269/8 receipt; the Medium retention finding now has this narrow physical
 qualification. Complete/check the canonical inventory rather than inventing more
 retention tests or another native experiment. Any new schema/policy/site/publication
 boundary still needs its own approval. Product progress stays4/8: this separately
 approved native proof and its evidence closeout are not extra safe-local tasks.
+
+### Reconciliation found a new policy gate
+
+Read-only source inspection at the published head found inconsistent definitions
+of current snapshot: `traits/trait-snapshot-repository-reads.php:34` orders the
+single-site lookup by observed_at/id, while its fleet lookup (line71) and
+`traits/trait-snapshot-repository-retention.php:42` choose MAX(id). Paths are
+relative to includes/. Existing `tests/SnapshotRepositoryTest.php:43,84`
+independently assert these different selectors, not their agreement.
+Site Detail consumes the former (`admin/traits/trait-admin-page-site-detail.php:28`);
+fleet/Diagnostics consume the latter. The former also supplies remote-action
+capabilities (`traits/trait-remote-action-dispatcher-intent.php:32`).
+
+Source-backed pure row model (no SQL/WordPress): for one site, id100 observed
+2026-08-02 and id101 observed2026-08-01, detail selects100, fleet101. With cutoff
+2026-09-27 both are old: existing retention deletes100 and protects101. Detail
+then changes to101 without a new observation. This requires out-of-order stored
+timestamps, e.g. clock regression; no such condition was alleged on a real site.
+The physical proof correctly qualified MAX(id) preservation, not agreement with
+every consumer. No database experiment or security bypass was demonstrated.
+
+Medium correctness/trust-input consistency finding remains open. No selector,
+capability guard, runtime query or test expectation was changed. Canonical05 is
+not closed; its complete inventory/evidence reconciliation remains unfinished.
+Recommend separately approving **repository-only Snapshot Latest-Selection
+Consistency Safety Foundation**: use highest ID for single-site current lookup,
+matching fleet/retention; preserve chronological history, retention SQL, schema,
+guards and remote execution. Add isolated out-of-order/tie/empty/site-isolation
+and capability-consumer regressions, then scoped reviews/local QA/push/exact-head
+CI. Any genuine database qualification is a separate gate. The current approval
+does not authorize this changed remote-action trust input.
