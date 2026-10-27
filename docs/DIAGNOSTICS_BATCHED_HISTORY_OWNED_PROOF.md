@@ -106,7 +106,12 @@ No native run used mutated code. Related randomized seed20261027 suite36/229,
 no skips/errors. Full local411 tests/2,210 assertions with two known missing-
 Sodium skips. Lint, structure, build, Node16/16, Composer strict validation and
 npm/Composer audits passed; zero vulnerabilities/advisories, generated assets
-unchanged. Publication and exact-head CI remain pending until recorded below.
+unchanged. Published proof7a43a15a5debebdd0a8bf7581c8cec1b45b26406 passed
+[exact-head CI40513429348](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40513429348):
+PHP7.4/8.3 each411 tests/2,217 assertions, no skips/failures; Node16/16,
+all configured gates. Actual counts were retrieved from both job logs. Remote
+master matched the clean proof head. This record-only closeout changes no proof,
+test or runtime source; CI does not rerun the native proof.
 
 Source review baseline4062a49 through this proof: four manual files, one test,
 owning records only. No production refactor, class move or fixture integration

@@ -12,7 +12,10 @@ all77 original table checksums/inventory unchanged, zero retained owned tables.
 No runtime/schema/version/guard/wiring change or installed WordPress bootstrap.
 Local411/2210 with two known Sodium skips; related36/229, new manifest3/36 no
 skips; two assertion-killed/SHA-restored manifest controls; lint/build/Node/
-structure/audits pass. Publication/exact-head CI pending. Product remains6/8;
+structure/audits pass. Published proof7a43a15a5debebdd0a8bf7581c8cec1b45b26406
+passed [exact-head CI40513429348](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40513429348):
+PHP7.4/8.3 each411/2217, no skips/failures; Node16/16, all configured gates.
+CI did not rerun native operations. Product remains6/8;
 native proof/tests/evidence are not extra product tasks. Canonical06 remains
 in progress. **Recommended next gated slice: repository-only Archived Local-
 Removal Readiness Count Batching Safety Foundation**, preserving exact per-site
