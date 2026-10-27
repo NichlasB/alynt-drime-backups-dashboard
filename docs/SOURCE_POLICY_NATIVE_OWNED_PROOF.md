@@ -174,7 +174,12 @@ protect value/autoload predicates. No further scoped security finding. Existing
 whole07/07A/13/FULL and release readiness remain incomplete; no toolkit checklist
 or historical whole-plugin row is refreshed by this manual proof.
 
-Publication: exact-head CI pending; local/native success does not imply CI success.
+Publication: implementation `5dee54486b6ff7684f9eed3cea762c77456e479c` passed
+[exact-head CI40577776136](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40577776136).
+Actual job logs: PHP7.4/8.3 each1089 tests/4557 assertions, no failures/skips;
+Node16/16 per job, all configured gates and both dependency audits pass with
+zero advisories. CI executes isolated regressions/lint, **not** this manual
+Plugin Tester proof or an application/native integration rerun.
 
 ## Implementation-plan progress and next gate
 

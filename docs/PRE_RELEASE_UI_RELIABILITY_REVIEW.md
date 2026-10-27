@@ -9,7 +9,11 @@ conflicts, non-empty core hook parity, post-commit uncertainty and real bounded
 lock timeout; two predicate bypasses assertion-killed and SHA256-restored.
 All77 existing table checksums unchanged; zero owned fixtures/sessions/transactions/
 processes/markers. Isolated17/23, related255/592, full1089/4550 with two known local
-Sodium skips, Node16/16/all local gates/audits pass; exact-head CI pending.
+Sodium skips, Node16/16/all local gates/audits pass. Implementation
+5dee54486b6ff7684f9eed3cea762c77456e479c passed
+[exact-head CI40577776136](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40577776136):
+actual PHP7.4/8.3 logs each1089/4557, no failures/skips; Node16/16/all configured
+gates pass, zero advisories; no native proof is executed by CI.
 Real application race remains open: runtime, form and legacy setter unchanged;
 no native authentication/HTTP/installed callback graph/external-cache acceptance.
 Whole07/07A/13/FULL and toolkit rows not refreshed. Next gated slice: repository-only

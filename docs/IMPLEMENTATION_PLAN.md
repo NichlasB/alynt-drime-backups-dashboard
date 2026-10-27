@@ -10,7 +10,11 @@ timeout, non-empty core hook parity, strict creation and byte-sensitive CAS.
 Two native assertion-killed/SHA256-restored predicates; all77 application table
 checksums unchanged, zero owned tables/sessions/transactions/processes/directories.
 New isolated17/23; related randomized255/592; full local1089/4550 with two known
-Sodium skips; Node16/16/all local gates/audits pass. Exact-head CI pending.
+Sodium skips; Node16/16/all local gates/audits pass. Implementation
+5dee54486b6ff7684f9eed3cea762c77456e479c passed
+[exact-head CI40577776136](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40577776136):
+actual PHP7.4/8.3 logs each1089/4557, no failures/skips; Node16/16/all configured
+gates pass, zero advisories. CI does not run the manual native proof.
 Only manual proof/test/records change: application race, runtime/form/legacy
 writer unchanged; installed callback graph/other core/external caches unqualified.
 Whole07/07A/13/FULL stay pending; uploader/toolkit unchanged; no task-count inflation.
