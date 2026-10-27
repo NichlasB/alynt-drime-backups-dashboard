@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved source-policy native owned qualification — 2026-10-27
+
+Separately approved R3 [owned proof](SOURCE_POLICY_NATIVE_OWNED_PROOF.md), exact
+Plugin Tester local-only confirmation; clean baseline6f141b9455e26212f4e29ff628c8ab957c7bab26.
+Audit first, then core7.1.3/PHP8.5.12/MariaDB10.6.23 owned options clone and private
+core cache: final241 checks/9 groups,236 parent+peer queries, real bounded lock
+timeout, non-empty core hook parity, strict creation and byte-sensitive CAS.
+Two native assertion-killed/SHA256-restored predicates; all77 application table
+checksums unchanged, zero owned tables/sessions/transactions/processes/directories.
+New isolated17/23; related randomized255/592; full local1089/4550 with two known
+Sodium skips; Node16/16/all local gates/audits pass. Exact-head CI pending.
+Only manual proof/test/records change: application race, runtime/form/legacy
+writer unchanged; installed callback graph/other core/external caches unqualified.
+Whole07/07A/13/FULL stay pending; uploader/toolkit unchanged; no task-count inflation.
+Recommended next gated slice: repository-only Source-Policy Native Adapter
+Compatibility and Guarded Form Integration Design, design-only with site operations,
+actual writes and production wiring disabled; qualify support/unsupported behavior
+before any application connection.
+
 ## Approved source-policy conditional-save foundation — 2026-10-27
 
 Repository-only R3 [DATA/handler foundation](SOURCE_POLICY_CONDITIONAL_SAVE_FOUNDATION.md)

@@ -1,5 +1,22 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Approved07 source-policy native owned qualification — 2026-10-27
+
+Separately approved [native owned proof](SOURCE_POLICY_NATIVE_OWNED_PROOF.md):
+genuine core libraries/private wpdb/process-local cache, no application bootstrap
+or production/form connection. Native241 checks/9 groups, strict creator/update
+conflicts, non-empty core hook parity, post-commit uncertainty and real bounded
+lock timeout; two predicate bypasses assertion-killed and SHA256-restored.
+All77 existing table checksums unchanged; zero owned fixtures/sessions/transactions/
+processes/markers. Isolated17/23, related255/592, full1089/4550 with two known local
+Sodium skips, Node16/16/all local gates/audits pass; exact-head CI pending.
+Real application race remains open: runtime, form and legacy setter unchanged;
+no native authentication/HTTP/installed callback graph/external-cache acceptance.
+Whole07/07A/13/FULL and toolkit rows not refreshed. Next gated slice: repository-only
+Source-Policy Native Adapter Compatibility and Guarded Form Integration Design,
+design-only; actual writes/site operations/wiring disabled until supported profile
+and unified application path are explicitly approved.
+
 ## Approved07 source-policy conditional-save foundation — 2026-10-27
 
 Separately approved [DATA contract/error-safe handler foundation](SOURCE_POLICY_CONDITIONAL_SAVE_FOUNDATION.md).
