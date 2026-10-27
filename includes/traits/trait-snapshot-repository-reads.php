@@ -125,6 +125,65 @@ trait Alynt_Drime_Backups_Dashboard_Snapshot_Repository_Reads {
 	}
 
 	/**
+	 * Gets independent chronological histories in batches of at most 50 sites.
+	 *
+	 * Each UNION ALL branch has its own ordering and limit; the final ordering
+	 * also preserves chronology because UNION does not preserve branch order.
+	 * Only summary columns are read. A failed batch leaves its histories empty,
+	 * like failed single-site reads, without N+1 retries or persistent caching.
+	 *
+	 * @param array<int> $site_ids Site IDs.
+	 * @param int        $limit Maximum snapshots per site, clamped to 1..50.
+	 * @return array<int,array<int,array<string,mixed>>>
+	 */
+	public function recent_by_site_ids( array $site_ids, $limit = 10 ) {
+		global $wpdb;
+
+		$site_ids  = array_values( array_unique( array_filter( array_map( 'absint', $site_ids ) ) ) );
+		$limit     = max( 1, min( 50, (int) $limit ) );
+		$histories = array_fill_keys( $site_ids, array() );
+
+		if ( empty( $site_ids ) ) {
+			return $histories;
+		}
+
+		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
+
+		foreach ( array_chunk( $site_ids, 50 ) as $batch ) {
+			$batch_ids = array_fill_keys( $batch, true );
+			$selects   = array();
+			$params    = array();
+
+			foreach ( $batch as $site_id ) {
+				$selects[] = "SELECT id, dashboard_site_id, schema_version, observed_at, overall_status, queue_count, uploaded_count, failed_count, active_upload, warning_count, cron_status
+					FROM {$table}
+					WHERE dashboard_site_id = %d
+					ORDER BY observed_at DESC, id DESC
+					LIMIT %d";
+				$params[]  = $site_id;
+				$params[]  = $limit;
+			}
+
+			$query = count( $selects ) === 1 ? $selects[0] : '(' . implode( ') UNION ALL (', $selects ) . ') ORDER BY dashboard_site_id ASC, observed_at DESC, id DESC';
+			$rows  = $wpdb->get_results( $wpdb->prepare( $query, $params ), ARRAY_A );
+
+			if ( ! is_array( $rows ) ) {
+				continue;
+			}
+
+			foreach ( $rows as $row ) {
+				$site_id = (int) $row['dashboard_site_id'];
+
+				if ( isset( $batch_ids[ $site_id ] ) ) {
+					$histories[ $site_id ][] = $row;
+				}
+			}
+		}
+
+		return $histories;
+	}
+
+	/**
 	 * Counts snapshots for one site.
 	 *
 	 * @since 0.1.0

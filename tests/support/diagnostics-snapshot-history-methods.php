@@ -10,6 +10,23 @@
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_History_Methods {
 	/**
+	 * Gets bounded fixture histories for a batch, without database access.
+	 *
+	 * @param array<int> $site_ids Site IDs.
+	 * @param int        $limit Maximum snapshots per site.
+	 * @return array<int,array>
+	 */
+	public function recent_by_site_ids( array $site_ids, $limit = 10 ) {
+		$histories = array();
+
+		foreach ( $site_ids as $site_id ) {
+			$histories[ $site_id ] = isset( $this->histories[ $site_id ] ) ? array_slice( $this->histories[ $site_id ], 0, max( 1, min( 50, (int) $limit ) ) ) : array();
+		}
+
+		return $histories;
+	}
+
+	/**
 	 * Gets recent snapshots for one site.
 	 *
 	 * @param int $site_id Site ID.

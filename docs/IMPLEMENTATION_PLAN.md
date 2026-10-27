@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved Diagnostics batched history foundation — 2026-10-27
+
+The user approved the repository-only canonical06 Phase2 history slice through
+validation, commit, push and exact-head CI. See
+[scope, strategy, regression evidence and limits](DIAGNOSTICS_BATCHED_HISTORY_FOUNDATION.md).
+Diagnostics now requests eligible histories in bulk; at most50 independently
+limited chronological summary SELECT branches share a statement, with final
+ordering and no persistent cache. Expected history round trips100 ->2, not a
+measured database latency result. Archived/zero exclusion, per-site10, summary
+projection, current highest-ID reads, retention, schema8/version0.1.77 and guards
+are preserved. No site/SQL/native operation or production-wiring change.
+Publication/exact-head CI pending; product progress remains5/8 until verified.
+Canonical06 remains in progress: archived COUNT batching and policy sanitization
+findings are not fixed by this slice. **Recommended next gated slice: Plugin
+Tester local-only Diagnostics Batched History Chronology and Aggregation Owned
+Proof**, separate approval and fresh target/fixture confirmation required. No
+whole-plugin review, package/release/tag/deploy or shared-toolkit publication.
+This current route supersedes dated resume pointers below; V2.3 remains parked.
+
 ## Approved current-snapshot owned proof — 2026-10-27
 
 User separately approved and freshly confirmed exact Plugin Tester local-only

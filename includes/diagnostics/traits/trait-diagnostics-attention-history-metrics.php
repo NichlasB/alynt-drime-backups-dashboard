@@ -34,6 +34,8 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Attention_History_Metrics {
 			'recent_attention_transitions' => 0,
 		);
 
+		$site_ids = array();
+
 		foreach ( $sites as $site ) {
 			if ( ! empty( $site['archived_at'] ) ) {
 				continue;
@@ -45,7 +47,13 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Attention_History_Metrics {
 				continue;
 			}
 
-			$history = $this->snapshots->recent_for_site( $site_id, 10 );
+			$site_ids[] = $site_id;
+		}
+
+		$histories = empty( $site_ids ) ? array() : $this->snapshots->recent_by_site_ids( $site_ids, 10 );
+
+		foreach ( $site_ids as $site_id ) {
+			$history = isset( $histories[ $site_id ] ) ? $histories[ $site_id ] : array();
 
 			if ( count( $history ) < 2 ) {
 				continue;
