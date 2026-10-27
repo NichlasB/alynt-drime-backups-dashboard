@@ -10,6 +10,20 @@
  */
 trait Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Snapshot_History_Methods {
 	/**
+	 * Gets full fixture row counts, not history-window counts.
+	 *
+	 * @param array<int> $site_ids Site IDs.
+	 * @return array<int,int>
+	 */
+	public function counts_by_site_ids( array $site_ids ) {
+		$counts = array();
+		foreach ( $site_ids as $site_id ) {
+			$counts[ $site_id ] = ! empty( $this->histories[ $site_id ] ) ? count( $this->histories[ $site_id ] ) : ( isset( $this->snapshots[ $site_id ] ) ? 1 : 0 );
+		}
+		return $counts;
+	}
+
+	/**
 	 * Gets bounded fixture histories for a batch, without database access.
 	 *
 	 * @param array<int> $site_ids Site IDs.

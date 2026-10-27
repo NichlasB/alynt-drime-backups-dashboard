@@ -91,6 +91,8 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			),
 		);
 
+		$local_removal_counts_by_site = $this->local_removal_counts_for_sites( $sites );
+
 		foreach ( $sites as $site ) {
 			$site_id  = isset( $site['id'] ) ? (int) $site['id'] : 0;
 			$snapshot = isset( $snapshots[ $site_id ] ) ? $snapshots[ $site_id ] : null;
@@ -111,7 +113,7 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Site_Metrics {
 			++$counts['record_states'][ $state ];
 
 			if ( ! empty( $site['archived_at'] ) ) {
-				$local_removal_counts = $this->local_removal_readiness_diagnostics( $site );
+				$local_removal_counts = $this->local_removal_readiness_diagnostics( $site, $local_removal_counts_by_site );
 
 				foreach ( $local_removal_counts as $key => $value ) {
 					$counts['local_removal'][ $key ] += $value;

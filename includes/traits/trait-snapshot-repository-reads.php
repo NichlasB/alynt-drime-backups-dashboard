@@ -205,6 +205,46 @@ trait Alynt_Drime_Backups_Dashboard_Snapshot_Repository_Reads {
 	}
 
 	/**
+	 * Counts all retained rows in bounded site batches, never history windows.
+	 *
+	 * Signed/zero integer IDs match count_for_site(). A failed grouped read uses
+	 * that existing scalar reader once per affected ID, preserving its behavior.
+	 *
+	 * @param array<int> $site_ids Site IDs.
+	 * @return array<int,int>
+	 */
+	public function counts_by_site_ids( array $site_ids ) {
+		global $wpdb;
+		$site_ids = array_values( array_unique( array_map( 'intval', $site_ids ) ) );
+		$counts   = array_fill_keys( $site_ids, 0 );
+		if ( empty( $site_ids ) ) {
+			return $counts;
+		}
+		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
+		foreach ( array_chunk( $site_ids, 50 ) as $batch ) {
+			$placeholders = implode( ',', array_fill( 0, count( $batch ), '%d' ) );
+			$rows         = $wpdb->get_results(
+				$wpdb->prepare( "SELECT dashboard_site_id, COUNT(*) AS row_count FROM {$table} WHERE dashboard_site_id IN ({$placeholders}) GROUP BY dashboard_site_id", $batch ),
+				ARRAY_A
+			);
+			if ( ! is_array( $rows ) || ! empty( $wpdb->last_error ) ) {
+				foreach ( $batch as $site_id ) {
+					$counts[ $site_id ] = max( 0, $this->count_for_site( $site_id ) );
+				}
+				continue;
+			}
+			$batch_ids = array_fill_keys( $batch, true );
+			foreach ( $rows as $row ) {
+				$site_id = (int) $row['dashboard_site_id'];
+				if ( isset( $batch_ids[ $site_id ] ) ) {
+					$counts[ $site_id ] = max( 0, (int) $row['row_count'] );
+				}
+			}
+		}
+		return $counts;
+	}
+
+	/**
 	 * Decodes snapshot JSON safely.
 	 *
 	 * @param string $payload Payload JSON.

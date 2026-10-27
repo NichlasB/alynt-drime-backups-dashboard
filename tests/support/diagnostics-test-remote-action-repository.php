@@ -59,6 +59,22 @@ class Alynt_Drime_Backups_Dashboard_Test_Diagnostics_Remote_Action_Repository ex
 	}
 
 	/**
+	 * Reads independent full fixture counts using the real ID policy.
+	 *
+	 * @param array<int> $site_ids Site IDs.
+	 * @param bool $non_terminal Select non-terminal counts.
+	 * @return array<int,int>
+	 */
+	public function counts_by_site_ids( array $site_ids, $non_terminal = false ) {
+		$counts = array();
+		$source = $non_terminal ? $this->non_terminal_counts : $this->action_counts;
+		foreach ( array_filter( array_map( 'absint', $site_ids ) ) as $site_id ) {
+			$counts[ $site_id ] = isset( $source[ $site_id ] ) ? (int) $source[ $site_id ] : 0;
+		}
+		return $counts;
+	}
+
+	/**
 	 * Builds an empty support summary.
 	 *
 	 * @return array<string,mixed>

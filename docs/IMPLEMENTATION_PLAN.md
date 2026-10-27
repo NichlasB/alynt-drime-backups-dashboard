@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved archived readiness count batching foundation — 2026-10-27
+
+User approved repository-only implementation/validation/commit/push/exact-head CI.
+See [strategy, regression evidence and limits](ARCHIVED_READINESS_COUNT_BATCHING_FOUNDATION.md).
+Diagnostics prefetches three independent archived count maps, at most50 IDs per
+grouped query: healthy100-record count statements300 ->6, not measured latency.
+Totals/non-terminal queries remain independent. Grouped errors (including ARRAY_A
+empty+last_error) use original scalar readers once per affected ID; valid empty
+groups remain zero without fallback. All readiness reasons, scalar Site Detail/
+deletion paths, exact state set and signed/absolute ID conventions are preserved.
+No schema/version/credential/history/retention/wiring/site operation. New21 cases/
+648 assertions; local432/2858 with two known Sodium skips, related23/668 no skips;
+lint/build/structure/Node/audits pass. Optional runtime mutation was rejected before
+application and not bypassed; no mutation-control or native proof claim. Exact-
+head CI/publication pending; product remains6/8 until verified, then7/8.
+**Recommended next gated slice: Plugin Tester local-only Archived Readiness
+Grouped Count and Scalar-Fallback Owned Proof**, separate approval/fresh target
+confirmation, two owned schema-only snapshot/action fixtures and cleanup, no
+application rows or execution. Canonical06 remains in progress; source-policy
+sanitization still open. Toolkit/uploader unchanged; no package/release/tag/deploy.
+This current route supersedes dated gates below; V2.3 remains parked.
+
 ## Approved Diagnostics batched history owned proof — 2026-10-27
 
 User separately approved and freshly confirmed exact Plugin Tester local-only

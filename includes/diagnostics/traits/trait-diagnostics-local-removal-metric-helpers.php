@@ -19,14 +19,16 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Local_Removal_Metric_Helpers {
 	/**
 	 * Builds support-safe local removal-readiness diagnostics for an archived record.
 	 *
-	 * @param array<string,mixed> $site Site row.
+	 * @param array<string,mixed>          $site Site row.
+	 * @param array<string,array<int,int>> $count_maps Independent prefetched counts.
 	 * @return array<string,int>
 	 */
-	private function local_removal_readiness_diagnostics( array $site ) {
+	private function local_removal_readiness_diagnostics( array $site, array $count_maps ) {
 		$site_id                   = isset( $site['id'] ) ? (int) $site['id'] : 0;
-		$snapshot_count            = $this->count_repository_rows_for_site( 'snapshots', 'count_for_site', $site_id );
-		$action_count              = $this->count_repository_rows_for_site( 'remote_actions', 'count_for_site', $site_id );
-		$non_terminal_action_count = $this->count_repository_rows_for_site( 'remote_actions', 'count_non_terminal_for_site', $site_id );
+		$action_site_id            = absint( $site_id );
+		$snapshot_count            = max( 0, (int) ( $count_maps['snapshots'][ $site_id ] ?? 0 ) );
+		$action_count              = max( 0, (int) ( $count_maps['actions'][ $action_site_id ] ?? 0 ) );
+		$non_terminal_action_count = max( 0, (int) ( $count_maps['non_terminal'][ $action_site_id ] ?? 0 ) );
 		$is_ready                  = $this->local_removal_readiness_blocking_reason( $site, $non_terminal_action_count ) === '';
 
 		return array(
@@ -108,16 +110,36 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Local_Removal_Metric_Helpers {
 	}
 
 	/**
-	 * Counts plugin-owned rows through a repository when the method is available.
+	 * Prefetches only archived records, retaining the existing signed snapshot IDs.
 	 *
-	 * @param string $property Repository property name.
-	 * @param string $method Repository method name.
-	 * @param int    $site_id Site ID.
-	 * @return int
+	 * @param array<int,array<string,mixed>> $sites Site rows.
+	 * @return array<string,array<int,int>>
 	 */
-	private function count_repository_rows_for_site( $property, $method, $site_id ) {
-		if ( ! isset( $this->{$property} ) || ! is_object( $this->{$property} ) || ! method_exists( $this->{$property}, $method ) ) {
-			return 0;
+	private function local_removal_counts_for_sites( array $sites ) {
+		$site_ids = array();
+		foreach ( $sites as $site ) {
+			if ( ! empty( $site['archived_at'] ) ) {
+				$site_ids[] = isset( $site['id'] ) ? (int) $site['id'] : 0;
+			}
+		}
+		return array(
+			'snapshots'    => $this->count_repository_rows_for_sites( 'snapshots', $site_ids ),
+			'actions'      => $this->count_repository_rows_for_sites( 'remote_actions', $site_ids ),
+			'non_terminal' => $this->count_repository_rows_for_sites( 'remote_actions', $site_ids, true ),
+		);
+	}
+
+	/**
+	 * Reads bounded count batches with the existing repository-availability guard.
+	 *
+	 * @param string     $property Repository property name.
+	 * @param array<int> $site_ids Site IDs.
+	 * @param bool       $non_terminal Restrict action counts to non-terminal rows.
+	 * @return array<int,int>
+	 */
+	private function count_repository_rows_for_sites( $property, array $site_ids, $non_terminal = false ) {
+		if ( empty( $site_ids ) || ! isset( $this->{$property} ) || ! is_object( $this->{$property} ) || ! method_exists( $this->{$property}, 'counts_by_site_ids' ) ) {
+			return array();
 		}
 
 		$repository_class = get_class( $this->{$property} );
@@ -126,9 +148,9 @@ trait Alynt_Drime_Backups_Dashboard_Diagnostics_Local_Removal_Metric_Helpers {
 		$is_test_repo = false !== strpos( $repository_class, '_Test_' );
 
 		if ( ! $has_database && ! $is_test_repo ) {
-			return 0;
+			return array();
 		}
 
-		return max( 0, (int) $this->{$property}->{$method}( $site_id ) );
+		return 'remote_actions' === $property ? $this->{$property}->counts_by_site_ids( $site_ids, $non_terminal ) : $this->{$property}->counts_by_site_ids( $site_ids );
 	}
 }

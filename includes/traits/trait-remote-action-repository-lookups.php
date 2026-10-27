@@ -183,6 +183,50 @@ trait Alynt_Drime_Backups_Dashboard_Remote_Action_Repository_Lookups {
 	}
 
 	/**
+	 * Counts retained action rows in batches, keeping each count kind independent.
+	 *
+	 * Failed grouped reads use the corresponding existing scalar reader once per
+	 * affected site. Empty groups are zero, not failed queries requiring fallback.
+	 *
+	 * @param array<int> $site_ids Site IDs, normalized like the scalar readers.
+	 * @param bool       $non_terminal Count only the existing non-terminal states.
+	 * @return array<int,int>
+	 */
+	public function counts_by_site_ids( array $site_ids, $non_terminal = false ) {
+		global $wpdb;
+		$site_ids = array_values( array_unique( array_filter( array_map( 'absint', $site_ids ) ) ) );
+		$counts   = array_fill_keys( $site_ids, 0 );
+		if ( empty( $site_ids ) ) {
+			return $counts;
+		}
+		$table = Alynt_Drime_Backups_Dashboard_Storage::actions_table();
+		$state = $non_terminal ? " AND state IN ('queued_for_dispatch', 'accepted', 'running')" : '';
+		foreach ( array_chunk( $site_ids, 50 ) as $batch ) {
+			$placeholders = implode( ',', array_fill( 0, count( $batch ), '%d' ) );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Independent plugin-owned aggregate, no persistent cache.
+			$rows = $wpdb->get_results(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Trusted table, fixed state clause and generated integer placeholders; all site values are prepared.
+				$wpdb->prepare( "SELECT dashboard_site_id, COUNT(*) AS row_count FROM {$table} WHERE dashboard_site_id IN ({$placeholders}){$state} GROUP BY dashboard_site_id", $batch ),
+				ARRAY_A
+			);
+			if ( ! is_array( $rows ) || ! empty( $wpdb->last_error ) ) {
+				foreach ( $batch as $site_id ) {
+					$counts[ $site_id ] = max( 0, $non_terminal ? $this->count_non_terminal_for_site( $site_id ) : $this->count_for_site( $site_id ) );
+				}
+				continue;
+			}
+			$batch_ids = array_fill_keys( $batch, true );
+			foreach ( $rows as $row ) {
+				$site_id = (int) $row['dashboard_site_id'];
+				if ( isset( $batch_ids[ $site_id ] ) ) {
+					$counts[ $site_id ] = max( 0, (int) $row['row_count'] );
+				}
+			}
+		}
+		return $counts;
+	}
+
+	/**
 	 * Reads one action row by internal ID.
 	 *
 	 * @param int $action_id Action ID.
