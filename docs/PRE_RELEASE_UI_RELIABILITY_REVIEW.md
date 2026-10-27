@@ -457,3 +457,20 @@ Snapshot Latest-Selection Consistency Safety Foundation; no behavioral fix under
 the completed retention-proof authority.05 inventory closure/06 stay pending;
 do not infer full05 complete from this proof alone. Toolkit/uploader remain
 untouched, V2.3 deferred, cumulative product count4/8 unchanged by native proof.
+
+## Approved snapshot latest-selection consistency — 2026-10-27
+
+User separately approved repository-only highest-ID current lookup, preserving
+history/retention/schema/guards. See [the scoped source/test/review receipt](SNAPSHOT_LATEST_SELECTION_CONSISTENCY_FOUNDATION.md),
+baseline bdde4daf37ec65fe34ad89117c9df3d6b07be7ec. One current SELECT ORDER BY
+and docblock changed; no dispatcher, guard, history/retention SQL, schema or site
+change. Actual repository/dispatcher over query-sensitive doubles: original8 new
+cases7 behavioral failures, final11new+3existing14/71 green; wrong-site/LIMIT
+controls assertion-killed and exact-SHA restored, randomized rerun green.
+Full local388/2039 (same two Sodium skips), Node16/16, PHPCS155, syntax/structure/
+build/strict manifest/audits/diff pass. Focused canonical Light,07 then07A and
+final Feature Security are source-scoped, not historical whole-plugin completion.
+Publication/exact-head CI pending; count5/8 only after verification. Resume
+canonical05 repository-only inventory/finding reconciliation before06; native
+query/installed qualification and toolkit publication require separate authority.
+No new site/SQL/WordPress/HTTP operation, package/release/tag/deploy. V2.3 parked.

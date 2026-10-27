@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved snapshot latest-selection consistency — 2026-10-27
+
+The user approved the repository-only foundation identified during05 source
+reconciliation. See [the scoped implementation/review/test receipt](SNAPSHOT_LATEST_SELECTION_CONSISTENCY_FOUNDATION.md).
+Single-site current reads now use highest ID, matching fleet/retention; history
+remains observed_at/id ordered. Retention SQL, schema/indexes, version0.1.77 and
+all capability/auth/key/origin/signing guards unchanged. Tests cover regressed/
+tied/forward timestamps, site separation, empty/corrupt payloads and actual
+dispatcher acceptance/rejection using isolated API/IO doubles only. No site work.
+Initial8 cases7 failures; final new11+existing3 cases14/71 green, two assertion-
+killed/restored controls and randomized rerun. Full local388/2039 with two known
+Sodium skips; lint/build/structure/Node/audits pass. Publication/exact-head CI
+pending; product count becomes5/8 only after verification. No new native proof,
+schema/schedule/retention execution, remote action, package/release/tag/deploy.
+Then continue canonical05 repository-only complete inventory/finding reconciliation
+before06, not another synthetic/native milestone. Broader physical/installed
+qualification and shared toolkit publication stay separately gated; no whole05/
+07/07A/13/FULL completion. Uploader/toolkit unchanged, V2.3 stays parked.
+This current routing supersedes the dated approval gates below.
+
 ## Approved retention owned proof — 2026-10-27
 
 The next main-work gate was approved and Plugin Tester local-only target/owned

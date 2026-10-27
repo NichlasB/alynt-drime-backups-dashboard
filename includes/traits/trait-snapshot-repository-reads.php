@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 trait Alynt_Drime_Backups_Dashboard_Snapshot_Repository_Reads {
 	/**
-	 * Gets the latest snapshot for one site.
+	 * Gets the highest-ID snapshot, matching fleet reads and retention protection.
 	 *
 	 * @since 0.1.0
 	 *
@@ -30,7 +30,7 @@ trait Alynt_Drime_Backups_Dashboard_Snapshot_Repository_Reads {
 		$table = Alynt_Drime_Backups_Dashboard_Storage::snapshots_table();
 		$row   = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE dashboard_site_id = %d ORDER BY observed_at DESC, id DESC LIMIT 1",
+				"SELECT * FROM {$table} WHERE dashboard_site_id = %d ORDER BY id DESC LIMIT 1",
 				(int) $site_id
 			),
 			ARRAY_A
