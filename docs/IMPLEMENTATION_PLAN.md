@@ -11,8 +11,11 @@ repeated processing is established, but no production CPU/latency impact justifi
 the freshness/hook/alias complexity. This is a decision, not a runtime fix or a
 new implementation obligation. Proof5980b298ae4bff3b92e4c07ce85693dd1c809374 passed
 [CI40532441474](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40532441474):
-PHP7.4/8.3 each435/2923 no skips/failures; Node16/16. Design publication/CI pending;
-safe-local progress remains7/8 until verified, then8/8. The eighth task is design/
+PHP7.4/8.3 each435/2923 no skips/failures; Node16/16. Published design
+b5af59366241e6b13c42a9720a8aa65297e5d4d0 passed
+[CI40534457864](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40534457864):
+PHP7.4/8.3 each440/2944 no skips/failures; Node16/16, all configured gates.
+Cumulative safe-local ceiling **8/8 complete**. The eighth task is design/
 disposition; native proofs/tests/docs closeouts do not become additional tasks.
 Current06 inventory: two query findings repaired and physically qualified, CPU
 optimization deferred; no whole-plugin/checklist completion inferred. Next gated

@@ -90,10 +90,15 @@ E90BCCA58F3A87E98348A0E650D0E0548A0933E710D37218AA7D5AA0A0A0B2D1.
 
 Local full440 tests/2,937 assertions with two known missing-Sodium skips; new5/21
 and related randomized seed20261027 suite7/23 pass with no skips. Lint/structure
-pass; all runtime/native-proof/generated files remain unchanged. Exact-head CI
-publication remains pending. The
-task counts as one completed design/disposition slice only after commit, push
-and exact-head CI; it is not a shipped runtime feature or the separate proof.
+pass; all runtime/native-proof/generated files remain unchanged. Published design
+b5af59366241e6b13c42a9720a8aa65297e5d4d0 passed
+[exact-head CI40534457864](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40534457864):
+PHP7.4/8.3 each440/2944, no skips/failures; Node16/16 and all configured gates,
+zero audit advisories/vulnerabilities. Actual counts retrieved from both job logs;
+remote master matched the clean design head. This completes the cumulative
+safe-local ceiling **8/8**; the eighth task is design/disposition, not a shipped
+runtime cache or the separately approved physical proof. This record-only
+closeout changes no tested source; CI does not rerun native/WordPress operations.
 
 ## Implementation-plan reconciliation and next gate
 

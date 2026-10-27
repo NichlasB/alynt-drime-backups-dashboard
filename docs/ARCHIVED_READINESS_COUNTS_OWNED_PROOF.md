@@ -113,3 +113,8 @@ safe-local batch authority, the next worthwhile task is the remaining source-
 policy read-cost/freshness design with isolated input counterexamples, no runtime
 or option writes. Complete that design as the final safe-local slot; do not assume
 permission to implement a new cache/freshness contract or run another site proof.
+Subsequently, the [source-policy decision](SOURCE_POLICY_READ_COST_DECISION.md)
+completed with5 isolated cases21 assertions and exact-head CI40534457864;
+cumulative safe-local ceiling8/8 is reached. Memoization is intentionally
+deferred, not wired. Follow that record for the current toolkit-only approval
+gate; this native proof remains complete and requires no further site rerun.
