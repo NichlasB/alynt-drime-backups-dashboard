@@ -1,5 +1,14 @@
 # Source-Policy Off-Production Linux Environment Preflight
 
+## Follow-on checkpoint — 2026-10-28
+
+The separately approved [owned identity/socket audit](SOURCE_POLICY_LINUX_SERVER_IDENTITY_AUDIT.md)
+now observes the actual mysqli/SQL version10.11.18-MariaDB-ubu2204 and Unix-socket
+connectivity, with independent release/empty-state snapshots and exact cleanup.
+It does not change the historical no-database preflight scope/results below or
+qualify the adapter. Current next gate is the exact-build/diagnostic qualification
+design in that audit record, not another instance or silent profile broadening.
+
 ## Authority, target and baseline — 2026-10-28
 
 Approved next slice from the [fixed transport/charset foundation](SOURCE_POLICY_FIXED_TRANSPORT_CHARSET_FOUNDATION.md).

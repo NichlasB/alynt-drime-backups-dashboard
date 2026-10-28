@@ -104,12 +104,72 @@ Database Review, UI workflow or whole-plugin release readiness is claimed.
 Runtime/includes, manual proofs, old preflight/ordinary CI, assets/dependencies,
 version/schema, all profile guards and production wiring remain byte-unchanged.
 
-Publication, exact-head ordinary CI and one approved audit dispatch are pending.
-Report actual source/run, normalized wire+SQL identity, snapshots/diagnostics and
-cleanup; do not infer success from local DATA checks or the binary banner.
+Implementation `d48b8f1243a466f21c01135a3a18dbb06bebf600` is pushed.
+[Ordinary exact-head CI40783364418](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40783364418)
+succeeded: actual PHP7.4/8.3 each1,986 tests/8,545 assertions, no failures/skips;
+admin16/16/0 skipped each, all configured gates successful. GitHub registered
+manual workflow399989831 as active. Static packaging inspection confirms scripts,
+tests/docs/.github are excluded by the existing release workflow; no ZIP ran.
 
-Implementation-plan progress: the missing owned identity/socket observation is
-prepared. Next gate depends on actual evidence. A build-row mismatch requires an
-explicit exact-row compatibility decision before a larger native proof. No
-admission broadening, adapter experiment or new application milestone follows
-from this audit authority.
+One [owned audit40783576271](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40783576271)
+ran at exact implementation head, workflow_dispatch/job123151060272, all steps
+successful in25s (2026-10-28 22:55:17–22:55:42 UTC). Fresh unchanged preflight
+observed PHP/mysqlnd8.5.12,11 core7.1.4 pins, zero connections/queries before the
+audit and the same CLI/module digests recorded in its owning record; exact
+preflight resources were removed before the owned database instance.
+
+Actual identity audit evidence:
+
+- mysqli API-normalized greeting version and SQL VERSION() both
+  `10.11.18-MariaDB-ubu2204`; host info `Localhost via UNIX socket`.
+- Server comment `mariadb.org binary distribution`, machine x86_64,
+  compile OS debian-linux-gnu, socket /run/adb-owned/native.sock. This is the
+  container path alias of the private host socket, not a production path.
+- no_tcp/read_only/autocommit each1; in_transaction0; CURRENT_USER root@localhost,
+  connection ID4. No report-mode toggle: this CLI audit requires3, not a claim
+  that genuine WordPress selected OFF or authenticated any application user.
+- Before, during and independent post-close: zero other sessions, all-server
+  INNODB_TRX and application schemas. The PHP client executed exactly one SELECT
+  and returned close_ack=true. Three outer audit client SELECTs total; vendor
+  system-table bootstrap SQL is separate and not represented as zero writes.
+- Normal server stop verified not running/exited0/OOMKilled=false; bounded logs
+  include ready-for-connections and Shutdown complete. Exit and always cleanup
+  each report containers0/directories0/database tmpfs released. No retained
+  application fixtures, WordPress state or installed lifecycle state existed.
+
+Retained diagnostics, not suppressed or accepted as a qualification policy:
+
+- Fresh version-only preflight again emitted MAC-address retrieval warning.
+- bootstrap.log2,137 bytes, SHA256
+  `ac7dc5f98381cbd6834c0a97a5d99fa74364a95b14fcfa81cce6f5ffc4535733`:
+  MAC warning, two WSREP base-address warnings, one WSREP incoming-address warning,
+  and io_uring_queue_init EPERM/kernel.io_uring_disabled diagnostic.
+- server.log3,135 bytes, SHA256
+  `11b35a8dd6b7e6b9a6f0ab985a97c40609c32271c53279a1b9b330f6f5d9e784`:
+  WSREP address warnings, io_uring EPERM, and two ignored hostname/proxy privilege
+  entries under --skip-name-resolve, followed by ready/shutdown records.
+  The hostname is an ephemeral container ID, not an existing user/site identity.
+- Filtered retained warning/error/start/stop records contain no ERROR line;
+  this is not a full raw-log or harmless-warning classification. No server IO,
+  network, account, acceptance or warning-suppression setting was changed and
+  no second attempt ran. Successful metadata reads do not qualify those contexts
+  for the full initializer, escape/CAS/failure or WordPress integration lanes.
+
+This closes the owned socket/version observation, not native adapter admission.
+Source inspection shows the current core7.1.4 exact candidate is
+`10.11.18-MariaDB`, which differs from the actual normalized guard input. The
+adapter/initializer was not invoked, so no actual native-owner refusal/success
+is claimed. No prefix/suffix wildcard or supported-build list was broadened.
+Evidence-only final-head CI/status is verified separately at handoff; native
+observations belong to d48b8f1, not silently to the documentation closeout head.
+
+Implementation-plan progress: missing intended-lab Unix-socket/wire identity
+observation completed; the next meaningful step is an exact-build/qualification
+policy decision, not generic safe-local maintenance. Recommended next gated
+slice: **Repository-only Linux Exact-Build Admission and Diagnostic Qualification
+Design**, using actual10.11.18-MariaDB-ubu2204 evidence and retained diagnostics.
+Specify the precise code-owned row, preservation of historical Windows/minimum
+lanes, CLI/report3 vs genuine core/OFF constraints, and warning/resource-profile
+proof requirements before any implementation or larger native proof. Keep
+database/native execution and production wiring disabled during that design;
+do not use current observations as permission to ignore warnings or add wildcards.

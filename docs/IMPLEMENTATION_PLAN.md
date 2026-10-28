@@ -10,9 +10,19 @@ owned, no application schema/WordPress/adapter execution. Private socket, bounde
 tmpfs/processes, strict label/path cleanup, diagnostics retained. All application
 guards/wiring and existing proof/preflight bytes unchanged. Local24/64, combined
 30/96 and full1986/8538 pass, two existing Sodium skips; four DATA controls killed
-and hash restored, other QA in owning record. Publication/CI/one audit pending.
-Implementation-plan progress: prepares actual socket/wire identity evidence;
-supported-row decision/native qualification remains gated by the observed result.
+and hash restored, other QA in owning record. Implementationd48b8f1/
+CI40783364418 succeeds: PHP7.4/8.3 each1986/8545, no failures/skips, admin16/16.
+One owned audit40783576271 passed in25s at exact head after fresh prerequisites:
+mysqli/SQL10.11.18-MariaDB-ubu2204 over Unix socket, baseline/during/post0 other
+sessions/trx/app schemas, one PHP query/close acknowledged, normal server exit0,
+owned container/directories/tmpfs removed. MAC/WSREP/io_uring/ignored hostname
+warnings retained, no suppression or profile change. Current exact candidate
+10.11.18-MariaDB does not match; adapter was not invoked. Final evidence-only
+CI checked separately at handoff. Implementation-plan progress: actual intended-
+lab socket/wire observation complete; supported-row/diagnostic policy is gated.
+Recommended next gated slice: Repository-only Linux Exact-Build Admission and
+Diagnostic Qualification Design, actual suffix/retained warning context,
+Windows/minimum and core-OFF preservation; design-only, execution/wiring disabled.
 
 ## Off-production Linux environment — approved preflight — 2026-10-28
 
