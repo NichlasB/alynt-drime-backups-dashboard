@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Native bootstrap revalidation — failed-connect session accounting — 2026-10-28
+
+Separately approved and exact-target-confirmed Plugin Tester local-only
+[proof](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md#fresh-revalidation--failed-initial-connect-session-accounting--2026-10-28),
+clean/synced `6a26e2a9626bcd2211578c130d85918a182e2dd0`. Genuine error audit25/6
+now verifies exact quiet owned results and positive core-hook controls; source/
+capability audit31 checks opens no native session/SQL/fixture. One empty owned
+schema clone and one ordered proof; four preflight cases pass, then failure in
+missing-database after94 checks at “no retained native session.” Missing-table/
+positive cases unexecuted; actual live-process counter value/cause not established.
+Exact clone removed after0-row preview; all77 application checksums identical,
+zero owned tables/databases/other local sessions/active transactions. No retry,
+runtime/harness/guard/budget/wiring or installed-state change. Focused isolated
+gates54/73 and full local1557/7022 (two existing Sodium skips), Node16/16/all
+configured local gates/zero-advisory audits pass; publication CI pending. Safe-local count unchanged;
+genuine error acceptance advanced, native qualification/lost-update repair remain
+open. Next gated slice: Plugin Tester local-only Failed-Initial-Connect Cleanup
+and mysqlnd Session-Accounting Owned Diagnosis, bounded harness-only observations
+and fresh target confirmation, not a guard relaxation or automatic proof retry.
+
 ## Manual bootstrap error-evidence readiness — 2026-10-28
 
 Autonomous safe-local R1 test/manual-audit task from clean/synced

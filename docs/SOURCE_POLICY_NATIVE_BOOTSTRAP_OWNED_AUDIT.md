@@ -1,5 +1,10 @@
 # Native Bootstrap Owned Qualification — Blocked at Genuine Error-Hook Refusal
 
+Current status: the [fresh approved revalidation](#fresh-revalidation--failed-initial-connect-session-accounting--2026-10-28)
+below passes the genuine error audit but stops at failed-initial-connect session
+accounting. The earlier error-hook failure remains historical, not the current
+stop point. Native qualification is still incomplete.
+
 Later approved [repository-only repair](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
 2026-10-28, implements hook-silent owned error DATA/classification with isolated
 tests. It does not rerun or resolve this native proof. Manual sources now expect
@@ -173,3 +178,83 @@ later use of is_wp_error. Do not disable/remove shared hooks or weaken guards.
 Keep actual authentication/storage/native execution, public factories and
 production wiring disabled. After validation/CI, a fresh owned native proof
 needs separate approval and exact target/fixture confirmation.
+
+## Fresh revalidation — failed-initial-connect session accounting — 2026-10-28
+
+Separately approved R3 proof, fresh exact target/owned-fixture confirmation:
+`plugin-tester`, `local-only`, LocalWP “Plugin Tester”,
+`http://plugin-tester.local`, WordPress at
+`C:\Users\Captain\Local Sites\plugin-tester\app\public`, database10004/web10005.
+Clean/synced restore point `6a26e2a9626bcd2211578c130d85918a182e2dd0`.
+Novamira HQ guide and complete inventory read; exact URL profile present.
+Resolved LocalWP metadata and OS listeners match; no service restart or change.
+No WordPress Ability, HTTP request or application bootstrap was executed.
+Only this record and the implementation plan change. Existing runtime, harness,
+tests, dependencies, source pins, guards, budgets and wiring are byte-unchanged.
+Uploader/toolkit and historical whole-plugin readiness/task counts stay untouched.
+
+Audit before fixtures:
+
+- Bundled PHP8.5.12/mysqlnd8.5.12, mysqli-only capability profile; required bounded
+  connection/read/local-infile options available. MariaDB10.6.23; autocommit1,
+  in_transaction0; expected four-column InnoDB options schema and indexes.
+- No db.php/object-cache.php/advanced-cache.php drop-in; installed core7.1.3.
+  Installed DB_CHARSET=utf8/DB_COLLATE empty is unchanged. The private fixture
+  profile is still utf8mb4/empty, not installed-configuration compatibility.
+- Driver-free genuine error audit: **25 checks/6 groups**, exact ordinary
+  WP_Error unavailable code/empty message/data for owned refusals. Core coded
+  construction emits wp_error_added and core classification emits
+  is_wp_error_instance; actual closed factory/admission/query/private-bootstrap
+  operations emit no error hooks. Handle-free lifecycle/registration cleanup
+  passes. **Zero native sessions/SQL/fixtures** in this audit.
+- Genuine executable/capability preflight: **31 checks**, all eight source pins
+  matched; **zero native sessions/SQL/fixtures**. This includes the newly loaded
+  error helper; the earlier30-check count is not reused.
+- Initial inspection used the resolved bundled mysql.exe directly with temporary
+  MYSQL_PWD restored afterward. No secrets/application values were printed.
+  Ordered77-table names/checksums recorded; no old owned fixture or transaction.
+
+Read-only absence preview verified the exact clone, missing-table and missing-
+database controls absent. Created only `adbb_a6e7628ce191_options LIKE wp_options`,
+an empty schema-only clone; no application rows were copied. Invoked the fixed
+ordered proof **once**. Default, wrong-source, all and incompatible_sql_modes
+cases completed their assertions. The proof then stopped at **missing-database,
+94 checks**, with fixed label **“no retained native session”**. The preceding
+one-failed-initial-connect/no-SQL/no-retry and repeated-cleanup assertions passed,
+but no completed per-case counter report was emitted. Do not infer an exact
+active_connections value, a confirmed leak, or correct native-close accounting.
+Missing-table and positive cases did not execute. No positive native bootstrap,
+physical escaping round trip or full partial-release qualification is claimed.
+
+Finally cleanup previewed exactly0 fixture rows, dropped only that exact clone
+and independently confirmed zero owned tables/databases, zero other local
+sessions and zero active transactions. **77/77 application table names/checksums
+were identical** to this task's baseline. Principal installed load/error/wpdb
+hashes were rechecked unchanged. Process-terminal reconciliation does not prove
+the failed live-process mysqlnd assertion or explain its cause. No native retry,
+process/statistics experiment, implementation or guard adjustment followed.
+
+Focused isolated evidence/early-entry gates pass54 tests/73 assertions; full
+local PHP1557/7022 with only two existing missing-Sodium signing skips. Node16/16,
+PHPCS196 files, structure148 runtime/215 support/184 tests/181 class names, build,
+strict Composer manifest and zero-advisory Composer/npm audits pass. Commands:
+php vendor/bin/phpunit with the EvidenceTest|OwnedProofGateTest filter and full
+--verbose --do-not-cache-result; npm lint/test:admin/check:structure/build;
+php composer.phar validate --strict/audit; npm audit --audit-level=moderate.
+Diff hygiene and scope review pass: only the two owning records changed, no
+runtime/harness/test/CI/source-pin edits or new success expectations. No UI/UX
+or whole-plugin review completion is claimed. Exact-head publication CI is
+pending. Repository QA does not replace the failed genuine proof.
+
+Implementation-plan progress: genuine hook-silent error revalidation now passes,
+and the ordered proof advanced to failed-connect cleanup/session accounting.
+Native setup/adapter acceptance, minimum-core/configuration matrix and actual
+lost-update repair remain open. This separately approved proof is not another
+safe-local task or release-readiness completion.
+
+Recommended next gated slice: **Plugin Tester local-only Failed-Initial-Connect
+Cleanup and mysqlnd Session-Accounting Owned Diagnosis**. Request fresh exact
+target/scope confirmation, add bounded harness-only observations as needed and
+distinguish failed-connect counter semantics from actual owned-handle closure.
+No guard/budget weakening, production wiring or automatic ordered-proof retry;
+any runtime repair or new qualification attempt requires its own bounded approval.
