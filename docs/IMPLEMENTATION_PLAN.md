@@ -14,7 +14,10 @@ all runtime/guards/budgets/wiring unchanged; no qualification retry or DDL/DML.
 All77 application checksums identical, zero owned fixtures/other local sessions/
 transactions. New11 isolated cases/44 assertions, focused65/117, full local
 1568/7066 (two baseline Sodium skips), Node16/16/all configured local gates and
-zero-advisory audits pass; publication CI pending. Safe-local count unchanged. Diagnosis/cause and native qualification
+zero-advisory audits pass. Harness/evidence7a67b82e447d01524c56de5982537595f4f4577a
+passed [exact-head CI40704732824](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40704732824):
+PHP7.4/8.3 each1568/7073, no failures/skips; Node16/16/all gates pass, no genuine
+diagnostic executed by CI. Safe-local count unchanged. Diagnosis/cause and native qualification
 remain incomplete. Next gated slice: Plugin Tester local-only Exception-Stage
 Failed-Connect Cleanup Diagnosis and One Raw/Owner Comparison, fresh exact target
 confirmation, one bounded comparison, no ordered qualification or runtime repair.

@@ -339,8 +339,12 @@ Commands: focused EvidenceTest|OwnedProofGateTest and full php vendor/bin/phpuni
 php composer.phar validate --strict/audit; npm audit --audit-level=moderate;
 explicit php -l and scope/preservation checks. Scoped review confirms fixed
 local modes, preserved credential/source gates, no raw exception messages and no
-runtime/native-case assertion change. Exact-head publication CI remains pending;
-no whole-plugin review row is refreshed. CI does not run genuine diagnostics.
+runtime/native-case assertion change. Harness/evidence commit
+`7a67b82e447d01524c56de5982537595f4f4577a` passed
+[exact-head CI40704732824](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40704732824):
+actual PHP7.4/8.3 each1568 tests/7073 assertions, no failures/skips; Node16/16,
+all configured gates and zero-advisory audits pass. No whole-plugin review row
+is refreshed. CI does not run genuine diagnostics or establish the native cause.
 
 Implementation-plan progress: the approved diagnosis exposed an ambiguous
 exception-reporting boundary but did not establish failed-connect cleanup or
