@@ -12,7 +12,9 @@ off-production native gates and unchanged minimum/core/schema/ownership safety.
 Only design/plan/forward records; no runtime/site/native/storage/wiring changes.
 Implementation-plan progress: concrete deployment compatibility lane defined,
 not an enabled production connection or completed application race repair.
-Local QA/publication in owning record. Next gated slice: repository-only
+Local QA/publication in owning record: designfebfd58/CI40775446488 succeeds,
+PHP7.4/8.3 each1885/8219, no skips/failures, Node16/16/all gates pass; docs closeout
+separately exact-head checked. Next gated slice: repository-only
 Source-Policy Fixed Transport and Core-Derived Charset Safety Foundation,
 isolated API/IO tests only; actual auth/storage/native execution/wiring disabled.
 

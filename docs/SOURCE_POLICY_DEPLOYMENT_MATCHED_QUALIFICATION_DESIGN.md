@@ -265,8 +265,13 @@ Actual local validation on PHP8.5.1:
   Uploader/toolkit remain clean at unchanged heads; no rollout tracker write.
 
 No tests, guard mutations or runtime changes were added for this docs-only task.
-Public primary sources were consulted, not installed/site profiles. Exact-head
-publication evidence follows; green CI does not qualify the candidate native row.
+Public primary sources were consulted, not installed/site profiles. Design
+`febfd585f02e1cc641d711565c10197d9a3ac806` is pushed and passed
+[exact-head CI40775446488](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40775446488).
+Actual PHP7.4/8.3 logs each1,885 tests/8,219 assertions, no failures/skips;
+Node16/16 on both/all configured gates pass. Both check-run heads match. This
+evidence-only closeout preserves non-document bytes and receives separate pushed
+exact-head CI before handoff. Green CI does not qualify the candidate native row.
 
 Implementation-plan progress: converts the approved static deployment audit into
 a finite off-production compatibility/qualification plan. Production connection
