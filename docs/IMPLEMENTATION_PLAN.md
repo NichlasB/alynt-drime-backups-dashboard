@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved core placeholder/connection-lifecycle design — 2026-10-28
+
+Repository-only [design](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_DESIGN.md),
+clean/synced756298a1aa9d631effceb2b66a63f09bdfb9810c. Exact owned receiver plus
+optional already-qualified ambient core wpdb, bounded two-entry query pipeline,
+core method provenance, preparation-before-fingerprint and post-prepare recheck;
+exact independent native/callback cleanup with retained uncertainty. Arbitrary
+query transformers remain refused. Documentation only; no runtime/test/manual
+script/site/native/wiring change or new qualification. Existing isolated related
+378/1405 randomized seed20261028 and structure pass; scoped links/diff/non-doc
+baseline identity pass. Exact-head CI pending.
+Native proof and application lost-update repair remain open; prior8/8 not inflated.
+Recommended next gated slice: repository-only Source-Policy Fixed Core
+Placeholder-Escape Admission and Owned Lifecycle Safety Foundation, isolated
+API/driver/IO only, with factories/authentication/storage/native execution and
+production wiring disabled. Resume owned native proof only after that contract
+is implemented and with fresh exact target/readiness/preservation checks.
+
 ## Approved non-reconnecting native proof — audit blocked — 2026-10-28
 
 Fresh confirmed Plugin Tester local-only scope; clean/synced93f391321506c04af32d6dce1bdf2f337d087776.

@@ -1,5 +1,12 @@
 # Fixed Non-Reconnecting Connection / Native Adapter Audit — Blocked
 
+Later design-only decision,2026-10-28: the
+[core placeholder/lifecycle design](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_DESIGN.md)
+specifies a bounded exact-receiver exception and its acceptance/cleanup gates.
+It does not change the runtime guard or rerun this probe. Native qualification
+remains blocked pending isolated implementation and genuine owned evidence;
+the original nine-check audit and preserved-state results remain historical.
+
 ## Authority, restore point and outcome — 2026-10-28
 
 Approved R3 Plugin Tester local-only Fixed Non-Reconnecting Connection

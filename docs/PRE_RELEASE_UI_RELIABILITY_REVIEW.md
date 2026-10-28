@@ -1,5 +1,19 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Core placeholder admission/lifecycle design — 2026-10-28
+
+[Repository-only design](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_DESIGN.md)
+specifies exact core callback receivers/provenance, preparation/recheck order
+and owned-only cleanup, not an implemented query exception or editable UI path.
+No runtime/form/handler/manual proof/test/site/native change. Existing isolated
+related378/1405 randomized seed20261028 and structure pass; scoped links/diff/
+baseline identity pass. Exact-head CI pending. Genuine authentication/native/
+cache/UI acceptance, minimum-core matrix,
+production lost-update repair and whole07/07A/13/FULL remain open. Next gated
+slice: repository-only Source-Policy Fixed Core Placeholder-Escape Admission
+and Owned Lifecycle Safety Foundation, isolated tests only, all factories and
+actual authentication/storage/native/wiring disabled. Toolkit rows unchanged.
+
 ## Non-reconnecting native audit blocked before fixtures — 2026-10-28
 
 [Confirmed local-only audit](SOURCE_POLICY_NON_RECONNECTING_NATIVE_AUDIT.md)
