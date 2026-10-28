@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Per-case native cleanup controller — blocked before native bodies — 2026-10-28
+
+Approved/confirmed Plugin Tester local-only [owned integration checkpoint](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md),
+baseline06936742b120623f2c721648da028d3f18c83e36. Genuine error25/6 and source31
+prerequisites pass; bounded owned stdio18/5 and combined isolated115/375 pass.
+One empty schema clone created; one controller invocation stops at fixture-audit
+after14 stderr bytes, completed0. Static query has an extra closing parenthesis;
+original server error code unavailable. Raw/all seven native owner cases unrun.
+No retry or native qualification. Exact empty clone removed; all77 application
+checksums identical, zero fixtures/all-server sessions/transactions. Runtime,
+current proof/acceptance and production wiring unchanged; uploader/toolkit untouched.
+Local full1683/7441 (two existing Sodium skips), Node16/16/all configured gates pass;
+exact-head publication closeout pending. Implementation-plan progress: bounded
+transport/preflight advanced, physical qualification and lost-update repair open.
+Next gated slice: Plugin Tester local-only Harness-Only Fixture-Audit SQL Projection
+and Safe Observer Diagnostics Repair, then One Fresh Ordered Cleanup Proof, with
+fresh prerequisites, owned fixtures/cleanup and preserved guards/budgets/wiring.
+
 ## Terminal revocation and cleanup evidence foundation — 2026-10-28
 
 Separately approved one-line terminal qualification revocation unblocks the

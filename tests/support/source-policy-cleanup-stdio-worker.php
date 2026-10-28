@@ -1,0 +1,13 @@
+<?php
+/** Fixed socket-free bounded-pipe fixture, never native sessions or WordPress. */
+if (defined('ABSPATH')) { return; }
+if(PHP_SAPI!=='cli'||count($argv)!==3||$argv[1]!=='--private-socket-free-stdio'||extension_loaded('mysqli')||extension_loaded('pdo_mysql'))exit(2);
+if('overflow'===$argv[2]){echo str_repeat('x',16385);exit(0);}
+if('stderr'===$argv[2]){fwrite(STDERR,str_repeat('private-secret-probe',400));exit(0);}
+if('exit1'===$argv[2])exit(1);
+if(!in_array($argv[2],array('normal','hold'),true))exit(2);
+echo "ready\n";fflush(STDOUT);
+$ack=fgets(STDIN,128);
+if('hold'===$argv[2])exit(false===$ack?0:1);
+if("ACK\n"!==$ack)exit(1);
+echo "done\n";
