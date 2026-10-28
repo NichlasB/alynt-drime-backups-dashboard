@@ -11,7 +11,9 @@ ambient identity/callback preservation, minimum/intended-profile acceptance and
 one cohesive factory/facade/form/legacy switch. All runtime, ADBC1/ADBC2/manual
 images and actual wiring remain unchanged; no native/site/storage operation.
 Implementation-plan progress: production admission/qualification path is explicit,
-not an enabled lost-update repair. Local QA/publication in owning record.
+not an enabled lost-update repair. Local QA/publication in owning record:
+design4959202, CI40766956606 successful; PHP7.4/8.3 each1874/8166, admin16/16,
+no CI skips/failures. Evidence-only closeout is separately exact-head checked.
 Next gated slice: Plugin Tester local-only Source-Policy Core-Owned Ambient/
 Report-OFF Qualification and Owned Cleanup Proof, audit-first with fresh exact
 target/owned fixture scope; no application state or production wiring changes.

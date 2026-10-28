@@ -247,7 +247,14 @@ Local validation on PHP 8.5.1:
 No tests/semantic controls were added for this documentation-only design.
 Actual prepare/placeholder helper provenance and ambient callback preservation
 belong to the qualified profile, not merely a matching method name.
-Exact-head publication evidence follows after the design commit.
+
+Publication: design commit `4959202ecd483909c93e44b262207816b450cb23` is pushed;
+exact-head [CI40766956606](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40766956606)
+succeeded. Actual logs: PHP 7.4 and 8.3 each 1,874 tests / 8,166 assertions, no
+skips/failures; admin 16/16 with no skips/failures on both jobs. Manifest,
+dependency audits, build, structure and PHPCS passed; audits report zero known
+advisories/vulnerabilities. This evidence-only closeout receives separate pushed
+exact-head CI verification before handoff; it is not a native qualification.
 
 Implementation-plan progress: turns current native evidence into a concrete
 production-admission and ordered qualification plan. The safe design lane advances,
