@@ -9,7 +9,10 @@ connections, assertion-killed guard control then exact restoration. Metadata/
 checksum reconciliation preserves all77 application tables; no fixture/native
 construction, actual UI/handler/authentication acceptance or wiring change.
 Full local1212/5363 with two known Sodium skips, Node16/16/all local gates/audits
-pass; exact-head CI pending. Native qualification, real lost-update repair
+pass. Audit checkpoint7a9e6bf014240b8fc5f39eee9b44625a6d16d749 passed
+[exact-head CI40657855729](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40657855729):
+actual PHP7.4/8.3 each1212/5370, no failures/skips, Node16/16/all gates and zero
+advisories. Native qualification, real lost-update repair
 and whole07/07A/13/FULL stay open; historical toolkit evidence not refreshed.
 Next gated slice: repository-only Source-Policy Genuine-Core Placeholder-Escape
 Admission and Connection-Lifecycle Compatibility Design, design-only; preserve

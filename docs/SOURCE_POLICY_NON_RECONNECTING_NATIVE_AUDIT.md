@@ -106,8 +106,13 @@ tests/5363 assertions passes with only the two existing missing-Sodium signing
 skips; Node16/16, PHPCS185 configured files, structure142 runtime/209 support/
 174 test files, build and strict Composer manifest pass. Composer/npm audits:
 zero advisories. Diff hygiene, scoped links, runtime/test/asset/config baseline
-identity and non-target clean-state checks pass. Exact-head publication evidence
-is pending; isolated QA success does not remove this native qualification block.
+identity and non-target clean-state checks pass. Audit checkpoint
+`7a9e6bf014240b8fc5f39eee9b44625a6d16d749` passed
+[exact-head CI40657855729](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40657855729).
+Actual PHP7.4/8.3 job logs each1212 tests/5370 assertions, no failures/skips;
+Node16/16, all configured gates pass, audits report zero advisories. Hosted CI
+does not run the installed-core probe or native proof. This successful isolated
+publication verification does not remove the native qualification block.
 
 Feature Light scope: one manual audit plus owning records and unchanged
 prepare/profile caller context. Risk: backend compatibility and isolated

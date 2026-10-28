@@ -11,7 +11,10 @@ SHA256-restored guard control. Bundled-mysql metadata/checksum reads only;
 all77 application tables unchanged, zero fixtures created/retained. Native
 construction/qualification did not run; runtime/factory/form/wiring unchanged.
 Full local1212/5363 with two baseline Sodium skips, Node16/16/all local gates/
-zero-advisory audits pass; exact-head CI pending. No completed native/task-count credit; previous
+zero-advisory audits pass. Audit checkpoint7a9e6bf014240b8fc5f39eee9b44625a6d16d749 passed
+[exact-head CI40657855729](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40657855729):
+actual PHP7.4/8.3 each1212/5370, no failures/skips, Node16/16/all gates and zero
+advisories. No completed native/task-count credit; previous
 isolated evidence remains scoped, not genuine preparation/driver acceptance.
 Recommended next gated slice: repository-only Source-Policy Genuine-Core
 Placeholder-Escape Admission and Connection-Lifecycle Compatibility Design,
