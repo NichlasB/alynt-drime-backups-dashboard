@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Exception-stage comparison — cleanup evidence contract gate — 2026-10-28
+
+Approved/confirmed one Plugin Tester local-only [raw/owner comparison](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md#exception-stage-comparison--closed-owner-and-wrapped-counter--2026-10-28),
+clean/synced `52a9d837a01f02f8893ba19e48b4892bcf422523`. Genuine error25/6 and
+source/capability31 prerequisite checks pass. Raw case exits1 after52 checks
+reached; actual exception marker is raw-errno/Error, not a formatting failure.
+Owner case passes63 checks: one failed/no successful connect, no SQL/reconnect,
+acknowledged closed object/terminal fields/callback cleanup, while mysqlnd
+active_connections is string18446744073709551615. Consistent with accounting
+underflow, not proof of a retained session or exact driver internals. Intermediate
+and final reconciliation show no retained sessions/transactions; all77 application
+checksums identical, zero owned fixtures. No runtime/harness/test/guard/budget/
+wiring or acceptance change, fixture write or ordered qualification retry.
+Focused isolated65/117, full local1568/7066 (two baseline Sodium skips), Node16/16,
+all configured local gates and zero-advisory audits pass; publication CI pending. Safe-local count unchanged;
+diagnosis advanced, qualification/lost-update repair remain open. Next gated
+slice: repository-only Failed-Connect Observation and Per-Case Cleanup Evidence
+Contract Design, design-only; no native execution or acceptance implementation.
+
 ## Failed-connect diagnosis — reporting blocker — 2026-10-28
 
 Approved/confirmed Plugin Tester local-only [bounded diagnosis](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md#failed-connect-diagnosis--exception-stage-reporting-blocker--2026-10-28),

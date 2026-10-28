@@ -3,9 +3,11 @@
 Current status: the [fresh approved revalidation](#fresh-revalidation--failed-initial-connect-session-accounting--2026-10-28)
 below passes the genuine error audit but stops at failed-initial-connect session
 accounting. The earlier error-hook failure remains historical, not the current
-stop point. The later [bounded diagnosis](#failed-connect-diagnosis--exception-stage-reporting-blocker--2026-10-28)
-also remains incomplete; its last-assertion label did not establish an exception
-cause. Native qualification is still incomplete.
+stop point. The first [bounded diagnosis](#failed-connect-diagnosis--exception-stage-reporting-blocker--2026-10-28)
+had an ambiguous exception label. The [new comparison](#exception-stage-comparison--closed-owner-and-wrapped-counter--2026-10-28)
+now captures a raw errno-read Error and acknowledged owner cleanup with a wrapped
+mysqlnd counter. Cleanup-evidence acceptance remains gated; native qualification
+is still incomplete.
 
 Later approved [repository-only repair](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
 2026-10-28, implements hook-silent owned error DATA/classification with isolated
@@ -356,3 +358,81 @@ Failed-Connect Cleanup Diagnosis and One Raw/Owner Comparison**, fresh exact
 target/scope confirmation, one bounded comparison using the corrected reporting.
 Keep application state, runtime guards/budgets and production wiring untouched;
 no ordered qualification retry or cleanup-accounting acceptance change.
+
+## Exception-stage comparison — closed owner and wrapped counter — 2026-10-28
+
+Separately approved R3 one bounded raw/owner comparison, fresh exact confirmation
+of `plugin-tester`, `local-only`, LocalWP “Plugin Tester”,
+`http://plugin-tester.local`, WordPress at
+`C:\Users\Captain\Local Sites\plugin-tester\app\public`, database10004/web10005.
+Clean/synced baseline `52a9d837a01f02f8893ba19e48b4892bcf422523`.
+Novamira HQ guide/complete inventory and exact local profile checked; resolved
+metadata/services ready. Genuine error audit25/6 and source/runtime preflight31
+pass, with zero native sessions/SQL/fixtures in those prerequisite processes.
+Initial database access used bundled mysql.exe; temporary MYSQL_PWD restored.
+Absent database `adbb_18ac9207e6f4_absent` verified before the comparison.
+
+Each side ran **once** in a separate bundled PHP8.5.12/mysqlnd8.5.12 private
+process, using the unchanged diagnostic source. No fixture/table, DDL/DML,
+application bootstrap, WordPress Ability, HTTP, service/configuration change or
+ordered qualification retry. Only this record and the implementation plan change;
+runtime/harness/tests/source pins/guards/budgets/wiring remain byte-unchanged.
+Uploader/toolkit and historical whole-plugin/task-count evidence are untouched.
+
+Raw control exits1 after52 checks reached. Before/allocation snapshots show all
+selected counters as string0. The corrected marker identifies **raw-errno,
+class Error**, not counter-format validation. This is the mysqli_errno read
+after the missing-database connection exception, before the failed/closed
+snapshots. Source ordering establishes that the caught connection code matched
+1049 (otherwise the errno call short-circuits); no raw exception message/trace
+was exposed. Finally cleanup emitted no secondary exception marker. No raw
+post-failure counter/close-ack report exists, so do not infer those values or
+claim the raw object was already closed before cleanup.
+
+Read-only inter-process reconciliation confirmed no retained local session,
+transaction or diagnostic database before the owner case. Actual dormant owner
+diagnostic then **passes63 checks**, exits0 and reports:
+
+- connect_success0, connect_failure1, com_query0, reconnect0, pconnect_success0;
+- active_connections **string18446744073709551615 (2^64−1)** after cleanup,
+  unchanged by cached close; explicit_close0 and implicit_close0;
+- close_ack true, closed_handle_probe true, owner_state closed; dbh null,
+  ready false, num_queries0, qualification null and no retained query callback.
+
+These observations reproduce the qualification harness's strict-zero mismatch
+despite acknowledged object cleanup, rather than demonstrating a retained server
+session. The unsigned maximum is **consistent with accounting underflow**; exact
+mysqlnd internals and the moment of the counter transition were not instrumented.
+The Error probe alone is not physical closure proof: its meaning is limited by
+the explicit close acknowledgement, exact owner terminal fields, no successful
+connect/SQL and independent server reconciliation. No floating/scientific native
+counter value was observed. The raw getter assumption is also inappropriate for
+this failed-initialization state and requires a failure-aware observation contract.
+
+Post-comparison: **77/77 application table names/checksums identical**, zero
+owned tables/databases, zero other local sessions and zero active transactions.
+No fixture was created or retained. The original94-check qualification failure
+is not relabeled successful; missing-table/positive qualification and the
+minimum-core/configuration matrix remain unexecuted. No acceptance predicate,
+production close implementation or qualification counter assertion was changed.
+
+Focused isolated gates65/117 and full local1568/7066 pass, with only the two
+baseline missing-Sodium skips. Node16/16, PHPCS197 files, structure148 runtime/
+216 support/184 tests/181 class names, build, strict Composer validation,
+zero-advisory Composer/npm audits and diff hygiene pass. Commands are the
+preceding section's focused/full PHPUnit and npm/Composer QA commands, rerun
+for this task. Source-scoped review confirms only measured evidence and owning
+plan updates; no new tests/implementation or historical readiness refresh.
+Exact-head publication CI is pending. Hosted QA does not repeat or replace
+this native comparison or establish broad native compatibility.
+
+Implementation-plan progress: the bounded comparison establishes the concrete
+failed-state getter exception and the owner's closed-but-wrapped counter
+observation. The next issue is a sound per-case cleanup-evidence contract,
+not another blind native attempt. Actual lost-update repair remains open.
+
+Recommended next gated slice: **repository-only Failed-Connect Observation and
+Per-Case Cleanup Evidence Contract Design**, design-only with no native execution,
+runtime change or acceptance implementation. Define independent failed-connect
+closure evidence and case isolation without treating the wrapped global counter
+as a grant, skipping a cleanup check or weakening successful-session guarantees.
