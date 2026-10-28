@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Owned Linux socket/server identity — approved audit — 2026-10-28
+
+Approved [empty-database identity/cleanup audit](SOURCE_POLICY_LINUX_SERVER_IDENTITY_AUDIT.md),
+clean/synced baseline87d03db. Manual exact-head Ubuntu24.04 lab, unchanged fresh
+source/runtime preflight, one pinned private non-root MariaDB instance and three
+fixed identity/release SELECTs; vendor system-table initialization explicitly
+owned, no application schema/WordPress/adapter execution. Private socket, bounded
+tmpfs/processes, strict label/path cleanup, diagnostics retained. All application
+guards/wiring and existing proof/preflight bytes unchanged. Local24/64, combined
+30/96 and full1986/8538 pass, two existing Sodium skips; four DATA controls killed
+and hash restored, other QA in owning record. Publication/CI/one audit pending.
+Implementation-plan progress: prepares actual socket/wire identity evidence;
+supported-row decision/native qualification remains gated by the observed result.
+
 ## Off-production Linux environment — approved preflight — 2026-10-28
 
 Approved [finite environment preflight](SOURCE_POLICY_LINUX_ENVIRONMENT_PREFLIGHT.md),
