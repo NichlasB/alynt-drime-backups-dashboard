@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Failed-connect per-case cleanup evidence design — 2026-10-28
+
+Approved repository-only [contract design](SOURCE_POLICY_FAILED_CONNECT_CLEANUP_EVIDENCE_DESIGN.md),
+clean/synced `8ebc8c86fb6ff45a620d5c7e97a90a6b93e65b0e`. Selects separate
+preflight/failed-initial-connect/connected evidence, failure-aware raw observations,
+fresh per-case processes, exact profile-bound counter DATA and independent
+live-child/post-exit server reconciliation including DB=NULL sessions. No wrap-only
+grant or relaxation for successful sessions; exact owned release/callback/result/
+terminal evidence remains mandatory. Proposed fixed stdio hold is proof-private,
+bounded and unimplemented, not a new relay/toolchain or hard-deadline claim.
+No source/harness/test, acceptance assertion, native/site/storage/fixture/process
+or production-wiring change. Focused65/117, full local1568/7066 (two existing
+Sodium skips), Node16/16/all configured gates/zero-advisory audits and scoped
+links/diff/preservation checks pass; publication CI pending. Historical proof
+and safe-local counts unchanged. Qualification/lost-update repair remain open.
+Next gated slice: repository-only Failed-Connect Observation and Per-Case Cleanup
+Evidence Safety Foundation, isolated API/IO tests only; no actual native execution.
+
 ## Exception-stage comparison — cleanup evidence contract gate — 2026-10-28
 
 Approved/confirmed one Plugin Tester local-only [raw/owner comparison](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md#exception-stage-comparison--closed-owner-and-wrapped-counter--2026-10-28),

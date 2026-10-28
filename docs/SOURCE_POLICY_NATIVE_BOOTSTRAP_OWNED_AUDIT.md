@@ -9,6 +9,11 @@ now captures a raw errno-read Error and acknowledged owner cleanup with a wrappe
 mysqlnd counter. Cleanup-evidence acceptance remains gated; native qualification
 is still incomplete.
 
+The later approved [repository-only cleanup-evidence design](SOURCE_POLICY_FAILED_CONNECT_CLEANUP_EVIDENCE_DESIGN.md)
+defines the next proof contract, including stronger live-child/all-session
+reconciliation. It performs no native rerun and does not refresh the historical
+comparison or qualify its proposed process protocol.
+
 Later approved [repository-only repair](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
 2026-10-28, implements hook-silent owned error DATA/classification with isolated
 tests. It does not rerun or resolve this native proof. Manual sources now expect
