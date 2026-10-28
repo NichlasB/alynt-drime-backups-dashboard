@@ -7,12 +7,12 @@
 
 // phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.DB.RestrictedFunctions -- Explicit private native proof only; no application bootstrap or imported candidate handle.
 if ( PHP_SAPI !== 'cli' || 4 !== count( $argv ) || '--confirmed-plugin-tester-owned-bootstrap-proof' !== $argv[1]
-	|| ! preg_match( '/\Aadbb_[a-f0-9]{12}_\z/', $argv[2] ) || ! in_array( $argv[3], array( 'audit', 'proof' ), true ) || defined( 'ABSPATH' ) ) {
+	|| ! preg_match( '/\Aadbb_[a-f0-9]{12}_\z/', $argv[2] ) || ! in_array( $argv[3], array( 'audit', 'proof', 'diagnose-raw', 'diagnose-owner' ), true ) || defined( 'ABSPATH' ) ) {
 	fwrite( STDERR, "Requires confirmed Plugin Tester owned bootstrap proof scope\n" );
 	exit( 1 );
 }
 if ( 'Windows' !== PHP_OS_FAMILY || '8.5.12' !== PHP_VERSION || ! extension_loaded( 'mysqli' ) || extension_loaded( 'pdo_mysql' )
-	|| ( 'proof' === $argv[3] && ! getenv( 'MYSQL_PWD' ) ) ) {
+	|| ( 'audit' !== $argv[3] && ! getenv( 'MYSQL_PWD' ) ) ) {
 	fwrite( STDERR, "Requires the audited bundled PHP8.5.12 mysqli-only profile\n" );
 	exit( 1 );
 }
@@ -122,6 +122,21 @@ try {
 		echo 'audit checks:', $checks, " native_connections:0 sql_queries:0 fixtures:0\n";
 		return;
 	}
+	if ( in_array( $argv[3], array( 'diagnose-raw', 'diagnose-owner' ), true ) ) {
+		require __DIR__ . '/source-policy-failed-connect-diagnosis.php';
+		$group  = $argv[3];
+		$report = adbb_failed_connect_diagnosis( $class, $frame, $binding, $group );
+		adbb_check( true === $report['close_ack'] && true === $report['closed_handle_probe'], 'diagnostic owned release confirmed' );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed labels, booleans and bounded native counter DATA only; no credentials/errors/SQL.
+		echo json_encode(
+			array(
+				'checks'        => $checks,
+				'diagnosis'     => $report,
+				'qualification' => 'not-run',
+			)
+		), "\n";
+		return;
+	}
 	require __DIR__ . '/source-policy-bootstrap-native-cases.php';
 	$report = adbb_native_cases( $class, $frame, $binding );
 	echo json_encode(
@@ -132,6 +147,10 @@ try {
 		)
 	), "\n";
 } catch ( Throwable $error ) {
+	if ( in_array( $group, array( 'diagnose-raw', 'diagnose-owner' ), true ) ) {
+		fwrite( STDERR, 'Owned failed-connect diagnosis stopped in ' . $group . ' after ' . $checks . ' checks reached; last recorded assertion (not exception cause): ' . ( $GLOBALS['adbb_last_check'] ?? 'none' ) . "\n" );
+		exit( 1 );
+	}
 	fwrite( STDERR, 'Owned bootstrap proof failed in ' . $group . ' after ' . $checks . ' checks: ' . ( $GLOBALS['adbb_last_check'] ?? 'before assertion' ) . "\n" );
 	exit( 1 );
 }

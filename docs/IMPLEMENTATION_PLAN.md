@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Failed-connect diagnosis — reporting blocker — 2026-10-28
+
+Approved/confirmed Plugin Tester local-only [bounded diagnosis](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md#failed-connect-diagnosis--exception-stage-reporting-blocker--2026-10-28),
+clean/synced `96e2481d87ef616493d437480d736bd89069504a`. Genuine error25/6 and
+source/capability31 checks pass. Three raw diagnostic invocations stop after52
+checks reached, owner comparison unexecuted. Last invocation shows only zero
+before/allocation counters; no post-failure/close report. Source review exposes
+the generic catch's stale last-assertion label, not a proven counter-format cause.
+Harness-only modes/snapshots and redacted primary/cleanup exception-stage markers
+added; final reporter native-unexecuted. Original ordered-proof assertions and
+all runtime/guards/budgets/wiring unchanged; no qualification retry or DDL/DML.
+All77 application checksums identical, zero owned fixtures/other local sessions/
+transactions. New11 isolated cases/44 assertions, focused65/117, full local
+1568/7066 (two baseline Sodium skips), Node16/16/all configured local gates and
+zero-advisory audits pass; publication CI pending. Safe-local count unchanged. Diagnosis/cause and native qualification
+remain incomplete. Next gated slice: Plugin Tester local-only Exception-Stage
+Failed-Connect Cleanup Diagnosis and One Raw/Owner Comparison, fresh exact target
+confirmation, one bounded comparison, no ordered qualification or runtime repair.
+
 ## Native bootstrap revalidation — failed-connect session accounting — 2026-10-28
 
 Separately approved and exact-target-confirmed Plugin Tester local-only

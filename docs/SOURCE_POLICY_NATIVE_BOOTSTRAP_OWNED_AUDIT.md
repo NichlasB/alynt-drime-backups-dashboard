@@ -3,7 +3,9 @@
 Current status: the [fresh approved revalidation](#fresh-revalidation--failed-initial-connect-session-accounting--2026-10-28)
 below passes the genuine error audit but stops at failed-initial-connect session
 accounting. The earlier error-hook failure remains historical, not the current
-stop point. Native qualification is still incomplete.
+stop point. The later [bounded diagnosis](#failed-connect-diagnosis--exception-stage-reporting-blocker--2026-10-28)
+also remains incomplete; its last-assertion label did not establish an exception
+cause. Native qualification is still incomplete.
 
 Later approved [repository-only repair](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
 2026-10-28, implements hook-silent owned error DATA/classification with isolated
@@ -262,3 +264,91 @@ target/scope confirmation, add bounded harness-only observations as needed and
 distinguish failed-connect counter semantics from actual owned-handle closure.
 No guard/budget weakening, production wiring or automatic ordered-proof retry;
 any runtime repair or new qualification attempt requires its own bounded approval.
+
+## Failed-connect diagnosis — exception-stage reporting blocker — 2026-10-28
+
+Approved R3 Plugin Tester local-only Failed-Initial-Connect Cleanup and mysqlnd
+Session-Accounting Owned Diagnosis. Fresh exact target/scope confirmation:
+`plugin-tester`, `local-only`, LocalWP “Plugin Tester”,
+`http://plugin-tester.local`, WordPress at
+`C:\Users\Captain\Local Sites\plugin-tester\app\public`, database10004/web10005.
+Clean/synced restore point `96e2481d87ef616493d437480d736bd89069504a`.
+Novamira HQ guide/complete inventory and exact local profile checked; both
+services listening. No WordPress Ability, HTTP or application bootstrap.
+Bounded harness-only observations, no application writes or qualification retry.
+
+The manual entry adds diagnose-raw/diagnose-owner modes behind the existing
+confirmed CLI/prefix, bundled Windows PHP8.5.12/mysqli-only and credential gates.
+Each would attempt only the previewed absent database, no table or successful
+session. Native-case/proof assertions are unchanged; diagnostic modes return
+before that include. New helper retains stage snapshots/counter types and probes
+only exact internally allocated objects. It grants no runtime/native eligibility.
+No runtime/includes/root, source pins, SQL templates, native budgets, public
+factories, production wiring, installed configuration, users/options/cron,
+dependencies or CI configuration changes. Uploader/toolkit remain read-only.
+
+Fresh genuine error audit25 checks/6 groups and executable preflight31 checks
+pass with zero native sessions/SQL/fixtures. Resolved bundled mysql.exe used
+first for database baseline; temporary MYSQL_PWD restored after each command.
+Expected server/autocommit/transaction state, absent diagnostic database
+`adbb_72bde4a609f8_absent`, zero old owned tables/sessions/transactions and
+ordered77-table checksums established. No DDL/DML or disposable table was needed.
+
+Three bounded raw diagnostic invocations stopped after52 checks reached; owner
+comparison did not run. The first printed only the generic last-assertion label.
+Two harness-only iterations broadened observation formatting for signed and
+floating/scientific numeric representations and added stage snapshots; synthetic
+tests cover those shapes, **not evidence that the driver returned them**.
+The last invocation printed before/allocation counters as string0 for every
+selected key, then stopped before any post-failure snapshot. No completed
+failed-connect/counter/close report exists from these invocations.
+
+Source review then identified that the outer catch reported the last assertion
+label for any later Throwable. The printed “bounded counter DATA: com_query”
+therefore **does not establish a counter-format rejection**. Earlier working
+commentary inferring that cause was premature. A later errno read or cleanup
+exception can also leave that label unchanged; its exact class/stage was not
+captured. Neither signed/wrapped accounting nor a native leak/automatic release
+is established. Do not relabel the original94-check qualification failure as fixed.
+
+Stopped native execution after the bounded comparison failed. Harness-only
+reporting now emits allowlisted primary operation stage/exception class and a
+separate secondary cleanup marker without messages, SQL, credentials or traces;
+the outer diagnostic label explicitly says it is not the exception cause.
+This final reporting repair has isolated regression evidence only and **has not
+been run natively**. No owner/qualification retry, guard change or runtime repair.
+
+Post-diagnosis independent reconciliation: **77/77 application table names and
+checksums identical**, zero owned tables/databases, zero other local sessions
+and zero active transactions. No fixture was created or retained. Process exit
+and reconciliation do not prove the unobserved live-object close behavior.
+
+Hosted refusal/observation tests add11 cases/44 assertions: diagnostic modes fail
+at the audited-runtime gate before installed-source reads; socket-free PHP -n
+workers model numeric observations and redacted exception markers only. Initial
+mode tests failed2/8; signed-format regression failed1/24; scientific/float
+regressions failed2/32 before their observation changes. One initial worker
+discovery guard error was repaired; worker declarations now remain inert unless
+explicitly enabled in a separate extension-free process. No skip or real native
+proof is introduced by these tests. Final focused65/117 and full local1568/7066
+pass, with only the two baseline missing-Sodium skips. Node16/16, PHPCS197 files,
+structure148 runtime/216 support/184 tests/181 class names, build, strict Composer
+manifest, zero-advisory Composer/npm audits, syntax and diff hygiene pass.
+Commands: focused EvidenceTest|OwnedProofGateTest and full php vendor/bin/phpunit
+--verbose --do-not-cache-result; npm lint/test:admin/check:structure/build;
+php composer.phar validate --strict/audit; npm audit --audit-level=moderate;
+explicit php -l and scope/preservation checks. Scoped review confirms fixed
+local modes, preserved credential/source gates, no raw exception messages and no
+runtime/native-case assertion change. Exact-head publication CI remains pending;
+no whole-plugin review row is refreshed. CI does not run genuine diagnostics.
+
+Implementation-plan progress: the approved diagnosis exposed an ambiguous
+exception-reporting boundary but did not establish failed-connect cleanup or
+accounting cause. Native qualification and actual lost-update repair stay open;
+the separately approved diagnosis does not inflate the safe-local task count.
+
+Recommended next gated slice: **Plugin Tester local-only Exception-Stage
+Failed-Connect Cleanup Diagnosis and One Raw/Owner Comparison**, fresh exact
+target/scope confirmation, one bounded comparison using the corrected reporting.
+Keep application state, runtime guards/budgets and production wiring untouched;
+no ordered qualification retry or cleanup-accounting acceptance change.
