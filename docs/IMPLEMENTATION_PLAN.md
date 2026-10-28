@@ -9,7 +9,9 @@ shared reporting capture/rechecks are implemented dormant. Existing bounds,
 schema/CAS/cleanup contracts, public factory closure and production wiring remain.
 New isolated71/230 and combined228/801 pass; final full local1956/8442, two existing
 Sodium skips only. Eleven assertion-killed/SHA256-restored controls, PHPCS/admin/
-structure/build/audits pass. Exact-head CI pending publication in owning record.
+structure/build/audits pass. Implementation1b6bcde/CI40778606046 succeeds: actual
+Ubuntu PHP7.4/8.3 each1956/8449, no failures/skips, admin16/16, all gates pass.
+Evidence-only final-head closeout is checked separately at handoff.
 No site/native/storage execution. Private frame/manual composition is explicitly
 migrated; historical Windows native images now require approved fresh regression,
 not recredited receipts. Implementation-plan progress: deployment compatibility

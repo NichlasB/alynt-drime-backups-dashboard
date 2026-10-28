@@ -106,8 +106,14 @@ whole-plugin release-readiness credit is claimed.
   schema/uninstall, assets, CI, dependencies and package metadata are unchanged.
   Uploader/toolkit statuses and heads unchanged; no rollout tracker write.
 
-Exact-head publication evidence is pending until the implementation is pushed
-and its configured CI completes; no success is inferred from local checks.
+Implementation `1b6bcdeea1f491ed97c8d8705cd6b9c3e78d835c` is pushed. Both exact-head
+checks in [CI40778606046](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40778606046)
+succeeded. Actual Ubuntu24.04 job logs report PHP7.4 and8.3 each1,956 tests/8,449
+assertions, no failures/skips; admin16/16/0 skipped each, all lint/build/structure/
+manifest/audit steps successful, zero known advisories/vulnerabilities. This runs
+the positive Linux socket initializer with doubles, not a native database/socket.
+Evidence-only closeout verification is reported at the final handoff; these
+implementation counts are not silently attributed to a different head.
 
 ## Evidence limits and exact next approval gate
 
