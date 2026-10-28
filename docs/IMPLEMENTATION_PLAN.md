@@ -12,7 +12,10 @@ diagnosis25 checks/6 groups confirms the defect, not native success. Exact
 clone removed; all77 application checksums identical, zero retained fixtures/
 transactions. No runtime/wiring fix or native retry. New gate tests6/24, related
 592/2339, full local1426/6297 (two baseline Sodium skips), Node16/16/all gates/
-audits pass; exact-head publication CI pending. Historical whole/toolkit rows
+audits pass. Checkpoint526afaeeb14a06aced74bc7bc4e941b90fe684df passed
+[exact-head CI40690940046](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40690940046):
+PHP7.4/8.3 each1426/6304, no failures/skips; Node16/16/all gates/zero advisories.
+CI runs no native/manual proof and does not resolve the blocker. Historical whole/toolkit rows
 and task count unchanged; native qualification/lost-update repair remain open.
 Next gated slice: repository-only Hook-Silent Source-Policy Refusal and
 Error-Classification Safety Foundation, isolated API tests only; preserve

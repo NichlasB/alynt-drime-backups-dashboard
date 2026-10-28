@@ -9,7 +9,10 @@ in actual dormant methods; synthetic shims missed them. No positive native/
 request/UI qualification or runtime fix. Exact empty clone removed, all77
 application checksums unchanged, zero fixtures/transactions. Gate tests6/24,
 related592/2339, full local1426/6297 (two baseline Sodium skips), Node16/16/all
-gates/audits pass; CI pending. Historical whole07/07A/13/FULL/toolkit readiness
+gates/audits pass. Checkpoint526afaeeb14a06aced74bc7bc4e941b90fe684df passed
+[exact-head CI40690940046](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40690940046):
+PHP7.4/8.3 each1426/6304, no failures/skips; Node16/16/all gates/zero advisories,
+not native proof acceptance. Historical whole07/07A/13/FULL/toolkit readiness
 unchanged. Next gated slice: repository-only Hook-Silent Source-Policy Refusal
 and Error-Classification Safety Foundation, isolated tests only; native/public
 factories/production wiring disabled. No native retry without fresh approval.

@@ -142,7 +142,13 @@ Database/Security/07/07A/FULL or toolkit readiness row is marked complete. A
 green hosted suite would validate gates/isolated algorithms, not this failed
 native proof or a repaired application lost-update path.
 
-Publication exact-head CI is pending; do not infer its result from local QA.
+Checkpoint `526afaeeb14a06aced74bc7bc4e941b90fe684df` passed
+[exact-head CI40690940046](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40690940046).
+Actual PHP7.4/8.3 logs each1426 tests/6304 assertions, no failures/skips;
+Node16/16 and every configured gate pass, zero Composer/npm advisories.
+Hosted QA validates refusal gates and isolated algorithms only; neither the
+installed-core diagnostic nor the failed native proof runs in CI. Its green
+result does not close the error-hook defect or grant native qualification.
 
 ## Implementation-plan progress and exact next gate
 
