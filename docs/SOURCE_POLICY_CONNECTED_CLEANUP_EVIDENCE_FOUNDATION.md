@@ -135,7 +135,15 @@ assets unchanged from baseline. Uploader/toolkit remain clean at unchanged
 3dfcb15b5cab8191df7d984251986ead140ded52/
 c067eb61883035a1764d830bccffc1e542d3e1dc. New relative documentation links resolve.
 
-Exact-head publication evidence is pending before handoff.
+Implementation `2d7666d2ed9e5b757d0c6c9977ea6ebc2d0418ab` passed
+[exact-head CI40752665449](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40752665449).
+Actual hosted PHP7.4/8.3 each1834 tests/8068 assertions, no failures/skips;
+Node16/16 each and all configured build/structure/lint/manifest/dependency audits
+pass. Both check-run head SHAs match that commit. The seven-assertion difference
+from local full QA is the existing pair of Sodium tests, available in CI; no skip
+or threshold was added. This evidence-only closeout changes no tested PHP byte
+and receives a separate exact-head CI check before handoff. CI proves isolated
+DATA/API behavior and compatibility, not the unimplemented native integration.
 
 Commands: focused SourcePolicyConnectedCleanup and combined
 SourcePolicyConnectedCleanup|SourcePolicyCleanup|SourcePolicyConnectedRaw|

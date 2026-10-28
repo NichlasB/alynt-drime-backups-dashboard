@@ -9,7 +9,11 @@ release evidence; fixed refusal/positive virtual cohort requires both live-child
 and post-exit reconciliation. Every state keeps native qualification not-established.
 No value-specific wrap grant, rewritten counters, legacy migration or native wiring.
 ADBC1/runtime/producer/controller unchanged. New isolated74/314, combined266/995,
-four assertion-killed/SHA256-restored controls; full QA/publication in owning record.
+four assertion-killed/SHA256-restored controls. Full local1834/8061 with only the
+two existing Sodium skips; all configured local gates pass. Implementation
+2d7666d2ed9e5b757d0c6c9977ea6ebc2d0418ab passed
+[exact-head CI40752665449](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40752665449):
+PHP7.4/8.3 each1834/8068, no failures/skips; Node16/16/all gates pass.
 No native/site/SQL/storage/fixture operation or product-feature task credit.
 Implementation-plan progress: manual connected evidence advances; actual owner
 qualification and source-policy lost-update repair remain open. Next gated slice:
