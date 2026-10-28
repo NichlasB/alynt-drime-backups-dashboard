@@ -265,8 +265,12 @@ source-policy-cleanup-source-audit.ps1 -RepositoryOnly; scoped link/anchor/path,
 Git diff hygiene and baseline-preservation checks. No new tests or semantic
 mutation experiment: documentation-only work preserves existing tests, which
 exercise the unchanged implementation, not the proposed native diagnostic.
-Exact-head hosted publication verification is pending; no native claim follows
-from local or hosted preservation QA.
+Design checkpoint `25682d638de6aa08ba23efa9918624810eb54b3d` passed
+[exact-head CI40741054616](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40741054616).
+Actual hosted PHP7.4/8.3 each1698 tests/7533 assertions, no failures/skips;
+Node16/16 and all configured gates pass. This evidence-only closeout preserves
+the tested implementation bytes and receives a separate exact-head check before
+handoff. No native claim follows from local or hosted preservation QA.
 
 Implementation-plan progress: the counter mismatch now has a pinned-source
 interpretation and a minimal release-evidence decision path. Native connected/

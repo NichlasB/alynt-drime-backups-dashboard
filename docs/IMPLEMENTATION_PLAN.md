@@ -15,6 +15,9 @@ positive qualification or the source-policy lost-update repair. Next gated slice
 Plugin Tester local-only Bounded Raw Connected Counter/Single-Close Diagnostic and
 Owned Cleanup Proof, one raw attempt after fresh prerequisites/exact confirmation,
 no application writes, existing acceptance unchanged. Not a full cohort retry.
+Design25682d638de6aa08ba23efa9918624810eb54b3d passed
+[exact-head CI40741054616](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40741054616):
+PHP7.4/8.3 each1698/7533, no failures/skips; Node16/16/all configured gates pass.
 
 ## Bounded missing-table diagnostic — counter mismatch identified — 2026-10-28
 
