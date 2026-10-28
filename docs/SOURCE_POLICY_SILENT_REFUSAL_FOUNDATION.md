@@ -238,7 +238,10 @@ advisories; three syntax checks and diff hygiene pass. Commands match the
 preceding validation section, with the new EvidenceTest and existing
 OwnedProofGateTest focused filters. Source-scoped review confirms bounded pure
 DATA checks, no extra production dependency or changed observer/authorization
-semantics. Publication/exact-head CI remains pending.
+semantics. Implementation `9c80a7251e5159470736b196e6b3cc83ec02738c` passed
+[exact-head CI40698367933](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40698367933).
+Actual PHP7.4/8.3 logs each1557 tests/7029 assertions, no failures/skips;
+all configured gates pass and Composer/npm audits report zero advisories.
 
 These are model and source-wiring checks, not genuine WP_Error execution,
 installed-source authentication or native success. The genuine manual audit

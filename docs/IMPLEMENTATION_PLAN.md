@@ -12,7 +12,10 @@ the two baseline missing-Sodium skips. Node16/16, lint196 files, structure,
 build, strict Composer validation and zero-advisory audits pass. Red28 assertion
 failures and a source-wiring bypass control establish non-vacuous regressions;
 details and proof limits are in the [owning record](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md).
-Publication CI is pending. This is one worthwhile readiness task, not multiple
+Implementation `9c80a7251e5159470736b196e6b3cc83ec02738c` passed
+[exact-head CI40698367933](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40698367933):
+PHP7.4/8.3 each1557/7029, no failures/skips; all configured gates pass.
+This is one worthwhile readiness task, not multiple
 tasks for its tests/docs. No genuine library, site, SQL, fixture or native proof
 executed; runtime/source pins/CLI gates/wiring are unchanged. Safe-local queue
 reassessment reaches the same next meaningful gate, not seven cleanup tasks:
