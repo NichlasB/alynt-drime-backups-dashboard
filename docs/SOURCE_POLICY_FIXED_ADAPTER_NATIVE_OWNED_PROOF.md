@@ -190,3 +190,11 @@ resolve minimum-core/support and strict-failure qualification limits, and specif
 one cohesive factory/facade/form/legacy integration path and required genuine
 authorization/owned-write tests. Design-only; keep native experiments, storage
 writes, production wiring and deployment disabled until separately approved.
+
+## Forward record — production readiness design — 2026-10-28
+
+The separately approved [readiness design](SOURCE_POLICY_PRODUCTION_CONNECTION_READINESS_DESIGN.md)
+distinguishes this actual private mode3/no-ambient proof from normal core-owned
+ambient/report-OFF and deployed-profile qualification. It preserves these counts,
+source image, runtime and ADBC contracts. The next proof is that concrete context
+gap, not a new generic cleanup layer or immediate production connection.

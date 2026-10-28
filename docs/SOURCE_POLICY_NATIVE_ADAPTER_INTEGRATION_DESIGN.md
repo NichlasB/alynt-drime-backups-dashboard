@@ -1,5 +1,10 @@
 # Source-Policy Native Adapter Compatibility and Guarded Form Integration Design
 
+Later [production readiness design](SOURCE_POLICY_PRODUCTION_CONNECTION_READINESS_DESIGN.md),
+2026-10-28, consolidates actual fixed-adapter evidence, shared reporting/ambient
+context and remaining qualification order. Original contracts/evidence below stay
+historical; no production connection is enabled by either document.
+
 Later approved repository-only [initial bootstrap design](SOURCE_POLICY_NATIVE_BOOTSTRAP_DESIGN.md),
 2026-10-28, selects bounded private first-connect/setup primitives and genuine
 core helper qualification without calling the parent connector or reopening

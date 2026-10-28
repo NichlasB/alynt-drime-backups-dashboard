@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Production-connection readiness — repository-only design — 2026-10-28
+
+Approved [readiness/remaining qualification design](SOURCE_POLICY_PRODUCTION_CONNECTION_READINESS_DESIGN.md),
+clean/synced baseline14eae708d8b4f5f312e33b13cbd50cbdaad0e42a. Consolidates actual
+fixed-adapter evidence without promoting CLI/no-ambient/mode3 to a WordPress
+production grant. Primary sources confirm core report-OFF/shared-driver context;
+actual site/deployment profile remains unknown. Specifies trusted lazy capture,
+ambient identity/callback preservation, minimum/intended-profile acceptance and
+one cohesive factory/facade/form/legacy switch. All runtime, ADBC1/ADBC2/manual
+images and actual wiring remain unchanged; no native/site/storage operation.
+Implementation-plan progress: production admission/qualification path is explicit,
+not an enabled lost-update repair. Local QA/publication in owning record.
+Next gated slice: Plugin Tester local-only Source-Policy Core-Owned Ambient/
+Report-OFF Qualification and Owned Cleanup Proof, audit-first with fresh exact
+target/owned fixture scope; no application state or production wiring changes.
+
 ## Fixed native adapter save/conflict — owned proof — 2026-10-28
 
 Approved/confirmed Plugin Tester local-only [actual dormant adapter proof](SOURCE_POLICY_FIXED_ADAPTER_NATIVE_OWNED_PROOF.md),
