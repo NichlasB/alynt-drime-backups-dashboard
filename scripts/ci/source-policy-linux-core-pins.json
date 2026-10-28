@@ -1,0 +1,13 @@
+{
+  "load.php": "3efd0934bd8a454a8d7076fbbd21504ea097a753125a48e64b8a1dad380d357a",
+  "plugin.php": "d70b9e18d34ab3fe46e15548a5e8e089ea5920832f06a4d89a9d64b2f7938b0d",
+  "class-wp-hook.php": "b839c0e5672246bca8db1ab781ec8835f7732f253c375a237cbf6ec536e8d12e",
+  "class-wp-filter-sentinel.php": "68c9c675d3805a343835728d98a0efedf0df9833cb904bebf909c7e0fda5c61c",
+  "class-wp-error.php": "a9e971548bf6a1d93c821f980f530efba985c25d5d0b13d9b63e63b378a81a94",
+  "class-wpdb.php": "e15403e90032dd0508811301505e491d4212de5152581a98f51b744a1a3903bd",
+  "cache.php": "a219c2b57cc9990b560c6b497c877db443b7e29239645a6a79b2d76839c46e19",
+  "class-wp-object-cache.php": "1857b774bd9cfbafbd50a1b1424f7df637d202cf3f2253cda9798d4ad56f3cf0",
+  "formatting.php": "350f6b32303915df970bb0e3ea360fcd54bb0b8a7ecc3d504c3d860ab9468d32",
+  "functions.php": "cac8a17e293df99f0683a88debd3ba5e5cce274183a4e9fd3c9f18375747f41c",
+  "option.php": "fe3f0b7e115b2a50c31162ed6428abe4088c080b0f71b9678d84806168fe90d0"
+}

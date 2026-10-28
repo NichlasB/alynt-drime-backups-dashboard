@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Off-production Linux environment — approved preflight — 2026-10-28
+
+Approved [finite environment preflight](SOURCE_POLICY_LINUX_ENVIRONMENT_PREFLIGHT.md),
+clean/synced baseline6ff6af6. Resolved official PHP8.5.12, WordPress7.1.4 immutable
+source/all11 matching pins and a digest-pinned MariaDB10.11.18 amd64 image.
+Dedicated exact-head manual-only Ubuntu24.04 workflow: metadata/version tools,
+private directory and bounded read-only/network-disabled non-root container;
+no server startup/SQL, WordPress execution or database fixtures. Local6/32 and
+full1962/8474 pass, two existing Sodium skips; remaining QA in owning record.
+Publication/ordinary CI/opt-in lab outcome pending. Implementation-plan progress:
+the environment gate is being evaluated, not native qualification or wiring.
+No production, LocalWP, workstation installation or runtime/ADBC changes.
+Next approval remains bounded owned native qualification only if preflight
+qualifies; any exact build/profile mismatch must be resolved explicitly first.
+
 ## Fixed transport/core-derived charset — isolated foundation — 2026-10-28
 
 Approved [private transport/charset foundation](SOURCE_POLICY_FIXED_TRANSPORT_CHARSET_FOUNDATION.md),
