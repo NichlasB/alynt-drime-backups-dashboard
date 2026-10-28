@@ -397,8 +397,13 @@ validate --strict/audit; npm audit --audit-level=moderate. All PHPUnit invocatio
 use --do-not-cache-result. Git comparison confirms includes/scripts/bootstrap,
 dependencies and CI configuration unchanged; uploader/toolkit clean at their
 unchanged heads3dfcb15b5cab8191df7d984251986ead140ded52/
-c067eb61883035a1764d830bccffc1e542d3e1dc. Hosted exact-head verification pending
-publication; CI does not run this manual native proof or Windows stdio audits.
+c067eb61883035a1764d830bccffc1e542d3e1dc. Published checkpoint
+8b56b8386e692554a521e4f56c945d51b1feddb7 passed
+[exact-head CI40739284353](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40739284353):
+actual PHP7.4/8.3 each1698 tests/7533 assertions, no failures/skips; Node16/16
+and all configured gates pass. CI does not run this manual native proof or Windows
+stdio audits. This docs-only completion preserves the tested source bytes and
+receives a separate exact-head check before handoff; it does not grant qualification.
 
 Implementation-plan progress: connected negative-case refusal/cleanup DATA now
 identifies the precise evidence blocker. Connected/positive native qualification,

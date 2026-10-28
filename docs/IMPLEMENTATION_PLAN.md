@@ -14,6 +14,9 @@ cause or a persistence leak. No positive/full retry or runtime/acceptance change
 Owned clone/process removed; all77 application names/checksums identical; zero
 owned tables, other sessions or transactions. Repository-only regression/QA and
 exact-head publication verification are recorded in the owning audit.
+Checkpoint8b56b8386e692554a521e4f56c945d51b1feddb7 passed
+[CI40739284353](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40739284353):
+PHP7.4/8.3 each1698/7533, no failures/skips; Node16/16/all configured gates pass.
 Implementation-plan progress: connected negative-case evidence now explains the
 qualification blocker; connected/positive qualification and lost-update repair
 remain open. Recommended next gated slice: repository-only Connected mysqlnd
