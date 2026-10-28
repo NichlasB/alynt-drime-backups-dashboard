@@ -137,3 +137,42 @@ runtime comparison. Preserve guards, reporting posture, budgets, ADBC and wiring
 Only after fresh prerequisites pass may one new owned attempt run, under fresh
 exact target/fixture confirmation. A runtime repair needs its own authority; do
 not bypass the refusal or resume production integration.
+
+## Approved canonical-key correction — native confirmation pending — 2026-10-28
+
+Separate approval covers the harness-only correction, regression tests, fresh
+prerequisites and one fresh owned attempt. Clean/synced repair baseline
+`5f7bf83b42cfbbfd37a76808b53e9988731df482`. Site Operations/registry/LocalWP metadata
+and Novamira guide/inventory refreshed; exact Plugin Tester profile and listeners
+10004/10005 resolved. A fresh target/fixture confirmation card is pending. No SQL,
+installed-core proof, fixture creation or native retry has run in this repair.
+
+The operation now obtains one fixed callback file/hash binding from the manual
+contract helper. The helper canonicalizes that fixed repository filename with
+realpath, returns an empty/refused binding if it is absent, and accepts no caller
+path, receiver, callback or metadata. Runtime source/hash equality remains strict;
+no comparison normalization, new grant, image exception or acceptance fallback.
+
+New PHP -n repository-only worker reflects the actual adba_hook declaration and
+checks the exact binding with the actual Bootstrap_Profile::hooks method and
+isolated hook API metadata. It requires a positive non-empty admitted observer,
+then rejects an equivalent `./` key, wrong hash and missing binding without
+invoking callbacks. It opens no driver or installed WordPress file. This is not
+genuine core authentication/storage/native evidence. Initial test-worker invocation
+path comparison was corrected before regression evidence; the subsequent original
+mixed-key run fails the intended canonical declaration assertion. Canonicalization
+then passes: new parent test1/4 with seven worker assertions; combined binding/
+receipt10/52, related342/1501, no skips/failures. No native guard mutation is claimed.
+
+Scoped lint/syntax, full PHPCS220, Node16/16, structure148 runtime/226 support/
+199 test files/196 class names, build, strict Composer validation and zero-advisory
+Composer/npm audits pass. Runtime, budgets/controller, original native cases,
+ADBC contracts, dependencies and production wiring remain baseline-identical;
+uploader/toolkit untouched. Full local PHP8.5.1: 1,884 tests/8,211 assertions,
+only the two existing missing-Sodium signing skips, no failures. The repair commit
+receives exact-head CI verification before handoff; native qualification remains
+pending regardless of isolated CI results.
+Do not treat this source repair as physical qualification or refresh historical
+whole-plugin readiness/task counts. The approved single fresh native attempt
+remains pending the exact target/fixture card and fresh prerequisites, not new
+product-feature approval.

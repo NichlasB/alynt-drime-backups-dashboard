@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Canonical ambient observer key — approved repair — 2026-10-28
+
+Approved [harness-only correction and fresh attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md),
+baseline5f7bf83. Fixed caller-side canonical file key, unchanged strict runtime
+source/hash guard. Intended red declaration assertion then green; binding/receipt
+10/52, related342/1501 pass. No SQL/native retry/fixture or production change yet:
+fresh exact Plugin Tester target/fixture card pending. Repository QA in owning
+record. Implementation-plan progress: harness defect corrected; physical
+ambient/report-OFF qualification remains open. Resume the already-approved single
+owned attempt only after target confirmation and fresh prerequisites.
+
 ## Ambient/report-OFF — blocked owned qualification — 2026-10-28
 
 Approved/confirmed Plugin Tester local-only [single owned attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md),

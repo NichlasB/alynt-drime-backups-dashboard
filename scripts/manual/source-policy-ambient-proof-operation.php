@@ -33,8 +33,7 @@ function adb0_owner() {
 			$bound['observers'][ $hook ] = $GLOBALS['wp_filter'][ $hook ]->callbacks;
 		}
 	}
-	$callback_file                             = __DIR__ . '/source-policy-adapter-proof-cases.php';
-	$bound['observer_files'][ $callback_file ] = hash_file( 'sha256', $callback_file );
+	$bound['observer_files'] = adb0_observer_binding();
 	adbb_bind( $owner, 'bootstrap_frame', $frame );
 	adbb_bind( $owner, 'bootstrap_binding', $bound );
 	$owners[] = $owner; // Retain before the first fallible native bootstrap.

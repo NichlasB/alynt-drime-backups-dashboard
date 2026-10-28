@@ -20,3 +20,12 @@ function adb0_terminal( $wire, $run, $image, $pid ) {
 	}
 	return 1 === preg_match( '/\AADBO1\|' . $run . '\|' . $image . '\|' . $pid . '\|[1-9][0-9]{0,4}\|9\|0\|closed\n\z/', $wire );
 }
+
+/** Fixed proof-owned callback source; consistency metadata, not an admission grant.
+ *
+ * @return array Exact file/hash binding, never caller-selected metadata.
+ */
+function adb0_observer_binding() {
+	$file = realpath( __DIR__ . '/source-policy-adapter-proof-cases.php' );
+	return false === $file ? array() : array( $file => hash_file( 'sha256', $file ) );
+}
