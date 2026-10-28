@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Native bootstrap owned proof — error-hook boundary blocked — 2026-10-28
+
+Fresh confirmed Plugin Tester local-only [audit](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md),
+clean/syncedf5279fcc80e3fca4375ac720a49fd1b49b9b1056. Genuine source/capability
+preflight30 checks/zero sessions; one empty owned schema clone then ordered
+attempt stopped at all-hook refusal after60 checks. WP_Error construction and
+is_wp_error dispatch genuine error hooks, including in actual private bootstrap
+refusal; old isolated error models omit these effects. Driver-free genuine
+diagnosis25 checks/6 groups confirms the defect, not native success. Exact
+clone removed; all77 application checksums identical, zero retained fixtures/
+transactions. No runtime/wiring fix or native retry. New gate tests6/24, related
+592/2339, full local1426/6297 (two baseline Sodium skips), Node16/16/all gates/
+audits pass; exact-head publication CI pending. Historical whole/toolkit rows
+and task count unchanged; native qualification/lost-update repair remain open.
+Next gated slice: repository-only Hook-Silent Source-Policy Refusal and
+Error-Classification Safety Foundation, isolated API tests only; preserve
+WP_Error/unavailable semantics without unqualified hook dispatch, keep native
+execution, factories and production wiring disabled. Fresh owned proof follows
+only with separate approval and target/fixture confirmation.
+
 ## Bounded initial construction / bootstrap isolated foundation — 2026-10-28
 
 Approved repository-only R3 [foundation](SOURCE_POLICY_NATIVE_BOOTSTRAP_FOUNDATION.md),

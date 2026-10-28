@@ -1,5 +1,19 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Genuine bootstrap refusal-hook blocker — 2026-10-28
+
+Fresh approved local-only [owned audit](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md)
+stopped at all after60 checks; genuine WP_Error/is_wp_error error events violate
+the callback-free refusal invariant. Driver-free25/6 diagnosis proves effects
+in actual dormant methods; synthetic shims missed them. No positive native/
+request/UI qualification or runtime fix. Exact empty clone removed, all77
+application checksums unchanged, zero fixtures/transactions. Gate tests6/24,
+related592/2339, full local1426/6297 (two baseline Sodium skips), Node16/16/all
+gates/audits pass; CI pending. Historical whole07/07A/13/FULL/toolkit readiness
+unchanged. Next gated slice: repository-only Hook-Silent Source-Policy Refusal
+and Error-Classification Safety Foundation, isolated tests only; native/public
+factories/production wiring disabled. No native retry without fresh approval.
+
 ## Dormant bounded bootstrap isolated foundation — 2026-10-28
 
 Repository-only [foundation](SOURCE_POLICY_NATIVE_BOOTSTRAP_FOUNDATION.md),

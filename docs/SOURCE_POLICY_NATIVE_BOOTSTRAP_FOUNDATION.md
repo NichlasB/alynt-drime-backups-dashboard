@@ -1,5 +1,13 @@
 # Bounded Initial Native Construction and Pre-Qualification Bootstrap Safety Foundation
 
+Later genuine [owned audit](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md),
+2026-10-28, stopped at the all-hook refusal: actual error construction and
+classification dispatch core error hooks absent from these isolated models.
+Fixtures were removed and all77 application checksums preserved. Native
+qualification is blocked; the historical synthetic/CI evidence below is not
+genuine refusal-hook closure or a successful native proof. Runtime remains
+unchanged pending the separately gated hook-silent refusal foundation.
+
 ## Authority and immutable boundary — 2026-10-28
 
 Approved repository-only R3 foundation implementing the
