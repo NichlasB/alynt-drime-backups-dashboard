@@ -12,6 +12,9 @@ regressions preserve symbols/constants/globals/output and executable dependency
 boundaries, while existing isolated operation coverage still passes. Local full
 1760/7775 with only two existing Sodium skips; combined192/709/all configured
 local gates pass. No native, manifest, SQL, site or physical proof rerun.
+Repairc4cca4a5c8e2cc665edafa7a67450590d6ba03c6 passed
+[exact-head CI40748998577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40748998577):
+PHP7.4/8.3 each1760/7782, no failures/skips; Node16/16/all configured gates pass.
 Implementation-plan progress: publication/test-integrity recovery, not additional
 native or product-feature credit. Hosted recovery evidence is in the owning record.
 Next gated slice remains repository-only Versioned Connected Cleanup Evidence

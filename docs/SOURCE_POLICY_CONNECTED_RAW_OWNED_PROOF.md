@@ -209,7 +209,8 @@ Red evidence: final regressions before/without the declaration guard fail with
 an explicit symbol-leak assertion (clean parent) and a nested redeclaration fatal
 exit255 (existing symbols), matching the hosted collision. After restoring the
 guard, discovery2 tests/8 assertions and combined ConnectedRaw/Cleanup/
-FailedConnectObservation192/709 pass. This is discovery/test-integrity evidence,
+FailedConnectObservation192/709 pass; focused ConnectedRaw62/249 also passes.
+This is discovery/test-integrity evidence,
 not another physical close proof. Restored fixture SHA256
 4877C2A0AB61D9685B0A25B667A66DA8FDB54B0FA8ECEB62B0B70AF373842823.
 
@@ -228,7 +229,12 @@ Every PHPUnit invocation uses --do-not-cache-result.
 The changed test fixture is outside the native producer's source image graph.
 Historical native665ms/four-stage/live-release evidence remains scoped to its
 original image; no native/manifest rerun, new checksum claim or retrospective
-owner qualification. Hosted exact-head recovery verification is pending.
+owner qualification. Repair checkpoint
+c4cca4a5c8e2cc665edafa7a67450590d6ba03c6 passed
+[exact-head CI40748998577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40748998577):
+actual PHP7.4/8.3 each1760 tests/7782 assertions, no failures/skips; Node16/16
+and all configured gates pass. This evidence-only closeout preserves the tested
+fixture/source bytes and receives a separate exact-head check before handoff.
 
 Implementation-plan progress: actual raw connected/once-close/live-release
 evidence advances; current owner connected/positive qualification and the actual
