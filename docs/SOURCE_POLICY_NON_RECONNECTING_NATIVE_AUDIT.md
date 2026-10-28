@@ -1,5 +1,12 @@
 # Fixed Non-Reconnecting Connection / Native Adapter Audit — Blocked
 
+Later confirmed native-construction audit,2026-10-28:
+[initial provider/bootstrap gap](SOURCE_POLICY_NATIVE_CONSTRUCTION_AUDIT.md).
+The installed core callback layer was proved, but no initial native construction
+or pre-qualification setup path exists. Ten-check driver-free diagnosis;
+fresh bundled-mysql preservation all77 unchanged, no fixtures. This is a new
+prerequisite block, not a rerun or promotion of the historical probe below.
+
 Later genuine-core library evidence,2026-10-28:
 [zero-SQL context/cleanup proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md)
 passes215/12 on the pinned installed7.1.3 profile, not native construction/SQL

@@ -1,5 +1,17 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Native construction qualification audit blocked before fixtures — 2026-10-28
+
+Fresh confirmed Plugin Tester local-only [audit](SOURCE_POLICY_NATIVE_CONSTRUCTION_AUDIT.md):
+read-only bundled-mysql metadata/checksums, all77 application tables unchanged,
+zero fixtures/transaction. Driver-free genuine-core10-check diagnosis confirms
+the fixed initial native constructor/provider and pre-qualification setup path
+are unimplemented; this is not positive native acceptance. No runtime/test/
+form/UI/wiring change or whole07/07A/13/FULL/toolkit completion. Previous native
+proof recommendation was premature. Next gated slice: repository-only
+Source-Policy Bounded Initial Native Construction and Pre-Qualification
+Bootstrap Design, design-only, native/storage/factories/wiring disabled.
+
 ## Genuine-core callback context / cleanup zero-SQL proof — 2026-10-28
 
 Fresh confirmed Plugin Tester local-only [proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md):

@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Native construction / adapter audit — blocked before fixtures — 2026-10-28
+
+Fresh confirmed Plugin Tester local-only [audit](SOURCE_POLICY_NATIVE_CONSTRUCTION_AUDIT.md),
+clean/synced3d0a8f0d2a7052d3ef3643d1e458de69065a956e. Bundled-mysql read-only
+schema/checksum baselines: expected MariaDB/options profile, all77 application
+tables unchanged, zero fixtures/retained transaction. Elevated checks confirmed
+both local services ready; no restart. Driver-free genuine-core diagnostic10
+checks confirms initial construction/provider and pre-qualification setup path
+are absent: own/parent constructors cannot open the final-refusing connection,
+and dispatch requires facts no implemented provider establishes. No fabricated
+active state/handle transfer/bypass, native candidate, DDL/DML or runtime change.
+The earlier native-proof recommendation jumped ahead of this prerequisite.
+Core6.0/native matrix and actual lost-update repair stay open; no task-count or
+whole-release credit. Next gated slice: repository-only Source-Policy Bounded
+Initial Native Construction and Pre-Qualification Bootstrap Design, design-only,
+native/storage/factories/authentication/production wiring disabled; isolated
+construction implementation precedes the resumed owned native proof.
+
 ## Genuine-core context / owned cleanup zero-SQL proof — 2026-10-28
 
 Fresh confirmed Plugin Tester local-only [proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md),
