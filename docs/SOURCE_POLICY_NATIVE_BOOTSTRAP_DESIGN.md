@@ -1,5 +1,10 @@
 # Bounded Initial Native Construction and Pre-Qualification Bootstrap Design
 
+Later approved repository-only [isolated foundation](SOURCE_POLICY_NATIVE_BOOTSTRAP_FOUNDATION.md),
+2026-10-28, implements this private orchestration using extension-free synthetic
+API/IO tests. This design's original evidence remains historical, not native
+qualification; actual source/provider/matrix and production wiring stay gated.
+
 ## Authority and immutable baseline — 2026-10-28
 
 Approved repository-only design, through validation/commit/push/exact-head CI.

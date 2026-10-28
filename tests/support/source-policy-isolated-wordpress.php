@@ -11,6 +11,7 @@ function current_user_can( $capability ) { $GLOBALS['policy_trace'][] = 'capabil
 function wp_verify_nonce( $nonce, $action ) { $GLOBALS['policy_trace'][] = 'nonce'; return 'valid' === $nonce && 'alynt_drime_backups_dashboard_update_source_policy' === $action; }
 function apply_filters( $hook, $value, ...$args ) {
 	$GLOBALS['policy_trace'][] = $hook;
+	foreach(isset($GLOBALS['wp_filter']['all'])?$GLOBALS['wp_filter']['all']->callbacks:array() as $entries) foreach($entries as $entry) call_user_func_array($entry['function'],array($hook,$value));
 	foreach ( isset( $GLOBALS['wp_filter'][ $hook ] ) ? $GLOBALS['wp_filter'][ $hook ]->callbacks : array() as $entries ) {
 		foreach ( $entries as $entry ) { $value = call_user_func_array( $entry['function'], array_slice( array_merge( array( $value ), $args ), 0, $entry['accepted_args'] ) ); }
 	}
@@ -18,6 +19,7 @@ function apply_filters( $hook, $value, ...$args ) {
 }
 function do_action( $hook, ...$args ) {
 	$GLOBALS['policy_trace'][] = $hook;
+	foreach(isset($GLOBALS['wp_filter']['all'])?$GLOBALS['wp_filter']['all']->callbacks:array() as $entries) foreach($entries as $entry) call_user_func_array($entry['function'],array_merge(array($hook),$args));
 	foreach ( isset( $GLOBALS['wp_filter'][ $hook ] ) ? $GLOBALS['wp_filter'][ $hook ]->callbacks : array() as $entries ) {
 		foreach ( $entries as $entry ) { call_user_func_array( $entry['function'], array_slice( $args, 0, $entry['accepted_args'] ) ); }
 	}

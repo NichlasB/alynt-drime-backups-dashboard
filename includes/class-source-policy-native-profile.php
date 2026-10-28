@@ -21,6 +21,11 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 	 */
 	public static function admit( $facts, $table, $query_context = null ) {
 		global $wp_object_cache, $wp_filter;
+		foreach ( array( 'all', 'incompatible_sql_modes' ) as $hook ) {
+			if ( isset( $wp_filter[ $hook ] ) && ! empty( $wp_filter[ $hook ]->callbacks ) ) {
+				return new WP_Error( 'source_policy_unavailable' );
+			}
+		}
 		$required = array( 'core', 'server', 'database', 'table', 'schema', 'autocommit', 'single_site', 'dropins', 'cache', 'bounded_session', 'hooks' );
 		if ( ! is_array( $facts ) || count( $required ) !== count( $facts ) || array_diff( $required, array_keys( $facts ) ) ) {
 			return new WP_Error( 'source_policy_unavailable' );
@@ -54,8 +59,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 	 */
 	public static function fingerprint( $without_query = false ) {
 		global $wp_filter;
-		$name  = Alynt_Drime_Backups_Dashboard_Source_Policy::OPTION_SOURCE_POLICIES;
-		$hooks = array( 'sanitize_key', 'pre_option', "pre_option_$name", "option_$name", "default_option_$name", "sanitize_option_$name", "pre_update_option_$name", 'pre_update_option', 'update_option', "update_option_$name", 'updated_option', 'add_option', "add_option_$name", 'added_option', 'alloptions', 'pre_cache_alloptions', 'pre_wp_load_alloptions', 'wp_autoload_values_to_autoload', 'query' );
+		$hooks = self::hook_names();
 		if ( isset( $wp_filter ) && ! is_array( $wp_filter ) ) {
 			return new WP_Error( 'source_policy_unavailable' );
 		}
@@ -91,6 +95,15 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 			}
 		}
 		return hash( 'sha256', $frames );
+	}
+
+	/** Relevant hook-name DATA, not callback qualification.
+	 *
+	 * @return array
+	 */
+	public static function hook_names() {
+		$name = Alynt_Drime_Backups_Dashboard_Source_Policy::OPTION_SOURCE_POLICIES;
+		return array( 'sanitize_key', 'pre_option', "pre_option_$name", "option_$name", "default_option_$name", "sanitize_option_$name", "pre_update_option_$name", 'pre_update_option', 'update_option', "update_option_$name", 'updated_option', 'add_option', "add_option_$name", 'added_option', 'alloptions', 'pre_cache_alloptions', 'pre_wp_load_alloptions', 'wp_autoload_values_to_autoload', 'all', 'incompatible_sql_modes', 'query' );
 	}
 
 	/**

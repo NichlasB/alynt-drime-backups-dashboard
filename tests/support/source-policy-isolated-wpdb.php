@@ -7,7 +7,22 @@ class wpdb {
 	public $store, $prepared = array(), $queries = array(), $physical = 0, $reconnects = 0, $closes = 0;
 	public $dbh = null, $placeholder_calls = 0;
 	private $marker = null;
-	public function __construct() { throw new RuntimeException( 'A parent/native constructor must never run.' ); }
+	private $use_mysqli = false;
+	public $num_queries=0, $charset, $collate, $is_mysql, $dbpassword='';
+	protected $incompatible_modes=array('NO_ZERO_DATE');
+	public function __construct(...$args) {
+		if(empty($GLOBALS['policy_bootstrap_model'])) throw new RuntimeException('A parent/native constructor must never run.');
+		++$GLOBALS['boot_counts']['object']; $this->use_mysqli=empty($GLOBALS['boot_legacy']); $this->ready=false; $this->dbh=null; $this->store=$GLOBALS['boot_store']; boot_event('object'); $this->db_connect(false);
+	}
+	public function __get($name){return $this->$name;}
+	public function db_connect($allow_bail=true){unset($allow_bail); ++$GLOBALS['boot_counts']['unexpected_connect']; return false;}
+	public function init_charset(){boot_event('init'); $values=$this->determine_charset(DB_CHARSET,DB_COLLATE); $this->charset=$values['charset']; $this->collate=$values['collate'];}
+	public function determine_charset($charset,$collate){$this->has_cap('collation'); return array('charset'=>$charset,'collate'=>$collate?:'utf8mb4_unicode_520_ci');}
+	public function has_cap($cap){unset($cap); return strlen($this->db_version())>0;}
+	public function db_version(){return $this->db_server_info();}
+	public function db_server_info(){return mysqli_get_server_info($this->dbh);}
+	public function set_charset($dbh,$charset=null,$collate=null){boot_event('charset'); $dbh->charset=$charset??$this->charset; $dbh->collation=$collate??$this->collate;}
+	public function set_sql_mode($modes=array()){boot_event('mode-helper'); $excluded=apply_filters('incompatible_sql_modes',$this->incompatible_modes); $this->dbh->mode=implode(',',array_diff($modes,$excluded));}
 	public function prepare( $template, ...$args ) {
 		$id='isolated:'.count($this->prepared); $this->prepared[$id]=array($template,$args);
 		$wire=$this->add_placeholder_escape($this->_real_escape($id.'|'.serialize($args)));

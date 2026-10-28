@@ -1,5 +1,10 @@
 # Fixed Native Construction / Adapter Qualification Audit — Blocked Before Fixtures
 
+Later approved [isolated bootstrap foundation](SOURCE_POLICY_NATIVE_BOOTSTRAP_FOUNDATION.md),
+2026-10-28, supplies the previously absent private setup algorithm in dormant
+code. Synthetic success does not rerun this audit or establish genuine
+construction/provider/native qualification; fresh owned proof remains gated.
+
 Later approved repository-only [bootstrap design](SOURCE_POLICY_NATIVE_BOOTSTRAP_DESIGN.md),
 2026-10-28, specifies the private one-shot initial setup/admission and partial
 cleanup contract. It does not implement a constructor, rerun this audit or

@@ -8,9 +8,16 @@
 if ( ! defined( 'ABSPATH' ) || ! class_exists( 'wpdb', false ) ) {
 	return;
 }
+require_once __DIR__ . '/class-source-policy-bootstrap-profile.php';
+require_once __DIR__ . '/class-source-policy-bootstrap-evidence.php';
+require_once __DIR__ . '/traits/trait-source-policy-native-bootstrap.php';
+require_once __DIR__ . '/traits/trait-source-policy-bootstrap-setup.php';
 
 /** Native construction remains closed pending separately approved qualification. */
 class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extends wpdb {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap;
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Setup;
+
 	/**
 	 * Private qualification DATA, never accepted by an application command.
 	 *
@@ -147,7 +154,9 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 		$native                = false;
 		try {
 			$native = ( $GLOBALS['wpdb'] ?? null ) === $this ? false : ( 'never_opened' === $this->native_state && null === $this->dbh && ! $this->ready );
-			if ( ( $GLOBALS['wpdb'] ?? null ) !== $this && 'active' === $this->native_state && null !== $this->dbh ) {
+			if ( null !== $this->bootstrap_handle ) {
+				$native = $this->bootstrap_release();
+			} elseif ( ( $GLOBALS['wpdb'] ?? null ) !== $this && 'active' === $this->native_state && null !== $this->dbh ) {
 				$native = true === parent::close();
 			}
 		} catch ( Throwable $error ) {

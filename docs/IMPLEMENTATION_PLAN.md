@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Bounded initial construction / bootstrap isolated foundation — 2026-10-28
+
+Approved repository-only R3 [foundation](SOURCE_POLICY_NATIVE_BOOTSTRAP_FOUNDATION.md),
+clean/syncedf36a69f0e3f960fbed538af56dfb8625a6d03515. Implements private once-only
+object initialization/allocation/connect/setup, exact source/hook admission,
+bounded readbacks, active-last publication and partial owned cleanup; final
+connect/reconnect refusals and public factories remain closed. Synthetic PHP -n
+workers only, no actual authentication/storage/native/site/wiring operation.
+New138/552, related randomized567/2296; full local1401/6254 with two baseline
+Sodium skips; Node16/16/all local gates/zero-advisory audits pass. Eight
+assertion-killed/SHA256-restored controls and canonical scoped Light/structure/
+Security reviews recorded. Exact-head publication verification pending; local
+QA is not native/source/provider qualification. Uploader/toolkit and historical
+whole07/07A/13/FULL/task count unchanged; actual lost-update repair stays open.
+Next gated slice: Plugin Tester local-only Bounded Initial Native Construction
+and Pre-Qualification Bootstrap Owned Qualification/Cleanup Proof, audit first,
+fresh target/owned-fixture approval, actual private path not injected active
+state, matrix prerequisites explicit, factories/production wiring disabled.
+
 ## Bounded initial construction / pre-qualification bootstrap design — 2026-10-28
 
 Approved repository-only [design](SOURCE_POLICY_NATIVE_BOOTSTRAP_DESIGN.md),
