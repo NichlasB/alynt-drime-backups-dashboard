@@ -13,8 +13,11 @@ bounded and unimplemented, not a new relay/toolchain or hard-deadline claim.
 No source/harness/test, acceptance assertion, native/site/storage/fixture/process
 or production-wiring change. Focused65/117, full local1568/7066 (two existing
 Sodium skips), Node16/16/all configured gates/zero-advisory audits and scoped
-links/diff/preservation checks pass; publication CI pending. Historical proof
-and safe-local counts unchanged. Qualification/lost-update repair remain open.
+links/diff/preservation checks pass. Design84bf6da0b01344e4fc099d957e22e8a9b9b68d73
+passed [exact-head CI40708838718](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40708838718):
+PHP7.4/8.3 each1568/7073, no failures/skips; Node16/16/all gates pass. Hosted QA
+does not implement/test the proposed native controller. Historical proof and
+safe-local counts unchanged. Qualification/lost-update repair remain open.
 Next gated slice: repository-only Failed-Connect Observation and Per-Case Cleanup
 Evidence Safety Foundation, isolated API/IO tests only; no actual native execution.
 

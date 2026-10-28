@@ -222,7 +222,12 @@ kept successful-case zero-counter checks, bound the failed-case observation to
 its qualified profile and kept the next foundation dormant/test-only rather
 than switching current proof acceptance. No remaining identified inconsistency;
 actual process limits/hold protocol/native matrix remain unproved gates.
-Exact-head publication CI is pending; no release-readiness completion is claimed.
+Design commit `84bf6da0b01344e4fc099d957e22e8a9b9b68d73` passed
+[exact-head CI40708838718](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40708838718):
+actual PHP7.4/8.3 each1568 tests/7073 assertions, no failures/skips; Node16/16,
+all configured gates and zero-advisory audits pass. Hosted QA validates existing
+isolated code, not this unimplemented controller or native process contract.
+No release-readiness completion is claimed.
 
 Recommended next gated slice: **repository-only Failed-Connect Observation and
 Per-Case Cleanup Evidence Safety Foundation**, isolated API/IO tests only.
