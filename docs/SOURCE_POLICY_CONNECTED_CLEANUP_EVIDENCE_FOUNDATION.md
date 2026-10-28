@@ -168,3 +168,11 @@ legacy-cohort qualification, application-state changes or production wiring. The
 new contract is presently unwired; isolated green tests do not authorize that
 native/site boundary. Stop on failed prerequisites, unexplained release evidence
 or a new approval boundary rather than retrying or granting qualification.
+
+## Forward record — separately approved owned integration — 2026-10-28
+
+The [single native ADBC2 integration/owned proof](SOURCE_POLICY_CONNECTED_CLEANUP_NATIVE_OWNED_PROOF.md)
+now records actual fixed-profile refusal/positive release evidence and exact
+cleanup. This foundation/model, ADBC1 and production sources remain unchanged.
+Diagnostic divergence is not a native grant; conditional-write adapter proof and
+production connection remain separate approval boundaries.

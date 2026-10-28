@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## ADBC2 connected owner and live/post release — owned proof — 2026-10-28
+
+Approved/confirmed Plugin Tester local-only [single connected proof](SOURCE_POLICY_CONNECTED_CLEANUP_NATIVE_OWNED_PROOF.md),
+clean/synced baseline6e84147a1f89041de58fa1c56e468070193b165b. New private actual
+producer/controller/bridge, unchanged ADBC1 and runtime. Fresh source26+20,
+stdio46/10+12/3, genuine error25/6 and pinned-source31 prerequisites pass. One
+refusal/real-positive ordered attempt completes836ms: actual binary SELECT and
+hook seal, acknowledged exact release, independent live and post-exit0/0 for both.
+Pconnect/open-counter divergence remains raw diagnostic DATA, no qualification
+grant. Exact empty clone/process cleanup passes; all77 application checksums
+unchanged, zero retained fixtures/other sessions/transactions. New isolated18/101,
+combined284/1068, three assertion-killed/hash-restored controls. Local full1852/8134
+with only two existing Sodium skips; Node16/16/all configured local gates pass.
+Publication in owning record; no native rerun, wiring, release or task-count credit.
+Implementation-plan progress: physical connected/positive release advances, not
+the application lost-update repair or full compatibility/qualification matrix.
+Next gated slice: Plugin Tester local-only Fixed Non-Reconnecting Native Adapter
+Conditional-Save/Conflict and Owned Cleanup Proof, audit-first/fresh prerequisites,
+new exact owned-row write/fixture/cleanup authority, production wiring disabled.
+
 ## Versioned connected cleanup evidence — repository-only — 2026-10-28
 
 Approved [ADBC2 manual DATA foundation](SOURCE_POLICY_CONNECTED_CLEANUP_EVIDENCE_FOUNDATION.md),
