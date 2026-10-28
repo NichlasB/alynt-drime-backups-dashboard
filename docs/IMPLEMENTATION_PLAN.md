@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Bounded missing-table diagnostic — counter mismatch identified — 2026-10-28
+
+Approved same-target [one-case diagnostic and cleanup](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md#bounded-missing-table-terminal-evidence-diagnostic--2026-10-28),
+baseline63c87174b0633018013c2ce1273ef5729d8286d9. Fresh source26/stdio46/10/
+genuine-error25/6/pinned-source31 prerequisites pass. One missing-table attempt
+rejected unchanged acceptance: actual bootstrap/after vectors both
+1,0,10,6,6,0,0,0,0,1,18446744073709551615. Exactly two counter expectations
+disagree: pconnect_success1 versus0 and active_connections wrapped versus0.
+All recorded terminal predicates otherwise match, steps8, unavailable/closed,
+28ms owner/150ms parent. This identifies evidence mismatches, not their mysqlnd
+cause or a persistence leak. No positive/full retry or runtime/acceptance change.
+Owned clone/process removed; all77 application names/checksums identical; zero
+owned tables, other sessions or transactions. Repository-only regression/QA and
+exact-head publication verification are recorded in the owning audit.
+Implementation-plan progress: connected negative-case evidence now explains the
+qualification blocker; connected/positive qualification and lost-update repair
+remain open. Recommended next gated slice: repository-only Connected mysqlnd
+Counter Semantics and Release-Evidence Design, no native execution, acceptance
+relaxation or production wiring.
+
 ## Fresh cleanup proof — raw and five cases pass, missing-table gated — 2026-10-28
 
 Approved one fresh [same-target owned proof](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md#fresh-approved-attempt--raw-and-five-owner-cases--2026-10-28),

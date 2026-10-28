@@ -5,6 +5,21 @@ require_once __DIR__.'/support/source-policy-cleanup-fixtures.php';
 
 /** Diagnostics are bounded non-secret DATA, never terminal acceptance. */
 final class SourcePolicyCleanupDiagnosticTest extends TestCase {
+ public function test_observed_connected_counter_mismatches_remain_independent_refusals() {
+  // Replay only non-secret measured DATA with isolated correlation, never a native receipt.
+  $base=cleanup_fixture_rows()['missing-table'];$pid=(int)$base['pid'];
+  foreach(array(array('pconnect_success'=>'1'),array('active_connections'=>Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::WRAP),array('pconnect_success'=>'1','active_connections'=>Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::WRAP)) as $changes){
+   $row=$base;
+   foreach(array('bootstrap','after') as $field){foreach($changes as $counter=>$value){cleanup_fixture_counter($row,$field,$counter,$value);}}
+   $before=$row;$wire=$this->render($row,'missing-table',$pid);
+   $this->assertFalse(Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::matches($row,str_repeat('a',32),'missing-table',hash('sha256','isolated-cleanup-fixture'),$pid));
+   $this->assertStringStartsWith('ADBC-DIAG1|missing-table|'.$pid.'|1|'.$row['bootstrap'].'|'.$row['after'].'|',$wire);
+   $this->assertSame($before,$row);$this->assertFalse(Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::parse($wire));
+  }
+  $row=$base;$row['bootstrap']='1,0,10,6,6,0,0,0,0,1,18446744073709551615';$row['after']=$row['bootstrap'];$row['elapsed']='28';
+  $this->assertFalse(Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::matches($row,str_repeat('a',32),'missing-table',hash('sha256','isolated-cleanup-fixture'),$pid));
+  $this->assertStringContainsString('|'.$row['bootstrap'].'|'.$row['after'].'|1,unavailable,0,1,1,1,1,0,1,1,1,1,1,1,closed,0,8,0,0,0,28', $this->render($row,'missing-table',$pid));
+ }
  public function test_rejected_observations_remain_rejected_and_counters_are_unchanged() {
   foreach(cleanup_fixture_rows() as $case=>$row){
    $pid=(int)$row['pid'];$row['steps']='4';$before=$row;$wire=$this->render($row,$case,$pid);

@@ -325,3 +325,86 @@ target, with fresh source/error/stdio prerequisites and an exact owned empty clo
 Use the new bounded rejected-row projection to identify the actual mismatch; no
 full ordered retry, runtime change, guard/budget relaxation or production wiring.
 Any runtime remedy or subsequent full qualification needs its own evidence/gate.
+
+## Bounded missing-table terminal-evidence diagnostic — 2026-10-28
+
+Explicit user approval covers one bounded missing-table diagnostic on the same
+confirmed Plugin Tester local-only target, exact owned empty schema clone and
+cleanup; no full cohort, raw reference, positive case or runtime remedy. Baseline
+63c87174b0633018013c2ce1273ef5729d8286d9 was clean/synced and its exact-head
+CI40737139063 successful before the attempt. Refreshed LocalWP metadata and both
+listening ports match WP7.1.3/PHP8.5.12/mysqlnd8.5.12/MariaDB10.6.23, DB10004.
+Novamira complete inventory includes plugin-tester.local; bundled mysql first
+confirmed version/autocommit1/no transaction, PROCESS privilege and77 tables.
+No other all-server session/transaction. Fresh source26, owned socket-free
+stdio46/10, genuine error-hook25/6 and pinned-source31 prerequisites pass.
+
+Frozen loaded image ed37f5d80e8c7d96aece8663df9d8378aec50266b16fe05064311bc68fd54b2f;
+run ad48c0868ce2475db2ffb34cb5ecada9, child14824, exact empty owned clone
+local.adbb_e009b56bf0c4_options. Absent table/database and zero sessions/transactions
+preview passed before creation. One missing-table child, original25s parent and
+20s owner/16-command budgets unchanged. It emitted175 bounded stderr bytes and
+was rejected by the unchanged verifier at parent150ms; no accepted stdout/ACK.
+
+Actual diagnostic baseline_zero1; bootstrap and after vectors both:
+1,0,10,6,6,0,0,0,0,1,18446744073709551615.
+Order: connect_success,connect_failure,com_query,result_set_queries,
+explicit_free_result,implicit_free_result,unbuffered_sets,reconnect,
+connection_reused,pconnect_success,active_connections. Exactly two mismatches
+against the existing connected-negative expectation: pconnect_success is1 rather
+than0, active_connections is18446744073709551615 rather than0. Connect1/failure0,
+10commands within7..16, six result sets/explicit frees and all other counters match.
+
+Actual terminal vector (allocations through elapsed):
+1,unavailable,0,1,1,1,1,0,1,1,1,1,1,1,closed,0,8,0,0,0,28.
+Every recorded non-time terminal predicate matches the negative-case contract;
+28ms elapsed is within budget. This supplies previously missing terminal DATA:
+eight consumed steps, never active, close acknowledged/cached, exact context,
+no ambient handle, null dbh/qualification, cleared frame/callback/result state,
+closed-object supporting probe, no observer/public query/roundtrip/seal effects.
+Allocation/close-call fields remain audited-path/latch observations, not separate
+primitive instrumentation. Consumed steps and result counts do not establish
+successful schema qualification, physical counter semantics or a positive grant.
+
+Cleanup: exact owned Process object stopped/disposed, then independent all-server
+sessions/transactions0/0. Preview exact clone row count0 and sessions/transactions0
+before dropping only that clone. Final77 table names/checksums identical; owned
+adbb_ tables0, absent database0, sessions0, transactions0. No existing application
+tables/options/users/cron, installed lifecycle, credentials, services or production
+wiring changed. No second native attempt or post-failure SQL diagnosis ran.
+
+Source inspection shows literal127.0.0.1 (no p: prefix), flags0 and one internally
+allocated mysqli handle; public factories/reconnect remain closed. This does not
+explain the driver's two counter values. Do not interpret pconnect_success1 as
+proven actual persistence, normalize the wrap, blame a specific PHP defect or
+relax acceptance from this diagnostic. Native failure-cause/session schema detail
+is not exported, so the refusal is not attributed to one exact internal predicate.
+
+Repository-only regression replays the bounded observed vector using isolated
+fixture correlation, checks each anomalous counter independently remains refused,
+and verifies diagnostics preserve bytes and cannot parse as success. It opens no
+native session and does not add a success path. Runtime, original acceptance,
+source manifest graph, guards and budgets remain byte-for-byte unchanged.
+Executed local validation: diagnostic15 tests/113 assertions, combined cleanup/
+failed-connect130/460, full PHP8.5.1 suite1698/7526 with only two existing missing-
+Sodium skips and no failures. Node16/16, PHPCS204 files, structure148 runtime/
+220 support/189 test files/186 class names, build, strict Composer manifest,
+Composer/npm zero-advisory audits, scoped syntax/link/diff checks all pass.
+Commands: php vendor/bin/phpunit --filter SourcePolicyCleanupDiagnosticTest;
+--filter 'SourcePolicyCleanup|SourcePolicyFailedConnectObservation'; full --verbose
+--do-not-cache-result; npm lint/test:admin/check:structure/build; php composer.phar
+validate --strict/audit; npm audit --audit-level=moderate. All PHPUnit invocations
+use --do-not-cache-result. Git comparison confirms includes/scripts/bootstrap,
+dependencies and CI configuration unchanged; uploader/toolkit clean at their
+unchanged heads3dfcb15b5cab8191df7d984251986ead140ded52/
+c067eb61883035a1764d830bccffc1e542d3e1dc. Hosted exact-head verification pending
+publication; CI does not run this manual native proof or Windows stdio audits.
+
+Implementation-plan progress: connected negative-case refusal/cleanup DATA now
+identifies the precise evidence blocker. Connected/positive native qualification,
+minimum-version native matrix and actual lost-update repair remain unverified;
+this is not Database Review/whole-plugin readiness or product-task credit.
+Recommended next gated slice: **Repository-only Connected mysqlnd Counter Semantics
+and Release-Evidence Design**. Establish what independently justifies connected
+release and how counter anomalies remain diagnostic without becoming admission;
+design only, no native experiments, acceptance change or production wiring.
