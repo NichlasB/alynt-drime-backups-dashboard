@@ -428,3 +428,17 @@ remain unchanged; no new native/site/storage experiment. Proposed next gate is o
 bounded raw connected counter/single-close reference with independent live/post
 observations and owned cleanup, not a full owner-cohort retry or acceptance change.
 Design preservation QA/publication are recorded in that owning document.
+
+## Raw connected single-close reference — 2026-10-28
+
+The separately approved/confirmed [raw reference](SOURCE_POLICY_CONNECTED_RAW_OWNED_PROOF.md)
+completed one actual native attempt in665ms with four direct counter captures,
+one acknowledged PHP close and actual live/post all-server reconciliation. Both
+active counters wrap despite zero retained sessions while the raw child is still
+alive; pconnect_success1 is also observed before close. No candidate SQL, application
+tables/fixtures/writes or original owner/ADBC1 acceptance change. Source/ABI image
+correlation and exact owned cleanup pass. This reference does not retroactively
+complete the rejected missing-table hold/ACK or the unrun owner positive/cohort.
+The owning raw proof records new isolated tests/semantic controls, limits and CI.
+Next gated decision: repository-only versioned manual connected cleanup evidence
+foundation, with existing ADBC1/runtime rules unchanged and native execution disabled.

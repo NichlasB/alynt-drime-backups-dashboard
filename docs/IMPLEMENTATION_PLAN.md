@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Raw connected single-close proof — complete — 2026-10-28
+
+Approved/confirmed Plugin Tester local-only [bounded raw proof](SOURCE_POLICY_CONNECTED_RAW_OWNED_PROOF.md),
+baseline524ac9a2da2fe0ee61bcba372db0e6ac34cf5768. One native attempt completed
+in665ms: fresh/initialized counters0, connected pconnect/open/persistent-open1,
+one acknowledged PHP close, explicit_close1 and both active counters wrapped.
+Independent actual all-server observations1/0 before close,0/0 while child alive
+after close, and0/0 after clean exit. Exact owned process cleanup and frozen-image
+equality pass; no candidate SQL/application-table access/fixtures/writes. New
+private diagnostic protocol never grants owner qualification. Original ADBC1,
+runtime/guards/budgets/production wiring unchanged. New isolated60/241, combined
+190/701, local full1758/7767 with only two existing Sodium skips; all local gates
+pass, three assertion-killed/SHA256-restored controls. Publication in owning record.
+Implementation-plan progress: raw physical release evidence advances; connected/
+positive owner qualification and lost-update repair remain open. Next gated slice:
+Repository-only Versioned Connected Cleanup Evidence Safety Foundation, isolated
+tests only/new manual contract, preserve existing ADBC1 and disable native/wiring.
+
 ## Connected counter/release design — repository-only — 2026-10-28
 
 Approved [Connected mysqlnd Counter Semantics and Release-Evidence Design](SOURCE_POLICY_CONNECTED_COUNTER_RELEASE_DESIGN.md),

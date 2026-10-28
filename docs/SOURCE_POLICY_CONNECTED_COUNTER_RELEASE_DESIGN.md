@@ -280,3 +280,10 @@ Counter/Single-Close Diagnostic and Owned Cleanup Proof**, one fresh raw attempt
 no application writes, existing acceptance/runtime/wiring unchanged. Approve it
 to distinguish initialized-handle accounting from actual live release before any
 owner acceptance revision or full qualification retry.
+
+The subsequently approved and exactly confirmed [raw connected proof](SOURCE_POLICY_CONNECTED_RAW_OWNED_PROOF.md)
+completed its single native attempt with independent live/post release evidence,
+without changing current acceptance or production wiring. It records the actual
+four snapshots and remains a raw diagnostic, not owner qualification. The next
+gate is a repository-only versioned manual evidence foundation; this historical
+design's proposed native authority does not authorize another attempt.
