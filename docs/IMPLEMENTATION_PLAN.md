@@ -12,7 +12,8 @@ real saved/noop/stale/CAS/creation conflict, false errno1064/1062/1205, preserve
 ambient handle/callback and all-server live/post0/0. Exact clone/process cleanup,
 77 application checksums/inventory unchanged. Full local1885/8212, two existing
 Sodium skips; all other QA pass. Repair8b4eb4d/CI40772318044 successful1884/8218;
-final source-isolation/evidence publication separately exact-head checked.
+finalf82b10d/CI40773080794 succeeds: PHP7.4/8.3 each1885/8219, no failures/skips,
+Node16/16/all gates. Scoped docs closeout separately exact-head checked.
 No runtime/ADBC/budget/wiring changes, task-count or historical readiness credit.
 Implementation-plan progress: current ambient/report-OFF qualification gap closed,
 not production connection or authenticated/minimum-profile qualification. Next

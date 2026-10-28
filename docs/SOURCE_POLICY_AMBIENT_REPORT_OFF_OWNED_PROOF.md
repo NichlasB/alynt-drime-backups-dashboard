@@ -240,6 +240,15 @@ minimum WP6.0/PHP7.4 native support or intended deployment transport/configurati
 Public factories/provider/legacy form remain disconnected and the application
 lost-update repair is not deployed or complete.
 
+Final implementation/evidence `f82b10d5b0ee07ac4b75f583ed4248e218d6eedf` passed
+[exact-head CI40773080794](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40773080794).
+Actual PHP7.4/8.3 logs each1,885 tests/8,219 assertions, no failures/skips;
+Node16/16 each/all configured gates pass. Both check-run heads match. This scoped
+docs-only completion preserves the native image and receives separate exact-head
+CI before handoff; no native/SQL/fixture or installed-source proof rerun. Final
+scope/link/diff checks and unchanged runtime/ADBC/budget comparisons pass;
+uploader/toolkit remain clean at their unchanged original heads.
+
 Recommended next gated slice: **control-sitesmanage live-only Source-Policy
 Non-Secret Production-Connection Profile Audit (read-only)**. Recommend explicit
 approval of installed source/configuration/runtime/transport/drop-in discovery
