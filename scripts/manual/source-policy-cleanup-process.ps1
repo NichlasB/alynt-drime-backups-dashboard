@@ -14,7 +14,7 @@ function New-AdbcProcess([string]$Executable, [string[]]$Arguments) {
     $process.StartInfo = $info
     if (-not $process.Start()) { throw 'Owned process start refused' }
     $process.StandardInput.NewLine = "`n"
-    $state = [pscustomobject]@{ Process=$process; Id=$process.Id; Out=''; OutBytes=0; ErrBytes=0; ErrorFact=''; OutBuffer=[byte[]]::new(4096); ErrBuffer=[byte[]]::new(1024); OutRead=$null; ErrRead=$null }
+    $state = [pscustomobject]@{ Process=$process; Id=$process.Id; Out=''; OutBytes=0; ErrBytes=0; ErrorFact=''; ErrPrefix=''; OutBuffer=[byte[]]::new(4096); ErrBuffer=[byte[]]::new(1024); OutRead=$null; ErrRead=$null }
     $state.OutRead = $process.StandardOutput.BaseStream.ReadAsync($state.OutBuffer,0,4096)
     $state.ErrRead = $process.StandardError.BaseStream.ReadAsync($state.ErrBuffer,0,1024)
     return $state
@@ -26,18 +26,33 @@ function Get-AdbcRemaining($Clock, [int]$Limit) {
     return $remaining
 }
 
+function Get-AdbcErrorFact([string]$Prefix) {
+    if ($Prefix.Length -gt 256) { return '' }
+    if ($Prefix -cmatch '^ERROR ([1-9][0-9]{0,4}) \(([A-Z0-9]{5})\)') { return ('mysql_code:'+$Matches[1]+' sqlstate:'+$Matches[2]) }
+    if ($Prefix -cmatch '^native-cleanup failure stage:(manifest|native-case|hold) class:(RuntimeException|Error|mysqli_sql_exception|Throwable) checks:(0|[1-9][0-9]{0,4})(?: |$)') { return ('worker_stage:'+$Matches[1]+' worker_class:'+$Matches[2]+' checks:'+$Matches[3]) }
+    return ''
+}
+
+function Deny-AdbcError($Child) {
+    $Child.ErrPrefix='' # Never expose or retain a partial raw error/SQL/message after rejection.
+    throw ('Private stderr rejected ('+$Child.ErrBytes+' bytes) '+$Child.ErrorFact)
+}
+
 function Update-AdbcProcess($Child) {
     foreach ($stream in @('Out','Err')) {
         $read = $Child.($stream+'Read')
         if ($null -eq $read -or -not $read.IsCompleted) { continue }
         $size = $read.GetAwaiter().GetResult()
-        if ($size -eq 0) { $Child.($stream+'Read')=$null; continue }
+        if ($size -eq 0) { $Child.($stream+'Read')=$null; if ($stream -ceq 'Err' -and $Child.ErrBytes -gt 0) { Deny-AdbcError $Child }; continue }
         $buffer = $Child.($stream+'Buffer')
         if ($stream -eq 'Err') {
             $Child.ErrBytes += $size
-            $text = [System.Text.Encoding]::ASCII.GetString($buffer,0,$size)
-            if ($text -match 'native-cleanup failure stage:[a-z-]+ class:[A-Za-z_]+ checks:[0-9]+ assertion:[a-zA-Z0-9 :_-]+') { $Child.ErrorFact=$Matches[0] }
-            throw ('Private stderr rejected ('+$Child.ErrBytes+' bytes) '+$Child.ErrorFact)
+            $keep=[Math]::Min($size,256-$Child.ErrPrefix.Length)
+            $Child.ErrPrefix += [System.Text.Encoding]::ASCII.GetString($buffer,0,$keep)
+            $Child.ErrorFact=Get-AdbcErrorFact $Child.ErrPrefix
+            if ($Child.ErrBytes -gt 4096 -or $Child.ErrorFact -ne '' -or $Child.ErrPrefix.Contains("`n") -or $Child.ErrPrefix.Length -eq 256) { Deny-AdbcError $Child }
+            $Child.ErrRead=$Child.Process.StandardError.BaseStream.ReadAsync($Child.ErrBuffer,0,1024)
+            continue
         }
         if ($Child.OutBytes + $size -gt 16384) { throw 'Owned stdout bound exceeded' }
         for ($i=0;$i -lt $size;$i++) { if ($buffer[$i] -gt 127 -or ($buffer[$i] -lt 32 -and $buffer[$i] -notin @(9,10,13))) { throw 'Non-ASCII private output rejected' } }
@@ -52,7 +67,7 @@ function Read-AdbcLine($Child, $Clock, [int]$Limit) {
         [void](Get-AdbcRemaining $Clock $Limit)
         Update-AdbcProcess $Child
         $index=$Child.Out.IndexOf("`n")
-        if ($index -ge 0) {
+        if ($index -ge 0 -and $Child.ErrBytes -eq 0) {
             $line=$Child.Out.Substring(0,$index+1)
             $Child.Out=$Child.Out.Substring($index+1)
             return $line
@@ -91,5 +106,5 @@ function Stop-AdbcProcess($Child) {
             $Child.Process.Kill() # Exact owned Process object only, never name/PID search or foreign cleanup.
             if (-not $Child.Process.WaitForExit(1000)) { throw 'Owned process cleanup unconfirmed' }
         }
-    } finally { $Child.Process.Dispose() }
+    } finally { $Child.ErrPrefix=''; $Child.Process.Dispose() }
 }

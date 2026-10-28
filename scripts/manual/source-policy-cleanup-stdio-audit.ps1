@@ -18,7 +18,7 @@ try {
     Complete-AdbcProcess $child $clock 10000
     Assert-AdbcAudit ($child.OutBytes -eq 11 -and $child.ErrBytes -eq 0)
 } finally { Stop-AdbcProcess $child }
-foreach ($mode in @('overflow','stderr','exit1','hold')) {
+foreach ($mode in @('overflow','stderr','exit1','hold','mysql-error-fragments','mysql-error-eof','stderr-prefix-eof','stdout-partial-stderr')) {
     $child=New-AdbcProcess $php @('-n',$worker,'--private-socket-free-stdio',$mode)
     $caught=$false
     try {
@@ -28,11 +28,15 @@ foreach ($mode in @('overflow','stderr','exit1','hold')) {
             [void](Read-AdbcLine $child $holdClock 40)
         } else { [void](Read-AdbcLine $child $clock 10000) }
     } catch {
-        $expected=switch ($mode) { 'overflow' {'Owned stdout bound exceeded'} 'stderr' {'Private stderr rejected'} 'exit1' {'Owned child exited without a complete record'} 'hold' {'Original proof deadline exhausted'} }
+        $expected=switch ($mode) { 'overflow' {'Owned stdout bound exceeded'} 'stderr' {'Private stderr rejected'} 'exit1' {'Owned child exited without a complete record'} 'hold' {'Original proof deadline exhausted'} default {'Private stderr rejected'} }
         Assert-AdbcAudit ($_.Exception.Message.StartsWith($expected))
         Assert-AdbcAudit (-not $_.Exception.Message.Contains('private-secret'))
+        if ($mode -in @('mysql-error-fragments','stdout-partial-stderr')) { Assert-AdbcAudit ($_.Exception.Message.Contains('mysql_code:1064 sqlstate:42000')) }
+        if ($mode -ceq 'mysql-error-eof') { Assert-AdbcAudit ($_.Exception.Message.Contains('mysql_code:1045 sqlstate:28000')) }
+        if ($mode -ceq 'stderr-prefix-eof') { Assert-AdbcAudit (-not $_.Exception.Message.Contains('mysql_code:')) }
+        if ($mode -like '*error*' -or $mode -in @('stderr-prefix-eof','stderr','stdout-partial-stderr')) { Assert-AdbcAudit ($child.ErrPrefix -ceq '') }
         $caught=$true
     } finally { Stop-AdbcProcess $child }
     Assert-AdbcAudit $caught
 }
-Write-Output ('stdio-audit checks:'+$checks+' groups:5 native_connections:0 sql_queries:0 fixtures:0 owned_processes_cleaned:5')
+Write-Output ('stdio-audit checks:'+$checks+' groups:9 native_connections:0 sql_queries:0 fixtures:0 owned_processes_cleaned:9')

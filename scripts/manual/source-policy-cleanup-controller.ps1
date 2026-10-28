@@ -1,6 +1,6 @@
 param([switch]$ConfirmedPluginTesterPerCaseCleanup,[string]$Prefix)
 $ErrorActionPreference='Stop'
-if (-not $ConfirmedPluginTesterPerCaseCleanup -or $Prefix -cnotmatch '^adbb_[a-f0-9]{12}_$' -or $args.Count -ne 0 -or -not $IsWindows) { throw 'Exact confirmed Plugin Tester scope required' }
+if (-not $ConfirmedPluginTesterPerCaseCleanup -or $Prefix -cnotmatch '\Aadbb_[a-f0-9]{12}_\z' -or $args.Count -ne 0 -or -not $IsWindows) { throw 'Exact confirmed Plugin Tester scope required' }
 if ([string]::IsNullOrEmpty($env:MYSQL_PWD)) { throw 'Inherited private credential environment required' }
 $script:AdbcScope=$true
 . "$PSScriptRoot/source-policy-cleanup-process.ps1"
@@ -35,10 +35,15 @@ function Invoke-AdbcBridge([string]$Command,$Clock) {
     return (Read-AdbcLine $script:bridge $Clock 25000)
 }
 
+function Get-AdbcFixtureAuditSql([string]$OwnedPrefix) {
+    if ($OwnedPrefix -cnotmatch '\Aadbb_[a-f0-9]{12}_\z') { throw 'Exact owned fixture prefix required' }
+    return "SELECT (SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='local' AND TABLE_NAME='$($OwnedPrefix)options'),(SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='local' AND TABLE_NAME='$($OwnedPrefix)missing_options'),(SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='$($OwnedPrefix)absent'),(SELECT COUNT(*) FROM information_schema.USER_PRIVILEGES WHERE PRIVILEGE_TYPE='PROCESS' AND GRANTEE=CONCAT(QUOTE(SUBSTRING_INDEX(CURRENT_USER(),'@',1)),'@',QUOTE(SUBSTRING_INDEX(CURRENT_USER(),'@',-1))));"
+}
+
 try {
     $sites=Get-Content -Raw 'C:/Users/Captain/AppData/Roaming/Local/sites.json' | ConvertFrom-Json
     $site=@($sites.PSObject.Properties.Value | Where-Object { $_.domain -ceq 'plugin-tester.local' })
-    if ($site.Count -ne 1 -or $site[0].name -cne 'Plugin Tester' -or $site[0].services.mariadb.version -cne '10.6.23' -or $site[0].services.php.version -cne '8.5.12' -or $site[0].services.mariadb.ports.MYSQL[0] -ne 10004) { throw 'Frozen local metadata drift' }
+    if ($site.Count -ne 1 -or $site[0].name -cne 'Plugin Tester' -or [System.IO.Path]::GetFullPath([string]$site[0].path).TrimEnd('\','/') -ine 'C:\Users\Captain\Local Sites\plugin-tester' -or $site[0].services.mariadb.version -cne '10.6.23' -or $site[0].services.php.version -cne '8.5.12' -or $site[0].services.mariadb.ports.MYSQL[0] -ne 10004) { throw 'Frozen local metadata drift' }
     $clock=[System.Diagnostics.Stopwatch]::StartNew()
     $manifest=New-AdbcProcess $php ($nativeArgs+@($run,$zero,'manifest'));$children.Add($manifest)
     $source=(Read-AdbcLine $manifest $clock 10000).TrimEnd("`n")
@@ -46,7 +51,7 @@ try {
     if ($source -cnotmatch '^[a-f0-9]{64}$') { throw 'Source correlation refused' }
     $stage='fixture-audit'
     $clock.Restart()
-    $sql="SELECT (SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='local' AND TABLE_NAME='$($Prefix)options'),(SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='local' AND TABLE_NAME='$($Prefix)missing_options'),(SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='$($Prefix)absent'),(SELECT COUNT(*) FROM information_schema.USER_PRIVILEGES WHERE PRIVILEGE_TYPE='PROCESS' AND GRANTEE=CONCAT(QUOTE(SUBSTRING_INDEX(CURRENT_USER(),'@',1)),'@',QUOTE(SUBSTRING_INDEX(CURRENT_USER(),'@',-1)))));"
+    $sql=Get-AdbcFixtureAuditSql $Prefix
     if ((Invoke-AdbcSQL $sql $clock 10000) -cne "1`t0`t0`t1`n") { throw 'Owned empty fixture/absent controls/observer privilege required' }
     if ((Invoke-AdbcSQL "SELECT COUNT(*) FROM $($Prefix)options;" $clock 10000) -cne "0`n") { throw 'Fixture must be schema-only and empty' }
     Assert-AdbcClear $clock 10000

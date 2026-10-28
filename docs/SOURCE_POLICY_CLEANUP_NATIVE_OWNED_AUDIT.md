@@ -120,7 +120,11 @@ preservation checks pass. Commands: php vendor/bin/phpunit --verbose
 --do-not-cache-result and focused Cleanup/FailedConnectObservation filter;
 npm lint/test:admin/check:structure/build; php composer.phar validate --strict/audit;
 npm audit --audit-level=moderate. No generated output changed.
-Exact-head publication closeout pending. The new harness is a blocked
+Checkpoint307fd57760419fca8b8f3d1e71d9ffad321ce0a6 passed
+[exact-head CI40723492643](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40723492643):
+PHP7.4/8.3 each1683 tests/7448 assertions, no failures/skips; Node16/16,
+all configured gates and zero-advisory audits pass. At that checkpoint the query
+defect remained; hosted QA does not execute the manual controller. The harness is a blocked
 manual checkpoint, not a ready native qualifier. CI tests refusal gates and
 socket-free DATA only, never this local fixture/controller or genuine core audit.
 No whole-plugin Database/Security/07/07A/FULL or toolkit readiness row is refreshed.
@@ -139,3 +143,56 @@ fragmented safe error-code diagnostics regressions, preserve all guards/budgets,
 rerun fresh source/error/stdio prerequisites, then one raw/seven-case attempt with
 owned fixtures and exact cleanup on the same confirmed target. No production wiring,
 runtime repair, acceptance relaxation or automatic retry is included in this record.
+
+## Repository-only correction after checkpoint — no native retry
+
+Standing safe-local authorization was used to complete the routine correction,
+without another approval or another site/database/native attempt. The failed image
+and hashes above remain historical, preserved in307fd57; they do not describe the
+subsequently repaired files. Source correlation must be frozen anew before a proof.
+
+The actual query now lives in a pure private Get-AdbcFixtureAuditSql function in
+the controller. A repository-only audit extracts that exact function with the
+PowerShell AST, never executing the controller body. Its first parenthesis-balance
+assertion failed on the original query; removing the one surplus parenthesis
+passes exact projection/lexical shape and owned-prefix checks. This is not execution
+by MariaDB or a complete SQL parser. A trailing-newline prefix also reproduced a
+rejection gap (assertion7); both private prefix gates now use strict full-string
+anchors. Frozen LocalWP path equality was added to the existing metadata admission.
+No new target, native dispatch mode, budget, accepted case or runtime guard change.
+
+The transport now accumulates at most256 transient prefix bytes under the4KiB stderr
+cap. Fragmented mysql diagnostics expose only numeric code/five-character SQLSTATE;
+worker diagnostics expose only allowlisted stage/class and bounded check count.
+Raw SQL/message/trace/assertion payloads are not emitted. The prefix is erased on
+rejection and cleanup. Every nonempty stderr still rejects the case, even a known
+code; partial stderr blocks available stdout until rejection, not case admission.
+No error code grants native eligibility or changes save/conflict/uncertainty rules.
+
+Actual repository source audit passes18 checks, zero SQL/site reads/native sessions.
+Owned PHP -n stdio audit passes39 checks/9 groups, including fragmented errors,
+EOF after complete/incomplete diagnostic prefixes and stdout racing a partial error.
+All nine owned children were cleaned; no WordPress, database fixture, network/native
+session or installed source audit was rerun. Four deliberate controls produced
+assertion failures, not startup errors: original unbalanced query (source1), let
+stdout bypass known partial stderr (stdio35), emit a VoidTaskResult (stdio3), retain
+raw rejected prefix (source17 at that control revision). Each altered file's SHA256
+matched before/after restoration; strict prefix/path changes followed separately.
+
+Final repair local QA passes: full PHP1683/7441 with only the two existing Sodium
+skips; Node16/16, PHPCS203, structure/build/strict manifest/zero-advisory audits,
+source18 and owned socket-free stdio39/9, four PowerShell syntax parses and diff/
+preservation checks. The source audit is a local PowerShell check, not a configured
+GitHub Actions step. Exact-head repair publication closeout pending.
+The earlier physical stop is not
+resolved by these local tests: raw/seven native cases and all live-child physical
+qualification remain unrun, and the revised query has not been sent to the server.
+No historical native result or whole-plugin readiness row is refreshed.
+
+Recommended next gated slice: **Plugin Tester local-only One Fresh Per-Case Cleanup
+Controller/Live-Child Reconciliation and Owned Cleanup Proof**, on the same exactly
+confirmed target. Recheck metadata/source/error/stdio prerequisites, freeze the new
+image, create only a qualified empty owned clone, then one raw/seven-case attempt
+with live/post all-server reconciliation and exact cleanup. Preserve application
+state, all existing guards/budgets and disabled production wiring. No retry occurred
+in this repository-only repair; fresh physical execution needs approval.

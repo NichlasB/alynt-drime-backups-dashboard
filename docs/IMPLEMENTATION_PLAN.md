@@ -12,10 +12,17 @@ No retry or native qualification. Exact empty clone removed; all77 application
 checksums identical, zero fixtures/all-server sessions/transactions. Runtime,
 current proof/acceptance and production wiring unchanged; uploader/toolkit untouched.
 Local full1683/7441 (two existing Sodium skips), Node16/16/all configured gates pass;
-exact-head publication closeout pending. Implementation-plan progress: bounded
+checkpoint307fd57760419fca8b8f3d1e71d9ffad321ce0a6 passed
+[exact-head CI40723492643](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40723492643):
+PHP7.4/8.3 each1683/7448, no failures/skips. Standing safe-local follow-up corrects
+the pure query projection, strict prefix/path admission and bounded fragmented-error
+redaction; source18 and socket-free stdio39/9 checks pass, four assertion-killed/
+hash-restored controls. No SQL/site/native retry. Repair full local1683/7441 (same
+two Sodium skips), Node16/16/all configured gates pass; repair publication pending.
+Implementation-plan progress: bounded
 transport/preflight advanced, physical qualification and lost-update repair open.
-Next gated slice: Plugin Tester local-only Harness-Only Fixture-Audit SQL Projection
-and Safe Observer Diagnostics Repair, then One Fresh Ordered Cleanup Proof, with
+Next gated slice: Plugin Tester local-only One Fresh Per-Case Cleanup Controller/
+Live-Child Reconciliation and Owned Cleanup Proof, with
 fresh prerequisites, owned fixtures/cleanup and preserved guards/budgets/wiring.
 
 ## Terminal revocation and cleanup evidence foundation — 2026-10-28
