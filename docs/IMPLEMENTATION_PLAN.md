@@ -10,7 +10,10 @@ callers and realistic isolated error/translation models updated; UI mapping,
 storage/SQL/guard ordering, factories and production wiring unchanged. New83/676,
 related675/3015; full local1509/6973 (two baseline Sodium skips), Node16/16/all
 gates/zero-advisory audits pass. Seven assertion-killed/SHA256-restored controls
-and scoped reviews recorded; exact-head CI pending. No genuine WordPress/native
+and scoped reviews recorded. Implementation7859010732155a185d569481c4041a5362377b0e
+passed [exact-head CI40696075408](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40696075408):
+PHP7.4/8.3 each1509/6980, no failures/skips; Node16/16/all gates/zero advisories.
+Hosted QA remains isolated, not genuine/native acceptance. No genuine WordPress/native
 execution or old proof rerun; historical whole/toolkit rows/task count unchanged.
 The native blocker is not declared resolved by isolated evidence. Next gated
 slice: fresh Plugin Tester local-only Bounded Initial Native Construction and

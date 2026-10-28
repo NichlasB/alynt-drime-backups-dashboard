@@ -9,7 +9,10 @@ construction is deliberately untranslated; real UI/handler translations and
 production wiring unchanged. New83/676, related675/3015, full local1509/6973
 with only baseline Sodium skips; Node16/16/all gates/audits and seven restored
 assertion controls pass. Scoped Light/structure/Security, not whole readiness
-or genuine/native acceptance. CI pending. No toolkit/historical row refresh.
+or genuine/native acceptance. Implementation7859010732155a185d569481c4041a5362377b0e
+passed [exact-head CI40696075408](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40696075408):
+PHP7.4/8.3 each1509/6980, no failures/skips; Node16/16/all gates/zero advisories.
+No toolkit/historical row refresh or genuine/native acceptance claim.
 Next gated slice: fresh Plugin Tester local-only bootstrap qualification/cleanup,
 genuine error-API audit first, fresh target/owned fixture confirmation, disabled wiring.
 

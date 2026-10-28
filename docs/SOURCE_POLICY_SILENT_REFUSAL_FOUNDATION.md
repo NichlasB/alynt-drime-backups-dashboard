@@ -187,7 +187,12 @@ native verification remains a gate, not inferred from the model. Historical
 whole07/07A/13/FULL and toolkit checklist rows remain untouched under this
 repository-only scope. No release-readiness completion is claimed.
 
-Exact-head publication CI is pending; no success is inferred from local QA.
+Implementation `7859010732155a185d569481c4041a5362377b0e` passed
+[exact-head CI40696075408](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40696075408).
+Actual PHP7.4/8.3 logs each1509 tests/6980 assertions, no failures/skips;
+Node16/16 and all configured gates pass, zero Composer/npm advisories.
+Hosted QA executes the isolated foundation and early manual-entry refusals,
+not installed WordPress, genuine refusal verification or native qualification.
 
 ## Implementation-plan progress and next gate
 
