@@ -171,10 +171,64 @@ issues were resolved before source freeze/native execution; no assertion weakene
 
 Uploader/toolkit remain clean at unchanged heads
 3dfcb15b5cab8191df7d984251986ead140ded52/
-c067eb61883035a1764d830bccffc1e542d3e1dc. Hosted exact-head publication verification
-is pending. Hosted CI validates isolated code, not this manual native proof or
+c067eb61883035a1764d830bccffc1e542d3e1dc. Initial published head
+c31a7da825b96aee07331da9776a11e582166d28 failed
+[exact-head CI40747280957](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40747280957)
+on PHP7.4/8.3 during discovery: Cannot redeclare mysqli_get_client_stats in the
+new test fixture. No hosted suite counts or green verification are claimed for
+that run. Implementation stopped at the CI-failure gate; the approved repair and
+subsequent verification are recorded below. Hosted CI validates isolated code, not this manual native proof or
 the Windows PowerShell audits. No historical whole-plugin readiness/task-count
 refresh, package, release, tag or deployment is authorized by this checkpoint.
+
+## Fixture declaration isolation and CI recovery — repository-only — 2026-10-28
+
+Separate explicit approval covers only test isolation, discovery regressions,
+validation/commit/push/exact-head CI. Baselinec31a7da was clean and matched origin.
+No site/LocalWP inspection, SQL, native driver/session experiment, proof/manifest
+mode, application fixture, credential, schedule, acceptance, wiring or release work.
+R1 fixture/test repair, not new native authority. Ordinary PHP -n test children
+are socket-free doubles; they are not another Plugin Tester diagnostic attempt.
+
+Root cause: tests/ discovery includes .php support files. PHP registers top-level
+functions when a file is included, before its early return executes. The fixture
+could pollute a driver-free parent and fatally collide with real mysqli symbols
+on the hosted matrix. Only its class/function declarations are now conditional
+on the original isolated/no-ABSPATH/no-driver context; the existing early guards,
+primitive doubles, failure modes and actual-operation assertions are unchanged.
+
+New SourcePolicyConnectedRawDiscoveryTest checks both a clean PHP -n parent and
+a parent containing explicit userland mysqli/adcr canaries. It requires unchanged
+function/class registries, constants, relevant globals, output, canary invocation
+count and included-file closure: only the fixture, never its executable dependency.
+Constants use a trusted serialized self-snapshot (never deserialized), preserving
+NAN without the false inequality of comparing NAN directly. No JSON dependency,
+native extension load, stubbed-success substitution, skip or threshold relaxation.
+
+Red evidence: final regressions before/without the declaration guard fail with
+an explicit symbol-leak assertion (clean parent) and a nested redeclaration fatal
+exit255 (existing symbols), matching the hosted collision. After restoring the
+guard, discovery2 tests/8 assertions and combined ConnectedRaw/Cleanup/
+FailedConnectObservation192/709 pass. This is discovery/test-integrity evidence,
+not another physical close proof. Restored fixture SHA256
+4877C2A0AB61D9685B0A25B667A66DA8FDB54B0FA8ECEB62B0B70AF373842823.
+
+Full local PHP8.5.1 suite1760 tests/7775 assertions, no failures, only the two
+existing missing-Sodium skips. Node16/16, PHPCS208 files, structure148 runtime/
+221 support/192 test files/189 class names, build, strict Composer manifest and
+Composer/npm zero-advisory audits pass. Scoped PHP syntax/diff checks and byte
+comparison confirm all scripts, includes, acceptance, dependencies and CI config
+unchanged from c31a7da. Uploader/toolkit remain clean at the same heads above.
+Commands: focused Discovery and combined ConnectedRaw|Cleanup|
+FailedConnectObservation PHPUnit; full --verbose --do-not-cache-result;
+npm lint/test:admin/check:structure/build; php composer.phar validate --strict/audit;
+npm audit --audit-level=moderate; scoped php -l and Git preservation checks.
+Every PHPUnit invocation uses --do-not-cache-result.
+
+The changed test fixture is outside the native producer's source image graph.
+Historical native665ms/four-stage/live-release evidence remains scoped to its
+original image; no native/manifest rerun, new checksum claim or retrospective
+owner qualification. Hosted exact-head recovery verification is pending.
 
 Implementation-plan progress: actual raw connected/once-close/live-release
 evidence advances; current owner connected/positive qualification and the actual

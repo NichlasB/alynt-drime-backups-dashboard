@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixture declaration isolation and CI recovery — repository-only — 2026-10-28
+
+Approved [fixture-only repair](SOURCE_POLICY_CONNECTED_RAW_OWNED_PROOF.md#fixture-declaration-isolation-and-ci-recovery--repository-only--2026-10-28),
+baselinec31a7da825b96aee07331da9776a11e582166d28, clean/synced. Original
+CI40747280957 failed both PHP versions during discovery: unconditional mysqli
+double declarations registered before the fixture's early return. Four added
+fixture lines place declarations behind the isolation condition; operation logic,
+all scripts/runtime/acceptance/wiring remain unchanged. New parent-discovery
+regressions preserve symbols/constants/globals/output and executable dependency
+boundaries, while existing isolated operation coverage still passes. Local full
+1760/7775 with only two existing Sodium skips; combined192/709/all configured
+local gates pass. No native, manifest, SQL, site or physical proof rerun.
+Implementation-plan progress: publication/test-integrity recovery, not additional
+native or product-feature credit. Hosted recovery evidence is in the owning record.
+Next gated slice remains repository-only Versioned Connected Cleanup Evidence
+Safety Foundation, isolated tests/new manual contract only, preserve ADBC1 and
+keep native execution/production wiring disabled.
+
 ## Raw connected single-close proof — complete — 2026-10-28
 
 Approved/confirmed Plugin Tester local-only [bounded raw proof](SOURCE_POLICY_CONNECTED_RAW_OWNED_PROOF.md),

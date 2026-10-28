@@ -8,6 +8,9 @@ require dirname(__DIR__,2).'/scripts/manual/source-policy-connected-raw-operatio
 $mode=$argv[3];$run=$argv[2];$source=hash('sha256','isolated-raw-connected');
 $init_calls=0;$connect_calls=0;$close_calls=0;$stats_calls=0;$image_calls=0;$connected=false;$closed=false;$options=array();$allocated=null;
 if('ambient'===$mode)$GLOBALS['wpdb']=new stdClass();
+// Declarations themselves must be conditional: an early return cannot isolate
+// top-level PHP functions from PHPUnit discovery or an existing native extension.
+if(!defined('ABSPATH')&&!extension_loaded('mysqli')&&!extension_loaded('pdo_mysql')){
 class mysqli {}
 function adcr_image(){global $image_calls,$mode,$source;++$image_calls;return 'pre-source-drift'===$mode||('source-drift'===$mode&&$image_calls>1)?str_repeat('0',64):$source;}
 function mysqli_get_client_stats(){
@@ -32,6 +35,7 @@ function mysqli_real_connect($handle,$host,$user,$password,$database,$port,$sock
 }
 function mysqli_get_server_info($handle){return '10.6.23-MariaDB';}
 function mysqli_close($handle){global $close_calls,$closed,$mode,$allocated;++$close_calls;if($handle!==$allocated)throw new RuntimeException('foreign-object');$closed=true;if('close-throw'===$mode||'paired'===$mode)throw new RuntimeException('private-secret');return 'close-false'!==$mode;}
+}
 $exit=0;
 try{adcr_raw($run,$source);}catch(Throwable $error){$exit=1;fwrite(STDERR,'isolated primary:'.($GLOBALS['adcr_primary_kind']??'unconfirmed').' cleanup:'.($GLOBALS['adcr_cleanup_kind']??'not_attempted')."\n");}
 echo 'CHECKS|'.$init_calls.'|'.$connect_calls.'|'.$close_calls.'|'.$stats_calls."\n";
