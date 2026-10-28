@@ -243,8 +243,12 @@ php vendor/bin/phpunit with the EvidenceTest|OwnedProofGateTest filter and full
 php composer.phar validate --strict/audit; npm audit --audit-level=moderate.
 Diff hygiene and scope review pass: only the two owning records changed, no
 runtime/harness/test/CI/source-pin edits or new success expectations. No UI/UX
-or whole-plugin review completion is claimed. Exact-head publication CI is
-pending. Repository QA does not replace the failed genuine proof.
+or whole-plugin review completion is claimed. Evidence commit
+`119970f45749cd4e2ad18bf55893f66b712932bd` passed
+[exact-head CI40701517126](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40701517126):
+actual PHP7.4/8.3 each1557 tests/7029 assertions, no failures/skips; Node16/16,
+all configured gates and zero-advisory audits pass. Repository QA does not
+replace the failed genuine proof; CI does not run this native/manual entry.
 
 Implementation-plan progress: genuine hook-silent error revalidation now passes,
 and the ordered proof advanced to failed-connect cleanup/session accounting.

@@ -14,7 +14,10 @@ Exact clone removed after0-row preview; all77 application checksums identical,
 zero owned tables/databases/other local sessions/active transactions. No retry,
 runtime/harness/guard/budget/wiring or installed-state change. Focused isolated
 gates54/73 and full local1557/7022 (two existing Sodium skips), Node16/16/all
-configured local gates/zero-advisory audits pass; publication CI pending. Safe-local count unchanged;
+configured local gates/zero-advisory audits pass. Evidence119970f45749cd4e2ad18bf55893f66b712932bd
+passed [exact-head CI40701517126](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40701517126):
+PHP7.4/8.3 each1557/7029, no failures/skips; all gates pass. Hosted QA runs no
+native/manual proof and cannot resolve this blocker. Safe-local count unchanged;
 genuine error acceptance advanced, native qualification/lost-update repair remain
 open. Next gated slice: Plugin Tester local-only Failed-Initial-Connect Cleanup
 and mysqlnd Session-Accounting Owned Diagnosis, bounded harness-only observations
