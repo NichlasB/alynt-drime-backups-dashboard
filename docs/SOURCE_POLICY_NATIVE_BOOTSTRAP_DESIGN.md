@@ -175,6 +175,10 @@ This is the selected future sequence, not permission to run it now:
    reach these helpers. Select the database in step3, not via a bail-capable
    fallback. Reconcile actual negotiated charset/collation/mode afterward;
    helper void returns or silence are not acknowledgements of correct setup.
+   Check fixed native error status immediately after each helper, before a
+   later statement can clear it. Known errors refuse even if a subsequent
+   readback could coincidentally match; expected void/no-op behavior requires
+   the audited branch and verified end state, not an invented success receipt.
 6. Perform fixed bounded session and schema/index metadata reads on that exact
    handle. Verify the expected four-column options shape/full unique identity,
    InnoDB, selected database/table, autocommit/no transaction and limits. No
@@ -328,6 +332,13 @@ under the final refusal; no core-private flag stamping is selected. Setup `all`/
 mode-hook tracking is a required future guard, not inferred from the current
 fingerprint. No further design inconsistency was identified. No UI/UX workflow
 or whole-plugin release/security completion is claimed by this scoped review.
+
+Publication: design `c9f94155cd96217571d3ccd2f64ae6c386a7ff82` passed
+[exact-head CI40676746866](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40676746866).
+Actual PHP7.4/8.3 job logs each1263 tests/5709 assertions, no failures/skips;
+Node16/16, all configured gates and zero-advisory Composer/npm audits pass.
+Hosted suites validate unchanged isolated code, not the proposed initializer,
+genuine minimum-core libraries, native setup, authentication or site behavior.
 
 Recommended next gated slice: **repository-only Source-Policy Bounded Initial
 Native Construction and Pre-Qualification Bootstrap Safety Foundation**,

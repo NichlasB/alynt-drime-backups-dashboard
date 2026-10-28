@@ -14,6 +14,10 @@ no current guard is relaxed. Proposed limits/matrix need actual native proof.
 Unchanged related randomized429/1744, seed20261028, no failures/skips; structure,
 scoped links/diff/baseline identity pass. Source-scoped contract review records
 the minimum-core object-initialization correction, not real native acceptance.
+Designc9f94155cd96217571d3ccd2f64ae6c386a7ff82 passed
+[exact-head CI40676746866](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40676746866):
+PHP7.4/8.3 each1263/5709, no failures/skips; Node16/16/all gates, zero advisories.
+Hosted suites do not execute or qualify the proposed initializer.
 No runtime/test/harness/site/native/storage/authentication/wiring change; no
 historical whole07/07A/13/FULL/toolkit or task-count refresh. Actual lost-update
 repair and native qualification remain open. Next gated slice: repository-only

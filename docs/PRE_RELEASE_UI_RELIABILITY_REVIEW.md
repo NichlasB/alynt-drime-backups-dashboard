@@ -12,7 +12,10 @@ native/storage/wiring change or historical whole-review refresh. Unchanged
 related randomized429/1744, no failures/skips; structure/scoped links/diff and
 baseline identity pass. Object-only parent initialization preserves minimum-core
 driver selection without a connection attempt; proposed, not executed. Matrix/native
-proof and lost-update repair remain open. Next gated slice: repository-only
+proof and lost-update repair remain open. Designc9f94155cd96217571d3ccd2f64ae6c386a7ff82
+passed [exact-head CI40676746866](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40676746866):
+PHP7.4/8.3 each1263/5709, no failures/skips; Node16/16/all gates, zero advisories.
+Hosted suites do not execute the proposed initializer. Next gated slice: repository-only
 Bounded Initial Native Construction and Pre-Qualification Bootstrap Safety
 Foundation, isolated API/IO only, actual execution/factories/wiring disabled.
 
