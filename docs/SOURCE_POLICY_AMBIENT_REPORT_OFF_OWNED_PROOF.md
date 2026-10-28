@@ -114,7 +114,15 @@ record links resolve, diff check is clean, runtime and prior proof/ADBC bytes
 remain baseline-identical. Full QA is repository-only and no native body reran.
 Publication records this as a blocked attempt, not an enabled/qualified milestone.
 Isolated CI never runs the installed-core/database body; green CI cannot qualify
-this blocked proof. Exact-head results are recorded after publication.
+this blocked proof.
+
+Publication `c213a58ac3844a80878157cfa01a98e8049520a5` passed
+[exact-head CI40770058137](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40770058137).
+Actual PHP7.4/8.3 logs each 1,883 tests/8,214 assertions, no failures/skips;
+Node16/16 each/all configured gates pass. Both check-run heads match. The local
+seven-assertion difference is the two existing missing-Sodium skips. Evidence-only
+closeout preserves every attempted-image byte and receives separate exact-head
+CI before handoff. No native, SQL, fixture or source-image rerun for publication.
 No UI workflow, Database Review or historical whole-plugin readiness refresh.
 
 Implementation-plan progress: a genuine ambient/report-OFF gap is now observed,
