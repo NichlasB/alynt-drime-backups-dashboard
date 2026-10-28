@@ -246,3 +246,11 @@ proof contract separating exact counter diagnostics from independently reconcile
 release, preserving existing ADBC1 refusals and production rules. No native
 execution, owner fact/handle injection or retrospective qualification; later
 owner integration/positive proof needs separate explicit approval.
+
+## Forward record — versioned connected DATA foundation — 2026-10-28
+
+The separately approved [ADBC2 foundation](SOURCE_POLICY_CONNECTED_CLEANUP_EVIDENCE_FOUNDATION.md)
+now models counter diagnostics and independent live/post release DATA separately.
+It changes no raw/native producer or ADBC1 rules and does not repeat or enlarge
+this historical physical proof. Actual connected-owner integration remains gated;
+the foundation's isolated tests cannot grant native or production qualification.

@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Versioned connected cleanup evidence — repository-only — 2026-10-28
+
+Approved [ADBC2 manual DATA foundation](SOURCE_POLICY_CONNECTED_CLEANUP_EVIDENCE_FOUNDATION.md),
+clean/synced baseline dd35f2612eb85454c48b255aeb1c7f548be18ad2. Distinct31-field
+contract preserves exact counter diagnostics separately from pending independent
+release evidence; fixed refusal/positive virtual cohort requires both live-child
+and post-exit reconciliation. Every state keeps native qualification not-established.
+No value-specific wrap grant, rewritten counters, legacy migration or native wiring.
+ADBC1/runtime/producer/controller unchanged. New isolated74/314, combined266/995,
+four assertion-killed/SHA256-restored controls; full QA/publication in owning record.
+No native/site/SQL/storage/fixture operation or product-feature task credit.
+Implementation-plan progress: manual connected evidence advances; actual owner
+qualification and source-policy lost-update repair remain open. Next gated slice:
+Plugin Tester local-only ADBC2 Connected-Owner Terminal Producer and Live/Post-Exit
+Release Integration / Owned Cleanup Proof, fresh prerequisites/exact confirmation,
+owned fixtures only, ADBC1 and production wiring preserved.
+
 ## Fixture declaration isolation and CI recovery — repository-only — 2026-10-28
 
 Approved [fixture-only repair](SOURCE_POLICY_CONNECTED_RAW_OWNED_PROOF.md#fixture-declaration-isolation-and-ci-recovery--repository-only--2026-10-28),
