@@ -423,8 +423,11 @@ zero-advisory Composer/npm audits and diff hygiene pass. Commands are the
 preceding section's focused/full PHPUnit and npm/Composer QA commands, rerun
 for this task. Source-scoped review confirms only measured evidence and owning
 plan updates; no new tests/implementation or historical readiness refresh.
-Exact-head publication CI is pending. Hosted QA does not repeat or replace
-this native comparison or establish broad native compatibility.
+Evidence commit `79c7c75c5c92ba185cf538295046169837f5629c` passed
+[exact-head CI40706420833](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40706420833):
+actual PHP7.4/8.3 each1568 tests/7073 assertions, no failures/skips; Node16/16,
+all configured gates and zero-advisory audits pass. Hosted QA does not repeat
+or replace this native comparison or establish broad native compatibility.
 
 Implementation-plan progress: the bounded comparison establishes the concrete
 failed-state getter exception and the owner's closed-but-wrapped counter

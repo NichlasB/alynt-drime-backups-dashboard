@@ -14,7 +14,10 @@ and final reconciliation show no retained sessions/transactions; all77 applicati
 checksums identical, zero owned fixtures. No runtime/harness/test/guard/budget/
 wiring or acceptance change, fixture write or ordered qualification retry.
 Focused isolated65/117, full local1568/7066 (two baseline Sodium skips), Node16/16,
-all configured local gates and zero-advisory audits pass; publication CI pending. Safe-local count unchanged;
+all configured local gates and zero-advisory audits pass. Evidence79c7c75c5c92ba185cf538295046169837f5629c
+passed [exact-head CI40706420833](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40706420833):
+PHP7.4/8.3 each1568/7073, no failures/skips; Node16/16/all gates pass. Hosted
+QA runs no native comparison or qualification. Safe-local count unchanged;
 diagnosis advanced, qualification/lost-update repair remain open. Next gated
 slice: repository-only Failed-Connect Observation and Per-Case Cleanup Evidence
 Contract Design, design-only; no native execution or acceptance implementation.
