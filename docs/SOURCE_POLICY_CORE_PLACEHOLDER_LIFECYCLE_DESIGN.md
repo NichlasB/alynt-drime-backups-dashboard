@@ -219,7 +219,12 @@ tests/1405 assertions passes, randomized seed20261028, no failures/skips;
 structure142 runtime/209 support/174 test files passes. Seven scoped relative
 links resolve; diff hygiene, non-document baseline identity and non-target
 clean-state checks pass. This validates documentation consistency/unchanged RAM
-contracts, not the proposed callback exception. Exact-head CI is pending.
+contracts, not the proposed callback exception. Design
+`04ab1829ac75523bf396fb4580ef30f2a4cc6ae7` passed
+[exact-head CI40662435827](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40662435827).
+Actual PHP7.4/8.3 logs each1212 tests/5370 assertions, no failures/skips;
+Node16/16 and all configured gates pass; both audits report zero advisories.
+Hosted suites do not execute the proposed code or qualify core/native behavior.
 
 Focused contract review: immutable receiver binding, bounded exact registry,
 transitive method provenance, priority0, no fingerprint refresh, post-prepare

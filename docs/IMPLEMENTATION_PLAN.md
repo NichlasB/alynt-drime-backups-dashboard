@@ -10,7 +10,10 @@ exact independent native/callback cleanup with retained uncertainty. Arbitrary
 query transformers remain refused. Documentation only; no runtime/test/manual
 script/site/native/wiring change or new qualification. Existing isolated related
 378/1405 randomized seed20261028 and structure pass; scoped links/diff/non-doc
-baseline identity pass. Exact-head CI pending.
+baseline identity pass. Design04ab1829ac75523bf396fb4580ef30f2a4cc6ae7 passed
+[exact-head CI40662435827](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40662435827):
+actual PHP7.4/8.3 each1212/5370, no failures/skips; Node16/16/all gates and zero
+advisories. No proposed implementation/native proof runs in these suites.
 Native proof and application lost-update repair remain open; prior8/8 not inflated.
 Recommended next gated slice: repository-only Source-Policy Fixed Core
 Placeholder-Escape Admission and Owned Lifecycle Safety Foundation, isolated

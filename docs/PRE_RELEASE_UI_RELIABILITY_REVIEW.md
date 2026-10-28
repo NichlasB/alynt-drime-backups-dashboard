@@ -7,7 +7,10 @@ specifies exact core callback receivers/provenance, preparation/recheck order
 and owned-only cleanup, not an implemented query exception or editable UI path.
 No runtime/form/handler/manual proof/test/site/native change. Existing isolated
 related378/1405 randomized seed20261028 and structure pass; scoped links/diff/
-baseline identity pass. Exact-head CI pending. Genuine authentication/native/
+baseline identity pass. Design04ab1829ac75523bf396fb4580ef30f2a4cc6ae7 passed
+[exact-head CI40662435827](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40662435827):
+actual PHP7.4/8.3 each1212/5370, no failures/skips; Node16/16/all gates and zero
+advisories. Hosted tests do not exercise the proposed exception. Genuine authentication/native/
 cache/UI acceptance, minimum-core matrix,
 production lost-update repair and whole07/07A/13/FULL remain open. Next gated
 slice: repository-only Source-Policy Fixed Core Placeholder-Escape Admission
