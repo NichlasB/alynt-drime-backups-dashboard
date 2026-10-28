@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Ambient/report-OFF — blocked owned qualification — 2026-10-28
+
+Approved/confirmed Plugin Tester local-only [single owned attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md),
+clean/synced baseline48780b7. Fresh source/stdio/core prerequisites and ADBC2
+release1170ms pass. Genuine stock ambient/report-OFF/callback established; actual
+dedicated bootstrap refused at positive-stage check139, zero completed groups.
+Source-only follow-up identifies a noncanonical proof observer-file key, which
+necessarily refuses strict source admission; later native gates unproven. No
+native retry or runtime/acceptance change. Owned
+clone/process cleanup complete,77 application checksums/inventory unchanged,
+zero retained fixtures/other sessions/transactions. New isolated9/48 and related
+341/1497 pass; publication evidence in owning record. No native success, wiring,
+whole-plugin readiness or batch-task credit. Implementation-plan progress: gap
+observed, not closed. Next gated slice: Plugin Tester local-only Harness-Only
+Canonical Observer Source-Key Correction, Regression Tests and One Fresh
+Ambient/Report-OFF Qualification Attempt, fresh prerequisites/exact target/fixtures;
+guards intact.
+
 ## Production-connection readiness — repository-only design — 2026-10-28
 
 Approved [readiness/remaining qualification design](SOURCE_POLICY_PRODUCTION_CONNECTION_READINESS_DESIGN.md),

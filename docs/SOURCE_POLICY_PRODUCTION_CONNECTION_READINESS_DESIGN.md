@@ -1,5 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Later [owned ambient/report-OFF attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md)
+reached genuine ambient construction but blocked on the dedicated bootstrap.
+It does not qualify the context or enable production; original design below is
+preserved. Follow the owning attempt record for the current diagnostic gate.
+
 ## Authority and baseline — 2026-10-28
 
 Approved repository-only design, validation, commit, push and exact-head CI.
