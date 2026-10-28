@@ -1,5 +1,13 @@
 # Source-Policy Non-Reconnecting Native Adapter and Guarded Integration Safety Foundation
 
+Later evidence limit,2026-10-28: the
+[confirmed native-proof audit](SOURCE_POLICY_NON_RECONNECTING_NATIVE_AUDIT.md)
+stopped before fixtures because genuine core preparation registers a query
+callback which this foundation explicitly refuses. Earlier isolated results
+stand, but do not establish genuine preparation/native eligibility. The next
+contract decision must address exact core placeholder-filter ownership and
+fingerprint timing before native qualification; production wiring stays closed.
+
 ## Authority and baseline — 2026-10-27
 
 Separately approved repository-only R3 foundation, isolated tests only, through

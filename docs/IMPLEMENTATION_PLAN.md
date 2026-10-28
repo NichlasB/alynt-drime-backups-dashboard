@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved non-reconnecting native proof — audit blocked — 2026-10-28
+
+Fresh confirmed Plugin Tester local-only scope; clean/synced93f391321506c04af32d6dce1bdf2f337d087776.
+[Audit checkpoint](SOURCE_POLICY_NON_RECONNECTING_NATIVE_AUDIT.md): genuine
+core prepare registers its placeholder-escape query callback, rejected even
+with matching fingerprint by the dormant all-query-callbacks-closed profile.
+Permanent zero-SQL core-library reproducer9 checks, one assertion-killed and
+SHA256-restored guard control. Bundled-mysql metadata/checksum reads only;
+all77 application tables unchanged, zero fixtures created/retained. Native
+construction/qualification did not run; runtime/factory/form/wiring unchanged.
+Full local1212/5363 with two baseline Sodium skips, Node16/16/all local gates/
+zero-advisory audits pass; exact-head CI pending. No completed native/task-count credit; previous
+isolated evidence remains scoped, not genuine preparation/driver acceptance.
+Recommended next gated slice: repository-only Source-Policy Genuine-Core
+Placeholder-Escape Admission and Connection-Lifecycle Compatibility Design,
+design-only, to specify the exact core exception/ordering/ownership contract
+before isolated implementation and resuming the owned proof. Keep production
+wiring, actual writes and native experiments disabled for that design.
+
 ## Approved non-reconnecting source-policy safety foundation — 2026-10-27
 
 Repository-only R3 [dormant foundation](SOURCE_POLICY_NON_RECONNECTING_INTEGRATION_FOUNDATION.md)

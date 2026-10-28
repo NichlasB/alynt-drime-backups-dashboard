@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Non-reconnecting native audit blocked before fixtures — 2026-10-28
+
+[Confirmed local-only audit](SOURCE_POLICY_NON_RECONNECTING_NATIVE_AUDIT.md)
+reproduces genuine wpdb prepare's core query callback conflicting with the
+dormant profile's explicit empty-query requirement:9 checks, zero probe SQL/
+connections, assertion-killed guard control then exact restoration. Metadata/
+checksum reconciliation preserves all77 application tables; no fixture/native
+construction, actual UI/handler/authentication acceptance or wiring change.
+Full local1212/5363 with two known Sodium skips, Node16/16/all local gates/audits
+pass; exact-head CI pending. Native qualification, real lost-update repair
+and whole07/07A/13/FULL stay open; historical toolkit evidence not refreshed.
+Next gated slice: repository-only Source-Policy Genuine-Core Placeholder-Escape
+Admission and Connection-Lifecycle Compatibility Design, design-only; preserve
+arbitrary query-filter refusal and disabled production wiring.
+
 ## Approved07 non-reconnecting source-policy safety foundation — 2026-10-27
 
 [Dormant adapter/guard foundation](SOURCE_POLICY_NON_RECONNECTING_INTEGRATION_FOUNDATION.md)
