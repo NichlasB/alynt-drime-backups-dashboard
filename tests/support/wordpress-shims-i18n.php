@@ -14,7 +14,10 @@ if ( ! function_exists( '__' ) ) {
 	 * @return string
 	 */
 	function __( $text, $domain = 'default' ) {
-		unset( $domain );
+		if ( defined( 'ADB_POLICY_ISOLATED' ) && function_exists( 'apply_filters' ) ) {
+			$translated = apply_filters( 'gettext', $text, $text, $domain );
+			return apply_filters( 'gettext_' . $domain, $translated, $text, $domain );
+		}
 		return $text;
 	}
 }

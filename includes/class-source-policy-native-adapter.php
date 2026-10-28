@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once __DIR__ . '/class-source-policy-error.php';
 
 /** Private construction/connection/profile are provisioned only by isolated fixtures. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
@@ -39,7 +40,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 * @return WP_Error
 	 */
 	public static function create() {
-		return new WP_Error( 'source_policy_unavailable' );
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 	}
 
 	/**
@@ -90,21 +91,21 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 */
 	private function run( $operation, $revision, $site_id, $source, $mode ) {
 		if ( $this->busy ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$this->busy      = true;
 		$this->submitted = false;
 		try {
 			$result = $this->perform( $operation, $revision, $site_id, $source, $mode );
 		} catch ( Throwable $error ) {
-			$result = new WP_Error( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
+			$result = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
 		}
 		try {
 			if ( $this->connection instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection && true !== $this->connection->close() ) {
-				$result = new WP_Error( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
+				$result = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
 			}
 		} catch ( Throwable $error ) {
-			$result = new WP_Error( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
+			$result = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
 		} finally {
 			$this->busy = false;
 		}
@@ -123,21 +124,21 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 */
 	private function perform( $operation, $revision, $site_id, $source, $mode ) {
 		if ( ! is_scalar( $site_id ) || ! is_scalar( $source ) || ! is_scalar( $mode ) || ( 'conditional' === $operation && ( ! is_string( $revision ) || ! preg_match( '/\A[a-f0-9]{64}\z/', $revision ) ) ) ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		$profile = $this->admit();
-		if ( is_wp_error( $profile ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $profile ) ) {
 			return $profile;
 		}
 		$site_id = absint( $site_id );
 		$source  = sanitize_key( (string) $source );
 		$mode    = sanitize_key( (string) $mode );
 		if ( $site_id <= 0 || 'wpvivid' !== $source || ( 'conditional' === $operation && ! in_array( $mode, array( 'required', 'external_optional' ), true ) ) ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		$this->require_profile();
 		$before = $this->observe( $profile );
-		if ( is_wp_error( $before ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $before ) ) {
 			return $before;
 		}
 		$this->require_profile();
@@ -151,7 +152,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 			);
 		}
 		$plan = $before['model']->plan( 'legacy' === $operation ? $before['model']->revision() : $revision, $site_id, $source, $mode );
-		if ( is_wp_error( $plan ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $plan ) ) {
 			return $plan;
 		}
 		$this->require_profile();
@@ -163,23 +164,23 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 			$this->require_profile();
 			$value = apply_filters( 'pre_update_option', $value, $name, $before['map'] );
 		}
-		if ( $value !== $plan['policies'] || is_wp_error( $this->admit() ) ) {
-			return new WP_Error( 'source_policy_unavailable' );
+		if ( $value !== $plan['policies'] || Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit() ) ) {
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		if ( 'noop' === $plan['operation'] ) {
 			return 'unchanged';
 		}
 		$bytes = maybe_serialize( $value );
 		if ( ! is_string( $bytes ) || strlen( $bytes ) > 16384 ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		if ( 'insert' === $plan['operation'] ) {
 			do_action( 'add_option', $name, $value );
 		} else {
 			do_action( 'update_option', $name, $before['map'], $value );
 		}
-		if ( is_wp_error( $this->admit() ) ) {
-			return new WP_Error( 'source_policy_unavailable' );
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit() ) ) {
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$sql             = $this->mutation_sql( $plan['operation'], $before['row'], $bytes, $profile['autoload'] );
 		$this->submitted = true;
@@ -187,15 +188,15 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 		if ( false === $ack['affected'] ) {
 			if ( 'insert' === $plan['operation'] && 1062 === $ack['errno'] && true === $this->connection->ready ) {
 				$winner = $this->observe( $profile );
-				return new WP_Error( ! is_wp_error( $winner ) && null !== $winner['row'] ? 'source_policy_conflict' : 'source_policy_write_uncertain' );
+				return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $winner ) && null !== $winner['row'] ? 'source_policy_conflict' : 'source_policy_write_uncertain' );
 			}
-			return new WP_Error( in_array( $ack['errno'], array( 1064, 1205, 1213 ), true ) ? 'source_policy_storage_error' : 'source_policy_write_uncertain' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( in_array( $ack['errno'], array( 1064, 1205, 1213 ), true ) ? 'source_policy_storage_error' : 'source_policy_write_uncertain' );
 		}
 		if ( 0 === $ack['affected'] ) {
-			return new WP_Error( 'source_policy_conflict' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_conflict' );
 		}
-		if ( 1 !== $ack['affected'] || is_wp_error( $this->admit() ) || ! $this->invalidate() ) {
-			return new WP_Error( 'source_policy_write_uncertain' );
+		if ( 1 !== $ack['affected'] || Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit() ) || ! $this->invalidate() ) {
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_write_uncertain' );
 		}
 		$this->require_profile();
 		if ( 'insert' === $plan['operation'] ) {
@@ -207,7 +208,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 			$this->require_profile();
 			do_action( 'updated_option', $name, $before['map'], $value );
 		}
-		return is_wp_error( $this->admit() ) ? new WP_Error( 'source_policy_write_uncertain' ) : 'saved';
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit() ) ? Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_write_uncertain' ) : 'saved';
 	}
 
 	/**
@@ -217,7 +218,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 */
 	private function admit() {
 		if ( ! $this->connection instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection || true !== $this->connection->ready ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		return $this->connection->admit_profile();
 	}
@@ -229,7 +230,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 * @throws RuntimeException For stale admission.
 	 */
 	private function require_profile() {
-		if ( is_wp_error( $this->admit() ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit() ) ) {
 			throw new RuntimeException( 'Policy profile changed' );
 		}
 	}
@@ -246,13 +247,13 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Fixed connection table validated by profile admission; values prepared, no request identifier.
 		$ack = $connection->execute( $connection->prepare_checked( "SELECT IF(OCTET_LENGTH(option_value)<=16384,option_value,NULL) AS option_value,autoload FROM $connection->options WHERE option_name=%s AND BINARY option_name=BINARY %s LIMIT 1", $name, $name ) );
 		if ( ! is_int( $ack['affected'] ) || $ack['affected'] < 0 || $ack['affected'] > 1 || ! is_array( $connection->last_result ) || count( $connection->last_result ) !== $ack['affected'] ) {
-			return new WP_Error( 'source_policy_storage_error' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_storage_error' );
 		}
 		$row = null;
 		if ( 1 === $ack['affected'] ) {
 			$row = $connection->last_result[0];
 			if ( ! is_object( $row ) || 'stdClass' !== get_class( $row ) ) {
-				return new WP_Error( 'source_policy_invalid' );
+				return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 			}
 			$row = (array) $row;
 		}

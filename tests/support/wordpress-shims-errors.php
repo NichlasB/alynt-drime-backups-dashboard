@@ -15,6 +15,9 @@ if ( ! function_exists( 'is_wp_error' ) ) {
 	 * @return bool
 	 */
 	function is_wp_error( $thing ) {
+		if ( $thing instanceof WP_Error && defined( 'ADB_POLICY_ISOLATED' ) && function_exists( 'do_action' ) ) {
+			do_action( 'is_wp_error_instance', $thing );
+		}
 		return $thing instanceof WP_Error;
 	}
 }

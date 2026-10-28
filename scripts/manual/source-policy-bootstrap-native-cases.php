@@ -60,7 +60,7 @@ function adbb_native_cases( ReflectionClass $owner_class, array $frame, array $b
 		adbb_bind( $owner, 'bootstrap_binding', $sources );
 		$before = mysqli_get_client_stats();
 		try {
-			adbb_check( ! $owner->ready && is_wp_error( $owner->admit_profile() ) && false === $owner->query( 'SELECT never-dispatched' ), 'pre-active public dispatch refuses' );
+			adbb_check( ! $owner->ready && $owner->admit_profile() instanceof WP_Error && false === $owner->query( 'SELECT never-dispatched' ), 'pre-active public dispatch refuses' );
 			$refused = false;
 			try {
 				$owner->execute( 'SELECT never-dispatched' );
@@ -74,7 +74,7 @@ function adbb_native_cases( ReflectionClass $owner_class, array $frame, array $b
 				$delta[ $key ] = (int) $after[ $key ] - (int) $before[ $key ];
 			}
 			$positive = 'positive' === $group;
-			adbb_check( $positive ? true === $result : is_wp_error( $result ), 'actual private initializer outcome' );
+			adbb_check( $positive ? true === $result : $result instanceof WP_Error, 'actual private initializer outcome' );
 			adbb_check( $positive === $owner->ready && 0 === $called, 'active-last and no forbidden observer invocation' );
 			adbb_check( 0 === $delta['reconnect'] && 0 === $delta['connection_reused'] && 0 === $delta['pconnect_success'], 'no reconnect, reuse or persistent connection' );
 			adbb_check( $delta['com_query'] <= 16, 'physical mysqlnd bootstrap command envelope' );
@@ -105,7 +105,7 @@ function adbb_native_cases( ReflectionClass $owner_class, array $frame, array $b
 					$refused = true; }
 				adbb_check( $refused && mysqli_get_client_stats()['com_query'] === $read_before && 0 === $called, 'changed seal refuses without SQL or observer invocation' );
 			}
-			adbb_check( is_wp_error( $owner_class->getMethod( 'bootstrap' )->invoke( $owner ) ), 'single-use bootstrap cannot reopen' );
+			adbb_check( $owner_class->getMethod( 'bootstrap' )->invoke( $owner ) instanceof WP_Error, 'single-use bootstrap cannot reopen' );
 			$closed = $owner->close();
 			adbb_check( $closed === $owner->close() && false === has_filter( 'query', array( $owner, 'remove_placeholder_escape' ) ), 'once-only independent callback cleanup' );
 			adbb_check( '0' === mysqli_get_client_stats()['active_connections'], 'no retained native session' );

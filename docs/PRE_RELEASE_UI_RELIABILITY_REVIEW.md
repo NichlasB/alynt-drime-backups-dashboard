@@ -1,5 +1,18 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Hook-silent owned refusal foundation — 2026-10-28
+
+[Repository-only foundation](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md) removes
+owned error/translation observer effects and virtual subclass getter calls;
+normal WP_Error result DATA and external observers remain. Internal diagnostic
+construction is deliberately untranslated; real UI/handler translations and
+production wiring unchanged. New83/676, related675/3015, full local1509/6973
+with only baseline Sodium skips; Node16/16/all gates/audits and seven restored
+assertion controls pass. Scoped Light/structure/Security, not whole readiness
+or genuine/native acceptance. CI pending. No toolkit/historical row refresh.
+Next gated slice: fresh Plugin Tester local-only bootstrap qualification/cleanup,
+genuine error-API audit first, fresh target/owned fixture confirmation, disabled wiring.
+
 ## Genuine bootstrap refusal-hook blocker — 2026-10-28
 
 Fresh approved local-only [owned audit](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md)

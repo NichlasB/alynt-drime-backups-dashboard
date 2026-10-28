@@ -56,7 +56,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 	 */
 	private function bootstrap() {
 		if ( $this->bootstrap_attempted || $this->close_attempted || 'never_opened' !== $this->native_state || null !== $this->dbh ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$this->bootstrap_attempted = true;
 		$this->bootstrap_started   = hrtime( true );
@@ -146,7 +146,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 				'hooks'           => Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::fingerprint(),
 			);
 			$this->bootstrap_check();
-			if ( is_wp_error( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $facts, $frame['table'], $this->query_context ) ) ) {
+			if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $facts, $frame['table'], $this->query_context ) ) ) {
 				throw new RuntimeException( 'Final profile unavailable' );
 			}
 			$this->options       = $frame['table'];
@@ -156,7 +156,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$success             = true;
 			return true;
 		} catch ( Throwable $error ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		} finally {
 			$this->bootstrap_frame   = null;
 			$this->bootstrap_binding = null;

@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once __DIR__ . '/class-source-policy-error.php';
 
 /** Receivers/source bindings are provisioned only by isolated fixtures here. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context {
@@ -85,7 +86,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context {
 	 * @return WP_Error
 	 */
 	public static function create() {
-		return new WP_Error( 'source_policy_unavailable' );
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 	}
 
 	/** Establishes only the verified owned callback before sealing.

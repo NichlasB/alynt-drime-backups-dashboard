@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Hook-silent refusal / classification foundation — 2026-10-28
+
+Approved repository-only R3 [foundation](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
+clean/synced228c3e146600371124245868cfba857843ec3fb4. Ordinary empty WP_Error plus
+bounded public error DATA; hook-free instance classification, no autoload,
+fixed internal diagnostics and exact-class code projection. Source-policy
+callers and realistic isolated error/translation models updated; UI mapping,
+storage/SQL/guard ordering, factories and production wiring unchanged. New83/676,
+related675/3015; full local1509/6973 (two baseline Sodium skips), Node16/16/all
+gates/zero-advisory audits pass. Seven assertion-killed/SHA256-restored controls
+and scoped reviews recorded; exact-head CI pending. No genuine WordPress/native
+execution or old proof rerun; historical whole/toolkit rows/task count unchanged.
+The native blocker is not declared resolved by isolated evidence. Next gated
+slice: fresh Plugin Tester local-only Bounded Initial Native Construction and
+Pre-Qualification Bootstrap Owned Qualification/Cleanup Proof; fresh target/
+fixture confirmation, genuine quiet-error code/message/data audit first, then
+one ordered owned attempt only if eligible, preserving state and disabled wiring.
+
 ## Native bootstrap owned proof — error-hook boundary blocked — 2026-10-28
 
 Fresh confirmed Plugin Tester local-only [audit](SOURCE_POLICY_NATIVE_BOOTSTRAP_OWNED_AUDIT.md),

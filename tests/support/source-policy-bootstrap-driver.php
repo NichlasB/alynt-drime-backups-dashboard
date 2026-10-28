@@ -8,7 +8,7 @@ function boot_event($name){
 	$GLOBALS['boot_events'][]=$name;
 	if('close'!==$name){
 		$connection=$GLOBALS['boot_connection']; PHPUnit\Framework\Assert::assertFalse($connection->ready,'No early active publication.');
-		PHPUnit\Framework\Assert::assertTrue(is_wp_error($connection->admit_profile())); PHPUnit\Framework\Assert::assertFalse($connection->query('SELECT never-dispatched'));
+		PHPUnit\Framework\Assert::assertInstanceOf(WP_Error::class,$connection->admit_profile()); PHPUnit\Framework\Assert::assertFalse($connection->query('SELECT never-dispatched'));
 		$refused=false;try{$connection->execute('SELECT never-dispatched');}catch(RuntimeException $error){$refused=true;} PHPUnit\Framework\Assert::assertTrue($refused,'No prequalification public execution.');
 	}
 	if($GLOBALS['boot_fault']===$name.'-throw') throw new RuntimeException('owned-private-driver-material');

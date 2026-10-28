@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once __DIR__ . '/class-source-policy-error.php';
 
 /** Pure checks only. Private bindings are not distribution authentication. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile {
@@ -98,7 +99,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile {
 	 */
 	public static function hooks( array $binding ) {
 		global $wp_filter;
-		if ( ! is_array( $binding['observers'] ) || ! is_array( $binding['observer_files'] ) || is_wp_error( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::fingerprint() ) ) {
+		if ( ! is_array( $binding['observers'] ) || ! is_array( $binding['observer_files'] ) || Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::fingerprint() ) ) {
 			return false;
 		}
 		foreach ( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::hook_names() as $name ) {

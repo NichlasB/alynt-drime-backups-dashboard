@@ -65,9 +65,7 @@ try {
 		} else {
 			$result = $class->getMethod( 'bootstrap' )->invoke( $owner );
 		}
-		$expected = 'core-classification' === $group ? array( 'is_wp_error_instance' ) : array( 'wp_error_added' );
-		if ( 'public-query' === $group ) {
-			$expected[] = 'is_wp_error_instance'; }
+		$expected = 'core-construction' === $group ? array( 'wp_error_added' ) : ( 'core-classification' === $group ? array( 'is_wp_error_instance' ) : array() );
 		++$checks;
 		if ( $expected !== $events ) {
 			throw new RuntimeException( 'Unexpected error-hook transcript' ); }

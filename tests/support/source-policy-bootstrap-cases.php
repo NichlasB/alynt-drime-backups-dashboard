@@ -37,8 +37,8 @@ function boot_configure($case,$connection,$context){
 	}
 	if('during-prepare'===$case)$GLOBALS['boot_store']->after_prepare=static function(){policy_isolated_hook('all',static function($value){++$GLOBALS['boot_observer_calls'];return $value;});};
 	$GLOBALS['boot_reentered']=false; $GLOBALS['boot_nested_refused']=false;
-	if('reentry'===$case)$GLOBALS['boot_after']['identity']=static function()use($connection){$GLOBALS['boot_reentered']=is_wp_error(boot_invoke($connection,'bootstrap'));};
-	if('object-reentry'===$case)$GLOBALS['boot_after']['object']=static function()use($connection){$GLOBALS['boot_reentered']=is_wp_error(boot_invoke($connection,'bootstrap'));};
+	if('reentry'===$case)$GLOBALS['boot_after']['identity']=static function()use($connection){$GLOBALS['boot_reentered']=boot_invoke($connection,'bootstrap') instanceof WP_Error;};
+	if('object-reentry'===$case)$GLOBALS['boot_after']['object']=static function()use($connection){$GLOBALS['boot_reentered']=boot_invoke($connection,'bootstrap') instanceof WP_Error;};
 	if('out-of-order'===$case)$GLOBALS['boot_after']['limits']=static function()use($connection){try{boot_invoke($connection,'bootstrap_probe','indexes');}catch(RuntimeException $error){$GLOBALS['boot_nested_refused']=true;}};
 	if(0===strpos($case,'readback-')){$field=substr($case,9);$GLOBALS['boot_rewrite']['session']=static function($rows)use($field){$rows[0][$field]='wrong';return $rows;};}
 	if(0===strpos($case,'column-')){$field=substr($case,7);$GLOBALS['boot_rewrite']['columns']=static function($rows)use($field){$rows[0][$field]='wrong';return $rows;};}
@@ -66,7 +66,7 @@ function boot_verify($case,$connection,$result){
 		foreach(array('init','charset','mode-helper') as $step)PHPUnit\Framework\Assert::assertSame(1,count(array_filter($GLOBALS['boot_events'],static function($event)use($step){return $event===$step;})));
 		PHPUnit\Framework\Assert::assertIsArray($connection->admit_profile());
 		if('positive-observer'===$case){$owner=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter'))->newInstanceWithoutConstructor();boot_set($owner,'connection',$connection);$observed=Alynt_Drime_Backups_Dashboard_Source_Policy_Stored_Map::decode($GLOBALS['boot_store']->row,hash('sha256','isolated:wp_options'),array('yes','no'));PHPUnit\Framework\Assert::assertSame('saved',$owner->save_source_mode_if_current($observed['model']->revision(),7,'wpvivid','external_optional'));PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_observer_calls']);}
-		PHPUnit\Framework\Assert::assertTrue(is_wp_error(boot_invoke($connection,'bootstrap')));
+		PHPUnit\Framework\Assert::assertInstanceOf(WP_Error::class,boot_invoke($connection,'bootstrap'));
 	}
 	if('positive-observer'!==$case)PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_observer_calls']);
 	if(in_array($case,array('remove-false','remove-throw','close-and-remove'),true)){$GLOBALS['policy_remove_retain']='remove-throw'!==$case;$GLOBALS['policy_remove_throw']='remove-throw'===$case;}

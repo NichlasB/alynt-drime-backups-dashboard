@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once __DIR__ . '/class-source-policy-error.php';
 
 /** Private collaborators have no production factory in this foundation. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
@@ -33,7 +34,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 	 * @return WP_Error
 	 */
 	public static function create() {
-		return new WP_Error( 'source_policy_unavailable' );
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 	}
 
 	/**
@@ -45,21 +46,21 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 	 */
 	public function view( $site_id, $source ) {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error( 'source_policy_forbidden' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_forbidden' );
 		}
 		if ( ( ! is_string( $site_id ) && ! is_int( $site_id ) ) || 'wpvivid' !== $source ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		$site_id = absint( $site_id );
 		if ( $site_id <= 0 || ! $this->sites || ! $this->owner || ! $this->record_matches( $site_id ) ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$view = $this->owner->view_source_mode( $site_id, 'wpvivid' );
-		if ( is_wp_error( $view ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $view ) ) {
 			return $this->safe_error( $view );
 		}
 		if ( ! is_array( $view ) || array( 'mode', 'revision' ) !== array_keys( $view ) || ! in_array( $view['mode'], array( 'required', 'external_optional' ), true ) || ! $this->revision_valid( $view['revision'] ) ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		return $view;
 	}
@@ -72,29 +73,29 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 	 */
 	public function submit( $request ) {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error( 'source_policy_forbidden' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_forbidden' );
 		}
 		if ( ! is_array( $request ) || ! isset( $request['_wpnonce'] ) || ! is_string( $request['_wpnonce'] ) || strlen( $request['_wpnonce'] ) > 128 || ! wp_verify_nonce( wp_unslash( $request['_wpnonce'] ), 'alynt_drime_backups_dashboard_update_source_policy' ) ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		if ( ! isset( $request['dashboard_site_id'], $request['source_key'], $request['source_mode'], $request['source_policy_revision'] ) || ( ! is_string( $request['dashboard_site_id'] ) && ! is_int( $request['dashboard_site_id'] ) ) || ! is_string( $request['source_key'] ) || ! is_string( $request['source_mode'] ) || ! is_string( $request['source_policy_revision'] ) ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		$site_id  = absint( wp_unslash( $request['dashboard_site_id'] ) );
 		$source   = wp_unslash( $request['source_key'] );
 		$mode     = wp_unslash( $request['source_mode'] );
 		$revision = wp_unslash( $request['source_policy_revision'] );
 		if ( $site_id <= 0 || 'wpvivid' !== $source || ! in_array( $mode, array( 'required', 'external_optional' ), true ) || ! $this->revision_valid( $revision ) ) {
-			return new WP_Error( 'source_policy_invalid' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		if ( ! $this->sites || ! $this->owner || ! $this->record_matches( $site_id ) ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$result = $this->owner->save_source_mode_if_current( $revision, $site_id, $source, $mode );
-		if ( is_wp_error( $result ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $result ) ) {
 			return $this->safe_error( $result );
 		}
-		return in_array( $result, array( 'saved', 'unchanged' ), true ) ? $result : new WP_Error( 'source_policy_save_failed' );
+		return in_array( $result, array( 'saved', 'unchanged' ), true ) ? $result : Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_save_failed' );
 	}
 
 	/**
@@ -125,7 +126,8 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 	 * @return WP_Error
 	 */
 	private function safe_error( WP_Error $error ) {
-		$code = $error->get_error_code();
-		return new WP_Error( in_array( $code, array( 'source_policy_conflict', 'source_policy_unavailable', 'source_policy_invalid', 'source_policy_storage_error', 'source_policy_write_uncertain' ), true ) ? $code : 'source_policy_save_failed' );
+		// Unknown subclasses can override getters; classify their type but do not invoke them.
+		$code = 'WP_Error' === get_class( $error ) ? $error->get_error_code() : '';
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( in_array( $code, array( 'source_policy_conflict', 'source_policy_unavailable', 'source_policy_invalid', 'source_policy_storage_error', 'source_policy_write_uncertain' ), true ) ? $code : 'source_policy_save_failed' );
 	}
 }

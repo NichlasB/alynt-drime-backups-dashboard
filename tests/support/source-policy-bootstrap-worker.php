@@ -33,6 +33,8 @@ try {
 	boot_set($connection,'bootstrap_frame',array('core'=>'6.0','database'=>'isolated','table'=>'wp_options','host'=>'127.0.0.1','port'=>10004,'user'=>'owned','password'=>'owned-private-password','charset'=>DB_CHARSET,'collate'=>DB_COLLATE));
 	boot_set($connection,'bootstrap_binding',array('core_file'=>__DIR__.'/source-policy-isolated-wpdb.php','driver_file'=>__DIR__.'/source-policy-bootstrap-driver.php','cache_file'=>__DIR__.'/source-policy-isolated-wordpress.php','cache_api_file'=>__DIR__.'/source-policy-isolated-wordpress.php','observers'=>array(),'observer_files'=>array()));
 	boot_configure($argv[1],$connection,$context);
+	// These unqualified domains must stay unreachable even in complete positive/error transcripts.
+	foreach(array('wp_error_added','is_wp_error_instance','gettext','gettext_alynt-drime-backups-dashboard') as $error_hook)policy_isolated_hook($error_hook,static function(){throw new RuntimeException('Owned code dispatched an error/translation observer');});
 	$GLOBALS['boot_prior_calls']=0; $GLOBALS['boot_prior_messages']=array(); $prior=static function($severity,$message){++$GLOBALS['boot_prior_calls'];$GLOBALS['boot_prior_messages'][]=array($severity,$message);return true;}; set_error_handler($prior);
 	$result=boot_invoke($connection,'bootstrap'); boot_verify($argv[1],$connection,$result);
 	trigger_error('synthetic-after-bootstrap',E_USER_WARNING); PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_prior_calls']); restore_error_handler();

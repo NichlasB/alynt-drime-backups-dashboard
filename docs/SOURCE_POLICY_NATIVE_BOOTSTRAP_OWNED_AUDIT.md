@@ -1,5 +1,12 @@
 # Native Bootstrap Owned Qualification — Blocked at Genuine Error-Hook Refusal
 
+Later approved [repository-only repair](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
+2026-10-28, implements hook-silent owned error DATA/classification with isolated
+tests. It does not rerun or resolve this native proof. Manual sources now expect
+quiet owned results/direct type observation while preserving positive core-event
+controls; the historical25-check diagnostic below describes the pre-repair code.
+Fresh genuine code/message/data and native qualification remain separately gated.
+
 ## Authority, target and restore point — 2026-10-28
 
 Approved R3 Plugin Tester local-only Bounded Initial Native Construction and

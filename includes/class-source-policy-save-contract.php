@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once __DIR__ . '/class-source-policy-error.php';
 
 /**
  * Models saves without a storage adapter, injected callbacks or native writer.
@@ -214,6 +215,6 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Save_Contract {
 	 * @return WP_Error
 	 */
 	private static function failure( $reason ) {
-		return new WP_Error( 'source_policy_' . $reason, __( 'The monitoring policy could not be saved safely.', 'alynt-drime-backups-dashboard' ) );
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_' . $reason, true );
 	}
 }

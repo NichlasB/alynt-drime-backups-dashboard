@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) || ! class_exists( 'wpdb', false ) ) {
 	return;
 }
+require_once __DIR__ . '/class-source-policy-error.php';
 require_once __DIR__ . '/class-source-policy-bootstrap-profile.php';
 require_once __DIR__ . '/class-source-policy-bootstrap-evidence.php';
 require_once __DIR__ . '/traits/trait-source-policy-native-bootstrap.php';
@@ -56,7 +57,7 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @return WP_Error
 	 */
 	public static function create() {
-		return new WP_Error( 'source_policy_unavailable' );
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 	}
 
 	/**
@@ -109,7 +110,7 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 */
 	final public function query( $query ) {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Fixed dormant owner; reconnect and raw error output are refused above.
-		return is_wp_error( $this->admit_profile() ) ? false : parent::query( $query );
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit_profile() ) ? false : parent::query( $query );
 	}
 
 	/** Admits only this privately bound single-use receiver.
@@ -118,7 +119,7 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 */
 	final public function admit_profile() {
 		if ( $this->close_attempted || 'active' !== $this->native_state || true !== $this->ready || ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this ) ) {
-			return new WP_Error( 'source_policy_unavailable' );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		return Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $this->qualification, $this->options, $this->query_context );
 	}
@@ -132,11 +133,11 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @throws RuntimeException If admission changes.
 	 */
 	final public function prepare_checked( $query, ...$args ) {
-		if ( is_wp_error( $this->admit_profile() ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit_profile() ) ) {
 			throw new RuntimeException( 'Policy preparation unavailable' );
 		}
 		$prepared = $this->prepare( $query, ...$args );
-		if ( ! is_string( $prepared ) || is_wp_error( $this->admit_profile() ) ) {
+		if ( ! is_string( $prepared ) || Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit_profile() ) ) {
 			throw new RuntimeException( 'Policy preparation changed' );
 		}
 		return $prepared;
@@ -185,7 +186,7 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @throws RuntimeException If dispatch admission changed.
 	 */
 	final public function execute( $sql ) {
-		if ( is_wp_error( $this->admit_profile() ) ) {
+		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit_profile() ) ) {
 			throw new RuntimeException( 'Policy dispatch unavailable' );
 		}
 		try {
