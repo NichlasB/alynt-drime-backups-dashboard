@@ -10,7 +10,10 @@ Strict case-specific verifier, virtual cohort and extension-free observation sea
 have107 new isolated tests/331 assertions and eight assertion-killed/SHA256-restored
 semantic controls. No unavailable-only positive or failed-getter shortcut. Final
 local1675/7397 (two existing Sodium skips), Node16/16 and all configured local gates
-pass; exact-head publication closeout pending. No native qualification is claimed.
+pass. Implementation cd6e4fb17c2f2b812e700a59748929417a6fb925 passed
+[exact-head CI40717995787](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40717995787):
+PHP7.4/8.3 each1675/7404, no failures/skips; Node16/16/all gates pass. No native
+qualification is claimed; physical integration remains separately gated.
 Current proof/acceptance, root and production wiring are unchanged; no site/SQL,
 fixture/native operation, package/release/deploy or toolkit/uploader edit.
 Implementation-plan progress: advances the cleanup evidence contract, not physical

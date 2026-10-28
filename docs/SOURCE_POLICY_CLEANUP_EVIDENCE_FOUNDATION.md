@@ -122,7 +122,12 @@ structure148 runtime/219 support/187 tests/184 class names, build, strict Compos
 manifest, Composer/npm zero-advisory audits, eleven scoped PHP syntax checks,
 scoped Markdown targets/diff hygiene/baseline preservation all pass. Original
 positive isolated worker passes181 checks. No generated build output changed.
-Exact-head CI publication closeout pending; no hosted result is claimed yet.
+Implementation commit cd6e4fb17c2f2b812e700a59748929417a6fb925 is pushed and passed
+[exact-head CI40717995787](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40717995787).
+Actual logs: PHP7.4/8.3 each1675 tests/7404 assertions, no failures/skips; Node16/16,
+all configured gates and zero-advisory audits pass. This evidence-only closeout
+does not change those tested source bytes. Its publication receives a separate
+exact-head CI check before handoff; no native execution is implied by either run.
 Commands: focused Cleanup/FailedConnectObservation PHPUnit; randomized
 SourcePolicy|AdminPageCompoundRequestId seed20261028; full PHPUnit --verbose
 --do-not-cache-result; npm lint/test:admin/check:structure/build; strict Composer
