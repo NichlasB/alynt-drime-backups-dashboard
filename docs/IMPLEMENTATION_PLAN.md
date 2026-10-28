@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fresh cleanup proof — raw and five cases pass, missing-table gated — 2026-10-28
+
+Approved one fresh [same-target owned proof](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md#fresh-approved-attempt--raw-and-five-owner-cases--2026-10-28),
+baselineb9d4a3ed1c8aa49f23dbfc4b9ce7c9c8ba4ef9b2. Fresh source18/stdio39/9/error25/6/
+source31 prerequisites pass. Raw1049/exact-close reference and first five owner
+cases pass with actual live-child/post-exit all-server reconciliation, including
+missing-database's wrapped-counter and independent cleanup evidence. Missing-table
+stops native-case/RuntimeException/check110; failed tuple unknown, positive unrun.
+No retry/acceptance change. Exact empty clone removed; all77 checksums identical,
+zero fixtures/other sessions/transactions. Runtime/production wiring unchanged.
+Safe-local diagnostic-only follow-up adds a privacy-bound256-byte rejected-row
+projection, PHP14/99 (combined129/446), source26 and socket-free stdio46/10 checks,
+three assertion-killed/SHA256-restored controls. No new native/SQL experiment.
+Final local full1697/7512 (two existing Sodium skips), Node16/16/all configured
+local gates pass; exact-head publication pending. Read-only observer catalog/mode
+checks did not establish the failed owner tuple; no connected qualification claim.
+Implementation-plan progress: physical preflight/failed-initial cleanup advanced;
+connected/positive qualification and lost-update repair open. Next gated slice:
+Plugin Tester local-only One Bounded Missing-Table Terminal-Evidence Diagnostic and
+Owned Cleanup Proof, fresh prerequisites/owned cleanup, no full retry or runtime fix.
+
 ## Per-case native cleanup controller — blocked before native bodies — 2026-10-28
 
 Approved/confirmed Plugin Tester local-only [owned integration checkpoint](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md),

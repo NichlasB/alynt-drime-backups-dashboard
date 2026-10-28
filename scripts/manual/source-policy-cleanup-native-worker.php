@@ -27,6 +27,7 @@ if ( 1 !== preg_match( '/\Aaudit checks:[0-9]+ native_connections:0 sql_queries:
 	exit( 1 );
 }
 require __DIR__ . '/source-policy-cleanup-evidence.php';
+require __DIR__ . '/source-policy-cleanup-diagnostic.php';
 require __DIR__ . '/source-policy-cleanup-native-cases.php';
 $stage = 'manifest';
 try {

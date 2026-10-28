@@ -1,4 +1,9 @@
-# Per-Case Cleanup Controller Owned Proof — Blocked Before Native Cases
+# Per-Case Cleanup Controller Owned Proof — Partial Qualification
+
+Latest result: the [fresh approved attempt](#fresh-approved-attempt--raw-and-five-owner-cases--2026-10-28)
+passed the raw reference and five owner cases, then stopped at missing-table.
+Positive remains unrun. All77 application checksums match and owned cleanup is
+complete. A diagnostic-only local follow-up is below; no native retry followed.
 
 ## Authority, target and baseline — 2026-10-28
 
@@ -201,3 +206,117 @@ image, create only a qualified empty owned clone, then one raw/seven-case attemp
 with live/post all-server reconciliation and exact cleanup. Preserve application
 state, all existing guards/budgets and disabled production wiring. No retry occurred
 in this repository-only repair; fresh physical execution needs approval.
+
+## Fresh approved attempt — raw and five owner cases — 2026-10-28
+
+Separately approved one fresh proof on the same exactly confirmed Plugin Tester
+local-only target/path/database10004. Clean/synced restore point
+b9d4a3ed1c8aa49f23dbfc4b9ce7c9c8ba4ef9b2; its
+[exact-head CI40726645133](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40726645133)
+was independently checked successful. Novamira guide/complete inventory refreshed;
+exact local URL present. No WordPress Ability/HTTP/application bootstrap.
+
+Fresh metadata, listeners, MariaDB10.6.23/PHP8.5.12/mysqlnd, expected options schema
+and PROCESS privilege match. Zero other all-server sessions/transactions. Source
+audit18, socket-free stdio39/9, genuine error25/6 and source/capability31 prerequisites
+pass. New77-table checksum baseline captured. Exact clone/missing-table/absent-DB
+controls preview absent. Frozen source/ABI image:
+f0879f69ba92476d6dbe7cf6422c6e2890d891025521feb73f5eadc5575a7305.
+
+Created only empty schema clone local.adbb_86296893b2f0_options LIKE local.wp_options.
+The repaired fixture-audit passes. One raw reference and one fixed cohort invocation:
+
+| Actual result | Evidence |
+|---|---|
+| Raw reference passed | Expected1049 captured before failed-object getter; exact owned close acknowledged, closed-object probe; zero SQL/reuse/reconnect/results, one failed/no successful connect; active counter exact18446744073709551615; actual live-child and post-exit all-server reconciliation clear |
+| default passed | Preflight unavailable, no allocation/connect/SQL; live/post clear; cumulative401ms |
+| wrong-source passed | Same preflight refusal/no effects; live/post clear; cumulative778ms |
+| all passed | Preflight refusal, zero observer calls; live/post clear; cumulative1140ms |
+| incompatible_sql_modes passed | Preflight refusal, zero observer calls; live/post clear; cumulative1487ms |
+| missing-database passed | Fresh zero baseline, one failure/no success/SQL/reconnect/reuse/persistence; acknowledged exact owned release, cached close/terminal fields/callback/result/probe evidence; wrapped counter; live/post clear; cumulative1881ms |
+| missing-table stopped | UNCONFIRMED, completed5, native-case/RuntimeException/checks110,126 stderr bytes; no accepted terminal row |
+| positive unrun | No successful native initialization/round-trip qualification claimed |
+
+The five accepted owner packets share run035146e70d804200b34dba80e4a0ad68 and the
+frozen image. All baseline vectors are literal0. Missing-database bootstrap/after
+vectors are both0,1,0,0,0,0,0,0,0,0,18446744073709551615. Its allocation/close/cached/
+identity/terminal-cleanup fields pass the unchanged case-specific verifier. The
+four preflight rows correctly retain close_ack0 and no allocated release claim.
+This is first live-child/all-session evidence for these rows, not an unconditional
+wrapped-counter exception, internal mysqlnd cause proof or positive qualification.
+
+Check110 maps to the terminal verification assertion in the audited source path;
+the report withholds the actual failed counter/state tuple. Therefore the failed
+field and underlying native cause are **unknown**. Do not infer successful complete
+connected setup, metadata step count, exact missing-table command/result counts,
+native errno or positive facts from the preceding five cases. The private failure
+report is not an observed native SQL exception. No automatic retry or acceptance
+relaxation occurred, and the whole25s cohort never completed successfully.
+
+Finally preview: zero other all-server sessions/transactions and zero rows in the
+exact owned clone. Dropped only that clone; subsequent owned-table/session/
+transaction counts0/0/0. Independent final reconciliation:77 table names/checksums
+identical,77 total tables, zero adbb_ tables/owned absent database/sessions/
+transactions. No retained owned process reported. Runtime, guards, budgets, current
+proof/acceptance, application state and production wiring remained unchanged for
+the attempt. No new accounts, service/schedule/credential/client/live operations.
+
+### Repository-only rejected-evidence diagnostic follow-up
+
+Standing safe-local authorization was used to address the missing non-secret
+failure detail, not speculate about or modify runtime bootstrap behavior. Added
+source-policy-cleanup-diagnostic.php and14 isolated PHP tests; private worker loads
+it, and only after the original verifier returnsfalse emits its diagnostic to
+stderr before the same failing assertion/finally cleanup. Successful stdout,
+acceptance predicate/parameters and all native effects/guards remain unchanged.
+
+Fixed schema, maximum256 bytes:
+ADBC-DIAG1|case|pid|baseline_zero|bootstrap_vector|after_vector|terminal_vector.
+Vectors use the existing11-counter order; terminal uses the21 fields from
+allocations through elapsed (outcome index1, state index14). Expected run/source/
+profile/pid bindings must match before export, but run/source are not exported.
+Only canonical numeric strings and fixed case/outcome/state enums pass. No SQL,
+table data, messages, traces, credentials, handles or arbitrary strings. Oversize/
+unsafe input emits a fixed marker. No unsigned cast, normalization or row mutation.
+
+The parent parser recognizes only a complete bounded safe first line; output
+remains a rejected stderr diagnostic, never ACK/native qualification. Partial or
+malformed/forged/unsafe lines stay masked, and raw prefix erasure/unchanged budgets
+remain enforced. A diagnostic cannot parse as an accepted ADBC1 terminal receipt.
+Synthetic example vectors in tests are not measurements of this failed case.
+
+Executed follow-up: diagnostic PHP14/99; combined cleanup129/446; repository source
+audit26; socket-free stdio46/10 including split diagnostic plus appended secret
+probe, exact counter preservation and redaction. All ten owned PHP -n children
+cleaned. Three semantic controls assertion-fail then restore exact SHA256: remove
+diagnostic byte cap, remove outcome enum, omit parent vector canonical-byte check.
+Restored formatterC79B88FE79BA6F5D9E87D9395DA2C07C22516EDADF72918F2440B7FC93EC6AC1;
+transportE5731B6DF057675FF3047DEEA48078907BBCE4A3B4447B5AEF334CBB7B063044.
+No installed source audit, fixture/native candidate experiment or new physical
+attempt ran after this diagnostic addition. Additional read-only bundled-mysql
+observer checks showed global/session mode-emptiness0/0, init-connect-emptiness1,
+and all three finite table/column/index catalog SELECTs against the absent control
+table succeed with zero rows. Only boolean/count/error-code facts were reported;
+no mode text, SQL payload, user/host/session contents or application data. These
+checks do not recover the failed owner's tuple or prove its session/helper path.
+The new source image still needs fresh physical evidence.
+
+Final local QA: full PHP1697 tests/7512 assertions, no failures and only the two
+existing missing-Sodium skips; combined cleanup129/446, Node16/16, PHPCS204 files,
+structure148 runtime/220 support/189 tests/186 class names, build, strict Composer
+manifest and Composer/npm zero-advisory audits all pass. Commands: full PHPUnit
+--verbose --do-not-cache-result and focused Cleanup/FailedConnectObservation;
+npm lint/test:admin/check:structure/build; php composer.phar validate --strict/audit;
+npm audit --audit-level=moderate; source/stdio audits above. Scoped syntax, link,
+diff, acceptance/runtime/dependency/non-target preservation checks pass.
+Exact-head CI closeout pending. No whole-plugin readiness,
+Database Review or product-task completion credit. Implementation-plan progress:
+raw/failed-initial cleanup and preflight rows physically advance, but connected
+missing-table/positive qualification and actual lost-update repair remain open.
+
+Recommended next gated slice: **Plugin Tester local-only One Bounded Missing-Table
+Terminal-Evidence Diagnostic and Owned Cleanup Proof**, on the same confirmed
+target, with fresh source/error/stdio prerequisites and an exact owned empty clone.
+Use the new bounded rejected-row projection to identify the actual mismatch; no
+full ordered retry, runtime change, guard/budget relaxation or production wiring.
+Any runtime remedy or subsequent full qualification needs its own evidence/gate.

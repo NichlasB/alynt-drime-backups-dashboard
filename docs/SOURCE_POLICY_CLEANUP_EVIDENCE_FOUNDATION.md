@@ -161,6 +161,7 @@ existing acceptance, budgets or independent release evidence. Stop if the fixed
 profile/hold cannot meet the envelope. No such operation is authorized here.
 
 The subsequently approved [native controller checkpoint](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md)
-stopped at its fixture-audit before raw/owner native execution, cleaned its owned
-fixture and preserved all77 application checksums. It does not refresh this
+initially stopped at fixture-audit; a fresh approved attempt now passes raw/five
+owner rows and stops at missing-table, positive unrun. Owned cleanup and all77
+application checksums pass. It does not refresh this
 foundation's historical isolated evidence or grant native qualification.

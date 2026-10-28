@@ -8,6 +8,7 @@ if('mysql-error-fragments'===$argv[2]){fwrite(STDERR,'ERROR 10');fflush(STDERR);
 if('mysql-error-eof'===$argv[2]){fwrite(STDERR,'ERROR 1045 (28000)');exit(1);}
 if('stderr-prefix-eof'===$argv[2]){fwrite(STDERR,'ERROR 10');exit(1);}
 if('stdout-partial-stderr'===$argv[2]){fwrite(STDERR,'ERROR 10');fflush(STDERR);usleep(100000);echo "ready\n";fflush(STDOUT);usleep(100000);fwrite(STDERR,"64 (42000) private-secret SQL\n");exit(1);}
+if('evidence-error'===$argv[2]){$line='ADBC-DIAG1|missing-table|'.getmypid()."|1|1,0,4,2,2,0,0,0,0,0,0|1,0,4,2,2,0,0,0,0,0,0|1,unavailable,0,1,1,1,1,0,1,1,1,1,1,1,closed,0,4,0,0,0,12\n";fwrite(STDERR,substr($line,0,40));fflush(STDERR);usleep(20000);fwrite(STDERR,substr($line,40)."private-secret SQL\n");exit(1);}
 if('exit1'===$argv[2])exit(1);
 if(!in_array($argv[2],array('normal','hold'),true))exit(2);
 echo "ready\n";fflush(STDOUT);

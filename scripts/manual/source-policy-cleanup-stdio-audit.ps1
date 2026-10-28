@@ -18,7 +18,7 @@ try {
     Complete-AdbcProcess $child $clock 10000
     Assert-AdbcAudit ($child.OutBytes -eq 11 -and $child.ErrBytes -eq 0)
 } finally { Stop-AdbcProcess $child }
-foreach ($mode in @('overflow','stderr','exit1','hold','mysql-error-fragments','mysql-error-eof','stderr-prefix-eof','stdout-partial-stderr')) {
+foreach ($mode in @('overflow','stderr','exit1','hold','mysql-error-fragments','mysql-error-eof','stderr-prefix-eof','stdout-partial-stderr','evidence-error')) {
     $child=New-AdbcProcess $php @('-n',$worker,'--private-socket-free-stdio',$mode)
     $caught=$false
     try {
@@ -34,9 +34,14 @@ foreach ($mode in @('overflow','stderr','exit1','hold','mysql-error-fragments','
         if ($mode -in @('mysql-error-fragments','stdout-partial-stderr')) { Assert-AdbcAudit ($_.Exception.Message.Contains('mysql_code:1064 sqlstate:42000')) }
         if ($mode -ceq 'mysql-error-eof') { Assert-AdbcAudit ($_.Exception.Message.Contains('mysql_code:1045 sqlstate:28000')) }
         if ($mode -ceq 'stderr-prefix-eof') { Assert-AdbcAudit (-not $_.Exception.Message.Contains('mysql_code:')) }
+        if ($mode -ceq 'evidence-error') {
+            Assert-AdbcAudit ($_.Exception.Message.Contains('evidence_case:missing-table pid:'+$child.Id+' baseline_zero:1'))
+            Assert-AdbcAudit ($_.Exception.Message.Contains('bootstrap:1,0,4,2,2,0,0,0,0,0,0'))
+            Assert-AdbcAudit ($_.Exception.Message.Contains('terminal:1,unavailable,0,1,1,1,1,0,1,1,1,1,1,1,closed,0,4,0,0,0,12'))
+        }
         if ($mode -like '*error*' -or $mode -in @('stderr-prefix-eof','stderr','stdout-partial-stderr')) { Assert-AdbcAudit ($child.ErrPrefix -ceq '') }
         $caught=$true
     } finally { Stop-AdbcProcess $child }
     Assert-AdbcAudit $caught
 }
-Write-Output ('stdio-audit checks:'+$checks+' groups:9 native_connections:0 sql_queries:0 fixtures:0 owned_processes_cleaned:9')
+Write-Output ('stdio-audit checks:'+$checks+' groups:10 native_connections:0 sql_queries:0 fixtures:0 owned_processes_cleaned:10')

@@ -192,7 +192,7 @@ function adbc_owner( ReflectionClass $owner_class, array $frame, array $binding,
 		if ( null !== $hook ) {
 			remove_filter( $hook, $observer, 1 );
 			$hook = null; }
-		$row = array_combine(
+		$row      = array_combine(
 			Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::fields(),
 			array(
 				'ADBC1',
@@ -227,7 +227,12 @@ function adbc_owner( ReflectionClass $owner_class, array $frame, array $binding,
 				(string) (int) ( ( hrtime( true ) - $started ) / 1000000 ),
 			)
 		);
-		adbb_check( Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::matches( $row, $request[3], $name, $source, getmypid() ), 'actual native terminal evidence contract' );
+		$accepted = Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::matches( $row, $request[3], $name, $source, getmypid() );
+		if ( ! $accepted ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed diagnostic schema validates every scalar, numeric vector and enum; never success/SQL/messages.
+			fwrite( STDERR, Alynt_Drime_Backups_Dashboard_Cleanup_Diagnostic::format( $row, $request[3], $name, $source, getmypid() ) );
+		}
+		adbb_check( $accepted, 'actual native terminal evidence contract' );
 		return implode( '|', $row ) . "\n";
 	} finally {
 		$owner->close(); // Cached if already attempted; preserves cleanup on failed assertions.

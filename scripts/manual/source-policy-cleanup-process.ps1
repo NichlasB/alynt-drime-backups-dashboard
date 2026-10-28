@@ -28,6 +28,22 @@ function Get-AdbcRemaining($Clock, [int]$Limit) {
 
 function Get-AdbcErrorFact([string]$Prefix) {
     if ($Prefix.Length -gt 256) { return '' }
+    $newline=$Prefix.IndexOf("`n")
+    if ($newline -ge 0) {
+        $line=$Prefix.Substring(0,$newline+1)
+        if ($line -cmatch '\AADBC-DIAG1\|(default|wrong-source|all|incompatible_sql_modes|missing-database|missing-table|positive)\|[1-9][0-9]{0,9}\|[01]\|[0-9,]+\|[0-9,]+\|[A-Za-z0-9_,]+\n\z') {
+            $parts=$line.TrimEnd("`n").Split('|')
+            foreach ($index in @(4,5)) {
+                $values=$parts[$index].Split(',')
+                if ($values.Count -ne 11) { return '' }
+                foreach ($value in $values) { if ($value -cnotmatch '\A(?:0|[1-9][0-9]{0,19})\z') { return '' } }
+            }
+            $terminal=$parts[6].Split(',')
+            if ($terminal.Count -ne 21 -or $terminal[1] -cnotin @('active','unavailable') -or $terminal[14] -cnotin @('never_opened','allocating','allocated','connecting','connected_unqualified','active','closed','closure_unknown','preflight')) { return '' }
+            for ($i=0;$i -lt 21;$i++) { if ($i -notin @(1,14) -and $terminal[$i] -cnotmatch '\A(?:0|[1-9][0-9]{0,4})\z') { return '' } }
+            return ('evidence_case:'+$parts[1]+' pid:'+$parts[2]+' baseline_zero:'+$parts[3]+' bootstrap:'+$parts[4]+' after:'+$parts[5]+' terminal:'+$parts[6])
+        }
+    }
     if ($Prefix -cmatch '^ERROR ([1-9][0-9]{0,4}) \(([A-Z0-9]{5})\)') { return ('mysql_code:'+$Matches[1]+' sqlstate:'+$Matches[2]) }
     if ($Prefix -cmatch '^native-cleanup failure stage:(manifest|native-case|hold) class:(RuntimeException|Error|mysqli_sql_exception|Throwable) checks:(0|[1-9][0-9]{0,4})(?: |$)') { return ('worker_stage:'+$Matches[1]+' worker_class:'+$Matches[2]+' checks:'+$Matches[3]) }
     return ''

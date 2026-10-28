@@ -35,4 +35,10 @@ $refused=$false
 try { Deny-AdbcError $child } catch { $refused=$_.Exception.Message -ceq 'Private stderr rejected (14 bytes) mysql_code:1064 sqlstate:42000' }
 Assert-AdbcSource $refused
 Assert-AdbcSource ($child.ErrPrefix -ceq '')
+$diagnostic="ADBC-DIAG1|missing-table|105|1|1,0,4,2,2,0,0,0,0,0,0|1,0,4,2,2,0,0,0,0,0,0|1,unavailable,0,1,1,1,1,0,1,1,1,1,1,1,closed,0,4,0,0,0,12`n"
+$fact=Get-AdbcErrorFact ($diagnostic+'private-secret SQL')
+Assert-AdbcSource ($fact.StartsWith('evidence_case:missing-table pid:105 baseline_zero:1 bootstrap:1,0,4,2,2,0,0,0,0,0,0'))
+Assert-AdbcSource ($fact.Contains('terminal:1,unavailable,0,1,1,1,1,0,1,1,1,1,1,1,closed,0,4,0,0,0,12'))
+Assert-AdbcSource (-not $fact.Contains('private-secret'))
+foreach ($bad in @($diagnostic.TrimEnd("`n"),$diagnostic.Replace('|105|','|private-secret|'),$diagnostic.Replace('closed','private-secret'),$diagnostic.Replace('1,0,4,2,2','01,0,4,2,2'),$diagnostic.Replace('missing-table','private-secret'))) { Assert-AdbcSource ((Get-AdbcErrorFact $bad) -ceq '') }
 Write-Output ('source-audit checks:'+$checks+' SQL_executed:0 site_reads:0 native_connections:0')

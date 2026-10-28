@@ -1,8 +1,8 @@
 # Native Bootstrap Owned Qualification — Blocked at Genuine Error-Hook Refusal
 
 Latest forward checkpoint: the separately approved [per-case controller proof](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md)
-stopped in its fixture-audit before raw/owner native bodies, cleaned its owned clone
-and preserved all77 application checksums. Native qualification remains incomplete;
+now passes the raw reference/five owner rows and stops at missing-table, positive
+unrun; its owned clone is cleaned and all77 application checksums match. Native qualification remains incomplete;
 the error-hook and counter findings below retain their historical scopes.
 
 Current status: the [fresh approved revalidation](#fresh-revalidation--failed-initial-connect-session-accounting--2026-10-28)
