@@ -12,6 +12,10 @@ are absent: own/parent constructors cannot open the final-refusing connection,
 and dispatch requires facts no implemented provider establishes. No fabricated
 active state/handle transfer/bypass, native candidate, DDL/DML or runtime change.
 The earlier native-proof recommendation jumped ahead of this prerequisite.
+Audit09597b6c236f976f5e3ae2f87246a8526b49fa23 passed
+[exact-head CI40673843559](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40673843559):
+PHP7.4/8.3 each1263/5709, no failures/skips; Node16/16/all gates, zero advisories.
+CI does not execute/qualify native construction or this site audit.
 Core6.0/native matrix and actual lost-update repair stay open; no task-count or
 whole-release credit. Next gated slice: repository-only Source-Policy Bounded
 Initial Native Construction and Pre-Qualification Bootstrap Design, design-only,

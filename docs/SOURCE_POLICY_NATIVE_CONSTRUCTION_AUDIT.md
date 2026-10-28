@@ -117,7 +117,14 @@ no failures, only the two existing missing-Sodium signing skips;
 PHPCS187 configured files and structure143 runtime/210 support/179 test files,
 177 class names pass. Diff hygiene and scoped relative links pass; all
 runtime/test/manual-script/asset/dependency/CI paths are byte-unchanged from
-the restore point. No new native or automated-test success is claimed.
+the restore point. No new native proof or automated-test coverage is claimed.
+
+Publication: audit `09597b6c236f976f5e3ae2f87246a8526b49fa23` passed
+[exact-head CI40673843559](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40673843559).
+Actual PHP7.4/8.3 job logs each1263 tests/5709 assertions, no failures/skips;
+Node16/16/all configured gates and zero-advisory Composer/npm audits pass.
+Hosted isolated suites do not run this installed-core/database audit or
+establish initial native construction or application qualification.
 
 ## Implementation-plan progress and exact next gate
 
