@@ -9,11 +9,20 @@ Dedicated exact-head manual-only Ubuntu24.04 workflow: metadata/version tools,
 private directory and bounded read-only/network-disabled non-root container;
 no server startup/SQL, WordPress execution or database fixtures. Local6/32 and
 full1962/8474 pass, two existing Sodium skips; remaining QA in owning record.
-Publication/ordinary CI/opt-in lab outcome pending. Implementation-plan progress:
-the environment gate is being evaluated, not native qualification or wiring.
+Implementation8c0c339/CI40780852519 succeeds: PHP7.4/8.3 each1962/8481, no skips,
+admin16/16/all gates. One manual preflight40781039665 passed in19s at exact head:
+PHP/mysqlnd8.5.12, core7.1.4/all11 pins, mode700 UID1001/future socket69 bytes,
+zero connections/SQL/WordPress execution; exact owned container/directory/core
+cleanup complete. Server binary10.11.18-MariaDB-ubu2204 and MAC-address warning
+recorded; actual wire version/socket access unqueried. No guard/suffix broadening.
+Implementation-plan progress: environment availability evidenced, not native
+compatibility, qualification or wiring. Evidence-only final CI checked at handoff.
 No production, LocalWP, workstation installation or runtime/ADBC changes.
-Next approval remains bounded owned native qualification only if preflight
-qualifies; any exact build/profile mismatch must be resolved explicitly first.
+Recommended next gated slice: Off-Production Linux Owned Unix-Socket Server-
+Identity and Cleanup Audit, empty disposable database only, bounded identity
+reads/fresh prerequisites/exact cleanup; no WordPress/application/adapter writes.
+Requires new database initialization/server/connection authority to resolve the
+wire/build/diagnostic decision before selecting an exact runtime row or proof.
 
 ## Fixed transport/core-derived charset — isolated foundation — 2026-10-28
 

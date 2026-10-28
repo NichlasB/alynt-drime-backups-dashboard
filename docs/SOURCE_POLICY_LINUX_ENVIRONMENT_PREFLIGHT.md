@@ -96,14 +96,59 @@ Source-scoped workflow review covers exact-head admission, public source trust,
 effect absence, bounded resources and owned cleanup; it is not full release
 readiness, Database Review, UI review or native qualification.
 
-Publication, exact-head ordinary CI and one opt-in lab dispatch remain pending.
-Do not report readiness from source availability alone. The final record must
-include actual run/head, runtime/core/build observations and cleanup outcome.
+Implementation `8c0c339ef3f4ce299b997624ab62487a41eda1bc` is pushed.
+[Ordinary exact-head CI40780852519](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40780852519)
+succeeded: PHP7.4/8.3 each1,962 tests/8,481 assertions, no failures/skips;
+admin16/16/0 skipped each; all other configured gates pass. GitHub registered the
+manual workflow as active399975740, resolving the missing local YAML-parser gate.
 
-Implementation-plan progress: deployment-matched environment preflight prepared;
-real socket/session/schema/escaping/CAS/failure and independent all-server release
-proof remain separately gated. If the finite environment qualifies, the next
-approval is one bounded owned Linux Unix-Socket Native Qualification/Cleanup
-Proof with exact target/storage/process scope and fresh prerequisites. Any
-observed build/profile mismatch requires its exact compatibility decision first;
-do not change acceptance or improvise another environment on preflight authority.
+One approved [preflight40781039665](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40781039665)
+ran at that exact head, workflow_dispatch, preflight job123142497368. All steps
+succeeded in19s, 2026-10-28 22:34:47–22:35:06 UTC. Observed PHP/mysqlnd8.5.12,
+64-bit NTS/Linux x86_64, official core7.1.4/all11 pins match, initial report3,
+zero native connections/SQL/WordPress execution. The owned directory was mode700,
+UID1001,69-byte future socket path, no socket created. Version-only container
+UID/GID1001/1001. Exit and always cleanup each report zero owned containers,
+private directory and core checkout. No database was initialized or started;
+no real socket access, database principal, session/schema or application proof.
+
+Observed image-bound binary identities (not reproducible-build attestations):
+
+| Component | SHA256 |
+|---|---|
+| PHP CLI | `5c4bbcbc030ab0e6dd0962c45967ccad8df6415d936999c2762ff1a92fcc38c6` |
+| mysqlnd.so | `61b7f9f615ae0e292a0ffaf9c8436b4f57b386287254369e69a0cdca39314610` |
+| mysqli.so | `3c759ffdb594a82404a5168b9e893dac9397fe668ba5d6963bfb295ea5d9ac03` |
+| mariadbd | `93b8d1f5ae7141c6b53067d9fc8222683957e26ea87205dd372b1016777a2973` |
+| mariadb client | `daa1a4832ac8a5c305d4ba272548088359a0f9ead096721beeaf5a6f5f83a661` |
+
+The full server banner is `mariadbd Ver 10.11.18-MariaDB-ubu2204 for
+debian-linux-gnu on x86_64 (mariadb.org binary distribution)`. Client reports
+`Ver 15.1 Distrib 10.11.18-MariaDB, for debian-linux-gnu (x86_64) using EditLine
+wrapper`. The server version-only process also emitted `[Warning] failed to
+retrieve the MAC address`. It is retained, not suppressed or counted as a
+negative control. Its relationship to the network-disabled profile is an
+inference, not an established harmless-diagnostic policy. Git init branch-name
+hints are unrelated checkout output. No rerun was made.
+
+Availability preflight succeeded; native compatibility is **not established**.
+The server binary's build suffix differs from the current exact candidate row
+`10.11.18-MariaDB`; a banner is not mysqli_get_server_info(). The actual wire
+version was deliberately not queried, so neither its exact value nor a runtime
+admission failure/success is claimed. No wildcard/suffix allowance, server mode,
+network setting or guard is changed to make this candidate pass.
+
+The evidence-only closeout changes records, not the preflight image or runtime;
+its final ordinary exact-head CI/status is verified separately at handoff.
+
+Implementation-plan progress: finite environment/tool/source availability gate
+advanced with actual hosted evidence; build/wire/socket compatibility remains a
+gated decision, not maintenance work. Recommended next gated slice:
+**Off-Production Linux Owned Unix-Socket Server-Identity and Cleanup Audit**.
+Approve one exact pinned ephemeral job with an empty owned disposable database
+and bounded connection/identity reads, no WordPress/application fixtures or
+adapter mutation, fresh prerequisites and exact cleanup. This necessarily adds
+owned database initialization/server/socket/connection authority, absent from
+this preflight. Establish the real wire version and diagnostic/socket posture
+before choosing any exact admission row or attempting the larger native proof.
+Keep existing guards, report-mode rules and production wiring unchanged.
