@@ -178,3 +178,11 @@ This needs new explicit owned-row write/testing/cleanup authority; the present
 empty-clone/read-only candidate approval does not authorize it. Keep application
 state, public factories and production/form wiring untouched. Broader compatibility
 and final production integration/release reviews remain later separate gates.
+
+## Forward record — fixed adapter owned qualification — 2026-10-28
+
+The separately approved [actual fixed adapter owned proof](SOURCE_POLICY_FIXED_ADAPTER_NATIVE_OWNED_PROOF.md)
+now records real writes/conflicts and strict-profile failure behavior after fresh
+ADBC2 prerequisites. This historical proof, its source image and ADBC1/ADBC2
+contracts remain unchanged. Production initialization/form wiring and remaining
+support/qualification decisions still require their own gates.

@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed native adapter save/conflict — owned proof — 2026-10-28
+
+Approved/confirmed Plugin Tester local-only [actual dormant adapter proof](SOURCE_POLICY_FIXED_ADAPTER_NATIVE_OWNED_PROOF.md),
+clean/synced baselinee490f3d54e0dc6cd095833444a373e5123c7d367. Fresh pinned/helper81,
+source26+20/stdio46/10+12/3/error25/6 and ADBC2 release854ms prerequisites pass.
+One adapter body211 checks/8 groups/2103ms: actual saved/noop/stale/CAS conflict,
+non-empty hooks/private cache, reentry and strict-profile failure/late-admission
+uncertainty. No reporting change, artificial facts/handles or fake success.
+Exact clone/process cleanup; all77 application checksums unchanged, zero retained
+fixtures/other sessions/transactions. ADBC1/ADBC2/runtime/wiring unchanged. New
+isolated22/25, combined306/1093, two assertion-killed/hash-restored catalog controls.
+Local full1874/8159 with two existing Sodium skips; Node16/16/all local gates pass.
+Publication in owning record; no package/release/deploy or safe-local batch credit.
+Implementation-plan progress: real fixed-adapter writes/conflicts now have owned
+current-profile evidence; actual application wiring/lost-update repair remains open.
+Next gated slice: repository-only Source-Policy Production-Connection Readiness
+and Remaining Qualification Design, design-only; no storage/native/wiring changes.
+
 ## ADBC2 connected owner and live/post release — owned proof — 2026-10-28
 
 Approved/confirmed Plugin Tester local-only [single connected proof](SOURCE_POLICY_CONNECTED_CLEANUP_NATIVE_OWNED_PROOF.md),
