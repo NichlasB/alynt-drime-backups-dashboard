@@ -13,7 +13,10 @@ qualification. No toolkit/historical release-row refresh. Initial46a7303 CI40682
 failed PHP7.4 worker JSON reporting; PHP8.3 passed1401/6261. Separately approved
 test-only ASCII reporting repair keeps -n/native refusal and runtime bytes:
 targeted157/571, related586/2315, full local1420/6273 with two baseline Sodium
-skips, Node16/16/all gates/audits pass. Recovery exact-head CI pending.
+skips, Node16/16/all gates/audits pass. Recoverya75cb26649a7d2c4ec0d1fba4bb1b3d31f7ff4dc
+passed [exact-head CI40685989998](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40685989998):
+PHP7.4/8.3 each1420/6280, no failures/skips; Node16/16/all gates/zero advisories.
+This is reporting compatibility and synthetic acceptance, not real native proof.
 Native/source/runtime matrix and actual lost-update repair remain open. Next
 gated slice: Plugin Tester local-only Bounded Initial Native Construction and
 Pre-Qualification Bootstrap Owned Qualification/Cleanup Proof, audit first,

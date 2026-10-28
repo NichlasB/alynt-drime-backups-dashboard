@@ -231,8 +231,13 @@ listed above; pure protocol control is not a WordPress or native experiment.
 Scoped repair diff review confirms no bypass, assertion weakening, skip or
 backend fallback; this does not refresh historical whole-plugin reviews.
 
-Exact-head recovery publication verification remains pending until its pushed
-run completes; no CI success is inferred from the local results.
+Recovery `a75cb26649a7d2c4ec0d1fba4bb1b3d31f7ff4dc` passed
+[exact-head CI40685989998](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40685989998).
+Actual PHP7.4/8.3 logs each report1420 tests/6280 assertions, no failures/skips;
+Node16/16 and all configured lint/structure/build/manifest/audit gates pass,
+zero advisories. This closes the reporting compatibility failure, not native
+bootstrap, genuine core/source/runtime matrix or production acceptance. Hosted
+workers still use -n with JSON functions disabled and synthetic APIs only.
 
 ## Implementation-plan progress and next gated slice
 
