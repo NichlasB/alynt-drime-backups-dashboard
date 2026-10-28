@@ -413,3 +413,18 @@ Recommended next gated slice: **Repository-only Connected mysqlnd Counter Semant
 and Release-Evidence Design**. Establish what independently justifies connected
 release and how counter anomalies remain diagnostic without becoming admission;
 design only, no native experiments, acceptance change or production wiring.
+
+## Connected-counter design follow-through — 2026-10-28
+
+The approved repository-only [counter/release design](SOURCE_POLICY_CONNECTED_COUNTER_RELEASE_DESIGN.md)
+starts from clean/synced260b90c94deb47640b1df70491ba9464a722321f and its successful
+CI40739552966. It records immutable upstream comparison hashes and separates
+allocation persistence/pooling, exact owned release, live/post server reconciliation
+and owner qualification. Upstream close/refcount paths are consistent with the
+counter observations; this is not a native trace or installed-binary defect proof.
+No historical refusal becomes accepted, and the rejected diagnostic had no accepted
+live-child hold/ACK. Runtime, all acceptance predicates, tests and harness source
+remain unchanged; no new native/site/storage experiment. Proposed next gate is one
+bounded raw connected counter/single-close reference with independent live/post
+observations and owned cleanup, not a full owner-cohort retry or acceptance change.
+Design preservation QA/publication are recorded in that owning document.

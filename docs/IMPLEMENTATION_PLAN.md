@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Connected counter/release design — repository-only — 2026-10-28
+
+Approved [Connected mysqlnd Counter Semantics and Release-Evidence Design](SOURCE_POLICY_CONNECTED_COUNTER_RELEASE_DESIGN.md),
+baseline260b90c94deb47640b1df70491ba9464a722321f, clean/synced/exact-head CI green.
+Pinned upstream PHP tag/commit inspection distinguishes mysqlnd allocation
+persistence from mysqli pooling and identifies internal close/reference accounting
+consistent with the wrap; installed-binary causation remains unproved. Separate
+counter DATA, exact owned release, independent live/post reconciliation and owner
+qualification. Existing ADBC1/connected anomaly refusals/runtime/production wiring
+remain unchanged; no native/site/storage/fixture work or additional task credit.
+Implementation-plan progress: evidence-policy design advances, not connected/
+positive qualification or the source-policy lost-update repair. Next gated slice:
+Plugin Tester local-only Bounded Raw Connected Counter/Single-Close Diagnostic and
+Owned Cleanup Proof, one raw attempt after fresh prerequisites/exact confirmation,
+no application writes, existing acceptance unchanged. Not a full cohort retry.
+
 ## Bounded missing-table diagnostic — counter mismatch identified — 2026-10-28
 
 Approved same-target [one-case diagnostic and cleanup](SOURCE_POLICY_CLEANUP_NATIVE_OWNED_AUDIT.md#bounded-missing-table-terminal-evidence-diagnostic--2026-10-28),
