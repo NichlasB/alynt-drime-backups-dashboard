@@ -164,8 +164,19 @@ SourcePolicyFailedConnectObservation PHPUnit; full --verbose (all with
 validate --strict/audit; npm audit --audit-level=moderate; named source/stdio/core
 prerequisites, one fresh ADBC2 controller and one owned adapter controller, bundled
 mysql baseline/preview/owned DDL/reconciliation; scoped links/diff/source identity.
-Publication/exact-head CI evidence pending before handoff. CI is isolated and
-does not execute the installed-core/native/Windows manual proof.
+Implementation `5b0b81e8d4e479c3c078cdb62d8f65a0af027eee` passed
+[exact-head CI40764716898](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40764716898).
+Actual hosted PHP7.4/8.3 each1874 tests/8166 assertions, no failures/skips;
+Node16/16 each/all configured gates and zero-advisory audits pass. Both check-run
+heads match the pushed commit. The seven-assertion local difference is the existing
+two unavailable-Sodium tests, not a new skip or changed threshold. This docs-only
+closeout preserves all tested/proof-image bytes and receives separate exact-head
+CI before handoff. CI is isolated and does not execute the installed-core/native/
+Windows manual proof; no native/manifest/SQL/fixture rerun for publication.
+Scoped links/syntax/diff and unchanged production/legacy-contract checks pass.
+Uploader/toolkit remain clean at unchanged
+3dfcb15b5cab8191df7d984251986ead140ded52/
+c067eb61883035a1764d830bccffc1e542d3e1dc.
 
 Implementation-plan progress: the actual fixed non-reconnecting adapter now has
 current-profile save/conflict/cleanup evidence, not just an in-memory writer or

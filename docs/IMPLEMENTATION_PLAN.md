@@ -12,7 +12,10 @@ Exact clone/process cleanup; all77 application checksums unchanged, zero retaine
 fixtures/other sessions/transactions. ADBC1/ADBC2/runtime/wiring unchanged. New
 isolated22/25, combined306/1093, two assertion-killed/hash-restored catalog controls.
 Local full1874/8159 with two existing Sodium skips; Node16/16/all local gates pass.
-Publication in owning record; no package/release/deploy or safe-local batch credit.
+Implementation5b0b81e8d4e479c3c078cdb62d8f65a0af027eee passed
+[exact-head CI40764716898](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40764716898):
+PHP7.4/8.3 each1874/8166, no failures/skips; Node16/16/all gates pass.
+No package/release/deploy or safe-local batch credit.
 Implementation-plan progress: real fixed-adapter writes/conflicts now have owned
 current-profile evidence; actual application wiring/lost-update repair remains open.
 Next gated slice: repository-only Source-Policy Production-Connection Readiness
