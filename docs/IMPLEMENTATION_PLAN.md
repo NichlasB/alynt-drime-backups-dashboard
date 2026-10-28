@@ -9,7 +9,11 @@ pipeline, owned/ambient identity/metadata, once-only cleanup, sequential and
 concurrent ownership; four assertion-killed/SHA256-restored controls. No core
 substitutes, fabricated session/schema facts, authentication, native handles,
 SQL/storage/bootstrap/wiring. Gate tests3/12; full local1263/5702 with two baseline
-Sodium skips; Node16/16/all local gates/audits pass. Runtime/historical audit and
+Sodium skips; Node16/16/all local gates/audits pass. Proof
+fe7ae56d58994f1edcbc290e249b6f8851c8cf8d passed
+[exact-head CI40672122994](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40672122994):
+actual PHP7.4/8.3 each1263/5709, no failures/skips; Node16/16/all gates, zero
+advisories. CI does not run the installed-core manual proof. Runtime/historical audit and
 uploader/toolkit unchanged. Core6.0/native matrix and application lost-update
 repair remain open; no whole-release or prior8/8 task-count inflation.
 Recommended next gated slice: Plugin Tester local-only Fixed Non-Reconnecting

@@ -132,6 +132,13 @@ new security defect; four actual guard-removal controls establish proof
 sensitivity. No whole-plugin07/07A/13/FULL or toolkit readiness row refreshed;
 no Database Review, physical atomicity or release-readiness credit.
 
+Publication: proof `fe7ae56d58994f1edcbc290e249b6f8851c8cf8d` passed
+[exact-head CI40672122994](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40672122994).
+Actual PHP7.4/8.3 job logs each1263 tests/5709 assertions, no failures/skips;
+Node16/16, all configured gates pass, Composer/npm audits zero advisories.
+This is hosted isolated/refusal-gate evidence only; it does not rerun the
+installed-core manual proof or qualify minimum-core/native behavior.
+
 ## Implementation-plan progress and exact next gate
 
 The installed core-library admission/marker/never-opened cleanup layer is now

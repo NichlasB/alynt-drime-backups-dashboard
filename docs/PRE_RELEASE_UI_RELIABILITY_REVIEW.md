@@ -7,7 +7,11 @@ actual pinned installed7.1.3 core libraries215 checks/12 groups, four
 assertion-killed/SHA256-restored controls. Context admission and numeric/marker
 pipeline/owned cleanup are genuine, not native SQL/escaping/session/schema
 qualification. New accidental-execution gate tests3/12; full local1263/5702 with
-two known Sodium skips; Node16/16/all local gates/audits pass. No runtime/UI/
+two known Sodium skips; Node16/16/all local gates/audits pass. Proof
+fe7ae56d58994f1edcbc290e249b6f8851c8cf8d passed
+[exact-head CI40672122994](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40672122994):
+actual PHP7.4/8.3 each1263/5709, no failures/skips; Node16/16/all gates, zero
+advisories; hosted suites do not rerun installed-core proof. No runtime/UI/
 bootstrap/authentication/native handle/storage/wiring change. Minimum-core/
 native matrix, real lost-update repair and whole07/07A/13/FULL remain open;
 toolkit/historical readiness unchanged. Next gated slice: Plugin Tester
