@@ -1,5 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Later [deployment-matched qualification design](SOURCE_POLICY_DEPLOYMENT_MATCHED_QUALIFICATION_DESIGN.md)
+records the separately approved static live audit and selects bounded off-production
+Linux/socket/core-derived-charset qualification. No site is re-read or production
+grant enabled by the design; original readiness contracts below stay historical.
+
 Later [owned ambient/report-OFF records](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md)
 preserve the first blocked bootstrap, then the separately approved canonical-key
 repair and successful367/9 current-profile proof. This closes that private context

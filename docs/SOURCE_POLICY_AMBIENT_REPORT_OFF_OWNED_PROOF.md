@@ -1,5 +1,10 @@
 # Source-Policy Core-Owned Ambient/Report-OFF Qualification — Owned Attempt Records
 
+Later [deployment-matched qualification design](SOURCE_POLICY_DEPLOYMENT_MATCHED_QUALIFICATION_DESIGN.md)
+records the subsequent approved static production audit and remaining Linux/socket/
+charset/server gates. It preserves every native count/image below and does not
+promote this private Windows proof into production or minimum-profile readiness.
+
 Current outcome: the separately approved canonical-key repair and fresh owned
 attempt below passed the current private profile. The first blocked attempt is
 preserved as historical evidence, not rewritten into a success. Production

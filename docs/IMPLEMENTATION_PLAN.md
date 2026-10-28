@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Deployment-matched qualification — repository-only design — 2026-10-28
+
+Approved [Linux/socket/charset qualification design](SOURCE_POLICY_DEPLOYMENT_MATCHED_QUALIFICATION_DESIGN.md),
+clean/synced baseline8daa4e7. Records the prior approved static production audit,
+not a new site read: configured FPM8.5.12/Linux, WP7.1.4 with11 matched library
+hashes, explicit Unix DB socket, configured utf8/empty collate and installed
+MariaDB10.11.18 binary; actual DB/schema/hook state remains unknown. Selects
+private tagged transport and configured-vs-negotiated charset contracts, bounded
+off-production native gates and unchanged minimum/core/schema/ownership safety.
+Only design/plan/forward records; no runtime/site/native/storage/wiring changes.
+Implementation-plan progress: concrete deployment compatibility lane defined,
+not an enabled production connection or completed application race repair.
+Local QA/publication in owning record. Next gated slice: repository-only
+Source-Policy Fixed Transport and Core-Derived Charset Safety Foundation,
+isolated API/IO tests only; actual auth/storage/native execution/wiring disabled.
+
 ## Canonical ambient observer key — approved repair — 2026-10-28
 
 Approved [harness-only correction and fresh attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md),
