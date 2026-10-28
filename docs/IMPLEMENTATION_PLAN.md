@@ -11,10 +11,14 @@ workers only, no actual authentication/storage/native/site/wiring operation.
 New138/552, related randomized567/2296; full local1401/6254 with two baseline
 Sodium skips; Node16/16/all local gates/zero-advisory audits pass. Eight
 assertion-killed/SHA256-restored controls and canonical scoped Light/structure/
-Security reviews recorded. Exact-head publication verification pending; local
+Security reviews recorded. Initial implementation46a73031eb7cd08dccbc89b1063e7c01cedb55a5
+failed CI40682396460 on PHP7.4's JSON-free worker reporting; PHP8.3 passed1401/6261.
+Separately approved reporting-only repair preserves -n and all runtime bytes;
+targeted157/571, related586/2315 and full local1420/6273 (two baseline Sodium
+skips), Node16/16/all gates/audits pass. Recovery exact-head CI pending; local
 QA is not native/source/provider qualification. Uploader/toolkit and historical
 whole07/07A/13/FULL/task count unchanged; actual lost-update repair stays open.
-Next gated slice: Plugin Tester local-only Bounded Initial Native Construction
+After successful recovery, next gated slice: Plugin Tester local-only Bounded Initial Native Construction
 and Pre-Qualification Bootstrap Owned Qualification/Cleanup Proof, audit first,
 fresh target/owned-fixture approval, actual private path not injected active
 state, matrix prerequisites explicit, factories/production wiring disabled.

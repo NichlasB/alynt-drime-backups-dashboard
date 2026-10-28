@@ -188,8 +188,51 @@ No remaining scoped security defect. Source/provider/native acceptance remains
 an explicit gate, not a suppressed finding. No whole-plugin release readiness
 or historical toolkit row is marked complete by these scoped workflows.
 
-Publication verification is pending until the pushed exact-head run completes;
-no CI success is inferred from local QA.
+Initial implementation `46a73031eb7cd08dccbc89b1063e7c01cedb55a5` failed
+[exact-head CI40682396460](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40682396460):
+PHP7.4 reported138 failures, all the worker's undefined json_encode(), after
+running the scenarios. PHP8.3 passed1401/6261 with no failures/skips, Node16/16
+and all gates/audits. This was a test-reporting compatibility defect, not a
+native result or successful minimum-version acceptance. Work stopped at that
+failed-verification gate before the separately approved repair below.
+
+## Approved JSON-free worker reporting repair — 2026-10-28
+
+Repository-only R1 test/evidence repair; clean/synced restore point
+`46a73031eb7cd08dccbc89b1063e7c01cedb55a5`. Only the PHPUnit wrapper, worker's
+final report and owning evidence records change. Runtime/includes, factories,
+production loader, manual proofs, CI/tooling/dependencies and all four guard
+hashes above remain byte-identical. No JSON extension is loaded or installed;
+`-n` isolation and mysqli/pdo_mysql refusal remain intact. No site/native run.
+
+The worker now emits exactly one ASCII `checks:<positive integer>\n` record.
+The wrapper requires exit0, empty stderr and the complete anchored record with
+one to nine digits, no zero/leading zero/noise/multiple records. No child check
+is skipped or counted as a parent assertion. Every scenario subprocess explicitly
+disables json_encode/json_decode, preserving regression coverage on newer PHP
+versions where JSON is compiled in rather than optional under `-n`.
+
+Red reproduction with JSON disabled:1 test/2 assertions, undefined json_encode().
+After repair,157 tests/571 assertions pass: all138 existing scenarios plus19
+pure report-shape cases. A temporary always-accept parser control produced16
+assertion failures from19 cases; restored SHA256
+`3FFD25509A1E1961D5808F5388939241C1C4637B770726BEA209A84DBD72AE55`, then clean
+protocol19/19 and full suites passed. The eight runtime controls remain the
+historical evidence above, not rerun or inflated by this test-only task.
+
+Current local validation: full1420/6273, only the same two baseline Sodium
+skips; related randomized586/2315, seed20261028, no failures/skips. Node16/16,
+PHPCS191, unchanged structure counts, build, strict Composer manifest and
+zero-advisory Composer/npm audits pass. Both changed PHP syntax checks, diff
+hygiene and explicit runtime/CI-input identity pass. Successful direct workers
+with JSON disabled emit checks:178 and checks:179 (positive/positive-observer).
+Commands are the corresponding focused/full/randomized suites and local gates
+listed above; pure protocol control is not a WordPress or native experiment.
+Scoped repair diff review confirms no bypass, assertion weakening, skip or
+backend fallback; this does not refresh historical whole-plugin reviews.
+
+Exact-head recovery publication verification remains pending until its pushed
+run completes; no CI success is inferred from the local results.
 
 ## Implementation-plan progress and next gated slice
 

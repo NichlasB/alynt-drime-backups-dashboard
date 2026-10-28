@@ -36,7 +36,7 @@ try {
 	$GLOBALS['boot_prior_calls']=0; $GLOBALS['boot_prior_messages']=array(); $prior=static function($severity,$message){++$GLOBALS['boot_prior_calls'];$GLOBALS['boot_prior_messages'][]=array($severity,$message);return true;}; set_error_handler($prior);
 	$result=boot_invoke($connection,'bootstrap'); boot_verify($argv[1],$connection,$result);
 	trigger_error('synthetic-after-bootstrap',E_USER_WARNING); PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_prior_calls']); restore_error_handler();
-	echo json_encode( array( 'checks' => PHPUnit\Framework\Assert::getCount() ) ), "\n";
+	echo 'checks:', PHPUnit\Framework\Assert::getCount(), "\n";
 } catch ( Throwable $error ) {
 	fwrite( STDERR, 'Synthetic bootstrap '.$argv[1].' '.get_class($error).' '.$error->getMessage()."\n" );
 	exit( 1 );

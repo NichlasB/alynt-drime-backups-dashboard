@@ -9,7 +9,11 @@ and negative synthetic API/IO workers only; new138/552, related567/2296, full
 local1401/6254 with only two baseline Sodium skips; Node16/16/all gates/audits
 pass. Eight assertion-killed/restored controls; scoped canonical Light,
 structure and final Security review, not whole07/07A/13/FULL completion or UI
-qualification. No toolkit/historical release-row refresh. Exact-head CI pending.
+qualification. No toolkit/historical release-row refresh. Initial46a7303 CI40682396460
+failed PHP7.4 worker JSON reporting; PHP8.3 passed1401/6261. Separately approved
+test-only ASCII reporting repair keeps -n/native refusal and runtime bytes:
+targeted157/571, related586/2315, full local1420/6273 with two baseline Sodium
+skips, Node16/16/all gates/audits pass. Recovery exact-head CI pending.
 Native/source/runtime matrix and actual lost-update repair remain open. Next
 gated slice: Plugin Tester local-only Bounded Initial Native Construction and
 Pre-Qualification Bootstrap Owned Qualification/Cleanup Proof, audit first,
