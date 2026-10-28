@@ -183,7 +183,12 @@ have permanent isolated regressions and assertion-killed controls. No remaining
 scoped security finding; genuine code/session qualification is explicitly absent.
 Whole07/07A/13/FULL and historical toolkit rows remain unchanged/incomplete.
 
-Publication: exact-head CI pending; local/isolated success is not native eligibility.
+Publication: implementation `9cbdabb9d702d429563889cdb196e3bca1a28edc` passed
+[exact-head CI40668851169](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40668851169).
+Actual PHP7.4/8.3 job logs each1260 tests/5697 assertions, no failures/skips;
+Node16/16, all configured gates pass, Composer/npm audits zero advisories.
+Hosted tests execute the isolated foundation, not genuine core/native/source
+qualification, application authentication, storage or the manual proof scripts.
 
 ## Implementation-plan progress and exact next gate
 

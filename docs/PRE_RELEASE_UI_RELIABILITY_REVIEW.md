@@ -7,7 +7,11 @@ implements the exact-receiver preparation/cleanup contract, not real UI/writer
 integration. New48/327, related426/1732, full local1260/5690 with only two known
 Sodium skips; Node16/16/all quality/audit gates pass. Five assertion-killed and
 SHA256-restored controls; scoped Light/structure/Security records, not genuine
-authentication/native/cache/UI qualification. Exact-head CI pending. Actual
+authentication/native/cache/UI qualification. Implementation
+9cbdabb9d702d429563889cdb196e3bca1a28edc passed
+[exact-head CI40668851169](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40668851169):
+actual PHP7.4/8.3 each1260/5697, no failures/skips; Node16/16/all gates, zero
+advisories. These suites do not run genuine-core/native/site proofs. Actual
 facade/form/handler and manual proofs unchanged; all factories/provider and
 native execution/wiring remain closed. Native proof and application lost-update
 repair stay open; whole07/07A/13/FULL/toolkit rows not refreshed.

@@ -11,7 +11,11 @@ and production wiring remain absent/disabled. Source bindings and RAM handles
 are not genuine qualification. New48/327; related randomized426/1732; full local
 1260/5690 with two baseline Sodium skips; Node16/16/all gates/audits pass. Five
 assertion-killed/SHA256-restored controls and source-scoped reviews recorded.
-Exact-head CI pending. Actual lost-update repair/native proof remain open;
+Implementation9cbdabb9d702d429563889cdb196e3bca1a28edc passed
+[exact-head CI40668851169](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40668851169):
+actual PHP7.4/8.3 each1260/5697, no failures/skips; Node16/16/all gates, zero
+advisories. CI remains isolated, not genuine core/native qualification.
+Actual lost-update repair/native proof remain open;
 whole07/07A/13/FULL and toolkit unchanged, no prior8/8 count inflation.
 Recommended next gated slice: Plugin Tester local-only Genuine-Core Query
 Context and Owned Callback Cleanup Zero-SQL Qualification Proof, fresh exact
