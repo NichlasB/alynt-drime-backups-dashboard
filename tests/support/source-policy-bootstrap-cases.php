@@ -62,6 +62,7 @@ function boot_verify($case,$connection,$result){
 	if(in_array($case,array('reentry','object-reentry'),true))PHPUnit\Framework\Assert::assertTrue($GLOBALS['boot_reentered']);
 	if('out-of-order'===$case)PHPUnit\Framework\Assert::assertTrue($GLOBALS['boot_nested_refused']);
 	if($success){
+		PHPUnit\Framework\Assert::assertIsArray($connection->profile(),'Active qualification remains visible until terminal close.');
 		PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['object']); PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['allocate']); PHPUnit\Framework\Assert::assertSame(3,$GLOBALS['boot_counts']['options']); PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['connect']); PHPUnit\Framework\Assert::assertSame(7,$GLOBALS['boot_counts']['commands']);
 		foreach(array('init','charset','mode-helper') as $step)PHPUnit\Framework\Assert::assertSame(1,count(array_filter($GLOBALS['boot_events'],static function($event)use($step){return $event===$step;})));
 		PHPUnit\Framework\Assert::assertIsArray($connection->admit_profile());
@@ -74,6 +75,8 @@ function boot_verify($case,$connection,$result){
 	$clean=!in_array($case,array('default','driver-selection','bad-host','bad-port','bad-table','bad-database','bad-user','bad-password','bad-core','bad-charset','bad-collate','bad-core-source','bad-driver-source','bad-cache-source','external-cache','multisite','setup-mode','legacy','dropin','all','incompatible_sql_modes','unknown-observer','observer-source','observer-autoload','bad-client','allocate-false','allocate-throw','allocate-alias','late-handle','close-false','close-throw','close-warning','remove-false','remove-throw','close-and-remove'),true);
 	// Preflight failures may be clean never-opened; do not force a fake unknown result.
 	$closed=$connection->close(); if($success||$GLOBALS['boot_counts']['allocate']>0)PHPUnit\Framework\Assert::assertSame($clean,$closed,'Truthful once-only native/callback cleanup.');
+	PHPUnit\Framework\Assert::assertNull($connection->profile(),'Terminal qualification visibility is revoked even when cleanup fails.');
+	PHPUnit\Framework\Assert::assertNull(boot_get($connection,'qualification'),'Terminal facts are cleared, not merely hidden by the getter.');
 	PHPUnit\Framework\Assert::assertSame($closed,$connection->close());
 	PHPUnit\Framework\Assert::assertLessThanOrEqual(1,$GLOBALS['boot_counts']['close']);
 	if(isset($GLOBALS['boot_handle'])&&!in_array($case,array('allocate-alias'),true))PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['close'],'Every owned partial/active allocation gets one release attempt.');

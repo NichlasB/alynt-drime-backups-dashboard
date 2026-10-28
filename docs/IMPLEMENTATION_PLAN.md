@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Terminal revocation and cleanup evidence foundation — 2026-10-28
+
+Separately approved one-line terminal qualification revocation unblocks the
+[resumed dormant foundation](SOURCE_POLICY_CLEANUP_EVIDENCE_FOUNDATION.md), baseline
+`d156b104a3797b67a54d9f58814119ccddd6573a`. Close revokes DATA before cleanup;
+active facts, once-only independent release and ambient/dispatch guards remain.
+Strict case-specific verifier, virtual cohort and extension-free observation seam
+have107 new isolated tests/331 assertions and eight assertion-killed/SHA256-restored
+semantic controls. No unavailable-only positive or failed-getter shortcut. Final
+local1675/7397 (two existing Sodium skips), Node16/16 and all configured local gates
+pass; exact-head publication closeout pending. No native qualification is claimed.
+Current proof/acceptance, root and production wiring are unchanged; no site/SQL,
+fixture/native operation, package/release/deploy or toolkit/uploader edit.
+Implementation-plan progress: advances the cleanup evidence contract, not physical
+qualification or lost-update repair. Next gated slice: Plugin Tester local-only
+Failed-Connect Per-Case Controller/Live-Child Reconciliation Integration and Owned
+Cleanup Proof, audit-first with fresh prerequisites and exact target/scope approval.
+
 ## Failed-connect per-case cleanup evidence design — 2026-10-28
 
 Approved repository-only [contract design](SOURCE_POLICY_FAILED_CONNECT_CLEANUP_EVIDENCE_DESIGN.md),

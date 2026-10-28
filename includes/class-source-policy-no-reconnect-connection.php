@@ -152,6 +152,7 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 			return $this->closed;
 		}
 		$this->close_attempted = true;
+		$this->qualification   = null; // Revoke terminal DATA before any fallible or reentrant cleanup.
 		$native                = false;
 		try {
 			$native = ( $GLOBALS['wpdb'] ?? null ) === $this ? false : ( 'never_opened' === $this->native_state && null === $this->dbh && ! $this->ready );

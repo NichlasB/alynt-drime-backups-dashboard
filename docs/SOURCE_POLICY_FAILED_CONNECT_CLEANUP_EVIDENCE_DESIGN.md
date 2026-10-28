@@ -237,3 +237,8 @@ authentication/storage/native execution and current manual qualification until
 the separately approved native proof. Add dormant/test-only harness contracts;
 do not switch the existing proof mode to new acceptance or remove its assertions
 under that repository-only foundation. No native action is authorized now.
+
+Subsequent source-scoped implementation and the separately approved terminal-DATA
+repair are recorded in the [foundation closeout](SOURCE_POLICY_CLEANUP_EVIDENCE_FOUNDATION.md).
+That forward record does not refresh this design's historical native evidence or
+authorize its next real process/SQL integration proof.
