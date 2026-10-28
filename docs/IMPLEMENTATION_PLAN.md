@@ -13,7 +13,10 @@ grant. Exact empty clone/process cleanup passes; all77 application checksums
 unchanged, zero retained fixtures/other sessions/transactions. New isolated18/101,
 combined284/1068, three assertion-killed/hash-restored controls. Local full1852/8134
 with only two existing Sodium skips; Node16/16/all configured local gates pass.
-Publication in owning record; no native rerun, wiring, release or task-count credit.
+Implementation51c348e27a223871ecf7ea44c38f68312df6bcef passed
+[exact-head CI40756726252](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40756726252):
+PHP7.4/8.3 each1852/8141, no failures/skips; Node16/16/all gates pass.
+No native rerun, wiring, release or task-count credit.
 Implementation-plan progress: physical connected/positive release advances, not
 the application lost-update repair or full compatibility/qualification matrix.
 Next gated slice: Plugin Tester local-only Fixed Non-Reconnecting Native Adapter

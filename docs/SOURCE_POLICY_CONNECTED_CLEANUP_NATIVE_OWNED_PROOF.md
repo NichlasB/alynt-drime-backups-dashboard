@@ -150,7 +150,18 @@ ADBC2 continues to say `native_qualification=not-established`; ADBC1 stays refus
 for its divergent vectors. Counter divergence requires review, not a pooling or
 native safety exception. The actual application lost-update repair remains open.
 
-Publication/exact-head CI evidence: pending before handoff.
+Implementation `51c348e27a223871ecf7ea44c38f68312df6bcef` passed
+[exact-head CI40756726252](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40756726252).
+Actual hosted PHP7.4/8.3 each1852 tests/8141 assertions, no failures/skips;
+Node16/16 each/all configured gates and zero-advisory audits pass. Both check-run
+SHAs match the pushed implementation. Local's seven fewer assertions are the
+existing two missing-Sodium skips, not a new skip/threshold. This documentation-
+only closeout preserves every tested/proof-image byte and receives separate
+exact-head CI before handoff; no native/manifest/SQL/fixture operation is repeated.
+Uploader/toolkit remain clean at unchanged
+3dfcb15b5cab8191df7d984251986ead140ded52/
+c067eb61883035a1764d830bccffc1e542d3e1dc. Scoped local links/diff/syntax and
+pre-existing runtime/script/test/configuration baseline-preservation checks pass.
 
 ## Implementation-plan progress and next gate
 
