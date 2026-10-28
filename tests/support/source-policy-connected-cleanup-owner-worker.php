@@ -22,8 +22,9 @@ try {
  $GLOBALS['boot_events']=array();$GLOBALS['boot_after']=array();$GLOBALS['boot_rewrite']=array();$GLOBALS['boot_fault']=$fault==='unavailable'?'connect-false':($fault==='close'?'close-false':($case==='missing-table'?'table-bad':''));
  $GLOBALS['adbc2_fault']=$fault;$GLOBALS['adbc2_post_freed']=0;$GLOBALS['boot_store']=new Alynt_Drime_Backups_Dashboard_Test_Policy_Store(array(),'no');$GLOBALS['boot_store']->row=array('option_value'=>'unused','autoload'=>'no');
  $class=new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection');
- $frame=array('core'=>'7.1.3','database'=>'isolated','table'=>'wp_options','host'=>'127.0.0.1','port'=>10004,'user'=>'owned','password'=>'owned-private-password','charset'=>DB_CHARSET,'collate'=>DB_COLLATE);
+ $frame=array('core'=>'7.1.3','database'=>'isolated','table'=>'wp_options','host'=>'127.0.0.1','port'=>10004,'user'=>'owned','password'=>'owned-private-password','charset'=>DB_CHARSET,'collate'=>DB_COLLATE,'transport'=>'tcp_loopback','socket'=>null,'db_host'=>'127.0.0.1:10004');
  $binding=array('core_file'=>__DIR__.'/source-policy-connected-cleanup-wpdb.php','driver_file'=>__DIR__.'/source-policy-connected-cleanup-driver.php','cache_file'=>__DIR__.'/source-policy-isolated-wordpress.php','cache_api_file'=>__DIR__.'/source-policy-isolated-wordpress.php','observers'=>array(),'observer_files'=>array());
+ $binding['parser_api_file']=__DIR__.'/wordpress-shims-sanitization.php';
  $wire=adbc2_owner($class,$frame,$binding,array(__FILE__,'isolated','adbb_0123456789ab_',str_repeat('a',32),str_repeat('b',64),$case),str_repeat('b',64));
  PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['allocate']);PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['close']);PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_counts']['unexpected_connect']);
  PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_store']->mutations);PHPUnit\Framework\Assert::assertFalse(has_filter('query'));PHPUnit\Framework\Assert::assertFalse(has_filter('all'));

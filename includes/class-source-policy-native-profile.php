@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 require_once __DIR__ . '/class-source-policy-error.php';
+require_once __DIR__ . '/class-source-policy-transport-profile.php';
 
 /** No method here discovers a site, opens a connection or qualifies a real profile. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
@@ -33,7 +34,8 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 		}
 		if ( ! is_string( $table ) || strlen( $table ) > 64 || ! preg_match( '/\A[A-Za-z0-9_]+options\z/', $table )
 			|| $facts['table'] !== $table || ! is_string( $facts['database'] ) || ! preg_match( '/\A[A-Za-z0-9_-]{1,64}\z/', $facts['database'] )
-			|| ! in_array( $facts['core'], array( '6.0', '7.1.3' ), true ) || '10.6.23-MariaDB' !== $facts['server']
+			|| false === Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'] )
+			|| Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'] ) !== $facts['server']
 			|| 'options4-unique-name-InnoDB' !== $facts['schema'] || true !== $facts['autocommit'] || true !== $facts['single_site']
 			|| false !== $facts['dropins'] || 'core-process' !== $facts['cache'] || true !== $facts['bounded_session'] ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );

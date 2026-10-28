@@ -3,6 +3,7 @@
 if ( defined('ADB_POLICY_ISOLATED') && !extension_loaded('mysqli') ) {
 define('MYSQLI_OPT_CONNECT_TIMEOUT',0); define('MYSQLI_OPT_READ_TIMEOUT',11); define('MYSQLI_OPT_LOCAL_INFILE',8);
 class mysqli { public $closed=false,$connected=false,$errno=0,$options=array(),$charset='utf8mb4',$collation='utf8mb4_unicode_520_ci',$mode='NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION'; }
+class mysqli_driver { public $report_mode;public function __construct(){$GLOBALS['boot_report_reads']=($GLOBALS['boot_report_reads']??0)+1;$this->report_mode=$GLOBALS['boot_report_mode']??3;} }
 class mysqli_result { public $rows,$position=0,$freed=false; public function __construct($rows){$this->rows=$rows; ++$GLOBALS['boot_counts']['results'];} }
 function boot_event($name){
 	$GLOBALS['boot_events'][]=$name;
@@ -25,11 +26,12 @@ function mysqli_options($handle,$option,$value){
 }
 function mysqli_real_connect($handle,$host,$user,$password,$database,$port,$socket,$flags){
 	++$GLOBALS['boot_counts']['connect']; boot_event('connect');
-	PHPUnit\Framework\Assert::assertSame(array('127.0.0.1','owned','owned-private-password','isolated',10004,null,0),array($host,$user,$password,$database,$port,$socket,$flags));
+	$GLOBALS['boot_actual_endpoint']=array($host,$user,$password,$database,$port,$socket,$flags);
+	PHPUnit\Framework\Assert::assertSame($GLOBALS['boot_expected_endpoint']??array('127.0.0.1','owned','owned-private-password','isolated',10004,null,0),$GLOBALS['boot_actual_endpoint']);
 	if('connect-false'===$GLOBALS['boot_fault'])return false; $handle->connected=true; return true;
 }
 function mysqli_get_client_info(){return 'bad-client'===$GLOBALS['boot_fault']?'unknown':'mysqlnd synthetic';}
-function mysqli_get_server_info($handle){unset($handle); return 'bad-server'===$GLOBALS['boot_fault']?'unknown':'10.6.23-MariaDB';}
+function mysqli_get_server_info($handle){unset($handle); return 'bad-server'===$GLOBALS['boot_fault']?'unknown':($GLOBALS['boot_server']??'10.6.23-MariaDB');}
 function mysqli_errno($handle){return $handle->errno;}
 function mysqli_query($handle,$sql){
 	PHPUnit\Framework\Assert::assertTrue($handle->connected && !$handle->closed);

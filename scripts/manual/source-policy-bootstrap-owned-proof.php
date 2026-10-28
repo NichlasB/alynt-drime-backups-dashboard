@@ -34,6 +34,9 @@ $pins   = array(
 	'class-wpdb.php'               => 'E15403E90032DD0508811301505E491D4212DE5152581A98F51B744A1A3903BD',
 	'cache.php'                    => 'A219C2B57CC9990B560C6B497C877DB443B7E29239645A6A79B2D76839C46E19',
 	'class-wp-object-cache.php'    => '1857B774BD9CFBAFBD50A1B1424F7DF637D202CF3F2253CDA9798D4AD56F3CF0',
+	'formatting.php'               => '350F6B32303915DF970BB0E3EA360FCD54BB0B8A7ECC3D504C3D860AB9468D32',
+	'functions.php'                => 'CAC8A17E293DF99F0683A88DEBD3BA5E5CCE274183A4E9FD3C9F18375747F41C',
+	'option.php'                   => 'FE3F0B7E115B2A50C31162ED6428ABE4088C080B0F71B9678D84806168FE90D0',
 );
 $checks = 0;
 $group  = 'source-audit';
@@ -71,7 +74,7 @@ try {
 	foreach ( $pins as $file => $hash ) {
 		adbb_check( is_file( ABSPATH . WPINC . '/' . $file ) && strtoupper( hash_file( 'sha256', ABSPATH . WPINC . '/' . $file ) ) === $hash, 'pinned genuine source' );
 	}
-	foreach ( array( 'load.php', 'plugin.php', 'class-wp-error.php', 'cache.php', 'class-wpdb.php' ) as $file ) {
+	foreach ( array( 'load.php', 'plugin.php', 'class-wp-error.php', 'cache.php', 'class-wpdb.php', 'formatting.php', 'functions.php' ) as $file ) {
 		require_once ABSPATH . WPINC . '/' . $file;
 	}
 	foreach ( array( 'class-source-policy.php', 'class-source-policy-native-profile.php', 'class-source-policy-query-context.php', 'class-source-policy-no-reconnect-connection.php' ) as $file ) {
@@ -81,26 +84,30 @@ try {
 	wp_cache_init();
 	$wpdb    = null;
 	$binding = array(
-		'core_file'      => ABSPATH . WPINC . '/class-wpdb.php',
-		'driver_file'    => null,
-		'cache_file'     => ABSPATH . WPINC . '/class-wp-object-cache.php',
-		'cache_api_file' => ABSPATH . WPINC . '/load.php',
-		'observers'      => array(),
-		'observer_files' => array(),
+		'core_file'       => ABSPATH . WPINC . '/class-wpdb.php',
+		'driver_file'     => null,
+		'cache_file'      => ABSPATH . WPINC . '/class-wp-object-cache.php',
+		'cache_api_file'  => ABSPATH . WPINC . '/load.php',
+		'parser_api_file' => ABSPATH . WPINC . '/functions.php',
+		'observers'       => array(),
+		'observer_files'  => array(),
 	);
 	$class   = new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' );
 	$owner   = $class->newInstanceWithoutConstructor();
 	$class->getConstructor()->invoke( $owner );
 	$frame = array(
-		'core'     => '7.1.3',
-		'database' => 'local',
-		'table'    => $argv[2] . 'options',
-		'host'     => '127.0.0.1',
-		'port'     => 10004,
-		'user'     => 'root',
-		'password' => 'audit' === $argv[3] ? 'inert-audit-only' : getenv( 'MYSQL_PWD' ),
-		'charset'  => DB_CHARSET,
-		'collate'  => DB_COLLATE,
+		'core'      => '7.1.3',
+		'database'  => 'local',
+		'table'     => $argv[2] . 'options',
+		'host'      => '127.0.0.1',
+		'port'      => 10004,
+		'user'      => 'root',
+		'password'  => 'audit' === $argv[3] ? 'inert-audit-only' : getenv( 'MYSQL_PWD' ),
+		'charset'   => DB_CHARSET,
+		'collate'   => DB_COLLATE,
+		'transport' => 'tcp_loopback',
+		'socket'    => null,
+		'db_host'   => '127.0.0.1:10004',
 	);
 	adbb_check( Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::settings( $frame ), 'finite private fixture settings' );
 	adbb_check( Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::source( $owner, $binding ), 'genuine executable closure and empty observer eligibility' );

@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed transport/core-derived charset — isolated foundation — 2026-10-28
+
+Approved [private transport/charset foundation](SOURCE_POLICY_FIXED_TRANSPORT_CHARSET_FOUNDATION.md),
+clean/synced baseline6149024. Explicit12-key tuple and source-bound core parser,
+Linux/socket exact candidate, configured utf8 vs helper/session evidence and fixed
+shared reporting capture/rechecks are implemented dormant. Existing bounds,
+schema/CAS/cleanup contracts, public factory closure and production wiring remain.
+New isolated71/230 and combined228/801 pass; final full local1956/8442, two existing
+Sodium skips only. Eleven assertion-killed/SHA256-restored controls, PHPCS/admin/
+structure/build/audits pass. Exact-head CI pending publication in owning record.
+No site/native/storage execution. Private frame/manual composition is explicitly
+migrated; historical Windows native images now require approved fresh regression,
+not recredited receipts. Implementation-plan progress: deployment compatibility
+foundation advanced; next meaningful step is gated environment qualification.
+Recommended next gated slice: Off-Production Linux/PHP8.5.12/mysqlnd/MariaDB10.11.18
+Unix-Socket Environment Preflight, preferably an approved opt-in ephemeral CI lab;
+resolve setup/image/ownership/cleanup authority before any native fixtures.
+
 ## Deployment-matched qualification — repository-only design — 2026-10-28
 
 Approved [Linux/socket/charset qualification design](SOURCE_POLICY_DEPLOYMENT_MATCHED_QUALIFICATION_DESIGN.md),

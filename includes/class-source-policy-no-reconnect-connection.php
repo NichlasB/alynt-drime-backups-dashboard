@@ -45,6 +45,16 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @var string
 	 */
 	private $native_state = 'never_opened';
+	/** Captured shared reporting posture; no caller-selected reporting switch.
+	 *
+	 * @var int|null
+	 */
+	private $report_mode = null;
+	/** Fixed observer source binding, never an executor callback.
+	 *
+	 * @var string|null
+	 */
+	private $report_source = null;
 
 	/** No parent constructor, credentials, socket or native session is opened. */
 	protected function __construct() {
@@ -118,7 +128,8 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @return array|WP_Error
 	 */
 	final public function admit_profile() {
-		if ( $this->close_attempted || 'active' !== $this->native_state || true !== $this->ready || ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this ) ) {
+		if ( $this->close_attempted || 'active' !== $this->native_state || true !== $this->ready || ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this )
+			|| ! in_array( $this->report_mode, array( 0, 3 ), true ) || $this->observed_report_mode() !== $this->report_mode ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		return Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $this->qualification, $this->options, $this->query_context );
@@ -153,6 +164,8 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 		}
 		$this->close_attempted = true;
 		$this->qualification   = null; // Revoke terminal DATA before any fallible or reentrant cleanup.
+		$this->report_mode     = null;
+		$this->report_source   = null;
 		$native                = false;
 		try {
 			$native = ( $GLOBALS['wpdb'] ?? null ) === $this ? false : ( 'never_opened' === $this->native_state && null === $this->dbh && ! $this->ready );
@@ -193,7 +206,11 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 		try {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Fixed dormant owner prepares the statement; no native constructor/caller is connected.
 			$affected = parent::query( $sql );
-			$errno    = false === $affected ? $this->driver_error_number() : 0;
+			if ( $this->observed_report_mode() !== $this->report_mode ) {
+				$this->ready = false;
+				throw new RuntimeException( 'Reporting context changed' );
+			}
+			$errno = false === $affected ? $this->driver_error_number() : 0;
 			if ( false === $affected && ! in_array( $errno, array( 1062, 1064, 1205, 1213 ), true ) ) {
 				$this->ready = false;
 			}
@@ -203,6 +220,9 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 			);
 		} catch ( Throwable $error ) {
 			$this->ready = false;
+			if ( $this->observed_report_mode() !== $this->report_mode ) {
+				throw new RuntimeException( 'Reporting context changed' ); // Owner maps pre-write refusal vs submitted uncertainty; no raw exception escapes.
+			}
 			return array(
 				'affected' => false,
 				'errno'    => null,
@@ -218,5 +238,13 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	protected function driver_error_number() {
 		// phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_errno -- Error-code read only, never infer failure class from raw SQL/error text.
 		return $this->dbh instanceof mysqli ? mysqli_errno( $this->dbh ) : null;
+	}
+
+	/** Fixed driver observation; RAM-only test subclasses model this IO seam.
+	 *
+	 * @return int|false
+	 */
+	protected function observed_report_mode() {
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::report_mode( $this->report_source );
 	}
 }

@@ -10,6 +10,7 @@ class Alynt_Drime_Backups_Dashboard_Test_Policy_Store {
 class Alynt_Drime_Backups_Dashboard_Test_Policy_Connection extends Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection {
 	public function __construct( $store ) { $this->store=$store; $this->ready=true; $this->dbh=true; }
 	protected function driver_error_number() { return $this->error_code; }
+	protected function observed_report_mode() { return $GLOBALS['policy_report_mode']; }
 }
 class Alynt_Drime_Backups_Dashboard_Test_Policy_Sites {
 	public $calls=array(), $exists=true, $record_override=false;

@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 require_once __DIR__ . '/class-source-policy-error.php';
+require_once __DIR__ . '/class-source-policy-transport-profile.php';
 
 /** Pure checks only. Private bindings are not distribution authentication. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile {
@@ -19,22 +20,20 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile {
 	 * @return bool
 	 */
 	public static function settings( $frame ) {
-		$keys = array( 'core', 'database', 'table', 'host', 'port', 'user', 'password', 'charset', 'collate' );
+		$keys = array( 'core', 'database', 'table', 'host', 'port', 'user', 'password', 'charset', 'collate', 'transport', 'socket', 'db_host' );
 		if ( ! is_array( $frame ) || count( $keys ) !== count( $frame ) || array_diff( $keys, array_keys( $frame ) ) ) {
 			return false;
 		}
-		foreach ( array_diff( $keys, array( 'port' ) ) as $key ) {
+		foreach ( array_diff( $keys, array( 'port', 'socket' ) ) as $key ) {
 			if ( ! is_string( $frame[ $key ] ) || strlen( $frame[ $key ] ) > 1024 || false !== strpos( $frame[ $key ], "\0" ) ) {
 				return false;
 			}
 		}
-		return in_array( $frame['core'], array( '6.0', '7.1.3' ), true )
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::valid( $frame, PHP_OS_FAMILY )
 			&& 1 === preg_match( '/\A[A-Za-z0-9_-]{1,64}\z/', $frame['database'] )
 			&& strlen( $frame['table'] ) <= 64 && 1 === preg_match( '/\A[A-Za-z0-9_]+options\z/', $frame['table'] )
 			&& 1 === preg_match( '/\A[A-Za-z0-9_.-]{1,64}\z/', $frame['user'] )
-			&& in_array( $frame['host'], array( '127.0.0.1', '::1' ), true )
-			&& is_int( $frame['port'] ) && $frame['port'] > 0 && $frame['port'] <= 65535
-			&& 'utf8mb4' === $frame['charset'] && in_array( $frame['collate'], array( '', 'utf8mb4_unicode_520_ci' ), true )
+			&& in_array( $frame['charset'], array( 'utf8', 'utf8mb4' ), true ) && in_array( $frame['collate'], array( '', 'utf8mb4_unicode_520_ci' ), true )
 			&& defined( 'DB_CHARSET' ) && DB_CHARSET === $frame['charset'] && defined( 'DB_COLLATE' ) && DB_COLLATE === $frame['collate']
 			&& ! defined( 'WP_SETUP_CONFIG' ) && ( ! defined( 'WP_INSTALLING' ) || ! WP_INSTALLING )
 			&& ( ! defined( 'WP_USE_EXT_MYSQL' ) || ! WP_USE_EXT_MYSQL ) && ( ! defined( 'MYSQL_CLIENT_FLAGS' ) || 0 === MYSQL_CLIENT_FLAGS )
@@ -68,7 +67,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile {
 			|| ( new ReflectionFunction( 'wp_using_ext_object_cache' ) )->getFileName() !== realpath( $binding['cache_api_file'] ) || false !== wp_using_ext_object_cache() ) {
 			return false;
 		}
-		foreach ( array( '__construct', '__get', 'init_charset', 'determine_charset', 'set_charset', 'set_sql_mode', 'has_cap', 'db_version', 'db_server_info', 'prepare', '_real_escape', 'placeholder_escape', 'add_placeholder_escape', 'remove_placeholder_escape', 'query', 'close' ) as $name ) {
+		foreach ( array( '__construct', '__get', 'parse_db_host', 'init_charset', 'determine_charset', 'set_charset', 'set_sql_mode', 'has_cap', 'db_version', 'db_server_info', 'prepare', '_real_escape', 'placeholder_escape', 'add_placeholder_escape', 'remove_placeholder_escape', 'query', 'close' ) as $name ) {
 			$method = new ReflectionMethod( 'wpdb', $name );
 			if ( 'wpdb' !== $method->getDeclaringClass()->getName() || $method->getFileName() !== realpath( $binding['core_file'] ) ) {
 				return false;
@@ -87,8 +86,38 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile {
 				return false;
 			}
 		}
-		// phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_get_client_info -- Capability observation only after source binding; no connection or provider is created here.
-		return false !== strpos( mysqli_get_client_info(), 'mysqlnd' ) && self::hooks( $binding );
+		$absint = function_exists( 'absint' ) ? new ReflectionFunction( 'absint' ) : null;
+		return isset( $binding['parser_api_file'] ) && is_string( $binding['parser_api_file'] ) && null !== $absint
+			&& false !== realpath( $binding['parser_api_file'] ) && $absint->getFileName() === realpath( $binding['parser_api_file'] )
+			// phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_get_client_info -- Capability observation only after source binding, never a connection or provider.
+			&& false !== strpos( mysqli_get_client_info(), 'mysqlnd' ) && self::hooks( $binding ) && self::report_source( $binding['driver_file'] );
+	}
+
+	/** Validates the fixed shared-driver observer without executing unknown code.
+	 *
+	 * @param string|null $file Expected fixture file or native extension.
+	 * @return bool
+	 */
+	public static function report_source( $file ) {
+		if ( ! class_exists( 'mysqli_driver', false ) ) {
+			return false;
+		}
+		$class = new ReflectionClass( 'mysqli_driver' );
+		return null === $file ? ( $class->isInternal() && 'mysqli' === $class->getExtensionName() )
+			: ( is_string( $file ) && false !== realpath( $file ) && $class->getFileName() === realpath( $file ) );
+	}
+
+	/** Reads shared reporting only from the already source-bound fixed observer.
+	 *
+	 * @param string|null $file Expected fixture file or native extension.
+	 * @return int|false
+	 */
+	public static function report_mode( $file ) {
+		try {
+			return self::report_source( $file ) ? ( new mysqli_driver() )->report_mode : false;
+		} catch ( Throwable $error ) {
+			return false; // No raw driver diagnostic or alternate reporting posture.
+		}
 	}
 
 	/**

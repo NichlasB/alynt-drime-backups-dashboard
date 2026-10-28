@@ -18,7 +18,7 @@ try {
 	$context=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context'))->newInstanceWithoutConstructor();
 	foreach(array('owned'=>$connection,'ambient'=>null,'core_file'=>__DIR__.'/source-policy-isolated-wpdb.php') as $key=>$value)boot_set($context,$key,$value);
 	boot_set($connection,'query_context',$context);
-	boot_set($connection,'bootstrap_frame',array('core'=>'7.1.3','database'=>'isolated','table'=>'wp_options','host'=>'127.0.0.1','port'=>10004,'user'=>'owned','password'=>'owned-private-password','charset'=>DB_CHARSET,'collate'=>DB_COLLATE));
+	boot_set($connection,'bootstrap_frame',array('core'=>'7.1.3','database'=>'isolated','table'=>'wp_options','host'=>'127.0.0.1','port'=>10004,'user'=>'owned','password'=>'owned-private-password','charset'=>DB_CHARSET,'collate'=>DB_COLLATE,'transport'=>'tcp_loopback','socket'=>null,'db_host'=>'127.0.0.1:10004'));
 	boot_set($connection,'bootstrap_binding',array('core_file'=>__DIR__.'/source-policy-isolated-wpdb.php','driver_file'=>__DIR__.'/source-policy-bootstrap-driver.php','cache_file'=>__DIR__.'/source-policy-isolated-wordpress.php','cache_api_file'=>__DIR__.'/source-policy-isolated-wordpress.php','observers'=>array(),'observer_files'=>array()));
 	$mapping=array('wrong-source'=>'bad-core-source','missing-database'=>'connect-false','missing-table'=>'table-bad','all'=>'positive','incompatible_sql_modes'=>'positive'); boot_configure($mapping[$case]??$case,$connection,$context);
 	if(in_array($case,array('all','incompatible_sql_modes'),true)){

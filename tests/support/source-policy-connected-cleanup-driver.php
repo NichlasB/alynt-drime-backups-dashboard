@@ -3,6 +3,7 @@
 if ( defined('ADB_POLICY_ISOLATED') && !extension_loaded('mysqli') ) {
 define('MYSQLI_OPT_CONNECT_TIMEOUT',0); define('MYSQLI_OPT_READ_TIMEOUT',11); define('MYSQLI_OPT_LOCAL_INFILE',8);
 class mysqli { public $closed=false,$connected=false,$errno=0,$options=array(),$charset='utf8mb4',$collation='utf8mb4_unicode_520_ci',$mode='NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION'; }
+class mysqli_driver { public $report_mode=3; }
 class mysqli_result { public $rows,$position=0,$freed=false; public function __construct($rows){$this->rows=$rows; ++$GLOBALS['boot_counts']['results'];} }
 function boot_event($name){
 	$GLOBALS['boot_events'][]=$name;

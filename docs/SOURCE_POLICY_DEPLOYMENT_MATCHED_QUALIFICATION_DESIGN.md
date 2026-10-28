@@ -1,5 +1,14 @@
 # Source-Policy Deployment-Matched Linux/Socket/Charset Qualification Design
 
+## Current implementation checkpoint — 2026-10-28
+
+The separately approved [fixed transport/charset foundation](SOURCE_POLICY_FIXED_TRANSPORT_CHARSET_FOUNDATION.md)
+implements gate1 below using isolated API/IO tests only. Original design outcomes
+remain historical; runtime/base-composition changes invalidate old native images
+for current-source qualification. No native/provider/production grant follows.
+The next approval is the off-production Linux environment preflight in gate2,
+not another cleanup slice or a production connection attempt.
+
 ## Authority and baseline — 2026-10-28
 
 Approved repository-only design through validation, commit, push and exact-head

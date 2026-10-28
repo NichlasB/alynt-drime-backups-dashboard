@@ -12,12 +12,19 @@ class wpdb {
 	protected $incompatible_modes=array('NO_ZERO_DATE');
 	public function __construct(...$args) {
 		if(empty($GLOBALS['policy_bootstrap_model'])) throw new RuntimeException('A parent/native constructor must never run.');
+		$GLOBALS['boot_constructor_args']=$args;
 		++$GLOBALS['boot_counts']['object']; $this->use_mysqli=empty($GLOBALS['boot_legacy']); $this->ready=false; $this->dbh=null; $this->store=$GLOBALS['boot_store']; boot_event('object'); $this->db_connect(false);
 	}
 	public function __get($name){return $this->$name;}
+	public function parse_db_host($host){
+		$GLOBALS['boot_parse_calls']=($GLOBALS['boot_parse_calls']??0)+1;
+		if(!empty($GLOBALS['boot_parser_wrong']))return array('127.0.0.1',10005,null,false);
+		$known=array('127.0.0.1:10004'=>array('127.0.0.1',10004,null,false),'[::1]:10004'=>array('::1',10004,null,true),'localhost:/tmp/owned.sock'=>array('localhost',null,'/tmp/owned.sock',false));
+		return $known[$host]??false; // Fixed API answers, not a copied core parser.
+	}
 	public function db_connect($allow_bail=true){unset($allow_bail); ++$GLOBALS['boot_counts']['unexpected_connect']; return false;}
 	public function init_charset(){boot_event('init'); $values=$this->determine_charset(DB_CHARSET,DB_COLLATE); $this->charset=$values['charset']; $this->collate=$values['collate'];}
-	public function determine_charset($charset,$collate){$this->has_cap('collation'); return array('charset'=>$charset,'collate'=>$collate?:'utf8mb4_unicode_520_ci');}
+	public function determine_charset($charset,$collate){$GLOBALS['boot_configured_collate']=$collate;$this->has_cap('collation');return array('charset'=>empty($GLOBALS['boot_helper_wrong'])?'utf8mb4':'utf8','collate'=>$collate?:'utf8mb4_unicode_520_ci');}
 	public function has_cap($cap){unset($cap); return strlen($this->db_version())>0;}
 	public function db_version(){return $this->db_server_info();}
 	public function db_server_info(){return mysqli_get_server_info($this->dbh);}

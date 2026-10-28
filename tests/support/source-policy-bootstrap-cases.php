@@ -3,6 +3,7 @@
 if(defined('ADB_POLICY_ISOLATED')) {
 function boot_configure($case,$connection,$context){
 	$frame=boot_get($connection,'bootstrap_frame'); $binding=boot_get($connection,'bootstrap_binding');
+	$binding['parser_api_file']=__DIR__.'/wordpress-shims-sanitization.php';
 	$bad=array('host'=>'example.invalid','port'=>'10004','table'=>'wp_options;DROP','database'=>'wrong name','user'=>str_repeat('a',65),'password'=>array(),'core'=>'unknown','charset'=>'latin1','collate'=>'unknown');
 	foreach($bad as $key=>$value)if('bad-'.$key===$case)$frame[$key]=$value;
 	if('positive-current'===$case){$frame['core']='7.1.3'; $GLOBALS['boot_store']->row['autoload']='off';}

@@ -15,6 +15,7 @@ class wpdb {
 		$GLOBALS['boot_connection']=$this; ++$GLOBALS['boot_counts']['object']; $this->use_mysqli=empty($GLOBALS['boot_legacy']); $this->ready=false; $this->dbh=null; $this->store=$GLOBALS['boot_store']; boot_event('object'); $this->db_connect(false);
 	}
 	public function __get($name){return $this->$name;}
+	public function parse_db_host($host){return '127.0.0.1:10004'===$host?array('127.0.0.1',10004,null,false):false;}
 	public function flush(){if('flush'!==$GLOBALS['adbc2_fault']){$GLOBALS['adbc2_post_freed']+=count($this->last_result);$this->last_result=array();}}
 	public function db_connect($allow_bail=true){unset($allow_bail); ++$GLOBALS['boot_counts']['unexpected_connect']; return false;}
 	public function init_charset(){boot_event('init'); $values=$this->determine_charset(DB_CHARSET,DB_COLLATE); $this->charset=$values['charset']; $this->collate=$values['collate'];}

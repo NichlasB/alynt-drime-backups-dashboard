@@ -69,8 +69,14 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 		);
 		try {
 			$this->bootstrap_check( false ); // Null default frame refuses before any native primitive.
-			$frame = $this->bootstrap_frame;
-			parent::__construct( $frame['user'], $frame['password'], $frame['database'], $frame['host'] . ':' . $frame['port'] );
+			$frame               = $this->bootstrap_frame;
+			$this->report_source = $this->bootstrap_binding['driver_file'];
+			$this->report_mode   = $this->observed_report_mode();
+			if ( ! in_array( $this->report_mode, array( 0, 3 ), true ) || ( 'unix_socket' === $frame['transport'] && 0 !== $this->report_mode )
+				|| array( $frame['host'], $frame['port'], $frame['socket'], '::1' === $frame['host'] ) !== $this->parse_db_host( $frame['db_host'] ) ) {
+				throw new RuntimeException( 'Transport or reporting context unavailable' );
+			}
+			parent::__construct( $frame['user'], $frame['password'], $frame['database'], $frame['db_host'] );
 			if ( true !== $this->use_mysqli || false !== $this->ready || null !== $this->dbh || 0 !== $this->num_queries ) {
 				throw new RuntimeException( 'Object-only initialization unavailable' );
 			}
@@ -97,13 +103,14 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			}
 			$this->bootstrap_check();
 			$this->native_state = 'connecting';
-			if ( true !== mysqli_real_connect( $this->dbh, $frame['host'], $frame['user'], $frame['password'], $frame['database'], $frame['port'], null, 0 ) || 0 !== mysqli_errno( $this->dbh ) ) {
+			$host               = '::1' === $frame['host'] ? '[::1]' : $frame['host']; // mysqlnd's explicit IPv6 representation; never a socket conversion.
+			if ( true !== mysqli_real_connect( $this->dbh, $host, $frame['user'], $frame['password'], $frame['database'], $frame['port'], $frame['socket'], 0 ) || 0 !== mysqli_errno( $this->dbh ) ) {
 				throw new RuntimeException( 'Initial connection unavailable' );
 			}
 			$this->native_state = 'connected_unqualified';
 			$this->is_mysql     = true;
 			$this->bootstrap_check();
-			if ( '10.6.23-MariaDB' !== mysqli_get_server_info( $this->dbh ) ) {
+			if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $frame['core'] ) !== mysqli_get_server_info( $this->dbh ) ) {
 				throw new RuntimeException( 'Server profile unavailable' );
 			}
 			$identity = $this->bootstrap_probe( 'identity' );
@@ -182,6 +189,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 		if ( $this->close_attempted || $this->ready || ( hrtime( true ) - $this->bootstrap_started ) > 20000000000 || $this->bootstrap_credits > 16
 			|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::settings( $this->bootstrap_frame )
 			|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::source( $this, $this->bootstrap_binding )
+			|| ( null !== $this->report_mode && $this->observed_report_mode() !== $this->report_mode )
 			|| ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this )
 			|| ( $sealed && ! $this->query_context->valid() ) || ( null !== $this->bootstrap_handle && $this->dbh !== $this->bootstrap_handle ) ) {
 			throw new RuntimeException( 'Bootstrap admission unavailable' );
