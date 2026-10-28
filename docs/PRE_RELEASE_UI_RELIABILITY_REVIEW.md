@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Genuine-core callback context / cleanup zero-SQL proof — 2026-10-28
+
+Fresh confirmed Plugin Tester local-only [proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md):
+actual pinned installed7.1.3 core libraries215 checks/12 groups, four
+assertion-killed/SHA256-restored controls. Context admission and numeric/marker
+pipeline/owned cleanup are genuine, not native SQL/escaping/session/schema
+qualification. New accidental-execution gate tests3/12; full local1263/5702 with
+two known Sodium skips; Node16/16/all local gates/audits pass. No runtime/UI/
+bootstrap/authentication/native handle/storage/wiring change. Minimum-core/
+native matrix, real lost-update repair and whole07/07A/13/FULL remain open;
+toolkit/historical readiness unchanged. Next gated slice: Plugin Tester
+local-only Fixed Non-Reconnecting Connection Construction and Native Adapter
+Owned Qualification/Cleanup Proof, fresh target/readiness/preservation and
+explicit owned storage scope, audit first, production wiring disabled.
+
 ## Core placeholder/owned lifecycle isolated foundation — 2026-10-28
 
 [Closed safety foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md)

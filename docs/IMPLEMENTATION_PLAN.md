@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-core context / owned cleanup zero-SQL proof — 2026-10-28
+
+Fresh confirmed Plugin Tester local-only [proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md),
+clean/syncedf888c90f4796b930577a4282ed2495b1aa1e9824. Actual installed pinned7.1.3
+libraries and dormant context/close pass215 checks/12 groups; numeric/marker
+pipeline, owned/ambient identity/metadata, once-only cleanup, sequential and
+concurrent ownership; four assertion-killed/SHA256-restored controls. No core
+substitutes, fabricated session/schema facts, authentication, native handles,
+SQL/storage/bootstrap/wiring. Gate tests3/12; full local1263/5702 with two baseline
+Sodium skips; Node16/16/all local gates/audits pass. Runtime/historical audit and
+uploader/toolkit unchanged. Core6.0/native matrix and application lost-update
+repair remain open; no whole-release or prior8/8 task-count inflation.
+Recommended next gated slice: Plugin Tester local-only Fixed Non-Reconnecting
+Connection Construction and Native Adapter Owned Qualification/Cleanup Proof,
+audit first with fresh exact target/readiness/preservation and owned disposable
+storage approval. Actual factories/form/production wiring remain disabled.
+
 ## Approved core placeholder/owned lifecycle foundation — 2026-10-28
 
 Repository-only R3 [dormant foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md),

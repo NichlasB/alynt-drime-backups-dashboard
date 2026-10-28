@@ -1,5 +1,11 @@
 # Fixed Non-Reconnecting Connection / Native Adapter Audit — Blocked
 
+Later genuine-core library evidence,2026-10-28:
+[zero-SQL context/cleanup proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md)
+passes215/12 on the pinned installed7.1.3 profile, not native construction/SQL
+qualification. The historical nine-check probe below remains unchanged/not
+rerun; minimum-core/native proof and application integration remain open.
+
 Later isolated implementation,2026-10-28:
 [core placeholder/lifecycle foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md)
 adds a closed private-context exception and RAM tests. This audit script and its

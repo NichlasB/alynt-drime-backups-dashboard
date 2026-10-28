@@ -1,5 +1,11 @@
 # Fixed Core Placeholder-Escape Admission and Owned Lifecycle Safety Foundation
 
+Later genuine installed-core evidence,2026-10-28:
+[zero-SQL context/cleanup proof](SOURCE_POLICY_CORE_CONTEXT_ZERO_SQL_PROOF.md).
+The installed7.1.3 library layer now passes215/12 with four guard controls;
+this does not convert the historical isolated evidence below into native
+qualification. Minimum-core/native construction/session/storage/wiring remain open.
+
 ## Authority and boundary — 2026-10-28
 
 Approved repository-only R3 foundation implementing the
