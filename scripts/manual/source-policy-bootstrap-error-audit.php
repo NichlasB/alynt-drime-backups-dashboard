@@ -44,6 +44,7 @@ try {
 	foreach ( array( 'class-source-policy.php', 'class-source-policy-native-profile.php', 'class-source-policy-query-context.php', 'class-source-policy-no-reconnect-connection.php' ) as $file ) {
 		require_once dirname( __DIR__, 2 ) . '/includes/' . $file;
 	}
+	require_once __DIR__ . '/source-policy-bootstrap-error-evidence.php';
 	add_action( 'all', $all, 1 );
 	$armed  = true;
 	$report = array();
@@ -70,7 +71,7 @@ try {
 		if ( $expected !== $events ) {
 			throw new RuntimeException( 'Unexpected error-hook transcript' ); }
 		++$checks;
-		if ( 'public-query' === $group ? false !== $result : ( 'core-classification' === $group ? true !== $result : ! $result instanceof WP_Error ) ) {
+		if ( ! Alynt_Drime_Backups_Dashboard_Bootstrap_Error_Evidence::result_matches( $group, $result ) ) {
 			throw new RuntimeException( 'Changed refusal result' ); }
 		++$checks;
 		if ( null !== $owner->dbh || $owner->ready || 0 !== $owner->num_queries || ! $owner->close() ) {

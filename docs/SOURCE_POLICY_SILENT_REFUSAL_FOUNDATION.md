@@ -209,3 +209,41 @@ genuine hook-silent refusal code/message/data and unchanged core control events;
 only then run one fresh ordered owned proof and cleanup if prerequisites pass.
 Preserve existing state and disabled public factories/production wiring. No new
 native attempt or genuine-library operation is authorized by this foundation.
+
+## Repository-only manual evidence readiness — 2026-10-28
+
+R1 autonomous batch follow-up from clean/synced
+`8e6f98b9ad3bdb86e7b1c415773a7e8f1518c47a`. Reviewing the next gate's prepared
+audit found that its error-result check accepted any WP_Error. An always-empty
+refusal could therefore pass that check despite the required code contract.
+The manual-only pure evidence checker now requires the exact ordinary class,
+one unavailable code/empty-message public map, empty public data map and exact
+core getter projections. Malformed maps reject before getters; subclasses never
+reach virtual getters. Classification/query controls require literal true/false;
+unknown case names reject. Existing source pins, invocation/driver gates,
+positive core hook transcripts and handle-free cleanup assertions are unchanged.
+No runtime/loader, authentication, schema, SQL, native or production-wiring change.
+
+New isolated suite48 tests/49 assertions: valid evidence, empty/wrong/extra code,
+nonempty message/data, malformed map, foreign subclass and wrong result types,
+plus source wiring. The original type-only predicate failed28/47 assertions.
+Temporarily bypassing the checker in the manual audit failed1/2 assertions;
+restored audit SHA256
+`ADA030660B48D3D57DA97C8B23522B97A67B826A7BCA27ABB54BAF344A9E6159`.
+Restored focused suite plus existing early-entry gates54/73, randomized related
+723/3064 (seed20261028), full local1557/7022 with only two existing missing-Sodium
+skips. Node16/16; PHPCS196 files; structure148 runtime/215 support/184 tests/181
+class names; build; strict Composer validation; Composer/npm audits zero
+advisories; three syntax checks and diff hygiene pass. Commands match the
+preceding validation section, with the new EvidenceTest and existing
+OwnedProofGateTest focused filters. Source-scoped review confirms bounded pure
+DATA checks, no extra production dependency or changed observer/authorization
+semantics. Publication/exact-head CI remains pending.
+
+These are model and source-wiring checks, not genuine WP_Error execution,
+installed-source authentication or native success. The genuine manual audit
+was not run; no site/SQL/fixture/driver operation occurred. Historical native
+failure and whole-plugin/toolkit readiness remain untouched. One worthwhile
+safe-local task advances audit acceptance; the next meaningful item still
+crosses the separately approved-and-confirmed genuine/native proof boundary
+named above. No unrelated cleanup is selected merely to fill eight tasks.

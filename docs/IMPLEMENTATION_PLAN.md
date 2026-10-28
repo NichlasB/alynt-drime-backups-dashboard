@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Manual bootstrap error-evidence readiness — 2026-10-28
+
+Autonomous safe-local R1 test/manual-audit task from clean/synced
+`8e6f98b9ad3bdb86e7b1c415773a7e8f1518c47a`. The prepared genuine audit previously
+accepted any WP_Error, including an empty one. Its isolated pure checker now
+requires the exact ordinary class, unavailable code, empty message/data and
+exact public maps, with exact boolean controls and unknown-case rejection.
+New48/49; focused54/73; related randomized723/3064; full local1557/7022 with only
+the two baseline missing-Sodium skips. Node16/16, lint196 files, structure,
+build, strict Composer validation and zero-advisory audits pass. Red28 assertion
+failures and a source-wiring bypass control establish non-vacuous regressions;
+details and proof limits are in the [owning record](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md).
+Publication CI is pending. This is one worthwhile readiness task, not multiple
+tasks for its tests/docs. No genuine library, site, SQL, fixture or native proof
+executed; runtime/source pins/CLI gates/wiring are unchanged. Safe-local queue
+reassessment reaches the same next meaningful gate, not seven cleanup tasks:
+fresh Plugin Tester local-only Bounded Initial Native Construction and
+Pre-Qualification Bootstrap Owned Qualification/Cleanup Proof. Separate proof
+approval and exact target/fixture confirmation remain required; audit genuine
+code/message/data and positive core events first, attempt fixtures only if eligible.
+
 ## Hook-silent refusal / classification foundation — 2026-10-28
 
 Approved repository-only R3 [foundation](SOURCE_POLICY_SILENT_REFUSAL_FOUNDATION.md),
