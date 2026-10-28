@@ -1,4 +1,9 @@
-# Source-Policy Core-Owned Ambient/Report-OFF Qualification — Blocked Owned Attempt
+# Source-Policy Core-Owned Ambient/Report-OFF Qualification — Owned Attempt Records
+
+Current outcome: the separately approved canonical-key repair and fresh owned
+attempt below passed the current private profile. The first blocked attempt is
+preserved as historical evidence, not rewritten into a success. Production
+admission/wiring, minimum-core/runtime and real deployment compatibility stay open.
 
 ## Authority, scope and baseline — 2026-10-28
 
@@ -138,14 +143,14 @@ Only after fresh prerequisites pass may one new owned attempt run, under fresh
 exact target/fixture confirmation. A runtime repair needs its own authority; do
 not bypass the refusal or resume production integration.
 
-## Approved canonical-key correction — native confirmation pending — 2026-10-28
+## Approved canonical-key correction and fresh owned proof — 2026-10-28
 
 Separate approval covers the harness-only correction, regression tests, fresh
 prerequisites and one fresh owned attempt. Clean/synced repair baseline
 `5f7bf83b42cfbbfd37a76808b53e9988731df482`. Site Operations/registry/LocalWP metadata
 and Novamira guide/inventory refreshed; exact Plugin Tester profile and listeners
-10004/10005 resolved. A fresh target/fixture confirmation card is pending. No SQL,
-installed-core proof, fixture creation or native retry has run in this repair.
+10004/10005 resolved. Fresh target/owned-fixture card confirmed before any SQL,
+installed-core proof or fixture operation in this repair.
 
 The operation now obtains one fixed callback file/hash binding from the manual
 contract helper. The helper canonicalizes that fixed repository filename with
@@ -161,18 +166,84 @@ invoking callbacks. It opens no driver or installed WordPress file. This is not
 genuine core authentication/storage/native evidence. Initial test-worker invocation
 path comparison was corrected before regression evidence; the subsequent original
 mixed-key run fails the intended canonical declaration assertion. Canonicalization
-then passes: new parent test1/4 with seven worker assertions; combined binding/
-receipt10/52, related342/1501, no skips/failures. No native guard mutation is claimed.
+then passes: initial parent test1/4 with seven worker assertions; combined binding/
+receipt10/52, related342/1501, no skips/failures. Final review adds a second
+assertion-proven regression for PHP's unconditional function declaration during
+PHPUnit discovery. The worker helper is now declared only inside its isolated
+branch, not installed in the parent process. Final binding/receipt11/53, including
+parent2/5 plus seven worker assertions. No native guard mutation is claimed.
 
 Scoped lint/syntax, full PHPCS220, Node16/16, structure148 runtime/226 support/
 199 test files/196 class names, build, strict Composer validation and zero-advisory
 Composer/npm audits pass. Runtime, budgets/controller, original native cases,
 ADBC contracts, dependencies and production wiring remain baseline-identical;
-uploader/toolkit untouched. Full local PHP8.5.1: 1,884 tests/8,211 assertions,
+uploader/toolkit untouched. Final full local PHP8.5.1: 1,885 tests/8,212 assertions,
 only the two existing missing-Sodium signing skips, no failures. The repair commit
-receives exact-head CI verification before handoff; native qualification remains
-pending regardless of isolated CI results.
-Do not treat this source repair as physical qualification or refresh historical
-whole-plugin readiness/task counts. The approved single fresh native attempt
-remains pending the exact target/fixture card and fresh prerequisites, not new
-product-feature approval.
+`8b4eb4d71fe3f749239f45c9d65d3879bafc6681` passed
+[exact-head CI40772318044](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40772318044):
+PHP7.4/8.3 each1,884/8,218, no skips/failures, Node16/16. Final declaration-isolation
+fix and native evidence receive separate exact-head CI before handoff. No original
+runtime, manual case/controller budget or ADBC contract was edited for this repair.
+
+### Fresh prerequisites, actual outcomes and cleanup
+
+After target confirmation, fresh repository source26+20, socket-free stdio46/10,
+connected stdio12/3, genuine error-hook25/6 and connection-free ambient/helper126
+checks pass. Core, native PHP/DLL and full loaded proof closure remain pinned;
+the new actual image is
+`77d1b5ce4b525e444e4cd599e717bfed9c69f4399d54ac4425c2045c2695cd87`.
+All 77 application table names/checksums refreshed and matched immediately before
+one empty owned schema clone: `local.adbb_09d04e554da1_options`; source rows were
+not copied. No retained proof fixture/other server session/transaction at baseline.
+
+Fresh unchanged ADBC2 refusal/positive release prerequisite passes in1,140ms,
+image `d547b7451b08b54efe069e2c54ed056387204c7480b3d1ffa1cce5da62798167`,
+run `5dffb241d2a749dd971faf02d1554166`, children42860/64472, actual live/post0/0.
+Counter observations remain diagnostic DATA, never ADBC1/ADBC2 grant changes.
+
+Exactly one separately approved fresh ambient native attempt succeeds:
+run `bdf2fac041924513bbd183f51e0d5488`, child46620, receipt367 checks/nine groups,
+report mode0, controller elapsed3,705ms, exact held-child release and independent
+all-server live/post0/0. No replay, mode toggle or third native body was run.
+
+| Group | Actual assertion-enforced result |
+|---|---|
+| Positive | Same-observation view; real saved write with2 post-bootstrap commands, non-target bytes/autoload preserved; genuine private cache invalidation and once-only observer |
+| No-op/stale | Unchanged with1 read/no success observer; stale conflict before already-satisfied no-op |
+| Update | Real conditional removal,2 commands |
+| CAS contender | Owned ambient contender delete/insert plus one failed CAS,4 aggregate commands; conflict/no success observer |
+| Creation contender | Definite duplicate leads to conflict with exactly one winner read,5 commands total; no insert replay or false success |
+| Transform/reentry | Changed candidate refuses after1 read; nested view refuses without extra dispatch, outer save succeeds once with2 commands |
+| Lock failure | Real bounded contention maps to storage_error,4 aggregate commands; ambient ROLLBACK in finally |
+| Post-commit admission | Changed hook graph maps to write_uncertain after2 commands; no retry or false rollback claim |
+| Native errno | Actual dedicated execute acknowledgements false/1064, false/1062 and false/1205 on usable handle,6 fixed aggregate commands including ambient BEGIN/lock/ROLLBACK; no error-message parsing |
+
+Every adapter operation bootstraps its own real owner, then confirms ready=false,
+dbh/profile=null and cached close success. The ambient identity, live handle/thread,
+exact query registry and mode0 are preserved per operation. No imported active
+owner handle/facts; Reflection composes only private proof frame/source/context.
+The direct errno group is private primitive evidence, not an authenticated form
+or public SQL executor. The parent samples independently after all owned/ambient
+connections close while the child is alive, then again after clean child exit;
+it does not claim independent per-operation live sampling.
+
+Exact owned row-count preview1, only the named clone dropped. All77 application
+table names/checksums unchanged, zero retained fixtures/other sessions/transactions;
+owned processes cleaned and source image unchanged through cleanup. No WordPress
+application bootstrap, users/options/cron, installed lifecycle or wiring changed.
+Do not refresh historical whole-plugin readiness/task counts from this proof.
+
+Implementation-plan progress: actual dedicated-adapter behavior now has current
+stock ambient/report-OFF positive/conflict/errno and cleanup evidence. This does
+not establish genuine authenticated form flow, real application hook graph,
+minimum WP6.0/PHP7.4 native support or intended deployment transport/configuration.
+Public factories/provider/legacy form remain disconnected and the application
+lost-update repair is not deployed or complete.
+
+Recommended next gated slice: **control-sitesmanage live-only Source-Policy
+Non-Secret Production-Connection Profile Audit (read-only)**. Recommend explicit
+approval of installed source/configuration/runtime/transport/drop-in discovery
+without application bootstrap, authentication probes, SQL, writes or service/
+credential changes. Resolve the actual deployment compatibility gap before
+selecting provider wiring; minimum-supported native qualification remains a
+separate required gate, not replaced by this current-profile proof.

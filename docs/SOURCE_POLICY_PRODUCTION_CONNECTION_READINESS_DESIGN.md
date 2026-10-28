@@ -1,9 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Later [owned ambient/report-OFF attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md)
-reached genuine ambient construction but blocked on the dedicated bootstrap.
-It does not qualify the context or enable production; original design below is
-preserved. Follow the owning attempt record for the current diagnostic gate.
+Later [owned ambient/report-OFF records](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md)
+preserve the first blocked bootstrap, then the separately approved canonical-key
+repair and successful367/9 current-profile proof. This closes that private context
+gap, not production admission/wiring or minimum/deployment compatibility. Original
+design below stays historical; follow the owning record for the next profile audit.
 
 ## Authority and baseline — 2026-10-28
 

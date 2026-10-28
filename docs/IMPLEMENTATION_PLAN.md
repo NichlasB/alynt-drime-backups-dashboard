@@ -5,11 +5,20 @@
 Approved [harness-only correction and fresh attempt](SOURCE_POLICY_AMBIENT_REPORT_OFF_OWNED_PROOF.md),
 baseline5f7bf83. Fixed caller-side canonical file key, unchanged strict runtime
 source/hash guard. Intended red declaration assertion then green; binding/receipt
-10/52, related342/1501 pass. No SQL/native retry/fixture or production change yet:
-fresh exact Plugin Tester target/fixture card pending. Repository QA in owning
-record. Implementation-plan progress: harness defect corrected; physical
-ambient/report-OFF qualification remains open. Resume the already-approved single
-owned attempt only after target confirmation and fresh prerequisites.
+10/52, related342/1501 pass; final worker declaration-isolation regression11/53.
+Fresh exact target/fixture confirmed; source/stdio/core126 and ADBC2 release1140ms
+pass. One fresh native ambient/report-OFF body367 checks/9 groups/3705ms succeeds:
+real saved/noop/stale/CAS/creation conflict, false errno1064/1062/1205, preserved
+ambient handle/callback and all-server live/post0/0. Exact clone/process cleanup,
+77 application checksums/inventory unchanged. Full local1885/8212, two existing
+Sodium skips; all other QA pass. Repair8b4eb4d/CI40772318044 successful1884/8218;
+final source-isolation/evidence publication separately exact-head checked.
+No runtime/ADBC/budget/wiring changes, task-count or historical readiness credit.
+Implementation-plan progress: current ambient/report-OFF qualification gap closed,
+not production connection or authenticated/minimum-profile qualification. Next
+gated slice: control-sitesmanage live-only Source-Policy Non-Secret Production-
+Connection Profile Audit, strictly read-only source/config/runtime/transport;
+no bootstrap/authentication/SQL/writes/service or credential changes.
 
 ## Ambient/report-OFF — blocked owned qualification — 2026-10-28
 

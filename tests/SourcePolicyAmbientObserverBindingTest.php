@@ -2,6 +2,9 @@
 use PHPUnit\Framework\TestCase;
 
 final class SourcePolicyAmbientObserverBindingTest extends TestCase {
+ public function test_phpunit_discovery_does_not_install_manual_proof_helpers(){
+  $this->assertFalse(function_exists('adbb_check'));
+ }
  public function test_actual_fixed_binding_matches_declaration_and_strict_runtime_hook_admission(){
   $script=__DIR__.'/support/source-policy-ambient-observer-worker.php';
   $process=proc_open(array(PHP_BINARY,'-n',$script,'--isolated-observer-binding'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);

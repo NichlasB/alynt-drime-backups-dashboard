@@ -7,8 +7,10 @@ define( 'ADB_POLICY_ISOLATED', true );
 require ABSPATH . 'vendor/autoload.php';
 require ABSPATH . 'tests/support/source-policy-isolated-wordpress.php';
 require ABSPATH . 'scripts/manual/source-policy-ambient-proof-contract.php';
-/** The source inspection must not execute the actual fixture callback body. */
-function adbb_check() { throw new RuntimeException( 'No fixture execution permitted' ); }
+if ( defined( 'ADB_POLICY_ISOLATED' ) ) {
+ /** The source inspection must not execute the actual fixture callback body. */
+ function adbb_check() { throw new RuntimeException( 'No fixture execution permitted' ); }
+}
 require ABSPATH . 'scripts/manual/source-policy-adapter-proof-cases.php';
 foreach ( array( 'class-source-policy.php', 'class-source-policy-native-profile.php', 'class-source-policy-bootstrap-profile.php' ) as $file ) require ABSPATH . 'includes/' . $file;
 try {
