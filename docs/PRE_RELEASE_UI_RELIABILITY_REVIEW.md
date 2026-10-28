@@ -1,5 +1,21 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Bounded native construction / bootstrap design — 2026-10-28
+
+Repository-only [design](SOURCE_POLICY_NATIVE_BOOTSTRAP_DESIGN.md) resolves the
+missing first-connect/setup-versus-admission contract, not physical construction
+or actual UI/writer integration. Private one-shot initializer, setup-source/hook
+eligibility (`all`/SQL-mode domain included), bounded own-session helpers and
+readbacks, active-last publication and independent partial cleanup; db_connect/
+check_connection/factories remain closed. No runtime/test/manual proof/site/
+native/storage/wiring change or historical whole-review refresh. Unchanged
+related randomized429/1744, no failures/skips; structure/scoped links/diff and
+baseline identity pass. Object-only parent initialization preserves minimum-core
+driver selection without a connection attempt; proposed, not executed. Matrix/native
+proof and lost-update repair remain open. Next gated slice: repository-only
+Bounded Initial Native Construction and Pre-Qualification Bootstrap Safety
+Foundation, isolated API/IO only, actual execution/factories/wiring disabled.
+
 ## Native construction qualification audit blocked before fixtures — 2026-10-28
 
 Fresh confirmed Plugin Tester local-only [audit](SOURCE_POLICY_NATIVE_CONSTRUCTION_AUDIT.md):

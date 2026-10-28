@@ -1,5 +1,11 @@
 # Source-Policy Native Adapter Compatibility and Guarded Form Integration Design
 
+Later approved repository-only [initial bootstrap design](SOURCE_POLICY_NATIVE_BOOTSTRAP_DESIGN.md),
+2026-10-28, selects bounded private first-connect/setup primitives and genuine
+core helper qualification without calling the parent connector or reopening
+db_connect/check_connection. Existing native/request/wiring acceptance gates
+remain; this is a design extension, not actual construction or matrix evidence.
+
 ## Authority and immutable baseline — 2026-10-27
 
 Separately approved repository-only design through validation, commit, push and

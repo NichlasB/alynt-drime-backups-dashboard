@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Bounded initial construction / pre-qualification bootstrap design — 2026-10-28
+
+Approved repository-only [design](SOURCE_POLICY_NATIVE_BOOTSTRAP_DESIGN.md),
+clean/syncedcd948727e67eb4ff1be4db8fb22c67ef92438a1a. Selects one private,
+bounded, once-only first-connect/setup path while db_connect/check_connection
+remain unconditional refusals and public factories stay closed. Separates
+object-only genuine parent initialization (minimum-core driver selection),
+source/settings/setup-hook eligibility, partial driver ownership, genuine core
+helpers/readbacks, metadata qualification and active publication. Adds required
+`all`/incompatible_sql_modes admission and partial-state cleanup contracts;
+no current guard is relaxed. Proposed limits/matrix need actual native proof.
+Unchanged related randomized429/1744, seed20261028, no failures/skips; structure,
+scoped links/diff/baseline identity pass. Source-scoped contract review records
+the minimum-core object-initialization correction, not real native acceptance.
+No runtime/test/harness/site/native/storage/authentication/wiring change; no
+historical whole07/07A/13/FULL/toolkit or task-count refresh. Actual lost-update
+repair and native qualification remain open. Next gated slice: repository-only
+Source-Policy Bounded Initial Native Construction and Pre-Qualification
+Bootstrap Safety Foundation, isolated API/IO tests only; factories, actual
+authentication/storage/native execution and production wiring disabled.
+
 ## Native construction / adapter audit — blocked before fixtures — 2026-10-28
 
 Fresh confirmed Plugin Tester local-only [audit](SOURCE_POLICY_NATIVE_CONSTRUCTION_AUDIT.md),
