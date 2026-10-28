@@ -183,7 +183,12 @@ Final repair local QA passes: full PHP1683/7441 with only the two existing Sodiu
 skips; Node16/16, PHPCS203, structure/build/strict manifest/zero-advisory audits,
 source18 and owned socket-free stdio39/9, four PowerShell syntax parses and diff/
 preservation checks. The source audit is a local PowerShell check, not a configured
-GitHub Actions step. Exact-head repair publication closeout pending.
+GitHub Actions step. Repairc258dd0d2663b892f690d4c077b132eb883566bb is pushed and
+passed [exact-head CI40726243058](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40726243058):
+actual PHP7.4/8.3 each1683 tests/7448 assertions, no failures/skips; Node16/16
+and all configured gates pass. This evidence-only closeout preserves those source
+bytes and receives its own exact-head check before handoff. No hosted or local
+repository check executes/qualifies the postponed native controller proof.
 The earlier physical stop is not
 resolved by these local tests: raw/seven native cases and all live-child physical
 qualification remain unrun, and the revised query has not been sent to the server.

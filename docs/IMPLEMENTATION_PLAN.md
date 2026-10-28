@@ -18,7 +18,9 @@ PHP7.4/8.3 each1683/7448, no failures/skips. Standing safe-local follow-up corre
 the pure query projection, strict prefix/path admission and bounded fragmented-error
 redaction; source18 and socket-free stdio39/9 checks pass, four assertion-killed/
 hash-restored controls. No SQL/site/native retry. Repair full local1683/7441 (same
-two Sodium skips), Node16/16/all configured gates pass; repair publication pending.
+two Sodium skips), Node16/16/all configured gates pass. Repairc258dd0d2663b892f690d4c077b132eb883566bb
+passed [exact-head CI40726243058](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40726243058):
+PHP7.4/8.3 each1683/7448, no failures/skips. Physical qualification still unrun.
 Implementation-plan progress: bounded
 transport/preflight advanced, physical qualification and lost-update repair open.
 Next gated slice: Plugin Tester local-only One Fresh Per-Case Cleanup Controller/
