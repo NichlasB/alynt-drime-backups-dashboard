@@ -14,7 +14,9 @@ Safe-local diagnostic-only follow-up adds a privacy-bound256-byte rejected-row
 projection, PHP14/99 (combined129/446), source26 and socket-free stdio46/10 checks,
 three assertion-killed/SHA256-restored controls. No new native/SQL experiment.
 Final local full1697/7512 (two existing Sodium skips), Node16/16/all configured
-local gates pass; exact-head publication pending. Read-only observer catalog/mode
+local gates pass. Checkpoint4c6e08a0cc4d1e8c1efecdb81c3db119baaebbb9 passed
+[exact-head CI40736765574](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40736765574):
+PHP7.4/8.3 each1697/7519, no failures/skips; Node16/16/all gates pass. Read-only observer catalog/mode
 checks did not establish the failed owner tuple; no connected qualification claim.
 Implementation-plan progress: physical preflight/failed-initial cleanup advanced;
 connected/positive qualification and lost-update repair open. Next gated slice:

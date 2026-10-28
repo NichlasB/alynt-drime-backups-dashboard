@@ -309,7 +309,12 @@ manifest and Composer/npm zero-advisory audits all pass. Commands: full PHPUnit
 npm lint/test:admin/check:structure/build; php composer.phar validate --strict/audit;
 npm audit --audit-level=moderate; source/stdio audits above. Scoped syntax, link,
 diff, acceptance/runtime/dependency/non-target preservation checks pass.
-Exact-head CI closeout pending. No whole-plugin readiness,
+Checkpoint4c6e08a0cc4d1e8c1efecdb81c3db119baaebbb9 passed
+[exact-head CI40736765574](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40736765574):
+actual PHP7.4/8.3 each1697 tests/7519 assertions, no failures/skips; Node16/16
+and all configured gates pass. Hosted QA never runs the native proof or Windows
+manual audits. This evidence-only closeout preserves tested source bytes and gets
+a separate exact-head check before handoff. No whole-plugin readiness,
 Database Review or product-task completion credit. Implementation-plan progress:
 raw/failed-initial cleanup and preflight rows physically advance, but connected
 missing-table/positive qualification and actual lost-update repair remain open.
