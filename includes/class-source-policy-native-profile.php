@@ -14,11 +14,12 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 	/**
 	 * Validates private provider facts; the production provider remains absent.
 	 *
-	 * @param mixed  $facts Provider DATA, never request input.
-	 * @param string $table Fixed connection table binding.
+	 * @param mixed       $facts Provider DATA, never request input.
+	 * @param string      $table Fixed connection table binding.
+	 * @param object|null $query_context Closed private receiver context, not a caller grant.
 	 * @return array|WP_Error
 	 */
-	public static function admit( $facts, $table ) {
+	public static function admit( $facts, $table, $query_context = null ) {
 		global $wp_object_cache, $wp_filter;
 		$required = array( 'core', 'server', 'database', 'table', 'schema', 'autocommit', 'single_site', 'dropins', 'cache', 'bounded_session', 'hooks' );
 		if ( ! is_array( $facts ) || count( $required ) !== count( $facts ) || array_diff( $required, array_keys( $facts ) ) ) {
@@ -34,7 +35,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 		$fingerprint = self::fingerprint();
 		if ( is_wp_error( $fingerprint ) || ! is_string( $facts['hooks'] ) || ! hash_equals( $fingerprint, $facts['hooks'] )
 			|| ! is_object( $wp_object_cache ) || 'WP_Object_Cache' !== get_class( $wp_object_cache ) || ! function_exists( 'wp_using_ext_object_cache' ) || false !== wp_using_ext_object_cache()
-			|| ( isset( $wp_filter['query'] ) && ! empty( $wp_filter['query']->callbacks ) ) ) {
+			|| ( null === $query_context ? ( isset( $wp_filter['query'] ) && ! empty( $wp_filter['query']->callbacks ) ) : ( ! $query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $query_context->valid() ) ) ) {
 			return new WP_Error( 'source_policy_unavailable' );
 		}
 		return array(
@@ -48,9 +49,10 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 	/**
 	 * Inspects bounded hook metadata without invoking callbacks or autoloaders.
 	 *
+	 * @param bool $without_query Private warm-up comparison excludes the owned registry change.
 	 * @return string|WP_Error Consistency DATA only; matching it is NOT qualification.
 	 */
-	public static function fingerprint() {
+	public static function fingerprint( $without_query = false ) {
 		global $wp_filter;
 		$name  = Alynt_Drime_Backups_Dashboard_Source_Policy::OPTION_SOURCE_POLICIES;
 		$hooks = array( 'sanitize_key', 'pre_option', "pre_option_$name", "option_$name", "default_option_$name", "sanitize_option_$name", "pre_update_option_$name", 'pre_update_option', 'update_option', "update_option_$name", 'updated_option', 'add_option', "add_option_$name", 'added_option', 'alloptions', 'pre_cache_alloptions', 'pre_wp_load_alloptions', 'wp_autoload_values_to_autoload', 'query' );
@@ -59,6 +61,9 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 		}
 		$frames = '';
 		foreach ( $hooks as $hook ) {
+			if ( $without_query && 'query' === $hook ) {
+				continue;
+			}
 			$frames .= strlen( $hook ) . ':' . $hook;
 			if ( ! isset( $wp_filter[ $hook ] ) ) {
 				continue;

@@ -5,11 +5,24 @@ if ( class_exists( 'wpdb', false ) ) throw new RuntimeException( 'Never replace 
 class wpdb {
 	public $ready = true, $options = 'wp_options', $last_result = array(), $last_error = '', $error_code = 0;
 	public $store, $prepared = array(), $queries = array(), $physical = 0, $reconnects = 0, $closes = 0;
+	public $dbh = null, $placeholder_calls = 0;
+	private $marker = null;
 	public function __construct() { throw new RuntimeException( 'A parent/native constructor must never run.' ); }
-	public function prepare( $template, ...$args ) { $id = 'isolated:' . count( $this->prepared ); $this->prepared[$id] = array( $template, $args ); return $id; }
+	public function prepare( $template, ...$args ) {
+		$id='isolated:'.count($this->prepared); $this->prepared[$id]=array($template,$args);
+		$wire=$this->add_placeholder_escape($this->_real_escape($id.'|'.serialize($args)));
+		if($this->store&&$this->store->after_prepare) { $after=$this->store->after_prepare; $this->store->after_prepare=null; $after($this,$template); }
+		return $wire;
+	}
+	public function placeholder_escape() { ++$this->placeholder_calls; if(null===$this->marker) $this->marker='{isolated-'.spl_object_hash($this).'}'; if(false===has_filter('query',array($this,'remove_placeholder_escape'))) add_filter('query',array($this,'remove_placeholder_escape'),0); return $this->marker; }
+	public function add_placeholder_escape($query) { return str_replace('%',$this->placeholder_escape(),$query); }
+	public function remove_placeholder_escape($query) { return str_replace($this->placeholder_escape(),'%',$query); }
+	public function _real_escape($value) { return $this->add_placeholder_escape($value); }
 	public function query( $sql ) {
 		if ( ! $this->ready ) return false;
+		$sql=apply_filters('query',$sql); list($sql,$wire)=explode('|',$sql,2);
 		if ( ! isset( $this->prepared[$sql] ) ) throw new RuntimeException( 'Only fixed prepared queries are modeled.' );
+		if($wire!==serialize($this->prepared[$sql][1])) throw new RuntimeException('Placeholder pipeline must restore exact parameter bytes.');
 		$result = $this->physical_query( $this->prepared[$sql] );
 		if ( 2006 === $this->error_code ) {
 			if ( $this->check_connection() ) return $this->physical_query( $this->prepared[$sql] );
@@ -18,7 +31,7 @@ class wpdb {
 		return $result;
 	}
 	public function check_connection( $allow_bail = true ) { ++$this->reconnects; $this->store->lose_ack = false; return true; }
-	public function close() { ++$this->closes; $this->ready = false; if ( $this->store->close_throw ) throw new RuntimeException( 'owned-close-private' ); return $this->store->close_ok; }
+	public function close() { ++$this->closes; $this->ready = false; if ( $this->store->close_throw ) throw new RuntimeException( 'owned-close-private' ); if($this->store->close_ok) $this->dbh=null; return $this->store->close_ok; }
 	private function physical_query( $prepared ) {
 		list( $sql, $args ) = $prepared; ++$this->physical; $this->queries[] = $prepared;
 		$this->last_result = array(); $this->last_error = ''; $this->error_code = 0;

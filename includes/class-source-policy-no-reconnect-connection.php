@@ -17,6 +17,26 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @var array|null
 	 */
 	private $qualification = null;
+	/** Closed private query context; never returned to callers.
+	 *
+	 * @var object|null
+	 */
+	private $query_context = null;
+	/** One native cleanup attempt only.
+	 *
+	 * @var bool
+	 */
+	private $close_attempted = false;
+	/** Confirmed independent driver/callback cleanup.
+	 *
+	 * @var bool
+	 */
+	private $closed = false;
+	/** Known private lifecycle, not inferred from a missing handle after failure.
+	 *
+	 * @var string
+	 */
+	private $native_state = 'never_opened';
 
 	/** No parent constructor, credentials, socket or native session is opened. */
 	protected function __construct() {
@@ -80,9 +100,72 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 * @param string $query Fixed prepared statement.
 	 * @return int|bool
 	 */
-	final public function query( $query ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod -- final prevents subclass executor replacement; core behavior is not copied.
+	final public function query( $query ) {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Fixed dormant owner; reconnect and raw error output are refused above.
-		return parent::query( $query );
+		return is_wp_error( $this->admit_profile() ) ? false : parent::query( $query );
+	}
+
+	/** Admits only this privately bound single-use receiver.
+	 *
+	 * @return array|WP_Error
+	 */
+	final public function admit_profile() {
+		if ( $this->close_attempted || 'active' !== $this->native_state || true !== $this->ready || ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this ) ) {
+			return new WP_Error( 'source_policy_unavailable' );
+		}
+		return Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $this->qualification, $this->options, $this->query_context );
+	}
+
+	/**
+	 * Guards both sides of genuine preparation; never reseals altered metadata.
+	 *
+	 * @param string $query Fixed owner SQL template.
+	 * @param mixed  ...$args Prepared values only.
+	 * @return string
+	 * @throws RuntimeException If admission changes.
+	 */
+	final public function prepare_checked( $query, ...$args ) {
+		if ( is_wp_error( $this->admit_profile() ) ) {
+			throw new RuntimeException( 'Policy preparation unavailable' );
+		}
+		$prepared = $this->prepare( $query, ...$args );
+		if ( ! is_string( $prepared ) || is_wp_error( $this->admit_profile() ) ) {
+			throw new RuntimeException( 'Policy preparation changed' );
+		}
+		return $prepared;
+	}
+
+	/** Attempts owned driver and callback cleanup independently, once.
+	 *
+	 * @return bool
+	 */
+	final public function close() {
+		if ( $this->close_attempted ) {
+			return $this->closed;
+		}
+		$this->close_attempted = true;
+		$native                = false;
+		try {
+			$native = ( $GLOBALS['wpdb'] ?? null ) === $this ? false : ( 'never_opened' === $this->native_state && null === $this->dbh && ! $this->ready );
+			if ( ( $GLOBALS['wpdb'] ?? null ) !== $this && 'active' === $this->native_state && null !== $this->dbh ) {
+				$native = true === parent::close();
+			}
+		} catch ( Throwable $error ) {
+			$native = false; // Unknown native closure is not converted to success or retried.
+		} finally {
+			$this->native_state = $native ? 'closed' : 'closure_unknown';
+			if ( ( $GLOBALS['wpdb'] ?? null ) !== $this ) {
+				$this->ready = false;
+			}
+		}
+		try {
+			$callbacks = $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context && $this->query_context->owns( $this )
+				? $this->query_context->finish() : false === has_filter( 'query', array( $this, 'remove_placeholder_escape' ) );
+		} catch ( Throwable $error ) {
+			$callbacks = false; // Do not delete foreign registrations to claim cleanup.
+		}
+		$this->closed = $native && $callbacks;
+		return $this->closed;
 	}
 
 	/**
@@ -90,8 +173,12 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 	 *
 	 * @param string $sql Fixed owner-prepared statement.
 	 * @return array Internal acknowledgement DATA.
+	 * @throws RuntimeException If dispatch admission changed.
 	 */
 	final public function execute( $sql ) {
+		if ( is_wp_error( $this->admit_profile() ) ) {
+			throw new RuntimeException( 'Policy dispatch unavailable' );
+		}
 		try {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared -- Fixed dormant owner prepares the statement; no native constructor/caller is connected.
 			$affected = parent::query( $sql );

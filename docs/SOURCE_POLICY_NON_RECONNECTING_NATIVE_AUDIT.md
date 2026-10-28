@@ -1,5 +1,11 @@
 # Fixed Non-Reconnecting Connection / Native Adapter Audit — Blocked
 
+Later isolated implementation,2026-10-28:
+[core placeholder/lifecycle foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md)
+adds a closed private-context exception and RAM tests. This audit script and its
+default no-context refusal remain unchanged/not rerun. Native qualification is
+still blocked pending genuine-core context/cleanup and owned native evidence.
+
 Later design-only decision,2026-10-28: the
 [core placeholder/lifecycle design](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_DESIGN.md)
 specifies a bounded exact-receiver exception and its acceptance/cleanup gates.

@@ -219,7 +219,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 		if ( ! $this->connection instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection || true !== $this->connection->ready ) {
 			return new WP_Error( 'source_policy_unavailable' );
 		}
-		return Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $this->connection->profile(), $this->connection->options );
+		return $this->connection->admit_profile();
 	}
 
 	/**
@@ -244,7 +244,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 		$connection = $this->connection;
 		$name       = Alynt_Drime_Backups_Dashboard_Source_Policy::OPTION_SOURCE_POLICIES;
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Fixed connection table validated by profile admission; values prepared, no request identifier.
-		$ack = $connection->execute( $connection->prepare( "SELECT IF(OCTET_LENGTH(option_value)<=16384,option_value,NULL) AS option_value,autoload FROM $connection->options WHERE option_name=%s AND BINARY option_name=BINARY %s LIMIT 1", $name, $name ) );
+		$ack = $connection->execute( $connection->prepare_checked( "SELECT IF(OCTET_LENGTH(option_value)<=16384,option_value,NULL) AS option_value,autoload FROM $connection->options WHERE option_name=%s AND BINARY option_name=BINARY %s LIMIT 1", $name, $name ) );
 		if ( ! is_int( $ack['affected'] ) || $ack['affected'] < 0 || $ack['affected'] > 1 || ! is_array( $connection->last_result ) || count( $connection->last_result ) !== $ack['affected'] ) {
 			return new WP_Error( 'source_policy_storage_error' );
 		}
@@ -273,10 +273,10 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 		$name       = Alynt_Drime_Backups_Dashboard_Source_Policy::OPTION_SOURCE_POLICIES;
 		if ( 'insert' === $operation ) {
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Fixed admitted table, prepared values only.
-			return $connection->prepare( "INSERT INTO $connection->options (option_name,option_value,autoload) VALUES (%s,%s,%s)", $name, $bytes, $autoload );
+			return $connection->prepare_checked( "INSERT INTO $connection->options (option_name,option_value,autoload) VALUES (%s,%s,%s)", $name, $bytes, $autoload );
 		}
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Fixed admitted table, all identity/byte/length values prepared.
-		return $connection->prepare( "UPDATE $connection->options SET option_value=%s,autoload=%s WHERE option_name=%s AND BINARY option_name=BINARY %s AND BINARY option_value=BINARY %s AND OCTET_LENGTH(option_value)=%d AND BINARY autoload=BINARY %s AND OCTET_LENGTH(autoload)=%d", $bytes, $autoload, $name, $name, $row['option_value'], strlen( $row['option_value'] ), $row['autoload'], strlen( $row['autoload'] ) );
+		return $connection->prepare_checked( "UPDATE $connection->options SET option_value=%s,autoload=%s WHERE option_name=%s AND BINARY option_name=BINARY %s AND BINARY option_value=BINARY %s AND OCTET_LENGTH(option_value)=%d AND BINARY autoload=BINARY %s AND OCTET_LENGTH(autoload)=%d", $bytes, $autoload, $name, $name, $row['option_value'], strlen( $row['option_value'] ), $row['autoload'], strlen( $row['autoload'] ) );
 	}
 
 	/**

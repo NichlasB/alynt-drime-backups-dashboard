@@ -22,6 +22,7 @@ final class SourcePolicyNoReconnectFoundationTest extends TestCase {
 		$sql='INSERT INTO wp_options (option_name,option_value,autoload) VALUES (%s,%s,%s)';
 		$control->query($control->prepare($sql,'owned','a:0:{}','off'));
 		$this->assertSame(2,$control->physical); $this->assertSame(1,$control->reconnects);
+		remove_filter('query',array($control,'remove_placeholder_escape'),0); // Exact reference-control cleanup before the independently owned candidate.
 		list($owner,$connection,$store)=$this->owner(new Alynt_Drime_Backups_Dashboard_Test_Policy_Store(null));
 		$store->lose_ack=true;
 		$this->error_code($owner->save_source_mode_if_current($this->revision($store),7,'wpvivid','external_optional'),'source_policy_write_uncertain');

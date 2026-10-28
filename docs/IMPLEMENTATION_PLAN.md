@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved core placeholder/owned lifecycle foundation — 2026-10-28
+
+Repository-only R3 [dormant foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md),
+clean/synced61ef71dcf8bd5c5485b7a26a21bdb7de0e93e781. Closed private query context,
+fixed receiver/method bindings, core callback warm-up/seal, checked preparation/
+dispatch and independent once-only owned cleanup; explicit never-opened versus
+unknown state. Factories/provider, actual authentication/storage/native execution
+and production wiring remain absent/disabled. Source bindings and RAM handles
+are not genuine qualification. New48/327; related randomized426/1732; full local
+1260/5690 with two baseline Sodium skips; Node16/16/all gates/audits pass. Five
+assertion-killed/SHA256-restored controls and source-scoped reviews recorded.
+Exact-head CI pending. Actual lost-update repair/native proof remain open;
+whole07/07A/13/FULL and toolkit unchanged, no prior8/8 count inflation.
+Recommended next gated slice: Plugin Tester local-only Genuine-Core Query
+Context and Owned Callback Cleanup Zero-SQL Qualification Proof, fresh exact
+target/scope, no native handle/SQL/authentication/storage/wiring. Native owned
+construction/adapter proof follows genuine-core qualification, not RAM success.
+
 ## Approved core placeholder/connection-lifecycle design — 2026-10-28
 
 Repository-only [design](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_DESIGN.md),

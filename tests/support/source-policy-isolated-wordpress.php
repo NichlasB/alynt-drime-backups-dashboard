@@ -37,4 +37,26 @@ function policy_isolated_hook( $hook, $callback, $accepted = 3 ) {
 	if ( ! isset( $GLOBALS['wp_filter'][ $hook ] ) ) $GLOBALS['wp_filter'][ $hook ] = new WP_Hook();
 	$GLOBALS['wp_filter'][ $hook ]->callbacks[10][] = array( 'function' => $callback, 'accepted_args' => $accepted );
 }
+function policy_isolated_callback_key($callback) { return is_array($callback)?spl_object_hash($callback[0]).':'.$callback[1]:(is_object($callback)?spl_object_hash($callback):$callback); }
+function add_filter($hook,$callback,$priority=10,$accepted=1) {
+	if(!isset($GLOBALS['wp_filter'][$hook])) $GLOBALS['wp_filter'][$hook]=new WP_Hook();
+	$GLOBALS['wp_filter'][$hook]->callbacks[$priority][policy_isolated_callback_key($callback)]=array('function'=>$callback,'accepted_args'=>$accepted);
+	ksort($GLOBALS['wp_filter'][$hook]->callbacks);
+	if(!empty($GLOBALS['policy_after_add'])) { $after=$GLOBALS['policy_after_add']; $GLOBALS['policy_after_add']=null; $after(); }
+	return true;
+}
+function has_filter($hook,$callback=false) {
+	foreach(isset($GLOBALS['wp_filter'][$hook])?$GLOBALS['wp_filter'][$hook]->callbacks:array() as $priority=>$entries) {
+		if(false===$callback&&$entries) return true;
+		if(false!==$callback&&isset($entries[policy_isolated_callback_key($callback)])) return $priority;
+	}
+	return false;
+}
+function remove_filter($hook,$callback,$priority=10) {
+	if(!empty($GLOBALS['policy_remove_throw'])) throw new RuntimeException('owned-private-remove');
+	$key=policy_isolated_callback_key($callback); $found=isset($GLOBALS['wp_filter'][$hook]->callbacks[$priority][$key]);
+	if(empty($GLOBALS['policy_remove_retain'])) unset($GLOBALS['wp_filter'][$hook]->callbacks[$priority][$key]);
+	if(empty($GLOBALS['wp_filter'][$hook]->callbacks[$priority])) unset($GLOBALS['wp_filter'][$hook]->callbacks[$priority]);
+	return $found;
+}
 }

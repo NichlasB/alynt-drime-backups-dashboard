@@ -1,5 +1,20 @@
 # UI Reliability Pre-Release Review — 2026-10-26
 
+## Core placeholder/owned lifecycle isolated foundation — 2026-10-28
+
+[Closed safety foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md)
+implements the exact-receiver preparation/cleanup contract, not real UI/writer
+integration. New48/327, related426/1732, full local1260/5690 with only two known
+Sodium skips; Node16/16/all quality/audit gates pass. Five assertion-killed and
+SHA256-restored controls; scoped Light/structure/Security records, not genuine
+authentication/native/cache/UI qualification. Exact-head CI pending. Actual
+facade/form/handler and manual proofs unchanged; all factories/provider and
+native execution/wiring remain closed. Native proof and application lost-update
+repair stay open; whole07/07A/13/FULL/toolkit rows not refreshed.
+Next gated slice: Plugin Tester local-only Genuine-Core Query Context and Owned
+Callback Cleanup Zero-SQL Qualification Proof, fresh exact target/scope; keep
+authentication/native handles/SQL/storage/bootstrap/wiring disabled.
+
 ## Core placeholder admission/lifecycle design — 2026-10-28
 
 [Repository-only design](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_DESIGN.md)

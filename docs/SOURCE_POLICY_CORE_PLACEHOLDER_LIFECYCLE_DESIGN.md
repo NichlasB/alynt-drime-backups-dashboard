@@ -1,5 +1,11 @@
 # Source-Policy Genuine-Core Placeholder-Escape Admission and Connection-Lifecycle Compatibility Design
 
+Later repository-only implementation,2026-10-28:
+[isolated foundation](SOURCE_POLICY_CORE_PLACEHOLDER_LIFECYCLE_FOUNDATION.md).
+The closed algorithm and modeled core preparation/lifecycle tests now exist;
+real provider/source/native qualification and production wiring remain absent.
+This does not refresh the historical design-only validation into native evidence.
+
 ## Authority and immutable baseline — 2026-10-28
 
 Separately approved repository-only design through validation, commit, push and
