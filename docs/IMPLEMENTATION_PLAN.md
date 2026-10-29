@@ -11,7 +11,10 @@ transcripts, connected refusal before commands and altered-fact refusal after
 Linux initializer success. Three intended red assertions, then combined349/1331
 green; two separate assertion-killed/hash-restored identity controls. Current-
 source manual image effects inventoried, no stale receipt refreshed. No native/
-database/site/manual dispatch or package/release/deploy; final QA/CI in owner.
+database/site/manual dispatch or package/release/deploy. Full local2006/8683,
+two existing Sodium skips; implementationc925d61/CI40845939867 succeeds with
+PHP7.4/8.3 each2006/8690, no failures/skips, admin16/16/all gates. Evidence-only
+final-head CI checked separately at handoff; detailed QA/limits in owner.
 Implementation-plan progress: exact-row isolated foundation implemented; native
 qualification and production integration remain gated. Recommended next gated
 slice: Off-Production Linux Genuine-Core Report-OFF and Diagnostic Native

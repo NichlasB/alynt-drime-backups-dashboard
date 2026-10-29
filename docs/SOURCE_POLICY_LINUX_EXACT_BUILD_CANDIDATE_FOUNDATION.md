@@ -95,6 +95,7 @@ There is no new source authority derived from that observed hash.
 | Isolated bootstrap worker/transport cases and contract/profile tests | Expected literal/negative migration implemented explicitly; no helper-derived oracle. Existing isolated source bindings need no production pin relaxation. |
 | scripts/manual/source-policy-bootstrap-owned-proof.php | Loads Native_Profile/No_Reconnect_Connection and thus the changed helper; fixed Windows7.1.3/TCP composition is unchanged, not rerun or recredited. |
 | scripts/manual/source-policy-cleanup-native-cases.php adbc_source, adapter-owned-proof.php and ambient-owned-proof.php | Their loaded-file SHA256 image includes the transitive helper. Current-source image/receipt correlation changes; collect and audit a new exact image only inside separately approved prerequisites/proof. Preserve ADBC contracts and historical receipts. |
+| scripts/manual/source-policy-connected-cleanup-worker.php adbc2_image | Also freezes get_included_files after the same bootstrap audit; its changed image must be freshly correlated to live/post-exit ADBC2 evidence, not converted from old receipts. No execution here. |
 | scripts/ci/source-policy-linux-core-pins.json and preflight | Own11 genuine core files, not this dashboard helper; pins/immutable runtime/image selection stay unchanged. No candidate hash is substituted for a genuine core pin. |
 | scripts/ci/source-policy-linux-identity contract/worker and manual workflows | Observation-only input agreement remains unchanged, not runtime admission; prior d48b8f1/run40783576271 identity evidence stays historical. No workflow dispatch or new native result. |
 
@@ -119,8 +120,15 @@ signing skips (RemoteActionSignerFailureTest and RemoteActionSignerTest).
 Final diff/link/scope review passes; runtime diff is one literal and manual
 scripts/CI/dependencies/assets/schema/application writer remain baseline-identical.
 Uploader3dfcb15 and toolkitc067eb6 remain clean/synced, no toolkit write.
-Exact-head publication/ordinary CI evidence follows after push. No installed/site
-state was touched and no physical qualification result is claimed.
+Implementation `c925d615bc3cb0b8cc2c465df2fd8032edabad1d` is pushed.
+[Ordinary exact-head CI40845939867](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40845939867)
+succeeded with both check contexts successful. Actual retrieved logs: PHP7.4/8.3
+each2,006 tests/8,690 assertions, no failures/skips; admin16/16/0 skipped each and
+all configured lint/build/structure/manifest/audit gates successful. This includes
+the positive/negative Linux socket initializer and altered-fact query refusal
+with extension-free doubles, not a physical socket/database or genuine core/OFF.
+Evidence-only final-head remote/ordinary CI is checked separately at handoff.
+No installed/site state was touched and no physical qualification result is claimed.
 
 Implementation-plan progress: the intended-lab exact candidate and isolated
 admission regressions are implemented; genuine Linux/OFF/diagnostic/native
