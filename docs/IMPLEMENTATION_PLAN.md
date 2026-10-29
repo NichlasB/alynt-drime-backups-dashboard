@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Observer diagnostics: first snapshot exceeds module ceiling — 2026-10-29
+
+Approved [diagnostic repair and one fresh owned attempt](SOURCE_POLICY_TOOL_OBSERVER_DIAGNOSTICS_OWNED_PROOF.md)
+at clean/synced restore baseline f787291. Finite source/run/owned-identity-bound
+stderr facts are EOF-validated; zero-stderr positive acceptance and all budgets/
+cleanup stay unchanged. Fresh attempt stopped at snapshot-one/module-count with
+rows:129 overflow sentinel, before row traversal: actual collection exceeds 128,
+not an exact count of 129. Both owned processes/pipes/fixtures were reconciled;
+timeout/cancellation groups did not run. No automatic retry or ceiling change.
+
+Implementation-plan progress: validated diagnostics identify a genuine tool/
+module-cap incompatibility; physical observer qualification is still blocked.
+Previous safe-local count remains 1/8 plus separate proof/diagnostic work.
+Recommended next gated slice: Design-only Existing-Tool Module-Ceiling and
+Observer Feasibility Decision, evaluating a bounded tool-only profile without
+changing the candidate's 128-module limit or any current guards. Keep installation,
+candidate loading, host/site/database operations and production wiring disabled.
+
 ## Owned existing-tool observer proof — blocked after clean failure — 2026-10-29
 
 Approved [physical owned-tool prerequisite](SOURCE_POLICY_TOOL_OBSERVER_OWNED_PROOF.md)

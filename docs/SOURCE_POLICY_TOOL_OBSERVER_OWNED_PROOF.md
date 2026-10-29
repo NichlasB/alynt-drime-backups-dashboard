@@ -1,5 +1,10 @@
 # Existing-Tool Bounded Observer/Termination Owned Proof — Blocked
 
+Forward progress: the approved [diagnostic repair and one fresh attempt](SOURCE_POLICY_TOOL_OBSERVER_DIAGNOSTICS_OWNED_PROOF.md)
+identified a first-snapshot collection above 128 modules and cleaned its owned
+processes/fixtures. It does not retroactively classify this initial failure or
+establish physical success. Follow the new module-ceiling design decision gate.
+
 ## Authority, restore baseline and disposition — 2026-10-29
 
 Explicitly approved local-only proof using existing bundled PowerShell and

@@ -25,4 +25,12 @@ final class SourcePolicyToolObserverSourceTest extends TestCase {
 		$this->assertStringNotContainsString('Remove-Item',$c);$this->assertStringNotContainsString('$true)',$c);
 		$this->assertStringNotContainsString('source-policy-tool-observer',file_get_contents(dirname(__DIR__).'/alynt-drime-backups-dashboard.php'));
 	}
+	public function test_diagnostics_are_correlated_finite_eof_only_and_cannot_admit_stderr() {
+		$p=$this->source('transport');$o=$this->source('child');$c=$this->source('owned-proof');
+		foreach(array('function Read-ToolDiagnostic','function Add-ToolDiagnosticBytes',"'ADBTD1|'",'$Child.TargetId','$Child.TargetTick','$f.Count -ne 13','$Line.Length -gt 512','$rows -gt 129','$index -gt 128','$mask -gt 15','$Child.ErrEof','$Child.ErrPrefix.Length -eq $Child.ErrBytes',"$".'Child.ErrPrefix=\'\';return',"if (\$Child.ErrBytes -gt 0) { throw 'tool-stderr-refused' }",'$Child.ErrBytes -ne 0') as $text)$this->assertStringContainsString($text,$p);
+		foreach(array("'snapshot-one'","'snapshot-two'","'module-count'","'module-name'","'module-path'","'module-size'","'module-duplicate'",'$script:DiagMask=[int]$badName+2*[int]$badPath+4*[int]$badSize+8*[int]$duplicate','$badName -or $badPath -or $badSize -or $duplicate') as $text)$this->assertStringContainsString($text,$o);
+		foreach(array('if (-not $badName) {','if (-not $badName -and -not $badPath) {','if (-not $badName -and -not $badPath -and -not $badSize) {') as $text)$this->assertStringContainsString($text,$o);
+		foreach(array('Exception.Message','Exception.ToString','Format-List','Write-Error') as $text)$this->assertStringNotContainsString($text,$o);
+		$this->assertStringContainsString('if ($failure) {',$c);$this->assertStringContainsString('observer_phase:',$c);$this->assertStringNotContainsString('ErrPrefix',$c);
+	}
 }

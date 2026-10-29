@@ -104,5 +104,8 @@ try {
     if (-not $clean) { [Console]::Error.WriteLine('tool-proof-retained run:'+$run);$failure=$true }
 }
 if ($null -ne $script:ToolProof -and $script:ToolProof.Clock.ElapsedMilliseconds -ge 25000) { [Console]::Error.WriteLine('tool-proof-cleanup-deadline');$failure=$true }
-if ($failure) { [Console]::Error.WriteLine('tool-proof failure_cleanup_confirmed:'+[int]($clean -and $allExited)+' fixtures_absent:'+[int]$clean+' owned_absence_confirmed:'+[int]$allExited);exit 1 }
+if ($failure) {
+    if ($null -ne $script:ToolProof) { foreach ($child in $script:ToolProof.Children) { if ($null -ne $child.ErrorFact) { $fact=$child.ErrorFact;[Console]::Error.WriteLine('tool-proof observer_phase:'+$fact.Phase+' observer_reason:'+$fact.Reason+' rows:'+$fact.Rows+' row:'+$fact.Index+' mask:'+$fact.Mask) } } }
+    [Console]::Error.WriteLine('tool-proof failure_cleanup_confirmed:'+[int]($clean -and $allExited)+' fixtures_absent:'+[int]$clean+' owned_absence_confirmed:'+[int]$allExited);exit 1
+}
 [Console]::Out.WriteLine('tool-proof checks:'+$checks+' groups:'+$groups+' modules:'+$snapshot.Count+' image_bytes:'+$snapshot.Bytes+' max_image_bytes:'+$snapshot.Max+' catalog_sha256:'+$snapshot.Digest+' elapsed_ms:'+$script:ToolProof.Clock.ElapsedMilliseconds+' cancellation_not_exit:'+[int]$cancelAlive+' fixtures:0 owned_processes:0 runtime_load_authorized:0')
