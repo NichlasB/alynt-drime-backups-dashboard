@@ -149,8 +149,16 @@ Executed repository QA, existing PHP8.5.1:
   source-pin values are unchanged; catalog adds only the fixed metadata URL.
   Uploader/toolkit remain clean and untouched. Both exact children are absent.
 
-Exact-head ordinary publication CI follows; no new artifact/native operation is
-run for publication, and green CI does not complete the refused import boundary.
+Ordinary publication CI passed for exact implementation head
+`60e253d1a8fd4e43267012dd95db400aa004aa31`:
+[run40904744052](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40904744052).
+Actual logs report PHP7.4:2,129 tests/11,167 assertions and PHP8.3:2,129 tests/
+11,172 assertions, both successful with no skips. Each job's admin suite passed
+23/23 with zero failures/skips; Composer/npm audits report zero advisories/
+vulnerabilities. Build, structure and PHPCS steps passed in both jobs. This
+evidence-only closeout is committed separately and its exact-head status is
+verified at handoff. No new artifact/native operation runs for publication;
+green CI does not complete the refused import boundary or qualify downloaded code.
 
 Implementation-plan progress: the core host/mode and full decoded core source
 identity boundary advanced; complete acquisition/static qualification is now
