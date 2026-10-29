@@ -1,5 +1,10 @@
 # Supported-Profile Source Rebaseline and Isolated Harness Safety Foundation
 
+Subsequent separately approved [current-source Windows/TCP owned qualification](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md)
+passed395 checks/nine groups for its exact new image, with independent release
+and unchanged77 application checksums. The original foundation evidence below
+remains historical; minimum-profile and wider coverage are not inferred.
+
 ## Scope and restore point — 2026-10-29
 
 Approved gate1 of the [qualification design](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md).

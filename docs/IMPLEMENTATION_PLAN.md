@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Current-source Windows/TCP owned qualification — 2026-10-29
+
+Approved and exact-target-confirmed [owned proof](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md)
+at clean/synced source baseline3f9530d. Fresh source26+20, socket-free stdio46/10
+and12/3, genuine core error25/6 and connection-free149 prerequisites passed.
+Fresh ADBC2 refusal/positive release prerequisite passed; the single ambient/OFF
+body passed395 checks/nine groups with exact held/live/post release. Only one
+empty owned clone was created and removed; all77 original application table
+checksums unchanged, retained fixtures/other all-server sessions/transactions0.
+No runtime/harness changes or native replay; production wiring remains closed.
+Owning record preserves exact images, proof limits and publication evidence.
+
+Implementation-plan progress: current Windows9-group native evidence refreshed,
+not minimum-core/PHP7.4 or exhaustive supported-matrix qualification. Recommended
+next gated slice: Repository-only Minimum-Core/PHP7.4 Isolated Artifact
+Provisioning and Fixed Runner Integration Design, design-only without downloads,
+native experiments, installation/site changes or production wiring.
+
 ## Supported-profile source/isolated harness foundation — 2026-10-29
 
 Approved [source-rebaseline and isolated harness foundation](SOURCE_POLICY_SUPPORTED_PROFILE_FOUNDATION.md)
