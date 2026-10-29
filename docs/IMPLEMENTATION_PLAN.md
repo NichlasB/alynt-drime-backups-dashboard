@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Owned existing-tool observer proof — blocked after clean failure — 2026-10-29
+
+Approved [physical owned-tool prerequisite](SOURCE_POLICY_TOOL_OBSERVER_OWNED_PROOF.md)
+at clean/synced restore baseline 911e9a3. One ordered attempt stopped at
+positive-observer/tool-stderr-refused after 13 controller checks, before any
+completed group. Both owned process identities/pipes were reconciled and all
+disposable fixtures removed. Actual observer/module feasibility is not proved;
+timeout/cancellation groups did not run. No automatic retry or guard relaxation.
+
+Implementation-plan progress: bounded PowerShell harness and parser/source
+regressions exist; physical verification remains blocked, not completed by CI.
+Previous safe-local progress remains 1/8 plus this separately approved failed
+attempt. Recommended next gated slice: Harness-only Observer Phase/Reason
+Diagnostics and One Fresh Owned Observer Proof, finite validated diagnostics,
+fresh same-scope fixtures and unchanged guards/budgets. Keep candidate PHP,
+installation, WordPress/database/site, host-trust designation and wiring disabled.
+
 ## Socket-free explicit host-trust/observer admission foundation — 2026-10-29
 
 Autonomous safe-local batch selects the [next pure foundation](SOURCE_POLICY_MINIMUM_HOST_ADMISSION_SAFETY_FOUNDATION.md)

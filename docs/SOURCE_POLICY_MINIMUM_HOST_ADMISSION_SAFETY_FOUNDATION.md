@@ -1,5 +1,10 @@
 # Socket-Free Explicit Host-Trust and Observer-Admission Safety Foundation
 
+Forward progress: the separately approved [owned-tool physical attempt](SOURCE_POLICY_TOOL_OBSERVER_OWNED_PROOF.md)
+failed in the positive observer stage and cleaned both owned processes/fixtures.
+It does not upgrade this synthetic foundation to physical feasibility; follow
+the recorded diagnostic/fresh-attempt approval gate. Historical results remain.
+
 ## Authority, baseline and implementation-plan position — 2026-10-29
 
 Selected under the autonomous safe-local batch, at clean/synced dashboard restore
