@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum-core/PHP7.4 artifact and fixed runner design — 2026-10-29
+
+Approved [repository-only design](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_DESIGN.md)
+at clean/synced baselinef26a1d4. Pins the publisher's Windows NTS x64 PHP7.4.33
+ZIP checksum and genuine core6.0 commit/tree/schema reference without fetching
+archives. Selects disposable portable artifacts outside LocalWP, separate fixed
+minimum runner contracts, legacy autoload/reflection and complete escaping/cost
+requirements. No runtime, harness, source pins, schema, dependencies or wiring
+change; no download, installation, site operation or native experiment.
+
+Implementation-plan progress: minimum-profile provisioning/runner decision is
+specified, not provisioned or physically qualified. Recommended next gated slice:
+Repository-only Minimum-Profile Artifact Admission and Fixed Runner Safety
+Foundation, synthetic archive/PE/profile/transcript and isolated API tests only.
+Actual acquisition, runtime loading and owned native proof remain separate gates;
+production/form wiring remains disabled.
+
 ## Current-source Windows/TCP owned qualification — 2026-10-29
 
 Approved and exact-target-confirmed [owned proof](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md)

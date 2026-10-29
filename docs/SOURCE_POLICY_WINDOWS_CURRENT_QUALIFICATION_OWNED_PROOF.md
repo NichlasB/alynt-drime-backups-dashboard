@@ -1,5 +1,10 @@
 # Current-Source Windows/TCP Qualification — Owned Proof
 
+Forward progress: the approved [minimum artifact/runner design](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_DESIGN.md)
+records the subsequent repository-only decision. It does not rerun or broaden
+this historical native image; follow its resume gate rather than repeating this
+record's formerly recommended design slice.
+
 ## Authority, target and baseline — 2026-10-29
 
 Explicit approval of the Plugin Tester local-only current-source Windows/TCP
