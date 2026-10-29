@@ -1,5 +1,9 @@
 # Source-Policy Linux Exact-Build Candidate Safety Foundation
 
+Subsequent approved [Linux owned qualification](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md)
+owns new harness/native evidence. This foundation's isolated results and historic
+source-image limitations remain unchanged; no fresh native credit is inferred.
+
 ## Approval, baseline and implemented boundary — 2026-10-29
 
 Approved next isolated foundation from the

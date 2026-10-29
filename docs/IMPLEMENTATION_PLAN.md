@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux genuine-core/OFF native qualification — approved owned proof — 2026-10-29
+
+Approved [audit-first harness/owned proof](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+baseline7cabc01. Manual exact-head pinned Ubuntu/PHP8.5.12/core7.1.4/MariaDB lab,
+fresh unchanged preflight/source audit, one disposable table-scoped account/schema,
+unchanged9-group ambient/OFF cases and independent live/post-exit reconciliation.
+Full bounded diagnostic context/fallback evidence, strict resource/cleanup rules,
+no production/runtime guard change. Isolated PHP7/63, related37/159, Node3/3 and
+two assertion-killed/hash-restored controls pass. Native execution/result and full
+QA/CI remain pending in the owning record; no native success is implied here.
+
 ## Linux exact-build candidate — approved isolated foundation — 2026-10-29
 
 Approved [exact candidate foundation](SOURCE_POLICY_LINUX_EXACT_BUILD_CANDIDATE_FOUNDATION.md),

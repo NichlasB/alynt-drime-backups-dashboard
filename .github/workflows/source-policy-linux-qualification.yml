@@ -1,0 +1,89 @@
+name: Source-policy owned Linux qualification
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact approved master commit for one owned native qualification attempt
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-policy-linux-qualification
+  cancel-in-progress: false
+
+jobs:
+  qualification:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+    steps:
+      - name: Admit exact source and fresh private directories
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" ]]
+          [[ "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+          [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
+          [[ "$(docker context inspect --format '{{.Endpoints.docker.Host}}')" == unix:///var/run/docker.sock ]]
+          [[ ! -e "$GITHUB_WORKSPACE/.adb-linux-preflight-core" ]]
+          umask 077
+          mkdir -- "$RUNNER_TEMP/adb-linux-preflight-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          stage="$RUNNER_TEMP/adb-linux-qualification-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          mkdir -- "$stage" "$stage/socket"
+
+      - name: Checkout approved proof source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+
+      - name: Checkout pinned core for unchanged preflight
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: WordPress/WordPress
+          ref: db96f5eaa77a8d3e8eec8923a518fa2326f0d46a
+          path: .adb-linux-preflight-core
+          persist-credentials: false
+
+      - name: Exact disposable PHP runtime
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
+        with:
+          php-version: '8.5.12'
+          extensions: mysqli
+          tools: none
+          coverage: none
+
+      - name: Fresh unchanged environment prerequisite and cleanup
+        shell: bash
+        run: bash scripts/ci/source-policy-linux-preflight.sh
+
+      - name: Reacquire same pinned core for finite genuine-library proof
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: WordPress/WordPress
+          ref: db96f5eaa77a8d3e8eec8923a518fa2326f0d46a
+          path: .adb-linux-preflight-core
+          persist-credentials: false
+
+      - name: Audit first then one owned native body
+        shell: bash
+        run: bash scripts/ci/source-policy-linux-qualification.sh
+
+      - name: Always reconcile owned instance and source checkout
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          failed=0
+          if [[ -f scripts/ci/source-policy-linux-qualification.sh ]]; then
+            bash scripts/ci/source-policy-linux-qualification.sh --cleanup || failed=1
+          fi
+          if [[ -f scripts/ci/source-policy-linux-preflight.sh ]]; then
+            bash scripts/ci/source-policy-linux-preflight.sh --cleanup || failed=1
+          fi
+          exit "$failed"
