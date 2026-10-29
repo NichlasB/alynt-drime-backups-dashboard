@@ -500,3 +500,53 @@ assertion, guard, native case, budget and disabled wiring, then require green
 exact-head CI before the still-unused approved attempt. No new native retry or
 scope expansion is authorized by this closeout. Evidence-only final-head checks
 are reported separately at handoff; this failed verification is not relabeled.
+
+## PHP7.4 isolated test-child compatibility and failure reporting — 2026-10-29
+
+User approved this repository test-only repair, validation/commit/push/exact-head
+CI and resumption of the still-unused single native attempt after green CI.
+Restore baseline3cb91ff687819c4df88f3b919bfdeb087fc3e1c5 was clean/synced. Only
+the existing qualification PHP test home plus these owning records change.
+Native worker, supervisor, pure terminal contract, runtime, old cases, core pins,
+preflight, shell, manual workflow, compatibility metadata and all guard/resource/
+acceptance/cleanup rules remain baseline-identical. No installed WordPress,
+LocalWP/live site, production wiring, package/release/tag/deploy or toolkit change.
+
+The isolated PHP -n fixture launcher now disables json_encode/json_decode
+explicitly, so a dependency on optional JSON cannot pass silently on a newer
+runtime. Existing children return core serialized primitive arrays, decoded with
+allowed_classes:false and an8KiB output assertion; existing observable first-
+failure/escaping assertions remain. No runtime wire format or serialized storage
+contract changes. These are owned synthetic test results, not imported data.
+
+A private test-child warning handler converts diagnostics to a fixed exception;
+the outer catch emits only ADBDIAG1, allowlisted exception kind, source line and
+JSON availability, then exits1. Unknown exception names become other. The parent
+asserts status0/empty stderr using only fixed parsed facts plus channel byte
+counts and bounded-prefix SHA256 (stdout8KiB/stderr1KiB), never raw child streams,
+messages, paths, SQL or values. Unexpected/malformed diagnostic text contributes
+only its hash/length, not an untrusted label. No assertion is skipped or exit255
+accepted. PHP-version-specific missing/disabled-function errors may be Error or
+the fixed warning-handler RuntimeException; both must fail with JSON unavailable.
+
+Before encoding repair, controlled local JSON-disabled runs produced the intended
+failures: JSON fixture output raised Error/json0 through the bounded reporter,
+and serialized output could not be decoded by the old JSON parent. After repair,
+related PHP51/346 passes, including positive scalar/NUL-byte round trip, expected
+missing-JSON refusal, safe thrown fixture reporting and all prior first-failure/
+short-circuit/cleanup cases. This is a controlled dependency reproduction, not
+retroactive observation of the hidden historical PHP7.4 fatal. The original
+failed runs remain failed; actual PHP7.4 compatibility still requires new CI.
+
+Full local PHP8.5.1 PHPUnit2027/8933 passes with only the two existing missing-
+Sodium signing skips. PHPCS226 files, Node22/22/no skips, structure149 runtime/
+227 support/205 test files/202 class names, build, strict Composer validation
+and Composer/npm moderate audits pass (zero known advisories/vulnerabilities).
+PHP syntax, Bash -n, Node --check and diff whitespace pass. Final scope review:
+only one test file plus these two owning records changed; runtime, complete
+native harness/controller/contract/cases/pins/preflight/shell/workflow, dependencies,
+metadata and tracked assets unchanged. Uploader/toolkit remain clean/synced and
+read-only. No local native execution occurred. Publication evidence follows
+below before resuming the one approved native attempt. That attempt must
+use fresh unchanged preflight and exact source; failure requires closeout, not
+an automatic repair, second attempt, weakened predicate or production activation.

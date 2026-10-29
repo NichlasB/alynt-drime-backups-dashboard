@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PHP7.4 diagnostic-child compatibility — approved repair/resumption — 2026-10-29
+
+Approved [isolated child repair and resumption of the unused owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+clean/synced restore baseline3cb91ff. Existing source-backed fixture children now
+use core serialize/unserialize with classes disabled, not JSON; JSON functions
+are explicitly disabled to enforce independence on every test runtime. Private
+child exceptions/warnings produce fixed kind/line/JSON-capability facts only;
+parent failure messages expose bounded stream hashes/lengths, never raw text.
+Controlled JSON-absence regression failed before the encoding fix, then related
+PHP51/346 passes. Full local PHP8.5.1 suite2027/8933 has only two existing Sodium
+skips; Node22/22/lint/structure/build/audits pass. Runtime/harness/controller/native cases/pins/workflow/budgets/
+acceptance/wiring remain unchanged. Full QA and exact-head CI are required before
+the still-unused single approved fresh native attempt; no automatic native retry.
+
 ## Linux first-failure/escaping diagnostics — approved owned attempt — 2026-10-29
 
 Approved [harness-only attribution repair and one fresh attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
