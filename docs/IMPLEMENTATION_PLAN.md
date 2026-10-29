@@ -18,6 +18,10 @@ Observer Feasibility Decision, evaluating a bounded tool-only profile without
 changing the candidate's 128-module limit or any current guards. Keep installation,
 candidate loading, host/site/database operations and production wiring disabled.
 
+Diagnostic publication bc760e8 is pushed and exact-head ordinary CI 40953758495
+passed (PHP 7.4/8.3 each 2,320 tests, no failures/skips). Physical qualification
+remains refused; no replay, filtered module set or increased ceiling is credited.
+
 ## Owned existing-tool observer proof — blocked after clean failure — 2026-10-29
 
 Approved [physical owned-tool prerequisite](SOURCE_POLICY_TOOL_OBSERVER_OWNED_PROOF.md)

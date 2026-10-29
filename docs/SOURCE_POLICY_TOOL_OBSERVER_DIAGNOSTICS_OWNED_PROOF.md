@@ -137,7 +137,16 @@ Fresh ordinary repository QA on existing trusted PHP 8.5.1:
   generated tracked delta. Uploader/toolkit stay clean/read-only at
   3dfcb15/c067eb6. No new skip, assertion weakening or whole-plugin review refresh.
 
-Exact-head publication evidence follows after push and ordinary CI.
+Diagnostic publication `bc760e878d07ff997ea8da74b7d5b6e10f35aa3c` is pushed;
+[CI 40953758495](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40953758495)
+succeeded for that exact head. Actual PHP 7.4 log: 2,320 tests / 20,850 assertions;
+PHP 8.3: 2,320 / 20,855, both without failures/skips. Admin 23/23 each, zero
+failures/skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. Setup Node emitted tool-level `punycode`/`url.parse()` deprecation
+warnings; no acceptance change suppresses them. This evidence-only closeout
+receives its own pushed exact-head ordinary CI and clean/remote check at handoff.
+No owned-process proof is replayed for publication. Green CI does not close the
+physical module-count refusal or authorize a ceiling change.
 No runtime/bootstrap/native worker, existing pure host-admission helper,
 source/artifact pin, schema/version, manifest/lock, workflow or production wiring
 is changed. Ordinary green CI does not close the failed physical verification.
