@@ -207,5 +207,15 @@ gate1 above, not another native attempt or production activation.
   remain clean and unchanged. Only this design, its implementation-plan entry
   and the Linux owner's forward pointer change. No whole-plugin rows refreshed.
 
-Ordinary exact-head CI publication evidence follows after the approved push;
-PHP7.4 isolated CI does not establish genuine core6.0/native compatibility.
+### Publication evidence
+
+Design commit `d154d1ff66d6478bc3001325693cf128c4fa0ec2` is pushed;
+ordinary push [CI40868990970](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40868990970)
+completed successfully on that exact head. Actual logs: PHP7.4 and8.3 each
+2,033 tests/9,045 assertions, no failures/skips; admin23/23 on each job, no
+failures/skips. Manifest, audits, build, structure and PHPCS passed, zero known
+dependency advisories/vulnerabilities. Node setup emitted DEP0169 (`url.parse`)
+deprecation notices; no check failed and no dependency change was made.
+This evidence-only closeout receives its own pushed exact-head ordinary CI and
+remote verification at handoff. No native workflow was dispatched. PHP7.4
+isolated CI does not establish genuine core6.0/native compatibility.
