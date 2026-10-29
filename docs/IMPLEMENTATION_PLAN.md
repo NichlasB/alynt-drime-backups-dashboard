@@ -14,6 +14,21 @@ skips; Node22/22/lint/structure/build/audits pass. Runtime/harness/controller/na
 acceptance/wiring remain unchanged. Full QA and exact-head CI are required before
 the still-unused single approved fresh native attempt; no automatic native retry.
 
+Repairf646509/ordinaryCI40859970810 passes PHP7.4/8.3 each2027/8940/no skips,
+Node22/22/all gates, resolving the test-child compatibility blocker. The resumed
+single manual40860191306 passed fresh prerequisites/source audit29 and actual
+owner bootstrap, then failed at escape/check41/groups0: preparedtrue/ack_exactfalse,
+row/byte checks not reached; first-failure attribution now works, escape release
+checks complete. Independent failure-path reconciliation, exact fixture/account
+removal and container/directory/tmpfs/core cleanup pass. No retry or native fix.
+Implementation-plan progress: CI compatibility and first-failure attribution
+resolved; physical qualification remains blocked at execution acknowledgement.
+Recommended next gated slice: Linux Harness-Only Bounded Native Acknowledgement
+and Query-Path Diagnostics, Fresh Prerequisites and One New Owned Attempt. Classify
+the existing returned acknowledgement without raw SQL/values or runtime changes;
+audit genuine non-ASCII validation/fallback, preserve guards/budgets/acceptance/
+disabled wiring. Evidence-only final-head ordinary CI is verified at handoff.
+
 ## Linux first-failure/escaping diagnostics — approved owned attempt — 2026-10-29
 
 Approved [harness-only attribution repair and one fresh attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),

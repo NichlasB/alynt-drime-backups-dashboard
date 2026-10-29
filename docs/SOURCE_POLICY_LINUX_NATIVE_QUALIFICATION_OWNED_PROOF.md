@@ -550,3 +550,84 @@ read-only. No local native execution occurred. Publication evidence follows
 below before resuming the one approved native attempt. That attempt must
 use fresh unchanged preflight and exact source; failure requires closeout, not
 an automatic repair, second attempt, weakened predicate or production activation.
+
+### Exact-head CI recovery and the resumed single native attempt
+
+Repairf646509327bdafbc46f65d7b7f34cc4aab0974a7 is pushed.
+[Ordinary exact-head CI40859970810](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40859970810)
+passes: actual PHP7.4/8.3 each2027 tests/8940 assertions, no failures or skips;
+Node22/22/no skips each and all configured manifest/audit/build/structure/lint
+gates successful. This establishes actual PHP7.4 fixture compatibility; it does
+not retroactively reveal the old hidden fatal or relabel prior failed CI runs.
+
+After verifying exact successful CI, clean working tree and remote master at the
+repair head, resumed the still-unused single approved native attempt exactly once:
+[manual run40860191306](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40860191306),
+job123401170338, workflow_dispatch, exactf646509,2026-10-29 10:46:29–10:47:01 UTC
+(32s), overall failure. Fresh unchanged preflight and same pinned-core reacquisition
+passed; all recorded PHP/module/server/client digests,11 core pins and exact
+MariaDB image/version match the previous record. Version-only preflight completed
+with zero database/SQL/WordPress execution and removed its owned resources.
+
+New actual source audit passes29 checks/zero native connections/queries,
+image31cffaa1b33e81029e774d85fc4fd02a1a52f6d8caa5e770c15e8fcc4ed88f8b,
+run58c820f37b1b955f593290bd6749ee77. The fresh labeled private instance baseline
+is exact10.11.18-MariaDB-ubu2204/noTCP1/wsrep0/nativeAIO1/autocommit1/in_transaction0/
+other sessions0/transactions0/non-system schemas0, host io_uring_disabled0. Owned
+schema/table/account creation and actual ambient/core-selected OFF/privilege
+denial1142/owned initializer prerequisites were reached and passed sequentially.
+
+Improved failure report now retains the original failure-time count41, not the
+later46 reached through finally. Stage escape/phase native/groups0,
+RuntimeException/diagnostic:null/status1/no signal or spawn error/empty stdout;
+325-byte stderr record, within unchanged1KiB bound. Assertion SHA256
+f8243cf6c8ea6b6a8caa52f48a77eff25d802b6a9d9bc38b6e09d352a84d1ce1
+matches the exact genuine quote/backslash/NUL/percent/utf8mb4 round-trip assertion.
+Facts: step execute, preparedtrue, ack_exactfalse, row_exactnull, bytes_equalnull,
+escape_releasetrue. Thus checked preparation returned and execution returned an
+acknowledgement unequal to affected1/errno0. Row count/byte equality were not
+evaluated. The original assertion survives successful release checks; no report-
+mode drift, returned-byte corruption, exact errno or caught exception within the
+runtime execute mapper can be inferred from the boolean acknowledgement fact.
+Zero original native groups complete; no successful round trip/9-group physical
+qualification or held-terminal success handshake is claimed.
+
+Read-only source diagnosis after failure: official pinned class-wpdb.php UTF-8
+SHA256e15403e90032dd0508811301505e491d4212de5152581a98f51b744a1a3903bd matches the
+committed manifest. Query/strip_invalid_text_from_query/strip_invalid_text show
+non-ASCII validation and a capability-dependent conversion-query fallback; the
+runtime execute mapper can return failed acknowledgements or collapse a caught
+Throwable to affectedfalse/errnonull. Current facts do not distinguish those
+paths. No core execution, SQL, runtime/source fix or additional attempt followed
+this read-only inspection; do not disable validation or invent a missing helper
+as the cause. Future diagnostic work must account for genuine query dependencies
+and possible auxiliary validation queries, not assume one method call equals
+one physical SQL command.
+
+All strict full bounded diagnostic reviews passed: bootstrap2137B SHA256
+5cebca325003a2e36c7a37077ad6c2fa0cc699860a19f64068d7ae324f6e9277;
+initial server2450B SHA256629d0a01f553ee31c06a95302d380454104f88da7706af56ddc60cadc26b6461;
+final server3071B SHA25691c5708edf9b0873a6dfd8f81176403363c53785dd86555d9b197b3e12802751.
+Known namespace/WSREP/io_uring-to-libaio warnings remain visible and unchanged,
+normal shutdown present. Escape close/ambient-handle/callback/report-mode release
+checks all completed. Independent failure-path root reconciliation then requires
+all-server other sessions0/INNODB_TRX0 before exact schema/account drops, followed
+by non-system schemas0/owned account0/sessions0/transactions0. Cleanup reports
+reconciliation_failure0 and normal stop exit0/notOOM under those existing rules.
+Exit and always cleanup each report containers0/directories0/tmpfs released/
+reconciliation_failure0; preflight cleanup core_checkout0. No existing application,
+LocalWP/live site or production wiring was touched. This failure-path cleanup is
+not the uncompleted held-terminal live/post-exit success proof.
+
+Implementation-plan progress: test-child compatibility and first-failure
+attribution are resolved; native qualification is blocked specifically at the
+execution acknowledgement. Recommended next gated slice: **Linux Harness-Only
+Bounded Native Acknowledgement and Query-Path Diagnostics, Fresh Prerequisites
+and One New Owned Attempt**. Classify only existing acknowledgement fields into
+fixed affected/errno/type categories and pure bounded source/query-path facts,
+with isolated positive/negative regressions, no raw SQL/values/messages, extra
+queries, runtime guard changes or automatic replay. Preserve source identity,
+existing cases/acceptance/budgets/cleanup and disabled wiring. The approved single
+attempt is now consumed; another native attempt requires new explicit approval.
+Evidence-only closeout ordinary CI/remote is verified separately at handoff;
+ordinary CI success must not relabel this failed native qualification.
