@@ -43,4 +43,7 @@ final class SourcePolicyMinimumArchiveTest extends TestCase {
 		require_once dirname(__DIR__).'/scripts/manual/source-policy-minimum-acquire.php';try{adbmin_download('https://invalid.example/');$this->fail('Caller URL accepted');}catch(RuntimeException $error){$this->assertSame('download-preflight-refused',$error->getMessage());}
 		$source=file_get_contents(dirname(__DIR__).'/scripts/manual/source-policy-minimum-acquire.php');$this->assertStringContainsString("CURLOPT_FOLLOWLOCATION => false",preg_replace('/ +/',' ',$source));$this->assertStringContainsString("'https' : CURLPROTO_HTTPS",$source);$this->assertStringNotContainsString('CURLOPT_SSL_VERIFYPEER => false',$source);
 	}
+	public function test_link_guard_precedes_parent_creation_in_actual_owner_source() {
+		$source=file_get_contents(dirname(__DIR__).'/scripts/manual/source-policy-minimum-owned.php');$begin=strpos($source,'public function path(');$method=substr($source,$begin,strpos($source,'public function write(',$begin)-$begin);$guard=strpos($method,'if ( is_link( $path ) )');$create=strpos($method,'! mkdir( $path, 0700 )');$this->assertNotFalse($guard);$this->assertLessThan($create,$guard,'Dangling links must be refused before any mkdir attempt; source-level ordering, not a Windows reparse proof.');
+	}
 }

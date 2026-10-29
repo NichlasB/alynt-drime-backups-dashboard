@@ -121,6 +121,9 @@ final class Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files {
 		$path  = $this->root;
 		foreach ( $parts as $index => $part ) {
 			$path .= DIRECTORY_SEPARATOR . $part;
+			if ( is_link( $path ) ) {
+				throw new RuntimeException( 'owned-alias-refused' );
+			}
 			if ( $index < count( $parts ) - 1 && ! file_exists( $path ) && $create ) {
 				if ( ! mkdir( $path, 0700 ) ) {
 					throw new RuntimeException( 'owned-parent-create-refused' );

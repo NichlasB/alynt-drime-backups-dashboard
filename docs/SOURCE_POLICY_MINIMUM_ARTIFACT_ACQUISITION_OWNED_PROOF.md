@@ -126,9 +126,30 @@ Post-attempt repository QA, existing PHP8.5.1:
   delta. Owning links, bounded source/consumer/error/cleanup/compatibility diff
   review and whitespace checks pass. Uploader/toolkit remain clean and untouched.
 
-Exact-head ordinary CI is recorded after publication. No network acquisition or
-candidate-runtime operation is repeated for publication. Green isolated CI will
-not turn the refused proof into success.
+Publication `8ebe6cf21c7fc329a921b46b191c8f98c945b6b9` is pushed;
+ordinary [CI40892116234](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40892116234)
+succeeded at that exact head. Actual PHP7.4:2,116 tests/11,054 assertions;
+PHP8.3:2,116/11,059, each without failures/skips. Admin23/23 on each job, no
+failures/skips; remaining manifest/audit/build/structure/PHPCS gates passed.
+
+Post-publication source review moved the owned path's explicit link rejection
+before potential parent mkdir, retaining the subsequent alias recheck. Its new
+regression checks ordering in actual source, not physical Windows reparse or
+hostile concurrent replacement. Latest minimum family74/1,848 passes with no
+failures/skips. This small safety hardening changes the adapter image relative
+to the historical refused-attempt receipt above; no new acquisition is run or
+qualification claimed for it. Final full QA and pushed exact-head CI are separately
+verified at handoff. Original pins, HTTPS/TLS checks and all budgets are preserved.
+
+Executed final post-hardening QA: full PHP8.5.1 suite2,117 tests/11,056 assertions,
+no failures and only the same two existing Sodium skips. Focused family74/1,848,
+PHPCS237, admin23/23/no skips, structure, build, strict Composer validation and
+both dependency audits pass again; zero known advisories/vulnerabilities. Exact
+failed-child absence is independently rechecked. No runtime/site/native input,
+dependency, application state or artifact acquisition is changed by the closeout.
+
+No network acquisition or candidate-runtime operation is repeated for publication.
+Green isolated CI will not turn the refused proof into success.
 
 Implementation-plan progress: bounded adapter and owned filesystem/libzip failure
 prerequisites advance the minimum lane; real artifact qualification is blocked
