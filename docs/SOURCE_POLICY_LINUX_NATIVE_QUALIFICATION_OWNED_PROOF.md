@@ -182,3 +182,54 @@ bounded inner source-audit failure evidence and correct only timestamp framing,
 then use fresh prerequisites before at most one explicitly approved owned attempt.
 Evidence-only closeout remote/ordinary CI is verified separately at handoff; it
 does not erase this failed manual run or promote pending native claims.
+
+## Approved diagnostics/padded-hour repair and one fresh attempt — 2026-10-29
+
+Explicit approval covers the preceding recommended harness-only repair,
+regressions, publication and one new owned attempt after fresh prerequisites.
+Clean/synced restore-point baseline77b31e05952772a92c4a75d23f100c8011433468.
+Same R3 ephemeral Ubuntu/PHP/core/MariaDB target and disposable account/schema/
+cleanup scope; no installed site/LocalWP/SSH or production operation. Risk tier,
+runtime/source/authentication guards, nine-group acceptance, resources/deadlines,
+credential handling, shell cleanup and manual-only workflow are unchanged.
+
+Changes are limited to the supervisor, proof-worker failure metadata and existing
+Node test file. No library/pin/helper/case or production-wiring edit:
+
+- Worker records fixed phase plus stage/check/group/assertion-digest fields,
+  an allowlisted exception class, and optional PHP diagnostic severity/component/
+  line. The message/path are not retained. Warnings still throw/refuse exactly as
+  before. Phase labels are observation only, never a new execution/admission path.
+- Source-audit refusal now reports bounded child exit/signal/spawn-error facts,
+  stream byte counts, truncation and SHA256 of at most16KiB per stream. Only a
+  complete strict safe worker-failure record is surfaced; unknown/extra/raw
+  fields and raw stderr/stdout/error messages are not emitted. Native failure
+  reporting uses the same sanitization, without changing the success terminal.
+- Timestamp framing accepts only canonical00–23 or space-padded0–9 hours with
+  valid minute/second fields. Known warning messages/hostname checks, unknown
+  warning refusal and full/selected log bounds remain unchanged. Bad padding,
+  unpadded single hours, out-of-range fields or altered text still refuse.
+
+Two new Node tests failed before implementation for the intended timestamp and
+missing failure-evidence behavior, then passed. Current targeted Node5/5 covers
+positive padded formats, malformed framing/changed text, metadata preservation,
+strict field/type/domain refusal, no raw stream/message leakage, timeout facts,
+oversized output and multibyte byte-exact16KiB hashing. Existing PHP gate/receipt/
+identity/preflight combined37/159 pass. An optional temporary sanitization-bypass
+control was rejected by tool safety review before application; no guard was
+weakened and no mutation-control credit is claimed for this repair. Work continued
+with non-mutating tests and actual red-to-green regression evidence.
+
+Final local PHP8.5.1 full PHPUnit2013/8746 passes, two existing missing-Sodium
+signing skips only; PHPCS226 files, Node21/21/no skips, structure149 runtime/
+227 support/205 test files/202 class names, build, strict Composer validation and
+Composer/npm moderate audits pass with zero known advisories/vulnerabilities.
+Final byte-prefix Node tests pass after that full PHP run; no PHP code changed
+after the full run. Bash -n, Node --check, PHP syntax and scoped lint pass.
+Runtime, old native cases, source pins/preflight, shell, workflow, dependencies,
+package metadata and tracked assets remain baseline-identical. Uploader/toolkit
+remain clean/synced and read-only. No native run occurred locally.
+
+Exact-head ordinary CI and the newly approved one-off attempt are recorded below
+when executed. The previous failed run remains failed; source-audit compatibility
+and all physical native proof claims remain pending until actual evidence exists.

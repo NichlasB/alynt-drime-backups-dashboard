@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux proof diagnostics/padded-hour repair — approved retry — 2026-10-29
+
+Approved [harness-only repair and one fresh attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+baseline77b31e0. Bounded safe child diagnostics now preserve source-audit phase/
+stage/counts/status and hashes, never raw streams/messages/paths; canonical padded
+MariaDB hours parsed without broadening warning content. Two intended red tests
+then targeted Node5/5, PHP37/159; local full2013/8746 with two existing Sodium
+skips, Node21/21/lint/structure/build/audits pass. Optional bypass control rejected
+before application; no mutation credit. Runtime/cases/pins/shell/workflow/budgets/
+acceptance/wiring unchanged. Exact-head CI and one fresh owned attempt pending
+in owner; no physical qualification claimed from isolated QA.
+
 ## Linux genuine-core/OFF native qualification — approved owned proof — 2026-10-29
 
 Approved [audit-first harness/owned proof](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),

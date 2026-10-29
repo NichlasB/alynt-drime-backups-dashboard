@@ -43,23 +43,33 @@ function adbb_check( $condition, $label ) {
 function adbb_bind( $receiver, $name, $value ) {
 	( new ReflectionProperty( $receiver, $name ) )->setValue( $receiver, $value );
 }
-$owners  = array();
-$ambient = null;
-$groups  = 0;
-$stage   = 'source-audit';
-$failed  = false;
-$rows    = array();
-$frame   = array();
+$owners                              = array();
+$ambient                             = null;
+$groups                              = 0;
+$stage                               = 'source-audit';
+$phase                               = 'runtime';
+$failed                              = false;
+$rows                                = array();
+$frame                               = array();
+$GLOBALS['qualification_diagnostic'] = null;
 // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler -- Proof diagnostics fail closed; no suppress-and-continue or raw output.
 set_error_handler(
-	static function () {
+	static function ( $severity, $message, $file, $line ) {
+		unset( $message ); // Never retain a PHP diagnostic's raw text or path.
+		$source                              = __FILE__ === $file ? 'worker' : ( defined( 'ABSPATH' ) && defined( 'WPINC' ) && 0 === strpos( $file, ABSPATH . WPINC . '/' ) ? 'core' : 'other' );
+		$GLOBALS['qualification_diagnostic'] = array(
+			'severity' => $severity,
+			'source'   => $source,
+			'line'     => $line,
+		);
 		throw new RuntimeException( 'Owned proof diagnostic' );
 	}
 );
 try {
 	adbb_check( 'mysqlnd 8.5.12' === mysqli_get_client_info() && '3' === ini_get( 'default_socket_timeout' ) && '3' === ini_get( 'mysqlnd.net_read_timeout' ), 'bounded exact runtime' );
 	adbb_check( '' === ini_get( 'auto_prepend_file' ) && '' === ini_get( 'auto_append_file' ) && 1 === count( get_included_files() ), 'no injected entry' );
-	$core = realpath( __DIR__ . '/../../.adb-linux-preflight-core' );
+	$phase = 'core-pins';
+	$core  = realpath( __DIR__ . '/../../.adb-linux-preflight-core' );
 	adbb_check( false !== $core && dirname( $core ) === realpath( __DIR__ . '/../..' ), 'exact pinned core child' );
 	define( 'ABSPATH', $core . '/' );
 	define( 'WPINC', 'wp-includes' );
@@ -75,9 +85,11 @@ try {
 	foreach ( $pins as $file => $hash ) {
 		adbb_check( preg_match( '/\A[a-z-]+\.php\z/', $file ) && hash_equals( $hash, hash_file( 'sha256', ABSPATH . WPINC . '/' . $file ) ), 'pinned genuine core bytes' );
 	}
+	$phase = 'core-load';
 	foreach ( array( 'load.php', 'plugin.php', 'class-wp-error.php', 'cache.php', 'class-wpdb.php', 'formatting.php', 'functions.php' ) as $file ) {
 		require_once ABSPATH . WPINC . '/' . $file;
 	}
+	$phase = 'owned-load';
 	foreach ( array( 'class-source-policy.php', 'class-source-policy-native-profile.php', 'class-source-policy-query-context.php', 'class-source-policy-no-reconnect-connection.php', 'class-source-policy-save-contract.php', 'class-source-policy-stored-map.php', 'class-source-policy-native-adapter.php' ) as $file ) {
 		require_once dirname( __DIR__, 2 ) . '/includes/' . $file;
 	}
@@ -86,6 +98,7 @@ try {
 	require __DIR__ . '/../manual/source-policy-ambient-proof-operation.php';
 	require __DIR__ . '/../manual/source-policy-ambient-proof-cases.php';
 	require __DIR__ . '/source-policy-linux-qualification-contract.php';
+	$phase = 'cache';
 	wp_using_ext_object_cache( false );
 	wp_cache_init();
 	$wpdb    = null;
@@ -115,12 +128,14 @@ try {
 		'observers'       => array(),
 		'observer_files'  => array(),
 	);
+	$phase   = 'profile';
 	$class   = new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' );
 	$owner   = $class->newInstanceWithoutConstructor();
 	$class->getConstructor()->invoke( $owner );
 	adbb_check( Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::settings( $frame ) && Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::source( $owner, $binding ), 'genuine fixed source/endpoint admission' );
 	adbb_check( null === $owner->dbh && false === $owner->ready && false === $owner->db_connect() && false === $owner->check_connection(), 'no public connection path' );
 	adbb_check( '0' === mysqli_get_client_stats()['connect_success'] && '0' === mysqli_get_client_stats()['connect_failure'] && '0' === mysqli_get_client_stats()['com_query'] && 3 === ( new mysqli_driver() )->report_mode, 'audit zero native activity unchanged strict mode' );
+	$phase = 'image';
 	$files = array_merge( get_included_files(), array( PHP_BINARY, ini_get( 'extension_dir' ) . '/mysqlnd.so', ini_get( 'extension_dir' ) . '/mysqli.so', __DIR__ . '/source-policy-linux-core-pins.json', __DIR__ . '/source-policy-linux-qualification.sh', __DIR__ . '/source-policy-linux-qualification-controller.mjs', dirname( __DIR__, 2 ) . '/.github/workflows/source-policy-linux-qualification.yml' ) );
 	sort( $files, SORT_STRING );
 	foreach ( array_unique( $files ) as $file ) {
@@ -143,6 +158,7 @@ try {
 		), "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded DATA only.
 		return;
 	}
+	$phase = 'native';
 	adbb_check( getenv( 'QUALIFICATION_IMAGE' ) === $image && 1 === preg_match( '/\A[a-f0-9]{64}\z/', (string) getenv( 'QUALIFICATION_PASSWORD' ) ), 'frozen parent source and owned credential' );
 	$frame['password'] = getenv( 'QUALIFICATION_PASSWORD' );
 	$request           = array( __FILE__, '--owned-linux-qualification', $prefix, $run, $image, 'proof' );
@@ -189,8 +205,26 @@ try {
 	adb0_cases();
 	adbb_check( 9 === $groups && hrtime( true ) - $started < 20000000000, 'original body deadline and complete groups' );
 } catch ( Throwable $error ) {
-	$failed = true;
-	fwrite( STDERR, 'Owned qualification failed:' . $stage . ':' . hash( 'sha256', $GLOBALS['adbb_last_check'] ?? 'diagnostic' ) . "\n" );
+	$failed    = true;
+	$exception = get_class( $error );
+	if ( ! in_array( $exception, array( 'RuntimeException', 'Error', 'TypeError', 'ValueError', 'ParseError', 'ArgumentCountError', 'ReflectionException' ), true ) ) {
+		$exception = 'other';
+	}
+	fwrite(
+		STDERR,
+		json_encode(
+			array(
+				'event'      => 'failure',
+				'stage'      => $stage,
+				'phase'      => $phase,
+				'checks'     => $checks,
+				'groups'     => $groups,
+				'assertion'  => hash( 'sha256', $GLOBALS['adbb_last_check'] ?? 'none' ),
+				'exception'  => $exception,
+				'diagnostic' => $GLOBALS['qualification_diagnostic'],
+			)
+		) . "\n"
+	);
 } finally {
 	foreach ( $owners as $owned ) {
 		try {

@@ -12,6 +12,35 @@ export function validTerminal(row, image, run, pid) {
     && row.groups === 9 && row.mode === 0 && row.closed === true);
 }
 
+// Diagnostics only: never raw streams, paths, messages or a success/admission grant.
+export function childFailureSummary(result) {
+  const channel = value => {
+    const raw = Buffer.from(typeof value === 'string' ? value : '', 'utf8');
+    return { bytes: raw.length, truncated: raw.length > 16384,
+      sha256_prefix: createHash('sha256').update(raw.subarray(0, 16384)).digest('hex') };
+  };
+  let worker = null;
+  if (typeof result.stderr === 'string' && result.stderr.length <= 1024 && /^\{[^\r\n]+\}\n$/.test(result.stderr)) {
+    try {
+      const row = JSON.parse(result.stderr);
+      const diagnostic = row.diagnostic;
+      const validDiagnostic = diagnostic === null || (diagnostic && Object.keys(diagnostic).join(',') === 'severity,source,line'
+        && [2,8,256,512,1024,2048,4096,8192,16384].includes(diagnostic.severity)
+        && ['worker','core','other'].includes(diagnostic.source) && Number.isSafeInteger(diagnostic.line) && diagnostic.line > 0 && diagnostic.line <= 100000);
+      if (Object.keys(row).join(',') === 'event,stage,phase,checks,groups,assertion,exception,diagnostic' && row.event === 'failure'
+        && ['source-audit','ambient','escape','positive','noop-stale','update','race','duplicate','transform-reentry','lock','post-change','errno'].includes(row.stage)
+        && ['runtime','core-pins','core-load','owned-load','cache','profile','image','native'].includes(row.phase)
+        && Number.isSafeInteger(row.checks) && row.checks >= 0 && row.checks <= 99999
+        && Number.isSafeInteger(row.groups) && row.groups >= 0 && row.groups <= 9 && typeof row.assertion === 'string' && /^[a-f0-9]{64}$/.test(row.assertion)
+        && ['RuntimeException','Error','TypeError','ValueError','ParseError','ArgumentCountError','ReflectionException','other'].includes(row.exception) && validDiagnostic) worker = row;
+    } catch { /* Malformed child DATA is represented only by bounded stream digests. */ }
+  }
+  return { status: Number.isSafeInteger(result.status) && result.status >= 0 && result.status <= 255 ? result.status : null,
+    signal: ['SIGKILL','SIGTERM'].includes(result.signal) ? result.signal : null,
+    error: ['ETIMEDOUT','ENOBUFS','ENOENT','EACCES'].includes(result.error?.code) ? result.error.code : null,
+    stdout: channel(result.stdout), stderr: channel(result.stderr), worker };
+}
+
 // Context-limited diagnostic review, not a general harmless-warning whitelist.
 export function reviewLog(raw, hostname) {
   if (typeof raw !== 'string' || Buffer.byteLength(raw) > 65536 || /[^\x09\x0a\x0d\x20-\x7e]/.test(raw) || typeof hostname !== 'string' || !/^[a-f0-9]{12}$/.test(hostname)
@@ -19,7 +48,7 @@ export function reviewLog(raw, hostname) {
   const lines = raw.split(/\r?\n/).filter(Boolean);
   if (lines.length > 128 || lines.some(line => Buffer.byteLength(line) > 1024)) throw Error('Unbounded diagnostics');
   for (const line of lines.filter(line => line.includes('[Warning]'))) {
-    const message = line.replace(/^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d\s+\d+ \[Warning\] /, '');
+    const message = line.replace(/^\d{4}-\d\d-\d\d (?:[01]\d|2[0-3]| [0-9]):[0-5]\d:[0-5]\d +\d+ \[Warning\] /, '');
     const known = [
       'failed to retrieve the MAC address',
       'WSREP: Failed to guess base node address. Set it explicitly via wsrep_node_address.',
@@ -58,7 +87,8 @@ async function main() {
   const run = createHash('sha256').update(process.env.GITHUB_RUN_ID + ':' + process.env.GITHUB_RUN_ATTEMPT).digest('hex').slice(0, 32);
   if (process.argv[2] === 'audit') {
     const result = spawnSync('php', [...args, 'audit'], { timeout: 20000, maxBuffer: 16384, encoding: 'utf8' });
-    if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || !/^\{[^\r\n]+\}\n$/.test(result.stdout)) throw Error('Source audit refused');
+    if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || !/^\{[^\r\n]+\}\n$/.test(result.stdout))
+      throw Error('Source audit refused: ' + JSON.stringify(childFailureSummary(result)));
     const row = JSON.parse(result.stdout);
     if (row.event !== 'audit' || !/^[a-f0-9]{64}$/.test(row.image) || row.run !== run || row.native_connections !== 0 || row.sql_queries !== 0 || row.checks < 1) throw Error('Invalid source audit');
     process.stdout.write(result.stdout); return;
@@ -98,7 +128,7 @@ async function main() {
     child.on('error', error => { clearTimeout(deadline); reject(error); });
     child.on('close', (code, signal) => {
       clearTimeout(deadline);
-      const diagnostic = /^Owned qualification failed:[a-z-]+:[a-f0-9]{64}\n$/.test(err) ? err.trim() : createHash('sha256').update(err).digest('hex');
+      const diagnostic = JSON.stringify(childFailureSummary({ status: code, signal, stdout: out, stderr: err }));
       if (failure || signal || code !== 0 || err !== '' || !terminal) reject(failure ?? Error('Owned child refused: ' + diagnostic)); else resolve();
     });
   });
