@@ -401,3 +401,68 @@ preserve runtime/cases/pins/budgets/acceptance and disabled wiring. No automatic
 retry, release-readiness refresh or production-provider activation is authorized.
 Evidence-only closeout ordinary CI/remote is verified separately at handoff;
 the failed native run remains failed, never relabeled by ordinary CI success.
+
+## First-failure retention and bounded escaping diagnostics — 2026-10-29
+
+User approved this exact harness-only repair, validation/publication and one
+fresh owned diagnostic/qualification attempt. R3 owned-lab scope only; restore
+baselinee4f02aa129b3d86de820a490073e6331927af45c was clean/synced. No installed
+WordPress/LocalWP/live target, Novamira action, runtime grant, provider activation,
+packaging, release, tag or deployment is included. Existing prior failures remain
+failed. The unchanged pinned manual lab/least-privilege fixture and exact owned
+cleanup scope above apply; no new server, profile or runtime version is selected.
+
+Only the private worker, its supervisor diagnostic parser and their existing
+PHP/Node test homes change, plus these two owning records. adbb_check now captures
+only a failed assertion before throwing. A pure write-once snapshot retains
+failure-time stage/phase/counts/groups, assertion SHA256, fixed exception kind,
+sanitized diagnostic and escaping facts. A thrown prepare/execute operation is
+captured before finally with assertion hash("none"), not the previous successful
+check. Error-handler exceptions likewise capture immediately. Neither successful
+nor failed finally checks can replace an earlier captured failure; failure still
+throws/exits and no success path is added.
+
+Escaping diagnostics retain only fixed step prepare/execute/rows/bytes/release
+and nullable booleans prepared/ack_exact/row_exact/bytes_equal. The exact original
+acknowledgement, single-row and byte-equality predicates remain conjunctive and
+short-circuited in their original order. One prepare and at most one execute;
+no extra SQL, driver observation, reconnect, retry, fixture or returned value is
+added. Separate escape_release is null before entry, false until the existing
+close plus helper release checks complete, then true. It does not claim the
+parent's independent all-server physical reconciliation or final fixture cleanup.
+
+The supervisor accepts only the exact new private failure schema/field order,
+fixed step enum, bool/null facts and existing bounded counts/types/diagnostics;
+extra fields, paths/SQL/values and unknown/missing/malformed types are refused.
+Existing1KiB diagnostic budget,16KiB stream-prefix hashes, child deadlines,
+strict log review and exact held-terminal9-group success policy remain unchanged.
+No raw exception message/class outside the fixed enum, trace, path, prepared SQL,
+needle, result bytes or credential is retained. Diagnostics never grant admission.
+
+Three PHP source-backed tests failed before implementation for absent first-
+failure capture/inner-catch wiring. Updated and new Node tests failed on the
+unsupported exact diagnostic schema. After implementation, PHP19/200 and
+Node6/6 pass with no skips. PHP tests extract only the actual pure diagnostic
+function declarations and the finite escaping try/catch/finally source block
+into private PHP -n processes with isolated doubles; they do not load or run the
+guarded worker, core, native handles, SQL or WordPress authentication. Positive
+acceptance plus prepare/execute/ack/row/bytes/release refusal cases verify single
+dispatch, short-circuit facts, release, first-assertion preservation even when
+finally also fails, exception-type privacy and no failure snapshot on success.
+Source wiring checks require capture-before-finally and captured output, never
+the old last-check label. Node tests enforce exact schema, bool/null facts,
+missing/extra/reordered/secret-bearing field refusal and sub1KiB bounded output;
+such a failure record cannot satisfy the unchanged held-terminal validator.
+
+Final related PHP49/296 and full local PHP8.5.1 PHPUnit2025/8883 pass; only the
+two existing missing-Sodium signing skips occur in the full suite. PHPCS226
+files, Node22/22/no skips, structure149 runtime/227 support/205 test files/202
+class names, build, strict Composer validation and Composer/npm moderate audits
+pass (zero known advisories/vulnerabilities). Bash -n, Node --check, PHP syntax
+and diff whitespace pass. Diff review confirms runtime, old native cases,
+source pins/preflight, shell, workflow, terminal contract, dependencies, metadata
+and tracked assets are baseline-identical; uploader/toolkit clean/synced and
+read-only. No local native execution occurred. Exact-head publication and the
+one newly approved native outcome follow below. Dispatch requires successful
+ordinary exact-head CI and fresh unchanged workflow prerequisites; no automatic
+repair/retry is authorized.

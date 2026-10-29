@@ -28,10 +28,38 @@ $checks = 0;
 function adbb_check( $condition, $label ) {
 	global $checks;
 	++$checks;
-	$GLOBALS['adbb_last_check'] = $label;
 	if ( ! $condition ) {
-		throw new RuntimeException( 'Owned qualification refused' );
+		$error = new RuntimeException( 'Owned qualification refused' );
+		adbb_capture( $error, $label );
+		throw $error;
 	}
+}
+/** Snapshots the first failure before any finally checks can replace it.
+ *
+ * @param Throwable $error Failure type only, never its message, trace or path.
+ * @param string    $label Fixed failed assertion, or none for a thrown operation.
+ * @return void
+ */
+function adbb_capture( $error, $label = 'none' ) {
+	global $checks, $groups, $stage, $phase;
+	if ( null !== ( $GLOBALS['adbb_first_failure'] ?? null ) ) {
+		return;
+	}
+	$exception = get_class( $error );
+	if ( ! in_array( $exception, array( 'RuntimeException', 'Error', 'TypeError', 'ValueError', 'ParseError', 'ArgumentCountError', 'ReflectionException' ), true ) ) {
+		$exception = 'other';
+	}
+	$GLOBALS['adbb_first_failure'] = array(
+		'event'      => 'failure',
+		'stage'      => $stage,
+		'phase'      => $phase,
+		'checks'     => $checks,
+		'groups'     => $groups,
+		'assertion'  => hash( 'sha256', $label ),
+		'exception'  => $exception,
+		'diagnostic' => $GLOBALS['qualification_diagnostic'] ?? null,
+		'escape'     => $GLOBALS['adbb_escape'] ?? null,
+	);
 }
 /** Bind private composition, never active state or a native handle.
  *
@@ -52,6 +80,9 @@ $failed                              = false;
 $rows                                = array();
 $frame                               = array();
 $GLOBALS['qualification_diagnostic'] = null;
+$GLOBALS['adbb_first_failure']       = null;
+$GLOBALS['adbb_escape']              = null;
+$GLOBALS['adbb_escape_release']      = null;
 // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler -- Proof diagnostics fail closed; no suppress-and-continue or raw output.
 set_error_handler(
 	static function ( $severity, $message, $file, $line ) {
@@ -62,7 +93,9 @@ set_error_handler(
 			'source'   => $source,
 			'line'     => $line,
 		);
-		throw new RuntimeException( 'Owned proof diagnostic' );
+		$error                               = new RuntimeException( 'Owned proof diagnostic' );
+		adbb_capture( $error );
+		throw $error;
 	}
 );
 try {
@@ -186,44 +219,54 @@ try {
 	adbb_check( is_string( $ambient->prepare( 'SELECT %d', 1 ) ) && mysqli_get_client_stats()['com_query'] === $before, 'genuine prepare with zero SQL' );
 	$ambient_query = $GLOBALS['wp_filter']['query']->callbacks;
 	adbb_check( 0 === has_filter( 'query', array( $ambient, 'remove_placeholder_escape' ) ) && 1 === count( $ambient_query[0] ), 'owned ambient callback' );
-	$stage        = 'escape';
-	$escape_owner = adb0_owner();
+	$stage                  = 'escape';
+	$escape_owner           = adb0_owner();
+	$GLOBALS['adbb_escape'] = array(
+		'step'        => 'prepare',
+		'prepared'    => null,
+		'ack_exact'   => null,
+		'row_exact'   => null,
+		'bytes_equal' => null,
+	);
 	try {
-		$needle = "owned'\\\0%\xf0\x9f\x8c\x8d";
-		$sql    = $escape_owner->prepare_checked( 'SELECT %s AS escaped', $needle );
+		$needle                              = "owned'\\\0%\xf0\x9f\x8c\x8d";
+		$sql                                 = $escape_owner->prepare_checked( 'SELECT %s AS escaped', $needle );
+		$GLOBALS['adbb_escape']['prepared']  = is_string( $sql );
+		$GLOBALS['adbb_escape']['step']      = 'execute';
+		$GLOBALS['adbb_escape']['ack_exact'] = array(
+			'affected' => 1,
+			'errno'    => 0,
+		) === $escape_owner->execute( $sql );
+		if ( $GLOBALS['adbb_escape']['ack_exact'] ) {
+			$GLOBALS['adbb_escape']['step']      = 'rows';
+			$GLOBALS['adbb_escape']['row_exact'] = 1 === count( $escape_owner->last_result );
+			if ( $GLOBALS['adbb_escape']['row_exact'] ) {
+				$GLOBALS['adbb_escape']['step']        = 'bytes';
+				$GLOBALS['adbb_escape']['bytes_equal'] = $needle === $escape_owner->last_result[0]->escaped;
+			}
+		}
 		adbb_check(
-			array(
-				'affected' => 1,
-				'errno'    => 0,
-			) === $escape_owner->execute( $sql ) && 1 === count( $escape_owner->last_result ) && $needle === $escape_owner->last_result[0]->escaped,
+			true === $GLOBALS['adbb_escape']['ack_exact'] && true === $GLOBALS['adbb_escape']['row_exact'] && true === $GLOBALS['adbb_escape']['bytes_equal'],
 			'genuine owned quote/backslash/NUL/percent/utf8mb4 round trip'
 		);
+	} catch ( Throwable $error ) {
+		adbb_capture( $error );
+		throw $error;
 	} finally {
+		$GLOBALS['adbb_escape']['step'] = 'release';
+		$GLOBALS['adbb_escape_release'] = false;
 		adbb_check( true === $escape_owner->close(), 'escape owner release' );
 		adb0_released( $escape_owner );
+		$GLOBALS['adbb_escape_release'] = true;
 	}
 	adb0_cases();
 	adbb_check( 9 === $groups && hrtime( true ) - $started < 20000000000, 'original body deadline and complete groups' );
 } catch ( Throwable $error ) {
-	$failed    = true;
-	$exception = get_class( $error );
-	if ( ! in_array( $exception, array( 'RuntimeException', 'Error', 'TypeError', 'ValueError', 'ParseError', 'ArgumentCountError', 'ReflectionException' ), true ) ) {
-		$exception = 'other';
-	}
+	$failed = true;
+	adbb_capture( $error );
 	fwrite(
 		STDERR,
-		json_encode(
-			array(
-				'event'      => 'failure',
-				'stage'      => $stage,
-				'phase'      => $phase,
-				'checks'     => $checks,
-				'groups'     => $groups,
-				'assertion'  => hash( 'sha256', $GLOBALS['adbb_last_check'] ?? 'none' ),
-				'exception'  => $exception,
-				'diagnostic' => $GLOBALS['qualification_diagnostic'],
-			)
-		) . "\n"
+		json_encode( $GLOBALS['adbb_first_failure'] + array( 'escape_release' => $GLOBALS['adbb_escape_release'] ) ) . "\n"
 	);
 } finally {
 	foreach ( $owners as $owned ) {

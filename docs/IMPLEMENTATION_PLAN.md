@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux first-failure/escaping diagnostics — approved owned attempt — 2026-10-29
+
+Approved [harness-only attribution repair and one fresh attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+clean/synced restore baselinee4f02aa. First failed assertion/exception metadata
+is captured before finally checks and cannot be overwritten. Fixed nullable
+escaping facts distinguish prepare/ack/row/byte comparisons; release completion
+is separate. Same compound acceptance, short-circuit order, single dispatch,
+cleanup, guards, sources and resource budgets; no runtime/manual-case/wiring
+changes. Isolated actual-source function/block tests cover positive and negative
+paths, without guarded-worker/native execution. Three intended PHP red tests
+and Node schema reds preceded implementation; targetedPHP19/200, related49/296
+and Node6/6 pass. Full local PHP8.5.1 suite2025/8883 has only two existing Sodium
+skips; Node22/22/lint/structure/build/audits pass. Publication and one exact-head
+fresh-prerequisite lab result follow in the owning record. No retry or new
+milestone is authorized on native failure.
+
 ## Linux canonical absint binding — approved harness correction — 2026-10-29
 
 Approved [caller-binding correction and one fresh owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),

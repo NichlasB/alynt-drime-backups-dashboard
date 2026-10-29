@@ -27,12 +27,18 @@ export function childFailureSummary(result) {
       const validDiagnostic = diagnostic === null || (diagnostic && Object.keys(diagnostic).join(',') === 'severity,source,line'
         && [2,8,256,512,1024,2048,4096,8192,16384].includes(diagnostic.severity)
         && ['worker','core','other'].includes(diagnostic.source) && Number.isSafeInteger(diagnostic.line) && diagnostic.line > 0 && diagnostic.line <= 100000);
-      if (Object.keys(row).join(',') === 'event,stage,phase,checks,groups,assertion,exception,diagnostic' && row.event === 'failure'
+      const escape = row.escape;
+      const validEscape = escape === null || (escape && !Array.isArray(escape)
+        && Object.keys(escape).join(',') === 'step,prepared,ack_exact,row_exact,bytes_equal'
+        && ['prepare','execute','rows','bytes','release'].includes(escape.step)
+        && ['prepared','ack_exact','row_exact','bytes_equal'].every(key => escape[key] === null || typeof escape[key] === 'boolean'));
+      if (Object.keys(row).join(',') === 'event,stage,phase,checks,groups,assertion,exception,diagnostic,escape,escape_release' && row.event === 'failure'
         && ['source-audit','ambient','escape','positive','noop-stale','update','race','duplicate','transform-reentry','lock','post-change','errno'].includes(row.stage)
         && ['runtime','core-pins','core-load','owned-load','cache','profile','image','native'].includes(row.phase)
         && Number.isSafeInteger(row.checks) && row.checks >= 0 && row.checks <= 99999
         && Number.isSafeInteger(row.groups) && row.groups >= 0 && row.groups <= 9 && typeof row.assertion === 'string' && /^[a-f0-9]{64}$/.test(row.assertion)
-        && ['RuntimeException','Error','TypeError','ValueError','ParseError','ArgumentCountError','ReflectionException','other'].includes(row.exception) && validDiagnostic) worker = row;
+        && ['RuntimeException','Error','TypeError','ValueError','ParseError','ArgumentCountError','ReflectionException','other'].includes(row.exception) && validDiagnostic && validEscape
+        && (row.escape_release === null || typeof row.escape_release === 'boolean')) worker = row;
     } catch { /* Malformed child DATA is represented only by bounded stream digests. */ }
   }
   return { status: Number.isSafeInteger(result.status) && result.status >= 0 && result.status <= 255 ? result.status : null,

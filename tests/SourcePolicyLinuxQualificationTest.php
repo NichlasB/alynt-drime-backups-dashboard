@@ -43,4 +43,49 @@ final class SourcePolicyLinuxQualificationTest extends TestCase {
 		$this->assertStringContainsString("\$ambient->db_connect( false )",$worker);
 		$this->assertStringContainsString("source-policy-ambient-proof-cases.php",$worker);
 	}
+	/** Executes only the actual pure diagnostic function declarations, never the guarded worker/native body. */
+	private function diagnostic_run($body) {
+		$worker=file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-qualification.php');$definitions='';
+		foreach(array('adbb_capture','adbb_check') as $name){$this->assertSame(1,preg_match('/^function '.$name.'\([^\n]+\n.*?^\}/ms',$worker,$match));$definitions.=$match[0]."\n";}
+		$process=proc_open(array(PHP_BINARY,'-n','-r',$definitions.$body),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);
+		$this->assertIsResource($process);fclose($pipes[0]);$out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
+		$this->assertSame(0,proc_close($process));$this->assertSame('',$err);return json_decode($out,true);
+	}
+	public function test_first_assertion_survives_successful_and_failed_finally_checks() {
+		$row=$this->diagnostic_run('$checks=0;$groups=0;$stage="escape";$phase="native";adbb_check(true,"positive");try{try{adbb_check(false,"original");}finally{adbb_check(true,"release-positive");adbb_check(false,"release-negative");}}catch(Throwable $error){adbb_capture($error);}echo json_encode(array($checks,$GLOBALS["adbb_first_failure"]));');
+		$this->assertSame(4,$row[0]);$this->assertSame(2,$row[1]['checks']);$this->assertSame(hash('sha256','original'),$row[1]['assertion']);$this->assertSame('RuntimeException',$row[1]['exception']);
+	}
+	public function test_non_assertion_throwable_is_captured_before_cleanup_without_secret_text() {
+		$row=$this->diagnostic_run('$checks=0;$groups=0;$stage="escape";$phase="native";$GLOBALS["adbb_escape"]=array("step"=>"prepare","prepared"=>null,"ack_exact"=>null,"row_exact"=>null,"bytes_equal"=>null);try{try{throw new TypeError("private-secret-sql");}catch(Throwable $error){adbb_capture($error);throw $error;}finally{$GLOBALS["adbb_escape"]["step"]="release";adbb_check(false,"cleanup");}}catch(Throwable $error){adbb_capture($error);}echo json_encode($GLOBALS["adbb_first_failure"]);');
+		$this->assertSame(0,$row['checks']);$this->assertSame('TypeError',$row['exception']);$this->assertSame(hash('sha256','none'),$row['assertion']);$this->assertSame('prepare',$row['escape']['step']);$this->assertStringNotContainsString('private-secret-sql',json_encode($row));
+	}
+	public function test_escape_capture_precedes_finally_and_preserves_single_dispatch_and_original_predicates() {
+		$worker=file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-qualification.php');
+		$this->assertMatchesRegularExpression('/catch \( Throwable \$error \) \{\s*adbb_capture\( \$error \);\s*throw \$error;\s*\} finally/s',$worker);
+		foreach(array('prepared','ack_exact','row_exact','bytes_equal','adbb_escape_release') as $field)$this->assertStringContainsString($field,$worker);
+		$this->assertSame(1,substr_count($worker,'$escape_owner->prepare_checked('));$this->assertSame(1,substr_count($worker,'$escape_owner->execute('));
+		$this->assertStringContainsString("\$needle === \$escape_owner->last_result[0]->escaped",$worker);
+		$this->assertStringContainsString("json_encode( \$GLOBALS['adbb_first_failure'] + array( 'escape_release' => \$GLOBALS['adbb_escape_release'] ) )",$worker);
+		$this->assertStringNotContainsString('adbb_last_check',$worker);
+	}
+	public function test_success_does_not_create_failure_and_unknown_exception_names_are_not_emitted() {
+		$row=$this->diagnostic_run('$checks=0;$groups=0;$stage="escape";$phase="native";adbb_check(true,"positive");$none=$GLOBALS["adbb_first_failure"]??null;class PrivateSecretException extends RuntimeException{}adbb_capture(new PrivateSecretException("private-secret"));echo json_encode(array($none,$GLOBALS["adbb_first_failure"]));');
+		$this->assertNull($row[0]);$this->assertSame('other',$row[1]['exception']);$this->assertSame(1,$row[1]['checks']);$this->assertStringNotContainsString('private-secret',strtolower(json_encode($row)));
+	}
+	/** @dataProvider escape_cases */
+	public function test_actual_escape_block_preserves_short_circuit_acceptance_and_release($case,$step,$executions) {
+		$worker=file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-qualification.php');$start=strpos($worker,"\ttry {\n\t\t\$needle");$end=strpos($worker,"\tadb0_cases();",$start);
+		$this->assertNotFalse($start);$this->assertNotFalse($end);$block=substr($worker,$start,$end-$start);
+		$setup='$checks=0;$groups=0;$stage="escape";$phase="native";$case='.var_export($case,true).';$calls=array(0,0,0);$GLOBALS["adbb_escape"]=array("step"=>"prepare","prepared"=>null,"ack_exact"=>null,"row_exact"=>null,"bytes_equal"=>null);';
+		$double='class OwnedDiagnosticDouble{public $last_result=array();private $value;public function prepare_checked($sql,$value){global $calls,$case;++$calls[0];$this->value=$value;if("prepare"===$case)throw new TypeError("private-prepare");return "opaque";}public function execute($sql){global $calls,$case;++$calls[1];if("execute"===$case)throw new TypeError("private-execute");$this->last_result="rows"===$case?array():array((object)array("escaped"=>"bytes"===$case?"wrong":$this->value));return array("affected"=>"ack"===$case?false:1,"errno"=>0);}public function close(){global $calls,$case;++$calls[2];return "release"!==$case;}}function adb0_released($owner){adbb_check(true,"cleanup-positive");}$escape_owner=new OwnedDiagnosticDouble();$failed=false;';
+		$row=$this->diagnostic_run($setup.$double.'try{'.$block.'}catch(Throwable $error){$failed=true;adbb_capture($error);}echo json_encode(array($failed,$GLOBALS["adbb_first_failure"]??null,$calls,$GLOBALS["adbb_escape_release"]));');
+		$this->assertSame(array(1,$executions,1),$row[2]);$this->assertSame('positive'!==$case,$row[0]);$this->assertSame('release'!==$case,$row[3]);
+		if('positive'===$case){$this->assertNull($row[1]);return;}
+		$this->assertSame($step,$row[1]['escape']['step']);$this->assertSame(0,$row[1]['groups']);
+		if('ack'===$case){$this->assertFalse($row[1]['escape']['ack_exact']);$this->assertNull($row[1]['escape']['row_exact']);$this->assertNull($row[1]['escape']['bytes_equal']);}
+		if('rows'===$case){$this->assertFalse($row[1]['escape']['row_exact']);$this->assertNull($row[1]['escape']['bytes_equal']);}
+		if('bytes'===$case)$this->assertFalse($row[1]['escape']['bytes_equal']);
+		$this->assertStringNotContainsString('private-',json_encode($row));
+	}
+	public static function escape_cases(){return array(array('positive',null,1),array('prepare','prepare',0),array('execute','execute',1),array('ack','execute',1),array('rows','rows',1),array('bytes','bytes',1),array('release','release',1));}
 }

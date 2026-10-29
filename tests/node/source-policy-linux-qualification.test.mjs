@@ -44,7 +44,7 @@ test('only canonical zero-padded and space-padded MariaDB hours preserve the exa
 
 test('child failure summary retains safe stage/counts/status but never raw streams or errors',()=>{
   assert.equal(typeof supervisor.childFailureSummary,'function');
-  const worker={event:'failure',stage:'source-audit',phase:'core-load',checks:17,groups:0,assertion:'c'.repeat(64),exception:'RuntimeException',diagnostic:{severity:2,source:'core',line:125}};
+  const worker={event:'failure',stage:'source-audit',phase:'core-load',checks:17,groups:0,assertion:'c'.repeat(64),exception:'RuntimeException',diagnostic:{severity:2,source:'core',line:125},escape:null,escape_release:null};
   const summary=supervisor.childFailureSummary({status:1,signal:null,error:null,stdout:'private-password-stdout',stderr:JSON.stringify(worker)+'\n'});
   assert.equal(summary.status,1);assert.deepEqual(summary.worker,worker);
   assert.equal(summary.stdout.bytes,23);assert.match(summary.stdout.sha256_prefix,/^[a-f0-9]{64}$/);
@@ -60,4 +60,22 @@ test('child failure summary retains safe stage/counts/status but never raw strea
   for(const token of ['private-message','private-secret','do-not-emit']) assert.equal(JSON.stringify(refused).includes(token),false);
   for(const [key,value] of Object.entries({stage:'secret',phase:'unknown',checks:-1,groups:10,assertion:'bad',exception:'secret',diagnostic:{severity:2,source:'private-path',line:125}}))
     assert.equal(supervisor.childFailureSummary({status:1,stderr:JSON.stringify({...worker,[key]:value})+'\n'}).worker,null);
+});
+
+test('escaping diagnostics retain fixed facts only and cannot grant a terminal',()=>{
+  const row={event:'failure',stage:'escape',phase:'native',checks:41,groups:0,assertion:'d'.repeat(64),exception:'RuntimeException',diagnostic:null,
+    escape:{step:'execute',prepared:true,ack_exact:false,row_exact:null,bytes_equal:null},escape_release:true};
+  const summary=worker=>supervisor.childFailureSummary({status:1,stderr:JSON.stringify(worker)+'\n'}).worker;
+  assert.deepEqual(summary(row),row);assert.equal(validTerminal(row,image,run,pid),false);
+  assert.ok(Buffer.byteLength(JSON.stringify({...row,diagnostic:{severity:16384,source:'other',line:100000},checks:99999,groups:9})+'\n')<1024);
+  for(const step of ['prepare','execute','rows','bytes','release']) assert.deepEqual(summary({...row,escape:{...row.escape,step}}).escape.step,step);
+  for(const key of ['prepared','ack_exact','row_exact','bytes_equal']) {
+    for(const value of [null,true,false]) assert.equal(summary({...row,escape:{...row.escape,[key]:value}}).escape[key],value);
+    for(const value of ['secret',1,{},[]]) assert.equal(summary({...row,escape:{...row.escape,[key]:value}}),null);
+    const escape={...row.escape};delete escape[key];assert.equal(summary({...row,escape}),null);
+  }
+  for(const escape of [[],{...row.escape,step:'private-path'},{...row.escape,sql:'private-sql'},{...row.escape,rows:['private-value']},Object.fromEntries(Object.entries(row.escape).reverse())])
+    assert.equal(summary({...row,escape}),null);
+  for(const escape_release of ['secret',0,{},[]]) assert.equal(summary({...row,escape_release}),null);
+  const missing={...row};delete missing.escape_release;assert.equal(summary(missing),null);
 });
