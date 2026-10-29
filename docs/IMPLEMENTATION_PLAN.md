@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Read-only Windows/VC dependency and observer audit — 2026-10-29
+
+Approved [existing-host audit](SOURCE_POLICY_MINIMUM_WINDOWS_DEPENDENCY_OBSERVER_AUDIT.md)
+at clean/synced restore baseline 1efb985. OS/tool metadata and 13 bounded System32
+files are present/x64; VC 14.50.35719.0 agrees with installed-package registration.
+No signature verification or candidate runtime was invoked. Existing-tool
+metadata confirms observer API surfaces, not bounded physical operation. The
+signature command's cache-only/network guarantees are not established; source/
+loaded-method metadata shows a fallback without an explicit cache-only flag.
+Hashes/versions/owners are correlation, not provenance or a load grant.
+
+Implementation-plan progress: real metadata/feasibility gaps are established;
+physical preflight remains blocked at the next trust-policy decision. Recommended
+next gated slice: Design-only Existing-Host Trust Profile and Bounded Observer
+Admission Decision, evaluating explicit named operator trust versus claimed
+offline cryptographic provenance without adding verification tooling. No trust
+exception/guard change or loading is approved by this audit. Keep host/site/
+database state and production wiring unchanged; owning record preserves evidence.
+
 ## Socket-free dependency/launch and preflight transcript foundation — 2026-10-29
 
 Approved [synthetic-only foundation](SOURCE_POLICY_MINIMUM_PREFLIGHT_SAFETY_FOUNDATION.md)

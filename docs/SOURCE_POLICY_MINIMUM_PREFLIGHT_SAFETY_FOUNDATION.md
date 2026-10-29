@@ -1,5 +1,10 @@
 # Socket-Free Dependency/Launch and Preflight Transcript Safety Foundation
 
+Forward progress: the approved [read-only Windows/VC audit](SOURCE_POLICY_MINIMUM_WINDOWS_DEPENDENCY_OBSERVER_AUDIT.md)
+records actual metadata and unresolved offline-provenance/observer evidence.
+Follow its gated trust-policy decision; no synthetic claim below is upgraded to
+host trust or physical runtime qualification.
+
 ## Authority, baseline and outcome — 2026-10-29
 
 Approved local-only implementation of the next synthetic gate in the
