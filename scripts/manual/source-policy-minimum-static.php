@@ -6,19 +6,21 @@
  */
 
 /**
- * Complete fixed core and selected PE structure checks before extraction.
+ * Parses only the three fixed roles; bounded DATA, never a loader or trust grant.
  *
  * @param array $php Decoded authenticated PHP archive.
- * @param array $core Decoded core archive.
- * @return array Non-loading evidence.
- * @throws RuntimeException Fixed source, binary structure or import refusal.
+ * @return array Selected role/hash/import observations.
+ * @throws RuntimeException Missing, ambiguous or malformed selected role.
  */
-function adbmin_static_identity( array $php, array $core ) {
-	if ( ! adbmin_core_tree( $core['files'] ) ) {
-		throw new RuntimeException( 'complete-core-tree-refused' );
+function adbmin_selected_pe( array $php ) {
+	if ( ! isset( $php['files'] ) || ! is_array( $php['files'] ) || count( $php['files'] ) < 3 || count( $php['files'] ) > 8192 ) {
+		throw new RuntimeException( 'selected-inventory-refused' );
 	}
 	$by_name = array();
 	foreach ( $php['files'] as $file ) {
+		if ( ! is_array( $file ) || ! isset( $file['path'], $file['bytes'] ) || ! is_string( $file['path'] ) || ! is_string( $file['bytes'] ) || isset( $by_name[ strtolower( $file['path'] ) ] ) ) {
+			throw new RuntimeException( 'selected-inventory-refused' );
+		}
 		$by_name[ strtolower( $file['path'] ) ] = $file;
 	}
 	$pe = array();
@@ -33,9 +35,26 @@ function adbmin_static_identity( array $php, array $core ) {
 		$row['sha256'] = hash( 'sha256', $by_name[ $role ]['bytes'] );
 		$pe[]          = $row;
 	}
+	return $pe;
+}
+
+/**
+ * Classifies parsed direct imports only, not presence/transitive/loader trust.
+ *
+ * @param array $php Decoded authenticated PHP archive.
+ * @return array Non-authorizing observations.
+ * @throws RuntimeException Missing/invalid selected image or unknown import.
+ */
+function adbmin_selected_import_identity( array $php ) {
+	$pe      = adbmin_selected_pe( $php );
+	$by_name = array();
+	foreach ( $php['files'] as $file ) {
+		$by_name[ strtolower( $file['path'] ) ] = $file;
+	}
 	$external = array();
 	$bundled  = array();
-	$os       = array( 'kernel32.dll', 'user32.dll', 'advapi32.dll', 'shell32.dll', 'ole32.dll', 'oleaut32.dll', 'ws2_32.dll', 'dnsapi.dll', 'iphlpapi.dll', 'bcrypt.dll', 'crypt32.dll', 'secur32.dll', 'normaliz.dll', 'psapi.dll', 'shlwapi.dll', 'version.dll', 'ntdll.dll', 'rpcrt4.dll', 'winmm.dll', 'mswsock.dll', 'vcruntime140.dll', 'msvcp140.dll', 'concrt140.dll', 'ucrtbase.dll' );
+	// ImageHlp is OS-included per Microsoft; this name classification proves no local DLL presence or trust.
+	$os = array( 'kernel32.dll', 'user32.dll', 'advapi32.dll', 'shell32.dll', 'ole32.dll', 'oleaut32.dll', 'ws2_32.dll', 'dnsapi.dll', 'iphlpapi.dll', 'bcrypt.dll', 'crypt32.dll', 'secur32.dll', 'normaliz.dll', 'psapi.dll', 'shlwapi.dll', 'version.dll', 'ntdll.dll', 'rpcrt4.dll', 'winmm.dll', 'mswsock.dll', 'imagehlp.dll', 'vcruntime140.dll', 'msvcp140.dll', 'concrt140.dll', 'ucrtbase.dll' );
 	foreach ( $pe as $image ) {
 		foreach ( $image['imports'] as $name ) {
 			if ( isset( $by_name[ $name ] ) ) {
@@ -50,14 +69,30 @@ function adbmin_static_identity( array $php, array $core ) {
 	ksort( $external );
 	ksort( $bundled );
 	return array(
-		'core_tree'                    => adbmin_catalog()['core_tree'],
-		'source_sha256_pins'           => 12,
 		'pe'                           => $pe,
 		'bundled_direct_imports'       => $bundled,
 		'external_direct_imports'      => $external,
 		'dependency_closure_qualified' => false,
 		'runtime_loading'              => false,
 	);
+}
+
+/**
+ * Complete fixed core and selected PE structure checks before extraction.
+ *
+ * @param array $php Decoded authenticated PHP archive.
+ * @param array $core Decoded core archive.
+ * @return array Non-loading evidence, never dependency closure qualification.
+ * @throws RuntimeException Fixed source, binary structure or import refusal.
+ */
+function adbmin_static_identity( array $php, array $core ) {
+	if ( ! adbmin_core_tree( $core['files'] ) ) {
+		throw new RuntimeException( 'complete-core-tree-refused' );
+	}
+	return array(
+		'core_tree'          => adbmin_catalog()['core_tree'],
+		'source_sha256_pins' => 12,
+	) + adbmin_selected_import_identity( $php );
 }
 
 /**

@@ -1,5 +1,10 @@
 # Minimum-Profile Core ZIP Host/Mode Repair and Owned Proof
 
+Forward progress: the separately approved [selected import/classification proof](SOURCE_POLICY_MINIMUM_IMPORT_CLASSIFICATION_OWNED_PROOF.md)
+identified the exact ImageHlp dependency and completed static acquisition and
+owned payload readback/cleanup. Follow that record's dependency/runtime gate;
+the historical refusal and proof limits below remain unchanged.
+
 ## Authority, baseline and outcome — 2026-10-29
 
 Explicit R3 approval of the harness-only Core ZIP Host/Mode Diagnostic and

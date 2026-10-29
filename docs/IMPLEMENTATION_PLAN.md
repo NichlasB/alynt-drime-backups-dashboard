@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Selected PE import classification and complete owned readback — 2026-10-29
+
+Approved [selected import diagnostic/classification proof](SOURCE_POLICY_MINIMUM_IMPORT_CLASSIFICATION_OWNED_PROOF.md)
+at clean/synced restore baseline5611847. The pinned PHP ZIP diagnostic identified
+php7.dll's exact imagehlp.dll import; Microsoft documents it as OS-included.
+Only that external name is added, with unknown/lookalike refusals preserved.
+Fresh107/2027, red-to-green positive and three assertion-killed in-memory controls
+passed. One fresh full proof completed pinned source/PE/direct-import identity
+and exclusive readback of3,523 files/144,216,233 bytes; exact cleanup and independent
+absence/image checks confirmed. Nothing downloaded was installed or loaded.
+
+Implementation-plan progress: the minimum artifact acquisition/static/readback
+gate is complete, not external dependency presence/closure, runtime or native
+qualification. Recommended next gated slice: Repository-only Minimum-Profile
+Dependency Closure and Fixed Runtime-Preflight Integration Design, specifying
+finite DLL/search-path/source admission and bounded fixed legacy launch/cleanup.
+Design-only: no acquisition, installation, runtime loading, authentication/SQL,
+storage/native experiment or production wiring. Owning record preserves evidence
+limits; actual runtime and site/native proofs remain separate approval boundaries.
+
 ## Core ZIP authenticated mode repair and later import refusal — 2026-10-29
 
 Approved [core mode diagnostic/owned proof](SOURCE_POLICY_MINIMUM_CORE_MODES_OWNED_PROOF.md)
