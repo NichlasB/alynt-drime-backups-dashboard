@@ -189,8 +189,14 @@ Final post-composition repository QA on existing PHP8.5.1:
   remain identical toa686b43. Only new dev helpers/tests and owning records change;
   uploader/toolkit remain clean and untouched at3dfcb15/c067eb6.
 
-Ordinary pushed exact-head CI is recorded after publication, not inferred from
-local QA. No new test is skipped or existing assertion weakened.
+Implementation publication `2faf5bfbff11372c6130c69c3145673613bc1462` is pushed;
+ordinary [CI40925149833](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40925149833)
+succeeded for that exact head. Actual PHP7.4 log:2,200 tests/16,443 assertions;
+PHP8.3:2,200/16,448, both without failures/skips. Admin23/23 each, zero failures/
+skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. This evidence-only closeout receives its own pushed exact-head
+ordinary CI and clean/remote verification at handoff. No new test is skipped or
+existing assertion weakened; no manual/native workflow is dispatched.
 No artifact/site/runtime/native proof is replayed for this evidence closeout.
 
 Implementation-plan progress: the closed synthetic dependency/layout/runtime/wire
