@@ -237,8 +237,16 @@ Fresh ordinary repository QA on existing trusted PHP 8.5.1:
   3dfcb15/c067eb6. No new test skip, assertion weakening or historical checklist
   refresh; UI/UX and whole-plugin pre-release workflows do not apply to this slice.
 
-Exact-head publication evidence follows after push and ordinary CI. No
-behavioral regression is implemented or claimed by a design-only document.
+Design publication `868e0cc7970274487814b89a34b3b002482b44eb` is pushed;
+[CI 40936999758](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40936999758)
+succeeded for that exact head. Actual PHP 7.4 log: 2,200 tests / 16,443 assertions;
+PHP 8.3: 2,200 / 16,448, both without failures/skips. Admin 23/23 each, zero
+failures/skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. Setup Node emitted tool-level `punycode`/`url.parse()` deprecation
+warnings; no source or acceptance rule is changed to suppress them. This
+evidence-only closeout receives its own pushed exact-head ordinary CI and
+clean/remote verification at handoff; no manual/native workflow is dispatched.
+No behavioral regression is implemented or claimed by a design-only document.
 Compatibility, schema, source/artifact pins, runtime/native workers, acceptance
 rules, actual guards and production wiring remain unchanged. Only the proposed
 future operator-trust decision differs; it must be explicit and separately gated.
