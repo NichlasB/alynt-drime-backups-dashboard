@@ -13,8 +13,16 @@ paths, without guarded-worker/native execution. Three intended PHP red tests
 and Node schema reds preceded implementation; targetedPHP19/200, related49/296
 and Node6/6 pass. Full local PHP8.5.1 suite2025/8883 has only two existing Sodium
 skips; Node22/22/lint/structure/build/audits pass. Publication and one exact-head
-fresh-prerequisite lab result follow in the owning record. No retry or new
-milestone is authorized on native failure.
+fresh-prerequisite lab result follow in the owning record. Implementation5641e0e
+is pushed; ordinaryCI40858584834 fails on PHP7.4 (2025/8821,10 isolated-child
+exit255 failures); PHP8.3 passes2025/8890 and Node22/22. No native attempt has
+been dispatched. Under the CI-failure stop gate, no portability fix, weakened
+test or runtime change follows. Implementation-plan progress: diagnostic repair
+implemented, publication verification blocked at PHP7.4 test-child compatibility.
+Recommended next gated slice: PHP7.4 Isolated Diagnostic Child Portability and
+Failure Reporting Repair, Exact-Head CI Recovery, Then Resume the Previously
+Approved Single Owned Attempt. Verify the suspected PHP -n JSON dependency,
+retain strict assertions and diagnostic privacy; preserve guards/budgets/wiring.
 
 ## Linux canonical absint binding — approved harness correction — 2026-10-29
 

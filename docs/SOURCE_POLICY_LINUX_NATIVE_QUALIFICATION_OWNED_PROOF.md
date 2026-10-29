@@ -466,3 +466,37 @@ read-only. No local native execution occurred. Exact-head publication and the
 one newly approved native outcome follow below. Dispatch requires successful
 ordinary exact-head CI and fresh unchanged workflow prerequisites; no automatic
 repair/retry is authorized.
+
+### Publication verification blocker — no native dispatch
+
+Implementation5641e0e2dd66b891a7ef8be4aeff498fb3a8ece4 is pushed.
+[Exact-head ordinary CI40858584834](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40858584834)
+failed: PHP7.4 job123395730096 completed2025 tests/8821 assertions with10
+failures, all new diagnostic child cases exiting255 instead of0. The source-only
+wiring regression passes; the child-case failures are not native proof failures.
+PHP8.3 job123395730201 passes2025/8890, Node22/22/no skips and all configured
+gates. Local PHP8.5.1 success above does not establish PHP7.4 compatibility.
+
+Read-only diagnosis: the new pure source-backed child launcher uses PHP -n and
+JSON output; PHP7.4's JSON module availability under -n is the leading portability
+suspect. Current status assertion runs before the stderr assertion, so CI lacks
+the actual child's diagnostic text; the exact fatal cause remains unobserved.
+Do not claim that hypothesis as proven, skip the cases or accept exit255.
+
+The CI-failure stop condition is reached. No compatibility implementation or
+verification-bypass fix follows without approval. No manual owned qualification
+was dispatched at this head (workflow history query returned none); the approved
+single native attempt is unused, and no fresh lab/SQL/fixture/credential cleanup
+was necessary in this task. Existing application state and wiring are untouched.
+
+Implementation-plan progress: first-failure/escaping diagnostic implementation
+is published, but publication verification is blocked at isolated PHP7.4 child
+compatibility, before native qualification. Recommended next gated slice:
+**PHP7.4 Isolated Diagnostic Child Portability and Failure Reporting Repair,
+Exact-Head CI Recovery, Then Resume the Previously Approved Single Owned
+Attempt**. Establish the actual child failure without raw secret-bearing output,
+use a PHP7.4-compatible isolated encoding/launcher contract, preserve every
+assertion, guard, native case, budget and disabled wiring, then require green
+exact-head CI before the still-unused approved attempt. No new native retry or
+scope expansion is authorized by this closeout. Evidence-only final-head checks
+are reported separately at handoff; this failed verification is not relabeled.
