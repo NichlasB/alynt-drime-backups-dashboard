@@ -163,8 +163,17 @@ Fresh repository QA (ordinary isolated checks, not a physical proof):
   tracked files remain identical to the restore baseline, with no generated delta.
   Uploader/toolkit remain clean/read-only at 3dfcb15/c067eb6.
 
-Exact-head publication evidence follows after push and ordinary CI. The audit
-makes no runtime/native/whole-plugin release-readiness or Database Review claim.
+Audit publication `0abe16a53738ff976a8a54a029b950c9e605013b` is pushed;
+[CI 40929913571](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40929913571)
+succeeded for that exact head. Actual PHP 7.4 log: 2,200 tests / 16,443 assertions;
+PHP 8.3: 2,200 / 16,448, both without failures/skips. Admin 23/23 each, zero
+failures/skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. Setup Node emitted its tool-level `url.parse()` deprecation
+warning; no runtime/acceptance change is made to suppress it. This evidence-only
+closeout receives its own pushed exact-head ordinary CI and clean/remote check at
+handoff; no host/native proof or manual workflow is replayed.
+
+The audit makes no runtime/native/whole-plugin release-readiness or Database Review claim.
 Host state, code, source/artifact pins, dependencies, acceptance, schedules and
 wiring remain unchanged. No new regression test is warranted for a metadata-only
 audit; existing assertions and skips are unchanged.
