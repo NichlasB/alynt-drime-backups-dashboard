@@ -129,6 +129,17 @@ and generated tracked assets remain byte-identical to575a35a. Exact-head CI
 publication evidence follows the approved commit/push; local results do not
 substitute for the actual PHP7.4 reflection branch on CI.
 
+Implementation `daa7ee6a3940427f84faa19d88945aa225ebd2a1` is committed/pushed;
+ordinary exact-head [CI40873625559](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40873625559)
+succeeded. Actual PHP7.4 and8.3 logs each report2,043 tests/9,215 assertions,
+no failures/skips; admin23/23 on both, no failures/skips. Manifest/audits/build/
+structure/PHPCS all pass, zero known dependency advisories/vulnerabilities.
+Node setup/cleanup emitted DEP0040/DEP0169 deprecations, not failed gates; no
+dependency change was made. This verifies actual PHP7.4 fixture compatibility,
+including protected/private reflection, **not** Windows/native core qualification.
+No native workflow was dispatched. This evidence-only closeout receives its own
+ordinary pushed exact-head CI and clean/remote verification at handoff.
+
 Implementation-plan progress: gate1's source-binding/isolated compatibility
 foundation is implemented; genuine supported-profile evidence is still gated.
 Recommended next gated slice: **Read-Only Supported-Profile Source/Runtime
