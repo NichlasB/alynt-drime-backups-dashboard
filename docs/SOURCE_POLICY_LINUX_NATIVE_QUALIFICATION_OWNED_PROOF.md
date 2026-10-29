@@ -697,3 +697,83 @@ metadata/assets unchanged; uploader/toolkit clean/synced and read-only. No local
 native execution occurred. Publication and the approved single native outcome
 follow below. Dispatch requires green exact-head ordinary CI, clean/
 synced master and fresh unchanged prerequisites; no automatic native repair/retry.
+
+### Publication and the single bounded diagnostic attempt
+
+Implementation432cd6f4dee3f90f9a3d71dd0a96013740d45986 is pushed.
+[Ordinary exact-head CI40863045789](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40863045789)
+passes: PHP7.4/8.3 each2032 tests/9040 assertions/no failures or skips; Node23/23/
+no skips each and every configured audit/manifest/build/structure/lint gate.
+After exact-head/clean/remote checks, dispatched exactly one approved attempt:
+[manual40863271720](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40863271720),
+job123411591054, exact432cd6f, workflow_dispatch,2026-10-29 11:10:11–11:10:45 UTC
+(34s), overall failure. No repair/retry followed this single native failure.
+
+Fresh unchanged preflight/core reacquisition pass: same exact PHP8.5.12/mysqlnd/
+mysqli, binary/module/server/client digests,11 core pins and MariaDB image/version
+as recorded above; version-only preflight reports zero database/SQL/WordPress
+execution, resources removed. Actual source audit29/zero connections/queries,
+image4310c880ffffb449158e918bb3770fd37a13cae3bdbbf640a7e3b6a16514a787,
+run648b84cf0d280386571acc72f6c3af4d. Fresh lab baseline exact10.11.18-MariaDB-
+ubu2204/noTCP1/wsrep0/nativeAIO1/autocommit1/in_transaction0/other sessions0/
+transactions0/non-system schemas0, host io_uring_disabled0. Owned fixture creation
+and ambient/core-selected OFF/privilege denial/actual owner bootstrap pass.
+
+Original first failure remains escape/native/check41/groups0/RuntimeException/
+diagnostic:null, round-trip assertion SHA256
+f8243cf6c8ea6b6a8caa52f48a77eff25d802b6a9d9bc38b6e09d352a84d1ce1.
+484-byte bounded stderr, status1/no signal/no spawn error/empty stdout. Prepared
+true, ack_exactfalse, row/byte facts null; acknowledgement shape true, affected
+false, errno1064. Query facts: ASCIIfalse, mb_strlenfalse, is_wp_errortrue,
+l10nfalse, core num_queries delta two, readytrue. Escape release checks complete.
+This is the ordinary numeric syntax-error acknowledgement path, not the runtime
+mapper's affectedfalse/errnonull caught-Throwable path. It does not prove which
+two individual statements executed or authorize suppressing genuine non-ASCII
+validation. No completed native groups, successful escaping byte comparison or
+held-terminal9-group qualification is claimed.
+
+### Read-only source-backed SQL alias diagnosis
+
+The fixed private worker template is SELECT %s AS escaped; the alias is bare.
+[MariaDB's official reserved-word reference](https://mariadb.com/docs/server/reference/sql-structure/sql-language-structure/reserved-words)
+lists ESCAPED as reserved and requires quoting reserved identifiers. The exact
+server revision reported by the pinned lab is197f92bee02d8e836f529f37625be69b83e7acbd.
+Read-only primary-source inspection at that immutable revision confirms:
+
+- [sql/lex.h](https://github.com/MariaDB/server/blob/197f92bee02d8e836f529f37625be69b83e7acbd/sql/lex.h#L226)
+  maps ESCAPED to its keyword token; UTF-8 SHA256
+  2ed431597be2ee2353e2db7b626cbda44c7a56a8c5cd60edc047f36ca789f9c0.
+- [sql/sql_yacc.yy](https://github.com/MariaDB/server/blob/197f92bee02d8e836f529f37625be69b83e7acbd/sql/sql_yacc.yy#L9159)
+  requires an identifier/string for the alias and places ESCAPED in the reserved
+  rule, not a general identifier; UTF-8 SHA256
+  465b1719d4a663afc6c1699e44edbf417a6ab3430376977f8546cd455b002b91.
+
+This is a concrete source-backed sufficient syntax-refusal path consistent with
+the observed1064. It is not a native alias-only reproduction or proof no other
+later condition can fail. No raw SQL/error payload was retrieved from the child,
+no parser/core execution, alias fix or further native attempt was performed.
+
+All unchanged strict full diagnostic reviews pass: bootstrap2137B SHA256
+e44da46361750a165e2c5e0f5db5ddf701c4b1483d137070a75d93b6d2e84894;
+initial server2514B SHA25637a85ad970a6f3a493a44adb44affb2bf964eeef563e743c63ddef10fbc872e0;
+final server3135B SHA2569fa9d3fdb65b8e37f370d8e7e1460c92f9b98beca52a379d98e773e25c727ffd,
+known warnings visible and normal shutdown present. Independent failure-path
+root reconciliation requires other all-server sessions0/INNODB_TRX0 before exact
+schema/account drops, then non-system schemas0/owned account0/sessions0/trx0.
+Cleanup reports reconciliation_failure0 and normal stop exit0/notOOM under those
+unchanged conditions. Exit/always containers0/directories0/tmpfs released/
+reconciliation_failure0; source preflight cleanup core_checkout0. This is not
+the uncompleted held-terminal live/post-exit success proof. Existing application
+state, LocalWP/live sites and production wiring remain untouched.
+
+Implementation-plan progress: bounded diagnostics resolved the opaque execution
+failure into a concrete private SQL-alias defect; full physical qualification
+remains blocked. Recommended next gated slice: **Harness-Only Quoted ESCAPED
+Alias Correction, Source-Backed Regression, Fresh Prerequisites and One New Owned
+Qualification Attempt**. Quote the fixed alias in the template, retaining its
+existing result property/exact bytes, the complete test value, core validation,
+native cases, source guards, budgets, acceptance and disabled wiring. No change
+to runtime queries or generic identifier policy belongs in that slice. The
+current attempt is consumed; another requires explicit approval. Evidence-only
+final-head ordinary CI/remote is verified separately at handoff; prior native
+failures remain failed and qualification is not established by green ordinary CI.

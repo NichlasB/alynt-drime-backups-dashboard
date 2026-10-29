@@ -15,6 +15,22 @@ PHP8.5.1 suite2032/9033 has only two existing Sodium skips; Node23/23/lint/
 structure/build/audits pass. Exact-head CI and the one approved fresh-prerequisite lab outcome follow in the owner;
 native failure requires closeout, not automatic repair/replay.
 
+Implementation432cd6f/ordinaryCI40863045789 passes PHP7.4/8.3 each2032/9040/no
+skips, Node23/23/all gates. One manual40863271720 passed fresh prerequisites,
+audit29 and owned bootstrap, then failed check41/groups0 with acknowledgement
+shape true/affectedfalse/errno1064, non-ASCII query, mb_strlenfalse/is_wp_errortrue/
+l10nfalse, core counter delta two and readytrue. Release checks and independent
+failure-path fixture/account/container/directory/tmpfs/core cleanup pass. No retry.
+Read-only official docs and exact MariaDB parser source identify bare ESCAPED
+as reserved; the fixed SELECT uses unquoted AS escaped. This is a sufficient
+syntax-refusal path consistent with1064, not proof all later gates pass.
+Implementation-plan progress: failure now narrowed to a concrete harness SQL
+alias defect; full native qualification remains blocked. Recommended next gated
+slice: Harness-Only Quoted ESCAPED Alias Correction, Source-Backed Regression,
+Fresh Prerequisites and One New Owned Qualification Attempt. Quote only the fixed
+alias, retain exact byte comparison and every guard/budget/acceptance/wiring
+boundary. No alias repair or second native attempt was made after failure.
+
 ## PHP7.4 diagnostic-child compatibility — approved repair/resumption — 2026-10-29
 
 Approved [isolated child repair and resumption of the unused owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
