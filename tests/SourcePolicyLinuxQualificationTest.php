@@ -116,4 +116,11 @@ final class SourcePolicyLinuxQualificationTest extends TestCase {
 		$this->assertSame(array('shape'=>true,'affected'=>'other','errno'=>'other'),$row[3]);$this->assertSame('null',$row[4]['affected']);$this->assertSame('1142',$row[4]['errno']);$this->assertSame('other',$row[5]['errno']);
 		foreach(array(6,7,8) as $index)$this->assertSame(array('shape'=>false,'affected'=>'other','errno'=>'other'),$row[$index]);$this->assertStringNotContainsString('private-',serialize($row));
 	}
+	/** Static SQL grammar/probe-source regression; genuine escaping remains a native assertion. */
+	public function test_fixed_reserved_alias_is_quoted_without_changing_probe_or_byte_assertion() {
+		$worker=file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-qualification.php');
+		$this->assertSame(1,preg_match('/prepare_checked\(\s*\x27([^\x27]+)\x27,\s*\$needle\s*\)/',$worker,$template));$this->assertSame('SELECT %s AS `escaped`',$template[1]);
+		$this->assertSame(1,preg_match('/\$needle\s*=\s*([^;]+);/',$worker,$probe));$this->assertSame('dd87c5cfcb62310d9636bc9951f5abcc8dcdb60d14eb8b53518a21577bdd67b5',hash('sha256',$probe[1]));
+		$this->assertSame(1,substr_count($worker,'$needle === $escape_owner->last_result[0]->escaped'));
+	}
 }

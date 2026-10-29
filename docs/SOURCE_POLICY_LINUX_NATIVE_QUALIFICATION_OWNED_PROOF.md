@@ -777,3 +777,42 @@ to runtime queries or generic identifier policy belongs in that slice. The
 current attempt is consumed; another requires explicit approval. Evidence-only
 final-head ordinary CI/remote is verified separately at handoff; prior native
 failures remain failed and qualification is not established by green ordinary CI.
+
+## Quoted fixed ESCAPED alias correction — 2026-10-29
+
+User approved quoting only the fixed alias, its regression, full validation/
+publication and one fresh qualification attempt. R3 private owned lab scope only;
+restore baseline7de84aedcd355d258fff89e01b7625e5db877ff0 was clean/synced.
+The worker's single SQL-template change wraps the fixed escaped identifier in
+backticks. It does not rename the result property, change a runtime query or add
+a generic identifier policy. Exact affected1/errno0, one row, complete probe and
+byte equality remain mandatory; no ASCII-only replacement, removed NUL/percent/
+emoji, changed charset, validation bypass or relaxed SQL/error acceptance.
+
+The existing PHP test home gains a static source regression requiring the quoted
+template, fingerprinting the unchanged probe expression (SHA256
+dd87c5cfcb62310d9636bc9951f5abcc8dcdb60d14eb8b53518a21577bdd67b5) and retaining
+the exact result-property byte comparison. It failed on bare AS escaped before
+the one-line repair and then relatedPHP57/451 passes. Existing actual-source
+isolated escaping cases still exercise positive acceptance and independent
+prepare/execute/ack/row/byte/release failures. Static quoting/probe evidence and
+synthetic doubles are not a genuine SQL parser or native escaping proof.
+
+Worker/test plus these two owning records are the only intended changes. Runtime,
+all prior native cases, source pins/preflight, supervisor/terminal contract,
+shell/workflow, dependencies, metadata/assets, guards, resource limits/deadlines,
+diagnostic/log policies and disabled production wiring remain unchanged. No
+installed WordPress/LocalWP/live-site/Novamira operation, package/release/tag/
+deploy, uploader or toolkit change is included. Ordinary exact-head CI must pass
+before the one approved manual dispatch with fresh unchanged prerequisites.
+Native failure requires truthful evidence/cleanup closeout, not another retry.
+
+Final local PHP8.5.1 PHPUnit2033/9038 passes, with only the two existing missing-
+Sodium signing skips. Other QA passes: PHPCS226 files, Node23/23/no skips,
+structure149 runtime/227 support/205 test files/202 class names, build, strict
+Composer validation and Composer/npm moderate audits (zero known advisories/
+vulnerabilities), PHP syntax/Bash -n/Node --check/diff whitespace. Diff review
+confirms exactly one worker-line edit and one new existing-home test, plus the
+two owning records; all protected runtime/native inputs remain baseline-identical.
+Companion uploader/toolkit clean/synced and read-only. No local native execution.
+Publication/native outcome is recorded below once complete.

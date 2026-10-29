@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux quoted fixed alias — approved owned attempt — 2026-10-29
+
+Approved [quoted-alias repair and one fresh qualification attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+clean/synced restore baseline7de84ae. Only worker edit quotes the fixed ESCAPED
+alias; result property, exact quote/backslash/NUL/percent/utf8mb4 probe and byte
+comparison remain. Source regression failed for the bare template before the
+repair, then relatedPHP57/451 passes; existing positive/negative escaping cases
+remain. Runtime/cases/pins/supervisor/workflow/budgets/acceptance/wiring unchanged.
+Full local PHP8.5.1 suite2033/9038 has only two existing Sodium skips; Node23/23/
+lint/structure/build/audits pass. Exact-head CI and one fresh-prerequisite native
+result follow in the owner. No automatic native retry or further runtime repair
+is authorized.
+
 ## Linux bounded acknowledgement/query diagnostics — approved owned attempt — 2026-10-29
 
 Approved [harness-only diagnostics and one fresh owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),

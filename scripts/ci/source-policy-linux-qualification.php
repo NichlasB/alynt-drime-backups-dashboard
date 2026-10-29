@@ -265,7 +265,7 @@ try {
 	);
 	try {
 		$needle                             = "owned'\\\0%\xf0\x9f\x8c\x8d";
-		$sql                                = $escape_owner->prepare_checked( 'SELECT %s AS escaped', $needle );
+		$sql                                = $escape_owner->prepare_checked( 'SELECT %s AS `escaped`', $needle );
 		$GLOBALS['adbb_escape']['prepared'] = is_string( $sql );
 		$GLOBALS['adbb_escape']['step']     = 'execute';
 		$GLOBALS['adbb_escape']['query']    = array(
