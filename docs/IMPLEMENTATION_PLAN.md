@@ -11,8 +11,11 @@ Genuine core-generated report-OFF remains a prerequisite; audit CLI/report3 is
 not native compatibility. MAC/WSREP/name-resolution diagnostics stay unqualified,
 io_uring fallback needs resource-path evidence; no suppression/settings changes.
 Only design/plan/forward records; no runtime/native/storage/CI/wiring changes.
-Fresh QA/publication belongs to the owning design, historical native evidence
-remains d48b8f1/run40783576271. Implementation-plan progress: exact candidate and
+Fresh QA/publication is in the owning design: local306/946 and full1986/8538,
+two existing Sodium skips; design7667c8f/CI40843005563 succeeds with PHP7.4/8.3
+each1986/8545, no skips/failures, admin16/16/all gates. Evidence-only final-head
+CI checked separately at handoff; historical native evidence remains
+d48b8f1/run40783576271. Implementation-plan progress: exact candidate and
 bounded qualification requirements resolved in design, native/production gates
 still open. Recommended next gated slice: Repository-only Linux Exact-Build
 Candidate Safety Foundation, isolated tests/manifest inventory only; authentication,

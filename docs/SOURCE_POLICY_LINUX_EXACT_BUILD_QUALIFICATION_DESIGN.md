@@ -210,9 +210,17 @@ Fresh repository-only QA executed for this design:
   baseline; runtime/test/manual-proof/CI/dependency/package bytes unchanged.
   Uploader3dfcb15 and toolkitc067eb6 remain clean/synced and unmodified.
 
-Exact-head publication evidence follows after push/ordinary CI. No new tests or
-mutation controls are credited to this documentation task; the historical native
-run remains d48b8f1/run40783576271 only, with no new database/native execution.
+Design `7667c8fdd6a48a794b57b5a0f15b7afd247dd36b` is pushed.
+[Ordinary exact-head CI40843005563](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40843005563)
+succeeded with both check contexts successful. Retrieved actual job logs report
+PHP7.4/8.3 each1,986 tests/8,545 assertions, no failures/skips; admin16/16/0 skipped
+each and all configured lint/build/structure/manifest/audit gates successful.
+Hosted setup emits a Node url.parse deprecation warning; dependency audits report
+zero known advisories/vulnerabilities. No dependency or CI change was made.
+Evidence-only closeout head/remote/ordinary CI is checked separately at handoff.
+No new tests or mutation controls are credited to this documentation task; the
+historical native run remains d48b8f1/run40783576271 only, with no new database/
+native execution. No manual workflow was dispatched during this task.
 
 Implementation-plan progress: the observed lab identity now has a precise
 candidate migration and bounded qualification contract; current-source Linux
