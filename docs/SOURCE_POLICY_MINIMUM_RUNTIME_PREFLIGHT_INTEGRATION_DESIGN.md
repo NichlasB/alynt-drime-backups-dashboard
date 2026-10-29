@@ -1,5 +1,10 @@
 # Minimum-Profile Dependency Closure and Fixed Runtime-Preflight Integration Design
 
+Current proposed policy: the approved [existing-host trust/observer decision](SOURCE_POLICY_MINIMUM_HOST_TRUST_OBSERVER_DESIGN.md)
+defines an explicit operator-trust alternative after the audit's unavailable
+offline-provenance stop. No trust exception, guard or launch permission is active;
+follow its ordered gates without rewriting historical verification claims.
+
 Forward progress: the approved [socket-free safety foundation](SOURCE_POLICY_MINIMUM_PREFLIGHT_SAFETY_FOUNDATION.md)
 implements the synthetic gate only, without host discovery, acquisition or loading.
 Follow its read-only dependency/observer audit gate; this design and historical

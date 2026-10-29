@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Existing-host trust and bounded observer admission decision — 2026-10-29
+
+Approved [design-only decision](SOURCE_POLICY_MINIMUM_HOST_TRUST_OBSERVER_DESIGN.md)
+at clean/synced baseline 7754cfb. Proposes explicit, narrowly bound operator trust
+for the existing Windows/VC/tool profile, not claimed offline cryptographic
+provenance. No trust designation, guard change or load permission is applied.
+Requires fresh identities, profile-change expiry and independently bounded owned
+observer/termination evidence before any separately approved candidate launch.
+No new verifier/compiler/installation or host/site/database operation.
+
+Implementation-plan progress: trust semantics, observer budgets/refusals and
+ordered proof gates are specified, not physically established. Recommended next
+gated slice: Local-only Socket-Free Explicit Host-Trust and Observer-Admission
+Safety Foundation, pure DATA/virtual clocks/isolated tests only. Keep actual
+trust designation, discovery, process IO, runtime loading, installation, native
+execution and production wiring disabled. Owning record keeps proof limits.
+
 ## Read-only Windows/VC dependency and observer audit — 2026-10-29
 
 Approved [existing-host audit](SOURCE_POLICY_MINIMUM_WINDOWS_DEPENDENCY_OBSERVER_AUDIT.md)

@@ -1,5 +1,10 @@
 # Read-Only Minimum-Profile Windows/VC Dependency and Observer Audit
 
+Forward progress: the approved [design-only trust/observer decision](SOURCE_POLICY_MINIMUM_HOST_TRUST_OBSERVER_DESIGN.md)
+specifies a proposed explicit operator-trust alternative and ordered observer
+gates. It does not upgrade this audit to verified provenance or permit loading.
+Historical findings and publication evidence below remain unchanged.
+
 ## Authority, baseline and outcome — 2026-10-29
 
 Approved non-secret, read-only existing-host metadata/source audit after the
