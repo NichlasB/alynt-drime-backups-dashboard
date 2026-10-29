@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux bounded acknowledgement/query diagnostics — approved owned attempt — 2026-10-29
+
+Approved [harness-only diagnostics and one fresh owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+clean/synced restore baselinedd52d70. The existing single execute return is
+classified into fixed shape/affected/errno categories. Pure query-path capability
+facts and public core query-counter delta categories are diagnostics only, never
+acceptance or a driver/SQL call. Existing first-failure, exact acknowledgement,
+row/byte predicates and short-circuit cleanup remain. Intended PHP/Node red
+regressions then relatedPHP56/446 and focusedNode7/7 pass; positive single-
+dispatch acceptance survives zero/one/two/many/unknown counter categories.
+Runtime/cases/pins/workflow/budgets/acceptance/wiring unchanged. Full local
+PHP8.5.1 suite2032/9033 has only two existing Sodium skips; Node23/23/lint/
+structure/build/audits pass. Exact-head CI and the one approved fresh-prerequisite lab outcome follow in the owner;
+native failure requires closeout, not automatic repair/replay.
+
 ## PHP7.4 diagnostic-child compatibility — approved repair/resumption — 2026-10-29
 
 Approved [isolated child repair and resumption of the unused owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),

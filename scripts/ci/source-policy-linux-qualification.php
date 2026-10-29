@@ -61,6 +61,39 @@ function adbb_capture( $error, $label = 'none' ) {
 		'escape'     => $GLOBALS['adbb_escape'] ?? null,
 	);
 }
+/** Classifies existing acknowledgement DATA without retaining arbitrary payloads.
+ *
+ * @param mixed $ack Existing execute return, never another dispatch.
+ * @return array Fixed diagnostic categories only.
+ */
+function adbb_ack( $ack ) {
+	$shape = is_array( $ack ) && array_keys( $ack ) === array( 'affected', 'errno' );
+	if ( ! $shape ) {
+		return array(
+			'shape'    => false,
+			'affected' => 'other',
+			'errno'    => 'other',
+		);
+	}
+	$affected = 'other';
+	foreach ( array(
+		'one'   => 1,
+		'zero'  => 0,
+		'false' => false,
+		'null'  => null,
+	) as $name => $value ) {
+		if ( $ack['affected'] === $value ) {
+			$affected = $name;
+			break;
+		}
+	}
+	$errno = null === $ack['errno'] ? 'null' : ( is_int( $ack['errno'] ) && in_array( $ack['errno'], array( 0, 1062, 1064, 1142, 1146, 1205, 1213, 1366, 2006, 2013 ), true ) ? (string) $ack['errno'] : 'other' );
+	return array(
+		'shape'    => true,
+		'affected' => $affected,
+		'errno'    => $errno,
+	);
+}
 /** Bind private composition, never active state or a native handle.
  *
  * @param object $receiver Owned receiver.
@@ -227,16 +260,33 @@ try {
 		'ack_exact'   => null,
 		'row_exact'   => null,
 		'bytes_equal' => null,
+		'ack'         => null,
+		'query'       => null,
 	);
 	try {
-		$needle                              = "owned'\\\0%\xf0\x9f\x8c\x8d";
-		$sql                                 = $escape_owner->prepare_checked( 'SELECT %s AS escaped', $needle );
-		$GLOBALS['adbb_escape']['prepared']  = is_string( $sql );
-		$GLOBALS['adbb_escape']['step']      = 'execute';
-		$GLOBALS['adbb_escape']['ack_exact'] = array(
+		$needle                             = "owned'\\\0%\xf0\x9f\x8c\x8d";
+		$sql                                = $escape_owner->prepare_checked( 'SELECT %s AS escaped', $needle );
+		$GLOBALS['adbb_escape']['prepared'] = is_string( $sql );
+		$GLOBALS['adbb_escape']['step']     = 'execute';
+		$GLOBALS['adbb_escape']['query']    = array(
+			'ascii'       => 0 === preg_match( '/[^\x00-\x7F]/', $sql ),
+			'mb_strlen'   => function_exists( 'mb_strlen' ),
+			'is_wp_error' => function_exists( 'is_wp_error' ),
+			'l10n'        => function_exists( '__' ) && function_exists( 'wp_load_translations_early' ),
+			'commands'    => 'unobserved',
+			'ready'       => null,
+		);
+		$queries_before                     = $escape_owner->num_queries;
+		$ack                                = $escape_owner->execute( $sql );
+		$GLOBALS['adbb_escape']['ack']      = adbb_ack( $ack );
+		$queries_after                      = $escape_owner->num_queries;
+		$delta                              = is_int( $queries_before ) && is_int( $queries_after ) && $queries_after >= $queries_before ? $queries_after - $queries_before : null;
+		$GLOBALS['adbb_escape']['query']['commands'] = null === $delta ? 'unknown' : ( array( 'zero', 'one', 'two' )[ $delta ] ?? 'many' );
+		$GLOBALS['adbb_escape']['query']['ready']    = true === $escape_owner->ready;
+		$GLOBALS['adbb_escape']['ack_exact']         = array(
 			'affected' => 1,
 			'errno'    => 0,
-		) === $escape_owner->execute( $sql );
+		) === $ack;
 		if ( $GLOBALS['adbb_escape']['ack_exact'] ) {
 			$GLOBALS['adbb_escape']['step']      = 'rows';
 			$GLOBALS['adbb_escape']['row_exact'] = 1 === count( $escape_owner->last_result );

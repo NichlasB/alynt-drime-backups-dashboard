@@ -631,3 +631,69 @@ existing cases/acceptance/budgets/cleanup and disabled wiring. The approved sing
 attempt is now consumed; another native attempt requires new explicit approval.
 Evidence-only closeout ordinary CI/remote is verified separately at handoff;
 ordinary CI success must not relabel this failed native qualification.
+
+## Bounded native acknowledgement/query-path diagnostics — 2026-10-29
+
+User approved harness-only bounded acknowledgement/query-path diagnostics and
+one fresh owned attempt through validation/commit/push/exact-head CI. R3 private
+lab scope only; clean/synced restore baselinedd52d704d64e292a7282e6f808bc58a8cb39b82f.
+Only worker/supervisor, existing PHP/Node test homes and these two owner records
+change. Runtime guards, old native cases, pins/preflight, shell/workflow, receipt
+success policy, resources/deadlines and production wiring remain unchanged.
+No installed WordPress/LocalWP/live target or toolkit/release/deployment work.
+
+The same single execute return is retained locally for its original exact
+affected1/errno0 comparison and classified separately: exact array field shape,
+affected one/zero/false/null/other and errno from a fixed finite code/null/other
+domain. Strict type distinctions remain; malformed/reordered/unknown payloads
+produce fixed other categories, never arbitrary strings or object values.
+Preparation, one dispatch, row count and exact byte comparison stay unchanged.
+
+Query facts are only prepared-ASCII, function availability for mb_strlen,
+is_wp_error and the combined l10n pair, public ready and the public core
+num_queries delta classified as unobserved/zero/one/two/many/unknown. Availability
+checks invoke no helper; counter/property reads issue no SQL or driver call.
+The counter is core bookkeeping, not independent physical wire accounting or
+proof of which nested function ran. No query/state/session probing, callback,
+replay, reconnect, extra statement or source/runtime fix is introduced. The
+existing first-failure snapshot retains these facts before finally; no SQL,
+prepared bytes, returned values, raw errno outside the finite domain, messages,
+paths, credentials or native handles are emitted.
+
+Supervisor parsing requires exact nested key order and strict bool/null/enum
+domains. Unknown/missing/extra/reordered/secret-bearing fields refuse; unchanged
+1KiB child diagnostic/16KiB stream-prefix limits and strict log review apply.
+The diagnostic record still cannot satisfy the unchanged9-group held-terminal
+validator. It is not used for a success/admission decision.
+
+Before implementation the new PHP actual-source classifier test failed for the
+missing classifier; new/updated Node positive schemas failed under the old
+parser. Current relatedPHP56/446 and focusedNode7/7 pass. Existing PHP -n JSON-
+disabled source-backed tests exercise actual pure functions and the finite
+escaping block with isolated doubles, not the guarded worker/core/native body.
+Positive acknowledgement and independent prepare/execute/ack/row/bytes/release
+refusals retain one prepare/at-most-one execute/cleanup. Zero/one/two/many/unknown
+counter categories do not alter positive acceptance. Strict scalar types,
+malformed shape and private payloads are classified without leakage. Node tests
+cover all finite categories, malformed types, missing/extra/reordered fields,
+counter domain and sub1KiB complete records; no native qualification credit.
+
+Read-only official source audit in this task verified all seven loaded core
+library hashes against the unchanged11-file manifest: load.php declares
+is_wp_error and wp_load_translations_early; those seven sources do not declare
+mb_strlen or __. This does not itself establish runtime capabilities, a missing
+dependency as the observed cause or permission to add a core include/extension.
+The separately observed pinned query path may use conversion-query fallback;
+diagnostics will distinguish facts without disabling genuine core validation.
+
+Full local PHP8.5.1 suite2032/9033 passes, with only the two existing missing-
+Sodium signing skips. PHPCS226 files, Node23/23/no skips, structure149 runtime/
+227 support/205 test files/202 class names, build, strict Composer validation
+and Composer/npm moderate audits pass, zero known advisories/vulnerabilities.
+Bash -n, Node --check, PHP syntax and diff whitespace pass. Final diff/ownership
+review confirms only the four harness/test files plus these two records change;
+runtime/manual cases/pins/preflight/shell/workflow/terminal contract/dependencies/
+metadata/assets unchanged; uploader/toolkit clean/synced and read-only. No local
+native execution occurred. Publication and the approved single native outcome
+follow below. Dispatch requires green exact-head ordinary CI, clean/
+synced master and fresh unchanged prerequisites; no automatic native repair/retry.

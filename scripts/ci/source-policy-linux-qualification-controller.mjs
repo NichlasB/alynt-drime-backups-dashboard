@@ -28,10 +28,17 @@ export function childFailureSummary(result) {
         && [2,8,256,512,1024,2048,4096,8192,16384].includes(diagnostic.severity)
         && ['worker','core','other'].includes(diagnostic.source) && Number.isSafeInteger(diagnostic.line) && diagnostic.line > 0 && diagnostic.line <= 100000);
       const escape = row.escape;
+      const ack = escape?.ack, query = escape?.query;
+      const validAck = ack === null || (ack && !Array.isArray(ack) && Object.keys(ack).join(',') === 'shape,affected,errno'
+        && typeof ack.shape === 'boolean' && ['one','zero','false','null','other'].includes(ack.affected)
+        && ['0','1062','1064','1142','1146','1205','1213','1366','2006','2013','null','other'].includes(ack.errno));
+      const validQuery = query === null || (query && !Array.isArray(query) && Object.keys(query).join(',') === 'ascii,mb_strlen,is_wp_error,l10n,commands,ready'
+        && ['ascii','mb_strlen','is_wp_error','l10n'].every(key => typeof query[key] === 'boolean')
+        && ['unobserved','zero','one','two','many','unknown'].includes(query.commands) && (query.ready === null || typeof query.ready === 'boolean'));
       const validEscape = escape === null || (escape && !Array.isArray(escape)
-        && Object.keys(escape).join(',') === 'step,prepared,ack_exact,row_exact,bytes_equal'
+        && Object.keys(escape).join(',') === 'step,prepared,ack_exact,row_exact,bytes_equal,ack,query'
         && ['prepare','execute','rows','bytes','release'].includes(escape.step)
-        && ['prepared','ack_exact','row_exact','bytes_equal'].every(key => escape[key] === null || typeof escape[key] === 'boolean'));
+        && ['prepared','ack_exact','row_exact','bytes_equal'].every(key => escape[key] === null || typeof escape[key] === 'boolean') && validAck && validQuery);
       if (Object.keys(row).join(',') === 'event,stage,phase,checks,groups,assertion,exception,diagnostic,escape,escape_release' && row.event === 'failure'
         && ['source-audit','ambient','escape','positive','noop-stale','update','race','duplicate','transform-reentry','lock','post-change','errno'].includes(row.stage)
         && ['runtime','core-pins','core-load','owned-load','cache','profile','image','native'].includes(row.phase)

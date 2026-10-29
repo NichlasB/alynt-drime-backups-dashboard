@@ -64,7 +64,7 @@ test('child failure summary retains safe stage/counts/status but never raw strea
 
 test('escaping diagnostics retain fixed facts only and cannot grant a terminal',()=>{
   const row={event:'failure',stage:'escape',phase:'native',checks:41,groups:0,assertion:'d'.repeat(64),exception:'RuntimeException',diagnostic:null,
-    escape:{step:'execute',prepared:true,ack_exact:false,row_exact:null,bytes_equal:null},escape_release:true};
+    escape:{step:'execute',prepared:true,ack_exact:false,row_exact:null,bytes_equal:null,ack:null,query:null},escape_release:true};
   const summary=worker=>supervisor.childFailureSummary({status:1,stderr:JSON.stringify(worker)+'\n'}).worker;
   assert.deepEqual(summary(row),row);assert.equal(validTerminal(row,image,run,pid),false);
   assert.ok(Buffer.byteLength(JSON.stringify({...row,diagnostic:{severity:16384,source:'other',line:100000},checks:99999,groups:9})+'\n')<1024);
@@ -78,4 +78,19 @@ test('escaping diagnostics retain fixed facts only and cannot grant a terminal',
     assert.equal(summary({...row,escape}),null);
   for(const escape_release of ['secret',0,{},[]]) assert.equal(summary({...row,escape_release}),null);
   const missing={...row};delete missing.escape_release;assert.equal(summary(missing),null);
+});
+
+test('acknowledgement and query-path facts are strictly bounded diagnostics only',()=>{
+  const ack={shape:true,affected:'false',errno:'null'},query={ascii:false,mb_strlen:false,is_wp_error:true,l10n:false,commands:'zero',ready:false};
+  const row={event:'failure',stage:'escape',phase:'native',checks:41,groups:0,assertion:'d'.repeat(64),exception:'RuntimeException',diagnostic:null,
+    escape:{step:'execute',prepared:true,ack_exact:false,row_exact:null,bytes_equal:null,ack,query},escape_release:true};
+  const summary=escape=>supervisor.childFailureSummary({status:1,stderr:JSON.stringify({...row,escape})+'\n'}).worker;
+  assert.deepEqual(summary(row.escape),row);assert.equal(validTerminal(row,image,run,pid),false);
+  assert.ok(Buffer.byteLength(JSON.stringify({...row,diagnostic:{severity:16384,source:'other',line:100000}})+'\n')<1024);
+  for(const affected of ['one','zero','false','null','other']) assert.equal(summary({...row.escape,ack:{...ack,affected}}).escape.ack.affected,affected);
+  for(const errno of ['0','1062','1064','1142','1146','1205','1213','1366','2006','2013','null','other']) assert.equal(summary({...row.escape,ack:{...ack,errno}}).escape.ack.errno,errno);
+  for(const commands of ['unobserved','zero','one','two','many','unknown']) assert.equal(summary({...row.escape,query:{...query,commands}}).escape.query.commands,commands);
+  for(const bad of [[],{...ack,affected:1},{...ack,errno:1064},{...ack,shape:'true'},{...ack,errno:'private-sql'},{...ack,raw:'private-value'},Object.fromEntries(Object.entries(ack).reverse())]) assert.equal(summary({...row.escape,ack:bad}),null);
+  for(const key of Object.keys(query)) {const bad={...query};delete bad[key];assert.equal(summary({...row.escape,query:bad}),null);assert.equal(summary({...row.escape,query:{...query,[key]:'private-path'}}),null);}
+  for(const bad of [[],{...query,sql:'private-sql'},{...query,commands:2}]) assert.equal(summary({...row.escape,query:bad}),null);
 });
