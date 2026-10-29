@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Supported-profile qualification closure design — 2026-10-29
+
+Approved [minimum-core/PHP7.4 and current-source Windows/TCP design](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md),
+repository-only at clean/synced baseline9535e51. Keeps pinned Linux282/9 success
+distinct from historical Windows and absent minimum-native evidence. Records
+genuine core6.0/7.1.3 source refs, parser/core-file/mode/reflection/module deltas,
+exact server/transport feasibility, non-vacuous cases and independent cleanup.
+No runtime/guard/support changes, native execution, storage/site operations,
+production wiring, package/release or whole-plugin checklist refresh. Scoped QA
+and exact-head CI publication evidence belong to the design owner.
+
+Implementation-plan progress: advances the remaining qualification design, not
+native/product feature completion. Recommended next gated slice: Repository-only
+Minimum-Core/PHP7.4 and Windows/TCP Source-Rebaseline and Isolated Harness Safety
+Foundation, isolated tests only; keep native execution/storage/site inspection/
+production wiring disabled. Actual target/fixture proofs require later approval.
+
 ## Linux quoted fixed alias — approved owned attempt — 2026-10-29
 
 Approved [quoted-alias repair and one fresh qualification attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),

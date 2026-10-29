@@ -13,6 +13,11 @@ fresh Windows/TCP qualification or whole-plugin release readiness follows.
 Prior failed attempts below stay failed; their resume recommendations are
 historical. Latest successful closeout and remaining gates are at the end.
 
+The subsequently approved [supported-profile closure design](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md)
+now owns the minimum-core/PHP7.4 and fresh Windows/TCP planning/resume point.
+It does not rerun or extend this native evidence; actual qualification and
+production wiring remain gated.
+
 ## Approval, audit-first plan and owned target — 2026-10-29
 
 Approved next harness/owned proof from the
