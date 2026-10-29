@@ -132,5 +132,53 @@ PHPCS226 files, Node19/19 (no failures/skips), structure149 runtime/227 support/
 205 test files/202 class names, build, strict Composer validation and Composer/npm
 moderate audits pass; zero known advisories/vulnerabilities. Local links/diff/
 scope review pass; generated tracked assets and uploader/toolkit remain unchanged.
-Ordinary exact-head CI and the one manual native result are recorded below when
-executed. Until then all native assertions above are requirements, not passes.
+Implementation `599b4b4ad24024c767335effc27cb00877358c4b` is pushed.
+[Ordinary exact-head CI40849941384](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40849941384)
+passed: actual PHP7.4/8.3 each2,013 tests/8,753 assertions, no failures/skips;
+Node19/19/0 skipped each and all configured gates successful. GitHub registered
+manual workflow400422878 as active. This is repository QA, not native success.
+
+## Single blocked attempt, cleanup and exact resume gate
+
+One [manual attempt40850202133](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40850202133),
+job123367484397, ran at exact implementation head, workflow_dispatch,
+2026-10-29 09:30:46–09:31:09 UTC (23s), overall failure.
+Fresh unchanged environment preflight and exact pinned core reacquisition passed.
+Observed PHP/mysqlnd8.5.12/all11 core pins, initial report3 and zero connections/
+queries; CLI/module digests match the prior preflight record. Version-only image
+check retained MAC warning. Its own container/directory/core cleanup completed.
+
+The new step stopped at the **connection-free source audit** with
+`Owned Linux supervision failed: Source audit refused`. The supervisor currently
+discards the inner child status/stdout/stderr when that audit refuses, so the log
+does not establish the exact inner failed predicate. Do not infer runtime/core/
+driver incompatibility or successful source closure. No audited image terminal
+was issued. Source control flow places database initialization, credential
+generation, schema/account/fixture creation and the actual native body strictly
+after that successful audit. None was reached: **zero completed native groups**,
+no genuine OFF/escaping/CAS/failure/privilege or physical release qualification.
+
+Exit cleanup and always cleanup both report containers0/directories0/tmpfs
+released/reconciliation_failure0; always preflight cleanup reports core_checkout0.
+No database instance/fixture was created by the failed qualification step, so
+these are exact no-instance cleanup facts, not a native live/post-exit SQL proof.
+No automatic retry, second database attempt or acceptance/runtime change ran.
+
+A separate source-only finding was reproduced with synthetic Node input after
+the failed attempt: reviewLog accepts `2026-10-29 09:31:02` but rejects the actual
+MariaDB padded-hour form `2026-10-29  9:31:02` as Unclassified startup warning.
+The unchanged preflight log demonstrates that form. Its strict two-digit hour
+prefix regex is a harness defect requiring a precise formatting regression.
+This is **not the observed source-audit failure cause**: diagnostic log review
+was not reached. No code was repaired or native process rerun after failure.
+
+Implementation-plan progress: opt-in qualification harness and isolated checks
+published, but genuine Linux qualification is blocked before database startup.
+Recommended next gated slice: **Harness-only Source-Audit Failure Diagnostics
+and Padded-Hour Diagnostic Parsing Repair, Fresh Prerequisites and One New Owned
+Linux Qualification Attempt**. Preserve all runtime/source/authentication guards,
+budgets, case acceptance, owned scope and disabled production wiring; surface
+bounded inner source-audit failure evidence and correct only timestamp framing,
+then use fresh prerequisites before at most one explicitly approved owned attempt.
+Evidence-only closeout remote/ordinary CI is verified separately at handoff; it
+does not erase this failed manual run or promote pending native claims.

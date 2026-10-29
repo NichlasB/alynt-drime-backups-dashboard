@@ -8,8 +8,19 @@ fresh unchanged preflight/source audit, one disposable table-scoped account/sche
 unchanged9-group ambient/OFF cases and independent live/post-exit reconciliation.
 Full bounded diagnostic context/fallback evidence, strict resource/cleanup rules,
 no production/runtime guard change. Isolated PHP7/63, related37/159, Node3/3 and
-two assertion-killed/hash-restored controls pass. Native execution/result and full
-QA/CI remain pending in the owning record; no native success is implied here.
+two assertion-killed/hash-restored controls pass. Full local2013/8746, two existing
+Sodium skips; implementation599b4b4/ordinaryCI40849941384 succeeds with PHP7.4/8.3
+each2013/8753, no failures/skips, Node19/19/all gates. One manual40850202133 failed
+at the connection-free source audit after fresh unchanged preflight; no DB init,
+account/schema/fixture or native body reached, zero completed groups. Exact
+no-instance/core cleanup passed. Inner source-audit detail was discarded by the
+supervisor; separately reproduced padded single-digit hour parser defect is not
+that observed failure cause. No repair/retry performed. Implementation-plan
+progress: harness published, physical qualification blocked before DB startup.
+Recommended next gated slice: Harness-only Source-Audit Failure Diagnostics and
+Padded-Hour Diagnostic Parsing Repair, Fresh Prerequisites and One New Owned
+Linux Qualification Attempt; preserve guards/budgets/acceptance/disabled wiring.
+Evidence-only final-head ordinary CI checked separately at handoff.
 
 ## Linux exact-build candidate — approved isolated foundation — 2026-10-29
 
