@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Socket-free dependency/launch and preflight transcript foundation — 2026-10-29
+
+Approved [synthetic-only foundation](SOURCE_POLICY_MINIMUM_PREFLIGHT_SAFETY_FOUNDATION.md)
+at clean/synced restore baselinea686b43. Two closed helpers implement fixed
+dependency/layout/profile/module DATA and a separate two-stage ADBMP1 producer/
+validator. Separate worker/controller/ACK channels, exact identity/order/payloads,
+virtual25s bounds, sticky refusal and final cleanup claims are required; all
+outputs remain non-authorizing. Fresh157/7233, twelve assertion-killed in-memory
+controls and token-level no-IO/launcher/discovery checks passed. No artifact/site/
+runtime/native operation or production wiring change; ADBM0/ADBC1/2 unchanged.
+
+Implementation-plan progress: synthetic preflight foundation is implemented;
+real host provenance, observer feasibility, process cleanup and runtime/native
+qualification remain separately gated. Recommended next gated slice: Read-Only
+Minimum-Profile Windows/VC Dependency and Observer Feasibility Audit, non-secret
+existing metadata/source inspection only; no download/install/configuration or
+permission change, SQL/site probe, artifact loading, native experiment or wiring.
+Owning record keeps exact proof limits and publication evidence.
+
 ## Minimum dependency closure and fixed runtime-preflight design — 2026-10-29
 
 Approved [repository-only integration design](SOURCE_POLICY_MINIMUM_RUNTIME_PREFLIGHT_INTEGRATION_DESIGN.md)

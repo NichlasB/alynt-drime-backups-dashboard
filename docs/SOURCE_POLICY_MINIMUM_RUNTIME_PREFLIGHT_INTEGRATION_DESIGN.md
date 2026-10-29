@@ -1,5 +1,10 @@
 # Minimum-Profile Dependency Closure and Fixed Runtime-Preflight Integration Design
 
+Forward progress: the approved [socket-free safety foundation](SOURCE_POLICY_MINIMUM_PREFLIGHT_SAFETY_FOUNDATION.md)
+implements the synthetic gate only, without host discovery, acquisition or loading.
+Follow its read-only dependency/observer audit gate; this design and historical
+proofs are not upgraded to physical preflight or native qualification.
+
 ## Authority, decision and restore baseline — 2026-10-29
 
 Approved repository-only design at clean/synced dashboard
