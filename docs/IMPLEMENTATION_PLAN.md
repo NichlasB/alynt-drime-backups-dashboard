@@ -17,6 +17,10 @@ Diagnostics and One Fresh Owned Observer Proof, finite validated diagnostics,
 fresh same-scope fixtures and unchanged guards/budgets. Keep candidate PHP,
 installation, WordPress/database/site, host-trust designation and wiring disabled.
 
+Harness/failure record 2544654 is pushed; ordinary exact-head CI 40948355064
+passed with PHP 7.4/8.3 each 2,319 tests, no failures/skips. This repository
+publication does not close or replay the failed Windows physical prerequisite.
+
 ## Socket-free explicit host-trust/observer admission foundation — 2026-10-29
 
 Autonomous safe-local batch selects the [next pure foundation](SOURCE_POLICY_MINIMUM_HOST_ADMISSION_SAFETY_FOUNDATION.md)

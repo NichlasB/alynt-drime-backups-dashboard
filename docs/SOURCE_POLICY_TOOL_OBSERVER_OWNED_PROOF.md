@@ -162,7 +162,16 @@ Fresh ordinary repository QA on existing trusted PHP 8.5.1:
   Uploader/toolkit remain clean/read-only at 3dfcb15/c067eb6. No new skip or
   assertion weakening, UI/UX workflow or historical whole-plugin review refresh.
 
-Exact-head publication evidence follows after push and ordinary CI.
+Harness/failure-record publication `2544654db6c26f4f88d0a2f4de218157b0962bdb`
+is pushed; [CI 40948355064](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40948355064)
+succeeded for that exact head. Actual PHP 7.4 log: 2,319 tests / 20,816 assertions;
+PHP 8.3: 2,319 / 20,821, both without failures/skips. Admin 23/23 each, zero
+failures/skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. Setup Node emitted tool-level `punycode`/`url.parse()` deprecation
+warnings; no assertion or acceptance change suppresses them. This evidence-only
+closeout receives its own pushed exact-head ordinary CI and clean/remote check
+at handoff. No Windows process/fixture proof is replayed for closeout. Successful
+CI is repository evidence only; `positive-observer` remains physically blocked.
 No runtime/native guard, ADBM0/ADBMP1/ADBC1/2 contract, host-admission helper,
 source/artifact pin, dependency manifest, workflow, schema/version or production
 wiring changes. No release/package/native workflow is dispatched. Ordinary CI
