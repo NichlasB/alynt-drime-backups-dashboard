@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum-profile synthetic artifact and runner foundation — 2026-10-29
+
+Approved [isolated foundation](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_FOUNDATION.md)
+at clean/synced restore baseline9ae4bcd. Four development-only helpers cover fixed
+identity/inventory/ownership DATA, complete synthetic Git trees, PE header/import
+structure and ordered non-authorizing runner/profile DATA. Tests include valid
+paths, hostile cases, extension-free composition and five in-memory semantic
+controls. No production caller or existing native image input changes; no download,
+extraction, candidate-runtime load, site/SQL/native operation or wiring change.
+
+Implementation-plan progress: minimum-profile synthetic gate advanced, not actual
+artifact/environment/native qualification. Recommended next gated slice: Owned
+Minimum-Profile Artifact Acquisition, Static Verification and Cleanup Proof,
+including the fixed ZIP/filesystem adapter, exact disposable portable artifacts
+and cleanup only; no installation, candidate-runtime loading or site/SQL work.
+Owning record preserves detailed proof limits and QA/publication evidence.
+
 ## Minimum-core/PHP7.4 artifact and fixed runner design — 2026-10-29
 
 Approved [repository-only design](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_DESIGN.md)

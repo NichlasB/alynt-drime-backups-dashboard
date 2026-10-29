@@ -1,5 +1,10 @@
 # Minimum-Core/PHP7.4 Isolated Artifact and Fixed Runner Design
 
+Forward progress: the approved [synthetic-only foundation](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_FOUNDATION.md)
+implements the next repository gate without fetching, extracting or loading any
+artifact. Follow its resume boundary; the design/provenance observations below
+remain historical, not real artifact or native qualification.
+
 ## Authority and decision — 2026-10-29
 
 Approved repository-only design, based on clean/synced dashboard
