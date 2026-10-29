@@ -22,7 +22,7 @@ final class SourcePolicyTransportProfileTest extends TestCase {
 		return $cases;
 	}
 	public function test_server_rows_are_exact_candidates_not_prefix_grants() {
-		foreach(array('6.0'=>'10.6.23-MariaDB','7.1.3'=>'10.6.23-MariaDB','7.1.4'=>'10.11.18-MariaDB') as $core=>$server)$this->assertSame($server,Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server($core));
+		foreach(array('6.0'=>'10.6.23-MariaDB','7.1.3'=>'10.6.23-MariaDB','7.1.4'=>'10.11.18-MariaDB-ubu2204') as $core=>$server)$this->assertSame($server,Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server($core));
 		foreach(array('7.1','7.1.4-dev','7.2',null,714) as $core)$this->assertFalse(Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server($core));
 	}
 }

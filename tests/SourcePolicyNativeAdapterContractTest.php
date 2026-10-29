@@ -59,4 +59,30 @@ final class SourcePolicyNativeAdapterContractTest extends TestCase {
 		$this->assertSame(0,$connection->physical); $this->assertSame(0,$store->mutations); $this->assertSame(1,$connection->closes);
 	}
 	public static function rejected_profiles() { return array(array('core','9.0'),array('server','MySQL'),array('database','invalid.name'),array('table','wp_other_options'),array('schema','no-unique-key'),array('autocommit',1),array('single_site',false),array('dropins',true),array('cache','external'),array('bounded_session',false),array('hooks',str_repeat('a',64))); }
+	/** Pure profile DATA under a RAM context, not platform/native qualification.
+	 * @dataProvider exact_build_profiles
+	 */
+	public function test_exact_candidate_facts_are_checked_independently_of_connected_identity($core,$server,$accepted) {
+		list($owner,$connection,$store,$facts,$context)=$this->owner();unset($owner);
+		$facts['core']=$core;$facts['server']=$server;
+		$result=Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit($facts,'wp_options',$context);
+		if($accepted){
+			$this->assertIsArray($result);$this->assertSame(hash('sha256','isolated:wp_options'),$result['owner']);
+			$this->assertSame('6.0'===$core?'no':'off',$result['autoload']);
+		}else $this->error_code($result,'source_policy_unavailable');
+		$this->assertSame(0,$connection->physical);$this->assertSame(0,$store->reads);$this->assertSame(0,$store->attempts);
+		$this->assertTrue($connection->close());$this->assertSame(1,$connection->closes);
+		$this->assertFalse(has_filter('query',array($connection,'remove_placeholder_escape')));
+	}
+	public static function exact_build_profiles() {
+		return array(
+			'linux-exact'=>array('7.1.4','10.11.18-MariaDB-ubu2204',true),
+			'minimum-preserved'=>array('6.0','10.6.23-MariaDB',true),'windows-preserved'=>array('7.1.3','10.6.23-MariaDB',true),
+			'generic-refused'=>array('7.1.4','10.11.18-MariaDB',false),'missing-suffix'=>array('7.1.4','10.11.18',false),
+			'other-build'=>array('7.1.4','10.11.18-MariaDB-ubu2404',false),'other-patch'=>array('7.1.4','10.11.19-MariaDB-ubu2204',false),
+			'trailing'=>array('7.1.4','10.11.18-MariaDB-ubu2204-extra',false),'nul'=>array('7.1.4',"10.11.18-MariaDB-ubu2204\0",false),
+			'type'=>array('7.1.4',new stdClass(),false),'wrong-core'=>array('7.1.3','10.11.18-MariaDB-ubu2204',false),
+			'wrong-server'=>array('7.1.4','10.6.23-MariaDB',false),'unknown-core'=>array('7.1.5','10.11.18-MariaDB-ubu2204',false)
+		);
+	}
 }

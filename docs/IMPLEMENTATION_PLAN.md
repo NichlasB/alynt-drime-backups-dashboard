@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux exact-build candidate — approved isolated foundation — 2026-10-29
+
+Approved [exact candidate foundation](SOURCE_POLICY_LINUX_EXACT_BUILD_CANDIDATE_FOUNDATION.md),
+clean/synced baseline614c830. Only runtime edit is core7.1.4's candidate changing
+to10.11.18-MariaDB-ubu2204. Existing exact consumer comparisons, minimum/Windows
+rows, report-OFF socket guard, bounds, schemas and closed public wiring remain.
+Extended existing isolated tests:13 independent profile DATA cases,7 socket
+transcripts, connected refusal before commands and altered-fact refusal after
+Linux initializer success. Three intended red assertions, then combined349/1331
+green; two separate assertion-killed/hash-restored identity controls. Current-
+source manual image effects inventoried, no stale receipt refreshed. No native/
+database/site/manual dispatch or package/release/deploy; final QA/CI in owner.
+Implementation-plan progress: exact-row isolated foundation implemented; native
+qualification and production integration remain gated. Recommended next gated
+slice: Off-Production Linux Genuine-Core Report-OFF and Diagnostic Native
+Qualification Harness and Owned Proof, audit/fresh prerequisites, exact owned
+lab/schema/least-privilege scope and bounded cleanup, production wiring disabled.
+
 ## Linux exact-build admission/diagnostics — approved design — 2026-10-29
 
 Approved [exact-build qualification design](SOURCE_POLICY_LINUX_EXACT_BUILD_QUALIFICATION_DESIGN.md),

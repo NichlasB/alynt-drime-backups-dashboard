@@ -1,5 +1,9 @@
 # Source-Policy Linux Exact-Build Admission and Diagnostic Qualification Design
 
+The subsequent approved [isolated candidate foundation](SOURCE_POLICY_LINUX_EXACT_BUILD_CANDIDATE_FOUNDATION.md)
+implements the single row/regressions below. Historical design validation remains
+unchanged; implementation evidence and current-source proof limits belong there.
+
 ## Authority, baseline and decision — 2026-10-29
 
 Approved repository-only design, validation, commit, push and ordinary exact-head

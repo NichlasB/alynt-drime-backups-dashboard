@@ -47,6 +47,6 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile {
 		if ( in_array( $core, array( '6.0', '7.1.3' ), true ) ) {
 			return '10.6.23-MariaDB';
 		}
-		return '7.1.4' === $core ? '10.11.18-MariaDB' : false;
+		return '7.1.4' === $core ? '10.11.18-MariaDB-ubu2204' : false;
 	}
 }
