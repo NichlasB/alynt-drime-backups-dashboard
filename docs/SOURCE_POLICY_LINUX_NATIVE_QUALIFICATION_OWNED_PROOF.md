@@ -1,5 +1,18 @@
 # Off-Production Linux Genuine-Core/OFF and Diagnostic Native Qualification
 
+## Current scoped status — 2026-10-29
+
+Pinned lab qualification **passed** atb0717fc54597712a823c3ebaf1ea497c39ed115b,
+[run40864997754](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40864997754):
+282 recorded checks/9 groups, genuine core-selected OFF/exact escaping/CAS/error
+cases, independently zero owned all-server sessions/transactions while held and
+after exit, exact fixture/resource cleanup. Scope is the recorded Linux/PHP8.5.12/
+core7.1.4/MariaDB10.11.18-ubu2204 image only. No production admission/wiring,
+full WordPress authentication/bootstrap, minimum PHP7.4/core6.0 compatibility,
+fresh Windows/TCP qualification or whole-plugin release readiness follows.
+Prior failed attempts below stay failed; their resume recommendations are
+historical. Latest successful closeout and remaining gates are at the end.
+
 ## Approval, audit-first plan and owned target — 2026-10-29
 
 Approved next harness/owned proof from the
@@ -816,3 +829,75 @@ confirms exactly one worker-line edit and one new existing-home test, plus the
 two owning records; all protected runtime/native inputs remain baseline-identical.
 Companion uploader/toolkit clean/synced and read-only. No local native execution.
 Publication/native outcome is recorded below once complete.
+
+### Successful quoted-alias qualification and publication
+
+Repairb0717fc54597712a823c3ebaf1ea497c39ed115b is pushed.
+[Ordinary exact-head CI40864770758](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40864770758)
+passes: PHP7.4/8.3 each2033 tests/9045 assertions, no failures/skips; Node23/23/
+no skips each and all configured manifest/audit/build/structure/lint gates.
+After exact successful CI and clean/synced remote/master verification, dispatched
+exactly one approved fresh attempt:
+[manual40864997754](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40864997754),
+job123417408896, workflow_dispatch, exactb0717fc,2026-10-29 11:23:22–11:23:54 UTC
+(32s), **success**, including always cleanup. No retry or further native run.
+
+Fresh unchanged preflight/core reacquisition passed with the previously recorded
+exact PHP8.5.12/mysqlnd/mysqli/server/client digests,11 core pins and immutable
+MariaDB image/version. Version-only preflight reports zero database/SQL/WordPress
+execution and removes its owned resources before the actual proof. Actual
+source audit29/zero connections/queries; new frozen image
+379e8519d0913473d778981c51bba14af60f816fc19c4afa3f6713dc19557c98,
+run06e2c1d87f76d6a5f3d50814f9200cde. Fresh lab baseline exact10.11.18-MariaDB-
+ubu2204/noTCP1/wsrep0/nativeAIO1/autocommit1/in_transaction0/other sessions0/
+transactions0/non-system schemas0, host io_uring_disabled0. No existing database.
+
+The held terminal records **282 checks/9 groups**, pid3609, mode0/closedtrue,
+the exact frozen image/run, independent_livezero/independent_post_exitzero and
+qualificationlab-only. Genuine core created the separate ambient handle and
+selected OFF; the dedicated owner preserved ambient identity/handle/callbacks/
+reporting. The unchanged quote/backslash/NUL/percent/4-byte UTF8 probe prepared,
+executed with exact affected1/errno0, returned exactly one row and identical bytes.
+All nine original groups complete: positive view/save/cache/once-only observer,
+no-op/stale ordering, conditional removal, update race, duplicate winner handling,
+transform/reentry refusal, bounded lock failure, post-change uncertainty and
+real false/errno1064/1062/1205 with no retry. Exact bytes/autoload/non-target data
+and all prior acceptance predicates remain; the only worker fix was alias quoting.
+
+The controller verified the correlated closed terminal while the child remained
+alive, independently required other all-server sessions0/INNODB_TRX0, then sent
+the exact run/image acknowledgement. After acknowledged child exit it repeated
+the independent all-server zero check. This run therefore establishes the held-
+live/post-exit success handshake, unlike earlier failure-path-only cleanup.
+Final fixture cleanup independently rechecks zero other sessions/transactions,
+drops only adb_owned/adbp, requires zero non-system schemas/owned account/
+sessions/transactions, then normal server exit0/notOOM. Exit and always cleanup
+report containers0/directories0/tmpfs released/reconciliation_failure0; source
+preflight cleanup core_checkout0. Existing application/site state is untouched.
+
+Unchanged strict full diagnostic review passed, known namespace/WSREP/io_uring-
+to-libaio warnings visible, normal shutdown present. Bootstrap2137B SHA256
+89163982bb5b5850bd2a054d81770dc1d3da374efc79a8321ad6ce80ff0913ca;
+initial server2461B SHA256e711eef3d3c1590db84816f1912b0e75cfb8ff43ab4bf6d6030b3e3aacb82e51;
+final server3082B SHA25684503df9085e829747bee1b82b1133abd064674f4bba78b37afbc5dd7f1e48a7.
+No ERROR/unknown warning was ignored or new warning allowance added.
+
+This resolves the concrete alias blocker and completes this pinned Linux native
+qualification milestone. It is not a provider grant, live-site compatibility,
+application race-fix deployment, whole-plugin review, full authentication proof,
+minimum PHP7.4/core6.0 native proof or refreshed current-source Windows/TCP proof.
+Old proof images/checklist counts remain historical. Public factories and form/
+legacy/production wiring remain closed and unchanged; no package/release/deploy.
+
+Implementation-plan progress: the Linux genuine-core/OFF/escaping/9-group native
+and independent cleanup gate is now complete for this exact image. Existing
+readiness designs still require supported-profile evidence before trusted lazy
+provider and cohesive guarded form/legacy integration. Recommended next gated
+slice: **Repository-only Minimum-Core/PHP7.4 and Current-Source Windows/TCP
+Qualification Closure Design**. Resolve the finite remaining profile/source-
+image/fixture authority and required genuine proofs without conflating this lab
+with minimum support or existing LocalWP state. Keep it design-only: no native
+experiments, storage/site operations, acceptance changes or production wiring.
+Actual qualification targets/fixtures and later provider/form/release actions
+require separate explicit authority. Evidence-only closeout exact-head ordinary
+CI/remote is verified at handoff; it does not rerun or widen this native success.

@@ -13,6 +13,20 @@ lint/structure/build/audits pass. Exact-head CI and one fresh-prerequisite nativ
 result follow in the owner. No automatic native retry or further runtime repair
 is authorized.
 
+Repairb0717fc/ordinaryCI40864770758 passes PHP7.4/8.3 each2033/9045/no skips,
+Node23/23/all gates. One fresh manual40864997754 succeeds: **282 checks/9 groups**,
+exact unchanged escaping bytes, genuine OFF/ambient preservation, native CAS/
+conflict/errno cases, correlated held closed terminal, independent all-server
+zero sessions/transactions while held and after exit, exact fixture/resource/
+core cleanup. No production/native-policy change. Implementation-plan progress:
+this pinned Linux qualification milestone is complete; minimum-core/PHP7.4 and
+current-source Windows/TCP evidence remain distinct gates before trusted provider/
+form wiring. Recommended next gated slice: Repository-only Minimum-Core/PHP7.4
+and Current-Source Windows/TCP Qualification Closure Design, design-only with
+native execution/storage/site operations/production wiring disabled. No release,
+whole-plugin review or other profile success is inferred. Final docs-head CI
+is verified at handoff; native success remains scoped to exactb0717fc/image.
+
 ## Linux bounded acknowledgement/query diagnostics — approved owned attempt — 2026-10-29
 
 Approved [harness-only diagnostics and one fresh owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
