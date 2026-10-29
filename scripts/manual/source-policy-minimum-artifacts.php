@@ -13,6 +13,7 @@ function adbmin_catalog() {
 		'core_url'    => 'https://codeload.github.com/WordPress/WordPress/zip/cc101b64012b16d087780657a2b828ccd7794a63',
 		'core_commit' => 'cc101b64012b16d087780657a2b828ccd7794a63',
 		'core_tree'   => 'a3bd7a4074a4c95c8af3b969346726273d68e167',
+		'tree_url'    => 'https://api.github.com/repos/WordPress/WordPress/git/trees/a3bd7a4074a4c95c8af3b969346726273d68e167?recursive=1',
 		'execution'   => false,
 	);
 }

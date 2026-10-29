@@ -46,4 +46,12 @@ final class SourcePolicyMinimumArchiveTest extends TestCase {
 	public function test_link_guard_precedes_parent_creation_in_actual_owner_source() {
 		$source=file_get_contents(dirname(__DIR__).'/scripts/manual/source-policy-minimum-owned.php');$begin=strpos($source,'public function path(');$method=substr($source,$begin,strpos($source,'public function write(',$begin)-$begin);$guard=strpos($method,'if ( is_link( $path ) )');$create=strpos($method,'! mkdir( $path, 0700 )');$this->assertNotFalse($guard);$this->assertLessThan($create,$guard,'Dangling links must be refused before any mkdir attempt; source-level ordering, not a Windows reparse proof.');
 	}
+	public function test_diagnostic_observes_host_kind_without_admitting_or_expanding() {
+		require_once dirname(__DIR__).'/scripts/manual/source-policy-minimum-core-diagnostic.php';$zip=$this->archive(array(array('root/','',0040755),array('root/a','x',0100644)));$zip->close();$this->assertTrue($zip->open($this->owned->path('synthetic.zip')));$this->assertTrue($zip->setExternalAttributesName('root/',0,0x10));$this->assertTrue($zip->setExternalAttributesName('root/a',0,0));$zip->close();$this->assertTrue($zip->open($this->owned->path('synthetic.zip'),ZipArchive::RDONLY|ZipArchive::CHECKCONS));
+		try{$data=adbmin_core_metadata($zip);$this->assertSame(array('0:directory:0:16'=>1,'0:file:0:0'=>1),$data['groups']);$this->assertTrue($data['non_unix_examples'][0]['directory']);$this->assertFalse($data['non_unix_examples'][1]['directory']);$this->assertFalse($data['payload_expansion']);$this->assertFalse($data['admission']);}finally{$zip->close();}
+	}
+	public function test_dos_core_regular_mode_never_defaults_without_authenticated_manifest() {
+		$prefix='WordPress-'.adbmin_catalog()['core_commit'].'/';$zip=$this->archive(array(array($prefix.'a.txt','x',0100644)));$zip->close();$this->assertTrue($zip->open($this->owned->path('synthetic.zip')));$this->assertTrue($zip->setExternalAttributesName($prefix.'a.txt',0,0));$zip->close();$this->assertTrue($zip->open($this->owned->path('synthetic.zip'),ZipArchive::RDONLY|ZipArchive::CHECKCONS));
+		try{try{adbmin_zip_contents($zip,'core',filesize($this->owned->path('synthetic.zip')),strlen($this->owned->root())+8);$this->fail('Unproven regular-file mode accepted');}catch(RuntimeException $error){$this->assertSame('core-file-mode-refused',$error->getMessage());}}finally{$zip->close();}
+	}
 }

@@ -8,15 +8,19 @@
 /**
  * Decodes an owned archive as data only; never extractTo or executable loading.
  *
- * @param Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files $owned Exact child owner.
- * @param string                                            $kind Fixed php/core archive role.
+ * @param Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files     $owned Exact child owner.
+ * @param string                                                $kind Fixed php/core archive role.
+ * @param Alynt_Drime_Backups_Dashboard_Minimum_Core_Modes|null $modes Fixed-root mode descriptor for core only.
  * @return array Validated inventory and in-memory files.
  * @throws RuntimeException Unsupported archive or changed bytes.
  */
-function adbmin_archive( Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files $owned, $kind ) {
+function adbmin_archive( Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files $owned, $kind, ?Alynt_Drime_Backups_Dashboard_Minimum_Core_Modes $modes = null ) {
 	$owned->budget();
 	if ( ! in_array( $kind, array( 'php', 'core' ), true ) || ! class_exists( 'ZipArchive', false ) || ! defined( 'ZipArchive::RDONLY' ) ) {
 		throw new RuntimeException( 'archive-runtime-refused' );
+	}
+	if ( 'core' === $kind && null === $modes ) {
+		throw new RuntimeException( 'core-mode-manifest-required' );
 	}
 	$bytes  = $owned->read( $kind . '.zip', 67108864 );
 	$digest = hash( 'sha256', $bytes );
@@ -28,7 +32,7 @@ function adbmin_archive( Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files $owne
 		throw new RuntimeException( 'zip-consistency-refused' );
 	}
 	try {
-		return adbmin_zip_contents( $zip, $kind, strlen( $bytes ), strlen( $owned->root() ) + 8 ) + array( 'zip_sha256' => $digest );
+		return adbmin_zip_contents( $zip, $kind, strlen( $bytes ), strlen( $owned->root() ) + 8, $modes ) + array( 'zip_sha256' => $digest );
 	} finally {
 		$zip->close();
 		if ( hash( 'sha256', $owned->read( $kind . '.zip', 67108864 ) ) !== $digest ) {
@@ -40,20 +44,22 @@ function adbmin_archive( Alynt_Drime_Backups_Dashboard_Minimum_Owned_Files $owne
 /**
  * Complete metadata validation precedes all expansion. Does not write files.
  *
- * @param ZipArchive $zip Existing read-only archive.
- * @param string     $kind Fixed candidate kind.
- * @param int        $packed Actual archive length.
- * @param int        $root_length Owned output-root length.
+ * @param ZipArchive                                            $zip Existing read-only archive.
+ * @param string                                                $kind Fixed candidate kind.
+ * @param int                                                   $packed Actual archive length.
+ * @param int                                                   $root_length Owned output-root length.
+ * @param Alynt_Drime_Backups_Dashboard_Minimum_Core_Modes|null $modes Optional sealed fixed-root modes; required for DOS-style core files.
  * @return array
  * @throws RuntimeException Metadata, resource or content integrity refusal.
  */
-function adbmin_zip_contents( ZipArchive $zip, $kind, $packed, $root_length ) {
+function adbmin_zip_contents( ZipArchive $zip, $kind, $packed, $root_length, ?Alynt_Drime_Backups_Dashboard_Minimum_Core_Modes $modes = null ) {
 	$count = $zip->numFiles; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Native libzip API.
 	if ( $count < 1 || $count > 8192 ) {
 		throw new RuntimeException( 'zip-entry-limit' );
 	}
-	$inventory = array();
-	$rows      = array();
+	$inventory  = array();
+	$rows       = array();
+	$file_count = 0;
 	for ( $index = 0; $index < $count; ++$index ) {
 		$row = $zip->statIndex( $index, ZipArchive::FL_UNCHANGED );
 		if ( false === $row || ! isset( $row['name'], $row['size'], $row['comp_size'], $row['comp_method'], $row['encryption_method'], $row['crc'] )
@@ -68,25 +74,50 @@ function adbmin_zip_contents( ZipArchive $zip, $kind, $packed, $root_length ) {
 			|| ( 3 !== $host && ( 0 !== ( $attributes & 0x10 ) ) !== $directory ) ) {
 			throw new RuntimeException( 'zip-link-type-refused' );
 		}
-		if ( 'core' === $kind && 3 !== $host ) {
-			throw new RuntimeException( 'core-file-mode-refused' );
+		$name          = $directory ? substr( $row['name'], 0, -1 ) : $row['name'];
+		$git_mode      = ( 3 === $host || 'core' !== $kind ) ? ( ( $mode & 0111 ) ? '100755' : '100644' ) : null;
+		$expected_blob = null;
+		if ( 'core' === $kind ) {
+			$wrapper  = 'WordPress-' . adbmin_catalog()['core_commit'];
+			$relative = $name === $wrapper ? '' : ( 0 === strpos( $name, $wrapper . '/' ) ? substr( $name, strlen( $wrapper ) + 1 ) : false );
+			$expected = null !== $modes && false !== $relative ? $modes->file( $relative ) : false;
+			if ( false === $relative || ( $directory && null !== $modes && ! $modes->directory( $relative ) ) ) {
+				throw new RuntimeException( 'core-manifest-path-refused' );
+			}
+			if ( ! $directory && null !== $modes ) {
+				if ( false === $expected || ( 3 === $host && $git_mode !== $expected['mode'] ) ) {
+					throw new RuntimeException( 'core-manifest-mode-refused' );
+				}
+				$expected_blob = $expected['sha'];
+			}
+			if ( 3 !== $host ) {
+				if ( 0 !== $host || 0 !== $mode || ( $directory ? 16 : 0 ) !== $attributes || null === $modes || ( ! $directory && false === $expected ) ) {
+					throw new RuntimeException( 'core-file-mode-refused' );
+				}
+				if ( ! $directory ) {
+					$git_mode = $expected['mode'];
+				}
+			}
 		}
-		$name        = $directory ? substr( $row['name'], 0, -1 ) : $row['name'];
 		$inventory[] = array(
 			'path'       => $name,
 			'kind'       => $directory ? 'directory' : 'file',
 			'size'       => $row['size'],
 			'compressed' => $row['comp_size'],
 		);
-		$rows[]      = array( $row, $directory, $mode );
+		$rows[]      = array( $row, $directory, $git_mode, $expected_blob );
+		$file_count += $directory ? 0 : 1;
 	}
 	$plan = adbmin_inventory( $kind, $inventory, $packed, $root_length );
 	if ( false === $plan ) {
 		throw new RuntimeException( 'zip-inventory-refused' );
 	}
+	if ( 'core' === $kind && null !== $modes && $file_count !== $modes->summary()['files'] ) {
+		throw new RuntimeException( 'core-manifest-file-count-refused' );
+	}
 	$files = array();
 	foreach ( $rows as $entry ) {
-		list( $row, $directory, $mode ) = $entry;
+		list( $row, $directory, $git_mode, $expected_blob ) = $entry;
 		if ( $directory ) {
 			continue;
 		}
@@ -111,10 +142,13 @@ function adbmin_zip_contents( ZipArchive $zip, $kind, $packed, $root_length ) {
 		if ( strlen( $content ) !== $row['size'] || hash( 'crc32b', $content ) !== sprintf( '%08x', $row['crc'] ) ) {
 			throw new RuntimeException( 'zip-crc-size-refused' );
 		}
+		if ( null !== $expected_blob && ! hash_equals( $expected_blob, sha1( 'blob ' . strlen( $content ) . "\0" . $content ) ) ) {
+			throw new RuntimeException( 'core-manifest-blob-refused' );
+		}
 		$name    = 'core' === $kind ? substr( $row['name'], strlen( 'WordPress-' . adbmin_catalog()['core_commit'] . '/' ) ) : $row['name'];
 		$files[] = array(
 			'path'  => $name,
-			'mode'  => ( $mode & 0111 ) ? '100755' : '100644',
+			'mode'  => $git_mode,
 			'bytes' => $content,
 		);
 	}
@@ -125,3 +159,4 @@ function adbmin_zip_contents( ZipArchive $zip, $kind, $packed, $root_length ) {
 }
 
 require_once __DIR__ . '/source-policy-minimum-artifacts.php';
+require_once __DIR__ . '/source-policy-minimum-core-modes.php';

@@ -26,7 +26,7 @@ function adbmin_native_ca_profile( $os, $version, $ssl, $native_ca ) {
  * @throws RuntimeException Fixed request refused.
  */
 function adbmin_download( $kind ) {
-	if ( ! in_array( $kind, array( 'php', 'core' ), true ) || ! extension_loaded( 'curl' ) ) {
+	if ( ! in_array( $kind, array( 'php', 'core', 'tree' ), true ) || ! extension_loaded( 'curl' ) ) {
 		throw new RuntimeException( 'download-preflight-refused' );
 	}
 	$backend = curl_version();
@@ -36,6 +36,7 @@ function adbmin_download( $kind ) {
 	$url             = adbmin_catalog()[ $kind . '_url' ];
 	$curl            = curl_init( $url );
 	$bytes           = '';
+	$limit           = 'tree' === $kind ? 2097152 : 67108864;
 	$protocol_option = defined( 'CURLOPT_PROTOCOLS_STR' ) ? constant( 'CURLOPT_PROTOCOLS_STR' ) : CURLOPT_PROTOCOLS;
 	$protocol_value  = defined( 'CURLOPT_PROTOCOLS_STR' ) ? 'https' : CURLPROTO_HTTPS;
 	$configured      = curl_setopt_array(
@@ -54,8 +55,8 @@ function adbmin_download( $kind ) {
 			CURLOPT_LOW_SPEED_LIMIT => 1,
 			CURLOPT_LOW_SPEED_TIME  => 30,
 			CURLOPT_USERAGENT       => 'Alynt-owned-minimum-static-proof/1',
-			CURLOPT_WRITEFUNCTION   => static function ( $handle, $chunk ) use ( &$bytes ) {
-				if ( strlen( $bytes ) + strlen( $chunk ) > 67108864 ) {
+			CURLOPT_WRITEFUNCTION   => static function ( $handle, $chunk ) use ( &$bytes, $limit ) {
+				if ( strlen( $bytes ) + strlen( $chunk ) > $limit ) {
 					return 0;
 				}
 				$bytes .= $chunk;
@@ -97,7 +98,7 @@ function adbmin_acquisition_proof() {
 	);
 	$started = microtime( true );
 	$image   = array();
-	foreach ( array( __FILE__, __DIR__ . '/source-policy-minimum-owned.php', __DIR__ . '/source-policy-minimum-archive.php', __DIR__ . '/source-policy-minimum-static.php', __DIR__ . '/source-policy-minimum-artifacts.php', __DIR__ . '/source-policy-minimum-tree.php', __DIR__ . '/source-policy-minimum-pe.php', __DIR__ . '/source-policy-supported-core-pins.php', PHP_BINARY ) as $path ) {
+	foreach ( array( __FILE__, __DIR__ . '/source-policy-minimum-owned.php', __DIR__ . '/source-policy-minimum-archive.php', __DIR__ . '/source-policy-minimum-static.php', __DIR__ . '/source-policy-minimum-core-modes.php', __DIR__ . '/source-policy-minimum-artifacts.php', __DIR__ . '/source-policy-minimum-tree.php', __DIR__ . '/source-policy-minimum-pe.php', __DIR__ . '/source-policy-supported-core-pins.php', PHP_BINARY ) as $path ) {
 		$image[ $path ] = hash_file( 'sha256', $path );
 	}
 	try {
@@ -121,6 +122,18 @@ function adbmin_acquisition_proof() {
 			'child_memory_limit' => '768M',
 		);
 		$report['owned_child']   = basename( $owned->root() );
+		$stage                   = 'core-mode-manifest';
+		$tree_bytes              = adbmin_download( 'tree' );
+		$owned->write( 'tree.json', $tree_bytes );
+		$tree  = json_decode( $tree_bytes, true, 32 );
+		$modes = is_array( $tree ) ? Alynt_Drime_Backups_Dashboard_Minimum_Core_Modes::from_metadata( $tree ) : false;
+		if ( false === $modes ) {
+			throw new RuntimeException( 'pinned-core-modes-refused' );
+		}
+		$report['core_mode_manifest'] = $modes->summary() + array(
+			'bytes'              => strlen( $tree_bytes ),
+			'sha256_correlation' => hash( 'sha256', $tree_bytes ),
+		);
 		foreach ( array( 'php', 'core' ) as $kind ) {
 			$stage = 'download-' . $kind;
 			$bytes = adbmin_download( $kind );
@@ -129,7 +142,7 @@ function adbmin_acquisition_proof() {
 			}
 			$owned->write( $kind . '.zip', $bytes );
 			$stage             = 'archive-' . $kind;
-			$archives[ $kind ] = adbmin_archive( $owned, $kind );
+			$archives[ $kind ] = adbmin_archive( $owned, $kind, 'core' === $kind ? $modes : null );
 			$report[ $kind ]   = array(
 				'zip_bytes'  => strlen( $bytes ),
 				'zip_sha256' => $archives[ $kind ]['zip_sha256'],

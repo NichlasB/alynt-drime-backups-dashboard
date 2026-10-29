@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Core ZIP authenticated mode repair and later import refusal — 2026-10-29
+
+Approved [core mode diagnostic/owned proof](SOURCE_POLICY_MINIMUM_CORE_MODES_OWNED_PROOF.md)
+at restore baseline29f7e96. A bounded metadata-only diagnostic established DOS
+host0 entries for directories and regular files. The repair authenticates each
+mode/blob through the unchanged pinned Git graph; no regular-file mode default,
+pin update or tree/link check bypass. Fresh86/1957 and genuine graph positive/
+changed-data refusal passed. One full proof decoded both archives, including
+3,856 core entries, then refused at the unchanged unexpected-import guard.
+Exact diagnostic/proof child cleanup and independent absence confirmed; no
+installation, loading, site/database operation, import-policy change or retry.
+
+Implementation-plan progress: core mode and decoded source identity advanced;
+complete static qualification is blocked at selected import classification.
+Recommended next gated slice: Harness-only Selected PE Import Diagnostic and
+Evidence-Based Dependency Classification with One Fresh Owned Acquisition/Cleanup
+Proof. Preserve all TLS/artifact/tree/mode/link/budget checks; no dependency
+installation, code loading or site/database work. Owning record keeps proof limits.
+
 ## Minimum-profile native-CA recovery and new core archive refusal — 2026-10-29
 
 Approved [native-CA owned attempt](SOURCE_POLICY_MINIMUM_NATIVE_CA_OWNED_PROOF.md)

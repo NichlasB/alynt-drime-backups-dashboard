@@ -1,5 +1,10 @@
 # Minimum-Profile Native-CA Integration and Owned Acquisition Attempt
 
+Forward progress: the approved [core host/mode repair and proof](SOURCE_POLICY_MINIMUM_CORE_MODES_OWNED_PROOF.md)
+passed authenticated core mode/blob decoding, then stopped at the unchanged later
+import-classification guard with exact cleanup. Follow that record's resume gate;
+this historical host/mode refusal is not rewritten as complete qualification.
+
 ## Authority, restore baseline and outcome — 2026-10-29
 
 Explicitly approved R3 harness-only Windows Native-CA Trust Integration and one
