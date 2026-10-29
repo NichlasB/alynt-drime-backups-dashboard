@@ -133,8 +133,15 @@ Executed post-proof repository QA:
   `git diff --check` pass. Scripts/runtime/tests/workflows/assets/dependencies
   remain byte-identical to3f9530d. Uploader/toolkit remain clean and untouched.
 
-These isolated checks do not rerun or broaden the native proof. Ordinary
-exact-head CI publication evidence follows the approved documentation push.
+These isolated checks do not rerun or broaden the native proof. Publication
+`962278586423b4ce54478ccfb505f5a291d457a0` is pushed; ordinary exact-head
+[CI40877939990](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40877939990)
+succeeded. Actual PHP7.4/8.3 logs each2,043 tests/9,215 assertions, no failures/
+skips; admin23/23 on each job, no failures/skips. Manifest/audits/build/structure/
+PHPCS passed; zero known advisories/vulnerabilities. Node setup/cleanup emitted
+DEP0040/DEP0169 deprecations, not failed gates; no dependency change was made.
+This evidence-only closeout receives separate pushed exact-head ordinary CI and
+clean/remote verification at handoff. No native/SQL/fixture operation is repeated.
 
 Implementation-plan progress: current Windows/TCP genuine ambient/report-OFF
 conditional-write/conflict/error/release evidence is refreshed for the exact
