@@ -104,8 +104,7 @@ function adba_all() {}
  */
 function adba_run( $operation, array $args ) {
 	global $class, $frame, $binding, $owners, $adapter, $scenario, $last_commands, $events;
-	$owner = $class->newInstanceWithoutConstructor();
-	$class->getConstructor()->invoke( $owner );
+	$owner   = adbb_construct( $class );
 	$context = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
 	foreach ( array(
 		'owned'     => $owner,

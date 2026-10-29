@@ -23,13 +23,8 @@ require_once __DIR__ . '/source-policy-cleanup-native-cases.php'; // Pure shared
 function adbc2_owner( ReflectionClass $owner_class, array $frame, array $binding, array $request, $source ) {
 	$name = $request[5];
 	adbb_check( in_array( $name, Alynt_Drime_Backups_Dashboard_Connected_Cleanup_Evidence::cases(), true ), 'fixed connected case' );
-	$started     = hrtime( true );
-	$owner       = $owner_class->newInstanceWithoutConstructor();
-	$constructor = $owner_class->getConstructor();
-	if ( PHP_VERSION_ID < 80100 ) {
-		$constructor->setAccessible( true );
-	}
-	$constructor->invoke( $owner );
+	$started   = hrtime( true );
+	$owner     = adbb_construct( $owner_class );
 	$bootstrap = $owner_class->getMethod( 'bootstrap' );
 	if ( PHP_VERSION_ID < 80100 ) {
 		$bootstrap->setAccessible( true );

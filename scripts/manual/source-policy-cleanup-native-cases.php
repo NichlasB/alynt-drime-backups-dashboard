@@ -115,8 +115,7 @@ function adbc_owner( ReflectionClass $owner_class, array $frame, array $binding,
 	$started = hrtime( true );
 	$name    = $request[5];
 	$pre     = in_array( $name, array_slice( Alynt_Drime_Backups_Dashboard_Cleanup_Evidence::cases(), 0, 4 ), true );
-	$owner   = $owner_class->newInstanceWithoutConstructor();
-	$owner_class->getConstructor()->invoke( $owner );
+	$owner   = adbb_construct( $owner_class );
 	$context = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
 	foreach ( array(
 		'owned'     => $owner,

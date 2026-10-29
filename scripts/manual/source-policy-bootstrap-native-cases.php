@@ -23,9 +23,8 @@ function adbb_native_cases( ReflectionClass $owner_class, array $frame, array $b
 	$report  = array();
 	$started = hrtime( true );
 	foreach ( array( 'default', 'wrong-source', 'all', 'incompatible_sql_modes', 'missing-database', 'missing-table', 'positive' ) as $group ) {
-		$owner   = $owner_class->newInstanceWithoutConstructor();
+		$owner   = adbb_construct( $owner_class );
 		$context = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
-		$owner_class->getConstructor()->invoke( $owner );
 		foreach ( array(
 			'owned'     => $owner,
 			'ambient'   => null,

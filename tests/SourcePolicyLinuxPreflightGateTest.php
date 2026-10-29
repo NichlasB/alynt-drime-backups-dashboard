@@ -12,9 +12,8 @@ final class SourcePolicyLinuxPreflightGateTest extends TestCase {
 	}
 	public static function invocations(){return array(array(array()),array(array('--wrong')),array(array('--owned-profile-preflight')),array(array('--owned-profile-preflight','extra')));}
 	public function test_source_pins_equal_existing_reviewed_closure_without_executing_it() {
-		$source=file_get_contents(dirname(__DIR__).'/scripts/manual/source-policy-bootstrap-owned-proof.php');
-		preg_match_all('/\x27([^\x27]+\.php)\x27\s*=>\s*\x27([A-F0-9]{64})\x27/',$source,$matches,PREG_SET_ORDER);
-		$expected=array();foreach($matches as $match)$expected[$match[1]]=strtolower($match[2]);
+		require_once dirname(__DIR__).'/scripts/manual/source-policy-supported-profile.php';
+		$profile=adbp_profile('7.1.3');$expected=$profile['pins'];unset($expected['version.php']);
 		$pins=json_decode(file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-core-pins.json'),true);
 		$this->assertCount(11,$expected);$this->assertSame($expected,$pins);
 	}

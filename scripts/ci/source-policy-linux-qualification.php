@@ -94,16 +94,6 @@ function adbb_ack( $ack ) {
 		'errno'    => $errno,
 	);
 }
-/** Bind private composition, never active state or a native handle.
- *
- * @param object $receiver Owned receiver.
- * @param string $name Fixed field name.
- * @param mixed  $value Source-owned composition.
- * @return void
- */
-function adbb_bind( $receiver, $name, $value ) {
-	( new ReflectionProperty( $receiver, $name ) )->setValue( $receiver, $value );
-}
 $owners                              = array();
 $ambient                             = null;
 $groups                              = 0;
@@ -134,6 +124,7 @@ set_error_handler(
 try {
 	adbb_check( 'mysqlnd 8.5.12' === mysqli_get_client_info() && '3' === ini_get( 'default_socket_timeout' ) && '3' === ini_get( 'mysqlnd.net_read_timeout' ), 'bounded exact runtime' );
 	adbb_check( '' === ini_get( 'auto_prepend_file' ) && '' === ini_get( 'auto_append_file' ) && 1 === count( get_included_files() ), 'no injected entry' );
+	require_once __DIR__ . '/../manual/source-policy-proof-reflection.php'; // Definitions only, frozen with the loaded image below.
 	$phase = 'core-pins';
 	$core  = realpath( __DIR__ . '/../../.adb-linux-preflight-core' );
 	adbb_check( false !== $core && dirname( $core ) === realpath( __DIR__ . '/../..' ), 'exact pinned core child' );
@@ -196,8 +187,7 @@ try {
 	);
 	$phase   = 'profile';
 	$class   = new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' );
-	$owner   = $class->newInstanceWithoutConstructor();
-	$class->getConstructor()->invoke( $owner );
+	$owner   = adbb_construct( $class );
 	adbb_check( Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::settings( $frame ) && Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::source( $owner, $binding ), 'genuine fixed source/endpoint admission' );
 	adbb_check( null === $owner->dbh && false === $owner->ready && false === $owner->db_connect() && false === $owner->check_connection(), 'no public connection path' );
 	adbb_check( '0' === mysqli_get_client_stats()['connect_success'] && '0' === mysqli_get_client_stats()['connect_failure'] && '0' === mysqli_get_client_stats()['com_query'] && 3 === ( new mysqli_driver() )->report_mode, 'audit zero native activity unchanged strict mode' );

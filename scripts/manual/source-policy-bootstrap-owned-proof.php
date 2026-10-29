@@ -16,6 +16,9 @@ if ( 'Windows' !== PHP_OS_FAMILY || '8.5.12' !== PHP_VERSION || ! extension_load
 	fwrite( STDERR, "Requires the audited bundled PHP8.5.12 mysqli-only profile\n" );
 	exit( 1 );
 }
+require_once __DIR__ . '/source-policy-supported-profile.php';
+require_once __DIR__ . '/source-policy-proof-reflection.php';
+$profile = adbp_profile( '7.1.3' ); // Fixed existing Windows candidate; no minimum native runner enabled.
 define( 'ABSPATH', 'C:/Users/Captain/Local Sites/plugin-tester/app/public/' );
 define( 'WPINC', 'wp-includes' );
 define( 'WP_DEBUG', false );
@@ -25,19 +28,7 @@ define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
 define( 'DB_CHARSET', 'utf8mb4' ); // Private owned-fixture profile, not wp-config compatibility.
 define( 'DB_COLLATE', '' );
 define( 'AUTH_SALT', 'owned-non-secret-native-bootstrap-proof' );
-$pins   = array(
-	'load.php'                     => '3EFD0934BD8A454A8D7076FBBD21504EA097A753125A48E64B8A1DAD380D357A',
-	'plugin.php'                   => 'D70B9E18D34AB3FE46E15548A5E8E089EA5920832F06A4D89A9D64B2F7938B0D',
-	'class-wp-hook.php'            => 'B839C0E5672246BCA8DB1AB781EC8835F7732F253C375A237CBF6EC536E8D12E',
-	'class-wp-filter-sentinel.php' => '68C9C675D3805A343835728D98A0EFEDF0DF9833CB904BEBF909C7E0FDA5C61C',
-	'class-wp-error.php'           => 'A9E971548BF6A1D93C821F980F530EFBA985C25D5D0B13D9B63E63B378A81A94',
-	'class-wpdb.php'               => 'E15403E90032DD0508811301505E491D4212DE5152581A98F51B744A1A3903BD',
-	'cache.php'                    => 'A219C2B57CC9990B560C6B497C877DB443B7E29239645A6A79B2D76839C46E19',
-	'class-wp-object-cache.php'    => '1857B774BD9CFBAFBD50A1B1424F7DF637D202CF3F2253CDA9798D4AD56F3CF0',
-	'formatting.php'               => '350F6B32303915DF970BB0E3EA360FCD54BB0B8A7ECC3D504C3D860AB9468D32',
-	'functions.php'                => 'CAC8A17E293DF99F0683A88DEBD3BA5E5CCE274183A4E9FD3C9F18375747F41C',
-	'option.php'                   => 'FE3F0B7E115B2A50C31162ED6428ABE4088C080B0F71B9678D84806168FE90D0',
-);
+$pins   = $profile['pins'];
 $checks = 0;
 $group  = 'source-audit';
 
@@ -58,23 +49,11 @@ function adbb_check( $condition, $label ) {
 	}
 }
 
-/**
- * Private proof composition only, never an active state/handle injection.
- *
- * @param object $receiver Exact owner/context.
- * @param string $name Private composition field.
- * @param mixed  $value Fixed proof binding.
- * @return void
- */
-function adbb_bind( $receiver, $name, $value ) {
-	( new ReflectionProperty( $receiver, $name ) )->setValue( $receiver, $value );
-}
-
 try {
 	foreach ( $pins as $file => $hash ) {
-		adbb_check( is_file( ABSPATH . WPINC . '/' . $file ) && strtoupper( hash_file( 'sha256', ABSPATH . WPINC . '/' . $file ) ) === $hash, 'pinned genuine source' );
+		adbb_check( is_file( ABSPATH . WPINC . '/' . $file ) && hash_equals( $hash, hash_file( 'sha256', ABSPATH . WPINC . '/' . $file ) ), 'pinned genuine source' );
 	}
-	foreach ( array( 'load.php', 'plugin.php', 'class-wp-error.php', 'cache.php', 'class-wpdb.php', 'formatting.php', 'functions.php' ) as $file ) {
+	foreach ( $profile['includes'] as $file ) {
 		require_once ABSPATH . WPINC . '/' . $file;
 	}
 	foreach ( array( 'class-source-policy.php', 'class-source-policy-native-profile.php', 'class-source-policy-query-context.php', 'class-source-policy-no-reconnect-connection.php' ) as $file ) {
@@ -84,18 +63,17 @@ try {
 	wp_cache_init();
 	$wpdb    = null;
 	$binding = array(
-		'core_file'       => ABSPATH . WPINC . '/class-wpdb.php',
+		'core_file'       => ABSPATH . WPINC . '/' . $profile['core_file'],
 		'driver_file'     => null,
-		'cache_file'      => ABSPATH . WPINC . '/class-wp-object-cache.php',
-		'cache_api_file'  => ABSPATH . WPINC . '/load.php',
-		'parser_api_file' => ABSPATH . WPINC . '/functions.php',
+		'cache_file'      => ABSPATH . WPINC . '/' . $profile['cache_file'],
+		'cache_api_file'  => ABSPATH . WPINC . '/' . $profile['cache_api_file'],
+		'parser_api_file' => ABSPATH . WPINC . '/' . $profile['parser_api_file'],
 		'observers'       => array(),
 		'observer_files'  => array(),
 	);
 	$class   = new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' );
-	$owner   = $class->newInstanceWithoutConstructor();
-	$class->getConstructor()->invoke( $owner );
-	$frame = array(
+	$owner   = adbb_construct( $class );
+	$frame   = array(
 		'core'      => '7.1.3',
 		'database'  => 'local',
 		'table'     => $argv[2] . 'options',

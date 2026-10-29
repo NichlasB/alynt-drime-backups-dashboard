@@ -26,7 +26,7 @@ foreach ( array( 'db_connect', 'parse_db_host', 'select', 'set_sql_mode', 'set_c
 	adbb_check( 'wpdb' === $definition->getDeclaringClass()->getName() && realpath( $binding['core_file'] ) === $definition->getFileName(), 'stock connector closure identity' );
 }
 adbb_check( '3' === ini_get( 'default_socket_timeout' ), 'bounded private ambient IO default' );
-$files = array_merge( get_included_files(), array( PHP_BINARY, dirname( PHP_BINARY ) . '/php8.dll', ini_get( 'extension_dir' ) . '/php_mysqli.dll', __DIR__ . '/source-policy-ambient-proof-controller.ps1', __DIR__ . '/source-policy-cleanup-process.ps1' ) );
+$files = array_merge( get_included_files(), array( PHP_BINARY, dirname( PHP_BINARY ) . '/' . $profile['runtime_module'], ini_get( 'extension_dir' ) . '/php_mysqli.dll', __DIR__ . '/source-policy-ambient-proof-controller.ps1', __DIR__ . '/source-policy-cleanup-process.ps1' ) );
 $files = array_unique( array_map( 'realpath', $files ) );
 sort( $files, SORT_STRING );
 $rows = array();

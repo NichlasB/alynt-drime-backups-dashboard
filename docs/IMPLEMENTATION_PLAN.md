@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Supported-profile source/isolated harness foundation — 2026-10-29
+
+Approved [source-rebaseline and isolated harness foundation](SOURCE_POLICY_SUPPORTED_PROFILE_FOUNDATION.md)
+at clean/synced baseline575a35a. Fixed genuine core6.0/7.1.3 source rows include
+version pins, per-core parser/database/cache bindings and pure PHP/mode/module
+candidate DATA. Windows parser binding is repaired; shared constructor/binder
+composition is PHP7.4-safe without injecting handles/readiness. Linux/manual/
+isolated callers use the same helper; their new images have **no fresh native
+qualification**. Required predicates have non-vacuous controls, including two
+in-memory predicate-removal mutants; all23 official source hashes revalidated.
+QA/publication evidence and proof limits are in the owning record.
+
+Implementation-plan progress: source/isolated gate1 is complete, not actual
+minimum-core/Windows native support or deployed lost-update repair. Recommended
+next gated slice: Read-Only Supported-Profile Source/Runtime Feasibility Audit;
+resolve exact candidate artifacts/owned targets without SQL/authentication/
+bootstrap/fixtures/installations or configuration changes. Site-backed inspection
+requires its exact target confirmation. Native execution/wiring remain disabled.
+
 ## Supported-profile qualification closure design — 2026-10-29
 
 Approved [minimum-core/PHP7.4 and current-source Windows/TCP design](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md),

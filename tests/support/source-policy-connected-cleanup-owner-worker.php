@@ -11,8 +11,8 @@ foreach(array('class-source-policy.php','class-source-policy-save-contract.php',
 require __DIR__.'/source-policy-isolated-fixtures.php';
 if(defined('ADB_POLICY_ISOLATED')) {
 function adbb_check($condition,$label){PHPUnit\Framework\Assert::assertTrue($condition,$label);}
-function adbb_bind($object,$name,$value){boot_set($object,$name,$value);}
 }
+require ABSPATH.'scripts/manual/source-policy-proof-reflection.php';
 require ABSPATH.'scripts/manual/source-policy-connected-cleanup-operation.php';
 try {
  $case=$argv[1];$fault=$argv[2];if(!in_array($case,array('missing-table','positive'),true))exit(1);

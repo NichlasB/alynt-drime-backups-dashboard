@@ -18,9 +18,9 @@ require __DIR__ . '/source-policy-bootstrap-owned-proof.php';
 $audit = ob_get_clean();
 adbb_check( 1 === preg_match( '/\Aaudit checks:[0-9]+ native_connections:0 sql_queries:0 fixtures:0\n\z/', $audit ), 'base audit' );
 $helper_pins = array(
-	'formatting.php' => '350F6B32303915DF970BB0E3EA360FCD54BB0B8A7ECC3D504C3D860AB9468D32',
-	'functions.php'  => 'CAC8A17E293DF99F0683A88DEBD3BA5E5CCE274183A4E9FD3C9F18375747F41C',
-	'option.php'     => 'FE3F0B7E115B2A50C31162ED6428ABE4088C080B0F71B9678D84806168FE90D0',
+	'formatting.php' => $pins['formatting.php'],
+	'functions.php'  => $pins['functions.php'],
+	'option.php'     => $pins['option.php'],
 );
 foreach ( $helper_pins as $file => $digest ) {
 	adbb_check( hash_file( 'sha256', ABSPATH . WPINC . '/' . $file ) === strtolower( $digest ), 'pinned helper source' );
@@ -43,10 +43,10 @@ foreach ( get_included_files() as $file ) {
 	}
 }
 $driver = new mysqli_driver();
-adbb_check( 3 === $driver->report_mode, 'unchanged strict mysqli reporting profile' );
+adbb_check( adbp_initial_mode( '7.1.3', PHP_VERSION, $driver->report_mode ), 'unchanged strict mysqli reporting profile' );
 $fresh = mysqli_get_client_stats();
 adbb_check( '0' === $fresh['connect_success'] && '0' === $fresh['connect_failure'] && '0' === $fresh['com_query'] && ! isset( $GLOBALS['wpdb'] ), 'helper audit has no session SQL or ambient handle' );
-$files = array_merge( get_included_files(), array( PHP_BINARY, dirname( PHP_BINARY ) . '/php8.dll', ini_get( 'extension_dir' ) . '/php_mysqli.dll', __DIR__ . '/source-policy-adapter-proof-controller.ps1', __DIR__ . '/source-policy-cleanup-process.ps1' ) );
+$files = array_merge( get_included_files(), array( PHP_BINARY, dirname( PHP_BINARY ) . '/' . $profile['runtime_module'], ini_get( 'extension_dir' ) . '/php_mysqli.dll', __DIR__ . '/source-policy-adapter-proof-controller.ps1', __DIR__ . '/source-policy-cleanup-process.ps1' ) );
 $files = array_unique( array_map( 'realpath', $files ) );
 sort( $files, SORT_STRING );
 $rows = array();

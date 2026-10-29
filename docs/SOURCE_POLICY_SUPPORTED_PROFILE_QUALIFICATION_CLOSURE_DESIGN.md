@@ -1,5 +1,10 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Subsequent approved gate1 implementation/evidence and current resume point:
+[Supported-Profile Source Rebaseline and Isolated Harness Safety Foundation](SOURCE_POLICY_SUPPORTED_PROFILE_FOUNDATION.md).
+The historical design/QA evidence below remains scoped to its original heads;
+new proof-source images have no transferred native qualification.
+
 ## Authority, baseline and decision — 2026-10-29
 
 Approved repository-only design, R1 documentation work. Clean/synced restore and

@@ -16,8 +16,7 @@ if ( ! defined( 'ABSPATH' ) || ! function_exists( 'adbb_check' ) ) {
  */
 function adb0_owner() {
 	global $class, $frame, $binding, $owners, $ambient;
-	$owner = $class->newInstanceWithoutConstructor();
-	$class->getConstructor()->invoke( $owner );
+	$owner   = adbb_construct( $class );
 	$context = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
 	foreach ( array(
 		'owned'     => $owner,

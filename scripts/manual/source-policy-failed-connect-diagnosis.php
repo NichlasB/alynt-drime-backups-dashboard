@@ -133,9 +133,8 @@ function adbb_failed_connect_diagnosis( ReflectionClass $owner_class, array $fra
 			}
 		}
 	} else {
-		$owner   = $owner_class->newInstanceWithoutConstructor();
+		$owner   = adbb_construct( $owner_class );
 		$context = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
-		$owner_class->getConstructor()->invoke( $owner );
 		foreach ( array(
 			'owned'     => $owner,
 			'ambient'   => null,
