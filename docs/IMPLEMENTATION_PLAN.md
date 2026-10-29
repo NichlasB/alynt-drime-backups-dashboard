@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Socket-free explicit host-trust/observer admission foundation — 2026-10-29
+
+Autonomous safe-local batch selects the [next pure foundation](SOURCE_POLICY_MINIMUM_HOST_ADMISSION_SAFETY_FOUNDATION.md)
+at clean/synced restore baseline 0f5858e. One new self-contained development-only
+DATA owner binds strict host/decision/module/identity claims and ordered virtual
+observer/release/cleanup evidence. Positive consistency is non-authorizing;
+actual trust, signatures, process ownership/absence and execution stay unverified.
+No discovery, IO adapter, installation, site/database or production-wiring change.
+
+Implementation-plan progress: the designed synthetic gate is implemented, not
+physical observer/runtime qualification. This is one coherent safe-local task,
+not extra task credit for tests, review or closeout. The next meaningful item is
+Local-only Existing-Tool Bounded Observer/Termination and Owned Cleanup Proof:
+existing bundled x64 PowerShell and exact owned process/filesystem/stdio fixtures
+only, separately approved. Candidate loading, actual host-trust designation,
+installation, WordPress/database/native work and production wiring stay disabled.
+Owning record keeps final validation, publication and batch-count evidence.
+
 ## Existing-host trust and bounded observer admission decision — 2026-10-29
 
 Approved [design-only decision](SOURCE_POLICY_MINIMUM_HOST_TRUST_OBSERVER_DESIGN.md)

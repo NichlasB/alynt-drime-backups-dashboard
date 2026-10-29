@@ -1,5 +1,11 @@
 # Existing-Host Trust Profile and Bounded Observer Admission Decision
 
+Forward progress: the [socket-free safety foundation](SOURCE_POLICY_MINIMUM_HOST_ADMISSION_SAFETY_FOUNDATION.md)
+implements only supplied-DATA consistency and virtual-clock observer/cleanup
+guards. No actual trust designation, physical proof, runtime loading or wiring
+is enabled; follow its next gated existing-tool proof rather than replaying this
+design or historical audit as execution authority.
+
 ## Authority, decision and restore baseline — 2026-10-29
 
 Approved **design only**, at clean/synced dashboard baseline
