@@ -134,7 +134,15 @@ Executed final repository QA on existing PHP8.5.1:
   byte-identical to6aef5b2; uploader/toolkit are clean and untouched. Exact child
   absence was independently confirmed. No physical acquisition is repeated.
 
-Ordinary exact-head publication CI is recorded after pushing; it does not
+Publication `78eb11f082216af032646488eecc010e8293a4e4` is pushed;
+ordinary [CI40899707594](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40899707594)
+succeeded at that exact head. Actual PHP7.4 log:2,125 tests/11,115 assertions;
+PHP8.3:2,125/11,120, each without failures/skips. Admin23/23/no failures/skips on
+each job; manifest/audits/build/structure/PHPCS passed with zero known advisories/
+vulnerabilities. Existing Node setup/cleanup DEP0040/DEP0169 warnings are nonfatal;
+no dependency update is included. This docs-only evidence closeout receives its
+own pushed exact-head ordinary CI and clean/remote verification at handoff.
+No physical acquisition or native operation is repeated. Ordinary CI does not
 retroactively qualify the refused core archive or any candidate runtime.
 
 Implementation-plan progress: explicit Windows-native trust and the PHP publisher
