@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux exact-build admission/diagnostics — approved design — 2026-10-29
+
+Approved [exact-build qualification design](SOURCE_POLICY_LINUX_EXACT_BUILD_QUALIFICATION_DESIGN.md),
+clean/synced baseline5ee5360. Selects the future single provisional core7.1.4 row
+10.11.18-MariaDB-ubu2204, replacing the generic unqualified candidate, not adding
+wildcards/ranges or granting production admission. Both whole-string consumers,
+12/11-key contracts, Windows/minimum lanes and all bounds/guards stay specified.
+Genuine core-generated report-OFF remains a prerequisite; audit CLI/report3 is
+not native compatibility. MAC/WSREP/name-resolution diagnostics stay unqualified,
+io_uring fallback needs resource-path evidence; no suppression/settings changes.
+Only design/plan/forward records; no runtime/native/storage/CI/wiring changes.
+Fresh QA/publication belongs to the owning design, historical native evidence
+remains d48b8f1/run40783576271. Implementation-plan progress: exact candidate and
+bounded qualification requirements resolved in design, native/production gates
+still open. Recommended next gated slice: Repository-only Linux Exact-Build
+Candidate Safety Foundation, isolated tests/manifest inventory only; authentication,
+storage, native execution and production wiring remain disabled.
+
 ## Owned Linux socket/server identity — approved audit — 2026-10-28
 
 Approved [empty-database identity/cleanup audit](SOURCE_POLICY_LINUX_SERVER_IDENTITY_AUDIT.md),

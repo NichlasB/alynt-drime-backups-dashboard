@@ -1,5 +1,10 @@
 # Off-Production Linux Owned Unix-Socket Server-Identity and Cleanup Audit
 
+Subsequent [exact-build admission/diagnostic design](SOURCE_POLICY_LINUX_EXACT_BUILD_QUALIFICATION_DESIGN.md)
+selects the future single full-suffix lab candidate and genuine-OFF/resource
+qualification requirements. It preserves this exact audit image and observations;
+no native rerun, compatibility change or qualification grant is implied.
+
 ## Approval, target and baseline — 2026-10-28
 
 Approved next slice from the [environment preflight](SOURCE_POLICY_LINUX_ENVIRONMENT_PREFLIGHT.md).
