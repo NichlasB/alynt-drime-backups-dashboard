@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Existing-tool module ceiling: retain 128; calibrate separately — 2026-10-29
+
+Approved [design-only feasibility decision](SOURCE_POLICY_TOOL_MODULE_CEILING_FEASIBILITY_DESIGN.md)
+at clean/synced baseline 2cb1b22. Neither the candidate nor existing-tool full
+snapshot ceiling increases: rows:129 proves only greater than 128. A distinct
+non-authorizing count-only receipt is designed to obtain the missing exact
+scalar without per-row traversal; the Modules getter itself is not claimed to
+have constant cost or bounded native allocation. Existing parsers, guards,
+budgets, execution gates and production wiring remain unchanged.
+
+Implementation-plan progress: resolves the tool/candidate evidence boundary,
+not physical feasibility. Previous cumulative progress stays 1/8 plus separate
+proof/diagnostic work. Next gated slice: Local-only Count-Only Existing-Tool
+Module Calibration and Owned Cleanup Proof, separately approved owned process/
+fixture scope and one attempt only. Count evidence cannot authorize a larger
+snapshot or candidate loading; require a later measured-budget decision.
+Repository-only validation/publication evidence belongs to the design record.
+
 ## Observer diagnostics: first snapshot exceeds module ceiling — 2026-10-29
 
 Approved [diagnostic repair and one fresh owned attempt](SOURCE_POLICY_TOOL_OBSERVER_DIAGNOSTICS_OWNED_PROOF.md)

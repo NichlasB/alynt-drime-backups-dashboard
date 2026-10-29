@@ -1,5 +1,9 @@
 # Observer Phase/Reason Diagnostics and One Fresh Owned Proof
 
+Forward decision: the approved [module-ceiling feasibility design](SOURCE_POLICY_TOOL_MODULE_CEILING_FEASIBILITY_DESIGN.md)
+retains both 128-module limits and specifies a separately gated non-authorizing
+exact-count calibration. It does not rerun, complete or alter this failed proof.
+
 ## Authority, baseline and disposition — 2026-10-29
 
 Explicitly approved harness-only diagnostics, regression validation and **one**
