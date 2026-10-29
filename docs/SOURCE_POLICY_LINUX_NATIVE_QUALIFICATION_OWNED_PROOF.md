@@ -230,6 +230,65 @@ Runtime, old native cases, source pins/preflight, shell, workflow, dependencies,
 package metadata and tracked assets remain baseline-identical. Uploader/toolkit
 remain clean/synced and read-only. No native run occurred locally.
 
-Exact-head ordinary CI and the newly approved one-off attempt are recorded below
-when executed. The previous failed run remains failed; source-audit compatibility
-and all physical native proof claims remain pending until actual evidence exists.
+Repair `47a307bba0ea0c6298260861d55e0ead85493623` is pushed.
+[Ordinary exact-head CI40853406337](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40853406337)
+passed: actual PHP7.4/8.3 each2013/8753, no failures/skips; Node21/21/0 skipped
+each and all configured gates successful. No runtime/native compatibility credit.
+
+### One newly approved blocked attempt and source-backed diagnosis
+
+One [fresh manual attempt40853631245](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40853631245),
+job123379011895, ran at exact repair head, workflow_dispatch,
+2026-10-29 09:57:05–09:57:29 UTC (24s), overall failure. Fresh unchanged preflight
+and same pinned-core reacquisition passed; PHP/module/binary digests and all11
+core pins match the prior record, initial report3 and zero native connections/
+queries. MAC warning retained, exact preflight resources removed.
+
+Repaired reporting now shows status1/no signal/no spawn error, empty stdout,
+worker stage source-audit, phase profile, checks16/groups0, RuntimeException and
+diagnostic:null. Assertion digest
+`cc3e43892868a661bc90feaeb3a713fef85a649be8d56d169b5826b89be282ce`
+matches **genuine fixed source/endpoint admission**: the combined
+Bootstrap_Profile::settings(frame) && Bootstrap_Profile::source(owner,binding)
+predicate. No PHP warning was reported. Do not infer which operand short-circuited
+from that combined check alone, or that subsequent native gates would pass.
+
+Read-only official pinned source inspection then established a definite refusal
+path, without another core/native execution:
+
+- [load.php](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/load.php)
+  declares both wp_using_ext_object_cache() and absint(); downloaded UTF-8 bytes
+  hash3efd0934bd8a454a8d7076fbbd21504ea097a753125a48e64b8a1dad380d357a,
+  exactly matching the committed/preflight pin.
+- [functions.php](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/functions.php)
+  declares neither; hashcac8a17e293df99f0683a88debd3ba5e5cce274183a4e9fd3c9f18375747f41c,
+  also pin-identical.
+- The Linux harness correctly binds cache_api_file to load.php but incorrectly
+  binds parser_api_file to functions.php. The unchanged source guard requires
+  absint's actual declaration filename to equal that binding. Thus this stale
+  caller binding necessarily refuses if source() is evaluated; it does not
+  justify weakening source identity or accepting arbitrary helper files.
+
+The settings/source distinction and other later conditions remain unproven; this
+is a source-backed sufficient refusal path, not a claim that all others pass.
+No source-binding repair or further attempt was made after the failed check.
+The padded-hour repair has isolated evidence; server-log review was not reached.
+
+Qualification database initialization, credential generation, account/schema/
+fixture creation and native body were not reached: **zero native groups**.
+Exit and always cleanup each report containers0/directories0/tmpfs released/
+reconciliation_failure0; source cleanup reports core_checkout0. These are exact
+no-instance cleanup facts, not a physical live/post-exit database proof. Existing
+site/application state and production wiring remain untouched.
+
+Implementation-plan progress: bounded diagnostics and padded-hour repair complete;
+Linux physical qualification is now blocked at a concrete stale helper binding,
+not an unexplained error. Recommended next gated slice: **Linux Harness-Only
+Canonical absint Declaration Binding Correction, Source-Backed Regression,
+Fresh Prerequisites and One New Owned Qualification Attempt**. Correct the
+private parser_api_file to pinned load.php, preserve every actual guard/budget/
+acceptance/cleanup rule and disabled wiring, then use a fresh exact image before
+at most one newly approved attempt. No generic source allowlist, runtime policy,
+old receipt rewrite or production provider migration belongs in that slice.
+Evidence-only final-head ordinary CI/remote is checked separately at handoff;
+both historical failed manual attempts remain failed and qualification pending.

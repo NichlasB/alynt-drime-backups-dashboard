@@ -9,8 +9,18 @@ MariaDB hours parsed without broadening warning content. Two intended red tests
 then targeted Node5/5, PHP37/159; local full2013/8746 with two existing Sodium
 skips, Node21/21/lint/structure/build/audits pass. Optional bypass control rejected
 before application; no mutation credit. Runtime/cases/pins/shell/workflow/budgets/
-acceptance/wiring unchanged. Exact-head CI and one fresh owned attempt pending
-in owner; no physical qualification claimed from isolated QA.
+acceptance/wiring unchanged. Repair47a307b/ordinaryCI40853406337 succeeds with
+PHP7.4/8.3 each2013/8753, no failures/skips, Node21/21/all gates. One fresh manual
+40853631245 failed at phase profile/check16, combined settings/source admission,
+zero groups/no DB initialization. No-instance/core cleanup passed. Exact pinned
+read-only source/hash evidence establishes absint declared in load.php, while
+the harness parser_api_file incorrectly points to functions.php: a sufficient
+source refusal, not proof other gates pass. No binding repair/second retry.
+Implementation-plan progress: diagnostic repair complete; native qualification
+blocked at a concrete stale helper binding. Recommended next gated slice: Linux
+Harness-Only Canonical absint Declaration Binding Correction, Source-Backed
+Regression, Fresh Prerequisites and One New Owned Qualification Attempt; preserve
+all guards/budgets/acceptance/disabled wiring. Final-head ordinary CI at handoff.
 
 ## Linux genuine-core/OFF native qualification — approved owned proof — 2026-10-29
 
