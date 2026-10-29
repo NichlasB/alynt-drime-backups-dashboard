@@ -10,9 +10,21 @@ Equivalent assertion against immutable prior source fails as expected; no guard
 mutation or genuine-core execution credit is claimed for that static check.
 Local targeted related38/162, full PHP8.5.1 suite2014/8749 with two existing
 missing-Sodium skips and all other QA gates pass; publication/native evidence
-follow in the owning record. No existing-site work,
-runtime/pin/workflow/budget/acceptance/wiring changes or automatic retry. Native
-dispatch requires successful exact-head ordinary CI and fresh prerequisites.
+is in the owning record. Repairbc82f72/ordinaryCI40855948097 succeeds with
+PHP7.4/8.3 each2014/8756/no skips, Node21/21/all gates. One fresh manual attempt
+40856185813 cleared genuine source admission (audit29/zero connections/queries),
+started the fresh lab and passed core-selected OFF/privilege denial/actual owned
+bootstrap, but failed at native escape/check46/groups0. Last-check digest points
+to a release assertion that can overwrite an earlier escaping failure; do not
+claim the inner cause or report-mode drift. Independent failure-path post-exit
+reconciliation, exact fixture/account removal, normal stop and complete
+container/directory/tmpfs/core cleanup passed. No second attempt or runtime/
+pin/workflow/budget/acceptance/wiring change. Implementation-plan progress:
+canonical source admission resolved; full physical qualification remains blocked
+at escaping/body-or-release attribution. Recommended next gated slice: Linux
+Harness-Only First-Failure Retention and Bounded Escaping Diagnostics, Fresh
+Prerequisites and One Owned Diagnostic/Qualification Attempt; preserve all guards,
+acceptance, budgets and disabled wiring. Final docs-head ordinary CI at handoff.
 
 ## Linux proof diagnostics/padded-hour repair — approved retry — 2026-10-29
 

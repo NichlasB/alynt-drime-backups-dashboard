@@ -327,3 +327,77 @@ One new manual attempt is authorized only after ordinary exact-head CI succeeds,
 with fresh unchanged preflight and reacquired pinned core. Retain all original
 guard, resource, source-identity, diagnostic, ADBC1/2 and cleanup conditions;
 no automatic repair/retry if it fails. Previous failed runs remain failed.
+
+### Publication and one fresh owned attempt
+
+Repairbc82f729d718abb5dd976f2dfcc8e56e957f0c69 is pushed.
+[Ordinary exact-head CI40855948097](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40855948097)
+passes: PHP7.4/8.3 each2014/8756/no failures or skips; Node21/21/no skips each,
+all configured build/structure/lint/manifest/audit gates successful. Rechecked
+official immutable load.php/functions.php text/hash read-only in this task:
+both match the existing manifest and only load.php declares absint/cache API.
+This source-text check did not load WordPress or open a native connection.
+
+One [manual attempt40856185813](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40856185813),
+job123387633595, ran at that exact head, workflow_dispatch, from
+2026-10-29 10:16:03 to10:16:34 UTC (31s), overall failure. Fresh unchanged
+preflight and same pinned-core reacquisition succeeded with identical recorded
+PHP/module/server/client digests and11 core pins. Version-only preflight
+containers/core/directory cleanup passed before actual source reacquisition.
+
+The actual genuine-library source audit now passes:29 checks, zero native
+connections/queries, image9901894ed7440ea0facfa9bad03da460a1da683496ea4e0f72510bcf5d191392,
+run0c8ed92a41a16f8c20907a014996af07. The stale declaration-binding refusal is
+resolved in the native source layer, not merely the static regression.
+
+The fresh network-none/read-only-root instance then initialized successfully.
+Baseline: exact10.11.18-MariaDB-ubu2204, no TCP1/wsrep0/nativeAIO1/autocommit1/
+in_transaction0/other sessions0/transactions0/non-system schemas0; host
+io_uring_disabled0. Full bounded bootstrap2137B and server2461B diagnostic
+contexts were accepted under unchanged strict policy, including exact known
+io_uring-to-libaio and namespace/WSREP warnings. The prior padded-hour change
+has isolated coverage, but this native attempt's hour10 does not physically
+exercise single-digit hour padding.
+
+Owned schema/table/account creation was reached. The sequential native worker
+passed genuine stock core ambient connection, core-selected report-OFF, actual
+outside-fixture privilege denial1142, prepare-without-SQL, owned ambient callback
+and actual ambient-bound owner bootstrap preserving OFF. It then failed in
+stage escape/phase native at46 checks, **zero completed native case groups**:
+RuntimeException, diagnostic:null, status1/no signal/no spawn error/empty stdout.
+No successful escaping round trip, complete9-group CAS/error qualification or
+held-terminal receipt is claimed.
+
+Reported assertion SHA256
+f49523a32f85c7e6a655474deda16410124bba3a4836c81b12fcf805d69cbcee
+maps to the reused helper's final "no report-mode restoration or toggle" check.
+Read-only source inspection found adbb_check overwrites adbb_last_check on every
+check, including successful finally/release checks before an earlier exception
+reaches the outer catch. Therefore this digest is **last-check attribution, not
+proof that reporting changed or that this was the first failing assertion**.
+The compound round-trip acknowledgement/row-count/bytes condition and release
+checks are not individually distinguished by current evidence. No root-cause
+claim, diagnostic/runtime repair or further native attempt was made after failure.
+
+Failure-path root reconciliation is distinct from the uncompleted held-terminal
+success handshake: before dropping fixtures it requires all-server other
+sessions0/INNODB_TRX0; after exact owned schema/account drops it requires
+non-system schemas0/owned account0/other sessions0/transactions0. Cleanup reported
+reconciliation_failure0 and normal stop exit0/notOOM under those unchanged
+conditions. Final server3082B diagnostic context includes normal shutdown and
+passed strict review. Exit/always cleanup each report containers0/directories0/
+tmpfs released/reconciliation_failure0; preflight cleanup core_checkout0.
+No existing application/site/LocalWP state or production wiring was touched.
+
+Implementation-plan progress: canonical source admission is resolved; physical
+qualification remains blocked at escaping/body-or-release failure attribution.
+Recommended next gated slice: **Linux Harness-Only First-Failure Retention and
+Bounded Escaping Diagnostics, Fresh Prerequisites and One Owned Diagnostic/
+Qualification Attempt**. Preserve the first failing assertion/exception across
+finally checks; distinguish fixed non-secret prepare/acknowledgement/row/byte-
+equality/release facts without raw SQL, values, credentials or guard relaxation.
+Use isolated source-backed regressions before any newly approved single attempt;
+preserve runtime/cases/pins/budgets/acceptance and disabled wiring. No automatic
+retry, release-readiness refresh or production-provider activation is authorized.
+Evidence-only closeout ordinary CI/remote is verified separately at handoff;
+the failed native run remains failed, never relabeled by ordinary CI success.
