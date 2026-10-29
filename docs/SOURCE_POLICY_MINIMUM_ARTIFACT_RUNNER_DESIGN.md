@@ -232,4 +232,15 @@ complete; no artifact has been provisioned or physically qualified. Recommended
 next gated slice: **Repository-only Minimum-Profile Artifact Admission and Fixed
 Runner Safety Foundation**, synthetic archive/PE/profile/transcript and isolated
 API tests only, with downloads, runtime loading, storage/native execution and
-production wiring disabled. Ordinary exact-head publication evidence follows.
+production wiring disabled.
+
+Design publication `0d743adcc8072cc6c2643027bd85dfd905e910fc` is pushed;
+ordinary [CI40882215816](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40882215816)
+succeeded at that exact head. Actual PHP7.4/8.3 logs each report2,043 tests/
+9,215 assertions with no failures/skips; admin23/23 each, no failures/skips.
+Manifest/dependency audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. Existing Node setup/cleanup DEP0040/DEP0169 warnings are nonfatal;
+no dependency update is included. This evidence-only closeout receives separate
+pushed exact-head ordinary CI and clean/remote verification at handoff, without
+repeating site, artifact or native work. It does not qualify the proposed Windows
+PHP7.4 executable, minimum-core library/native path or release candidate.
