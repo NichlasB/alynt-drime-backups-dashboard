@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum-profile native-CA recovery and new core archive refusal — 2026-10-29
+
+Approved [native-CA owned attempt](SOURCE_POLICY_MINIMUM_NATIVE_CA_OWNED_PROOF.md)
+at clean/synced restore baseline6aef5b2. Adds a fixed reviewed Windows/cURL/OpenSSL
+capability guard and explicit per-request native CA store use; all TLS/pin/URL/
+budget/cleanup guards remain intact. Fresh81/1899 and four semantic controls passed.
+The single new attempt passed TLS and PHP ZIP publisher identity/93-entry CRC/
+inventory decoding, then refused at archive-core/core-file-mode-refused. Complete
+core/static/output extraction remains unproved. Exact child/ZIP cleanup and
+independent absence confirmed; no install, code loading, site/database work or retry.
+
+Implementation-plan progress: TLS and PHP archive boundaries advanced; complete
+qualification is blocked by core host/mode evidence. Recommended next gated slice:
+Harness-only Core ZIP Host/Mode Diagnostic and Evidence-Based Compatibility Repair
+with One Fresh Owned Acquisition/Cleanup Proof, without defaulting regular-file
+modes, changing pins or bypassing tree/link/type checks. Owning record preserves
+the missing evidence, source scope, remaining gates and publication verification.
+
 ## Minimum-profile acquisition adapter and refused owned attempt — 2026-10-29
 
 Approved [owned adapter/proof](SOURCE_POLICY_MINIMUM_ARTIFACT_ACQUISITION_OWNED_PROOF.md)

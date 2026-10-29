@@ -6,6 +6,19 @@
  */
 
 /**
+ * Fixed reviewed native-CA capability DATA, not a network or execution grant.
+ *
+ * @param mixed $os Observed platform.
+ * @param mixed $version Observed cURL version.
+ * @param mixed $ssl Observed TLS backend.
+ * @param mixed $native_ca Observed option availability.
+ * @return bool No fallback for unreviewed backends or missing capability.
+ */
+function adbmin_native_ca_profile( $os, $version, $ssl, $native_ca ) {
+	return 'Windows' === $os && '8.17.0' === $version && 'OpenSSL/3.5.4' === $ssl && true === $native_ca;
+}
+
+/**
  * Fixed HTTPS request, no redirects/proxies/authentication/fallback/retry.
  *
  * @param string $kind Fixed artifact.
@@ -16,12 +29,16 @@ function adbmin_download( $kind ) {
 	if ( ! in_array( $kind, array( 'php', 'core' ), true ) || ! extension_loaded( 'curl' ) ) {
 		throw new RuntimeException( 'download-preflight-refused' );
 	}
+	$backend = curl_version();
+	if ( ! adbmin_native_ca_profile( PHP_OS_FAMILY, $backend['version'], $backend['ssl_version'], defined( 'CURLSSLOPT_NATIVE_CA' ) ) ) {
+		throw new RuntimeException( 'native-ca-profile-refused' );
+	}
 	$url             = adbmin_catalog()[ $kind . '_url' ];
 	$curl            = curl_init( $url );
 	$bytes           = '';
 	$protocol_option = defined( 'CURLOPT_PROTOCOLS_STR' ) ? constant( 'CURLOPT_PROTOCOLS_STR' ) : CURLOPT_PROTOCOLS;
 	$protocol_value  = defined( 'CURLOPT_PROTOCOLS_STR' ) ? 'https' : CURLPROTO_HTTPS;
-	curl_setopt_array(
+	$configured      = curl_setopt_array(
 		$curl,
 		array(
 			CURLOPT_FOLLOWLOCATION  => false,
@@ -31,6 +48,7 @@ function adbmin_download( $kind ) {
 			CURLOPT_NETRC           => CURL_NETRC_IGNORED,
 			CURLOPT_SSL_VERIFYPEER  => true,
 			CURLOPT_SSL_VERIFYHOST  => 2,
+			CURLOPT_SSL_OPTIONS     => constant( 'CURLSSLOPT_NATIVE_CA' ),
 			CURLOPT_CONNECTTIMEOUT  => 10,
 			CURLOPT_TIMEOUT         => 120,
 			CURLOPT_LOW_SPEED_LIMIT => 1,
@@ -45,6 +63,9 @@ function adbmin_download( $kind ) {
 			},
 		)
 	);
+	if ( true !== $configured ) {
+		throw new RuntimeException( 'fixed-request-options-refused' );
+	}
 	try {
 		$ok = curl_exec( $curl );
 		if ( false === $ok || 200 !== curl_getinfo( $curl, CURLINFO_RESPONSE_CODE ) || curl_getinfo( $curl, CURLINFO_EFFECTIVE_URL ) !== $url || '' === $bytes ) {
@@ -95,6 +116,8 @@ function adbmin_acquisition_proof() {
 			'php'                => PHP_VERSION,
 			'libzip'             => ZipArchive::LIBZIP_VERSION,
 			'curl'               => curl_version()['version'],
+			'ssl_backend'        => curl_version()['ssl_version'],
+			'tls_trust'          => 'windows-native-ca-per-request',
 			'child_memory_limit' => '768M',
 		);
 		$report['owned_child']   = basename( $owned->root() );

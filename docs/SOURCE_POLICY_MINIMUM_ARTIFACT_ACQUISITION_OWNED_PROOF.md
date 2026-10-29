@@ -1,5 +1,10 @@
 # Minimum-Profile Artifact Acquisition — Adapter and Refused Owned Attempt
 
+Forward progress: the approved [native-CA recovery attempt](SOURCE_POLICY_MINIMUM_NATIVE_CA_OWNED_PROOF.md)
+passed TLS and the PHP archive boundary, then stopped at a distinct core host/mode
+guard with exact cleanup. Follow its resume gate; this earlier cURL60 receipt is
+historical and is not rewritten as a successful complete artifact proof.
+
 ## Authority, baseline and outcome — 2026-10-29
 
 Explicit approval of Owned Minimum-Profile Artifact Acquisition, Static
