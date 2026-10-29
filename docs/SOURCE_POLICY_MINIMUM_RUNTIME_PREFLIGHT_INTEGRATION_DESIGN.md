@@ -289,8 +289,14 @@ Executed repository QA on existing tooling PHP8.5.1 (no candidate runtime loaded
   and whitespace checks pass. All tracked non-documentation files remain identical
   to9ea299d. Uploader/toolkit are clean and untouched at3dfcb15/c067eb6.
 
-Design publication receives pushed exact-head ordinary CI before handoff; actual
-counts/run evidence follow validation, without repeating any physical proof.
+Design publication `5c31c430373413b9b0e9b263f616fd36bfa6185c` is pushed;
+ordinary [CI40916766096](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40916766096)
+succeeded for that exact head. Actual PHP7.4 log:2,150 tests/11,237 assertions;
+PHP8.3:2,150/11,242, both without failures/skips. Admin23/23 each, zero failures/
+skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. This evidence-only closeout receives its own pushed exact-head
+ordinary CI and clean/remote verification at handoff, without dispatching a
+manual/native workflow, redoing acquisition or repeating any physical proof.
 No installed profile, downloaded code, subprocess loader, signature/catalog or
 native/database evidence is produced by this design.
 
