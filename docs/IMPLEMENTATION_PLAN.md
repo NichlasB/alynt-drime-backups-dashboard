@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum dependency closure and fixed runtime-preflight design — 2026-10-29
+
+Approved [repository-only integration design](SOURCE_POLICY_MINIMUM_RUNTIME_PREFLIGHT_INTEGRATION_DESIGN.md)
+at clean/synced restore baseline9ea299d. Specifies a finite publisher-owned
+application closure and explicit Windows/installed-CRT trust boundary, fresh
+artifact ownership, sterile fixed base/mysqli children, independently observed
+module/exit evidence, separate `ADBMP1` contract, bounded cleanup
+and ordered synthetic/profile/process/runtime/native gates. Absolute paths and
+PHP -n are not mislabeled loader isolation; no compiler/installation fallback.
+No runtime/harness/pin/acceptance change or actual profile/load/site operation.
+
+Implementation-plan progress: dependency/preflight ownership and evidence contract
+are specified, not implemented or physically qualified. Recommended next gated
+slice: Local-only Socket-Free Dependency/Launch Admission and Runtime-Preflight
+Transcript Safety Foundation, synthetic DATA/virtual clocks/isolated tests only.
+Keep installed-profile discovery, filesystem/network/process IO, artifact loading,
+SQL/native execution and production wiring disabled; actual audits/proofs remain
+separate approvals. Owning record preserves limits and publication evidence.
+
 ## Selected PE import classification and complete owned readback — 2026-10-29
 
 Approved [selected import diagnostic/classification proof](SOURCE_POLICY_MINIMUM_IMPORT_CLASSIFICATION_OWNED_PROOF.md)

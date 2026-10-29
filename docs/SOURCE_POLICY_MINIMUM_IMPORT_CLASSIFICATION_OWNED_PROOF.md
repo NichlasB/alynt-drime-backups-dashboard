@@ -1,5 +1,10 @@
 # Minimum-Profile Selected PE Import Classification and Owned Proof
 
+Forward progress: the approved [dependency/runtime-preflight integration design](SOURCE_POLICY_MINIMUM_RUNTIME_PREFLIGHT_INTEGRATION_DESIGN.md)
+defines the next closed boundary without acquisition, profile inspection or
+loading. Follow its ordered gates; this historical owned proof is not rerun or
+upgraded to runtime/dependency closure evidence.
+
 **Outcome: static acquisition, complete source identity, selected direct-import
 classification and exclusive payload readback passed; exact cleanup confirmed.**
 Dependency presence/transitive closure and candidate-runtime/native qualification
