@@ -112,9 +112,17 @@ Executed local validation on existing PHP8.5.1:
   byte-identical to9ae4bcd; uploader/toolkit are clean and untouched. Existing
   release workflow already excludes scripts/tests/docs; no package was built.
 
-Exact-head ordinary publication CI is recorded after pushing. No native workflow
-is dispatched; ordinary repository CI does not admit the proposed Windows
-executable or minimum-profile native path.
+Publication `d3328d84310c514bc95462e99b34dec13082b00e` is pushed;
+ordinary [CI40887183349](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40887183349)
+succeeded for that exact head. Actual PHP7.4 log:2,103 tests/10,950 assertions;
+PHP8.3:2,103/10,955, each without failures/skips. Admin23/23 on each job, no
+failures/skips; manifest/audits/build/structure/PHPCS passed with zero known
+advisories/vulnerabilities. Existing Node setup/cleanup DEP0040/DEP0169 warnings
+were nonfatal, not dependency changes. The evidence-only closeout receives its
+own pushed exact-head ordinary CI and clean/remote verification at handoff.
+No native workflow is dispatched; ordinary repository CI does not admit the
+proposed Windows executable or minimum-profile native path. No site, artifact
+or native operation is repeated for evidence publication.
 
 Implementation-plan progress: synthetic artifact/tree/PE/runner contracts are
 implemented; actual acquisition, filesystem ownership/extraction, dependency
