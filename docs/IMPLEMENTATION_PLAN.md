@@ -17,6 +17,8 @@ Module Calibration and Owned Cleanup Proof, separately approved owned process/
 fixture scope and one attempt only. Count evidence cannot authorize a larger
 snapshot or candidate loading; require a later measured-budget decision.
 Repository-only validation/publication evidence belongs to the design record.
+Design 116d838 is pushed; exact-head CI 40959014391 passed (PHP 7.4/8.3 each
+2,320 tests, no failures/skips). No physical calibration or cap increase follows.
 
 ## Observer diagnostics: first snapshot exceeds module ceiling — 2026-10-29
 

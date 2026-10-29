@@ -164,10 +164,17 @@ candidate runtime:
   unchanged against baseline; only this design, plan and predecessor pointer
   change. Uploader/toolkit remain clean/read-only at 3dfcb15/c067eb6.
 
-Exact-head publication verification follows the design commit. No physical
-attempt, current host/profile reinspection, site or native operation runs here.
-No historical failure is relabeled, whole-plugin review refreshed, or release
-readiness claimed by these isolated checks.
+Design publication `116d8384ed593b28a7483451b256c2863bfc4e1c` is pushed;
+[exact-head CI 40959014391](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40959014391)
+succeeded. Actual PHP 7.4 log: 2,320 tests / 20,850 assertions; PHP 8.3:
+2,320 / 20,855, both without failures/skips. Admin 23/23 each, no failures/skips;
+manifest, PHPCS, structure, build and audits passed, zero known advisories/
+vulnerabilities. Setup Node emitted existing tool-level `punycode`/`url.parse()`
+deprecation warnings; no runtime/guard change suppresses them. This docs-only
+evidence closeout receives its own pushed exact-head CI and clean/remote check
+at handoff. No physical attempt, current host/profile reinspection, site or
+native operation runs here. No historical failure is relabeled, whole-plugin
+review refreshed, or release readiness claimed by these isolated checks.
 
 Implementation-plan progress: the tool/candidate evidence boundary and the
 missing exact-count prerequisite are now explicit; physical observer
