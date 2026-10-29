@@ -124,7 +124,7 @@ try {
 		'driver_file'     => null,
 		'cache_file'      => ABSPATH . WPINC . '/class-wp-object-cache.php',
 		'cache_api_file'  => ABSPATH . WPINC . '/load.php',
-		'parser_api_file' => ABSPATH . WPINC . '/functions.php',
+		'parser_api_file' => ABSPATH . WPINC . '/load.php',
 		'observers'       => array(),
 		'observer_files'  => array(),
 	);

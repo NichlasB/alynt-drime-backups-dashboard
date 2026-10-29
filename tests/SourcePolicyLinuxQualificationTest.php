@@ -23,6 +23,16 @@ final class SourcePolicyLinuxQualificationTest extends TestCase {
 		$this->assertSame(1,proc_close($process));$this->assertSame('',$out);$this->assertSame("Requires exact owned Linux qualification job\n",$err);
 	}
 	public static function invocations(){return array(array(array()),array(array('--wrong','proof')),array(array('--owned-linux-qualification','audit')),array(array('--owned-linux-qualification','proof')),array(array('--owned-linux-qualification','proof','extra')));}
+	/** Static caller-binding regression grounded in the hash-verified pinned declaration, not core execution. */
+	public function test_parser_binding_uses_pinned_genuine_load_declaration() {
+		$worker=file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-qualification.php');
+		preg_match_all('/\x27(parser_api_file|cache_api_file)\x27\s*=>\s*ABSPATH\s*\.\s*WPINC\s*\.\s*\x27(\/[a-z-]+\.php)\x27/',$worker,$matches,PREG_SET_ORDER);
+		$bindings=array();foreach($matches as $match)$bindings[$match[1]]=$match[2];
+		$this->assertSame(array('cache_api_file'=>'/load.php','parser_api_file'=>'/load.php'),$bindings,'Both actual declarations are in pinned load.php, not functions.php.');
+		$pins=json_decode(file_get_contents(dirname(__DIR__).'/scripts/ci/source-policy-linux-core-pins.json'),true);
+		$this->assertCount(11,$pins);
+		$this->assertSame('3efd0934bd8a454a8d7076fbbd21504ea097a753125a48e64b8a1dad380d357a',$pins['load.php']);
+	}
 	public function test_only_manual_exact_head_immutable_actions_and_independent_cleanup() {
 		$workflow=file_get_contents(dirname(__DIR__).'/.github/workflows/source-policy-linux-qualification.yml');
 		foreach(array('workflow_dispatch:','contents: read','timeout-minutes: 10','"$EXPECTED_SHA" == "$GITHUB_SHA"','if: always()','source-policy-linux-preflight.sh','source-policy-linux-qualification.sh') as $required)$this->assertStringContainsString($required,$workflow);

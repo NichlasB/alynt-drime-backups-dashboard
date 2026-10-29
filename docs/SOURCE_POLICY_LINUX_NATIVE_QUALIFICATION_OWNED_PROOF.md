@@ -292,3 +292,38 @@ at most one newly approved attempt. No generic source allowlist, runtime policy,
 old receipt rewrite or production provider migration belongs in that slice.
 Evidence-only final-head ordinary CI/remote is checked separately at handoff;
 both historical failed manual attempts remain failed and qualification pending.
+
+## Canonical absint declaration binding correction — 2026-10-29
+
+User approved the exact harness-only correction, source-backed regression, fresh
+prerequisites and one new owned Linux qualification attempt. Restore baseline:
+clean/synced master6adb7aee239fe3f536a4445cc7bd1f62f4bc3e23. Only worker edit is
+parser_api_file functions.php to load.php. Both absint and cache API declarations
+belong to pinned load.php with the hash recorded above; the actual runtime
+ReflectionFunction declaration/source guard is unchanged. No general helper
+allowlist, predicate bypass or settings/source assumption is introduced.
+
+The added existing-test-home regression reads the actual two worker bindings,
+requires load.php for both and checks the existing 11-file manifest/load.php
+SHA256. An equivalent read-only assertion against immutable baseline source
+fails as expected for functions.php. This is static caller metadata/pin evidence,
+not genuine core execution, authorization, database or physical cleanup proof.
+An earlier concurrent PHPUnit invocation completed after the binding edit and
+passed, so it is not credited as a red-before-change run. Current related
+PHP gate/receipt/identity/preflight tests38/162 pass; source guard/cases and all
+native acceptance remain unchanged. No mutation-control credit is claimed.
+
+PHPCS226 files, Node21/21/no skips, structure149 runtime/227 support/205 tests/
+202 class names, build, strict Composer validation and Composer/npm moderate
+audits pass (zero known advisories/vulnerabilities); Bash -n, Node --check, PHP
+syntax and diff whitespace pass. Full local PHP8.5.1 PHPUnit2014/8749 passes
+with two existing missing-Sodium signing skips only. Publication evidence is
+pending below before any dispatch. Worker/test plus these two owning records are the
+only intended changes; runtime/manual cases/pins/shell/controller/workflow/
+dependencies/metadata/assets, uploader and toolkit remain unchanged. No local
+native execution, LocalWP/live/Novamira operation or release work is in scope.
+
+One new manual attempt is authorized only after ordinary exact-head CI succeeds,
+with fresh unchanged preflight and reacquired pinned core. Retain all original
+guard, resource, source-identity, diagnostic, ADBC1/2 and cleanup conditions;
+no automatic repair/retry if it fails. Previous failed runs remain failed.

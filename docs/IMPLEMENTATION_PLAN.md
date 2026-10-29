@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux canonical absint binding — approved harness correction — 2026-10-29
+
+Approved [caller-binding correction and one fresh owned attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
+baseline6adb7ae. Only worker change: parser_api_file now names pinned load.php,
+the actual absint declaration; reflection/source admission remains unchanged.
+Static regression checks both helper bindings and the existing load.php hash.
+Equivalent assertion against immutable prior source fails as expected; no guard
+mutation or genuine-core execution credit is claimed for that static check.
+Local targeted related38/162, full PHP8.5.1 suite2014/8749 with two existing
+missing-Sodium skips and all other QA gates pass; publication/native evidence
+follow in the owning record. No existing-site work,
+runtime/pin/workflow/budget/acceptance/wiring changes or automatic retry. Native
+dispatch requires successful exact-head ordinary CI and fresh prerequisites.
+
 ## Linux proof diagnostics/padded-hour repair — approved retry — 2026-10-29
 
 Approved [harness-only repair and one fresh attempt](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md),
