@@ -1,5 +1,9 @@
 # Minimum-Profile Artifact Admission and Fixed Runner Safety Foundation
 
+Forward progress: the approved [acquisition adapter and owned attempt](SOURCE_POLICY_MINIMUM_ARTIFACT_ACQUISITION_OWNED_PROOF.md)
+reached a TLS verification refusal and confirmed cleanup. Follow that record's
+specific recovery gate; no genuine artifact/native qualification is added here.
+
 ## Authority and restore baseline — 2026-10-29
 
 Approved implementation of the next synthetic-only gate in the

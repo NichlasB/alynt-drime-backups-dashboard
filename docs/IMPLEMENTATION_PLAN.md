@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum-profile acquisition adapter and refused owned attempt — 2026-10-29
+
+Approved [owned adapter/proof](SOURCE_POLICY_MINIMUM_ARTIFACT_ACQUISITION_OWNED_PROOF.md)
+at restore baselined8cbfbd. Fixed HTTPS/libzip/owned-file/static adapters and13
+new disposable tests are implemented; fresh family73/1844 passed. The sole
+acquisition stopped at download-php with TLS verification code60, before any ZIP
+write/core download/real static identity or extraction. Exact child cleanup and
+independent absence confirmed; no retry, installation, candidate-runtime load,
+site/database operation, configuration change or production wiring change.
+
+Implementation-plan progress: adapter/owned prerequisites advanced; real artifact
+qualification is blocked, not complete. Recommended next gated slice: Harness-only
+Windows Native-CA Trust Integration and One Fresh Owned Artifact Acquisition/
+Cleanup Attempt, per-request native trust only with unchanged peer/hostname/HTTPS
+verification, pins and budgets. No CA installation, global configuration, runtime
+loading or site/database work. Owning record preserves evidence and CI limits.
+
 ## Minimum-profile synthetic artifact and runner foundation — 2026-10-29
 
 Approved [isolated foundation](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_FOUNDATION.md)
