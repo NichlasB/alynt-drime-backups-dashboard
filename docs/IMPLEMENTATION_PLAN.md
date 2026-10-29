@@ -18,6 +18,11 @@ only, separately approved. Candidate loading, actual host-trust designation,
 installation, WordPress/database/native work and production wiring stay disabled.
 Owning record keeps final validation, publication and batch-count evidence.
 
+Batch closeout: 1/8 worthwhile safe-local tasks completed. Implementation 0fbb67a
+is pushed and exact-head CI 40940936318 passed (PHP 7.4/8.3 each 2,316 tests,
+no failures/skips). The current safe-local lane ends at the physical owned-tool
+observer/termination gate; no filler maintenance is counted toward the ceiling.
+
 ## Existing-host trust and bounded observer admission decision — 2026-10-29
 
 Approved [design-only decision](SOURCE_POLICY_MINIMUM_HOST_TRUST_OBSERVER_DESIGN.md)

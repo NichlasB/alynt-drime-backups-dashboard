@@ -153,7 +153,19 @@ Fresh final repository QA on existing trusted PHP 8.5.1:
   development helper/tests are added. Uploader/toolkit remain clean/read-only at
   3dfcb15/c067eb6. No assertion weakened, new skip or whole-plugin review refresh.
 
-Exact-head publication evidence follows after push and ordinary CI. Version
+Implementation publication `0fbb67abad5828cc87aac0ba7b495bc2147bb301` is pushed;
+[CI 40940936318](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/40940936318)
+succeeded for that exact head. Actual PHP 7.4 log: 2,316 tests / 20,706 assertions;
+PHP 8.3: 2,316 / 20,711, both without failures/skips. Admin 23/23 each, zero
+failures/skips; manifest/audits/build/structure/PHPCS passed, zero known advisories/
+vulnerabilities. Setup Node emitted its tool-level `punycode`/`url.parse()`
+deprecation warnings; no test/acceptance change suppresses them. This evidence-only
+closeout receives its own pushed exact-head ordinary CI and clean/remote check
+at handoff. No manual/native workflow or physical proof is dispatched/replayed.
+The unchanged release configuration excludes scripts/tests/docs; this is static
+configuration review, not a package audit or permission to create a release.
+
+Version
 0.1.77/schema 8, runtime/bootstrap code, native workers/controllers, ADBM0/ADBMP1/
 ADBC1/2 acceptance, existing source/artifact pins, dependency manifests/locks,
 workflows and production wiring remain unchanged. No release is warranted for
@@ -161,9 +173,11 @@ this development-only foundation.
 
 Implementation-plan progress: the pure trust/observer consistency foundation is
 implemented; actual trust, physical process/observer feasibility and candidate
-runtime/native qualification remain unproved. One worthwhile safe-local task is
-counted only after validation, commit/push and exact-head CI. The next meaningful
-plan item is a separately gated physical proof, not another generic cleanup.
+runtime/native qualification remain unproved. **1/8 worthwhile safe-local tasks
+completed** through validation, commit/push and exact-head CI; tests, source review
+and evidence closeout are not separately counted. The current implementation-plan
+safe-local lane is exhausted at the next separately gated physical proof. No
+filler maintenance, release work or deferred feature is opened to reach eight.
 
 Recommended next gated slice: **Local-only Existing-Tool Bounded Observer/
 Termination and Owned Cleanup Proof**, using only the existing bundled x64
