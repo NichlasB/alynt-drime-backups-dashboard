@@ -117,9 +117,20 @@ Ordinary trusted PHP 8.5.1 repository QA, without candidate/native reruns:
 - 142 owning local documentation targets and whitespace passed. Existing release
   workflow excludes scripts/tests/docs; no package is created or audited here.
 
-Exact-head CI publication is pending. The owned physical attempt is complete
-and must not be replayed for publication. No whole-plugin pre-release review
-or release-readiness row is refreshed.
+Implementation/proof publication `8d6c8d10ccf8db25346aff01444e2f2a85fdf427` is
+pushed; [exact-head CI 41099209833](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41099209833)
+succeeded. Actual PHP 7.4: 2,324 tests / 20,985 assertions; PHP 8.3: 2,324 /
+20,990, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, structure, build, PHPCS and audits passed, zero known advisories/
+vulnerabilities. Existing Setup Node `punycode`/`url.parse()` deprecation warnings
+remain tool-level warnings, not suppressed by acceptance changes. CI exercises
+the ordinary PHP/static contracts; the pure PowerShell and physical Windows
+evidence above were executed locally, not inferred from Linux CI.
+
+This docs-only evidence closeout receives its own pushed exact-head ordinary
+CI and clean/remote verification at handoff. The owned physical attempt is
+complete and must not be replayed for publication. No whole-plugin pre-release
+review or release-readiness row is refreshed.
 
 Implementation-plan progress: closes the missing exact tool-count prerequisite,
 not full observer feasibility. Previous safe-local count remains 1/8 plus the

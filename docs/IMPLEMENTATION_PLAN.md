@@ -17,6 +17,8 @@ Measured Tool-Only Module Budget and Full-Snapshot Feasibility Decision, weighin
 135 observed modules and unmeasured traversal/catalog costs before any tool-cap
 change or fresh experiment. Candidate limit remains 128; no automatic retry or
 production execution. Publication evidence belongs to the proof record.
+Implementation/proof 8d6c8d1 is pushed; exact-head CI 41099209833 passed (PHP
+7.4/8.3 each 2,324 tests, no failures/skips). No physical rerun for publication.
 
 ## Existing-tool module ceiling: retain 128; calibrate separately — 2026-10-29
 
