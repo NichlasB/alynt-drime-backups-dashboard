@@ -3,14 +3,22 @@ param([string]$Run,[int]$TargetId,[long]$TargetTick,[string]$Image,[switch]$Hold
 $ErrorActionPreference='Stop'
 $target=$null
 $diagPrefix=$null;$script:DiagPhase='scope';$script:DiagReason='api';$script:DiagRows=0;$script:DiagIndex=0;$script:DiagMask=0
+function Add-ToolCatalogRow($Rows,[string]$Name,[string]$Row,[ref]$Used) {
+    $length=[Text.Encoding]::UTF8.GetByteCount($Row)+1
+    if ($length -gt 131072-$Used.Value) { $script:DiagReason='catalog-bound';throw 'Private catalog bound refused' }
+    $Rows.Add($Name,$Row);$Used.Value+=$length
+}
+function Assert-ToolSnapshotPair($first,$second) {
+    if ($first.Text -cne $second.Text) { $script:DiagReason='snapshots-changed';throw 'Held snapshots changed' }
+}
 try {
     if ($args.Count -ne 0 -or $Run -cnotmatch '\A[a-f0-9]{32}\z' -or [IO.Path]::GetFileName($PSScriptRoot) -cne ('adbtool-'+$Run) -or $TargetId -le 0 -or $TargetTick -le 0 -or $Image -cne [Environment]::ProcessPath) { $script:DiagReason='scope';throw 'Owned observation scope required' }
     $script:DiagPhase='self'
     $self=[Diagnostics.Process]::GetCurrentProcess()
     $tick=$self.StartTime.ToUniversalTime().Ticks.ToString([Globalization.CultureInfo]::InvariantCulture)
     $source=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([IO.File]::ReadAllBytes($PSCommandPath))).ToLowerInvariant()
-    $prefix='ADBT1|'+$Run+'|observer|'+$PID+'|'+$tick+'|'+$source+'|'
-    $diagPrefix='ADBTD1|'+$Run+'|observer|'+$PID+'|'+$tick+'|'+$source+'|'+$TargetId+'|'+$TargetTick+'|'
+    $prefix='ADBTS1|'+$Run+'|observer|'+$PID+'|'+$tick+'|'+$source+'|'
+    $diagPrefix='ADBTSD1|'+$Run+'|observer|'+$PID+'|'+$tick+'|'+$source+'|'+$TargetId+'|'+$TargetTick+'|'
     [Console]::Out.Write($prefix+"ready`n");[Console]::Out.Flush()
     if ($Hold) { $script:DiagPhase='hold';[void][Console]::In.ReadLine();$script:DiagReason='hold-released';throw 'Controlled hold released unexpectedly' }
     $script:DiagPhase='lookup'
@@ -23,11 +31,12 @@ try {
         $target.Refresh()
         if ($target.HasExited -or $target.StartTime.ToUniversalTime().Ticks -ne $TargetTick) { $script:DiagReason='identity';throw 'Target changed' }
         $modules=$target.Modules
-        $script:DiagRows=[Math]::Min(129,$modules.Count)
-        if ($modules.Count -lt 2 -or $modules.Count -gt 128) { $script:DiagReason='module-count';throw 'Module count refused' }
+        $script:DiagRows=[Math]::Min(136,$modules.Count)
+        if ($modules.Count -lt 2 -or $modules.Count -gt 135) { $script:DiagReason='module-count';throw 'Module count refused' }
         $rows=[Collections.Generic.SortedDictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase)
-        $total=0L;$max=0
+        $total=0L;$max=0;$used=0
         foreach ($module in $modules) {
+            if ($script:DiagIndex -ge 135) { $script:DiagRows=136;$script:DiagIndex=0;$script:DiagMask=0;$script:DiagReason='module-count';throw 'Module enumeration bound refused' }
             $script:DiagIndex++;$script:DiagMask=0
             $name=$module.ModuleName;$path=$module.FileName;$size=$module.ModuleMemorySize
             $badName=$name.Length -gt 100 -or $name -cnotmatch '\A[A-Za-z0-9._-]+\.(?:[dD][lL][lL]|[eE][xX][eE])\z'
@@ -39,17 +48,19 @@ try {
             $script:DiagMask=[int]$badName+2*[int]$badPath+4*[int]$badSize+8*[int]$duplicate
             if ($badName -or $badPath -or $badSize -or $duplicate) { $script:DiagReason=if ($badName) {'module-name'} elseif ($badPath) {'module-path'} elseif ($badSize) {'module-size'} else {'module-duplicate'};throw 'Module metadata refused' }
             $total+=$size;if ($total -gt 268435456) { $script:DiagReason='module-total';throw 'Module image bound refused' };$max=[Math]::Max($max,$size)
-            $rows.Add($name,($name+'|'+[Convert]::ToHexString([Text.Encoding]::UTF8.GetBytes($path))+'|'+$size))
+            $row=$name+'|'+[Convert]::ToHexString([Text.Encoding]::UTF8.GetBytes($path))+'|'+$size
+            Add-ToolCatalogRow $rows $name $row ([ref]$used)
         }
+        if ($rows.Count -ne $modules.Count) { $script:DiagRows=$rows.Count;$script:DiagIndex=0;$script:DiagReason='module-count';throw 'Module enumeration mismatch' }
         if (-not $rows.ContainsKey('pwsh.exe') -or -not $rows.ContainsKey('kernel32.dll')) { $script:DiagReason='module-required';throw 'Required tool modules absent' }
         if ($target.HasExited -or $target.StartTime.ToUniversalTime().Ticks -ne $TargetTick -or $target.MainModule.FileName -cne $Image) { $script:DiagReason='identity';throw 'Target changed during observation' }
         $text=[string]::Join("`n",$rows.Values)+"`n"
-        if ([Text.Encoding]::UTF8.GetByteCount($text) -gt 131072) { $script:DiagReason='catalog-bound';throw 'Private catalog bound refused' }
+        if ([Text.Encoding]::UTF8.GetByteCount($text) -gt 131072 -or [Text.Encoding]::UTF8.GetByteCount($text) -ne $used) { $script:DiagReason='catalog-bound';throw 'Private catalog bound refused' }
         return [pscustomobject]@{Text=$text;Count=$rows.Count;Bytes=$total;Max=$max}
     }
     $script:DiagPhase='snapshot-one';$first=Get-ToolSnapshot;$script:DiagPhase='snapshot-two';$second=Get-ToolSnapshot
     $script:DiagPhase='compare'
-    if ($first.Text -cne $second.Text) { $script:DiagReason='snapshots-changed';throw 'Held snapshots changed' }
+    Assert-ToolSnapshotPair $first $second
     $script:DiagPhase='catalog'
     $catalog=[IO.Path]::Combine($PSScriptRoot,'modules.txt')
     $bytes=[Text.Encoding]::UTF8.GetBytes($first.Text)

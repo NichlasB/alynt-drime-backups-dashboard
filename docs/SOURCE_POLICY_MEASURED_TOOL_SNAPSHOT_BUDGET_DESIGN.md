@@ -1,5 +1,9 @@
 # Measured Tool-Only Module Budget and Full-Snapshot Feasibility Decision
 
+Successor: the approved [135-module profile and one owned proof](SOURCE_POLICY_TOOL_SNAPSHOT_135_OWNED_PROOF.md)
+implemented this tool-only boundary but failed closed at the observer deadline.
+Owned cleanup succeeded; no physical qualification or larger budget is inferred.
+
 ## Authority and disposition — 2026-10-30
 
 Approved **design only**, at clean/synced dashboard restore baseline

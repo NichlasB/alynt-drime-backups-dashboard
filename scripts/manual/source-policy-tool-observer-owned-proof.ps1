@@ -12,7 +12,8 @@ function Get-ToolHash([string]$Path) { return [Convert]::ToHexString([Security.C
 function Assert-ToolProof([bool]$Condition) { if (-not $Condition) { throw 'tool-proof-assertion' };$script:checks++ }
 function Assert-ToolWork { if ($script:ToolProof.Clock.ElapsedMilliseconds -ge 20000) { throw 'tool-work-deadline' } }
 function Read-ToolReady($Child,[string]$State,[int]$Limit) {
-    $expected='ADBT1|'+$run+'|'+$Child.Role+'|'+$Child.Id+'|'+$Child.Tick+'|'+$Child.Source+'|'+$State+"`n"
+    $tag=if ($Child.Role -ceq 'observer') { 'ADBTS1' } else { 'ADBT1' }
+    $expected=$tag+'|'+$run+'|'+$Child.Role+'|'+$Child.Id+'|'+$Child.Tick+'|'+$Child.Source+'|'+$State+"`n"
     Assert-ToolLine (Read-ToolLine $Child $Limit) $expected;Assert-ToolProof $true
 }
 function Start-ToolWorker {
@@ -45,7 +46,8 @@ try {
     $o=New-ToolProcess 'observer';Read-ToolReady $o 'ready' $observerLimit
     $snapshot=Read-ToolSummary (Read-ToolLine $o $observerLimit) $w $o $run
     Complete-ToolProcess $o $observerLimit $true;Assert-ToolIdentity $w $true;Assert-ToolProof $true
-    $catalog=[IO.Path]::Combine($root,'modules.txt');Assert-ToolProof ([IO.File]::Exists($catalog) -and ([IO.FileInfo]::new($catalog)).Length -le 131072 -and (Get-ToolHash $catalog) -ceq $snapshot.Digest)
+    $catalog=[IO.Path]::Combine($root,'modules.txt');Assert-ToolProof ([IO.File]::Exists($catalog))
+    Assert-ToolCatalogReceipt $snapshot ([IO.FileInfo]::new($catalog)).Length (Get-ToolHash $catalog);Assert-ToolProof $true
     $stage='positive-release';Assert-ToolWork
     $ack='ADBT1-ACK|'+$run+'|'+$w.Id+'|'+$w.Tick+"`n"
     $write=$w.Process.StandardInput.WriteAsync($ack);$remaining=20000-[int]$s.Clock.ElapsedMilliseconds
@@ -67,6 +69,7 @@ try {
     Assert-ToolIdentity $w $true;$cancelAlive=-not $w.Process.HasExited;Assert-ToolProof $cancelAlive
     Stop-ToolProcess $w ([Math]::Min(25000,[int]$s.Clock.ElapsedMilliseconds+5000));Assert-ToolProof $w.Process.HasExited;$groups++
     $stage='reconcile'
+    Assert-ToolProof ($groups -eq 3 -and $s.Children.Count -eq 5)
     foreach ($child in $s.Children) { Assert-ToolIdentity $child $false;Assert-ToolProof ($child.Process.HasExited -and $null -eq $child.OutRead -and $null -eq $child.ErrRead -and $child.Out.Length -eq 0 -and $child.ErrBytes -eq 0) }
     Assert-ToolProof ((Get-ToolHash $canary) -ceq $canaryHash)
     foreach ($role in $sourceFiles.Keys) { Assert-ToolProof ((Get-ToolHash $sourceFiles[$role]) -ceq $sourceHashes[$role]) }
@@ -108,4 +111,4 @@ if ($failure) {
     if ($null -ne $script:ToolProof) { foreach ($child in $script:ToolProof.Children) { if ($null -ne $child.ErrorFact) { $fact=$child.ErrorFact;[Console]::Error.WriteLine('tool-proof observer_phase:'+$fact.Phase+' observer_reason:'+$fact.Reason+' rows:'+$fact.Rows+' row:'+$fact.Index+' mask:'+$fact.Mask) } } }
     [Console]::Error.WriteLine('tool-proof failure_cleanup_confirmed:'+[int]($clean -and $allExited)+' fixtures_absent:'+[int]$clean+' owned_absence_confirmed:'+[int]$allExited);exit 1
 }
-[Console]::Out.WriteLine('tool-proof checks:'+$checks+' groups:'+$groups+' modules:'+$snapshot.Count+' image_bytes:'+$snapshot.Bytes+' max_image_bytes:'+$snapshot.Max+' catalog_sha256:'+$snapshot.Digest+' elapsed_ms:'+$script:ToolProof.Clock.ElapsedMilliseconds+' cancellation_not_exit:'+[int]$cancelAlive+' fixtures:0 owned_processes:0 runtime_load_authorized:0')
+[Console]::Out.WriteLine('tool-proof profile:'+'tool-snapshot-135-v1'+' checks:'+$checks+' groups:'+$groups+' modules:'+$snapshot.Count+' image_bytes:'+$snapshot.Bytes+' max_image_bytes:'+$snapshot.Max+' catalog_sha256:'+$snapshot.Digest+' elapsed_ms:'+$script:ToolProof.Clock.ElapsedMilliseconds+' cancellation_not_exit:'+[int]$cancelAlive+' fixtures:0 owned_processes:0 runtime_load_authorized:0')

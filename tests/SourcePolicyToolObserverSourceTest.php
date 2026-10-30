@@ -27,10 +27,18 @@ final class SourcePolicyToolObserverSourceTest extends TestCase {
 	}
 	public function test_diagnostics_are_correlated_finite_eof_only_and_cannot_admit_stderr() {
 		$p=$this->source('transport');$o=$this->source('child');$c=$this->source('owned-proof');
-		foreach(array('function Read-ToolDiagnostic','function Add-ToolDiagnosticBytes',"'ADBTD1|'",'$Child.TargetId','$Child.TargetTick','$f.Count -ne 13','$Line.Length -gt 512','$rows -gt 129','$index -gt 128','$mask -gt 15','$Child.ErrEof','$Child.ErrPrefix.Length -eq $Child.ErrBytes',"$".'Child.ErrPrefix=\'\';return',"if (\$Child.ErrBytes -gt 0) { throw 'tool-stderr-refused' }",'$Child.ErrBytes -ne 0') as $text)$this->assertStringContainsString($text,$p);
+		foreach(array('function Read-ToolDiagnostic','function Add-ToolDiagnosticBytes',"'ADBTSD1|'",'$Child.TargetId','$Child.TargetTick','$f.Count -ne 13','$Line.Length -gt 512','$rows -gt 136','$index -gt 135','$mask -gt 15','$Child.ErrEof','$Child.ErrPrefix.Length -eq $Child.ErrBytes',"$".'Child.ErrPrefix=\'\';return',"if (\$Child.ErrBytes -gt 0) { throw 'tool-stderr-refused' }",'$Child.ErrBytes -ne 0') as $text)$this->assertStringContainsString($text,$p);
 		foreach(array("'snapshot-one'","'snapshot-two'","'module-count'","'module-name'","'module-path'","'module-size'","'module-duplicate'",'$script:DiagMask=[int]$badName+2*[int]$badPath+4*[int]$badSize+8*[int]$duplicate','$badName -or $badPath -or $badSize -or $duplicate') as $text)$this->assertStringContainsString($text,$o);
 		foreach(array('if (-not $badName) {','if (-not $badName -and -not $badPath) {','if (-not $badName -and -not $badPath -and -not $badSize) {') as $text)$this->assertStringContainsString($text,$o);
 		foreach(array('Exception.Message','Exception.ToString','Format-List','Write-Error') as $text)$this->assertStringNotContainsString($text,$o);
 		$this->assertStringContainsString('if ($failure) {',$c);$this->assertStringContainsString('observer_phase:',$c);$this->assertStringNotContainsString('ErrPrefix',$c);
+	}
+	public function test_fixed_snapshot_profile_is_versioned_and_bounds_retention_before_insertion() {
+		$o=$this->source('child');$p=$this->source('transport');$c=$this->source('owned-proof');
+		foreach(array("'ADBTS1|'","'ADBTSD1|'",'$modules.Count -gt 135','$script:DiagIndex -ge 135','$rows.Count -ne $modules.Count','function Add-ToolCatalogRow','$length -gt 131072-$Used.Value','Add-ToolCatalogRow $rows $name $row ([ref]$used)','function Assert-ToolSnapshotPair') as $text)$this->assertStringContainsString($text,$o);
+		$this->assertLessThan(strpos($o,'$Rows.Add($Name,$Row)'),strpos($o,'$length -gt 131072-$Used.Value'));
+		foreach(array("'ADBTS1|'",'$count -gt 135','function Assert-ToolCatalogReceipt') as $text)$this->assertStringContainsString($text,$p);
+		foreach(array("'tool-snapshot-135-v1'","'ADBTS1'","'ADBT1'",'Assert-ToolCatalogReceipt $snapshot','$groups -eq 3 -and $s.Children.Count -eq 5') as $text)$this->assertStringContainsString($text,$c);
+		$this->assertStringNotContainsString("'ADBTD1|'",$p);$this->assertStringNotContainsString("'ADBTD1|'",$o);
 	}
 }

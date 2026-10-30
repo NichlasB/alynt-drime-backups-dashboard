@@ -19,11 +19,13 @@ final class SourcePolicyToolCountCalibrationTest extends TestCase {
 			$this->assertStringNotContainsString( $text, $c );
 		}
 		$old = file_get_contents( dirname( __DIR__ ) . '/scripts/manual/source-policy-tool-observer-child.ps1' );
-		$this->assertStringContainsString( '$modules.Count -gt 128', $old );
+		$this->assertStringContainsString( '$modules.Count -gt 135', $old );
+		$this->assertStringContainsString( "'ADBTS1|'", $old );
 		foreach ( array( 'host-admission', 'launch-data', 'preflight-transcript' ) as $name ) {
 			$source = file_get_contents( dirname( __DIR__ ) . '/scripts/manual/source-policy-minimum-' . $name . '.php' );
-			$this->assertStringContainsString( '128', $source );
+			$this->assertStringContainsString( 'preflight-transcript' === $name ? "\$fields[1] <= 128" : 'count( $rows ) > 128', $source );
 			$this->assertStringNotContainsString( 'ADBTC1', $source );
+			$this->assertStringNotContainsString( 'ADBTS1', $source );
 		}
 	}
 

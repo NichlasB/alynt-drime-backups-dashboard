@@ -4,22 +4,26 @@ function Assert-ToolLine([string]$Actual,[string]$Expected) {
 }
 function Read-ToolSummary([string]$Line,$Worker,$Observer,[string]$Run) {
     if ($Line.Length -gt 512 -or $Line -cnotmatch '\A[\x20-\x7e]+\n\z') { throw 'tool-summary-refused' }
+    if ($Run -cnotmatch '\A[a-f0-9]{32}\z' -or $Worker.Id -isnot [int] -or $Worker.Id -le 0 -or $Worker.Tick -isnot [long] -or $Worker.Tick -le 0 -or $Observer.Id -isnot [int] -or $Observer.Id -le 0 -or $Observer.Tick -isnot [long] -or $Observer.Tick -le 0 -or $Observer.Source -cnotmatch '\A[a-f0-9]{64}\z' -or $Observer.Role -cne 'observer' -or $Observer.Run -cne $Run -or $Observer.TargetId -isnot [int] -or $Observer.TargetTick -isnot [long] -or $Observer.TargetId -ne $Worker.Id -or $Observer.TargetTick -ne $Worker.Tick) { throw 'tool-summary-context-refused' }
     $fields=$Line.TrimEnd("`n").Split('|')
-    $prefix='ADBT1|'+$Run+'|observer|'+$Observer.Id+'|'+$Observer.Tick+'|'+$Observer.Source+'|modules|'+$Worker.Id+'|'+$Worker.Tick+'|'
+    $prefix='ADBTS1|'+$Run+'|observer|'+$Observer.Id+'|'+$Observer.Tick+'|'+$Observer.Source+'|modules|'+$Worker.Id+'|'+$Worker.Tick+'|'
     if (-not $Line.StartsWith($prefix,[StringComparison]::Ordinal) -or $fields.Count -ne 14 -or $fields[9] -cnotmatch '\A[1-9][0-9]{0,2}\z' -or $fields[10] -cnotmatch '\A[1-9][0-9]{0,8}\z' -or $fields[11] -cnotmatch '\A[1-9][0-9]{0,7}\z' -or $fields[12] -cnotmatch '\A[a-f0-9]{64}\z' -or $fields[13] -cne 'stable') { throw 'tool-summary-refused' }
     $count=[int]$fields[9];$bytes=[long]$fields[10];$max=[int]$fields[11]
-    if ($count -lt 2 -or $count -gt 128 -or $bytes -gt 268435456 -or $max -gt 33554432 -or $bytes -lt $max -or $bytes -gt $count*$max) { throw 'tool-summary-refused' }
+    if ($count -lt 2 -or $count -gt 135 -or $bytes -gt 268435456 -or $max -gt 33554432 -or $bytes -lt $max -or $bytes -gt $count*$max) { throw 'tool-summary-refused' }
     return [pscustomobject]@{Count=$count;Bytes=$bytes;Max=$max;Digest=$fields[12]}
+}
+function Assert-ToolCatalogReceipt($Snapshot,$Length,$Digest) {
+    if ($Length -isnot [long] -or $Length -lt 1 -or $Length -gt 131072 -or $Digest -isnot [string] -or $Digest -cnotmatch '\A[a-f0-9]{64}\z' -or $Snapshot.Digest -cne $Digest) { throw 'tool-catalog-refused' }
 }
 function Read-ToolDiagnostic([string]$Line,$Child) {
     # A validated error fact never authorizes positive completion.
     if ($Child.Role -cne 'observer' -or $Child.Run -cnotmatch '\A[a-f0-9]{32}\z' -or $Child.Source -cnotmatch '\A[a-f0-9]{64}\z' -or $Child.Id -isnot [int] -or $Child.TargetId -isnot [int] -or $Child.Tick -isnot [long] -or $Child.TargetTick -isnot [long] -or $Child.Id -le 0 -or $Child.TargetId -le 0 -or $Child.Tick -le 0 -or $Child.TargetTick -le 0 -or $Line.Length -gt 512 -or $Line -cnotmatch '\A[\x20-\x7e]+\n\z') { return $null }
-    $prefix='ADBTD1|'+$Child.Run+'|observer|'+$Child.Id+'|'+$Child.Tick+'|'+$Child.Source+'|'+$Child.TargetId+'|'+$Child.TargetTick+'|'
+    $prefix='ADBTSD1|'+$Child.Run+'|observer|'+$Child.Id+'|'+$Child.Tick+'|'+$Child.Source+'|'+$Child.TargetId+'|'+$Child.TargetTick+'|'
     $f=$Line.TrimEnd("`n").Split('|')
     if (-not $Line.StartsWith($prefix,[StringComparison]::Ordinal) -or $f.Count -ne 13 -or $f[8] -cnotin @('scope','self','lookup','identity','snapshot-one','snapshot-two','compare','catalog','emit','finish','hold') -or $f[9] -cnotin @('api','scope','identity','module-count','module-name','module-path','module-size','module-duplicate','module-total','module-required','catalog-bound','snapshots-changed','hold-released')) { return $null }
     foreach ($i in @(10,11,12)) { if ($f[$i] -cnotmatch '\A(?:0|[1-9][0-9]{0,2})\z') { return $null } }
     $rows=[int]$f[10];$index=[int]$f[11];$mask=[int]$f[12]
-    if ($rows -gt 129 -or $index -gt 128 -or $index -gt $rows -or $mask -gt 15) { return $null }
+    if ($rows -gt 136 -or $index -gt 135 -or $index -gt $rows -or $mask -gt 15 -or ($f[9] -ceq 'module-count' -and $index -ne 0)) { return $null }
     $snapshot=$f[8] -cin @('snapshot-one','snapshot-two')
     if ((($f[9].StartsWith('module-',[StringComparison]::Ordinal) -or $f[9] -ceq 'catalog-bound') -and -not $snapshot) -or ($f[9] -ceq 'scope' -and $f[8] -cne 'scope') -or ($f[9] -ceq 'snapshots-changed' -and $f[8] -cne 'compare') -or ($f[9] -ceq 'hold-released' -and $f[8] -cne 'hold') -or ($f[9] -ceq 'identity' -and $f[8] -cne 'identity' -and -not $snapshot)) { return $null }
     $bits=@{'module-name'=1;'module-path'=2;'module-size'=4;'module-duplicate'=8}

@@ -3,30 +3,30 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../../scripts/manual/source-policy-tool-observer-transport.ps1"
 $checks=0
 function Assert-Unit([bool]$Condition) { if (-not $Condition) { throw 'tool-unit-failed' };$script:checks++ }
-function Assert-Refused([scriptblock]$Action) { $caught=$false;try { & $Action } catch { $caught=$true };Assert-Unit $caught }
+function Assert-Refused([scriptblock]$Action) { $caught=$false;try { [void](& $Action) } catch { $caught=$true };Assert-Unit $caught }
 $run='a'*32;$source='b'*64
-$worker=[pscustomobject]@{Id=101;Tick=123L};$observer=[pscustomobject]@{Id=102;Tick=124L;Source=$source}
-$prefix='ADBT1|'+$run+'|observer|102|124|'+$source+'|modules|101|123|'
+$worker=[pscustomobject]@{Id=101;Tick=123L};$observer=[pscustomobject]@{Id=102;Tick=124L;Source=$source;Role='observer';Run=$run;TargetId=101;TargetTick=123L}
+$prefix='ADBTS1|'+$run+'|observer|102|124|'+$source+'|modules|101|123|'
 $line=$prefix+'3|3072|1024|'+('c'*64)+"|stable`n"
 $result=Read-ToolSummary $line $worker $observer $run
 Assert-Unit ($result.Count -eq 3 -and $result.Bytes -eq 3072 -and $result.Max -eq 1024 -and $result.Digest -ceq ('c'*64))
 Assert-ToolLine "fixed`n" "fixed`n";Assert-Unit $true
 foreach ($bad in @('fixed',"fixed`r`n","Fixed`n","fixed`nextra`n",(('x'*513)+"`n"),("fixed`0`n"))) { Assert-Refused { Assert-ToolLine $bad "fixed`n" } }
 $parts=$line.TrimEnd("`n").Split('|')
-foreach ($pair in @(@(0,'ADBT2'),@(1,('d'*32)),@(2,'worker'),@(3,'103'),@(4,'125'),@(5,('d'*64)),@(6,'ready'),@(7,'103'),@(8,'125'),@(9,'1'),@(9,'129'),@(9,'03'),@(10,'268435457'),@(10,'0'),@(10,'1023'),@(10,'3073'),@(11,'33554433'),@(11,'0'),@(12,('C'*64)),@(13,'partial'))) {
+foreach ($pair in @(@(0,'ADBT1'),@(0,'ADBTC1'),@(0,'ADBMP1'),@(0,'ADBTD1'),@(1,('d'*32)),@(2,'worker'),@(3,'103'),@(4,'125'),@(5,('d'*64)),@(6,'ready'),@(7,'103'),@(8,'125'),@(9,'0'),@(9,'1'),@(9,'136'),@(9,'999'),@(9,'03'),@(10,'268435457'),@(10,'0'),@(10,'1023'),@(10,'3073'),@(11,'33554433'),@(11,'0'),@(12,('C'*64)),@(13,'partial'))) {
     $bad=$parts.Clone();$bad[$pair[0]]=$pair[1];$record=[string]::Join('|',$bad)+"`n";Assert-Refused { Read-ToolSummary $record $worker $observer $run }
 }
 foreach ($bad in @($line.TrimEnd("`n"),($line.Replace("`n","`r`n")),($line+"x`n"),($line.Replace('|stable', '|stable|extra')))) { Assert-Refused { Read-ToolSummary $bad $worker $observer $run } }
 function New-UnitDiagnosticChild { return [pscustomobject]@{Role='observer';Run=$run;Id=102;Tick=124L;Source=$source;TargetId=101;TargetTick=123L;ErrBytes=0;ErrPrefix='';ErrInvalid=$false;ErrEof=$false;ErrorFact=$null} }
 $diagChild=New-UnitDiagnosticChild
-$diag='ADBTD1|'+$run+'|observer|102|124|'+$source+"|101|123|snapshot-one|module-size|3|2|4`n"
+$diag='ADBTSD1|'+$run+'|observer|102|124|'+$source+"|101|123|snapshot-one|module-size|3|2|4`n"
 $fact=Read-ToolDiagnostic $diag $diagChild
 Assert-Unit ($null -ne $fact -and $fact.Phase -ceq 'snapshot-one' -and $fact.Reason -ceq 'module-size' -and $fact.Rows -eq 3 -and $fact.Index -eq 2 -and $fact.Mask -eq 4)
 function Assert-DiagnosticContract {
     $context=New-UnitDiagnosticChild
     Assert-Unit ($null -ne (Read-ToolDiagnostic $diag $context))
     $f=$diag.TrimEnd("`n").Split('|')
-    foreach ($pair in @(@(0,'ADBT1'),@(1,('d'*32)),@(2,'worker'),@(3,'103'),@(4,'125'),@(5,('d'*64)),@(6,'103'),@(7,'125'),@(8,'unsafe'),@(9,'private-secret'),@(10,'130'),@(10,'03'),@(11,'129'),@(11,'4'),@(12,'20'),@(12,'0'))) {
+    foreach ($pair in @(@(0,'ADBT1'),@(0,'ADBTD1'),@(0,'ADBTC1'),@(1,('d'*32)),@(2,'worker'),@(3,'103'),@(4,'125'),@(5,('d'*64)),@(6,'103'),@(7,'125'),@(8,'unsafe'),@(9,'private-secret'),@(10,'137'),@(10,'03'),@(11,'136'),@(11,'4'),@(12,'20'),@(12,'0'))) {
         $bad=$f.Clone();$bad[$pair[0]]=$pair[1];Assert-Unit ($null -eq (Read-ToolDiagnostic ([string]::Join('|',$bad)+"`n") $context))
     }
     foreach ($bad in @($diag.TrimEnd("`n"),$diag.Replace("`n","`r`n"),($diag+"extra`n"),$diag.Replace('|snapshot-one|','|catalog|'))) { Assert-Unit ($null -eq (Read-ToolDiagnostic $bad $context)) }
@@ -37,7 +37,7 @@ function Assert-DiagnosticContract {
     }
 }
 Assert-DiagnosticContract
-foreach ($shape in @(@('lookup','api',0,0,0),@('identity','identity',0,0,0),@('snapshot-one','module-count',129,0,0),@('snapshot-two','module-duplicate',5,3,8),@('compare','snapshots-changed',3,3,0),@('hold','hold-released',0,0,0))) {
+foreach ($shape in @(@('lookup','api',0,0,0),@('identity','identity',0,0,0),@('snapshot-one','module-count',136,0,0),@('snapshot-two','module-duplicate',5,3,8),@('compare','snapshots-changed',3,3,0),@('hold','hold-released',0,0,0))) {
     $f=$diag.TrimEnd("`n").Split('|');for($i=0;$i -lt 5;$i++){$f[8+$i]=[string]$shape[$i]};Assert-Unit ($null -ne (Read-ToolDiagnostic ([string]::Join('|',$f)+"`n") (New-UnitDiagnosticChild)))
 }
 $diagBytes=[Text.Encoding]::ASCII.GetBytes($diag)
@@ -65,7 +65,7 @@ $definition=$ast.Find({param($node) $node -is [Management.Automation.Language.Fu
 $controls=@(
     @('-not $Line.StartsWith($prefix,[StringComparison]::Ordinal)','$false'),
     @("'scope','self','lookup','identity','snapshot-one','snapshot-two','compare','catalog','emit','finish','hold'","'scope','self','lookup','identity','snapshot-one','snapshot-two','compare','catalog','emit','finish','hold','unsafe'"),
-    @('$rows -gt 129','$false'),@('$Child.Id -isnot [int]','$false'),@('$mask -gt 15','$false'),
+    @('$rows -gt 136','$false'),@('$Child.Id -isnot [int]','$false'),@('$mask -gt 15','$false'),
     @('return [pscustomobject]@{Phase=$f[8];Reason=$f[9];Rows=$rows;Index=$index;Mask=$mask}','return $null')
 )
 $killed=0

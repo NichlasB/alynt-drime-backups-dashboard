@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed 135-module tool profile: deadline refusal, cleaned — 2026-10-30
+
+Approved [profile implementation and one ordered proof](SOURCE_POLICY_TOOL_SNAPSHOT_135_OWNED_PROOF.md)
+at clean/synced restore baseline 0ac854a. Versioned ADBTS1/ADBTSD1, collection/
+visited-row limits, exact incremental catalog accounting and candidate-128
+separation pass isolated tests. One physical attempt stopped at positive-
+observer/tool-deadline after 13 checks; owned processes/pipes/fixtures reconciled.
+No positive group, later timeout/cancellation group or final readback proof.
+No exact inner-phase diagnosis, benchmark, native retry or budget relaxation.
+
+Implementation-plan progress: fixed tool-only foundation and non-vacuous tests
+advance; physical full-observer qualification remains blocked. Cumulative count
+stays 1/8 plus separately approved proof work. Recommended next gated slice:
+Design-only Existing-Tool Observer Deadline Failure and Qualification-Route
+Reassessment, pausing Windows implementation/experiments to assess proportionality
+before continuation. Candidate 128 and production wiring remain untouched.
+Owning record carries ordinary validation and exact-head publication evidence.
+
 ## Measured tool-only snapshot budget decision — 2026-10-30
 
 Approved [design-only budget/feasibility decision](SOURCE_POLICY_MEASURED_TOOL_SNAPSHOT_BUDGET_DESIGN.md)
