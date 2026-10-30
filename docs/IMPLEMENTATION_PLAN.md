@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Measured tool-only snapshot budget decision — 2026-10-30
+
+Approved [design-only budget/feasibility decision](SOURCE_POLICY_MEASURED_TOOL_SNAPSHOT_BUDGET_DESIGN.md)
+at clean/synced baseline 28e5cc2. Selects a future fixed 135-row tool-only
+evaluation profile, no headroom, based on the one measured count; it does not
+change current executable tool/candidate limits of 128. All other budgets stay
+fixed; incremental catalog accounting, actual enumeration bounds and versioned
+receipt separation are required before any separately approved experiment.
+
+Implementation-plan progress: finite evaluation policy and proof obligations
+are specified, not physical full-snapshot feasibility or host-DATA integration.
+Existing minimum PHP helpers remain unchanged at 128; metadata cannot supply
+their file-hash/trust provenance. Cumulative count remains 1/8 plus separate
+proof work. Recommended next gated slice: Local-only Fixed 135-Module Tool
+Snapshot Profile and One Ordered Observer/Termination Owned Cleanup Proof,
+implementation/tests and one explicit owned attempt only. No candidate/native/
+site/production execution. Design record owns validation/publication evidence.
+
 ## Count-only existing-tool calibration: 135 observed, cleaned — 2026-10-30
 
 Approved [one count-only calibration](SOURCE_POLICY_TOOL_COUNT_CALIBRATION_OWNED_PROOF.md)

@@ -1,5 +1,9 @@
 # Count-Only Existing-Tool Module Calibration and Owned Cleanup Proof
 
+Forward decision: the [measured tool-only snapshot budget design](SOURCE_POLICY_MEASURED_TOOL_SNAPSHOT_BUDGET_DESIGN.md)
+selects a proposed fixed 135-row experiment with all other budgets intact.
+Current executable caps stay 128; this proof is neither rerun nor relabeled.
+
 ## Authority and restore point — 2026-10-30
 
 Explicit approval follows the [module-ceiling decision](SOURCE_POLICY_TOOL_MODULE_CEILING_FEASIBILITY_DESIGN.md).
