@@ -32,6 +32,12 @@ site/live/LocalWP, credentials/permissions, schedules, grants, activation,
 rollback, release/package/tag/deploy or toolkit changes. Site Operations was
 consulted; no site target or Novamira operation applies.
 
+Follow-up: the approved [Linux candidate feasibility design](SOURCE_POLICY_LINUX_MINIMUM_CANDIDATE_FEASIBILITY_DESIGN.md)
+selects one conditional metadata-pinned donor and records the exact core-6.0/
+server-build mismatch. It does not admit the tuple, transfer historical proof,
+reopen this Windows route or authorize acquisition/execution. Its next gate is
+the finite lab-tuple/source-ownership integration design, not a native run.
+
 ## Evidence versus diagnosis
 
 | Established evidence | What remains unproved |

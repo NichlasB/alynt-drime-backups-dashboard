@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum candidate: identified, not admitted — 2026-10-30
+
+Approved [repository-only candidate/exact-build feasibility design](SOURCE_POLICY_LINUX_MINIMUM_CANDIDATE_FEASIBILITY_DESIGN.md)
+at clean/synced baseline 95130db. Selects one metadata-pinned official Linux/amd64
+PHP-7.4 donor, independently pinned genuine core 6.0 and the existing MariaDB
+10.11.18 lab image with proposed private loopback TCP. No payload is downloaded,
+provisioned or executed; recipes/metadata are not binary or native proof.
+
+Implementation-plan progress: finite candidate and evidence gaps are recorded;
+current core-6.0 server contract still correctly rejects its full 10.11.18 build.
+Minimum native qualification remains open, Windows observer work deferred,
+legacy rows/support/guards and production/form wiring unchanged. Historical count
+remains 1/8 plus separate proof work; no feature/physical completion is claimed.
+Recommended next gated slice: Repository-only Linux Minimum-Lab Exact-Tuple
+Admission and Source-Ownership Integration Design, explicitly resolving that
+lab-only contract decision before implementation/acquisition/execution/storage.
+The owning design records actual validation/publication; no native dispatch.
+
 ## Observer route reassessment: defer Windows detour — 2026-10-30
 
 Approved [design-only deadline/route reassessment](SOURCE_POLICY_OBSERVER_DEADLINE_ROUTE_REASSESSMENT.md)
