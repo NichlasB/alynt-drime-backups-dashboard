@@ -17,6 +17,8 @@ proof work. Recommended next gated slice: Local-only Fixed 135-Module Tool
 Snapshot Profile and One Ordered Observer/Termination Owned Cleanup Proof,
 implementation/tests and one explicit owned attempt only. No candidate/native/
 site/production execution. Design record owns validation/publication evidence.
+Design b2740a5 is pushed; exact-head CI 41118340191 passed (PHP 7.4/8.3 each
+2,324 tests, no failures/skips). No tool limit, native source or execution changes.
 
 ## Count-only existing-tool calibration: 135 observed, cleaned — 2026-10-30
 

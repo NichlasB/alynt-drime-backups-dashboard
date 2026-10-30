@@ -184,8 +184,18 @@ Executed ordinary repository-only QA with trusted PHP 8.5.1, not the candidate:
   remains unchanged against baseline. Uploader/toolkit remain clean/read-only
   at 3dfcb15/c067eb6. No new whole-plugin review/readiness credit.
 
-Exact-head CI publication is pending. No physical/source-profile/host experiment
-runs in this design task, and no historical evidence is refreshed.
+Design publication `b2740a55fc9bc3268b50eb9616e5c37fcd023595` is pushed;
+[exact-head CI 41118340191](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41118340191)
+succeeded. Actual PHP 7.4: 2,324 tests / 20,985 assertions; PHP 8.3: 2,324 /
+20,990, both without failures/skips. Admin 23/23 each, no failures/skips;
+manifest, structure, build, PHPCS and audits passed, zero known advisories/
+vulnerabilities. Existing Setup Node `punycode`/`url.parse()` deprecation warnings
+remain tool-level warnings; no runtime/acceptance change suppresses them.
+
+This docs-only evidence closeout receives its own pushed exact-head CI and
+clean/remote verification at handoff. No physical/source-profile/host experiment
+runs in this design task, and no historical evidence is refreshed. Ordinary
+green CI does not validate or authorize the proposed 135-row physical profile.
 
 Implementation-plan progress: selects a finite tool-only evaluation budget and
 complete cost/guard/receipt obligations; full observer feasibility remains
