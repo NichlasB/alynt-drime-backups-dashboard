@@ -17,6 +17,12 @@ final class SourcePolicyLinuxMinimumTupleTest extends TestCase {
 		$methods=get_class_methods($c);sort($methods);$this->assertSame(array('consistent','correlates','digest','template'),$methods);
 		$pins=require dirname(__DIR__).'/scripts/manual/source-policy-supported-core-pins.php';$this->assertSame($pins['6.0']['commit'],$row['commit']);$this->assertCount(11,$pins['6.0']['pins']);
 	}
+	public function test_fixed_canonical_bytes_match_json_reference_and_golden_digest() {
+		$c=self::HELPER;$reference=json_encode(linux_minimum_tuple_fixture(),JSON_UNESCAPED_SLASHES);
+		$method=new ReflectionMethod($c,'canonical');if(PHP_VERSION_ID<80100)$method->setAccessible(true);
+		$this->assertSame($reference,$method->invoke(null));$this->assertSame(hash('sha256',$reference),linux_minimum_correlation_fixture()['tuple_hash']);
+		$this->assertSame(linux_minimum_correlation_fixture()['tuple_hash'],$c::digest(linux_minimum_tuple_fixture()));
+	}
 	/** @dataProvider fixed_fields */
 	public function test_each_fixed_field_is_exact_typed_and_required($key) {
 		$c=self::HELPER;$row=linux_minimum_tuple_fixture();

@@ -63,7 +63,39 @@ final class Alynt_Drime_Backups_Dashboard_Linux_Minimum_Tuple {
 	 * @return string|false Correlation digest, never an artifact attestation.
 	 */
 	public static function digest( $row ) {
-		return self::consistent( $row ) ? hash( 'sha256', json_encode( self::template(), JSON_UNESCAPED_SLASHES ) ) : false;
+		if ( ! self::consistent( $row ) ) {
+			return false;
+		}
+		$bytes = self::canonical();
+		return is_string( $bytes ) ? hash( 'sha256', $bytes ) : false;
+	}
+
+	/**
+	 * Encodes only this fixed ASCII row; not a general JSON encoder or input API.
+	 *
+	 * PHP 7.4 -n need not load JSON. Preserve the existing canonical JSON bytes
+	 * without loading extensions, coercing supplied DATA or changing the domain.
+	 *
+	 * @return string|false Fixed canonical bytes; refuse unsafe future source edits.
+	 */
+	private static function canonical() {
+		$parts = array();
+		foreach ( self::template() as $key => $value ) {
+			if ( ! is_string( $key ) || 1 !== preg_match( '/\A[a-z_]{1,32}\z/', $key ) ) {
+				return false;
+			}
+			if ( is_string( $value ) && 1 === preg_match( '/\A[A-Za-z0-9_.: -]{1,128}\z/', $value ) ) {
+				$encoded = '"' . $value . '"';
+			} elseif ( is_int( $value ) ) {
+				$encoded = (string) $value;
+			} elseif ( null === $value ) {
+				$encoded = 'null';
+			} else {
+				return false; // No fallback encoder, object conversion or escaping guess.
+			}
+			$parts[] = '"' . $key . '":' . $encoded;
+		}
+		return '{' . implode( ',', $parts ) . '}';
 	}
 
 	/**

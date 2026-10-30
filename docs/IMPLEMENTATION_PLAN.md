@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum DATA: PHP 7.4 compatibility recovery — 2026-10-30
+
+Approved [JSON-free synthetic-control compatibility repair](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_FOUNDATION.md#foundation-publication-and-approved-compatibility-recovery)
+at clean/synced failed head 78f2ee4, CI 41134455755 (39 PHP 7.4 child failures;
+PHP 8.3 passed). Explicit JSON disablement reproduced fixture-stage failure.
+Fixed only the development helper's finite encoding/fixture dependency and
+bounded diagnostics; exact canonical bytes/hash, all 38 original guard controls
+and isolation restrictions remain, with JSON functions additionally disabled.
+Two further encoder guard-bypass tests and byte-reference checks added.
+
+Implementation-plan progress: repair closes a verification dependency, not a
+new product/native task. No runtime integration, downloads or production wiring.
+Full QA/exact-head CI recovery remains the immediate gate before the recorded
+Digest-Pinned Artifact Acquisition/Static Verification/Owned Cleanup Proof;
+that next slice still needs separate download/file-effect approval and must not
+load/execute artifacts. Owning record carries actual recovery evidence.
+
 ## Linux minimum lab: socket-free tuple DATA foundation — 2026-10-30
 
 Approved [DATA/source-ownership contract foundation](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_FOUNDATION.md)

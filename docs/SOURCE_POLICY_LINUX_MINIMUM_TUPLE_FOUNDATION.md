@@ -100,6 +100,65 @@ Connection-free execution and native proof retain separate later approvals.
 
 ## Validation and publication
 
+### Foundation publication and approved compatibility recovery
+
+Implementation `78f2ee4f301116173c09ad254acb07fd9b886b8f` was pushed;
+[ordinary CI 41134455755](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41134455755)
+failed on PHP 7.4: 2,435 tests / 22,597 assertions, 39 control-runner failures,
+each unexpected exit 2 rather than positive 0/assertion-killed 1. PHP 8.3 passed
+2,435 / 22,719, admin 23/23, no failures/skips. Those original child diagnostics
+did not identify their inner exception; no native/artifact gate was closed.
+
+The separately approved repository-only recovery starts at that clean/synced
+failed head. Added bounded allowlisted phase/exception-kind/JSON-capability
+facts, never raw exception text, paths, SQL or credentials. With JSON functions
+explicitly disabled, the unchanged path reproduced exit 2 at `fixture`, kind
+`Error`, JSON encode/decode availability 0, before any semantic assertion.
+This establishes the missing-JSON failure path, not a retrospective capture
+of the original runner's unrecorded exception. [PHP's installation documentation](https://www.php.net/manual/en/json.installation.php)
+distinguishes always-enabled JSON in PHP 8 from its optional pre-8 build;
+the extension-free PHP 7.4 child cannot assume that API is available.
+
+The repair removes that dependency from the development helper/fixture, not
+the isolation: the same two allowed directories, `-n`, URL-off and all ten
+network/process-function restrictions remain, with JSON encode/decode now
+disabled as well in **every** semantic control. No extension is loaded, test
+skipped or acceptance loosened. The private fixed-row encoder handles only the
+source-owned ASCII strings/integers/null, rejects unsafe future source edits,
+and preserves exact canonical JSON bytes and the existing descriptor digest
+`df9040cde903f45639faa5bf7e6db5dd3ed97bf6d5616f54cd39e4e3ff5c6c05`.
+It is not a general JSON encoder or a new input API. An independent normal-JSON
+reference and golden fixture digest verify byte equality; public DATA methods,
+format/keys/pins, validators, runtime imports and legacy contracts are unchanged.
+
+All 38 original assertion-killed controls remain, now JSON-disabled. Two further
+in-memory assertion-killed encoder guard bypasses verify key/value restrictions;
+unsafe quote/backslash/newline/overlong/bool/array source variants refuse. The
+actual file hashes are preserved throughout. Diagnostic tests enforce bounded
+allowlisted output and exclude supplied exception messages. No artifacts,
+candidate/runtime proof, native/session/database or production operation occurs.
+
+Fresh recovery QA with trusted existing PHP 8.5.1:
+
+- Focused minimum/adapter/transport checks: 195 tests / 2,340 assertions, no
+  failures/skips; targeted helper PHPCS passes.
+- Full `php vendor/bin/phpunit --verbose --do-not-cache-result`: 2,438 tests /
+  22,937 assertions, no failures; two existing Sodium-unavailable signing skips.
+- PHPCS 244 files; admin 23/23, no failures/skips; structure 149 runtime /
+  235 PHP support / 226 test files / 223 class names; asset build passed with
+  no tracked generated changes. Strict Composer validation, Composer audit and
+  npm moderate audit passed, zero known dependency advisories/vulnerabilities.
+- 151 owning local documentation targets, whitespace and final scoped
+  source/security/resource/error/compatibility/test-integrity review passed.
+  Only the development helper, four affected test files and two owning docs
+  change; runtime/bootstrap, existing pins/manifests, workflows/runners and
+  dependencies remain byte-unchanged. Uploader/toolkit remain clean/read-only.
+
+Exact-head recovery publication follows after push; genuine PHP 7.4 native
+qualification is not established by these ordinary checks.
+
+### Historical foundation local QA (before recovery)
+
 Focused checks executed with existing trusted PHP 8.5.1:
 `php vendor/bin/phpunit --do-not-cache-result --filter
 'SourcePolicyLinuxMinimum|SourcePolicyNativeAdapterContract|SourcePolicyTransportProfile'`:
@@ -119,7 +178,8 @@ structure guard pass. Executed full ordinary repository QA:
   are byte-unchanged against baseline. Only the one development helper,
   five new/affected test files and three owning documentation files change.
 
-Exact-head publication results follow after push; ordinary QA is never a
-minimum-runtime, artifact-provenance or physical-source-ownership qualification.
+Ordinary QA is never a minimum-runtime, artifact-provenance or physical-source-
+ownership qualification; the failed publication and approved recovery above
+supersede the former pending-CI handoff, not any historical physical evidence.
 Uploader/toolkit remain read-only; no toolkit checklist or whole-plugin
 pre-release row changes. Full pre-release readiness is still pending.

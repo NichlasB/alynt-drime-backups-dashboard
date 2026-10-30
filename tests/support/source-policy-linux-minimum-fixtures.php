@@ -11,5 +11,6 @@ function linux_minimum_tuple_fixture() {
 }
 function linux_minimum_correlation_fixture() {
 	return array('event'=>'tuple-data','head'=>str_repeat('a',40),'source_image'=>str_repeat('b',64),'run'=>str_repeat('c',32),'pid'=>123,
-		'tuple_hash'=>hash('sha256',json_encode(linux_minimum_tuple_fixture(),JSON_UNESCAPED_SLASHES)));
+		// Golden expected descriptor hash, independently checked against JSON in the parent suite; not an artifact hash.
+		'tuple_hash'=>'df9040cde903f45639faa5bf7e6db5dd3ed97bf6d5616f54cd39e4e3ff5c6c05');
 }
