@@ -77,6 +77,7 @@ final class SourcePolicyNativeAdapterContractTest extends TestCase {
 	public static function exact_build_profiles() {
 		return array(
 			'linux-exact'=>array('7.1.4','10.11.18-MariaDB-ubu2204',true),
+			'minimum-lab-unscoped'=>array('6.0','10.11.18-MariaDB-ubu2204',false),
 			'minimum-preserved'=>array('6.0','10.6.23-MariaDB',true),'windows-preserved'=>array('7.1.3','10.6.23-MariaDB',true),
 			'generic-refused'=>array('7.1.4','10.11.18-MariaDB',false),'missing-suffix'=>array('7.1.4','10.11.18',false),
 			'other-build'=>array('7.1.4','10.11.18-MariaDB-ubu2404',false),'other-patch'=>array('7.1.4','10.11.19-MariaDB-ubu2204',false),

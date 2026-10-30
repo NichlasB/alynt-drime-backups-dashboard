@@ -24,6 +24,11 @@ Future source DATA must copy the full immutable digest values from that owning
 record, never resolve a mutable tag. Consistency, runtime admission and native
 qualification remain distinct; the candidate is still payload-unverified.
 
+Follow-up: the approved [socket-free DATA foundation](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_FOUNDATION.md)
+implements only the fixed descriptor/correlation layer with independent positive
+and assertion-killed semantic tests. It does not implement the receiver scope,
+change legacy admission or supply artifact/native qualification evidence.
+
 For the first synthetic foundation, select a proposed DATA domain `ADBLMT1`
 with exactly these 17 keys: `format`, `platform`, `arch`, `php`, `client`,
 `core`, `commit`, `tree`, `runtime_image`, `server_image`, `server`, `transport`,

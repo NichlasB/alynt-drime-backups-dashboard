@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: socket-free tuple DATA foundation — 2026-10-30
+
+Approved [DATA/source-ownership contract foundation](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_FOUNDATION.md)
+at clean/synced baseline 2d1de83. Implements the fixed 17-key ADBLMT1 descriptor,
+canonical consistency digest and bounded six-key parent correlation outside the
+runtime graph. Independent positives and 38 assertion-killed in-memory controls
+cover field/shape/bounds/parent guards; unscoped core-6.0 lab-server rejection is
+pinned. Runtime receiver integration, legacy profiles/factories, ADBC contracts,
+source/artifact pins, workflows and production wiring remain unchanged.
+
+Implementation-plan progress: first executable lab DATA contract completed,
+not actual artifact/source/native qualification. Windows observer stays deferred;
+no autonomous-batch or product completion is claimed. Recommended next gated
+slice: Linux Minimum-Lab Digest-Pinned Artifact Acquisition, Static Verification
+and Owned Cleanup Proof, audit-first, bounded selected artifacts only and no
+runtime loading. Owning foundation records actual QA/publication and proof limits.
+
 ## Linux minimum lab: closed tuple/receiver design — 2026-10-30
 
 Approved [exact-tuple admission/source-ownership design](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_ADMISSION_DESIGN.md)
