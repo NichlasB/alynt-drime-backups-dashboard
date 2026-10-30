@@ -17,6 +17,9 @@ Design-only Existing-Tool Observer Deadline Failure and Qualification-Route
 Reassessment, pausing Windows implementation/experiments to assess proportionality
 before continuation. Candidate 128 and production wiring remain untouched.
 Owning record carries ordinary validation and exact-head publication evidence.
+Implementation/refusal 765a80c is pushed; ordinary exact-head CI 41126657488
+passed (PHP 7.4/8.3 each 2,325 tests, no failures/skips). Physical proof remains
+refused; green publication checks do not authorize another attempt.
 
 ## Measured tool-only snapshot budget decision — 2026-10-30
 

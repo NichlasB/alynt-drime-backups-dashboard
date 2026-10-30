@@ -137,9 +137,20 @@ Executed ordinary trusted PHP 8.5.1 repository QA, without another native attemp
   workflow, production bootstrap/include or schema changes. Uploader/toolkit
   remain clean/read-only at 3dfcb15/c067eb6.
 
-Exact-head ordinary CI publication remains pending. Green isolated tests or CI
-cannot complete the refused physical proof. No whole-plugin pre-release
-readiness, UI/UX or Database Review is refreshed.
+Implementation/refusal publication `765a80c1c8b1525f1279f4735e6b630b50ccd5fb`
+is pushed; [exact-head ordinary CI 41126657488](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41126657488)
+succeeded. Actual PHP 7.4: 2,325 tests / 21,009 assertions; PHP 8.3: 2,325 /
+21,014, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, structure, build, PHPCS and audits passed, zero known advisories/
+vulnerabilities. Existing Setup Node `punycode`/`url.parse()` deprecation warnings
+remain tool-level warnings, not suppressed by acceptance changes. Linux CI
+exercises ordinary PHP/static contracts, not the local pure PowerShell suites
+or a successful physical Windows proof.
+
+This docs-only evidence closeout receives its own pushed exact-head CI and
+clean/remote verification at handoff. Green isolated tests or CI cannot complete
+the refused physical proof. No whole-plugin pre-release readiness, UI/UX or
+Database Review is refreshed; no native rerun or implementation repair follows.
 
 Implementation-plan progress: versioned fixed tool profile, incremental catalog
 budget and non-vacuous isolated proof support now exist; full observer
