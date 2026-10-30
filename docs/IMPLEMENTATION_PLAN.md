@@ -12,10 +12,12 @@ Two further encoder guard-bypass tests and byte-reference checks added.
 
 Implementation-plan progress: repair closes a verification dependency, not a
 new product/native task. No runtime integration, downloads or production wiring.
-Full QA/exact-head CI recovery remains the immediate gate before the recorded
-Digest-Pinned Artifact Acquisition/Static Verification/Owned Cleanup Proof;
-that next slice still needs separate download/file-effect approval and must not
-load/execute artifacts. Owning record carries actual recovery evidence.
+Full QA passed; recovery c3d8649 is pushed and exact-head ordinary CI 41135829504
+passed (PHP 7.4/8.3 each 2,438 tests, no failures/skips). CI recovery gate closed.
+Recommended next gated slice: Linux Minimum-Lab Digest-Pinned Artifact
+Acquisition, Static Verification and Owned Cleanup Proof. It still needs
+separate download/file-effect approval and must not load/execute artifacts.
+Owning record carries actual recovery evidence and physical proof limits.
 
 ## Linux minimum lab: socket-free tuple DATA foundation — 2026-10-30
 

@@ -154,8 +154,19 @@ Fresh recovery QA with trusted existing PHP 8.5.1:
   change; runtime/bootstrap, existing pins/manifests, workflows/runners and
   dependencies remain byte-unchanged. Uploader/toolkit remain clean/read-only.
 
-Exact-head recovery publication follows after push; genuine PHP 7.4 native
-qualification is not established by these ordinary checks.
+Recovery `c3d8649b607c184d837c00b1dd959c82de85911c` is pushed;
+[exact-head ordinary CI 41135829504](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41135829504)
+succeeded. Actual PHP 7.4: 2,438 tests / 22,939 assertions; PHP 8.3: 2,438 /
+22,944, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, audits, build, structure and PHPCS passed, zero known dependency
+advisories/vulnerabilities. Existing Setup Node `punycode`/`url.parse()` warnings
+remain tooling deprecations; no suppression or acceptance change was made.
+
+This docs-only evidence closeout receives its own pushed exact-head ordinary CI
+and clean/remote verification at handoff. Genuine PHP 7.4 native qualification
+is not established by these ordinary checks. The CI recovery gate is closed;
+the next artifact acquisition/static-verification/owned-cleanup approval above
+remains required, with runtime loading/native execution/wiring still disabled.
 
 ### Historical foundation local QA (before recovery)
 
