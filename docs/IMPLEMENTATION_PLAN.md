@@ -18,6 +18,8 @@ Recommended next gated slice: Repository-only Linux Minimum-Profile Candidate
 and Exact-Build Feasibility Design, explicit alternative-strategy approval with
 implementation/downloads/execution/storage/wiring disabled. No automatic workflow
 dispatch or acceptance relaxation. Owning decision records validation/publication.
+Decision 98f0815 is pushed; exact-head ordinary CI 41128227385 passed (PHP 7.4/
+8.3 each 2,325 tests, no failures/skips). No native evidence or gate is refreshed.
 
 ## Fixed 135-module tool profile: deadline refusal, cleaned — 2026-10-30
 

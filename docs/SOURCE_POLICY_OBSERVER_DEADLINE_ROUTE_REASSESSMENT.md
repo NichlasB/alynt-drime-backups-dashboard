@@ -168,5 +168,14 @@ Executed ordinary repository-only QA with trusted PHP 8.5.1, not a candidate run
   baseline; only this decision, plan and predecessor pointer change. Uploader/
   toolkit remain clean/read-only at 3dfcb15/c067eb6. No whole-plugin readiness claim.
 
-Exact-head ordinary CI publication is pending. No operational evidence is
-produced or renewed, and no Linux candidate or Windows observer is qualified.
+Decision publication `98f08155e47fb721bc464e15361a2a7c59b728b7` is pushed;
+[exact-head ordinary CI 41128227385](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41128227385)
+succeeded. Actual PHP 7.4: 2,325 tests / 21,009 assertions; PHP 8.3: 2,325 /
+21,014, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, PHPCS, structure, build and audits passed, zero known advisories/
+vulnerabilities. Existing Setup Node `punycode`/`url.parse()` deprecation warnings
+remain tool-level warnings; no acceptance/runtime change suppresses them.
+
+This docs-only evidence closeout receives its own pushed exact-head ordinary
+CI and clean/remote verification at handoff. No operational evidence is produced
+or renewed, and no Linux candidate or Windows observer is qualified by CI.
