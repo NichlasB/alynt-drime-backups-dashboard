@@ -227,5 +227,15 @@ candidate or genuine core/native environment:
   source/provenance, error/resource/cleanup, compatibility and proof-limit review
   confirms only three docs changed against baseline; no executable/pin changes.
 
-Exact-head publication/CI evidence follows after push. These ordinary checks
-cannot establish artifact availability beyond metadata, native behavior or trust.
+Design publication `a680b123b1c2ef130c3d3adc2408d536687f16b2` is pushed;
+[exact-head ordinary CI 41131267870](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41131267870)
+succeeded. Actual PHP 7.4: 2,325 tests / 21,009 assertions; PHP 8.3: 2,325 /
+21,014, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, audits, structure, asset build and PHPCS passed, zero known dependency
+advisories/vulnerabilities. Existing Setup Node `punycode`/`url.parse()`
+deprecation warnings remain tooling warnings, not suppressed or repaired here.
+
+This docs-only evidence closeout receives its own pushed exact-head ordinary
+CI and clean/remote verification at handoff. These ordinary checks cannot
+establish artifact availability beyond metadata, native behavior, image trust
+or candidate admission; minimum native qualification remains gated.

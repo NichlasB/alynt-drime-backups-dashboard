@@ -17,6 +17,8 @@ Recommended next gated slice: Repository-only Linux Minimum-Lab Exact-Tuple
 Admission and Source-Ownership Integration Design, explicitly resolving that
 lab-only contract decision before implementation/acquisition/execution/storage.
 The owning design records actual validation/publication; no native dispatch.
+Design a680b12 is pushed; exact-head ordinary CI 41131267870 passed (PHP 7.4/
+8.3 each 2,325 tests, no failures/skips). No candidate/native evidence is renewed.
 
 ## Observer route reassessment: defer Windows detour — 2026-10-30
 
