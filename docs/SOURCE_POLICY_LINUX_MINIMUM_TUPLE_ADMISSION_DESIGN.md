@@ -232,7 +232,16 @@ QA with existing PHP 8.5.1, not the candidate or genuine core/native environment
   review confirms all executable/test/profile/manifest/workflow files unchanged.
   A rejected patch anchor made no partial changes; it was corrected before QA.
 
-Exact-head publication evidence follows after push. No ordinary test result
-establishes new artifact, receiver scope or native admission.
+Design `612b65ef39eb650a761206e4e2e5257ed10cf86e` is pushed;
+[exact-head ordinary CI 41132623673](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41132623673)
+succeeded. Actual PHP 7.4: 2,325 tests / 21,009 assertions; PHP 8.3: 2,325 /
+21,014, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, dependency audits, build, structure and PHPCS passed, zero known
+dependency advisories/vulnerabilities. Existing Setup Node `punycode`/
+`url.parse()` deprecation warnings remain tool-level warnings, not suppressed.
+
+This docs-only evidence closeout receives its own pushed exact-head ordinary CI
+and clean/remote verification at handoff. No ordinary test result establishes
+new artifact, receiver scope or native admission.
 No canonical whole-plugin review, physical proof or release readiness closeout;
 no toolkit checklist or historical whole-plugin review row is refreshed.

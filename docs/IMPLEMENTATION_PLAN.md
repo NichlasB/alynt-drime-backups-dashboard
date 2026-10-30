@@ -16,6 +16,8 @@ separate proof work. Recommended next gated slice: repository-only Socket-Free
 Linux Minimum-Lab Tuple DATA and Source-Ownership Contract Safety Foundation,
 synthetic-only, with receiver integration/execution/wiring disabled. Owning
 design carries validation/publication; no transferred native proof.
+Design 612b65e is pushed; exact-head ordinary CI 41132623673 passed (PHP 7.4/
+8.3 each 2,325 tests, no failures/skips). No new scope or native admission enabled.
 
 ## Linux minimum candidate: identified, not admitted — 2026-10-30
 
