@@ -17,6 +17,8 @@ Diagnostics and One Fresh Linux Minimum-Lab Static Acquisition/Cleanup Attempt,
 same pins/limits, fresh prerequisites first, no broader path rule preapproval.
 It needs new payload/download authority; runtime loading, native operations and
 production wiring remain disabled. Owning record carries QA/publication limits.
+Harness/refusal 930273c is pushed; exact-head ordinary CI 41139628673 passed
+(PHP 7.4/8.3 each 2,440 tests, no failures/skips). Physical proof stays refused.
 
 ## Linux minimum DATA: PHP 7.4 compatibility recovery — 2026-10-30
 

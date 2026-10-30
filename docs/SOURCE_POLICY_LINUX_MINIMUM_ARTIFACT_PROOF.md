@@ -165,12 +165,22 @@ existing `/usr/bin/python3`. No interpreter/package is installed or downloaded.
 Only the new development scripts/tests and owning docs change. Existing runtime
 bootstrap/includes, PHP/profile/pin contracts, workflows/runners, dependencies,
 client sites and production wiring remain untouched. Uploader/toolkit read-only;
-no whole-plugin review/readiness/checklist row is refreshed. Publication evidence
-follows after scoped review and push; green ordinary CI cannot erase this refusal.
+no whole-plugin review/readiness/checklist row is refreshed. Green ordinary CI
+cannot erase this refusal.
 158 owning local documentation targets and whitespace checks passed; scoped
 source/security/resource/error/provenance/test-integrity review preserves all
 recorded limits and the actual attempt source cohort. No fresh physical attempt
 or artifact mutation was used to obtain green ordinary checks.
+
+Harness/refusal publication `930273c176f7834b795d404d650c951474d707e0` is pushed;
+[exact-head ordinary CI 41139628673](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41139628673)
+succeeded. Actual PHP 7.4: 2,440 tests / 22,951 assertions; PHP 8.3: 2,440 /
+22,956, no failures/skips on either. Admin 23/23 each, no failures/skips;
+manifest, dependency audits, build, structure and PHPCS passed, zero known
+dependency advisories/vulnerabilities. Existing Setup Node `punycode`/
+`url.parse()` deprecation warnings remain tool-level warnings, not suppressed.
+This docs-only closeout receives its own pushed exact-head ordinary CI and
+clean/remote verification at handoff. No new payload attempt follows.
 
 ## Exact resume recommendation
 
