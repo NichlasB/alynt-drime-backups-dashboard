@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: closed tuple/receiver design — 2026-10-30
+
+Approved [exact-tuple admission/source-ownership design](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_ADMISSION_DESIGN.md)
+at clean/synced baseline 026427b. Traces initial connected-server comparison,
+final bootstrap facts admission and per-query revalidation. Selects a private
+receiver-bound lab scope, not a new core-to-server default or caller grant;
+legacy rows, 11-key exported facts, factories, guards and wiring stay unchanged.
+No implementation, downloads, artifact/runtime/native or site operations.
+
+Implementation-plan progress: minimum-lab integration contract and ownership/
+revocation checks are explicit; actual build admission/native qualification stay
+open. Windows observer work stays deferred; historical count stays 1/8 plus
+separate proof work. Recommended next gated slice: repository-only Socket-Free
+Linux Minimum-Lab Tuple DATA and Source-Ownership Contract Safety Foundation,
+synthetic-only, with receiver integration/execution/wiring disabled. Owning
+design carries validation/publication; no transferred native proof.
+
 ## Linux minimum candidate: identified, not admitted — 2026-10-30
 
 Approved [repository-only candidate/exact-build feasibility design](SOURCE_POLICY_LINUX_MINIMUM_CANDIDATE_FEASIBILITY_DESIGN.md)

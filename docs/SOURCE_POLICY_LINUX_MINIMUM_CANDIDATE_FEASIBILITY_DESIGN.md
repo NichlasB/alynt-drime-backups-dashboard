@@ -20,6 +20,11 @@ profile.** This is source-feasible direction, **payload-unverified and
 contract-blocked**, not an admitted, provisioned or physically qualified lab.
 No minimum-support or production-connection claim changes.
 
+Follow-up: the approved [tuple admission/source-ownership design](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_ADMISSION_DESIGN.md)
+traces all three build-admission consumers and selects a private receiver-bound
+scope, preserving this candidate's uncertainty and every legacy row. It does
+not implement admission or authorize acquisition, runtime or native execution.
+
 The proposed server is exactly `10.11.18-MariaDB-ubu2204`, not the existing
 core-6.0 contract's `10.6.23-MariaDB`. Preserve that rejection. Before any
 implementation, separately approve the finite Linux lab tuple and its private
