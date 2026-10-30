@@ -1,5 +1,9 @@
 # Fixed 135-Module Tool Snapshot Profile and One Ordered Owned Proof
 
+Disposition successor: the approved [deadline/route reassessment](SOURCE_POLICY_OBSERVER_DEADLINE_ROUTE_REASSESSMENT.md)
+defers this Windows observer route as unqualified, without code removal, retry,
+budget change or qualification credit. This failed physical record stays historical.
+
 ## Authority, baseline and disposition — 2026-10-30
 
 Explicitly approved implementation, isolated validation and **one** ordered

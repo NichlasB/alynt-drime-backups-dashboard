@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Observer route reassessment: defer Windows detour — 2026-10-30
+
+Approved [design-only deadline/route reassessment](SOURCE_POLICY_OBSERVER_DEADLINE_ROUTE_REASSESSMENT.md)
+at clean/synced baseline 8155efe. The captured observer deadline does not identify
+its exact inner cause or a safe larger timeout. Defer the Windows/PowerShell
+full-module route as unqualified, retaining code/tests/history and all guards;
+no retry, profiling, optimization, budget change or candidate launch is selected.
+
+Implementation-plan progress: restores genuine minimum-profile qualification,
+not PowerShell inventory, as the parent product gate. Prefer a separately designed
+Linux minimum lab using existing manual-lab patterns only; no transferred newer
+Linux proof, admitted build or changed server/transport contract. Candidate 128,
+tool 135, support declarations and production/form wiring are unchanged; minimum
+qualification remains open. Cumulative count remains 1/8 plus separate proof work.
+Recommended next gated slice: Repository-only Linux Minimum-Profile Candidate
+and Exact-Build Feasibility Design, explicit alternative-strategy approval with
+implementation/downloads/execution/storage/wiring disabled. No automatic workflow
+dispatch or acceptance relaxation. Owning decision records validation/publication.
+
 ## Fixed 135-module tool profile: deadline refusal, cleaned — 2026-10-30
 
 Approved [profile implementation and one ordered proof](SOURCE_POLICY_TOOL_SNAPSHOT_135_OWNED_PROOF.md)
