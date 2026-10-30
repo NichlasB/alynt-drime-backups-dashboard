@@ -98,6 +98,11 @@ installation, extraction execution, candidate/core loading or native/database
 operation. That new download/file-effect authority is outside this foundation.
 Connection-free execution and native proof retain separate later approvals.
 
+Follow-up: the approved [static artifact attempt](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md)
+stopped at a generic layer-2 path refusal after partial byte verification;
+owned cleanup is confirmed. Complete artifact/runtime qualification stays open,
+and its explicit diagnostics/fresh-attempt approval is the new resume gate.
+
 ## Validation and publication
 
 ### Foundation publication and approved compatibility recovery

@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum artifacts: path refusal, owned cleanup confirmed — 2026-10-30
+
+Approved [digest-pinned static acquisition/cleanup proof](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md)
+at clean/synced baseline 59d6b27. Metadata chains and the complete core mode/blob
+tree were checked; two runtime layer diff IDs and three compressed blobs passed.
+The one attempt refused archive-path at WordPress layer 2, without enough facts
+to identify the name/predicate. Seven owned files/root removed; source readbacks
+unchanged, no artifact retained. No later payload/core/ELF/native qualification.
+No retry, normalization, budget/profile relaxation or image fallback selected.
+
+Implementation-plan progress: bounded acquisition tooling, offline checks and
+partial byte/cleanup evidence advance; complete artifact evidence is still
+blocked. Recommended next gated slice: Harness-Only Bounded Archive-Path Refusal
+Diagnostics and One Fresh Linux Minimum-Lab Static Acquisition/Cleanup Attempt,
+same pins/limits, fresh prerequisites first, no broader path rule preapproval.
+It needs new payload/download authority; runtime loading, native operations and
+production wiring remain disabled. Owning record carries QA/publication limits.
+
 ## Linux minimum DATA: PHP 7.4 compatibility recovery — 2026-10-30
 
 Approved [JSON-free synthetic-control compatibility repair](SOURCE_POLICY_LINUX_MINIMUM_TUPLE_FOUNDATION.md#foundation-publication-and-approved-compatibility-recovery)
