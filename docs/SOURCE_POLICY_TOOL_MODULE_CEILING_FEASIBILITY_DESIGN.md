@@ -1,5 +1,9 @@
 # Existing-Tool Module-Ceiling and Observer Feasibility Decision
 
+Successor: the separately approved [count-only calibration proof](SOURCE_POLICY_TOOL_COUNT_CALIBRATION_OWNED_PROOF.md)
+observed 135 modules with owned closure/cleanup. Neither 128-module ceiling
+changes, and no full observer qualification follows. This design stays historical.
+
 ## Authority, baseline and decision — 2026-10-29
 
 Approved **design only**, at clean/synced dashboard baseline

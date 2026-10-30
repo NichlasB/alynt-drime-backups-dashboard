@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Count-only existing-tool calibration: 135 observed, cleaned — 2026-10-30
+
+Approved [one count-only calibration](SOURCE_POLICY_TOOL_COUNT_CALIBRATION_OWNED_PROOF.md)
+at clean/synced baseline 2f8639f. Separate explicit controller/child/ADBTC1 receipt
+passes pure non-authorizing tests; original full proof, transport, candidate
+helpers, all current ceilings/guards and production wiring remain unchanged.
+One owned attempt: 28 checks, exact count 135, 916 ms through closure/cleanup,
+source/canary readbacks matched, zero retained fixtures/owned processes. No
+catalog, full snapshot, timeout/cancellation or runtime qualification is credited.
+
+Implementation-plan progress: exact count prerequisite closes; physical full
+observer feasibility remains blocked. Previous cumulative progress stays 1/8
+plus separately approved proof work. Recommended next gated slice: Design-only
+Measured Tool-Only Module Budget and Full-Snapshot Feasibility Decision, weighing
+135 observed modules and unmeasured traversal/catalog costs before any tool-cap
+change or fresh experiment. Candidate limit remains 128; no automatic retry or
+production execution. Publication evidence belongs to the proof record.
+
 ## Existing-tool module ceiling: retain 128; calibrate separately — 2026-10-29
 
 Approved [design-only feasibility decision](SOURCE_POLICY_TOOL_MODULE_CEILING_FEASIBILITY_DESIGN.md)
