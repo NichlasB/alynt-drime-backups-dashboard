@@ -285,9 +285,16 @@ implementation/guard evidence. The last actual artifact attempt is still refused
 unknown name/target, later layers, full diff IDs, core bytes and ELF/native
 qualification are not inferred from these tests.
 
-Recommended next gated slice: **Linux Minimum-Lab Unicode-Policy Static
+Foundation-time next gated slice (subsequently approved): **Linux Minimum-Lab Unicode-Policy Static
 Acquisition and Owned Cleanup Proof**. Approve one fresh bounded digest-pinned
 static attempt with fresh offline prerequisites, the same pins and all original
 payload/parser/time/cleanup ceilings. No normalization, larger limits, fallback,
 second attempt, extraction or candidate/native execution; production wiring
 remains disabled. Current synthetic approval does not authorize that retrieval.
+
+Follow-up: the separately approved [one static acquisition attempt](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md#approved-unicode-policy-static-attempt--2026-10-31)
+passed all 25 layer diff IDs, complete pinned core bytes and selected ELF checks,
+then removed all 30 owned files/root with independent absence confirmation.
+This actual later evidence clears the static refusal, not dependency closure or
+runtime/native qualification. The owning proof now carries the current gated
+dependency-closure/preflight design recommendation; no source changed here.

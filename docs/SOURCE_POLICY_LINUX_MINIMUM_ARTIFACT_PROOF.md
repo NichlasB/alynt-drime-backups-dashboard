@@ -275,18 +275,120 @@ at handoff. Historical 2026-10-30 QA/CI above remains historical, not refreshed
 evidence for this diff. Ordinary CI cannot qualify the refused artifact or
 authorize another physical attempt; no new retrieval follows publication.
 
+## Approved Unicode-policy static attempt — 2026-10-31
+
+Clean/synced restore baseline `5ec779bb7bbc73f1dc8f96f9d2e0d8fffa06f619`.
+User approves one fresh digest-pinned static acquisition/owned-cleanup attempt
+using the published tar-only Unicode policy, after fresh offline prerequisites.
+All original payload/parser/member/file/time/TLS/cleanup ceilings and pins above
+remain. No normalization, budget increase, fallback, second attempt, extraction,
+image loading, candidate/native execution, site/database operation, installation,
+release/deployment or production wiring. No LocalWP/live target or Novamira
+operation applies. Uploader/toolkit remain clean/read-only at original heads.
+Frozen acquisition/reader/pin/tool sources were read back after cleanup.
+The one approved attempt is consumed; this checkpoint grants no wider retry.
+
+### Actual result: static verified, cleanup independently confirmed
+
+Fresh prerequisites: related DATA/artifact 114 tests / 1,933 assertions, no
+failures/skips, including strict 23 offline groups and 23 assertion-killed
+controls; structure/whitespace passed. Existing trusted Python 3.12.14 reports
+Unicode database 15.0.0 and verified TLS/hostname checking. The acquisition and
+reader, pin/tuple files and all executable/test/runtime/dependency/workflow
+sources were unchanged from the baseline before the physical attempt.
+
+Executed the fixed entry exactly once with `-I -B` and
+`--approved-static-artifacts`. Exit 0, `status=static-verified`,
+`cleanup=confirmed`, `source_unchanged=true`. Both immutable manifest/config
+chains passed. All **25 compressed layer blobs and full uncompressed diff IDs**
+passed (17 WordPress / eight MariaDB), including previously blocked layer 2.
+The scan counted 26,567 entries and 948,137,472 expanded tar bytes within the
+original ceilings. No normalization, alternate image, relaxed guard, retry or
+budget increase was needed.
+
+Payload totals: WordPress 212,262,998 compressed bytes; MariaDB 104,043,037;
+core ZIP 32,963,838; aggregate payload 349,269,873 bytes. Total staged bytes
+including four manifest/config files: 349,301,254. Complete pinned core tree
+`a3bd7a4074a4c95c8af3b969346726273d68e167` / commit
+`cc101b64012b16d087780657a2b828ccd7794a63`: all 3,437 file byte streams agree
+with the pinned Git blob set, all 11 existing source SHA256 pins agree,
+74,132,675 expanded core bytes. Core ZIP SHA256:
+`f94b2d521ea9c38d965d1adf8ead55a1b45dc171795bd550e94cd2ce99c7a437`.
+Git metadata modes/tree were verified separately; ZIP entry kinds were checked.
+No host checkout/permissions or ZIP permission-bit equivalence is claimed.
+
+Selected direct regular members reached bounded static ELF inspection:
+
+| Role | Bytes | SHA256 |
+| --- | ---: | --- |
+| `usr/local/bin/php` | 16,803,880 | `51810786a5d7ab1e43e7d43077493d7dfced717cc81fc08270cde58b32731d29` |
+| `usr/local/lib/php/extensions/no-debug-non-zts-20190902/mysqli.so` | 154,752 | `aa91cdc28133fac497aade6a658e83c219fcbbbfb809069969dd32c749a8657e` |
+| `usr/sbin/mariadbd` | 25,418,352 | `93b8d1f5ae7141c6b53067d9fc8222683957e26ea87205dd372b1016777a2973` |
+
+All three report ELF64 x86_64, type 3, uid/gid 0. Raw recorded modes are
+33,261 for PHP/mysqli and 493 for mariadbd; no chmod or host permission
+application occurred. PHP/server interpreter fields are
+`/lib64/ld-linux-x86-64.so.2`; mysqli's is null. Direct `DT_NEEDED` strings:
+
+- PHP: libargon2.so.1, libresolv.so.2, libreadline.so.8, libm.so.6, libdl.so.2,
+  libxml2.so.2, libssl.so.1.1, libcrypto.so.1.1, libsqlite3.so.0, libz.so.1,
+  libcurl.so.4, libonig.so.5, libc.so.6.
+- mysqli: libc.so.6.
+- mariadbd: libpcre2-8.so.0, libcrypt.so.1, liburing.so.2, libaio.so.1,
+  libsystemd.so.0, libz.so.1, libssl.so.3, libcrypto.so.3, libstdc++.so.6,
+  libm.so.6, libgcc_s.so.1, libc.so.6, ld-linux-x86-64.so.2.
+
+All three report empty search-path lists and `dependency_closure_verified=false`.
+These names are static declarations, not located/hashed dependency files,
+successful symbol resolution, loaded module identity or safe execution evidence.
+PHP_VERSION 7.4.33 and MariaDB package version remain config declarations, not
+observed binary/client/server runtime identities. mysqlnd build/loading/ABI,
+transitive dependencies, vulnerabilities and genuine native behaviour remain
+unqualified. No `ldd`, loader or binary invocation occurred.
+
+Cleanup removed **30 exact owned files** (four manifest/config files, 25 layer
+blobs and core ZIP), then `adb-linux-minimum-static-kt_urma2`. Independent
+read-only existence check confirmed that exact OS-temp child absent. No payload
+or candidate data remains staged; no user data was removed. Source-image SHA256
+`4dd6fa3d85ea30e61fbd112e60f0dbb483c54b3ef2de44fc874032f80f27d2af`
+binds the acquisition/reader/pins/tuple/trusted executable readbacks, not a
+whole-host or library-closure attestation. Tool facts: Python 3.12.14, OpenSSL
+3.5.8, Unicode 15.0.0. Candidate execution, database operations, Docker image
+loading and rootfs extraction were all false.
+
+The historical refusals remain accurate for their source cohorts; this later
+source-bound success closes their static path blocker. It does not establish
+general OCI/rootfs application, container/network isolation, connection-free
+runtime preflight, lab receiver integration, database qualification or product/
+production readiness.
+
+### Repository QA and publication
+
+Trusted local PHP 8.5.1 full suite: 2,440 tests / 22,949 assertions, no failures,
+two existing Sodium-unavailable signing skips. Fresh relevant checks: 114 /
+1,933, no failures/skips, including 23 offline Python groups and 23 assertion-
+killed controls. PHPCS 244 files; admin 23/23, no failures/skips; structure 149
+runtime / 235 PHP support / 227 test files / 224 classes; build passed without
+tracked generated changes. Strict Composer validation and Composer/npm moderate
+audits passed, zero known project dependency advisories/vulnerabilities; these
+audits do not clear the legacy donor images. Whitespace and 164 owning local
+documentation targets passed. Final source/provenance/resource/error/cleanup/
+claim-limit review confirms only three owning docs changed, no executable,
+test, pin, tuple, runtime, workflow or dependency changes. Uploader/toolkit
+remain clean/read-only; no historical whole-plugin readiness row is refreshed.
+Exact-head evidence publication pending; no further physical attempt follows.
+
 ## Exact resume recommendation
 
-Implementation-plan progress: the refusal is specifically identified with
-bounded facts and confirmed cleanup. The approved [Unicode path policy design](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md)
-selects a separate tar-only contract. Its separately approved [synthetic foundation](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md#approved-synthetic-foundation--2026-10-31)
-implements that contract without renewing acquisition authority or superseding
-the historical physical refusal. No native or product completion claim.
+Implementation-plan progress: complete selected-layer/core-byte and selected
+ELF static evidence now passes under the [published Unicode policy](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md),
+with owned cleanup confirmed. Dependency closure and runtime/native admission
+remain open; this is a real static-evidence milestone, not product completion.
 Do not reopen Windows observer work or fill the queue with generic cleanup.
 
-Recommended next gated slice: **Linux Minimum-Lab Unicode-Policy Static
-Acquisition and Owned Cleanup Proof**, one fresh digest-pinned bounded attempt
-after prerequisites under the published tar-only policy. It needs new retrieval
-approval: no attempt is authorized by synthetic tests. Pins/ceilings remain;
-no normalization, fallback, second attempt, extraction, runtime loading, native
-experiments or production wiring is authorized.
+Recommended next gated slice: **Repository-Only Linux Minimum-Lab
+Dependency-Closure and Connection-Free Preflight Admission Design**. Resolve finite
+dependency/source/configuration identity and the isolated launch/zero-connection
+evidence contract before any candidate loading. Design-only: no new acquisition,
+extraction, provisioning, loader/runtime/native/database experiment or wiring.
+The completed acquisition scope grants none of those later actions.

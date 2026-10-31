@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum artifacts: complete static proof, cleanup confirmed — 2026-10-31
+
+At clean/synced baseline `5ec779b`, user approves one bounded static acquisition/
+cleanup attempt under the published tar-only Unicode policy, same pins and
+all original ceilings, fresh offline prerequisites first. [Owning checkpoint](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md#approved-unicode-policy-static-attempt--2026-10-31)
+records authority, limits and actual success: all 25 layer digests/full diff IDs,
+3,437 core file streams and 11 source pins passed; three selected regular ELF
+roles hashed/inspected. Payload 349,269,873 bytes; 30 owned files/root removed,
+independently absent, source unchanged. No normalization, larger limits, fallback,
+second attempt, extraction, execution or site/wiring work. Full local QA 2,440 /
+22,949, no failures, two existing Sodium skips; other QA passed. Exact-head
+publication pending; static facts are not dependency closure/runtime identity.
+
+Implementation-plan progress: static path blocker cleared and complete selected
+artifact byte evidence established. Recommended next gated slice:
+Repository-Only Linux Minimum-Lab Dependency-Closure and Connection-Free Preflight Admission
+Design, design-only before new acquisition/provisioning or candidate execution.
+Runtime receiver/native qualification and production wiring remain gated.
+
 ## Linux minimum artifacts: tar-only Unicode synthetic foundation — 2026-10-31
 
 Approved [synthetic foundation](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md#approved-synthetic-foundation--2026-10-31)
