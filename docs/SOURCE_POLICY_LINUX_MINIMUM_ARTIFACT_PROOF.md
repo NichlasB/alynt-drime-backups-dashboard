@@ -376,7 +376,16 @@ documentation targets passed. Final source/provenance/resource/error/cleanup/
 claim-limit review confirms only three owning docs changed, no executable,
 test, pin, tuple, runtime, workflow or dependency changes. Uploader/toolkit
 remain clean/read-only; no historical whole-plugin readiness row is refreshed.
-Exact-head evidence publication pending; no further physical attempt follows.
+Evidence publication `85b67af7059d77085f63d5f804005157ef26b27b` is pushed;
+[exact-head ordinary CI 41191157436](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41191157436)
+passed. Actual PHP 7.4: 2,440 tests / 22,951 assertions; PHP 8.3: 2,440 /
+22,956, no failures/skips. Admin 23/23 per matrix, no failures/skips; manifest,
+audits, build, structure and PHPCS passed, zero known project dependency
+advisories/vulnerabilities. Existing Setup Node `punycode` / `url.parse()`
+deprecations remain visible tool-level warnings. This docs-only closeout is
+pushed and independently exact-head CI/clean/remote verified at handoff. Ordinary
+CI does not extend the physical proof's claim limits or authorize execution;
+no further physical attempt follows publication.
 
 ## Exact resume recommendation
 

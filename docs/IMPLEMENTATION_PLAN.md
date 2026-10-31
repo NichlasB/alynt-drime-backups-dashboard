@@ -10,8 +10,10 @@ records authority, limits and actual success: all 25 layer digests/full diff IDs
 roles hashed/inspected. Payload 349,269,873 bytes; 30 owned files/root removed,
 independently absent, source unchanged. No normalization, larger limits, fallback,
 second attempt, extraction, execution or site/wiring work. Full local QA 2,440 /
-22,949, no failures, two existing Sodium skips; other QA passed. Exact-head
-publication pending; static facts are not dependency closure/runtime identity.
+22,949, no failures, two existing Sodium skips; other QA passed. Evidence
+`85b67af` is pushed; exact-head ordinary CI 41191157436 passed (PHP 7.4/8.3
+each 2,440 tests, no failures/skips). Owning proof records exact counts/limits;
+static facts are not dependency closure/runtime identity.
 
 Implementation-plan progress: static path blocker cleared and complete selected
 artifact byte evidence established. Recommended next gated slice:
