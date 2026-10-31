@@ -1,6 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Latest minimum-lab outcome: the approved [single ephemeral attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31)
+Latest bounded evidence: [pre-start probe 41227432637](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-pre-start-readback-and-cleanup-result--2026-10-31)
+observed an empty port-binding object / zero keys while unchanged admission
+requires null; all other 20 clauses passed. Unstarted-fixture cleanup completed.
+This diagnoses the configuration mismatch, not startup/database/native behavior.
+Strict empty-map compatibility repair plus one fresh full qualification attempt
+is the next gated slice; no acceptance correction or production wiring yet.
+
+Earlier full-qualification outcome: the approved [single ephemeral attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31)
 refused at server configuration admission before startup/PHP/SQL; owned recovery
 passed, but the failing predicate was not exported. Bounded pre-start diagnostic
 readback is the next approval gate. No minimum qualification, profile waiver,

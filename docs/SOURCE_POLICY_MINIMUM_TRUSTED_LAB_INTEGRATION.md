@@ -1,10 +1,11 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: the original ephemeral attempt
-[stopped before server start at configuration admission](#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31).
-User subsequently approved [bounded diagnostics and one owned pre-start probe](#approved-pre-start-diagnostics-and-owned-readback--2026-10-31).
-Genuine minimum qualification remains open. This new scope does not authorize
-server/PHP/SQL startup, an automatic qualification retry or wider acceptance.
+Current disposition: [the completed pre-start probe](#actual-pre-start-readback-and-cleanup-result--2026-10-31)
+observed exactly one rejected predicate: Docker supplied an empty port-binding
+object with zero keys, while unchanged admission requires null. All other 20
+checks and owned unstarted-fixture cleanup passed. Acceptance remains unchanged;
+strict representation compatibility repair and a fresh full qualification
+attempt require separate approval. Genuine minimum qualification remains open.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -277,5 +278,66 @@ audit, npm moderate audit and whitespace passed, zero reported dependency
 advisories/vulnerabilities. No existing runtime, native worker/controller,
 qualification workflow, dependency, version/schema or asset source changed.
 Exact-head ordinary CI must pass before the one approved pre-start dispatch.
-The actual probe outcome/publication evidence follows when complete; the
-original full native workflow is not rerun.
+The actual probe outcome/publication evidence follows; the original full native
+workflow was not rerun.
+
+## Actual pre-start readback and cleanup result — 2026-10-31
+
+Implementation `f54cf54c3a7ceb7ed20c65718fabe9fa1574b16a` was pushed and
+[ordinary exact-head CI 41227313359](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41227313359)
+passed: PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115;
+Node 40/40 per matrix, no failures/skips. Local/remote heads matched and the
+worktree was clean. The dedicated workflow had zero runs before dispatch.
+
+Exactly one approved [pre-start probe 41227432637](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41227432637)
+ran at that same SHA with `minimum-prestart-readback-v1`, attempt 1. Its job
+completed successfully at 18:02:47 UTC (started 18:02:38); the readback/cleanup
+step ran 18:02:40–18:02:45. The dedicated always-recovery step also passed.
+This is a successful diagnostic/cleanup result, **not** profile admission or
+native qualification. The original full qualification run 41226041248 remains
+failed and was not repeated.
+
+Actual `ADBMPC_OBSERVATION` and final `ADBMPC1` agreed on:
+
+- `accepted=false`, `agreement=true`, `admission_error=false`;
+- exactly 20 passed clauses and `failed=["port_bindings"]`;
+- `port_bindings_shape="empty-object"`, `port_binding_keys=0`;
+- configured memory 536,870,912 bytes / CPU 1,000,000,000 nanos / 64 PIDs;
+- dropped-capability and security counts one each, zero devices/bind mounts,
+  two expected tmpfs paths with both exact option strings passing;
+- created/not-running/PID-zero/no-restart ownership and stable readbacks passed.
+
+The original clause is literally `row.ports===null`; the observed empty JSON
+object is therefore rejected without any inference that a port was exposed.
+This establishes the concrete mismatch in this reproduction. The earlier full
+run did not retain its inspect projection, so its historical field values
+remain unavailable rather than retroactively reconstructed as evidence.
+
+Owned CID was
+`0e0bb9b3927367ec5875570de9e64a604f0a45ad7e6320906eb31266879db407`;
+the frozen five-file source correlation was
+`720d2516e34cf253b904d87eff5238e98d40f6a419c8706d33ad7dfef1d0c5ca`.
+The final record reported one exact owned container removed, zero remaining
+containers, stage removed, source readback passed and 3,577 engine-output bytes.
+The separate recovery record rechecked `containers:0 stage:0`. No force removal,
+server start, candidate PHP, SQL or account creation occurred; runtime grant,
+production readiness and native qualification were all explicitly false.
+
+Only selected-image/configuration and unstarted-fixture observations are proved.
+Configured limits are not executed runtime/resource measurements. No database
+transaction/release proof, genuine minimum PHP/core behavior, legacy tuple
+coverage, loaded-object attestation, application authorization or whole-plugin
+readiness is established. Engine/cache/provider assumptions remain accepted,
+not independently proved; no global image prune or site operation occurred.
+
+Implementation-plan progress: the pre-start blocker now has concrete bounded
+evidence rather than an unknown predicate. No acceptance correction is included
+in this scope. Recommended next gated slice: **Strict Empty Port-Bindings
+Compatibility Repair and One Fresh Trusted Minimum-Lab Qualification / Owned
+Cleanup Attempt**. Preserve null support and admit only a strictly empty plain
+JSON binding map, while rejecting nonempty/malformed maps and arrays; leave all
+other predicates, pins, budgets, scope/grant and production boundaries intact.
+Require discriminating isolated tests, validation/publication/exact-head CI,
+then separately scoped fresh prerequisites and one full attempt with explicitly
+approved owned database/account/row/process fixtures and cleanup. No automatic
+retry or production wiring.

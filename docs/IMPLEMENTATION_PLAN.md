@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: pre-start mismatch observed, cleanup complete — 2026-10-31
+
+[Approved probe 41227432637](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41227432637)
+completed on `f54cf54` after ordinary exact-head CI passed. It observed exactly
+one rejected clause: an empty Docker port-binding object / zero keys versus
+the unchanged `row.ports===null` requirement. Other 20 clauses passed; the owned
+unstarted container/stage and always-recovery checks completed cleanly. No
+server/PHP/SQL startup, account creation, native qualification or acceptance
+change. See the [actual bounded evidence](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-pre-start-readback-and-cleanup-result--2026-10-31).
+
+Implementation-plan progress: the concrete representation mismatch is now
+identified; genuine minimum qualification remains unproved. Recommended next
+gated slice: Strict Empty Port-Bindings Compatibility Repair and One Fresh
+Trusted Minimum-Lab Qualification / Owned Cleanup Attempt, with unchanged
+other guards/pins/budgets and fresh prerequisites. Current pre-start approval
+does not authorize that correction or any database/native execution.
+
 ## Minimum profile: approved diagnostics and one pre-start readback — 2026-10-31
 
 At clean/synced `98f0680`, user approves [bounded predicate diagnostics and one
