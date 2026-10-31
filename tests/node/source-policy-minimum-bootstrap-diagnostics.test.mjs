@@ -52,15 +52,15 @@ test('actual wrapper preserves first diagnostic, rethrows the same error and inv
   assert.ok(a>=0&&b>a);const source=op.slice(a,b);
   // PHP 7.4 treats a class-named method case-insensitively as an old-style constructor.
   const fixture=`class Owner {public $ready=false;}class WP_Error {}class FixedBootstrapInvocationDouble {public $calls=0,$mode='error',$error;function invoke($owner){++$this->calls;if($this->mode==='throw')throw $this->error;if($this->mode==='success'){$owner->ready=true;return true;}return new WP_Error();}}
-    function adbm_bootstrap_before(...$args){return '1111';}function adbm_bootstrap_after(...$args){++$GLOBALS['snapshots'];return array('fixed'=>'first');}function adbb_check($ok,$label){if(!$ok)throw new RuntimeException('Refused');}
-    $owner=new Owner();$context=new stdClass();$frame=$bound=array();$bootstrap=new FixedBootstrapInvocationDouble();$GLOBALS['snapshots']=0;`;
+    function adbm_bootstrap_before(...$args){return '1111';}function adbm_bootstrap_after(...$args){++$GLOBALS['snapshots'];return array('fixed'=>'first');}function adbm_bootstrap_cause_wire(...$args){return 'cause-'.++$GLOBALS['cause_snapshots'];}function adbb_check($ok,$label){if(!$ok)throw new RuntimeException('Refused');}
+    $owner=new Owner();$context=new stdClass();$frame=$bound=array();$bootstrap=new FixedBootstrapInvocationDouble();$GLOBALS['snapshots']=0;$GLOBALS['cause_snapshots']=0;`;
   const run=code=>child(['-r',fixture+code]);
-  assert.equal(run(`try{${source}}catch(Throwable $e){}$bootstrap->mode='throw';$bootstrap->error=new Error('never-print');try{${source}}catch(Throwable $e){echo $e===$bootstrap->error?'same':'changed';}echo '|'.$bootstrap->calls.'|'.$GLOBALS['snapshots'].'|'.$GLOBALS['adbm_bootstrap_failure']['fixed'];`),'same|2|1|first');
-  assert.equal(run(`$bootstrap->mode='success';${source}echo $bootstrap->calls.'|'.$GLOBALS['snapshots'].'|'.(isset($GLOBALS['adbm_bootstrap_failure'])?'bad':'none');`),'1|0|none');
+  assert.equal(run(`try{${source}}catch(Throwable $e){}$bootstrap->mode='throw';$bootstrap->error=new Error('never-print');try{${source}}catch(Throwable $e){echo $e===$bootstrap->error?'same':'changed';}echo '|'.$bootstrap->calls.'|'.$GLOBALS['snapshots'].'|'.$GLOBALS['adbm_bootstrap_failure']['fixed'].'|'.$GLOBALS['cause_snapshots'].'|'.$GLOBALS['adbm_bootstrap_cause'];`),'same|2|1|first|1|cause-1');
+  assert.equal(run(`$bootstrap->mode='success';${source}echo $bootstrap->calls.'|'.$GLOBALS['snapshots'].'|'.(isset($GLOBALS['adbm_bootstrap_failure'])||isset($GLOBALS['adbm_bootstrap_cause'])?'bad':'none');`),'1|0|none');
   const replay=source.replace('$result = $bootstrap->invoke( $owner );','$result = $bootstrap->invoke( $owner );$bootstrap->invoke( $owner );');assert.notEqual(replay,source);
   assert.throws(()=>assert.equal(run(`$bootstrap->mode='success';${replay}echo $bootstrap->calls;`),'1'),assert.AssertionError);
 });
-test('source-backed integration observes one invocation, retains refusal and leaves runtime files uninstrumented',()=>{
+test('source-backed integration observes one invocation, retains refusal and keeps diagnostic reads free of native IO',()=>{
   const op=read('scripts/ci/source-policy-minimum-native-operation.php'),worker=read('scripts/ci/source-policy-minimum-qualification.php');
   assert.equal((op.match(/\$bootstrap->invoke\( \$owner \)/g)??[]).length,1);
   assert.match(op,/adbb_check\( true === \$result && \$owner->ready, 'actual ambient-bound bootstrap' \)/);

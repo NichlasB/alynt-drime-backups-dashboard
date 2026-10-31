@@ -47,6 +47,11 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 	 * @var int
 	 */
 	private $bootstrap_position = 0;
+	/** Bounded first caught location/state DATA only; never an error, message or grant.
+	 *
+	 * @var array|null
+	 */
+	private $bootstrap_failure = null;
 
 	/**
 	 * Inaccessible from factories; no actual provider or production wiring exists.
@@ -163,6 +168,13 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$success             = true;
 			return true;
 		} catch ( Throwable $error ) {
+			$kind                    = get_class( $error );
+			$this->bootstrap_failure = array(
+				'kind'   => in_array( $kind, array( 'RuntimeException', 'Error', 'TypeError', 'ArgumentCountError', 'ValueError' ), true ) ? $kind : 'other',
+				'source' => __FILE__ === $error->getFile() ? 'bootstrap' : 'other',
+				'line'   => $error->getLine() > 0 && $error->getLine() <= 999999 ? $error->getLine() : 0,
+				'state'  => $this->native_state,
+			);
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		} finally {
 			$this->bootstrap_frame   = null;

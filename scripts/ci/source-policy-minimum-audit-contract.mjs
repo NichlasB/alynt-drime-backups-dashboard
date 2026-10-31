@@ -12,13 +12,18 @@ export function bootstrapEvidence(raw) {
 }
 export function failureEvidence(raw) {
   if(typeof raw!=='string'||Buffer.byteLength(raw)>4608)return null;
-  let bootstrap=null;
+  let bootstrap=null,cause=null;
+  if(raw.startsWith('ADBMBC1|')){
+    const end=raw.indexOf('\n');if(end<0)return null;
+    cause=bootstrapCauseEvidence(raw.slice(0,end+1));if(!cause)return null;
+    raw=raw.slice(end+1);
+  }
   if(raw.startsWith('ADBMBD1|')){
     const end=raw.indexOf('\n');if(end<0)return null;
     bootstrap=bootstrapEvidence(raw.slice(0,end+1));if(!bootstrap)return null;
     raw=raw.slice(end+1);
   }
-  const attach=row=>row&&bootstrap?{...row,bootstrap}:row;
+  const attach=row=>row?{...row,...(bootstrap?{bootstrap}:{}),...(cause?{bootstrap_cause:cause}:{})}:row;
   const legacy=new RegExp('^ADBMF1\\|'+stage+'\\|'+phase+'\\|([0-9]{1,5})\\|([0-9])\\n(?![\\s\\S])').exec(raw);
   if(legacy)return attach({stage:legacy[1],phase:legacy[2],checks:Number(legacy[3]),groups:Number(legacy[4])});
   const match=new RegExp('^ADBMF2\\|'+stage+'\\|'+phase+'\\|([0-9]{1,5})\\|([0-9])\\|([a-f0-9]{64})\\|(RuntimeException|Error|TypeError|ValueError|ParseError|ArgumentCountError|ReflectionException|other)\\|([0-9]{1,5})\\|(none|worker|core|other)\\|([0-9]{1,6})\\|([01u]{7})\\|(-|!|[A-Za-z0-9_ ;]{1,4159})\\n(?![\\s\\S])').exec(raw);
@@ -31,6 +36,11 @@ export function failureEvidence(raw) {
   return attach({stage:s,phase:p,checks:Number(checks),groups:Number(groups),assertion,exception,
     diagnostic:source==='none'?null:{severity:Number(severity),source,line:Number(line)},
     inventory:names?{names,php_root:facts[0],mysqli_root:facts[1],no_loaded_ini:facts[2],no_scanned_ini:facts[3],no_prepend:facts[4],no_append:facts[5],report_off:facts[6]}:inventory==='!'?{status:'invalid'}:null});
+}
+export function bootstrapCauseEvidence(raw) {
+  if(typeof raw!=='string'||Buffer.byteLength(raw)>128)return null;
+  const m=/^ADBMBC1\|(RuntimeException|Error|TypeError|ArgumentCountError|ValueError|other)\|(bootstrap|other)\|(0|[1-9][0-9]{0,5})\|(never_opened|allocating|allocated|connecting|connected_unqualified|active|closed|closure_unknown)\n(?![\s\S])/.exec(raw);
+  return m?{kind:m[1],source:m[2],line:Number(m[3]),state_before_cleanup:m[4]}:null;
 }
 export function executionPhases(scope,argument,workflow) {
   if(scope===undefined&&argument===undefined&&workflow!==AUDIT_WORKFLOW)return ['audit','proof'];

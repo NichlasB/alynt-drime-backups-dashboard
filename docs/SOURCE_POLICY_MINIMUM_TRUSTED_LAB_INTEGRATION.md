@@ -1256,3 +1256,86 @@ were unchanged. No qualification workflow was dispatched: the last native run
 remains historical failed 41234652466 at 35e72a7. This evidence-only closeout
 requires its own pushed exact-head ordinary CI before handoff; it grants no
 native retry, storage fixture, production wiring or release authority.
+
+## Autonomous campaign authority and attempt ledger — 2026-10-31
+
+New explicit user approval supersedes prior per-slice approval limits only for
+the current dashboard development-and-qualification campaign: at most ten
+worthwhile milestones, ten native qualification attempts and three evidence-
+backed repair/verification cycles per distinct blocker. Includes the existing
+trusted ephemeral manual CI workflow and proven owned disposable schema/table/
+rows/account/permissions/container/process/filesystem creation and exact cleanup,
+plus source-scoped design, diagnosis, repair, tests, owning evidence, commit/push
+and exact-head ordinary CI. This is scoped R3 lab authority, not a global risk
+tier increase or a support/evidence-contract waiver. Unchanged blind retries
+are excluded. Prior source/image/core/module/admission/acceptance/resource and
+cleanup guards remain mandatory.
+
+Restore point `1b739b8389efbbed6fb928b653486a308af1d8de` is clean/synced and
+ordinary exact-head CI 41238241799 succeeded. First milestone is the genuine-core
+transport-tuple qualification, not a new plugin or deferred feature. Attempts,
+diagnostic/fix cycles, cleanup and evidence commits do not inflate milestone
+counts. Existing-site state and LocalWP/live/client/Drime operations, production
+wiring/public activation/grants/rollback, release/package/tag/deploy, new system
+installations/security policy and out-of-scope architecture/product/support
+decisions remain approval boundaries. Uploader/toolkit remain untouched unless
+directly owning evidence genuinely requires a scoped update under its workflow.
+No Novamira or installed-site target is involved in the ephemeral CI lab.
+
+Campaign attempt 1/10: [41238716042](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41238716042)
+dispatches the exact green baseline above, trusted-lab-functional-v1, with a
+fresh held audit before owned application fixtures/native proof. Duplicate/
+pending checks found no prior attempt at that head. Outcome and cleanup must
+be recorded before another attempt; no success is inferred from dispatch.
+
+Attempt 1 outcome (job 20:23:58–20:24:25 UTC): held fresh audit passed; native
+body refused the same owned-bootstrap assertion at 470 checks / zero groups.
+Four prechecks passed. Retained bootstrap handle=1, position/credits=0;
+post-internal cleanup native=closed, context=closed, close_attempted=closed=1,
+ready=0, dbh_present=0. This advances beyond the prior null-handle/pre-context
+refusal and supports the transport repair's genuine reachability, not full
+bootstrap qualification or attribution to a particular subsequent predicate.
+Handle presence is not a live handle after close. No first probe was consumed.
+
+External cleanup has only php-nonzero-exit as an issue: containers/stage removed,
+strict_release_complete=false. No owned schema/account-absence or independent
+all-server release/log/ownership/OOM/removal issue was reported. Always-recovery
+passed with no issues and no remaining owned resources. Artifact count=0. Failed
+worker exit is not relabeled clean qualification. Cleanup ownership/removal is
+established sufficiently to diagnose and undertake a fresh campaign-owned attempt;
+no retained resource is reused. Completed milestones remain 0/10, attempts 1/10.
+
+Bootstrap zero-probe refusal, diagnostic cycle 1/3: preserve the first caught
+exception's finite kind/source-category/line and native state in a private field
+before unchanged internal cleanup, then continue returning the same fixed
+unavailable WP_Error. No message, path, trace, SQL, frame/credential, handle,
+callback, native read/reissue, acceptance grant or cleanup suppression is added.
+The initial once-only refusal precedes this catch, so repeated invocation cannot
+overwrite the retained first cause. A successful bootstrap leaves it null.
+
+The fixed source-owned harness reads those four bounded fields only and emits
+optional ADBMBC1 before existing ADBMBD1/ADBMF1/2. Existing envelopes are unchanged;
+the receiver accepts at most one finite cause prefix (128-byte limit), keeps the
+original failure and progress, and retains the combined 4,608-byte bound. This
+is diagnostic DATA, not a runtime or successful release receipt. Unknown source
+identities, malformed fields/extra payloads, duplicated/reordered/standalone
+packets and path/message-bearing DATA reject without raw output.
+
+Isolated focused checks: bootstrap/transport/minimum-lab tests 189 / 699
+assertions and diagnostic Node tests 10/10 pass. Actual model server refusal
+retains the exact source line and connected_unqualified state after cleanup;
+early source refusal remains never_opened, positive/unknown cases emit no cause.
+Malformed private metadata and unknown-object magic are rejected. An in-memory
+omitted-capture control is assertion-killed, not a startup failure. Full ordinary
+QA and successful exact-head CI precede a second, newly justified native attempt.
+This diagnostic cycle is part of milestone 1, not a separate completed milestone.
+
+Cycle 1 local QA: PHP 8.5.1 full isolated suite 2,573 tests / 23,263 assertions,
+two existing Sodium environment skips and no failures; Node 72/72 no failures/
+skips, including final strengthened first-cause/no-success-record assertions.
+Full PHPCS (255 files), focused syntax/lint, structure/build, strict Composer
+validation, Composer audit, npm moderate audit and whitespace checks pass;
+zero reported dependency vulnerabilities and no generated delta. Review confirms
+no SQL/native primitive was added, fixed refusal and effect order are retained,
+source/module/image pins and budgets unchanged, and catch DATA does not qualify
+an owner. Exact-head CI and fresh audit are still required before attempt 2.

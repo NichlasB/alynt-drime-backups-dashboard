@@ -50,10 +50,12 @@ function adb0_owner() {
 		$result = $bootstrap->invoke( $owner );
 	} catch ( Throwable $error ) {
 		$GLOBALS['adbm_bootstrap_failure'] = $GLOBALS['adbm_bootstrap_failure'] ?? adbm_bootstrap_after( $owner, $context, $before, null, true );
+		$GLOBALS['adbm_bootstrap_cause']   = $GLOBALS['adbm_bootstrap_cause'] ?? adbm_bootstrap_cause_wire( $owner, $context );
 		throw $error;
 	}
 	if ( true !== $result || true !== $owner->ready ) {
 		$GLOBALS['adbm_bootstrap_failure'] = $GLOBALS['adbm_bootstrap_failure'] ?? adbm_bootstrap_after( $owner, $context, $before, $result );
+		$GLOBALS['adbm_bootstrap_cause']   = $GLOBALS['adbm_bootstrap_cause'] ?? adbm_bootstrap_cause_wire( $owner, $context );
 	}
 	adbb_check( true === $result && $owner->ready, 'actual ambient-bound bootstrap' );
 	adbb_check( 0 === ( new mysqli_driver() )->report_mode, 'owned initializer preserves OFF' );

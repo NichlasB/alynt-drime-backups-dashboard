@@ -311,8 +311,9 @@ try {
 	$first    = $GLOBALS['adbb_first_failure'];
 	$wire     = function_exists( 'adbm_failure_wire' ) ? adbm_failure_wire( $first, $GLOBALS['adbm_inventory'] ?? null ) : '';
 	$progress = function_exists( 'adbm_bootstrap_wire' ) ? adbm_bootstrap_wire( $GLOBALS['adbm_bootstrap_failure'] ?? null ) : '';
+	$cause    = $GLOBALS['adbm_bootstrap_cause'] ?? '';
 	// Early failures retain the original finite envelope; never substitute raw diagnostics.
-	fwrite( STDERR, $progress . ( '' !== $wire ? $wire : 'ADBMF1|' . $first['stage'] . '|' . $first['phase'] . '|' . $first['checks'] . '|' . $first['groups'] . "\n" ) );
+	fwrite( STDERR, $cause . $progress . ( '' !== $wire ? $wire : 'ADBMF1|' . $first['stage'] . '|' . $first['phase'] . '|' . $first['checks'] . '|' . $first['groups'] . "\n" ) );
 } finally {
 	foreach ( $owners as $owned ) {
 		try {

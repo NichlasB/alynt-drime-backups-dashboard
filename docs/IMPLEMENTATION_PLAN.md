@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Autonomous dashboard development-and-qualification campaign — 2026-10-31
+
+User explicitly approves up to ten worthwhile milestones in the current
+workstream, starting with genuine-core transport compatibility qualification.
+Restore baseline is clean/synced `1b739b8389efbbed6fb928b653486a308af1d8de`,
+ordinary exact-head CI 41238241799 reverified successful. The existing trusted
+ephemeral CI lab and proven owned schema/table/rows/account/permissions/process/
+filesystem cleanup are authorized R3 activities only; this is not a global risk
+tier increase. No LocalWP/live/client/Drime or existing application state,
+production wiring/public activation/grants/rollback, release/package/tag/deploy,
+new installation or out-of-scope product/architecture/support decision.
+
+Campaign ceilings: ten native attempts total, three evidence-backed repair/
+verification cycles per distinct blocker. Never blindly rerun an unchanged
+failure; retain guards, acceptance, pins and budgets, and verify owned cleanup
+before the next attempt. Stop if ownership/cleanup cannot be established,
+limits are exhausted or the next meaningful step crosses the agreed boundary.
+Do not count retries, cleanup or evidence commits as extra product milestones.
+The earlier 1/8 safe-local count is historical, not this campaign's counter.
+Current milestone/attempt evidence is owned by the
+[trusted-lab integration record](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#autonomous-campaign-authority-and-attempt-ledger--2026-10-31).
+
 ## Approved repository-only genuine-core transport tuple compatibility — 2026-10-31
 
 User approves the exact next gated foundation from clean/synced restore point

@@ -2,6 +2,7 @@
 /** In-memory APIs only; no genuine core, SQL, network or native driver. */
 if(defined('ABSPATH'))return;
 if(PHP_SAPI!=='cli'||count($argv)!==2||extension_loaded('mysqli')||extension_loaded('pdo_mysql'))exit(1);
+$causeOnly=0===strpos($argv[1],'cause-');if($causeOnly)$argv[1]=substr($argv[1],6);
 define('ABSPATH',dirname(__DIR__,2).'/');define('ADB_POLICY_ISOLATED',true);
 require ABSPATH.'vendor/autoload.php';require __DIR__.'/wordpress-shims.php';
 foreach(array('isolated-wordpress','bootstrap-driver','bootstrap-metadata','isolated-wpdb')as$file)require __DIR__.'/source-policy-'.$file.'.php';
@@ -49,5 +50,11 @@ try {
  }
  trigger_error('owned-test-warning',E_USER_WARNING);A::assertSame(2,$prior_calls);restore_error_handler();
  A::assertSame(array('sentinel'=>'unchanged'),$GLOBALS['adbb_first_failure']);
- $owner->close();echo adbm_bootstrap_wire($row);
+ $owner->close();
+ if($causeOnly&&0===strpos($argv[1],'malformed-')){
+  $bad=array('kind'=>'RuntimeException','source'=>'bootstrap','line'=>1,'state'=>'connecting');$field=substr($argv[1],10);
+  if('extra'===$field)$bad['payload']='never-export-private';elseif('line'===$field)$bad['line']='1';elseif('object'===$field)$bad['state']=new stdClass();else $bad['kind']='private-message';
+  boot_set($owner,'bootstrap_failure',$bad);
+ }
+ echo $causeOnly?adbm_bootstrap_cause_wire($owner,$context):adbm_bootstrap_wire($row);
 }catch(Throwable$error){fwrite(STDERR,'Isolated bootstrap diagnostic refused: '.get_class($error)."\n");exit(1);}
