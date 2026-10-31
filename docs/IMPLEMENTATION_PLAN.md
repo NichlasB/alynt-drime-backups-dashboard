@@ -10,7 +10,9 @@ phase, but existing-authority independent host-observer feasibility must pass
 first. No custom loader, new privileges, invented module origins or whole-OS
 attestation. No source/test/workflow, download, loading/execution or wiring
 change. Relevant local 254 / 2,803, structure/manifest/audits and 170 local-link
-checks passed; exact-head publication pending. Actual dependency closure stays open.
+checks passed. Design `3c72a3f` is pushed; exact-head ordinary CI 41193159552
+passed (PHP 7.4/8.3 each 2,440 tests, no failures/skips). Owning design records
+actual counts and scope limits. Actual dependency closure stays open.
 
 Implementation-plan progress: finite admission contract and next physical trust
 gate established. Recommended next gated slice: Linux Minimum-Lab

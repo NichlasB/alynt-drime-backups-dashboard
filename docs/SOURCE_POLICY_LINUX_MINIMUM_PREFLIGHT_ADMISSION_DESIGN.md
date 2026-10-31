@@ -232,10 +232,19 @@ moderate audit passed, zero known project advisories/vulnerabilities. Whitespace
 and 170 owning local documentation targets passed. Executable/test/runtime,
 artifact/core pins, tuple, workflow and dependency files remain unchanged;
 uploader/toolkit clean at original `3dfcb15` / `c067eb6` heads. Full local suite/
-build/lint were not rerun for this docs-only change; exact-head ordinary CI will
-supply actual matrix evidence, not an assumed historical refresh. Publication
-pending. No whole-plugin readiness or new physical proof is claimed by this
-design or its ordinary CI.
+build/lint were not rerun locally for this docs-only change.
+
+Design `3c72a3fedc22a310a69dbacdabe044719582cd5a` is pushed;
+[exact-head ordinary CI 41193159552](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41193159552)
+passed. Actual PHP 7.4: 2,440 tests / 22,951 assertions; PHP 8.3: 2,440 /
+22,956, no failures/skips. Admin 23/23 per matrix with zero failures/skips;
+manifest, audits, build, structure and PHPCS passed, zero known project
+dependency advisories/vulnerabilities. Existing Setup Node `punycode` /
+`url.parse()` deprecations remain visible tool-level warnings. The docs-only
+evidence closeout is pushed and independently exact-head CI/remote/clean
+verified at handoff. Ordinary CI is unchanged-contract validation, not
+implementation or host-observer feasibility evidence. No whole-plugin readiness
+or new physical proof is claimed by this design or its ordinary CI.
 
 Implementation-plan progress: finite staged inventory/preflight contract selected;
 candidate loading remains blocked on existing host-observer feasibility, not
