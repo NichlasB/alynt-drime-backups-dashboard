@@ -11,7 +11,10 @@ is unchanged, so lost-update repair is not wired/deployed or complete. PHP 7.4 /
 core 6.0 support declarations and all guards remain unchanged. Docs only, no
 native/site/database/configuration or production-wiring operation. Local unchanged-
 contract checks 262 / 2,864, no failures/skips; structure/manifest/audits/208 local
-links passed. Publication/ordinary exact-head CI pending; no physical refresh.
+links passed. Decision `dd2d313` pushed; exact-head ordinary CI 41221771788
+passed (PHP 7.4 2,448 / 23,012; PHP 8.3 2,448 / 23,017, no failures/skips;
+admin 23/23 per matrix). Owning decision records actual evidence; no physical
+refresh or trust-model acceptance is claimed.
 
 Implementation-plan progress: route deferred, product/release impact and exact
 resume criteria recorded, not feature completion or a new batch count.

@@ -143,8 +143,17 @@ known project dependency advisories/vulnerabilities. Whitespace and 208 owning
 local documentation targets passed. Runtime, scripts, tests, workflow, artifact/
 profile pins, dependencies, root metadata and assets unchanged against baseline.
 Uploader/toolkit remain clean/read-only at `3dfcb15` / `c067eb6`. Full local
-suite/lint/build not rerun for this docs-only slice; ordinary exact-head CI and
-publication pending. No site or physical workflow dispatched.
+suite/lint/build not rerun for this docs-only slice. No site or physical workflow
+dispatched.
+
+Decision `dd2d3133a9e86b50e04e5d9af0310f50046631ed` is pushed;
+[ordinary exact-head CI 41221771788](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41221771788)
+passed: PHP 7.4 2,448 tests / 23,012 assertions, PHP 8.3 2,448 / 23,017,
+no failures/skips. Admin 23/23 per matrix, no failures/skips; configured lint,
+build, structure, manifest and dependency audits passed. Ordinary CI validates
+unchanged source contracts, not a new compatibility trust model or physical
+qualification. The docs-only evidence closeout receives independent remote/
+clean/synced and exact-head ordinary CI verification at handoff; no audit rerun.
 
 Recommended next gated slice: **Repository-Only Genuine Minimum-Profile
 Trusted-Lab Qualification Replan**, design-only with execution, downloads,
