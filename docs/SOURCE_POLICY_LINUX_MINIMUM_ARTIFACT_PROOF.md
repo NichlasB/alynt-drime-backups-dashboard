@@ -277,16 +277,15 @@ authorize another physical attempt; no new retrieval follows publication.
 
 ## Exact resume recommendation
 
-Implementation-plan progress: the refusal is now specifically identified with
-bounded facts and confirmed cleanup, but complete artifact qualification remains
-blocked by the existing ASCII-only virtual-path policy. No native or product
-completion claim; the safe-local diagnostic lane has reached a policy gate.
+Implementation-plan progress: the refusal is specifically identified with
+bounded facts and confirmed cleanup. The approved [Unicode path policy design](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md)
+selects a separate tar-only contract; it does not change actual ASCII refusal
+or renew acquisition authority. No native or product completion claim.
 Do not reopen Windows observer work or fill the queue with generic cleanup.
 
-Recommended next gated slice: **Repository-Only Unicode Archive-Metadata Path
-Policy and Critical-Link Containment Design**. Approve design-only analysis of
-bounded virtual-name treatment and its relationship to traversal, duplicate/
-whiteout identity and critical-role/ancestor link refusals before changing any
-acceptance rule. No normalization, acceptance change, budget increase, fallback
-or payload retry is approved here. Existing pins/guards remain; runtime loading,
-native experiments and production wiring stay disabled.
+Recommended next gated slice: **Local-Only Socket-Free Tar Unicode Virtual-Name
+and Critical-Link Containment Safety Foundation**, synthetic/isolated tests only,
+implementing the approved design before any separate acquisition decision. No
+acceptance change, budget increase, fallback or payload retry is approved by
+this design-only slice. Pins/guards remain unchanged; runtime loading, native
+experiments and production wiring stay disabled.

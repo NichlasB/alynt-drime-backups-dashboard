@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum artifacts: tar-only Unicode policy design — 2026-10-31
+
+Approved [repository-only path/containment design](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md)
+at clean/synced baseline `febe6db`. Selects a separate tar-only bounded literal
+Unicode policy, preserving ASCII core/Git/ZIP contracts, exact identity and
+critical-link/read/whiteout guards. Records the existing conservative whiteout
+ordering limit, not full OCI changeset conformance. No code/tests, acquisition,
+extraction, native operation or wiring change. Related local 114 / 1,933 and
+structure/manifest/audits/link checks passed; exact-head publication pending.
+
+Implementation-plan progress: finite policy and non-vacuous synthetic proof
+contract established; artifact/native qualification remains refused. Recommended
+next gated slice: Local-Only Socket-Free Tar Unicode Virtual-Name and Critical-
+Link Containment Safety Foundation, synthetic/isolated tests only. It needs
+acceptance-change approval; no physical retry or production work is authorized.
+
 ## Linux minimum artifacts: non-ASCII refusal identified — 2026-10-31
 
 At clean/synced baseline `1b10c0e`, user approves harness-only bounded path
