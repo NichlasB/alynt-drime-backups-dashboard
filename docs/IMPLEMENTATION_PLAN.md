@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Current-source Linux/socket owned requalification passed — 2026-10-31
+
+Approved fixed ephemeral runner at1c4f848 passes285 checks/nine groups in
+[native41247436756](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31),
+fresh audit/byte probe, independent held-live/post-exit release, exact primary/
+always cleanup and artifact0. No implementation, guard, budget or wiring changes.
+Implementation-plan progress: required current Linux row L is refreshed;
+after publication/exact-head CI, campaign3/10 milestones,7/10 ordered attempts.
+Required legacy row M (core6.0/PHP7.4/exact10.6.23) remains unqualified; existing
+newer-server minimum-lab success does not close it. No generic cleanup is selected
+to inflate the milestone count. Recommended next gated slice: **Legacy-Minimum
+Exact-Server Candidate and Owned Qualification Design**, finite candidate/runner
+decision before new provisioning/native scope, no support waiver, toolchain
+reopening or production/provider/form wiring.
+
 ## Current-source Windows/TCP owned requalification passed — 2026-10-31
 
 The separately approved/confirmed Plugin Tester local-only proof at2c28b1e

@@ -13,7 +13,7 @@ no new site/native run, support exclusion or separate milestone is created.
 | Accepted M-lab: PHP/mysqlnd7.4.33, core6.0, TCP, MariaDB10.11.18-ubu2204 | Exact19288da/image50437fc7… passes fresh audit, byte probe, nine groups and independent strict release/cleanup; raw API identity has literal5.5.5 prefix, connection unicode_ci, physical schema unicode_520_ci. Trusted-lab evidence only. |
 | Legacy M: core6.0/PHP7.4, exact10.6.23-MariaDB | Not qualified by the newer-server lab. Do not waive/exclude this required row or fabricate its server/version. Existing Windows-minimum observer/toolchain route stays deferred. |
 | W: current-source Windows/TCP, core7.1.3/PHP8.5.12, exact10.6.23 | Separately approved fresh proof at2c28b1e passes403/9 with fresh ADBC2 release and all77 application checksums unchanged; see current owning evidence below. Historical3f9530d receipt is not transferred. |
-| L: Linux/socket core7.1.4/PHP8.5.12, exact10.11.18-ubu2204 | Historical successful b0717fc54597712a823c3ebaf1ea497c39ed115b/image only. Shared-source impact/revalidation remains required before provider/form/release readiness; M-lab success does not transfer to this tuple. |
+| L: Linux/socket core7.1.4/PHP8.5.12, exact10.11.18-ubu2204 | Separately approved current-source proof at1c4f848/native41247436756 passes285/9, exact byte probe, independent held-live/post-exit release and exact cleanup; historical b0717fc image is not transferred. |
 
 Repository diff against both historical native source heads confirms changes
 to shared bootstrap-evidence/native-bootstrap, native-profile and transport-
@@ -22,7 +22,14 @@ Some branches retain strict defaults in model tests, but that is not physical
 requalification of a new source image. The historical Windows/Linux records
 retain their actual counts and successful original-image scope unchanged.
 
-The Windows slice below was subsequently approved, confirmed and completed;
+Current resume point: both W and L were separately approved and physically
+requalified. [Linux current evidence](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
+closes L, not legacy M. Recommended next gated slice is **Legacy-Minimum Exact-
+Server Candidate and Owned Qualification Design**, core6.0/PHP7.4/exact10.6.23
+candidate/runner decision before new provisioning/native authority. No inferred
+support waiver or reopened deferred Windows observer/toolchain route.
+
+Historical resume wording: the Windows slice below was approved, confirmed and completed;
 [current evidence](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
 supersedes its pending status, not historical scope limits. Preferred next gated
 slice is **Current-Source Linux/Socket Owned Requalification and Cleanup Proof**,

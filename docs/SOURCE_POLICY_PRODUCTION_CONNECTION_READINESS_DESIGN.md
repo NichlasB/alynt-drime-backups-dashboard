@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume: approved Linux/socket [requalification](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
+at1c4f848/native41247436756 passes285/9 with byte probe, independent release and
+exact cleanup. W and L current-source rows now have physical evidence. Campaign
+3/10 milestones after publication/CI,7/10 attempts. Required legacy minimum M
+remains unqualified: recommended next gated slice is **Legacy-Minimum Exact-Server
+Candidate and Owned Qualification Design**, without new provisioning/native
+operations, support waiver, deferred toolchain reopening or provider/form wiring.
+The previous W-to-L resume wording below is historical.
+
 Current resume point: separately approved current-source Windows/TCP
 [requalification](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
 passes403/9 at2c28b1e, fresh ADBC2 release, exact cleanup and77 unchanged existing

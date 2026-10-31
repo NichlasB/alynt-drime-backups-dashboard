@@ -1,5 +1,92 @@
 # Off-Production Linux Genuine-Core/OFF and Diagnostic Native Qualification
 
+## Current shared-source requalification — 2026-10-31
+
+User explicitly approves Current-Source Linux/Socket Owned Requalification and
+Cleanup Proof. R3 scope is only the existing fixed ephemeral runner, owned
+schema/table/account/process/container/directory and exact cleanup, not a risk-tier
+increase or any existing site operation. Clean/synced restore/native source:
+`1c4f8482ca7ee0086ee8517c9c32bdb745c044a1`; ordinary CI41243587114 reverified
+successful before dispatch. This is campaign ordered attempt7/10, not a reset or
+an inferred extension of the historical b0717fc receipt. No implementation,
+runtime/harness/workflow, acceptance, source-pin or budget change was required.
+
+Fresh repository prerequisites pass: related isolated364 tests/2951 assertions,
+no failures/skips; Node74/74, including source-backed refusal and semantic
+controls; Node controller syntax and Bash runner syntax. The initially guessed
+Git Bash path was absent; resolved installed Git at C:/Apps/Git and its existing
+bin/bash.exe passed syntax without installation/configuration changes. No native
+attempt was issued before these prerequisites and exact baseline verification.
+
+Exactly one manual dispatch at the source above:
+[41247436756](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41247436756),
+job124673686304,2026-10-31 22:16:34–22:17:10UTC, **success**. Fresh unchanged
+connection-free environment preflight removes its own resources/core checkout
+before reacquiring the same official core7.1.4 commit. Source audit22:17:02.368
+records29 checks/zero native connections/zero SQL; initial reporting3, pinned
+PHP/mysqlnd8.5.12, source/ABI/closure and private image checks remain enforced.
+
+Frozen loaded producer/runtime/controller image:
+`65222424fd10581a33de60bf2eb6814d378132e502447dac9d7149cfd059a930`;
+run `23e58c36f71f293331e83673c909e5dc`. The immutable MariaDB image and resource,
+network:none/socket-only, non-root/capability/readonly/tmpfs limits below are
+unchanged. Fresh baseline22:17:04.212: exact10.11.18-MariaDB-ubu2204, noTCP1,
+wsrep0, nativeAIO1, autocommit1, in_transaction0, other all-server sessions0,
+INNODB_TRX0, non-system schemas0; host io_uring_disabled0. No application database
+or host/site data is mounted or used. Only the new adb_owned table/account receives
+fixture writes; restricted-account denial and byte probe remain required guards.
+
+Actual held terminal22:17:06.695: pid3418, **285 checks/nine groups**, mode0,
+closedtrue, exact image/run, independent_livezero/independent_post_exitzero,
+qualificationlab-only. Genuine core creates the private ambient and selects OFF;
+the dedicated owner preserves its handle/thread/callback/reporting identity.
+Unchanged quote/backslash/NUL/percent/four-byte UTF8 probe returns exactly the
+original bytes; all nine view/save/no-op/stale/removal/update-race/creation-conflict/
+transform-reentry/lock/uncertainty/native1064/1062/1205 groups pass without replay.
+Default strict profile/session/schema guards are not replaced by a lab fallback.
+
+The correlated closed child stays held during independent all-server zero
+session/transaction observation, receives the exact run/image acknowledgement,
+exits cleanly and passes distinct post-exit reconciliation. Exact cleanup checks
+quiescence, removes only the owned schema/account, requires zero non-system
+schemas/owned accounts/sessions/transactions, normal server exit0/notOOM, then
+removes the exact container/known leaves/directories. Primary cleanup22:17:07.027
+and always cleanup22:17:07.083 both report containers0/directories0/tmpfs released/
+reconciliation_failure0; preflight cleanup22:17:07.847 core_checkout0. Artifact
+count0. Removed fixture data is disposable; tmpfs release is not secure-wipe proof.
+No recovery, native rerun or retained resource is needed for evidence publication.
+
+Full bounded diagnostic review passes unchanged. Known namespace/WSREP/io_uring
+fallback warnings remain visible, nativeAIO1 and normal shutdown observed; no
+kernel/IO/account/network policy or warning acceptance is widened. Bootstrap2137B
+SHA25649af9cde09b89c7d8550ccaadc3a954f44646633d86f73142dfcbd29a84c06e3;
+initial server2450B SHA256bc5fd619b941f3cce0de2e09a7c7680cc2f9470ad485dba6a7f414d66783d028;
+final server3071B SHA2561b3f796cd0cf3c8f02f1328845067af2611e028427e7820060ad4b424466e945.
+
+This is current-image physical Linux/socket evidence, not independent loaded-
+object/reproducible-build attestation, whole WordPress authentication/bootstrap,
+legacy core6.0/PHP7.4/exact10.6.23 coverage, provider/form admission or production
+readiness. No LocalWP/live/client/Drime state, actual users/options/cron/lifecycle,
+credentials, production wiring/grants/activation/rollback, package/tag/release or
+deployment is touched. Historical evidence below is preserved. Uploader/toolkit
+are outside this change. Fresh repository QA: full local PHP8.5.1 PHPUnit
+2589 tests/23346 assertions, no failures, two existing missing-Sodium skips;
+PHPCS255 files, Node74/74 without skips, structure/build, strict Composer
+validation and Composer/npm audits pass, zero known advisories/vulnerabilities.
+Only owning evidence/plan records change; runtime/harness/workflow/asset/dependency
+bytes remain identical to the native-tested source. Local link/diff/ownership
+review passes. Publication exact-head ordinary CI is recorded after execution;
+isolated QA is not a replacement for the native receipt or whole-plugin review.
+
+Implementation-plan progress: current Linux/socket shared-source requalification
+closes row L; campaign totals become3/10 milestones after publication/exact-head
+CI,7/10 ordered attempts. Required legacy minimum-server row M remains unqualified;
+the newer-server minimum lab is not its substitute or a support waiver.
+Recommended next gated slice: **Legacy-Minimum Exact-Server Candidate and Owned
+Qualification Design**. Resolve a finite core6.0/PHP7.4/exact10.6.23 candidate and
+runner before any new provisioning/native authority; preserve deferred Windows
+observer/toolchain work, support declarations and closed provider/form wiring.
+
 ## Current scoped status — 2026-10-29
 
 Pinned lab qualification **passed** atb0717fc54597712a823c3ebaf1ea497c39ed115b,
