@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current minimum-profile disposition: [Linux observer-route deferral](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md).
+Only that infrastructure route is deferred. Genuine minimum qualification and
+the production/form integration gates below remain open/closed respectively;
+no support declaration, runtime guard, active legacy writer or release waiver
+changes. Existing proof rows below retain their historical scope.
+
 Later [deployment-matched qualification design](SOURCE_POLICY_DEPLOYMENT_MATCHED_QUALIFICATION_DESIGN.md)
 records the separately approved static live audit and selects bounded off-production
 Linux/socket/core-derived-charset qualification. No site is re-read or production

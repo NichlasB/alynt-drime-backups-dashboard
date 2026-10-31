@@ -1,5 +1,10 @@
 # Linux Minimum-Lab Dependency-Closure and Connection-Free Preflight Admission Design
 
+Current route disposition: [observer boundary and deferral decision](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md).
+The independent-observer-dependent physical stages below are deferred, not
+qualified or implicitly approved. The historical design stays intact; no
+inventory/runtime/DATA continuation until an explicit accepted evidence strategy.
+
 ## Authority and selected direction — 2026-10-31
 
 Approved repository-only design at clean/synced restore baseline

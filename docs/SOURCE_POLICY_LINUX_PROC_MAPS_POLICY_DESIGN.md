@@ -284,10 +284,12 @@ Implementation-plan progress: the bounded access question is answered for this
 existing-authority CI profile. The independent-observer lane is blocked at a
 trust/product boundary, not another reader fix or generic maintenance queue.
 
-Recommended next gated slice: **Repository-Only Linux Minimum-Lab Observer
-Boundary and Qualification Deferral Decision**, design-only. Preferred direction:
-defer this independent-observer lane under current authority rather than add
-privileges, another principal/helper or repeated experiments. Record the exact
-product/release impact, unchanged support claims and criteria for revisiting it;
-do not weaken the current runtime gate or silently substitute child/path reports.
-No new execution, download, site/database operation or production wiring.
+The approved [boundary and deferral decision](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md)
+defers this route under current CI authority. Existing evidence/tooling stays
+intact; no observer retry, new privilege/helper or runtime/DATA continuation.
+Minimum compatibility and the source-policy application switch remain gated.
+
+Recommended next gated slice: **Repository-Only Genuine Minimum-Profile
+Trusted-Lab Qualification Replan**, design-only. Evaluate the explicit proposed
+compatibility evidence-strategy change and disclose reduced claims before any
+implementation or physical authority; no guard waiver or source/path self-grant.

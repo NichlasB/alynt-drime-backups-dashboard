@@ -276,8 +276,8 @@ Access unavailable, no atomic/candidate qualification; child reaped, stage
 independently absent, source/authority unchanged. It does not refresh or turn
 the two preceding failed ADBLHO1 attempts into successes.
 
-Recommended next gated slice: **Repository-Only Linux Minimum-Lab Observer
-Boundary and Qualification Deferral Decision**, design-only. Prefer deferring
-this lane under existing authority, with explicit product/release impact and
-resume criteria, not added privilege/helpers or another physical experiment.
-Runtime guards, support claims and production wiring remain unchanged.
+The approved [observer-route deferral](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md)
+records unchanged support/guards, product/release impact and explicit resume
+criteria. No repeat audit or new privilege/helper is selected. Follow its next
+product gate: Repository-Only Genuine Minimum-Profile Trusted-Lab Qualification
+Replan, design-only, with implementation/execution and production wiring disabled.

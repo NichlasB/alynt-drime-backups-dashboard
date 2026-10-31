@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: approved observer-route deferral — 2026-10-31
+
+At clean/synced baseline `7644556`, user approves the [repository-only boundary/deferral decision](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md).
+Independent kernel-mapping observation on the tested CI authority is deferred;
+no retry, privileged helper or further route-specific runtime/DATA batch.
+Parent genuine minimum PHP/core qualification stays open. Public native factory
+and production integration remain closed; active legacy source-policy writing
+is unchanged, so lost-update repair is not wired/deployed or complete. PHP 7.4 /
+core 6.0 support declarations and all guards remain unchanged. Docs only, no
+native/site/database/configuration or production-wiring operation. Local unchanged-
+contract checks 262 / 2,864, no failures/skips; structure/manifest/audits/208 local
+links passed. Publication/ordinary exact-head CI pending; no physical refresh.
+
+Implementation-plan progress: route deferred, product/release impact and exact
+resume criteria recorded, not feature completion or a new batch count.
+Recommended next gated slice: Repository-Only Genuine Minimum-Profile Trusted-
+Lab Qualification Replan, design-only. Evaluate an explicitly trusted-lab
+compatibility evidence contract and disclose any reduced claim before any
+implementation/execution; current qualification/wiring gate is not waived.
+
 ## Linux minimum lab: approved access-only integration and one audit — 2026-10-31
 
 At clean/synced baseline `9eb7ce808c85e770f196a92c5c471271e986353e`, user
