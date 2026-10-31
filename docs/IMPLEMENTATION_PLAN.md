@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: bounded dependency/preflight admission design — 2026-10-31
+
+Approved [repository-only dependency/preflight design](SOURCE_POLICY_LINUX_MINIMUM_PREFLIGHT_ADMISSION_DESIGN.md)
+at clean/synced baseline `1a97a55`. Separates static bytes, bounded candidate
+inventory and actual mapped/startup observations. Selects standard-engine
+non-starting inventory followed by a separately approved PHP-only connection-free
+phase, but existing-authority independent host-observer feasibility must pass
+first. No custom loader, new privileges, invented module origins or whole-OS
+attestation. No source/test/workflow, download, loading/execution or wiring
+change. Relevant local 254 / 2,803, structure/manifest/audits and 170 local-link
+checks passed; exact-head publication pending. Actual dependency closure stays open.
+
+Implementation-plan progress: finite admission contract and next physical trust
+gate established. Recommended next gated slice: Linux Minimum-Lab
+Existing-Authority Read-Only Host-Observer Feasibility and Owned Harmless-Child
+Cleanup Audit on an approved ephemeral Linux CI host, without candidate images,
+SQL, elevation or permission changes. Do not build more runtime/DATA machinery
+if that observer boundary cannot be met under existing approved authority.
+
 ## Linux minimum artifacts: complete static proof, cleanup confirmed — 2026-10-31
 
 At clean/synced baseline `5ec779b`, user approves one bounded static acquisition/

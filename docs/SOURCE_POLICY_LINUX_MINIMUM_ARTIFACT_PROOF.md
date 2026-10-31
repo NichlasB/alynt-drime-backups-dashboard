@@ -395,9 +395,13 @@ with owned cleanup confirmed. Dependency closure and runtime/native admission
 remain open; this is a real static-evidence milestone, not product completion.
 Do not reopen Windows observer work or fill the queue with generic cleanup.
 
-Recommended next gated slice: **Repository-Only Linux Minimum-Lab
-Dependency-Closure and Connection-Free Preflight Admission Design**. Resolve finite
-dependency/source/configuration identity and the isolated launch/zero-connection
-evidence contract before any candidate loading. Design-only: no new acquisition,
-extraction, provisioning, loader/runtime/native/database experiment or wiring.
-The completed acquisition scope grants none of those later actions.
+Follow-up: the approved [dependency/preflight admission design](SOURCE_POLICY_LINUX_MINIMUM_PREFLIGHT_ADMISSION_DESIGN.md)
+selects staged non-starting inventory and PHP-only observations, with independent
+host-observer feasibility first. It changes no executable or physical evidence.
+
+Recommended next gated slice: **Linux Minimum-Lab Existing-Authority Read-Only
+Host-Observer Feasibility and Owned Harmless-Child Cleanup Audit** on an approved
+ephemeral Linux CI host. No candidate download/loading/execution, database/site
+operation, elevation or permission change. Verify that the required observer is
+possible under existing approved authority before further runtime-admission
+implementation; the completed static acquisition authorizes none of that work.
