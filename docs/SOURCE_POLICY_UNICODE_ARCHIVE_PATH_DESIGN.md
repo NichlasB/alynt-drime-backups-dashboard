@@ -6,8 +6,10 @@ Approved repository-only design at clean/synced baseline
 `febe6db16386a40bab25d71afd589b6269f49c17`. Documentation, ordinary trusted
 repository validation, commit/push and exact-head CI only. No parser/test-source
 implementation, artifact acquisition, extraction, candidate loading/execution,
-Docker operation, WordPress/site/authentication/SQL/fixture operation, permission
-change, package/release/deploy or production-wiring change. No site target is
+Docker operation, WordPress/site/authentication/SQL or operational storage-fixture
+operation, permission change, package/release/deploy or production-wiring change.
+Existing isolated offline test temporary files/cleanup are ordinary QA, not a
+new operational fixture proof. No site target is
 selected; LocalWP confirmation/Novamira operations do not apply. Uploader and
 toolkit stay read-only; no toolkit or whole-plugin readiness rows are refreshed.
 
@@ -176,10 +178,19 @@ not implementation of this proposal. `npm run check:structure` passed (149
 runtime / 235 PHP support / 227 test files / 224 classes); strict Composer
 manifest validation and Composer/npm moderate audits passed, zero known
 advisories/vulnerabilities. Whitespace and all 160 owning local documentation
-targets passed. Remote master matches the baseline; uploader/toolkit remain
-clean at `3dfcb15` / `c067eb6`. Exact-head publication pending; full suite/build/
-lint execution for this docs head will be reported from actual CI, not assumed
-from historical runs. No physical proof or whole-plugin readiness is renewed.
+targets passed. Pre-publication remote master matched the baseline;
+uploader/toolkit remain clean at `3dfcb15` / `c067eb6`.
+
+Design `0a6ae7e5a9fd3830d7302fe43b93131ebcd46bb6` is pushed;
+[exact-head ordinary CI 41189182921](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41189182921)
+succeeded. Actual PHP 7.4: 2,440 tests / 22,951 assertions; PHP 8.3: 2,440 /
+22,956, no failures/skips. Admin 23/23 per matrix, no failures/skips; build,
+structure, PHPCS, manifest and dependency audits passed, zero known dependency
+advisories/vulnerabilities. Existing Setup Node `punycode` / `url.parse()`
+deprecation warnings remain visible tool-level warnings. The docs-only evidence
+closeout is pushed and independently exact-head CI/remote/clean checked at
+handoff. No physical proof or whole-plugin readiness is renewed; ordinary CI
+does not implement/test the new policy or supersede the artifact refusal.
 
 Implementation-plan progress: a finite tar-only policy and implementation proof
 contract are selected; actual parser behaviour and artifact admission remain

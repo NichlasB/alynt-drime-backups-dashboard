@@ -8,7 +8,9 @@ Unicode policy, preserving ASCII core/Git/ZIP contracts, exact identity and
 critical-link/read/whiteout guards. Records the existing conservative whiteout
 ordering limit, not full OCI changeset conformance. No code/tests, acquisition,
 extraction, native operation or wiring change. Related local 114 / 1,933 and
-structure/manifest/audits/link checks passed; exact-head publication pending.
+structure/manifest/audits/link checks passed. Design `0a6ae7e` is pushed;
+exact-head ordinary CI 41189182921 passed (PHP 7.4/8.3 each 2,440 tests,
+no failures/skips). Owning design records actual counts and proof limits.
 
 Implementation-plan progress: finite policy and non-vacuous synthetic proof
 contract established; artifact/native qualification remains refused. Recommended
