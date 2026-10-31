@@ -196,6 +196,79 @@ passed, zero known project advisories/vulnerabilities. Whitespace and 173 owning
 local documentation targets passed. Final scoped error/privacy/resource/
 ownership/cleanup/test-integrity review confirms diagnostic-only behavior and
 unchanged runtime, workflow/child, artifact reader/pins, tuple, ADBC1/ADBC2 and
-dependency sources. Uploader/toolkit clean/read-only. Exact-head publication/CI
-pending; no fresh physical attempt has run yet. No whole-plugin readiness
-evidence is refreshed.
+dependency sources. Uploader/toolkit clean/read-only. No whole-plugin readiness
+evidence is refreshed. Publication and the single fresh result follow.
+
+## Fresh diagnostic audit result — 2026-10-31
+
+Diagnostic implementation `60dfbdedcd989ec943de41994b768137aa4a733a` is pushed;
+[ordinary exact-head CI 41199300682](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41199300682)
+passed before dispatch: PHP 7.4 2,447 tests / 23,007 assertions, PHP 8.3
+2,447 / 23,012, no failures/skips; admin 23/23 per matrix with no failures/
+skips. Other configured lint/structure/build/manifest/audits passed.
+
+Exactly one newly approved [manual diagnostic audit 41199419498, attempt 1](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41199419498)
+ran at that same head on GitHub-hosted Ubuntu 24.04.5 x86_64, image
+`20261025.353.1`, existing Python 3.12.3. Audit step failed with unchanged
+`status=refused`, `reason=proc-read-incomplete`,
+`phase=mapped-file-observation`. New fixed diagnostic facts:
+
+| Fact | Actual value |
+| --- | --- |
+| proc role | `maps` |
+| first payload bytes | 3,980 |
+| existing payload limit | 32,768 |
+| one-byte EOF probe returned bytes | 1 |
+
+The first call requested limit + 1, unchanged. It returned fewer bytes than the
+limit but was not at EOF; no continued payload assembly or retry followed.
+This identifies a partial first maps read, not total maps size or a 32 KiB
+overflow. Parsing/complete mapping snapshot and kernel `map_files` object opens
+were not reached; neither their accessibility nor a capability denial is proved.
+No startup/final cohort or candidate qualification was established.
+
+Parent/child UID/GID 1001/1001, effective capabilities `0000000000000000`,
+NoNewPrivs 0; authority readback unchanged. Owned child PID 2184 / start 26057
+was reaped; supervisor `cleanup=confirmed`, independent always-cleanup
+`owned_stage_absent=true` for exact `adb-linux-observer-41199419498-1`.
+Disposable files/root removed, not recoverable. Both reports bind source image
+`b71926d5308ba25d6ddcbd440a8917e83dd43d7d4c37b82eeed9fa626cb3db56`;
+source unchanged. Stage absence is not a second independent process census.
+Candidate images 0, candidate execution false, database operations false,
+privilege changes false, `candidate_qualification=not-established`.
+No third overall attempt, read-policy correction or guard/limit change follows.
+
+The [kernel proc documentation](https://docs.kernel.org/filesystems/proc.html)
+warns that maps reads can race and that consistent output requires one read;
+the [seq_file documentation](https://docs.kernel.org/filesystems/seq_file.html)
+also describes iteration across read sessions. Those are source references,
+not measurements of this runner's exact kernel implementation. The observed
+3,980 + 1 does not establish total size, an atomic multi-read snapshot, frozen
+mappings or a sufficient consistency substitute. Do not fix the refusal by
+silently draining to EOF or increasing the cap. PID/start identity alone does
+not establish unchanged mapping contents across reads.
+
+Evidence closeout is docs-only: owning audit, implementation-plan checkpoint
+and predecessor design resume. It cannot turn failed physical verification
+green. Executable/test/workflow cohort stays at `60dfbde`; a final ordinary
+exact-head CI checks publication, not physical recovery. No whole-plugin
+readiness, support-matrix change or production admission is claimed.
+
+Closeout validation: adjacent isolated 40 / 443 passed, no failures/skips;
+whitespace and 175 owning local documentation targets passed. Diff review
+confirms only the three owning records changed. Companion uploader/toolkit
+remain clean at `3dfcb15` / `c067eb6`. Docs-only exact remote head, clean/synced
+state and ordinary CI are independently verified at final handoff; no physical
+workflow rerun is part of that verification.
+
+Implementation-plan progress: actual failing role and partial-read shape are
+known; safe-local runtime/DATA work stays blocked on the consistency decision.
+
+Recommended next gated slice: **Repository-Only Linux Proc-Maps Completeness
+and Snapshot-Consistency Policy Design**, design-only. Review whether the
+required evidence can be obtained proportionately under existing authority;
+make any revised consistency claim explicit or defer the lane if it cannot.
+No automatic multi-read acceptance, larger budget, new privileged helper,
+runtime implementation, physical rerun, candidate loading, database/site work
+or production wiring. The current guards remain in force until a separately
+approved policy and implementation replace them.

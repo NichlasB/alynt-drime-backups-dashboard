@@ -12,8 +12,21 @@ prior failed attempt remains failed; no capability conclusion is inferred.
 Current diagnostics and adjacent isolated checks: 40 tests / 443 assertions,
 no failures/skips. Full local PHP: 2,447 / 23,005, no failures, two existing
 Sodium skips; lint/admin/structure/build/manifest/audits/links passed. Source
-review preserves runtime, child/workflow, limits and cleanup. Publication/CI
-and the approved fresh attempt pending; no new physical result inferred.
+review preserves runtime, child/workflow, limits and cleanup. Implementation
+`60dfbde` pushed; exact-head ordinary CI 41199300682 passed (PHP 7.4:
+2,447 / 23,007; PHP 8.3: 2,447 / 23,012, no failures/skips). One fresh
+manual audit 41199419498 failed at the unchanged completeness guard: `maps`
+payload 3,980 bytes, existing limit 32,768, EOF probe one further byte. Child
+reaped and exact stage independently absent; source/authority unchanged.
+[Actual result and evidence limits](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md#fresh-diagnostic-audit-result--2026-10-31).
+
+Implementation-plan progress: the failing role/read shape is established;
+observer feasibility and runtime admission remain blocked, not cleanup.
+Recommended next gated slice: Repository-Only Linux Proc-Maps Completeness
+and Snapshot-Consistency Policy Design, design-only. Resolve the incompatibility
+between this observed partial read and the single-payload rule without silently
+claiming multi-read atomicity, increasing limits or adding privilege. No code/
+native repeat, candidate loading, database/site work or production wiring.
 
 ## Linux minimum lab: approved existing-authority observer audit — 2026-10-31
 

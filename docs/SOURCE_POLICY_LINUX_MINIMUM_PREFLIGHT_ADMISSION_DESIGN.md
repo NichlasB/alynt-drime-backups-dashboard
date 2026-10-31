@@ -260,10 +260,17 @@ unchanged. This establishes neither completed kernel-object reads nor a
 capability denial. No guard repair or repeat attempt is authorized by the failed
 run; candidate loading and further runtime admission remain blocked.
 
-Recommended next gated slice: **Harness-Only Linux Proc-Read Completeness
-Diagnostics and One Fresh Existing-Authority Harmless-Child Audit**. Approve
-fixed proc-role/byte-count diagnostics, source-backed isolated regressions,
-ordinary CI and one new bounded owned audit, preserving existing read policy,
-budgets, kernel-object guards and cleanup. Diagnose the actual read shape before
-any separate read-policy/trust decision; no multi-read fallback, elevation,
-candidate images/loading, database/site work or production wiring.
+The separately approved [fresh diagnostic audit](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md#fresh-diagnostic-audit-result--2026-10-31)
+at `60dfbde` after ordinary CI 41199300682 passed identifies the role as `maps`:
+first payload 3,980 bytes / limit 32,768, EOF probe one further byte. Manual
+run 41199419498 failed under the preserved completeness rule. Child reaped,
+stage independently absent, source/authority unchanged. No total-size,
+mapped-object access or candidate qualification result is established.
+
+Recommended next gated slice: **Repository-Only Linux Proc-Maps Completeness
+and Snapshot-Consistency Policy Design**, design-only. Resolve observed partial
+read versus the existing one-payload consistency contract without silently
+stitching an atomic snapshot, increasing caps or adding privilege. Any policy
+change needs explicit review before implementation or another physical attempt.
+Candidate images/loading, database/site work and production wiring remain
+disabled; no additional runtime/DATA maintenance batch avoids this decision.
