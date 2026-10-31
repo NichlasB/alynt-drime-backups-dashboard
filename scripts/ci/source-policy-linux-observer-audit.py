@@ -37,6 +37,19 @@ class Refusal(Exception):
     pass
 
 
+class ProcReadIncomplete(Refusal):
+    def __init__(self, role, payload_bytes, limit, probe_bytes):
+        super().__init__('proc-read-incomplete')
+        self.facts = {'role': role, 'payload_bytes': payload_bytes,
+                      'payload_limit': limit, 'eof_probe_bytes': probe_bytes}
+
+
+def proc_read_details(error):
+    if isinstance(error, ProcReadIncomplete):
+        return {'proc_read': error.facts}
+    return {}
+
+
 class AccessDenied(PermissionError):
     def __init__(self, operation, number, facts):
         super().__init__(number, 'owned observer access denied')
@@ -142,11 +155,14 @@ def admit(env):
 
 
 def read_at(directory, name, limit):
+    need(name in ('stat', 'status', 'maps'), 'proc-read-role')
     fd = os.open(name, os.O_RDONLY | os.O_CLOEXEC, dir_fd=directory)
     try:
         data = bounded_read(fd, limit)
         # Never stitch a changing proc snapshot from multiple payload reads.
-        need(os.read(fd, 1) == b'', 'proc-read-incomplete')
+        probe = os.read(fd, 1)
+        if probe:
+            raise ProcReadIncomplete(name, len(data), limit, len(probe))
         return data
     finally:
         os.close(fd)
@@ -321,6 +337,7 @@ def audit(head, image, root, owner):
         report['denial_facts'] = getattr(error,'facts',{})
     except Exception as error:
         report.update(status='refused',reason=str(error) if isinstance(error,Refusal) else 'unexpected-audit-failure',phase=phase)
+        report.update(proc_read_details(error))
     finally:
         try:
             if process is not None:
@@ -348,6 +365,7 @@ def audit(head, image, root, owner):
         except Exception as error:
             report['cleanup'] = 'unconfirmed'; report['status'] = 'refused'
             report['cleanup_reason'] = str(error) if isinstance(error,Refusal) else 'unexpected-cleanup-failure'
+            report.update(proc_read_details(error))
         finally:
             if proc is not None: os.close(proc)
         report['source_unchanged'] = source_identity() == image
@@ -376,9 +394,11 @@ def main():
         print(json.dumps(report,sort_keys=True))
         return exit_code(report['status'],report['cleanup']=='confirmed',report['source_unchanged'])
     except Exception as error:
-        print(json.dumps({'format':'ADBLHO1','head':head,'status':'refused',
+        report = {'format':'ADBLHO1','head':head,'status':'refused',
             'reason':str(error) if isinstance(error,Refusal) else 'audit-supervisor-preflight-or-cleanup-failed',
-            'candidate_qualification':'not-established'}))
+            'candidate_qualification':'not-established'}
+        report.update(proc_read_details(error))
+        print(json.dumps(report))
         return 1
 
 

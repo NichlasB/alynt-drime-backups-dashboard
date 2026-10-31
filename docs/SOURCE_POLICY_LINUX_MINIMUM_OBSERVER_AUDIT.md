@@ -155,3 +155,47 @@ First distinguish stat/maps and actual read shape; do not silently assemble
 multiple snapshots, enlarge limits, assert missing capabilities or change the
 observer trust model. Any required read-policy change needs a separate explicit
 decision after those facts. No candidate loading, site/database work or wiring.
+
+## Approved harness-only proc-read diagnostics — 2026-10-31
+
+User approves the exact preceding diagnostic slice and one fresh physical
+audit at clean/synced restore baseline
+`3324eecc9773b2bda7924a9496cbb7d2b48b67ca`. Same ephemeral Linux target,
+existing authority/tools and one owned harmless child only. Publish and pass
+ordinary exact-head CI before dispatching once at that implementation SHA.
+No new site target, candidate execution, acquisition, database, permission,
+package/release or production-wiring authority. Uploader/toolkit stay read-only.
+
+Only diagnostic behavior changes: a typed `ProcReadIncomplete` keeps the same
+reason/exit/refusal and records fixed `stat`/`status`/`maps` role, first payload
+byte count, existing requested payload limit and one-byte EOF probe count.
+Names are allowlisted before opening; unknown names refuse without IO. No raw
+payload, pathname or exception text is added. Facts propagate through audit,
+cleanup and preflight reporting. One bounded payload read, one one-byte probe,
+all limits, parsing, kernel-object/hash/PID/authority guards, manual workflow,
+child, ownership, termination and exact cleanup remain unchanged. No loop,
+additional diagnostic read, alternate path or accept-on-short-read fallback.
+
+New [cohesive synthetic diagnostic tests](../tests/support/source_policy_linux_observer_diagnostics_test.py)
+cover exact role/counts and no payload disclosure, EOF success, overflow before
+probe, unchanged permission errors, no-IO unknown role and source-backed report
+hooks. Four in-memory controls are assertion-killed: bypassed EOF refusal,
+wrong fixed role, dropped structured facts and an unused report hook; disk
+source unchanged. Existing
+10 groups / seven controls continue unchanged. No proc/process/network body
+runs in these pure/mocked tests. PHP test entry adds one fixed fixture invocation.
+Red baseline failed on missing diagnostic contracts; a Windows-only missing
+`O_CLOEXEC` mock in the permission-error fixture was corrected without changing
+Linux behavior. Adjacent isolated result: 40 PHP tests / 443 assertions, no
+failures/skips, including the final report-hook control. Full local PHP 8.5.1:
+2,447 tests / 23,005 assertions, no failures, two existing Sodium signing skips.
+PHPCS 244 files, admin 23/23 with no failures/skips, structure 149 runtime /
+235 PHP support / 228 test files / 225 classes and build passed, no tracked
+asset changes. Strict Composer manifest, Composer audit and npm moderate audit
+passed, zero known project advisories/vulnerabilities. Whitespace and 173 owning
+local documentation targets passed. Final scoped error/privacy/resource/
+ownership/cleanup/test-integrity review confirms diagnostic-only behavior and
+unchanged runtime, workflow/child, artifact reader/pins, tuple, ADBC1/ADBC2 and
+dependency sources. Uploader/toolkit clean/read-only. Exact-head publication/CI
+pending; no fresh physical attempt has run yet. No whole-plugin readiness
+evidence is refreshed.

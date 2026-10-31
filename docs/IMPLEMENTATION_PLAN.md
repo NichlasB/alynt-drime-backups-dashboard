@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: approved proc-read diagnostics and one fresh audit — 2026-10-31
+
+At clean/synced baseline `3324eecc9773b2bda7924a9496cbb7d2b48b67ca`, user
+approves [harness-only completeness diagnostics](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md#approved-harness-only-proc-read-diagnostics--2026-10-31),
+isolated regressions, validation/publication/CI and one fresh exact-head manual
+existing-authority harmless-child audit. Preserve single payload plus one-byte
+EOF rule, resource/authority/cleanup guards and disabled production wiring.
+No candidate execution, acquisition, SQL/site work or privilege change. The
+prior failed attempt remains failed; no capability conclusion is inferred.
+Current diagnostics and adjacent isolated checks: 40 tests / 443 assertions,
+no failures/skips. Full local PHP: 2,447 / 23,005, no failures, two existing
+Sodium skips; lint/admin/structure/build/manifest/audits/links passed. Source
+review preserves runtime, child/workflow, limits and cleanup. Publication/CI
+and the approved fresh attempt pending; no new physical result inferred.
+
 ## Linux minimum lab: approved existing-authority observer audit — 2026-10-31
 
 At clean/synced baseline `4d6a917`, user approves the [owned harmless-child audit](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md),
