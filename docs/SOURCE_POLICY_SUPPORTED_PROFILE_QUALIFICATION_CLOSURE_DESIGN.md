@@ -1,5 +1,42 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+## Current campaign coverage reconciliation — 2026-10-31
+
+The accepted trusted minimum lab now passes at exact source19288da, manual
+[41241089577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41241089577).
+This is one campaign milestone, not completion of every historical required row.
+Reconciliation is source-scoped/read-only and part of that evidence closeout;
+no new site/native run, support exclusion or separate milestone is created.
+
+| Required/evidenced row | Actual evidence and current limitation |
+| --- | --- |
+| Accepted M-lab: PHP/mysqlnd7.4.33, core6.0, TCP, MariaDB10.11.18-ubu2204 | Exact19288da/image50437fc7… passes fresh audit, byte probe, nine groups and independent strict release/cleanup; raw API identity has literal5.5.5 prefix, connection unicode_ci, physical schema unicode_520_ci. Trusted-lab evidence only. |
+| Legacy M: core6.0/PHP7.4, exact10.6.23-MariaDB | Not qualified by the newer-server lab. Do not waive/exclude this required row or fabricate its server/version. Existing Windows-minimum observer/toolchain route stays deferred. |
+| W: current-source Windows/TCP, core7.1.3/PHP8.5.12, exact10.6.23 | Historical successful native source3f9530d44e81c66d855fcf6c9093fe9921704e90 only. Current shared native source differs; requires audit-first fresh owned requalification, not a copied receipt. |
+| L: Linux/socket core7.1.4/PHP8.5.12, exact10.11.18-ubu2204 | Historical successful b0717fc54597712a823c3ebaf1ea497c39ed115b/image only. Shared-source impact/revalidation remains required before provider/form/release readiness; M-lab success does not transfer to this tuple. |
+
+Repository diff against both historical native source heads confirms changes
+to shared bootstrap-evidence/native-bootstrap, native-profile and transport-
+profile files; Windows additionally differs in minimum-scope/connection source.
+Some branches retain strict defaults in model tests, but that is not physical
+requalification of a new source image. The historical Windows/Linux records
+retain their actual counts and successful original-image scope unchanged.
+
+Preferred next gated slice: **Plugin Tester local-only Current-Source
+Windows/TCP Owned Requalification and Cleanup Proof** using the existing
+audit-first proof design and fresh resolved target/fixture confirmation. Only
+owned disposable options-schema/process fixtures and exact cleanup; no existing
+application tables/options/users/cron/lifecycle/configuration or wiring change.
+This is LocalWP authority explicitly excluded by the campaign; no installed
+source/runtime/port/SQL inspection is performed during this reconciliation.
+No candidate or service is silently substituted if fresh audit fails.
+
+The replan's ordering remains: close/reconcile required supported/intended rows
+before trusted provider/form integration. The completed lab does not justify
+an unavailable-everywhere save feature, silent support change, production grant,
+new runtime installation or release. No further generic safe-local work is
+selected merely to avoid this real required-profile gate.
+
 Subsequent approved gate1 implementation/evidence and current resume point:
 [Supported-Profile Source Rebaseline and Isolated Harness Safety Foundation](SOURCE_POLICY_SUPPORTED_PROFILE_FOUNDATION.md).
 The historical design/QA evidence below remains scoped to its original heads;

@@ -150,3 +150,42 @@ Composer audit, npm moderate audit and whitespace pass; no known advisories/
 vulnerabilities or generated delta. Source review confirms no changes to native
 SQL, schema, workflow/launch, immutable source/image/module pins, configuration,
 budgets or production factory wiring. Actual native results follow separately.
+
+## Successful exact native qualification — 2026-10-31
+
+Implementation `19288daaa53e1338c76d41d46b76f3caa29c25a9` passed
+[ordinary CI 41240991429](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41240991429):
+PHP7.4 2,589 tests / 23,348 assertions, PHP8.3 2,589 / 23,353; Node74/74
+per job, zero failures/skips, all other configured gates passed.
+
+[Campaign attempt 5, run 41241089577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41241089577)
+succeeded at that exact source; job124654960268,20:54:43–20:55:08 UTC. Held fresh
+audit and original complete nine-group native body pass. Controller accepted the
+correlated closed-proof terminal at20:55:05.835, independently reconciled all
+other server sessions/transactions while the worker was held closed, acknowledged
+its run/image, then required normal child exit and repeated post-exit checks.
+Full byte probe and all nine required positive/no-op/stale/update/race/duplicate/
+transform-reentry/lock/post-change/errno cases are required by the unchanged
+source before that terminal; no group/check shortcut was added. The private
+terminal's numerical assertion counter is not retained by the existing parent
+log; its exact value is Unknown, not guessed from unit tests or source. Nine
+groups are fixed and validated by the terminal contract.
+
+Frozen source image `50437fc7db05c74446d23e4793e447a36002baf80f4b7f663e226f30a3e20dbf`,
+run identity `16cd4b35f42c0b2197152975d53059df`. Trusted-lab-functional-v1 only:
+independent loaded-object attestation=false, mapping consistency=not-established,
+runtime grant=false, production ready=false. No transfer to minimum database
+10.6.23, current Windows, deployed/live state or full supported-profile coverage.
+
+Primary cleanup at20:55:06.271 reports issues=[], containers_removed=true,
+stage_removed=true, strict_release_complete=true. Always recovery at20:55:06.365
+is also issue-free. Owned schema/account absence, all-server reconciliation,
+normal server exit/log review and exact physical removal are required by that
+path. Artifact count=0; no payload retained for reuse and no sixth attempt run.
+The four historical refusals remain failed records, not relabeled successes.
+
+This closes campaign milestone1 for the exact selected minimum lab after
+evidence publication/CI closeout; campaign attempt use is5/10, not reset. The
+remaining profile reconciliation is part of the closeout, not a second milestone
+or coverage waiver. The next required current-source Windows/TCP owned proof
+is a LocalWP operation excluded from the campaign and needs separate approval.

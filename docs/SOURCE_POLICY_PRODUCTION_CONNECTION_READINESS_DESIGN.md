@@ -1,5 +1,17 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current milestone: the approved lab-only collation revision passes the exact
+[native minimum lab](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#successful-exact-native-qualification--2026-10-31)
+at19288da/run41241089577, complete nine-group body/byte probe and independent
+strict release/cleanup. Campaign milestone1/10, attempts5/10; no extra credit
+for evidence/coverage records. [Required remaining rows](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md#current-campaign-coverage-reconciliation--2026-10-31)
+remain real gates before provider/form work. Preferred next approval is Plugin
+Tester local-only Current-Source Windows/TCP Owned Requalification and Cleanup
+Proof, audit-first with fresh target/owned fixture confirmation. LocalWP is
+excluded from the current campaign; no site inspection is performed now. Legacy
+minimum/current Linux/source-image gaps and production/release gates remain;
+the accepted trusted lab is not a support waiver or production grant.
+
 Current approved work: the exact [lab-only collation exception](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#approved-implementation-and-source-scoped-review--2026-10-31)
 is implemented with bound receiver/source/context selection, unchanged strict
 default/schema guards and drift/unknown-owner regression coverage. Native proof

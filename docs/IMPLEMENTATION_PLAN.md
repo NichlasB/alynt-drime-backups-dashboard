@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum-lab milestone passed; next gate is required profile requalification — 2026-10-31
+
+Approved collation implementation `19288da` passes ordinary CI41240991429 and
+[native attempt5 / 41241089577](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#successful-exact-native-qualification--2026-10-31).
+Fresh audit, complete original nine-group body/byte probe, independent held-live
+and post-exit release, normal exits and exact owned cleanup pass. No artifact
+or owner resource remains; source image/trusted-host limits and closed production
+wiring are unchanged. Native numerical assertion count is not exposed by the
+existing log (Unknown); nine groups are validated, not inferred from unit counts.
+
+Implementation-plan progress: campaign milestone1 succeeds for the exact
+PHP7.4.33/core6.0/MariaDB10.11.18 lab, not the untested legacy10.6.23 or current
+Windows/default/production rows. **1/10 milestones**, **5/10 native attempts**,
+after this evidence-only closeout's push/exact-head CI. Do not count the coverage
+comparison or evidence commits as extra milestones. The [remaining row matrix](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md#current-campaign-coverage-reconciliation--2026-10-31)
+shows required real gaps, so the existing replan still gates provider/form work.
+
+Recommended next gated slice: **Plugin Tester local-only Current-Source
+Windows/TCP Owned Requalification and Cleanup Proof**. Audit-first, fresh exact
+target/owned fixture confirmation under Site Operations, existing application
+state and wiring untouched. The historical proof at3f9530d cannot qualify the
+changed current shared source. LocalWP is explicitly excluded from this campaign,
+so stop for that specific scope extension; do not inspect the site, reopen
+deferred observer/toolchain work, waive required rows or make generic cleanup
+tasks to reach ten. Legacy-minimum coverage remains a separate unresolved row.
+
 ## Approved lab-only collation revision and campaign resume — 2026-10-31
 
 Explicit user approval accepts the exact [collation exception and owned

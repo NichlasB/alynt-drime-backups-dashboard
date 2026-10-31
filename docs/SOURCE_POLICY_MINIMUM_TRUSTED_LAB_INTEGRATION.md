@@ -1493,3 +1493,51 @@ The [decision record](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#
 owns implementation, focused review and red/green/control evidence. Exact-head
 ordinary CI and fresh prerequisites precede campaign attempt 5. No native success
 or milestone completion is inferred from isolated tests or this new approval.
+
+Collation revision `19288daaa53e1338c76d41d46b76f3caa29c25a9` passes
+[ordinary CI41240991429](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41240991429):
+PHP7.4 2,589 /23,348; PHP8.3 2,589 /23,353; Node74/74 each, no failures/skips,
+all configured lint/build/structure/manifest/dependency gates passed. Clean/
+synced exact head precedes campaign attempt5/10,
+[41241089577](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41241089577),
+which succeeds including always recovery. Job124654960268 runs20:54:43–20:55:08 UTC.
+
+Actual fresh audit at20:55:02.847 and held closed-proof at20:55:05.835 share
+image50437fc7db05c74446d23e4793e447a36002baf80f4b7f663e226f30a3e20dbf,
+run16cd4b35f42c0b2197152975d53059df. Controller validates the full nine-group
+terminal, independent live all-server session/transaction zero check, exact
+acknowledgement, normal child exit and independent post-exit zero check. All
+original body/byte/negative/error/once-only/no-replay requirements precede this
+terminal in unchanged source; no check/group count override or bypass was added.
+The numeric private assertion counter is not retained in the pre-existing
+parent log; exact value Unknown. Do not invent a native count or rerun only to
+obtain one. Nine groups are validated by the terminal and body gates.
+
+Primary cleanup20:55:06.271: issues=[], containers_removed=true,
+stage_removed=true, strict_release_complete=true. Always cleanup20:55:06.365
+has the same clean result. Independent owned schema/account absence, normal
+server exit/log review and exact removal guards pass. Artifact count=0, no
+owner resources remain and no sixth attempt runs. This is the first campaign
+native success, not a relabeling of four earlier failures. Trusted-host/image/
+cache assumptions remain; independent loaded-object attestation=false, mapping
+consistency=not-established, runtime grant=false, production ready=false.
+
+Milestone1 is the exact selected PHP7.4.33/core6.0/newer-server lab qualification
+and approved collation exception, with its owning evidence/push/CI closeout.
+Campaign totals become 1/10 completed milestones and 5/10 native attempts after
+that closeout; source/fixture diagnostics, repairs and this coverage review are
+not separately counted. The [current supported-row reconciliation](SOURCE_POLICY_SUPPORTED_PROFILE_QUALIFICATION_CLOSURE_DESIGN.md#current-campaign-coverage-reconciliation--2026-10-31)
+finds older Windows/Linux native source images and an unclosed legacy minimum
+server row. Defaults remaining strict in model tests do not qualify those
+changed shared-source images. Required row closure still precedes provider/form
+work; no generic cleanup or new unsupported architecture is selected instead.
+
+Recommended next gated slice: Plugin Tester local-only Current-Source
+Windows/TCP Owned Requalification and Cleanup Proof. It requires a fresh exact
+target/owned fixture confirmation and audit under Site Operations; LocalWP is
+explicitly outside the current campaign. No installed-site reads, probes, SQL,
+fixtures, configuration or service changes are performed now. Existing app/
+client/live/Drime state, production wiring/grants/activation/rollback, schedules,
+release/package/deploy, uploader/toolkit and historical whole-plugin rows remain
+untouched. This evidence-only closeout gets separate exact-head ordinary CI;
+no additional native operation is necessary for publication.
