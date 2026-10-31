@@ -10,8 +10,11 @@ does not accept or implement those reduced claims. Current guards, legacy
 tuples/public refusals, support declarations and observer deferral stand.
 No downloads, runtime/test/workflow changes, physical/site/database operation
 or production wiring. Local unchanged-contract checks 535 / 14,360, no failures/
-skips; structure/manifest/audits/204 local links passed. Publication/exact-head
-ordinary CI pending, not qualification or evidence-contract acceptance.
+skips; structure/manifest/audits/204 local links passed. Replan `c631e81` pushed;
+exact-head ordinary CI 41222562454 passed (PHP 7.4 2,448 / 23,012; PHP 8.3
+2,448 / 23,017, no failures/skips; admin 23/23 per matrix), not qualification
+or evidence-contract acceptance. Exact lab coverage cannot qualify Windows
+minimum or the different legacy core-6.0/10.6.23 row.
 
 Implementation-plan progress: finite proposed compatibility route and retained/
 reduced guarantees mapped; minimum qualification and actual lost-update repair

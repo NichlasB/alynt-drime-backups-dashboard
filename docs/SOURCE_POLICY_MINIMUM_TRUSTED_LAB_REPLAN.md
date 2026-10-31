@@ -51,6 +51,10 @@ entrypoint/FPM or rename its version to 6.0. The chosen newer MariaDB does not
 prove minimum database-version coverage, Windows minimum coverage, all PHP 7.4
 builds or production connectivity. Legacy PHP is for isolated compatibility
 testing, not a secure deployment recommendation. No pins/tags are refreshed here.
+In particular, this 10.11.18 lab cannot qualify the unchanged legacy
+core-6.0/10.6.23 production row. Its success could close the exact tested
+PHP/core/lab case only. Required legacy/intended-profile gaps must be explicitly
+reconciled before application wiring/release, never inferred across tuples.
 
 ## Guarantee mapping and explicit reduced claims
 
@@ -62,6 +66,7 @@ testing, not a secure deployment recommendation. No pins/tags are refreshed here
 | Exact loaded-module allowlist | No arbitrary dynamic loading; fixed mysqli only, bounded actual module inventory and before/after agreement | Bundled built-ins belong to the trusted image; do not invent an independently verified expected complete module-origin set |
 | Process/run ownership | Parent-created exact CID/labels, engine-reported host PID/start time, worker is the fixed container entrypoint, bounded source/run/phase transcript | Trust engine process attribution; namespace PID is not host PID or independent kernel-start attestation |
 | Exact native tuple/admission | Same receiver/context/frame across initial server check, final bootstrap and per-query admission; default legacy cases unchanged | A finite proof-only lab receiver is new internal scope, not a production grant |
+| Supported/intended deployment coverage | Record exact passed lab case and remaining rows separately | No transfer to Windows minimum or legacy core-6.0/10.6.23; no release coverage waiver |
 | Core source and callbacks | Genuine per-core reflection/include pins, exact stock cache, owned placeholder callbacks and unchanged ambient state | Hash/fingerprint consistency does not qualify unknown callbacks, drop-ins or altered source |
 | Report mode/transport/session | Genuine initial/final mode 0, exact TCP/full server/schema/charset/autocommit facts, no reconnect/reissue | No forced mode, suffix stripping, generic server or transport fallback |
 | Native correctness | Actual prepare/execute/saved/noop/conflict/failure/uncertainty cases, exact byte probes and assertion-killed controls | A matching row, count or worker success message alone is not proof |
@@ -218,8 +223,12 @@ Finite path, each authorization boundary explicit:
    qualification/owned cleanup attempt, only if prerequisites pass. This must
    explicitly cover owned DB fixtures/accounts and the trusted-engine resource/
    cache boundary. No automatic retry or alternative runtime/profile on failure.
-3. Only after genuine qualification succeeds under the accepted contract,
-   resume the existing [production readiness sequence](SOURCE_POLICY_PRODUCTION_CONNECTION_READINESS_DESIGN.md):
+3. After genuine qualification succeeds for the exact accepted lab case,
+   reconcile all required supported/intended-profile evidence, including the
+   untested legacy/minimum combinations. Unclosed required rows remain a
+   product/release gate, not a silent exclusion or unavailable save feature.
+   Only when those required gaps close, resume the existing
+   [production readiness sequence](SOURCE_POLICY_PRODUCTION_CONNECTION_READINESS_DESIGN.md):
    trusted-context/lazy-provider foundation and owned proof, coherent guarded
    form/facade/legacy switch and genuine WordPress authorization/behavior proof,
    canonical reviews/full pre-release and separately approved release/deploy.
@@ -248,6 +257,15 @@ audit passed, zero known project dependency advisories/vulnerabilities.
 Whitespace and 204 owning local documentation targets passed. Runtime,
 scripts/tests/workflows, core/image/profile pins, root metadata/assets and
 dependencies unchanged against baseline; uploader/toolkit clean/read-only at
-`3dfcb15` / `c067eb6`. Full local suite/lint/build not rerun for docs-only work;
-publication/ordinary exact-head CI pending. No candidate or site operation,
-artifact download or physical workflow was run.
+`3dfcb15` / `c067eb6`. Full local suite/lint/build not rerun for docs-only work.
+No candidate or site operation, artifact download or physical workflow was run.
+
+Replan `c631e81ca62375c47d486d7de35a10a03bd69f39` is pushed;
+[ordinary exact-head CI 41222562454](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41222562454)
+passed: PHP 7.4 2,448 tests / 23,012 assertions, PHP 8.3 2,448 / 23,017,
+no failures/skips; admin 23/23 per matrix with no failures/skips. Configured
+lint/build/structure/manifest/dependency audits passed. CI validates unchanged
+source contracts, not the proposed trust model, genuine minimum native behavior
+or any untested supported tuple. Final docs-only evidence/coverage clarification
+receives independent exact-head CI and clean/remote verification at handoff.
+No execution authority or evidence-contract acceptance is inferred from CI.
