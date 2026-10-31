@@ -30,6 +30,7 @@ try {
  foreach(array('query_context'=>$context,'bootstrap_frame'=>$frame,'minimum_lab_scope'=>$scope,'bootstrap_binding'=>$binding)as$key=>$value)boot_set($owner,$key,$value);
  if('bad-context'===$argv[1])boot_set($context,'core_file',__DIR__.'/nonexistent-never-read.php');
  if('bad-server'===$argv[1])$GLOBALS['boot_fault']='bad-server';
+ if('prefixed-server'===$argv[1])$GLOBALS['boot_server']='5.5.5-10.11.18-MariaDB-ubu2204';
  $counts=$GLOBALS['boot_counts'];$state=boot_get($owner,'native_state');$GLOBALS['adbb_first_failure']=array('sentinel'=>'unchanged');$prior_calls=0;
  $prior=static function()use(&$prior_calls){++$prior_calls;return true;};set_error_handler($prior);
  $before=adbm_bootstrap_before($owner,$context,$frame,$binding);
@@ -44,7 +45,7 @@ try {
   $result=boot_invoke($owner,'bootstrap');$counts=$GLOBALS['boot_counts'];
   $row=adbm_bootstrap_after($owner,$context,$before,$result);
   A::assertSame($counts,$GLOBALS['boot_counts']);
-  if('bad-server'===$argv[1]){A::assertInstanceOf(WP_Error::class,$result);A::assertSame(1,$counts['connect']);A::assertSame(0,$counts['commands']);A::assertSame(1,$counts['close']);}
+  if(in_array($argv[1],array('bad-server','prefixed-server'),true)){A::assertInstanceOf(WP_Error::class,$result);A::assertSame(1,$counts['connect']);A::assertSame(0,$counts['commands']);A::assertSame(1,$counts['close']);}
   elseif(in_array($argv[1],array('bad-source','bad-context'),true)){A::assertInstanceOf(WP_Error::class,$result);A::assertSame(0,$counts['allocate']);A::assertSame(0,$counts['connect']);}
   else {A::assertTrue($result);A::assertSame(1,$counts['connect']);A::assertTrue($owner->ready);}
  }
@@ -52,7 +53,7 @@ try {
  A::assertSame(array('sentinel'=>'unchanged'),$GLOBALS['adbb_first_failure']);
  $owner->close();
  if($causeOnly&&0===strpos($argv[1],'malformed-')){
-  $bad=array('kind'=>'RuntimeException','source'=>'bootstrap','line'=>1,'state'=>'connecting');$field=substr($argv[1],10);
+  $bad=array('kind'=>'RuntimeException','source'=>'bootstrap','line'=>1,'state'=>'connecting','server'=>'unobserved');$field=substr($argv[1],10);
   if('extra'===$field)$bad['payload']='never-export-private';elseif('line'===$field)$bad['line']='1';elseif('object'===$field)$bad['state']=new stdClass();else $bad['kind']='private-message';
   boot_set($owner,'bootstrap_failure',$bad);
  }

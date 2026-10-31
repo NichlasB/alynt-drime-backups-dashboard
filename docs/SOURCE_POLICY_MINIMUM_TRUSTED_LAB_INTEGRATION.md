@@ -1339,3 +1339,49 @@ zero reported dependency vulnerabilities and no generated delta. Review confirms
 no SQL/native primitive was added, fixed refusal and effect order are retained,
 source/module/image pins and budgets unchanged, and catch DATA does not qualify
 an owner. Exact-head CI and fresh audit are still required before attempt 2.
+
+Diagnostic cycle 1 publication `50195ccca8501f9f051bcdf431f38a0c387f9b0c`
+passed [ordinary CI 41239132905](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41239132905):
+PHP 7.4 2,573 / 23,265; PHP 8.3 2,573 / 23,270; Node 72/72 per job,
+zero failures/skips. All other QA steps passed. Clean/synced exact head and
+absence of a duplicate/pending native attempt were checked before dispatch.
+Campaign attempt 2/10 is [41239253831](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41239253831)
+at that exact source, with fresh audit and new owned fixtures. This is an
+evidence-backed diagnostic attempt, not an unchanged blind retry or completed
+milestone. Outcome/cleanup must be established before further attempts.
+
+Attempt 2 outcome: fresh held audit passed; native refusal still occurs at 470
+checks / zero groups. New first-cause DATA identifies RuntimeException, source
+bootstrap, line 119 at source 50195cc, state_before_cleanup=connected_unqualified.
+That line is exactly `Server profile unavailable`, after successful connect and
+the following bootstrap guard, before the first probe. Four prechecks pass;
+retained handle=1, final owner/context closed=true, no live dbh. This establishes
+the failing comparison, not its actual/expected string values or a version grant.
+External cleanup again reports only php-nonzero-exit, physical containers/stage
+removed; always-recovery is issue-free, artifact count=0. No fixture/session/
+ownership/reconciliation issue is reported. Attempts 2/10, milestones 0/10.
+
+Diagnostic cycle 2/3 for the zero-probe bootstrap blocker retains a finite
+classification of the SINGLE existing server-info read, in its original order:
+unobserved, unavailable expectation, invalid actual type, exact, exact expected
+value with the literal legacy 5.5.5- greeting prefix, or different. Both expected
+and actual local values feed the UNCHANGED strict inequality/refusal. No stripping,
+prefix admission, added getter/query, raw server-string export, new profile or
+runtime grant. Prior server-identity audit inspected PHP 8.5.12's prefix removal;
+that cannot establish PHP 7.4.33's behavior. Read-only official PHP7.4.33 source
+inspection finds greeting packet server_version copied directly and mysqli's
+getter returns mysql_get_server_info; no native result is inferred from source.
+
+ADBMBC2 adds this single bounded category to private catch DATA; ADBMBC1 remains
+accepted without invented historical server observations. Other failure/progress
+contracts and the 128/4,608-byte limits are unchanged. Synthetic prefixed-server
+output is observed but STILL refused before probes; current exact server remains
+positive. Unknown/malformed V2 fields, extra payload, missing category, duplicate/
+mixed-version packets and oversize DATA reject. Existing wrapper first-cause
+retention/same-error/one-invocation tests remain intact.
+
+Cycle 2 local checks: bootstrap/transport/minimum-lab 189 tests / 699 assertions,
+Node full suite 72/72, no skips/failures; focused PHPCS, structure and whitespace
+pass. Full ordinary exact-head CI is required before a newly justified third
+native attempt. No whole-plugin readiness or milestone credit is added by this
+diagnostic refinement. No global runtime/profile/guard/resource change occurred.

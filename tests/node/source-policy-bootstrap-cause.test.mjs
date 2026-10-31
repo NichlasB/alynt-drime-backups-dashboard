@@ -13,10 +13,12 @@ test('actual caught server refusal retains exact first location and pre-cleanup 
   const source=read('includes/traits/trait-source-policy-native-bootstrap.php');
   const line=source.slice(0,source.indexOf("throw new RuntimeException( 'Server profile unavailable' )")).split('\n').length;
   const row=bootstrapCauseEvidence(child([path('tests/support/source-policy-minimum-diagnostics-worker.php'),'cause-bad-server']));
-  assert.deepEqual(row,{kind:'RuntimeException',source:'bootstrap',line,state_before_cleanup:'connected_unqualified'});
+  assert.deepEqual(row,{kind:'RuntimeException',source:'bootstrap',line,state_before_cleanup:'connected_unqualified',server_observation:'different'});
+  const prefixed=bootstrapCauseEvidence(child([path('tests/support/source-policy-minimum-diagnostics-worker.php'),'cause-prefixed-server']));
+  assert.equal(prefixed.server_observation,'legacy_greeting');
   assert.equal(child([path('tests/support/source-policy-minimum-diagnostics-worker.php'),'cause-positive']),'');
   const early=bootstrapCauseEvidence(child([path('tests/support/source-policy-minimum-diagnostics-worker.php'),'cause-bad-source']));
-  assert.equal(early.state_before_cleanup,'never_opened');assert.equal(early.source,'bootstrap');
+  assert.equal(early.state_before_cleanup,'never_opened');assert.equal(early.source,'bootstrap');assert.equal(early.server_observation,'unobserved');
   assert.equal(child([path('tests/support/source-policy-minimum-diagnostics-worker.php'),'cause-unknown']),'');
   assert.doesNotMatch(JSON.stringify(row),/password|private|owned|[\/\\]/);
 });
@@ -30,6 +32,11 @@ test('new optional cause prefix preserves legacy/progress contracts and rejects 
   const names=Array.from({length:64},(_,i)=>('A'+String(i).padStart(2,'0')).padEnd(64,'x')).join(';');
   const maximum=`ADBMF2|escape|native|470|0|${'a'.repeat(64)}|RuntimeException|0|none|0|1111111|${names}\n`;
   assert.ok(Buffer.byteLength(cause+progress+maximum)<=4608);assert.equal(failureEvidence(cause+progress+maximum).inventory.names.length,64);
+  const v2=cause.replace('ADBMBC1','ADBMBC2').replace('\n','|legacy_greeting\n');
+  assert.equal(failureEvidence(v2+progress+maximum).bootstrap_cause.server_observation,'legacy_greeting');
+  assert.ok(Buffer.byteLength(v2+progress+maximum)<=4608);
+  for(const bad of [v2.replace('|legacy_greeting',''),v2.replace('legacy_greeting','private-message'),v2.replace('|legacy_greeting','|different|extra'),v2.replace('ADBMBC2','ADBMBC1')])assert.equal(bootstrapCauseEvidence(bad),null);
+  assert.equal(failureEvidence(v2+cause+progress+failure),null);
 });
 
 test('private cause reader refuses malformed metadata and unknown identities without magic, messages, paths or SQL',()=>{
@@ -41,8 +48,11 @@ test('private cause reader refuses malformed metadata and unknown identities wit
   assert.doesNotMatch(capture,/getMessage|getTrace|mysqli_|->close\(|->bootstrap\(|->query\(/);
   assert.match(capture,/__FILE__ === \$error->getFile\(\)/);assert.match(capture,/getLine\(\) <= 999999/);
   assert.ok(end<runtime.indexOf('} finally {',end));
+  const serverCheck=runtime.slice(runtime.indexOf('$expected_server'),runtime.indexOf("$identity = $this->bootstrap_probe( 'identity' )"));
+  assert.equal((serverCheck.match(/mysqli_get_server_info\(/g)??[]).length,1);
+  assert.match(serverCheck,/if \( \$expected_server !== \$actual_server \)/);
   for(const name of ['extra','line','object','kind'])assert.equal(child([path('tests/support/source-policy-minimum-diagnostics-worker.php'),'cause-malformed-'+name]),'');
-  const fixture=body=>`class FixedCatchMetadataDouble {public $native_state='connecting',$bootstrap_failure=null;function capture($error){${body}}}$o=new FixedCatchMetadataDouble();$o->capture(new RuntimeException('never-export-private'));if(!is_array($o->bootstrap_failure)||array_keys($o->bootstrap_failure)!==array('kind','source','line','state')||$o->bootstrap_failure['kind']!=='RuntimeException'||$o->bootstrap_failure['state']!=='connecting')throw new RuntimeException('capture-assertion-control');echo 'captured';`;
+  const fixture=body=>`class FixedCatchMetadataDouble {public $native_state='connecting',$bootstrap_failure=null,$bootstrap_server='unobserved';function capture($error){${body}}}$o=new FixedCatchMetadataDouble();$o->capture(new RuntimeException('never-export-private'));if(!is_array($o->bootstrap_failure)||array_keys($o->bootstrap_failure)!==array('kind','source','line','state','server')||$o->bootstrap_failure['kind']!=='RuntimeException'||$o->bootstrap_failure['state']!=='connecting')throw new RuntimeException('capture-assertion-control');echo 'captured';`;
   assert.equal(child(['-r',fixture(capture)]),'captured');
   const mutant=capture.replace('$this->bootstrap_failure','$ignored');assert.notEqual(mutant,capture);
   const killed=spawnSync(process.env.PHP_BINARY??'php',['-n','-r',fixture(mutant)],{encoding:'utf8',timeout:5000,maxBuffer:8192});

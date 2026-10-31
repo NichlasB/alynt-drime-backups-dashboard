@@ -52,6 +52,11 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 	 * @var array|null
 	 */
 	private $bootstrap_failure = null;
+	/** Finite observation of the existing server-info comparison; never admission.
+	 *
+	 * @var string
+	 */
+	private $bootstrap_server = 'unobserved';
 
 	/**
 	 * Inaccessible from factories; no actual provider or production wiring exists.
@@ -115,7 +120,10 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$this->native_state = 'connected_unqualified';
 			$this->is_mysql     = true;
 			$this->bootstrap_check();
-			if ( $this->bootstrap_expected_server( $frame['core'] ) !== mysqli_get_server_info( $this->dbh ) ) {
+			$expected_server        = $this->bootstrap_expected_server( $frame['core'] );
+			$actual_server          = mysqli_get_server_info( $this->dbh );
+			$this->bootstrap_server = ! is_string( $expected_server ) ? 'unavailable' : ( ! is_string( $actual_server ) ? 'invalid' : ( $expected_server === $actual_server ? 'exact' : ( '5.5.5-' . $expected_server === $actual_server ? 'legacy_greeting' : 'different' ) ) );
+			if ( $expected_server !== $actual_server ) {
 				throw new RuntimeException( 'Server profile unavailable' );
 			}
 			$identity = $this->bootstrap_probe( 'identity' );
@@ -174,6 +182,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 				'source' => __FILE__ === $error->getFile() ? 'bootstrap' : 'other',
 				'line'   => $error->getLine() > 0 && $error->getLine() <= 999999 ? $error->getLine() : 0,
 				'state'  => $this->native_state,
+				'server' => $this->bootstrap_server,
 			);
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		} finally {

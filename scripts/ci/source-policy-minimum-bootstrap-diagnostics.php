@@ -192,12 +192,13 @@ function adbm_bootstrap_cause_wire( $owner, $context ) {
 	} catch ( Throwable $error ) {
 		return ''; // No messages, paths, unknown receiver methods or native reads.
 	}
-	if ( ! is_array( $row ) || array_keys( $row ) !== array( 'kind', 'source', 'line', 'state' )
+	if ( ! is_array( $row ) || array_keys( $row ) !== array( 'kind', 'source', 'line', 'state', 'server' )
 		|| ! in_array( $row['kind'], array( 'RuntimeException', 'Error', 'TypeError', 'ArgumentCountError', 'ValueError', 'other' ), true )
 		|| ! in_array( $row['source'], array( 'bootstrap', 'other' ), true )
 		|| ! is_int( $row['line'] ) || $row['line'] < 0 || $row['line'] > 999999
-		|| ! in_array( $row['state'], array( 'never_opened', 'allocating', 'allocated', 'connecting', 'connected_unqualified', 'active', 'closed', 'closure_unknown' ), true ) ) {
+		|| ! in_array( $row['state'], array( 'never_opened', 'allocating', 'allocated', 'connecting', 'connected_unqualified', 'active', 'closed', 'closure_unknown' ), true )
+		|| ! in_array( $row['server'], array( 'unobserved', 'unavailable', 'invalid', 'exact', 'legacy_greeting', 'different' ), true ) ) {
 		return '';
 	}
-	return 'ADBMBC1|' . implode( '|', $row ) . "\n";
+	return 'ADBMBC2|' . implode( '|', $row ) . "\n";
 }

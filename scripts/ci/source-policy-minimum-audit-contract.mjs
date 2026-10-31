@@ -13,7 +13,7 @@ export function bootstrapEvidence(raw) {
 export function failureEvidence(raw) {
   if(typeof raw!=='string'||Buffer.byteLength(raw)>4608)return null;
   let bootstrap=null,cause=null;
-  if(raw.startsWith('ADBMBC1|')){
+  if(raw.startsWith('ADBMBC1|')||raw.startsWith('ADBMBC2|')){
     const end=raw.indexOf('\n');if(end<0)return null;
     cause=bootstrapCauseEvidence(raw.slice(0,end+1));if(!cause)return null;
     raw=raw.slice(end+1);
@@ -39,8 +39,10 @@ export function failureEvidence(raw) {
 }
 export function bootstrapCauseEvidence(raw) {
   if(typeof raw!=='string'||Buffer.byteLength(raw)>128)return null;
-  const m=/^ADBMBC1\|(RuntimeException|Error|TypeError|ArgumentCountError|ValueError|other)\|(bootstrap|other)\|(0|[1-9][0-9]{0,5})\|(never_opened|allocating|allocated|connecting|connected_unqualified|active|closed|closure_unknown)\n(?![\s\S])/.exec(raw);
-  return m?{kind:m[1],source:m[2],line:Number(m[3]),state_before_cleanup:m[4]}:null;
+  const fields='(RuntimeException|Error|TypeError|ArgumentCountError|ValueError|other)\\|(bootstrap|other)\\|(0|[1-9][0-9]{0,5})\\|(never_opened|allocating|allocated|connecting|connected_unqualified|active|closed|closure_unknown)';
+  const v2=new RegExp('^ADBMBC2\\|'+fields+'\\|(unobserved|unavailable|invalid|exact|legacy_greeting|different)\\n(?![\\s\\S])').exec(raw);
+  const m=v2??new RegExp('^ADBMBC1\\|'+fields+'\\n(?![\\s\\S])').exec(raw);
+  return m?{kind:m[1],source:m[2],line:Number(m[3]),state_before_cleanup:m[4],...(v2?{server_observation:m[5]}:{})}:null;
 }
 export function executionPhases(scope,argument,workflow) {
   if(scope===undefined&&argument===undefined&&workflow!==AUDIT_WORKFLOW)return ['audit','proof'];
