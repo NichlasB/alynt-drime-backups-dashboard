@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: module repair passed fresh audit; ambient construction blocked — 2026-10-31
+
+Repair `dd44a88` passed [ordinary exact-head CI 41231399060](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41231399060).
+The single [full attempt 41231529126](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41231529126)
+passed the held connection-free audit and advanced into native ambient setup,
+then threw `Error` at counter 458 / zero completed qualification groups. No
+assertion label or failing call was exported (`assertion=SHA256(none)`). Owned
+application schema/account cleanup, container/stage removal and recovery
+completed; the failed PHP exit keeps strict release incomplete.
+See [actual result and source-scoped diagnosis](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31).
+
+Read-only inspection of the exact pinned core found the ambient instance skips
+its constructor, leaving `wpdb::$use_mysqli=false`; `db_connect()` selects the
+obsolete `mysql_connect` branch. This is a concrete source defect consistent
+with the Error, not an exported runtime call attribution. No further repair
+or native retry was made.
+
+Implementation-plan progress: the fixed module compatibility barrier is closed
+and fresh genuine audit passed; native qualification remains unproved. Next
+gated slice: Harness-Only Genuine Ambient Core Constructor Initialization
+Repair and One Fresh Trusted Minimum-Lab Qualification / Owned Cleanup Attempt.
+Use genuine core initialization rather than injected driver/ready/handle flags;
+preserve connection-count, mode, source, body, budget and cleanup checks. The
+current one-attempt authority is consumed; production wiring remains disabled.
+
 ## Minimum profile: approved fixed-image module compatibility and one fresh attempt — 2026-10-31
 
 At clean/synced `88ae082`, user approves [the fixed-image built-in module

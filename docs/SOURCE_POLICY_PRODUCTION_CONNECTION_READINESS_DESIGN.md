@@ -1,6 +1,18 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Latest diagnostic outcome: [audit-only 41230593868](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-audit-only-outcome-and-cleanup--2026-10-31)
+Latest qualification outcome: [fixed-module attempt 41231529126](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31)
+passed fresh held audit after CI-green repair `dd44a88`, then threw `Error` in
+native ambient setup at counter 458 / zero groups. No failing call was exported.
+Read-only exact pinned-source inspection found constructor bypass leaves the
+core's mysqli selector false; its legacy connection branch is a concrete source
+defect consistent with that Error. Owned application fixtures/resources were
+removed and recovery passed; failed worker exit still blocks strict release.
+Next gated slice is genuine ambient core constructor initialization repair and
+one newly approved trusted-lab qualification/cleanup attempt, without injected
+driver/ready/handle flags or weakened guards/budgets. No further repair/retry,
+minimum functional qualification, coverage waiver or production wiring follows.
+
+Previous diagnostic outcome: [audit-only 41230593868](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-audit-only-outcome-and-cleanup--2026-10-31)
 identified the exact `fixed dynamic module profile` refusal: `mbstring` is
 reported by the unchanged pinned image, while that guard forbids it. Static
 roots and all seven configuration facts passed; zero qualification groups.

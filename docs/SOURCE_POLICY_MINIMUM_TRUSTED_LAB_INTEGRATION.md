@@ -1,12 +1,12 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: the [audit-only diagnostic attempt](#actual-audit-only-outcome-and-cleanup--2026-10-31)
-identified the pinned image's `mbstring` inventory conflict; owned removal and
-recovery completed. User now [approves the fixed-image compatibility repair
-and one new full attempt](#approved-fixed-image-module-compatibility-and-one-fresh-attempt--2026-10-31),
-with fresh audit prerequisites before owned application fixtures/body. Other
-guards/pins/budgets remain unchanged. Native qualification is not yet proved;
-production wiring, support waivers, release/deployment and retries stay closed.
+Current disposition: the approved fixed-image module repair passed ordinary
+CI and [fresh held audit in the single new full attempt](#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31).
+Native ambient setup then threw `Error`, with zero completed qualification
+groups. Owned schema/account/container/stage cleanup and recovery completed;
+failed PHP exit keeps strict release incomplete. Read-only pinned-source
+inspection found the constructor-bypassed ambient driver-selection defect.
+No further repair/retry, production grant/wiring, support waiver or release.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -667,3 +667,93 @@ Final scope review found only the private module comparison, its tests and
 owning records changed; controller/workflows, runtime includes, pins, budgets,
 assets, dependencies and production wiring remain unchanged. The new full
 attempt still requires successful exact-head ordinary CI and fresh admission.
+
+## Actual fixed-module attempt, ambient refusal and cleanup — 2026-10-31
+
+Repair `dd44a88e26b768106ac088bf2357ab2da4b1658c` was pushed and
+[ordinary exact-head CI 41231399060](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41231399060)
+passed: PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115;
+Node 56/56 per matrix, no failures/skips. Lint/build/structure/audits passed.
+The source was clean/synced at that full SHA, and no full attempt existed for
+it before the one newly authorized dispatch.
+
+Exactly one [full attempt 41231529126](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41231529126)
+ran at that same SHA. Job 18:52:49–18:53:19 UTC; controller step
+18:52:54–18:53:17. Admission/checkouts passed. The actual held connection-free
+audit was accepted at 18:53:15.804 UTC, bound to:
+
+```text
+head=dd44a88e26b768106ac088bf2357ab2da4b1658c
+source_image=8a11f83d62b43f0eefb3ff5fafc857db17faa329c44dab85874b5b0c85105ba5
+run=e3784e4925861c0387dc5aae755c6fbe
+audit_worker_cid=941d2fab310ac0cf86fa7282b9e8a9e752a1512fcf7c2ec34a0d17f2546eefd9
+server_cid=66e0c7553952368319b3450a270b0ea7d8d9c1509dff0d5e83069c7746b8552c
+engine_host_pid=2913 namespace_pid=1
+engine_started=2026-10-31T18:53:15.472290563Z
+```
+
+The parent acknowledged this audit, observed successful audit-worker exit and
+removed it before creating the owned application schema/options table/account
+and launching proof. The module compatibility barrier is therefore passed by
+fresh genuine evidence, not just synthetic tests. The accepted evidence model
+still trusts engine/distribution/PID/cache; independent loaded-object
+attestation is false, mapping consistency not established, runtime grant and
+production readiness false.
+
+The proof worker then emitted at 18:53:16.636 UTC:
+
+```text
+stage=ambient phase=native checks=458 groups=0 exception=Error diagnostic=null
+assertion=140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe
+```
+
+That assertion identity is SHA256 of the sentinel `none`, not a named failed
+assertion. Here the counter is the latest recorded check count before a thrown
+operation; do not call it 458 passed native assertions or identify assertion
+458 as failed. The same complete 33-name inventory and all seven root/config
+facts were retained as true. The native proof reached ambient setup but
+completed zero qualification groups; no successful ambient-handle assertion,
+closed-proof terminal, ordered functional-body completion or post-body source/
+inventory receipt was recorded. Raw error message/path/trace/call and connection
+state at the throw are intentionally not exported. Do not infer a runtime call
+or successful authentication solely from stage/counter.
+
+Read-only source inspection, without runtime loading: the official
+[pinned core wp-db.php](https://github.com/WordPress/WordPress/blob/cc101b64012b16d087780657a2b828ccd7794a63/wp-includes/wp-db.php)
+was read through GitHub's contents API and its bytes reverified against existing
+SHA256 `f07bc6403ab6db30195cca8e47a384de11d582a66a64cb50449d4335edcc24cf`.
+It declares private `$use_mysqli=false` (line 654); the genuine constructor
+(line 700) selects mysqli (line 707). The current harness uses
+`newInstanceWithoutConstructor()`, binds only credentials/database/host and
+calls `db_connect(false)`. The pinned `db_connect` (line 1713) branches on that
+uninitialized selector and otherwise calls obsolete `mysql_connect` (line
+1788 under the fixed non-debug profile). This is a concrete source-level
+construction defect consistent with the observed Error, not an exported proof
+that the throw occurred at that particular call. No private driver flag,
+ready/handle/qualification injection, constructor repair, native diagnostic or
+additional run was performed during closeout.
+
+Parent cleanup reported exactly `issues=[php-nonzero-exit]`,
+`containers_removed=true`, `stage_removed=true`,
+`strict_release_complete=false`. The independent all-server session/transaction
+reconciliation, owned schema/account DROP plus zero-absence readback and server
+log review recorded no issues. Thus owned application fixtures and physical
+resources were removed, but failed PHP exit still blocks strict release/body
+success. The separate always-recovery passed at 18:53:17 with an empty owned
+namespace; it does not retroactively qualify worker exit or native functionality.
+Artifact count was zero; bounded logs retain the evidence. Shared image cache/
+provider disposal remains trusted. No LocalWP/live/existing application state,
+production wiring, release/package/deploy or automatic retry was touched.
+
+Implementation-plan progress: module repair and genuine fresh audit are proved;
+minimum native qualification and supported/intended-profile coverage remain open.
+Recommended next gated slice: **Harness-Only Genuine Ambient Core Constructor
+Initialization Repair and One Fresh Trusted Minimum-Lab Qualification / Owned
+Cleanup Attempt**. Use genuine pinned core initialization, not injected private
+driver/ready/handle flags or a fabricated success path. Preserve the single
+ambient connection expectation, OFF/ambient invariants, all source/image/root/
+inventory guards, original nine-group body, budgets and strict cleanup. Require
+isolated regressions, local QA and successful exact-head ordinary CI, then fresh
+audit before one newly approved owned fixture/body attempt. The present one-
+attempt authority is consumed; no repair, fixture retry, production grant,
+wiring or release waiver follows automatically.
