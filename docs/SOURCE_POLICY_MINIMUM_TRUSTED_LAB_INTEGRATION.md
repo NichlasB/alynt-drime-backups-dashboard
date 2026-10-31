@@ -1385,3 +1385,51 @@ Node full suite 72/72, no skips/failures; focused PHPCS, structure and whitespac
 pass. Full ordinary exact-head CI is required before a newly justified third
 native attempt. No whole-plugin readiness or milestone credit is added by this
 diagnostic refinement. No global runtime/profile/guard/resource change occurred.
+
+Cycle 2 source `28bec69ab15fab9444ed38c8f71cf3451d828de2` passed
+[ordinary exact-head CI 41239499202](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41239499202):
+PHP 7.4 2,573 / 23,265; PHP 8.3 2,573 / 23,270; Node 72/72 per job,
+no failures/skips. Clean/synced source precedes campaign attempt 3/10,
+[41239642165](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41239642165).
+
+Attempt 3 fresh audit passed. First-cause source 28bec69 line 127 remains the
+server comparison, state connected_unqualified, observed category legacy_greeting.
+Because this category is defined only by exact equality to `5.5.5-` plus the
+fixed expected identity, the actual API value is established as
+`5.5.5-10.11.18-MariaDB-ubu2204`, not a generic prefix match or guessed version.
+The independent control SQL VERSION() gate still establishes the selected
+physical `10.11.18-MariaDB-ubu2204` build. Four prechecks pass; zero probes,
+470 checks / zero completed groups. Owner/context closed; external cleanup has
+only php-nonzero-exit, containers/stage removed, always-recovery issue-free,
+artifact count=0. Attempts 3/10, milestones 0/10; ownership/removal is verified.
+
+Cycle 3/3 for this server/bootstrap blocker corrects ONLY the private minimum-lab
+expectation to the exact observed PHP7.4.33/mysqlnd raw API identity above.
+Independent physical SQL VERSION(), immutable images/core/runtime and the exact
+raw string comparisons remain strict. No prefix stripping, acceptance of both
+forms, wildcard, server/build/support expansion or default production-profile
+change. The private scope still requires the exact original runtime/source/run/
+receiver/context/frame. Raw facts persist through final/per-command admission.
+Unscoped native facts, unprefixed/wrong/doubled-prefix/patch/build variants must
+refuse before metadata queries. Existing modeled complete positive paths use
+their pre-existing explicit DB_COLLATE setting; they do not qualify the genuine
+empty-collation native profile.
+
+Read-only pinned core6.0 source additionally exposes a subsequent constraint:
+db_version strips at the first non-numeric/dot character, so this raw identity
+becomes 5.5.5; has_cap('utf8mb4_520') requires >=5.6. With an empty DB_COLLATE,
+determine_charset therefore selects utf8mb4_unicode_ci, not the initializer's
+required utf8mb4_unicode_520_ci. This is a source-derived incompatibility, not
+yet an exported native session finding. A fixed API DATA case now reproduces
+that selection and verifies unchanged refusal after eight steps/twelve credits;
+the model's session row agrees with the modeled helper value. It is explicitly
+not copied/genuine core execution. Do not force a setting, helper success,
+weaken collation acceptance or change the pinned core to make it pass.
+
+Cycle 3 targeted transport/bootstrap/parsed/lab checks pass 311 tests / 938
+assertions; diagnostic Node 10/10, focused PHPCS, structure and whitespace pass.
+Full ordinary exact-head CI precedes attempt 4. That attempt is justified by
+the concrete raw-identity repair and will either qualify the original body or
+establish the next genuine refusal under unchanged requirements. A conflict
+requiring changed acceptance/support/configuration is a campaign boundary,
+not permission to relax it. No retries/diagnostics inflate milestone counts.

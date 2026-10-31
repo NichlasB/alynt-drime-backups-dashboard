@@ -27,7 +27,7 @@ class wpdb {
 	}
 	public function db_connect($allow_bail=true){unset($allow_bail); ++$GLOBALS['boot_counts']['unexpected_connect']; return false;}
 	public function init_charset(){boot_event('init'); $values=$this->determine_charset(DB_CHARSET,DB_COLLATE); $this->charset=$values['charset']; $this->collate=$values['collate'];}
-	public function determine_charset($charset,$collate){$GLOBALS['boot_configured_collate']=$collate;$this->has_cap('collation');return array('charset'=>empty($GLOBALS['boot_helper_wrong'])?'utf8mb4':'utf8','collate'=>$collate?:'utf8mb4_unicode_520_ci');}
+	public function determine_charset($charset,$collate){$GLOBALS['boot_configured_collate']=$collate;$this->has_cap('collation');$empty='5.5.5-10.11.18-MariaDB-ubu2204'===($GLOBALS['boot_server']??null)?'utf8mb4_unicode_ci':'utf8mb4_unicode_520_ci';return array('charset'=>empty($GLOBALS['boot_helper_wrong'])?'utf8mb4':'utf8','collate'=>$collate?:$empty);}
 	public function has_cap($cap){unset($cap); return strlen($this->db_version())>0;}
 	public function db_version(){return $this->db_server_info();}
 	public function db_server_info(){return mysqli_get_server_info($this->dbh);}

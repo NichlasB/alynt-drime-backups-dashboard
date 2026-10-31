@@ -16,7 +16,7 @@ try {
  $GLOBALS['policy_trace']=array();$GLOBALS['policy_cache_fail']=false;$GLOBALS['policy_cache']=array();
  $GLOBALS['boot_counts']=array_fill_keys(array('object','allocate','options','connect','commands','results','freed','close','unexpected_connect'),0);
  $GLOBALS['boot_events']=array();$GLOBALS['boot_after']=array();$GLOBALS['boot_rewrite']=array();$GLOBALS['boot_fault']='';
- $GLOBALS['boot_store']=new Alynt_Drime_Backups_Dashboard_Test_Policy_Store(array(),'no');$GLOBALS['boot_server']='10.11.18-MariaDB-ubu2204';$GLOBALS['boot_report_mode']=0;
+ $GLOBALS['boot_store']=new Alynt_Drime_Backups_Dashboard_Test_Policy_Store(array(),'no');$GLOBALS['boot_server']='5.5.5-10.11.18-MariaDB-ubu2204';$GLOBALS['boot_report_mode']=0;
  $GLOBALS['boot_expected_endpoint']=array('127.0.0.1','adbm','owned-private-password','adb_minimum',3306,null,0);
  foreach(array('identity','session')as$step)$GLOBALS['boot_rewrite'][$step]=static function($rows){$rows[0]['db']='adb_minimum';return$rows;};
  $owner=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection'))->newInstanceWithoutConstructor();boot_invoke($owner,'__construct');$GLOBALS['boot_connection']=$owner;
@@ -30,7 +30,7 @@ try {
  foreach(array('query_context'=>$context,'bootstrap_frame'=>$frame,'minimum_lab_scope'=>$scope,'bootstrap_binding'=>$binding)as$key=>$value)boot_set($owner,$key,$value);
  if('bad-context'===$argv[1])boot_set($context,'core_file',__DIR__.'/nonexistent-never-read.php');
  if('bad-server'===$argv[1])$GLOBALS['boot_fault']='bad-server';
- if('prefixed-server'===$argv[1])$GLOBALS['boot_server']='5.5.5-10.11.18-MariaDB-ubu2204';
+ if('prefixed-server'===$argv[1])$GLOBALS['boot_server']='5.5.5-5.5.5-10.11.18-MariaDB-ubu2204'; // Wrong extra prefix remains refused, no generic normalization.
  $counts=$GLOBALS['boot_counts'];$state=boot_get($owner,'native_state');$GLOBALS['adbb_first_failure']=array('sentinel'=>'unchanged');$prior_calls=0;
  $prior=static function()use(&$prior_calls){++$prior_calls;return true;};set_error_handler($prior);
  $before=adbm_bootstrap_before($owner,$context,$frame,$binding);

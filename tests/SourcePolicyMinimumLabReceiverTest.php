@@ -12,7 +12,7 @@ final class SourcePolicyMinimumLabReceiverTest extends TestCase {
 		$this->assertMatchesRegularExpression('/\Achecks:[1-9][0-9]*\n\z/',$out);
 	}
 	public static function scenarios() {
-		$cases=array('positive','default','image','core','run','endpoint','mode','server','context','late-context','late-frame','closed','active-context','active-facts');
+		$cases=array('positive','default','image','core','run','endpoint','mode','server','context','late-context','late-frame','closed','active-context','active-facts','server-unprefixed','server-double-prefix','server-wrong-build','server-patch','empty-collation');
 		foreach(array('model','platform','arch','php','client','core_commit','server_image','initial_mode','head','image')as$key)$cases[]='evidence-'.$key;
 		return array_map(static function($value){return array($value);},$cases);
 	}

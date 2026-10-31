@@ -97,7 +97,8 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope {
 		}
 		return array(
 			'core'     => '6.0',
-			'server'   => '10.11.18-MariaDB-ubu2204',
+			// Exact observed PHP 7.4.33/mysqlnd API identity, not SQL VERSION().
+			'server'   => '5.5.5-10.11.18-MariaDB-ubu2204',
 			'database' => $this->frame['database'],
 			'table'    => $this->frame['table'],
 			'context'  => spl_object_hash( $context ),

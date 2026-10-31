@@ -19,11 +19,11 @@ function minimum_adapter($frame,$evidence) {
 	$adapter=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter'))->newInstanceWithoutConstructor();boot_set($adapter,'connection',$owner);return$adapter;
 }
 try {
-	define('DB_CHARSET','utf8mb4'); define('DB_COLLATE','utf8mb4_unicode_520_ci'); define('MULTISITE',false); define('WP_CONTENT_DIR',__DIR__);
+	define('DB_CHARSET','utf8mb4'); define('DB_COLLATE','empty-collation'===$argv[1]?'':'utf8mb4_unicode_520_ci'); define('MULTISITE',false); define('WP_CONTENT_DIR',__DIR__);
 	$GLOBALS['policy_bootstrap_model']=true; $GLOBALS['policy_ext_cache']=false; $GLOBALS['wp_object_cache']=new WP_Object_Cache(); $GLOBALS['wp_filter']=array(); $GLOBALS['policy_trace']=array(); $GLOBALS['policy_cache_fail']=false; $GLOBALS['policy_cache']=array();
 	$GLOBALS['boot_counts']=array_fill_keys(array('object','allocate','options','connect','commands','results','freed','close','unexpected_connect'),0);
 	$GLOBALS['boot_events']=array(); $GLOBALS['boot_after']=array(); $GLOBALS['boot_rewrite']=array(); $GLOBALS['boot_fault']=''; $GLOBALS['boot_store']=new Alynt_Drime_Backups_Dashboard_Test_Policy_Store(array(),'no');
-	$GLOBALS['boot_server']='10.11.18-MariaDB-ubu2204'; $GLOBALS['boot_report_mode']=0;
+	$GLOBALS['boot_server']='5.5.5-10.11.18-MariaDB-ubu2204'; $GLOBALS['boot_report_mode']=0;
 	$GLOBALS['boot_expected_endpoint']=array('127.0.0.1','adbm','owned-private-password','adb_minimum',3306,null,0);
 	foreach(array('identity','session')as$step)$GLOBALS['boot_rewrite'][$step]=static function($rows){$rows[0]['db']='adb_minimum';return$rows;};
 	$owner=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection'))->newInstanceWithoutConstructor(); boot_invoke($owner,'__construct'); $GLOBALS['boot_connection']=$owner;
@@ -43,6 +43,9 @@ try {
 	if('default'!==$case)boot_set($owner,'minimum_lab_scope',$scope);
 	if('mode'===$case)$GLOBALS['boot_report_mode']=3;
 	if('server'===$case)$GLOBALS['boot_server']='10.11.18-MariaDB';
+	$server_faults=array('server-unprefixed'=>'10.11.18-MariaDB-ubu2204','server-double-prefix'=>'5.5.5-5.5.5-10.11.18-MariaDB-ubu2204','server-wrong-build'=>'5.5.5-10.11.18-MariaDB-ubu2404','server-patch'=>'5.5.5-10.11.19-MariaDB-ubu2204');
+	if(isset($server_faults[$case]))$GLOBALS['boot_server']=$server_faults[$case];
+	if('empty-collation'===$case)$GLOBALS['boot_rewrite']['session']=static function($rows){$rows[0]['db']='adb_minimum';$rows[0]['collation']='utf8mb4_unicode_ci';return $rows;};
 	if('context'===$case)boot_set($owner,'query_context',clone$context);
 	if('late-context'===$case)$GLOBALS['boot_after']['identity']=static function()use($owner,$context){boot_set($owner,'query_context',clone$context);};
 	if('late-frame'===$case)$GLOBALS['boot_after']['identity']=static function()use($owner,$frame){$frame['table']='adbm_bbbbbbbbbbbb_options';boot_set($owner,'bootstrap_frame',$frame);};
@@ -73,7 +76,8 @@ try {
 	} else {
 		A::assertInstanceOf(WP_Error::class,$result); A::assertFalse($owner->ready);
 		if(0===strpos($case,'evidence-'))A::assertSame(0,$GLOBALS['boot_counts']['allocate']);
-		if(in_array($case,array('default','server'),true))A::assertSame(0,$GLOBALS['boot_counts']['commands'],'Initial server mismatch must refuse before metadata queries.');
+		if(in_array($case,array('default','server'),true)||isset($server_faults[$case]))A::assertSame(0,$GLOBALS['boot_counts']['commands'],'Initial server mismatch must refuse before metadata queries.');
+		if('empty-collation'===$case){A::assertSame('utf8mb4_unicode_ci',$owner->collate);A::assertSame(7,$GLOBALS['boot_counts']['commands']);A::assertSame(8,boot_get($owner,'bootstrap_position'));A::assertSame(12,boot_get($owner,'bootstrap_credits'));A::assertTrue($owner->close());}
 		if(in_array($case,array('late-context','late-frame'),true))A::assertSame(1,$GLOBALS['boot_counts']['commands'],'Changed private binding stops before the next command.');
 		if(in_array($case,array('image','core','run','endpoint','mode','context'),true))A::assertSame(0,$GLOBALS['boot_counts']['allocate']);
 		if(in_array($case,array('default','server','late-context','late-frame'),true))A::assertSame(1,$GLOBALS['boot_counts']['close']);
