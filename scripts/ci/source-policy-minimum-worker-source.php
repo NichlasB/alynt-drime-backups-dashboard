@@ -8,6 +8,49 @@
 if ( ! defined( 'ABSPATH' ) || ! function_exists( 'adbb_check' ) ) {
 	exit( 1 );
 }
+/** Matches the pinned image's complete observed inventory, not module origins.
+ *
+ * @param mixed $names Sorted candidate-reported module names.
+ * @return bool Only the fixed observed list; never a production grant.
+ */
+function adbm_fixed_module_names( $names ) {
+	// Audit-only run 41230593868, fixed image/config and static roots checked below.
+	return array(
+		'Core',
+		'PDO',
+		'Phar',
+		'Reflection',
+		'SPL',
+		'SimpleXML',
+		'ctype',
+		'curl',
+		'date',
+		'dom',
+		'fileinfo',
+		'filter',
+		'ftp',
+		'hash',
+		'iconv',
+		'json',
+		'libxml',
+		'mbstring',
+		'mysqli',
+		'mysqlnd',
+		'openssl',
+		'pcre',
+		'pdo_sqlite',
+		'posix',
+		'readline',
+		'session',
+		'sqlite3',
+		'standard',
+		'tokenizer',
+		'xml',
+		'xmlreader',
+		'xmlwriter',
+		'zlib',
+	) === $names;
+}
 /** Checks the parent-frozen image, including all actually included files.
  *
  * @return array Non-secret hashes.
@@ -58,7 +101,7 @@ function adbm_modules() {
 	foreach ( $names as$name ) {
 		adbb_check( 1 === preg_match( '/\A[A-Za-z0-9_ ]{1,64}\z/', $name ), 'bounded module identity' );
 	}
-	adbb_check( ! extension_loaded( 'pdo_mysql' ) && ! extension_loaded( 'mbstring' ) && '' === ini_get( 'auto_prepend_file' ) && '' === ini_get( 'auto_append_file' ), 'fixed dynamic module profile' );
+	adbb_check( adbm_fixed_module_names( $names ) && ! extension_loaded( 'pdo_mysql' ) && '' === ini_get( 'auto_prepend_file' ) && '' === ini_get( 'auto_append_file' ), 'fixed selected-image module profile' );
 	foreach ( array( 'mysqli_init', 'mysqli_real_connect', 'mysqli_query', 'mysqli_close' )as$name ) {
 		$function = new ReflectionFunction( $name );
 		adbb_check( $function->isInternal() && 'mysqli' === $function->getExtensionName(), 'internal native declarations' );}

@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: approved fixed-image module compatibility and one fresh attempt — 2026-10-31
+
+At clean/synced `88ae082`, user approves [the fixed-image built-in module
+compatibility repair and one fresh trusted-lab qualification/cleanup attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-fixed-image-module-compatibility-and-one-fresh-attempt--2026-10-31).
+Replace only the conflicting `mbstring` exclusion with the complete observed
+33-name selected-image inventory. Preserve other root/INI/mode/source/internal-
+declaration guards, pins, budgets and fail-closed cleanup. After isolated QA,
+publication and successful exact-head ordinary CI, a new full manual attempt
+must pass fresh audit before creating its owned disposable application schema,
+account and rows. No retry, production grant/wiring, installed-site operation,
+release or deployment. Actual outcomes are recorded in the owning evidence.
+
+Implementation-plan progress: resolve the observed lab module-profile conflict;
+minimum native qualification and remaining supported-profile gates stay open
+until their own evidence passes. This is not product-feature completion.
+
 ## Minimum profile: audit identified fixed-image module mismatch — 2026-10-31
 
 Diagnostic implementation `c0a29ee` passed [ordinary CI 41230451074](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41230451074).

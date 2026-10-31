@@ -117,6 +117,6 @@ test('source-backed audit entry and cleanup cannot dispatch proof or erase prima
   precedes(worker,"if ( 'audit' === $argv[2] )","$phase = 'native'");
   assert.match(source,/\$GLOBALS\['adbm_inventory'\]\s*= array/);
   precedes(source,"$GLOBALS['adbm_inventory'] ","adbb_check( $php_root,");
-  assert.match(source,/! extension_loaded\( 'pdo_mysql' \) && ! extension_loaded\( 'mbstring' \)/);
+  assert.match(source,/adbm_fixed_module_names\( \$names \) && ! extension_loaded\( 'pdo_mysql' \)/);
   assert.match(source,/count\( \$names \) <= 64/);assert.doesNotMatch(worker+source,/json_encode\(|mysqli_report\(/);
 });

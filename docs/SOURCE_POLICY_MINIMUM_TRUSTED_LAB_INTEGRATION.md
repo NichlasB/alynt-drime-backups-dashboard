@@ -1,12 +1,12 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: [the strict repair's new attempt](#fresh-qualification-result-after-strict-repair--2026-10-31)
-passed container admission/startup and reached genuine PHP source/image audit,
-then refused at check counter 445 with zero qualification groups. Required
-cleanup/release evidence was flagged incomplete, although owned removal and
-separate recovery completed. The failing assertion identity was not exported;
-bounded audit/cleanup diagnostics are the next gate, not a guessed relaxation
-or another automatic qualification retry. Production wiring remains disabled.
+Current disposition: the [audit-only diagnostic attempt](#actual-audit-only-outcome-and-cleanup--2026-10-31)
+identified the pinned image's `mbstring` inventory conflict; owned removal and
+recovery completed. User now [approves the fixed-image compatibility repair
+and one new full attempt](#approved-fixed-image-module-compatibility-and-one-fresh-attempt--2026-10-31),
+with fresh audit prerequisites before owned application fixtures/body. Other
+guards/pins/budgets remain unchanged. Native qualification is not yet proved;
+production wiring, support waivers, release/deployment and retries stay closed.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -608,3 +608,62 @@ with owned disposable application schema/account/rows and exact cleanup.
 This recommendation needs new approval; current scope authorizes neither the
 acceptance repair nor those fixtures/body operations. No production grant,
 wiring, release waiver, deployment or automatic retry follows from it.
+
+## Approved fixed-image module compatibility and one fresh attempt — 2026-10-31
+
+User approval from clean/synced restore baseline
+`88ae082aabf330f640e72cfe6ef8df3ee8b9ae4e` authorizes harness-only compatibility
+repair, relevant isolated QA, commit/push/exact-head ordinary CI, followed by
+one new manual full trusted-lab qualification/owned cleanup attempt. This is
+explicit R3 authority for the fixed ephemeral CI lab and its disposable
+application schema/account/rows, not LocalWP/live/client/Drime or existing
+WordPress/database state. No matching installed-site target or Novamira
+operation applies. Uploader/toolkit remain read-only; no whole-plugin readiness
+row, product-task count, version/schema or production grant/wiring changes.
+
+The observed 33 sorted module names above become an exact private harness
+comparison after the unchanged static PHP/mysqli root checks. Unlike simply
+removing a ban, this admits only the selected image's observed complete list:
+missing/extra/replaced/reordered/duplicated names, case/type/key changes refuse.
+It includes the image-reported built-in `mbstring`, while retaining the explicit
+PDO-MySQL exclusion, empty INI/prepend/append, mode OFF, internal mysqli
+declarations, image/config/source pins, before/after inventory comparison and
+all existing time/query/memory/PID/network/output/cleanup limits. The assertion
+label becomes `fixed selected-image module profile`; old failure hashes and
+historical results keep their original meaning. No other worker/controller,
+workflow, dependency, runtime receiver or active public factory is changed.
+
+Inventory remains candidate-reported DATA under the accepted trusted-engine/
+distribution model, not independently proven loaded module origins, dependency
+closure, atomic mappings or an application capability. A pure comparison alone
+cannot grant a receiver; the actual caller follows exact source/root admission.
+Tests use synthetic observations and definitions only, not genuine WordPress,
+SQL or native sessions. The original source-owned predicate's rejection of
+the observed inventory was reproduced red in an isolated namespace before
+implementation; the new closed-list predicate must pass that exact case while
+retaining negative coverage. Fresh genuine audit remains required.
+
+Only after local validation, publication, exact-head ordinary CI, clean/synced
+source and duplicate-run checks may the one new full workflow be dispatched.
+It repeats connection-free candidate/core audit before creating any owned
+application schema/account/rows and executing the unchanged nine-group body.
+Owned server initialization, control SQL and exact cleanup are in scope;
+no production credentials or application state are reused. No automatic retry,
+alternate image/profile, budget increase or further acceptance repair on
+failure. Validation/publication and actual single-attempt evidence follow.
+
+Local pre-publication validation: PHP 8.5.1 full isolated suite 2,472 tests /
+23,108 assertions, no failures and two existing Sodium environment skips;
+Node 56/56 without failures/skips. Four new focused tests include the actual
+source-owned predicate with synthetic namespace API observations, the complete
+positive inventory, 71 missing/replaced/extra/duplicate/reorder/case-negative
+vectors, malformed type/key inputs, preserved PDO-MySQL/prepend/append refusals,
+and source-backed root/reflection/INI/mode/before-after binding. No genuine
+runtime or native qualification is claimed by those tests. The original guard
+was red on the observed selected-image list before the approved correction.
+Full PHPCS, syntax, build, structure, strict Composer validation, Composer audit,
+npm moderate audit and whitespace checks passed, zero reported vulnerabilities.
+Final scope review found only the private module comparison, its tests and
+owning records changed; controller/workflows, runtime includes, pins, budgets,
+assets, dependencies and production wiring remain unchanged. The new full
+attempt still requires successful exact-head ordinary CI and fresh admission.
