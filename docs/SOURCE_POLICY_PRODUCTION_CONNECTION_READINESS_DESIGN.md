@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Latest minimum-lab outcome: the approved [single ephemeral attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31)
+refused at server configuration admission before startup/PHP/SQL; owned recovery
+passed, but the failing predicate was not exported. Bounded pre-start diagnostic
+readback is the next approval gate. No minimum qualification, profile waiver,
+production connection or wiring authority follows from this failed attempt.
+
 Current minimum-profile disposition: [Linux observer-route deferral](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md).
 The [trusted-lab compatibility replan](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md)
 was subsequently accepted for [repository-only harness/receiver integration](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md).

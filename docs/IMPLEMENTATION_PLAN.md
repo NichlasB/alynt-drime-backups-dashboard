@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: approved single attempt blocked before server start — 2026-10-31
+
+The user-approved ephemeral attempt at clean/synced `8313227` failed in
+[native run 41226041248](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41226041248)
+at `server configuration` admission, before server start, candidate PHP or SQL.
+The original refusal survived finally cleanup; the separate always-recover
+step passed. Logs expose no failed field/configuration projection, so the exact
+mismatch remains unknown. No retry, guard/budget change or production operation.
+See the [owning attempt evidence](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31).
+
+Implementation-plan progress: acquisition reached pre-start configuration
+admission, but genuine minimum-profile qualification remains blocked, with no
+native body or physical database proof completed. Recommended next gated slice:
+Harness-Only Server-Configuration Predicate Diagnostics and One Owned Pre-Start
+Readback/Cleanup Probe, preserving guards and forbidding server/PHP/SQL startup.
+The previous one-attempt authority is consumed; another qualification run is
+not automatic. Required profile gaps and production/form wiring stay gated.
+
 ## Minimum profile: accepted trusted-lab contract and repository integration — 2026-10-31
 
 User accepts the disclosed trusted-engine/distribution/PID/cache assumptions and

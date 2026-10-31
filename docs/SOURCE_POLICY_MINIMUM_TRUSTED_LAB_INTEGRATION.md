@@ -1,5 +1,11 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
+Current disposition: the subsequently approved single ephemeral attempt
+[stopped before server start at configuration admission](#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31).
+Owned cleanup/recovery passed, but genuine minimum qualification remains open.
+The next gate is bounded harness diagnostics and an owned pre-start readback,
+not production wiring, an automatic retry or a wider acceptance profile.
+
 ## Authority and source-scoped baseline — 2026-10-31
 
 User accepts the [trusted-lab evidence contract](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md)
@@ -120,7 +126,7 @@ alter runtime/harness source and receives its own ordinary CI verification at
 handoff. Native manual workflow remains unrun and not dispatched. This is not
 qualification or whole-plugin readiness.
 
-## Exact next gated slice
+## Historical native-attempt gate — subsequently approved and consumed
 
 Approve **one exact-head ephemeral Trusted Minimum-Lab Acquisition,
 Connection-Free Preflight and Genuine Native Qualification / Owned Cleanup
@@ -132,3 +138,76 @@ increase. Production wiring, grants, activation and rollback stay disabled.
 On success, reconcile all required supported/intended-profile gaps before any
 application wiring or release decision; the different legacy 10.6.23 row is
 not qualified by this lab.
+
+## Approved single ephemeral attempt — pre-start refusal, 2026-10-31
+
+User approved one exact-head ephemeral Trusted Minimum-Lab Acquisition,
+Connection-Free Preflight and Genuine Native Qualification / Owned Cleanup
+Attempt, including its disposable container/database/account fixtures and the
+already accepted trusted-engine/cache/distribution boundary. Resolved target:
+`NichlasB/alynt-drime-backups-dashboard`, manual workflow
+`source-policy-minimum-qualification.yml`, master source
+`83132271387072acd8f5b454111cf0aae241f261`, GitHub-hosted ubuntu-24.04/x86_64.
+No registered site, LocalWP, Plugin Tester, live host, Novamira operation,
+application wiring, package/release/deploy or production grant was targeted.
+
+Read-only prerequisite checks verified a clean/synced exact local/remote head,
+successful ordinary CI 41225441602 on that same SHA, and zero existing native
+workflow runs. Exactly one dispatch was issued, with fixed evidence contract
+`trusted-lab-functional-v1`; no rerun, alternate candidate or guard/budget
+change followed its refusal.
+
+[Native workflow 41226041248](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41226041248)
+failed on the approved SHA. Its qualification job ran 17:45:16–17:45:37 UTC;
+the exact-job admission and both checkouts passed. The controller step ran
+17:45:21–17:45:35 UTC and reported exactly:
+
+```text
+Fixed minimum lab refused: server configuration; owned cleanup required if recovery failed.
+```
+
+The separate always-recover step then succeeded, as did both checkout post
+steps. No diagnostic artifacts were uploaded. The log retains no server
+configuration projection, CID or per-predicate reason, and no candidate audit,
+closed-proof terminal or successful body record. The exact mismatching field
+is **unknown**; do not infer it from a plausible Docker representation.
+
+Source-scoped interpretation: this refusal label follows staged source/core
+checks, both fixed image acquisition/config-profile checks and owned server
+container creation. It precedes `docker start`, candidate PHP construction,
+fixture SQL/account creation and the nine-group body. Those later steps were
+not reached: no native check/group count or physical qualification is claimed.
+Engine/static preflight reachability is not a renewed layer/diff-ID/ELF or
+loaded-object attestation result.
+
+The original `server configuration` reason survives the controller's finally
+cleanup, so its cleanup guards returned successfully; otherwise a cleanup
+refusal would replace that reason. The separate `--cleanup` step also returned
+success, rechecking zero owner-labeled containers and absent owned stage. This
+supports owned unstarted-container/stage cleanup, **not** an executed SQL
+reconciliation or working-runtime cleanup proof. Shared image cache/ordinary
+checkouts remain under trusted provider disposal; no global prune occurred.
+
+Only this owning record and plan/readiness pointers are updated for closeout.
+Runtime, harness, workflow, pins, acceptance, budgets, dependencies and production
+wiring remain identical to the attempted SHA. Ordinary validation/publication
+of this evidence does not turn the failed native run green or qualify any
+supported/intended profile.
+
+Local closeout checks: `php vendor/bin/phpunit --do-not-cache-result --filter
+SourcePolicyMinimumLabReceiverTest` passed 24 tests / 96 assertions;
+`npm run test:admin` passed 30/30 with no failures/skips; structure and
+`git diff --check` passed. These are existing isolated regressions, not a native
+rerun or substitute for the blocked qualification. Only the three owning
+Markdown records change; full local PHP/build/lint were not rerun for this
+evidence-only delta. Its pushed exact-head ordinary CI is verified separately
+at handoff, without dispatching the failed native workflow again.
+
+Recommended next gated slice: **Harness-Only Server-Configuration Predicate
+Diagnostics and One Owned Pre-Start Readback/Cleanup Probe**. Add bounded
+non-secret field/reason reporting and discriminating isolated tests, then one
+fresh exact-head ephemeral probe limited to the selected server image and an
+owned unstarted container/stage. Preserve all existing admission/resource
+guards; no server start, candidate PHP, SQL, accounts, wider mounts, native body
+or production wiring. Observe the actual failed predicate before proposing any
+acceptance correction or another full qualification attempt.
