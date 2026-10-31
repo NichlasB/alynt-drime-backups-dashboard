@@ -1244,3 +1244,15 @@ endpoint, SQL, public route, schema/version, asset, workflow, source pin or live
 state change. The derived fixture/test metadata does not authenticate future
 source or substitute for genuine API/native proof. This routine focused review
 does not refresh canonical whole-plugin review or release-readiness rows.
+
+Publication: repair `4a975c2499aeba208980ff9045ce693efddf9872` is pushed and
+[ordinary exact-head CI 41238101374](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41238101374)
+succeeded. Actual final-source logs: PHP 7.4 2,573 tests / 23,265 assertions;
+PHP 8.3 2,573 / 23,270; Node 69/69 on each job, no failures/skips. All manifest,
+dependency audit, build, structure and lint steps passed. This includes the final
+object-coercion assertion absent from the earlier local full-run snapshot.
+Dashboard was clean/synced at the repair head; uploader/toolkit heads and trees
+were unchanged. No qualification workflow was dispatched: the last native run
+remains historical failed 41234652466 at 35e72a7. This evidence-only closeout
+requires its own pushed exact-head ordinary CI before handoff; it grants no
+native retry, storage fixture, production wiring or release authority.

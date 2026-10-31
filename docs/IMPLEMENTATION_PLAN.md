@@ -26,6 +26,11 @@ owned disposable lab schema/account/rows only. It needs separate approval; the
 previous attempt authority is consumed. Existing-site state, production wiring,
 historical whole-plugin readiness and the earlier 1/8 batch count stay unchanged.
 
+Publication: `4a975c2499aeba208980ff9045ce693efddf9872` passed
+[ordinary exact-head CI 41238101374](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41238101374):
+PHP 7.4 2,573 tests / 23,265 assertions; PHP 8.3 2,573 / 23,270;
+Node 69/69 per job, zero failures/skips. No native run was dispatched.
+
 ## Bootstrap diagnostics: pre-allocation refusal and concrete port-type defect — 2026-10-31
 
 Diagnostics/test compatibility head `35e72a796db4110faa6ea393125f782bbe516ceb`
