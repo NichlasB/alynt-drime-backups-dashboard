@@ -1143,3 +1143,104 @@ Keep actual core loading, storage, native execution and production wiring
 disabled. This changes dormant runtime behavior and therefore needs new
 approval beyond the now-complete harness-only diagnostic scope. A fresh native
 proof would be a later separate gate after the repair's exact-head ordinary CI.
+
+## Repository-only genuine-core transport tuple compatibility foundation — 2026-10-31
+
+Explicit user approval starts at clean/synced restore baseline
+`050597aa3b45224918139c42fbf34481af210ab5`, verified against remote master and
+successful ordinary CI 41234992622. This R2 dormant compatibility/test repair
+authorizes validation, commit/push and ordinary exact-head CI, not a new native
+attempt or site operation. Uploader/toolkit stay read-only; no LocalWP/live
+target or Novamira/site operation applies. Version 0.1.77/schema 8, production
+wiring, unavailable factories and existing application state remain unchanged.
+
+Read-only official source inspection verified the existing full-file SHA256s for
+both pinned cores in memory, without storing/loading/executing core. WordPress
+6.0 `wp-db.php` (commit cc101b64012b16d087780657a2b828ccd7794a63) returns the
+port regex capture as a string; 7.1.3 `class-wpdb.php` (commit
+fc9832bef919c2a08541248db23af90d14ffb082) explicitly applies absint and returns
+an integer. Full-file hashes match the unchanged supported-core pin catalog.
+The inspected method slices (from `public function parse_db_host(` through its
+closing brace, LF source bytes) have SHA256
+`758f6f756c1ca62074010999342ff4039005fdbb71a134f6ef97784f3effcca5` and
+`c121e64ba9a5231ee06c86af19e9875b9169f9f587921ca3b652f84a8e0fbbc8`, respectively.
+These are static source observations, not genuine API execution receipts.
+
+Transport_Profile::matches_parsed first revalidates the complete finite
+endpoint/platform contract. It renders only the validated frame integer as a
+string for the exact 6.0 profile; current-core integers and socket null stay
+unchanged. Strict whole-array equality enforces four ordered fields and exact
+host/port/socket/IPv6 types and identity. No loose equality, parser DATA cast,
+generic numeric normalization, new endpoint/profile, provider or IO is added.
+Native_Bootstrap calls this helper at its existing once-only parser boundary,
+after initial source/settings checks and before parent initialization, context
+begin or allocation. Shared report-mode checks, refusal/cleanup behavior,
+source/core/image/module pins, effect order and all budgets stay unchanged.
+
+The general isolated wpdb double now uses source-derived fixed tuple DATA with
+explicit pin provenance and per-profile types, not a copied parser. The existing
+ADBC2 double remains integer-returning because its worker uses 7.1.3, matching
+that source contract. Unix socket DATA remains a separately labeled existing
+isolated profile, not newly claimed core/native evidence. Tuple fixture pin
+consistency is tested; it is not proof of future source contents or runtime
+behavior. No genuine core loading, authentication, native extension/session,
+SQL, transaction or physical cleanup experiment occurs.
+
+Red evidence: after correcting the 6.0 double but before runtime edits, the
+existing direct transport-tcp worker fails its positive initializer assertion;
+the existing 24-case transport suite has eight failures because the strict
+integer expectation stops positive and downstream cases too early. New helper
+tests initially error because the helper is absent (not a semantic red proof).
+After the repair, targeted transport/profile/bootstrap/parsed tests pass 328
+tests / 874 assertions before one additional object-coercion assertion. Existing
+diagnostic Node tests pass 7/7; new semantic controls pass 2/2. No assertions were
+deleted, expectations made unavailable-only or success states injected.
+
+New pure cases cover source-derived 6.0/current TCP and IPv6, ports 1/65535,
+wrong profile-specific port type, null/float/bool/object/malformed/oversized port
+DATA, wrong host/socket/flag, missing/extra/reordered tuple fields, invalid frame,
+trailing input and platform-gated socket null/path/flag. Eight new actual dormant
+bootstrap model cases retain current-core success and require malformed/wrong-
+type/endpoint failures before parent initialization, allocation, connect or query,
+with one parser call. These are API doubles, not genuine WordPress/native proof.
+
+Six in-memory semantic controls are assertion-killed without writing/mutating
+repository sources: restore the old integer expectation, use loose comparison,
+remove frame validation, bypass endpoint equality, bypass the actual bootstrap
+guard excerpt, and delay that guard until after a modeled effect. Controls must
+reach the fixed assertion exception, not merely fail startup. The actual guard
+excerpt has positive and negative controls and checks a single parser invocation;
+the full isolated bootstrap suite separately covers its surrounding orchestration.
+
+Implementation-plan progress: source compatibility and test fidelity advance the
+known minimum-profile blocker; native qualification and release readiness remain
+unproved. After validation/publication and successful exact-head ordinary CI,
+recommended next gated slice is one **Fresh Trusted Minimum-Lab Qualification /
+Owned Cleanup Proof of Genuine-Core Transport Tuple Compatibility**, with fresh
+audit and owned disposable lab schema/account/rows only, unchanged guards/budgets
+and exact cleanup. New explicit native authority is required; no retry follows
+from this repository-only approval. Historical whole-plugin review rows and the
+earlier safe-local batch count of 1/8 are not refreshed by this separate repair.
+
+Local final QA (PHP 8.5.1): full isolated PHPUnit, with the configured bundled
+Python static-analysis interpreter and `--do-not-cache-result`, passes 2,573
+tests / 23,262 assertions with two existing Sodium environment skips and no
+failures. That full run loaded tests before the final additional frame-port
+object-coercion assertion; the final parsed-transport suite was rerun and passes
+93 tests / 123 assertions, no skips/failures. No application storage/native
+operations occur in either run. Node full suite passes 69/69, no failures/skips.
+Full PHPCS checks 255 files, targeted runtime PHPCS and PHP/Node syntax checks
+pass. Structure, build, strict Composer validation, Composer audit, npm moderate
+audit and whitespace checks pass; both audits report zero known advisories/
+vulnerabilities. No tracked generated/build delta remains.
+
+Final source-scoped review covers strict profile-dependent port types, invalid
+frame short-circuiting, no object coercion or unknown callback, exact tuple shape,
+effect/guard order, source verification before parser invocation, bounded pure
+comparison, once-only parser/initializer behavior and the unchanged refusal/
+cleanup/resource limits. Runtime delta is one pure matcher and replacement of
+the existing tuple predicate only. No new dependency, factory/provider, secret,
+endpoint, SQL, public route, schema/version, asset, workflow, source pin or live
+state change. The derived fixture/test metadata does not authenticate future
+source or substitute for genuine API/native proof. This routine focused review
+does not refresh canonical whole-plugin review or release-readiness rows.

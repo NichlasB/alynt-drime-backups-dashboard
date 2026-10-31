@@ -73,7 +73,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$this->report_source = $this->bootstrap_binding['driver_file'];
 			$this->report_mode   = $this->observed_report_mode();
 			if ( ! in_array( $this->report_mode, array( 0, 3 ), true ) || ( 'unix_socket' === $frame['transport'] && 0 !== $this->report_mode )
-				|| array( $frame['host'], $frame['port'], $frame['socket'], '::1' === $frame['host'] ) !== $this->parse_db_host( $frame['db_host'] ) ) {
+				|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::matches_parsed( $frame, $this->parse_db_host( $frame['db_host'] ) ) ) {
 				throw new RuntimeException( 'Transport or reporting context unavailable' );
 			}
 			parent::__construct( $frame['user'], $frame['password'], $frame['database'], $frame['db_host'] );

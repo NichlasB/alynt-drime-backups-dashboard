@@ -1,5 +1,18 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Latest repository-only foundation: [genuine-core transport tuple compatibility](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#repository-only-genuine-core-transport-tuple-compatibility-foundation--2026-10-31)
+repairs the pinned 6.0 string-port versus validated integer-frame mismatch;
+separate inspection of pinned 7.1.3 confirms its integer-port contract remains
+strict. Only the validated expected port is rendered; parser DATA is never
+coerced. Red/green isolated positives, malformed/type/endpoint refusals and
+in-memory assertion-killed guard controls advance source compatibility, not
+actual native qualification. No actual core loading, SQL, fixture/native attempt,
+production wiring or release occurs. After ordinary exact-head CI, next gated
+slice is one Fresh Trusted Minimum-Lab Qualification / Owned Cleanup Proof of
+Genuine-Core Transport Tuple Compatibility with fresh audit and owned disposable
+lab fixtures; previous native authority remains consumed. The historical failed
+attempt below is not relabeled successful by this source repair.
+
 Latest diagnostic qualification: [attempt 41234652466](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-bootstrap-diagnostic-attempt-and-pinned-parser-mismatch--2026-10-31)
 at ordinary-CI-green `35e72a7` passed fresh audit/ambient prerequisites, then
 refused owned bootstrap at 470 checks / zero completed groups. Four prechecks

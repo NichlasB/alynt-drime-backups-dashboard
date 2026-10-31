@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved repository-only genuine-core transport tuple compatibility — 2026-10-31
+
+User approves the exact next gated foundation from clean/synced restore point
+`050597aa3b45224918139c42fbf34481af210ab5` (ordinary CI 41234992622 successful).
+Scope is the dormant parser-tuple guard, isolated source-derived DATA/API tests,
+validation, commit/push and exact-head ordinary CI only. No core loading, native
+attempt, SQL/storage fixtures, site operations, production wiring or release.
+See [owning repair evidence](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#repository-only-genuine-core-transport-tuple-compatibility-foundation--2026-10-31).
+
+The repair preserves strict comparison but renders only the already validated
+frame port to the exact pinned core API type: 6.0 string, 7.1.3 integer, Linux
+socket profile null. Parser-returned DATA is never cast; wrong types, extra or
+reordered fields, malformed endpoints and wrong host/socket/IPv6 identity refuse.
+Corrected 6.0 model positives fail before the repair, then pass without fake
+ready state or changed query/connection/resource budgets. Pinned-current integer
+behavior remains covered. Source-derived fixture DATA is not executed core proof.
+
+Implementation-plan progress: the known transport representation defect and its
+isolated-test blind spot are repaired locally; full native qualification is
+still unproved. After successful exact-head ordinary CI, recommended next gated
+slice is one **Fresh Trusted Minimum-Lab Qualification / Owned Cleanup Proof of
+Genuine-Core Transport Tuple Compatibility**, with fresh audit prerequisites and
+owned disposable lab schema/account/rows only. It needs separate approval; the
+previous attempt authority is consumed. Existing-site state, production wiring,
+historical whole-plugin readiness and the earlier 1/8 batch count stay unchanged.
+
 ## Bootstrap diagnostics: pre-allocation refusal and concrete port-type defect — 2026-10-31
 
 Diagnostics/test compatibility head `35e72a796db4110faa6ea393125f782bbe516ceb`

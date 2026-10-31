@@ -7,6 +7,7 @@ function boot_configure($case,$connection,$context){
 	$bad=array('host'=>'example.invalid','port'=>'10004','table'=>'wp_options;DROP','database'=>'wrong name','user'=>str_repeat('a',65),'password'=>array(),'core'=>'unknown','charset'=>'latin1','collate'=>'unknown');
 	foreach($bad as $key=>$value)if('bad-'.$key===$case)$frame[$key]=$value;
 	if('positive-current'===$case){$frame['core']='7.1.3'; $GLOBALS['boot_store']->row['autoload']='off';}
+	$GLOBALS['boot_parser_core']=$frame['core']??'6.0';
 	if('default'===$case)$frame=null;
 	if('driver-selection'===$case)$GLOBALS['boot_legacy']=true;
 	if('bad-core-source'===$case)$binding['core_file']=__FILE__;

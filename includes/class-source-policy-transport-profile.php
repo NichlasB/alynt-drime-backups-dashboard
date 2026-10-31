@@ -38,6 +38,23 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile {
 	}
 
 	/**
+	 * Matches fixed core parser DATA without coercing any returned component.
+	 *
+	 * @param array $frame Validated private endpoint; never caller connection authority.
+	 * @param mixed $parsed Result of the already source-verified core parser.
+	 * @return bool Exact tuple match, including version-specific port type.
+	 */
+	public static function matches_parsed( array $frame, $parsed ) {
+		if ( ! self::valid( $frame, PHP_OS_FAMILY ) ) {
+			return false;
+		}
+		// Pinned 6.0 preserves regex strings; pinned 7.1.3 returns absint ports.
+		// Render only our validated integer. Never cast or loosely compare parser DATA.
+		$port = '6.0' === $frame['core'] ? (string) $frame['port'] : $frame['port'];
+		return array( $frame['host'], $port, $frame['socket'], '::1' === $frame['host'] ) === $parsed;
+	}
+
+	/**
 	 * Explicit candidate server row; never a version-prefix or installed-binary grant.
 	 *
 	 * @param mixed $core Exact internally bound core row.

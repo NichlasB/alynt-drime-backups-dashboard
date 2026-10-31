@@ -2,6 +2,7 @@
 /** Small core-query/reissue behavioral double. Contains no mysqli/network functions. */
 if ( defined( 'ADB_POLICY_ISOLATED' ) ) {
 if ( class_exists( 'wpdb', false ) ) throw new RuntimeException( 'Never replace a genuine wpdb.' );
+require_once __DIR__.'/source-policy-parser-tuple-data.php';
 class wpdb {
 	public $ready = true, $options = 'wp_options', $last_result = array(), $last_error = '', $error_code = 0;
 	public $store, $prepared = array(), $queries = array(), $physical = 0, $reconnects = 0, $closes = 0;
@@ -18,9 +19,10 @@ class wpdb {
 	public function __get($name){return $this->$name;}
 	public function parse_db_host($host){
 		$GLOBALS['boot_parse_calls']=($GLOBALS['boot_parse_calls']??0)+1;
+		if(array_key_exists('boot_parser_result',$GLOBALS))return $GLOBALS['boot_parser_result'];
 		if(!empty($GLOBALS['boot_parser_wrong']))return array('127.0.0.1',10005,null,false);
-		$known=array('127.0.0.1:10004'=>array('127.0.0.1',10004,null,false),'[::1]:10004'=>array('::1',10004,null,true),'localhost:/tmp/owned.sock'=>array('localhost',null,'/tmp/owned.sock',false));
-		$known['127.0.0.1:3306']=array('127.0.0.1',3306,null,false); // Fixed lab API answer, never parser implementation.
+		$known=policy_parser_tuple_data()[$GLOBALS['boot_parser_core']??'6.0']['tuples']??array();
+		if('localhost:/tmp/owned.sock'===$host)return array('localhost',null,'/tmp/owned.sock',false); // Existing isolated socket profile, no new core proof.
 		return $known[$host]??false; // Fixed API answers, not a copied core parser.
 	}
 	public function db_connect($allow_bail=true){unset($allow_bail); ++$GLOBALS['boot_counts']['unexpected_connect']; return false;}

@@ -1,7 +1,7 @@
 <?php
 /** Finite isolated IO cases; no WordPress, native extension, socket or database. */
 function policy_transport_scenarios() {
-	return array('transport-tcp','transport-off','transport-ipv6','transport-socket','transport-old-frame','transport-parser','transport-parser-source','transport-mixed','transport-trailing','transport-report-invalid','transport-report-string','transport-report-late','transport-helper','transport-helper-session','transport-negotiation','transport-server','transport-socket-strict','transport-socket-report-string','transport-socket-generic','transport-socket-suffix','transport-socket-trailing','transport-socket-patch','transport-socket-type','transport-socket-core');
+	return array('transport-tcp','transport-off','transport-ipv6','transport-socket','transport-old-frame','transport-parser','transport-parser-source','transport-mixed','transport-trailing','transport-report-invalid','transport-report-string','transport-report-late','transport-helper','transport-helper-session','transport-negotiation','transport-server','transport-socket-strict','transport-socket-report-string','transport-socket-generic','transport-socket-suffix','transport-socket-trailing','transport-socket-patch','transport-socket-type','transport-socket-core','transport-parser-current','transport-parser-current-string','transport-parser-integer','transport-parser-shape','transport-parser-port','transport-parser-host','transport-parser-ipv6-flag','transport-parser-socket');
 }
 if(defined('ADB_POLICY_ISOLATED')) {
 function transport_configure($case,$connection) {
@@ -12,6 +12,17 @@ function transport_configure($case,$connection) {
 	$GLOBALS['boot_parse_calls']=0;$GLOBALS['boot_report_reads']=0;
 	$GLOBALS['boot_expected_endpoint']=array('127.0.0.1','owned','owned-private-password','isolated',10004,null,0);
 	if('transport-ipv6'===$case){$frame['host']='::1';$frame['db_host']='[::1]:10004';$GLOBALS['boot_expected_endpoint'][0]='[::1]';}
+	if(in_array($case,array('transport-parser-current','transport-parser-current-string'),true)){$frame['core']='7.1.3';$GLOBALS['boot_parser_core']='7.1.3';}
+	$parser_faults=array(
+		'transport-parser-current-string'=>array('127.0.0.1','10004',null,false),
+		'transport-parser-integer'=>array('127.0.0.1',10004,null,false),
+		'transport-parser-shape'=>array('127.0.0.1','10004',null,false,'extra'),
+		'transport-parser-port'=>array('127.0.0.1','10004tail',null,false),
+		'transport-parser-host'=>array('localhost','10004',null,false),
+		'transport-parser-ipv6-flag'=>array('127.0.0.1','10004',null,0),
+		'transport-parser-socket'=>array('127.0.0.1','10004','/tmp/a',false),
+	);
+	if(array_key_exists($case,$parser_faults))$GLOBALS['boot_parser_result']=$parser_faults[$case];
 	if(0===strpos($case,'transport-socket')){
 		$frame['core']='7.1.4';$frame['transport']='unix_socket';$frame['host']='localhost';$frame['port']=null;$frame['socket']='/tmp/owned.sock';$frame['db_host']='localhost:/tmp/owned.sock';
 		$GLOBALS['boot_report_mode']='transport-socket-strict'===$case?3:0;$GLOBALS['boot_server']='10.11.18-MariaDB-ubu2204';
@@ -36,14 +47,17 @@ function transport_configure($case,$connection) {
 	boot_set($connection,'bootstrap_frame',$frame);boot_set($connection,'bootstrap_binding',$binding);
 }
 function transport_verify($case,$connection,$result) {
-	$success=in_array($case,array('transport-tcp','transport-off','transport-ipv6'),true)||('transport-socket'===$case&&'Linux'===PHP_OS_FAMILY);
+	$success=in_array($case,array('transport-tcp','transport-off','transport-ipv6','transport-parser-current'),true)||('transport-socket'===$case&&'Linux'===PHP_OS_FAMILY);
 	PHPUnit\Framework\Assert::assertSame($success,true===$result,'Positive transcripts must reach the actual dormant initializer.');
 	PHPUnit\Framework\Assert::assertSame($success,$connection->ready);
 	$early=in_array($case,array('transport-old-frame','transport-parser','transport-parser-source','transport-mixed','transport-trailing','transport-report-invalid','transport-report-string','transport-socket-strict','transport-socket-report-string','transport-socket-core'),true)||(0===strpos($case,'transport-socket')&&'Linux'!==PHP_OS_FAMILY);
+	$parser_failure=in_array($case,array('transport-parser-current-string','transport-parser-integer','transport-parser-shape','transport-parser-port','transport-parser-host','transport-parser-ipv6-flag','transport-parser-socket'),true);
+	$early=$early||$parser_failure;
 	if($early){PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_counts']['object']);PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_counts']['allocate']);}
 	if(in_array($case,array('transport-old-frame','transport-parser-source','transport-mixed','transport-trailing'),true))PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_parse_calls']);
 	if('transport-parser-source'===$case)PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_report_reads'],'Unknown helper source must not execute the shared observer.');
 	if('transport-parser'===$case)PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_parse_calls']);
+	if($parser_failure){PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_parse_calls']);PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_counts']['connect']);PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_counts']['commands']);}
 	if('transport-report-late'===$case)PHPUnit\Framework\Assert::assertSame(1,$GLOBALS['boot_counts']['commands'],'No command after changed shared context.');
 	if('transport-socket-core'===$case)PHPUnit\Framework\Assert::assertSame(0,$GLOBALS['boot_parse_calls']);
 	$wrong_server=in_array($case,array('transport-server','transport-socket-generic','transport-socket-suffix','transport-socket-trailing','transport-socket-patch','transport-socket-type'),true);
