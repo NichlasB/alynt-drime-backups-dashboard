@@ -184,7 +184,8 @@ def proof():
         owner = Owned()
         client = Client(owner, deadline)
         report['owned_child'] = owner.root.name
-        report['tool'] = {'python': sys.version.split()[0], 'ssl': ssl.OPENSSL_VERSION}
+        report['tool'] = {'python': sys.version.split()[0], 'ssl': ssl.OPENSSL_VERSION,
+                          'unicode_db': static.unicodedata.unidata_version}
         plans = []
         for repo, pin, config_pin, roles in CATALOG:
             phase = repo + '-metadata'

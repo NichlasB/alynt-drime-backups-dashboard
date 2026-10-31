@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum artifacts: tar-only Unicode synthetic foundation — 2026-10-31
+
+Approved [synthetic foundation](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md#approved-synthetic-foundation--2026-10-31)
+at clean/synced baseline `8a45476`. Implements a separate bounded literal
+tar-name validator, explicit decoding and derived whiteout target validation;
+ASCII core/Git/ZIP, roles, pins, resource ceilings and conservative reduction
+remain. No acquisition, extraction, candidate/native, site/database or wiring
+operation. Narrow 23 offline groups and 23 assertion-killed in-memory controls
+passed. Full local 2,440 / 22,949, no failures, two existing Sodium skips;
+lint/admin/structure/build/manifest/audits/links passed. Exact-head publication
+pending. Owning record includes the bounded Windows test-report repair and its
+exact owned-child cleanup, with physical evidence explicitly unrenewed.
+
+Implementation-plan progress: finite policy implemented/proved synthetically,
+not actual artifact qualification. Recommended next gated slice: Linux Minimum-
+Lab Unicode-Policy Static Acquisition and Owned Cleanup Proof, one fresh
+digest-pinned bounded attempt with prerequisites. It requires new retrieval
+approval; no larger limits, normalization, fallback, execution or wiring.
+
 ## Linux minimum artifacts: tar-only Unicode policy design — 2026-10-31
 
 Approved [repository-only path/containment design](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md)

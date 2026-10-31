@@ -35,14 +35,15 @@ def minimal_elf():
     return bytes(data)
 
 
-def layer(entries):
+def layer(entries, format=tarfile.PAX_FORMAT, pax_headers=None, linkname='/outside'):
     output = io.BytesIO()
-    with tarfile.open(fileobj=output, mode='w') as archive:
+    with tarfile.open(fileobj=output, mode='w', format=format, encoding='utf-8', errors='surrogateescape') as archive:
         for path, kind, data in entries:
             info = tarfile.TarInfo(path)
             info.type = kind
             if kind in (tarfile.SYMTYPE, tarfile.LNKTYPE):
-                info.linkname = '/outside'
+                info.linkname = linkname
+            info.pax_headers = (pax_headers or {}).get(path, {})
             info.size = len(data) if kind == tarfile.REGTYPE else 0
             archive.addfile(info, io.BytesIO(data))
     raw = output.getvalue()
@@ -103,12 +104,18 @@ class StaticTests(unittest.TestCase):
         self.assertEqual('regular', facts['member_type'])
         self.assertEqual(1, facts['entry_index'])
         self.assertTrue(facts['leading_dot_slash_removed'])
-        # Synthetic analogue of the observed facts, not the retained real name.
-        path, sha = layer([('usr/share/locale/' + 'a' * 40 + '\u0151', tarfile.SYMTYPE, b'')])
+        # Preserve the historical ASCII-consumer facts; tar now has a separate policy.
+        with self.assertRaises(s.Refusal) as caught:
+            s.name('usr/share/locale/' + 'a' * 40 + '\u0151')
+        self.assertEqual(('ascii', 58, 4, 337),
+                         (caught.exception.facts['predicate'], caught.exception.facts['characters'],
+                          caught.exception.facts['depth'], caught.exception.facts['sample_first_non_printable_ordinal']))
+        # The tar diagnostic analogue is now a prohibited format control, not U+0151.
+        path, sha = layer([('usr/share/locale/' + 'a' * 40 + '\u202e', tarfile.SYMTYPE, b'')])
         with self.assertRaises(s.Refusal) as caught:
             s.scan_layer(path, sha, (), {}, self.budget())
         facts = caught.exception.facts
-        self.assertEqual(('ascii', 58, 4, 'symlink', 337),
+        self.assertEqual(('unicode-category', 58, 4, 'symlink', 8238),
                          (facts['predicate'], facts['characters'], facts['depth'], facts['member_type'],
                           facts['sample_first_non_printable_ordinal']))
         # Differential corpus uses the exact original boolean predicate.
@@ -246,8 +253,13 @@ if __name__ == '__main__':
         sys.exit(2)
     capture = io.StringIO()
     with patch.object(socket, 'socket', side_effect=AssertionError('Network forbidden in offline tests')), patch.object(socket, 'create_connection', side_effect=AssertionError('Network forbidden in offline tests')):
-        result = unittest.TextTestRunner(stream=capture).run(unittest.defaultTestLoader.loadTestsFromTestCase(StaticTests))
-    print(json.dumps({'tests': result.testsRun, 'failures': len(result.failures), 'errors': len(result.errors), 'network_calls': 0}))
+        unicode_spec = importlib.util.spec_from_file_location('tar_unicode_tests', Path(__file__).with_name('source_policy_tar_unicode_test.py'))
+        unicode_tests = importlib.util.module_from_spec(unicode_spec)
+        unicode_spec.loader.exec_module(unicode_tests)
+        suite = unittest.TestSuite((unittest.defaultTestLoader.loadTestsFromTestCase(StaticTests), unicode_tests.suite(s, layer, minimal_elf)))
+        result = unittest.TextTestRunner(stream=capture).run(suite)
+    print(json.dumps({'tests': result.testsRun, 'failures': len(result.failures), 'errors': len(result.errors), 'network_calls': 0, 'semantic_controls': unicode_tests.KILLED_CONTROLS}))
     if not result.wasSuccessful():
-        print(capture.getvalue(), file=sys.stderr)
+        # Keep below Windows anonymous-pipe capacity while the parent reads stdout.
+        print(capture.getvalue().encode('ascii', 'backslashreplace')[:3000].decode('ascii'), file=sys.stderr)
     sys.exit(0 if result.wasSuccessful() else 1)

@@ -7,6 +7,7 @@ import re
 import struct
 import tarfile
 import time
+import unicodedata
 import zipfile
 
 MIB = 1024 * 1024
@@ -53,9 +54,11 @@ def path_facts(value):
 
 
 class PathRefusal(Refusal):
-    def __init__(self, value):
+    def __init__(self, value, predicate=None):
         super().__init__('archive-path')
         self.facts = path_facts(value)
+        if predicate is not None:
+            self.facts['predicate'] = predicate
 
 
 def require(ok, code):
@@ -92,6 +95,33 @@ def name(value):
             and all(p not in ('', '.', '..') for p in value.split('/')))
     if not accepted:
         raise PathRefusal(value)
+    return value
+
+
+def tar_name(value):
+    """Literal virtual key only; never a host path or an ASCII core/Git name."""
+    if unicodedata.unidata_version != '15.0.0':
+        raise PathRefusal(value, 'unicode-version')
+    if not isinstance(value, str) or not 0 < len(value) <= 240:
+        raise PathRefusal(value)
+    try:
+        encoded = value.encode('utf-8', 'strict')
+    except UnicodeEncodeError:
+        raise PathRefusal(value, 'utf8') from None
+    if len(encoded) > 240:
+        error = PathRefusal(value, 'utf8-byte-length')
+        error.facts['utf8_bytes'] = len(encoded)
+        raise error
+    if any(unicodedata.category(c) in ('Cc', 'Cf', 'Cs', 'Co', 'Cn', 'Zl', 'Zp') for c in value):
+        raise PathRefusal(value, 'unicode-category')
+    if '\\' in value:
+        raise PathRefusal(value, 'backslash')
+    if value.startswith('/'):
+        raise PathRefusal(value, 'absolute')
+    if len(value.split('/')) > 32:
+        raise PathRefusal(value, 'depth')
+    if any(part in ('', '.', '..') for part in value.split('/')):
+        raise PathRefusal(value, 'segment')
     return value
 
 
@@ -170,7 +200,7 @@ def scan_layer(path, diff_id, wanted, roles, budget):
     layer_entries = 0
     with gzip.open(path, 'rb') as compressed:
         reader = ScanReader(compressed, budget)
-        with tarfile.open(fileobj=reader, mode='r|') as archive:
+        with tarfile.open(fileobj=reader, mode='r|', encoding='utf-8', errors='surrogateescape') as archive:
             for member in archive:
                 layer_entries += 1
                 budget['entries'] += 1
@@ -189,7 +219,7 @@ def scan_layer(path, diff_id, wanted, roles, budget):
                 if raw in ('', '.') and member.isdir():
                     continue
                 try:
-                    key = name(raw)
+                    key = tar_name(raw)
                 except PathRefusal as error:
                     error.facts.update(member_type={tarfile.REGTYPE: 'regular', tarfile.AREGTYPE: 'regular',
                         tarfile.DIRTYPE: 'directory', tarfile.SYMTYPE: 'symlink', tarfile.LNKTYPE: 'hardlink'}.get(member.type, 'other'),
@@ -207,6 +237,8 @@ def scan_layer(path, diff_id, wanted, roles, budget):
                 if leaf.startswith('.wh.'):
                     require(member.isfile() and member.size == 0 and leaf != '.wh.', 'whiteout-shape')
                     target = directory if leaf == '.wh..wh..opq' else (directory + '/' if directory else '') + leaf[4:]
+                    if leaf != '.wh..wh..opq':
+                        target = tar_name(target)
                     for role in list(roles):
                         if not target or role == target or role.startswith(target + '/'):
                             del roles[role]

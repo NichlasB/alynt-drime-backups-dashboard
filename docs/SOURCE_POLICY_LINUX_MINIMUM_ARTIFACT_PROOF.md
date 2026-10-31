@@ -279,13 +279,14 @@ authorize another physical attempt; no new retrieval follows publication.
 
 Implementation-plan progress: the refusal is specifically identified with
 bounded facts and confirmed cleanup. The approved [Unicode path policy design](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md)
-selects a separate tar-only contract; it does not change actual ASCII refusal
-or renew acquisition authority. No native or product completion claim.
+selects a separate tar-only contract. Its separately approved [synthetic foundation](SOURCE_POLICY_UNICODE_ARCHIVE_PATH_DESIGN.md#approved-synthetic-foundation--2026-10-31)
+implements that contract without renewing acquisition authority or superseding
+the historical physical refusal. No native or product completion claim.
 Do not reopen Windows observer work or fill the queue with generic cleanup.
 
-Recommended next gated slice: **Local-Only Socket-Free Tar Unicode Virtual-Name
-and Critical-Link Containment Safety Foundation**, synthetic/isolated tests only,
-implementing the approved design before any separate acquisition decision. No
-acceptance change, budget increase, fallback or payload retry is approved by
-this design-only slice. Pins/guards remain unchanged; runtime loading, native
-experiments and production wiring stay disabled.
+Recommended next gated slice: **Linux Minimum-Lab Unicode-Policy Static
+Acquisition and Owned Cleanup Proof**, one fresh digest-pinned bounded attempt
+after prerequisites under the published tar-only policy. It needs new retrieval
+approval: no attempt is authorized by synthetic tests. Pins/ceilings remain;
+no normalization, fallback, second attempt, extraction, runtime loading, native
+experiments or production wiring is authorized.

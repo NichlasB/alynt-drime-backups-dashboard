@@ -16,7 +16,9 @@ toolkit stay read-only; no toolkit or whole-plugin readiness rows are refreshed.
 **Select a separate tar-only, bounded literal Unicode virtual-name policy.
 Keep the existing ASCII `name()` contract for core/Git/ZIP consumers. Never
 normalize, case-fold, resolve, host-join or follow an archive name/link.** This
-design does not implement that selection or authorize another acquisition.
+design did not implement that selection or authorize another acquisition.
+The separately approved [synthetic foundation](#approved-synthetic-foundation--2026-10-31)
+below implements it without renewing physical acquisition authority.
 
 The [owning artifact proof](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md#approved-bounded-refusal-diagnostics--2026-10-31)
 records the consumed attempt, specific ASCII refusal and confirmed cleanup.
@@ -61,7 +63,7 @@ also prohibits duplicate path entries. Do not silently turn this Unicode slice
 into an overlay engine or claim OCI/rootfs reconstruction. Preserve conservative
 refusal/claim limits; physical acquisition remains blocked regardless of CI.
 
-## Proposed tar-only contract (not implemented)
+## Selected tar-only contract (design baseline)
 
 1. Consume only the decoded effective `TarInfo.name` string. Preserve existing
    pre-validation handling: strip exactly one leading `./`; trim trailing `/`
@@ -196,8 +198,86 @@ Implementation-plan progress: a finite tar-only policy and implementation proof
 contract are selected; actual parser behaviour and artifact admission remain
 unchanged/refused. No feature/native completion or autonomous task inflation.
 
-Recommended next gated slice: **Local-Only Socket-Free Tar Unicode Virtual-Name
+Design-time next gated slice (subsequently approved below): **Local-Only Socket-Free Tar Unicode Virtual-Name
 and Critical-Link Containment Safety Foundation**, synthetic/isolated tests only,
 implementing this consumer split and bounded policy. It requires approval before
 changing archive acceptance. No fresh payload attempt, extraction, candidate/native
 execution or wiring follows that approval; any physical retry is separately gated.
+
+## Approved synthetic foundation — 2026-10-31
+
+Clean/synced restore baseline `8a45476cdf85b3b8447a4090645ebf23fde9711d`.
+User approves the tar-only policy/containment foundation through local validation,
+commit/push and exact-head CI using isolated/synthetic tests only. The change
+is confined to development analysis helpers/tests and owning records. No
+downloaded/candidate archives, acquisition attempt, host extraction, image load,
+candidate/native execution, site/database fixture, installation, release/package
+or production-wiring operation. No site target/Novamira operation applies.
+
+Implemented the selected separate `tar_name()` guard: owned Unicode 15.0.0,
+strict UTF-8, at most 240 code points and 240 bytes, category and literal
+structure limits. Explicit tar decoding uses UTF-8/surrogateescape; escaped
+invalid bytes refuse rather than being replaced. Core `name()`, Git/ZIP/tree
+functions, ELF string policy, fixed roles and all 11 core pins remain unchanged.
+Only derived ordinary whiteout target validation is added to the existing
+conservative reducer; no reordering or general overlay semantics. Future
+acquisition reports Unicode database version, but no acquisition was run here.
+
+The new [Unicode tests](../tests/support/source_policy_tar_unicode_test.py)
+join the existing blocked-network offline runner. They establish real synthetic
+regular-member reads/diff-ID/role positives alongside inert Unicode links,
+USTAR/GNU long-name/PAX and invalid-binary name cases, literal identity/duplicate
+checks, byte/category/version boundaries, critical guard ordering and zero
+forbidden content reads, whiteouts/resource limits and ASCII consumer isolation.
+Historical U+0151 ASCII refusal facts are still tested against `name()`; tar's
+rejection analogue now uses a prohibited format control. That intentional
+policy change is paired with positive Unicode tar evidence, not a weakened
+always-refusing test or an invented successful real archive scan.
+
+All 23 in-memory source-image controls are assertion-killed; none counts an
+import/harness error as a successful kill. They cover accepting/refusing all,
+character/byte/category/version/structure guards, duplicates, critical-read/link
+guards, whiteouts, consumer separation, unwanted normalization, selected reads,
+diff IDs and decoder settings. Redundant guards use exact failure/order traces;
+these are not 23 independent exploit or native proofs. The actual source file
+SHA256 is checked unchanged after controls; no source mutation is written to
+disk. Current helper SHA256:
+`392d90edc29dc3044d3ab0f7d0a3c50412bdfacab737ae4fa3dab3dc19ea1eb5`.
+
+Red regressions established missing tar-only/Unicode acceptance before the
+implementation. Their larger report exposed a Windows anonymous-pipe stall:
+only verified owned Python child 61408 of test PHP 81672 was stopped, now absent.
+Bounded ASCII failure output (3,000 bytes plus newline) fixes that test-runner
+reporting issue without dropping tests, skips, counts or guard assertions.
+One ambiguous control selector was made unique; no runtime acceptance was
+changed to obtain green controls. Final narrow run: 2 PHP tests / 12 assertions,
+23 offline Python groups / 23 assertion-killed controls, zero failures/skips/
+network calls. Existing isolated test-owned temporary files use exact cleanup;
+no operational fixture/process or candidate data is retained.
+
+Final trusted local QA: related DATA/artifact 114 tests / 1,933 assertions,
+no failures/skips; full PHP 8.5.1 suite 2,440 / 22,949, no failures and two
+existing Sodium-unavailable signing skips. PHPCS 244 files; admin 23/23, no
+failures/skips; structure 149 runtime / 235 PHP support / 227 test files /
+224 class names; asset build passed without a tracked generated delta. Strict
+Composer validation, Composer audit and npm moderate audit passed, zero known
+dependency advisories/vulnerabilities. Whitespace and 163 owning local document
+targets passed. Final scoped source/security/error/resource/compatibility/
+test-integrity review confirmed the original ASCII functions, pins, runtime,
+tuple contracts, workflows and dependencies unchanged; no further finding was
+hidden by weakening guards. This is not full rootfs/OCI or physical qualification.
+Uploader/toolkit stay clean/read-only at their original heads; no historical
+physical evidence or whole-plugin review/readiness row is refreshed.
+Exact-head publication pending; ordinary CI cannot clear the physical gate.
+
+Implementation-plan progress: the selected tar-only policy now has synthetic
+implementation/guard evidence. The last actual artifact attempt is still refused;
+unknown name/target, later layers, full diff IDs, core bytes and ELF/native
+qualification are not inferred from these tests.
+
+Recommended next gated slice: **Linux Minimum-Lab Unicode-Policy Static
+Acquisition and Owned Cleanup Proof**. Approve one fresh bounded digest-pinned
+static attempt with fresh offline prerequisites, the same pins and all original
+payload/parser/time/cleanup ceilings. No normalization, larger limits, fallback,
+second attempt, extraction or candidate/native execution; production wiring
+remains disabled. Current synthetic approval does not authorize that retrieval.
