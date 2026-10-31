@@ -50,9 +50,10 @@ test('actual wrapper preserves first diagnostic, rethrows the same error and inv
   const op=read('scripts/ci/source-policy-minimum-native-operation.php');
   const a=op.indexOf('$before = adbm_bootstrap_before('),b=op.indexOf("\n\tadbb_check( 0 === ( new mysqli_driver() )->report_mode, 'owned initializer preserves OFF'",a);
   assert.ok(a>=0&&b>a);const source=op.slice(a,b);
-  const fixture=`class Owner {public $ready=false;}class WP_Error {}class Invoke {public $calls=0,$mode='error',$error;function invoke($owner){++$this->calls;if($this->mode==='throw')throw $this->error;if($this->mode==='success'){$owner->ready=true;return true;}return new WP_Error();}}
+  // PHP 7.4 treats a class-named method case-insensitively as an old-style constructor.
+  const fixture=`class Owner {public $ready=false;}class WP_Error {}class FixedBootstrapInvocationDouble {public $calls=0,$mode='error',$error;function invoke($owner){++$this->calls;if($this->mode==='throw')throw $this->error;if($this->mode==='success'){$owner->ready=true;return true;}return new WP_Error();}}
     function adbm_bootstrap_before(...$args){return '1111';}function adbm_bootstrap_after(...$args){++$GLOBALS['snapshots'];return array('fixed'=>'first');}function adbb_check($ok,$label){if(!$ok)throw new RuntimeException('Refused');}
-    $owner=new Owner();$context=new stdClass();$frame=$bound=array();$bootstrap=new Invoke();$GLOBALS['snapshots']=0;`;
+    $owner=new Owner();$context=new stdClass();$frame=$bound=array();$bootstrap=new FixedBootstrapInvocationDouble();$GLOBALS['snapshots']=0;`;
   const run=code=>child(['-r',fixture+code]);
   assert.equal(run(`try{${source}}catch(Throwable $e){}$bootstrap->mode='throw';$bootstrap->error=new Error('never-print');try{${source}}catch(Throwable $e){echo $e===$bootstrap->error?'same':'changed';}echo '|'.$bootstrap->calls.'|'.$GLOBALS['snapshots'].'|'.$GLOBALS['adbm_bootstrap_failure']['fixed'];`),'same|2|1|first');
   assert.equal(run(`$bootstrap->mode='success';${source}echo $bootstrap->calls.'|'.$GLOBALS['snapshots'].'|'.(isset($GLOBALS['adbm_bootstrap_failure'])?'bad':'none');`),'1|0|none');

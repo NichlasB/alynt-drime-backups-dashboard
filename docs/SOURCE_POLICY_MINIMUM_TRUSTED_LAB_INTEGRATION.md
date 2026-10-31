@@ -1036,3 +1036,19 @@ admission/cleanup guard, source/image/core/root/module pin, dependency,
 version/schema, asset or production-wiring change. The one native attempt is
 still pending clean/synced source, successful exact-head ordinary CI and
 duplicate-attempt checks; no current native result is inferred from local QA.
+
+Initial publication `bf86a0f8917fc55a2554ebd1b6b61c2c07c38228` failed
+[ordinary CI 41234329034](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41234329034)
+in one PHP 7.4 Node test child: fixture class `Invoke` and method `invoke` were
+interpreted as an old-style constructor, so constructing the stand-in without
+arguments raised ArgumentCountError before the wrapper test ran. Both PHP suites
+passed (7.4 2,472 / 23,110; 8.3 2,472 / 23,115); Node 7.4 66/67 passed with one
+failure and zero skips, Node 8.3 67/67 passed. The native workflow was not
+dispatched, and the one approved attempt remains unused.
+
+Routine in-scope test compatibility repair renames only that stand-in to
+`FixedBootstrapInvocationDouble`, keeping its `invoke` method, every assertion,
+replay control and actual harness/runtime logic unchanged. Local Node 67/67
+passes again. No guard, budget, source pin, native operation or acceptance
+behavior changes. A new successful exact-head ordinary CI is required before
+the still-approved single attempt; the failed CI is retained, not relabeled.
