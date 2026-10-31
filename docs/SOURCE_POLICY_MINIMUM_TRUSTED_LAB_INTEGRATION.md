@@ -524,3 +524,87 @@ Runtime includes, other workflow definitions, dependency pins, assets,
 version/schema and sibling repositories are unchanged. No acceptance guard,
 limit, production writer or public factory is relaxed. Actual audit evidence
 remains pending exact-head ordinary CI and the single approved dispatch.
+
+## Actual audit-only outcome and cleanup — 2026-10-31
+
+Implementation `c0a29eec1f3fbf3ca35d35ebb96da0520fe84ba6` was pushed and
+[ordinary exact-head CI 41230451074](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41230451074)
+passed: PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115;
+Node 52/52 per matrix, no failures/skips. Lint/build/structure/audits passed.
+Local/remote source was clean/synced and no audit run existed for that head
+before the one authorized dispatch.
+
+Exactly one [audit-only attempt 41230593868](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41230593868)
+ran at that same SHA. Job 18:40:59–18:41:23 UTC; audit/controller step
+18:41:07–18:41:22. Admission and both source/core checkouts passed. The audit
+refused; its bounded first-failure record retained:
+
+```text
+stage=source-audit phase=image checks=452 groups=0
+assertion=379c17749eeeac804a760602dedd246cfa13002b5a04bfa66d907a577f6a2481
+exception=RuntimeException diagnostic=null
+php_root=1 mysqli_root=1 no_loaded_ini=1 no_scanned_ini=1
+no_prepend=1 no_append=1 report_off=1
+```
+
+The SHA256 maps exactly to the unchanged fixed source label **`fixed dynamic
+module profile`**. Its conjunction requires no `pdo_mysql`, no `mbstring`, and
+empty prepend/append settings. The observed inventory contains `mbstring`,
+does not contain `pdo_mysql`, and both prepend/append facts are true. Thus the
+observed cause is that module guard's `mbstring` exclusion, not a guessed root,
+INI, mode or resource mismatch. Counter 452 includes the failed evaluation;
+it is not 452 passed assertions. The historical counter-445 run remains
+unidentified at its own evidence level; this fresh result is not a retroactive
+export of that earlier run.
+
+The 33 candidate-reported names, in their frozen sorted order, were:
+
+```text
+Core;PDO;Phar;Reflection;SPL;SimpleXML;ctype;curl;date;dom;fileinfo;filter;ftp;hash;iconv;json;libxml;mbstring;mysqli;mysqlnd;openssl;pcre;pdo_sqlite;posix;readline;session;sqlite3;standard;tokenizer;xml;xmlreader;xmlwriter;zlib
+```
+
+This is the trusted selected image's reported module inventory under fixed
+PHP `-n`/mysqli-only launch, not independent loaded-object origin/closure or
+mapping attestation. Static PHP/mysqli root and configuration observations
+passed; no successful held audit terminal or qualification terminal followed.
+Zero qualification groups, no application schema/account/row creation or
+credential forwarding, and no ordered native body. The owned server did
+initialize and bounded observer baseline/reconciliation/absence SELECTs ran;
+do not label the whole lab SQL-free. No application DROP branch ran in audit
+cleanup, and no installed/local/live/client state was targeted.
+
+Parent cleanup emitted exactly:
+
+```json
+{"scope":"audit-only","issues":["php-nonzero-exit"],"containers_removed":true,"stage_removed":true,"strict_release_complete":false}
+```
+
+No reconciliation, absence-readback, server-log, OOM, ownership or removal
+issue was recorded. The nonzero PHP-worker exit remains a real strict-release
+failure; it is not relaxed to green. The first assertion record survived that
+finally refusal. Always-recovery passed at 18:41:22, observing no owned
+containers/stage and no remaining recovery issue. Its empty-namespace result
+does not retroactively prove a successful worker exit or native release/body.
+No diagnostic artifacts were uploaded (`total_count=0`); bounded records are
+retained in run logs. Shared engine cache/provider disposal remains trusted.
+
+No guard, image/root/source pin, limit, runtime class, public factory or wiring
+was changed after this refusal; no retry or other native workflow was issued.
+The current one-attempt authority is consumed. Documentation-only closeout
+records the result without rerunning the lab or refreshing whole-plugin
+readiness/review rows.
+
+Implementation-plan progress: diagnostics now identify the exact prerequisite
+conflict; genuine minimum qualification remains open. Recommended next gated
+slice: **Harness-Only Fixed-Image Built-In Module Profile Compatibility Repair
+and One Fresh Trusted Minimum-Lab Qualification / Owned Cleanup Attempt**.
+Reconcile the `mbstring` exclusion with the accepted trusted-image contract by
+binding the complete observed inventory to the unchanged selected image and
+static roots, not by allowing arbitrary modules. Preserve PDO-MySQL/INI/
+prepend/append/internal-declaration/mode/source and all resource/cleanup guards.
+Require isolated adversarial validation and successful exact-head ordinary CI,
+then fresh audit prerequisites before a single newly approved full attempt
+with owned disposable application schema/account/rows and exact cleanup.
+This recommendation needs new approval; current scope authorizes neither the
+acceptance repair nor those fixtures/body operations. No production grant,
+wiring, release waiver, deployment or automatic retry follows from it.

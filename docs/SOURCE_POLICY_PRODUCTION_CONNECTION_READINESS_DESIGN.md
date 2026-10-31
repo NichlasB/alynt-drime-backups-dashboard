@@ -1,6 +1,19 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Latest qualification outcome: [strict-repair attempt 41229051185](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-qualification-result-after-strict-repair--2026-10-31)
+Latest diagnostic outcome: [audit-only 41230593868](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-audit-only-outcome-and-cleanup--2026-10-31)
+identified the exact `fixed dynamic module profile` refusal: `mbstring` is
+reported by the unchanged pinned image, while that guard forbids it. Static
+roots and all seven configuration facts passed; zero qualification groups.
+Owned removal and always-recovery completed, but failed worker exit keeps
+strict release incomplete. No application fixtures, native body or acceptance
+repair was executed. Next gated slice is the fixed-image built-in module profile
+compatibility repair and one newly approved trusted-lab qualification/cleanup
+attempt, retaining the complete fixed inventory and all other guards/budgets.
+Minimum qualification, supported/intended-profile coverage, production wiring
+and release readiness remain unestablished. No retry is authorized by this
+completed audit-only slice.
+
+Previous qualification outcome: [strict-repair attempt 41229051185](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-qualification-result-after-strict-repair--2026-10-31)
 passed container/startup gates but refused in genuine PHP source/image audit
 at counter 445 / zero groups. Specific assertion/inventory was not exported.
 Required cleanup/release evidence was incomplete; owned removal and subsequent

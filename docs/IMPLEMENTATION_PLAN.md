@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: audit identified fixed-image module mismatch — 2026-10-31
+
+Diagnostic implementation `c0a29ee` passed [ordinary CI 41230451074](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41230451074).
+The single [audit-only attempt 41230593868](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41230593868)
+then refused the unchanged `fixed dynamic module profile` assertion: the pinned
+image reports `mbstring`, which that guard forbids. Both static roots and all
+seven recorded configuration facts passed; 33 bounded module names were
+retained. Counter 452 includes the failed evaluation; zero qualification groups.
+Owned containers/stage were removed; the only strict-release issue was the
+nonzero PHP-worker exit, and always-recovery passed. No application fixtures,
+qualification body, acceptance change, site operation or retry.
+See [actual evidence and limits](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-audit-only-outcome-and-cleanup--2026-10-31).
+
+Implementation-plan progress: the concrete image/module conflict is identified;
+minimum native qualification is still unproved. Recommended next gated slice:
+Harness-Only Fixed-Image Built-In Module Profile Compatibility Repair and One
+Fresh Trusted Minimum-Lab Qualification / Owned Cleanup Attempt. Bind the
+observed complete inventory to the unchanged selected image/roots; preserve
+all other guards/pins/budgets. Fresh prerequisites must pass before any newly
+approved disposable application schema/account/row proof. Current audit-only
+authority is consumed; no production grant/wiring or automatic retry.
+
 ## Minimum profile: approved first-failure diagnostics and one audit-only attempt — 2026-10-31
 
 At clean/synced `8f573d1`, user approves [bounded first-failure, runtime-inventory
