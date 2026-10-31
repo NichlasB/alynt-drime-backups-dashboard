@@ -148,7 +148,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$columns = $this->bootstrap_probe( 'columns' );
 			$indexes = $this->bootstrap_probe( 'indexes' );
 			$this->bootstrap_check();
-			if ( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session( $session, $frame, $this->charset, $this->collate, array_values( array_diff( $modes, $this->incompatible_modes ) ) )
+			if ( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session( $session, $frame, $this->charset, $this->collate, array_values( array_diff( $modes, $this->incompatible_modes ) ), null === $this->minimum_lab_scope ? null : $this )
 				|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::schema( $table, $columns, $indexes ) ) {
 				throw new RuntimeException( 'Observed bootstrap evidence unavailable' );
 			}

@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved lab-only collation revision and campaign resume — 2026-10-31
+
+Explicit user approval accepts the exact [collation exception and owned
+requalification](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#approved-implementation-and-source-scoped-review--2026-10-31)
+from clean/synced `4ce8caa`, successful ordinary CI 41240297414. The campaign
+resumes at milestone 1 with 0/10 completed milestones and 4/10 native attempts
+used; counters are not reset. Only the bound lab helper-derived connection
+collation is revised; all physical schema/default profile/configuration,
+source/runtime/server bindings, budgets and closed production wiring remain.
+
+Implementation-plan progress: the approved exception now has a source-owned
+selector, unscoped/default refusal and drift/identity/schema regression coverage.
+This is not a successful native proof or whole-plugin readiness claim. After
+local validation, commit/push and successful exact-head ordinary CI, execute
+fresh trusted-lab attempt 5 under existing owned fixture/cleanup authority, then
+continue within the campaign unless its remaining limits or a new boundary hit.
+
 ## Campaign stopped at genuine-core collation acceptance decision — 2026-10-31
 
 Four native attempts and three bounded diagnostic/repair cycles advance the

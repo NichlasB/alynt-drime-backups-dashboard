@@ -35,7 +35,8 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab {
 			return $bad;
 		}
 		if ( 'active' === $this->native_state ) {
-			if ( ! $this->ready || ! is_array( $this->qualification ) || ! $this->query_context->valid() ) {
+			if ( ! $this->ready || ! is_array( $this->qualification ) || ! $this->query_context->valid()
+				|| 'utf8mb4' !== $this->charset || $expected['collation'] !== $this->collate ) {
 				return $bad;
 			}
 			foreach ( array( 'core', 'server', 'database', 'table' ) as $key ) {

@@ -1,6 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Current campaign gate: [minimum-lab genuine-core collation decision](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md).
+Current approved work: the exact [lab-only collation exception](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#approved-implementation-and-source-scoped-review--2026-10-31)
+is implemented with bound receiver/source/context selection, unchanged strict
+default/schema guards and drift/unknown-owner regression coverage. Native proof
+is still pending exact-head publication/CI and fresh campaign attempt 5; no
+production/provider/support/release authority follows. Campaign counters resume,
+not reset: 0/10 completed milestones and 4/10 native attempts used.
+
+Previous campaign gate: [minimum-lab genuine-core collation decision](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md).
 The private lab raw-identity correction passes exact-head CI; native attempt
 41240099125 reaches all eight setup steps/twelve credits then refuses combined
 session/schema validation. Pinned core6.0 source shows empty DB_COLLATE selects

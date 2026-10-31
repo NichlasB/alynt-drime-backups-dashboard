@@ -1,9 +1,10 @@
 # Minimum-Lab Genuine-Core Collation Compatibility Decision
 
-Status: proposed acceptance revision, not approved or implemented. Production
-wiring and native qualification remain disabled/unproved. This decision package
-is prepared under the autonomous campaign's source-scoped design authority;
-changing the acceptance criterion needs the campaign's explicit exception gate.
+Status: user explicitly approved the lab-only revision and owned requalification
+on 2026-10-31. Implementation/verification evidence follows below. Production
+wiring remains disabled; no native success is inferred from this approval.
+Only the exact stated connection-profile exception supersedes the campaign's
+preserve-acceptance boundary; other guards and campaign limits remain intact.
 
 ## Exact evidence boundary
 
@@ -89,7 +90,63 @@ requalified. Never infer success solely from row equality or a model.
   host limits. No whole-plugin readiness, transaction-uncertainty, intended-site,
   minimum-database-version or production-wiring claim follows from this lab case.
 
-No fifth native attempt or acceptance implementation is authorized by the
-current campaign while this decision is pending. Recommended next action:
-approve this exact lab-only collation acceptance revision and its bounded owned
-requalification, then resume the campaign with four of ten attempts used.
+Historical decision gate: the campaign stopped before a fifth native attempt.
+The subsequent explicit approval now authorizes this exact revision and bounded
+owned requalification; the campaign resumes with four of ten attempts used.
+
+## Approved implementation and source-scoped review — 2026-10-31
+
+Clean/synced restore baseline `4ce8caaa04e6fdc3553c05079bb32e0cf62c20ff`,
+ordinary CI 41240297414 reverified successful. Explicit R3 owned lab authority
+and the exact acceptance exception apply; autonomous global tier is not raised.
+No LocalWP/live/client/Drime, existing application state, credentials, schedules,
+production wiring/grants/activation/rollback, release/package/tag/deploy or new
+runtime installation. Uploader/toolkit remain untouched.
+
+The private scope projects one code-owned expected connection collation from
+its already frozen frame: empty configured collation selects unicode_ci for
+the exact pinned raw minimum runtime; the pre-existing explicit _520_ci test
+profile remains _520_ci. There is no free collation argument or new setting.
+The existing session validator has an optional exact receiver, not a profile
+descriptor. It source-checks class and declaration before calling the final
+minimum_lab_profile method, requires retained scope/context/frame identity and
+compares the selected exact value against BOTH helper output and session row.
+Null receiver retains the former strict _520_ci default; unknown/fake/clone/
+unscoped receivers cannot select the lab expectation. Wrong row shapes return
+false rather than invoking count on an invalid row.
+
+The initializer passes its receiver only when its existing private lab scope is
+present. All surrounding source/context/transport/mode/step/credit guards remain.
+Active lab admission additionally rechecks the retained helper charset/collation
+so drift closes eligibility before further dispatch; this is not a new per-query
+SQL observer. Schema validation, physical table/index layout, BINARY/OCTET_LENGTH
+mutation/read predicates, SQL catalog, source/image/core pins, configuration,
+effect order, once-only/no-reconnect behavior and resource budgets are unchanged.
+
+Focused admission/error/edge/security review (source-scoped, not canonical
+whole-plugin review completion): unknown receiver methods/magic are unreachable,
+identity checks precede the private profile read, cloned receiver/context or
+changed frame cannot reuse a scope, no handle/credential is exported, malformed
+session DATA fail closed, helper/session disagreement and charset/collation/
+schema drift refuse, and conditional SQL remains exact byte/length guarded.
+No public provisioning or request/form wiring is enabled. Negative controls
+retain default/production profile behavior; explicit _520_ci model positives
+are not substituted for genuine empty-collation qualification.
+
+Semantic red/green evidence: the approved empty-collation worker fails its
+positive assertion before runtime changes, then passes via the real dormant
+initializer under extension-free API doubles. Focused suites pass 266 tests /
+1,244 assertions. Four source-in-memory bypasses are assertion-killed: default
+collation widening, omitted receiver binding, omitted helper/session agreement,
+and accepting the connection collation as physical schema. These controls do
+not modify files or count startup failures. Node controls 2/2, full Node 74/74,
+no failures/skips. Native qualification, SQL/transaction and physical release
+remain unproved by these isolated tests; exact-head CI precedes attempt 5.
+
+Full local QA on PHP8.5.1: 2,589 tests / 23,346 assertions, no failures and two
+existing Sodium environment skips. Node full 74/74 no failures/skips. Full PHPCS
+255 files, focused runtime lint, structure/build, strict Composer validation,
+Composer audit, npm moderate audit and whitespace pass; no known advisories/
+vulnerabilities or generated delta. Source review confirms no changes to native
+SQL, schema, workflow/launch, immutable source/image/module pins, configuration,
+budgets or production factory wiring. Actual native results follow separately.

@@ -1480,3 +1480,16 @@ Accept only the exact privately bound lab helper-derived connection collation
 utf8mb4_unicode_ci; retain utf8mb4 charsets, the physical _unicode_520_ci schema,
 source/runtime/server bindings, query/resource/cleanup guards and closed
 production wiring. Do not force configuration or weaken unrelated profiles.
+
+## Approved lab collation exception and resumed campaign — 2026-10-31
+
+Explicit user approval accepts the exact prepared connection-collation revision
+and owned requalification, from clean/synced `4ce8caaa04e6fdc3553c05079bb32e0cf62c20ff`.
+Ordinary CI 41240297414 is reverified successful. Campaign resumes at 0/10
+completed milestones, 4/10 native attempts used; no counter reset or blanket
+acceptance waiver. Existing scope/ownership/site/production/release boundaries
+and ten-attempt/three-cycles-per-distinct-blocker limits remain unchanged.
+The [decision record](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#approved-implementation-and-source-scoped-review--2026-10-31)
+owns implementation, focused review and red/green/control evidence. Exact-head
+ordinary CI and fresh prerequisites precede campaign attempt 5. No native success
+or milestone completion is inferred from isolated tests or this new approval.

@@ -96,12 +96,13 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope {
 			return false;
 		}
 		return array(
-			'core'     => '6.0',
+			'core'      => '6.0',
 			// Exact observed PHP 7.4.33/mysqlnd API identity, not SQL VERSION().
-			'server'   => '5.5.5-10.11.18-MariaDB-ubu2204',
-			'database' => $this->frame['database'],
-			'table'    => $this->frame['table'],
-			'context'  => spl_object_hash( $context ),
+			'server'    => '5.5.5-10.11.18-MariaDB-ubu2204',
+			'collation' => '' === $this->frame['collate'] ? 'utf8mb4_unicode_ci' : 'utf8mb4_unicode_520_ci',
+			'database'  => $this->frame['database'],
+			'table'     => $this->frame['table'],
+			'context'   => spl_object_hash( $context ),
 		);
 	}
 

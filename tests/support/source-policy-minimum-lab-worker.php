@@ -19,7 +19,7 @@ function minimum_adapter($frame,$evidence) {
 	$adapter=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter'))->newInstanceWithoutConstructor();boot_set($adapter,'connection',$owner);return$adapter;
 }
 try {
-	define('DB_CHARSET','utf8mb4'); define('DB_COLLATE','empty-collation'===$argv[1]?'':'utf8mb4_unicode_520_ci'); define('MULTISITE',false); define('WP_CONTENT_DIR',__DIR__);
+	$empty=0===strpos($argv[1],'empty-');define('DB_CHARSET',$empty?'utf8':'utf8mb4'); define('DB_COLLATE',$empty?'':'utf8mb4_unicode_520_ci'); define('MULTISITE',false); define('WP_CONTENT_DIR',__DIR__);
 	$GLOBALS['policy_bootstrap_model']=true; $GLOBALS['policy_ext_cache']=false; $GLOBALS['wp_object_cache']=new WP_Object_Cache(); $GLOBALS['wp_filter']=array(); $GLOBALS['policy_trace']=array(); $GLOBALS['policy_cache_fail']=false; $GLOBALS['policy_cache']=array();
 	$GLOBALS['boot_counts']=array_fill_keys(array('object','allocate','options','connect','commands','results','freed','close','unexpected_connect'),0);
 	$GLOBALS['boot_events']=array(); $GLOBALS['boot_after']=array(); $GLOBALS['boot_rewrite']=array(); $GLOBALS['boot_fault']=''; $GLOBALS['boot_store']=new Alynt_Drime_Backups_Dashboard_Test_Policy_Store(array(),'no');
@@ -45,12 +45,13 @@ try {
 	if('server'===$case)$GLOBALS['boot_server']='10.11.18-MariaDB';
 	$server_faults=array('server-unprefixed'=>'10.11.18-MariaDB-ubu2204','server-double-prefix'=>'5.5.5-5.5.5-10.11.18-MariaDB-ubu2204','server-wrong-build'=>'5.5.5-10.11.18-MariaDB-ubu2404','server-patch'=>'5.5.5-10.11.19-MariaDB-ubu2204');
 	if(isset($server_faults[$case]))$GLOBALS['boot_server']=$server_faults[$case];
-	if('empty-collation'===$case)$GLOBALS['boot_rewrite']['session']=static function($rows){$rows[0]['db']='adb_minimum';$rows[0]['collation']='utf8mb4_unicode_ci';return $rows;};
+	if($empty)$GLOBALS['boot_rewrite']['session']=static function($rows)use($case,$owner){$rows[0]['db']='adb_minimum';$rows[0]['collation']='utf8mb4_unicode_ci';if('empty-session'===$case)$rows[0]['collation']='utf8mb4_unicode_520_ci';if('empty-charset'===$case)$rows[0]['client_charset']='utf8';if('empty-helper'===$case)$owner->collate='utf8mb4_general_ci';return $rows;};
+	if('empty-schema'===$case)$GLOBALS['boot_rewrite']['table']=static function($rows){$rows[0]['collation']='utf8mb4_unicode_ci';return $rows;};
 	if('context'===$case)boot_set($owner,'query_context',clone$context);
 	if('late-context'===$case)$GLOBALS['boot_after']['identity']=static function()use($owner,$context){boot_set($owner,'query_context',clone$context);};
 	if('late-frame'===$case)$GLOBALS['boot_after']['identity']=static function()use($owner,$frame){$frame['table']='adbm_bbbbbbbbbbbb_options';boot_set($owner,'bootstrap_frame',$frame);};
 	$result=boot_invoke($owner,'bootstrap');
-	if(in_array($case,array('positive','closed','active-context','active-facts'),true)) {
+	if(in_array($case,array('positive','closed','active-context','active-facts','empty-collation','empty-active-collation','empty-active-charset'),true)) {
 		A::assertTrue($result); A::assertTrue($owner->ready); A::assertSame(1,$GLOBALS['boot_counts']['allocate']); A::assertSame(1,$GLOBALS['boot_counts']['connect']);
 		A::assertNull(boot_get($owner,'bootstrap_frame')); A::assertIsArray($owner->minimum_lab_profile());
 		$facts=boot_get($owner,'qualification');
@@ -60,6 +61,14 @@ try {
 		if('active-context'===$case)boot_set($owner,'query_context',clone$context);
 		if('active-facts'===$case){$facts['server']='10.6.23-MariaDB';boot_set($owner,'qualification',$facts);}
 		if(in_array($case,array('active-context','active-facts'),true))A::assertInstanceOf(WP_Error::class,$owner->admit_profile());
+		if('empty-collation'===$case){
+			$session=boot_rows('session');$session[0]['db']=$frame['database'];$session[0]['collation']=$owner->collate;$modes=explode(',',$session[0]['mode']);$counts=$GLOBALS['boot_counts'];
+			A::assertSame('utf8mb4_unicode_ci',$owner->collate);A::assertTrue(Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session($session,$frame,$owner->charset,$owner->collate,$modes,$owner));
+			A::assertFalse(Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session($session,$frame,$owner->charset,$owner->collate,$modes));
+			A::assertFalse(Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session($session,$frame,$owner->charset,$owner->collate,$modes,clone $owner));
+			$wrong=$frame;$wrong['table']='other_options';A::assertFalse(Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session($session,$wrong,$owner->charset,$owner->collate,$modes,$owner));A::assertSame($counts,$GLOBALS['boot_counts']);
+		}
+		if(in_array($case,array('empty-active-collation','empty-active-charset'),true)){$counts=$GLOBALS['boot_counts'];if('empty-active-collation'===$case)$owner->collate='utf8mb4_unicode_520_ci';else $owner->charset='utf8';A::assertInstanceOf(WP_Error::class,$owner->admit_profile());A::assertFalse($owner->query('SELECT never-dispatched'));A::assertSame($counts,$GLOBALS['boot_counts']);}
 		if('positive'===$case) {
 			// Actual adapter path on modeled storage; no injected ready flag or facts.
 			$adapter=(new ReflectionClass('Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter'))->newInstanceWithoutConstructor();boot_set($adapter,'connection',$owner);
@@ -77,7 +86,7 @@ try {
 		A::assertInstanceOf(WP_Error::class,$result); A::assertFalse($owner->ready);
 		if(0===strpos($case,'evidence-'))A::assertSame(0,$GLOBALS['boot_counts']['allocate']);
 		if(in_array($case,array('default','server'),true)||isset($server_faults[$case]))A::assertSame(0,$GLOBALS['boot_counts']['commands'],'Initial server mismatch must refuse before metadata queries.');
-		if('empty-collation'===$case){A::assertSame('utf8mb4_unicode_ci',$owner->collate);A::assertSame(7,$GLOBALS['boot_counts']['commands']);A::assertSame(8,boot_get($owner,'bootstrap_position'));A::assertSame(12,boot_get($owner,'bootstrap_credits'));A::assertTrue($owner->close());}
+		if($empty){A::assertSame(8,boot_get($owner,'bootstrap_position'));A::assertSame(12,boot_get($owner,'bootstrap_credits'));A::assertTrue($owner->close());}
 		if(in_array($case,array('late-context','late-frame'),true))A::assertSame(1,$GLOBALS['boot_counts']['commands'],'Changed private binding stops before the next command.');
 		if(in_array($case,array('image','core','run','endpoint','mode','context'),true))A::assertSame(0,$GLOBALS['boot_counts']['allocate']);
 		if(in_array($case,array('default','server','late-context','late-frame'),true))A::assertSame(1,$GLOBALS['boot_counts']['close']);

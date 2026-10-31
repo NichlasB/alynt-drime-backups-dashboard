@@ -55,15 +55,17 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence {
 	/**
 	 * Validates observed own-session state, never settings requested by a caller.
 	 *
-	 * @param array  $rows Bounded result DATA.
-	 * @param array  $frame Private frozen settings.
-	 * @param string $charset Genuine helper-computed charset.
-	 * @param string $collation Genuine helper-computed collation.
-	 * @param array  $modes Expected core-processed mode tokens.
+	 * @param array       $rows Bounded result DATA.
+	 * @param array       $frame Private frozen settings.
+	 * @param string      $charset Genuine helper-computed charset.
+	 * @param string      $collation Genuine helper-computed collation.
+	 * @param array       $modes Expected core-processed mode tokens.
+	 * @param object|null $receiver Exact private lab receiver, never a collation descriptor.
 	 * @return bool
 	 */
-	public static function session( array $rows, array $frame, $charset, $collation, array $modes ) {
-		if ( 1 !== count( $rows ) || 11 !== count( $rows[0] ) ) {
+	public static function session( array $rows, array $frame, $charset, $collation, array $modes, $receiver = null ) {
+		$expected = self::session_collation( $frame, $receiver );
+		if ( false === $expected || 1 !== count( $rows ) || ! isset( $rows[0] ) || ! is_array( $rows[0] ) || 11 !== count( $rows[0] ) ) {
 			return false;
 		}
 		$row    = $rows[0];
@@ -74,9 +76,36 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence {
 		}
 		return ( $row['db'] ?? null ) === $frame['database'] && '1' === ( $row['ac'] ?? null ) && '0' === ( $row['tx'] ?? null )
 			&& in_array( $row['statement_limit'] ?? null, array( '3', '3.000000' ), true ) && '1' === ( $row['row_limit'] ?? null ) && '1' === ( $row['metadata_limit'] ?? null )
-			&& 'utf8mb4' === $charset && 'utf8mb4_unicode_520_ci' === $collation
+			&& 'utf8mb4' === $charset && $expected === $collation
 			&& ( $row['client_charset'] ?? null ) === $charset && ( $row['connection_charset'] ?? null ) === $charset && ( $row['result_charset'] ?? null ) === $charset
 			&& ( $row['collation'] ?? null ) === $collation && $actual === $modes;
+	}
+
+	/**
+	 * Selects only the default or the already bound private lab expectation.
+	 *
+	 * @param array       $frame Fixed private frame, never a profile selector from a request.
+	 * @param object|null $receiver Exact optional lab receiver.
+	 * @return string|false Code-owned collation or unavailable.
+	 */
+	private static function session_collation( array $frame, $receiver ) {
+		if ( null === $receiver ) {
+			return 'utf8mb4_unicode_520_ci';
+		}
+		if ( ! is_object( $receiver ) || 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' !== get_class( $receiver )
+			|| realpath( __DIR__ . '/class-source-policy-no-reconnect-connection.php' ) !== ( new ReflectionClass( $receiver ) )->getFileName() ) {
+			return false;
+		}
+		$expected = $receiver->minimum_lab_profile();
+		if ( ! is_array( $expected ) || ! in_array( $expected['collation'] ?? null, array( 'utf8mb4_unicode_ci', 'utf8mb4_unicode_520_ci' ), true ) ) {
+			return false;
+		}
+		foreach ( array( 'core', 'database', 'table' ) as $key ) {
+			if ( ( $frame[ $key ] ?? null ) !== $expected[ $key ] ) {
+				return false;
+			}
+		}
+		return $expected['collation'];
 	}
 
 	/**
