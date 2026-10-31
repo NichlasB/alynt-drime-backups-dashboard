@@ -75,8 +75,13 @@ PHPCS255 files, Node74/74 without skips, structure/build, strict Composer
 validation and Composer/npm audits pass, zero known advisories/vulnerabilities.
 Only owning evidence/plan records change; runtime/harness/workflow/asset/dependency
 bytes remain identical to the native-tested source. Local link/diff/ownership
-review passes. Publication exact-head ordinary CI is recorded after execution;
-isolated QA is not a replacement for the native receipt or whole-plugin review.
+review passes. Publication `02c43975cb1d852db5d8dbd9871f949ee7b9dd96` is pushed;
+exact-head [ordinary CI41247652292](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41247652292)
+succeeds. Actual logs: PHP7.4 2589 tests/23348 assertions, PHP8.3 2589/23353;
+Node74/74 on both, no failures/skips. All configured manifest/audit/build/structure/
+PHPCS gates pass. This evidence-only closeout receives its own pushed exact-head
+CI at handoff; no native/site rerun. Isolated QA is not a replacement for the
+native receipt or whole-plugin review.
 
 Implementation-plan progress: current Linux/socket shared-source requalification
 closes row L; campaign totals become3/10 milestones after publication/exact-head
