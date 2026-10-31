@@ -9,9 +9,22 @@ ADBLHO2 explicitly non-atomic and not candidate-qualified. Existing byte/time/
 row/file/authority/cleanup bounds unchanged; new 16-call EOF ceiling. Synthetic
 adjacent checks 41 / 448, no failures/skips; full local PHP 2,448 / 23,010,
 no failures, two existing Sodium skips. Lint/admin/structure/build/manifest/
-audits/185 local links passed. Publication/ordinary exact-head CI pending
-before one approved manual Linux attempt. No physical run yet,
-candidate execution, site/database work, new privilege or production wiring.
+audits/185 local links passed. Implementation `38c1f0f` pushed; exact-head
+ordinary CI 41207779554 passed (PHP 7.4 2,448 / 23,012, PHP 8.3 2,448 /
+23,017, no failures/skips). One manual access audit 41207893634 completed:
+maps EOF 5,307 bytes / three reads; 39 file-backed rows / 11 unique files.
+Known fixture kernel-object open denied EPERM (1), zero mapped files hashed.
+Access unavailable; no atomic/candidate qualification. Child reaped, owned
+stage independently absent, source/authority unchanged. [Owning outcome](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md#completed-access-audit-existing-authority-unavailable--2026-10-31).
+No candidate execution, site/database work, privilege or production-wiring change.
+
+Implementation-plan progress: complete access-only feasibility audit establishes
+this exact host-authority boundary; the independent-observer lane is blocked,
+not an unfinished reader repair or maintenance queue. Recommended next gated
+slice: Repository-Only Linux Minimum-Lab Observer Boundary and Qualification
+Deferral Decision, design-only. Prefer deferring this observer lane under
+current authority over adding privileges/helpers; record product/release impact
+and resume criteria without weakening guards or changing support claims.
 
 ## Linux minimum lab: approved maps completeness/consistency policy design — 2026-10-31
 
@@ -27,10 +40,9 @@ Design `104081c` is pushed; exact-head ordinary CI 41201531139 passed (PHP
 per matrix). Owning design records actual evidence; no physical result refreshed.
 
 Implementation-plan progress: evidence claims and finite access-only policy
-selected; stronger candidate observer remains blocked. Recommended next gated
-slice: Harness-Only Bounded Proc-Maps Access-Feasibility Integration and One
-Existing-Authority Harmless-Child Audit, including synthetic tests, exact-head
-CI and one owned Linux attempt/cleanup, without candidate loading or privilege.
+selected; the subsequent approved audit above now establishes access unavailable.
+Follow that explicit trust/deferral decision, not another runtime/DATA batch.
+Stronger candidate observer remains blocked; no loading or privilege workaround.
 
 ## Linux minimum lab: approved proc-read diagnostics and one fresh audit — 2026-10-31
 

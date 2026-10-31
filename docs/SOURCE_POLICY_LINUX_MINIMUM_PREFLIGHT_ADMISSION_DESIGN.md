@@ -273,8 +273,15 @@ candidate snapshot. It does not implement changes or qualify this preflight.
 The stronger candidate observation contract above remains unresolved and closed;
 successful access alone cannot authorize inventory or candidate loading.
 
-Recommended next gated slice: **Harness-Only Bounded Proc-Maps Access-Feasibility
-Integration and One Existing-Authority Harmless-Child Audit**, with synthetic
-tests, exact-head ordinary CI and one separately approved owned Linux attempt/
-cleanup. Preserve byte/time/identity/object/authority/cleanup limits. Candidate
-images/loading, site/database work, new privileges and wiring stay disabled.
+The [subsequent access-only audit](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md#completed-access-audit-existing-authority-unavailable--2026-10-31)
+at `38c1f0f`, manual run 41207893634, completed the bounded maps walk but
+observed EPERM opening the owned fixture's kernel map-files object. Actual
+access unavailable; child reaped, stage independently absent, authority/source
+unchanged. No candidate, atomic mapping or dependency-closure claim follows.
+
+Recommended next gated slice: **Repository-Only Linux Minimum-Lab Observer
+Boundary and Qualification Deferral Decision**, design-only. Prefer deferring
+the independent-observer lane under current authority; record product/release
+impact and resume criteria, without changing support claims or runtime guards.
+No added privileges/helpers, new physical attempt, candidate images/loading,
+site/database operations or production wiring.

@@ -219,5 +219,75 @@ advisories/vulnerabilities. Whitespace and 185 owning local documentation
 targets passed. Scoped security/error/resource/ownership/cleanup/test-integrity
 review confirms all limits, exact cleanup and non-admission claims preserved;
 protected runtime/manual artifact/pin/dependency and previous pure tests
-unchanged, uploader/toolkit clean/read-only. Publication/exact-head CI and one
-physical audit pending; prior failures are not reinterpreted or rerun.
+unchanged, uploader/toolkit clean/read-only. Publication and the one separately
+approved audit follow; prior failures are not reinterpreted or rerun.
+
+## Completed access audit: existing authority unavailable — 2026-10-31
+
+Implementation `38c1f0f91bdc4c3c1a7eb066d7d60cb2213ece04` is pushed;
+[ordinary exact-head CI 41207779554](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41207779554)
+passed before dispatch: PHP 7.4 2,448 tests / 23,012 assertions, PHP 8.3
+2,448 / 23,017, no failures/skips; admin 23/23 per matrix, no failures/
+skips. Configured lint, build, structure, manifest and dependency audits passed.
+Synthetic positives/controls and ordinary CI do not establish physical access.
+
+Exactly one newly approved [manual access audit 41207893634, attempt 1](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41207893634)
+ran at that same head on GitHub-hosted Ubuntu 24.04.5 x86_64, image
+`20261025.353.1`, existing Python 3.12.3. It completed with a green job and
+`ADBLHO2 status=unavailable`, `reason=existing-authority-denied`,
+`operation=fixture-mapfile-open`, errno 1 (EPERM),
+`phase=access-mapped-file-observation`. Green here means the bounded audit
+completed and cleaned up, not successful mapped-object access or admission.
+
+| Actual access evidence | Result |
+| --- | --- |
+| Bounded maps walk | EOF true, 5,307 payload bytes, three read calls |
+| Parsed file-backed entries | 39 rows / 11 unique backing files |
+| Known owned fixture | Selected first; kernel map-files open denied |
+| Successfully hashed mapped files | 0 |
+| Mapping consistency / candidate qualification | Both `not-established` |
+
+Stream acquisition now reaches EOF within the original 32-KiB budget and new
+16-call ceiling. The distinct kernel-object permission boundary is observed,
+not inferred from the prior short-read failures. No pathname fallback, extra
+authority or further attempt followed. No completed startup/final backing
+cohort exists; full mapped/dependency closure and candidate/native admission
+remain unproved. Prior static artifact byte evidence is not runtime access
+proof. This is an exact run/host/source result, not a universal claim
+that every Linux host denies access or proof of which capability change would
+be sufficient. Do not introduce a privileged helper to chase this result.
+
+Supervisor and child UID/GID 1001/1001, effective capabilities
+`0000000000000000`, NoNewPrivs 0; authority readback unchanged. Owned child
+PID 2426 / start 20152 reaped; supervisor `cleanup=confirmed`; independent
+always-cleanup `owned_stage_absent=true` for exact
+`adb-linux-observer-41207893634-1`. Disposable files/root removed, not
+recoverable. Both reports bind source image
+`eab522376105a232010bd93f10f82fdfec8be0e44d189873bc07174eba4aa192`;
+source unchanged. Independent stage absence is not a second process census or
+whole-host teardown attestation. Candidate images 0, candidate execution false,
+database operations false, privilege changes false; production wiring unchanged.
+
+Only owning records change for evidence closeout; executable/test/workflow
+cohort remains at `38c1f0f`. Final docs-only exact-head ordinary CI is publication
+verification, not a new physical audit or recovery of candidate qualification.
+No whole-plugin readiness, support-matrix change or production grant is claimed.
+
+Closeout checks: adjacent isolated 41 / 448 passed, no failures/skips;
+whitespace and 188 owning local documentation targets passed. Diff review
+confirms four owning records only, no post-attempt executable/test/workflow
+repair. Uploader/toolkit remain clean at `3dfcb15` / `c067eb6`. Final docs-only
+remote head, clean/synced state and ordinary exact-head CI are independently
+verified at handoff, without another physical run.
+
+Implementation-plan progress: the bounded access question is answered for this
+existing-authority CI profile. The independent-observer lane is blocked at a
+trust/product boundary, not another reader fix or generic maintenance queue.
+
+Recommended next gated slice: **Repository-Only Linux Minimum-Lab Observer
+Boundary and Qualification Deferral Decision**, design-only. Preferred direction:
+defer this independent-observer lane under current authority rather than add
+privileges, another principal/helper or repeated experiments. Record the exact
+product/release impact, unchanged support claims and criteria for revisiting it;
+do not weaken the current runtime gate or silently substitute child/path reports.
+No new execution, download, site/database operation or production wiring.

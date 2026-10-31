@@ -269,9 +269,15 @@ separates an EOF-complete access walk from atomic mapping consistency. It does
 not implement a reader change or refresh this failed physical result. Existing
 guards stay in force; no automatic multi-read acceptance or candidate grant.
 
-Recommended next gated slice: **Harness-Only Bounded Proc-Maps Access-Feasibility
-Integration and One Existing-Authority Harmless-Child Audit** under that finite
-access-only policy: synthetic tests, publication/exact-head CI, then one owned
-Linux audit/cleanup. No larger byte/time budget, privilege change, candidate
-loading, database/site work or production wiring. Stronger candidate evidence
-remains blocked even if a later access-only audit completes successfully.
+The separately approved [completed access-only audit](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md#completed-access-audit-existing-authority-unavailable--2026-10-31)
+at `38c1f0f`, manual run 41207893634, reached maps EOF in 5,307 bytes / three
+reads, then recorded actual EPERM on the known fixture kernel-object open.
+Access unavailable, no atomic/candidate qualification; child reaped, stage
+independently absent, source/authority unchanged. It does not refresh or turn
+the two preceding failed ADBLHO1 attempts into successes.
+
+Recommended next gated slice: **Repository-Only Linux Minimum-Lab Observer
+Boundary and Qualification Deferral Decision**, design-only. Prefer deferring
+this lane under existing authority, with explicit product/release impact and
+resume criteria, not added privilege/helpers or another physical experiment.
+Runtime guards, support claims and production wiring remain unchanged.
