@@ -821,3 +821,26 @@ controller/workflows, runtime classes, pins, budgets, native body assertions,
 cleanup implementation, assets, dependencies, version/schema and production
 wiring remain unchanged. These checks do not refresh genuine native evidence
 or whole-plugin release readiness. Exact-head publication CI follows.
+
+Publication: `9cfa168f89ab28f41d47653e8f43eed4f2afdca9` passed
+[ordinary exact-head CI 41232483675](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41232483675):
+PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115;
+Node 60/60 per matrix, no failures/skips. Lint/build/structure/audits passed.
+Local/remote heads matched and the worktree was clean; the manual full
+qualification workflow lookup for that SHA returned no runs. No native attempt
+or fixture authority was inferred from the autonomous batch.
+
+End-of-batch implementation-plan comparison: the constructor composition item
+has advanced through isolated validation/publication, but genuine constructor,
+authentication, physical query/connection accounting, body and cleanup evidence
+still require the next database/native proof. The batch completes **1/8**
+worthwhile tasks; the safe-local lane for this milestone is exhausted before
+the ceiling. Tests, guard controls, records and this CI closeout belong to that
+one task. The preferred next gated slice is **one Fresh Trusted Minimum-Lab
+Qualification / Owned Cleanup Proof of Genuine Ambient Core Initialization**,
+requiring fresh audit prerequisites before owned disposable schema/account/row
+creation and the original nine-group body, preserving all guards/pins/budgets
+and disabled production wiring. Approval must authorize that one physical
+attempt and exact cleanup; no further source repair, automatic retry, live
+operation or release is implied. This docs-only closeout is separately pushed
+and checked without dispatching the manual lab.

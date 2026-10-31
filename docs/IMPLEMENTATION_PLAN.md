@@ -20,6 +20,17 @@ reach eight or begin further implementation before this physical evidence.
 One completed task includes its tests, validation and evidence closeout; those
 activities are not separate product tasks.
 
+Publication: implementation `9cfa168f89ab28f41d47653e8f43eed4f2afdca9` passed
+[ordinary exact-head CI 41232483675](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41232483675):
+PHP 7.4 2,472 / 23,110 assertions; PHP 8.3 2,472 / 23,115; Node 60/60 each,
+no failures/skips. Local/remote heads were clean/synced and the full native
+workflow has no run for this SHA. The batch completes **1 of 8** worthwhile
+safe-local tasks; the current plan's safe-local lane is exhausted at the
+database/native gate, not continued into unrelated maintenance. Recommended
+next gated slice: one Fresh Trusted Minimum-Lab Qualification / Owned Cleanup
+Proof of Genuine Ambient Core Initialization, with fresh audit prerequisites,
+owned disposable schema/account/rows only and all guards/budgets preserved.
+
 ## Minimum profile: module repair passed fresh audit; ambient construction blocked — 2026-10-31
 
 Repair `dd44a88` passed [ordinary exact-head CI 41231399060](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41231399060).
