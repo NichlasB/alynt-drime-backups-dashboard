@@ -11,6 +11,12 @@ loading, Docker, installation, elevation, capability/permission change,
 WordPress/site/database/authentication, package/release/tag or deployment.
 No site target or Novamira operation applies; uploader/toolkit remain read-only.
 
+Owning source consumers: [supervisor reader/snapshot/result/cleanup](../scripts/ci/source-policy-linux-observer-audit.py),
+[manual exact-head workflow](../.github/workflows/source-policy-linux-observer-audit.yml),
+[PHP entry/source tests](../tests/SourcePolicyLinuxObserverAuditTest.php),
+[pure diagnostic controls](../tests/support/source_policy_linux_observer_diagnostics_test.py).
+They are inspected, not modified by this design.
+
 **Separate EOF-complete access feasibility from atomic mapping consistency.**
 Select a future bounded maps stream for the harmless-child access audit only,
 explicitly labeled non-atomic. Retain the stronger candidate-observer gate;
@@ -153,7 +159,16 @@ Composer audit and npm moderate audit passed, zero known project dependency
 advisories/vulnerabilities. Whitespace and 179 owning local documentation
 targets passed. Uploader/toolkit clean/read-only at original `3dfcb15` /
 `c067eb6`. Full local suite, lint and build not rerun for this docs-only slice;
-ordinary exact-head CI/publication pending. No physical audit dispatched.
+No physical audit dispatched.
+
+Design `104081c10732a4f806394c4681ff02c503c34389` is pushed;
+[ordinary exact-head CI 41201531139](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41201531139)
+passed: PHP 7.4 2,447 tests / 23,007 assertions, PHP 8.3 2,447 / 23,012,
+no failures/skips; admin 23/23 per matrix, no failures/skips. Configured lint,
+build, structure, manifest and dependency audits passed. This is unchanged
+source-contract validation, not implementation of the proposed helper or
+physical feasibility. Docs-only evidence closeout and final remote/clean/
+ordinary exact-head CI verification do not authorize an audit dispatch.
 
 Recommended next gated slice: **Harness-Only Bounded Proc-Maps Access-Feasibility
 Integration and One Existing-Authority Harmless-Child Audit**. Approval should

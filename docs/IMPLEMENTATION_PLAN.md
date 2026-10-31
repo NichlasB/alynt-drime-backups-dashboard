@@ -9,7 +9,9 @@ ceilings and a new 16-call ceiling. Explicit versioned non-atomic evidence canno
 qualify candidates. Current reader/tests/workflow/runtime remain unchanged;
 no physical dispatch or site/database operation. Local unchanged-contract checks
 261 / 2,859, no failures/skips; structure/manifest/audits/179 local links passed.
-Publication/exact-head ordinary CI pending; no physical result refreshed.
+Design `104081c` is pushed; exact-head ordinary CI 41201531139 passed (PHP
+7.4 2,447 / 23,007; PHP 8.3 2,447 / 23,012, no failures/skips; admin 23/23
+per matrix). Owning design records actual evidence; no physical result refreshed.
 
 Implementation-plan progress: evidence claims and finite access-only policy
 selected; stronger candidate observer remains blocked. Recommended next gated
