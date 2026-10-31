@@ -1,5 +1,39 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Bootstrap diagnostics: pre-allocation refusal and concrete port-type defect — 2026-10-31
+
+Diagnostics/test compatibility head `35e72a796db4110faa6ea393125f782bbe516ceb`
+passed [ordinary CI 41234507668](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41234507668).
+The single approved [native attempt 41234652466](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41234652466)
+passed fresh audit and ambient prerequisites, then refused owned bootstrap at
+470 checks / zero completed groups. All four observed preconditions passed;
+the return was WP_Error, with attempted=true, position/credits=0, no retained
+bootstrap/current handle and post-cleanup context=cleanup_failed, closed=false.
+This establishes a zero-probe/no-retained-handle refusal; the source defect
+below lies before allocation. The snapshot alone cannot rule out a throw from
+the first allocation expression before its handle assignment.
+Owned fixture/resource removal and always-recovery completed; failed PHP exit
+and the unconfirmed context terminal keep strict release/qualification incomplete.
+
+Read-only, hash-verified pinned WordPress 6.0 source returns the parsed explicit
+port as a string. The validated frame requires integer 3306, while bootstrap
+strictly compares the entire parser tuple against that integer. This is a
+concrete source defect consistent with the observed early refusal; the exact
+internal throw site was not exported. The isolated wpdb double returns integer
+ports and masks the mismatch. See [evidence and limits](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-bootstrap-diagnostic-attempt-and-pinned-parser-mismatch--2026-10-31).
+
+Implementation-plan progress: diagnostics identify a concrete compatibility/test
+fidelity defect; minimum native qualification remains blocked. Recommended next
+gated slice: **Repository-Only Genuine-Core Transport Tuple Compatibility Safety
+Foundation**. Validate the fixed genuine parser's finite output before canonical
+port comparison; preserve strict endpoint/range/transport identity, refusal,
+one-invocation and all budgets. Add source-backed discriminating positive and
+malformed/wrong-endpoint tests rather than loose comparison or a cast-only
+bypass. No native attempt is included in that recommendation. Runtime repair
+requires new approval because the completed diagnostic scope forbids runtime
+changes. Current one-attempt authority is consumed; wiring remains disabled,
+safe-local progress stays 1/8 and whole-plugin readiness remains pending.
+
 ## Approved bootstrap refusal observations and one fresh attempt — 2026-10-31
 
 At clean/synced `d07ae0b`, user approves [harness-only predicate/progress

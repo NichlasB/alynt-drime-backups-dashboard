@@ -1,6 +1,23 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Latest fresh qualification: [attempt 41232908042](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31)
+Latest diagnostic qualification: [attempt 41234652466](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-bootstrap-diagnostic-attempt-and-pinned-parser-mismatch--2026-10-31)
+at ordinary-CI-green `35e72a7` passed fresh audit/ambient prerequisites, then
+refused owned bootstrap at 470 checks / zero completed groups. Four prechecks
+passed; WP_Error and retained zero credits/position/no handles establish a
+zero-probe/no-retained-handle refusal, with the source defect below occurring
+before allocation (the snapshot alone cannot exclude a thrown first allocation).
+Context cleanup was unconfirmed; external owned fixture/
+resource removal and always-recovery completed, but failed PHP exit keeps strict
+release incomplete. Hash-verified pinned core source establishes a concrete
+string-port versus integer-frame strict-tuple mismatch, masked by the isolated
+integer-returning parser double. The internal throw site remains unexported.
+Recommended next gated slice: Repository-Only Genuine-Core Transport Tuple
+Compatibility Safety Foundation, with finite validated normalization and
+source-backed positive/refusal tests, not loose equality or weakened endpoint
+checks. This runtime repair needs separate approval; no native retry, production
+wiring, support waiver or release authority follows from this evidence closeout.
+
+Previous fresh qualification: [attempt 41232908042](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31)
 at CI-green `ac2ac9f` passed fresh audit, genuine ambient initialization,
 single-connect/OFF, restricted privilege, prepare and callback checks. It then
 failed the compound `actual ambient-bound bootstrap` assertion at counter 467 /

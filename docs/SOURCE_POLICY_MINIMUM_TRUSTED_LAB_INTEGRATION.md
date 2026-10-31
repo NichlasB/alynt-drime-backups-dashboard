@@ -1052,3 +1052,94 @@ replay control and actual harness/runtime logic unchanged. Local Node 67/67
 passes again. No guard, budget, source pin, native operation or acceptance
 behavior changes. A new successful exact-head ordinary CI is required before
 the still-approved single attempt; the failed CI is retained, not relabeled.
+
+## Actual bootstrap diagnostic attempt and pinned parser mismatch — 2026-10-31
+
+Recovery source `35e72a796db4110faa6ea393125f782bbe516ceb` passed
+[ordinary exact-head CI 41234507668](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41234507668):
+PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115; Node 67/67
+on each job with zero failures/skips. Lint, build, structure and dependency
+audits passed. Clean/synced source and absence of an existing qualification run
+for that head were checked before dispatch. The newly approved attempt was
+dispatched exactly once; initial PHP 7.4 test failure did not consume it.
+
+[Native run 41234652466](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41234652466),
+job 124635767560, ran 19:31:58–19:32:21 UTC. The ordered audit/body/cleanup step
+ran 19:32:04–19:32:19 and failed. The held connection-free audit accepted at
+19:32:18.401 with evidence model trusted-lab-functional-v1, independent loaded
+object attestation false, mapping consistency not established, runtime grant
+false and production readiness false. Genuine ambient constructor/single-
+connect/OFF/restricted-privilege/prepare-with-zero-SQL/callback prerequisites
+preceded the same owned-bootstrap assertion failure. The record reports
+stage=escape, phase=native, 470 checks, zero completed groups, RuntimeException,
+assertion `1aa00c36be301dadbd7ebe59e90bc569df1ee9d0510b2dcf88e632eb3251e04d`
+(`actual ambient-bound bootstrap`), original diagnostic=null. The fixed
+33-module inventory and all seven static-root/configuration facts passed.
+
+New bounded diagnostic DATA:
+
+- Before invocation: settings=1, source=1, context ownership/provenance=1,
+  minimum-lab scope=1. These observations are not admission grants.
+- Result category=error (WP_Error); attempted=1, position=0, credits=0.
+- After internal cleanup: native=closed, context=cleanup_failed,
+  close_attempted=1, closed=0, ready=0, dbh_present=0,
+  bootstrap_handle_present=0.
+
+The bootstrap handle is assigned from first allocation and retained thereafter;
+the null handle with attempted=true establishes no retained allocated handle,
+and zero credits establish no bootstrap probe consumption. The snapshot alone
+cannot exclude an exception from mysqli_init before assignment; the concrete
+source defect below is earlier, before that allocation expression.
+The context/native fields are cleanup-mutated observations, not the first
+failed predicate or a successful callback/native terminal. Four prechecks do
+not cover reporting/transport parsing, parent object initialization, context
+begin/sealing or every repeated guard. No exact internal throw site is exported.
+
+Read-only source follow-up retrieved official WordPress 6.0 commit
+`cc101b64012b16d087780657a2b828ccd7794a63` `wp-includes/wp-db.php` through the
+GitHub contents API and verified in-memory SHA256
+`f07bc6403ab6db30195cca8e47a384de11d582a66a64cb50449d4335edcc24cf`, matching
+the unchanged owning pin. No core code was loaded or executed. Its
+`parse_db_host()` assigns the preg_match `port` capture directly to the returned
+tuple, hence explicit port `3306` is string DATA. The fixed lab frame uses
+integer 3306, and Transport_Profile::valid requires an integer in 1–65535.
+Native_Bootstrap::bootstrap strictly compares the complete tuple against that
+integer before parent construction/context begin/allocation. Thus the genuine
+tuple and expected tuple differ by port type: a concrete source compatibility
+defect consistent with the observed early refusal, not proof of an exported
+first throw or that no other blocker remains. The isolated wpdb double's fixed
+integer-port answer masks this genuine API representation and requires a
+discriminating regression in a separately approved repair.
+
+Parent cleanup reports only `issues=[php-nonzero-exit]`, containers_removed=true,
+stage_removed=true, strict_release_complete=false. No independent all-server
+session/transaction reconciliation, owned schema/account DROP-and-absence,
+server log, ownership, OOM or physical-removal issue was reported. Owned
+fixtures/resources were removed. The separate always-recovery step passed at
+19:32:19.369 with no issues and no remaining owned containers/stage; its empty
+recovery success does not retroactively establish a clean worker exit, context
+terminal or successful native qualification. Artifact API count is zero; bounded
+records remain in logs. Shared cache/provider disposal remains trusted.
+
+No owned-bootstrap success, quote/backslash/NUL/percent/utf8mb4 round trip,
+ordered nine-group body, closed-proof terminal or final source/inventory receipt
+was recorded. No runtime source, parser/frame contract, guard, budget, pin,
+workflow, acceptance, production wiring or existing-site state was changed in
+response; no further native attempt was made. This closeout edits owning records
+only, leaves uploader/toolkit untouched and does not refresh historical
+whole-plugin readiness or the earlier safe-local count of 1/8.
+
+Implementation-plan progress: fresh observations turn the opaque bootstrap
+refusal into a concrete source-backed compatibility/test-fidelity defect, but
+minimum native qualification remains unproved. Recommended next gated slice:
+**Repository-Only Genuine-Core Transport Tuple Compatibility Safety Foundation**.
+Validate the exact source-owned parser output shape/types/finite port syntax
+before canonical comparison; retain strict host/socket/IPv6/port identity and
+existing bounds. No loose tuple equality, arbitrary cast, malformed endpoint
+acceptance, fake ready state, added query, re-entry or retry. Add source-backed
+positive and malformed/type/wrong-endpoint refusal tests that expose the current
+integer-returning double's blind spot and fail if required guards are bypassed.
+Keep actual core loading, storage, native execution and production wiring
+disabled. This changes dormant runtime behavior and therefore needs new
+approval beyond the now-complete harness-only diagnostic scope. A fresh native
+proof would be a later separate gate after the repair's exact-head ordinary CI.
