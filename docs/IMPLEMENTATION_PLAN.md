@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: strict repair passed CI, fresh PHP audit refused — 2026-10-31
+
+At `1c97788`, [ordinary CI 41228903947](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41228903947)
+passed after the approved null/strict-empty-object compatibility repair.
+Exactly one new [full attempt 41229051185](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41229051185)
+advanced past container admission/startup into genuine PHP source/image audit,
+then failed at counter 445 / zero qualification groups. The assertion identity
+was not exported. Parent cleanup/release evidence was flagged incomplete;
+final owned-removal checks and the separate always-recovery step completed.
+See [actual outcome and limits](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-qualification-result-after-strict-repair--2026-10-31).
+
+Implementation-plan progress: the port representation blocker is repaired;
+genuine minimum qualification is still unproved. Recommended next gated slice:
+Harness-Only Audit First-Failure, Runtime-Inventory and Cleanup Classification
+Diagnostics with One Fresh Audit-Only Owned Cleanup Attempt. Preserve all
+remaining guards/pins/budgets; no qualification body, application schema/account
+creation, production wiring or automatic retry. The current one-attempt
+authority is consumed; no failure condition is guessed or relaxed.
+
 ## Minimum profile: approved strict empty-map repair and one new attempt — 2026-10-31
 
 At clean/synced `ad0d650`, user approves [strict empty-binding compatibility and

@@ -1,10 +1,12 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: [the completed pre-start probe](#actual-pre-start-readback-and-cleanup-result--2026-10-31)
-identified the empty-object/null representation mismatch. User subsequently
-approved [the strict repair and one fresh full attempt](#approved-strict-empty-map-repair-and-one-fresh-qualification--2026-10-31).
-Only the zero-bindings representation changes; all other guards and production
-boundaries remain intact. Genuine minimum qualification is not presumed.
+Current disposition: [the strict repair's new attempt](#fresh-qualification-result-after-strict-repair--2026-10-31)
+passed container admission/startup and reached genuine PHP source/image audit,
+then refused at check counter 445 with zero qualification groups. Required
+cleanup/release evidence was flagged incomplete, although owned removal and
+separate recovery completed. The failing assertion identity was not exported;
+bounded audit/cleanup diagnostics are the next gate, not a guessed relaxation
+or another automatic qualification retry. Production wiring remains disabled.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -386,3 +388,71 @@ audit and whitespace checks passed, zero reported dependency advisories/
 vulnerabilities. Runtime/PHP source, both manual workflow definitions, native
 worker, dependencies, version/schema and asset sources are unchanged. These
 ordinary checks prove the repair's contracts, not genuine native qualification.
+
+## Fresh qualification result after strict repair — 2026-10-31
+
+Repair `1c97788cd3d22a4b653b4b29ad5ff5a85d3800ab` was pushed and
+[ordinary exact-head CI 41228903947](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41228903947)
+passed: PHP 7.4 2,472 tests / 23,110 assertions, PHP 8.3 2,472 / 23,115,
+Node 41/41 per matrix, no failures/skips. Clean local/remote heads matched;
+there was no native run for that SHA before dispatch.
+
+Exactly one newly approved [full attempt 41229051185](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41229051185)
+ran at that same SHA and failed. Job: 18:21:58–18:22:21 UTC; controller step:
+18:22:05–18:22:19. Exact-job admission and both source/core checkouts passed.
+The log retained this bounded first failure before parent cleanup:
+
+```json
+{"minimum_worker_failure":{"stage":"source-audit","phase":"image","checks":445,"groups":0}}
+```
+
+This is an executed check counter including the failed evaluation, **not 445
+passed assertions**, and zero completed qualification groups. No successful
+connection-free-audit or closed-proof terminal, functional-body completion or
+diagnostic artifacts were retained. The specific assertion, runtime inventory
+and first exception metadata were not exported. Do not identify a root cause
+from the counter or guess which image/inventory condition failed.
+
+Source-scoped reachability: the PHP failure record is after both container
+configuration gates, server startup/control-client baseline checks, genuine
+PHP-7.4.33 entry checks, the 11 genuine core pins/library loads and source/profile
+checks. Thus the original port-map barrier was passed and candidate PHP audit
+executed, but this is only partial preflight evidence. The ordered nine-group
+body and application fixture schema/account creation were not reached. Owned
+server initialization, baseline control SQL and conditional cleanup SQL are
+distinct from those unexecuted fixture/body operations. No existing application
+or installed-site state was targeted.
+
+The parent then reported:
+
+```text
+Fixed minimum lab refused: cleanup/release evidence incomplete; owned cleanup required if recovery failed.
+```
+
+Do not call the complete cleanup/release proof passed. A nonzero audit-worker
+exit is itself sufficient to mark that strict evidence flag failed; other
+possible failed cleanup subchecks are not individually logged. However, this
+particular final flag is checked only **after** owner-labeled container removal,
+zero-container readback and stage removal. The separate always-recovery step
+also succeeded at 18:22:19 UTC, rechecking absent owned containers/stage. This
+supports completed owned resource removal, not successful live SQL/transaction
+release qualification or a clean worker exit. Shared engine cache/provider
+disposal remains trusted; no global prune or production operation occurred.
+
+Only the approved null/strict-empty-map repair changed admission. No further
+guard, module/root expectation, source pin, budget, runtime image, worker,
+credentials or production wiring was changed after this refusal. No rerun or
+additional pre-start probe was issued. Historical runs remain distinct.
+
+Implementation-plan progress: the representation fix is validated and the lab
+advanced into genuine PHP image audit, but minimum qualification remains open.
+Recommended next gated slice: **Harness-Only Audit First-Failure, Runtime-
+Inventory and Cleanup Classification Diagnostics with One Fresh Audit-Only
+Owned Cleanup Attempt**. Preserve existing guards/pins/budgets; retain the
+already captured fixed assertion identity, safe first exception/diagnostic
+categories and bounded non-secret inventory observations, plus finite parent
+cleanup failure categories. Keep raw paths/messages/Env/credentials excluded.
+Then run one fresh exact-head audit-only lab attempt with owned server/PHP
+processes and cleanup; no qualification body or application schema/account/row
+creation, production grant, wiring, release or automatic retry. Observe the
+actual failed prerequisite before proposing any additional acceptance repair.

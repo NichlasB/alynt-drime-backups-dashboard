@@ -1,11 +1,19 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Latest bounded evidence: [pre-start probe 41227432637](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-pre-start-readback-and-cleanup-result--2026-10-31)
+Latest qualification outcome: [strict-repair attempt 41229051185](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-qualification-result-after-strict-repair--2026-10-31)
+passed container/startup gates but refused in genuine PHP source/image audit
+at counter 445 / zero groups. Specific assertion/inventory was not exported.
+Required cleanup/release evidence was incomplete; owned removal and subsequent
+recovery completed. First-failure/inventory/cleanup diagnostics plus a single
+audit-only owned attempt is the next gate. No minimum qualification, production
+connection/wiring, support waiver or release readiness is established.
+
+Historical pre-start evidence: [probe 41227432637](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-pre-start-readback-and-cleanup-result--2026-10-31)
 observed an empty port-binding object / zero keys while unchanged admission
 requires null; all other 20 clauses passed. Unstarted-fixture cleanup completed.
 This diagnoses the configuration mismatch, not startup/database/native behavior.
-Strict empty-map compatibility repair plus one fresh full qualification attempt
-is the next gated slice; no acceptance correction or production wiring yet.
+That result led to the subsequently approved strict empty-map repair; it did
+not itself establish native qualification or authorize production wiring.
 
 Earlier full-qualification outcome: the approved [single ephemeral attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31)
 refused at server configuration admission before startup/PHP/SQL; owned recovery
