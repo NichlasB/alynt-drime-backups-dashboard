@@ -17,9 +17,23 @@ test('positive diagnostics agree with the original predicate and have no failed 
   assert.equal(report.accepted,true);assert.equal(report.agreement,true);assert.deepEqual(report.failed,[]);
   assert.equal(Object.keys(report.checks).length,21);assert.equal(report.runtime_grant,false);assert.equal(report.native_qualification,false);
 });
+test('only null and a truly empty plain JSON binding map satisfy the no-bindings gate',()=>{
+  for(const ports of [null,JSON.parse('{}')]) {
+    const row={...positive(),ports};
+    assert.equal(containerProfile(row,'server',owner,selections.server.config,null,uid,stage),true);
+    const report=serverConfigurationDiagnostics(row,owner,uid,stage);
+    assert.equal(report.accepted,true);assert.equal(report.agreement,true);assert.deepEqual(report.failed,[]);
+  }
+  const hidden=Object.defineProperty({},'3306/tcp',{value:[],enumerable:false});
+  const symbolOnly={[Symbol('binding')]:[]};
+  const accessor=Object.defineProperty({},'toJSON',{get(){assert.fail('No arbitrary getter/coercion');}});
+  for(const ports of [undefined,false,true,0,'',[],new Date(),new Map(),Object.create(null),Object.create({binding:[]}),hidden,symbolOnly,accessor,{'3306/tcp':[]},{binding:undefined}]) {
+    assert.equal(containerProfile({...positive(),ports},'server',owner,selections.server.config,null,uid,stage),false);
+  }
+});
 test('each protected field change is independently identified without changing admission',()=>{
   const cases={image:['bad','image'],label:['bad','label'],user:['0:0','user'],ro:[false,'read_only'],entry:[['/bin/other'],'entrypoint'],
-    network:['host','network'],memory:[999999999,'memory'],cpu:[2000000000,'cpu'],pids:[100,'pids'],privileged:[true,'privileged'],ports:[{},'port_bindings'],
+    network:['host','network'],memory:[999999999,'memory'],cpu:[2000000000,'cpu'],pids:[100,'pids'],privileged:[true,'privileged'],ports:[{'3306/tcp':[]},'port_bindings'],
     caps:[[],'capabilities'],security:[[],'security'],devices:[[{}],'devices'],tmpfs:[{},'data_tmpfs_options'],mounts:[[{Type:'bind'}],'bind_mounts']};
   for(const [field,[value,clause]]of Object.entries(cases)) {
     const row={...positive(),[field]:value},report=serverConfigurationDiagnostics(row,owner,uid,stage);
@@ -27,8 +41,8 @@ test('each protected field change is independently identified without changing a
     assert.equal(report.accepted,false,field);assert.equal(report.agreement,true,field);assert.ok(report.failed.includes(clause),field);
   }
 });
-test('null, empty and nonempty port maps remain distinct and no acceptance is normalized',()=>{
-  for(const [value,description,accepted]of [[null,'null',true],[{},'empty-object',false],[{'3306/tcp':[]},'nonempty-object',false],[[],'array',false]]) {
+test('null and empty plain maps are admitted while nonempty/malformed maps remain rejected',()=>{
+  for(const [value,description,accepted]of [[null,'null',true],[{},'empty-object',true],[{'3306/tcp':[]},'nonempty-object',false],[[],'array',false]]) {
     const report=serverConfigurationDiagnostics({...positive(),ports:value},owner,uid,stage);
     assert.equal(report.observed.port_bindings_shape,description);assert.equal(report.accepted,accepted);assert.equal(report.agreement,true);
   }
@@ -65,7 +79,7 @@ function fake(row,options={}) {
   return {docker,calls,exists:()=>created};
 }
 test('one rejected-profile probe completes readback and cleanup without starting anything',()=>{
-  const engine=fake({...positive(),ports:{}}),report=probePrestartServer(engine.docker,owner,uid,stage);
+  const engine=fake({...positive(),ports:{'3306/tcp':[]}}),report=probePrestartServer(engine.docker,owner,uid,stage);
   assert.equal(report.diagnostic.accepted,false);assert.deepEqual(report.diagnostic.failed,['port_bindings']);assert.equal(report.native_qualification,false);
   assert.equal(report.server_started,false);assert.equal(report.php_executed,false);assert.equal(report.sql_executed,false);assert.equal(report.accounts_created,0);
   assert.equal(engine.exists(),false);assert.equal(engine.calls.filter(args=>args[0]==='create').length,1);assert.equal(engine.calls.filter(args=>args[0]==='rm').length,1);
@@ -73,7 +87,7 @@ test('one rejected-profile probe completes readback and cleanup without starting
   assert.ok(engine.calls.every(args=>['ps','pull','image','create','inspect','rm'].includes(args[0])));
 });
 test('positive modeled profile also completes without conferring a native/runtime grant',()=>{
-  const engine=fake(positive()),report=probePrestartServer(engine.docker,owner,uid,stage);
+  const engine=fake({...positive(),ports:{}}),report=probePrestartServer(engine.docker,owner,uid,stage);
   assert.equal(report.diagnostic.accepted,true);assert.equal(report.runtime_grant,false);assert.equal(report.production_ready,false);assert.equal(engine.exists(),false);
 });
 test('unexpected started fixture is refused and retained, never stopped or force-removed',()=>{

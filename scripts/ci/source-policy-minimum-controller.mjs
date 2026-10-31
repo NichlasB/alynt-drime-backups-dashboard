@@ -29,12 +29,16 @@ export function imageProfile(row,role) {
     && JSON.stringify(row.entry)===JSON.stringify(['docker-entrypoint.sh'])
     && JSON.stringify(row.cmd)===JSON.stringify([role==='php'?'php-fpm':'mariadbd']));
 }
+// Approved representation compatibility only: no keys of any kind, no arrays/coercion/custom prototypes.
+export function emptyPortBindings(value) {
+  return value===null||(typeof value==='object'&&!Array.isArray(value)&&Object.getPrototypeOf(value)===Object.prototype&&Reflect.ownKeys(value).length===0);
+}
 export function containerProfile(row,role,owner,image,serverCid,uid,stage) {
   const php=role==='php', scratch=php?'/var/www/html':'/var/lib/mysql';
   return Boolean(row&&row.image===image&&row.label===owner&&row.user===uid+':'+uid&&row.ro===true
     && JSON.stringify(row.entry)===JSON.stringify([php?'/usr/local/bin/php':'/bin/sh'])&&(!php||row.workdir==='/proof')
     && row.network===(php?'container:'+serverCid:'none')&&row.memory===(php?134217728:536870912)
-    && row.cpu===1000000000&&row.pids===(php?16:64)&&row.privileged===false&&row.ports===null
+    && row.cpu===1000000000&&row.pids===(php?16:64)&&row.privileged===false&&emptyPortBindings(row.ports)
     && JSON.stringify(row.caps)===JSON.stringify(['ALL'])&&Array.isArray(row.security)&&row.security.includes('no-new-privileges')&&row.tmpfs&&Array.isArray(row.mounts)
     && (row.devices??[]).length===0&&Object.keys(row.tmpfs).sort().join(',')===[scratch,'/tmp'].sort().join(',')
     && row.tmpfs[scratch]===`${scratch==='\/var/www/html'?'rw,nosuid,nodev,noexec,size=4k':'rw,nosuid,nodev,noexec,size=256m'},mode=700,uid=${uid},gid=${uid}`

@@ -1,5 +1,5 @@
-// Diagnostic DATA only. The existing admission function remains authoritative and unchanged.
-import {containerProfile, selections} from './source-policy-minimum-controller.mjs';
+// Diagnostic DATA only. The shared admission function, never this report, remains authoritative.
+import {containerProfile, emptyPortBindings, selections} from './source-policy-minimum-controller.mjs';
 
 const shape=value=>value===null?'null':Array.isArray(value)?'array':typeof value==='object'?(Object.keys(value).length?'nonempty-object':'empty-object'):typeof value;
 const count=value=>Array.isArray(value)&&value.length<=16?value.length:null;
@@ -20,7 +20,7 @@ export function serverConfigurationDiagnostics(row,owner,uid,stage) {
     cpu:()=>row.cpu===1000000000,
     pids:()=>row.pids===64,
     privileged:()=>row.privileged===false,
-    port_bindings:()=>row.ports===null,
+    port_bindings:()=>emptyPortBindings(row.ports),
     capabilities:()=>JSON.stringify(row.caps)===JSON.stringify(['ALL']),
     security:()=>Array.isArray(row.security)&&row.security.includes('no-new-privileges'),
     devices:()=> (row.devices??[]).length===0,

@@ -1,11 +1,10 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
 Current disposition: [the completed pre-start probe](#actual-pre-start-readback-and-cleanup-result--2026-10-31)
-observed exactly one rejected predicate: Docker supplied an empty port-binding
-object with zero keys, while unchanged admission requires null. All other 20
-checks and owned unstarted-fixture cleanup passed. Acceptance remains unchanged;
-strict representation compatibility repair and a fresh full qualification
-attempt require separate approval. Genuine minimum qualification remains open.
+identified the empty-object/null representation mismatch. User subsequently
+approved [the strict repair and one fresh full attempt](#approved-strict-empty-map-repair-and-one-fresh-qualification--2026-10-31).
+Only the zero-bindings representation changes; all other guards and production
+boundaries remain intact. Genuine minimum qualification is not presumed.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -341,3 +340,49 @@ Require discriminating isolated tests, validation/publication/exact-head CI,
 then separately scoped fresh prerequisites and one full attempt with explicitly
 approved owned database/account/row/process fixtures and cleanup. No automatic
 retry or production wiring.
+
+## Approved strict empty-map repair and one fresh qualification — 2026-10-31
+
+User approves Strict Empty Port-Bindings Compatibility Repair and One Fresh
+Trusted Minimum-Lab Qualification / Owned Cleanup Attempt, explicitly including
+disposable database/account/row/process fixtures. Clean/synced restore baseline
+`ad0d6506ce778f534b824b6b158d0db2bbfd6513`; target remains the fixed manual
+GitHub ubuntu-24.04/x86_64 trusted lab, not any installed WordPress/LocalWP/live
+site. This is the explicitly approved R3 remote-fixture boundary, not a general
+production or credential grant. Uploader/toolkit remain read-only. No release,
+deployment, schedules, client/Drime state or production wiring.
+
+The existing `containerProfile` changes one clause only, to a shared pure
+`emptyPortBindings` predicate. It accepts legacy null or an ordinary plain
+object with Object.prototype and zero `Reflect.ownKeys`; it rejects arrays,
+primitives, custom/null prototypes, hidden/symbol keys and every nonempty map.
+No string coercion, JSON normalization or truthiness grants admission. The
+diagnostic uses that exact predicate, retaining shape distinctions and agreement
+checks. Both server and PHP container roles retain the no-bindings invariant.
+All other profile predicates, image/config/core pins, native/PHP/SQL source,
+limits, cleanup, errors, public factory refusals and production composition
+remain unchanged.
+
+A new observed-empty-object regression was assertion-red before repair
+(`false !== true`) and green afterward. It covers null/JSON-empty positives,
+nonempty/malformed values, prototypes, hidden/symbol properties and a getter
+tripwire. Prior negative port fixtures now use actual nonempty maps, preserving
+their refusal assertions; existing positive null coverage remains. Both-role
+resource tests additionally require empty-object admission. No unrelated test
+is skipped or weakened to secure a green outcome.
+
+Only after local validation, commit/push, successful exact-head ordinary CI,
+clean/synced source and duplicate-run checks may one new full native workflow
+be dispatched. Fresh prerequisites precede any owned qualification body. No
+automatic retry, alternate runtime/image, resource increase or production
+activation if it refuses. The historical failed run and successful pre-start
+probe remain distinct evidence; neither is relabeled as native qualification.
+Validation/publication and actual one-attempt outcomes follow below.
+
+Local pre-publication QA: PHP 8.5.1 full suite 2,472 tests / 23,108 assertions,
+no failures, two existing Sodium environment skips; Node 41/41 without skips.
+PHPCS, build, structure, strict Composer manifest, Composer audit, npm moderate
+audit and whitespace checks passed, zero reported dependency advisories/
+vulnerabilities. Runtime/PHP source, both manual workflow definitions, native
+worker, dependencies, version/schema and asset sources are unchanged. These
+ordinary checks prove the repair's contracts, not genuine native qualification.

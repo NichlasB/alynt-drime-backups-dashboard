@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: approved strict empty-map repair and one new attempt — 2026-10-31
+
+At clean/synced `ad0d650`, user approves [strict empty-binding compatibility and
+one fresh trusted-lab qualification/owned cleanup attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-strict-empty-map-repair-and-one-fresh-qualification--2026-10-31),
+including disposable database/account fixtures. Admit null or only a strictly
+empty plain JSON map; retain all nonempty/malformed refusals and every other
+guard/pin/budget. Run validation/publication/exact-head ordinary CI before one
+manual full attempt with fresh prerequisites. No automatic retry, live/LocalWP
+operations, release, production grant or wiring. Owning evidence tracks actual
+outcomes; model/CI success alone is not genuine minimum qualification.
+
+Implementation-plan progress: address the observed representation blocker;
+the fresh native result and remaining supported/intended-profile gates remain
+unproved until their own evidence completes.
+
 ## Minimum profile: pre-start mismatch observed, cleanup complete — 2026-10-31
 
 [Approved probe 41227432637](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41227432637)

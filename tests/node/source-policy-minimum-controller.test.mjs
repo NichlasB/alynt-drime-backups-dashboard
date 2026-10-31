@@ -23,6 +23,7 @@ for(const role of ['php','server']) {
       tmpfs:{[scratch]:`rw,nosuid,nodev,noexec,size=${php?'4k':'256m'},mode=700,uid=1001,gid=1001`,'/tmp':`rw,nosuid,nodev,noexec,size=${php?'4m':'16m'},mode=700,uid=1001,gid=1001`},
       mounts:php?[{Type:'bind',Destination:'/proof',Source:stage+'/source',RW:false}]:[]};
     assert.equal(containerProfile(row,role,'owned',selections[role].config,cid,uid,stage),true);
+    assert.equal(containerProfile({...row,ports:{}},role,'owned',selections[role].config,cid,uid,stage),true,'observed empty JSON map preserves zero bindings in both roles');
     for(const [key,value]of Object.entries({image:'wrong',label:'foreign',user:'0:0',ro:false,network:'host',memory:999999999,cpu:2000000000,pids:100,privileged:true,ports:{3306:[]},caps:[],security:[],devices:[{}],tmpfs:{'/extra':'rw'},mounts:[{Type:'volume',Destination:'/var/www/html',RW:true}]}))assert.equal(containerProfile({...row,[key]:value},role,'owned',selections[role].config,cid,uid,stage),false,key);
   });
 }
