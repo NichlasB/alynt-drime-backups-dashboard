@@ -1,5 +1,95 @@
 # Current-Source Windows/TCP Qualification — Owned Proof
 
+## Current shared-source requalification — 2026-10-31
+
+Explicit user approval extends the campaign only to this Plugin Tester local-only
+proof, followed by fresh confirmation of the exact registry target: LocalWP
+“Plugin Tester”, http://plugin-tester.local,
+`C:\Users\Captain\Local Sites\plugin-tester\app\public`, database10004/web10005.
+Novamira HQ guide/complete inventory again identify the connected exact profile;
+no Ability, application bootstrap or authentication operation was used. Resolved
+metadata/listeners match the fixed candidate. Clean/synced source/restore baseline
+is `2c28b1ede21c66174049e3252045d789954ceef3`, ordinary CI41241375010 successful.
+Uploader/toolkit remain untouched. No runtime, harness, controller or guard changes
+were necessary; this is a fresh physical proof, not transferred historical CI.
+
+Fresh prerequisites: repository source audits26+20; isolated related564 tests/
+2250 assertions, no failures/skips; owned socket-free stdio46 checks/10 groups/
+ten processes; connected virtual stdio12 checks/three processes; genuine pinned
+core error-hook audit25 checks/six groups; actual connection-free ambient/helper
+audit155 checks, initial mode3. Core7.1.3, Windows PHP/mysqlnd8.5.12, numeric
+loopback TCP and exact MariaDB10.6.23 remain the fixed tuple. The source guard
+checks the finite core include closure before execution; the frozen loaded-image
+hash includes current plugin/harness/controller, PHP executable and selected DLLs.
+It is not independent whole-runtime loaded-object attestation.
+
+Bundled LocalWP mysql.exe baseline observes exact10.6.23-MariaDB/autocommit1,
+77 existing application tables, zero retained adbb_ tables and zero other
+all-server sessions/transactions. The complete ordered table-name/checksum vector
+SHA256 is `52e1a4f0a16318eadd90a9b43832f18e94a04356a72f9b903b1698a60a21ac9a`.
+Before creation, inventory/checksums, exact name absence and quiescence were
+checked again. Only `local.adbb_d98fa8bd1f7f_options` was created LIKE wp_options
+at21:22:58.979UTC, confirmed empty; no application rows were copied. The source
+schema remains InnoDB/utf8mb4_unicode_520_ci with unchanged guard validation.
+
+Fresh ADBC2 missing-table refusal and positive roundtrip/seal/replay/release
+prerequisite passes both held-live/post-exit reconciliations in890ms:
+run `ebabbb7260f1472ab07c78a9f02d1a7f`, image
+`f7844b10a354beafcc52f3f556e8dedad881384d76d23a5c9142951a46dc4bd9`,
+children66952/34204. The observed unsigned-max mysqlnd counter remains diagnostic
+DATA, not a release/ADBC1 exception or native qualification grant. The fixture
+remained empty and all-server counts zero before the single ambient body.
+
+Actual terminal, not an inferred unit count:
+
+`ADBO1|cd1350cf3b684d4fbeb0c5adc96f01ad|a6c923cb7f00c1cb77eeec78bbb2345f6128685f2afe11ab074e8469e639ee73|61208|403|9|0|closed`
+
+**403 checks/nine groups passed**, controller3506ms, body complete21:23:04.264UTC.
+Unchanged cases prove actual view/save, non-target bytes/autoload, once-only
+observers/cache invalidation, no-op/stale ordering, conditional removal, failed
+CAS/no replay, creation conflict/winner read, transform/reentry refusal, bounded
+lock storage error, post-change uncertainty and native false/errno1064/1062/1205.
+Strict startup3 changes to OFF only through genuine core db_connect(false);
+dedicated owners preserve the private ambient handle/thread/callback identity
+and OFF. No synthetic active/facts/handle injection or minimum-lab scope is used.
+Default profile/session/schema guards and public factories remain unchanged.
+
+Independent all-server reconciliation excludes only the observer, including
+NULL/foreign database sessions: zero while each closed terminal child is held,
+exact run/image/PID acknowledgement, clean exit, then a distinct zero post-exit
+check. This is not per-operation physical sampling. Exact outer cleanup previews
+one owned row, drops only that table and rechecks inventory/checksums/quiescence.
+At21:23:04.500UTC all77 application checksums match, proof tables0, other sessions0,
+transactions0; owned processes closed, temporary credential environment restored.
+No retained resources require recovery. The disposable table removal is final;
+it contained only owned test data. Existing options/users/cron/lifecycle,
+credentials/permissions, application state and production wiring remain untouched.
+
+Scope limits: this receipt qualifies only the recorded current-source W tuple
+and unchanged finite cases. ADBC2 covers quote/backslash/percent/NUL/control-byte
+roundtrip; no additional full four-byte/charset permutation matrix is claimed.
+It does not establish minimum-core/PHP7.4 legacy10.6.23, current Linux/socket,
+full WordPress authentication/bootstrap, provider/form wiring, production grants,
+release readiness or a deployed lost-update fix. Historical records below stay
+historical. No native rerun is needed just for documentation publication.
+
+Repository QA on the identical source baseline in this task: full PHP8.5.1
+2589 tests/23346 assertions, no failures, two existing Sodium skips; Node74/74
+without skips; PHPCS255 files, structure/build, strict Composer validation,
+Composer/npm audits pass with zero known advisories/vulnerabilities. These
+isolated checks are distinct from the physical native receipt. Publication and
+exact-head CI evidence follow below after execution. Campaign milestones become
+2/10 after publication/CI; ordered native attempts6/10 (fresh release prerequisite
+is part of this one ordered attempt, not an additional milestone).
+
+Implementation-plan progress: current shared-source Windows/TCP evidence is
+refreshed; required current Linux/socket and legacy minimum-server rows still
+gate provider/form integration. Recommended next gated slice: **Current-Source
+Linux/Socket Owned Requalification and Cleanup Proof**, audit-first for the fixed
+historical Linux tuple and existing runner, not a transfer of minimum-lab success
+or permission to substitute a server/build. That distinct native runner scope
+requires approval; production wiring and all release/deploy gates remain closed.
+
 Forward progress: the approved [minimum artifact/runner design](SOURCE_POLICY_MINIMUM_ARTIFACT_RUNNER_DESIGN.md)
 records the subsequent repository-only decision. It does not rerun or broaden
 this historical native image; follow its resume gate rather than repeating this

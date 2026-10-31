@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume point: separately approved current-source Windows/TCP
+[requalification](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
+passes403/9 at2c28b1e, fresh ADBC2 release, exact cleanup and77 unchanged existing
+application checksums. No runtime/wiring changes. Campaign2/10 milestones after
+publication/CI,6/10 ordered attempts; previous pending W text below is historical.
+Recommended next gated slice: Current-Source Linux/Socket Owned Requalification
+and Cleanup Proof, audit-first fixed existing runner with separate scope approval.
+Legacy minimum-server and production/provider/form/release gates remain open.
+
 Current milestone: the approved lab-only collation revision passes the exact
 [native minimum lab](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md#successful-exact-native-qualification--2026-10-31)
 at19288da/run41241089577, complete nine-group body/byte probe and independent

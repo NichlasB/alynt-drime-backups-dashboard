@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Current-source Windows/TCP owned requalification passed — 2026-10-31
+
+The separately approved/confirmed Plugin Tester local-only proof at2c28b1e
+passes403 checks/nine groups plus fresh ADBC2 physical release prerequisites.
+[Owning current evidence](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
+records exact images/receipts and cleanup: all77 existing application checksums
+unchanged, no retained fixtures/sessions/transactions. Runtime/harness/guards and
+production wiring unchanged. No historical whole-plugin review is refreshed.
+
+Implementation-plan progress: W current shared-source qualification advances,
+not product execution or production readiness. After publication/exact-head CI,
+campaign totals2/10 milestones,6/10 ordered native attempts. Required current
+Linux/socket and legacy minimum10.6.23 coverage remain genuine gaps before
+provider/form integration. Recommended next gated slice: **Current-Source
+Linux/Socket Owned Requalification and Cleanup Proof**, audit-first on the fixed
+existing runner; distinct native runner authority must be approved. No new
+installation, candidate substitution, production grant or release follows.
+
 ## Minimum-lab milestone passed; next gate is required profile requalification — 2026-10-31
 
 Approved collation implementation `19288da` passes ordinary CI41240991429 and

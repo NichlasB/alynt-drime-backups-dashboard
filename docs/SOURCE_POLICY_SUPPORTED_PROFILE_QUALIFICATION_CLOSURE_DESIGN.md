@@ -12,7 +12,7 @@ no new site/native run, support exclusion or separate milestone is created.
 | --- | --- |
 | Accepted M-lab: PHP/mysqlnd7.4.33, core6.0, TCP, MariaDB10.11.18-ubu2204 | Exact19288da/image50437fc7… passes fresh audit, byte probe, nine groups and independent strict release/cleanup; raw API identity has literal5.5.5 prefix, connection unicode_ci, physical schema unicode_520_ci. Trusted-lab evidence only. |
 | Legacy M: core6.0/PHP7.4, exact10.6.23-MariaDB | Not qualified by the newer-server lab. Do not waive/exclude this required row or fabricate its server/version. Existing Windows-minimum observer/toolchain route stays deferred. |
-| W: current-source Windows/TCP, core7.1.3/PHP8.5.12, exact10.6.23 | Historical successful native source3f9530d44e81c66d855fcf6c9093fe9921704e90 only. Current shared native source differs; requires audit-first fresh owned requalification, not a copied receipt. |
+| W: current-source Windows/TCP, core7.1.3/PHP8.5.12, exact10.6.23 | Separately approved fresh proof at2c28b1e passes403/9 with fresh ADBC2 release and all77 application checksums unchanged; see current owning evidence below. Historical3f9530d receipt is not transferred. |
 | L: Linux/socket core7.1.4/PHP8.5.12, exact10.11.18-ubu2204 | Historical successful b0717fc54597712a823c3ebaf1ea497c39ed115b/image only. Shared-source impact/revalidation remains required before provider/form/release readiness; M-lab success does not transfer to this tuple. |
 
 Repository diff against both historical native source heads confirms changes
@@ -22,8 +22,14 @@ Some branches retain strict defaults in model tests, but that is not physical
 requalification of a new source image. The historical Windows/Linux records
 retain their actual counts and successful original-image scope unchanged.
 
-Preferred next gated slice: **Plugin Tester local-only Current-Source
-Windows/TCP Owned Requalification and Cleanup Proof** using the existing
+The Windows slice below was subsequently approved, confirmed and completed;
+[current evidence](SOURCE_POLICY_WINDOWS_CURRENT_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
+supersedes its pending status, not historical scope limits. Preferred next gated
+slice is **Current-Source Linux/Socket Owned Requalification and Cleanup Proof**,
+audit-first for its fixed existing runner, with separate native scope approval.
+Legacy minimum-server coverage remains unresolved. Historical W gate wording:
+**Plugin Tester local-only Current-Source Windows/TCP Owned Requalification and
+Cleanup Proof** using the existing
 audit-first proof design and fresh resolved target/fixture confirmation. Only
 owned disposable options-schema/process fixtures and exact cleanup; no existing
 application tables/options/users/cron/lifecycle/configuration or wiring change.
