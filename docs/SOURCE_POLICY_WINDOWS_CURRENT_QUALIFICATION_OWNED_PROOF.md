@@ -77,8 +77,15 @@ Repository QA on the identical source baseline in this task: full PHP8.5.1
 2589 tests/23346 assertions, no failures, two existing Sodium skips; Node74/74
 without skips; PHPCS255 files, structure/build, strict Composer validation,
 Composer/npm audits pass with zero known advisories/vulnerabilities. These
-isolated checks are distinct from the physical native receipt. Publication and
-exact-head CI evidence follow below after execution. Campaign milestones become
+isolated checks are distinct from the physical native receipt. Evidence publication
+`a4a4f8bd20adbaa64fea5915247db5c2014b57b9` is pushed and exact-head
+[CI41243428806](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41243428806)
+succeeds: actual PHP7.4 logs2589 tests/23348 assertions, PHP8.3 logs2589/23353,
+no failures/skips; both admin suites pass. Manifest/audits/build/structure/PHPCS
+also pass, zero known advisories/vulnerabilities. Code/harness/controller bytes
+remain identical to the native-tested baseline. Local link/diff/ownership checks
+pass; this scoped evidence-only closeout receives its own pushed exact-head CI
+at handoff without rerunning the site proof. Campaign milestones become
 2/10 after publication/CI; ordered native attempts6/10 (fresh release prerequisite
 is part of this one ordered attempt, not an additional milestone).
 
