@@ -1,6 +1,9 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
 Current minimum-profile disposition: [Linux observer-route deferral](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md).
+The [trusted-lab compatibility replan](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md)
+is a proposed evidence change requiring acceptance and genuine proof, not a
+completed minimum qualification or authority to connect the application.
 Only that infrastructure route is deferred. Genuine minimum qualification and
 the production/form integration gates below remain open/closed respectively;
 no support declaration, runtime guard, active legacy writer or release waiver

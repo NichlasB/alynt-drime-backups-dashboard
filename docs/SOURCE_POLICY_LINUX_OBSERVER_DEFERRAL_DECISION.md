@@ -155,8 +155,12 @@ unchanged source contracts, not a new compatibility trust model or physical
 qualification. The docs-only evidence closeout receives independent remote/
 clean/synced and exact-head ordinary CI verification at handoff; no audit rerun.
 
-Recommended next gated slice: **Repository-Only Genuine Minimum-Profile
-Trusted-Lab Qualification Replan**, design-only with execution, downloads,
-storage writes and production wiring disabled. Approve that explicit
-evidence-strategy evaluation because compatibility remains the product blocker,
-not another observer repair or privilege experiment.
+The subsequently approved [trusted-lab replan](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md)
+maps retained and reduced guarantees explicitly; design approval does not accept
+its substitute evidence strategy or reopen this observer route.
+
+Recommended next gated slice: **Accept Trusted-Lab Evidence Contract and
+Repository-Only Minimum-Profile Harness/Receiver Integration**, including the
+disclosed reduced attestation/process/cache claims, isolated implementation,
+validation/publication and exact-head CI. Downloads, candidate/native execution,
+storage operations and production wiring remain separately gated.

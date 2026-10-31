@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: approved trusted-lab qualification replan — 2026-10-31
+
+At clean/synced baseline `be159d0`, user approves the [repository-only replan](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md).
+Proposes genuine minimum-core/PHP/native functional proof in an explicitly
+trusted pinned-image CI lab; drops independent loaded-object/atomic mapping
+attestation and discloses engine PID/cache/disk trust assumptions. This design
+does not accept or implement those reduced claims. Current guards, legacy
+tuples/public refusals, support declarations and observer deferral stand.
+No downloads, runtime/test/workflow changes, physical/site/database operation
+or production wiring. Local unchanged-contract checks 535 / 14,360, no failures/
+skips; structure/manifest/audits/204 local links passed. Publication/exact-head
+ordinary CI pending, not qualification or evidence-contract acceptance.
+
+Implementation-plan progress: finite proposed compatibility route and retained/
+reduced guarantees mapped; minimum qualification and actual lost-update repair
+remain incomplete. Recommended next gated slice: Accept Trusted-Lab Evidence
+Contract and Repository-Only Minimum-Profile Harness/Receiver Integration,
+including reduced-claim acceptance, closed lab seam and coherent isolated
+validation/publication/CI; actual acquisition/native proof remains separately gated.
+
 ## Linux minimum lab: approved observer-route deferral — 2026-10-31
 
 At clean/synced baseline `7644556`, user approves the [repository-only boundary/deferral decision](SOURCE_POLICY_LINUX_OBSERVER_DEFERRAL_DECISION.md).

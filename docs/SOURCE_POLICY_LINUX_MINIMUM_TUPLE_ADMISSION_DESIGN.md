@@ -1,5 +1,10 @@
 # Linux Minimum-Lab Exact-Tuple Admission and Source-Ownership Integration Design
 
+Proposed evidence-strategy revision: [trusted-lab qualification replan](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md).
+Its reduced attestation/process/cache claims require explicit acceptance before
+implementation. The private receiver/three-consumer integration below remains
+unimplemented; expected DATA and a design approval mint no lab/runtime grant.
+
 ## Authority and decision — 2026-10-30
 
 Approved repository-only design at clean/synced baseline
