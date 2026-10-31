@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: approved maps completeness/consistency policy design — 2026-10-31
+
+At clean/synced baseline `1aa0b7b`, user approves the [repository-only policy design](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md).
+Separates bounded EOF-complete access feasibility from atomic mapping evidence;
+selects a future access-only maps walk with unchanged 32 KiB/256-row/64-file
+ceilings and a new 16-call ceiling. Explicit versioned non-atomic evidence cannot
+qualify candidates. Current reader/tests/workflow/runtime remain unchanged;
+no physical dispatch or site/database operation. Local unchanged-contract checks
+261 / 2,859, no failures/skips; structure/manifest/audits/179 local links passed.
+Publication/exact-head ordinary CI pending; no physical result refreshed.
+
+Implementation-plan progress: evidence claims and finite access-only policy
+selected; stronger candidate observer remains blocked. Recommended next gated
+slice: Harness-Only Bounded Proc-Maps Access-Feasibility Integration and One
+Existing-Authority Harmless-Child Audit, including synthetic tests, exact-head
+CI and one owned Linux attempt/cleanup, without candidate loading or privilege.
+
 ## Linux minimum lab: approved proc-read diagnostics and one fresh audit — 2026-10-31
 
 At clean/synced baseline `3324eecc9773b2bda7924a9496cbb7d2b48b67ca`, user

@@ -267,10 +267,14 @@ run 41199419498 failed under the preserved completeness rule. Child reaped,
 stage independently absent, source/authority unchanged. No total-size,
 mapped-object access or candidate qualification result is established.
 
-Recommended next gated slice: **Repository-Only Linux Proc-Maps Completeness
-and Snapshot-Consistency Policy Design**, design-only. Resolve observed partial
-read versus the existing one-payload consistency contract without silently
-stitching an atomic snapshot, increasing caps or adding privilege. Any policy
-change needs explicit review before implementation or another physical attempt.
-Candidate images/loading, database/site work and production wiring remain
-disabled; no additional runtime/DATA maintenance batch avoids this decision.
+The approved [maps policy design](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md)
+selects a separately labeled access-only bounded EOF walk, not an atomic
+candidate snapshot. It does not implement changes or qualify this preflight.
+The stronger candidate observation contract above remains unresolved and closed;
+successful access alone cannot authorize inventory or candidate loading.
+
+Recommended next gated slice: **Harness-Only Bounded Proc-Maps Access-Feasibility
+Integration and One Existing-Authority Harmless-Child Audit**, with synthetic
+tests, exact-head ordinary CI and one separately approved owned Linux attempt/
+cleanup. Preserve byte/time/identity/object/authority/cleanup limits. Candidate
+images/loading, site/database work, new privileges and wiring stay disabled.

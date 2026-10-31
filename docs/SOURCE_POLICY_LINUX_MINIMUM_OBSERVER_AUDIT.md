@@ -264,11 +264,14 @@ workflow rerun is part of that verification.
 Implementation-plan progress: actual failing role and partial-read shape are
 known; safe-local runtime/DATA work stays blocked on the consistency decision.
 
-Recommended next gated slice: **Repository-Only Linux Proc-Maps Completeness
-and Snapshot-Consistency Policy Design**, design-only. Review whether the
-required evidence can be obtained proportionately under existing authority;
-make any revised consistency claim explicit or defer the lane if it cannot.
-No automatic multi-read acceptance, larger budget, new privileged helper,
-runtime implementation, physical rerun, candidate loading, database/site work
-or production wiring. The current guards remain in force until a separately
-approved policy and implementation replace them.
+The subsequently approved [repository-only policy design](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md)
+separates an EOF-complete access walk from atomic mapping consistency. It does
+not implement a reader change or refresh this failed physical result. Existing
+guards stay in force; no automatic multi-read acceptance or candidate grant.
+
+Recommended next gated slice: **Harness-Only Bounded Proc-Maps Access-Feasibility
+Integration and One Existing-Authority Harmless-Child Audit** under that finite
+access-only policy: synthetic tests, publication/exact-head CI, then one owned
+Linux audit/cleanup. No larger byte/time budget, privilege change, candidate
+loading, database/site work or production wiring. Stronger candidate evidence
+remains blocked even if a later access-only audit completes successfully.
