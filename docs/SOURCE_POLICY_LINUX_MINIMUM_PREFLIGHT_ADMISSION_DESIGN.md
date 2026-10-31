@@ -250,9 +250,20 @@ Implementation-plan progress: finite staged inventory/preflight contract selecte
 candidate loading remains blocked on existing host-observer feasibility, not
 on another maintenance queue or a detached receipt's boolean claim.
 
-Recommended next gated slice: **Linux Minimum-Lab Existing-Authority Read-Only
-Host-Observer Feasibility and Owned Harmless-Child Cleanup Audit** on an explicitly
-approved ephemeral Linux CI host. No candidate images/downloads/loading,
-database/site work, elevation, new capabilities or permission changes. Establish
-whether the required independent observer is achievable before further runtime
-admission code; failure stops at the trust decision rather than a workaround.
+### Subsequent observer audit resume — 2026-10-31
+
+The separately approved [single observer audit and cleanup](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md#published-implementation-and-single-physical-result--2026-10-31)
+ran at implementation `29195b0` after ordinary exact-head CI passed. Manual
+run 41197435627 failed with `proc-read-incomplete` during the first mapped-file
+observation; child reaped and stage independently absent, source/authority
+unchanged. This establishes neither completed kernel-object reads nor a
+capability denial. No guard repair or repeat attempt is authorized by the failed
+run; candidate loading and further runtime admission remain blocked.
+
+Recommended next gated slice: **Harness-Only Linux Proc-Read Completeness
+Diagnostics and One Fresh Existing-Authority Harmless-Child Audit**. Approve
+fixed proc-role/byte-count diagnostics, source-backed isolated regressions,
+ordinary CI and one new bounded owned audit, preserving existing read policy,
+budgets, kernel-object guards and cleanup. Diagnose the actual read shape before
+any separate read-policy/trust decision; no multi-read fallback, elevation,
+candidate images/loading, database/site work or production wiring.

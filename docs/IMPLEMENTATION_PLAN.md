@@ -7,9 +7,21 @@ its bounded harness/tests/publication and one manual exact-head attempt on
 GitHub-hosted ubuntu-24.04 Linux/x86_64. Existing tools/authority only, no Docker,
 candidate artifacts/loading, database/site work, elevation or permission changes.
 Pure/mock tests pass; full local 2,446 / 23,000, no failures, two existing Sodium
-skips; other QA passed. Publication/ordinary CI and physical audit pending. No result
-is inferred from expected Linux capability restrictions; a completed unavailable
-audit is not qualification. Stop on denial rather than add a fallback/privilege.
+skips; other QA passed. Implementation `29195b0` is pushed; exact-head ordinary
+CI 41197313747 passed (PHP 7.4: 2,446 / 23,002; PHP 8.3: 2,446 / 23,007,
+no failures/skips). The single manual audit 41197435627 failed at
+`mapped-file-observation` with `proc-read-incomplete`; no completed mapping
+snapshot or capability-denial evidence. Child reaped, owned stage removed and
+independently absent, source/authority unchanged. No second attempt or guard
+change. [Owning result and limits](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md#published-implementation-and-single-physical-result--2026-10-31).
+
+Implementation-plan progress: observer feasibility remains unresolved and the
+runtime/DATA lane is blocked by failed physical verification, not cleanup.
+Recommended next gated slice: Harness-Only Linux Proc-Read Completeness
+Diagnostics and One Fresh Existing-Authority Harmless-Child Audit. Approve
+fixed proc-role/byte-count diagnostics, isolated regressions, CI and one new
+bounded audit; preserve read policy, budgets, kernel-object guards and cleanup.
+No candidate loading, elevation, site/database work or production wiring.
 
 ## Linux minimum lab: bounded dependency/preflight admission design — 2026-10-31
 
@@ -25,12 +37,11 @@ checks passed. Design `3c72a3f` is pushed; exact-head ordinary CI 41193159552
 passed (PHP 7.4/8.3 each 2,440 tests, no failures/skips). Owning design records
 actual counts and scope limits. Actual dependency closure stays open.
 
-Implementation-plan progress: finite admission contract and next physical trust
-gate established. Recommended next gated slice: Linux Minimum-Lab
-Existing-Authority Read-Only Host-Observer Feasibility and Owned Harmless-Child
-Cleanup Audit on an approved ephemeral Linux CI host, without candidate images,
-SQL, elevation or permission changes. Do not build more runtime/DATA machinery
-if that observer boundary cannot be met under existing approved authority.
+Implementation-plan progress: finite admission contract and physical trust gate
+established; the later single audit above failed before completing a snapshot.
+Follow its exact diagnostic resume gate, not another runtime/DATA implementation
+batch. Candidate loading remains blocked, without SQL, elevation or permission
+changes; no observer capability result has been established yet.
 
 ## Linux minimum artifacts: complete static proof, cleanup confirmed — 2026-10-31
 

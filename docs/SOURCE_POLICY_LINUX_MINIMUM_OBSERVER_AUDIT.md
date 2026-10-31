@@ -96,8 +96,62 @@ Final scoped source/security/error/resource/ownership/cleanup/test-integrity
 review preserves all runtime, artifact pins/reader, existing tuple/profile,
 ADBC1/ADBC2, dependency and existing workflow sources. Uploader/toolkit remain
 clean/read-only. No Windows physical audit, site proof or native run occurred.
-Implementation publication/ordinary CI and the one physical audit pending.
-The [implementation plan](IMPLEMENTATION_PLAN.md) remains at observer feasibility,
-not another DATA/maintenance batch. Stop at the trust boundary on unavailability;
-do not elevate, add capabilities, substitute self-reports or rerun without new
-authority. Actual outcome and exact next recommendation will be recorded here.
+
+## Published implementation and single physical result — 2026-10-31
+
+Implementation `29195b02ee01b6e27eab376cf0235e5b5224d424` is pushed;
+[ordinary exact-head CI 41197313747](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41197313747)
+passed before dispatch. Actual PHP 7.4: 2,446 tests / 23,002 assertions;
+PHP 8.3: 2,446 / 23,007, no failures/skips. Admin 23/23 per matrix, no
+failures/skips; other configured lint/build/structure/manifest/audit checks passed.
+These isolated/source tests did not establish physical observer feasibility.
+
+Exactly one [manual audit 41197435627, attempt 1](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41197435627)
+ran at that same implementation head on GitHub-hosted Ubuntu 24.04.5 x86_64,
+runner image `20261025.353.1`, existing Python 3.12.3. Audit step failed:
+`ADBLHO1`, `status=refused`, `reason=proc-read-incomplete`,
+`phase=mapped-file-observation`. The report has no completed startup/final
+snapshot or access-denial facts. The source reason is emitted only when the
+one-byte EOF check after a bounded proc payload read returns another byte.
+At this phase, the first snapshot reads process stat and maps; the current
+report does not distinguish which read produced the reason or its payload size.
+Do not infer truncation beyond 32 KiB, a particular kernel short-read behavior,
+or a `map_files` capability denial from this result. Neither availability nor
+unavailability of the required kernel-object observer has been established.
+
+Observed parent/child UID/GID 1001/1001, effective capabilities
+`0000000000000000`, NoNewPrivs 0; authority readback unchanged. Child PID 2395 /
+start 15498 was reaped, supervisor reported `cleanup=confirmed`; the independent
+always-cleanup process reported `owned_stage_absent=true` for exact stage
+`adb-linux-observer-41197435627-1`. Its disposable files/root were removed and
+cannot be recovered. Both reports bind source image
+`ee3815418042444bdce03f2092f89231e00612bff6fed992660ee091db82d78c`;
+supervisor reports source unchanged. No candidate images/execution, database or
+privilege changes occurred. `candidate_qualification=not-established` remains.
+Stage absence is an independent filesystem readback; it is not a second
+independent post-exit process census or whole-host teardown attestation.
+
+No harness correction, raised limit, privilege fallback or second physical
+attempt follows this failed verification. Evidence closeout changes only this
+record and current plan/design resume references; executable sources remain at
+the attempted cohort. Ordinary CI on that docs-only closeout must not be
+reported as recovery of the failed physical workflow.
+
+Docs-only closeout checks: adjacent 39 tests / 438 assertions passed with no
+failures/skips; whitespace and 171 owning local documentation targets passed.
+Only three owning records change. Uploader/toolkit remain clean at original
+`3dfcb15` / `c067eb6`; no executable or test repair is included. Exact-head
+ordinary CI and remote/clean verification are required at final handoff.
+
+Implementation-plan progress: observer feasibility remains unresolved; the
+safe-local runtime/DATA lane is blocked, not a new maintenance queue.
+
+Recommended next gated slice: **Harness-Only Linux Proc-Read Completeness
+Diagnostics and One Fresh Existing-Authority Harmless-Child Audit**. Approve
+fixed proc-role/byte-count diagnostics, source-backed isolated regressions,
+fresh ordinary CI and one new bounded owned audit, with the existing single-
+payload/EOF rule, budgets, kernel-object access guards and cleanup unchanged.
+First distinguish stat/maps and actual read shape; do not silently assemble
+multiple snapshots, enlarge limits, assert missing capabilities or change the
+observer trust model. Any required read-policy change needs a separate explicit
+decision after those facts. No candidate loading, site/database work or wiring.
