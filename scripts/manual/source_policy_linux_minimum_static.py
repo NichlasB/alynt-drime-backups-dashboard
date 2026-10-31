@@ -18,6 +18,46 @@ class Refusal(Exception):
     pass
 
 
+def path_facts(value):
+    """Failure-only bounded facts; no raw name, coercion or acceptance decision."""
+    text = isinstance(value, str)
+    size = len(value) if text else None
+    sample = value[:1024] if text else ''
+    parts = value.split('/') if text and size <= 240 else None
+    if not text:
+        predicate = 'type'
+    elif not size:
+        predicate = 'empty'
+    elif size > 240:
+        predicate = 'length'
+    elif not all(32 <= ord(c) <= 126 for c in value):
+        predicate = 'ascii'
+    elif '\\' in value:
+        predicate = 'backslash'
+    elif value.startswith('/'):
+        predicate = 'absolute'
+    elif len(parts) > 32:
+        predicate = 'depth'
+    else:
+        predicate = 'segment'
+    return {'predicate': predicate, 'characters': size,
+            'depth': len(parts) if parts is not None else None,
+            'hashed_characters': len(sample),
+            'hash_scope': ('full-name' if size <= 1024 else 'prefix') if text else 'not-string',
+            'sample_sha256': hashlib.sha256(sample.encode('utf-8', 'surrogatepass')).hexdigest() if text else None,
+            'trailing_separator': value.endswith('/') if text else None,
+            'empty_segment': '' in parts if parts is not None else None,
+            'dot_segment': '.' in parts if parts is not None else None,
+            'parent_segment': '..' in parts if parts is not None else None,
+            'sample_first_non_printable_ordinal': next((ord(c) for c in sample if not 32 <= ord(c) <= 126), None)}
+
+
+class PathRefusal(Refusal):
+    def __init__(self, value):
+        super().__init__('archive-path')
+        self.facts = path_facts(value)
+
+
 def require(ok, code):
     if not ok:
         raise Refusal(code)
@@ -46,10 +86,12 @@ def decode(data):
 
 
 def name(value):
-    require(isinstance(value, str) and 0 < len(value) <= 240
+    accepted = (isinstance(value, str) and 0 < len(value) <= 240
             and all(32 <= ord(c) <= 126 for c in value) and '\\' not in value
             and not value.startswith('/') and len(value.split('/')) <= 32
-            and all(p not in ('', '.', '..') for p in value.split('/')), 'archive-path')
+            and all(p not in ('', '.', '..') for p in value.split('/')))
+    if not accepted:
+        raise PathRefusal(value)
     return value
 
 
@@ -125,10 +167,12 @@ class ScanReader:
 def scan_layer(path, diff_id, wanted, roles, budget):
     expected = digest(diff_id)
     seen = set()
+    layer_entries = 0
     with gzip.open(path, 'rb') as compressed:
         reader = ScanReader(compressed, budget)
         with tarfile.open(fileobj=reader, mode='r|') as archive:
             for member in archive:
+                layer_entries += 1
                 budget['entries'] += 1
                 require(budget['entries'] <= 65536 and not member.sparse
                         and not any(k.startswith('GNU.sparse') for k in member.pax_headers)
@@ -136,13 +180,23 @@ def scan_layer(path, diff_id, wanted, roles, budget):
                 require(len(member.pax_headers) <= 32
                         and all(len(k) <= 128 and len(v) <= 4096 for k, v in member.pax_headers.items()), 'tar-metadata-bound')
                 raw = member.name
+                leading_dot_slash_removed = raw.startswith('./')
+                directory_slashes_removed = member.isdir() and raw.endswith('/')
                 if raw.startswith('./'):
                     raw = raw[2:]
                 if member.isdir():
                     raw = raw.rstrip('/')
                 if raw in ('', '.') and member.isdir():
                     continue
-                key = name(raw)
+                try:
+                    key = name(raw)
+                except PathRefusal as error:
+                    error.facts.update(member_type={tarfile.REGTYPE: 'regular', tarfile.AREGTYPE: 'regular',
+                        tarfile.DIRTYPE: 'directory', tarfile.SYMTYPE: 'symlink', tarfile.LNKTYPE: 'hardlink'}.get(member.type, 'other'),
+                        entry_index=budget['entries'], layer_entry_index=layer_entries,
+                        leading_dot_slash_removed=leading_dot_slash_removed,
+                        directory_slashes_removed=directory_slashes_removed)
+                    raise
                 require(key not in seen, 'tar-duplicate')
                 seen.add(key)
                 require(member.type in (tarfile.REGTYPE, tarfile.AREGTYPE, tarfile.DIRTYPE, tarfile.SYMTYPE, tarfile.LNKTYPE), 'tar-special-type')

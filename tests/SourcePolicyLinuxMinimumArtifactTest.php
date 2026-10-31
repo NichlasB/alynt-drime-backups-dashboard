@@ -11,7 +11,7 @@ final class SourcePolicyLinuxMinimumArtifactTest extends TestCase {
 		$process=proc_open(array($python,'-I','-B',__DIR__.'/support/source_policy_linux_minimum_static_test.py','--offline-static-unit'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);
 		$this->assertIsResource($process);fwrite($pipes[0],json_encode($pins));fclose($pipes[0]);$out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
 		$this->assertSame(0,proc_close($process),substr($err,0,4000));$this->assertSame('',$err);
-		$this->assertSame(array('tests'=>12,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
+		$this->assertSame(array('tests'=>14,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
 	}
 	public function test_acquisition_is_explicit_and_runtime_imports_unchanged() {
 		$root=dirname(__DIR__);$source=file_get_contents($root.'/scripts/manual/source-policy-linux-minimum-acquire.py');

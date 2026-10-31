@@ -74,6 +74,68 @@ class StaticTests(unittest.TestCase):
         for value in ('../a', '/a', 'a/../b', 'a//b', 'a\\b', 'a\x00b', 'a/./b', 'a/' * 33 + 'b', 'a' * 241):
             self.refused(s.name, value)
 
+    def test_path_refusal_diagnostics_are_bounded_private_and_preserve_guard(self):
+        cases = [(None, 'type'), ('', 'empty'), ('a' * 241, 'length'), ('a/\u03b1', 'ascii'),
+                 ('a\\b', 'backslash'), ('/a', 'absolute'), ('a/' * 32 + 'b', 'depth'),
+                 ('a//b', 'segment'), ('a/./b', 'segment'), ('a/../b', 'segment'), ('a/', 'segment')]
+        for value, reason in cases:
+            with self.assertRaises(s.Refusal) as caught:
+                s.name(value)
+            self.assertTrue(hasattr(caught.exception, 'facts'), 'Path refusal must expose bounded predicate facts, not just a generic code.')
+            self.assertEqual('archive-path', str(caught.exception))
+            self.assertEqual(reason, caught.exception.facts['predicate'])
+            self.assertLess(len(json.dumps(caught.exception.facts)), 1024)
+        for value in ('a', 'a' * 240, 'a/' * 31 + 'b', 'var/lib/dpkg/lib:amd64.list'):
+            self.assertEqual(value, s.name(value))
+        for value in ('private/SECRET/../bad', 'SECRET' * 10000, 'surrogate/\udc80'):
+            with self.assertRaises(s.Refusal) as caught:
+                s.name(value)
+            facts = caught.exception.facts
+            encoded = value[:1024].encode('utf-8', 'surrogatepass')
+            self.assertEqual(hashlib.sha256(encoded).hexdigest(), facts['sample_sha256'])
+            self.assertEqual(min(len(value), 1024), facts['hashed_characters'])
+            self.assertNotIn('SECRET', json.dumps(facts))
+            self.assertLess(len(json.dumps(facts)), 1024)
+        path, sha = layer([('./../escape', tarfile.REGTYPE, b'')])
+        with self.assertRaises(s.Refusal) as caught:
+            s.scan_layer(path, sha, (), {}, self.budget())
+        facts = caught.exception.facts
+        self.assertEqual('regular', facts['member_type'])
+        self.assertEqual(1, facts['entry_index'])
+        self.assertTrue(facts['leading_dot_slash_removed'])
+        # Synthetic analogue of the observed facts, not the retained real name.
+        path, sha = layer([('usr/share/locale/' + 'a' * 40 + '\u0151', tarfile.SYMTYPE, b'')])
+        with self.assertRaises(s.Refusal) as caught:
+            s.scan_layer(path, sha, (), {}, self.budget())
+        facts = caught.exception.facts
+        self.assertEqual(('ascii', 58, 4, 'symlink', 337),
+                         (facts['predicate'], facts['characters'], facts['depth'], facts['member_type'],
+                          facts['sample_first_non_printable_ordinal']))
+        # Differential corpus uses the exact original boolean predicate.
+        for value in [None, 3, [], *[v for v, _ in cases], *['a' * n for n in (0, 1, 239, 240, 241)]]:
+            original = (isinstance(value, str) and 0 < len(value) <= 240
+                        and all(32 <= ord(c) <= 126 for c in value) and '\\' not in value
+                        and not value.startswith('/') and len(value.split('/')) <= 32
+                        and all(p not in ('', '.', '..') for p in value.split('/')))
+            try:
+                s.name(value); accepted = True
+            except s.Refusal:
+                accepted = False
+            self.assertEqual(bool(original), accepted)
+
+    def test_path_facts_survive_refused_proof_reporting_and_owned_cleanup(self):
+        error = s.PathRefusal('PRIVATE-SECRET/../file')
+        with patch.object(acquire, 'Client') as client:
+            client.return_value.get.side_effect = error
+            report = acquire.proof()
+        self.assertEqual('refused', report['status'])
+        self.assertEqual('archive-path', report['failure'])
+        self.assertEqual('segment', report['path_refusal']['predicate'])
+        self.assertEqual('confirmed', report['cleanup'])
+        self.assertEqual(0, report['removed_owned_files'])
+        self.assertTrue(report['source_unchanged'])
+        self.assertNotIn('PRIVATE-SECRET', json.dumps(report))
+
     def test_elf_bounds_and_no_runtime_claim(self):
         row = s.elf(minimal_elf())
         self.assertEqual('x86_64', row['machine'])

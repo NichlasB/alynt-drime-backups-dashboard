@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum artifacts: non-ASCII refusal identified — 2026-10-31
+
+At clean/synced baseline `1b10c0e`, user approves harness-only bounded path
+refusal diagnostics and one fresh static acquisition/cleanup attempt, same
+pins/limits and original path decisions. [Owning proof](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md#approved-bounded-refusal-diagnostics--2026-10-31)
+records the checkpoint, synthetic regressions and actual result: layer 2
+refused a 58-character/four-segment symlink name at the existing ASCII predicate
+(first outside-ASCII ordinal 337). Same partial layer evidence, no later
+qualification; seven owned files/root removed and independently absent, source
+unchanged. One attempt consumed. Full local suite 2,440 / 22,949, no failures,
+two existing Sodium skips; 14 offline groups and other QA passed. Exact-head
+publication pending; owning record separates the physical refusal from QA.
+
+Implementation-plan progress: diagnostic uncertainty resolved, complete artifact
+evidence still blocked; no product/native completion. Recommended next gated
+slice: Repository-Only Unicode Archive-Metadata Path Policy and Critical-Link
+Containment Design, design-only before changing acceptance. No normalization,
+broader rule, budget increase, fallback or second retrieval is selected. Runtime
+loading, native execution and production wiring stay disabled.
+
 ## Linux minimum artifacts: path refusal, owned cleanup confirmed — 2026-10-30
 
 Approved [digest-pinned static acquisition/cleanup proof](SOURCE_POLICY_LINUX_MINIMUM_ARTIFACT_PROOF.md)

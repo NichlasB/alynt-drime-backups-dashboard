@@ -182,18 +182,103 @@ dependency advisories/vulnerabilities. Existing Setup Node `punycode`/
 This docs-only closeout receives its own pushed exact-head ordinary CI and
 clean/remote verification at handoff. No new payload attempt follows.
 
+## Approved bounded refusal diagnostics — 2026-10-31
+
+Restore baseline `1b10c0e908ad303732a54dd24e652ddf83b88819` was clean/synced
+before the approved changes. User approves harness-only refusal diagnostics,
+offline regressions/fresh prerequisites and **one** fresh static acquisition/
+cleanup attempt. Original pins, limits, path predicate and transformations,
+transport and cleanup rules remain unchanged. No normalization, acceptance
+expansion, image fallback, extraction, execution or additional attempt is
+authorized by this slice. Uploader/toolkit remain read-only.
+
+The failure-only report adds bounded predicate, length/depth, segment flags,
+member kind/index and SHA256 of at most the first 1,024 characters; it never
+prints the name. Long names explicitly label a prefix hash. Offline tests
+compare the original boolean decisions, exercise each refusal predicate,
+non-text/long/surrogate inputs, tar context and report/cleanup propagation with
+network blocked. Narrow check: 2 PHP tests / 12 assertions; 14 Python groups,
+zero failures/errors/network calls. This is synthetic diagnostic evidence,
+not artifact qualification. A subsequent synthetic symlink fixture reproduces
+the observed 58-character/four-segment/U+0151 refusal facts without copying or
+retaining the actual name. No diagnostic changes affect archive acceptance.
+
+### One fresh static attempt: specific refusal, cleanup confirmed
+
+Fresh prerequisites passed: related DATA/artifact 114 tests / 1,933 assertions,
+no failures/skips; structure and whitespace checks passed. The single new
+attempt used the exact approved CLI flag and unchanged pins/ceilings. Both
+manifest/config chains and the 3,437-file pinned core metadata tree qualified.
+The same runtime layers 0 and 1 passed full diff-ID checks; layer 2 compressed
+bytes/SHA256 passed again, but its scan refused before its diff ID completed.
+
+Actual safe report: `status=refused`, `failure_stage=wordpress-layer-2`,
+`failure=archive-path`. Failure-only facts:
+
+```text
+predicate=ascii; characters=58; depth=4; member_type=symlink
+entry_index=5043; layer_entry_index=210
+hashed_characters=58; hash_scope=full-name
+sample_sha256=8fa5a308ef4b272950d3fa0cbf7c32e2872c369fed8aa045f32a075fa68d5b85
+sample_first_non_printable_ordinal=337 (U+0151; outside printable ASCII)
+trailing_separator=false; empty_segment=false; dot_segment=false
+parent_segment=false; leading_dot_slash_removed=false
+directory_slashes_removed=false
+```
+
+This identifies a non-ASCII symlink **name** rejected by the existing printable-
+ASCII predicate. It does not establish its link target, critical-role relevance,
+safe normalization, or permission to broaden acceptance. No raw archive path
+was printed or retained. The report label `sample_first_non_printable_ordinal`
+means outside the guard's ASCII interval, not a claim that U+0151 is unprintable
+Unicode. No later payload, core ZIP, ELF identity or native evidence qualified.
+
+Cleanup removed seven exact owned files and root
+`adb-linux-minimum-static-f5q6479a`; independent read-only existence check
+confirmed it absent. No candidate files remain staged and no user data was
+removed. Source readbacks were unchanged; actual attempt source-image SHA256
+`77a69eb7b4954e0feba36871cd0a72e70666a2c07f74ce47cfc08e9ba4fb7462`.
+That freezes the acquisition/reader/pins/tuple/trusted executable, not later
+test/docs edits or a whole-host attestation. Candidate execution, database
+operations, Docker image loading and rootfs extraction were all false. The
+one-attempt allowance is consumed; no second acquisition follows this slice.
+
+### Diagnostic-slice QA and publication
+
+The initial red regression failed because generic refusals had no predicate
+facts; green offline checks now exercise 14 groups with network blocked.
+Final narrow rerun: 2 PHP tests / 12 assertions, no failures/skips. Related
+DATA/artifact checks: 114 / 1,933, no failures/skips. Full trusted local PHP 8.5.1
+suite: 2,440 tests / 22,949 assertions, no failures; two existing Sodium-
+unavailable signing skips, not waived or represented as passing runtime proof.
+
+PHPCS 244 files; admin 23/23, zero failures/skips; structure 149 runtime /
+235 PHP support / 227 test files / 224 classes; build passed without tracked
+asset delta. Strict Composer validation, Composer audit and npm moderate audit
+passed with zero known advisories/vulnerabilities. Whitespace and 153 owning
+local documentation targets passed. Scoped diff review covered failure-only
+data bounds/privacy, original guard ordering/decisions, cleanup propagation,
+non-vacuous accept/refuse tests and exact source/proof claim separation.
+Existing runtime/includes, pins, tuple contracts, workflows and dependencies
+are unchanged. Uploader/toolkit remain clean at their original heads. No
+whole-plugin review, release-readiness or physical qualification is refreshed.
+
+Exact-head publication evidence pending. Historical 2026-10-30 QA/CI above
+remains historical, not refreshed evidence for this diff. Ordinary CI cannot
+qualify the refused artifact or authorize another physical attempt.
+
 ## Exact resume recommendation
 
-Implementation-plan progress: acquisition/containment is implemented and partial
-byte evidence/cleanup is established, but complete artifact qualification remains
-blocked at an unidentified path refusal. No native or product completion claim.
+Implementation-plan progress: the refusal is now specifically identified with
+bounded facts and confirmed cleanup, but complete artifact qualification remains
+blocked by the existing ASCII-only virtual-path policy. No native or product
+completion claim; the safe-local diagnostic lane has reached a policy gate.
 Do not reopen Windows observer work or fill the queue with generic cleanup.
 
-Recommended next gated slice: **Harness-Only Bounded Archive-Path Refusal
-Diagnostics and One Fresh Linux Minimum-Lab Static Acquisition/Cleanup Attempt**,
-same pins/target/limits, with offline regressions and fresh prerequisites first.
-Approve one further payload acquisition because no blocked-layer bytes remain.
-Capture only bounded non-secret predicate/length/hash facts to identify the
-actual refusal; do not preapprove normalization, broader path acceptance, budget
-changes, image fallback, extraction or execution. Stop before any such new
-decision. Runtime loading, native experiments and production wiring stay disabled.
+Recommended next gated slice: **Repository-Only Unicode Archive-Metadata Path
+Policy and Critical-Link Containment Design**. Approve design-only analysis of
+bounded virtual-name treatment and its relationship to traversal, duplicate/
+whiteout identity and critical-role/ancestor link refusals before changing any
+acceptance rule. No normalization, acceptance change, budget increase, fallback
+or payload retry is approved here. Existing pins/guards remain; runtime loading,
+native experiments and production wiring stay disabled.

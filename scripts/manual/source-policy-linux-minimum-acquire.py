@@ -258,6 +258,8 @@ def proof():
     except Exception as error:
         report['failure_stage'] = phase
         report['failure'] = str(error) if isinstance(error, static.Refusal) else 'unexpected-static-failure'
+        if isinstance(error, static.PathRefusal):
+            report['path_refusal'] = error.facts
     finally:
         try:
             report['removed_owned_files'] = owner.cleanup() if owner else 0
