@@ -1,0 +1,49 @@
+name: Source-policy minimum lab pre-start readback (manual only)
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact approved master head for one unstarted-container probe
+        required: true
+        type: string
+      readback_contract:
+        description: Approved minimum-prestart-readback-v1 (no server/PHP/SQL startup)
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-minimum-prestart
+  cancel-in-progress: false
+jobs:
+  prestart:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      PRESTART_CONTRACT: ${{ inputs.readback_contract }}
+      MINIMUM_MODEL: trusted-lab-functional-v1
+    steps:
+      - name: Admit exact approved pre-start job before checkout or acquisition
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$GITHUB_REPOSITORY" == NichlasB/alynt-drime-backups-dashboard && "$GITHUB_REF" == refs/heads/master ]]
+          [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" && "$PRESTART_CONTRACT" == minimum-prestart-readback-v1 ]]
+          [[ "$GITHUB_RUN_ID" =~ ^[0-9]+$ && "$GITHUB_RUN_ATTEMPT" =~ ^[0-9]+$ && "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+          [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
+          [[ "$(docker context inspect --format '{{.Endpoints.docker.Host}}')" == unix:///var/run/docker.sock ]]
+      - name: Checkout exact probe source only
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: One owned unstarted server configuration readback and cleanup
+        run: node scripts/ci/source-policy-minimum-prestart.mjs
+      - name: Always recover owned unstarted fixture only
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f scripts/ci/source-policy-minimum-prestart.mjs ]]; then
+            node scripts/ci/source-policy-minimum-prestart.mjs --cleanup
+          fi

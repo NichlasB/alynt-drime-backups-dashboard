@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: approved diagnostics and one pre-start readback — 2026-10-31
+
+At clean/synced `98f0680`, user approves [bounded predicate diagnostics and one
+owned unstarted-container probe](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-pre-start-diagnostics-and-owned-readback--2026-10-31).
+A separate manual-only workflow/runner observes fixed server configuration and
+cleanup without server/PHP/SQL startup. Existing admission, runtime, native
+harness, pins, budgets, grants and production wiring are not relaxed or activated.
+Only after local validation, publication and exact-head ordinary CI may the
+single approved pre-start probe be dispatched. No full native qualification
+retry, acceptance correction, release or deployment is authorized by this slice.
+
+Implementation-plan progress: diagnose the concrete pre-start admission blocker
+with bounded non-secret evidence; genuine minimum qualification remains open.
+See the owning integration record for model/CI and actual probe evidence.
+
 ## Minimum profile: approved single attempt blocked before server start — 2026-10-31
 
 The user-approved ephemeral attempt at clean/synced `8313227` failed in

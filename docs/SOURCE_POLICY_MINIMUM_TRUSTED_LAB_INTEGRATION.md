@@ -1,10 +1,10 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: the subsequently approved single ephemeral attempt
+Current disposition: the original ephemeral attempt
 [stopped before server start at configuration admission](#approved-single-ephemeral-attempt--pre-start-refusal-2026-10-31).
-Owned cleanup/recovery passed, but genuine minimum qualification remains open.
-The next gate is bounded harness diagnostics and an owned pre-start readback,
-not production wiring, an automatic retry or a wider acceptance profile.
+User subsequently approved [bounded diagnostics and one owned pre-start probe](#approved-pre-start-diagnostics-and-owned-readback--2026-10-31).
+Genuine minimum qualification remains open. This new scope does not authorize
+server/PHP/SQL startup, an automatic qualification retry or wider acceptance.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -211,3 +211,71 @@ owned unstarted container/stage. Preserve all existing admission/resource
 guards; no server start, candidate PHP, SQL, accounts, wider mounts, native body
 or production wiring. Observe the actual failed predicate before proposing any
 acceptance correction or another full qualification attempt.
+
+## Approved pre-start diagnostics and owned readback — 2026-10-31
+
+User approves Harness-Only Server-Configuration Predicate Diagnostics and One
+Owned Pre-Start Readback/Cleanup Probe at clean/synced baseline
+`98f06807665b7f410a2cb85e338268967b967139`; its ordinary exact-head CI
+41226326612 was rechecked successful. Bounded development implementation and
+explicitly approved remote owned-fixture operations only (R3 boundary). No
+installed WordPress/LocalWP/live target or Novamira operation applies; uploader
+and toolkit remain read-only. No release/package/deploy or runtime wiring.
+
+New diagnostic helper names 21 server-profile clauses and compares their
+conjunction against the **unchanged** authoritative `containerProfile`. It
+reports only fixed status codes, scalar counts/resource numbers and data
+shapes, never arbitrary string/object values, Env, paths, payloads or errors.
+Null/empty/nonempty port maps stay distinct; all prior refusals remain refusals.
+The helper cannot grant native/runtime authority. Malformed DATA is categorized,
+and disagreement with the authoritative predicate refuses the probe.
+
+The separate manual-only `source-policy-minimum-prestart.yml` and fixed Node
+runner admit the exact repository/master/head, dedicated workflow reference,
+contract, non-root UID, local trusted engine and fresh owned namespace before
+acquisition. They select only the existing pinned MariaDB image/config and
+create at most one unstarted container: network none, read-only root, non-root,
+512 MiB / one CPU / 64 PIDs, same 256-MiB data and 16-MiB scratch tmpfs, all
+capabilities dropped and no-new-privileges. No bind mounts or environment/secret
+files are supplied. The inert `exit 99` Cmd is deliberately not the native
+bootstrap command; Cmd is not one of the original admission predicates. This
+probe cannot establish startup/initialization feasibility.
+
+The executor permits only context/ps/pull/image/create/inspect/rm verbs, never
+start/run/exec/stop/kill, a shell host command, PHP or SQL. It reads a finite
+non-secret inspect projection, verifies created/not-running/PID-zero/no-restart
+ownership, stable second readback and exact one-container membership, then
+removes only that owned unstarted CID without force. Bounded observations are
+emitted before cleanup so a cleanup failure cannot erase the diagnosis; only
+successful readback/cleanup/source checks can emit a completed-probe record.
+A rejected profile may produce a successful **diagnostic** result, never an
+admitted profile or a native qualification result.
+
+The source cohort freezes five directly loaded/controller/workflow files with
+bounded hashes and post-probe readback. An exclusive owned 0700 stage/0600 marker
+binds head/source/owner/UID; cleanup validates membership, links, ownership and
+marker before removing known files and the empty directory. A retained container
+retains its lease for always-recovery. Unexpected started/foreign fixtures are
+not stopped or force-removed. Limits: 16-KiB command output, 64-KiB process
+aggregate, 120-second fixed-image pull / ten-second other engine commands,
+ten-minute job. Engine cache/provider disposal remains explicitly trusted.
+
+Ten new synthetic Node tests cover positive admission, each protected-field
+change and diagnostic agreement, null/empty/nonempty port distinctions, malformed
+and secret-bearing DATA redaction, positive/rejected probes, no startup/SQL
+verbs, retained foreign/started fixtures, removal failure, fixed resource/image
+arguments and manual-only workflow/gate ordering. The initial two test-double
+failures were corrected to assert the exact owned removal argv. No acceptance
+guard was changed to satisfy the tests. These are model/source tests, not the
+owned engine readback or a physical database proof.
+
+Local validation: full PHP 8.5.1 suite 2,472 tests / 23,108 assertions, no
+failures and two existing Sodium environment skips; Node 40/40 without skips,
+including the ten new tests. PHPCS, build, structure (151 runtime / 236 PHP
+support / 229 test files / 226 classes), strict Composer manifest, Composer
+audit, npm moderate audit and whitespace passed, zero reported dependency
+advisories/vulnerabilities. No existing runtime, native worker/controller,
+qualification workflow, dependency, version/schema or asset source changed.
+Exact-head ordinary CI must pass before the one approved pre-start dispatch.
+The actual probe outcome/publication evidence follows when complete; the
+original full native workflow is not rerun.
