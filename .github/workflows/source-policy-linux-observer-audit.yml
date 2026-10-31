@@ -1,0 +1,47 @@
+name: Source-policy existing-authority Linux observer audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact approved master commit for one harmless-child observer audit
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-policy-linux-observer-audit
+  cancel-in-progress: false
+
+jobs:
+  observer:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+    steps:
+      - name: Admit exact manually approved source
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch ]]
+          [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" ]]
+          [[ "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+      - name: Checkout approved audit only
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: One bounded existing-tool observer attempt
+        shell: bash
+        run: timeout --signal=TERM --kill-after=5s 45s /usr/bin/python3 -I -S -B scripts/ci/source-policy-linux-observer-audit.py --audit
+      - name: Always reconcile exact owned stage and harmless child
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f scripts/ci/source-policy-linux-observer-audit.py ]]; then
+            timeout --signal=TERM --kill-after=5s 45s /usr/bin/python3 -I -S -B scripts/ci/source-policy-linux-observer-audit.py --cleanup
+          fi

@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: approved existing-authority observer audit — 2026-10-31
+
+At clean/synced baseline `4d6a917`, user approves the [owned harmless-child audit](SOURCE_POLICY_LINUX_MINIMUM_OBSERVER_AUDIT.md),
+its bounded harness/tests/publication and one manual exact-head attempt on
+GitHub-hosted ubuntu-24.04 Linux/x86_64. Existing tools/authority only, no Docker,
+candidate artifacts/loading, database/site work, elevation or permission changes.
+Pure/mock tests pass; full local 2,446 / 23,000, no failures, two existing Sodium
+skips; other QA passed. Publication/ordinary CI and physical audit pending. No result
+is inferred from expected Linux capability restrictions; a completed unavailable
+audit is not qualification. Stop on denial rather than add a fallback/privilege.
+
 ## Linux minimum lab: bounded dependency/preflight admission design — 2026-10-31
 
 Approved [repository-only dependency/preflight design](SOURCE_POLICY_LINUX_MINIMUM_PREFLIGHT_ADMISSION_DESIGN.md)
