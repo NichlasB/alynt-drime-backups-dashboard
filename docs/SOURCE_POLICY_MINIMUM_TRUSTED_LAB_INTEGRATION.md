@@ -1,13 +1,13 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: after the repository-only constructor foundation, the
-user-approved [fresh native attempt](#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31)
-passed genuine ambient initialization and its prelude checks, then refused at
-the compound owned bootstrap/ready assertion, before any completed groups.
-Owned fixture/resource removal and recovery passed; failed PHP exit keeps
-strict release incomplete. No internal bootstrap cause is exported. Full
-qualification, production grants/wiring, support waivers and release stay
-closed; no source repair or automatic retry follows from this proof.
+Current disposition: after [genuine ambient initialization and owned-bootstrap
+refusal](#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31),
+the user approves [harness-only predicate/progress observations and one fresh
+attempt](#approved-harness-only-bootstrap-refusal-diagnostics-and-one-attempt--2026-10-31).
+Runtime classes, refusal behavior, guards/pins/budgets and production wiring
+remain unchanged. No diagnostic SQL or bootstrap re-entry; post-invocation
+cleanup-mutated fields are not a first-cause or success receipt. Full native
+qualification, production grants, support waivers and release remain closed.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -951,3 +951,88 @@ This recommendation requires new approval; present proof authority is consumed.
 Production grants/wiring, support waivers, release and automatic retry remain
 disabled. Whole-plugin readiness rows and the safe-local task count are not
 refreshed by this failed qualification closeout.
+
+## Approved harness-only bootstrap refusal diagnostics and one attempt — 2026-10-31
+
+New user approval starts from clean/synced restore baseline
+`d07ae0bf47862be9bed33c2a02c6a9258149c167` (ordinary CI 41233179887 reverified
+successful). Scope: bounded private harness observations, isolated QA,
+commit/push/exact-head ordinary CI, then one new trusted minimum-lab attempt
+with fresh audit prerequisites, owned disposable schema/account/rows and exact
+cleanup (explicit R3). No runtime-class, admission/refusal, image/core/root/
+module/source-pin or resource-budget change, diagnostic SQL, bootstrap re-entry,
+production grant/wiring, existing-site state, release or automatic retry.
+Uploader/toolkit remain read-only. This CI-only lab has no installed-site
+registry profile or Novamira operation; no LocalWP/live/client/Drime target is
+used. No safe-local count or historical whole-plugin readiness row is refreshed.
+
+The single existing reflection invocation remains once-only, stores its result
+once and retains the same compound true/ready assertion. Unexpected throws are
+re-thrown as the same object. Failed invocation observations are retained only
+once; a later failure cannot overwrite the first diagnostic. A successful call
+does not manufacture a failure record. No observation result can admit an owner
+or bypass the actual unchanged bootstrap and its guards.
+
+Before invocation, only fixed source-owned receiver/context definitions are
+accepted for observation. Four pure/capability predicates are read: settings,
+source, context ownership/provenance and minimum-lab scope availability. The
+context observation invokes only its fixed pure private provenance predicate,
+never begin/finish or bootstrap, after exact context-class/source verification.
+No callback is
+accepted from callers. Observational exceptions/warnings become unobserved `u`
+DATA under a temporary diagnostic handler; the prior handler is restored and
+the original first-failure state remains untouched. The actual bootstrap still
+runs under its own unchanged handler/refusal semantics. No protected SQL,
+connection, query-context begin/finish, credential write or native reissue is
+performed by observation.
+
+After invocation/internal finally, reflection reads a fixed catalog only:
+attempted; position 0–8; credits 0–16; finite native/context state; close-attempt,
+closed and ready bits; and null/mysqli-reference-presence bits for the current
+and bootstrap handles. No generic property reader, object/handle, private
+frame, credentials, SQL, messages, paths, traces or payloads are returned.
+Presence of a retained closed mysqli object does not mean an open connection.
+Post-cleanup `closed`/revoked states do not identify the first failed predicate
+or prove native release. Malformed/unknown values become `u`; unknown source
+identities invoke no methods/magic and expose no properties.
+
+The fixed `ADBMBD1` ASCII line is optional diagnostic context before the existing
+bounded first-failure envelope, never stdout or a success/admission receipt.
+Its parser admits at most one prefix, finite fields and at most 256 bytes;
+combined failure evidence stays within the unchanged 4,608-byte bound and
+existing 16-KiB worker streams. The existing first-failure stage/phase/assertion/
+exception/inventory is retained; malformed standalone, duplicate, reordered,
+out-of-range or secret-bearing lines reject without raw output. PHP `-n` needs
+no optional JSON module; tests disable JSON explicitly.
+
+Focused validation uses actual observer functions and runtime classes under
+explicit in-memory APIs, not genuine WordPress or native/database sessions.
+Positive bootstrap records all four prerequisites plus active progress;
+source/server refusals remain refused and distinguish consumed progress from
+cleanup state. Observation does not change modeled allocate/connect/command/
+close counts, owner state, prior handler or first-failure sentinel. The actual
+wrapper excerpt is tested for successful calls, first-record retention and
+same-error rethrow, with an assertion-killed replay control. These tests do not
+establish physical qualification, native query costs or transaction/release
+proof. Source review and full QA/publication precede the single approved run;
+actual outcomes follow below without a further automatic repair/retry.
+
+Local pre-publication QA: PHP 8.5.1 full isolated suite 2,472 tests / 23,108
+assertions, no failures and two existing Sodium environment skips; Node 67/67,
+no failures/skips. Seven new focused diagnostic tests cover positive active
+progress, source/context/server refusals, unchanged modeled effects/state,
+handler/first-failure preservation, unknown-identity tripwires, bounded DATA/
+maximum packets, malformed/secret-bearing input rejection, first-record/same-
+error retention and the assertion-killed replay control. JSON is disabled in
+the diagnostic child tests. These remain isolated API/model proofs, not genuine
+authentication, SQL/transaction or physical cleanup evidence.
+
+Full PHPCS plus final focused lint, build, structure, strict Composer validation,
+Composer audit, npm moderate audit, syntax and whitespace checks passed; zero
+reported dependency advisories/vulnerabilities. Final diff is confined to the
+private harness/helper, diagnostic parser, isolated tests and owning records.
+No runtime include, workflow/controller execution logic, native SQL/body,
+admission/cleanup guard, source/image/core/root/module pin, dependency,
+version/schema, asset or production-wiring change. The one native attempt is
+still pending clean/synced source, successful exact-head ordinary CI and
+duplicate-attempt checks; no current native result is inferred from local QA.

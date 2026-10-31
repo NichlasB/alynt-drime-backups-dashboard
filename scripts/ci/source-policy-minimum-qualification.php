@@ -160,6 +160,7 @@ try {
 	require __DIR__ . '/source-policy-minimum-native-contract.php';
 	require __DIR__ . '/source-policy-minimum-native-operation.php';
 	require __DIR__ . '/source-policy-minimum-native-cases.php';
+	require __DIR__ . '/source-policy-minimum-bootstrap-diagnostics.php';
 	require __DIR__ . '/source-policy-minimum-failure-evidence.php';
 	require __DIR__ . '/source-policy-minimum-worker-source.php';
 	$phase = 'cache';
@@ -307,10 +308,11 @@ try {
 } catch ( Throwable $error ) {
 	$failed = true;
 	adbb_capture( $error );
-	$first = $GLOBALS['adbb_first_failure'];
-	$wire  = function_exists( 'adbm_failure_wire' ) ? adbm_failure_wire( $first, $GLOBALS['adbm_inventory'] ?? null ) : '';
+	$first    = $GLOBALS['adbb_first_failure'];
+	$wire     = function_exists( 'adbm_failure_wire' ) ? adbm_failure_wire( $first, $GLOBALS['adbm_inventory'] ?? null ) : '';
+	$progress = function_exists( 'adbm_bootstrap_wire' ) ? adbm_bootstrap_wire( $GLOBALS['adbm_bootstrap_failure'] ?? null ) : '';
 	// Early failures retain the original finite envelope; never substitute raw diagnostics.
-	fwrite( STDERR, '' !== $wire ? $wire : 'ADBMF1|' . $first['stage'] . '|' . $first['phase'] . '|' . $first['checks'] . '|' . $first['groups'] . "\n" );
+	fwrite( STDERR, $progress . ( '' !== $wire ? $wire : 'ADBMF1|' . $first['stage'] . '|' . $first['phase'] . '|' . $first['checks'] . '|' . $first['groups'] . "\n" ) );
 } finally {
 	foreach ( $owners as $owned ) {
 		try {

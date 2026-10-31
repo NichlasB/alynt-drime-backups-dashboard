@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved bootstrap refusal observations and one fresh attempt — 2026-10-31
+
+At clean/synced `d07ae0b`, user approves [harness-only predicate/progress
+diagnostics and one fresh trusted-lab qualification/owned cleanup attempt](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-harness-only-bootstrap-refusal-diagnostics-and-one-attempt--2026-10-31).
+Observe four pure prerequisites before the single existing bootstrap call;
+retain bounded return/progress fields afterward, explicitly separated from
+cleanup-mutated state. Do not change runtime classes, admission/refusal,
+resource/query budgets, source/image/module pins or cleanup. No diagnostic SQL,
+bootstrap replay, payload/credential/handle export, production wiring or retry.
+Only after validation/publication and successful exact-head ordinary CI may the
+single fresh manual attempt run, with audit before owned application fixtures.
+
+Implementation-plan progress: improve evidence for the observed owned-bootstrap
+refusal without guessing or relaxing its cause; minimum qualification remains
+unproved. This separately approved diagnostic/proof slice does not change the
+earlier safe-local batch's 1/8 count or establish release readiness.
+
 ## Fresh ambient initialization proof: passed prelude, owned bootstrap refused — 2026-10-31
 
 User approved one fresh trusted minimum-lab qualification/owned cleanup proof

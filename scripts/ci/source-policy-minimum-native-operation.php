@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) || ! function_exists( 'adbb_check' ) ) {
 /** Constructs the actual closed owner; no ready/facts/handle injection.
  *
  * @return object Actual bootstrapped owner.
+ * @throws Throwable Original bootstrap invocation failure, without replay.
  */
 function adb0_owner() {
 	global $class, $frame, $binding, $owners, $ambient, $evidence;
@@ -44,7 +45,17 @@ function adb0_owner() {
 	adbb_check( 0 === ( new mysqli_driver() )->report_mode, 'core-selected OFF before owner allocation' );
 	$bootstrap = $class->getMethod( 'bootstrap' );
 	$bootstrap->setAccessible( true );
-	adbb_check( true === $bootstrap->invoke( $owner ) && $owner->ready, 'actual ambient-bound bootstrap' );
+	$before = adbm_bootstrap_before( $owner, $context, $frame, $bound );
+	try {
+		$result = $bootstrap->invoke( $owner );
+	} catch ( Throwable $error ) {
+		$GLOBALS['adbm_bootstrap_failure'] = $GLOBALS['adbm_bootstrap_failure'] ?? adbm_bootstrap_after( $owner, $context, $before, null, true );
+		throw $error;
+	}
+	if ( true !== $result || true !== $owner->ready ) {
+		$GLOBALS['adbm_bootstrap_failure'] = $GLOBALS['adbm_bootstrap_failure'] ?? adbm_bootstrap_after( $owner, $context, $before, $result );
+	}
+	adbb_check( true === $result && $owner->ready, 'actual ambient-bound bootstrap' );
 	adbb_check( 0 === ( new mysqli_driver() )->report_mode, 'owned initializer preserves OFF' );
 	return $owner;
 }
