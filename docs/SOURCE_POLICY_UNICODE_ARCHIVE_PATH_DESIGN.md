@@ -268,7 +268,17 @@ tuple contracts, workflows and dependencies unchanged; no further finding was
 hidden by weakening guards. This is not full rootfs/OCI or physical qualification.
 Uploader/toolkit stay clean/read-only at their original heads; no historical
 physical evidence or whole-plugin review/readiness row is refreshed.
-Exact-head publication pending; ordinary CI cannot clear the physical gate.
+Foundation `965b3ca0f810f42431bb9d30d56b946a6727412d` is pushed;
+[exact-head ordinary CI 41190019321](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41190019321)
+passed. Actual PHP 7.4: 2,440 tests / 22,951 assertions; PHP 8.3: 2,440 /
+22,956, no failures/skips. The strict offline report verifies 23 groups and
+23 assertion-killed controls on each matrix, not candidate execution. Admin
+23/23 per matrix with zero failures/skips; build, structure, PHPCS, manifest
+and audits passed, zero known dependency advisories/vulnerabilities. Existing
+Setup Node `punycode` / `url.parse()` warnings remain visible tool-level
+deprecations. This docs-only closeout receives its own pushed exact-head CI
+and clean/remote verification at handoff. Ordinary CI cannot clear the physical
+gate; no payload attempt follows this publication.
 
 Implementation-plan progress: the selected tar-only policy now has synthetic
 implementation/guard evidence. The last actual artifact attempt is still refused;
