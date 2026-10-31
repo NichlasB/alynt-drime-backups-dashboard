@@ -79,7 +79,7 @@ These do not simulate an engine into proof of physical topology or cleanup.
 Three semantic controls ran in an owned disposable source copy after its
 positive baseline passed (463 internal modeled assertions): context-identity
 guard bypass, initial server-check bypass and an always-unavailable lab owner.
-Each was assertion-killed; copy source was restored exactly and the entire
+Each was assertion-killed; original text was restored in the copy and the entire
 validated disposable copy removed. Repository guards were never weakened.
 The initial working-source mutation was rejected by the safety reviewer, so
 the explicitly recommended isolated-copy approach was used instead.
@@ -108,10 +108,17 @@ passed: PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115;
 no failures/skips; Node 29/29 per matrix, with configured lint/build/structure/
 manifest/dependency audits passing. A final source review then moved exact-job
 admission before **any** checkout/acquisition and added finite non-secret worker
-failure-stage reporting (Node now 30/30). The correction/evidence head requires
-its own successful exact-head ordinary CI before handoff; it is not covered by
-the earlier run. Native manual workflow remains unrun and not dispatched.
-This validation is not qualification or whole-plugin readiness.
+failure-stage reporting (Node now 30/30). Correction head
+`84cc5abab162576bd47e8125b70bcb29f851c76a` was pushed and independently passed
+[exact-head ordinary CI 41225220514](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41225220514):
+PHP 7.4 2,472 / 23,110 and PHP 8.3 2,472 / 23,115, no failures/skips;
+Node 30/30 per matrix with no failures/skips. Both exact-head check contexts
+succeeded; local/remote heads matched and the worktree was clean. Owning local
+documentation targets: 194 checked, none missing. Uploader/toolkit stayed clean
+at `3dfcb15` / `c067eb6`. This subsequent evidence-only record update does not
+alter runtime/harness source and receives its own ordinary CI verification at
+handoff. Native manual workflow remains unrun and not dispatched. This is not
+qualification or whole-plugin readiness.
 
 ## Exact next gated slice
 
