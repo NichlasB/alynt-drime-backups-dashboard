@@ -263,9 +263,17 @@ Existing runtime/includes, pins, tuple contracts, workflows and dependencies
 are unchanged. Uploader/toolkit remain clean at their original heads. No
 whole-plugin review, release-readiness or physical qualification is refreshed.
 
-Exact-head publication evidence pending. Historical 2026-10-30 QA/CI above
-remains historical, not refreshed evidence for this diff. Ordinary CI cannot
-qualify the refused artifact or authorize another physical attempt.
+Diagnostic/refusal publication `524dc30a4bbf6465aa109e6607efca180de1e22c`
+is pushed; [exact-head ordinary CI 41188227040](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41188227040)
+passed. Actual PHP 7.4: 2,440 tests / 22,951 assertions; PHP 8.3: 2,440 /
+22,956, neither with failures/skips. Admin 23/23 per matrix, no failures/skips;
+manifest validation, audits, build, structure and PHPCS all passed, zero known
+dependency advisories/vulnerabilities. Existing Setup Node `punycode` and
+`url.parse()` deprecation warnings remain visible tool-level warnings.
+The docs-only evidence closeout is independently pushed/exact-head CI-checked
+at handoff. Historical 2026-10-30 QA/CI above remains historical, not refreshed
+evidence for this diff. Ordinary CI cannot qualify the refused artifact or
+authorize another physical attempt; no new retrieval follows publication.
 
 ## Exact resume recommendation
 

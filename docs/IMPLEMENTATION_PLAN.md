@@ -10,8 +10,10 @@ refused a 58-character/four-segment symlink name at the existing ASCII predicate
 (first outside-ASCII ordinal 337). Same partial layer evidence, no later
 qualification; seven owned files/root removed and independently absent, source
 unchanged. One attempt consumed. Full local suite 2,440 / 22,949, no failures,
-two existing Sodium skips; 14 offline groups and other QA passed. Exact-head
-publication pending; owning record separates the physical refusal from QA.
+two existing Sodium skips; 14 offline groups and other QA passed. Diagnostic/
+refusal publication `524dc30` is pushed; exact-head ordinary CI 41188227040
+passed (PHP 7.4/8.3 each 2,440 tests, no failures/skips). Owning record separates
+physical refusal from QA and records exact counts/publication limits.
 
 Implementation-plan progress: diagnostic uncertainty resolved, complete artifact
 evidence still blocked; no product/native completion. Recommended next gated
