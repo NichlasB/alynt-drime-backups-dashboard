@@ -1,5 +1,11 @@
 # Genuine Minimum-Profile Trusted-Lab Qualification Replan
 
+Current disposition: user subsequently accepted the reduced evidence contract
+and approved [repository-only harness/receiver integration](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md).
+The original replan authority/validation below is historical. Acceptance does
+not authorize acquisition or native execution; the separate one-attempt gate
+remains closed, as do production wiring and release readiness.
+
 ## Authority and proposed decision — 2026-10-31
 
 Approved repository-only replan at clean/synced restore baseline

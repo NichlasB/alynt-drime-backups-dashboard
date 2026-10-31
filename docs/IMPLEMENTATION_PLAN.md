@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: accepted trusted-lab contract and repository integration — 2026-10-31
+
+User accepts the disclosed trusted-engine/distribution/PID/cache assumptions and
+approves [repository-only harness/receiver integration](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md)
+at clean/synced `925c77e`. The private finite lab binding spans initial server,
+final bootstrap and per-operation admission, with revocation before close;
+default legacy mappings and closed public factories remain unchanged. Separate
+manual-only worker/controller composition and isolated tests do not authorize
+or establish acquisition, actual native behavior, database/site operations or
+production wiring. Independent loaded-object/atomic mapping attestation stays
+unestablished; the observer route remains deferred, not silently satisfied.
+
+Implementation-plan progress: the accepted compatibility route now has a
+repository harness and closed receiver seam, but genuine minimum qualification,
+required untested profile rows and the actual lost-update repair remain open.
+Recommended next gated slice: one exact-head ephemeral Trusted Minimum-Lab
+Acquisition, Connection-Free Preflight and Genuine Native Qualification / Owned
+Cleanup Attempt, including explicit owned database/credential/fixture and
+trusted-engine cache/resource authority. No automatic dispatch or retry.
+See the owning integration record for ordinary validation/publication evidence.
+
 ## Minimum profile: approved trusted-lab qualification replan — 2026-10-31
 
 At clean/synced baseline `be159d0`, user approves the [repository-only replan](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_REPLAN.md).

@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) || ! class_exists( 'wpdb', false ) ) {
 require_once __DIR__ . '/class-source-policy-error.php';
 require_once __DIR__ . '/class-source-policy-bootstrap-profile.php';
 require_once __DIR__ . '/class-source-policy-bootstrap-evidence.php';
+require_once __DIR__ . '/class-source-policy-minimum-lab-scope.php';
+require_once __DIR__ . '/traits/trait-source-policy-minimum-lab.php';
 require_once __DIR__ . '/traits/trait-source-policy-native-bootstrap.php';
 require_once __DIR__ . '/traits/trait-source-policy-bootstrap-setup.php';
 
@@ -18,6 +20,7 @@ require_once __DIR__ . '/traits/trait-source-policy-bootstrap-setup.php';
 class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extends wpdb {
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Setup;
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab;
 
 	/**
 	 * Private qualification DATA, never accepted by an application command.
@@ -132,7 +135,7 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 			|| ! in_array( $this->report_mode, array( 0, 3 ), true ) || $this->observed_report_mode() !== $this->report_mode ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
-		return Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $this->qualification, $this->options, $this->query_context );
+		return $this->admit_bound_profile( $this->qualification, $this->options );
 	}
 
 	/**
@@ -162,11 +165,12 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 		if ( $this->close_attempted ) {
 			return $this->closed;
 		}
-		$this->close_attempted = true;
-		$this->qualification   = null; // Revoke terminal DATA before any fallible or reentrant cleanup.
-		$this->report_mode     = null;
-		$this->report_source   = null;
-		$native                = false;
+		$this->close_attempted   = true;
+		$this->minimum_lab_scope = null; // Revoke lab scope before any fallible/reentrant native or callback cleanup.
+		$this->qualification     = null; // Revoke terminal DATA before any fallible or reentrant cleanup.
+		$this->report_mode       = null;
+		$this->report_source     = null;
+		$native                  = false;
 		try {
 			$native = ( $GLOBALS['wpdb'] ?? null ) === $this ? false : ( 'never_opened' === $this->native_state && null === $this->dbh && ! $this->ready );
 			if ( null !== $this->bootstrap_handle ) {

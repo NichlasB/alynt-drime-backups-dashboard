@@ -1,0 +1,42 @@
+name: Source-policy trusted minimum lab (manual only)
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact separately approved master head
+        required: true
+        type: string
+      evidence_contract:
+        description: Separately approved trusted-lab-functional-v1 acquisition/native attempt
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-minimum-qualification
+  cancel-in-progress: false
+jobs:
+  qualification:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      MINIMUM_MODEL: ${{ inputs.evidence_contract }}
+    steps:
+      - name: Checkout approved source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Checkout genuine pinned core (not donor WordPress)
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: WordPress/WordPress
+          ref: cc101b64012b16d087780657a2b828ccd7794a63
+          path: .adb-minimum-core
+          persist-credentials: false
+      - name: Exact admission, fresh preflight, one ordered native body and cleanup
+        run: node scripts/ci/source-policy-minimum-controller.mjs
+      - name: Always recover exact owned resources
+        if: always()
+        run: node scripts/ci/source-policy-minimum-controller.mjs --cleanup

@@ -1,5 +1,9 @@
 # Linux Minimum-Lab Observer Boundary and Qualification Deferral Decision
 
+Subsequent disposition: [trusted-lab contract acceptance and repository integration](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md)
+does not reopen this independent-observer route or claim its requirement was
+met. Actual minimum-lab acquisition/native qualification remains separately gated.
+
 ## Approved decision and scope — 2026-10-31
 
 User approves repository-only deferral at clean/synced restore baseline

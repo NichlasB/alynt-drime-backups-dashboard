@@ -20,6 +20,7 @@ class wpdb {
 		$GLOBALS['boot_parse_calls']=($GLOBALS['boot_parse_calls']??0)+1;
 		if(!empty($GLOBALS['boot_parser_wrong']))return array('127.0.0.1',10005,null,false);
 		$known=array('127.0.0.1:10004'=>array('127.0.0.1',10004,null,false),'[::1]:10004'=>array('::1',10004,null,true),'localhost:/tmp/owned.sock'=>array('localhost',null,'/tmp/owned.sock',false));
+		$known['127.0.0.1:3306']=array('127.0.0.1',3306,null,false); // Fixed lab API answer, never parser implementation.
 		return $known[$host]??false; // Fixed API answers, not a copied core parser.
 	}
 	public function db_connect($allow_bail=true){unset($allow_bail); ++$GLOBALS['boot_counts']['unexpected_connect']; return false;}

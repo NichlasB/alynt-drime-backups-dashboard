@@ -110,7 +110,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$this->native_state = 'connected_unqualified';
 			$this->is_mysql     = true;
 			$this->bootstrap_check();
-			if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $frame['core'] ) !== mysqli_get_server_info( $this->dbh ) ) {
+			if ( $this->bootstrap_expected_server( $frame['core'] ) !== mysqli_get_server_info( $this->dbh ) ) {
 				throw new RuntimeException( 'Server profile unavailable' );
 			}
 			$identity = $this->bootstrap_probe( 'identity' );
@@ -153,7 +153,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 				'hooks'           => Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::fingerprint(),
 			);
 			$this->bootstrap_check();
-			if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $facts, $frame['table'], $this->query_context ) ) ) {
+			if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit_bound_profile( $facts, $frame['table'] ) ) ) {
 				throw new RuntimeException( 'Final profile unavailable' );
 			}
 			$this->options       = $frame['table'];
@@ -189,6 +189,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 		if ( $this->close_attempted || $this->ready || ( hrtime( true ) - $this->bootstrap_started ) > 20000000000 || $this->bootstrap_credits > 16
 			|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::settings( $this->bootstrap_frame )
 			|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::source( $this, $this->bootstrap_binding )
+			|| ( null !== $this->minimum_lab_scope && ! is_array( $this->minimum_lab_profile() ) )
 			|| ( null !== $this->report_mode && $this->observed_report_mode() !== $this->report_mode )
 			|| ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this )
 			|| ( $sealed && ! $this->query_context->valid() ) || ( null !== $this->bootstrap_handle && $this->dbh !== $this->bootstrap_handle ) ) {

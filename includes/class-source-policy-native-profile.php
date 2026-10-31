@@ -19,9 +19,10 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 	 * @param mixed       $facts Provider DATA, never request input.
 	 * @param string      $table Fixed connection table binding.
 	 * @param object|null $query_context Closed private receiver context, not a caller grant.
+	 * @param object|null $receiver Exact private lab receiver, never a caller-selected server.
 	 * @return array|WP_Error
 	 */
-	public static function admit( $facts, $table, $query_context = null ) {
+	public static function admit( $facts, $table, $query_context = null, $receiver = null ) {
 		global $wp_object_cache, $wp_filter;
 		foreach ( array( 'all', 'incompatible_sql_modes' ) as $hook ) {
 			if ( isset( $wp_filter[ $hook ] ) && ! empty( $wp_filter[ $hook ]->callbacks ) ) {
@@ -32,10 +33,10 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 		if ( ! is_array( $facts ) || count( $required ) !== count( $facts ) || array_diff( $required, array_keys( $facts ) ) ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
+		$server = self::expected_server( $facts, $query_context, $receiver );
 		if ( ! is_string( $table ) || strlen( $table ) > 64 || ! preg_match( '/\A[A-Za-z0-9_]+options\z/', $table )
 			|| $facts['table'] !== $table || ! is_string( $facts['database'] ) || ! preg_match( '/\A[A-Za-z0-9_-]{1,64}\z/', $facts['database'] )
-			|| false === Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'] )
-			|| Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'] ) !== $facts['server']
+			|| false === $server || $server !== $facts['server']
 			|| 'options4-unique-name-InnoDB' !== $facts['schema'] || true !== $facts['autocommit'] || true !== $facts['single_site']
 			|| false !== $facts['dropins'] || 'core-process' !== $facts['cache'] || true !== $facts['bounded_session'] ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
@@ -52,6 +53,35 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 			'states'   => '6.0' === $facts['core'] ? array( 'yes', 'no' ) : array( 'yes', 'no', 'on', 'off', 'auto', 'auto-on', 'auto-off' ),
 			'hooks'    => $fingerprint,
 		);
+	}
+
+	/**
+	 * Selects only the default mapping or an exact private lab receiver.
+	 *
+	 * @param array       $facts Actual facts.
+	 * @param object|null $context Private context.
+	 * @param object|null $receiver Exact optional receiver.
+	 * @return string|false
+	 */
+	private static function expected_server( $facts, $context, $receiver ) {
+		if ( null === $receiver ) {
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'] );
+		}
+		if ( ! is_object( $receiver ) || 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' !== get_class( $receiver )
+			|| realpath( __DIR__ . '/class-source-policy-no-reconnect-connection.php' ) !== ( new ReflectionClass( $receiver ) )->getFileName()
+			|| ! $context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $context->owns( $receiver ) ) {
+			return false;
+		}
+		$expected = $receiver->minimum_lab_profile();
+		if ( ! is_array( $expected ) || spl_object_hash( $context ) !== $expected['context'] ) {
+			return false;
+		}
+		foreach ( array( 'core', 'server', 'database', 'table' ) as $key ) {
+			if ( $facts[ $key ] !== $expected[ $key ] ) {
+				return false;
+			}
+		}
+		return $expected['server'];
 	}
 
 	/**
