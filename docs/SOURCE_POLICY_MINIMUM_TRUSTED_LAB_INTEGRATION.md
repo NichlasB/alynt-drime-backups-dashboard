@@ -456,3 +456,71 @@ Then run one fresh exact-head audit-only lab attempt with owned server/PHP
 processes and cleanup; no qualification body or application schema/account/row
 creation, production grant, wiring, release or automatic retry. Observe the
 actual failed prerequisite before proposing any additional acceptance repair.
+
+## Approved audit-only diagnostics and one attempt — 2026-10-31
+
+User approval at clean/synced restore baseline
+`8f573d1f3f2bba2b37ea5f14b12c9b28fa000b70` covers harness-only bounded
+diagnostics, isolated regression tests, validation, commit/push/exact-head
+ordinary CI and then one fresh exact-head manual **audit-only** ephemeral CI
+lab attempt. R3 owned CI processes/cleanup only; no installed WordPress,
+LocalWP/live/client/Drime target, application schema/account/row creation,
+qualification body, production grant/wiring, release/package/deploy or retries.
+No site registry target or Novamira operation applies. Uploader/toolkit remain
+read-only; historical whole-plugin readiness rows are not refreshed.
+
+The worker retains the already captured first failure's stage/phase/counter,
+fixed assertion SHA256 and finite exception/diagnostic metadata in a bounded
+`ADBMF2` private ASCII envelope, with legacy early-failure compatibility. No
+raw exception message/path/trace, environment, credentials, arguments or SQL is
+logged; PHP `-n` needs no optional JSON module. Candidate-reported module names
+are bounded to 64 sorted unique ASCII names of at most 64 bytes. Seven finite
+facts record static PHP/mysqli root match, no loaded/scanned INI, no prepend/
+append and report mode OFF (`1`/`0`/unobserved `u`). Malformed inventory emits
+only an invalid marker without hiding first cause. These observations are not
+independent loaded-object attestation, admission grants or acceptance changes.
+Every prior root/module/INI/internal-declaration guard remains in force.
+
+Parent cleanup reports finite reconciliation/absence/log/exit/ownership/remove
+categories and separates owned container/stage removal from strict release
+completion. A failed audit-worker exit still fails strict release; finally
+cleanup cannot replace the primary refusal. Recovery on already absent owned
+resources is not retroactive worker/release qualification.
+
+The new manual-only `source-policy-minimum-audit.yml` shares the existing lab
+concurrency group, pins, source/core checks, resource/output/time limits and
+trusted-engine model. Exact audit scope plus workflow identity and argument
+select only the actual audit worker. Missing/inconsistent scope refuses rather
+than falling through to proof. The worker independently refuses proof or
+qualification-password forwarding under this scope. No application password
+is generated; no proof loop or CREATE/GRANT branch is reached. Audit cleanup
+uses bounded SELECT absence checks, not application DROP operations. Owned
+server initialization and observer baseline/reconciliation/absence SQL do run;
+“connection-free” describes the PHP audit, not an absence of all lab SQL.
+
+Only after relevant local validation and successful exact-head ordinary CI,
+clean/synced heads and duplicate-attempt checks may this one audit be dispatched.
+Retain the actual failure/inventory/cleanup outcome without diagnosing from a
+counter, weakening a guard or issuing another attempt. Validation/publication
+and the single execution outcome follow below.
+
+Pre-publication validation: local PHP 8.5.1 full isolated suite 2,472 tests /
+23,108 assertions, no failures and two existing Sodium environment skips.
+Node 52/52 passed, including 11 new diagnostic/cleanup tests, without skips.
+The actual first-capture function runs under PHP `-n` without JSON; the actual
+cleanup function runs against explicitly modeled IO (not physical cleanup).
+Three in-memory semantic controls are assertion-killed: first-cause replacement,
+audit-workflow fallback to proof and ignored nonzero worker exit. No on-disk
+guard or native experiment was used for those controls. Positive records and
+positive modeled cleanup pass; malformed/overflow/secret-bearing DATA and
+reconciliation/absence/foreign-ownership/remove failures are discriminating.
+These isolated tests do not establish genuine core/database or resource proof.
+
+Full PHPCS, PHP/Node syntax, build, structure, strict Composer validation,
+Composer audit, npm moderate audit and whitespace checks passed; zero reported
+dependency advisories/vulnerabilities. Final diff is confined to the dormant
+CI harness, one manual audit-only workflow, tests and owning plan/evidence.
+Runtime includes, other workflow definitions, dependency pins, assets,
+version/schema and sibling repositories are unchanged. No acceptance guard,
+limit, production writer or public factory is relaxed. Actual audit evidence
+remains pending exact-head ordinary CI and the single approved dispatch.

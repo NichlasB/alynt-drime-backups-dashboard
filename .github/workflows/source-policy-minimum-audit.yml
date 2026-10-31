@@ -1,0 +1,57 @@
+name: Source-policy trusted minimum audit only (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact separately approved master head
+        required: true
+        type: string
+      evidence_contract:
+        description: Separately approved trusted-lab-functional-v1 audit-only attempt
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-minimum-qualification
+  cancel-in-progress: false
+jobs:
+  audit:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      MINIMUM_MODEL: ${{ inputs.evidence_contract }}
+      MINIMUM_SCOPE: audit-only-v1
+    steps:
+      - name: Admit exact approved audit before checkout or acquisition
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$GITHUB_REPOSITORY" == NichlasB/alynt-drime-backups-dashboard && "$GITHUB_REF" == refs/heads/master ]]
+          [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" && "$MINIMUM_MODEL" == trusted-lab-functional-v1 ]]
+          [[ "$MINIMUM_SCOPE" == audit-only-v1 && "$GITHUB_WORKFLOW_REF" == NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master ]]
+          [[ "$GITHUB_RUN_ID" =~ ^[0-9]+$ && "$GITHUB_RUN_ATTEMPT" =~ ^[0-9]+$ && "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+          [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
+          [[ "$(docker context inspect --format '{{.Endpoints.docker.Host}}')" == unix:///var/run/docker.sock ]]
+      - name: Checkout approved source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Checkout genuine pinned core (not donor WordPress)
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: WordPress/WordPress
+          ref: cc101b64012b16d087780657a2b828ccd7794a63
+          path: .adb-minimum-core
+          persist-credentials: false
+      - name: One connection-free worker audit and owned cleanup (no qualification body)
+        run: node scripts/ci/source-policy-minimum-controller.mjs --audit-only
+      - name: Always recover exact owned audit resources
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f scripts/ci/source-policy-minimum-controller.mjs ]]; then
+            node scripts/ci/source-policy-minimum-controller.mjs --cleanup
+          fi

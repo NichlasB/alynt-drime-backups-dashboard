@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Minimum profile: approved first-failure diagnostics and one audit-only attempt — 2026-10-31
+
+At clean/synced `8f573d1`, user approves [bounded first-failure, runtime-inventory
+and cleanup classification diagnostics](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#approved-audit-only-diagnostics-and-one-attempt--2026-10-31),
+validation/publication and one new exact-head manual audit-only lab attempt.
+Preserve all root/module/configuration guards, pins and budgets. The dedicated
+workflow stops before the qualification body and application fixture/account
+creation; no application credentials, production grant, wiring, site operations,
+release or automatic retry. Server initialization and bounded observer baseline/
+absence SQL remain distinct from the connection-free PHP audit.
+
+Implementation-plan progress: diagnose the observed PHP image refusal rather
+than guess or relax acceptance. Minimum native qualification and remaining
+supported/intended-profile gates stay open; no product-task count is advanced.
+
 ## Minimum profile: strict repair passed CI, fresh PHP audit refused — 2026-10-31
 
 At `1c97788`, [ordinary CI 41228903947](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41228903947)

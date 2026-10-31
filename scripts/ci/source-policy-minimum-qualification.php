@@ -14,6 +14,9 @@ if ( PHP_SAPI !== 'cli' || 3 !== count( $argv ) || '--owned-minimum-qualificatio
 	|| ! preg_match( '/\A[0-9]+\z/', (string) getenv( 'GITHUB_RUN_ID' ) ) || ! preg_match( '/\A[0-9]+\z/', (string) getenv( 'GITHUB_RUN_ATTEMPT' ) )
 	|| 1 !== getmypid() || 'trusted-lab-functional-v1' !== getenv( 'MINIMUM_MODEL' )
 	|| ! preg_match( '/\A[a-f0-9]{64}\z/', (string) getenv( 'MINIMUM_SERVER_CID' ) )
+	|| ( 'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master' === getenv( 'GITHUB_WORKFLOW_REF' ) && 'audit-only-v1' !== getenv( 'MINIMUM_SCOPE' ) )
+	|| ( false !== getenv( 'MINIMUM_SCOPE' ) && ( 'audit-only-v1' !== getenv( 'MINIMUM_SCOPE' ) || 'audit' !== $argv[2] || false !== getenv( 'QUALIFICATION_PASSWORD' )
+		|| 'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master' !== getenv( 'GITHUB_WORKFLOW_REF' ) ) )
 	|| ! extension_loaded( 'mysqli' ) || ! extension_loaded( 'mysqlnd' ) || extension_loaded( 'pdo_mysql' ) ) {
 	fwrite( STDERR, "Requires exact owned Linux qualification job\n" );
 	exit( 1 );
@@ -157,6 +160,7 @@ try {
 	require __DIR__ . '/source-policy-minimum-native-contract.php';
 	require __DIR__ . '/source-policy-minimum-native-operation.php';
 	require __DIR__ . '/source-policy-minimum-native-cases.php';
+	require __DIR__ . '/source-policy-minimum-failure-evidence.php';
 	require __DIR__ . '/source-policy-minimum-worker-source.php';
 	$phase = 'cache';
 	wp_using_ext_object_cache( false );
@@ -309,7 +313,10 @@ try {
 } catch ( Throwable $error ) {
 	$failed = true;
 	adbb_capture( $error );
-	fwrite( STDERR, 'ADBMF1|' . $stage . '|' . $phase . '|' . $checks . '|' . $groups . "\n" );
+	$first = $GLOBALS['adbb_first_failure'];
+	$wire  = function_exists( 'adbm_failure_wire' ) ? adbm_failure_wire( $first, $GLOBALS['adbm_inventory'] ?? null ) : '';
+	// Early failures retain the original finite envelope; never substitute raw diagnostics.
+	fwrite( STDERR, '' !== $wire ? $wire : 'ADBMF1|' . $first['stage'] . '|' . $first['phase'] . '|' . $first['checks'] . '|' . $first['groups'] . "\n" );
 } finally {
 	foreach ( $owners as $owned ) {
 		try {

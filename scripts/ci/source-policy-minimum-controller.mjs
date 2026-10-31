@@ -5,6 +5,8 @@ import {readFileSync, writeFileSync, mkdirSync, readdirSync, lstatSync, realpath
 import {join, dirname, relative} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {reviewLog} from './source-policy-linux-qualification-controller.mjs';
+import {AUDIT_WORKFLOW,executionPhases,failureEvidence,releaseIssues} from './source-policy-minimum-audit-contract.mjs';
+export {failureEvidence} from './source-policy-minimum-audit-contract.mjs';
 
 export const MODEL='trusted-lab-functional-v1';
 export const selections=Object.freeze({
@@ -13,11 +15,6 @@ export const selections=Object.freeze({
 });
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const requireFact=(ok,label)=>{if(!ok){const error=Error(label);error.minimumReason=label;throw error;}};
-export function failureEvidence(raw) {
-  if(typeof raw!=='string'||raw.length>128)return null;
-  const match=/^ADBMF1\|(source-audit|ambient|escape|positive|noop-stale|update|race|duplicate|transform-reentry|lock|post-change|errno)\|(runtime|core-pins|core-load|owned-load|cache|profile|image|native)\|([0-9]{1,5})\|([0-9])\n(?![\s\S])/.exec(raw);
-  return match?{stage:match[1],phase:match[2],checks:Number(match[3]),groups:Number(match[4])}:null;
-}
 export function terminal(wire,run,image,cid) {
   return typeof wire==='string' && typeof run==='string' && typeof image==='string' && typeof cid==='string' && /^[a-f0-9]{32}$/.test(run) && /^[a-f0-9]{64}$/.test(image) && /^[a-f0-9]{64}$/.test(cid)
     && new RegExp('^ADBMC1\\|'+run+'\\|'+image+'\\|'+cid+'\\|1\\|[a-f0-9]{64}\\|[1-9][0-9]{0,4}\\|9\\|0\\|closed\\|trusted-lab-functional-v1\\|false\\|not-established\\|false\\|false\\n(?![\\s\\S])').test(wire);
@@ -67,24 +64,40 @@ function ownedIds(owner) {
   const ids=wire.trim()?wire.trim().split('\n'):[];
   requireFact(ids.length<=2&&ids.every(id=>/^[a-f0-9]{64}$/.test(id)),'unknown owned container set');return ids;
 }
-function cleanup(owner,stage) {
-  const ids=ownedIds(owner).sort((a,b)=>Number(inspect(a).network==='none')-Number(inspect(b).network==='none'));let failed=false;
+function cleanup(owner,stage,auditOnly=false) {
+  const issues=new Set();let containersRemoved=false,stageRemoved=false,operation='owned-inventory';
+  try {
+  const ids=ownedIds(owner).sort((a,b)=>Number(inspect(a).network==='none')-Number(inspect(b).network==='none'));
   for(const cid of ids) {
+    operation='ownership-readback';
     const row=inspect(cid);requireFact(row.label===owner,'cleanup ownership changed');
+    const role=row.network==='none'?'server':'php';
     if(row.running&&row.network==='none') {
-      try {reconcile(cid);requireFact(rootSQL(cid,"DROP DATABASE IF EXISTS adb_minimum; DROP USER IF EXISTS 'adbm'@'127.0.0.1'; SELECT (SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME NOT IN ('mysql','information_schema','performance_schema','sys')),(SELECT COUNT(*) FROM mysql.global_priv WHERE User='adbm');")==='0\t0\n','fixture cleanup readback');}catch{failed=true;}
+      let category='server-reconciliation';
+      try {
+        reconcile(cid);category=auditOnly?'audit-absence-readback':'fixture-cleanup-readback';
+        const removal=auditOnly?'':"DROP DATABASE IF EXISTS adb_minimum; DROP USER IF EXISTS 'adbm'@'127.0.0.1'; ";
+        requireFact(rootSQL(cid,removal+"SELECT (SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME NOT IN ('mysql','information_schema','performance_schema','sys')),(SELECT COUNT(*) FROM mysql.global_priv WHERE User='adbm');")==='0\t0\n','fixture cleanup readback');
+      }catch{issues.add(category);}
     }
-    if(row.running)command(['stop','--time','5',cid],'',8000);
-    const ended=inspect(cid);if(ended.oom||ended.running||ended.exit!==0)failed=true;
-    if(row.network==='none')try{reviewLog(command(['logs',cid],'',3000,16384),ended.hostname);}catch{failed=true;}
-    command(['rm','--volumes',cid]);
+    operation=role+'-stop';if(row.running)command(['stop','--time','5',cid],'',8000);
+    operation=role+'-exit-readback';
+    const ended=inspect(cid);for(const issue of releaseIssues(role,ended))issues.add(issue);
+    if(row.network==='none')try{reviewLog(command(['logs',cid],'',3000,16384),ended.hostname);}catch{issues.add('server-log-review');}
+    operation=role+'-remove';command(['rm','--volumes',cid]);
   }
+  operation='container-absence-readback';
   requireFact(ownedIds(owner).length===0,'container cleanup incomplete');
+  containersRemoved=true;
   if(existsSync(stage)) {
+    operation='stage-ownership-readback';
     requireFact(realpathSync(stage)===stage&&!lstatSync(stage).isSymbolicLink()&&lstatSync(stage).uid===process.getuid(),'stage ownership changed');
-    rmSync(stage,{recursive:true});requireFact(!existsSync(stage),'stage cleanup incomplete');
+    operation='stage-remove';rmSync(stage,{recursive:true});requireFact(!existsSync(stage),'stage cleanup incomplete');
   }
-  requireFact(!failed,'cleanup/release evidence incomplete');
+  stageRemoved=!existsSync(stage);
+  } catch(error) {issues.add(operation);throw error;}
+  finally {process.stdout.write(JSON.stringify({minimum_cleanup:{scope:auditOnly?'audit-only':'qualification',issues:[...issues],containers_removed:containersRemoved,stage_removed:stageRemoved,strict_release_complete:issues.size===0&&containersRemoved&&stageRemoved}})+'\n');}
+  requireFact(issues.size===0,'cleanup/release evidence incomplete');
 }
 async function worker(cid,run,image,serverCid,proof,modules=null) {
   const child=spawn('docker',['start','--attach','--interactive',cid],{stdio:['pipe','pipe','pipe']});
@@ -117,22 +130,26 @@ async function main() {
     &&env.GITHUB_REPOSITORY==='NichlasB/alynt-drime-backups-dashboard'&&env.GITHUB_REF==='refs/heads/master'&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&env.EXPECTED_SHA===env.GITHUB_SHA
     &&/^[0-9]+$/.test(env.GITHUB_RUN_ID??'')&&/^[0-9]+$/.test(env.GITHUB_RUN_ATTEMPT??'')&&env.MINIMUM_MODEL===MODEL&&!env.DOCKER_HOST&&!env.DOCKER_CONTEXT,'exact approved manual job required');
   requireFact(command(['context','inspect','--format','{{.Endpoints.docker.Host}}']).trim()==='unix:///var/run/docker.sock','local trusted engine only');
+  const auditOnly=env.MINIMUM_SCOPE==='audit-only-v1',recover=process.argv.length===3&&process.argv[2]==='--cleanup';
+  const phases=executionPhases(env.MINIMUM_SCOPE,recover?(auditOnly?'--audit-only':undefined):process.argv[2],env.GITHUB_WORKFLOW_REF);
+  requireFact(phases!==null&&(!auditOnly||env.GITHUB_WORKFLOW_REF===AUDIT_WORKFLOW),'fixed execution scope required');
   const owner='adb-minimum-'+env.GITHUB_RUN_ID+'-'+env.GITHUB_RUN_ATTEMPT;
   const stage=join(realpathSync(env.RUNNER_TEMP),owner);
   requireFact(dirname(stage)===realpathSync(env.RUNNER_TEMP),'exact temporary child');
-  if(process.argv.length===3&&process.argv[2]==='--cleanup'){cleanup(owner,stage);return;}
-  requireFact(process.argv.length===2&&cwd===env.GITHUB_WORKSPACE&&!existsSync(stage)&&ownedIds(owner).length===0,'fresh owned namespace only');
+  if(recover){cleanup(owner,stage,auditOnly);return;}
+  requireFact(process.argv.length===(auditOnly?3:2)&&cwd===env.GITHUB_WORKSPACE&&!existsSync(stage)&&ownedIds(owner).length===0,'fresh owned namespace only');
   const git=spawnSync('git',['rev-parse','HEAD'],{encoding:'utf8',timeout:5000});requireFact(git.status===0&&git.stdout.trim()===env.GITHUB_SHA,'exact source head');
   const coreHead=spawnSync('git',['-C','.adb-minimum-core','rev-parse','HEAD'],{encoding:'utf8',timeout:5000});requireFact(coreHead.status===0&&coreHead.stdout.trim()==='cc101b64012b16d087780657a2b828ccd7794a63','exact genuine core checkout');
   const coreTree=spawnSync('git',['-C','.adb-minimum-core','rev-parse','HEAD^{tree}'],{encoding:'utf8',timeout:5000});requireFact(coreTree.status===0&&coreTree.stdout.trim()==='a3bd7a4074a4c95c8af3b969346726273d68e167','exact genuine core tree');
   mkdirSync(stage,{mode:0o700});
+  let primaryFailure=null;
   try {
     const source=stage+'/source';mkdirSync(source,{mode:0o700});
     const files=[];
     for(const dir of ['includes','scripts/ci'])for(const item of readdirSync(dir,{recursive:true,withFileTypes:true})) {
       if(item.isFile()&&(dir==='includes'||item.name.startsWith('source-policy-minimum-')))files.push(relative(cwd,join(item.parentPath??item.path,item.name)).replaceAll('\\','/'));
     }
-    files.push('scripts/manual/source-policy-proof-reflection.php','scripts/manual/source-policy-supported-core-pins.php','scripts/ci/source-policy-linux-qualification-controller.mjs','.github/workflows/source-policy-minimum-qualification.yml');
+    files.push('scripts/manual/source-policy-proof-reflection.php','scripts/manual/source-policy-supported-core-pins.php','scripts/ci/source-policy-linux-qualification-controller.mjs','.github/workflows/source-policy-minimum-qualification.yml','.github/workflows/source-policy-minimum-audit.yml');
     const core=['version.php','load.php','plugin.php','class-wp-hook.php','class-wp-error.php','wp-db.php','cache.php','class-wp-object-cache.php','formatting.php','functions.php','option.php'];
     let bytes=0;const rows=[];
     for(const file of files.sort()) {
@@ -157,12 +174,14 @@ async function main() {
     reviewLog(command(['exec',serverCid,'cat','/tmp/bootstrap.log'],'',3000,16384),serverCid.slice(0,12));
     reviewLog(command(['logs',serverCid],'',3000,16384),serverCid.slice(0,12));
     requireFact(rootSQL(serverCid,'SELECT VERSION(),@@autocommit,@@in_transaction;')==='10.11.18-MariaDB-ubu2204\t1\t0\n','exact actual server');reconcile(serverCid);
-    const password=randomBytes(32).toString('hex'),run=hash(env.GITHUB_RUN_ID+':'+env.GITHUB_RUN_ATTEMPT).slice(0,32);
+    const password=auditOnly?null:randomBytes(32).toString('hex'),run=hash(env.GITHUB_RUN_ID+':'+env.GITHUB_RUN_ATTEMPT).slice(0,32);
     const vars=Object.fromEntries(['GITHUB_ACTIONS','GITHUB_EVENT_NAME','GITHUB_REPOSITORY','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','EXPECTED_SHA','MINIMUM_MODEL'].map(key=>[key,env[key]]));
     vars.MINIMUM_IMAGE=image;vars.MINIMUM_SERVER_CID=serverCid;vars.PHP_INI_SCAN_DIR='';
+    if(auditOnly){vars.MINIMUM_SCOPE='audit-only-v1';vars.GITHUB_WORKFLOW_REF=AUDIT_WORKFLOW;}
     let moduleHash=null;
-    for(const phase of ['audit','proof']) {
+    for(const phase of phases) {
       if(phase==='proof') {
+        requireFact(!auditOnly,'audit cannot create application fixtures');
         const table='adbm_'+run.slice(0,12)+'_options';
         rootSQL(serverCid,`CREATE DATABASE adb_minimum CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; CREATE TABLE adb_minimum.${table} (option_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,option_name varchar(191) NOT NULL,option_value longtext NOT NULL,autoload varchar(20) NOT NULL,PRIMARY KEY(option_id),UNIQUE KEY option_name(option_name),KEY autoload(autoload)) ENGINE=InnoDB COLLATE=utf8mb4_unicode_520_ci; CREATE USER 'adbm'@'127.0.0.1' IDENTIFIED BY '${password}'; GRANT SELECT,INSERT,UPDATE,DELETE ON adb_minimum.${table} TO 'adbm'@'127.0.0.1';`);
         vars.QUALIFICATION_PASSWORD=password;
@@ -176,7 +195,8 @@ async function main() {
       command(['rm','--volumes',cid]);
     }
     for(const row of rows){const [digest,file]=row.split('  ');requireFact(hash(readFileSync(source+'/'+file))===digest,'parent source readback');}
-    process.stdout.write('Minimum trusted-lab functional body passed; independent_loaded_object_attestation=false mapping_consistency=not-established runtime_grant=false production_ready=false\n');
-  } finally {cleanup(owner,stage);}
+    process.stdout.write((auditOnly?'Minimum audit-only completed; qualification_body_executed=false application_fixtures_created=false; ':'Minimum trusted-lab functional body passed; ')+'independent_loaded_object_attestation=false mapping_consistency=not-established runtime_grant=false production_ready=false\n');
+  } catch(error) {primaryFailure=error;throw error;}
+  finally {try{cleanup(owner,stage,auditOnly);}catch(error){if(primaryFailure)process.stderr.write('Minimum cleanup also refused; original failure preserved.\n');else throw error;}}
 }
 if(process.argv[1]===fileURLToPath(import.meta.url))main().catch(error=>{const reason=typeof error.minimumReason==='string'&&/^[A-Za-z0-9 /-]{1,100}$/.test(error.minimumReason)?error.minimumReason:'unclassified-host-or-child-failure';process.stderr.write('Fixed minimum lab refused: '+reason+'; owned cleanup required if recovery failed.\n');process.exitCode=1;});

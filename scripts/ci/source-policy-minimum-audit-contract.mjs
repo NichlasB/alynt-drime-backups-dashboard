@@ -1,0 +1,26 @@
+// Pure diagnostic DATA contracts. No engine, source, SQL or native execution.
+export const AUDIT_WORKFLOW='NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master';
+const stage='(source-audit|ambient|escape|positive|noop-stale|update|race|duplicate|transform-reentry|lock|post-change|errno)';
+const phase='(runtime|core-pins|core-load|owned-load|cache|profile|image|native)';
+export function failureEvidence(raw) {
+  if(typeof raw!=='string'||Buffer.byteLength(raw)>4608)return null;
+  const legacy=new RegExp('^ADBMF1\\|'+stage+'\\|'+phase+'\\|([0-9]{1,5})\\|([0-9])\\n(?![\\s\\S])').exec(raw);
+  if(legacy)return {stage:legacy[1],phase:legacy[2],checks:Number(legacy[3]),groups:Number(legacy[4])};
+  const match=new RegExp('^ADBMF2\\|'+stage+'\\|'+phase+'\\|([0-9]{1,5})\\|([0-9])\\|([a-f0-9]{64})\\|(RuntimeException|Error|TypeError|ValueError|ParseError|ArgumentCountError|ReflectionException|other)\\|([0-9]{1,5})\\|(none|worker|core|other)\\|([0-9]{1,6})\\|([01u]{7})\\|(-|!|[A-Za-z0-9_ ;]{1,4159})\\n(?![\\s\\S])').exec(raw);
+  if(!match)return null;
+  const [,s,p,checks,groups,assertion,exception,severity,source,line,facts,inventory]=match;
+  const diag=source==='none'?Number(severity)===0&&Number(line)===0:
+    [1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384].includes(Number(severity))&&Number(line)>0;
+  const names=['-','!'].includes(inventory)?null:inventory.split(';');
+  if(!diag||(!names&&facts!=='uuuuuuu')||(names&&(names.length>64||names.some(n=>! /^[A-Za-z0-9_ ]{1,64}$/.test(n))||JSON.stringify([...new Set(names)].sort())!==JSON.stringify(names))))return null;
+  return {stage:s,phase:p,checks:Number(checks),groups:Number(groups),assertion,exception,
+    diagnostic:source==='none'?null:{severity:Number(severity),source,line:Number(line)},
+    inventory:names?{names,php_root:facts[0],mysqli_root:facts[1],no_loaded_ini:facts[2],no_scanned_ini:facts[3],no_prepend:facts[4],no_append:facts[5],report_off:facts[6]}:inventory==='!'?{status:'invalid'}:null};
+}
+export function executionPhases(scope,argument,workflow) {
+  if(scope===undefined&&argument===undefined&&workflow!==AUDIT_WORKFLOW)return ['audit','proof'];
+  return scope==='audit-only-v1'&&argument==='--audit-only'&&workflow===AUDIT_WORKFLOW?['audit']:null;
+}
+export function releaseIssues(role,row) {
+  return [row.oom?role+'-oom':null,row.running?role+'-still-running':null,row.exit!==0?role+'-nonzero-exit':null].filter(Boolean);
+}

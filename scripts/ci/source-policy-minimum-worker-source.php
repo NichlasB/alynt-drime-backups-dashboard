@@ -40,10 +40,20 @@ function adbm_source_rows() {
  * @return string Inventory hash.
  */
 function adbm_modules() {
-	adbb_check( PHP_BINARY === '/usr/local/bin/php' && hash_file( 'sha256', PHP_BINARY ) === '51810786a5d7ab1e43e7d43077493d7dfced717cc81fc08270cde58b32731d29', 'selected static PHP root readback, not loaded-object attestation' );
-	adbb_check( hash_file( 'sha256', '/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mysqli.so' ) === 'aa91cdc28133fac497aade6a658e83c219fcbbbfb809069969dd32c749a8657e', 'selected static mysqli root readback' );
 	$names = get_loaded_extensions();
 	sort( $names, SORT_STRING );
+	// Observe before the first image assertion; this DATA cannot admit the worker.
+	$GLOBALS['adbm_inventory']             = array(
+		'names' => $names,
+		'facts' => 'uu' . ( false === php_ini_loaded_file() ? '1' : '0' ) . ( ! php_ini_scanned_files() ? '1' : '0' )
+			. ( '' === ini_get( 'auto_prepend_file' ) ? '1' : '0' ) . ( '' === ini_get( 'auto_append_file' ) ? '1' : '0' ) . ( 0 === ( new mysqli_driver() )->report_mode ? '1' : '0' ),
+	);
+	$php_root                              = PHP_BINARY === '/usr/local/bin/php' && hash_file( 'sha256', PHP_BINARY ) === '51810786a5d7ab1e43e7d43077493d7dfced717cc81fc08270cde58b32731d29';
+	$GLOBALS['adbm_inventory']['facts'][0] = $php_root ? '1' : '0';
+	adbb_check( $php_root, 'selected static PHP root readback, not loaded-object attestation' );
+	$mysqli_root                           = hash_file( 'sha256', '/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mysqli.so' ) === 'aa91cdc28133fac497aade6a658e83c219fcbbbfb809069969dd32c749a8657e';
+	$GLOBALS['adbm_inventory']['facts'][1] = $mysqli_root ? '1' : '0';
+	adbb_check( $mysqli_root, 'selected static mysqli root readback' );
 	adbb_check( count( $names ) <= 64 && false === php_ini_loaded_file() && ! php_ini_scanned_files(), 'no donor or host INI' );
 	foreach ( $names as$name ) {
 		adbb_check( 1 === preg_match( '/\A[A-Za-z0-9_ ]{1,64}\z/', $name ), 'bounded module identity' );
