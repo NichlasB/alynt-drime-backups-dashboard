@@ -1,5 +1,18 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current campaign gate: [minimum-lab genuine-core collation decision](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md).
+The private lab raw-identity correction passes exact-head CI; native attempt
+41240099125 reaches all eight setup steps/twelve credits then refuses combined
+session/schema validation. Pinned core6.0 source shows empty DB_COLLATE selects
+utf8mb4_unicode_ci for this raw server identity, conflicting with the unchanged
+_unicode_520_ci connection guard. Native individual fields are not exported.
+Owned removal/recovery completes, but failed worker exit/full qualification
+remain unresolved. The campaign stops at its explicit preserve-acceptance
+boundary: 0/10 completed milestones, 4/10 native attempts, no fifth attempt or
+collation relaxation. Preferred next approval is the exact lab-only helper-
+derived connection-collation revision, keeping utf8mb4 charsets, the unchanged
+_unicode_520_ci physical schema, bindings/budgets and production wiring disabled.
+
 Latest repository-only foundation: [genuine-core transport tuple compatibility](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#repository-only-genuine-core-transport-tuple-compatibility-foundation--2026-10-31)
 repairs the pinned 6.0 string-port versus validated integer-frame mismatch;
 separate inspection of pinned 7.1.3 confirms its integer-port contract remains

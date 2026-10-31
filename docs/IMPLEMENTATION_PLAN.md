@@ -1,5 +1,38 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Campaign stopped at genuine-core collation acceptance decision — 2026-10-31
+
+Four native attempts and three bounded diagnostic/repair cycles advance the
+transport/server blocker to all eight bootstrap steps / twelve credits. Exact
+lab wire-identity repair `b16d70e` passes ordinary CI 41239966226. Native
+41240099125 then refuses combined session/schema validation; zero groups,
+owner/context closed, external owned cleanup/removal and recovery completed.
+Failed worker exit keeps strict functional release incomplete. No unrelated
+site/application state or production wiring changed.
+
+Pinned core6.0 source establishes an empty-collation profile mismatch:
+raw server identity leads db_version to 5.5.5, so genuine helper selection is
+utf8mb4_unicode_ci while the current guard requires utf8mb4_unicode_520_ci.
+Native progress confirms the later refusal point, not every individual row
+value or that no other blocker remains. Preserve the strict guard for now.
+
+Implementation-plan progress: concrete genuine-core compatibility/test-fidelity
+defects are isolated and the raw identity corrected, but milestone 1 is still
+blocked; **0/10 campaign milestones completed**, attempts **4/10**. Repairs,
+diagnostics and evidence commits are not counted as product milestones. This
+is the campaign's acceptance-criteria decision boundary, not another routine
+per-slice permission request. The remaining in-scope lane cannot close the
+qualification without that decision; do not manufacture maintenance tasks.
+
+Recommended next gated slice: approve the [Minimum-Lab Genuine-Core Collation
+Acceptance Revision and Owned Requalification](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md).
+Preferred policy is only the privately bound lab's helper-derived connection
+collation utf8mb4_unicode_ci, with all session charsets utf8mb4, physical schema
+still utf8mb4_unicode_520_ci, exact source/runtime/server bindings and budgets
+unchanged. No forced configuration, generic collation fallback, support waiver,
+production grant or wiring. The design is prepared; the policy change and a
+fifth native attempt wait for explicit approval beyond preserve-acceptance scope.
+
 ## Autonomous dashboard development-and-qualification campaign — 2026-10-31
 
 User explicitly approves up to ten worthwhile milestones in the current

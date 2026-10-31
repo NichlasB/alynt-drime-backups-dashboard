@@ -1433,3 +1433,50 @@ the concrete raw-identity repair and will either qualify the original body or
 establish the next genuine refusal under unchanged requirements. A conflict
 requiring changed acceptance/support/configuration is a campaign boundary,
 not permission to relax it. No retries/diagnostics inflate milestone counts.
+
+Cycle 3 source `b16d70e72b59e487825b07b36722c8d112634eec` passed
+[ordinary exact-head CI 41239966226](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41239966226):
+PHP 7.4 2,579 / 23,294; PHP 8.3 2,579 / 23,299; Node 72/72 per job,
+no failures/skips; lint/build/structure/manifests/dependency audits passed.
+Final local native-adapter contract check 38 / 375 and Node 72/72 passed too.
+No source/profile pins, DB_CHARSET/DB_COLLATE, collation acceptance or physical
+schema changed. Clean/synced exact source was checked before attempt 4/10,
+[41240099125](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41240099125).
+
+Attempt 4 fresh audit passes; first failure is at 470 checks / zero groups,
+same outer bootstrap assertion. New diagnostic establishes server_observation
+exact; state_before_cleanup connected_unqualified, caught line 153 at b16d70e,
+the combined session/schema check. All eight ordered setup steps and twelve
+credits were consumed. Post-internal cleanup native/context closed=true,
+close_attempted=closed=1, ready=0, current dbh absent, bootstrap handle retained
+as a closed reference. The earlier transport/raw-identity blockers are advanced
+by genuine reachability. No escape byte round trip, active final profile,
+nine-group body, end-source/inventory receipt or closed-proof terminal passes.
+Individual session/table/column/index DATA are not exported, and short-circuit
+validation does not prove schema passed or that collation is the only mismatch.
+
+Cleanup at 20:42:14.090 UTC reports only php-nonzero-exit; containers/stage removed.
+No owned fixture-absence, independent all-server session/transaction, log/OOM,
+ownership or physical-removal issue is reported. Always-recovery at 20:42:14.172
+passes with zero issues/no remaining owner resources. Artifact API count=0.
+Owned removal is established; strict functional release remains false because
+the PHP worker refused. No resource is reused and no fifth attempt runs.
+
+Campaign accounting: 4/10 native attempts, three diagnostic/repair cycles for
+the original pre-probe bootstrap blocker; milestone 1 remains unqualified,
+0/10 completed milestones. Source fixes, failed attempts, cleanup and evidence
+commits do not manufacture completion credit. Existing application/site state,
+LocalWP/live/client/Drime, production wiring, auth/grants/activation/rollback,
+schedules, release/package/tag/deploy and sibling repos stay untouched.
+
+The [prepared collation decision](SOURCE_POLICY_MINIMUM_COLLATION_COMPATIBILITY_DECISION.md)
+records the pinned-source derivation, native proof limits and exact preferred
+policy. Current acceptance still requires _unicode_520_ci. Resolving the genuine
+empty-collation conflict requires an explicit acceptance revision, excluded by
+the campaign's preserve-acceptance rule. Stop here at that real boundary, not
+for a routine design/commit/proof confirmation. Recommended next gated slice:
+Minimum-Lab Genuine-Core Collation Acceptance Revision and Owned Requalification.
+Accept only the exact privately bound lab helper-derived connection collation
+utf8mb4_unicode_ci; retain utf8mb4 charsets, the physical _unicode_520_ci schema,
+source/runtime/server bindings, query/resource/cleanup guards and closed
+production wiring. Do not force configuration or weaken unrelated profiles.
