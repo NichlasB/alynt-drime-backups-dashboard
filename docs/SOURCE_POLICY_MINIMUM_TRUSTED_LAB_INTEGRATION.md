@@ -1,12 +1,11 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: the approved fixed-image module repair passed ordinary
-CI and [fresh held audit in the single new full attempt](#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31).
-Native ambient setup then threw `Error`, with zero completed qualification
-groups. Owned schema/account/container/stage cleanup and recovery completed;
-failed PHP exit keeps strict release incomplete. Read-only pinned-source
-inspection found the constructor-bypassed ambient driver-selection defect.
-No further repair/retry, production grant/wiring, support waiver or release.
+Current disposition: after [fresh held audit and ambient refusal](#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31),
+the new safe-local batch implements a [repository-only ambient constructor
+composition foundation](#repository-only-ambient-constructor-composition-foundation--2026-10-31).
+It does not authorize or perform another native attempt. Isolated stand-ins are
+not genuine constructor/database/release proof. Production grants/wiring,
+support waivers, packaging/release and physical qualification remain gated.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -757,3 +756,68 @@ isolated regressions, local QA and successful exact-head ordinary CI, then fresh
 audit before one newly approved owned fixture/body attempt. The present one-
 attempt authority is consumed; no repair, fixture retry, production grant,
 wiring or release waiver follows automatically.
+
+## Repository-only ambient constructor composition foundation — 2026-10-31
+
+The user's new autonomous safe-local batch authorizes a bounded R2 repository-
+only repair from clean/synced restore baseline
+`4f27ecd01e9d960ce52e1b74d8f3059a657d7fae`. Ordinary exact-head baseline CI
+41231784007 was reverified successful before work. Scope is dormant harness
+composition, isolated stand-in regressions, local QA, commit/push and ordinary
+CI; this does not renew the consumed R3 native/fixture authority. No actual
+WordPress/core loading, authentication, SQL, storage/schema/account fixture,
+Docker/manual lab dispatch, LocalWP/live/client/Drime operation, credential/
+permission change, production wiring or release is performed. Uploader/toolkit
+remain read-only. No installed-site profile or Novamira operation applies.
+
+The exact public core constructor was inspected read-only and reverified against
+the unchanged `wp-db.php` SHA256 pin before implementation. It selects mysqli,
+binds its own credentials and calls `db_connect()` itself. The harness now
+retains the allocated ambient instance and its global reference **before**
+invoking that genuine public constructor exactly once with the fixed owned
+frame. The existing ready/handle check follows; the separate manual
+`db_connect(false)` call and direct credential binding loop are removed.
+This avoids a duplicate connection and lets existing finally cleanup retain
+access if initialization fails after acquiring a handle. No private driver,
+ready, handle or qualification flag is injected, and no constructor behavior
+is emulated in the real worker.
+
+Only the ambient composition block changes. The fresh audit return and frozen
+source/owned-credential guard still precede it. Single ambient connection count,
+mode OFF, actual native/reflection/source/image/module checks, nine-group body,
+all budgets, fail-closed worker/parent cleanup, workflows and production classes
+are unchanged. Invoking this source with genuine core/database remains a future
+separately approved manual operation, not an ordinary CI task.
+
+Four focused Node/PHP `-n` tests execute the actual composition and existing
+ambient finally excerpts against explicitly named **in-memory stand-ins**.
+They load no WordPress or native driver, and make no SQL/network calls. The
+original block was red with zero constructor calls and one invalid modeled
+connection attempt; repaired positive composition requires exactly one
+constructor and one constructor-owned modeled connection. Before/after-
+initialization errors and not-ready/no-handle results remain refused; a
+partially initialized instance remains owned and is closed by the actual
+cleanup excerpt. Three in-memory semantic controls are assertion-killed:
+omitted constructor, repeated connection and omitted readiness/handle guard.
+These are composition/control-flow tests, not genuine authentication,
+physical connection accounting, WordPress behavior or transaction/release proof.
+
+At batch start/end the owning implementation plan is compared against this
+work. This is one coherent task, not separate implementation/test/docs tasks.
+The next meaningful plan step is fresh genuine qualification with owned
+schema/account/rows and exact cleanup, which crosses the batch's database/
+native boundary. Further maintenance-only work or release preparation is not
+justified to reach the numerical target. Local/publication evidence follows;
+the batch must stop at that gate once this repository-only task is complete.
+
+Local pre-publication validation: PHP 8.5.1 full isolated suite 2,472 tests /
+23,108 assertions, no failures and two existing Sodium environment skips;
+Node 60/60 passed without failures/skips, including the four new composition/
+cleanup tests and their three in-memory assertion-killed controls. Full PHPCS,
+build, structure, strict Composer validation, Composer audit, npm moderate audit
+and whitespace checks passed; zero reported dependency advisories/vulnerabilities.
+Final source review found only the intended ambient composition changed:
+controller/workflows, runtime classes, pins, budgets, native body assertions,
+cleanup implementation, assets, dependencies, version/schema and production
+wiring remain unchanged. These checks do not refresh genuine native evidence
+or whole-plugin release readiness. Exact-head publication CI follows.

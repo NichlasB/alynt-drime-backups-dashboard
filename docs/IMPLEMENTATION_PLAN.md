@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Safe-local batch: ambient constructor composition foundation — 2026-10-31
+
+The new autonomous safe-local batch starts at clean/synced `4f27ecd` (ordinary
+CI 41231784007 successful). Its first worthwhile repository-only task advances
+the known ambient-construction blocker: [invoke genuine core initialization
+once while retaining cleanup ownership](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#repository-only-ambient-constructor-composition-foundation--2026-10-31).
+Only dormant harness source, isolated stand-in tests and owning records change.
+No pinned-core/candidate-runtime loading, native workflow dispatch, SQL, fixture/schema/
+account creation, site operation, production wiring or release is authorized
+or executed by this batch. The prior one-attempt authority remains consumed.
+
+Implementation-plan progress: this repository-only foundation advances the
+constructor defect, not physical qualification. After its validation,
+commit/push and exact-head ordinary CI, the next meaningful step is the gated
+Fresh Trusted Minimum-Lab Qualification / Owned Cleanup Proof of Genuine
+Ambient Core Initialization. Do not manufacture seven cleanup/docs tasks to
+reach eight or begin further implementation before this physical evidence.
+One completed task includes its tests, validation and evidence closeout; those
+activities are not separate product tasks.
+
 ## Minimum profile: module repair passed fresh audit; ambient construction blocked — 2026-10-31
 
 Repair `dd44a88` passed [ordinary exact-head CI 41231399060](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41231399060).

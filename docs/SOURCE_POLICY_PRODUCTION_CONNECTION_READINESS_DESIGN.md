@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Latest repository-only progress: the safe-local batch implements the
+[ambient constructor composition foundation](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#repository-only-ambient-constructor-composition-foundation--2026-10-31).
+The dormant harness invokes genuine initialization once, retaining ownership
+for partial-failure cleanup rather than directly binding credentials or
+issuing another connect. Validation uses isolated stand-ins only; no new native
+attempt, SQL, fixture creation, authentication or production wiring occurs.
+The prior physical refusal remains historical evidence. Fresh trusted-lab
+qualification/owned cleanup is the next approval gate, not seven maintenance
+tasks or a release-readiness claim.
+
 Latest qualification outcome: [fixed-module attempt 41231529126](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31)
 passed fresh held audit after CI-green repair `dd44a88`, then threw `Error` in
 native ambient setup at counter 458 / zero groups. No failing call was exported.

@@ -230,16 +230,10 @@ try {
 	$stage             = 'ambient';
 	$started           = hrtime( true );
 	$ambient           = ( new ReflectionClass( 'wpdb' ) )->newInstanceWithoutConstructor();
-	foreach ( array(
-		'dbuser'     => 'adbm',
-		'dbpassword' => $frame['password'],
-		'dbname'     => 'adb_minimum',
-		'dbhost'     => $frame['db_host'],
-	) as $key => $value ) {
-		adbb_bind( $ambient, $key, $value );
-	}
-	$wpdb = $ambient;
-	adbb_check( true === $ambient->db_connect( false ) && true === $ambient->ready && $ambient->dbh instanceof mysqli, 'genuine core creates ambient handle' );
+	$wpdb              = $ambient;
+	// Retain the owned instance for finally cleanup even if genuine initialization throws.
+	$ambient->__construct( $frame['user'], $frame['password'], $frame['database'], $frame['db_host'] );
+	adbb_check( true === $ambient->ready && $ambient->dbh instanceof mysqli, 'genuine core creates ambient handle' );
 	adbb_check( 0 === ( new mysqli_driver() )->report_mode && '1' === mysqli_get_client_stats()['connect_success'], 'genuine core selected OFF' );
 	$ambient->options = $prefix . 'options';
 	$peer             = $ambient->dbh;
