@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {terminal,imageProfile,containerProfile,selections} from '../../scripts/ci/source-policy-minimum-controller.mjs';
+import {terminal,imageProfile,containerProfile,selections,failureEvidence} from '../../scripts/ci/source-policy-minimum-controller.mjs';
 const run='a'.repeat(32),image='b'.repeat(64),cid='c'.repeat(64),modules='d'.repeat(64);
 const good=`ADBMC1|${run}|${image}|${cid}|1|${modules}|120|9|0|closed|trusted-lab-functional-v1|false|not-established|false|false\n`;
 test('fixed positive terminal and every field tamper are discriminating',()=>{
@@ -30,10 +30,16 @@ test('worker/controller/workflow closure: source-backed prohibitions and actual 
   const root=new URL('../../',import.meta.url),read=path=>readFileSync(new URL(path,root),'utf8');
   const worker=read('scripts/ci/source-policy-minimum-qualification.php'),op=read('scripts/ci/source-policy-minimum-native-operation.php'),controller=read('scripts/ci/source-policy-minimum-controller.mjs'),flow=read('.github/workflows/source-policy-minimum-qualification.yml');
   assert.match(flow,/workflow_dispatch:/);assert.doesNotMatch(flow,/^  (push|pull_request|schedule):/m);
+  assert.ok(flow.indexOf('Admit exact approved job')<flow.indexOf('uses: actions/checkout@'));
+  assert.ok(flow.indexOf('"$EXPECTED_SHA" == "$GITHUB_SHA"')<flow.indexOf('Checkout genuine pinned core'));
   assert.match(flow,/cc101b64012b16d087780657a2b828ccd7794a63/);assert.match(flow,/if: always\(\)/);
   for(const token of ["'7.4.33'",'mysqlnd 7.4.33',"'core'      => '6.0'",'adb0_cases();','genuine owned quote/backslash/NUL/percent/utf8mb4 round trip','20000000000'])assert.ok(worker.includes(token),token);
   assert.doesNotMatch(worker,/json_encode\(|json_decode\(|mysqli_report\(/);
   assert.match(op,/minimum_lab_scope/);assert.doesNotMatch(op,/bind\( \$owner, '(ready|dbh|qualification)'/);
   assert.match(controller,/reconcile\(serverCid\)/);assert.match(controller,/MINIMUM_MODEL===MODEL/);assert.match(controller,/--env-file/);
   assert.doesNotMatch(controller,/--privileged|--network','host|docker.sock:/);
+});
+test('only finite worker failure evidence is exposed, never raw errors or secrets',()=>{
+  assert.deepEqual(failureEvidence('ADBMF1|positive|native|120|1\n'),{stage:'positive',phase:'native',checks:120,groups:1});
+  for(const raw of ['',null,'secret password\n','ADBMF1|unknown|native|120|1\n','ADBMF1|positive|raw-path|120|1\n','ADBMF1|positive|native|100000|1\n','ADBMF1|positive|native|120|10\n','ADBMF1|positive|native|120|1\n\n'])assert.equal(failureEvidence(raw),null);
 });

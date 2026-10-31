@@ -12,7 +12,12 @@ export const selections=Object.freeze({
   server: {ref:'mariadb@sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5', config:'sha256:b5077e20185da2defdc68763c9f87e9ce6c449207f9e8de120dee346b54ce696', volume:'/var/lib/mysql'}
 });
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
-const requireFact=(ok,label)=>{if(!ok)throw Error(label);};
+const requireFact=(ok,label)=>{if(!ok){const error=Error(label);error.minimumReason=label;throw error;}};
+export function failureEvidence(raw) {
+  if(typeof raw!=='string'||raw.length>128)return null;
+  const match=/^ADBMF1\|(source-audit|ambient|escape|positive|noop-stale|update|race|duplicate|transform-reentry|lock|post-change|errno)\|(runtime|core-pins|core-load|owned-load|cache|profile|image|native)\|([0-9]{1,5})\|([0-9])\n(?![\s\S])/.exec(raw);
+  return match?{stage:match[1],phase:match[2],checks:Number(match[3]),groups:Number(match[4])}:null;
+}
 export function terminal(wire,run,image,cid) {
   return typeof wire==='string' && typeof run==='string' && typeof image==='string' && typeof cid==='string' && /^[a-f0-9]{32}$/.test(run) && /^[a-f0-9]{64}$/.test(image) && /^[a-f0-9]{64}$/.test(cid)
     && new RegExp('^ADBMC1\\|'+run+'\\|'+image+'\\|'+cid+'\\|1\\|[a-f0-9]{64}\\|[1-9][0-9]{0,4}\\|9\\|0\\|closed\\|trusted-lab-functional-v1\\|false\\|not-established\\|false\\|false\\n(?![\\s\\S])').test(wire);
@@ -97,7 +102,7 @@ async function worker(cid,run,image,serverCid,proof,modules=null) {
     }
   });
   child.stderr.on('data',bytes=>{err+=bytes.toString('utf8');if(Buffer.byteLength(err)>16384){failure=Error('worker diagnostic bound');child.kill('SIGKILL');}});
-  await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',(code,signal)=>{clearTimeout(deadline);if(failure||signal||code!==0||err|| (proof&&!accepted))reject(failure??Error('worker refused; diagnostic-sha256='+hash(err)));else resolve();});});
+  await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',(code,signal)=>{clearTimeout(deadline);if(failure||signal||code!==0||err|| (proof&&!accepted)){const evidence=failureEvidence(err);if(evidence)process.stderr.write(JSON.stringify({minimum_worker_failure:evidence})+'\n');reject(failure??Error('worker refused; diagnostic-sha256='+hash(err)));}else resolve();});});
   const row=inspect(cid);requireFact(!row.running&&!row.oom&&row.exit===0,'worker release state');
   if(proof)reconcile(serverCid);
   return out;
@@ -170,4 +175,4 @@ async function main() {
     process.stdout.write('Minimum trusted-lab functional body passed; independent_loaded_object_attestation=false mapping_consistency=not-established runtime_grant=false production_ready=false\n');
   } finally {cleanup(owner,stage);}
 }
-if(process.argv[1]===fileURLToPath(import.meta.url))main().catch(()=>{process.stderr.write('Fixed minimum lab refused; owned cleanup required if recovery failed.\n');process.exitCode=1;});
+if(process.argv[1]===fileURLToPath(import.meta.url))main().catch(error=>{const reason=typeof error.minimumReason==='string'&&/^[A-Za-z0-9 /-]{1,100}$/.test(error.minimumReason)?error.minimumReason:'unclassified-host-or-child-failure';process.stderr.write('Fixed minimum lab refused: '+reason+'; owned cleanup required if recovery failed.\n');process.exitCode=1;});

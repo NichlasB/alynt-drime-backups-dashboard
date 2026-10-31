@@ -72,7 +72,7 @@ and frame changes, active facts and post-close refusal. Initial server mismatch
 must issue zero metadata commands; late binding changes stop before the next
 command. The existing isolated driver gained only one fixed loopback answer.
 
-Six Node tests exercise positive terminals/image/resource profiles, field-by-
+Seven Node tests exercise positive terminals/image/resource profiles, field-by-
 field mutation/refusal and source-backed manual-workflow/worker composition.
 These do not simulate an engine into proof of physical topology or cleanup.
 
@@ -95,16 +95,23 @@ coverage or current application connectivity is established by these tests.
 Local PHP 8.5.1 full suite: 2,472 tests / 23,108 assertions, no failures,
 two existing local Sodium environment skips. The earlier focused cohort passed
 669 tests / 14,623 assertions with no skips; ten further negative evidence cases
-are included in the final full-suite result. Node 29/29 passed without skips,
-including six new supervisor tests. PHPCS, structure (151 runtime / 236 PHP
+are included in the final full-suite result. Node 30/30 passed without skips,
+including seven new supervisor tests. PHPCS, structure (151 runtime / 236 PHP
 support / 229 test files / 226 classes), build, strict Composer manifest,
 Composer audit, npm moderate audit and whitespace checks passed; zero reported
 dependency advisories/vulnerabilities. Version 0.1.77/schema 8, root metadata,
 dependencies, assets and historical worker sources remain unchanged.
 
-Exact-head ordinary publication CI is pending at the implementation commit and
-will be verified before handoff. Native manual workflow remains unrun and not
-dispatched. This validation is not qualification or whole-plugin readiness.
+Implementation `941afe787c41552b6ac0d0a2352fa2eb97941511` was pushed and
+[ordinary exact-head CI 41225016083](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41225016083)
+passed: PHP 7.4 2,472 tests / 23,110 assertions; PHP 8.3 2,472 / 23,115;
+no failures/skips; Node 29/29 per matrix, with configured lint/build/structure/
+manifest/dependency audits passing. A final source review then moved exact-job
+admission before **any** checkout/acquisition and added finite non-secret worker
+failure-stage reporting (Node now 30/30). The correction/evidence head requires
+its own successful exact-head ordinary CI before handoff; it is not covered by
+the earlier run. Native manual workflow remains unrun and not dispatched.
+This validation is not qualification or whole-plugin readiness.
 
 ## Exact next gated slice
 

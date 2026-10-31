@@ -24,6 +24,15 @@ jobs:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
       MINIMUM_MODEL: ${{ inputs.evidence_contract }}
     steps:
+      - name: Admit exact approved job before any checkout or acquisition
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$GITHUB_REPOSITORY" == NichlasB/alynt-drime-backups-dashboard && "$GITHUB_REF" == refs/heads/master ]]
+          [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" && "$MINIMUM_MODEL" == trusted-lab-functional-v1 ]]
+          [[ "$GITHUB_RUN_ID" =~ ^[0-9]+$ && "$GITHUB_RUN_ATTEMPT" =~ ^[0-9]+$ && "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+          [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
+          [[ "$(docker context inspect --format '{{.Endpoints.docker.Host}}')" == unix:///var/run/docker.sock ]]
       - name: Checkout approved source
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -39,4 +48,8 @@ jobs:
         run: node scripts/ci/source-policy-minimum-controller.mjs
       - name: Always recover exact owned resources
         if: always()
-        run: node scripts/ci/source-policy-minimum-controller.mjs --cleanup
+        shell: bash
+        run: |
+          if [[ -f scripts/ci/source-policy-minimum-controller.mjs ]]; then
+            node scripts/ci/source-policy-minimum-controller.mjs --cleanup
+          fi
