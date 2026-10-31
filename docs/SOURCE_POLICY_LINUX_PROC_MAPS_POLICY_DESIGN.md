@@ -177,3 +177,47 @@ validation/commit/push/exact-head ordinary CI, then one manual owned attempt on
 the same ephemeral Linux CI target and exact cleanup. No candidate artifacts/
 execution, site/database operations, elevation or production wiring. This is a
 single operational gate, not another series of detached DATA milestones.
+
+## Approved access-only integration and one audit — 2026-10-31
+
+User approves that exact combined slice at clean/synced restore baseline
+`9eb7ce808c85e770f196a92c5c471271e986353e`. Resolved physical target remains
+`NichlasB/alynt-drime-backups-dashboard`, master, existing manual observer
+workflow, GitHub-hosted `ubuntu-24.04` Linux/x86_64. Publish/validate first;
+dispatch once only at the exact CI-green implementation SHA. Existing host
+Python/tools and one owned harmless child/temporary fixtures only. No candidate
+images/downloads/loading, native database, WordPress/site work, installation,
+elevation, principal/capability/permission changes, release or production wiring.
+Uploader/toolkit stay read-only; no whole-plugin readiness evidence is refreshed.
+
+Implementation adds `read_maps_at`, the fixed EOF/32-KiB/16-call/deadline policy,
+safe partial-walk/denial facts and fixed ADBLHO2 scope fields/exit validation.
+The strict `read_at` and existing parser/diagnostic tests remain unchanged.
+Strict and access wrappers share the same existing kernel-object/hash/post-PID
+checks to avoid divergent guard copies; no candidate receiver/consumer added.
+Two actual audit observations now use only the explicit access wrapper. Child,
+stage ownership/receipts, signaling/cleanup, source/authority and all previous
+resource ceilings remain. Manual workflow changes only access-only labels;
+dispatch/master/head, pinned action, existing tools and always cleanup retained.
+
+New [synthetic walk tests](../tests/support/source_policy_linux_maps_walk_test.py)
+cover chunked positive reads, split lines, exact-cap EOF, cap+1, terminal-EOF
+call accounting, no restart, deadline, IO/permission errors, fixture/PID/device/
+inode/content binding and forbidden candidate/atomic claims. Eleven in-memory
+controls are assertion-killed, no harness errors or disk mutations. Prior ten
+groups/seven controls and four diagnostic groups/four controls remain intact.
+No proc/network/process body runs in these pure/mock checks. Red baseline
+failed because new helpers/contracts were absent. An initial local control
+selector collision was fixed by a distinct new helper variable name; existing
+strict tests and guards were not relaxed. Adjacent PHP: 41 tests / 448
+assertions, no failures/skips. Full local PHP 8.5.1: 2,448 / 23,010, no
+failures, two existing Sodium signing skips. PHPCS 244 files; admin 23/23,
+no failures/skips; structure 149 runtime / 235 PHP support / 228 test files /
+225 classes, build, strict manifest, Composer audit and npm moderate audit
+passed, no tracked generated-asset changes, zero known project dependency
+advisories/vulnerabilities. Whitespace and 185 owning local documentation
+targets passed. Scoped security/error/resource/ownership/cleanup/test-integrity
+review confirms all limits, exact cleanup and non-admission claims preserved;
+protected runtime/manual artifact/pin/dependency and previous pure tests
+unchanged, uploader/toolkit clean/read-only. Publication/exact-head CI and one
+physical audit pending; prior failures are not reinterpreted or rerun.

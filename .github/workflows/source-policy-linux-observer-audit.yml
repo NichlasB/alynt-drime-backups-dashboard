@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       expected_sha:
-        description: Exact approved master commit for one harmless-child observer audit
+        description: Exact approved master commit for one access-only harmless-child audit
         required: true
         type: string
 
@@ -35,7 +35,7 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
-      - name: One bounded existing-tool observer attempt
+      - name: One bounded existing-tool access-feasibility attempt
         shell: bash
         run: timeout --signal=TERM --kill-after=5s 45s /usr/bin/python3 -I -S -B scripts/ci/source-policy-linux-observer-audit.py --audit
       - name: Always reconcile exact owned stage and harmless child

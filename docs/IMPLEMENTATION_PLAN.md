@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Linux minimum lab: approved access-only integration and one audit — 2026-10-31
+
+At clean/synced baseline `9eb7ce808c85e770f196a92c5c471271e986353e`, user
+approves the [bounded access-only integration and one owned audit](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md#approved-access-only-integration-and-one-audit--2026-10-31).
+Dedicated maps helper, preserved strict reader/tests and shared object guards;
+ADBLHO2 explicitly non-atomic and not candidate-qualified. Existing byte/time/
+row/file/authority/cleanup bounds unchanged; new 16-call EOF ceiling. Synthetic
+adjacent checks 41 / 448, no failures/skips; full local PHP 2,448 / 23,010,
+no failures, two existing Sodium skips. Lint/admin/structure/build/manifest/
+audits/185 local links passed. Publication/ordinary exact-head CI pending
+before one approved manual Linux attempt. No physical run yet,
+candidate execution, site/database work, new privilege or production wiring.
+
 ## Linux minimum lab: approved maps completeness/consistency policy design — 2026-10-31
 
 At clean/synced baseline `1aa0b7b`, user approves the [repository-only policy design](SOURCE_POLICY_LINUX_PROC_MAPS_POLICY_DESIGN.md).

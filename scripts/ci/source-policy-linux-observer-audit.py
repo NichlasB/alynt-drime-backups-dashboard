@@ -44,9 +44,17 @@ class ProcReadIncomplete(Refusal):
                       'payload_limit': limit, 'eof_probe_bytes': probe_bytes}
 
 
+class MapsWalkRefusal(Refusal):
+    def __init__(self, code, facts):
+        super().__init__(code)
+        self.facts = facts
+
+
 def proc_read_details(error):
     if isinstance(error, ProcReadIncomplete):
         return {'proc_read': error.facts}
+    if isinstance(error, MapsWalkRefusal):
+        return {'maps_walk': error.facts}
     return {}
 
 
@@ -141,6 +149,18 @@ def exit_code(status, clean, unchanged):
     return 0 if status in ('available', 'unavailable') and clean is True and unchanged is True else 1
 
 
+def access_report_fields():
+    return {'format':'ADBLHO2','evidence_scope':'existing-authority-access-feasibility',
+            'read_policy':'bounded-eof-stream-v1','mapping_consistency':'not-established',
+            'candidate_qualification':'not-established'}
+
+
+def access_exit_code(report):
+    if any(report.get(key) != value for key, value in access_report_fields().items()): return 1
+    return exit_code(report.get('status'), report.get('cleanup') == 'confirmed',
+        report.get('source_unchanged') is True and report.get('authority_unchanged') is True)
+
+
 def admit(env):
     need(env.get('GITHUB_ACTIONS') == 'true' and env.get('GITHUB_EVENT_NAME') == 'workflow_dispatch'
          and env.get('GITHUB_REPOSITORY') == 'NichlasB/alynt-drime-backups-dashboard'
@@ -166,6 +186,30 @@ def read_at(directory, name, limit):
         return data
     finally:
         os.close(fd)
+
+
+def read_maps_at(directory, deadline):
+    """One EOF-complete bounded walk, explicitly not an atomic maps snapshot."""
+    payload = bytearray(); fd = None
+    facts = {'payload_bytes':0,'read_calls':0,'eof':False}
+    try:
+        fd = os.open('maps', os.O_RDONLY | os.O_CLOEXEC, dir_fd=directory)
+        for _ in range(16):
+            if not time.monotonic() < deadline: raise MapsWalkRefusal('maps-walk-deadline', facts)
+            facts['read_calls'] += 1
+            chunk = os.read(fd, 32768 - len(payload) + 1)
+            if not chunk:
+                facts['eof'] = True
+                return bytes(payload), facts
+            payload.extend(chunk); facts['payload_bytes'] = len(payload)
+            if not len(payload) <= 32768: raise MapsWalkRefusal('maps-walk-byte-bound', facts)
+        raise MapsWalkRefusal('maps-walk-call-bound', facts)
+    except PermissionError as error:
+        raise AccessDenied('maps-read', error.errno, {'maps_complete':False,'maps_walk':facts}) from None
+    except OSError:
+        raise MapsWalkRefusal('maps-walk-io', facts) from None
+    finally:
+        if fd is not None: os.close(fd)
 
 
 def own_status():
@@ -273,6 +317,18 @@ def snapshot(proc, pid, identity, fixture, deadline):
     need(parse_stat(read_at(proc, 'stat', 4096), pid) == identity, 'process-start-changed')
     try: rows = parse_maps(read_at(proc, 'maps', 32768))
     except PermissionError as error: raise AccessDenied('maps-read', error.errno, {}) from None
+    return observe_mapped_files(proc, pid, identity, fixture, deadline, rows)
+
+
+def access_snapshot(proc, pid, identity, fixture, deadline):
+    need(parse_stat(read_at(proc, 'stat', 4096), pid) == identity, 'process-start-changed')
+    data, facts = read_maps_at(proc, deadline)
+    result = observe_mapped_files(proc, pid, identity, fixture, deadline, parse_maps(data), facts)
+    result['maps_walk'] = facts
+    return result
+
+
+def observe_mapped_files(proc, pid, identity, fixture, deadline, rows, walk=None):
     unique = {}
     for address, key, executable in rows: unique.setdefault(key, address)
     need(fixture in unique and len(unique) <= 64, 'fixture-map-missing')
@@ -281,9 +337,11 @@ def snapshot(proc, pid, identity, fixture, deadline):
     for key in [fixture] + sorted(key for key in unique if key != fixture):
         try: fd = os.open('map_files/' + unique[key], os.O_RDONLY | os.O_CLOEXEC, dir_fd=proc)
         except PermissionError as error:
+            facts = {'maps_complete':True,'mapping_rows':len(rows),'unique_files':len(unique),
+                     'files_hashed':len(records),'fixture_selected':key == fixture}
+            if walk is not None: facts['maps_walk'] = walk
             raise AccessDenied('fixture-mapfile-open' if key == fixture else 'library-mapfile-open', error.errno,
-                {'maps_complete':True,'mapping_rows':len(rows),'unique_files':len(unique),
-                 'files_hashed':len(records),'fixture_selected':key == fixture}) from None
+                facts) from None
         try:
             info = os.fstat(fd)
             need((os.major(info.st_dev), os.minor(info.st_dev), info.st_ino) == key, 'mapped-object-mismatch')
@@ -298,9 +356,10 @@ def snapshot(proc, pid, identity, fixture, deadline):
 
 
 def audit(head, image, root, owner):
-    report = {'format':'ADBLHO1','head':head,'source_image':image,'status':'refused',
+    report = {'head':head,'source_image':image,'status':'refused',
         'candidate_images':0,'candidate_execution':False,'database_operations':False,
-        'privilege_changes':False,'candidate_qualification':'not-established','owned_stage':root.name}
+        'privilege_changes':False,'owned_stage':root.name,'run_id':owner['run_id'],'attempt':owner['attempt']}
+    report.update(access_report_fields())
     process = None; proc = None; created = False; ready = False; reaped = False
     deadline = time.monotonic() + 25; phase = 'stage-create'
     try:
@@ -326,11 +385,11 @@ def audit(head, image, root, owner):
         need(readable and os.read(process.stdout.fileno(),16) == b'READY\n','child-ready'); ready = True
         report['child_authority'] = parse_status(read_at(proc,'status',16384))
         need(report['child_authority'] == before, 'child-authority-changed')
-        phase = 'mapped-file-observation'
-        first = snapshot(proc,process.pid,identity,fixture,deadline); report['startup'] = first
-        second = snapshot(proc,process.pid,identity,fixture,deadline); report['final'] = second
+        phase = 'access-mapped-file-observation'
+        first = access_snapshot(proc,process.pid,identity,fixture,deadline); report['startup'] = first
+        second = access_snapshot(proc,process.pid,identity,fixture,deadline); report['final'] = second
         need(first['cohort_sha256'] == second['cohort_sha256'], 'mapped-cohort-changed')
-        report['status'] = 'available'; report['reason'] = 'bounded-kernel-file-reads-complete'
+        report['status'] = 'available'; report['reason'] = 'bounded-access-file-reads-complete'
     except PermissionError as error:
         report.update(status='unavailable',reason='existing-authority-denied',phase=phase,errno=error.errno)
         report['operation'] = getattr(error,'operation','other-owned-operation')
@@ -386,17 +445,17 @@ def main():
         image = source_identity(); root, owner = stage_context(head,image)
         if sys.argv[1] == '--cleanup':
             remove_stage(root,owner)
-            report = {'format':'ADBLHO1-cleanup','head':head,'source_image':image,'owned_stage_absent':not root.exists()}
+            report = dict(access_report_fields(), format='ADBLHO2-cleanup',head=head,source_image=image,
+                run_id=owner['run_id'],attempt=owner['attempt'],owned_stage_absent=not root.exists())
             print(json.dumps(report,sort_keys=True)); return 0
         def interrupted(signum, frame): raise Refusal('audit-interrupted')
         signal.signal(signal.SIGTERM,interrupted); signal.signal(signal.SIGINT,interrupted)
         report = audit(head,image,root,owner)
         print(json.dumps(report,sort_keys=True))
-        return exit_code(report['status'],report['cleanup']=='confirmed',report['source_unchanged'])
+        return access_exit_code(report)
     except Exception as error:
-        report = {'format':'ADBLHO1','head':head,'status':'refused',
-            'reason':str(error) if isinstance(error,Refusal) else 'audit-supervisor-preflight-or-cleanup-failed',
-            'candidate_qualification':'not-established'}
+        report = dict(access_report_fields(),head=head,status='refused',
+            reason=str(error) if isinstance(error,Refusal) else 'audit-supervisor-preflight-or-cleanup-failed')
         report.update(proc_read_details(error))
         print(json.dumps(report))
         return 1

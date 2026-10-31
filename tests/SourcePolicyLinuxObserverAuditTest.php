@@ -3,6 +3,13 @@ use PHPUnit\Framework\TestCase;
 
 /** Pure parser/source gates only; never an owned Linux observer attempt. */
 final class SourcePolicyLinuxObserverAuditTest extends TestCase {
+	public function test_bounded_maps_access_walk_is_isolated_and_not_candidate_admission() {
+		$python=getenv('ADB_STATIC_ANALYSIS_PYTHON')?:'/usr/bin/python3';$this->assertFileExists($python);
+		$process=proc_open(array($python,'-I','-S','-B',__DIR__.'/support/source_policy_linux_maps_walk_test.py'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);
+		$this->assertIsResource($process);fclose($pipes[0]);$out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
+		$this->assertSame(0,proc_close($process),substr($err,0,3000));$this->assertSame('',$err);
+		$this->assertSame(array('tests'=>8,'failures'=>0,'errors'=>0),json_decode($out,true));
+	}
 	public function test_proc_read_diagnostics_are_synthetic_and_preserve_refusal() {
 		$python=getenv('ADB_STATIC_ANALYSIS_PYTHON')?:'/usr/bin/python3';$this->assertFileExists($python);
 		$process=proc_open(array($python,'-I','-S','-B',__DIR__.'/support/source_policy_linux_observer_diagnostics_test.py'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);
