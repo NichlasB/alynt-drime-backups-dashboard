@@ -1,5 +1,17 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Latest fresh qualification: [attempt 41232908042](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31)
+at CI-green `ac2ac9f` passed fresh audit, genuine ambient initialization,
+single-connect/OFF, restricted privilege, prepare and callback checks. It then
+failed the compound `actual ambient-bound bootstrap` assertion at counter 467 /
+zero groups; internal failed predicate/progress is not exported. Owned fixture/
+resource removal and recovery completed, but failed PHP exit keeps strict
+release incomplete. Next gated slice: harness-only bounded bootstrap refusal
+predicate/progress diagnostics and one newly approved qualification/cleanup
+attempt, without runtime-class or guard/budget changes, diagnostic SQL or
+bootstrap re-entry. Full native qualification and production wiring remain
+unestablished. No additional source repair or native retry was authorized.
+
 Latest repository-only progress: the safe-local batch implements the
 [ambient constructor composition foundation](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#repository-only-ambient-constructor-composition-foundation--2026-10-31).
 The dormant harness invokes genuine initialization once, retaining ownership
@@ -10,7 +22,7 @@ The prior physical refusal remains historical evidence. Fresh trusted-lab
 qualification/owned cleanup is the next approval gate, not seven maintenance
 tasks or a release-readiness claim.
 
-Latest qualification outcome: [fixed-module attempt 41231529126](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31)
+Previous qualification outcome: [fixed-module attempt 41231529126](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31)
 passed fresh held audit after CI-green repair `dd44a88`, then threw `Error` in
 native ambient setup at counter 458 / zero groups. No failing call was exported.
 Read-only exact pinned-source inspection found constructor bypass leaves the

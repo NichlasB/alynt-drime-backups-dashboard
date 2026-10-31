@@ -1,11 +1,13 @@
 # Trusted Minimum-Lab Harness and Receiver Integration
 
-Current disposition: after [fresh held audit and ambient refusal](#actual-fixed-module-attempt-ambient-refusal-and-cleanup--2026-10-31),
-the new safe-local batch implements a [repository-only ambient constructor
-composition foundation](#repository-only-ambient-constructor-composition-foundation--2026-10-31).
-It does not authorize or perform another native attempt. Isolated stand-ins are
-not genuine constructor/database/release proof. Production grants/wiring,
-support waivers, packaging/release and physical qualification remain gated.
+Current disposition: after the repository-only constructor foundation, the
+user-approved [fresh native attempt](#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31)
+passed genuine ambient initialization and its prelude checks, then refused at
+the compound owned bootstrap/ready assertion, before any completed groups.
+Owned fixture/resource removal and recovery passed; failed PHP exit keeps
+strict release incomplete. No internal bootstrap cause is exported. Full
+qualification, production grants/wiring, support waivers and release stay
+closed; no source repair or automatic retry follows from this proof.
 
 ## Authority and source-scoped baseline — 2026-10-31
 
@@ -844,3 +846,108 @@ and disabled production wiring. Approval must authorize that one physical
 attempt and exact cleanup; no further source repair, automatic retry, live
 operation or release is implied. This docs-only closeout is separately pushed
 and checked without dispatching the manual lab.
+
+## Fresh genuine ambient initialization attempt and owned bootstrap refusal — 2026-10-31
+
+The user subsequently approves **one** Fresh Trusted Minimum-Lab Qualification /
+Owned Cleanup Proof of Genuine Ambient Core Initialization. This renews only
+the exact fixed ephemeral CI attempt, fresh audit prerequisites, owned
+disposable application schema/account/rows and cleanup (R3); it does not
+authorize additional implementation, acceptance changes, native retry,
+production wiring or release. The prior safe-local batch remains 1/8 completed
+tasks plus this separately approved physical proof. No LocalWP/live/client/
+Drime or existing application state is targeted; no installed-site profile or
+Novamira operation applies. Uploader/toolkit remain read-only.
+
+Read-only preflight verified clean/synced source/remote at restore baseline
+`ac2ac9fe24e1da1e869b5b970d1ff02ef601ac70`, ordinary exact-head CI
+[41232647972](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41232647972)
+successful, unchanged fixed workflow/images/core/source/root/module/resource/
+cleanup contracts, and no full qualification run for that SHA. No source edit
+or new local test was needed before the approved dispatch; prior CI evidence
+is not described as a new test execution here.
+
+Exactly one [full attempt 41232908042](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41232908042)
+ran at that exact SHA. Job 19:10:01–19:10:25 UTC; controller step
+19:10:07–19:10:22. Admission and source/core checkouts passed. Held fresh
+connection-free audit was accepted at 19:10:21.933 UTC, correlated to:
+
+```text
+head=ac2ac9fe24e1da1e869b5b970d1ff02ef601ac70
+source_image=8a21732911485a3f032ddf0a55262d547f2555a8151eb2742e03614be0cdd4a0
+run=176b74b415376e1377f4571e356ee583
+audit_worker_cid=4ef8f014d1e2038398653fa5edefb78a5af07e2e8282ceb7c203c59121951de1
+server_cid=7fea4baa43414bb1d3e7ae81f812d009b97e4894b1a9c4051a7a48c6b6fda9f6
+engine_host_pid=3152 namespace_pid=1
+engine_started=2026-10-31T19:10:21.781795753Z
+```
+
+The accepted audit then exited successfully before parent-owned application
+fixtures were created and proof launched. The native proof emitted at
+19:10:22.249 UTC:
+
+```text
+stage=escape phase=native checks=467 groups=0
+assertion=1aa00c36be301dadbd7ebe59e90bc569df1ee9d0510b2dcf88e632eb3251e04d
+exception=RuntimeException diagnostic=null
+```
+
+The assertion SHA256 maps exactly to **`actual ambient-bound bootstrap`** in
+`source-policy-minimum-native-operation.php`. Counter 467 includes the failed
+assertion evaluation; it is not 467 passed checks or completed native groups.
+All 33 expected candidate-reported module names and seven root/configuration
+facts were retained as true. Evidence remains trusted-lab-functional-v1:
+independent loaded-object attestation false, mapping consistency not established,
+runtime grant and production readiness false.
+
+Source-scoped reachability now establishes fresh successful genuine ambient
+constructor/ready/mysqli-handle assertion, exactly one mysqlnd connection at
+the ambient checkpoint and mode OFF, denied privilege outside the fixture, scoped session-limit setup,
+genuine prepare with no SQL increase and the expected single ambient callback.
+The constructor blocker is therefore advanced by actual native evidence, not
+only stand-in tests. The owner pre-allocation OFF check also preceded the
+failure. No successful owned bootstrap, quote/backslash/NUL/percent/utf8mb4
+round trip, ordered nine-group body, closed-proof terminal or post-body source/
+inventory receipt was recorded. Zero qualification groups completed.
+
+The failed assertion combines one bootstrap invocation with owner readiness.
+The private `bootstrap()` maps internal exceptions to the fixed unavailable
+result and performs fail-closed cleanup. The transcript exposes neither its
+return shape nor the failed initial/source/scope/context/native/setup/schema/
+final-profile predicate, step/credit progress or first internal cause. Thus
+even the owner's allocation/authentication/query progress is not established
+by this assertion alone. Read-only inspection mapped those refusal boundaries;
+no alternative guard was evaluated through new native IO, runtime behavior
+changed, credential/handle/ready state injected or root cause guessed.
+
+Parent cleanup retained `issues=[php-nonzero-exit]`,
+`containers_removed=true`, `stage_removed=true`,
+`strict_release_complete=false`. No independent all-server session/transaction
+reconciliation, owned database/account DROP-and-absence readback, server log,
+OOM, ownership or physical-removal issue was reported. Owned fixtures and
+resources were removed. This does not establish native owner/callback terminal
+qualification or a clean PHP exit. The separate always-recovery passed at
+19:10:22.629 with no remaining owner-labeled containers/stage and no recovery
+issue; it does not retroactively turn strict release or functionality green.
+No artifacts were uploaded (count zero); bounded records remain in run logs.
+Shared image-cache/provider disposal remains trusted. No retry or other native
+attempt was made. All guards/pins/budgets, runtime classes, workflows and
+production wiring remain unchanged; closeout is documentation-only.
+
+Implementation-plan progress: the fresh audit and genuine ambient initialization
+prelude pass, but minimum native qualification remains blocked at owned
+bootstrap. Recommended next gated slice: **Harness-Only Bootstrap Refusal
+Predicate/Progress Diagnostics and One Fresh Trusted Minimum-Lab Qualification /
+Owned Cleanup Attempt**. Retain bounded safe prerequisite/result/progress
+observations around the single existing invocation, using fixed source-owned
+fields/categories only; do not export messages, SQL, credentials, payloads or
+handles. Distinguish pre-invocation facts and retained progress from revocation/
+cleanup-mutated state. Preserve the fixed unavailable contract, runtime classes,
+all admission/resource/cleanup guards and one-invocation/no-reissue behavior;
+no diagnostic SQL, bootstrap re-entry, acceptance relaxation or fake success.
+Require isolated discriminating validation and successful exact-head ordinary
+CI before a single newly approved owned attempt with fresh prerequisites.
+This recommendation requires new approval; present proof authority is consumed.
+Production grants/wiring, support waivers, release and automatic retry remain
+disabled. Whole-plugin readiness rows and the safe-local task count are not
+refreshed by this failed qualification closeout.

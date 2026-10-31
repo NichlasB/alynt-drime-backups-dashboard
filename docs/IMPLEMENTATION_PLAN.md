@@ -1,5 +1,32 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fresh ambient initialization proof: passed prelude, owned bootstrap refused — 2026-10-31
+
+User approved one fresh trusted minimum-lab qualification/owned cleanup proof
+from clean/synced `ac2ac9f`, after ordinary exact-head CI 41232647972 passed.
+[Attempt 41232908042](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41232908042)
+passed held connection-free audit, genuine ambient construction, single-connect/
+OFF, restricted privilege, prepare-with-zero-SQL and ambient callback checks.
+It then failed `actual ambient-bound bootstrap` at counter 467 / zero completed
+qualification groups. That compound assertion exports no internal failed
+predicate, bootstrap return shape or progress, so no root cause is inferred.
+See [actual outcome and limits](SOURCE_POLICY_MINIMUM_TRUSTED_LAB_INTEGRATION.md#fresh-genuine-ambient-initialization-attempt-and-owned-bootstrap-refusal--2026-10-31).
+
+Owned schema/account absence, container/stage removal and always-recovery
+completed. Failed PHP exit keeps strict release incomplete; native owner/
+callback terminal qualification is not established. No source repair, guard/
+budget change, retry, production wiring or site operation occurred in this proof.
+
+Implementation-plan progress: genuine ambient initialization now has fresh
+positive evidence; full minimum native qualification remains blocked at owned
+bootstrap. Recommended next gated slice: Harness-Only Bootstrap Refusal
+Predicate/Progress Diagnostics and One Fresh Trusted Minimum-Lab Qualification /
+Owned Cleanup Attempt. Capture only bounded prerequisite/result/progress DATA
+around one invocation, without changing runtime classes, weakening guards,
+exporting credentials/handles or issuing diagnostic SQL/bootstrap re-entry.
+The current single-attempt authority is consumed; the prior safe-local batch
+remains 1/8 plus this separately approved proof, not another product-task count.
+
 ## Safe-local batch: ambient constructor composition foundation — 2026-10-31
 
 The new autonomous safe-local batch starts at clean/synced `4f27ecd` (ordinary
