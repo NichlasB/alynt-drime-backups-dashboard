@@ -4,7 +4,7 @@ Current resume: [actual diagnostic41342892366](SOURCE_POLICY_LEGACY_UBI_FEASIBIL
 at8166015 establishes layer-0 symlink lib64-to-usr/lib64, not a fully verified
 layer/final-rootfs origin or alias grant. Original refusal and empty real profile
 remain. The next action requires an explicit Candidate-Bound UBI Alias-Aware
-Static Admission Policy Decision; unchanged retries cannot close this policy gap.
+Static Admission Policy Exception; unchanged retries cannot close this policy gap.
 Earlier resume statements below are historical.
 
 Current resume: approved [synthetic-only foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)

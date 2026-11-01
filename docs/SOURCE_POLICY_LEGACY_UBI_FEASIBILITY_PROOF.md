@@ -4,7 +4,7 @@ Current resume: the [campaign diagnostic](#campaign-diagnostic-actual-failed-ent
 identifies layer-0 entry659 as symlink `lib64` to `usr/lib64`. The original
 critical-parent guard still refuses; zero complete layers/diffIDs are verified.
 Primary/always cleanup complete, artifact count0. Next boundary is an explicit
-candidate-bound alias-admission policy decision, not an unchanged retry or a
+candidate-bound alias-admission policy exception, not an unchanged retry or a
 routine guard repair. Earlier resume statements below are historical.
 
 Current resume: [provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
@@ -150,8 +150,13 @@ critical refusal for an acceptance result would be a path-admission policy chang
 not a routine harness correction. The dormant virtual model remains unconsumed
 with an empty real profile; shared reader and runtime acceptance remain unchanged.
 
+The source-scoped policy review is complete under the campaign's existing design
+authority: preserving current criteria means retaining refusal; an additional
+alias-aware accepting path would require an explicit exception. No further
+approval is requested merely to name, plan or review a routine slice.
+
 Recommended next action: **approve a Candidate-Bound UBI Alias-Aware Static
-Admission Policy Decision**, limited to whether a separate static-only path may
+Admission Policy Exception**, authorizing a separate static-only path to
 collect quarantined layer records and resolve this exact candidate's aliases
 after full compressed/diffID verification, while preserving the strict shared
 reader default, all resource/ownership rules and runtime_grantfalse. The observed

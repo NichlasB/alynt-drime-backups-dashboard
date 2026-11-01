@@ -11,8 +11,8 @@ Primary/always cleanup complete, artifact0, no candidate/native/SQL/site operati
 Implementation-plan progress: provenance gap closed, not an additional product
 milestone; campaign6/10 milestones,7/10 native attempts unchanged. Stop before
 changing path acceptance. Recommended next action: approve **Candidate-Bound UBI
-Alias-Aware Static Admission Policy Decision**, a finite static-only policy
-decision preserving strict shared defaults, resource/ownership limits and no
+Alias-Aware Static Admission Policy Exception**, a finite static-only exception
+preserving strict shared defaults, resource/ownership limits and no
 execution grants. An unchanged retry or generic maintenance is not selected.
 Earlier resume/gate text below remains historical; this campaign supersedes
 per-slice confirmation only within its explicit boundaries.

@@ -5,7 +5,7 @@ identifies layer-0 lib64-to-usr/lib64, retains static refusal and completes exac
 cleanup; zero full layers/diffIDs or new native groups. Required legacy M still
 unqualified, current W/L receipts not transferred to this candidate. Campaign6/10
 milestones,7/10 native attempts unchanged. Next boundary: explicit Candidate-Bound
-UBI Alias-Aware Static Admission Policy Decision, not an unchanged retry or
+UBI Alias-Aware Static Admission Policy Exception, not an unchanged retry or
 production-provider/form integration. Older resume statements are historical.
 
 Current resume: [synthetic provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)

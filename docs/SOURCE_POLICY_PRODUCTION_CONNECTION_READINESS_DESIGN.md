@@ -4,7 +4,7 @@ Current resume: [actual failed-entry diagnostic](SOURCE_POLICY_LEGACY_UBI_FEASIB
 captures lib64-to-usr/lib64 with original refusal and exact cleanup, not verified
 alias/dependency/runtime closure. Campaign6/10 milestones,7/10 native attempts
 unchanged. Next action: approve Candidate-Bound UBI Alias-Aware Static Admission
-Policy Decision before changing path acceptance. Legacy M and all production
+Policy Exception before changing path acceptance. Legacy M and all production
 wiring remain blocked. Older resume statements below are historical.
 
 Current resume: [synthetic provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
