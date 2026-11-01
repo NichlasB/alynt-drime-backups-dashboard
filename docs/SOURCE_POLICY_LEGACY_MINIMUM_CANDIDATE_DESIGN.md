@@ -1,5 +1,12 @@
 # Legacy-Minimum Exact-Server Candidate and Owned Qualification Design
 
+Current outcome: approved [owned static prerequisite](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal)
+refuses first-layer critical-parent-not-directory; metadata/first compressed hash
+verify but no full layer/dependency/runtime proof. Exact primary/always cleanup
+complete. Next gated slice is repository-only UBI Critical-Alias and Dependency-
+Closure Admission Design; do not relax the reader, repeat acquisition or execute
+the candidate on this failed prerequisite. Historical design/approval below stays.
+
 ## Authority, baseline and decision — 2026-11-01
 
 Explicit approval covers this repository-only design, validation, commit/push and

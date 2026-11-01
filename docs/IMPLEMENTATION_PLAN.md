@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Legacy UBI feasibility blocked at critical-parent guard — 2026-11-01
+
+Published prerequisite08ab612 passes ordinary CI41335121742. Its one
+[owned attempt41335270059](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal)
+verifies metadata/first compressed layer then refuses layer-0 at unchanged
+critical-parent-not-directory; no full layer/diffID or runtime proof. Primary
+and always cleanup complete, artifact0, no image loading/candidate execution/SQL.
+Implementation-plan progress: bounded harness/evidence advances, but legacy M
+feasibility remains blocked; campaign4/10 milestones and7/10 native qualification
+attempts unchanged. Recommended next gated slice: **UBI Critical-Alias and
+Dependency-Closure Admission Design**, repository-only path/provenance security
+decision, no guard removal, fresh acquisition, execution or wiring changes.
+
 ## Approved legacy UBI feasibility: static prerequisite first — 2026-11-01
 
 User approves bounded owned artifact/connection-free feasibility. The

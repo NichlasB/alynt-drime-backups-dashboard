@@ -1,5 +1,11 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current UBI prerequisite [result](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal):
+first-layer critical-parent refusal, primary/always cleanup complete, no runtime
+or legacy M qualification. Next gated slice: repository-only UBI Critical-Alias
+and Dependency-Closure Admission Design. Do not transfer newer-server success,
+remove critical-path guards or execute on this failed static prerequisite.
+
 2026-11-01 current resume: approved [legacy candidate design](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
 selects the conditional digest-pinned10.6.23-ubi9/amd64 server with existing PHP7.4/
 core6.0. Required M remains unqualified; metadata is not binary/session evidence

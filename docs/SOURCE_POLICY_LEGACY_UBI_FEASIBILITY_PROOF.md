@@ -68,3 +68,52 @@ publication CI and actual owned attempt evidence follow after execution.
 This foundation/publication is not a completed campaign milestone or a successful
 UBI/native proof; campaign remains4/10 milestones,7/10 native qualification attempts.
 No version/session/default admission or legacy M row is established by these tests.
+
+## Exact-head publication and single owned refusal
+
+Implementation08ab612c2b65e154165aafb549e25851b12ab44c is pushed;
+[ordinary CI41335121742](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41335121742)
+passes. Actual logs PHP7.4:2591 tests/23361 assertions; PHP8.3:2591/23366;
+Node74/74 on each, no failures/skips. Manifest/audits/build/structure/PHPCS pass.
+This is isolated QA, not artifact or runtime success.
+
+Exactly one [owned static attempt41335270059](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41335270059)
+at that head, job124933651225,2026-11-01 18:11:01–18:11:07UTC, **failure**.
+Metadata verifiedtrue; fixed first compressed layer2920d84e…/39653524 bytes
+passed the downloader's exact size/SHA256 checks before scanning. The reader
+then refuses in layer-0 with `critical-parent-not-directory`. Zero layers have
+completed static/diffID verification, no selected-role/dependency closure and
+no artifact acceptance receipt. The packet does not export the failed member's
+name/type/target; do not identify it as the literal lib64 alias from the synthetic
+test or claim a fully inspected rootfs. The exact guard means an ancestor of a
+selected critical path is not a directory. Whether and how a genuine alias may
+be supported requires bounded provenance/closure design, not removal of the guard.
+
+Candidate_executionfalse, image_loadingfalse, database_operationsfalse and
+rootfs_extractionfalse. No PHP donor/core acquisition, version-only execution,
+server initialization/listener, authentication, SQL, fixtures or production
+operation occurred. Source readbacks unchangedtrue; source image
+`92458af3a4ce974e33c5aba37a6e6c0525cba5f90a2630ebbd5e2175bde56c84`.
+Trusted tool facts: Python3.12.3/OpenSSL3.0.13/Unicode15.0.0, not a candidate ABI.
+
+Primary finally18:11:05.074 removes exactly four owned files (owner marker,
+manifest, config, first compressed blob) and the owned directory, cleanupcomplete.
+Always-recovery18:11:05.142 confirms complete/files_removed0. Artifact count0,
+no retained payload/directory requiring recovery. The removed bytes were owned
+disposable proof data, not application state; no physical secure-wipe claim.
+No retry, reader/acceptance change or claim of completed runtime feasibility.
+
+Implementation-plan progress: fixed bounded prerequisite and non-vacuous tests
+are published, but physical feasibility is **blocked**, not a completed fifth
+campaign milestone. Totals remain4/10 milestones,7/10 native qualification
+attempts; this separate static attempt creates no completed native group. Default
+reader and runtime guards remain unchanged; historical whole-plugin rows remain.
+
+Recommended next gated slice: **UBI Critical-Alias and Dependency-Closure Admission
+Design**, repository-only. Define source-bound failed-entry evidence, finite
+alias/link traversal and origin/whiteout/dependency rules, or retain refusal if
+no proportionate safe policy exists. No parser relaxation, fresh acquisition,
+candidate execution, initialization/SQL, installation or production wiring under
+that design-only scope. This is a genuine path-admission security boundary, not
+permission to delete a guard to reach version execution. Evidence-only closeout
+gets separate pushed exact-head ordinary CI without repeating the owned attempt.

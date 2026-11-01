@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+2026-11-01 current blocker: [owned UBI prerequisite](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal)
+at08ab612/native-static41335270059 refuses layer-0 critical-parent guard; exact
+cleanup complete, no image loading/execution/SQL. Legacy M still unqualified.
+Next gated slice: repository-only UBI Critical-Alias and Dependency-Closure
+Admission Design, not a reader bypass or unchanged retry; wiring remains closed.
+
 2026-11-01 current resume: [approved legacy candidate design](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
 advances required M planning only. Conditional10.6.23-ubi9/amd64 digest plus pinned
 PHP7.4/core6.0 is not qualified. Next gated slice: Owned Legacy-Minimum UBI Artifact
