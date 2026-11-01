@@ -1,5 +1,10 @@
 # UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation
 
+Current resume: [approved hardlink DATA extension](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
+adds an explicit defaultfalse model opt-in, fixed static consumer only. Strict
+reader/runtime defaults and no-execution grants remain. Historical model/source
+receipts below are not transferred to new collector/provenance bytes.
+
 Current outcome: the [explicit static consumer](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 passes isolated QA/CI but its real collection stops at hardlink entry1915 with
 zero complete layers/model commits. No physical alias/closure or runtime grant

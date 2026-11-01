@@ -33,12 +33,15 @@ def record(member, budget):
     if raw in ('', '.') and member.isdir():
         return None
     name = s.tar_name(raw)
-    s.require(member.type in (tarfile.REGTYPE, tarfile.AREGTYPE, tarfile.DIRTYPE, tarfile.SYMTYPE), 'alias-unsupported-type')
+    s.require(member.type in (tarfile.REGTYPE, tarfile.AREGTYPE, tarfile.DIRTYPE, tarfile.SYMTYPE, tarfile.LNKTYPE), 'alias-unsupported-type')
     s.require(all(type(val) is int and 0 <= val <= cap for val, cap in
                   ((member.mode, 0o7777), (member.uid, 4294967295), (member.gid, 4294967295))), 'record-metadata')
-    kind = 'file' if member.isfile() else 'directory' if member.isdir() else 'symlink'
-    target = member.linkname if member.issym() else None
-    if target is not None:
+    kind = 'file' if member.isfile() else 'directory' if member.isdir() else 'hardlink' if member.islnk() else 'symlink'
+    target = member.linkname if member.issym() or member.islnk() else None
+    if member.islnk():
+        target = s.tar_name(target[2:] if target.startswith('./') else target)
+        s.require(':' not in target, 'hardlink-target')
+    elif target is not None:
         try:
             v.target(name.rpartition('/')[0], target)
         except v.Refusal as error:

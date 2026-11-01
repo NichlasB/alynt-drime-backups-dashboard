@@ -87,11 +87,16 @@ class Contracts(unittest.TestCase):
 
     def test_unsafe_names_sparse_special_hardlinks_and_duplicates_refuse(self):
         for rows in ([member('../escape')], [member('/absolute')], [member('a'), member('a')],
-                     [member('a', tarfile.LNKTYPE, 'b')], [member('a', tarfile.FIFOTYPE)],
+                     [member('a', tarfile.LNKTYPE, '../b')], [member('a', tarfile.FIFOTYPE)],
                      [member('a', tarfile.SYMTYPE, '../escape')]):
             with self.assertRaises(a.s.Refusal): self.scan(rows)
         row, _ = member('a'); row.pax_headers = {'GNU.sparse.unknown': '1'}
         with self.assertRaises(a.s.Refusal): self.scan([(row, b'')])
+        # The approved collector may quarantine a canonical hardlink, never grant a missing target.
+        result = self.scan([member('a', tarfile.LNKTYPE, 'b')]); meta = dict(result['metadata'], ordinal=0)
+        model = a.v.VirtualClosure(dict(manifest=a.PIN, config=a.CONFIG, source='c'*64),
+                                  [(meta['compressed'], meta['diff_id'])], hardlinks=True)
+        with self.assertRaises(a.v.Refusal): model.apply(meta, result['records'], 0)
 
     def test_whiteout_records_are_not_files_and_apply_atomically(self):
         result = self.scan([member('d', tarfile.DIRTYPE), member('d/.wh.a'), member('d/.wh..wh..opq')])

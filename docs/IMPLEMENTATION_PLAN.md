@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved static hardlink content-origin exception — 2026-11-01
+
+User approves [candidate-bound hardlink DATA/content provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
+through isolated implementation/QA/publication/CI and one owned static attempt.
+Only already-present verified regular-file origins, archive-order capture and
+bounded immutable provenance are supported. Default model/shared reader remain
+strict; no extraction, execution, SQL or production wiring. Publish/verify exact
+ordinary CI before the one owned requalification; record actual refusal/success
+and cleanup without inferring legacy M/runtime readiness. Campaign6/10 milestones,
+7/10 native attempts unchanged pending completion; older resume text is historical.
+
 ## Alias-mode collection reaches hardlink policy boundary — 2026-11-01
 
 [Implementationc8584b4/CI41347896557](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md#exact-head-implementation-ci-and-one-owned-refusal)

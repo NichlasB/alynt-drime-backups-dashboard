@@ -1,5 +1,10 @@
 # UBI Critical-Alias and Dependency-Closure Admission Design
 
+Current resume: user approves [bounded hardlink content provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
+for the separate fixed static mode, no extraction/execution or default relaxation.
+Actual qualification follows fresh exact-head ordinary CI and one owned attempt;
+earlier type exclusions/gates below describe their historical source.
+
 Current outcome: [alias-static foundation/proof](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 is published/CI verified; actual archive refuses a hardlink before full layer
 verification. No alias/namespace/runtime qualification follows. New boundary is

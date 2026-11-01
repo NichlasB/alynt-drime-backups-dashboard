@@ -1,5 +1,10 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current resume: [bounded static hardlink provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
+is explicitly approved without extraction/execution. New ordinary CI and one
+owned static requalification are required; current W/L/native receipts do not
+qualify this candidate or its new static source image. Earlier text is historical.
+
 Current outcome: [alias-static attempt41348060972](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 refuses hardlink entry1915 before any full layer/namespace commit. No legacy M
 qualification is established; current W/L receipts are not transferred. Cleanup

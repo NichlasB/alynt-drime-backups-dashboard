@@ -64,7 +64,9 @@ def real_aliases():
 
 
 class VirtualClosure:
-    def __init__(self, identity, layers, aliases=()):
+    def __init__(self, identity, layers, aliases=(), hardlinks=False):
+        require(type(hardlinks) is bool, 'hardlink-policy')
+        self._hardlinks = hardlinks
         require(shape(identity, ('manifest', 'config', 'source')), 'identity')
         self._identity = {k: sha(identity[k]) for k in sorted(identity)}
         require(type(layers) in (list, tuple) and 0 < len(layers) <= 10, 'layers')
@@ -81,6 +83,7 @@ class VirtualClosure:
                     and type(edge['entry']) is int and 0 <= edge['entry'] < 65536, 'alias-origin')
             self._aliases[name] = dict(edge)
         self._nodes, self._committed, self._entries = {}, 0, 0
+        self._hardlink_edges = 0
         self._last, self._work, self._roles, self._final, self._snapshot_hash = 0, 0, 0, False, None
 
     def _tick(self, now, cost=1):
@@ -91,7 +94,8 @@ class VirtualClosure:
     def _record(self, row, index, ordinal):
         require(shape(row, ('path', 'kind', 'mode', 'uid', 'gid', 'sha256', 'size', 'target')), 'record-shape')
         name = key(row['path'])
-        require(type(row['kind']) is str and row['kind'] in ('directory', 'file', 'symlink', 'whiteout', 'opaque'), 'record-type')
+        require(type(row['kind']) is str and (row['kind'] in ('directory', 'file', 'symlink', 'whiteout', 'opaque')
+                or self._hardlinks and row['kind'] == 'hardlink'), 'record-type')
         require(type(row['mode']) is int and 0 <= row['mode'] <= 0o7777
                 and all(type(row[k]) is int and 0 <= row[k] <= 4294967295 for k in ('uid', 'gid'))
                 and type(row['size']) is int and 0 <= row['size'] <= 134217728, 'record-metadata')
@@ -99,7 +103,7 @@ class VirtualClosure:
             sha(row['sha256'])
         else:
             require(row['sha256'] is None and row['size'] == 0, 'non-file-content')
-        if row['kind'] == 'symlink':
+        if row['kind'] in ('symlink', 'hardlink'):
             text(row['target'])
         else:
             require(row['target'] is None, 'non-link-target')
@@ -111,6 +115,59 @@ class VirtualClosure:
         else:
             require(not leaf.startswith('.wh.'), 'marker-as-file')
         return dict(row, layer=ordinal, entry=index)
+
+    def _bind_hardlink(self, nodes, name, row, now):
+        link = key(row['target']); parts = link.split('/')
+        require(':' not in link and parts[0] not in ('proc', 'sys', 'dev')
+                and link != name and not link.startswith(name+'/'), 'hardlink-target-domain')
+        for i in range(1, len(parts)):
+            self._tick(now)
+            parent = nodes.get('/'.join(parts[:i]))
+            require(parent is not None and parent['kind'] == 'directory', 'hardlink-target-parent')
+        source = nodes.get(link)
+        require(source is not None and source['kind'] == 'file', 'hardlink-target-regular')
+        require(not row['mode'] & 0o6000 and all(row[k] == source[k] for k in ('mode', 'uid', 'gid')), 'hardlink-content-metadata')
+        history = source.get('hardlinks', [])
+        require(len(history) < 16 and not any(name in (edge['path'], edge['target']) for edge in history), 'hardlink-budget-cycle')
+        require(self._hardlink_edges + len(history)+1 <= 65536, 'hardlink-history-budget')
+        self._hardlink_edges += len(history)+1
+        self._tick(now, len(history)+1)
+        origin = dict(source.get('content_origin', dict(path=link, layer=source['layer'], entry=source['entry'],
+                                                       sha256=source['sha256'], size=source['size'])))
+        edges = [dict(edge) for edge in history]+[dict(path=name, target=link, layer=row['layer'], entry=row['entry'])]
+        return dict(row, kind='file', sha256=source['sha256'], size=source['size'], target=None,
+                    content_origin=origin, hardlinks=edges)
+
+    def _ordered_hardlinks(self, nodes, staged, now):
+        for name, row in staged.items():  # Preserve archive order for content identity.
+            self._tick(now)
+            if row['kind'] in ('whiteout', 'opaque'):
+                continue
+            if row['kind'] == 'hardlink':
+                try:
+                    row = self._bind_hardlink(nodes, name, row, now)
+                except Refusal as error:
+                    # Fixed scalar observation only; never erase or replace the original refusal.
+                    try:
+                        source = nodes.get(row['target'])
+                        error.hardlink_facts = dict(layer=row['layer'], entry=row['entry'],
+                            path_sha256=hashlib.sha256(name.encode('utf-8')).hexdigest(),
+                            target_sha256=hashlib.sha256(row['target'].encode('utf-8')).hexdigest(),
+                            target_kind=source['kind'] if source is not None else 'missing',
+                            target_layer=source['layer'] if source is not None else None,
+                            target_entry=source['entry'] if source is not None else None,
+                            metadata_equal={k: source is not None and source[k] == row[k] for k in ('mode', 'uid', 'gid')})
+                    except Exception:
+                        error.__dict__.setdefault('hardlink_facts', None)
+                    raise
+            old = nodes.get(name)
+            if old and not (old['kind'] == row['kind'] == 'directory'):
+                for child in tuple(nodes):
+                    self._tick(now)
+                    if child.startswith(name+'/'):
+                        del nodes[child]
+            nodes[name] = row
+        return nodes
 
     def apply(self, metadata, records, now):
         self._tick(now)
@@ -138,18 +195,21 @@ class VirtualClosure:
                     if (not removed or old.startswith(removed+'/')
                             or (row['kind'] == 'whiteout' and old == removed)):
                         del nodes[old]
-        # Parents first: unsupported writes through an alias are never emulated.
-        for name in sorted(staged, key=lambda p: (p.count('/'), p)):
-            row = staged[name]
-            if row['kind'] in ('whiteout', 'opaque'):
-                continue
-            old = nodes.get(name)
-            if old and not (old['kind'] == row['kind'] == 'directory'):
-                for child in tuple(nodes):
-                    self._tick(now)
-                    if child.startswith(name+'/'):
-                        del nodes[child]
-            nodes[name] = row
+        if self._hardlinks:
+            nodes = self._ordered_hardlinks(nodes, staged, now)
+        else:
+            # Strict default: parents first, with no hardlink support.
+            for name in sorted(staged, key=lambda p: (p.count('/'), p)):
+                row = staged[name]
+                if row['kind'] in ('whiteout', 'opaque'):
+                    continue
+                old = nodes.get(name)
+                if old and not (old['kind'] == row['kind'] == 'directory'):
+                    for child in tuple(nodes):
+                        self._tick(now)
+                        if child.startswith(name+'/'):
+                            del nodes[child]
+                nodes[name] = row
         require(len(nodes) <= 65536, 'node-budget')
         for name in nodes:
             parts = name.split('/')
@@ -163,7 +223,7 @@ class VirtualClosure:
     def finalize(self, now):
         self._tick(now)
         require(not self._final and self._committed == len(self._layers), 'final-phase')
-        self._snapshot_hash = hashlib.sha256(json.dumps([self._identity, self._layers, self._aliases, self._nodes],
+        self._snapshot_hash = hashlib.sha256(json.dumps([self._identity, self._layers, self._aliases, self._hardlinks, self._nodes],
                                                        sort_keys=True, ensure_ascii=True).encode()).hexdigest()
         self._final = True
         return dict(status='namespace-consistent', snapshot=self._snapshot_hash, model_only=True, runtime_grant=False)
@@ -191,8 +251,17 @@ class VirtualClosure:
                 require(row['kind'] == 'directory', 'selected-parent-directory')
             else:
                 require(row['kind'] == 'file' and not row['mode'] & 0o6000, 'selected-regular-file')
-                return dict(canonical=name, sha256=row['sha256'], layer=row['layer'], entry=row['entry'],
-                            aliases=edges, snapshot=self._snapshot_hash, model_only=True, runtime_grant=False)
+                require(len(edges)+len(row.get('hardlinks', [])) <= 16, 'combined-link-budget')
+                result = dict(canonical=name, sha256=row['sha256'], layer=row['layer'], entry=row['entry'],
+                              aliases=edges, snapshot=self._snapshot_hash, model_only=True, runtime_grant=False)
+                if 'content_origin' in row:
+                    origin = row['content_origin']
+                    result['content_origin'] = dict((k, origin[k]) for k in ('layer', 'entry', 'sha256', 'size'))
+                    result['content_origin']['path_sha256'] = hashlib.sha256(origin['path'].encode('utf-8')).hexdigest()
+                    result['hardlinks'] = [dict(layer=edge['layer'], entry=edge['entry'],
+                        path_sha256=hashlib.sha256(edge['path'].encode('utf-8')).hexdigest(),
+                        target_sha256=hashlib.sha256(edge['target'].encode('utf-8')).hexdigest()) for edge in row['hardlinks']]
+                return result
         raise Refusal('unresolved')
 
     def closure(self, objects, providers, now):

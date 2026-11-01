@@ -1,5 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume: [approved static hardlink provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
+requires exact-head QA/CI and one owned static proof; no extraction, execution,
+SQL or production/provider/form wiring. Actual legacy M evidence remains gated
+by the complete artifact/namespace/dependency/runtime prerequisite chain.
+
 Current outcome: [alias-static owned attempt41348060972](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 refuses hardlink entry1915, no full layer/namespace/native proof. Cleanup complete,
 artifact0; campaign6/10 milestones,7/10 native attempts unchanged. Next approval

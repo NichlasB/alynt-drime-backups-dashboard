@@ -152,7 +152,7 @@ def proof(root, alias_policy=False):
                     tree = alias.v.VirtualClosure(dict(manifest=PIN, config=CONFIG,
                         source=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()),
                         [(layer[0], s.digest(value)) for layer, value in zip(LAYERS, config['rootfs']['diff_ids'])],
-                        alias.approved_profile(collected, i))
+                        alias.approved_profile(collected, i), hardlinks=True)
                 tree.apply(dict(collected['metadata'], ordinal=i), collected['records'], int((time.monotonic()-deadline+300)*1000))
                 report['namespace_layers_committed'] += 1
             else:
@@ -175,6 +175,8 @@ def proof(root, alias_policy=False):
             report['path_facts'] = error.facts
         if alias is not None and isinstance(error, alias.s.Refusal) and 'alias_facts' in error.__dict__:
             report['alias_facts'] = error.alias_facts
+        if alias is not None and isinstance(error, alias.v.Refusal) and 'hardlink_facts' in error.__dict__:
+            report['hardlink_facts'] = error.hardlink_facts
         if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
             try:
                 context = dict(head=os.environ['GITHUB_SHA'], image=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest(),

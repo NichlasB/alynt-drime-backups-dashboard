@@ -1,5 +1,10 @@
 # Candidate-Bound UBI Alias-Aware Static Admission
 
+Current resume: user approves the [separate hardlink content-origin extension](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md).
+Its opt-in DATA policy preserves strict defaults and no extraction/execution,
+and requires fresh exact-head ordinary CI before one owned static requalification.
+Historical refusal/type-exclusion claims below remain accurate for their source.
+
 Current outcome: implementation/ordinary CI pass, but the one owned static
 attempt refuses layer-0 hardlink entry1915 before complete diffID verification.
 No namespace layer, alias grant, selected origin or runtime is qualified. Exact

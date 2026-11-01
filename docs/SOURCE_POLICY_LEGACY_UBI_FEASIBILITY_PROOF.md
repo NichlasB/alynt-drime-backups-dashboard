@@ -1,5 +1,10 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current resume: [approved hardlink DATA/content-origin work](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
+preserves extraction/execution denial and strict shared defaults. Its exact-head
+QA/CI and single owned requalification own current evidence; historical failed
+receipts below are not refreshed by isolated implementation success.
+
 Current outcome: [alias-mode attempt41348060972](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md#exact-head-implementation-ci-and-one-owned-refusal)
 refuses hardlink entry1915, no complete layer/diffID or namespace commit, exact
 cleanup complete/artifact0. Next boundary is Candidate-Bound Static Hardlink
