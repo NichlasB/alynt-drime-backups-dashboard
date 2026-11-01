@@ -1,5 +1,10 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current resume: [synthetic provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
+adds no physical M qualification or real alias consumer. Next gated slice is
+Owned UBI Failed-Entry Provenance Diagnostic Acquisition and Cleanup Proof,
+bounded unchanged-refusal/static-only diagnostic evidence with exact cleanup.
+
 Current planning resume: approved [UBI alias/closure design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md)
 keeps real-candidate aliases disabled and static guards unchanged. Next gated
 slice is Repository-Only UBI Failed-Entry Provenance and Dormant Virtual-Closure

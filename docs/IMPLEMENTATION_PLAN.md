@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## UBI provenance/dormant model foundation — 2026-11-01
+
+Approved synthetic-only [foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
+adds bounded first-failure correlation without changing original reader refusal,
+and a separate IO-free virtual namespace/dependency DATA model with empty real
+alias profile/no consumers or runtime grants. Positive/refusal controls, six
+assertion-killed semantic controls and65,536-node fixture pass. No acquisition,
+dispatch, candidate execution, SQL or production wiring. Implementation-plan
+progress: bounded safety foundation advances; after publication/CI campaign6/10
+milestones, native attempts7/10 unchanged; actual legacy M feasibility blocked.
+Recommended next gated slice: **Owned UBI Failed-Entry Provenance Diagnostic
+Acquisition and Cleanup Proof**, one fresh static diagnostic with unchanged
+guards/cleanup, no alias activation/loading/execution/SQL. Actual member/type/
+target evidence is needed before considering a real alias profile.
+
 ## UBI alias/closure admission design — 2026-11-01
 
 Approved repository-only [design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md) keeps

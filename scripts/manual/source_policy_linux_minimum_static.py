@@ -66,6 +66,39 @@ def require(ok, code):
         raise Refusal(code)
 
 
+def critical_summary(value):
+    """Bounded observation only. Never normalize or admit an archive path."""
+    if type(value) is not str:
+        return {'characters': None, 'hashed_characters': 0, 'hash_scope': 'not-string', 'sha256': None, 'literal': None}
+    sample = value[:1024]
+    literal = None
+    if (0 < len(value) <= 240 and all(32 <= ord(c) <= 126 for c in value)
+            and '\\' not in value and not value.startswith('//')
+            and all(part not in ('', '.', '..') for part in value.lstrip('/').split('/'))
+            and (value.lstrip('/') in ('lib', 'lib64', 'usr/lib', 'usr/lib64', 'usr/sbin')
+                 or value.lstrip('/').startswith(('lib/', 'lib64/', 'usr/lib/', 'usr/lib64/', 'usr/sbin/')))):
+        literal = value
+    return {'characters': len(value), 'hashed_characters': len(sample),
+            'hash_scope': 'full-name' if len(value) <= 1024 else 'prefix',
+            'sha256': hashlib.sha256(sample.encode('utf-8', 'surrogatepass')).hexdigest(), 'literal': literal}
+
+
+def capture_critical(error, member, key, wanted, budget, layer_entry):
+    """Attach first observation without replacing the exact original refusal."""
+    if 'critical_facts' in error.__dict__:
+        return
+    try:
+        role = next((p for p in wanted if p == key or p.startswith(key + '/')), None)
+        error.critical_facts = {
+            'reason': error.args[0], 'kind': {tarfile.REGTYPE: 'regular', tarfile.AREGTYPE: 'regular',
+                tarfile.DIRTYPE: 'directory', tarfile.SYMTYPE: 'symlink', tarfile.LNKTYPE: 'hardlink'}.get(member.type, 'other'),
+            'role': {'usr/sbin/mariadbd': 'server', 'lib64/ld-linux-x86-64.so.2': 'loader'}.get(role, 'other'),
+            'entry': budget['entries'], 'layer_entry': layer_entry,
+            'name': critical_summary(key), 'target': critical_summary(member.linkname if member.issym() or member.islnk() else None)}
+    except Exception:
+        error.critical_facts = None  # Observation failure never erases the refusal.
+
+
 def digest(value):
     require(isinstance(value, str) and re.fullmatch(r'sha256:[a-f0-9]{64}', value), 'digest-shape')
     return value[7:]
@@ -230,9 +263,16 @@ def scan_layer(path, diff_id, wanted, roles, budget):
                 require(key not in seen, 'tar-duplicate')
                 seen.add(key)
                 require(member.type in (tarfile.REGTYPE, tarfile.AREGTYPE, tarfile.DIRTYPE, tarfile.SYMTYPE, tarfile.LNKTYPE), 'tar-special-type')
-                require(not any(role.startswith(key + '/') for role in wanted) or member.isdir(), 'critical-parent-not-directory')
-                if member.issym() or member.islnk():
-                    require(not any(key == role or role.startswith(key + '/') for role in wanted), 'critical-linked-path')
+                try:
+                    require(not any(role.startswith(key + '/') for role in wanted) or member.isdir(), 'critical-parent-not-directory')
+                    if member.issym() or member.islnk():
+                        require(not any(key == role or role.startswith(key + '/') for role in wanted), 'critical-linked-path')
+                except Refusal as error:
+                    try:
+                        capture_critical(error, member, key, wanted, budget, layer_entries)
+                    except Exception:
+                        error.__dict__.setdefault('critical_facts', None)
+                    raise
                 directory, _, leaf = key.rpartition('/')
                 if leaf.startswith('.wh.'):
                     require(member.isfile() and member.size == 0 and leaf != '.wh.', 'whiteout-shape')

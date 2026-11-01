@@ -14,6 +14,9 @@ spec = importlib.util.spec_from_file_location('legacy_acquire', ROOT / 'scripts/
 acquire = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(acquire)
 s = acquire.static
+spec = importlib.util.spec_from_file_location('ubi_provenance', ROOT / 'scripts/manual/source_policy_ubi_provenance.py')
+provenance = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(provenance)
 PIN = '14bab8cc945c08109a2175e844d46f4eaff1fbf4f59e95dcf2f9cac7961510e1'
 CONFIG = '2a46b014d1a6182f9f8240db6bae96566cdb11178f878ffe794f15095b745f35'
 LAYERS = (
@@ -106,7 +109,7 @@ def proof(root):
               'database_operations': False, 'rootfs_extraction': False, 'layers_verified': 0}
     report['tool'] = {'python': sys.version.split()[0], 'ssl': acquire.ssl.OPENSSL_VERSION,
                       'unicode_db': s.unicodedata.unidata_version}
-    paths = (Path(__file__), Path(acquire.__file__), Path(s.__file__),
+    paths = (Path(__file__), Path(acquire.__file__), Path(s.__file__), Path(provenance.__file__),
              ROOT / '.github/workflows/source-policy-legacy-ubi-static.yml')
     frozen = {str(p.relative_to(ROOT)): acquire.file_hash(p) for p in paths}
     deadline = time.monotonic() + 300
@@ -143,6 +146,14 @@ def proof(root):
         report.update(failure_stage=phase, failure=code if re.fullmatch('[a-z0-9-]{1,64}', code) else 'bounded-refusal')
         if isinstance(error, s.PathRefusal):
             report['path_facts'] = error.facts
+        if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
+            try:
+                context = dict(head=os.environ['GITHUB_SHA'], image=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest(),
+                    run=hashlib.sha256((os.environ['GITHUB_RUN_ID']+':'+os.environ['GITHUB_RUN_ATTEMPT']).encode()).hexdigest()[:32],
+                    manifest=PIN, config=CONFIG, layer=i, compressed=sha, compressed_verified=True, diff_id_verified=False)
+                report['critical_provenance'] = provenance.packet(error.critical_facts, context)
+            except Exception:
+                report['critical_provenance'] = None  # Preserve the original reason.
     finally:
         try:
             report['source_unchanged'] = all(acquire.file_hash(ROOT / p) == sha for p, sha in frozen.items())

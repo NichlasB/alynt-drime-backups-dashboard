@@ -1,5 +1,11 @@
 # UBI Critical-Alias and Dependency-Closure Admission Design
 
+Current resume: approved [synthetic-only foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
+implements observational first-failure correlation and an unconsumed dormant
+model; original static refusal and real-alias/execute denial remain. Next gated
+slice is Owned UBI Failed-Entry Provenance Diagnostic Acquisition and Cleanup
+Proof, one unchanged-refusal static diagnostic only, not an alias acceptance run.
+
 ## Approved boundary and evidence — 2026-11-01
 
 Repository-only design, validation, commit/push and exact-head ordinary CI are

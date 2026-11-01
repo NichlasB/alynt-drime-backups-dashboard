@@ -1,5 +1,11 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current resume: [provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
+is synthetic-only; historical failed entry remains unknown. Next gated slice:
+Owned UBI Failed-Entry Provenance Diagnostic Acquisition and Cleanup Proof, one
+bounded static attempt with unchanged acceptance/cleanup and no execution. New
+source cohort cannot refresh the old failed physical receipt without that proof.
+
 Current resume: the approved repository-only [alias/closure design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md)
 preserves this failed proof and reader guards. Next gated slice is Repository-
 Only UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation,

@@ -1,5 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume: [synthetic provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
+preserves static refusal and all runtime grants disabled. Next gated slice is
+Owned UBI Failed-Entry Provenance Diagnostic Acquisition and Cleanup Proof,
+static-only actual entry evidence; legacy M/runtime qualification remains open.
+
 Current planning resume: [UBI alias/closure design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md)
 defines failure evidence and dormant image-only provenance model while preserving
 static refusal. Next gated slice: Repository-Only UBI Failed-Entry Provenance and
