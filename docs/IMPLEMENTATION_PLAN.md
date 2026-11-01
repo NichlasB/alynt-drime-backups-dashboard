@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Campaign diagnostic: actual UBI alias; acceptance gate — 2026-11-01
+
+The renewed autonomous campaign resumes existing counters, not completed transport
+proofs. [Static diagnostic41342892366](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
+at8166015 captures layer-0 entry659, symlink `lib64` to `usr/lib64`, then retains
+critical-parent-not-directory. Metadata/first compressed digest verify; no full
+layer/diffID, final alias origin, dependency closure or physical legacy M proof.
+Primary/always cleanup complete, artifact0, no candidate/native/SQL/site operation.
+Implementation-plan progress: provenance gap closed, not an additional product
+milestone; campaign6/10 milestones,7/10 native attempts unchanged. Stop before
+changing path acceptance. Recommended next action: approve **Candidate-Bound UBI
+Alias-Aware Static Admission Policy Decision**, a finite static-only policy
+decision preserving strict shared defaults, resource/ownership limits and no
+execution grants. An unchanged retry or generic maintenance is not selected.
+Earlier resume/gate text below remains historical; this campaign supersedes
+per-slice confirmation only within its explicit boundaries.
+
 ## UBI provenance/dormant model foundation — 2026-11-01
 
 Approved synthetic-only [foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)

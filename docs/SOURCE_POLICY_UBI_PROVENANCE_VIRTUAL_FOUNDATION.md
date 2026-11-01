@@ -1,5 +1,12 @@
 # UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation
 
+Current resume: the later authorized [static diagnostic](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
+observes the actual lib64-to-usr/lib64 symlink while preserving refusal and exact
+cleanup. Full layer/diffID and final origin/closure remain unverified. Next boundary
+is Candidate-Bound UBI Alias-Aware Static Admission Policy Decision, not another
+unchanged acquisition or real alias activation. Historical synthetic-only scope
+and publication evidence below remain accurate for this foundation's own slice.
+
 ## Approved scope and coherent baseline — 2026-11-01
 
 User approves the repository-only [foundation](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md),

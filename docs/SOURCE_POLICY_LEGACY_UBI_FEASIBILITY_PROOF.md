@@ -1,5 +1,12 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current resume: the [campaign diagnostic](#campaign-diagnostic-actual-failed-entry--2026-11-01)
+identifies layer-0 entry659 as symlink `lib64` to `usr/lib64`. The original
+critical-parent guard still refuses; zero complete layers/diffIDs are verified.
+Primary/always cleanup complete, artifact count0. Next boundary is an explicit
+candidate-bound alias-admission policy decision, not an unchanged retry or a
+routine guard repair. Earlier resume statements below are historical.
+
 Current resume: [provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
 is synthetic-only; historical failed entry remains unknown. Next gated slice:
 Owned UBI Failed-Entry Provenance Diagnostic Acquisition and Cleanup Proof, one
@@ -80,6 +87,97 @@ publication CI and actual owned attempt evidence follow after execution.
 This foundation/publication is not a completed campaign milestone or a successful
 UBI/native proof; campaign remains4/10 milestones,7/10 native qualification attempts.
 No version/session/default admission or legacy M row is established by these tests.
+
+## Campaign diagnostic: actual failed entry — 2026-11-01
+
+The renewed autonomous development-and-qualification campaign authorizes related
+repository work and narrowly owned ephemeral CI qualification, including recovery,
+without per-slice confirmation. It does not authorize changed acceptance criteria,
+security-policy decisions outside that scope, LocalWP/live operations, production
+wiring or release work. Existing counters are carried forward, not reset:
+6/10 completed milestones,7/10 native qualification attempts. The transport-tuple
+workstream has already progressed through M-lab/W/L evidence to the required legacy
+M gap; completed proofs are not repeated simply because the campaign names its
+original starting point.
+
+Read-only baseline8166015e28c2bdd77c436504abdc3a8f7078b55f is clean/synced;
+ordinary CI41340056890 reverified successful. Exactly one dispatch of the existing
+fixed static workflow at that head: [41342892366](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41342892366),
+job124956481897,2026-11-01 19:40:15–19:40:20UTC. The job **fails with its original
+refusal**, not with an infrastructure error. This is an evidence-backed diagnostic
+after the previously published observation foundation, not a blind unchanged retry.
+No executable, test, workflow, pin, budget, acceptance or cleanup rule was changed.
+
+Actual bounded ADBUPF1 packet:
+
+| Fact | Observed value |
+| --- | --- |
+| Failure | `critical-parent-not-directory`, stage `layer-0`, selected role `loader` |
+| Entry | Global659 / layer659, kind `symlink` |
+| Name | `lib64`, five characters, full-name SHA256 `f6840d080f83f1444d88a587022321eaaadf383be11e6acbc05c62fa4824604d` |
+| Literal target | `usr/lib64`, nine characters, full-name SHA256 `1a8dcebf89cf73748aa1a3c88dd1ecc2a040ffabb45a10d9231a642e1a89913b` |
+| Manifest/config | Fixed14bab8cc… /2a46b014… identities above, metadata_verifiedtrue |
+| Compressed layer | `2920d84eafa0cf94806ab58f0a2124f7b2d35bcbb06fc89a9106dcc28efe397a`, exact39653524 bytes verified before scanning |
+| Complete layer evidence | diff_id_verifiedfalse, layers_verified0 |
+| Frozen source image | `8827ce5f7c0b87a0299747465c4e36b4faf9125c32c19dddbe7e709e59314563`, source_unchangedtrue |
+| Run correlation | `05c255c77488232321e19c51309e8151` |
+
+These are actual current-run archive observations, no longer an inference from a
+synthetic lib64 fixture. They are **not** verified final-rootfs origins or a real
+alias grant: the first layer scan terminates before complete diffID verification,
+and later layers/whiteouts/replacements were not observed. `usr/lib64` existence,
+the final loader target and transitive/runtime dependency closure remain unknown.
+The correct guard rejects a non-directory critical ancestor; no implementation
+defect justifying a guard-removal repair was demonstrated. A formatter hash or
+candidate-supplied link cannot authorize itself.
+
+Primary finally at19:40:18.741 reports removal of exactly four owned files and
+their directory (owner marker, manifest, config and first compressed blob),
+cleanupcomplete. Always recovery at19:40:18.829 confirms complete/files_removed0.
+Actions artifact API reports total_count0. No recovery resources remain; no
+physical secure-wipe claim. Candidate_executionfalse, image_loadingfalse,
+database_operationsfalse, rootfs_extractionfalse. No PHP donor/core acquisition,
+native session, server initialization/listener, SQL, fixture account, installed
+site/state or production-wiring operation took place. Trusted tool facts remain
+Python3.12.3/OpenSSL3.0.13/Unicode15.0.0, not candidate runtime evidence.
+
+### Acceptance boundary and exact resume
+
+The current direct-directory acceptance policy cannot admit this symlink. An
+additional unchanged attempt would add no justified evidence. Enabling an
+alias-aware consumer, interpreting the link as safe, or collecting past the
+critical refusal for an acceptance result would be a path-admission policy change,
+not a routine harness correction. The dormant virtual model remains unconsumed
+with an empty real profile; shared reader and runtime acceptance remain unchanged.
+
+Recommended next action: **approve a Candidate-Bound UBI Alias-Aware Static
+Admission Policy Decision**, limited to whether a separate static-only path may
+collect quarantined layer records and resolve this exact candidate's aliases
+after full compressed/diffID verification, while preserving the strict shared
+reader default, all resource/ownership rules and runtime_grantfalse. The observed
+lib64 edge is only the first proposal input, not a complete allowlist. No general
+OCI extraction, host fallback, new image/dependency, candidate execution, SQL or
+production wiring is recommended. This requires explicit approval because the
+campaign requires preservation of acceptance criteria/security properties; a
+new slice name by itself is not the reason for stopping.
+
+Implementation-plan progress: failed-entry provenance gap closed, physical legacy
+M still blocked before any full layer/closure/runtime qualification. **6/10
+milestones,7/10 native attempts unchanged**. This diagnostic retry, cleanup and
+evidence publication do not earn another product milestone. There have now been
+two static acquisition jobs in the workstream; neither is counted as a native
+qualification attempt, and no further one is dispatched on the same refusal.
+Source-scoped evidence only; historical whole-plugin/Database Review readiness
+is not refreshed. Publication and exact-head CI of this record follow below.
+
+Fresh evidence-closeout validation: local PHP8.5.1 PHPUnit
+`--do-not-cache-result`2594 tests/23375 assertions, no failures, two existing
+missing-Sodium skips; PHPCS255 files passes; Node74/74 passes with no skips;
+structure, all six owning documents' local-link targets and diff checks pass.
+Diff review confirms documentation-only scope, no executable/test/workflow/pin/
+dependency changes. Uploader and toolkit working trees remain clean/untouched.
+This local QA validates unchanged isolated contracts, not an accepted UBI layer,
+real alias policy, database proof or whole-plugin release readiness.
 
 ## Exact-head publication and single owned refusal
 

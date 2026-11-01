@@ -1,5 +1,12 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume: [actual failed-entry diagnostic](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
+captures lib64-to-usr/lib64 with original refusal and exact cleanup, not verified
+alias/dependency/runtime closure. Campaign6/10 milestones,7/10 native attempts
+unchanged. Next action: approve Candidate-Bound UBI Alias-Aware Static Admission
+Policy Decision before changing path acceptance. Legacy M and all production
+wiring remain blocked. Older resume statements below are historical.
+
 Current resume: [synthetic provenance/dormant model foundation](SOURCE_POLICY_UBI_PROVENANCE_VIRTUAL_FOUNDATION.md)
 preserves static refusal and all runtime grants disabled. Next gated slice is
 Owned UBI Failed-Entry Provenance Diagnostic Acquisition and Cleanup Proof,
