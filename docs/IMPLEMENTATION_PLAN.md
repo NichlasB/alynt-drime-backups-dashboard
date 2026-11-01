@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved legacy UBI feasibility: static prerequisite first — 2026-11-01
+
+User approves bounded owned artifact/connection-free feasibility. The
+[owning proof record](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md) freezes metadata
+and a manual exact-head acquisition/static prerequisite with existing alias guards,
+strict resource/ownership cleanup and isolated positive/refusal controls. No
+runtime-reader/default-policy/wiring changes; version execution cannot precede
+qualified static dependency provenance. Publish/verify exact-head ordinary CI,
+then one owned prerequisite attempt. No campaign completion credit before actual
+evidence; totals4/10 milestones,7/10 native qualification attempts remain unchanged.
+
 ## Legacy minimum exact-server candidate design — 2026-11-01
 
 Approved repository-only [candidate/qualification design](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
