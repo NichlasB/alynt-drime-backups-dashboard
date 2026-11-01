@@ -1,4 +1,4 @@
-"""Dormant primitive-DATA namespace model. No IO, real alias policy or execution."""
+"""Primitive-DATA namespace model. No IO, default aliases or execution."""
 import hashlib
 import json
 import re

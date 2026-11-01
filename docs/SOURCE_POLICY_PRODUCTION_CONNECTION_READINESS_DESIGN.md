@@ -1,5 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume: [approved separate static alias mode](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+preserves strict shared defaults and runtime_grantfalse. Full-layer/namespace
+proof remains prerequisite to any selected-origin result; no dependency/native M
+or production-provider/form readiness follows. Earlier resume text is historical.
+
 Current resume: [actual failed-entry diagnostic](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
 captures lib64-to-usr/lib64 with original refusal and exact cleanup, not verified
 alias/dependency/runtime closure. Campaign6/10 milestones,7/10 native attempts

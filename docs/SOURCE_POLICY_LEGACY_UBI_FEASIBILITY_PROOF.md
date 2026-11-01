@@ -1,5 +1,11 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current resume: the [approved separate alias-static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+implements complete-layer quarantined collection and one fixed lib64 edge without
+changing the strict shared reader. Exact-head QA/publication precedes a new owned
+static attempt; no real candidate acceptance or runtime qualification is assumed.
+Earlier diagnostic/gate wording below is historical.
+
 Current resume: the [campaign diagnostic](#campaign-diagnostic-actual-failed-entry--2026-11-01)
 identifies layer-0 entry659 as symlink `lib64` to `usr/lib64`. The original
 critical-parent guard still refuses; zero complete layers/diffIDs are verified.

@@ -1,5 +1,10 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current resume: the [approved exact-candidate static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+is isolated from strict defaults and runtime grants. An owned static attempt must
+establish its actual hash/namespace evidence; legacy M/native row remains open.
+Earlier resume statements below are historical, not permission for execution.
+
 Current resume: [actual diagnostic41342892366](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
 identifies layer-0 lib64-to-usr/lib64, retains static refusal and completes exact
 cleanup; zero full layers/diffIDs or new native groups. Required legacy M still

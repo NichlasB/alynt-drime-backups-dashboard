@@ -1,5 +1,11 @@
 # UBI Critical-Alias and Dependency-Closure Admission Design
 
+Current resume: user approves the [candidate-bound static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md).
+Only an explicitly selected static workflow mode consumes the model, after full
+layer hashes, with the fixed lib64 edge and runtime_grantfalse. Shared strict
+reader/defaults and unapproved-link refusal remain. Historical empty-consumer
+and pending-policy statements below describe their original slices.
+
 Current resume: [actual diagnostic41342892366](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
 at8166015 establishes layer-0 symlink lib64-to-usr/lib64, not a fully verified
 layer/final-rootfs origin or alias grant. Original refusal and empty real profile

@@ -103,17 +103,25 @@ def cleanup(root):
     return len(children)
 
 
-def proof(root):
-    owner, phase = None, 'metadata'
+def proof(root, alias_policy=False):
+    owner, phase, budget = None, 'metadata', None
     report = {'status': 'refused', 'candidate_execution': False, 'image_loading': False,
-              'database_operations': False, 'rootfs_extraction': False, 'layers_verified': 0}
+              'database_operations': False, 'rootfs_extraction': False, 'layers_verified': 0,
+              'runtime_grant': False, 'alias_policy': alias_policy, 'namespace_layers_committed': 0}
     report['tool'] = {'python': sys.version.split()[0], 'ssl': acquire.ssl.OPENSSL_VERSION,
                       'unicode_db': s.unicodedata.unidata_version}
     paths = (Path(__file__), Path(acquire.__file__), Path(s.__file__), Path(provenance.__file__),
              ROOT / '.github/workflows/source-policy-legacy-ubi-static.yml')
+    alias = None
+    if alias_policy is True:
+        spec = importlib.util.spec_from_file_location('fixed_ubi_alias', ROOT / 'scripts/manual/source_policy_ubi_alias_static.py')
+        alias = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(alias)
+        paths += (Path(alias.__file__), Path(alias.v.__file__))
     frozen = {str(p.relative_to(ROOT)): acquire.file_hash(p) for p in paths}
     deadline = time.monotonic() + 300
     try:
+        s.require(type(alias_policy) is bool, 'explicit-alias-mode')
         owner = Owned(root)
         client = acquire.Client(owner, deadline)
         base = 'https://registry-1.docker.io/v2/library/mariadb'
@@ -128,24 +136,45 @@ def proof(root):
         admit(manifest, config)
         report['metadata_verified'] = True
         roles, budget = {}, {'expanded': 0, 'entries': 0, 'deadline': deadline}
+        tree = None
         for i, ((sha, size), diff) in enumerate(zip(LAYERS, config['rootfs']['diff_ids'])):
             phase = 'layer-' + str(i)
             path = owner.path(sha + '.blob')
             remaining = 256 * s.MIB - client.payload
             s.require(remaining > 0, 'compressed-budget')
             client.get(base + '/blobs/sha256:' + sha, min(128 * s.MIB, remaining), token, path, size, sha, True)
-            scan = s.scan_layer(path, diff, WANTED, roles, budget)
-            report['layers_verified'] += 1
+            if alias_policy:
+                collected = alias.collect(path, sha, size, diff, budget)
+                report['layers_verified'] += 1
+                scan = collected['scan']
+                if i == 0:
+                    s.require(alias.PIN == PIN and alias.CONFIG == CONFIG, 'alias-candidate-binding')
+                    tree = alias.v.VirtualClosure(dict(manifest=PIN, config=CONFIG,
+                        source=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()),
+                        [(layer[0], s.digest(value)) for layer, value in zip(LAYERS, config['rootfs']['diff_ids'])],
+                        alias.approved_profile(collected, i))
+                tree.apply(dict(collected['metadata'], ordinal=i), collected['records'], int((time.monotonic()-deadline+300)*1000))
+                report['namespace_layers_committed'] += 1
+            else:
+                scan = s.scan_layer(path, diff, WANTED, roles, budget)
+                report['layers_verified'] += 1
             print(json.dumps({'phase': phase, 'scan': scan}), flush=True)
+        if alias_policy:
+            phase = 'final-namespace'
+            tree.finalize(int((time.monotonic()-deadline+300)*1000))
+            roles = {key: tree.resolve(key, int((time.monotonic()-deadline+300)*1000)) for key in WANTED}
         s.require(set(roles) == set(WANTED), 'critical-roles')
         # A successful selected-origin scan is not a runtime/dependency grant.
         report.update(status='selected-origins-verified', runtime_feasibility='not-run',
                       dependency_closure='not-established', roles=roles)
     except Exception as error:
-        code = str(error) if isinstance(error, s.Refusal) else 'unexpected-tool-failure'
+        refusals = (s.Refusal, alias.s.Refusal, alias.v.Refusal) if alias is not None else (s.Refusal,)
+        code = str(error) if isinstance(error, refusals) else 'unexpected-tool-failure'
         report.update(failure_stage=phase, failure=code if re.fullmatch('[a-z0-9-]{1,64}', code) else 'bounded-refusal')
         if isinstance(error, s.PathRefusal):
             report['path_facts'] = error.facts
+        if alias is not None and isinstance(error, alias.s.Refusal) and 'alias_facts' in error.__dict__:
+            report['alias_facts'] = error.alias_facts
         if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
             try:
                 context = dict(head=os.environ['GITHUB_SHA'], image=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest(),
@@ -155,6 +184,8 @@ def proof(root):
             except Exception:
                 report['critical_provenance'] = None  # Preserve the original reason.
     finally:
+        if budget is not None:
+            report['scan_budget'] = {key: budget[key] for key in ('expanded', 'entries')}
         try:
             report['source_unchanged'] = all(acquire.file_hash(ROOT / p) == sha for p, sha in frozen.items())
             report['source_sha256'] = hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()
@@ -171,11 +202,13 @@ if __name__ == '__main__':
     try:
         s.require(sys.flags.isolated and sys.dont_write_bytecode and sys.platform == 'linux', 'isolated-linux-tool')
         root = target(os.environ)
-        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--cleanup']), 'explicit-scope')
+        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--cleanup']), 'explicit-scope')
         if sys.argv[1:] == ['--cleanup']:
             print(json.dumps({'always_cleanup': 'complete', 'files_removed': cleanup(root)}))
         else:
-            sys.exit(proof(root))
+            mode = sys.argv[1:] == ['--approved-alias-static-prerequisite']
+            s.require(os.environ.get('ALIAS_POLICY', 'false') == ('true' if mode else 'false'), 'explicit-alias-mode')
+            sys.exit(proof(root, mode))
     except s.Refusal:
         print('{"status":"scope-or-cleanup-refused"}')
         sys.exit(1)

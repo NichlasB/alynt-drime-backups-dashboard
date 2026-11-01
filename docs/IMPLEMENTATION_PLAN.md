@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved candidate-bound static alias exception — 2026-11-01
+
+User approves the [separate static admission implementation](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md):
+exact pinned candidate/lib64 edge, complete layer hashes before virtual commit,
+bounded final namespace and no execution grant. Workflow defaults to the unchanged
+strict reader. Unknown aliases, hardlinks, incomplete layers and dependency/runtime
+closure remain refusals. Publish/verify ordinary exact-head CI before one owned
+exception-mode static attempt with unchanged cleanup and no site/SQL/execution.
+Campaign6/10 milestones,7/10 native attempts pending completion evidence; retries
+and documentation do not earn credit. Earlier approval/resume text is historical.
+
 ## Campaign diagnostic: actual UBI alias; acceptance gate — 2026-11-01
 
 The renewed autonomous campaign resumes existing counters, not completed transport

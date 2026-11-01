@@ -1,5 +1,11 @@
 # UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation
 
+Current resume: the later approved [static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+adds the first explicit static-only consumer of this model; shared reader/runtime
+defaults remain unchanged and `real_aliases()` remains empty. That separate mode
+owns its fixed candidate profile and proof. Earlier dormant/no-consumer claims
+below remain historical facts about this foundation, not current static wiring.
+
 Current resume: the later authorized [static diagnostic](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#campaign-diagnostic-actual-failed-entry--2026-11-01)
 observes the actual lib64-to-usr/lib64 symlink while preserving refusal and exact
 cleanup. Full layer/diffID and final origin/closure remain unverified. Next boundary

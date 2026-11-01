@@ -6,6 +6,11 @@ on:
         description: Exact approved master head for one static prerequisite attempt
         required: true
         type: string
+      alias_policy:
+        description: Approved exact-candidate static alias exception; never an execution grant
+        required: true
+        default: false
+        type: boolean
 permissions:
   contents: read
 concurrency:
@@ -18,6 +23,7 @@ jobs:
     timeout-minutes: 10
     env:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
+      ALIAS_POLICY: ${{ inputs.alias_policy }}
     steps:
       - name: Admit exact approved head
         shell: bash
@@ -29,7 +35,12 @@ jobs:
         with:
           persist-credentials: false
       - name: One static prerequisite; no candidate execution
-        run: python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite
+        run: |
+          case "$ALIAS_POLICY" in
+            false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
+            true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
+            *) exit 1 ;;
+          esac
       - name: Always reconcile exact owned artifacts
         if: always()
         run: |
