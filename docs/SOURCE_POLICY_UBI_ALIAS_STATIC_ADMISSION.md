@@ -1,5 +1,11 @@
 # Candidate-Bound UBI Alias-Aware Static Admission
 
+Current outcome: [hardlink-enabled owned41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+passes all10 full layers/namespace commits and both selected origins, exact
+cleanup/artifact0. Campaign7/10 milestones on closeout CI, native attempts7/10.
+No ELF/dependency/runtime grant; next boundary is Candidate-Bound Selected-ELF
+and Static Dependency-Closure Policy Exception. Older refusals remain historical.
+
 Current resume: user approves the [separate hardlink content-origin extension](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md).
 Its opt-in DATA policy preserves strict defaults and no extraction/execution,
 and requires fresh exact-head ordinary CI before one owned static requalification.

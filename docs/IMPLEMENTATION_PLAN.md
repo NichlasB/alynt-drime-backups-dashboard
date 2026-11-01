@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Pinned UBI static artifact/namespace proof passed — 2026-11-01
+
+[Exact36e8272/CI41350637322 and owned41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+pass:10 compressed hashes/diffIDs,10 namespace commits and both selected server/
+loader content origins,8684 entries/455730688 expanded bytes. Primary13-file/
+directory cleanup and always reconciliation complete; artifact0, no extraction,
+candidate execution, SQL or production wiring. Implementation-plan progress:
+combined static alias/hardlink prerequisite completes one milestone on closeout
+publication/CI, campaign7/10 milestones/native attempts7/10. This does not close
+legacy M ELF/dependency/runtime/native qualification. Readiness review is done;
+recommended next action is approve **Candidate-Bound Selected-ELF and Static
+Dependency-Closure Policy Exception**, a new source-owned object/provider policy
+and one further static acquisition, not an execution grant. Earlier text below
+retains historical scope/counters; no retry/evidence-commit credit is added.
+
 ## Approved static hardlink content-origin exception — 2026-11-01
 
 User approves [candidate-bound hardlink DATA/content provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)

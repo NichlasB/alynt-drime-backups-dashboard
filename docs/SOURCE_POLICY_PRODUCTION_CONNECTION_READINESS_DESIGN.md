@@ -1,5 +1,12 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current outcome: [static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+passes10 complete layers/namespace commits and both origins, cleanup/artifact0,
+no extraction/execution/SQL. On evidence CI campaign7/10 milestones/native7/10.
+Legacy M ELF/dependency/runtime coverage and production-provider/form gates stay
+open. Next approval is Candidate-Bound Selected-ELF and Static Dependency-Closure
+Policy Exception, not candidate execution or wiring. Older resume text is historical.
+
 Current resume: [approved static hardlink provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
 requires exact-head QA/CI and one owned static proof; no extraction, execution,
 SQL or production/provider/form wiring. Actual legacy M evidence remains gated

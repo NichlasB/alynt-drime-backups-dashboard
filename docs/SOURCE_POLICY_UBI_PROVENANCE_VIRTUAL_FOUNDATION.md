@@ -1,5 +1,11 @@
 # UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation
 
+Current outcome: [explicit hardlink-enabled static consumer](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+passes the actual pinned candidate's10 layer commits and selected-origin checks,
+with runtime_grantfalse and exact cleanup. Default aliases/reader/runtime remain
+strict. Next source-owned Selected-ELF/Static Dependency-Closure policy is not
+established by historical synthetic graph positives or current content hashes.
+
 Current resume: [approved hardlink DATA extension](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
 adds an explicit defaultfalse model opt-in, fixed static consumer only. Strict
 reader/runtime defaults and no-execution grants remain. Historical model/source

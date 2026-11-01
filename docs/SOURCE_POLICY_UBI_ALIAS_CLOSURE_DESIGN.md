@@ -1,5 +1,11 @@
 # UBI Critical-Alias and Dependency-Closure Admission Design
 
+Current outcome: [approved hardlink-enabled static proof](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+passes10 verified layers/namespace commits and selected origins with no execution
+grant. Next policy is Candidate-Bound Selected-ELF and Static Dependency-Closure;
+static origin success does not establish ELF, provider or runtime-loaded closure.
+Earlier real-profile/type exclusions and failures below remain historical.
+
 Current resume: user approves [bounded hardlink content provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
 for the separate fixed static mode, no extraction/execution or default relaxation.
 Actual qualification follows fresh exact-head ordinary CI and one owned attempt;

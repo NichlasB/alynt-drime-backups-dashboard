@@ -1,5 +1,12 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+qualifies the pinned candidate's10 layers and selected virtual content origins,
+with exact cleanup/artifact0 and no extraction/execution/SQL. Legacy M ELF/
+dependency/runtime/native coverage remains open; the next exception is source-
+owned Selected-ELF and Static Dependency-Closure Policy, not runtime admission.
+The older blocked receipts below keep their exact source and limitations.
+
 Current resume: [approved hardlink DATA/content-origin work](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
 preserves extraction/execution denial and strict shared defaults. Its exact-head
 QA/CI and single owned requalification own current evidence; historical failed

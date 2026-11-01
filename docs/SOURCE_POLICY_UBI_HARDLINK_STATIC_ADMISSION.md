@@ -1,5 +1,13 @@
 # Candidate-Bound Static Hardlink DATA and Content Provenance
 
+Current outcome: [owned static41350800959](#exact-head-ci-and-successful-owned-static-proof)
+passes all10 compressed/diffID verifications and10 namespace commits, resolves
+both selected origins and completes primary/always cleanup with artifact0.
+No ELF/dependency/runtime grant follows. One authorized static requalification
+has been used; next boundary is Candidate-Bound Selected-ELF and Static
+Dependency-Closure Policy Exception. Campaign advances to7/10 completed
+milestones after this evidence's publication/CI; native attempts remain7/10.
+
 ## Approval, baseline and plan — 2026-11-01
 
 User explicitly approves implementation, validation, commit/push/exact-head CI
@@ -137,3 +145,85 @@ blocked legacy M static prerequisite, not native qualification. Counters remain
 6/10 milestones and7/10 native attempts pending actual validation/publication/
 qualification/evidence. Retrying, diagnostics, cleanup and docs commits do not
 earn separate milestone credit; one static requalification is authorized here.
+
+## Exact-head CI and successful owned static proof
+
+Implementation36e8272ac1dfd3fcc5f1c6f46cf90a6a98fce291 is pushed;
+[ordinary CI41350637322](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41350637322)
+succeeds at the exact head. Actual PHP7.4 logs2597 tests/23396 assertions;
+PHP8.3 logs2597/23401; Node74/74 on both with no failures/skips. Manifest,
+dependency audits, build, structure and PHPCS gates pass, including Linux
+execution of the actual synthetic collector/model/origin/cleanup contracts.
+
+Exactly one [owned alias-mode static requalification41350800959](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41350800959)
+at36e8272, job124980314222,2026-11-01 21:12:27–21:12:38UTC, **success**.
+Fixed manifest/config and all ten compressed descriptors (149080417 bytes in
+aggregate) verify. All10 full layer diffIDs verify and all10 namespace layers commit.
+Final report `selected-origins-verified`, metadata_verifiedtrue, alias_policytrue,
+runtime_grantfalse. Scan counters8684 entries/455730688 expanded bytes; every
+layer's actual counters are in the linked job. Total hardlink-binding count is
+not emitted; no numerical count is inferred from the synthetic fixtures.
+
+| Selected role | Actual final content origin |
+| --- | --- |
+| Server | Canonical `usr/sbin/mariadbd`, layer6/canonical-record index1275; SHA256 `910b30f53e2c9812e7b3cdc37f40df2ca867738eb79ed799fc056c15774f5f19`; no selected symlink edges |
+| Loader | Requested `lib64/ld-linux-x86-64.so.2`, canonical `usr/lib64/ld-linux-x86-64.so.2`, layer0/canonical-record index1641; SHA256 `73983b1895c124baa82e5f1c9c26ba0717f1440dff97a217fbb20ddbed8a3751` |
+| Approved loader ancestor edge | `lib64` to `usr/lib64`, layer0/canonical-record index658; fixed archive ordinal659 checked before profile construction |
+| Immutable namespace snapshot | `28aa2447a393e3f43e1c843dc676e57834e10d085aa0aecf2f1dd2b4e3762d29`, identical in both selected-role receipts |
+| Frozen source cohort | `73b6db3b62c372f431837021126df30f898b3bacd632c567e9e4c8f2ba53c6db`, source_unchangedtrue |
+
+Both roles are regular-file content/origin DATA in the bounded model, each
+model_onlytrue/runtime_grantfalse. This is genuine artifact acquisition, complete
+hash verification and execution of the trusted static collector/model against
+that pinned archive. It is **not** candidate binary execution, a physical inode/
+general-rootfs equivalence proof, ELF-header verification or core/PHP/SQL proof.
+The selected-role success cannot be replaced by an always-unavailable owner or
+transferred from a synthetic positive; the actual two content digests are above.
+
+Primary finally21:12:36.866 removes exactly13 owned files (marker, manifest,
+config and10 compressed blobs) plus the directory, cleanupcomplete. Always
+recovery21:12:36.957 confirms complete/files_removed0; Actions artifact API
+total_count0. No owned proof resources remain; no physical secure-wipe claim.
+Candidate_executionfalse, image_loadingfalse, database_operationsfalse,
+rootfs_extractionfalse; runtime_feasibilitynot-run, dependency_closurenot-established.
+No PHP/core acquisition, server initialization/listener, authentication/SQL,
+LocalWP/live/application state or production wiring was touched. Trusted tool
+facts Python3.12.3/OpenSSL3.0.13/Unicode15.0.0 are not candidate runtime identity.
+
+## Dependency/readiness decision at closeout
+
+The in-scope repository readiness review is complete; no separate approval is
+requested merely to plan the next slice. Whole-layer/namespace and selected
+hashes close the immediate type/provenance blocker. They do not prove that the
+named files have valid ELF structure, their interpreter/DT_NEEDED/search-path
+metadata, a finite unambiguous provider map or runtime-loaded-object closure.
+The current parser's dependency_closure_verifiedfalse and runtime grants stay
+unchanged. Required legacy M core6.0/PHP7.4/exact-engine qualification stays open.
+
+Next static work needs a separately source-owned object/provider admission
+policy and another fresh acquisition: all candidate bytes were intentionally
+removed. It must bind any in-memory ELF inspection to the final verified content
+origin/SHA256, not trust a copied log receipt as authority, and charge rereads/
+objects/edges against existing deadlines/byte/work/256-object/4096-edge caps.
+Unknown or ambiguous providers, path-search features and unsupported ELF shapes
+must refuse, never fall back to host loader/cache/libraries. Static ELF graph
+evidence cannot establish NSS/FIPS/dlopen/plugin/shutdown-loaded dependencies or
+authorize candidate execution. No generic extractor/new image/toolchain is selected.
+
+Recommended next action: **approve Candidate-Bound Selected-ELF and Static
+Dependency-Closure Policy Exception**, through bounded source-owned inspection/
+provider rules, isolated implementation/review/validation/CI and one owned static
+proof on this same pinned candidate. Keep extraction, image loading, candidate
+execution, server initialization/SQL and production wiring disabled. This extends
+the current content-origin-only policy and consumes a new acquisition beyond the
+single requalification authorized here; a new slice name alone is not the gate.
+
+Implementation-plan progress: the combined fixed-alias/hardlink artifact and
+namespace prerequisite now completes one worthwhile milestone. After evidence
+publication/exact-head CI, **campaign7/10 milestones, native attempts7/10**.
+There have been four static acquisition jobs in the workstream, the current one
+successful; none is a native qualification attempt. No separate credit for the
+intermediate blocked foundation, reviews, diagnoses, cleanup or evidence commits.
+The remaining candidate ELF/dependency/runtime/native gates and all production/
+release boundaries are unchanged. Evidence-only closeout receives its own pushed
+exact-head ordinary CI at handoff without another acquisition or native attempt.

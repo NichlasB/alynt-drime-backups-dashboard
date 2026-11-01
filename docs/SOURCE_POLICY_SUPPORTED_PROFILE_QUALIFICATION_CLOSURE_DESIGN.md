@@ -1,5 +1,12 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
+passes10 layers/namespace commits and both selected origins, exact cleanup,
+artifact0, no execution/SQL. On closeout CI campaign7/10 milestones/native7/10.
+Legacy M core/PHP/engine qualification is still unproved; selected hashes do not
+qualify ELF/dependency/runtime closure. Next boundary is source-owned Selected-ELF
+and Static Dependency-Closure Policy Exception. Historical W/L receipts are unchanged.
+
 Current resume: [bounded static hardlink provenance](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md)
 is explicitly approved without extraction/execution. New ordinary CI and one
 owned static requalification are required; current W/L/native receipts do not
