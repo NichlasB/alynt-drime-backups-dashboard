@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+2026-11-01 current resume: [approved legacy candidate design](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
+advances required M planning only. Conditional10.6.23-ubi9/amd64 digest plus pinned
+PHP7.4/core6.0 is not qualified. Next gated slice: Owned Legacy-Minimum UBI Artifact
+and Connection-Free Runtime Feasibility Proof, new bounded artifact/runtime scope;
+no initialization/SQL, default-policy waiver or production/provider/form wiring.
+
 Current resume: approved Linux/socket [requalification](SOURCE_POLICY_LINUX_NATIVE_QUALIFICATION_OWNED_PROOF.md#current-shared-source-requalification--2026-10-31)
 at1c4f848/native41247436756 passes285/9 with byte probe, independent release and
 exact cleanup. W and L current-source rows now have physical evidence. Campaign

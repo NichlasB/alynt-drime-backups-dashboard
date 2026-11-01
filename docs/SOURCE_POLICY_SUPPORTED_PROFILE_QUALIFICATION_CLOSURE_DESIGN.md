@@ -1,5 +1,12 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+2026-11-01 current resume: approved [legacy candidate design](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
+selects the conditional digest-pinned10.6.23-ubi9/amd64 server with existing PHP7.4/
+core6.0. Required M remains unqualified; metadata is not binary/session evidence
+or default-contract admission. Next gated slice is Owned Legacy-Minimum UBI
+Artifact and Connection-Free Runtime Feasibility Proof, new artifact/runtime
+scope without initialization/SQL or acceptance/production-wiring changes.
+
 ## Current campaign coverage reconciliation — 2026-10-31
 
 The accepted trusted minimum lab now passes at exact source19288da, manual

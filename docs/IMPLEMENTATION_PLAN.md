@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Legacy minimum exact-server candidate design — 2026-11-01
+
+Approved repository-only [candidate/qualification design](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
+selects conditional official Linux/amd64 MariaDB10.6.23-ubi9 by platform digest,
+retaining the pinned PHP7.4 donor/core6.0 and numeric-loopback TCP. Metadata/source
+only: payload/build/runtime identities and default-contract eligibility remain
+unverified. Raw mysqli versus SQL/core-helper identity and collation are separate
+gates; no stripping/fallback or transfer of the newer-server private exception.
+Implementation-plan progress: meaningful legacy M candidate/runner decision,
+not physical qualification; after publication/CI campaign4/10 milestones,
+native attempts unchanged7/10. Recommended next gated slice: **Owned Legacy-
+Minimum UBI Artifact and Connection-Free Runtime Feasibility Proof**, bounded
+harness/tests/static verification then prerequisite-gated version-only execution
+and exact cleanup. New artifact/runtime scope required; no SQL/initialization,
+site operations, host installation, acceptance or production-wiring changes.
+
 ## Current-source Linux/socket owned requalification passed — 2026-10-31
 
 Approved fixed ephemeral runner at1c4f848 passes285 checks/nine groups in
