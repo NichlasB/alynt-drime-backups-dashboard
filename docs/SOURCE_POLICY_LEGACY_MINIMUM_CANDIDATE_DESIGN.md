@@ -198,4 +198,9 @@ assertions, no failures and two existing missing-Sodium skips; PHPCS255 files,
 Node74/74 without failures/skips, structure and strict Composer validation pass.
 Local reference resolution and git diff --check pass. No new tests were necessary
 for a documentation-only decision; existing passing tests do not prove the new
-candidate. Pushed exact-head ordinary CI evidence follows after actual execution.
+candidate. Publication `3591ab95fa6731f26a9f84c26d9d6050b5d450e7` is pushed;
+exact-head [ordinary CI41333702260](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41333702260)
+succeeds. Actual PHP7.4 logs2589 tests/23348 assertions, PHP8.3 logs2589/23353;
+both Node suites74/74, no failures/skips. Manifest/audits/build/structure/PHPCS
+also pass. This evidence-only closeout receives its own pushed exact-head CI at
+handoff; it neither acquires artifacts nor executes a candidate/native proof.
