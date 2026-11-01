@@ -1,5 +1,12 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current outcome: [alias-static attempt41348060972](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+refuses hardlink entry1915 before any full layer/namespace commit. No legacy M
+qualification is established; current W/L receipts are not transferred. Cleanup
+complete/artifact0, counters6/10 milestones and7/10 native attempts unchanged.
+Next boundary is Candidate-Bound Static Hardlink DATA and Content-Provenance
+Policy Exception, no native/provider/form grant. Older resume text is historical.
+
 Current resume: the [approved exact-candidate static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 is isolated from strict defaults and runtime grants. An owned static attempt must
 establish its actual hash/namespace evidence; legacy M/native row remains open.

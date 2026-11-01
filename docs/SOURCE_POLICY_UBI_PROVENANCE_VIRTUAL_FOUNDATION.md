@@ -1,5 +1,10 @@
 # UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation
 
+Current outcome: the [explicit static consumer](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+passes isolated QA/CI but its real collection stops at hardlink entry1915 with
+zero complete layers/model commits. No physical alias/closure or runtime grant
+is claimed. A new hardlink DATA/content-provenance policy exception is required.
+
 Current resume: the later approved [static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 adds the first explicit static-only consumer of this model; shared reader/runtime
 defaults remain unchanged and `real_aliases()` remains empty. That separate mode

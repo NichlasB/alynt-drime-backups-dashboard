@@ -1,5 +1,12 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current outcome: [alias-mode attempt41348060972](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md#exact-head-implementation-ci-and-one-owned-refusal)
+refuses hardlink entry1915, no complete layer/diffID or namespace commit, exact
+cleanup complete/artifact0. Next boundary is Candidate-Bound Static Hardlink
+DATA and Content-Provenance Policy Exception; no current evidence qualifies
+the UBI candidate/runtime or authorizes a type-guard bypass. Earlier text is
+historical and retains its own actual source/receipt limitations.
+
 Current resume: the [approved separate alias-static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 implements complete-layer quarantined collection and one fixed lib64 edge without
 changing the strict shared reader. Exact-head QA/publication precedes a new owned

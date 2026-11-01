@@ -1,5 +1,11 @@
 # UBI Critical-Alias and Dependency-Closure Admission Design
 
+Current outcome: [alias-static foundation/proof](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+is published/CI verified; actual archive refuses a hardlink before full layer
+verification. No alias/namespace/runtime qualification follows. New boundary is
+Candidate-Bound Static Hardlink DATA and Content-Provenance Policy Exception;
+strict defaults/empty default aliases and no execution remain unchanged.
+
 Current resume: user approves the [candidate-bound static exception](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md).
 Only an explicitly selected static workflow mode consumes the model, after full
 layer hashes, with the fixed lib64 edge and runtime_grantfalse. Shared strict

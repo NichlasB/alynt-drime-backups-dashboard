@@ -1,5 +1,11 @@
 # Candidate-Bound UBI Alias-Aware Static Admission
 
+Current outcome: implementation/ordinary CI pass, but the one owned static
+attempt refuses layer-0 hardlink entry1915 before complete diffID verification.
+No namespace layer, alias grant, selected origin or runtime is qualified. Exact
+primary/always cleanup complete, artifact0. Next policy boundary is candidate-bound
+hardlink DATA/content provenance, not a retry or removal of the type guard.
+
 ## Authority, baseline and bounded plan — 2026-11-01
 
 User explicitly approves the candidate-bound static path-acceptance exception
@@ -111,3 +117,80 @@ approved-edge integration advances required legacy M preparation, not runtime
 qualification. Until all validation/publication/evidence is complete, campaign
 remains6/10 milestones,7/10 native attempts. Static retries, cleanup and docs-only
 closeout commits are not additional milestones or native qualification attempts.
+
+## Exact-head implementation CI and one owned refusal
+
+Implementationc8584b479c5576448e0eb0d17593a76e11460bac is pushed;
+[ordinary CI41347896557](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41347896557)
+succeeds at that exact head. Actual PHP7.4 logs2596 tests/23391 assertions;
+PHP8.3 logs2596/23396; Node74/74 on both with no failures/skips. Manifest,
+dependency audits, build, structure and PHPCS pass, including Linux execution
+of the synthetic collector/model/ownership contracts.
+
+Exactly one alias_policytrue [owned static attempt41348060972](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41348060972)
+atc8584b4, job124972049852,2026-11-01 20:40:30–20:40:35UTC, **failure**.
+Metadata and first compressed layer size/SHA256 verify; the separate collector
+then refuses `alias-unsupported-type`, stage `layer-0`, global archive entry1915,
+kind `hardlink`. Name and target are each39 characters, full-name hashes only:
+
+- name `c8c41d63637fe1865fff1e539da9dcb6036107795450a35034c56835f07fab9d`;
+- target `bb3a89da2631b8bcecc40610317e8b8d1382d61806b4f1829563512e5d31cfc6`.
+
+Both literal fields are null under the existing public-library/executable-domain
+diagnostic rule; no guessed filename, target regularity or safe-link conclusion
+is made. Partial scan counters:69038080 expanded bytes,1915 entries. **Zero
+complete layers/diffIDs and zero namespace layers committed**. The earlier lib64
+symlink can now be collected as quarantined DATA, but the real profile is never
+constructed/applied on this failed whole-layer prerequisite. Synthetic positive
+resolution is not transferred to the real archive.
+
+Source unchangedtrue, frozen image
+`8adb60efc4736d47ecae0ede2a55ea6f98d36a95b69b1cbba9d6c3589a0d16c3`.
+Primary finally at20:40:34.298 removes four owned files (marker, manifest, config,
+first compressed blob) and directory, cleanupcomplete. Always recovery at
+20:40:34.386 confirms complete/files_removed0; Actions artifact API total_count0.
+No resources remain requiring recovery; no physical secure-wipe claim. Runtime
+grant, candidate execution, image loading, database operations and rootfs
+extraction allfalse. No PHP/core acquisition, native server, authentication,
+SQL, LocalWP/live/application-state or production-wiring operation occurred.
+
+## Hardlink readiness review and next approval
+
+The guard is behaving as designed: this exception's initial supported type
+subset explicitly excludes hardlinks. No evidence shows a harness/guard defect
+that justifies an automatic repair, and an unchanged retry cannot add evidence.
+The approved lib64 symlink exception is not authority to add another archive type.
+
+The source-scoped design review is completed under existing campaign design
+authority. [OCI1.1.1 hardlink rules](https://github.com/opencontainers/image-spec/blob/v1.1.1/layer.md#hardlinks)
+describe shared file identity, not symbolic path redirection, and warn about
+references outside a layer. Therefore do not relabel hardlinks as symlinks,
+resolve them merely through the final pathname tree, skip them while claiming
+complete namespace semantics, or manufacture content hashes. A future narrower
+policy must explicitly define archive-root target grammar, ordering/layer origin,
+content identity retained across later unlink/replacement/whiteout, metadata
+compatibility, chains/forward references and finite cost. Unsupported/ambiguous
+cases remain refusals; directory/symlink/special/host targets are not implicitly
+authorized. Actual candidate names/targets and complete verified origins remain
+unknown in this receipt. These are proposed requirements, not implemented or
+physically demonstrated semantics.
+
+Recommended next action: **approve a Candidate-Bound Static Hardlink DATA and
+Content-Provenance Policy Exception**, covering bounded repository design,
+isolated implementation/review/CI and one owned static requalification for this
+same pinned image. Limit any eventual support to verified regular-file content
+origins under explicitly tested ordering/whiteout/replacement rules; retain
+strict shared defaults, resource/ownership limits, no rootfs extraction and
+runtime_grantfalse. No native execution, initialization/SQL or production wiring.
+This is a new type/content-identity policy boundary, not a routine slice-name gate
+or request to approve another already-authorized design review.
+
+Implementation-plan progress: separate collector/fixed-edge foundation is
+implemented and isolated QA/CI verified, but real static admission remains
+blocked before the first full layer. **Campaign completion credit stays6/10
+milestones; native attempts stay7/10**. The blocked qualification, acquisition
+retry, cleanup and evidence commits receive no new milestone credit. There are
+now three static acquisitions in this workstream, one in alias mode; none is a
+native qualification attempt. Required legacy M/dependency/runtime closure and
+all production/provider/form/release gates remain open. Exact-head publication
+of this evidence receives ordinary CI verification without another acquisition.

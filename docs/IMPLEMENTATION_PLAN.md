@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Alias-mode collection reaches hardlink policy boundary — 2026-11-01
+
+[Implementationc8584b4/CI41347896557](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md#exact-head-implementation-ci-and-one-owned-refusal)
+passes; one alias-mode static attempt41348060972 refuses layer-0 hardlink
+entry1915 after the prior symlink refusal point. Zero full layers/diffIDs and
+namespace commits; primary/always cleanup complete, artifact0, no execution/SQL.
+Implementation-plan progress: collector/fixed-edge foundation implemented, real
+legacy M static admission blocked by a new type/content-provenance policy boundary.
+Do not count a blocked proof/retry/evidence commit: campaign6/10 milestones,
+7/10 native attempts unchanged. Source-scoped hardlink readiness review is done;
+recommended next action is approve **Candidate-Bound Static Hardlink DATA and
+Content-Provenance Policy Exception**, bounded static-only support/qualification
+with verified regular-file origins, unchanged strict defaults/limits and no
+runtime grant. No unchanged retry, hardlink-as-symlink shortcut or generic cleanup.
+Earlier resume statements below are historical.
+
 ## Approved candidate-bound static alias exception — 2026-11-01
 
 User approves the [separate static admission implementation](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md):

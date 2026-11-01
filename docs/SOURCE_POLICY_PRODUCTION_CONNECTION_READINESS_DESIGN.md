@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current outcome: [alias-static owned attempt41348060972](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
+refuses hardlink entry1915, no full layer/namespace/native proof. Cleanup complete,
+artifact0; campaign6/10 milestones,7/10 native attempts unchanged. Next approval
+is Candidate-Bound Static Hardlink DATA and Content-Provenance Policy Exception,
+not production/provider/form integration. Earlier resume text is historical.
+
 Current resume: [approved separate static alias mode](SOURCE_POLICY_UBI_ALIAS_STATIC_ADMISSION.md)
 preserves strict shared defaults and runtime_grantfalse. Full-layer/namespace
 proof remains prerequisite to any selected-origin result; no dependency/native M
