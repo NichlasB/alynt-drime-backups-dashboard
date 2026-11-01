@@ -198,4 +198,9 @@ no failures and two existing missing-Sodium skips. PHPCS255 files, Node74/74/no
 skips, structure, strict Composer validation, local link resolution and
 git diff --check pass. No new tests are warranted for documentation-only policy;
 existing regression success does not prove a virtual resolver or UBI closure.
-Publication exact-head CI evidence follows actual execution, not these assumptions.
+Publication37a1dc6a47008206bc0eb3ac879f2354e0f15001 is pushed; exact-head
+[ordinary CI41336660618](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41336660618)
+succeeds. Actual logs PHP7.4:2591 tests/23361 assertions; PHP8.3:2591/23366;
+Node74/74 on both, no failures/skips. Manifest/audits/build/structure/PHPCS pass.
+This scoped evidence-only closeout receives its own pushed exact-head CI at
+handoff without acquisition, new native attempt or changed executable behavior.
