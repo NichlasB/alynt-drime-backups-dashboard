@@ -1,5 +1,10 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current planning resume: approved [UBI alias/closure design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md)
+keeps real-candidate aliases disabled and static guards unchanged. Next gated
+slice is Repository-Only UBI Failed-Entry Provenance and Dormant Virtual-Closure
+Safety Foundation, synthetic-only; no physical M/runtime eligibility is inferred.
+
 Current UBI prerequisite [result](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal):
 first-layer critical-parent refusal, primary/always cleanup complete, no runtime
 or legacy M qualification. Next gated slice: repository-only UBI Critical-Alias

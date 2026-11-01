@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current planning resume: [UBI alias/closure design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md)
+defines failure evidence and dormant image-only provenance model while preserving
+static refusal. Next gated slice: Repository-Only UBI Failed-Entry Provenance and
+Dormant Virtual-Closure Safety Foundation, synthetic only, no acceptance/acquisition/
+execution/wiring changes. Physical legacy M and runtime closure remain unqualified.
+
 2026-11-01 current blocker: [owned UBI prerequisite](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal)
 at08ab612/native-static41335270059 refuses layer-0 critical-parent guard; exact
 cleanup complete, no image loading/execution/SQL. Legacy M still unqualified.

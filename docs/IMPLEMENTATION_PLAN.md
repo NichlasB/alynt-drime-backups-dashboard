@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## UBI alias/closure admission design — 2026-11-01
+
+Approved repository-only [design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md) keeps
+the actual failed member/type unknown and current reader's refusal unchanged.
+Decision: source-bound first-failure evidence and a separate dormant, bounded
+image-only namespace/provenance model, no real alias profile or execution grant.
+OCI layer/whiteout semantics, finite link traversal and ELF-versus-runtime closure
+limits are explicit. Implementation-plan progress: security-policy design advances,
+not physical M qualification; after publication/CI campaign5/10 milestones,
+native attempts7/10 unchanged. Recommended next gated slice: **Repository-Only UBI
+Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation**, synthetic
+tests only; no parser relaxation, real aliases, acquisition/dispatch/execution/SQL
+or production wiring.
+
 ## Legacy UBI feasibility blocked at critical-parent guard — 2026-11-01
 
 Published prerequisite08ab612 passes ordinary CI41335121742. Its one

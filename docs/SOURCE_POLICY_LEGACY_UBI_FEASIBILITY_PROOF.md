@@ -1,5 +1,11 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current resume: the approved repository-only [alias/closure design](SOURCE_POLICY_UBI_ALIAS_CLOSURE_DESIGN.md)
+preserves this failed proof and reader guards. Next gated slice is Repository-
+Only UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation,
+synthetic tests only, no real alias activation/acquisition/execution. No later
+design transfers physical acceptance to this refused candidate.
+
 ## Authority and coherent baseline — 2026-11-01
 
 User approves the [owned artifact/connection-free feasibility scope](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md),
