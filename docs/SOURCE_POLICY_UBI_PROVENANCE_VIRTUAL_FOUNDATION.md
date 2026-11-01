@@ -128,6 +128,15 @@ validation and Composer/npm audits pass; zero known project advisories/
 vulnerabilities. Diff/ownership checks pass. Exact-head publication CI follows
 actual execution; isolated results do not establish UBI physical feasibility.
 
+Publication698e6a4018ac6def0a3a85ec27b918f964d73010 is pushed; exact-head
+[ordinary CI41339860920](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41339860920)
+succeeds. Actual PHP7.4 logs2594 tests/23377 assertions; PHP8.3 logs2594/23382;
+Node74/74 on both, no failures/skips. Manifest/audits/build/structure/PHPCS pass,
+including Linux execution of the synthetic model/provenance/cleanup contracts.
+This does not dispatch the static artifact workflow or qualify a real alias.
+The evidence-only closeout receives its own pushed exact-head CI at handoff;
+no acquisition/native rerun is required or authorized by publication.
+
 Implementation-plan progress: failure provenance and dormant bounded model are
 implemented; on publication/exact-head CI campaign6/10 milestones, native
 qualification attempts unchanged7/10. Physical legacy M/UBI feasibility remains
