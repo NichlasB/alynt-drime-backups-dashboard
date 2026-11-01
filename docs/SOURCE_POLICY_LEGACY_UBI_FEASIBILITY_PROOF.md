@@ -179,6 +179,14 @@ dependency changes. Uploader and toolkit working trees remain clean/untouched.
 This local QA validates unchanged isolated contracts, not an accepted UBI layer,
 real alias policy, database proof or whole-plugin release readiness.
 
+Publication8b42df686ca2467dbc6f4ebdabe0599b07ec2ea7 is pushed; exact-head
+[ordinary CI41343239603](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41343239603)
+succeeds. Actual PHP7.4 logs2594 tests/23377 assertions; PHP8.3 logs2594/23382;
+Node74/74 on both with no failures/skips. Manifest validation, dependency audits,
+build, structure and PHPCS pass. This evidence-only CI closeout receives its own
+pushed exact-head verification at handoff; the static refusal remains a failure,
+no successful UBI/native qualification is claimed, and no acquisition is repeated.
+
 ## Exact-head publication and single owned refusal
 
 Implementation08ab612c2b65e154165aafb549e25851b12ab44c is pushed;
