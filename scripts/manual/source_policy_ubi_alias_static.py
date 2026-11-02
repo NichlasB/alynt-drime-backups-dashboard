@@ -103,7 +103,11 @@ def collect(path, compressed, size, diff_id, budget, elf_policy=False):
                             try:
                                 parsed = elf.parse(body, budget['deadline'])
                             except elf.Refusal as error:
-                                raise s.Refusal(str(error)) from None
+                                refused = s.Refusal(str(error))
+                                if 'elf_string_table_facts' in error.__dict__:
+                                    try: refused.elf_string_table_facts = elf.string_table_packet(error.elf_string_table_facts)
+                                    except Exception: refused.elf_string_table_facts = None
+                                raise refused from None
                             s.require(parsed['sha256'] == row['sha256'], 'elf-content-origin')
                             budget['elf_work'] = budget.get('elf_work', 0)+parsed['work']; elf_work += parsed['work']
                             budget['elf_metadata'] = budget.get('elf_metadata', 0)+len(json.dumps(parsed, ensure_ascii=True).encode('ascii'))

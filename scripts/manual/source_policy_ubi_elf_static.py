@@ -31,6 +31,43 @@ def eligible(path):
     return path in (SERVER, LOADER) or (path.startswith('usr/lib64/') and library(path[10:]))
 
 
+def string_table_packet(value):
+    fields = {'format', 'strtab_present', 'strsz_present', 'declared_strsz', 'limit_bytes', 'failed_predicates', 'diagnostic_only', 'runtime_grant'}
+    if type(value) is not dict or len(value) != len(fields) or not all(type(k) is str for k in value) or set(value) != fields: return None
+    if not (type(value['format']) is str and value['format'] == 'ADBUELFST1'
+            and type(value['strtab_present']) is bool and type(value['strsz_present']) is bool
+            and type(value['limit_bytes']) is int and value['limit_bytes'] == MIB
+            and value['diagnostic_only'] is True and value['runtime_grant'] is False): return None
+    size = value['declared_strsz']
+    if value['strsz_present']:
+        if type(size) is not int or not 0 <= size < 2**64: return None
+    elif size is not None: return None
+    failed = []
+    if not value['strtab_present']: failed.append('missing-strtab')
+    if not value['strsz_present']: failed.append('missing-strsz')
+    elif size == 0: failed.append('zero-strsz')
+    elif size > MIB: failed.append('strsz-over-limit')
+    if not (failed and type(value['failed_predicates']) is list and len(value['failed_predicates']) <= 2
+            and all(type(p) is str for p in value['failed_predicates']) and value['failed_predicates'] == failed): return None
+    return dict(value, failed_predicates=list(failed))
+
+
+def capture_string_table_failure(error, tags):
+    require(type(error) is Refusal, 'elf-diagnostic-shape')
+    if 'elf_string_table_facts' in error.__dict__: return
+    require(type(tags) is dict and len(tags) <= 3 and all(type(k) is int and k in (5,10,14) for k in tags)
+            and all(type(v) is int and 0 <= v < 2**64 for v in tags.values()), 'elf-diagnostic-shape')
+    failed = []
+    if 5 not in tags: failed.append('missing-strtab')
+    if 10 not in tags: failed.append('missing-strsz')
+    elif tags[10] == 0: failed.append('zero-strsz')
+    elif tags[10] > MIB: failed.append('strsz-over-limit')
+    facts = string_table_packet(dict(format='ADBUELFST1', strtab_present=5 in tags, strsz_present=10 in tags,
+        declared_strsz=tags.get(10), limit_bytes=MIB, failed_predicates=failed, diagnostic_only=True, runtime_grant=False))
+    require(facts is not None, 'elf-diagnostic-shape')
+    error.elf_string_table_facts = facts
+
+
 def parse(data, deadline=None):
     require(type(data) in (bytes, bytearray) and 64 <= len(data) <= 128*MIB and data[:7] == b'\x7fELF\x02\x01\x01', 'elf-header')
     require(deadline is None or type(deadline) in (int, float) and 0 <= deadline < float('inf'), 'elf-deadline')
@@ -86,7 +123,12 @@ def parse(data, deadline=None):
     require(ended, 'elf-dynamic-terminator')
     strings = b''
     if needed or paths or 14 in tags:
-        require(5 in tags and 10 in tags and 0 < tags[10] <= MIB, 'elf-string-table')
+        try:
+            require(5 in tags and 10 in tags and 0 < tags[10] <= MIB, 'elf-string-table')
+        except Refusal as error:
+            try: capture_string_table_failure(error, tags)
+            except Exception: error.__dict__.setdefault('elf_string_table_facts', None)
+            raise
         mapped = [off+tags[5]-va for va, off, length in loads if va <= tags[5] and tags[5]+tags[10] <= va+length]
         require(len(mapped) == 1, 'elf-string-mapping')
         strings = data[mapped[0]:mapped[0]+tags[10]]

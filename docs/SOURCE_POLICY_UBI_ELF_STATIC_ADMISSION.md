@@ -1,5 +1,10 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
+Current authorization: user approves the [string-table diagnostic](#approved-string-table-refusal-diagnostic)
+and one fresh owned static cleanup proof. The preceding one-attempt authority
+was used; this is a new bounded diagnostic approval, not acceptance widening.
+Extraction/execution remain disabled. Historical outcomes below retain scope.
+
 Current outcome: implementation/ordinary CI pass, but the one owned static proof
 [41447107590](#exact-head-ci-and-one-owned-static-refusal) refuses `elf-string-table`
 at layer6, cumulative archive entry3714, `usr/lib64/libmariadbd.so.19`. Six layers
@@ -249,3 +254,69 @@ decision. Another acquisition exceeds the one explicitly authorized here; no
 additional dispatch is made. Production/provider/form and legacy M runtime/
 native qualification stay gated. Evidence-only closeout gets its own exact-head
 CI without another artifact or native attempt; uploader/toolkit stay untouched.
+
+## Approved string-table refusal diagnostic
+
+2026-11-02 user approves the exact preceding recommendation: harness-only
+first-refusal facts and one fresh owned static acquisition/cleanup, no acceptance
+or budget change. Restore/review baseline d3db40de9ab19027e1993a020ca8bf54fc79e425
+is clean/synced; ordinary CI41447815968 is reverified successful. This is the
+explicit narrow R3 binary/remote-artifact/owned-file diagnostic scope, not a
+general tier increase or installed-site authority. No uploader/toolkit edits.
+
+Plan: red synthetic regressions; retain the existing combined string-table guard
+verbatim; observe only typed DT_STRTAB/DT_STRSZ presence, unsigned64 declared size,
+fixed limit and failed-condition enums on that same refusal; validate primitive
+facts across collector and fixed-entry relays; preserve the first original
+error/code if diagnostics fail; review/full QA/commit/push/exact-head CI; one
+fresh exact-candidate static diagnostic and primary/always cleanup. No new body
+reads/files, full string-table copies, tag addresses/raw strings, host lookup,
+extraction, candidate execution, SQL, LocalWP/live or production wiring. Earlier
+receipt remains failed and source-scoped. Campaign starts7/10 milestones/native
+7/10, five static acquisitions; no counter reset or extra diagnostic credit.
+
+### Diagnostic implementation and source-scoped review
+
+The original `require(5 in tags and 10 in tags and 0 < tags[10] <= MIB,
+'elf-string-table')` expression remains verbatim. Its failure alone captures
+ADBUELFST1: exact-format identifier, two typed presence booleans, unsigned64
+declared_strsz ornull if absent, fixed1048576-byte limit, at most two ordered
+failed-predicate enums, diagnostic_onlytrue/runtime_grantfalse. No tag addresses,
+strings, bodies, symbol names or arbitrary errors enter the packet. Eight exact
+keys, bounded integers and source-owned literals bound the entire packet below
+1024 bytes; oversized dictionaries/lists and unknown or inconsistent fields are
+withheld before copying. A received packet cannot independently attest origin,
+complete diffID verification or membership in a reachable graph.
+
+Capture occurs before string-table mapping/copying, solely on refusal. First
+facts cannot be replaced; a diagnostic malfunction rethrows the same parser
+exception, with unavailable facts rather than a new cause. The collector keeps
+its existing error-type conversion and refusal code, validates the optional
+packet and retains the existing member-name/ordinal context. The fixed entry
+validates/copies again through one first-write relay; malformed or malfunctioning
+diagnostics become null, not success or an exception-message dump. It does not
+change status, verification counters, ownership, cleanup or exit criteria.
+
+Six added synthetic groups initially error against the absent implementation;
+all20 groups now pass under `-W error::SyntaxWarning`, no network calls. They
+exercise actual ELF bytes for each missing/zero/oversized/multiple failed clause,
+the maximum unsigned64 value, an actually mapped exact1MiB positive table and an
+unchanged mapping refusal without false string-table attribution. Actual
+collector-to-entry relay, first-fact retention, copy isolation, hostile DATA,
+diagnostic malfunction/same-error preservation and no host IO/process calls are
+tested. Three new assertion-killed controls remove the actual size guard on an
+otherwise mapped over-limit object, remove capture, and bypass relay packet
+validation. They supplement the earlier five controls, not native qualification.
+Related PHP wrappers/predecessor contracts pass10 tests/62 assertions. Full local
+PHP8.5.1 passes2599 tests/23408 assertions, no failures/errors and the two existing
+Sodium-unavailable skips. PHPCS255 files, Node74/74/no skips, structure, build,
+Composer strict validation, Composer audit and npm audit pass; zero audited
+vulnerabilities. Publication CI and the one newly approved artifact diagnostic
+remain pending; no artifact/native operation is inferred from these tests.
+
+Review baseline is d3db40d through the diagnostic parser/collector/entry, tests
+and directly owning plan/evidence. No default/mode, graph/provider, source pin,
+resource budget, shared strict-reader, workflow permission/cleanup, runtime PHP,
+dependency or compatibility contract changes. This source-scoped review does
+not refresh whole-plugin pre-release, native or Database Review evidence. No
+installed site is in scope, so no LocalWP/Novamira/live operation is performed.

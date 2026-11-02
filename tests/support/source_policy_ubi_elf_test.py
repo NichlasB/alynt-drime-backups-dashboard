@@ -253,6 +253,117 @@ class Contracts(unittest.TestCase):
             with self.assertRaises(AssertionError):
                 with self.assertRaises(u.s.Refusal): u.policy_flags(['--approved-elf-static-prerequisite'], 'true', 'false')
 
+    def string_case(self, size=None, missing=()):
+        data = binary(['liba.so.1'])
+        for tag, offset in ((5, 256), (10, 272)):
+            if tag in missing: struct.pack_into('<q', data, offset, 0x60000001+tag)
+        if size is not None: struct.pack_into('<Q', data, 280, size)
+        return data
+
+    def mapped_table(self, size):
+        data = self.string_case(size)
+        data.extend(b'\0'*(4096+size-len(data)))
+        for offset in (64+32, 64+40): struct.pack_into('<Q', data, offset, len(data))
+        return data
+
+    def packet(self, size=0, missing=()):
+        with self.assertRaisesRegex(e.Refusal, '^elf-string-table$') as caught: e.parse(self.string_case(size, missing))
+        return caught.exception.elf_string_table_facts
+
+    def test_string_table_guard_reports_each_actual_clause_without_acceptance_change(self):
+        for size, missing, failed in [(0, (), ['zero-strsz']), (e.MIB+1, (), ['strsz-over-limit']),
+                (2**64-1, (), ['strsz-over-limit']), (12, (5,), ['missing-strtab']),
+                (12, (10,), ['missing-strsz']), (0, (5,10), ['missing-strtab','missing-strsz']),
+                (e.MIB+1, (5,), ['missing-strtab','strsz-over-limit'])]:
+            facts = self.packet(size, missing)
+            self.assertEqual(failed, facts['failed_predicates'])
+            self.assertEqual(5 not in missing, facts['strtab_present']); self.assertEqual(10 not in missing, facts['strsz_present'])
+            self.assertEqual(None if 10 in missing else size, facts['declared_strsz'])
+            self.assertEqual(e.MIB, facts['limit_bytes']); self.assertFalse(facts['runtime_grant']); self.assertTrue(facts['diagnostic_only'])
+        parsed = e.parse(self.mapped_table(e.MIB))
+        self.assertEqual(['liba.so.1'], parsed['needed']); self.assertFalse(parsed['executed'])
+        data = binary(['liba.so.1']); struct.pack_into('<Q', data, 264, 2**64-1)
+        with self.assertRaisesRegex(e.Refusal, 'elf-string-mapping') as caught: e.parse(data)
+        self.assertNotIn('elf_string_table_facts', caught.exception.__dict__)
+
+    def test_string_table_receiver_refuses_hostile_shapes_and_copies_only_fixed_data(self):
+        good = self.packet(); first = e.string_table_packet(good)
+        self.assertEqual('ADBUELFST1', first['format']); self.assertLessEqual(len(json.dumps(first).encode()), 1024)
+        first['failed_predicates'].clear(); self.assertEqual(['zero-strsz'], good['failed_predicates'])
+        class Hostile:
+            def __eq__(self, other): raise AssertionError('hostile equality')
+            def __str__(self): raise AssertionError('hostile string')
+        cases = [None, [], Hostile(), dict(good, secret='do-not-log'), {str(i):0 for i in range(100)}]
+        for key in good: cases.append({k:v for k,v in good.items() if k != key})
+        for key, value in [('format',Hostile()), ('strtab_present',1), ('strsz_present',None),
+                ('declared_strsz',True), ('declared_strsz',-1), ('declared_strsz',2**64),
+                ('declared_strsz','do-not-log'), ('limit_bytes',e.MIB+1), ('failed_predicates',[Hostile()]),
+                ('failed_predicates',['missing-strtab']), ('runtime_grant',True), ('diagnostic_only',False)]:
+            cases.append(dict(good, **{key:value}))
+        for value in cases: self.assertIsNone(e.string_table_packet(value))
+        self.assertIsNone(e.string_table_packet(dict(good, declared_strsz=1, failed_predicates=[])))
+
+    def test_string_table_diagnostic_failure_preserves_same_first_refusal(self):
+        original = e.require; seen = []
+        def watched(ok, code):
+            try: original(ok, code)
+            except e.Refusal as error: seen.append(error); raise
+        with patch.object(e, 'require', watched), patch.object(e, 'capture_string_table_failure', side_effect=RuntimeError('do-not-log')):
+            with self.assertRaisesRegex(e.Refusal, '^elf-string-table$') as caught: e.parse(self.string_case(0))
+        self.assertIs(seen[0], caught.exception); self.assertIsNone(caught.exception.elf_string_table_facts)
+        error = e.Refusal('elf-string-table'); e.capture_string_table_failure(error, {5:0, 10:0})
+        first = error.elf_string_table_facts; e.capture_string_table_failure(error, {})
+        self.assertIs(first, error.elf_string_table_facts)
+        for tags in (None, {5:'do-not-log'}, {10:True}, {10:2**64}, {99:1}):
+            with self.assertRaises(e.Refusal): e.capture_string_table_failure(e.Refusal('elf-string-table'), tags)
+
+    def test_string_table_actual_collector_and_fixed_entry_relay_are_non_vacuous(self):
+        with self.assertRaisesRegex(a.s.Refusal, '^elf-string-table$') as caught:
+            t.Contracts().scan([t.member('usr/lib64/libbad.so.1', data=self.string_case(e.MIB+1))], elf_policy=True)
+        self.assertEqual('usr/lib64/libbad.so.1', caught.exception.alias_facts['name']['literal'])
+        report = dict(status='refused', failure=str(caught.exception), runtime_grant=False)
+        u.retain_string_table_diagnostic(report, caught.exception.elf_string_table_facts, e)
+        self.assertEqual(['strsz-over-limit'], report['elf_string_table_facts']['failed_predicates'])
+        first = copy.deepcopy(report); u.retain_string_table_diagnostic(report, self.packet(), e)
+        self.assertEqual(first, report); self.assertNotIn('elf', caught.exception.__dict__)
+        report = {}; u.retain_string_table_diagnostic(report, dict(self.packet(), secret='do-not-log'), e)
+        self.assertIsNone(report['elf_string_table_facts']); self.assertNotIn('do-not-log', json.dumps(report))
+        with patch.object(e, 'string_table_packet', side_effect=RuntimeError('do-not-log')):
+            report = {}; u.retain_string_table_diagnostic(report, self.packet(), e)
+            self.assertIsNone(report['elf_string_table_facts'])
+        with patch.object(a, 'load', return_value=e), patch.object(e, 'string_table_packet', side_effect=RuntimeError('do-not-log')):
+            with self.assertRaisesRegex(a.s.Refusal, '^elf-string-table$') as caught:
+                t.Contracts().scan([t.member('usr/lib64/libbad.so.1', data=self.string_case(0))], elf_policy=True)
+            self.assertIsNone(caught.exception.elf_string_table_facts)
+        self.assertNotIn('elf_string_table_facts', t.Contracts().scan([t.member('usr/lib64/liba.so.1', data=binary(soname='liba.so.1'))], elf_policy=True))
+
+    def test_string_table_diagnostic_and_size_guard_mutations_are_assertion_killed(self):
+        oversized = self.mapped_table(e.MIB+1); original = e.require
+        with self.assertRaisesRegex(e.Refusal, '^elf-string-table$'): e.parse(oversized)
+        with patch.object(e, 'require', lambda ok, code: None if code == 'elf-string-table' else original(ok, code)):
+            with self.assertRaises(AssertionError):
+                with self.assertRaises(e.Refusal): e.parse(oversized)
+        with patch.object(e, 'capture_string_table_failure', return_value=None):
+            with self.assertRaises(AssertionError):
+                self.assertIn('elf_string_table_facts', self.caught_string_case().__dict__)
+        invalid = dict(self.packet(), secret='do-not-log')
+        with patch.object(e, 'string_table_packet', side_effect=lambda value:value):
+            report = {}; u.retain_string_table_diagnostic(report, invalid, e)
+            with self.assertRaises(AssertionError): self.assertIsNone(report['elf_string_table_facts'])
+
+    def caught_string_case(self):
+        with self.assertRaisesRegex(e.Refusal, '^elf-string-table$') as caught: e.parse(self.string_case(0))
+        return caught.exception
+
+    def test_string_table_diagnostics_perform_no_host_io_or_candidate_execution(self):
+        import os
+        import subprocess
+        with patch('builtins.open', side_effect=AssertionError('file IO')), patch.object(socket, 'socket', side_effect=AssertionError('network')), \
+             patch.object(subprocess, 'Popen', side_effect=AssertionError('execution')), patch.object(os, 'stat', side_effect=AssertionError('host stat')):
+            facts = self.packet(e.MIB+1); report = {}; u.retain_string_table_diagnostic(report, facts, e)
+            self.assertFalse(report['elf_string_table_facts']['runtime_grant'])
+            self.assertNotIn('do-not-log', json.dumps(report))
+
 
 if __name__ == '__main__':
     output = io.StringIO(); result = unittest.TextTestRunner(stream=output).run(unittest.defaultTestLoader.loadTestsFromTestCase(Contracts))

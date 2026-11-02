@@ -113,6 +113,12 @@ def policy_flags(arguments, alias_value, elf_value):
     return alias_mode, inspect_elf
 
 
+def retain_string_table_diagnostic(report, value, elf):
+    if elf is None or 'elf_string_table_facts' in report: return
+    try: report['elf_string_table_facts'] = elf.string_table_packet(value)
+    except Exception: report['elf_string_table_facts'] = None
+
+
 def proof(root, alias_policy=False, elf_policy=False):
     owner, phase, budget = None, 'metadata', None
     report = {'status': 'refused', 'candidate_execution': False, 'image_loading': False,
@@ -203,6 +209,8 @@ def proof(root, alias_policy=False, elf_policy=False):
             report['hardlink_facts'] = error.hardlink_facts
         if elf is not None and 'elf_facts' in error.__dict__:
             report['elf_facts'] = error.elf_facts
+        if 'elf_string_table_facts' in error.__dict__:
+            retain_string_table_diagnostic(report, error.elf_string_table_facts, elf)
         if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
             try:
                 context = dict(head=os.environ['GITHUB_SHA'], image=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest(),

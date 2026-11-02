@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved string-table refusal diagnostic; no acceptance change — 2026-11-02
+
+User approves the [bounded diagnostic and one owned static cleanup proof](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#approved-string-table-refusal-diagnostic).
+Baseline d3db40de9ab19027e1993a020ca8bf54fc79e425 is clean/synced, exact CI41447815968
+successful. Add only typed tag-presence/declared-size/failed-predicate facts to
+the existing refusal, with first-error preservation, bounded relay validation
+and synthetic guard controls. Validate/publish/exact-head CI before one new
+static acquisition/cleanup. Keep all acceptance expressions, pins, budgets,
+extraction/execution and production wiring unchanged; no site/native operations.
+Campaign7/10 milestones/native7/10, five static acquisitions at start; diagnostics,
+retries and evidence commits do not earn separate milestone credit.
+
 ## Static ELF foundation published; real string-table guard remains closed — 2026-11-02
 
 [Implementationcc9425d/CI41446844295 and static41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal):
