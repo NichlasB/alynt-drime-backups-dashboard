@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## String-access cost/reachability design; active policy unchanged — 2026-11-02
+
+The approved [repository-only design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
+selects bounded requested-string access, not a cap tuned to the failed object or
+reachability-based suppression. A future explicitly selected profile may accept
+an extent larger than1MiB only inside the complete mapped body, without copying
+the table and with byte-level pre-admission cost bounds. This is a new dormant
+admission policy proposal, not an already authorized parser change. Strict cap,
+eager collector, final-origin graph, limits and wiring remain untouched; no new
+artifact/native attempt. Reachability of the refused library remains unknown.
+Recommended next gated slice: **Local-only Socket-Free Candidate-Bound ELF
+String-Access and Cost Admission Safety Foundation**, pure opt-in/synthetic tests
+only, strict defaults and actual consumer wiring unchanged. Campaign7/10
+milestones/native7/10, six static acquisitions; design earns no product credit.
+
 ## Diagnostic identifies oversized declared string table; admission stays blocked — 2026-11-02
 
 [Diagnostic implementation e79a75f / CI41450370119 and owned static41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)

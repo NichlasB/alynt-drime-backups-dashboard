@@ -1,11 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Current resume: [actual string-table diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
-identifies an over-limit declared extent; ordinary CI passes, static qualification
-still fails with exact cleanup/artifact0. Legacy M and production/provider/form
-gates stay open; campaign milestones/native attempts7/10 unchanged. Next approval
-is repository-only string-table cost/reachability admission design, not an
-acceptance increase, new acquisition or wiring. Earlier text is historical.
+Current resume: [string-access cost/reachability design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
+specifies a dormant, explicit-opt-in bounded-access foundation. Active parser,
+eager refusal, graph and production/provider/form wiring remain unchanged; no
+artifact/native attempt. Next approval is the socket-free synthetic foundation,
+not live admission or execution. Legacy M stays blocked; campaign milestones/
+native attempts7/10 unchanged. Earlier text is historical.
 
 Current outcome: [static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 complete layers/namespace commits and both origins, cleanup/artifact0,

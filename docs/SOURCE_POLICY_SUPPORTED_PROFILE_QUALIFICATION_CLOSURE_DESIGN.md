@@ -1,11 +1,11 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
-Current resume: [diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
-measures the failed size-cap predicate; qualification stays refused with exact
-cleanup/artifact0 and no extraction/execution/SQL. Legacy M coverage remains
-open, campaign milestones/native attempts7/10 unchanged. Next gate is repository-
-only string-table cost/reachability admission design, preserving current limits
-and disabled wiring. Historical profile receipts are not refreshed by diagnostics.
+Current resume: [bounded-string-access admission design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
+is design-only; the measured failed qualification and enforced1MiB cap remain.
+Next approval is a socket-free, dormant opt-in foundation using synthetic bytes
+and cost tests, without collector/entry/workflow wiring or artifact/native work.
+Legacy M coverage remains open, milestones/native attempts7/10 unchanged. No
+historical profile or whole-plugin readiness row is refreshed by this design.
 
 Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 layers/namespace commits and both selected origins, exact cleanup,

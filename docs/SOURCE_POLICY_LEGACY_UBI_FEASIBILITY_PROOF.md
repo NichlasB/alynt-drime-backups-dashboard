@@ -1,11 +1,11 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
-Current resume: [diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
-measures DT_STRSZ1,084,894 versus the unchanged1,048,576-byte cap. Six layers/model
-commits, exact cleanup/artifact0, no final graph or extraction/execution/SQL.
-Legacy M remains blocked; campaign milestones/native attempts7/10 unchanged,
-six static acquisitions. Next gate is repository-only string-table cost and
-reachability admission design, not a cap increase or another artifact attempt.
+Current resume: [cost/reachability admission design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
+selects a dormant bounded-string-access foundation, not active cap widening or
+suppression of the refused library. Current source/limits and failed diagnostic
+remain unchanged; legacy M is blocked, milestones/native attempts7/10, six static
+acquisitions. Next approval is the socket-free explicit-opt-in foundation with
+synthetic tests only; no new acquisition, consumer wiring or execution.
 
 Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 qualifies the pinned candidate's10 layers and selected virtual content origins,

@@ -1,5 +1,12 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
+Current design: [string-access cost and reachability decision](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
+prefers a socket-free, dormant bounded-access foundation; it does not raise the
+active cap or suppress an unproved library refusal. Current parser/collector/
+graph/wiring remain unchanged and no artifact attempt is authorized. The next
+approval is the explicit-opt-in synthetic foundation named in that design.
+Historical diagnostics below retain their exact source and failed qualification.
+
 Current outcome: the [approved diagnostic / owned41450662313](#actual-string-table-diagnostic-and-cleanup-result)
 identifies both tags present, declared DT_STRSZ **1,084,894 bytes** versus the
 unchanged **1,048,576-byte** cap. Static admission still refuses; six layers/model
