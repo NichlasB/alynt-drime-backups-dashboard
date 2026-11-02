@@ -202,7 +202,7 @@ def _owned_model(owner, first):
         raise
 
 
-def _owned_graph(tree, owner, layers):
+def _owned_graph(tree, owner, layers, *, candidate_alias_context=None):
     v.require(type(owner) is v._FixedWorkAuthority, 'work-owner-type')
     elf = None
     try:
@@ -224,7 +224,13 @@ def _owned_graph(tree, owner, layers):
                 owner.check_observation(ordinal, index, layer['elf_bindings'][index], _metadata_digest(metadata))
                 observations[str(ordinal)+':'+str(index)] = metadata; seen.add((ordinal, index))
         v.require(seen == set(owner._records), 'work-owner-observation-omitted')
-        result = elf.graph(tree, observations, owner.deadline)
+        if candidate_alias_context is None:
+            result = elf.graph(tree, observations, owner.deadline)
+        else:
+            # Dormant explicit seam only. No fixed entry/workflow currently supplies this context.
+            v.require(type(tree) is v.VirtualClosure and tree._work_owner is owner, 'work-owner-model')
+            policy = elf._CandidateAliasPolicy(tree, owner, candidate_alias_context)
+            result = elf.graph(tree, observations, owner.deadline, candidate_alias_policy=policy)
         owner.close_model(tree)
         return dict(result, work_owner=owner.snapshot())
     except Exception as error:

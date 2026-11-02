@@ -1,5 +1,33 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant exact libgcc_s policy implemented; fixed selection gated — 2026-11-02
+
+The approved [policy safety foundation](SOURCE_POLICY_UBI_LIBGCC_POLICY_FOUNDATION.md)
+implements one private candidate-bound alias policy and default-None provider/
+graph/helper seam. Fourteen isolated groups/eight semantic control families prove
+positive admission and guarded failures with actual synthetic parser/model/owner
+components; no real candidate/authentication/root-pin-first success is claimed.
+Mandatory name/non-self, target/origin/SONAME/closure checks and budgets remain.
+Fixed entry/workflow selection and production wiring are unchanged/disabled.
+
+Implementation-plan progress: policy foundation complete locally; operational
+selection and actual qualification remain gated. **Recommended next gated slice:
+Repository-only Default-Off libgcc_s Fixed-Entry Policy Integration Safety
+Foundation**, explicit default-false source-owned selection/ordering and isolated
+tests only, preserving acquisition, execution and production boundaries. No
+manual dispatch or new static/native proof. Campaign7/10 milestones/native7/10/
+eight static acquisitions unchanged. Earlier entries are historical resume gates.
+
+## Approved dormant libgcc_s exact-policy foundation — 2026-11-02
+
+User approves the [candidate-bound policy foundation](SOURCE_POLICY_UBI_LIBGCC_ALIAS_ADMISSION_DESIGN.md#design-validation-and-exact-next-gate)
+through isolated tests, validation, commit/push and exact-head ordinary CI.
+Restore cb989e1 is clean/synced; implement only the private exact-tuple policy and
+guarded provider/graph seam. This narrowly approved R3 policy implementation does
+not enable fixed entry/workflow selection, acquisition, extraction, execution or
+production wiring. No installed-site operation. Campaign7/10 milestones/native
+7/10/eight static acquisitions stays unchanged until actual product qualification.
+
 ## Exact candidate-bound libgcc_s alias admission designed; implementation gated — 2026-11-02
 
 The approved [versioned provider-alias design](SOURCE_POLICY_UBI_LIBGCC_ALIAS_ADMISSION_DESIGN.md)

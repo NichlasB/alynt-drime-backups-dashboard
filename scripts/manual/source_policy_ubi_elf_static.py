@@ -12,6 +12,21 @@ INTERPRETER = '/lib64/ld-linux-x86-64.so.2'
 ROOT_HASHES = {SERVER: '910b30f53e2c9812e7b3cdc37f40df2ca867738eb79ed799fc056c15774f5f19',
                LOADER: '73983b1895c124baa82e5f1c9c26ba0717f1440dff97a217fbb20ddbed8a3751'}
 FEATURE_TAGS = {0x6ffffefa: 'config', 0x6ffffefb: 'depaudit', 0x6ffffefc: 'audit', 0x7ffffffd: 'auxiliary', 0x7fffffff: 'filter'}
+_LIBGCC_PIN = '14bab8cc945c08109a2175e844d46f4eaff1fbf4f59e95dcf2f9cac7961510e1'
+_LIBGCC_CONFIG = '2a46b014d1a6182f9f8240db6bae96566cdb11178f878ffe794f15095b745f35'
+_LIBGCC_DIFF = '004d2c90a65694c2830b06fddc1047d40063c6cb36fb31a5a3edfce9435326c6'
+_LIBGCC_LAYERS = (
+    '2920d84eafa0cf94806ab58f0a2124f7b2d35bcbb06fc89a9106dcc28efe397a',
+    '46735ccec920ba5e6df52c8787af94e3d7ea0fedb92ca37f7e0279c89506e13a',
+    '189b0ff547a3cff8241702bd70b6be360d4841e72a74e438b3bd60d530e43007',
+    'd982fdd339edcf849f97671ec949c25b570de306244a2b6b03e6441a586ffc8a',
+    '82c48ac2fca221a7aa5d650e52f057a21f73cec9e1202ff995e30276c620c276',
+    '444b4ce536f188518cbcc061ab236a7e8db460af28e5f870fe200a7ba0790b6b',
+    '617276d6715b91a6fedc8af16badcec2e0520cc2c04a2f3b169027a47057abfb',
+    'e6a3432e4f830821a37b4186e566ae46c3d9f09844600cb3b78d469c8d7ad8d5',
+    'd1540db65d371923fb149b6317345a5c5670c090f8506e30947d59463716d300',
+    'c1c3acb5fb6a522a08e27e306a765c58b15407644a6d204e2c57035a840bf07a',
+)
 
 
 class Refusal(Exception):
@@ -330,15 +345,90 @@ def clock(deadline):
     return int((time.monotonic()-deadline+300)*1000)
 
 
-def provider(tree, name, deadline):
+def _candidate_alias_frame(context):
+    fields = {'format', 'profile', 'manifest', 'config', 'head', 'run', 'source', 'snapshot', 'layers'}
+    require(type(context) is dict and len(context) == len(fields) and all(type(k) is str for k in context)
+            and set(context) == fields, 'elf-candidate-policy-context')
+    require(type(context['format']) is str and context['format'] == 'ADBUCAP1'
+            and type(context['profile']) is str and context['profile'] == 'candidate-libgcc-alias-v1'
+            and type(context['manifest']) is str and context['manifest'] == _LIBGCC_PIN
+            and type(context['config']) is str and context['config'] == _LIBGCC_CONFIG, 'elf-candidate-policy-context')
+    for key, length in (('head',40), ('run',32), ('source',64), ('snapshot',64)):
+        require(type(context[key]) is str and len(context[key]) == length
+                and re.fullmatch('[a-f0-9]{'+str(length)+'}', context[key]), 'elf-candidate-policy-context')
+    layers = context['layers']
+    require(type(layers) is tuple and len(layers) == 10, 'elf-candidate-policy-layers')
+    for index, pair in enumerate(layers):
+        require(type(pair) is tuple and len(pair) == 2 and type(pair[0]) is str and pair[0] == _LIBGCC_LAYERS[index]
+                and type(pair[1]) is str and len(pair[1]) == 64 and re.fullmatch('[a-f0-9]{64}', pair[1]), 'elf-candidate-policy-layers')
+    require(layers[0][1] == _LIBGCC_DIFF, 'elf-candidate-policy-layers')
+    return tuple(context[k] for k in ('manifest', 'config', 'source', 'head', 'run', 'snapshot', 'layers'))
+
+
+def _candidate_libgcc_alias(name, row, snapshot):
+    # One observed tuple, never a version/date pattern or a target-content hash.
+    fields = {'path', 'kind', 'mode', 'uid', 'gid', 'sha256', 'size', 'target', 'layer', 'entry', 'snapshot', 'model_only', 'runtime_grant'}
+    return bool(type(name) is str and name == 'libgcc_s.so.1' and type(row) is dict and len(row) == len(fields)
+        and all(type(k) is str for k in row) and set(row) == fields
+        and row['model_only'] is True and row['runtime_grant'] is False
+        and type(row['mode']) is int and 0 <= row['mode'] <= 0o7777
+        and all(type(row[k]) is int and 0 <= row[k] <= 4294967295 for k in ('uid', 'gid'))
+        and row['sha256'] is None and type(row['size']) is int and row['size'] == 0
+        and type(snapshot) is str and len(snapshot) == 64 and re.fullmatch('[a-f0-9]{64}', snapshot)
+        and type(row.get('snapshot')) is str and row['snapshot'] == snapshot
+        and type(row.get('path')) is str and row['path'] == 'usr/lib64/libgcc_s.so.1'
+        and type(row.get('kind')) is str and row['kind'] == 'symlink'
+        and type(row.get('layer')) is int and row['layer'] == 0
+        and type(row.get('entry')) is int and row['entry'] == 1700
+        and type(row.get('target')) is str and row['target'] == 'libgcc_s-11-20240719.so.1'
+        and hashlib.sha256(row['target'].encode('ascii')).hexdigest() == 'd359192c4c77928fa9d0d5be9e87f9a95cad61eaa2081a46213ae80d18bb2ec9')
+
+
+class _CandidateAliasPolicy:
+    """Private per-call DATA policy. Only the fixed helper supplies typed owners.
+
+    No job authentication or candidate attestation is conferred by this object.
+    Actual fixed-entry selection remains absent; Python is not a hostile sandbox.
+    """
+    __slots__ = ('_tree', '_owner', '_frame')
+
+    def __init__(self, tree, owner, context):
+        self._frame = _candidate_alias_frame(context)
+        self._tree, self._owner = tree, owner
+        self._admit(tree, owner.deadline)
+
+    def _admit(self, tree, deadline):
+        owner = self._owner; manifest, config, source, head, run, snapshot, layers = self._frame
+        require(tree is self._tree and tree._work_owner is owner and owner._model is tree
+                and tree._final is True and type(tree._committed) is int and tree._committed == 10
+                and type(owner._verified) is int and owner._verified == 10, 'elf-candidate-policy-owner')
+        require(owner._identity == tree._identity == dict(manifest=manifest, config=config, source=source)
+                and owner._run == dict(head=head, run=run, profile='bounded-strings-v1')
+                and owner._layers == tree._layers == list(layers)
+                and tree._snapshot_hash == snapshot and deadline == owner.deadline, 'elf-candidate-policy-binding')
+        owner.admit_graph(tree)  # Original clock/phase check: poison is terminal.
+        tree.charge(32, clock(deadline))  # Fixed bounded frame comparisons, shared work/deadline.
+
+    def _matches(self, name, row):
+        return _candidate_libgcc_alias(name, row, self._frame[5])
+
+
+def _admit_candidate_policy(tree, policy, deadline):
+    require(type(policy) is _CandidateAliasPolicy, 'elf-candidate-policy-type')
+    policy._admit(tree, deadline)
+
+
+def provider(tree, name, deadline, *, candidate_alias_policy=None):
     require(library(name), 'elf-library-name')
+    if candidate_alias_policy is not None: _admit_candidate_policy(tree, candidate_alias_policy, deadline)
     path = 'usr/lib64/'+name
     row = tree.inspect(path, clock(deadline)); edges = []
     if row['kind'] == 'symlink':
         target = row['target']; stem = name.split('.so', 1)[0]+'.so.'
         try:
-            require(library(target) and target.startswith(stem) and target != name
-                    and re.fullmatch(r'[0-9]+(?:\.[0-9]+)*', target[len(stem):]), 'elf-provider-alias')
+            valid_target = library(target) and target != name
+            strict = valid_target and target.startswith(stem) and re.fullmatch(r'[0-9]+(?:\.[0-9]+)*', target[len(stem):])
+            require(valid_target and (strict or (candidate_alias_policy is not None and candidate_alias_policy._matches(name, row))), 'elf-provider-alias')
         except Refusal as error:
             try: capture_provider_alias(error, name, row)
             except Exception: error.__dict__.setdefault('provider_alias_facts', None)
@@ -431,7 +521,7 @@ def capture_failure(error, stage, current, requested, roots):
     error.elf_facts = facts if len(json.dumps(facts, ensure_ascii=True).encode('ascii')) <= 32768 else dict(format='ADBUELF1', withheld=True, runtime_grant=False)
 
 
-def graph(tree, observations, deadline):
+def graph(tree, observations, deadline, *, candidate_alias_policy=None):
     require(type(observations) is dict and len(observations) <= 256 and all(type(k) is str and re.fullmatch('[0-9]{1,2}:[0-9]{1,5}', k) for k in observations), 'elf-observation-bound')
     roots, cache, providers, alias_edges, objects = {}, {}, {}, [], {}
     current, requested, stage = SERVER, None, 'root-origins'
@@ -439,6 +529,7 @@ def graph(tree, observations, deadline):
         node = tree.inspect(path, clock(deadline))
         return bound_metadata(node, observations, path), node['snapshot']
     try:
+        if candidate_alias_policy is not None: _admit_candidate_policy(tree, candidate_alias_policy, deadline)
         snapshot = None
         for path in (SERVER, LOADER):
             current = path; found, observed_snapshot = descriptor(path)
@@ -454,7 +545,7 @@ def graph(tree, observations, deadline):
             objects[current] = object_policy(current, found)
             for requested in found['needed']:
                 if requested in providers: continue
-                path, node, aliases = provider(tree, requested, deadline)
+                path, node, aliases = provider(tree, requested, deadline, candidate_alias_policy=candidate_alias_policy)
                 require(node['snapshot'] == snapshot, 'elf-snapshot-binding')
                 supplied, observed_snapshot = descriptor(path)
                 require(observed_snapshot == snapshot, 'elf-snapshot-binding')
