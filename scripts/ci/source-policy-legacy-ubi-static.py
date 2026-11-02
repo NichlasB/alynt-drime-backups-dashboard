@@ -207,6 +207,51 @@ def retain_string_table_diagnostic(report, value, elf):
     except Exception: report['elf_string_table_facts'] = None
 
 
+def retain_provider_alias_diagnostic(report, value, alias, elf, tree, work_owner, frozen, config):
+    if 'provider_alias_diagnostic' in report: return
+    report['provider_alias_diagnostic'] = None
+    try:
+        facts = elf.provider_alias_packet(value)
+        s.require(facts is not None and type(work_owner) is alias.v._FixedWorkAuthority
+                  and type(tree) is alias.v.VirtualClosure and tree._work_owner is work_owner
+                  and work_owner._model is tree and tree._final is True
+                  and tree._committed == work_owner._verified == 10, 'diagnostic-owner')
+        s.require(report.get('metadata_verified') is True and all(type(report.get(k)) is int and report[k] == 10
+                  for k in ('layers_verified', 'namespace_layers_committed'))
+                  and report.get('failure') == 'elf-provider-alias' and report.get('access_profile') == 'bounded-strings-v1', 'diagnostic-phase')
+        # Already held finalized alias metadata only: no inspect/resolve after poison, no target lookup.
+        node = tree._nodes.get('usr/lib64/'+facts['requested_name'])
+        s.require(type(node) is dict and node.get('kind') == 'symlink' and node.get('layer') == facts['alias_layer']
+                  and node.get('entry') == facts['alias_entry'] and facts['snapshot'] == tree._snapshot_hash
+                  and type(node.get('target')) is str and 1 <= len(node['target']) <= 240, 'diagnostic-origin')
+        target_bytes = node['target'].encode('utf-8', 'strict')
+        s.require(len(target_bytes) == facts['target_utf8_bytes'] and hashlib.sha256(target_bytes).hexdigest() == facts['target_sha256'], 'diagnostic-target')
+        s.require(type(frozen) is dict and set(frozen) == set(BOUNDED_SOURCES)
+                  and all(provenance.hexadecimal(v, 64) for v in frozen.values()), 'diagnostic-source')
+        source = hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()
+        identity = dict(manifest=PIN, config=CONFIG, source=source)
+        head, run, attempt = (os.environ[k] for k in ('GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT'))
+        s.require(head == os.environ['EXPECTED_SHA'] and re.fullmatch('[a-f0-9]{40}', head)
+                  and all(re.fullmatch('[0-9]+', v) for v in (run, attempt)), 'diagnostic-job')
+        correlation = hashlib.sha256((run+':'+attempt).encode()).hexdigest()[:32]
+        s.require(work_owner._identity == tree._identity == identity and work_owner._run == dict(head=head, run=correlation, profile='bounded-strings-v1'), 'diagnostic-identity')
+        diffs = config['rootfs']['diff_ids']
+        s.require(type(diffs) is list and len(diffs) == 10, 'diagnostic-layers')
+        layers = [(layer[0], s.digest(diff)) for layer, diff in zip(LAYERS, diffs)]
+        s.require(work_owner._layers == tree._layers == layers, 'diagnostic-layers')
+        if report.get('elf_facts') is not None:
+            s.require(report['elf_facts'].get('needed_name') == facts['requested_name'], 'diagnostic-request')
+        ordinal = facts['alias_layer']
+        context = provenance.provider_alias_context(dict(head=head, source=source, run=correlation, manifest=PIN, config=CONFIG,
+            profile='bounded-strings-v1', layers_verified=10, namespace_layers_committed=10, snapshot=tree._snapshot_hash,
+            layer=ordinal, compressed=layers[ordinal][0], diff_id=layers[ordinal][1]))
+        s.require(context is not None, 'diagnostic-context')
+        raw = json.dumps(dict(format='ADBUPA1', context=context, alias=facts, diagnostic_only=True, runtime_grant=False), ensure_ascii=True, separators=(',', ':'))
+        if len(raw.encode('ascii')) <= 4096: report['provider_alias_diagnostic'] = json.loads(raw)
+    except Exception:
+        report['provider_alias_diagnostic'] = None  # Preserve primary failure; no diagnostic retry.
+
+
 def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=False):
     s.require(all(type(value) is bool for value in (alias_policy, elf_policy, bounded_access_policy))
               and (not elf_policy or alias_policy) and (not bounded_access_policy or elf_policy), 'explicit-elf-mode')
@@ -322,6 +367,8 @@ def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=Fals
             except Exception: report['elf_facts'] = None
         if 'elf_string_table_facts' in error.__dict__:
             retain_string_table_diagnostic(report, error.elf_string_table_facts, elf)
+        if bounded_access_policy and 'provider_alias_facts' in error.__dict__:
+            retain_provider_alias_diagnostic(report, error.provider_alias_facts, alias, elf, tree, work_owner, frozen, config)
         if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
             try:
                 context = dict(head=os.environ['GITHUB_SHA'], image=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest(),

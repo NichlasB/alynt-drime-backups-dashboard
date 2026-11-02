@@ -233,6 +233,9 @@ def _owned_graph(tree, owner, layers):
             refused = s.Refusal(str(error))
             try: refused.elf_facts = elf.failure_packet(error.__dict__.get('elf_facts'))
             except Exception: refused.elf_facts = None
+            if 'provider_alias_facts' in error.__dict__:
+                try: refused.provider_alias_facts = elf.provider_alias_packet(error.provider_alias_facts)
+                except Exception: refused.provider_alias_facts = None
             owner.fail(refused)
             raise refused from error  # Exact helper-module type, finite primary cause retained.
         raise

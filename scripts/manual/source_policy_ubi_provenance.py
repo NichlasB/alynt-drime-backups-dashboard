@@ -12,6 +12,20 @@ def hexadecimal(value, length):
     return type(value) is str and re.fullmatch('[a-f0-9]{'+str(length)+'}', value) is not None
 
 
+def provider_alias_context(value):
+    # Primitive consistency only. The fixed entry must bind this to its held owner/model.
+    if not shape(value, ('head', 'source', 'run', 'manifest', 'config', 'profile', 'layers_verified',
+                         'namespace_layers_committed', 'snapshot', 'layer', 'compressed', 'diff_id')): return None
+    if not (hexadecimal(value['head'], 40) and hexadecimal(value['run'], 32)
+            and all(hexadecimal(value[k], 64) for k in ('source', 'snapshot', 'compressed', 'diff_id'))
+            and type(value['manifest']) is str and value['manifest'] == '14bab8cc945c08109a2175e844d46f4eaff1fbf4f59e95dcf2f9cac7961510e1'
+            and type(value['config']) is str and value['config'] == '2a46b014d1a6182f9f8240db6bae96566cdb11178f878ffe794f15095b745f35'
+            and type(value['profile']) is str and value['profile'] == 'bounded-strings-v1'
+            and all(type(value[k]) is int and value[k] == 10 for k in ('layers_verified', 'namespace_layers_committed'))
+            and type(value['layer']) is int and 0 <= value['layer'] < 10): return None
+    return dict(value)
+
+
 def owner_snapshot(value):
     work = ('work_used', 'parser_work', 'model_work', 'burned_work')
     counts = ('grants', 'settled', 'verified_layers', 'records', 'observation_bytes')

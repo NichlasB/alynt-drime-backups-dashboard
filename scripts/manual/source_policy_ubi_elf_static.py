@@ -27,6 +27,61 @@ def library(value):
     return type(value) is str and len(value) <= 128 and re.fullmatch(r'(?:lib[A-Za-z0-9_.+-]+|ld-linux-x86-64)\.so(?:\.[A-Za-z0-9_.+-]+)*', value) is not None
 
 
+def _alias_checks(name, target):
+    # Diagnostic decomposition only; never used to decide provider admission.
+    stem = name.split('.so', 1)[0]+'.so.'
+    return dict(library_name_valid=library(target), same_family_prefix=target.startswith(stem),
+                not_self=target != name, numeric_suffix=re.fullmatch(r'[0-9]+(?:\.[0-9]+)*', target[len(stem):]) is not None)
+
+
+def provider_alias_packet(value):
+    fields = {'format', 'reason', 'requested_name', 'provider_path_sha256', 'snapshot', 'alias_layer', 'alias_entry',
+              'target_utf8_bytes', 'target_sha256', 'target_literal', 'checks', 'failed_predicates', 'diagnostic_only', 'runtime_grant'}
+    if type(value) is not dict or len(value) != len(fields) or not all(type(k) is str for k in value) or set(value) != fields: return None
+    if not (type(value['format']) is str and value['format'] == 'ADBUELFPA1'
+            and type(value['reason']) is str and value['reason'] == 'elf-provider-alias' and library(value['requested_name'])
+            and value['diagnostic_only'] is True and value['runtime_grant'] is False): return None
+    if not all(type(value[k]) is str and re.fullmatch('[a-f0-9]{64}', value[k]) for k in ('snapshot', 'provider_path_sha256', 'target_sha256')): return None
+    if not (type(value['alias_layer']) is int and 0 <= value['alias_layer'] < 10
+            and type(value['alias_entry']) is int and 0 <= value['alias_entry'] < 65536
+            and type(value['target_utf8_bytes']) is int and 1 <= value['target_utf8_bytes'] <= 240
+            and value['provider_path_sha256'] == hashlib.sha256(('usr/lib64/'+value['requested_name']).encode('ascii')).hexdigest()): return None
+    checks = value['checks']; labels = ('library_name_valid', 'same_family_prefix', 'not_self', 'numeric_suffix')
+    if not (type(checks) is dict and len(checks) == 4 and all(type(k) is str for k in checks)
+            and set(checks) == set(labels) and all(type(checks[k]) is bool for k in labels)): return None
+    failed = [reason for key, reason in zip(labels, ('invalid-library', 'wrong-family', 'self-target', 'nonnumeric-suffix')) if not checks[key]]
+    if not (failed and type(value['failed_predicates']) is list and len(value['failed_predicates']) <= 4
+            and all(type(p) is str for p in value['failed_predicates']) and value['failed_predicates'] == failed): return None
+    literal = value['target_literal']
+    if literal is None:
+        if checks['library_name_valid']: return None
+    else:
+        if not library(literal): return None
+        raw = literal.encode('ascii')
+        if not (len(raw) == value['target_utf8_bytes'] and hashlib.sha256(raw).hexdigest() == value['target_sha256']
+                and _alias_checks(value['requested_name'], literal) == checks): return None
+    raw = json.dumps(value, ensure_ascii=True, separators=(',', ':'))
+    return json.loads(raw) if len(raw.encode('ascii')) <= 2048 else None
+
+
+def capture_provider_alias(error, name, row):
+    require(type(error) is Refusal and str(error) == 'elf-provider-alias', 'elf-diagnostic-shape')
+    if 'provider_alias_facts' in error.__dict__: return
+    error.provider_alias_facts = None  # First attempt, including unavailable, is final.
+    require(library(name) and type(row) is dict and row.get('kind') == 'symlink', 'elf-diagnostic-shape')
+    target = row.get('target')
+    require(type(target) is str and 1 <= len(target) <= 240, 'elf-diagnostic-shape')
+    raw = target.encode('utf-8', 'strict')
+    require(1 <= len(raw) <= 240, 'elf-diagnostic-shape')
+    checks = _alias_checks(name, target)
+    failed = [reason for key, reason in zip(('library_name_valid', 'same_family_prefix', 'not_self', 'numeric_suffix'),
+              ('invalid-library', 'wrong-family', 'self-target', 'nonnumeric-suffix')) if not checks[key]]
+    error.provider_alias_facts = provider_alias_packet(dict(format='ADBUELFPA1', reason='elf-provider-alias', requested_name=name,
+        provider_path_sha256=hashlib.sha256(('usr/lib64/'+name).encode('ascii')).hexdigest(), snapshot=row.get('snapshot'),
+        alias_layer=row.get('layer'), alias_entry=row.get('entry'), target_utf8_bytes=len(raw), target_sha256=hashlib.sha256(raw).hexdigest(),
+        target_literal=target if library(target) else None, checks=checks, failed_predicates=failed, diagnostic_only=True, runtime_grant=False))
+
+
 def eligible(path):
     return path in (SERVER, LOADER) or (path.startswith('usr/lib64/') and library(path[10:]))
 
@@ -281,8 +336,13 @@ def provider(tree, name, deadline):
     row = tree.inspect(path, clock(deadline)); edges = []
     if row['kind'] == 'symlink':
         target = row['target']; stem = name.split('.so', 1)[0]+'.so.'
-        require(library(target) and target.startswith(stem) and target != name
-                and re.fullmatch(r'[0-9]+(?:\.[0-9]+)*', target[len(stem):]), 'elf-provider-alias')
+        try:
+            require(library(target) and target.startswith(stem) and target != name
+                    and re.fullmatch(r'[0-9]+(?:\.[0-9]+)*', target[len(stem):]), 'elf-provider-alias')
+        except Refusal as error:
+            try: capture_provider_alias(error, name, row)
+            except Exception: error.__dict__.setdefault('provider_alias_facts', None)
+            raise
         edges.append(dict(path=path, target=target, layer=row['layer'], entry=row['entry']))
         path = 'usr/lib64/'+target; row = tree.inspect(path, clock(deadline))
     require(row['kind'] == 'file' and not row['mode'] & 0o6000 and len(edges)+len(row.get('hardlinks', [])) <= 16, 'elf-provider-target')

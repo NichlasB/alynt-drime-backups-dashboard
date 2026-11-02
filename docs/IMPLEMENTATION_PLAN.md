@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved bounded provider-alias diagnostic and one static attempt — 2026-11-02
+
+User approves the [diagnostic foundation/proof](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_FOUNDATION.md)
+through implementation, offline regressions, review, validation, commit/push and
+exact-head ordinary CI, then exactly one owned static diagnostic/cleanup attempt
+at the clean published head if checks pass. Restore7f6c535 is clean/synced.
+Keep admission, pins, limits and disabled extraction/execution/wiring unchanged.
+No policy exception, unchanged retry, installed-site or production operation.
+Campaign7/10 milestones/native7/10/seven static acquisitions at start; intermediate
+diagnostics/publication do not earn product qualification credit.
+
 ## Provider-alias first-refusal diagnostic designed; implementation/acquisition gated — 2026-11-02
 
 The approved [libgcc_s diagnostic design](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_DESIGN.md)
