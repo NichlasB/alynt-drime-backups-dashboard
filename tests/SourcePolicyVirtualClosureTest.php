@@ -18,9 +18,16 @@ final class SourcePolicyVirtualClosureTest extends TestCase {
   $this->assertSame(0,proc_close($p),$err);$this->assertSame('',$err);
   $this->assertSame(array('tests'=>5,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
  }
- public function test_model_has_no_runtime_consumer_and_real_profile_is_empty() {
+ public function test_model_has_no_plugin_runtime_consumer_and_default_profile_is_empty() {
   $root=dirname(__DIR__);
-  foreach(array('scripts/manual/source_policy_linux_minimum_static.py','scripts/ci/source-policy-legacy-ubi-static.py','.github/workflows/source-policy-legacy-ubi-static.yml','alynt-drime-backups-dashboard.php') as $file)$this->assertStringNotContainsString('source_policy_virtual_closure',file_get_contents($root.'/'.$file));
+  // The approved manual entry/workflow now names the model in its fixed source cohort, not a plugin runtime import.
+  foreach(array('scripts/manual/source_policy_linux_minimum_static.py','alynt-drime-backups-dashboard.php') as $file)$this->assertStringNotContainsString('source_policy_virtual_closure',file_get_contents($root.'/'.$file));
+  $entry=file_get_contents($root.'/scripts/ci/source-policy-legacy-ubi-static.py');
+  $this->assertStringContainsString('bounded_access_policy=False',$entry);
+  $this->assertStringNotContainsString('import source_policy_virtual_closure',$entry);
+  $workflow=file_get_contents($root.'/.github/workflows/source-policy-legacy-ubi-static.yml');
+  $this->assertStringContainsString('workflow_dispatch:',$workflow);
+  $this->assertStringNotContainsString('schedule:',$workflow);
   $this->assertStringContainsString('return ()',file_get_contents($root.'/scripts/manual/source_policy_virtual_closure.py'));
  }
 }

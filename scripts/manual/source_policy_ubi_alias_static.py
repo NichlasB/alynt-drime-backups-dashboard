@@ -204,6 +204,7 @@ def _owned_model(owner, first):
 
 def _owned_graph(tree, owner, layers):
     v.require(type(owner) is v._FixedWorkAuthority, 'work-owner-type')
+    elf = None
     try:
         owner.admit_graph(tree)
         v.require(type(layers) is list and len(layers) == len(owner._layers), 'work-owner-graph-layers')
@@ -228,6 +229,12 @@ def _owned_graph(tree, owner, layers):
         return dict(result, work_owner=owner.snapshot())
     except Exception as error:
         owner.fail(error)
+        if elf is not None and type(error) is elf.Refusal:
+            refused = s.Refusal(str(error))
+            try: refused.elf_facts = elf.failure_packet(error.__dict__.get('elf_facts'))
+            except Exception: refused.elf_facts = None
+            owner.fail(refused)
+            raise refused from error  # Exact helper-module type, finite primary cause retained.
         raise
 
 

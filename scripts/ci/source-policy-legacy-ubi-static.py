@@ -32,6 +32,12 @@ LAYERS = (
     ('c1c3acb5fb6a522a08e27e306a765c58b15407644a6d204e2c57035a840bf07a', 8227),
 )
 WANTED = ('usr/sbin/mariadbd', 'lib64/ld-linux-x86-64.so.2')
+BOUNDED_SOURCES = (
+    'scripts/ci/source-policy-legacy-ubi-static.py', '.github/workflows/source-policy-legacy-ubi-static.yml',
+    'scripts/manual/source-policy-linux-minimum-acquire.py', 'scripts/manual/source_policy_linux_minimum_static.py',
+    'scripts/manual/source_policy_ubi_provenance.py', 'scripts/manual/source_policy_ubi_alias_static.py',
+    'scripts/manual/source_policy_virtual_closure.py', 'scripts/manual/source_policy_ubi_elf_static.py',
+)
 
 
 def admit(manifest, config):
@@ -113,17 +119,102 @@ def policy_flags(arguments, alias_value, elf_value):
     return alias_mode, inspect_elf
 
 
+def selection(arguments, alias_value, elf_value, bounded_value='false'):
+    s.require(type(bounded_value) is str and bounded_value in ('true', 'false'), 'explicit-bounded-mode')
+    if bounded_value == 'false':
+        return (*policy_flags(arguments, alias_value, elf_value), False)
+    s.require(type(arguments) is list and len(arguments) == 1 and type(arguments[0]) is str
+              and arguments == ['--approved-bounded-elf-static-prerequisite'], 'explicit-scope')
+    s.require(type(alias_value) is str and alias_value == 'true', 'explicit-alias-mode')
+    s.require(type(elf_value) is str and elf_value == 'true', 'explicit-elf-mode')
+    return True, True, True
+
+
+def create_work_authority(alias, config, frozen, deadline):
+    s.require(alias.PIN == PIN and alias.CONFIG == CONFIG, 'alias-candidate-binding')
+    head, run, attempt = (os.environ[k] for k in ('GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT'))
+    s.require(re.fullmatch('[a-f0-9]{40}', head) and all(re.fullmatch('[0-9]+', value) for value in (run, attempt)), 'exact-job')
+    return alias.v._FixedWorkAuthority(dict(manifest=PIN, config=CONFIG,
+        source=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()),
+        [(layer[0], s.digest(value)) for layer, value in zip(LAYERS, config['rootfs']['diff_ids'])],
+        dict(head=head, run=hashlib.sha256((run+':'+attempt).encode()).hexdigest()[:32], profile='bounded-strings-v1'), deadline)
+
+
+def compact_layer(collected):
+    return {key: collected[key] for key in ('metadata', 'elf', 'elf_bindings')}
+
+
+def apply_bounded_layer(alias, tree, work_owner, collected, ordinal):
+    if ordinal == 0:
+        s.require(tree is None, 'single-model')
+        tree = alias._owned_model(work_owner, collected)
+    else:
+        s.require(type(tree) is alias.v.VirtualClosure and tree._work_owner is work_owner, 'single-model')
+    tree.apply(dict(collected['metadata'], ordinal=ordinal), collected['records'], work_owner.now())
+    return tree, compact_layer(collected)
+
+
+def bounded_graph(alias, elf, tree, work_owner, layers):
+    roles = {key: tree.resolve(key, work_owner.now()) for key in WANTED}
+    elf.admit_selected(roles)
+    return roles, alias._owned_graph(tree, work_owner, layers)
+
+
+def successful(report, bounded):
+    common = (report.get('status') in ('selected-origins-verified', 'static-dt-needed-closure-verified')
+              and report.get('source_unchanged') is True and report.get('cleanup') == 'complete'
+              and report.get('reporting') == 'complete' and report.get('reported') is True
+              and all(report.get(k) is False for k in ('runtime_grant', 'candidate_execution', 'image_loading', 'database_operations', 'rootfs_extraction')))
+    if not bounded: return common
+    packet = provenance.owner_snapshot(report.get('work_owner'))
+    return bool(common and report.get('status') == 'static-dt-needed-closure-verified'
+                and report.get('access_profile') == 'bounded-strings-v1' and packet is not None
+                and packet['state'] == 'closed-model' and packet['model_bound'] is True
+                and packet['verified_layers'] == report.get('layers_verified') == report.get('namespace_layers_committed') == 10
+                and report.get('elf_graph', {}).get('static_dependency_closure_verified') is True
+                and report['elf_graph'].get('runtime_grant') is False and report['elf_graph'].get('model_only') is True)
+
+
+def finish_report(report, root, frozen, work_owner=None):
+    # Readback/accounting/report failures cannot bypass exact ownership cleanup.
+    try:
+        report['source_unchanged'] = bool(frozen) and all(acquire.file_hash(ROOT / p) == sha for p, sha in frozen.items())
+        report['source_sha256'] = hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()
+    except Exception:
+        report['source_unchanged'] = False
+    if not report['source_unchanged']:
+        report['status'] = 'refused'; report.setdefault('failure', 'source-readback')
+    if work_owner is not None:
+        try: report['work_owner'] = provenance.owner_snapshot(work_owner.snapshot())
+        except Exception: report['work_owner'] = None
+        if report['work_owner'] is None:
+            report['status'] = 'refused'; report.setdefault('failure', 'owner-accounting')
+    try:
+        report['owned_files_removed'] = cleanup(root)
+        report['cleanup'] = 'complete'
+    except Exception:
+        report['cleanup'] = 'unconfirmed'; report['status'] = 'refused'; report.setdefault('failure', 'owned-cleanup')
+    report['reporting'], report['reported'] = 'complete', True
+    try: print(json.dumps(report, separators=(',', ':')), flush=True)
+    except Exception:
+        report['reporting'], report['reported'], report['status'] = 'unconfirmed', False, 'refused'
+        report.setdefault('failure', 'reporting-failed')
+
+
 def retain_string_table_diagnostic(report, value, elf):
     if elf is None or 'elf_string_table_facts' in report: return
     try: report['elf_string_table_facts'] = elf.string_table_packet(value)
     except Exception: report['elf_string_table_facts'] = None
 
 
-def proof(root, alias_policy=False, elf_policy=False):
-    owner, phase, budget = None, 'metadata', None
+def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=False):
+    s.require(all(type(value) is bool for value in (alias_policy, elf_policy, bounded_access_policy))
+              and (not elf_policy or alias_policy) and (not bounded_access_policy or elf_policy), 'explicit-elf-mode')
+    owner, phase, budget, work_owner = None, 'metadata', None, None
     report = {'status': 'refused', 'candidate_execution': False, 'image_loading': False,
               'database_operations': False, 'rootfs_extraction': False, 'layers_verified': 0,
               'runtime_grant': False, 'alias_policy': alias_policy, 'elf_policy': elf_policy, 'namespace_layers_committed': 0}
+    if bounded_access_policy: report['access_profile'] = 'bounded-strings-v1'
     report['tool'] = {'python': sys.version.split()[0], 'ssl': acquire.ssl.OPENSSL_VERSION,
                       'unicode_db': s.unicodedata.unidata_version}
     paths = (Path(__file__), Path(acquire.__file__), Path(s.__file__), Path(provenance.__file__),
@@ -137,10 +228,10 @@ def proof(root, alias_policy=False, elf_policy=False):
         if elf_policy is True:
             elf = alias.load('source_policy_ubi_elf_static.py', 'fixed_ubi_elf')
             paths += (Path(elf.__file__),)
-    frozen = {str(p.relative_to(ROOT)): acquire.file_hash(p) for p in paths}
+    frozen = {p.relative_to(ROOT).as_posix(): acquire.file_hash(p) for p in paths}
+    if bounded_access_policy: s.require(set(frozen) == set(BOUNDED_SOURCES), 'fixed-source-closure')
     deadline = time.monotonic() + 300
     try:
-        s.require(type(alias_policy) is bool and type(elf_policy) is bool and (not elf_policy or alias_policy), 'explicit-elf-mode')
         owner = Owned(root)
         client = acquire.Client(owner, deadline)
         base = 'https://registry-1.docker.io/v2/library/mariadb'
@@ -154,8 +245,9 @@ def proof(root, alias_policy=False, elf_policy=False):
         owner.write('config.json', raw)
         admit(manifest, config)
         report['metadata_verified'] = True
+        if bounded_access_policy: work_owner = create_work_authority(alias, config, frozen, deadline)
         roles, budget = {}, {'expanded': 0, 'entries': 0, 'deadline': deadline}
-        tree, observations = None, {}
+        tree, observations, compact = None, {}, []
         for i, ((sha, size), diff) in enumerate(zip(LAYERS, config['rootfs']['diff_ids'])):
             phase = 'layer-' + str(i)
             path = owner.path(sha + '.blob')
@@ -163,20 +255,30 @@ def proof(root, alias_policy=False, elf_policy=False):
             s.require(remaining > 0, 'compressed-budget')
             client.get(base + '/blobs/sha256:' + sha, min(128 * s.MIB, remaining), token, path, size, sha, True)
             if alias_policy:
-                collected = alias.collect(path, sha, size, diff, budget, elf_policy=elf_policy)
+                if bounded_access_policy:
+                    collected = alias.collect(path, sha, size, diff, budget, elf_policy=True, work_owner=work_owner, layer_ordinal=i)
+                else:
+                    collected = alias.collect(path, sha, size, diff, budget, elf_policy=elf_policy)
                 report['layers_verified'] += 1
                 scan = collected['scan']
                 if i == 0:
                     s.require(alias.PIN == PIN and alias.CONFIG == CONFIG, 'alias-candidate-binding')
-                    tree = alias.v.VirtualClosure(dict(manifest=PIN, config=CONFIG,
-                        source=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()),
-                        [(layer[0], s.digest(value)) for layer, value in zip(LAYERS, config['rootfs']['diff_ids'])],
-                        alias.approved_profile(collected, i), hardlinks=True)
-                if elf_policy:
+                    if not bounded_access_policy:
+                        tree = alias.v.VirtualClosure(dict(manifest=PIN, config=CONFIG,
+                            source=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()),
+                            [(layer[0], s.digest(value)) for layer, value in zip(LAYERS, config['rootfs']['diff_ids'])],
+                            alias.approved_profile(collected, i), hardlinks=True)
+                if elf_policy and not bounded_access_policy:
                     tree.charge(collected['elf_work'], int((time.monotonic()-deadline+300)*1000))
-                tree.apply(dict(collected['metadata'], ordinal=i), collected['records'], int((time.monotonic()-deadline+300)*1000))
+                if bounded_access_policy:
+                    tree, envelope = apply_bounded_layer(alias, tree, work_owner, collected, i)
+                else:
+                    tree.apply(dict(collected['metadata'], ordinal=i), collected['records'], int((time.monotonic()-deadline+300)*1000))
                 report['namespace_layers_committed'] += 1
-                if elf_policy:
+                if bounded_access_policy:
+                    compact.append(envelope)
+                    del envelope, collected  # No retained complete layer record journal.
+                elif elf_policy:
                     observations.update({str(i)+':'+str(index): value for index, value in collected['elf'].items()})
             else:
                 scan = s.scan_layer(path, diff, WANTED, roles, budget)
@@ -184,19 +286,27 @@ def proof(root, alias_policy=False, elf_policy=False):
             print(json.dumps({'phase': phase, 'scan': scan}), flush=True)
         if alias_policy:
             phase = 'final-namespace'
-            tree.finalize(int((time.monotonic()-deadline+300)*1000))
-            roles = {key: tree.resolve(key, int((time.monotonic()-deadline+300)*1000)) for key in WANTED}
-        s.require(set(roles) == set(WANTED), 'critical-roles')
-        report['roles'] = roles
+            tree.finalize(work_owner.now() if bounded_access_policy else int((time.monotonic()-deadline+300)*1000))
+            if not bounded_access_policy:
+                roles = {key: tree.resolve(key, int((time.monotonic()-deadline+300)*1000)) for key in WANTED}
+        if not bounded_access_policy:
+            s.require(set(roles) == set(WANTED), 'critical-roles')
+            report['roles'] = roles
         # A successful selected-origin scan is not a runtime/dependency grant.
         if elf_policy:
             phase = 'elf-dependency-closure'
-            elf.admit_selected(roles)
-            report['elf_graph'] = elf.graph(tree, observations, deadline)
+            if bounded_access_policy:
+                roles, report['elf_graph'] = bounded_graph(alias, elf, tree, work_owner, compact)
+            else:
+                elf.admit_selected(roles)
+                report['elf_graph'] = elf.graph(tree, observations, deadline)
             report.update(status='static-dt-needed-closure-verified', runtime_feasibility='not-run', dependency_closure='static-dt-needed-only')
         else:
             report.update(status='selected-origins-verified', runtime_feasibility='not-run', dependency_closure='not-established')
+        s.require(set(roles) == set(WANTED), 'critical-roles')
+        report['roles'] = roles
     except Exception as error:
+        if work_owner is not None: work_owner.fail(error)
         refusals = (s.Refusal, alias.s.Refusal, alias.v.Refusal) if alias is not None else (s.Refusal,)
         if elf is not None: refusals += (elf.Refusal,)
         code = str(error) if isinstance(error, refusals) else 'unexpected-tool-failure'
@@ -208,7 +318,8 @@ def proof(root, alias_policy=False, elf_policy=False):
         if alias is not None and isinstance(error, alias.v.Refusal) and 'hardlink_facts' in error.__dict__:
             report['hardlink_facts'] = error.hardlink_facts
         if elf is not None and 'elf_facts' in error.__dict__:
-            report['elf_facts'] = error.elf_facts
+            try: report['elf_facts'] = elf.failure_packet(error.elf_facts)
+            except Exception: report['elf_facts'] = None
         if 'elf_string_table_facts' in error.__dict__:
             retain_string_table_diagnostic(report, error.elf_string_table_facts, elf)
         if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
@@ -220,30 +331,27 @@ def proof(root, alias_policy=False, elf_policy=False):
             except Exception:
                 report['critical_provenance'] = None  # Preserve the original reason.
     finally:
-        if budget is not None:
-            report['scan_budget'] = {key: budget[key] for key in ('expanded', 'entries', 'elf_objects', 'elf_work', 'elf_metadata') if key in budget}
         try:
-            report['source_unchanged'] = all(acquire.file_hash(ROOT / p) == sha for p, sha in frozen.items())
-            report['source_sha256'] = hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()
-            report['owned_files_removed'] = owner.cleanup() if owner else 0
-            report['cleanup'] = 'complete'
+            if budget is not None:
+                report['scan_budget'] = {key: budget[key] for key in ('expanded', 'entries', 'elf_objects', 'elf_work', 'elf_metadata') if key in budget}
         except Exception:
-            report['cleanup'] = 'unconfirmed'
-        print(json.dumps(report, separators=(',', ':')), flush=True)
-    return 0 if (report['status'] in ('selected-origins-verified', 'static-dt-needed-closure-verified') and report.get('source_unchanged')
-                 and report.get('cleanup') == 'complete') else 1
+            report['scan_budget'] = None; report['status'] = 'refused'; report.setdefault('failure', 'scan-accounting')
+        finally:
+            finish_report(report, root, frozen, work_owner)
+    return 0 if successful(report, bounded_access_policy) else 1
 
 
 if __name__ == '__main__':
     try:
         s.require(sys.flags.isolated and sys.dont_write_bytecode and sys.platform == 'linux', 'isolated-linux-tool')
         root = target(os.environ)
-        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--approved-elf-static-prerequisite'], ['--cleanup']), 'explicit-scope')
+        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--approved-elf-static-prerequisite'], ['--approved-bounded-elf-static-prerequisite'], ['--cleanup']), 'explicit-scope')
         if sys.argv[1:] == ['--cleanup']:
             print(json.dumps({'always_cleanup': 'complete', 'files_removed': cleanup(root)}))
         else:
-            mode, inspect_elf = policy_flags(sys.argv[1:], os.environ.get('ALIAS_POLICY', 'false'), os.environ.get('ELF_POLICY', 'false'))
-            sys.exit(proof(root, mode, inspect_elf))
+            mode, inspect_elf, bounded = selection(sys.argv[1:], os.environ.get('ALIAS_POLICY', 'false'),
+                os.environ.get('ELF_POLICY', 'false'), os.environ.get('BOUNDED_ACCESS_POLICY', 'false'))
+            sys.exit(proof(root, mode, inspect_elf, bounded))
     except s.Refusal:
         print('{"status":"scope-or-cleanup-refused"}')
         sys.exit(1)

@@ -335,6 +335,34 @@ def object_policy(path, found):
                 needed=list(found['needed']), search_paths=list(found['search_paths']))
 
 
+def failure_packet(value):
+    fields = {'format', 'stage', 'path_sha256', 'needed_name', 'roots', 'runtime_grant'}
+    if type(value) is not dict or any(type(k) is not str for k in value) or set(value) != fields: return None
+    def digest(raw): return type(raw) is str and re.fullmatch('[a-f0-9]{64}', raw) is not None
+    if not (type(value['format']) is str and value['format'] == 'ADBUELF1' and value['runtime_grant'] is False
+            and type(value['stage']) is str and value['stage'] in ('root-origins', 'dependency-graph', 'graph-validation')
+            and (value['path_sha256'] is None or digest(value['path_sha256']))
+            and (value['needed_name'] is None or library(value['needed_name']))
+            and type(value['roots']) is dict and len(value['roots']) <= 2
+            and all(type(k) is str and k in (SERVER, LOADER) for k in value['roots'])): return None
+    for root in value['roots'].values():
+        if not (type(root) is dict and all(type(k) is str for k in root) and set(root) == {
+                'sha256', 'bytes', 'type', 'soname', 'needed', 'unsupported_features', 'interpreter_sha256', 'search_path_count', 'search_path_hashes'}): return None
+        if not (digest(root['sha256']) and type(root['bytes']) is int and 64 <= root['bytes'] <= 128*MIB
+                and type(root['type']) is int and root['type'] in (2,3) and (root['soname'] is None or library(root['soname']))
+                and type(root['needed']) is list and len(root['needed']) <= 64 and all(library(n) for n in root['needed'])
+                and len(set(root['needed'])) == len(root['needed'])
+                and type(root['unsupported_features']) is list and len(root['unsupported_features']) <= 7
+                and all(type(f) is str and f in set(FEATURE_TAGS.values()) | {'origin-flag', 'dynamic-search-flag'} for f in root['unsupported_features'])
+                and len(set(root['unsupported_features'])) == len(root['unsupported_features'])
+                and (root['interpreter_sha256'] is None or digest(root['interpreter_sha256']))
+                and type(root['search_path_count']) is int and 0 <= root['search_path_count'] <= 2
+                and type(root['search_path_hashes']) is list and len(root['search_path_hashes']) == root['search_path_count']
+                and all(digest(p) for p in root['search_path_hashes'])): return None
+    raw = json.dumps(value, ensure_ascii=True, separators=(',', ':'))
+    return json.loads(raw) if len(raw.encode('ascii')) <= 32768 else None
+
+
 def capture_failure(error, stage, current, requested, roots):
     if 'elf_facts' in error.__dict__: return
     facts = dict(format='ADBUELF1', stage=stage,

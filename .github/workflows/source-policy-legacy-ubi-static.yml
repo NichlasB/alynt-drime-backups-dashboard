@@ -16,6 +16,11 @@ on:
         required: true
         default: false
         type: boolean
+      bounded_access_policy:
+        description: Separately approved shared-budget bounded-string static inspection; requires alias and ELF policies
+        required: true
+        default: false
+        type: boolean
 permissions:
   contents: read
 concurrency:
@@ -30,6 +35,7 @@ jobs:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
       ALIAS_POLICY: ${{ inputs.alias_policy }}
       ELF_POLICY: ${{ inputs.elf_policy }}
+      BOUNDED_ACCESS_POLICY: ${{ inputs.bounded_access_policy }}
     steps:
       - name: Admit exact approved head
         shell: bash
@@ -40,12 +46,29 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
+      - name: Admit checked-out source closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$BOUNDED_ACCESS_POLICY" == true ]]; then
+            [[ "$(git rev-parse HEAD)" == "$EXPECTED_SHA" ]]
+            git diff --no-ext-diff --no-textconv --quiet "$EXPECTED_SHA" -- \
+              scripts/ci/source-policy-legacy-ubi-static.py \
+              .github/workflows/source-policy-legacy-ubi-static.yml \
+              scripts/manual/source-policy-linux-minimum-acquire.py \
+              scripts/manual/source_policy_linux_minimum_static.py \
+              scripts/manual/source_policy_ubi_provenance.py \
+              scripts/manual/source_policy_ubi_alias_static.py \
+              scripts/manual/source_policy_virtual_closure.py \
+              scripts/manual/source_policy_ubi_elf_static.py
+          fi
       - name: One static prerequisite; no candidate execution
         run: |
-          case "$ALIAS_POLICY:$ELF_POLICY" in
-            false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
-            true:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
-            true:true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-elf-static-prerequisite ;;
+          case "$ALIAS_POLICY:$ELF_POLICY:$BOUNDED_ACCESS_POLICY" in
+            false:false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
+            true:false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
+            true:true:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-elf-static-prerequisite ;;
+            true:true:true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-bounded-elf-static-prerequisite ;;
             *) exit 1 ;;
           esac
       - name: Always reconcile exact owned artifacts
@@ -53,4 +76,6 @@ jobs:
         run: |
           if [[ -f scripts/ci/source-policy-legacy-ubi-static.py ]]; then
             python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --cleanup
+          else
+            exit 1
           fi

@@ -10,14 +10,14 @@ final class SourcePolicyUbiStringAccessTest extends TestCase {
   fclose($pipes[1]);$this->assertSame(0,proc_close($p),$out);$this->assertFalse($overflow,'Bounded child diagnostics overflowed.');
   $this->assertSame(array('tests'=>12,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
  }
- public function test_default_collector_and_actual_entry_workflow_do_not_select_the_new_profile() {
+ public function test_strict_default_parser_call_is_preserved_and_entry_does_not_bypass_owner() {
   $root=dirname(__DIR__);
   $collector=file_get_contents($root.'/scripts/manual/source_policy_ubi_alias_static.py');
   $this->assertStringContainsString("parsed = elf.parse(body, budget['deadline'])",$collector);
-  // The separately approved dormant owner adapter may opt in; the real entry/workflow may not.
+  // The separately approved default-off entry delegates through its owner, never directly to the parser profile.
   foreach(array('/scripts/ci/source-policy-legacy-ubi-static.py','/.github/workflows/source-policy-legacy-ubi-static.yml') as $path){
    $source=file_get_contents($root.$path);$this->assertStringNotContainsString('bounded_strings',$source);$this->assertStringNotContainsString('ADBUELFSA1',$source);
-   $this->assertStringNotContainsString('work_owner',$source);
   }
+  $this->assertStringContainsString('bounded_access_policy=False',file_get_contents($root.'/scripts/ci/source-policy-legacy-ubi-static.py'));
  }
 }

@@ -1,5 +1,10 @@
 # Fixed-Entry Bounded String-Access Admission and Static Qualification Integration Design
 
+Current implementation: the [default-off admission/cleanup foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md)
+implements this design with offline evidence only. Next gate is one separately
+approved owned static qualification/cleanup proof, not candidate execution.
+Earlier proposed-state/design evidence below remains historical.
+
 ## Approval, baseline and proof limits — 2026-11-02
 
 User approves repository-only design, validation, commit, push and exact-head

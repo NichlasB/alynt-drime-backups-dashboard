@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Default-off fixed-entry admission/cleanup integrated; real static proof gated — 2026-11-02
+
+The [fixed-entry foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md) implements
+the separate default-off mode, fixed source/head and one-authority construction,
+compact envelopes/pin-before-graph ordering, bounded cross-module refusal relay
+and independent exact cleanup. Twelve offline groups/six guard-control families
+exercise real components and failure paths; transport DATA remain synthetic.
+Old modes/budgets and plugin runtime stay unchanged. No manual dispatch,
+acquisition or native operation. Recommended next gated slice: **One exact-head
+Owned Bounded-Access Static Qualification and Cleanup Proof**, one separately
+approved static-only workflow run after successful exact-head ordinary CI.
+Campaign7/10 milestones/native7/10/six static acquisitions unchanged; the offline
+foundation does not qualify a candidate or earn intermediate product credit.
+
+## Approved default-off fixed-entry admission/cleanup foundation — 2026-11-02
+
+User approves the [fixed-entry design's repository-only foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_INTEGRATION_DESIGN.md)
+through offline regressions, validation, commit, push and exact-head ordinary CI.
+Implement the separate default-off selector, fixed authority/compact envelopes,
+mandatory selected pins, bounded refusal relay and independent exact cleanup.
+Restore baseline9d0488b is clean/synced; no manual dispatch, acquisition, native/
+candidate execution, installed-site or production operation. Campaign remains
+7/10 milestones/native7/10/six static acquisitions; intermediate credit unchanged.
+
 ## Fixed-entry bounded-access integration designed; implementation gated — 2026-11-02
 
 The approved [fixed-entry integration design](SOURCE_POLICY_UBI_FIXED_ENTRY_INTEGRATION_DESIGN.md)

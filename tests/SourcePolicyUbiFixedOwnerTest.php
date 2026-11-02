@@ -10,11 +10,18 @@ final class SourcePolicyUbiFixedOwnerTest extends TestCase {
   fclose($pipes[1]);$this->assertSame(0,proc_close($p),$out);$this->assertFalse($overflow,'Bounded child diagnostics overflowed.');
   $this->assertSame(array('tests'=>14,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
  }
- public function test_opt_in_owner_remains_disconnected_from_actual_entry_and_workflow() {
+ public function test_owner_selection_is_explicit_default_off_and_legacy_modes_remain_strict() {
   $root=dirname(__DIR__);
+  $entry=file_get_contents($root.'/scripts/ci/source-policy-legacy-ubi-static.py');
+  $this->assertStringContainsString('bounded_access_policy=False',$entry);
+  $this->assertStringContainsString('if elf_policy and not bounded_access_policy:',$entry);
+  $this->assertStringContainsString("tree.charge(collected['elf_work']",$entry);
+  $workflow=file_get_contents($root.'/.github/workflows/source-policy-legacy-ubi-static.yml');
+  $this->assertMatchesRegularExpression('/bounded_access_policy:\R\s+description:[^\r\n]+\R\s+required: true\R\s+default: false/',$workflow);
+  // Actual selector/order/guard-removal contracts run in SourcePolicyUbiFixedEntryTest.
   foreach(array('/scripts/ci/source-policy-legacy-ubi-static.py','/.github/workflows/source-policy-legacy-ubi-static.yml') as $path){
    $source=file_get_contents($root.$path);
-   foreach(array('work_owner','_owned_model','_owned_graph','bounded_strings','ADBUOWN1') as $marker)$this->assertStringNotContainsString($marker,$source);
+   foreach(array('bounded_strings','ADBUOWN1','ADBUELFSA1') as $marker)$this->assertStringNotContainsString($marker,$source);
   }
  }
 }

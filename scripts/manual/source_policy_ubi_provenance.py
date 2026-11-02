@@ -12,6 +12,20 @@ def hexadecimal(value, length):
     return type(value) is str and re.fullmatch('[a-f0-9]{'+str(length)+'}', value) is not None
 
 
+def owner_snapshot(value):
+    work = ('work_used', 'parser_work', 'model_work', 'burned_work')
+    counts = ('grants', 'settled', 'verified_layers', 'records', 'observation_bytes')
+    if not shape(value, (*work, *counts, 'state', 'model_bound', 'runtime_grant')): return None
+    if not (all(type(value[k]) is int and 0 <= value[k] <= 2097152 for k in (*work, *counts))
+            and type(value['model_bound']) is bool and value['runtime_grant'] is False
+            and type(value['state']) is str and value['state'] in ('ready', 'poisoned', 'closed-model')): return None
+    if not (value['verified_layers'] <= 10 and value['records'] <= value['settled'] <= value['grants'] <= 256
+            and value['grants']-value['settled'] <= 1
+            and value['work_used'] == value['parser_work']+value['model_work']+value['grants']+value['settled']+value['burned_work']): return None
+    if value['state'] == 'closed-model' and (not value['model_bound'] or value['grants'] != value['settled']): return None
+    return dict(value)
+
+
 def summary(row):
     if not shape(row, ('characters', 'hashed_characters', 'hash_scope', 'sha256', 'literal')):
         return False
