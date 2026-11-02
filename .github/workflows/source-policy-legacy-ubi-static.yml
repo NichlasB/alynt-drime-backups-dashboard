@@ -11,6 +11,11 @@ on:
         required: true
         default: false
         type: boolean
+      elf_policy:
+        description: Approved static ELF/provider inspection only; requires alias_policy and never permits execution
+        required: true
+        default: false
+        type: boolean
 permissions:
   contents: read
 concurrency:
@@ -24,6 +29,7 @@ jobs:
     env:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
       ALIAS_POLICY: ${{ inputs.alias_policy }}
+      ELF_POLICY: ${{ inputs.elf_policy }}
     steps:
       - name: Admit exact approved head
         shell: bash
@@ -36,9 +42,10 @@ jobs:
           persist-credentials: false
       - name: One static prerequisite; no candidate execution
         run: |
-          case "$ALIAS_POLICY" in
-            false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
-            true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
+          case "$ALIAS_POLICY:$ELF_POLICY" in
+            false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
+            true:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
+            true:true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-elf-static-prerequisite ;;
             *) exit 1 ;;
           esac
       - name: Always reconcile exact owned artifacts

@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved selected-ELF/static provider exception — 2026-11-02
+
+User approves [bounded ELF and static dependency closure](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md)
+through implementation/validation/publication/CI and one fresh static proof.
+In-memory observations bind complete verified layer/final content origins;
+provider rules are fixed to image `usr/lib64`, exact SONAME and constrained
+same-family version aliases. Unknown providers/search features/cycles refuse;
+no host fallback, extraction/execution, native server/SQL or production wiring.
+Publish/verify exact-head ordinary CI before the one owned proof and cleanup.
+Campaign7/10 milestones/native7/10 remain pending actual completion; no new
+milestone credit for tests, repairs or evidence commits. Older text is historical.
+
 ## Pinned UBI static artifact/namespace proof passed — 2026-11-01
 
 [Exact36e8272/CI41350637322 and owned41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)

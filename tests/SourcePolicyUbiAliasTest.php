@@ -12,7 +12,7 @@ final class SourcePolicyUbiAliasTest extends TestCase {
  public function test_exception_is_explicit_static_only_and_default_reader_remains() {
   $root=dirname(__DIR__);$entry=file_get_contents($root.'/scripts/ci/source-policy-legacy-ubi-static.py');
   $workflow=file_get_contents($root.'/.github/workflows/source-policy-legacy-ubi-static.yml');
-  $this->assertStringContainsString('def proof(root, alias_policy=False):',$entry);
+  $this->assertStringContainsString('def proof(root, alias_policy=False, elf_policy=False):',$entry);
   $this->assertStringContainsString('scan = s.scan_layer(path, diff, WANTED, roles, budget)',$entry);
   $this->assertStringContainsString("s.require(alias.PIN == PIN and alias.CONFIG == CONFIG, 'alias-candidate-binding')",$entry);
   $this->assertStringContainsString("'runtime_grant': False",$entry);

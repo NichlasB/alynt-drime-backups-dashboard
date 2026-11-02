@@ -2,6 +2,7 @@
 import gzip
 import hashlib
 import importlib.util
+import json
 from pathlib import Path
 import tarfile
 import time
@@ -54,7 +55,9 @@ def record(member, budget):
                 sha256=None, size=member.size, target=target)
 
 
-def collect(path, compressed, size, diff_id, budget):
+def collect(path, compressed, size, diff_id, budget, elf_policy=False):
+    s.require(type(elf_policy) is bool, 'explicit-elf-mode')
+    elf = load('source_policy_ubi_elf_static.py', 'ubi_elf_parser') if elf_policy else None
     expected = s.digest(diff_id)
     s.require(type(size) is int and 0 < size <= 128 * s.MIB, 'alias-compressed-bound')
     s.digest('sha256:'+compressed)
@@ -68,7 +71,7 @@ def collect(path, compressed, size, diff_id, budget):
             count += len(block); sha.update(block)
             s.require(count <= size, 'alias-compressed-identity')
     s.require(count == size and sha.hexdigest() == compressed, 'alias-compressed-identity')
-    records, ordinals = [], {}
+    records, ordinals, observations, elf_work = [], {}, {}, 0
     with gzip.open(path, 'rb') as stream:
         reader = s.ScanReader(stream, budget)
         with tarfile.open(fileobj=reader, mode='r|', encoding='utf-8', errors='surrogateescape') as archive:
@@ -80,17 +83,33 @@ def collect(path, compressed, size, diff_id, budget):
                         continue
                     s.require(row['path'] not in ordinals, 'tar-duplicate')
                     if row['kind'] == 'file':
-                        length, sha = 0, hashlib.sha256()
+                        length, sha, body = 0, hashlib.sha256(), None
                         with archive.extractfile(member) as content:
                             while True:
                                 s.require(time.monotonic() < budget['deadline'], 'scan-read-bound')
                                 block = content.read(s.MIB)
                                 if not block:
                                     break
+                                if length == 0 and elf is not None and elf.eligible(row['path']) and (block[:4] == b'\x7fELF' or row['path'] in (elf.SERVER, elf.LOADER)):
+                                    budget['elf_objects'] = budget.get('elf_objects', 0)+1
+                                    s.require(budget['elf_objects'] <= 256, 'elf-object-bound')
+                                    body = bytearray()
                                 length += len(block); sha.update(block)
                                 s.require(length <= member.size, 'critical-size')
+                                if body is not None: body.extend(block)
                         s.require(length == member.size, 'critical-size')
                         row['sha256'] = sha.hexdigest()
+                        if body is not None:
+                            try:
+                                parsed = elf.parse(body, budget['deadline'])
+                            except elf.Refusal as error:
+                                raise s.Refusal(str(error)) from None
+                            s.require(parsed['sha256'] == row['sha256'], 'elf-content-origin')
+                            budget['elf_work'] = budget.get('elf_work', 0)+parsed['work']; elf_work += parsed['work']
+                            budget['elf_metadata'] = budget.get('elf_metadata', 0)+len(json.dumps(parsed, ensure_ascii=True).encode('ascii'))
+                            s.require(budget['elf_work'] <= 2097152 and budget['elf_metadata'] <= 2*s.MIB, 'elf-observation-bound')
+                            observations[len(records)] = parsed
+                            body = None
                     records.append(row); ordinals[row['path']] = budget['entries']
                 except s.Refusal as error:
                     error.alias_facts = dict(entry=budget['entries'],
@@ -102,9 +121,11 @@ def collect(path, compressed, size, diff_id, budget):
             pass
         s.require(reader.sha.hexdigest() == expected, 'diff-id-mismatch')
     # No staging record escapes the function until both complete hashes verify.
-    return dict(records=records, ordinals=ordinals,
+    result = dict(records=records, ordinals=ordinals,
                 metadata=dict(compressed=compressed, diff_id=expected, compressed_verified=True, diff_verified=True),
                 scan=dict(entries=len(records), expanded_bytes=reader.size, diff_id_verified=True))
+    if elf_policy: result.update(elf=observations, elf_work=elf_work)
+    return result
 
 
 def approved_profile(layer, ordinal):

@@ -103,25 +103,38 @@ def cleanup(root):
     return len(children)
 
 
-def proof(root, alias_policy=False):
+def policy_flags(arguments, alias_value, elf_value):
+    s.require(type(arguments) is list and len(arguments) == 1 and type(arguments[0]) is str
+              and arguments[0] in ('--approved-static-prerequisite', '--approved-alias-static-prerequisite', '--approved-elf-static-prerequisite'), 'explicit-scope')
+    inspect_elf = arguments[0] == '--approved-elf-static-prerequisite'
+    alias_mode = inspect_elf or arguments[0] == '--approved-alias-static-prerequisite'
+    s.require(type(alias_value) is str and alias_value == ('true' if alias_mode else 'false'), 'explicit-alias-mode')
+    s.require(type(elf_value) is str and elf_value == ('true' if inspect_elf else 'false'), 'explicit-elf-mode')
+    return alias_mode, inspect_elf
+
+
+def proof(root, alias_policy=False, elf_policy=False):
     owner, phase, budget = None, 'metadata', None
     report = {'status': 'refused', 'candidate_execution': False, 'image_loading': False,
               'database_operations': False, 'rootfs_extraction': False, 'layers_verified': 0,
-              'runtime_grant': False, 'alias_policy': alias_policy, 'namespace_layers_committed': 0}
+              'runtime_grant': False, 'alias_policy': alias_policy, 'elf_policy': elf_policy, 'namespace_layers_committed': 0}
     report['tool'] = {'python': sys.version.split()[0], 'ssl': acquire.ssl.OPENSSL_VERSION,
                       'unicode_db': s.unicodedata.unidata_version}
     paths = (Path(__file__), Path(acquire.__file__), Path(s.__file__), Path(provenance.__file__),
              ROOT / '.github/workflows/source-policy-legacy-ubi-static.yml')
-    alias = None
+    alias, elf = None, None
     if alias_policy is True:
         spec = importlib.util.spec_from_file_location('fixed_ubi_alias', ROOT / 'scripts/manual/source_policy_ubi_alias_static.py')
         alias = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(alias)
         paths += (Path(alias.__file__), Path(alias.v.__file__))
+        if elf_policy is True:
+            elf = alias.load('source_policy_ubi_elf_static.py', 'fixed_ubi_elf')
+            paths += (Path(elf.__file__),)
     frozen = {str(p.relative_to(ROOT)): acquire.file_hash(p) for p in paths}
     deadline = time.monotonic() + 300
     try:
-        s.require(type(alias_policy) is bool, 'explicit-alias-mode')
+        s.require(type(alias_policy) is bool and type(elf_policy) is bool and (not elf_policy or alias_policy), 'explicit-elf-mode')
         owner = Owned(root)
         client = acquire.Client(owner, deadline)
         base = 'https://registry-1.docker.io/v2/library/mariadb'
@@ -136,7 +149,7 @@ def proof(root, alias_policy=False):
         admit(manifest, config)
         report['metadata_verified'] = True
         roles, budget = {}, {'expanded': 0, 'entries': 0, 'deadline': deadline}
-        tree = None
+        tree, observations = None, {}
         for i, ((sha, size), diff) in enumerate(zip(LAYERS, config['rootfs']['diff_ids'])):
             phase = 'layer-' + str(i)
             path = owner.path(sha + '.blob')
@@ -144,7 +157,7 @@ def proof(root, alias_policy=False):
             s.require(remaining > 0, 'compressed-budget')
             client.get(base + '/blobs/sha256:' + sha, min(128 * s.MIB, remaining), token, path, size, sha, True)
             if alias_policy:
-                collected = alias.collect(path, sha, size, diff, budget)
+                collected = alias.collect(path, sha, size, diff, budget, elf_policy=elf_policy)
                 report['layers_verified'] += 1
                 scan = collected['scan']
                 if i == 0:
@@ -153,8 +166,12 @@ def proof(root, alias_policy=False):
                         source=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()),
                         [(layer[0], s.digest(value)) for layer, value in zip(LAYERS, config['rootfs']['diff_ids'])],
                         alias.approved_profile(collected, i), hardlinks=True)
+                if elf_policy:
+                    tree.charge(collected['elf_work'], int((time.monotonic()-deadline+300)*1000))
                 tree.apply(dict(collected['metadata'], ordinal=i), collected['records'], int((time.monotonic()-deadline+300)*1000))
                 report['namespace_layers_committed'] += 1
+                if elf_policy:
+                    observations.update({str(i)+':'+str(index): value for index, value in collected['elf'].items()})
             else:
                 scan = s.scan_layer(path, diff, WANTED, roles, budget)
                 report['layers_verified'] += 1
@@ -164,11 +181,18 @@ def proof(root, alias_policy=False):
             tree.finalize(int((time.monotonic()-deadline+300)*1000))
             roles = {key: tree.resolve(key, int((time.monotonic()-deadline+300)*1000)) for key in WANTED}
         s.require(set(roles) == set(WANTED), 'critical-roles')
+        report['roles'] = roles
         # A successful selected-origin scan is not a runtime/dependency grant.
-        report.update(status='selected-origins-verified', runtime_feasibility='not-run',
-                      dependency_closure='not-established', roles=roles)
+        if elf_policy:
+            phase = 'elf-dependency-closure'
+            elf.admit_selected(roles)
+            report['elf_graph'] = elf.graph(tree, observations, deadline)
+            report.update(status='static-dt-needed-closure-verified', runtime_feasibility='not-run', dependency_closure='static-dt-needed-only')
+        else:
+            report.update(status='selected-origins-verified', runtime_feasibility='not-run', dependency_closure='not-established')
     except Exception as error:
         refusals = (s.Refusal, alias.s.Refusal, alias.v.Refusal) if alias is not None else (s.Refusal,)
+        if elf is not None: refusals += (elf.Refusal,)
         code = str(error) if isinstance(error, refusals) else 'unexpected-tool-failure'
         report.update(failure_stage=phase, failure=code if re.fullmatch('[a-z0-9-]{1,64}', code) else 'bounded-refusal')
         if isinstance(error, s.PathRefusal):
@@ -177,6 +201,8 @@ def proof(root, alias_policy=False):
             report['alias_facts'] = error.alias_facts
         if alias is not None and isinstance(error, alias.v.Refusal) and 'hardlink_facts' in error.__dict__:
             report['hardlink_facts'] = error.hardlink_facts
+        if elf is not None and 'elf_facts' in error.__dict__:
+            report['elf_facts'] = error.elf_facts
         if type(error) is s.Refusal and error.__dict__.get('critical_facts') is not None:
             try:
                 context = dict(head=os.environ['GITHUB_SHA'], image=hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest(),
@@ -187,7 +213,7 @@ def proof(root, alias_policy=False):
                 report['critical_provenance'] = None  # Preserve the original reason.
     finally:
         if budget is not None:
-            report['scan_budget'] = {key: budget[key] for key in ('expanded', 'entries')}
+            report['scan_budget'] = {key: budget[key] for key in ('expanded', 'entries', 'elf_objects', 'elf_work', 'elf_metadata') if key in budget}
         try:
             report['source_unchanged'] = all(acquire.file_hash(ROOT / p) == sha for p, sha in frozen.items())
             report['source_sha256'] = hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()
@@ -196,7 +222,7 @@ def proof(root, alias_policy=False):
         except Exception:
             report['cleanup'] = 'unconfirmed'
         print(json.dumps(report, separators=(',', ':')), flush=True)
-    return 0 if (report['status'] == 'selected-origins-verified' and report.get('source_unchanged')
+    return 0 if (report['status'] in ('selected-origins-verified', 'static-dt-needed-closure-verified') and report.get('source_unchanged')
                  and report.get('cleanup') == 'complete') else 1
 
 
@@ -204,13 +230,12 @@ if __name__ == '__main__':
     try:
         s.require(sys.flags.isolated and sys.dont_write_bytecode and sys.platform == 'linux', 'isolated-linux-tool')
         root = target(os.environ)
-        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--cleanup']), 'explicit-scope')
+        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--approved-elf-static-prerequisite'], ['--cleanup']), 'explicit-scope')
         if sys.argv[1:] == ['--cleanup']:
             print(json.dumps({'always_cleanup': 'complete', 'files_removed': cleanup(root)}))
         else:
-            mode = sys.argv[1:] == ['--approved-alias-static-prerequisite']
-            s.require(os.environ.get('ALIAS_POLICY', 'false') == ('true' if mode else 'false'), 'explicit-alias-mode')
-            sys.exit(proof(root, mode))
+            mode, inspect_elf = policy_flags(sys.argv[1:], os.environ.get('ALIAS_POLICY', 'false'), os.environ.get('ELF_POLICY', 'false'))
+            sys.exit(proof(root, mode, inspect_elf))
     except s.Refusal:
         print('{"status":"scope-or-cleanup-refused"}')
         sys.exit(1)

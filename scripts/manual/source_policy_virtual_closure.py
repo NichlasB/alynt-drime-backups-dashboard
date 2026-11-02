@@ -264,6 +264,22 @@ class VirtualClosure:
                 return result
         raise Refusal('unresolved')
 
+    def charge(self, cost, now):
+        require(type(cost) is int and 0 <= cost <= WORK_LIMIT, 'inspection-work')
+        self._tick(now, cost)
+
+    def inspect(self, path, now):
+        self._tick(now)
+        require(self._final, 'inspection-phase')
+        parts = key(path).split('/')
+        require(parts[0] not in ('proc', 'sys', 'dev'), 'special-root')
+        for i in range(1, len(parts)):
+            self._tick(now); parent = self._nodes.get('/'.join(parts[:i]))
+            require(parent is not None and parent['kind'] == 'directory', 'inspection-parent')
+        node = self._nodes.get(path)
+        require(node is not None, 'missing-node')
+        return dict(json.loads(json.dumps(node)), snapshot=self._snapshot_hash, model_only=True, runtime_grant=False)
+
     def closure(self, objects, providers, now):
         self._tick(now)
         require(type(objects) is list and 0 < len(objects) <= 256 and type(providers) is list and len(providers) <= 256, 'closure-budget')

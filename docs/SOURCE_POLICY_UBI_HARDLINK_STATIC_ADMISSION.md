@@ -1,5 +1,10 @@
 # Candidate-Bound Static Hardlink DATA and Content Provenance
 
+Current resume: user approves the [selected-ELF/static dependency exception](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md).
+It requires fresh exact-head QA/CI and one new static proof, with no extraction,
+execution or runtime grant. The actual hardlink/static success below retains
+its original source identity and does not pre-qualify the new ELF policy.
+
 Current outcome: [owned static41350800959](#exact-head-ci-and-successful-owned-static-proof)
 passes all10 compressed/diffID verifications and10 namespace commits, resolves
 both selected origins and completes primary/always cleanup with artifact0.
