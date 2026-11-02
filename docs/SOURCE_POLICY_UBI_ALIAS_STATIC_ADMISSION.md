@@ -1,5 +1,12 @@
 # Candidate-Bound UBI Alias-Aware Static Admission
 
+Current resume: [ELF-mode owned41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
+refuses `elf-string-table` after six verified layers/namespace commits; exact
+cleanup/artifact0, no extraction/execution or final graph. Implementation CI
+passes. One approved static proof is used; bounded tag/size diagnostics and a new
+acquisition need approval, not an unchanged retry. Campaign7/10 milestones/native
+7/10 unchanged. Earlier results below keep their historical source and limits.
+
 Current outcome: [hardlink-enabled owned41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes all10 full layers/namespace commits and both selected origins, exact
 cleanup/artifact0. Campaign7/10 milestones on closeout CI, native attempts7/10.

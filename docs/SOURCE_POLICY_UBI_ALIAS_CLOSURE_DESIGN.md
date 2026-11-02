@@ -1,5 +1,12 @@
 # UBI Critical-Alias and Dependency-Closure Admission Design
 
+Current resume: [ELF policy implementation/owned refusal](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
+passes ordinary CI but stops at the real string-table guard, not a final graph.
+Six layer commits/exact cleanup/artifact0; no extraction/execution grant. Next
+gate is bounded first-refusal tag/size diagnostics and one new static acquisition,
+without changing acceptance or budgets. Historical design/results below retain
+their original source and proof limits.
+
 Current outcome: [approved hardlink-enabled static proof](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 verified layers/namespace commits and selected origins with no execution
 grant. Next policy is Candidate-Bound Selected-ELF and Static Dependency-Closure;

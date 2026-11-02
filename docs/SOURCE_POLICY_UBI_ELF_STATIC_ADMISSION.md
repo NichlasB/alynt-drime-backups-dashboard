@@ -1,5 +1,14 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
+Current outcome: implementation/ordinary CI pass, but the one owned static proof
+[41447107590](#exact-head-ci-and-one-owned-static-refusal) refuses `elf-string-table`
+at layer6, cumulative archive entry3714, `usr/lib64/libmariadbd.so.19`. Six layers
+verify/commit; no final ELF/provider closure. Exact cleanup completes, artifact0,
+no extraction/execution/SQL. Campaign7/10 milestones/native7/10 unchanged;
+five static acquisitions total. The single approved acquisition has been used.
+Next gate is a bounded string-table refusal diagnostic and one new owned static
+proof, not a limit increase, another unchanged retry or candidate execution.
+
 ## Approval, baseline and plan — 2026-11-02
 
 User approves implementation, validation, commit/push/exact-head CI and **one
@@ -167,3 +176,76 @@ but campaign remains7/10 milestones/native attempts7/10 until actual scoped
 validation/publication/proof/evidence completion. One new static acquisition is
 authorized here; no repeated proof, counter reset or extra credit for retries,
 cleanup, tests or evidence commits. Extraction and execution remain disabled.
+
+## Exact-head CI and one owned static refusal
+
+Implementation head **cc9425da1abcb8e122cf20b7d36fcad1e3b34f43** was committed,
+pushed and verified clean/synced before dispatch. Ordinary
+[CI41446844295](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41446844295)
+succeeds: PHP7.4 **2599 tests/23409 assertions**, PHP8.3 **2599/23414**, both
+without failures/errors/skips; Node74/74/no skips in both jobs. PHPCS, structure,
+build, strict Composer validation and both dependency audits pass; zero audited
+vulnerabilities. These are isolated/source-scoped checks, not candidate runtime
+qualification or refreshed whole-plugin release readiness.
+
+Exactly one manual ELF-mode
+[static proof41447107590](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41447107590)
+at that same head, attempt1/job125282859478, ran2026-11-02
+12:44:16–12:44:22 UTC. Both literal mode inputs were true. The final job is
+**failure**, not a successful qualification. Python3.12.3/OpenSSL3.0.13/
+Unicode15.0.0 performed only trusted static analysis of the pinned artifact.
+
+Actual final packet:
+
+- metadata_verifiedtrue; layers_verified6 and namespace_layers_committed6;
+- failure_stage `layer-6`, failure `elf-string-table`;
+- regular `usr/lib64/libmariadbd.so.19`, cumulative archive entry3714;
+  full-name SHA256632bec122434a754cd56fe57c31fc831c33949e9414211cee9eb1e0d50ec1c47;
+- scan expanded343200256 bytes/3714 entries; elf_objects144 reservations
+  (includes the failing object, not144 admitted objects), elf_work6448 and
+  elf_metadata52395 bytes before refusal;
+- source_unchangedtrue; cohort
+  5554e5f3025c609a0186a020b403d3372f5d2a31324e456c8d31e8a8703acdd4;
+- candidate_executionfalse, image_loadingfalse, rootfs_extractionfalse,
+  database_operationsfalse and runtime_grantfalse.
+
+The first six completed layer scans report respectively2730/106087424,
+4/15872,102/14193152,62/9731584,3/3072 and3/3072 canonical entries/expanded
+bytes, each with complete diffID verification. The seventh layer did not return
+observations or commit; no final namespace/selected-root/ELF dependency graph was
+established by this run. Historical ten-layer/origin success belongs to its old
+source cohort only and is not copied into this result.
+
+The exact guard requires DT_STRTAB and DT_STRSZ to be present with
+`0 < DT_STRSZ <= 1MiB` whenever needed/SONAME/search strings exist. Its combined
+refusal code does **not** disclose which clause failed. The job contains no
+actual tag-presence/declared-size receipt: missing tags, zero or oversized size
+must not be guessed from the filename. It is also not established whether this
+library is reachable from the selected roots; the present bounded collector
+parses eligible library bodies before final reachability is known. Do not skip
+the object, widen the table cap or change eager/deferred admission on assumption.
+
+Primary finally at12:44:22.405 confirms **10 exact owned files and their
+directory removed**; always reconciliation at12:44:22.504 confirms complete,
+files_removed0. Actions artifacts API returns0. No body extraction, candidate
+loading/execution, server initialization, SQL, installed site/LocalWP state,
+production wiring, dependency/image change or release operation occurred.
+The refused attempt is not rerun or relabeled; all source guards/budgets stay.
+
+Implementation-plan progress: the dormant static foundation is implemented and
+published, but actual legacy M ELF/provider admission remains blocked. Campaign
+stays **7/10 completed milestones,7/10 native attempts**; this is the fifth
+static acquisition, not another native attempt or completed product milestone.
+No credit for the local warning repair, tests, diagnosis or evidence closeout.
+
+**Recommended next gated slice: Candidate-Bound ELF String-Table Refusal
+Diagnostic and One Owned Static Cleanup Proof.** Approve harness-only bounded
+first-refusal facts (tag presence/declared size and the failed predicate, no raw
+strings/bodies), meaningful synthetic regressions, publication/exact-head CI and
+one fresh static diagnostic acquisition/cleanup. It must preserve acceptance,
+the1MiB cap and all other budgets, pins, strict defaults and no-extraction/
+execution policy. Actual facts should precede any reachability/size-policy
+decision. Another acquisition exceeds the one explicitly authorized here; no
+additional dispatch is made. Production/provider/form and legacy M runtime/
+native qualification stay gated. Evidence-only closeout gets its own exact-head
+CI without another artifact or native attempt; uploader/toolkit stay untouched.

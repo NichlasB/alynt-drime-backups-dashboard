@@ -1,5 +1,12 @@
 # UBI Failed-Entry Provenance and Dormant Virtual-Closure Safety Foundation
 
+Current resume: [ELF-mode owned41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
+refuses at the string-table guard after six complete layer/model commits, with
+exact cleanup/artifact0 and no extraction/execution. Ordinary implementation CI
+passes; synthetic closure positives do not qualify the real candidate. A bounded
+tag/size diagnostic and another static acquisition are the next approval gate;
+strict defaults/limits and historical source identities below stay unchanged.
+
 Current outcome: [explicit hardlink-enabled static consumer](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes the actual pinned candidate's10 layer commits and selected-origin checks,
 with runtime_grantfalse and exact cleanup. Default aliases/reader/runtime remain

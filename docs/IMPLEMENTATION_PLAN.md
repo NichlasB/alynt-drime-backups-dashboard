@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Static ELF foundation published; real string-table guard remains closed — 2026-11-02
+
+[Implementationcc9425d/CI41446844295 and static41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal):
+ordinary PHP7.4/8.3/Node QA passes, but the one owned proof refuses
+`elf-string-table`, layer6/cumulative entry3714, `usr/lib64/libmariadbd.so.19`.
+Six full layers/namespace commits; no final ELF/provider closure. Primary10-file/
+directory cleanup and always reconciliation complete, artifact0, no extraction,
+execution or SQL. The combined tag/size guard does not reveal its failed clause;
+do not presume oversize, skip the library or increase limits. Campaign7/10
+milestones/native7/10 unchanged, five static acquisitions; no blocked-proof or
+evidence-commit credit. Recommended next gated slice: **Candidate-Bound ELF
+String-Table Refusal Diagnostic and One Owned Static Cleanup Proof**, bounded
+tag/size/failed-predicate facts and one additional acquisition, preserving all
+acceptance/budgets and disabled execution/wiring. The single approved proof is
+used; no second dispatch or acceptance change is authorized. Older text below is
+historical; meaningful plan progress is now gated, not a generic cleanup queue.
+
 ## Approved selected-ELF/static provider exception — 2026-11-02
 
 User approves [bounded ELF and static dependency closure](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md)
