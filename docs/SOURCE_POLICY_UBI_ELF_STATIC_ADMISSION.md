@@ -1,5 +1,14 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
+Latest qualified result: [campaign static41532634830 and owning closeout](SOURCE_POLICY_UBI_LIBGCC_ENTRY_INTEGRATION.md#actual-exact-head-static-closure-and-owned-cleanup)
+at26a9a1b succeeds with all10 layers,19 objects/46 edges and one exact libgcc
+policy match; exact primary/independent cleanup and artifacts0. No extraction,
+loading, execution, SQL or ABI/runtime qualification. The coherent static milestone
+becomes campaign8/10 only after closeout publication/CI; native7/10,static9.
+Next real boundary is candidate-bound connection-free runtime admission **design**,
+not wider aliases or altered native lab image/version guards. Older outcomes
+below remain historical and retain their actual failed/source-scoped conclusions.
+
 Latest actual outcome: the [one approved bounded-access static proof41510494382](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md#actual-bounded-access-static-proof-and-cleanup-result)
 at a718841 verifies/commits all ten layers, then refuses `elf-provider-alias`
 for `libgcc_s.so.1`. Cleanup complete, artifacts zero; graph qualification failed,

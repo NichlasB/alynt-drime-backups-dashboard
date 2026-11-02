@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Actual static ELF/provider closure succeeds; runtime admission boundary — 2026-11-02
+
+The campaign [fixed-entry integration and actual proof41532634830](SOURCE_POLICY_UBI_LIBGCC_ENTRY_INTEGRATION.md#actual-exact-head-static-closure-and-owned-cleanup)
+at26a9a1b, after ordinary CI41531116604 success, verifies all10 layers/model
+commits and selected roots, then closes **19 objects/46 edges** with exactly one
+approved libgcc match. Whole static job succeeds; source/accounting/reporting
+are valid, owner closed-model, primary13-file/directory and independent zero
+cleanup complete, artifacts0. No extraction/loading/execution/native/SQL occurs.
+Evidence closeout publication/CI completes one coherent static qualification
+milestone: campaign **8/10 milestones,native7/10,nine static acquisitions** after
+its exact-head CI success. No preparatory foundation/retry/doc commit earns
+separate credit. Required legacy M native/runtime coverage remains unestablished.
+
+Implementation-plan progress: static candidate/provider closure is qualified;
+next meaningful work changes runtime trust/compatibility admission. The existing
+native minimum lab is pinned to another image and10.11.18-MariaDB-ubu2204, not
+this UBI10.6.23 candidate. Do not alter those guards or rerun that different image.
+**Recommended next gated slice: Repository-only Candidate-Bound UBI
+Connection-Free Runtime Admission Design**, design-only definition of the exact
+trusted-engine/no-init/no-listener/no-SQL runtime profile and owned cleanup before
+any new execution authority. Stop at this genuine campaign boundary; keep image
+loading, candidate execution, SQL and production wiring disabled. Earlier entries
+below retain their historical scope and are not the current resume gate.
+
 ## Fixed libgcc_s selection integrated; campaign qualification pending — 2026-11-02
 
 The campaign [default-off entry integration](SOURCE_POLICY_UBI_LIBGCC_ENTRY_INTEGRATION.md)

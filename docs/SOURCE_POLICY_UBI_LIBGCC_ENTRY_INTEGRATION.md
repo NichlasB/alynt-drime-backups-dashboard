@@ -107,3 +107,111 @@ real security/compatibility decision: stop before changing its guard or making
 another uncorrected attempt. Acquisition/diagnosis/docs do not create product
 milestone credit or reset the seven used native attempts. Native/legacy-runtime
 coverage remains unestablished by any isolated or static-only result.
+
+## Actual exact-head static closure and owned cleanup
+
+Implementation **26a9a1bf8126a3d203dd8b489e55a6f29b85d968** was clean/synced,
+equal to remote master, with no matching dispatch before the single attempt.
+Ordinary [CI41531116604](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41531116604)
+passes at that exact head: PHP7.4 **2,607 tests /23,452 assertions**, PHP8.3
+**2,607 /23,457**, both without failures/skips; Node74/74 each, no failures/skips;
+zero audit advisories. PHP8.3 checkout post-job took longer than its tests; the
+pending overall run was not treated as failure/success, cancelled or rerun.
+An attempted one-off follow-up did not schedule; CI then completed and work
+continued in this chat, with no active reminder or duplicate attempt.
+
+One campaign-owned [static run41532634830](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41532634830),
+attempt1/job125576472077, runs **2026-11-02 21:54:55–21:55:13 UTC**, all four
+explicit flags true. The exact-head/source-closure steps pass. **The static step
+and whole job succeed**, not merely their cleanup. Actual final report states:
+
+| Evidence | Actual result |
+|---|---|
+| Status | `static-dt-needed-closure-verified` |
+| Complete layers / namespace commits | **10 /10**, metadata verified |
+| Closed graph | **19 objects /46 edges**,15 provider aliases |
+| Exact libgcc usage | `ADBUCAPUSE1`, `candidate-libgcc-alias-v1`, **one** match, grant=false |
+| Graph scope | model_only=true, static_dependency_closure_verified=true |
+| Source/readback/reporting | unchanged=true, complete, reported=true |
+| Work used | **598,847 /2,097,152** |
+| Parser / model / burn | **144,631 /453,910 /0** |
+| Grants / settlements / records | **153 /153 /153**, no outstanding grant |
+| Observation bytes | **194,086**, inside2MiB ceiling |
+| Owner final state | closed-model, model_bound=true, verified_layers10 |
+| Expanded / entries / observed ELF | **455,730,688 /8,684 /153** |
+| Primary cleanup | complete, **13 files and owned directory removed** |
+| Independent always reconciliation | success, complete, **0** files to remove |
+| Completed-run artifacts API | **0** artifacts |
+
+Graph SHA256:
+`15e1fbc88a66a5b8d0c605b70712657f2b57a0ff40deaa5781c7a765160b70bd`.
+Current snapshot:
+`7aedec03c9ffda4abd66b06884e79f20825a03001878137a2e0887eabec008f6`.
+Fresh eight-path source cohort:
+`18770d299e7608cf9c2e899e950b416d464ec88bf5795fef295293856f087a3c`.
+The selected server/loader content hashes remain the unchanged admitted pins;
+server layer6/entry1275 and loader layer0/entry1641 are resolved in this snapshot.
+The existing lib64 edge is layer0/entry658. The provider match and graph closure
+run only after selected-root admission and actual retained parser/owner checks.
+The report does not separately export the versioned target's body SHA; do not
+invent it from the target-string hash or opaque graph digest. By the reviewed
+fixed path, actual target regular/origin/SONAME and graph policies returned
+success; their detailed individual metadata are not new exported receipts.
+
+Accounting holds:144631+453910+153+153+0=598847. The extra model work is bounded
+actual graph/policy checking, not a raised allowance. Source/graph/cleanup success
+are all established before the final success matcher. No repair or repeated
+qualification is needed for this attempt. All actual candidate_execution,
+image_loading, database_operations, rootfs_extraction and runtime_grant fields
+remain **false**; runtime_feasibility=not-run, relocations_verified=false and
+runtime_profile=unestablished. No native server, authentication or SQL ran.
+
+## Campaign closeout and next real boundary
+
+This closes one coherent **selected-ELF/static dependency-closure qualification
+milestone**, including the related admission/cost/origin/entry foundations and
+this actual proof, not one milestone for each preparatory slice. After this
+evidence's publication/exact-head ordinary CI passes, campaign totals become
+**8/10 completed milestones,7/10 native attempts,nine static acquisitions**.
+No prior counters reset; this static attempt is not native attempt8. Earlier
+failed receipts remain failed and source-scoped. Legacy required row M is not
+native-qualified by this static graph.
+
+Read-only next-step audit finds the existing
+[native minimum-lab controller](../scripts/ci/source-policy-minimum-controller.mjs)
+allows server image `sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5`,
+config `sha256:b5077e20185da2defdc68763c9f87e9ce6c449207f9e8de120dee346b54ce696`,
+and exact SQL version `10.11.18-MariaDB-ubu2204`. It is not an admission profile
+for this `14bab8cc...` UBI10.6.23 candidate, and its ordered body initializes a
+server/SQL rather than a connection-free observation. Dispatching it unchanged
+would rerun the already qualified different image, not advance required M.
+Replacing its pinned image/version/config or using the static workflow to start
+this new candidate would change runtime trust/compatibility/launch acceptance.
+Do not silently make that new decision under campaign recovery authority.
+
+Static DT_NEEDED closure does not cover relocations/symbol versions/ABI, runtime
+dlopen/NSS/FIPS/plugin/shutdown dependencies or a safe launch profile. The
+[existing legacy candidate roadmap](SOURCE_POLICY_LEGACY_MINIMUM_CANDIDATE_DESIGN.md)
+separates connection-free runtime feasibility from later identity/session and
+full native qualification; no old image/session receipt transfers to this one.
+No candidate bytes remain to inspect or execute. No new image selection,
+installation/security setting, native attempt or production operation is made.
+
+Only owning records/plan pointers change in this evidence closeout; all non-doc
+bytes remain the attempted26a9a1b head. Validate local links/diff/scope and related
+isolated checks, then commit/push and verify exact-head ordinary CI. Uploader and
+toolkit remain untouched; no whole-plugin release-readiness rows are refreshed.
+
+Executed evidence-only validation passes18 related tests/104 assertions without
+failures/skips, all owning local-link and diff checks. Git confirms exactly four
+owning documents changed and every non-document byte equals the attempted head.
+Uploader/toolkit are clean and unchanged. Final publication CI is verified at
+the resulting exact evidence head and reported independently at handoff.
+
+**Recommended next action / next gated slice: approve Repository-only
+Candidate-Bound UBI Connection-Free Runtime Admission Design.** Specify the exact
+new image's bounded trusted-engine/no-init/no-listener/no-SQL launch/identity,
+dependency/runtime observations and owned cleanup/admission policy before any
+execution integration. Design only: no image loading, candidate execution,
+server initialization, SQL or production wiring. This is the next genuine
+runtime trust/compatibility decision, not another routine safe slice or retry.

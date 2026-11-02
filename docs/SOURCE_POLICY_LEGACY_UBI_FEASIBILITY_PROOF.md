@@ -1,5 +1,14 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
+Current qualified static outcome: [run41532634830 and owning campaign evidence](SOURCE_POLICY_UBI_LIBGCC_ENTRY_INTEGRATION.md#actual-exact-head-static-closure-and-owned-cleanup)
+verifies10 layers and rooted19-object/46-edge DT_NEEDED closure with one exact
+libgcc exception; source/cleanup complete, artifacts0, no extraction/execution.
+Runtime/ABI/legacy M native coverage remains open. Next gated slice is the
+repository-only Candidate-Bound UBI Connection-Free Runtime Admission Design;
+the current native lab's different image/version must not be silently replaced.
+On owning closeout publication/CI, campaign8/10 milestones/native7/10,static9.
+Older resume/result paragraphs below are historical, not new execution authority.
+
 Current resume: [fixed-owner cost/origin design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
 specifies the bootstrap/shared ledger and full-layer origin gates. It changes no
 collector/entry/workflow behavior or selection. Next approval is its socket-free
