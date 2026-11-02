@@ -1,11 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Current resume: [static ELF implementation/owned refusal41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
-passes ordinary CI but refuses `elf-string-table` at layer6/entry3714. Six full
-commits/exact cleanup/artifact0; no final ELF/provider or runtime/native M proof.
-Campaign7/10 milestones/native7/10 unchanged. Next approval is bounded tag/size
-diagnostics and one additional static acquisition, not larger budgets, another
-unchanged attempt or production/provider/form wiring. Earlier text is historical.
+Current resume: [actual string-table diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
+identifies an over-limit declared extent; ordinary CI passes, static qualification
+still fails with exact cleanup/artifact0. Legacy M and production/provider/form
+gates stay open; campaign milestones/native attempts7/10 unchanged. Next approval
+is repository-only string-table cost/reachability admission design, not an
+acceptance increase, new acquisition or wiring. Earlier text is historical.
 
 Current outcome: [static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 complete layers/namespace commits and both origins, cleanup/artifact0,

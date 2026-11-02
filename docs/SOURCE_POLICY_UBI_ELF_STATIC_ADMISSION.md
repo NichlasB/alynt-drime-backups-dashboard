@@ -1,9 +1,13 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
-Current authorization: user approves the [string-table diagnostic](#approved-string-table-refusal-diagnostic)
-and one fresh owned static cleanup proof. The preceding one-attempt authority
-was used; this is a new bounded diagnostic approval, not acceptance widening.
-Extraction/execution remain disabled. Historical outcomes below retain scope.
+Current outcome: the [approved diagnostic / owned41450662313](#actual-string-table-diagnostic-and-cleanup-result)
+identifies both tags present, declared DT_STRSZ **1,084,894 bytes** versus the
+unchanged **1,048,576-byte** cap. Static admission still refuses; six layers/model
+commits, exact cleanup/artifact0, no final graph or extraction/execution. Ordinary
+implementation CI passes. The one diagnostic acquisition is used; campaign
+7/10 milestones/native7/10, six static acquisitions. Next approval is the
+repository-only string-table cost/reachability admission **design**, not a cap
+increase, another download or candidate execution. Historical outcomes retain scope.
 
 Current outcome: implementation/ordinary CI pass, but the one owned static proof
 [41447107590](#exact-head-ci-and-one-owned-static-refusal) refuses `elf-string-table`
@@ -320,3 +324,70 @@ resource budget, shared strict-reader, workflow permission/cleanup, runtime PHP,
 dependency or compatibility contract changes. This source-scoped review does
 not refresh whole-plugin pre-release, native or Database Review evidence. No
 installed site is in scope, so no LocalWP/Novamira/live operation is performed.
+
+### Actual string-table diagnostic and cleanup result
+
+Diagnostic implementation **e79a75f285cad7bc270719dc5655f0954dbf8da0** was clean,
+pushed and synced before dispatch. Exact-head ordinary
+[CI41450370119](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41450370119)
+passes: PHP7.4 **2,599 tests / 23,410 assertions**, PHP8.3 **2,599 / 23,415**,
+both without failures/errors/skips; Node **74/74**, zero failures/skips, in both
+jobs. PHPCS, structure, build, Composer strict validation and both dependency
+audits pass. Local PHP8.5.1 evidence is 2,599 / 23,408 with the two existing
+Sodium skips; all 20 synthetic Python groups pass with warnings treated as errors.
+
+Exactly one newly authorized
+[owned static diagnostic41450662313](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41450662313),
+attempt1 / job125294771282, runs **2026-11-02 13:10:26–13:10:36 UTC** at that
+same implementation head. Final job conclusion is **failure**, exit1. The
+diagnostic objective is met; this is not a successful ELF admission or native
+qualification, and the original41447107590 refusal is not relabeled.
+
+Actual ADBUELFST1 packet carried through parser, collector and fixed entry:
+
+| Field | Observed value |
+|---|---|
+| strtab_present / strsz_present | true / true |
+| declared_strsz | **1,084,894 bytes** |
+| limit_bytes | **1,048,576 bytes**, unchanged |
+| failed_predicates | `["strsz-over-limit"]` |
+| diagnostic_only / runtime_grant | true / false |
+
+Failure remains `elf-string-table`, stage `layer-6`, regular member
+`usr/lib64/libmariadbd.so.19`, cumulative archive entry3714. Metadata verifies;
+six whole layer hashes/diffIDs and six model commits complete. Scan budget is
+343,200,256 expanded bytes / 3,714 entries / 144 ELF reservations (including the
+refused object), 6,448 successful parse-work units and 52,395 metadata bytes.
+No seventh-layer observations return or commit. The packet is an actual
+pre-completion diagnostic, **not** complete seventh-layer/final-origin or rooted
+reachability evidence. It does not establish malformed ELF, required membership,
+ABI validity, runtime compatibility or permission to accept the larger table.
+
+Source readback is unchanged, cohort
+`010c177bbe0de9009052f76fc9dfc94d5f041204e549198303ed4b50bc74d25e`.
+Primary finally removes exactly **ten owned files and their directory**; always
+reconciliation confirms complete with zero remaining files. Actions artifacts
+API returns zero. Candidate execution, image loading, rootfs extraction, database
+operations and runtime grant remain false. No LocalWP, installed application,
+production, dependency/image, permission/credential, schedule or release change.
+No second attempt or acceptance/resource change is performed.
+
+Implementation-plan progress: the missing refusal cause is now measured and
+published, but legacy M artifact/ELF/provider admission remains gated. Campaign
+stays **7/10 completed milestones / 7/10 native attempts**, with **six static
+acquisitions** tracked separately. No milestone credit for this diagnosis,
+synthetic controls, cleanup or evidence commits. Ordinary CI is successful;
+static qualification is explicitly failed and runtime proof remains unestablished.
+
+**Recommended next gated slice: Repository-only Candidate-Bound ELF String-Table
+Cost and Reachability Admission Design.** Approve design-only evaluation of the
+current full-table copy/cap versus bounded requested-string access, the complete
+verified-layer/final-origin contract, and root-reachable versus unused object
+admission. Do not presume the refused library is unused, skip its refusal, widen
+the cap because the excess is small, or change parser/graph behavior during the
+design. Preserve the current enforced 1MiB limit and all other budgets/pins until
+an explicit admission policy is approved. No new acquisition, extraction, image
+loading, native execution, SQL or production wiring is part of that design.
+This policy/architecture decision is outside the just-completed diagnostic-only
+approval. Evidence-only closeout receives its own pushed exact-head CI without
+another acquisition; uploader/toolkit and historical whole-plugin rows stay untouched.

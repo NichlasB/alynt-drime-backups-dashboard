@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Diagnostic identifies oversized declared string table; admission stays blocked — 2026-11-02
+
+[Diagnostic implementation e79a75f / CI41450370119 and owned static41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
+establish that both tags exist and declared DT_STRSZ is **1,084,894 bytes**,
+exceeding the unchanged **1,048,576-byte** cap for `usr/lib64/libmariadbd.so.19`.
+The static job remains a failed qualification: six layers/model commits, no
+final namespace, selected-root or dependency closure. Primary ten-file/directory
+cleanup and always reconciliation complete; artifacts zero, no extraction or
+candidate execution. The approved single diagnostic attempt is used. Campaign
+remains 7/10 milestones, 7/10 native attempts; six static acquisitions total.
+No credit for diagnostic/retry/evidence commits. Recommended next gated slice:
+**Repository-only Candidate-Bound ELF String-Table Cost and Reachability Admission
+Design**, design-only review of bounded string access and rooted reachability,
+without assuming this library is required or merely raising a cap to pass.
+Current acceptance, budgets, acquisition/execution prohibitions and production
+wiring remain unchanged pending that policy decision. Older entries are historical.
+
 ## Approved string-table refusal diagnostic; no acceptance change — 2026-11-02
 
 User approves the [bounded diagnostic and one owned static cleanup proof](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#approved-string-table-refusal-diagnostic).

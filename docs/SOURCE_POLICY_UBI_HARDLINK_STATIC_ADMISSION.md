@@ -1,11 +1,10 @@
 # Candidate-Bound Static Hardlink DATA and Content Provenance
 
-Current resume: [ELF-mode owned41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
-refuses the string-table guard at layer6/entry3714 after six full commits. Exact
-cleanup/artifact0; no final ELF/provider/runtime proof. Ordinary implementation
-CI passes. Next gate is the bounded string-table diagnostic plus one new static
-acquisition, not an acceptance/budget change. Historical receipts below retain
-their source identity; campaign7/10 milestones/native7/10, five static attempts.
+Current resume: [measured ELF string-table diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
+confirms declared size exceeds the unchanged cap; admission still refuses, with
+exact cleanup/artifact0. Next gate is repository-only string-table cost and
+reachability admission design, no new acquisition/execution. Campaign milestones
+remain7/10; historical content-origin receipts below retain their source scope.
 
 Current resume: user approves the [selected-ELF/static dependency exception](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md).
 It requires fresh exact-head QA/CI and one new static proof, with no extraction,

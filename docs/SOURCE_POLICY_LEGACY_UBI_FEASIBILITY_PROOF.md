@@ -1,12 +1,11 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
-Current resume: [ELF-mode owned41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
-refuses `elf-string-table`, layer6/cumulative entry3714, after six verified
-namespace commits. Exact cleanup/artifact0, no extraction/execution/SQL or final
-ELF/provider proof. Ordinary CI passes; legacy M remains blocked, campaign7/10
-milestones/native7/10 unchanged. Next gated slice is the bounded string-table
-refusal diagnostic and one new static acquisition, preserving all acceptance
-limits. No historical whole-layer/native receipt is transferred to this source.
+Current resume: [diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
+measures DT_STRSZ1,084,894 versus the unchanged1,048,576-byte cap. Six layers/model
+commits, exact cleanup/artifact0, no final graph or extraction/execution/SQL.
+Legacy M remains blocked; campaign milestones/native attempts7/10 unchanged,
+six static acquisitions. Next gate is repository-only string-table cost and
+reachability admission design, not a cap increase or another artifact attempt.
 
 Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 qualifies the pinned candidate's10 layers and selected virtual content origins,

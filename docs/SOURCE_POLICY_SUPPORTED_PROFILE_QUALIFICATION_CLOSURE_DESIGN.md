@@ -1,12 +1,11 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
-Current resume: [ELF-mode static41447107590](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#exact-head-ci-and-one-owned-static-refusal)
-refuses the string-table guard after six complete layer/model commits. Exact
-cleanup/artifact0, no extraction/execution/SQL; ordinary implementation CI passes.
-Legacy M ELF/provider/runtime/native coverage stays open, campaign7/10 milestones/
-native7/10 unchanged. Next gate is bounded actual tag/size diagnostics and one
-additional static acquisition, with no acceptance/budget/wiring change. Historical
-profile qualification receipts below are not refreshed by this source-scoped work.
+Current resume: [diagnostic41450662313](SOURCE_POLICY_UBI_ELF_STATIC_ADMISSION.md#actual-string-table-diagnostic-and-cleanup-result)
+measures the failed size-cap predicate; qualification stays refused with exact
+cleanup/artifact0 and no extraction/execution/SQL. Legacy M coverage remains
+open, campaign milestones/native attempts7/10 unchanged. Next gate is repository-
+only string-table cost/reachability admission design, preserving current limits
+and disabled wiring. Historical profile receipts are not refreshed by diagnostics.
 
 Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 layers/namespace commits and both selected origins, exact cleanup,
