@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Exact candidate-bound libgcc_s alias admission designed; implementation gated — 2026-11-02
+
+The approved [versioned provider-alias design](SOURCE_POLICY_UBI_LIBGCC_ALIAS_ADMISSION_DESIGN.md)
+selects a separate default-off exact-candidate policy, not a general regex change.
+It binds the observed layer0/entry1700 alias/target tuple, current owner/model and
+fresh source/run/snapshot; retains root-pin-before-policy ordering and downstream
+regular-target/content-origin/SONAME/graph guards. Target body/ABI and real
+provider closure remain unproven. Documents only; actual admission, entry,
+workflow and execution are unchanged. Earlier result/gate entries are history.
+
+Implementation-plan progress: exact exception and non-vacuous validation contracts
+are specified. **Recommended next gated slice: Repository-only Candidate-Bound
+libgcc_s Provider-Alias Policy Safety Foundation**—dormant exact policy and guarded
+static seam with isolated tests, separately approved narrow policy implementation;
+no fixed entry/workflow selection, acquisition, extraction/execution or production
+wiring change. Campaign7/10 milestones/native7/10/eight static acquisitions stays
+unchanged; no intermediate design credit.
+
 ## Provider-alias diagnostic captured; exact alias admission decision gated — 2026-11-02
 
 The [implemented foundation and one approved static run41521163038](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_FOUNDATION.md#actual-single-static-diagnostic-and-cleanup-result)
