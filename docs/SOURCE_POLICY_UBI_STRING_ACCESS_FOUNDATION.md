@@ -1,10 +1,10 @@
 # Socket-Free Candidate-Bound ELF String-Access and Cost Admission Foundation
 
-Current design: [fixed-owner shared work/origin integration](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
-specifies the bootstrap, exclusive grant/debit and final-origin gates. It does
-not wire this foundation into the real collector or qualify a candidate. Next
-approval is its socket-free dormant integration foundation; existing entry and
-workflow remain unchanged. Earlier evidence below retains its exact source.
+Current foundation: [fixed-owner shared work/origin integration](SOURCE_POLICY_UBI_FIXED_OWNER_FOUNDATION.md)
+implements the dormant bootstrap, exclusive grant/debit and final-origin gates
+using synthetic archives only. Existing entry/workflow selection remains off;
+no real candidate is qualified. Next approval is the design-only real fixed-entry
+admission/static qualification integration. Earlier evidence retains its source.
 
 ## Approval and bounded plan — 2026-11-02
 

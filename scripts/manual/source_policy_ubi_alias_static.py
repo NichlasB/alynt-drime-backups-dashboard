@@ -55,12 +55,25 @@ def record(member, budget):
                 sha256=None, size=member.size, target=target)
 
 
-def collect(path, compressed, size, diff_id, budget, elf_policy=False):
+def collect(path, compressed, size, diff_id, budget, elf_policy=False, *, work_owner=None, layer_ordinal=None):
+    s.require(work_owner is None or type(work_owner) is v._FixedWorkAuthority, 'work-owner-type')
+    try:
+        s.require((work_owner is None and layer_ordinal is None) or
+                  (work_owner is not None and elf_policy is True and type(layer_ordinal) is int
+                   and budget['deadline'] == work_owner.deadline), 'work-owner-mode')
+        return _collect(path, compressed, size, diff_id, budget, elf_policy, work_owner, layer_ordinal)
+    except Exception as error:
+        if work_owner is not None: work_owner.fail(error)
+        raise
+
+
+def _collect(path, compressed, size, diff_id, budget, elf_policy, work_owner, layer_ordinal):
     s.require(type(elf_policy) is bool, 'explicit-elf-mode')
     elf = load('source_policy_ubi_elf_static.py', 'ubi_elf_parser') if elf_policy else None
     expected = s.digest(diff_id)
     s.require(type(size) is int and 0 < size <= 128 * s.MIB, 'alias-compressed-bound')
     s.digest('sha256:'+compressed)
+    if work_owner is not None: work_owner.begin_layer(layer_ordinal, compressed, expected, budget['deadline'])
     count, sha = 0, hashlib.sha256()
     with path.open('rb') as stream:
         while True:
@@ -71,7 +84,7 @@ def collect(path, compressed, size, diff_id, budget, elf_policy=False):
             count += len(block); sha.update(block)
             s.require(count <= size, 'alias-compressed-identity')
     s.require(count == size and sha.hexdigest() == compressed, 'alias-compressed-identity')
-    records, ordinals, observations, elf_work = [], {}, {}, 0
+    records, ordinals, observations, bindings, elf_work = [], {}, {}, {}, 0
     with gzip.open(path, 'rb') as stream:
         reader = s.ScanReader(stream, budget)
         with tarfile.open(fileobj=reader, mode='r|', encoding='utf-8', errors='surrogateescape') as archive:
@@ -101,7 +114,10 @@ def collect(path, compressed, size, diff_id, budget, elf_policy=False):
                         row['sha256'] = sha.hexdigest()
                         if body is not None:
                             try:
-                                parsed = elf.parse(body, budget['deadline'])
+                                if work_owner is None:
+                                    parsed = elf.parse(body, budget['deadline'])
+                                else:
+                                    parsed, binding = _parse_owned(body, row, len(records), budget, work_owner, layer_ordinal, elf)
                             except elf.Refusal as error:
                                 refused = s.Refusal(str(error))
                                 if 'elf_string_table_facts' in error.__dict__:
@@ -110,7 +126,13 @@ def collect(path, compressed, size, diff_id, budget, elf_policy=False):
                                 raise refused from None
                             s.require(parsed['sha256'] == row['sha256'], 'elf-content-origin')
                             budget['elf_work'] = budget.get('elf_work', 0)+parsed['work']; elf_work += parsed['work']
-                            budget['elf_metadata'] = budget.get('elf_metadata', 0)+len(json.dumps(parsed, ensure_ascii=True).encode('ascii'))
+                            if work_owner is None:
+                                budget['elf_metadata'] = budget.get('elf_metadata', 0)+len(json.dumps(parsed, ensure_ascii=True).encode('ascii'))
+                            else:
+                                envelope_size = len(json.dumps(dict(metadata=parsed, binding=binding), ensure_ascii=True).encode('ascii'))
+                                work_owner.retain(binding, envelope_size)
+                                budget['elf_metadata'] = work_owner.snapshot()['observation_bytes']
+                                bindings[len(records)] = binding
                             s.require(budget['elf_work'] <= 2097152 and budget['elf_metadata'] <= 2*s.MIB, 'elf-observation-bound')
                             observations[len(records)] = parsed
                             body = None
@@ -129,7 +151,84 @@ def collect(path, compressed, size, diff_id, budget, elf_policy=False):
                 metadata=dict(compressed=compressed, diff_id=expected, compressed_verified=True, diff_verified=True),
                 scan=dict(entries=len(records), expanded_bytes=reader.size, diff_id_verified=True))
     if elf_policy: result.update(elf=observations, elf_work=elf_work)
+    if work_owner is not None:
+        work_owner.verify_layer(result['metadata'], approved_profile(result, 0) if layer_ordinal == 0 else None)
+        result['elf_bindings'] = bindings
     return result
+
+
+def _metadata_digest(metadata):
+    return hashlib.sha256(json.dumps(metadata, sort_keys=True, ensure_ascii=True).encode('ascii')).hexdigest()
+
+
+def _parse_owned(body, row, index, budget, owner, ordinal, elf):
+    # Source-owned frame pairs the real parser invocation with its ticket. No callback/handle enters the parser.
+    context = dict(layer=ordinal, compressed=owner._layers[ordinal][0], diff_id=owner._layers[ordinal][1],
+                   entry=index, archive=budget['entries'], path_sha256=hashlib.sha256(row['path'].encode('utf-8')).hexdigest(),
+                   sha256=row['sha256'], bytes=row['size'])
+    token, grant = owner.issue(context)
+    try:
+        owner.invoke(token, context)
+        try:
+            result = elf.parse(body, owner.deadline, bounded_strings=True, remaining_work=grant)
+        except Exception as error:
+            # Never replace the original parser cause with a broken diagnostic/settlement cause.
+            try:
+                cost = elf.access_receipt(error.__dict__.get('string_access_facts'))
+                if cost is None: owner.poison()
+                else: owner.settle(token, context, cost, None, None, False)
+            except Exception:
+                owner.poison()
+            raise
+        v.require(v.shape(result, ('format', 'metadata', 'cost', 'runtime_grant'))
+                  and result['format'] == 'ADBUELFSA1' and result['runtime_grant'] is False, 'work-owner-result')
+        metadata = elf.metadata(result['metadata'])
+        cost = elf.access_receipt(result['cost'])
+        v.require(cost is not None, 'work-owner-cost')
+        summary = {k: metadata[k] for k in ('sha256', 'bytes', 'work')}
+        binding = owner.settle(token, context, cost, summary, _metadata_digest(metadata), True)
+        return metadata, binding
+    except Exception as error:
+        owner.fail(error)
+        raise
+
+
+def _owned_model(owner, first):
+    v.require(type(owner) is v._FixedWorkAuthority, 'work-owner-type')
+    try:
+        return v.VirtualClosure(owner._identity, owner._layers, approved_profile(first, 0), hardlinks=True, work_owner=owner)
+    except Exception as error:
+        owner.fail(error)
+        raise
+
+
+def _owned_graph(tree, owner, layers):
+    v.require(type(owner) is v._FixedWorkAuthority, 'work-owner-type')
+    try:
+        owner.admit_graph(tree)
+        v.require(type(layers) is list and len(layers) == len(owner._layers), 'work-owner-graph-layers')
+        elf = load('source_policy_ubi_elf_static.py', 'ubi_owned_graph')
+        observations = {}
+        seen = set()
+        for ordinal, layer in enumerate(layers):
+            v.require(type(layer) is dict and type(layer.get('elf')) is dict and type(layer.get('elf_bindings')) is dict
+                      and len(layer['elf']) <= 256 and set(layer['elf']) == set(layer['elf_bindings']), 'work-owner-observations')
+            v.require(v.shape(layer.get('metadata'), ('compressed', 'diff_id', 'compressed_verified', 'diff_verified'))
+                      and (layer['metadata']['compressed'], layer['metadata']['diff_id']) == owner._layers[ordinal]
+                      and layer['metadata']['compressed_verified'] is True and layer['metadata']['diff_verified'] is True,
+                      'work-owner-graph-layer')
+            for index, raw in layer['elf'].items():
+                v.require(type(index) is int and 0 <= index < 65536, 'work-owner-observation-index')
+                metadata = elf.metadata(raw)
+                owner.check_observation(ordinal, index, layer['elf_bindings'][index], _metadata_digest(metadata))
+                observations[str(ordinal)+':'+str(index)] = metadata; seen.add((ordinal, index))
+        v.require(seen == set(owner._records), 'work-owner-observation-omitted')
+        result = elf.graph(tree, observations, owner.deadline)
+        owner.close_model(tree)
+        return dict(result, work_owner=owner.snapshot())
+    except Exception as error:
+        owner.fail(error)
+        raise
 
 
 def approved_profile(layer, ordinal):

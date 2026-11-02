@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant fixed-owner cost/origin contract implemented; real selection gated — 2026-11-02
+
+The [fixed-owner foundation](SOURCE_POLICY_UBI_FIXED_OWNER_FOUNDATION.md) now shares
+one work/deadline authority across actual synthetic parser, collector and model,
+with exclusive grants, irreversible accounting, verified-layer staging and
+immutable final-origin admission. Fourteen isolated groups/nine assertion-killed
+controls exercise positives and failures. Strict defaults and actual fixed-entry/
+workflow remain unchanged; no acquisition/native/site operation or new campaign
+credit. Exact local QA/publication evidence is owned by that foundation and its
+pushed-head checks. Recommended next gated slice: **Repository-only Fixed-Entry
+Bounded String-Access Admission and Static Qualification Integration Design**,
+design-only closure of genuine run/source/profile/pin/cleanup gates before real
+selection. Campaign7/10 milestones/native7/10/six static acquisitions unchanged.
+Earlier design/approval entries below are historical, not the current resume gate.
+
+## Approved dormant fixed-owner integration foundation — 2026-11-02
+
+User approves the [socket-free cost/origin integration foundation](SOURCE_POLICY_UBI_FIXED_OWNER_FOUNDATION.md)
+using synthetic bytes and owned temporary archive fixtures only. Implement one
+shared authority, exclusive grants/settlement, dormant collector/model hooks and
+immutable-origin admission; validate, commit, push and verify exact-head CI.
+Existing fixed-entry/workflow selection stays off, with no acquisition/native/
+site/production operation. Campaign7/10 milestones/native7/10/six static
+acquisitions unchanged; no product credit for intermediate foundations or retries.
+
 ## Fixed-owner cost/origin design; actual consumers remain unchanged — 2026-11-02
 
 The approved [fixed-owner integration design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)

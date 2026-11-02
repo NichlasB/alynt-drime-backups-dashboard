@@ -1,12 +1,11 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
-Current foundation: [dormant bounded string access/cost admission](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
-implements the explicitly opted-in pure profile, not a collector/runtime change.
-Existing consumer calls still enforce the original1MiB guard. No acquisition,
-native attempt or refreshed real-candidate receipt. The [fixed-owner design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
-now specifies the shared grant/origin contract; its dormant integration safety
-foundation is the next approval, not live admission. Historical
-diagnostics below retain their exact source and failed qualification.
+Current foundation: [dormant fixed-owner cost/origin integration](SOURCE_POLICY_UBI_FIXED_OWNER_FOUNDATION.md)
+implements a private synthetic collector/model opt-in, not actual entry/workflow
+selection or runtime admission. Default calls still enforce the original1MiB
+guard. No acquisition, native attempt or refreshed candidate receipt. Next gate:
+design-only real fixed-entry bounded-access admission/static qualification
+integration. Historical diagnostics below retain their source and failed result.
 
 Current outcome: the [approved diagnostic / owned41450662313](#actual-string-table-diagnostic-and-cleanup-result)
 identifies both tags present, declared DT_STRSZ **1,084,894 bytes** versus the
