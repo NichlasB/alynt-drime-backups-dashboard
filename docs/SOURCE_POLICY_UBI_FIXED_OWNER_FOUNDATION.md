@@ -106,6 +106,16 @@ Exact-head publication results are recorded by this change's checks and final
 handoff; no pending run is treated as successful. Do not dispatch the manual
 acquisition workflow from this foundation.
 
+Published implementation **1d075831da62ad6026018ede30c8e35f746b081a** passes
+[exact-head ordinary CI41489238869](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41489238869).
+Retrieved logs report PHP7.4 **2,603 tests/23,435 assertions** and PHP8.3
+**2,603/23,440**, both successful with no failures/skips. Each Node job passes74/74,
+zero failures/skips; both audits report zero advisories. Both exact-head check
+contexts are completed/success. Dashboard is clean/synced at that publication;
+uploader/toolkit working trees remain unchanged. This evidence-only closeout
+does not change the implemented source cohort or start another milestone; its
+own pushed-head CI must also finish before handoff.
+
 **Recommended next gated slice: Repository-only Fixed-Entry Bounded String-Access
 Admission and Static Qualification Integration Design.** Approve design-only
 closure of the real entry's source/head/run binding, profile selection, original

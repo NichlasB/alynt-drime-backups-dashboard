@@ -8,8 +8,9 @@ with exclusive grants, irreversible accounting, verified-layer staging and
 immutable final-origin admission. Fourteen isolated groups/nine assertion-killed
 controls exercise positives and failures. Strict defaults and actual fixed-entry/
 workflow remain unchanged; no acquisition/native/site operation or new campaign
-credit. Exact local QA/publication evidence is owned by that foundation and its
-pushed-head checks. Recommended next gated slice: **Repository-only Fixed-Entry
+credit. Implementation1d07583 passes exact-head ordinary CI41489238869 on both
+PHP7.4/8.3 (2,603 tests each, no skips); local full QA and source-scoped evidence
+are recorded in the foundation. Recommended next gated slice: **Repository-only Fixed-Entry
 Bounded String-Access Admission and Static Qualification Integration Design**,
 design-only closure of genuine run/source/profile/pin/cleanup gates before real
 selection. Campaign7/10 milestones/native7/10/six static acquisitions unchanged.
