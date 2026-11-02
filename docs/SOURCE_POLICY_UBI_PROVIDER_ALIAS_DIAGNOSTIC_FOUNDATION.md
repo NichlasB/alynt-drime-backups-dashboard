@@ -103,5 +103,96 @@ tests pass with temporary-fixture access. No foreign path or site state changed.
 
 Implementation-plan progress: first-alias diagnostic capture and its fixed
 provenance relay are implemented, not provider admission or graph qualification.
-Ordinary exact-head CI and the one approved static attempt are still pending at
-this pre-publication record. No target literal is yet claimed from real bytes.
+The pre-publication tests above were isolated; the actual publication and one
+approved acquisition evidence follow. Neither is inferred from synthetic flags.
+
+## Actual single static diagnostic and cleanup result
+
+Implementation **6bd8444a494bbc2eab11408c75232ed6d0cce90f** is committed/pushed,
+clean/synced and equal to remote master before dispatch. Ordinary
+[CI41520878504](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41520878504)
+passes at that exact head: PHP7.4 **2,605 tests /23,444 assertions**, PHP8.3
+**2,605 /23,449**, no failures/skips; Node74/74 each, zero failures/skips; audit
+advisories zero. No matching static dispatch existed at the admission check.
+
+Exactly one explicit alias/ELF/bounded static dispatch runs at that full head:
+[run41521163038](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41521163038),
+attempt1, job125537257833, **2026-11-02 20:39:13–20:39:24 UTC**. Exact-head and
+checked-out source-closure steps pass. The static step exits1 and the whole job
+concludes **failure** on the original `elf-provider-alias` at dependency-graph
+resolution. A valid diagnostic completes the evidence objective, **not** graph
+qualification. No repair, policy change, target follow or rerun occurs.
+
+| Actual first-alias evidence | Observed result |
+|---|---|
+| Requested provider | `libgcc_s.so.1` |
+| Exact target literal | **`libgcc_s-11-20240719.so.1`** |
+| Full UTF-8 target size / SHA256 | **25 bytes** / `d359192c4c77928fa9d0d5be9e87f9a95cad61eaa2081a46213ae80d18bb2ec9` |
+| Alias layer / entry | **0 /1700** |
+| Provider path SHA256 | `31f0d4667f36cff4fa296e4e10b2d817fa1a649b1a7b1cb2af9585570cb3ed1a` |
+| Current library-name predicate | true |
+| Same-family prefix predicate | **false** |
+| Not-self predicate | true |
+| Numeric-suffix predicate | **false** |
+| Ordered failed predicates | `wrong-family`, `nonnumeric-suffix` |
+| Layers verified / namespace commits | **10 /10** |
+| Primary cleanup | complete, **13 owned files and directory removed** |
+| Independent always reconciliation | success, complete, **0** files to remove |
+| Actions artifacts API after completion | **0** artifacts |
+
+Snapshot: `56e6aefb0a9cb73cc0ac680201a2b241848f3315c29bd86c8870b34575298d8b`.
+Fresh source cohort:
+`1ca8c72299de8116d30ba3e5cc6b6a36f404853f76495bee12add630b276cf69`.
+Run/attempt correlation: `42bf92c9d32de582dac523d3a20d2414`.
+Manifest/config remain the fixed design pins. Alias layer0 compressed identity
+is `2920d84eafa0cf94806ab58f0a2124f7b2d35bcbb06fc89a9106dcc28efe397a`;
+admitted diffID is
+`004d2c90a65694c2830b06fddc1047d40063c6cb36fb31a5a3edfce9435326c6`.
+The entry compares the finalized source-held origin/snapshot/target hash before
+publishing. This is alias metadata identity, not target-body identity or proof
+that a target was followed, loaded, safe or ABI-compatible.
+
+Expanded455,730,688 bytes /8,684 entries /153 ELF objects; owner work597,888
+=144,631 parser+452,951 model+153 grants+153 settlements+0 burn, inside2,097,152.
+153 records and194,086 observation bytes; ten verified layers, model bound,
+terminal poisoned state. These match the previous attempt's accounting: the
+diagnostic causes no extra model inspection/grant. Reporting and source readback
+complete, source unchanged=true. Candidate_execution, image_loading,
+database_operations, rootfs_extraction and runtime_grant all remain false.
+The generic first graph packet remains independently available, including the
+unchanged requesting-object digest and pinned selected-root summaries. Root
+matcher/finalization return before the graph by the unchanged fixed call order;
+provider closure and any native runtime compatibility remain unestablished.
+
+`wrong-family` is the existing **lexical prefix** label: the target does not
+start with `libgcc_s.so.`. It does not establish a foreign ABI or broken image.
+The numeric check uses the unchanged suffix slice, independently decomposed
+after refusal. The admitted-looking basename is not itself policy authorization.
+Candidate bytes are removed; no further inspection/acquisition is implicit.
+
+Only this owning record and the implementation-plan result/gate pointer change
+in evidence closeout; every non-document byte remains the attempted head's byte.
+Review links/diff/document-only scope and related isolated tests, then commit,
+push and verify ordinary CI at the exact evidence head. Its conclusion is
+reported separately and cannot convert the preserved static failure to success.
+No toolkit checklist/historical whole-plugin row is refreshed.
+
+Evidence-only local validation passes16 related tests/96 assertions without
+failures/skips, owning local-link and diff checks. Git diff confirms only these
+two owning documents differ from6bd8444; uploader/toolkit are still clean and
+untouched. Publication CI must be checked at the resulting exact evidence head,
+not borrowed from the implementation commit.
+
+Implementation-plan progress: the missing real first-alias target/provenance and
+refusal-clause evidence is now established. Admission is the next substantive
+compatibility/security policy decision. Campaign stays **7/10 completed product
+milestones, 7/10 native attempts**, now **eight static acquisitions**. The one
+approved diagnostic acquisition is consumed; no retry is authorized.
+
+**Recommended next gated slice: Repository-only Candidate-Bound libgcc_s
+Versioned Provider-Alias Admission Design.** Approve design only to evaluate a
+candidate-bound exact alias rule and required regular-target/origin/SONAME/graph
+security evidence, retaining current admission until separately approved. This
+is a policy decision, not permission to broadly widen the regex, skip a provider,
+run the candidate or perform another acquisition. Extraction/execution and
+production wiring remain disabled.

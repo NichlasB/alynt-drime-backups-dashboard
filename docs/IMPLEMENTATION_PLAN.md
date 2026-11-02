@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Provider-alias diagnostic captured; exact alias admission decision gated — 2026-11-02
+
+The [implemented foundation and one approved static run41521163038](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_FOUNDATION.md#actual-single-static-diagnostic-and-cleanup-result)
+at6bd8444 follows successful ordinary CI41520878504. It establishes the actual
+`libgcc_s.so.1` symlink target **`libgcc_s-11-20240719.so.1`**, layer0/entry1700,
+with bounded full-target identity and source-held provenance. The unchanged
+conjunction refuses `wrong-family` and `nonnumeric-suffix`; whole static job
+remains **failed**, not qualified. Ten layers/model commits verify; source and
+accounting remain bounded; primary13-file/directory cleanup, independent zero
+reconciliation and zero artifacts are confirmed. No target follow/execution,
+admission relaxation or retry. Campaign7/10 milestones/native7/10 unchanged;
+**eight static acquisitions**, with this single approved acquisition now used.
+
+Implementation-plan progress: missing real alias evidence is closed; provider
+admission is now an explicit compatibility/security policy decision, not another
+generic diagnostic task. **Recommended next gated slice: Repository-only
+Candidate-Bound libgcc_s Versioned Provider-Alias Admission Design**—design only
+for whether/how this exact pinned alias can be admitted without general regex
+widening, family/SONAME/origin/regular-target checks bypass or new runtime grant.
+No policy exception, implementation or further acquisition is authorized here.
+Earlier approval/result entries below are historical, not the current gate.
+
 ## Approved bounded provider-alias diagnostic and one static attempt — 2026-11-02
 
 User approves the [diagnostic foundation/proof](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_FOUNDATION.md)
