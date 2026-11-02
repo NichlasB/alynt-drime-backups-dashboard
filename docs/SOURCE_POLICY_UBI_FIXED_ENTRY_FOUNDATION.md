@@ -6,6 +6,11 @@ for `libgcc_s.so.1`. Exact primary/always cleanup completes; artifacts zero.
 Static graph qualification remains failed, execution/wiring disabled. The prior
 foundation approval/evidence below is historical; no second attempt is approved.
 
+Current next design: [bounded provider-alias first-refusal diagnostic](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_DESIGN.md)
+now specifies the missing target/origin/clause evidence. Next approval may cover
+its diagnostic foundation and one fresh static-only diagnostic/cleanup proof;
+the present design does not authorize either or relax the alias rule.
+
 ## Approved scope and restore baseline — 2026-11-02
 
 User approves the [fixed-entry design's foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_INTEGRATION_DESIGN.md)

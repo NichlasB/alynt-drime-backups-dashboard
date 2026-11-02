@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Provider-alias first-refusal diagnostic designed; implementation/acquisition gated — 2026-11-02
+
+The approved [libgcc_s diagnostic design](SOURCE_POLICY_UBI_PROVIDER_ALIAS_DIAGNOSTIC_DESIGN.md)
+specifies bounded exact-target/origin/predicate facts from the already inspected
+alias, without following it or changing admission. Separate first-only packet,
+typed cross-module/candidate-context relays and non-vacuous ordering/guard tests
+are defined. Documents only; actual target/clause remain unknown. Recommended
+next gated slice: **Bounded Provider-Alias Diagnostic Safety Foundation and One
+Owned Static Diagnostic/Cleanup Proof**, implementation/ordinary-CI followed by
+one separately approved fresh static diagnostic attempt, with guard/pins/budgets
+unchanged. No current implementation, acquisition or execution authority.
+Campaign7/10 milestones/native7/10/seven static acquisitions unchanged; design
+does not complete provider qualification. Earlier result/gate entries are history.
+
 ## All ten bounded-access layers verified; provider-alias qualification refused — 2026-11-02
 
 The separately approved [one real static proof41510494382](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md#actual-bounded-access-static-proof-and-cleanup-result)
