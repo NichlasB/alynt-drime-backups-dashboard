@@ -1,11 +1,11 @@
 # Candidate-Bound Selected-ELF and Static Dependency-Closure Policy
 
-Current foundation: [dormant fixed-owner cost/origin integration](SOURCE_POLICY_UBI_FIXED_OWNER_FOUNDATION.md)
-implements a private synthetic collector/model opt-in, not actual entry/workflow
-selection or runtime admission. Default calls still enforce the original1MiB
-guard. No acquisition, native attempt or refreshed candidate receipt. Next gate:
-design-only real fixed-entry bounded-access admission/static qualification
-integration. Historical diagnostics below retain their source and failed result.
+Latest actual outcome: the [one approved bounded-access static proof41510494382](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md#actual-bounded-access-static-proof-and-cleanup-result)
+at a718841 verifies/commits all ten layers, then refuses `elf-provider-alias`
+for `libgcc_s.so.1`. Cleanup complete, artifacts zero; graph qualification failed,
+no extraction/execution. Strict defaults remain unchanged. Next gate is a
+repository-only provider-alias refusal diagnostic design, not a regex relaxation
+or another download. Historical diagnostics below retain their exact sources.
 
 Current outcome: the [approved diagnostic / owned41450662313](#actual-string-table-diagnostic-and-cleanup-result)
 identifies both tags present, declared DT_STRSZ **1,084,894 bytes** versus the

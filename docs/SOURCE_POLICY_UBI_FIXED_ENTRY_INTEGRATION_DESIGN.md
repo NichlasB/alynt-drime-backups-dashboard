@@ -1,9 +1,9 @@
 # Fixed-Entry Bounded String-Access Admission and Static Qualification Integration Design
 
-Current implementation: the [default-off admission/cleanup foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md)
-implements this design with offline evidence only. Next gate is one separately
-approved owned static qualification/cleanup proof, not candidate execution.
-Earlier proposed-state/design evidence below remains historical.
+Current outcome: the [approved real static proof](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md#actual-bounded-access-static-proof-and-cleanup-result)
+verifies all ten layers, then refuses a `libgcc_s.so.1` provider alias; exact
+cleanup completes, artifacts zero. Next gate is provider-alias diagnostic design,
+not another acquisition or candidate execution. Earlier design remains historical.
 
 ## Approval, baseline and proof limits — 2026-11-02
 

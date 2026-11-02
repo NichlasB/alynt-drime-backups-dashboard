@@ -1,5 +1,11 @@
 # Default-Off Fixed-Entry Bounded-Access Admission and Cleanup Foundation
 
+Latest real outcome: the [one approved bounded-access proof](#actual-bounded-access-static-proof-and-cleanup-result)
+at a718841 verifies all ten layers/model commits, then refuses a provider alias
+for `libgcc_s.so.1`. Exact primary/always cleanup completes; artifacts zero.
+Static graph qualification remains failed, execution/wiring disabled. The prior
+foundation approval/evidence below is historical; no second attempt is approved.
+
 ## Approved scope and restore baseline — 2026-11-02
 
 User approves the [fixed-entry design's foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_INTEGRATION_DESIGN.md)
@@ -155,3 +161,93 @@ and final job conclusion. Require exact ownership and no retained artifacts;
 refusal remains failure, with no automatic unchanged retry. No extraction,
 image loading, candidate/native execution, SQL, installed-site or production
 operation is included. That manual run is not authorized by this foundation.
+
+## Actual bounded-access static proof and cleanup result
+
+The user separately approved **one** exact-head owned static qualification and
+cleanup proof at **a7188412308884a69bdbe6495010b9c5a23c978c**, with extraction,
+candidate execution and production wiring disabled. The head was clean/synced,
+matched remote master and had successful ordinary
+[CI41501870186](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41501870186)
+before dispatch. Retrieved CI logs report PHP7.4 **2,604 tests/23,440 assertions**,
+PHP8.3 **2,604/23,445**, both without failures/skips; each Node job passes74/74,
+no failures/skips. Audits report zero advisories. No matching static job existed.
+
+Exactly one dispatch selected alias/ELF/bounded-access policies explicitly true,
+with EXPECTED_SHA equal to that full head. Actual
+[static run41510494382](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41510494382),
+attempt1, job125500812004, executes **2026-11-02 19:30:22–19:30:36 UTC**.
+Whole job concludes **failure**, exit1. Exact-head and checked-out source-closure
+steps pass. This is a completed failed qualification, not an ordinary-CI failure
+or a successful graph relabeled because cleanup worked. No repair/rerun occurs.
+
+| Actual evidence | Result |
+|---|---|
+| Profile / metadata | `bounded-strings-v1`; metadata_verified=true |
+| Complete layers and namespace commits | **10/10** each; every layer diffID verifies |
+| Failure | `elf-provider-alias`, phase `elf-dependency-closure`, diagnostic stage `dependency-graph` |
+| Requested provider | `libgcc_s.so.1` |
+| Current-object digest | `7e8761146798e3019dce1be0c0490241c64e97c78ee68768f0644126668a6551` |
+| Expanded bytes / entries / observed ELF objects | **455,730,688 / 8,684 / 153** |
+| Charged work | **597,888** of2,097,152 |
+| Parser / model / conservative burn | **144,631 / 452,951 / 0** |
+| Grants / settled / records | **153 / 153 / 153**, no outstanding consumption |
+| Observation-envelope bytes | **194,086**, inside2MiB cap |
+| Owner final state | poisoned, model_bound=true, runtime_grant=false |
+| Source readback | unchanged=true; fresh cohort below |
+| Primary cleanup | **13 owned files and directory removed**, complete |
+| Independent always reconciliation | success, complete, **0** files remaining to remove |
+| Actions artifacts API | **0** artifacts |
+
+Fresh observed source cohort:
+`9f92a1acd85d08756b6324554a3513a873be163e2c6bda6bbdddafa8023e3935`.
+Accounting is consistent:144631+452951+153+153+0=597888. Capacity is not exhausted;
+poison is terminal, not permission to resume unused allowance or relax a guard.
+Reporting is complete. Actual candidate_execution, image_loading,
+database_operations, rootfs_extraction and runtime_grant all remain false.
+
+The observed root summaries contain the unchanged pinned server SHA
+`910b30f53e2c9812e7b3cdc37f40df2ca867738eb79ed799fc056c15774f5f19`
+(25,622,464 bytes) and canonical loader SHA
+`73983b1895c124baa82e5f1c9c26ba0717f1440dff97a217fbb20ddbed8a3751`
+(897,856 bytes), without unsupported features/search paths. Reaching the actual
+graph establishes, by the fixed reviewed call order, that finalization and the
+mandatory selected-root matcher returned first. It does **not** establish full
+provider closure, a successful graph digest, ABI/runtime compatibility or any
+minimum-profile native result. No further artifacts are retained for inspection.
+
+The prior string-table refusal is passed in this selected bounded-access attempt:
+layer6 now verifies/commits, followed by the remaining layers. The new refusal is
+the unchanged provider-alias rule. Its conjunction requires a valid library name,
+same-family stem, non-self target and numeric version suffix. The current packet
+does **not** contain the alias target literal/digest or distinguish the failing
+clause. Do not infer the target, declare a broken candidate, assume the provider
+is unused, admit a different family, skip the dependency or widen the regex just
+to pass. Candidate bytes were removed, so another read/acquisition is not implicit.
+
+Only directly owning evidence/plan pointers are updated after this result;
+source, workflow, pins, policy, budgets and cleanup implementation stay at the
+qualified-attempt source. No LocalWP/live/WordPress/Drime operation or toolkit
+change occurs. The evidence-only closeout must pass diff/link/scope checks and
+ordinary exact-head CI before handoff; that CI cannot turn this static failure
+into success. No whole-plugin, Database Review or release-readiness row is refreshed.
+
+Implementation-plan progress: genuine bounded-access scanning now covers all ten
+layers and reaches rooted dependency resolution, advancing beyond the earlier
+layer6 extent blocker. **Provider admission remains gated.** Campaign remains
+**7/10 completed milestones, 7/10 native attempts**, with **seven static
+acquisitions** now tracked separately. Failed qualification/evidence is not a
+new product milestone; the one newly approved acquisition is used.
+
+Evidence-only local validation passes15 related PHP tests/92 assertions, no
+failures/skips, plus affected local-link, diff and documentation-only scope
+checks. All non-document bytes remain identical to the attempted a718841 source.
+Publication CI is verified at the resulting evidence head and reported separately
+from the deliberately preserved failed static-job conclusion.
+
+**Recommended next gated slice: Repository-only Candidate-Bound libgcc_s
+Provider-Alias Refusal Diagnostic Design.** Approve design-only specification of
+bounded first-refusal alias-origin/target and failed-predicate evidence before
+considering any policy change. Keep current admission, limits, execution and
+production wiring unchanged; no implementation or new acquisition is included.
+Any subsequent diagnostic acquisition requires a new explicit approval.

@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## All ten bounded-access layers verified; provider-alias qualification refused — 2026-11-02
+
+The separately approved [one real static proof41510494382](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md#actual-bounded-access-static-proof-and-cleanup-result)
+runs at exact a718841 after successful ordinary CI41501870186. All ten layers/
+model commits complete, then `elf-provider-alias` refuses `libgcc_s.so.1` in
+dependency resolution. Source unchanged, accounting bounded, owner poisoned;
+primary13-file/directory cleanup and independent always reconciliation complete,
+artifacts zero. No extraction/execution/SQL/site/production change or rerun.
+This advances beyond the prior layer6 string-table blocker but **does not pass
+static graph qualification**. The packet does not reveal the target or failed
+alias clause. Recommended next gated slice: **Repository-only Candidate-Bound
+libgcc_s Provider-Alias Refusal Diagnostic Design**, design only; no admission
+change or new acquisition. Campaign7/10 milestones/native7/10 unchanged; seven
+static acquisitions, with this single approved attempt now used. Earlier entries
+below retain their historical approval/evidence and are not the current gate.
+
 ## Default-off fixed-entry admission/cleanup integrated; real static proof gated — 2026-11-02
 
 The [fixed-entry foundation](SOURCE_POLICY_UBI_FIXED_ENTRY_FOUNDATION.md) implements
