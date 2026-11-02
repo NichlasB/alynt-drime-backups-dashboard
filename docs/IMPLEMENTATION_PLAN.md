@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed-entry bounded-access integration designed; implementation gated — 2026-11-02
+
+The approved [fixed-entry integration design](SOURCE_POLICY_UBI_FIXED_ENTRY_INTEGRATION_DESIGN.md)
+specifies a separate default-off static mode, genuine head/source/run construction,
+one shared authority/deadline, compact observations, mandatory root pins before
+model closure and independent exact cleanup despite source-readback failure.
+It also records the exact-loaded ELF refusal relay requirement. Documents only:
+no selector/workflow/source behavior change, dispatch, acquisition or execution.
+Recommended next gated slice: **Repository-only Fixed-Entry Bounded-Access
+Admission and Cleanup Integration Safety Foundation**, offline implementation
+and tests only, preserving old modes/budgets and disabled execution/wiring.
+Any actual owned static acquisition/cleanup proof requires later explicit approval.
+Campaign7/10 milestones/native7/10/six static acquisitions unchanged; no design
+credit. Earlier foundation/design entries below retain their historical evidence.
+
 ## Dormant fixed-owner cost/origin contract implemented; real selection gated — 2026-11-02
 
 The [fixed-owner foundation](SOURCE_POLICY_UBI_FIXED_OWNER_FOUNDATION.md) now shares

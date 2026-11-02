@@ -1,5 +1,10 @@
 # Socket-Free Fixed-Owner String-Access Cost and Origin Integration Foundation
 
+Current next design: [fixed-entry bounded-access admission/static qualification](SOURCE_POLICY_UBI_FIXED_ENTRY_INTEGRATION_DESIGN.md)
+now specifies real source/run/profile/pin/cleanup integration. Next gate is its
+repository-only default-off admission/cleanup foundation, not a manual dispatch.
+Historical implementation evidence and earlier recommendation below retain scope.
+
 ## Approved scope and bounded plan — 2026-11-02
 
 User approves the [exact design's dormant foundation](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
