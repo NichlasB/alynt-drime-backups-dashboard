@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed-owner cost/origin design; actual consumers remain unchanged — 2026-11-02
+
+The approved [fixed-owner integration design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
+selects one work authority before layer0 parsing, shared later with the model,
+an exclusive call-correlated grant and irreversible success/failure settlement.
+Complete-layer/final-origin admission remains separate from cost readiness.
+This solves the specified bootstrap/accounting contract on paper, not in code:
+no collector/entry/workflow behavior or profile selection changes, no attempt.
+Recommended next gated slice: **Local-only Socket-Free Fixed-Owner String-Access
+Cost and Origin Integration Safety Foundation**, dormant model/collector contract
+and synthetic archive/API tests only; real entry/workflow selection stays off.
+Campaign7/10 milestones/native7/10/six static acquisitions unchanged; no design
+or intermediate-evidence credit toward completed product qualification.
+
 ## Dormant string-access/cost foundation implemented; owner integration still gated — 2026-11-02
 
 The [socket-free foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md) now

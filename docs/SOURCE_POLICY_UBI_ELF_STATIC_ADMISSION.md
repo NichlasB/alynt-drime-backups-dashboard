@@ -3,8 +3,9 @@
 Current foundation: [dormant bounded string access/cost admission](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
 implements the explicitly opted-in pure profile, not a collector/runtime change.
 Existing consumer calls still enforce the original1MiB guard. No acquisition,
-native attempt or refreshed real-candidate receipt. The next gate is repository-
-only fixed-owner cost/origin integration design, not live admission. Historical
+native attempt or refreshed real-candidate receipt. The [fixed-owner design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
+now specifies the shared grant/origin contract; its dormant integration safety
+foundation is the next approval, not live admission. Historical
 diagnostics below retain their exact source and failed qualification.
 
 Current outcome: the [approved diagnostic / owned41450662313](#actual-string-table-diagnostic-and-cleanup-result)

@@ -1,9 +1,9 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
-Current resume: [dormant string-access/cost foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
-passes synthetic positive/refusal controls; actual collector/entry/workflow stay
-strict and unchanged, with no new acquisition or native attempt. Next approval
-is repository-only fixed-owner cost/origin integration design, not an artifact
+Current resume: [fixed-owner cost/origin design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
+specifies the bootstrap/shared ledger and full-layer origin gates. It changes no
+collector/entry/workflow behavior or selection. Next approval is its socket-free
+dormant integration foundation using synthetic fixtures only, not an artifact
 job or execution. Legacy M stays blocked; milestones/native attempts7/10 and
 six static acquisitions unchanged. Historical failed receipts keep their scope.
 

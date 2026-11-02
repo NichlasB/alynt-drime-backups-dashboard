@@ -1,10 +1,10 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Current resume: [dormant bounded-access/cost foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
-adds a pure explicit opt-in, not real consumer admission. Collector/entry/workflow,
-graph and production/provider/form wiring are unchanged; no artifact/native work.
-Next approval is repository-only fixed-owner cost/origin integration design,
-because local DATA grants do not establish true aggregate budget authority.
+Current resume: [fixed-owner budget/origin integration design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
+closes the specified bootstrap/grant/verification contract on paper only.
+Collector/entry/workflow, graph and production/provider/form behavior are unchanged;
+no artifact/native work. Next approval is the socket-free dormant integration
+foundation, not actual workflow profile selection or production admission.
 Legacy M stays blocked; campaign milestones/native attempts7/10 unchanged.
 
 Current outcome: [static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)

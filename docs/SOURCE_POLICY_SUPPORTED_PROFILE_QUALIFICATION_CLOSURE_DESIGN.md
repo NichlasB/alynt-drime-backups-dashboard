@@ -1,9 +1,9 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
-Current resume: [socket-free string-access/cost foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
-passes isolated tests only; actual collectors retain the enforced1MiB guard and
-no new profile is wired. Next approval is repository-only fixed-owner cost/origin
-integration design, with no acquisition, native execution or production wiring.
+Current resume: [fixed-owner integration design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
+specifies one shared work authority and immutable origin admission; collectors
+retain the enforced1MiB guard and no new profile is wired. Next approval is its
+socket-free dormant safety foundation, with no acquisition/native/production work.
 Legacy M coverage remains open, milestones/native attempts7/10 unchanged. No
 historical profile/whole-plugin readiness row is refreshed by pure foundations.
 
