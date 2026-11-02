@@ -525,6 +525,7 @@ def graph(tree, observations, deadline, *, candidate_alias_policy=None):
     require(type(observations) is dict and len(observations) <= 256 and all(type(k) is str and re.fullmatch('[0-9]{1,2}:[0-9]{1,5}', k) for k in observations), 'elf-observation-bound')
     roots, cache, providers, alias_edges, objects = {}, {}, {}, [], {}
     current, requested, stage = SERVER, None, 'root-origins'
+    candidate_aliases = 0
     def descriptor(path):
         node = tree.inspect(path, clock(deadline))
         return bound_metadata(node, observations, path), node['snapshot']
@@ -546,6 +547,9 @@ def graph(tree, observations, deadline, *, candidate_alias_policy=None):
             for requested in found['needed']:
                 if requested in providers: continue
                 path, node, aliases = provider(tree, requested, deadline, candidate_alias_policy=candidate_alias_policy)
+                if candidate_alias_policy is not None and requested == 'libgcc_s.so.1' and aliases == [dict(
+                        path='usr/lib64/libgcc_s.so.1', target='libgcc_s-11-20240719.so.1', layer=0, entry=1700)]:
+                    candidate_aliases += 1
                 require(node['snapshot'] == snapshot, 'elf-snapshot-binding')
                 supplied, observed_snapshot = descriptor(path)
                 require(observed_snapshot == snapshot, 'elf-snapshot-binding')
@@ -558,6 +562,8 @@ def graph(tree, observations, deadline, *, candidate_alias_policy=None):
         result = tree.closure(list(objects.values()), list(providers.values()), clock(deadline))
         result.update(static_dependency_closure_verified=True, relocations_verified=False, provider_alias_count=len(alias_edges), roots=roots,
             graph_sha256=hashlib.sha256(json.dumps([snapshot, objects, providers, alias_edges], sort_keys=True).encode()).hexdigest())
+        if candidate_alias_policy is not None:
+            result['candidate_alias_policy'] = dict(format='ADBUCAPUSE1', profile='candidate-libgcc-alias-v1', matched_aliases=candidate_aliases, runtime_grant=False)
         return result
     except Exception as error:
         try: capture_failure(error, stage, current, requested, roots)

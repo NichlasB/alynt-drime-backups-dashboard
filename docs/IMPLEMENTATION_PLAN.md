@@ -1,5 +1,34 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed libgcc_s selection integrated; campaign qualification pending — 2026-11-02
+
+The campaign [default-off entry integration](SOURCE_POLICY_UBI_LIBGCC_ENTRY_INTEGRATION.md)
+adds independent selection, mandatory root pins before source-owned context,
+same-helper policy construction and an actual matched-alias usage requirement.
+Ten isolated groups/four guard controls cover selectors, context, success and
+cleanup; genuine artifact/native claims await actual proof. Existing modes,
+policy, pins, budgets, exact cleanup and production wiring remain unchanged.
+After implementation validation/publication/exact-head CI, continue the bounded
+static prerequisite and evidence closeout automatically under campaign authority;
+do not stop at the new slice name or clean commit. Stop before any newly required
+security/compatibility exception or other real boundary. Campaign baseline remains
+7/10 milestones/native7/10/eight static acquisitions until actual results close.
+
+## Autonomous campaign resumed at fixed libgcc_s entry integration — 2026-11-02
+
+The renewed user campaign authorizes related repository integration and bounded
+existing ephemeral CI qualification/recovery without intermediate task-scope
+confirmation. Restore d4d0fa0 is clean/synced. Recorded transport-tuple work is
+already complete; resume the current exact-policy workstream, not the old start.
+Baseline is7/10 product milestones,7/10 native attempts,eight static acquisitions.
+Do not reset counters or count foundations/retries/evidence commits as products.
+Implement independent default-false fixed selection and genuine source-held
+context/usage evidence; validate/publish/exact-head CI before bounded static
+qualification. Preserve the approved exact alias exception, all other admission,
+pins/budgets and production boundaries. No LocalWP/live, extraction, execution,
+package/release/deploy, new compatibility/security-policy decision or unchanged
+failed rerun. Stop at any real new exception/ownership/cleanup boundary.
+
 ## Dormant exact libgcc_s policy implemented; fixed selection gated — 2026-11-02
 
 The approved [policy safety foundation](SOURCE_POLICY_UBI_LIBGCC_POLICY_FOUNDATION.md)

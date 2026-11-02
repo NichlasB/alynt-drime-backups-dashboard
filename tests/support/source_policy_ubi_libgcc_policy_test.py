@@ -214,7 +214,9 @@ class Contracts(unittest.TestCase):
     def test_source_root_pins_and_fixed_entry_workflow_remain_unmodified(self):
         source=(d.ROOT/'scripts/ci/source-policy-legacy-ubi-static.py').read_text()
         workflow=(d.ROOT/'.github/workflows/source-policy-legacy-ubi-static.yml').read_text()
-        self.assertNotIn('candidate_alias_context',source); self.assertNotIn('candidate-libgcc-alias-v1',workflow)
+        self.assertIn('libgcc_alias_policy=False',source); self.assertIn('libgcc_alias_policy:',workflow)
+        section=workflow.split('      libgcc_alias_policy:',1)[1].split('permissions:',1)[0]
+        self.assertIn('default: false',section)
         self.assertLess(source.index('elf.admit_selected(roles)',source.index('def bounded_graph')),source.index('alias._owned_graph(tree',source.index('def bounded_graph')))
         with fixture() as (tree,owner,_,_,_):
             roles={key:tree.resolve(key,owner.now()) for key in u.WANTED}

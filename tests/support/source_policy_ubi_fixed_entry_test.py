@@ -183,7 +183,7 @@ class Contracts(unittest.TestCase):
         original=u.create_work_authority
         def authority(*args):
             owner=original(*args); captured.append(owner); return owner
-        for policies in ((False,False,False),(True,False,False),(True,True,False),(True,True,True)):
+        for policies in ((False,False,False),(True,False,False),(True,True,False),(True,True,True),(True,True,True,True)):
             captured.clear()
             with tempfile.TemporaryDirectory() as parent,patch.dict(os.environ,dict(GITHUB_SHA='b'*40,EXPECTED_SHA='b'*40,GITHUB_RUN_ID='321',GITHUB_RUN_ATTEMPT='1')):
                 root=Path(parent).resolve()/'adb-legacy-ubi-321-1'; out=io.StringIO()

@@ -21,6 +21,11 @@ on:
         required: true
         default: false
         type: boolean
+      libgcc_alias_policy:
+        description: Exact candidate libgcc alias profile; requires all static prerequisites, never execution
+        required: true
+        default: false
+        type: boolean
 permissions:
   contents: read
 concurrency:
@@ -36,6 +41,7 @@ jobs:
       ALIAS_POLICY: ${{ inputs.alias_policy }}
       ELF_POLICY: ${{ inputs.elf_policy }}
       BOUNDED_ACCESS_POLICY: ${{ inputs.bounded_access_policy }}
+      LIBGCC_ALIAS_POLICY: ${{ inputs.libgcc_alias_policy }}
     steps:
       - name: Admit exact approved head
         shell: bash
@@ -64,13 +70,20 @@ jobs:
           fi
       - name: One static prerequisite; no candidate execution
         run: |
-          case "$ALIAS_POLICY:$ELF_POLICY:$BOUNDED_ACCESS_POLICY" in
-            false:false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
-            true:false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
-            true:true:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-elf-static-prerequisite ;;
-            true:true:true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-bounded-elf-static-prerequisite ;;
-            *) exit 1 ;;
-          esac
+          if [[ "$LIBGCC_ALIAS_POLICY" == true ]]; then
+            [[ "$ALIAS_POLICY:$ELF_POLICY:$BOUNDED_ACCESS_POLICY" == true:true:true ]]
+            python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-libgcc-elf-static-prerequisite
+          elif [[ "$LIBGCC_ALIAS_POLICY" == false ]]; then
+            case "$ALIAS_POLICY:$ELF_POLICY:$BOUNDED_ACCESS_POLICY" in
+              false:false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-static-prerequisite ;;
+              true:false:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-alias-static-prerequisite ;;
+              true:true:false) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-elf-static-prerequisite ;;
+              true:true:true) python3 -I -B scripts/ci/source-policy-legacy-ubi-static.py --approved-bounded-elf-static-prerequisite ;;
+              *) exit 1 ;;
+            esac
+          else
+            exit 1
+          fi
       - name: Always reconcile exact owned artifacts
         if: always()
         run: |

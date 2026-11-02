@@ -140,6 +140,40 @@ def create_work_authority(alias, config, frozen, deadline):
         dict(head=head, run=hashlib.sha256((run+':'+attempt).encode()).hexdigest()[:32], profile='bounded-strings-v1'), deadline)
 
 
+def libgcc_selection(arguments, alias_value, elf_value, bounded_value='false', libgcc_value='false'):
+    s.require(type(libgcc_value) is str and libgcc_value in ('true', 'false'), 'explicit-libgcc-mode')
+    if libgcc_value == 'false': return (*selection(arguments, alias_value, elf_value, bounded_value), False)
+    s.require(type(arguments) is list and arguments == ['--approved-libgcc-elf-static-prerequisite'], 'explicit-scope')
+    s.require(all(type(v) is str and v == 'true' for v in (alias_value, elf_value, bounded_value)), 'explicit-libgcc-prerequisites')
+    return True, True, True, True
+
+
+def libgcc_context(alias, tree, owner, config, frozen):
+    s.require(type(owner) is alias.v._FixedWorkAuthority and type(tree) is alias.v.VirtualClosure
+              and tree._work_owner is owner and owner._model is tree and tree._final is True
+              and type(tree._committed) is int and tree._committed == 10
+              and type(owner._verified) is int and owner._verified == 10, 'libgcc-owner')
+    owner.admit_graph(tree)
+    s.require(type(frozen) is dict and len(frozen) == len(BOUNDED_SOURCES)
+              and all(type(k) is str for k in frozen) and set(frozen) == set(BOUNDED_SOURCES)
+              and all(provenance.hexadecimal(v,64) for v in frozen.values()), 'libgcc-source')
+    source = hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest()
+    head, run, attempt = (os.environ[k] for k in ('GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT'))
+    s.require(provenance.hexadecimal(head,40) and head == os.environ['EXPECTED_SHA']
+              and all(re.fullmatch('[0-9]+', v) for v in (run, attempt)), 'libgcc-job')
+    correlation = hashlib.sha256((run+':'+attempt).encode()).hexdigest()[:32]
+    s.require(alias.PIN == PIN and alias.CONFIG == CONFIG
+              and owner._identity == tree._identity == dict(manifest=PIN, config=CONFIG, source=source)
+              and owner._run == dict(head=head,run=correlation,profile='bounded-strings-v1')
+              and provenance.hexadecimal(tree._snapshot_hash,64), 'libgcc-context')
+    diffs = config['rootfs']['diff_ids']
+    s.require(type(diffs) is list and len(diffs) == 10, 'libgcc-layers')
+    layers = [(layer[0],s.digest(diff)) for layer,diff in zip(LAYERS,diffs)]
+    s.require(owner._layers == tree._layers == layers, 'libgcc-layers')
+    return dict(format='ADBUCAP1',profile='candidate-libgcc-alias-v1',manifest=PIN,config=CONFIG,
+                head=head,run=correlation,source=source,snapshot=tree._snapshot_hash,layers=tuple(layers))
+
+
 def compact_layer(collected):
     return {key: collected[key] for key in ('metadata', 'elf', 'elf_bindings')}
 
@@ -154,13 +188,27 @@ def apply_bounded_layer(alias, tree, work_owner, collected, ordinal):
     return tree, compact_layer(collected)
 
 
-def bounded_graph(alias, elf, tree, work_owner, layers):
+def bounded_graph(alias, elf, tree, work_owner, layers, *, libgcc_alias_policy=False, config=None, frozen=None):
+    s.require(type(libgcc_alias_policy) is bool, 'explicit-libgcc-mode')
     roles = {key: tree.resolve(key, work_owner.now()) for key in WANTED}
     elf.admit_selected(roles)
+    if libgcc_alias_policy:
+        context = libgcc_context(alias, tree, work_owner, config, frozen)
+        return roles, alias._owned_graph(tree, work_owner, layers, candidate_alias_context=context)
     return roles, alias._owned_graph(tree, work_owner, layers)
 
 
-def successful(report, bounded):
+def libgcc_usage(value):
+    return bool(type(value) is dict and len(value) == 4 and all(type(k) is str for k in value)
+                and set(value) == {'format','profile','matched_aliases','runtime_grant'}
+                and type(value['format']) is str and value['format'] == 'ADBUCAPUSE1'
+                and type(value['profile']) is str and value['profile'] == 'candidate-libgcc-alias-v1'
+                and type(value['matched_aliases']) is int and value['matched_aliases'] == 1 and value['runtime_grant'] is False)
+
+
+def successful(report, bounded, libgcc=False):
+    if libgcc and (not bounded or report.get('provider_alias_policy') != 'candidate-libgcc-alias-v1'
+                   or not libgcc_usage(report.get('elf_graph', {}).get('candidate_alias_policy'))): return False
     common = (report.get('status') in ('selected-origins-verified', 'static-dt-needed-closure-verified')
               and report.get('source_unchanged') is True and report.get('cleanup') == 'complete'
               and report.get('reporting') == 'complete' and report.get('reported') is True
@@ -252,14 +300,16 @@ def retain_provider_alias_diagnostic(report, value, alias, elf, tree, work_owner
         report['provider_alias_diagnostic'] = None  # Preserve primary failure; no diagnostic retry.
 
 
-def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=False):
-    s.require(all(type(value) is bool for value in (alias_policy, elf_policy, bounded_access_policy))
-              and (not elf_policy or alias_policy) and (not bounded_access_policy or elf_policy), 'explicit-elf-mode')
+def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=False, libgcc_alias_policy=False):
+    s.require(all(type(value) is bool for value in (alias_policy, elf_policy, bounded_access_policy, libgcc_alias_policy))
+              and (not elf_policy or alias_policy) and (not bounded_access_policy or elf_policy)
+              and (not libgcc_alias_policy or bounded_access_policy), 'explicit-elf-mode')
     owner, phase, budget, work_owner = None, 'metadata', None, None
     report = {'status': 'refused', 'candidate_execution': False, 'image_loading': False,
               'database_operations': False, 'rootfs_extraction': False, 'layers_verified': 0,
               'runtime_grant': False, 'alias_policy': alias_policy, 'elf_policy': elf_policy, 'namespace_layers_committed': 0}
     if bounded_access_policy: report['access_profile'] = 'bounded-strings-v1'
+    if libgcc_alias_policy: report['provider_alias_policy'] = 'candidate-libgcc-alias-v1'
     report['tool'] = {'python': sys.version.split()[0], 'ssl': acquire.ssl.OPENSSL_VERSION,
                       'unicode_db': s.unicodedata.unidata_version}
     paths = (Path(__file__), Path(acquire.__file__), Path(s.__file__), Path(provenance.__file__),
@@ -341,7 +391,12 @@ def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=Fals
         if elf_policy:
             phase = 'elf-dependency-closure'
             if bounded_access_policy:
-                roles, report['elf_graph'] = bounded_graph(alias, elf, tree, work_owner, compact)
+                if libgcc_alias_policy:
+                    roles, report['elf_graph'] = bounded_graph(alias, elf, tree, work_owner, compact,
+                        libgcc_alias_policy=True, config=config, frozen=frozen)
+                    s.require(libgcc_usage(report['elf_graph'].get('candidate_alias_policy')), 'libgcc-policy-evidence')
+                else:
+                    roles, report['elf_graph'] = bounded_graph(alias, elf, tree, work_owner, compact)
             else:
                 elf.admit_selected(roles)
                 report['elf_graph'] = elf.graph(tree, observations, deadline)
@@ -385,20 +440,20 @@ def proof(root, alias_policy=False, elf_policy=False, bounded_access_policy=Fals
             report['scan_budget'] = None; report['status'] = 'refused'; report.setdefault('failure', 'scan-accounting')
         finally:
             finish_report(report, root, frozen, work_owner)
-    return 0 if successful(report, bounded_access_policy) else 1
+    return 0 if successful(report, bounded_access_policy, libgcc_alias_policy) else 1
 
 
 if __name__ == '__main__':
     try:
         s.require(sys.flags.isolated and sys.dont_write_bytecode and sys.platform == 'linux', 'isolated-linux-tool')
         root = target(os.environ)
-        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--approved-elf-static-prerequisite'], ['--approved-bounded-elf-static-prerequisite'], ['--cleanup']), 'explicit-scope')
+        s.require(sys.argv[1:] in (['--approved-static-prerequisite'], ['--approved-alias-static-prerequisite'], ['--approved-elf-static-prerequisite'], ['--approved-bounded-elf-static-prerequisite'], ['--approved-libgcc-elf-static-prerequisite'], ['--cleanup']), 'explicit-scope')
         if sys.argv[1:] == ['--cleanup']:
             print(json.dumps({'always_cleanup': 'complete', 'files_removed': cleanup(root)}))
         else:
-            mode, inspect_elf, bounded = selection(sys.argv[1:], os.environ.get('ALIAS_POLICY', 'false'),
-                os.environ.get('ELF_POLICY', 'false'), os.environ.get('BOUNDED_ACCESS_POLICY', 'false'))
-            sys.exit(proof(root, mode, inspect_elf, bounded))
+            mode, inspect_elf, bounded, libgcc = libgcc_selection(sys.argv[1:], os.environ.get('ALIAS_POLICY', 'false'),
+                os.environ.get('ELF_POLICY', 'false'), os.environ.get('BOUNDED_ACCESS_POLICY', 'false'), os.environ.get('LIBGCC_ALIAS_POLICY', 'false'))
+            sys.exit(proof(root, mode, inspect_elf, bounded, libgcc))
     except s.Refusal:
         print('{"status":"scope-or-cleanup-refused"}')
         sys.exit(1)
