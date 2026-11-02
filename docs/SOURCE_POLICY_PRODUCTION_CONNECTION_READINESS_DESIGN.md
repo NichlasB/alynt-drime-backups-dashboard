@@ -1,11 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
-Current resume: [string-access cost/reachability design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
-specifies a dormant, explicit-opt-in bounded-access foundation. Active parser,
-eager refusal, graph and production/provider/form wiring remain unchanged; no
-artifact/native attempt. Next approval is the socket-free synthetic foundation,
-not live admission or execution. Legacy M stays blocked; campaign milestones/
-native attempts7/10 unchanged. Earlier text is historical.
+Current resume: [dormant bounded-access/cost foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
+adds a pure explicit opt-in, not real consumer admission. Collector/entry/workflow,
+graph and production/provider/form wiring are unchanged; no artifact/native work.
+Next approval is repository-only fixed-owner cost/origin integration design,
+because local DATA grants do not establish true aggregate budget authority.
+Legacy M stays blocked; campaign milestones/native attempts7/10 unchanged.
 
 Current outcome: [static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 complete layers/namespace commits and both origins, cleanup/artifact0,

@@ -68,7 +68,106 @@ def capture_string_table_failure(error, tags):
     error.elf_string_table_facts = facts
 
 
-def parse(data, deadline=None):
+_COST_FIELDS = ('structural', 'mapping', 'search_bytes', 'copy_bytes', 'ascii_bytes', 'decode_bytes', 'boundary_bytes')
+
+
+def access_receipt(value):
+    fields = set(_COST_FIELDS) | {'format', 'complete', 'granted', 'used', 'requests', 'extent', 'runtime_grant'}
+    if type(value) is not dict or len(value) != len(fields) or not all(type(k) is str for k in value) or set(value) != fields: return None
+    if not (type(value['format']) is str and value['format'] == 'ADBUELFCOST1'
+            and type(value['complete']) is bool and value['runtime_grant'] is False): return None
+    if not all(type(value[k]) is int and 0 <= value[k] <= 2097152 for k in (*_COST_FIELDS, 'granted', 'used')): return None
+    if not (type(value['requests']) is int and 0 <= value['requests'] <= 67
+            and type(value['extent']) is int and 0 <= value['extent'] <= 128*MIB): return None
+    if not (value['used'] == sum(value[k] for k in _COST_FIELDS) and value['used'] <= value['granted']
+            and value['mapping'] <= 256 and value['boundary_bytes'] <= 2
+            and value['structural'] >= value['requests']
+            and value['search_bytes'] <= 241*value['requests']
+            and value['copy_bytes'] == value['ascii_bytes'] == value['decode_bytes'] <= min(240*value['requests'], value['search_bytes'])): return None
+    if value['requests'] and (not value['extent'] or value['boundary_bytes'] != 2): return None
+    if value['complete'] and bool(value['requests']) != bool(value['extent']): return None
+    return dict(value)
+
+
+class _AccessCost:
+    def __init__(self, granted, deadline):
+        require(type(granted) is int and 0 <= granted <= 2097152, 'elf-string-access-budget')
+        require(deadline is None or type(deadline) in (int,float) and 0 <= deadline < float('inf'), 'elf-deadline')
+        self.granted, self.deadline, self.used, self.requests, self.extent = granted, deadline, 0, 0, 0
+        self.counts = dict.fromkeys(_COST_FIELDS, 0)
+
+    def _admit(self, amount):
+        require(type(amount) is int and 0 <= amount <= 2097152, 'elf-string-access-cost')
+        require(self.used+amount <= self.granted, 'elf-string-access-work')
+        require(self.deadline is None or time.monotonic() < self.deadline, 'elf-string-access-deadline')
+        self.used += amount
+
+    def spend(self, category, amount):
+        require(type(category) is str and category in _COST_FIELDS, 'elf-string-access-cost')
+        self._admit(amount); self.counts[category] += amount
+
+    def payload(self, length):
+        require(type(length) is int and 0 <= length <= 240, 'elf-string-length')
+        self._admit(3*length)
+        self.counts['copy_bytes'] += length; self.counts['ascii_bytes'] += length; self.counts['decode_bytes'] += length
+
+    def receipt(self, complete):
+        result = access_receipt(dict(self.counts, format='ADBUELFCOST1', complete=complete, granted=self.granted,
+            used=self.used, requests=self.requests, extent=self.extent, runtime_grant=False))
+        require(result is not None, 'elf-string-access-receipt')
+        return result
+
+
+def _bounded_table(data, tags, loads, meter):
+    require(5 in tags and 10 in tags and 0 < tags[10] <= len(data)
+            and tags[5] <= 2**64-tags[10], 'elf-string-access-span')
+    pointer, extent = tags[5], tags[10]; meter.extent = extent
+    meter.spend('mapping', len(loads))
+    mapped = [off+pointer-va for va, off, length in loads if va <= pointer and pointer-va <= length
+              and extent <= length-(pointer-va)]
+    require(len(mapped) == 1, 'elf-string-access-mapping')
+    base = mapped[0]
+    require(0 <= base <= len(data) and extent <= len(data)-base, 'elf-string-access-span')
+    meter.spend('boundary_bytes', 2)
+    require(data[base] == 0 and data[base+extent-1] == 0, 'elf-string-access-boundary')
+    return base, extent
+
+
+def _bounded_text(data, base, extent, index, empty, meter):
+    require(type(data) in (bytes,bytearray) and type(base) is int and type(extent) is int
+            and 0 <= base <= len(data) and 0 < extent <= len(data)-base
+            and type(index) is int and 0 <= index < extent and type(empty) is bool
+            and type(meter) is _AccessCost, 'elf-string-index')
+    meter.spend('structural', 1)
+    require(meter.requests < 67, 'elf-string-access-requests'); meter.requests += 1
+    window = min(241, extent-index); position = base+index
+    meter.spend('search_bytes', window)
+    end = data.find(b'\0', position, position+window)
+    require(end >= position and end-position <= 240, 'elf-string-length')
+    length = end-position; meter.payload(length)
+    raw = data[position:end]
+    require((empty or length > 0) and all(32 <= c <= 126 for c in raw), 'elf-string-ascii')
+    return raw.decode('ascii')
+
+
+def parse(data, deadline=None, *, bounded_strings=False, remaining_work=None):
+    require(type(bounded_strings) is bool, 'elf-string-access-mode')
+    if not bounded_strings:
+        require(remaining_work is None, 'elf-string-access-budget')
+        return _parse(data, deadline, None)
+    meter = _AccessCost(remaining_work, deadline)
+    try:
+        result = _parse(data, deadline, meter)
+        meter.spend('structural', 0)
+        return dict(format='ADBUELFSA1', metadata=result, cost=meter.receipt(True), runtime_grant=False)
+    except Exception as error:
+        try: error.__dict__.setdefault('string_access_facts', meter.receipt(False))
+        except Exception: error.__dict__.setdefault('string_access_facts', None)
+        raise
+
+
+def _parse(data, deadline, meter):
+    if meter is not None: meter.spend('structural', 1)
     require(type(data) in (bytes, bytearray) and 64 <= len(data) <= 128*MIB and data[:7] == b'\x7fELF\x02\x01\x01', 'elf-header')
     require(deadline is None or type(deadline) in (int, float) and 0 <= deadline < float('inf'), 'elf-deadline')
     kind, machine, version = struct.unpack_from('<HHI', data, 16)
@@ -79,6 +178,9 @@ def parse(data, deadline=None):
     work = 0
     def tick():
         nonlocal work
+        if meter is not None:
+            meter.spend('structural', 1)
+            return
         work += 1
         require(work <= 2097152 and (deadline is None or time.monotonic() < deadline), 'elf-work-bound')
     def ascii_text(raw):
@@ -90,6 +192,7 @@ def parse(data, deadline=None):
         typ, flags, start, address, physical, size, memory, align = struct.unpack_from('<IIQQQQQQ', data, offset+i*width)
         require(start+size <= len(data), 'elf-segment-bound')
         if typ == 1:
+            if meter is not None: require(memory <= 2**64-address, 'elf-string-access-span')
             require(size <= memory and (align in (0, 1) or align & (align-1) == 0 and address % align == start % align), 'elf-load-shape')
             require(not loads or address >= loads[-1][0], 'elf-load-order')
             loads.append((address, start, size))
@@ -97,11 +200,17 @@ def parse(data, deadline=None):
             require(dynamic is None and 0 < size <= MIB and size % 16 == 0, 'elf-dynamic-bound')
             dynamic = (start, size, address)
         elif typ == 3:
-            require(interpreter is None and 1 < size <= 240 and data[start+size-1] == 0
-                    and 0 not in data[start:start+size-1], 'elf-interpreter')
+            if meter is not None:
+                require(interpreter is None and 1 < size <= 240, 'elf-interpreter')
+                meter.spend('structural', 4*(size-1)+1)
+                require(data[start+size-1] == 0 and data.find(b'\0',start,start+size-1) == -1, 'elf-interpreter')
+            else:
+                require(interpreter is None and 1 < size <= 240 and data[start+size-1] == 0
+                        and 0 not in data[start:start+size-1], 'elf-interpreter')
             interpreter = ascii_text(data[start:start+size-1])
     require(bool(loads) and dynamic is not None, 'elf-dynamic-required')
     start, size, address = dynamic
+    if meter is not None: meter.spend('mapping', len(loads))
     require(sum(1 for va, off, length in loads if off <= start and start+size <= off+length and va+start-off == address) == 1, 'elf-dynamic-mapping')
     tags, needed, paths, features, flag_tags, ended = {}, [], [], set(), set(), False
     for pos in range(start, start+size, 16):
@@ -123,16 +232,20 @@ def parse(data, deadline=None):
     require(ended, 'elf-dynamic-terminator')
     strings = b''
     if needed or paths or 14 in tags:
-        try:
-            require(5 in tags and 10 in tags and 0 < tags[10] <= MIB, 'elf-string-table')
-        except Refusal as error:
-            try: capture_string_table_failure(error, tags)
-            except Exception: error.__dict__.setdefault('elf_string_table_facts', None)
-            raise
-        mapped = [off+tags[5]-va for va, off, length in loads if va <= tags[5] and tags[5]+tags[10] <= va+length]
-        require(len(mapped) == 1, 'elf-string-mapping')
-        strings = data[mapped[0]:mapped[0]+tags[10]]
+        if meter is not None:
+            base, extent = _bounded_table(data, tags, loads, meter)
+        else:
+            try:
+                require(5 in tags and 10 in tags and 0 < tags[10] <= MIB, 'elf-string-table')
+            except Refusal as error:
+                try: capture_string_table_failure(error, tags)
+                except Exception: error.__dict__.setdefault('elf_string_table_facts', None)
+                raise
+            mapped = [off+tags[5]-va for va, off, length in loads if va <= tags[5] and tags[5]+tags[10] <= va+length]
+            require(len(mapped) == 1, 'elf-string-mapping')
+            strings = data[mapped[0]:mapped[0]+tags[10]]
     def text(index, empty=False):
+        if meter is not None: return _bounded_text(data, base, extent, index, empty, meter)
         tick(); require(index < len(strings), 'elf-string-index')
         end = strings.find(b'\0', index, index+241)
         require(end >= index, 'elf-string-length')
@@ -140,9 +253,12 @@ def parse(data, deadline=None):
     result = dict(machine='x86_64', bits=64, type=kind, interpreter=interpreter,
                   needed=[text(i) for i in needed], soname=text(tags[14]) if 14 in tags else None,
                   search_paths=[text(i, True) for i in paths], sha256=hashlib.sha256(data).hexdigest(), bytes=len(data),
-                  dependency_closure_verified=False, executed=False, work=work, unsupported_features=sorted(features))
+                  dependency_closure_verified=False, executed=False, work=meter.used if meter is not None else work, unsupported_features=sorted(features))
+    if meter is not None:
+        meter.spend('structural', sum(len(n) for n in result['needed'])+len(result['needed'])+len(result['soname'] or ''))
     require(all(library(n) for n in result['needed']) and len(set(result['needed'])) == len(result['needed'])
             and (result['soname'] is None or library(result['soname'])), 'elf-library-name')
+    if meter is not None: result['work'] = meter.used
     return result
 
 

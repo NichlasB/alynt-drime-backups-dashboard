@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant string-access/cost foundation implemented; owner integration still gated — 2026-11-02
+
+The [socket-free foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md) now
+reuses the parser through a typed default-off profile and supplied local work
+grant, with complete file-backed extent checks, pre-charged bounded string
+access and versioned DATA receipts. Twelve new synthetic groups/seven guard
+controls and the twenty predecessor groups pass; actual consumer wiring stays
+byte-identical and strict. No acquisition/native attempt or real admission.
+Recommended next gated slice: **Repository-only Candidate-Bound Fixed-Owner
+String-Access Cost and Origin Integration Design**, design-only closure of the
+true aggregate grant/debit and source/final-origin authority before any collector
+selection. Campaign7/10 milestones/native7/10/six static acquisitions unchanged;
+an intermediate pure foundation is not completed product qualification.
+
+## Approved dormant bounded string-access foundation — 2026-11-02
+
+User approves the [socket-free foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
+using synthetic bytes/work grants only, through validation, commit, push and
+exact-head CI. Strict defaults and the existing collector/fixed-entry/workflow
+remain unchanged; no acquisition, extraction, native execution or wiring. The
+new opt-in must prove full file-backed mapping, bounded per-name access, cost
+pre-admission and non-vacuous controls without claiming real-candidate success.
+Campaign7/10 milestones/native7/10, six static acquisitions unchanged; no credit
+for tests, retries or evidence commits. Earlier design/gate text is historical.
+
 ## String-access cost/reachability design; active policy unchanged — 2026-11-02
 
 The approved [repository-only design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)

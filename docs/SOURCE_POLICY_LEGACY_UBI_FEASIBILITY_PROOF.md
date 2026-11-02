@@ -1,11 +1,11 @@
 # Legacy-Minimum UBI Owned Feasibility — Static Prerequisite
 
-Current resume: [cost/reachability admission design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
-selects a dormant bounded-string-access foundation, not active cap widening or
-suppression of the refused library. Current source/limits and failed diagnostic
-remain unchanged; legacy M is blocked, milestones/native attempts7/10, six static
-acquisitions. Next approval is the socket-free explicit-opt-in foundation with
-synthetic tests only; no new acquisition, consumer wiring or execution.
+Current resume: [dormant string-access/cost foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
+passes synthetic positive/refusal controls; actual collector/entry/workflow stay
+strict and unchanged, with no new acquisition or native attempt. Next approval
+is repository-only fixed-owner cost/origin integration design, not an artifact
+job or execution. Legacy M stays blocked; milestones/native attempts7/10 and
+six static acquisitions unchanged. Historical failed receipts keep their scope.
 
 Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 qualifies the pinned candidate's10 layers and selected virtual content origins,

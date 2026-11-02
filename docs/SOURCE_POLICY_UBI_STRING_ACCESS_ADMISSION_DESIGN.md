@@ -1,5 +1,12 @@
 # Candidate-Bound ELF String-Table Cost and Reachability Admission Design
 
+Current implementation: user approves the [dormant socket-free foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md).
+It adds a typed explicit opt-in and bounded work/receipt DATA, while all actual
+collector/entry/workflow calls remain strict and unchanged. No artifact/native
+attempt follows this approval. Owner-level aggregate grant/origin integration
+still needs the design gate named in the foundation; older text below records
+the design baseline rather than a refreshed real-candidate qualification.
+
 ## Approved scope and baseline — 2026-11-02
 
 User approves repository-only design through validation, commit, push and

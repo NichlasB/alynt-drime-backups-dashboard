@@ -1,11 +1,11 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
-Current resume: [bounded-string-access admission design](SOURCE_POLICY_UBI_STRING_ACCESS_ADMISSION_DESIGN.md)
-is design-only; the measured failed qualification and enforced1MiB cap remain.
-Next approval is a socket-free, dormant opt-in foundation using synthetic bytes
-and cost tests, without collector/entry/workflow wiring or artifact/native work.
+Current resume: [socket-free string-access/cost foundation](SOURCE_POLICY_UBI_STRING_ACCESS_FOUNDATION.md)
+passes isolated tests only; actual collectors retain the enforced1MiB guard and
+no new profile is wired. Next approval is repository-only fixed-owner cost/origin
+integration design, with no acquisition, native execution or production wiring.
 Legacy M coverage remains open, milestones/native attempts7/10 unchanged. No
-historical profile or whole-plugin readiness row is refreshed by this design.
+historical profile/whole-plugin readiness row is refreshed by pure foundations.
 
 Current outcome: [owned static41350800959](SOURCE_POLICY_UBI_HARDLINK_STATIC_ADMISSION.md#exact-head-ci-and-successful-owned-static-proof)
 passes10 layers/namespace commits and both selected origins, exact cleanup,
