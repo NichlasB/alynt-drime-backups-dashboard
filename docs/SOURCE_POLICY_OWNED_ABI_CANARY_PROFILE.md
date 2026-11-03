@@ -1,5 +1,18 @@
 # Owned Native ABI Canary Execution Profile
 
+## Unclassified daemon coverage and privacy-safe recovery design — 2026-11-03
+
+The approved [design](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md)
+records pinned CLI/API error-source discovery and selects five exact envelope
+recipes with enum-only, separately bound supplemental DATA. It preserves the
+current unknown historical receipt and requires useful synthetic positives plus
+source-backed guard controls before any future physical proposal. No implementation,
+raw disclosure, new protected read, command, profile/acceptance/budget change or
+native run occurs here. Cause/ABI coverage remain unestablished; campaign8/10,
+static9 and 11 consumed attempts are unchanged. Next gated slice is the combined
+repository-only safety foundation/dormant integration with isolated tests only,
+not another native attempt or a renewal of the exhausted allowance.
+
 ## Additional authorized startup-diagnostic proof: unclassified daemon message — 2026-11-03
 
 The user approves **one** additional bounded native qualification/cleanup proof

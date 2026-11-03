@@ -1,0 +1,225 @@
+# Unclassified Daemon Startup Diagnostic Coverage and Privacy-Safe Recovery Design
+
+## Authority and verified baseline — 2026-11-03
+
+The user approves repository-only **design**, validation, commit/push and ordinary
+exact-head CI. R1 documentation work only: no implementation, native/workflow
+dispatch, engine read, acquisition/build/import, installation, SQL, site operation,
+candidate execution, production wiring, release/package/tag or deployment.
+Uploader/toolkit remain untouched. Restore/review baseline
+**d7a73c8f0021ec697658ab49cfd3a9763a688368** is clean/synced, equals remote master
+and has reverified successful [ordinary CI41720409115](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41720409115).
+Campaign remains **8/10 milestones,static9**; original native10/10 and separately
+approved additional1/1 are exhausted (11 total). This design grants no retry.
+
+The coherent source-review boundary is **b858a6d7687be301d1d333e0eeec2336e20f06dd
+through d7a73c8f0021ec697658ab49cfd3a9763a688368**, covering fbcba44's complete
+contract/owner/bridge foundation and its subsequent publication/native evidence,
+not merely the latest docs-only verification commit. Directly affected scope is
+the fixed owner/startup call, pure diagnostic contract, existing Python/PHP tests
+and owning plan/profile/foundation records. Pinned upstream discovery follows.
+
+## Actual problem, not a guessed root cause
+
+[Run41719960658](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41719960658)
+produced a valid operation/source-bound first-failure packet at c2e2b4a: CLI1,
+complete stdout0/stderr157, daemon envelope, analysis unclassified/unknown.
+First owned cleanup state was created/not running/OOMfalse/exit null. Primary
+and independent cleanup proved containers0/images0/stage absent; artifacts0.
+No accepted syscall observation or ABI qualification resulted. Raw stderr was
+not retained. Neither its hash/length nor the later state identifies a cause,
+observed API route, process exit or whether a container process ever started.
+
+The [current parser](../scripts/manual/source_policy_abi_canary_contract.py)
+recognizes broad shim/OCI/runc and permission/path/security markers, not a complete
+daemon/API error grammar. Its unknown result is correct fail-closed behavior,
+not a test failure to erase. Existing useful synthetic cases and six semantic
+controls do not establish coverage of the lost real message. Do not construct
+candidate messages and compare their hashes/lengths with that historical record.
+
+## Pinned primary-source discovery
+
+Read these exact official source files through the GitHub Contents API; no engine
+or runtime was contacted. Links are immutable source references, not dependencies
+to fetch during a proof:
+
+- [CLI RunStart](https://github.com/docker/cli/blob/b8034c0ed70494a90c133461d145cd072d920d7c/cli/command/container/start.go):
+  inspect, attach and wait setup precede ContainerStart; errors can arise along
+  those paths or from attachment/status afterward. The operation name does not
+  identify which API call failed.
+- [Actual CLI-vendored checkResponseErr](https://github.com/docker/cli/blob/b8034c0ed70494a90c133461d145cd072d920d7c/vendor/github.com/docker/docker/client/request.go#L194):
+  HTTP200–399 are accepted. Error bodies may be JSON Message or plain text;
+  a parsed response lacking Message generates an SDK status-text message. The
+  shared daemon prefix wraps these cases; it does not locate a daemon stage.
+- [Moby ContainerStart/validateState](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/start.go#L26)
+  and [containerStart](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/start.go#L75):
+  state/settings validation, mounts/networking/spec/AppArmor setup and task
+  creation/start can return errors. An internal failure defer records Error and
+  performs cleanup; those source paths do not prove this run traversed them.
+- [Moby ContainerAttach](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/attach.go#L20):
+  paused/restarting checks interpolate the supplied identifier. The pinned CLI
+  supplies the inspected full CID. Invalid detach keys and streamed attach errors
+  have other formats; do not treat every daemon-prefixed message as startup.
+
+The observed server commit6430e49 resolves to the full Moby commit above; use
+the CLI's own vendored client, not an assumed SDK version from another tree.
+The already-running source case maps to HTTP304 and is not selected as a failed
+CLI envelope. Checkpoint/nonempty-body and arbitrary lower-runtime strings are
+also excluded from this small fixed-command catalog. None of this establishes
+the missing157-byte message or a defect in the accepted containment profile.
+
+## Selected small extension: exact envelopes, separate non-authoritative DATA
+
+Keep the existing ADBOWNEDABISTARTFAIL1 packet, parser results, binding, first
+failure and cleanup projection unchanged. Add no generic word-dump, replacement
+message sanitizer, callback, executor, transport proxy, debug flag or API request.
+The future implementation should extend the existing pure contract and owner,
+not split out a new runtime subsystem or change the nine-member source cohort.
+
+Propose one optional sibling `startup_source_envelope` under the same failure
+object. It is supplemental coverage evidence, **not** a correction of historical
+unclassified results. It may inspect only the same complete transient stderr
+already held for the first exact source/owner/image/CID/ABI/policy-bound failed
+start/attach call. Validate the original packet and actual argv/flags before
+matching; require original daemon-envelope/unclassified analysis, both EOFs,
+no truncation and the existing4KiB/16-line/1KiB-line input restrictions.
+Missing bytes or a hash-only record cannot reach a matcher.
+
+Match the **entire** single error envelope against five source-held templates:
+the exact daemon prefix and spacing, the pinned literal body, and at most one
+terminal LF or CRLF. Do not strip arbitrary whitespace, ignore punctuation or
+suffixes, tokenize away unknown text, or search after masking an opaque payload.
+All parameter slots are closed as specified below; no regex wildcard, arbitrary
+name, path, quoted text, URL, environment value or caller-selected template.
+
+| Fixed family ID | Canonical pinned-source recipe | Meaning of a future match |
+|---|---|---|
+| `start-paused` | complete validateState paused-error literal, start.go line32 | reported paused-start message only |
+| `start-removing` | complete removal/dead-error literal, start.go line42/90; one template, not duplicate matches | reported removal-state message only |
+| `attach-paused` | complete attach.go line36 format with its sole identifier slot replaced by the exact bound full CID | reported paused-attach message only |
+| `attach-restarting` | complete attach.go line39 format with that same exact CID rule | reported restarting-attach message only |
+| `api-empty-message-500` | complete vendored request.go line262 format for status500 and its canonical Internal Server Error status text | reported SDK empty-error-message500 format only; no claim of independently observed HTTP status |
+
+Freeze the five reviewed literal/slot recipes and their provenance in source
+with a canonical catalog digest. No live source fetch, local catalog override,
+message-length heuristic, historical hash lookup, lowercasing or fuzzy match.
+Other status codes and nested runtime grammars remain unsupported until a
+separately justified source/fixture review. These five families are independently
+useful coverage cases, **not candidates asserted to explain the old failure**.
+Their reachability is source-format evidence, not a promise of future native
+coverage. Conflicting/multiple matches fail to ambiguous, never first-match wins.
+
+Proposed sibling schema (not implemented):
+
+- format fixed `ADBOWNEDABISOURCEENV1`;
+- `operation_sha`: SHA256 of the validated original binding, which already binds
+  context/head/run/attempt/source, image, full CID, ABI and policy;
+- `stderr_sha`: the original packet's complete-stream hash, correlation only;
+- `catalog_sha`: exact source-held canonical catalog digest;
+- `status`: matched / unmatched / ambiguous / invalid / unavailable;
+- `family`: one of the five IDs only for matched, otherwise null;
+- authority=false and qualification=false; no extra fields or dynamic values.
+
+Strictly validate types, closed keys and cross-packet binding/hash/catalog
+agreement; reject bool-as-number, copied/foreign receipts and malformed digests.
+The digest is not classification input: only the actual complete bytes can
+produce a match. Do not add a new value to existing layer/topic enums, broaden
+the old validator or mutate its native/synthetic historical receipts.
+
+## Privacy, ordering and resource invariants
+
+No raw or generally sanitized message, token list, matched substring, slot value,
+exception text, State.Error, PID, environment, path, policy or inspect object is
+stored/emitted. No new protected field is read: State.Error remains excluded,
+even though upstream source shows it can exist. The match only reports a fixed
+source-format family, not authenticated origin, actual state, fault cause or
+authority to repair the runtime/profile. Keep later cleanup state independent.
+
+Capture the sibling once alongside the original first failure, then release
+transient buffers. Later errors/cleanup cannot replace either first observation.
+Preserve the exact original exception, status0+stderr/nonzero rejection and direct
+child reap behavior. A match, unavailable diagnostic or a projection exception
+must not suppress refusal, retry, change cleanup decisions or continue an ABI.
+The optional sibling's failure cannot discard or downgrade the original packet.
+
+Cap the sibling at512 serialized bytes and the combined startup diagnostics at
+the existing4KiB allowance, charged before publication to existing body-control/
+observation quotas. No extra budget for the original raw stream. An insufficient
+reserve withholds the sibling using a fixed unavailable indication within the
+same allowance; never add a raw fallback. Hash only immutable binding/stream
+facts, so later legitimate cleanup projection cannot invalidate correlation.
+
+Share bounded input validation and use only five fixed-size full comparisons;
+do not run an unbounded second parser. Future instrumented tests must prove the
+**combined** projection stays within16 input-byte passes plus1024 bookkeeping
+units, including CID comparisons/catalog bookkeeping. If it cannot, stop rather
+than raise the bound. Preserve startup15s/4KiB, native16KiB, body/cleanup512KiB,
+observation2MiB, <510s reserve, cleanup30s, job10min and summary64KiB. No new
+inspection/log/exec/proc read, native command, timer, artifact or cleanup extension.
+
+## Required future isolated proof — not executed by this design
+
+Use the existing Python/PHP bridge with fake IO and virtual clocks only:
+
+1. Positive complete synthetic envelopes for **all five** source recipes;
+   verify their exact families and that the current broad analysis remains
+   unclassified. Label fixtures source-format-derived/synthetic, never native.
+2. Wrong full CID, short ID/name, quoted identifiers, prefix/suffix injection,
+   multiline/duplicate envelopes, bad controls/encoding and partial/truncated
+   bytes cannot match. Two source locations sharing one removal literal are
+   one rule, not a false ambiguity.
+3. An unknown complete envelope remains unmatched, with no leaked payload;
+   old hash-only evidence is unavailable. No artificial historical success case.
+4. Cross-receipt/catalog swaps, extra fields, bad types, altered argv/flags or
+   another operation fail before attribution. No custom template can be supplied.
+5. Actual owner/outer-summary tests preserve original refusal, first capture,
+   status0+stderr rejection, healthy-command behavior and the unchanged cleanup
+   read/stop/remove sequence. Quota exhaustion/diagnostic/reap faults stay failures.
+6. Source-backed semantic controls must kill removed full-envelope matching,
+   exact-CID binding, hash correlation, first-capture and quota checks with
+   relevant assertions, not earlier unrelated failures. Measure the unchanged
+   combined work/serialization bounds at exact limits and hostile shapes.
+
+## Recovery and non-selected approaches
+
+A future matched family may direct **repository-only source review** of that
+reported state/API-message path; it never selects unpause/restart, permission or
+policy changes. Even a paused/restarting message would not reconcile a later
+created snapshot automatically. An SDK-empty-message family would identify an
+observability limitation, not disclose the daemon's underlying error.
+
+Do not enable CLI debug, split start from attach, proxy the Docker socket, read
+daemon logs/State.Error, install tools, alter AppArmor/seccomp/UTS, save an unknown
+raw message as an artifact, or replace fail-closed parsing with broad redaction.
+These add authority/exposure or change the tested path, and are not selected.
+
+Coverage growth alone is **not** grounds for another native attempt. First finish
+and review the finite isolated implementation; any later proposal must identify
+the expected new discriminating observation, exact head, fresh prerequisites,
+owned cleanup and an explicitly new bounded allowance. If a later approved proof
+is still unmatched, stop—do not grow guesses or repeatedly request blind retries.
+A different evidence channel would need a separate privacy/operational decision.
+
+## Validation, proof limits and next approval
+
+This is source-scoped design, not implementation, native qualification, Database
+Review, canonical whole-plugin security review or release readiness. Existing
+isolated bridge rerun passes **2 tests/8 assertions**, covering21 original and15
+startup groups with no failures/errors/network calls. A separate in-memory
+discovery check confirms all five synthetic source recipes are currently
+unclassified; it does not implement or test the proposed matcher. An illustrative
+largest-family sibling serializes to370 bytes, below proposed512; this is schema
+feasibility, not a strict-validator or complete resource proof. All245 local links
+in the four owning design records resolve; structure and whitespace checks pass.
+Ordinary exact-head CI remains required for publication. The future five-family
+matrix and new sibling are not tested or wired by this approval.
+The actual cause remains unknown; no physical qualification or product milestone
+is credited. Campaign8/10,static9 and 11 consumed native attempts are unchanged.
+
+**Recommended next gated slice: Repository-Only Source-Anchored Startup Envelope
+Coverage Safety Foundation and Dormant Integration (Isolated Tests Only; No Native
+Rerun).** Implement the five closed recipes and strict supplemental DATA in the
+existing contract/owner, add the discriminating isolated tests, validate/publish
+and verify ordinary exact-head CI. No raw logging, new reads/executor/profile,
+acceptance/budget change, SQL/candidate/site/production operation or native
+allowance is included. Current approval ends at this design.

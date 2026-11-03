@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Unclassified startup diagnostic coverage/recovery design — 2026-11-03
+
+The approved [repository-only design](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md)
+traces the actual unknown packet and pinned CLI/vendored-client/Moby sources.
+It selects five whole-envelope source recipes and a separate strictly bound,
+enum-only supplemental report; the original failure packet/analysis stays
+unchanged. No raw logging, State.Error read, new command, runtime/profile change
+or retry is selected. These are source-format cases, not a reconstruction or
+classification of the missing actual message. Design-only approval includes
+validation/publication/ordinary exact-head CI, not implementation or execution.
+
+Implementation-plan progress: the smallest source-anchored coverage extension
+and its privacy/resource/isolated acceptance boundaries are designed; startup
+cause and physical ABI qualification remain blocked. Campaign8/10 milestones,
+static9 and consumed original10/10 plus additional1/1 (11 total) are unchanged.
+**Recommended next gated slice: Repository-Only Source-Anchored Startup Envelope
+Coverage Safety Foundation and Dormant Integration (Isolated Tests Only; No Native
+Rerun)**. Native authority is not renewed, and coverage growth alone is not a
+reason to dispatch another attempt.
+
 ## Additional startup-diagnostic attempt: unclassified; owned cleanup verified — 2026-11-03
 
 The user separately approves one bounded native diagnostic proof at c2e2b4a,
