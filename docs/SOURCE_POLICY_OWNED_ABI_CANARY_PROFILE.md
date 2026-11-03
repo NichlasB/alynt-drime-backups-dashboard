@@ -1,5 +1,18 @@
 # Owned Native ABI Canary Execution Profile
 
+## One-time disclosure/retention design: no capture admitted — 2026-11-03
+
+The approved [decision](SOURCE_POLICY_ONE_TIME_DISCLOSURE_DECISION.md) records the
+public-repository exposure boundary and selects conditional recipient encryption,
+not plaintext logging, artifacts or more guessed source templates. Proposed
+disclosure is complete bounded stderr only, offline owner review, no private key
+in CI/agent, and separately approved exact-run log cleanup with explicit retention
+limits. No implementation, cryptographic process, new read, key/permission/
+retention change, log deletion or native attempt occurs. Key/tool/privacy/cleanup
+and new-attempt admissions remain unresolved. Cause/ABI qualification, campaign8/10,
+static9 and12 consumed attempts unchanged. Next action is owner-provided purpose-
+specific RSA4096 public SPKI key/fingerprint approval; no private key or capture.
+
 ## Native source-envelope discrimination: unmatched and owned cleanup verified — 2026-11-03
 
 The user approves one bounded proof at

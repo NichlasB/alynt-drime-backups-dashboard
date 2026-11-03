@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## One-time disclosure/retention decision: public repository, conditional encryption — 2026-11-03
+
+The approved [design-only decision](SOURCE_POLICY_ONE_TIME_DISCLOSURE_DECISION.md)
+verifies that this repository is **public**. Plaintext logs/artifacts and generic
+redaction are rejected. The selected conditional channel is one small recipient-
+encrypted payload in existing structured output, with owner-only offline review,
+explicit public-ciphertext risk acceptance and separately authorized owned-log
+cleanup. No key, crypto tool, capture, log deletion or permission change is made.
+
+Implementation-plan progress: the next privacy boundary has a bounded design;
+startup cause and ABI qualification remain blocked. Campaign8/10 milestones,
+static9 and12 consumed attempts unchanged. Missing recipient fingerprint, exact
+crypto-tool qualification and the privacy/retention/native authorities prevent
+activation. **Recommended next action: owner provides a purpose-specific RSA-4096
+public SPKI key and approves its fingerprint/public use; private key stays offline.**
+Then seek approval for one combined mock-IO-only dormant foundation. The key alone
+does not authorize implementation, credentials setup or any additional native run.
+
 ## Native source-envelope discrimination: unmatched; retry stop reached — 2026-11-03
 
 The user approves one additional proof at b0cb9b9.

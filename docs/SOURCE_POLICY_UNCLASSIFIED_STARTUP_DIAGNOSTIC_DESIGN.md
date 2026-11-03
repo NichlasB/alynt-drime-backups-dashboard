@@ -1,5 +1,11 @@
 # Unclassified Daemon Startup Diagnostic Coverage and Privacy-Safe Recovery Design
 
+The separately approved [one-time disclosure decision](SOURCE_POLICY_ONE_TIME_DISCLOSURE_DECISION.md)
+verifies the public-repository boundary and conditionally selects recipient-only
+encryption/offline review. It does not implement or authorize that channel. Stop
+classifier growth/retries; the missing public recipient and later privacy/tool/
+cleanup admissions are the next gates, not a reinterpretation of the old message.
+
 ## Native follow-through: unmatched stop condition reached — 2026-11-03
 
 The one separately approved [native discrimination proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#native-source-envelope-discrimination-unmatched-and-owned-cleanup-verified--2026-11-03)
