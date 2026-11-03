@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Moby builtin preservation / ABI denial designed; dormant implementation gated — 2026-11-03
+
+The approved [candidate-bound design](SOURCE_POLICY_UBI_MOBY_POLICY_PRESERVATION_DESIGN.md)
+selects a separate fixed-source subtraction-only model, not a widening of the old
+synthetic guard. Only22 networking ALLOW names may be removed; all retained
+conditional/argument/errno rules and architecture mappings must be preserved by
+an independent verifier. Builtin-source correspondence, CLI compact transport
+and ABI-complete/non-vacuous kernel controls remain distinct evidence layers.
+Design only: no profile, implementation, native proof or wiring changes.
+
+Implementation-plan progress: real-policy/ABI preservation obligations are now
+specified. **Recommended next gated slice: Repository-only Socket-Free
+Candidate-Bound Moby Policy Preservation and ABI Coverage DATA Safety Foundation**,
+bounded pure fixed-baseline derivation/verifier and isolated tests through
+validation/publication/exact-head CI. Keep application, acquisition/import,
+native/canary/candidate execution, SQL and production wiring disabled. Campaign
+8/10 milestones,native7/10,static9 unchanged; no preparatory/docs credit. The
+owned engine-import/containment proof remains unfinished; earlier gates are history.
+
 ## UBI engine audit complete; real builtin-policy admission blocked — 2026-11-03
 
 The actual [exact-head audit41633106695](SOURCE_POLICY_UBI_ENGINE_FEASIBILITY_AUDIT.md#actual-exact-head-audit-and-immutable-source-comparison)
