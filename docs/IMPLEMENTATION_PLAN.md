@@ -1,5 +1,31 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Campaign reaches native ABI canary execution-profile gate — 2026-11-03
+
+The [preservation foundation](SOURCE_POLICY_MOBY_PRESERVATION_FOUNDATION.md) and
+[actual runtime prerequisite audit41645127746](SOURCE_POLICY_MOBY_RUNTIME_PREREQUISITES.md#actual-audit-result-and-next-execution-profile-boundary)
+are validated, published and exact-head CI verified. Engine/client28.0.4 match;
+runc1.5.2 reports libseccomp2.5.5, and a kernel file declares IA32=y/X32=n, without
+boot/filter attestation. Source/runtime metadata is not native ABI qualification.
+No candidate/image/container/profile/SQL action occurs; resources/artifacts0.
+
+Implementation-plan progress: planned DATA preservation and real runtime facts
+advanced automatically across both commits. The existing authorized SQL minimum
+lab has no ABI-canary/image role; adding one changes its guarded execution
+architecture. **Recommended next gated slice: Owned Native ABI Canary Execution-
+Profile Construction and One Bounded Qualification/Cleanup Proof**, separately
+registered fixed source/argv/image control scope, existing-tool feasibility first,
+no installation, candidate execution or SQL; preserve the existing lab's pins.
+See the owning record for exact proposed limits/ownership and any host availability-
+only child restrictions. Do not fabricate candidate graph identity for controls.
+
+Campaign remains **8/10 completed milestones,native7/10,static9**. Zero additional
+end-to-end qualification milestones are counted for the two preparatory stages;
+ceiling not reached. Stop at this explicit architecture/profile decision, not
+because safe task names or clean commits require approval. Further work remains
+but the next meaningful native step is gated; do not invent maintenance churn.
+Earlier gate names and resume directions below retain their historical scope.
+
 ## Campaign continues through Moby runtime/ABI prerequisites — 2026-11-03
 
 The preservation foundation db59f95 is published with successful exact-head

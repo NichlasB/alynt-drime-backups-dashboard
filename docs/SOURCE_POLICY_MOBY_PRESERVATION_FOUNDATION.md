@@ -80,6 +80,13 @@ npm audit (zero vulnerabilities), attribution hashes and diff checks pass.
 Exact-head ordinary CI is verified after push and actual counts are retrieved
 for the campaign closeout, never borrowed from restore CI.
 
+Published implementation **db59f9536400c2a4afacc76511ab394d5b04350d** has successful
+[exact-head CI41643323523](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41643323523):
+PHP7.4 **2,609/23,460 assertions**, PHP8.3 **2,609/23,465**; Node82/82 in both,
+no failures/skips. This closes the dormant implementation stage, not a native
+milestone. The campaign continued automatically into actual prerequisite audit;
+see [its outcome and genuine next gate](SOURCE_POLICY_MOBY_RUNTIME_PREREQUISITES.md#actual-audit-result-and-next-execution-profile-boundary).
+
 ## Implementation-plan progress and continuation
 
 The designed fixed-baseline structural blocker now has executable non-vacuous
