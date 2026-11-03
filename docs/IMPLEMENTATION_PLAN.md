@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant UBI import/launch DATA foundation — 2026-11-03
+
+The approved [socket-free foundation](SOURCE_POLICY_UBI_RUNTIME_CONTRACT_FOUNDATION.md)
+adds bounded proposed archive streaming, exact candidate/source/launch DATA,
+restrictive synthetic policy subsets and correlated output/cleanup summaries.
+Thirteen isolated groups/seven semantic guard controls include real DATA positives;
+no actual engine import, kernel enforcement or execution authority is inferred.
+Existing workflows/native guards/static cleanup and production wiring remain
+unchanged. Validation/publication/exact-head CI close this repository-only slice.
+
+Implementation-plan progress: runtime trust boundaries now have discriminating
+pure contracts; operational same-attempt owner/export/import/readback and
+containment remain gated. **Recommended next gated slice: Candidate-Bound UBI
+Owned Engine-Import and Effect-Containment Feasibility / Cleanup Proof**, audit-first
+trusted ephemeral CI only, with fresh static prerequisites, non-executing owned
+import/stopped-container readback, exact default-policy/source qualification,
+bounded harmless controls and cleanup. Keep candidate execution/SQL disabled.
+Campaign8/10 milestones,native7/10,static9 unchanged; no foundation/commit credit.
+Earlier gates below are historical, not the current resume pointer.
+
 ## UBI connection-free runtime admission designed; dormant foundation gated — 2026-11-03
 
 The approved [runtime-admission design](SOURCE_POLICY_UBI_CONNECTION_FREE_RUNTIME_ADMISSION_DESIGN.md)
