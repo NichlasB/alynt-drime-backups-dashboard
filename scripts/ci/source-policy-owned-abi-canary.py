@@ -33,6 +33,8 @@ class Owner:
         self.started=time.monotonic(); self.phase='admission'; self.observed=0; self.control=0; self.native=0
         self.cleaning=False; self.cleanup_bytes=0
         self.diagnostics=[]; self.profile_diagnostic=None
+        self.startup_failure=None; self.command_cleanup_issue=False
+        self.startup_cleanup_attempted=False; self.startup_cleanup_unavailable=False
         env=os.environ
         c.need(sys.argv[1:] in (['--approved-owned-abi-proof'], ['--cleanup-only'])
             and platform.system() == 'Linux' and platform.machine() == 'x86_64'
@@ -62,49 +64,107 @@ class Owner:
             rows.append((relative,c.sha(path.read_bytes())))
         return c.sha(c.encode(rows))
 
-    def run(self, argv, timeout=10, limit=65536, input_path=None, native=False, cleanup=False):
-        c.need(type(argv) is list and argv and all(type(a) is str and '\x00' not in a for a in argv), 'closed-argv')
-        # No shell or inherited credentials. Kill/reap the owned command group on any failure.
-        cleanup=cleanup or self.cleaning
-        c.need(cleanup or time.monotonic()-self.started+timeout < 510, 'cleanup-reserve')
-        if self.cleaning:
-            timeout=min(timeout,self.cleanup_deadline-time.monotonic())
-            c.need(timeout > 0, 'cleanup-deadline')
-        out=bytearray(); err=bytearray(); deadline=time.monotonic()+timeout
-        source=open(input_path,'rb') if input_path else subprocess.DEVNULL
+    def run(self, argv, timeout=10, limit=65536, input_path=None, native=False, cleanup=False, startup=None):
+        out=bytearray(); err=bytearray(); eof=[False,False]; p=None; source=None; failure=None
+        flags=dict(timeout=timeout,limit=limit,input_path=input_path,native=native,cleanup=cleanup or self.cleaning)
         try:
+            c.need(type(argv) is list and argv and all(type(a) is str and '\x00' not in a for a in argv), 'closed-argv')
+            # No shell or inherited credentials. Existing limits and reaping stay.
+            cleanup=cleanup or self.cleaning
+            c.need(cleanup or time.monotonic()-self.started+timeout < 510, 'cleanup-reserve')
+            if self.cleaning:
+                timeout=min(timeout,self.cleanup_deadline-time.monotonic())
+                c.need(timeout > 0, 'cleanup-deadline')
+            deadline=time.monotonic()+timeout
+            source=open(input_path,'rb') if input_path else subprocess.DEVNULL
             p=subprocess.Popen(argv, stdin=source, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                env=self.env, cwd=ROOT, start_new_session=True)
-            try:
-                with selectors.DefaultSelector() as selector:
-                    selector.register(p.stdout,selectors.EVENT_READ,out); selector.register(p.stderr,selectors.EVENT_READ,err)
-                    while selector.get_map():
-                        c.need(time.monotonic() < deadline, 'command-deadline')
-                        for key,_ in selector.select(min(.1,max(0,deadline-time.monotonic()))):
-                            chunk=os.read(key.fileobj.fileno(),8192)
-                            if not chunk:
-                                selector.unregister(key.fileobj); continue
-                            key.data.extend(chunk); self.observed+=len(chunk)
-                            c.need(len(out)+len(err) <= limit and self.observed <= 2097152, 'command-output-budget')
-                    p.wait(timeout=max(.01,deadline-time.monotonic()))
-                if native:
-                    self.native+=len(out)+len(err); c.need(self.native <= 16384, 'native-output-budget')
-                elif cleanup:
-                    self.cleanup_bytes+=len(out)+len(err); c.need(self.cleanup_bytes <= 524288, 'cleanup-output-budget')
-                else:
-                    self.control+=len(out)+len(err); c.need(self.control <= 524288, 'control-budget')
-                if p.returncode != 0 or err:
-                    self.diagnostics.append(dict(phase=self.phase,returncode=p.returncode,stderr_bytes=len(err),
-                                                 stderr_sha=c.sha(bytes(err))))
-                    raise c.Refusal('bounded-command-failed')
-                return bytes(out)
-            finally:
-                if p.poll() is None:
-                    os.killpg(p.pid,signal.SIGKILL)
-                p.wait(timeout=2); p.stdout.close(); p.stderr.close()
+            with selectors.DefaultSelector() as selector:
+                selector.register(p.stdout,selectors.EVENT_READ,out); selector.register(p.stderr,selectors.EVENT_READ,err)
+                while selector.get_map():
+                    c.need(time.monotonic() < deadline, 'command-deadline')
+                    for key,_ in selector.select(min(.1,max(0,deadline-time.monotonic()))):
+                        chunk=os.read(key.fileobj.fileno(),8192)
+                        if not chunk:
+                            eof[0 if key.fileobj is p.stdout else 1]=True
+                            selector.unregister(key.fileobj); continue
+                        key.data.extend(chunk); self.observed+=len(chunk)
+                        c.need(len(out)+len(err) <= limit and self.observed <= 2097152, 'command-output-budget')
+                p.wait(timeout=max(.01,deadline-time.monotonic()))
+            if native:
+                self.native+=len(out)+len(err); c.need(self.native <= 16384, 'native-output-budget')
+            elif cleanup:
+                self.cleanup_bytes+=len(out)+len(err); c.need(self.cleanup_bytes <= 524288, 'cleanup-output-budget')
+            else:
+                self.control+=len(out)+len(err); c.need(self.control <= 524288, 'control-budget')
+            if p.returncode != 0 or err:
+                self.diagnostics.append(dict(phase=self.phase,returncode=p.returncode,stderr_bytes=len(err),
+                                             stderr_sha=c.sha(bytes(err))))
+                raise c.Refusal('bounded-command-failed')
+            return bytes(out)
+        except Exception as error:
+            failure=error
+            try:self.capture_startup(startup,argv,flags,out,err,tuple(eof),p,error)
+            except Exception:
+                if startup is not None and self.startup_failure is None:
+                    self.startup_failure=dict(status='unavailable',authority=False)
+            out.clear();err.clear()
+            raise
         finally:
-            if input_path:
-                source.close()
+            try:
+                try:
+                    if p is not None:
+                        try:
+                            if p.poll() is None:os.killpg(p.pid,signal.SIGKILL)
+                            p.wait(timeout=2)
+                        finally:
+                            try:p.stdout.close()
+                            finally:p.stderr.close()
+                finally:
+                    if input_path and source is not None:source.close()
+            except Exception as error:
+                self.command_cleanup_issue=True
+                if failure is None:
+                    try:self.capture_startup(startup,argv,flags,out,err,tuple(eof),p,error)
+                    except Exception:
+                        if startup is not None and self.startup_failure is None:
+                            self.startup_failure=dict(status='unavailable',authority=False)
+                    out.clear();err.clear()
+                    raise
+
+    def capture_startup(self, binding, argv, flags, out, err, eof, process, error):
+        if binding is None or getattr(self,'startup_failure',None) is not None:return
+        try:
+            reason=str(error) if isinstance(error,c.Refusal) else ''
+            kind='timeout' if reason in ('command-deadline','cleanup-deadline') or isinstance(error,subprocess.TimeoutExpired) else (
+                 'overflow' if reason in ('command-output-budget','native-output-budget','control-budget','cleanup-output-budget') else (
+                 'spawn-error' if process is None and isinstance(error,OSError) else (
+                 'cli-exited' if reason=='bounded-command-failed' else 'command-error')))
+            packet=c.startup_packet(self.frame,self.image,self.phase,binding,argv,bytes(out),bytes(err),eof,
+                                    process is not None,process.returncode if process is not None else None,kind,flags)
+            size=len(c.encode(packet))
+            c.need(self.control+size<=524288 and self.observed+size<=2097152,'startup-existing-budget')
+            self.control+=size;self.observed+=size;self.startup_failure=packet
+        except Exception:
+            self.startup_failure=dict(status='unavailable',authority=False)
+
+    def capture_startup_cleanup(self, cid, row):
+        try:
+            packet=getattr(self,'startup_failure',None)
+            if type(packet) is not dict or packet.get('format')!='ADBOWNEDABISTARTFAIL1':return
+            if packet['binding']['cid']!=cid or packet['cleanup'] is not None or getattr(self,'startup_cleanup_attempted',False):return
+            self.startup_cleanup_attempted=True
+            try:
+                state=c.startup_cleanup(packet,self.frame,self.image,cid,row)
+            except Exception:
+                state=dict(status='refused',basis='first-owned-cleanup-readback-after-failure',
+                           state=None,running=None,oom=None,exit_code=None)
+            changed=dict(packet,cleanup=state);c.validate_startup(changed,packet['binding'])
+            size=max(0,len(c.encode(changed))-len(c.encode(packet)))
+            c.need(self.cleanup_bytes+size<=524288 and self.observed+size<=2097152,'startup-cleanup-budget')
+            self.cleanup_bytes+=size;self.observed+=size;self.startup_failure=changed
+        except Exception:
+            self.startup_cleanup_unavailable=True
 
     def docker(self, *args, **kwargs):
         return self.run(['/usr/bin/docker','--host','unix:///var/run/docker.sock',*args],**kwargs)
@@ -251,7 +311,8 @@ class Owner:
         c.need(target.is_file() and not target.is_symlink() and target.stat().st_size <= 131072
                and c.sha(target.read_bytes()) == c.sha((self.stage/'canary').read_bytes()), 'executable-readback')
         self.profile_readback(self.inspect(cid),abi,security,'pre-start')
-        wire=self.docker('start','--attach',cid,timeout=15,limit=4096,native=True)
+        binding=c.startup_binding(self.frame,self.image,cid,abi,negative)
+        wire=self.docker('start','--attach',cid,timeout=15,limit=4096,native=True,startup=binding)
         ended=self.inspect(cid); self.profile_readback(ended,abi,security,'post-exit')
         c.need(ended['State']['Running'] is False and ended['State']['ExitCode'] == 0
                and ended['State']['OOMKilled'] is False and not ended['State']['Error'], 'native-exit')
@@ -280,6 +341,8 @@ class Owner:
         for cid in self.ids('containers'):
             row=self.inspect(cid)
             c.need(row['Config']['Labels'] == self.labels and row['Image'] == self.image, 'cleanup-cid-owner')
+            try:self.capture_startup_cleanup(cid,row)
+            except Exception:self.startup_cleanup_unavailable=True
             if row['State']['Running']:
                 self.docker('stop','--time','2',cid,timeout=5,cleanup=True)
             row=self.inspect(cid)
@@ -348,6 +411,10 @@ def main():
             failure=failure or error
         result['observed_bytes']=owner.observed
         result['native_output_bytes']=owner.native
+        if owner.startup_failure is not None:
+            if failure is not None:result['failure']['startup_failure']=owner.startup_failure
+        if owner.command_cleanup_issue:result['command_cleanup_issue']=True
+        if owner.startup_cleanup_unavailable:result['startup_cleanup_unavailable']=True
         wire=c.encode(result); c.need(len(wire) <= 65536,'summary-budget')
         print(wire.decode())
     return 1 if failure else 0

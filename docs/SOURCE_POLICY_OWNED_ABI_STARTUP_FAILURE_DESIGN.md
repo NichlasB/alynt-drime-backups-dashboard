@@ -1,5 +1,10 @@
 # Owned ABI Canary Startup-Failure Evidence and Recovery Design
 
+Implementation follow-through: the separately approved repository-only
+[safety foundation](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_FOUNDATION.md) records
+the actual dormant implementation and isolated tests. The design-stage authority
+and test statements below remain historical, not new native authorization.
+
 ## Approval, baseline and proof boundary — 2026-11-03
 
 User approves repository-only **design**, validation, commit/push and ordinary

@@ -1,5 +1,18 @@
 # Owned Native ABI Canary Execution Profile
 
+## Startup evidence foundation: isolated implementation only — 2026-11-03
+
+The approved [foundation and dormant integration](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_FOUNDATION.md)
+adds a first-failure operation/source-bound enum-only diagnostic and optional state
+from the existing first owned cleanup row. Fifteen isolated groups, the original
+21 and six source-backed controls validate capture/privacy/budgets/rejection and
+cleanup without engine execution. Workflow, original readback/acceptance, native C,
+SQL/candidate and production paths remain unchanged. Historical startup cause is
+still unknown; no new native or ABI result is claimed. Campaign8/10 milestones,
+native10/10,static9 unchanged. The exact next gate is one newly explicitly
+authorized bounded startup-diagnostic qualification/cleanup attempt; no dispatch
+is authorized by this foundation or ordinary CI.
+
 ## Startup-failure evidence/recovery design approved — 2026-11-03
 
 The [repository-only design](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_DESIGN.md)

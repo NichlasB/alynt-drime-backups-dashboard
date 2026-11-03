@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Startup evidence foundation implemented; isolated only — 2026-11-03
+
+The approved [bounded startup-evidence foundation](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_FOUNDATION.md)
+implements the closed operation-bound byte-to-enum packet, immutable first-failure
+capture and existing-owned-cleanup-row projection. Fifteen new isolated groups,
+the original21 groups and six source-backed semantic controls exercise useful
+and refused outcomes without native execution. Original guards, quotas, workflow,
+SQL/candidate paths and production wiring remain unchanged. Validation/publication
+and ordinary exact-head CI evidence are owned by that record; no physical startup
+cause or ABI qualification is inferred from synthetic messages.
+
+Implementation-plan progress: the missing startup-evidence implementation is now
+locally validated, but genuine-core/ABI qualification remains blocked. Campaign
+**8/10 milestones,native10/10,static9** is unchanged. No remaining repository-only
+cleanup is substituted for the next physical evidence gate.
+**Recommended next gated slice: One Newly Authorized Bounded Owned ABI Startup-
+Diagnostic Qualification and Cleanup Proof**, with one explicitly additional
+attempt, fresh prerequisites, exact published head and unchanged guards/cleanup.
+Do not dispatch under the exhausted allowance or count this foundation as a
+completed product milestone.
+
 ## Approved repository-only startup-failure evidence/recovery design — 2026-11-03
 
 The [startup-failure design](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_DESIGN.md)

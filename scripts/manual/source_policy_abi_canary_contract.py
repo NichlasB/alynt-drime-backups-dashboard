@@ -222,6 +222,212 @@ def container_diagnostics(row, identity, frame, abi, security):
     return result
 
 
+START_LAYERS=('docker-daemon','containerd-shim','oci-runtime','runc','attach')
+START_TOPICS=('permission','missing-path','exec-format','apparmor','seccomp','cgroup','namespace','unknown')
+START_KINDS=('spawn-error','cli-exited','timeout','overflow','command-error')
+START_STATES=('created','restarting','running','removing','paused','exited','dead')
+
+
+def startup_binding(frame, image, cid, abi, negative):
+    need(type(frame) is dict and frame == context(frame.get('head'),frame.get('run'),
+         frame.get('attempt'),frame.get('source')), 'startup-context')
+    need(type(image) is str and re.fullmatch('sha256:[a-f0-9]{64}',image)
+         and type(cid) is str and re.fullmatch('[a-f0-9]{64}',cid)
+         and type(abi) is str and abi in ABIS and type(negative) is bool, 'startup-binding')
+    return dict(context_sha=sha(encode(frame)),image=image,cid=cid,abi=abi,policy='derived' if negative else 'builtin')
+
+
+def _startup_scan(raw):
+    """Fixed ASCII marker catalog; quoted/path/assignment tokens are never topics."""
+    def result(status, layers=(), topics=()):
+        return dict(status=status,layers=list(layers),topics=list(topics))
+    if raw is None:
+        return result('unavailable'),0
+    if type(raw) is not bytes or len(raw)>4096:
+        return result('invalid'),0
+    if not raw:
+        return result('unavailable'),0
+    work=len(raw)
+    if any(byte not in (9,10,13) and not 32<=byte<=126 for byte in raw):
+        return result('invalid'),work
+    text=raw.decode('ascii').replace('\r\n','\n'); work+=len(raw)
+    lines=text.splitlines()
+    if '\r' in text or len(lines)>16 or any(len(line)>1024 for line in lines):
+        return result('invalid'),work
+    # One bounded pass masks quoted spans. Malformed quoting is not repaired.
+    masked=[]; quote=None; escaped=False
+    for char in text:
+        work+=1
+        if quote:
+            if char in ('\n','\r') or escaped and char not in (quote,'\\'):
+                return result('invalid'),work
+            masked.append(' ')
+            if escaped: escaped=False
+            elif char=='\\': escaped=True
+            elif char==quote: quote=None
+        elif char in ('"',"'",'`'):
+            quote=char;masked.append(' ')
+        else:
+            masked.append(char)
+    if quote or escaped:
+        return result('invalid'),work
+    # Mask whole untrusted path/URL/assignment/long-ID tokens; never return text.
+    text=''.join(masked); safe=[]
+    for token in re.finditer(r'\S+|\s+',text):
+        word=token.group();work+=len(word)
+        hidden='/' in word or '\\' in word or '=' in word or re.fullmatch('[a-fA-F0-9]{32,}',word)
+        safe.append(' '*len(word) if hidden else word)
+    lines=[line for line in ''.join(safe).splitlines() if line.strip()]
+    if len(lines)>1:
+        return result('ambiguous'),work
+    if not lines:
+        return result('unclassified'),work
+    text=lines[0];work+=len(text)
+    if text.startswith('Error response from daemon:'):
+        layers=['docker-daemon']; body=text[len('Error response from daemon:'):]
+    elif text.startswith('Error attaching:'):
+        layers=['attach']; body=text[len('Error attaching:'):]
+    else:
+        return result('unclassified'),work
+    if 'error response from daemon:' in body.lower() or 'error attaching:' in body.lower():
+        return result('ambiguous'),work
+    words=re.findall('[a-z0-9_-]+',body.lower());work+=len(body)
+    layer_patterns={('failed','to','create','shim','task'):'containerd-shim',
+                    ('oci','runtime','create','failed'):'oci-runtime',('runc','create','failed'):'runc'}
+    topic_patterns={('permission','denied'):'permission',('operation','not','permitted'):'permission',
+                    ('no','such','file','or','directory'):'missing-path',('exec','format','error'):'exec-format',
+                    ('apparmor',):'apparmor',('seccomp',):'seccomp',('cgroup',):'cgroup',('namespace',):'namespace'}
+    topics=set(); seen=[]
+    for index in range(len(words)):
+        for width in range(1,6):
+            phrase=tuple(words[index:index+width]);work+=len(phrase)
+            if phrase in layer_patterns:seen.append(layer_patterns[phrase])
+            if phrase in topic_patterns:topics.add(topic_patterns[phrase])
+    if len(seen)!=len(set(seen)) or seen!=sorted(seen,key=START_LAYERS.index):
+        return result('ambiguous'),work
+    layers.extend(seen)
+    need(work<=16*len(raw)+1024,'startup-parser-work')
+    return result('recognized' if seen or topics or 'attach' in layers else 'unclassified',
+                  [layer for layer in START_LAYERS if layer in layers],
+                  [topic for topic in START_TOPICS if topic in topics] or ['unknown']),work
+
+
+def classify_startup(raw):
+    return _startup_scan(raw)[0]
+
+
+def startup_packet(frame, image, phase, binding, argv, out, err, eof, spawned, returncode, kind, flags):
+    need(type(binding) is dict and set(binding)=={'context_sha','image','cid','abi','policy'}
+         and binding.get('policy') in ('builtin','derived'), 'startup-binding-shape')
+    expected=startup_binding(frame,image,binding.get('cid'),binding.get('abi'),binding['policy']=='derived')
+    need(binding==expected and type(phase) is str and phase==binding['abi']+'-'+binding['policy']
+         and type(argv) is list and argv==['/usr/bin/docker','--host','unix:///var/run/docker.sock',
+                                         'start','--attach',binding['cid']], 'startup-operation')
+    need(type(flags) is dict and set(flags)=={'timeout','limit','native','cleanup','input_path'}
+         and type(flags['timeout']) is int and flags['timeout']==15 and type(flags['limit']) is int
+         and flags['limit']==4096 and flags['native'] is True and flags['cleanup'] is False
+         and flags['input_path'] is None, 'startup-operation-flags')
+    need(type(out) is bytes and type(err) is bytes and len(out)+len(err)<=12288
+         and type(eof) is tuple and len(eof)==2 and all(type(v) is bool for v in eof)
+         and type(spawned) is bool and type(kind) is str and kind in START_KINDS, 'startup-observation')
+    complete=all(eof) and len(out)+len(err)<=4096 and kind not in ('overflow','timeout','spawn-error')
+    packet=dict(format='ADBOWNEDABISTARTFAIL1',operation='container-start-attach',authority=False,
+        qualification=False,candidate_execution=False,sql=False,production_wiring=False,binding=dict(binding),
+        outcome=dict(kind=kind,cli_spawned=spawned,returncode=returncode,
+                     signal=-returncode if type(returncode) is int and returncode<0 else None),
+        streams=dict(stdout_bytes=len(out),stderr_bytes=len(err),stdout_complete=complete and eof[0],
+                     stderr_complete=complete and eof[1],stderr_sha=sha(err) if complete else None),
+        analysis=classify_startup(err if complete else None),cleanup=None)
+    validate_startup(packet,expected)
+    return packet
+
+
+def validate_startup(packet, expected):
+    need(type(expected) is dict and set(expected)=={'context_sha','image','cid','abi','policy'}
+         and all(type(value) is str for value in expected.values())
+         and re.fullmatch('[a-f0-9]{64}',expected['context_sha'])
+         and re.fullmatch('sha256:[a-f0-9]{64}',expected['image']) and re.fullmatch('[a-f0-9]{64}',expected['cid'])
+         and expected['abi'] in ABIS and expected['policy'] in ('builtin','derived'), 'startup-expected-binding')
+    keys={'format','operation','authority','qualification','candidate_execution','sql','production_wiring',
+          'binding','outcome','streams','analysis','cleanup'}
+    need(type(packet) is dict and set(packet)==keys and type(packet['format']) is str
+         and packet['format']=='ADBOWNEDABISTARTFAIL1' and type(packet['operation']) is str
+         and packet['operation']=='container-start-attach'
+         and all(packet[key] is False for key in ('authority','qualification','candidate_execution','sql','production_wiring'))
+         and type(packet['binding']) is dict and set(packet['binding'])==set(expected)
+         and all(type(value) is str for value in packet['binding'].values())
+         and packet['binding']==expected, 'startup-packet')
+    outcome=packet['outcome']; streams=packet['streams']; analysis=packet['analysis']
+    need(type(outcome) is dict and set(outcome)=={'kind','cli_spawned','returncode','signal'}
+         and type(outcome['kind']) is str and outcome['kind'] in START_KINDS
+         and type(outcome['cli_spawned']) is bool, 'startup-outcome')
+    rc=outcome['returncode']; sig=outcome['signal']
+    need((rc is None or type(rc) is int and -64<=rc<=255)
+         and (sig is None or type(sig) is int and 1<=sig<=64)
+         and sig==(-rc if type(rc) is int and rc<0 else None)
+         and (outcome['cli_spawned'] or rc is None)
+         and (outcome['kind']!='spawn-error' or not outcome['cli_spawned'])
+         and (outcome['kind']!='cli-exited' or outcome['cli_spawned'] and rc is not None), 'startup-status')
+    need(type(streams) is dict and set(streams)=={'stdout_bytes','stderr_bytes','stdout_complete','stderr_complete','stderr_sha'}
+         and all(type(streams[k]) is int and 0<=streams[k]<=12288 for k in ('stdout_bytes','stderr_bytes'))
+         and streams['stdout_bytes']+streams['stderr_bytes']<=12288
+         and all(type(streams[k]) is bool for k in ('stdout_complete','stderr_complete')), 'startup-streams')
+    complete=streams['stdout_complete'] and streams['stderr_complete']
+    need((not complete and streams['stderr_sha'] is None or complete and type(streams['stderr_sha']) is str
+          and re.fullmatch('[a-f0-9]{64}',streams['stderr_sha']))
+         and (not complete or streams['stdout_bytes']+streams['stderr_bytes']<=4096)
+         and (outcome['kind'] not in ('spawn-error','timeout','overflow') or not complete)
+         and (outcome['kind']!='cli-exited' or complete)
+         and (outcome['cli_spawned'] or not complete and streams['stdout_bytes']==streams['stderr_bytes']==0)
+         and (outcome['kind']!='cli-exited' or rc!=0 or streams['stderr_bytes']>0), 'startup-completeness')
+    need(type(analysis) is dict and set(analysis)=={'status','layers','topics'}
+         and type(analysis['status']) is str and analysis['status'] in ('recognized','unclassified','ambiguous','unavailable','invalid')
+         and type(analysis['layers']) is list and type(analysis['topics']) is list
+         and all(type(n) is str for n in analysis['layers']+analysis['topics'])
+         and analysis['layers']==[n for n in START_LAYERS if n in analysis['layers']]
+         and analysis['topics']==[n for n in START_TOPICS if n in analysis['topics']]
+         and (complete or analysis==dict(status='unavailable',layers=[],topics=[]))
+         and (analysis['status'] not in ('unavailable','invalid','ambiguous') or not analysis['layers'] and not analysis['topics'])
+         and (analysis['status']!='recognized' or ('docker-daemon' in analysis['layers'] or 'attach' in analysis['layers'])
+              and bool(analysis['topics']) and not (analysis['layers']==['docker-daemon'] and analysis['topics']==['unknown'])),
+         'startup-analysis')
+    cleanup=packet['cleanup']
+    if cleanup is not None:
+        need(type(cleanup) is dict and set(cleanup)=={'status','basis','state','running','oom','exit_code'}
+             and type(cleanup['basis']) is str and cleanup['basis']=='first-owned-cleanup-readback-after-failure'
+             and type(cleanup['status']) is str and cleanup['status'] in ('observed','unavailable','refused'), 'startup-cleanup-shape')
+        if cleanup['status']=='observed':
+            need(type(cleanup['state']) is str and cleanup['state'] in START_STATES
+                 and type(cleanup['running']) is bool and type(cleanup['oom']) is bool
+                 and (not cleanup['running'] or cleanup['state'] not in ('created','exited','dead'))
+                 and (cleanup['state'] not in ('running','paused') or cleanup['running'])
+                 and (cleanup['state'] not in ('exited','dead') and cleanup['exit_code'] is None
+                      or cleanup['state'] in ('exited','dead') and not cleanup['running']
+                      and type(cleanup['exit_code']) is int and 0<=cleanup['exit_code']<=255), 'startup-cleanup-state')
+        else:
+            need(all(cleanup[k] is None for k in ('state','running','oom','exit_code')), 'startup-cleanup-unavailable')
+    need(len(encode(packet))<=4096,'startup-packet-budget')
+
+
+def startup_cleanup(packet, frame, image, cid, row):
+    need(type(packet) is dict,'startup-cleanup-packet')
+    binding=packet.get('binding',{})
+    need(type(binding) is dict and type(binding.get('policy')) is str,'startup-cleanup-binding')
+    expected=startup_binding(frame,image,cid,binding.get('abi'),binding.get('policy')=='derived')
+    validate_startup(packet,expected)
+    need(type(row) is dict and type(row.get('Id')) is str and row.get('Id')==cid
+         and type(row.get('Image')) is str and row.get('Image')==image
+         and type(row.get('Config')) is dict and type(row['Config'].get('Labels')) is dict
+         and all(type(v) is str for v in row['Config']['Labels'].values())
+         and row['Config'].get('Labels')==labels(frame), 'startup-cleanup-owner')
+    state=row.get('State');need(type(state) is dict,'startup-cleanup-state')
+    result=dict(status='observed',basis='first-owned-cleanup-readback-after-failure',state=state.get('Status'),
+                running=state.get('Running'),oom=state.get('OOMKilled'),
+                exit_code=state.get('ExitCode') if state.get('Status') in ('exited','dead') else None)
+    changed=dict(packet,cleanup=result);validate_startup(changed,expected)
+    return result
+
+
 def numbers(wire, count):
     need(type(wire) is bytes and len(wire) <= 4096 and re.fullmatch(rb'(?:-?[0-9]{1,12}\n)+', wire), 'probe-wire')
     rows=[int(n) for n in wire.splitlines()]
