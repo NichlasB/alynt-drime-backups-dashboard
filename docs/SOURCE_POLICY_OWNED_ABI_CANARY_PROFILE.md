@@ -12,6 +12,11 @@ still unknown; no new native or ABI result is claimed. Campaign8/10 milestones,
 native10/10,static9 unchanged. The exact next gate is one newly explicitly
 authorized bounded startup-diagnostic qualification/cleanup attempt; no dispatch
 is authorized by this foundation or ordinary CI.
+Implementation fbcba446884ab54c8505c45b4c4257bb8cf434e7 passes
+[ordinary CI41716099147](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41716099147):
+PHP7.4 2,611/23,468 assertions, PHP8.3 2,611/23,473; Node88/88 each, no
+failures/skips and zero advisories. This is isolated source validation, not a new
+physical attempt or successful native check.
 
 ## Startup-failure evidence/recovery design approved — 2026-11-03
 

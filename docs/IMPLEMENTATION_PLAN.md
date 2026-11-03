@@ -7,12 +7,14 @@ implements the closed operation-bound byte-to-enum packet, immutable first-failu
 capture and existing-owned-cleanup-row projection. Fifteen new isolated groups,
 the original21 groups and six source-backed semantic controls exercise useful
 and refused outcomes without native execution. Original guards, quotas, workflow,
-SQL/candidate paths and production wiring remain unchanged. Validation/publication
-and ordinary exact-head CI evidence are owned by that record; no physical startup
+SQL/candidate paths and production wiring remain unchanged. Published fbcba44 has
+[successful ordinary CI41716099147](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41716099147);
+actual counts and scope are owned by that record. No physical startup
 cause or ABI qualification is inferred from synthetic messages.
 
 Implementation-plan progress: the missing startup-evidence implementation is now
-locally validated, but genuine-core/ABI qualification remains blocked. Campaign
+validated and ordinary exact-head CI verified, but genuine-core/ABI qualification
+remains blocked. Campaign
 **8/10 milestones,native10/10,static9** is unchanged. No remaining repository-only
 cleanup is substituted for the next physical evidence gate.
 **Recommended next gated slice: One Newly Authorized Bounded Owned ABI Startup-

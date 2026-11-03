@@ -91,8 +91,24 @@ for those controls, and no artificial native success path is added.
 Local full PHPUnit: **2,611 tests/23,466 assertions**, two existing Sodium skips;
 the final targeted bridge is rerun after review fixes. PHPCS passes255 files;
 Node88/88, structure, asset build, strict Composer validation, Composer/npm audits
-(zero advisories), and whitespace checks pass. Ordinary exact-head CI remains a
-publication requirement; actual run/counts must be recorded after it completes.
+(zero advisories), and whitespace checks pass. All243 local links in the four
+owning records resolve; direct baseline comparison confirms the original
+container-readback source segment SHA256 remains
+`b4ae3f201336ee2b497251d352d3d35f2ad1e4ff1a1cebf0c687db1307889747`.
+
+## Publication and actual exact-head CI
+
+Implementation **fbcba446884ab54c8505c45b4c4257bb8cf434e7** is committed/pushed,
+equals remote master at verification, and has successful
+[ordinary CI41716099147](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41716099147).
+Actual logs: PHP7.4 **2,611 tests/23,468 assertions**; PHP8.3 **2,611/23,473**;
+both have no failures/skips. Node88/88 each, PHPCS, strict Composer validation,
+structure/build and Composer/npm audits all pass, with zero advisories. The
+two exact-head check runs succeed; legacy status contexts0 is not a separate
+green CI result. No native workflow is dispatched at this implementation head.
+This evidence-only closeout must itself be committed/pushed and ordinary
+exact-head CI verified before final handoff; it changes no implementation or
+fixture/acceptance contract. No whole-plugin readiness row is refreshed.
 
 ## Proof limits and next gate
 
