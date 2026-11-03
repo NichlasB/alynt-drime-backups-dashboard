@@ -31,6 +31,7 @@ i=load('abi_meter','scripts/manual/source_policy_ubi_import_contract.py')
 o=load('abi_owner','scripts/ci/source-policy-owned-abi-canary.py')
 RAW=base64.b64decode(b''.join((ROOT/c.SOURCES[-1]).read_bytes().splitlines()),validate=True)
 FRAME=c.context('a'*40,'123','1','b'*64)
+PROFILE_CASES=json.loads((ROOT/'tests/fixtures/moby-28.0.4/owned-abi-readback-scope.json').read_text())
 
 
 def binary():
@@ -45,9 +46,9 @@ def container():
     return dict(Image='sha256:'+'c'*64,Mounts=[],Path='/canary',Args=['amd64'],AppArmorProfile='docker-default',Config=dict(Labels=c.labels(FRAME),
         Entrypoint=['/canary'],Cmd=['amd64'],User='65532:65532',WorkingDir='/',Env=[],Hostname='abi-canary'),
         HostConfig=dict(ReadonlyRootfs=True,NetworkMode='none',Privileged=False,CapDrop=['ALL'],
-            SecurityOpt=['no-new-privileges','seccomp=builtin'],Memory=536870912,MemorySwap=536870912,
+            SecurityOpt=copy.deepcopy(PROFILE_CASES['explicit_default']['HostConfig']['SecurityOpt']),Memory=536870912,MemorySwap=536870912,
             NanoCpus=1000000000,PidsLimit=64,PidMode='',IpcMode='private',CgroupnsMode='private',
-            Runtime='runc',UtsMode='',UsernsMode='',AutoRemove=False,
+            Runtime='runc',UTSMode=PROFILE_CASES['explicit_default']['HostConfig']['UTSMode'],UsernsMode='',AutoRemove=False,
             RestartPolicy=dict(Name='no',MaximumRetryCount=0),PublishAllPorts=False,
             LogConfig=dict(Type='local',Config={'max-size':'16k','max-file':'1'}),
             Ulimits=[dict(Name='core',Hard=0,Soft=0),dict(Name='nofile',Hard=64,Soft=64)]))
@@ -116,7 +117,7 @@ class Tests(unittest.TestCase):
         mutations={'ReadonlyRootfs':False,'NetworkMode':'host','Privileged':True,'CapDrop':[],
             'CapAdd':['SYS_ADMIN'],'SecurityOpt':['seccomp=unconfined'],'Memory':0,'MemorySwap':-1,
             'NanoCpus':0,'PidsLimit':0,'PidMode':'host','IpcMode':'host','CgroupnsMode':'host','Binds':['/tmp:/tmp'],
-            'Runtime':'other','UtsMode':'host','UsernsMode':'host','AutoRemove':True,'Init':True,
+            'Runtime':'other','UTSMode':'host','UsernsMode':'host','AutoRemove':True,'Init':True,
             'Devices':[{}],'DeviceRequests':[{}],'Tmpfs':{'/tmp':'rw'},'PortBindings':{'80/tcp':[{}]},
             'RestartPolicy':dict(Name='always',MaximumRetryCount=0),'LogConfig':{},'Ulimits':[]}
         for key,value in mutations.items():
@@ -157,9 +158,29 @@ class Tests(unittest.TestCase):
         with patch.dict(os.environ,{},clear=True), patch.object(o.Owner,'freeze',side_effect=AssertionError('source read')):
             with self.assertRaisesRegex(o.c.Refusal,'fixed-entry'): o.Owner()
 
+    def test_actual_prerequisite_refuses_missing_apparmor_before_tool_work(self):
+        owner=o.Owner.__new__(o.Owner)
+        def command(argv,**kwargs):
+            self.assertEqual(['/usr/bin/docker','context','inspect','--format','{{.Endpoints.docker.Host}}'],argv)
+            return b'unix:///var/run/docker.sock\n'
+        def docker(*args,**kwargs):
+            if args[0]=='version':return c.encode(dict(
+                Server=dict(Version='28.0.4',GitCommit='6430e49',Os='linux',Arch='amd64'),
+                Client=dict(Version='28.0.4',GitCommit='b8034c0',Os='linux',Arch='amd64')))
+            self.assertEqual('info',args[0])
+            return c.encode(dict(DefaultRuntime='runc',Runtimes={'runc':dict(path='runc')},
+                                 SecurityOptions=['name=seccomp,profile=builtin']))
+        owner.run=command;owner.docker=docker
+        with self.assertRaisesRegex(o.c.Refusal,'runtime-profile'):owner.prerequisites()
+
     def test_profile_diagnostics_preserve_original_guard_and_discriminate_fields(self):
         original=inspect.getsource(c.container_readback).rstrip()
-        self.assertEqual('d2bf7e5ac211e4a315dd28c3ccc88e367165e46ef8c2d462cdc99100a5235280',c.sha(original.encode()))
+        # Only the two explicitly approved comparisons may differ from the old guard.
+        self.assertEqual(1,original.count("h.get('UTSMode')"))
+        self.assertEqual(1,original.count("['no-new-privileges', security, 'apparmor=docker-default']"))
+        restored=original.replace("h.get('UTSMode')","h.get('UtsMode')").replace(
+            "['no-new-privileges', security, 'apparmor=docker-default']","['no-new-privileges', security]")
+        self.assertEqual('d2bf7e5ac211e4a315dd28c3ccc88e367165e46ef8c2d462cdc99100a5235280',c.sha(restored.encode()))
         positive=container()
         self.assertTrue(c.container_diagnostics(positive,positive['Image'],FRAME,'amd64','seccomp=builtin')['matched'])
         mutations=[('root','Image','other'),('root','Path','/bin/sh'),('root','Args',[]),
@@ -170,7 +191,7 @@ class Tests(unittest.TestCase):
         mutations += [('HostConfig',key,value) for key,value in dict(ReadonlyRootfs=False,NetworkMode='host',
             Privileged=True,CapDrop=[],CapAdd=['SYS_ADMIN'],SecurityOpt=[],Memory=0,MemorySwap=-1,
             NanoCpus=0,PidsLimit=0,PidMode='host',IpcMode='host',CgroupnsMode='host',Runtime='other',
-            UtsMode='host',UsernsMode='host',AutoRemove=True,Init=True,RestartPolicy={},Binds=['x'],Tmpfs={'x':'x'},
+            UTSMode='host',UsernsMode='host',AutoRemove=True,Init=True,RestartPolicy={},Binds=['x'],Tmpfs={'x':'x'},
             Devices=[{}],DeviceRequests=[{}],PortBindings={'x':[]},ExtraHosts=['x'],VolumesFrom=['x'],Links=['x'],
             Dns=['x'],GroupAdd=['x'],Sysctls={'x':'x'},CgroupParent='x',PublishAllPorts=True,LogConfig={},Ulimits=[]).items()]
         for section,key,value in mutations:
@@ -244,6 +265,33 @@ class Tests(unittest.TestCase):
         namespace['profile_readback'](owner,row,'amd64','seccomp=builtin','created')
         # The real rejection and mismatch assertions above would both be killed.
 
+    def test_canonical_namespace_and_exact_explicit_security_profile(self):
+        self.assertEqual('source-schema-subset-not-native-capture',PROFILE_CASES['kind'])
+        self.assertEqual(m.MOBY_COMMIT,PROFILE_CASES['commit'])
+        self.assertNotIn('UtsMode',PROFILE_CASES['explicit_default']['HostConfig'])
+        positive=container();identity=positive['Image']
+        c.container_readback(positive,identity,FRAME,'amd64','seccomp=builtin')
+        bads=[]
+        for value in ('host',None,False,[],{},'private'):
+            row=copy.deepcopy(positive);row['HostConfig']['UTSMode']=value;bads.append(row)
+        row=copy.deepcopy(positive);del row['HostConfig']['UTSMode'];row['HostConfig']['UtsMode']='';bads.append(row)
+        row=copy.deepcopy(positive);row['HostConfig']['UTSMode']='host';row['HostConfig']['UtsMode']='';bads.append(row)
+        for value in ('','unconfined','custom',None):
+            row=copy.deepcopy(positive);row['AppArmorProfile']=value;bads.append(row)
+        options=positive['HostConfig']['SecurityOpt']
+        for value in (options[:-1],options+[options[-1]],options+['apparmor=unconfined'],
+                      options[:-1]+['apparmor=custom'],options[:-1]+['apparmor=unconfined'],
+                      options+['label=disable']):
+            row=copy.deepcopy(positive);row['HostConfig']['SecurityOpt']=value;bads.append(row)
+        implicit=copy.deepcopy(positive);implicit['AppArmorProfile']=PROFILE_CASES['implicit_default']['AppArmorProfile']
+        implicit['HostConfig'].update(PROFILE_CASES['implicit_default']['HostConfig']);bads.append(implicit)
+        for row in bads:
+            with self.assertRaises(c.Refusal):c.container_readback(row,identity,FRAME,'amd64','seccomp=builtin')
+            self.assertFalse(c.container_diagnostics(row,identity,FRAME,'amd64','seccomp=builtin')['matched'])
+        negative=copy.deepcopy(positive);negative['HostConfig']['SecurityOpt']=['apparmor=docker-default','seccomp={}', 'no-new-privileges']
+        c.container_readback(negative,identity,FRAME,'amd64','seccomp={}')
+        with self.assertRaises(c.Refusal):c.container_readback(negative,identity,FRAME,'amd64','seccomp=builtin')
+
     def probe_fixture(self, function, bad=False):
         with tempfile.TemporaryDirectory(prefix='adb-abi-isolated-') as folder:
             owner=o.Owner.__new__(o.Owner);owner.stage=Path(folder);owner.frame=FRAME
@@ -252,7 +300,10 @@ class Tests(unittest.TestCase):
             (owner.stage/'canary').write_bytes(binary())
             started=[]
             def docker(*args,**kwargs):
-                if args[0]=='create':return b'd'*64+b'\n'
+                if args[0]=='create':
+                    self.assertEqual(['no-new-privileges','seccomp=builtin','apparmor=docker-default'],
+                                     [args[index+1] for index,arg in enumerate(args) if arg=='--security-opt'])
+                    return b'd'*64+b'\n'
                 if args[0]=='cp':Path(args[2]).write_bytes(b'changed' if bad else binary());return b''
                 if args[0]=='start':started.append(True);return wire('amd64')
                 raise AssertionError('unexpected modeled engine command')

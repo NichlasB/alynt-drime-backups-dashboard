@@ -8,6 +8,6 @@ final class SourcePolicyAbiCanaryTest extends TestCase {
   $this->assertIsResource($p);fclose($pipes[0]);$out='';$overflow=false;
   while(!feof($pipes[1])){$chunk=fread($pipes[1],8192);$remaining=65536-strlen($out);if(strlen($chunk)>$remaining)$overflow=true;$out.=substr($chunk,0,$remaining);}
   fclose($pipes[1]);$this->assertSame(0,proc_close($p),$out);$this->assertFalse($overflow,'Bounded child diagnostics overflowed.');
-  $this->assertSame(array('tests'=>19,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
+  $this->assertSame(array('tests'=>21,'failures'=>0,'errors'=>0,'network_calls'=>0),json_decode($out,true));
  }
 }

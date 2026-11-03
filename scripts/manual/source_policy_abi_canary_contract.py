@@ -154,11 +154,11 @@ def container_readback(row, identity, frame, abi, security):
          'container-command')
     need(h.get('ReadonlyRootfs') is True and h.get('NetworkMode') == 'none'
          and h.get('Privileged') is False and h.get('CapDrop') == ['ALL'] and not h.get('CapAdd')
-         and sorted(h.get('SecurityOpt', [])) == sorted(['no-new-privileges', security])
+         and sorted(h.get('SecurityOpt', [])) == sorted(['no-new-privileges', security, 'apparmor=docker-default'])
          and h.get('Memory') == h.get('MemorySwap') == 536870912 and h.get('NanoCpus') == 1000000000
          and h.get('PidsLimit') == 64 and h.get('PidMode') == '' and h.get('IpcMode') == 'private'
          and h.get('CgroupnsMode') == 'private'
-         and h.get('Runtime') == 'runc' and h.get('UtsMode') == '' and h.get('UsernsMode') == ''
+         and h.get('Runtime') == 'runc' and h.get('UTSMode') == '' and h.get('UsernsMode') == ''
          and h.get('AutoRemove') is False and not h.get('Init')
          and h.get('RestartPolicy') == dict(Name='no', MaximumRetryCount=0)
          and not any(h.get(k) for k in ('Binds','Tmpfs','Devices','DeviceRequests','PortBindings',
@@ -201,11 +201,11 @@ def container_diagnostics(row, identity, frame, abi, security):
         check('HostConfig.'+name,lambda name=name,expected=expected:host.get(name) is expected)
     for name,expected in (('NetworkMode','none'),('CapDrop',['ALL']),('Memory',536870912),('MemorySwap',536870912),
                           ('NanoCpus',1000000000),('PidsLimit',64),('PidMode',''),('IpcMode','private'),
-                          ('CgroupnsMode','private'),('Runtime','runc'),('UtsMode',''),('UsernsMode',''),
+                          ('CgroupnsMode','private'),('Runtime','runc'),('UTSMode',''),('UsernsMode',''),
                           ('RestartPolicy',dict(Name='no',MaximumRetryCount=0)),
                           ('LogConfig',dict(Type='local',Config={'max-size':'16k','max-file':'1'}))):
         check('HostConfig.'+name,lambda name=name,expected=expected:host.get(name) == expected)
-    check('HostConfig.SecurityOpt',lambda:sorted(host.get('SecurityOpt', [])) == sorted(['no-new-privileges',security]))
+    check('HostConfig.SecurityOpt',lambda:sorted(host.get('SecurityOpt', [])) == sorted(['no-new-privileges',security,'apparmor=docker-default']))
     check('HostConfig.Ulimits',lambda:sorted(host.get('Ulimits', []),key=lambda r:r['Name']) ==
           [dict(Name='core',Hard=0,Soft=0),dict(Name='nofile',Hard=64,Soft=64)])
     for name in ('CapAdd','Init','Binds','Tmpfs','Devices','DeviceRequests','PortBindings','ExtraHosts',

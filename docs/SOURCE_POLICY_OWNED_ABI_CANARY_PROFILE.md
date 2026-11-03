@@ -1,5 +1,51 @@
 # Owned Native ABI Canary Execution Profile
 
+## Approved canonical UTS / explicit default-AppArmor repair — 2026-11-03
+
+User approval covers the identified fixed-profile compatibility repair and
+**one** fresh owned proof, campaign native attempt10/10. Restore point:
+clean/synced `42416634a87fe60c563f1ef4f80223102ac4a90b`, ordinary CI41684223198
+success. Campaign8/10 milestones,native9/10,static9 before dispatch. No automatic
+limit reset/extension, installation, candidate execution, SQL, site operation or
+production wiring; SQL lab guards and all resource/output/deadline budgets stay.
+
+Read the matching official Moby6430e49 source again: canonical HostConfig.UTSMode,
+explicit AppArmor option parsing and conditional default OCI AppArmor selection.
+Repair the two approved admission comparisons only: require the canonical
+namespace key's exact empty/private value, and exactly NNP + selected seccomp +
+`apparmor=docker-default`. The existing root AppArmorProfile requirement remains
+strictly docker-default. Constructor now explicitly requests that existing
+default; no custom/unconfined selection or host-policy management path is added.
+Prerequisites additionally require engine-advertised AppArmor before owned work.
+Missing support refuses; there is no fallback or permission increase.
+
+New guard SHA256: `b4ae3f201336ee2b497251d352d3d35f2ad1e4ff1a1cebf0c687db1307889747`.
+Tests reverse **only those two source edits** and require the preceding guard's
+exact d2bf7e5 source hash, proving every other acceptance clause is preserved.
+The non-authoritative diagnostics mirror the canonical key/options and continue
+to preserve first exception/report, redaction and existing-budget accounting.
+Native C bytes, syscall expectations, workflow and cleanup logic are unchanged.
+
+The test-only `owned-abi-readback-scope.json` records a source-specified wire-format
+subset, explicitly **not a captured inspect response or native proof**. It
+replaces the wrong-case assumption, with positive explicit-default and rejected
+implicit-default cases. Twenty-one isolated groups pass after a red run against
+the old construction/guard: canonical key, missing/host/malformed namespace,
+wrong-case fallback, empty/custom/unconfined AppArmor, missing/duplicate/extra
+security options, both seccomp selectors, actual constructor argv and refusal of
+unsupported AppArmor before further tools. Previous semantic controls remain.
+
+Focused source review confirms no arbitrary profile/argv, security relaxation,
+new dependency, credential/environment disclosure or broadened cleanup. This is
+approved narrow R3 disposable CI-lab scope, not whole-plugin release readiness
+or an installed-site/SQL proof. Validate/publish/verify ordinary exact-head CI
+before the single ordered attempt; report real native outcomes and independent
+cleanup without further dispatch once the10/10 ceiling is consumed.
+
+Local checks: isolated21/21, PHP bridge1/4, full PHP2,610/23,462 with two existing
+Sodium skips; Node88/88; PHPCS255 files; structure/build, Python syntax, strict
+Composer validation, Composer/npm audits and diff checks pass, zero advisories.
+
 ## Fresh diagnostic attempt: readback-model blockers identified — 2026-11-03
 
 Published diagnostics **c24226c1a598a3b0c209ddc726c91780f988c4a7** have successful

@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved canonical UTS / explicit default-AppArmor compatibility repair — 2026-11-03
+
+The user approves the [fixed compatibility repair and final campaign proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#approved-canonical-uts--explicit-default-apparmor-repair--2026-11-03).
+Require canonical private UTSMode and exactly NNP/seccomp/explicit docker-default
+AppArmor; reject missing/host/custom/unconfined/extra data. Tests invert only the
+two approved guard edits to recover the old exact source hash. Source-specified
+wire-format cases are labeled not-native-capture;21 isolated groups pass.
+Existing SQL guards, resource budgets, native C/syscall expectations, cleanup and
+disabled candidate/production paths remain unchanged. Ordinary exact-head CI
+precedes fresh prerequisites and the single approved native attempt10/10.
+
+Implementation-plan progress: concrete readback/construction defects are repaired
+locally; physical ABI qualification is still pending. Campaign8/10 milestones,
+native9/10,static9 before dispatch. No product credit for repair/docs/retry steps,
+and no implicit native limit extension after this attempt. Earlier gates below
+remain historical; this approval does not activate any candidate or site action.
+
 ## Owned ABI diagnostics identify two compatibility defects; cleanup complete — 2026-11-03
 
 Diagnostics **c24226c** pass exact-head [ordinary CI41683281342](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41683281342).

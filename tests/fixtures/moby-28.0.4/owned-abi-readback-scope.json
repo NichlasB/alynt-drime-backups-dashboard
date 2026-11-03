@@ -1,0 +1,19 @@
+{
+  "kind": "source-schema-subset-not-native-capture",
+  "commit": "6430e49a55babd9b8f4d08e70ecb2b68900770fe",
+  "sources": ["api/types/container/hostconfig.go", "daemon/daemon_unix.go", "daemon/oci_linux.go"],
+  "explicit_default": {
+    "AppArmorProfile": "docker-default",
+    "HostConfig": {
+      "UTSMode": "",
+      "SecurityOpt": ["no-new-privileges", "seccomp=builtin", "apparmor=docker-default"]
+    }
+  },
+  "implicit_default": {
+    "AppArmorProfile": "",
+    "HostConfig": {
+      "UTSMode": "",
+      "SecurityOpt": ["no-new-privileges", "seccomp=builtin"]
+    }
+  }
+}

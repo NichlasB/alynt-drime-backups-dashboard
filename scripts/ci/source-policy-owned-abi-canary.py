@@ -143,7 +143,8 @@ class Owner:
                    and row['Os'] == 'linux' and row['Arch'] == 'amd64', 'pinned-engine-client')
         info=json.loads(self.docker('info','--format','{{json .}}'))
         c.need(info['DefaultRuntime'] == 'runc' and info['Runtimes']['runc']['path'] == 'runc'
-               and 'name=seccomp,profile=builtin' in info['SecurityOptions'], 'runtime-profile')
+               and 'name=seccomp,profile=builtin' in info['SecurityOptions']
+               and 'name=apparmor' in info['SecurityOptions'], 'runtime-profile')
         runtime=self.run(['/usr/bin/runc','--version'],limit=8192)
         c.need(re.fullmatch(rb'runc version 1\.5\.2\ncommit: v1\.5\.2-0-g29dd3dc2\nspec: 1\.3\.0\n'
                            rb'go: go[0-9.]+\nlibseccomp: 2\.5\.5\n',runtime), 'runtime-library')
@@ -234,6 +235,7 @@ class Owner:
         options=['create','--name',name,'--hostname','abi-canary','--network','none','--ipc','private','--cgroupns','private',
                  '--read-only','--cap-drop','ALL','--security-opt','no-new-privileges',
                  '--security-opt','seccomp='+str(self.stage/'policy.json') if negative else security,
+                 '--security-opt','apparmor=docker-default',
                  '--user','65532:65532','--memory','512m','--memory-swap','512m','--cpus','1',
                  '--pids-limit','64','--restart','no','--log-driver','local','--log-opt','max-size=16k',
                  '--log-opt','max-file=1','--ulimit','nofile=64:64','--ulimit','core=0:0','--entrypoint','/canary']

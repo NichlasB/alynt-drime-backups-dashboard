@@ -12,3 +12,12 @@ No live test download, Go execution, filter application or runtime admission.
 Upstream Apache-2.0 LICENSE and NOTICE are retained unmodified alongside the
 fixture. This is test-only source DATA, not a runtime dependency or plugin asset.
 The existing tests exclusion from release packaging remains unchanged.
+
+`owned-abi-readback-scope.json` is a **source-schema subset, not a captured native
+inspect response**. It records the canonical `HostConfig.UTSMode` spelling from
+the same commit's `api/types/container/hostconfig.go`, and explicit versus implicit
+AppArmor request forms reviewed in `daemon/daemon_unix.go` and `daemon/oci_linux.go`.
+It prevents the test double from inventing a differently cased namespace key.
+The explicit case includes exactly NNP, selected seccomp and existing
+`apparmor=docker-default`; the implicit case is deliberately rejected by this
+owned-canary contract. These cases do not establish actual kernel/LSM enforcement.
