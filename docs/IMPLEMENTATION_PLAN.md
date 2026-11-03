@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Owned ABI profile built; single attempt stops before container execution — 2026-11-03
+
+The separate profile **47f05dc** is published with successful ordinary
+[CI41675517649](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41675517649)
+(PHP7.4/8.3 each2,610 tests;Node88/88). The approved single
+[native attempt41675986199](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41675986199)
+compiles both owned static executables, observes harmless host ABI facts and
+imports the owned image, but refuses the first created container at its initial
+`container-command` pre-start predicate. **No container canary started and no
+profile was applied.** The actual failed field is not retained; no speculative
+guard change or second attempt is made. Primary and independent cleanup confirm
+containers0/images0/stage absent; artifacts0. No SQL/candidate/site operation.
+
+Implementation-plan progress: approved profile construction and actual build/
+import/cleanup evidence advance the plan, but native containment qualification
+is incomplete. Campaign remains **8/10 milestones,native8/10,static9**; the
+failure earns no product credit. Exact next gated slice: **Harness-only Fixed
+Container-Profile Predicate Diagnostics and One Fresh Owned ABI Qualification/
+Cleanup Attempt**, unchanged guards/budgets, non-secret per-field evidence and
+fresh prerequisites. See the [owning actual-result record](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#actual-one-attempt-result-pre-start-refusal-cleanup-verified).
+Do not conflate successful ordinary/docs CI with the preserved failed native run.
+
 ## Approved separate owned native ABI canary profile — 2026-11-03
 
 The user approves the [separate default-off execution profile](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md)

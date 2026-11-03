@@ -125,3 +125,67 @@ pass. The expanded14-group/five-control suite is rerun after final guard changes
 exact-head CI must verify the final complete source before any dispatch.
 These focused engineering reviews do not refresh canonical whole-plugin toolkit
 rows, historical release readiness or the postponed full pre-release suite.
+
+## Actual one-attempt result: pre-start refusal, cleanup verified
+
+Published implementation **47f05dca17f53af22509a23e013feb41acf9c3a4** has successful
+[ordinary CI41675517649](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41675517649):
+PHP7.4 **2,610/23,464 assertions**, PHP8.3 **2,610/23,469**; Node88/88 in each,
+no failures/skips, zero Composer/npm advisories. Local final14-group bridge1/4
+passes. Ordinary CI success is **not** native qualification success.
+
+The single approved [native run41675986199](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41675986199),
+attempt1/job126056604849, fails on **2026-11-03 16:36:55–16:36:57 UTC** at
+`amd64-builtin / container-command`, the first created container's initial
+pre-start readback. No start/attach call, container syscall observation, derived
+profile application or negative control occurred. The actual failed field within
+that compound predicate is not retained; do not guess AppArmor, environment,
+command or another specific field, and do not widen a predicate without evidence.
+
+Established facts before refusal:
+
+| Fact | Actual evidence |
+|---|---|
+| Source cohort |`579900c4a695eed0af4d086ede615768fad43a492c94dd57c654219129d1ce31`|
+| Engine/client |28.0.4 /6430e49;28.0.4 /b8034c0 |
+| Runtime/library |runc1.5.2 /v1.5.2-0-g29dd3dc2;libseccomp2.5.5 |
+| Existing compiler |`/usr/bin/x86_64-linux-gnu-gcc-13`; no installation/download |
+| Owned canary ELF |`4e27a6aa75b0e47f5818e040f4f98b91632e0a603ca216af38cfcbd1c4b051ee`|
+| Owned host ELF |`3a51b40bead7f3c2f9e87c13197e6b522caf5b124a16b5ec24e3998f3bbfc06a`|
+| Imported owned image |`sha256:fef20cc8d81af34929c2236da07bf6a1b2cc290d8af980b6dc6bda79efa20ab1`|
+| Derived DATA policy |`3277296f5e2fa40d0e53fe3d2925e390174f3fcfc9ec2adfba8fd63852984fe4`|
+| Host observation only |UID1001,NNP0,seccomp0;amd64/i386 getpid2478;x32 getpid-38 |
+| Kernel file |7.0.0-1017-azure;IA32=y/X32=n;same hash as prior audit;boot_correspondence=false |
+| Observations/output |container observations0; native host output23bytes; total observed39,332bytes |
+
+Compilation and strict ELF checks succeeded for both owned executables; the
+owned image imported and passed image/config/layer readback. One container was
+created but **never started**. The successful harmless host observer is not a
+network/filter control. ENOSYS plus a config declaration still does not grant
+complete-ABI non-callability, and no container qualification was obtained.
+
+Primary cleanup reports **containers0,images0,stage_absent=true**. The separate
+always-run process succeeds and independently reports the same absence; it
+observes41 bounded bytes. Owned container/image/staging files were removed;
+there are no retained fixtures or workflow artifacts (Actions artifacts API0).
+No compiler cache/base-image/build-daemon resource was created. No candidate,
+SQL, installation, installed site or production operation occurred. Existing SQL
+workflow/controller and candidate policy API remain byte-for-byte at baseline.
+
+The exact implementation head has two successful ordinary check runs and one
+failed native `canary` check; legacy status contexts0. Do not report all checks
+green or let a later docs-only CI success erase that native failure. No native
+retry was run. Campaign remains **8/10 completed milestones,native8/10,static9**:
+construction/preflight/import progress is meaningful, but failed qualification
+does not earn an end-to-end product milestone.
+
+**Recommended next gated slice: Harness-only Fixed Container-Profile Predicate
+Diagnostics and One Fresh Owned ABI Qualification/Cleanup Attempt.** Add bounded
+non-secret per-field mismatch categories that are proven equivalent to the
+unchanged guard, with source-backed regressions; then fresh prerequisites and
+one explicitly approved attempt. Do not relax fields, infer missing readback,
+change SQL guards or count the retry as another milestone. The new attempt is
+not included in this already-consumed single-attempt approval. Full all-ABI,
+builtin-source/loaded-filter correspondence and candidate runtime admission
+remain unestablished. Final docs-only exact-head CI/publication is required
+before the consolidated handoff; no further execution is performed for docs.
