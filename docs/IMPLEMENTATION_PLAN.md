@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Autonomous campaign resumed: Moby preservation foundation — 2026-11-03
+
+Renewed campaign preserves the actual8/10 milestones,native7/10,static9 baseline
+and existing repair/attempt limits. Transport-tuple qualification is historical
+completed work; continue the current real-policy/ABI prerequisite instead.
+The [dormant foundation](SOURCE_POLICY_MOBY_PRESERVATION_FOUNDATION.md) implements
+fixed raw-source derivation and independent structural verification, with10
+isolated groups/eight assertion-killed controls and inert licensed byte fixtures.
+Old guards/cohorts/workflows and production wiring remain unchanged.
+
+Implementation-plan progress: the planned preservation DATA is executable;
+actual builtin/runtime/ABI control evidence remains unestablished. Validate,
+publish and verify exact-head CI, then continue meaningful prerequisite audit/
+qualification work under the campaign without another slice confirmation.
+Do not count foundation/retry/doc commits as products. No LocalWP/live, release,
+unscoped dependency/security changes or candidate/production activation. Earlier
+gate names below are historical, not automatic new approval boundaries.
+
 ## Moby builtin preservation / ABI denial designed; dormant implementation gated — 2026-11-03
 
 The approved [candidate-bound design](SOURCE_POLICY_UBI_MOBY_POLICY_PRESERVATION_DESIGN.md)
