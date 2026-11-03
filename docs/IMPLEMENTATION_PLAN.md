@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved UBI import/containment proof: audit first — 2026-11-03
+
+The approved [feasibility audit](SOURCE_POLICY_UBI_ENGINE_FEASIBILITY_AUDIT.md)
+first checks exact trusted ephemeral engine/build/source compatibility, before
+candidate acquisition, import or harmless controls. A dedicated read-only manual
+collector cannot dispatch either existing static/native controller. Official
+Moby source has conditional/multi-ABI seccomp semantics absent from the synthetic
+foundation; unknown real-profile admission must stop, never flatten those guards.
+No candidate execution, SQL, installed-site operation or production wiring.
+Validation/publication/exact-head CI precede actual metadata dispatch.
+Campaign remains8/10 milestones,native7/10,static9; metadata discovery earns no
+native/product credit. Read actual audit outcomes before resuming later stages.
+
 ## Dormant UBI import/launch DATA foundation — 2026-11-03
 
 The approved [socket-free foundation](SOURCE_POLICY_UBI_RUNTIME_CONTRACT_FOUNDATION.md)
