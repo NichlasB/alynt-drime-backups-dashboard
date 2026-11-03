@@ -1,5 +1,78 @@
 # Owned Native ABI Canary Execution Profile
 
+## Native source-envelope discrimination: unmatched and owned cleanup verified — 2026-11-03
+
+The user approves one bounded proof at
+**b0cb9b960f56a6b9b10a0fe4a0c77171e009e497**, not a new campaign or limit reset.
+This is the exact narrowly scoped R3 owned-lab authority; no SQL, installed site,
+candidate execution, installation, new protected read, raw disclosure, production,
+release or profile/acceptance/budget change is authorized. The head is clean/
+synced and [ordinary CI41726295847](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41726295847)
+is reverified successful. Fresh isolated preflight passes3 PHP tests/12 assertions
+(21 original,15 startup,12 source-envelope groups) before the single dispatch.
+
+[Native run41726834197](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41726834197),
+attempt1/job126233752569, runs its audit/proof step **22:00:15–22:00:16 UTC**;
+job concludes failure at22:00:19. Fresh pinned engine/client28.0.4,
+runc1.5.2/libseccomp2.5.5, compiler and kernel7.0.0-1017-azure prerequisites pass.
+Created/pre-start containment and copied-executable hashes pass. The first amd64
+builtin start/attach returns CLI1 with complete stdout0/stderr157 bytes, raising
+the unchanged bounded-command-failed refusal. No accepted syscall observation,
+derived-policy/i386/x32 container control or ABI qualification follows.
+
+The real ADBOWNEDABISTARTFAIL1 and ADBOWNEDABISOURCEENV1 packets both pass strict
+DATA validation against their actual operation binding. Independent read-only
+hashing of the exact nine Git blobs reproduces the emitted source cohort. The
+supplement's operation digest, cached five-recipe catalog digest and complete
+stderr digest all correlate. Its status is **unmatched**, family **null**,
+authority/qualification false. The original analysis remains daemon-envelope,
+unclassified/unknown. This proves transmission of the actual bounded unmatched
+observation, not a synthetic positive or successful classification/ABI control.
+It rules out an exact match under the five frozen byte/owned-CID recipes only;
+it does not establish which daemon/API/runtime path or cause occurred.
+
+| Actual binding/fact | Value |
+|---|---|
+| Source cohort |`f84d53e800695448937b2587676b3a7fc8a7d7dcf17f8b984fea225c08ae083a`|
+| Context hash |`b8a7fe87ad9ef26c058afab887ed6a772fd92b9771e06b9e8b81853a1bac4089`|
+| Owned image |`sha256:05dc2db423cc5f69686cd9666ae6da5f13b12976d85288a4459d359564f0f408`|
+| Owned CID |`b1e609baf4317994f2b9f370a7b0eae36bbe74cc51b3093369c74471ec9b1ce4`|
+| Supplemental operation hash |`f148ee30749a476edc60acb2a5830c37deb362c19bdbf1f3c7d27fbcc580a5f1`|
+| Catalog hash |`c420258fa529bab9bdeb2bc2ab701accba01d7303f7fe1233efab3a246be1551`|
+| Complete stderr hash |`80a868096821299612792f8e0917bc2abf47d10457d368b829edc8e23bdf720e`|
+| Canary/host/policy hashes |same three exact byte hashes as the preceding actual proof |
+| Harmless host only |UID1001/NNP0/seccomp0;amd64/i386 getpid2472;x32 getpid-38 |
+| Accounting |primary49,416;native180 (23 host +157 CLI stderr);independent cleanup41 |
+
+The first existing owned cleanup readback is **created/Runningfalse/OOMfalse/
+exit null**. This later snapshot is not proof of process non-execution or a
+default-zero exit receipt. Primary cleanup and separate always-run cleanup both
+report **containers0/images0/stage_absent=true**; independent cleanup succeeds
+at22:00:16. Uploaded artifacts API reports0. No cleanup/diagnostic-unavailable
+flag is emitted. Raw text remains unavailable; neither this unchanged digest/
+length nor candidate hash guesses may reconstruct it. All SQL/candidate/
+production/qualification flags remain false. The proof head has successful
+ordinary CI and a **failed native check**; never call all checks green.
+
+Implementation-plan progress: real source/catalog/stream correlation and the
+unmatched outcome are verified, but cause/ABI coverage remain unestablished.
+Campaign8/10 milestones,static9 unchanged. Original native10/10 plus first
+additional1/1 and this additional1/1 are consumed (**12 total**). The explicit
+unmatched stop condition is now reached: **no catalog growth or blind retry**.
+Do not interpret a successful diagnostic DATA validation or verified cleanup as
+a product milestone, native qualification success or permission to continue.
+
+**Recommended next gated slice: Design-Only One-Time Human-Supervised Startup
+Error Disclosure and Retention Decision**. The machine-only catalog has not
+identified the cause. Evaluate the minimum human-readable evidence from the same
+bounded, minimal-environment owned command buffer, with explicit privacy,
+exposure/retention and exact cleanup controls. This is a new privacy/operational
+decision, not more guessed templates. No raw capture, extra field/log/API read,
+implementation or native attempt is authorized by the proposed design approval.
+Closeout edits owning records only; validation, commit/push and ordinary exact-
+head CI must complete before handoff. Uploader/toolkit and application state stay
+untouched; no whole-plugin release-readiness evidence is refreshed.
+
 ## Source-envelope coverage foundation: no native execution — 2026-11-03
 
 The approved [source-envelope foundation](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md#approved-isolated-safety-foundation-and-dormant-integration--2026-11-03)

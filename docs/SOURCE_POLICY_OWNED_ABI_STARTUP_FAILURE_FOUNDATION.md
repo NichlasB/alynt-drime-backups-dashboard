@@ -1,5 +1,11 @@
 # Bounded Startup-Failure Evidence Safety Foundation
 
+The [actual source-envelope discrimination proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#native-source-envelope-discrimination-unmatched-and-owned-cleanup-verified--2026-11-03)
+is unmatched with verified primary/independent owned cleanup. Stop catalog growth
+and blind retries; the next gate is a design-only human-supervised diagnostic
+disclosure/retention decision. No original protocol, privacy guard, native
+allowance or production behavior changes in this evidence closeout.
+
 The separately approved [source-envelope implementation](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md#approved-isolated-safety-foundation-and-dormant-integration--2026-11-03)
 adds optional enum-only coverage after this original first failure is retained.
 This foundation's scanner/builder/validator/cleanup projection remain unchanged;

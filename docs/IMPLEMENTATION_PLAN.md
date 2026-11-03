@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Native source-envelope discrimination: unmatched; retry stop reached — 2026-11-03
+
+The user approves one additional proof at b0cb9b9.
+[Run41726834197](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41726834197)
+passes fresh prerequisites/pre-start checks, then the first amd64 builtin start
+fails CLI1. Both actual diagnostic packets validate against exact source/owner,
+image/CID, catalog and complete stderr hash. The original report remains
+unclassified/unknown; the new report is **unmatched/family null**. No exact
+catalog envelope matches; this does not exclude semantically related failures
+or identify a cause. Primary and independent cleanup prove containers0/images0/
+stage absent; artifacts0. See the [actual-result record](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#native-source-envelope-discrimination-unmatched-and-owned-cleanup-verified--2026-11-03).
+
+Implementation-plan progress: the supplemental DATA path now has genuine native
+correlation/unmatched evidence, but startup cause and ABI qualification remain
+blocked. Campaign8/10 milestones,static9 unchanged; original10/10 plus two
+separately approved1/1 allowances are consumed (**12 native total**). Per the
+approved stop condition, stop catalog expansion and blind retries. No code,
+guard, budget, profile, SQL/candidate or production change is made for closeout.
+**Recommended next gated slice: Design-Only One-Time Human-Supervised Startup
+Error Disclosure and Retention Decision**. Evaluate a narrowly bounded human-
+readable channel from the same owned command buffer, including exposure, privacy,
+retention and cleanup controls. This requires a new privacy decision; it does
+not authorize raw capture, new reads, implementation or another native attempt.
+
 ## Source-anchored envelope foundation implemented; isolated only — 2026-11-03
 
 The approved [foundation and dormant integration](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md#approved-isolated-safety-foundation-and-dormant-integration--2026-11-03)

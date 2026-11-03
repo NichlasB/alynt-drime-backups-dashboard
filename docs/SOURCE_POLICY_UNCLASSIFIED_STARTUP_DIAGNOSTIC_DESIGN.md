@@ -1,5 +1,18 @@
 # Unclassified Daemon Startup Diagnostic Coverage and Privacy-Safe Recovery Design
 
+## Native follow-through: unmatched stop condition reached — 2026-11-03
+
+The one separately approved [native discrimination proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#native-source-envelope-discrimination-unmatched-and-owned-cleanup-verified--2026-11-03)
+at b0cb9b9 produces a valid source/catalog/complete-stream-correlated report with
+status **unmatched**, family null. The original failure stays unclassified;
+both owned cleanup receipts prove absence. No exact recipe matched, no raw text
+was retained and no ABI qualification resulted. The agreed stop condition is
+enforced: **stop catalog growth and blind retries**. Original10/10 plus two
+separate1/1 allowances are consumed (12 total); campaign8/10,static9 unchanged.
+The next gate is the actual-result record's design-only human-supervised
+disclosure/retention decision, not another matcher, raw capture or native run.
+The implementation/design-stage next-step statements below are historical.
+
 ## Approved isolated safety foundation and dormant integration — 2026-11-03
 
 The user separately approves implementation, validation, commit/push and ordinary
