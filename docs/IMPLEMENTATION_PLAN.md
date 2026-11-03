@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Campaign continues through Moby runtime/ABI prerequisites — 2026-11-03
+
+The preservation foundation db59f95 is published with successful exact-head
+CI41643323523. Continue into [readonly client/runtime/kernel prerequisites](SOURCE_POLICY_MOBY_RUNTIME_PREREQUISITES.md)
+under the same campaign: default-off V2 metadata, source-bound engine/client
+identity, runtime/library correlation and honest kernel configuration gaps.
+This cannot apply profiles or dispatch import/candidate/SQL operations.
+Node88/88 and structure checks pass; full exact-head CI precedes actual audit.
+
+Implementation-plan progress: structural DATA blocker implemented; collect the
+remaining actual runtime/ABI facts without another slice confirmation. Continue
+evidence-backed source/qualification work if within authority; do not turn missing
+metadata into eligibility. Campaign8/10 milestones,native7/10,static9 unchanged;
+no foundation/metadata/retry/docs credit. Earlier gates remain historical.
+
 ## Autonomous campaign resumed: Moby preservation foundation — 2026-11-03
 
 Renewed campaign preserves the actual8/10 milestones,native7/10,static9 baseline

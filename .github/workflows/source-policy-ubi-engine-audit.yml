@@ -6,6 +6,11 @@ on:
         description: Exact approved master head; metadata only, never import or execution
         required: true
         type: string
+      policy_preflight:
+        description: Read only client/runtime/kernel prerequisite metadata; no policy or container operations
+        type: boolean
+        required: true
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -25,4 +30,10 @@ jobs:
       - name: Read-only engine metadata; no acquisition or fixture creation
         env:
           AUDIT_RUNNER_ENVIRONMENT: ${{ runner.environment }}
-        run: node scripts/ci/source-policy-ubi-engine-audit.mjs --approved-read-only-engine-audit
+          POLICY_PREFLIGHT: ${{ inputs.policy_preflight }}
+        run: |
+          case "$POLICY_PREFLIGHT" in
+            false) node scripts/ci/source-policy-ubi-engine-audit.mjs --approved-read-only-engine-audit ;;
+            true) node scripts/ci/source-policy-ubi-engine-audit.mjs --approved-read-only-policy-preflight ;;
+            *) exit 1 ;;
+          esac
