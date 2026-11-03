@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved owned ABI diagnostics recovery — 2026-11-03
+
+The user approves [guard-preserving per-field diagnostics and one fresh attempt](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#approved-guard-preserving-diagnostics-and-one-fresh-attempt--2026-11-03).
+Keep the original acceptance function source-pinned and unchanged; capture fixed
+non-secret mismatch categories only after its rejection, within existing budgets,
+without changing the first exception or authorizing execution. Isolated19 groups
+and seven combined source controls pass; publication/exact-head CI must precede
+fresh prerequisites and native attempt9/10. No SQL/candidate/site/wiring changes.
+
+Implementation-plan progress: the previous missing-field observability blocker
+is addressed in the harness, not by weakening the profile. Actual fresh native
+qualification remains pending. Campaign8/10 milestones,native8/10,static9 before
+dispatch; no product credit for diagnostic/docs/retry steps. Earlier gates and
+failed proof records below remain historical, not erased by this approval.
+
 ## Owned ABI profile built; single attempt stops before container execution — 2026-11-03
 
 The separate profile **47f05dc** is published with successful ordinary

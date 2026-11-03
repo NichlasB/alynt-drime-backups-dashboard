@@ -170,6 +170,58 @@ def container_readback(row, identity, frame, abi, security):
              dict(Name='nofile',Hard=64,Soft=64)], 'container-limits')
 
 
+def container_diagnostics(row, identity, frame, abi, security):
+    """Finite mismatch names only; never authority and never used for admission."""
+    result=dict(format='ADBOWNEDABIPROFILEDIAG1',status='compared',matched=False,
+                mismatches=[],categories={},authority=False)
+    if type(row) is not dict or type(row.get('Config')) is not dict or type(row.get('HostConfig')) is not dict:
+        result.update(status='malformed',mismatches=['shape.inspect'])
+        return result
+    config=row['Config']; host=row['HostConfig']; failed=result['mismatches']
+
+    def check(name, predicate):
+        try:
+            passed=bool(predicate())
+        except (TypeError,ValueError,KeyError,AttributeError):
+            passed=False
+        if not passed:
+            failed.append(name)
+
+    # Mirror the unchanged guard, including its comparison/truthiness semantics.
+    check('selector.abi',lambda:abi in ABIS)
+    for name,expected in (('Image',identity),('Path','/canary'),('Args',[abi]),('AppArmorProfile','docker-default')):
+        check('root.'+name,lambda name=name,expected=expected:row.get(name) == expected)
+    for name,expected in (('Labels',labels(frame)),('Entrypoint',['/canary']),('Cmd',[abi]),
+                          ('User','65532:65532'),('WorkingDir','/'),('Hostname','abi-canary')):
+        check('Config.'+name,lambda name=name,expected=expected:config.get(name) == expected)
+    check('Config.Env',lambda:config.get('Env') in (None, []))
+    for name in ('OpenStdin','StdinOnce','Tty','Volumes','ExposedPorts','Healthcheck'):
+        check('Config.'+name,lambda name=name:not config.get(name))
+    for name,expected in (('ReadonlyRootfs',True),('Privileged',False),('AutoRemove',False),('PublishAllPorts',False)):
+        check('HostConfig.'+name,lambda name=name,expected=expected:host.get(name) is expected)
+    for name,expected in (('NetworkMode','none'),('CapDrop',['ALL']),('Memory',536870912),('MemorySwap',536870912),
+                          ('NanoCpus',1000000000),('PidsLimit',64),('PidMode',''),('IpcMode','private'),
+                          ('CgroupnsMode','private'),('Runtime','runc'),('UtsMode',''),('UsernsMode',''),
+                          ('RestartPolicy',dict(Name='no',MaximumRetryCount=0)),
+                          ('LogConfig',dict(Type='local',Config={'max-size':'16k','max-file':'1'}))):
+        check('HostConfig.'+name,lambda name=name,expected=expected:host.get(name) == expected)
+    check('HostConfig.SecurityOpt',lambda:sorted(host.get('SecurityOpt', [])) == sorted(['no-new-privileges',security]))
+    check('HostConfig.Ulimits',lambda:sorted(host.get('Ulimits', []),key=lambda r:r['Name']) ==
+          [dict(Name='core',Hard=0,Soft=0),dict(Name='nofile',Hard=64,Soft=64)])
+    for name in ('CapAdd','Init','Binds','Tmpfs','Devices','DeviceRequests','PortBindings','ExtraHosts',
+                 'VolumesFrom','Links','Dns','GroupAdd','Sysctls','CgroupParent'):
+        check('HostConfig.'+name,lambda name=name:not host.get(name))
+    check('root.Mounts',lambda:not row.get('Mounts'))
+    env=config.get('Env'); apparmor=row.get('AppArmorProfile')
+    result['categories']=dict(
+        environment='none' if env is None else 'empty' if env == [] else 'nonempty-list' if type(env) is list else 'other',
+        default_path_only=env == ['PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'],
+        apparmor='missing' if apparmor is None else 'empty' if apparmor == '' else
+                 'docker-default' if apparmor == 'docker-default' else 'other')
+    result['matched']=not failed
+    return result
+
+
 def numbers(wire, count):
     need(type(wire) is bytes and len(wire) <= 4096 and re.fullmatch(rb'(?:-?[0-9]{1,12}\n)+', wire), 'probe-wire')
     rows=[int(n) for n in wire.splitlines()]

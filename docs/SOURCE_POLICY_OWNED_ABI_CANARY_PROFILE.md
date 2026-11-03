@@ -1,5 +1,48 @@
 # Owned Native ABI Canary Execution Profile
 
+## Approved guard-preserving diagnostics and one fresh attempt — 2026-11-03
+
+The user approves recovery from the recorded pre-start refusal: add bounded
+per-field diagnostics, validate/publish/exact-head CI, then **one** fresh owned
+qualification/cleanup attempt. Restore point is clean/synced
+`0528ffdc68a319bbd0c62b9805d102345d90b11b`, ordinary CI41676498861 success.
+Campaign stays8/10 milestones,native8/10,static9 before dispatch; reserve native9/10
+for this attempt. No installation, candidate execution, SQL, site operation or
+production wiring, and no changes to existing SQL lab guards or budgets.
+
+The authoritative `container_readback` function is unchanged, pinned by its
+source SHA256 `d2bf7e5ac211e4a315dd28c3ccc88e367165e46ef8c2d462cdc99100a5235280`.
+A separate pure diagnostic mirrors each field comparison without becoming an
+admission predicate. The owner calls the original guard first at the three
+existing checkpoints; only rejection captures one finite first-failure report,
+then rethrows the **same** exception. Diagnostic failure/exhaustion cannot mask
+the rejection, grant a start or replace the earlier report.
+
+Only fixed mismatch names and finite shape categories are retained. No raw
+inspect object, environment entry/name/value, security-policy bytes, labels or
+arbitrary errors are emitted. Exact default-PATH-only and AppArmor empty/default/
+other categories are diagnostic facts, not newly accepted profiles. Reports are
+at most8KiB and charged against the unchanged body control512KiB/observation2MiB
+ceilings; exhausted budget yields unavailable evidence and preserves failure.
+Workflow/argv/native C sources, acceptance predicates, cleanup and SQL paths
+remain unchanged; no speculative profile correction is included.
+
+Five new isolated groups (19 total) establish positive/mutation agreement with
+the pinned guard, malformed/redacted data, first-exception/first-report retention,
+budget refusal, and inability of a forged matched report to override rejection.
+Two additional source-backed controls discriminate diagnostic-field omission
+and bypass of the original guard, without editing tracked source; the preceding
+five controls remain. Initial tests fail for the absent APIs, then19/19 pass.
+These are isolated contract/owner tests, not physical qualification or whole-plugin
+release readiness. Focused source review checks data-only output, guard ordering,
+exception identity, finite work/output and no new executable/cleanup dispatch.
+Ordinary exact-head CI and fresh prerequisites are required before dispatch;
+record actual mismatch/cleanup results below, never infer native success from CI.
+
+Local validation for this repair: isolated19/19; bridge1/4; full PHP2,610/23,462
+with the same two existing Sodium skips; Node88/88; PHPCS255 files; structure,
+build, strict Composer manifest and Composer/npm audits pass, zero advisories.
+
 ## Approved boundary and plan — 2026-11-03
 
 User approval selects a **separate**, default-off ephemeral GitHub lab profile,

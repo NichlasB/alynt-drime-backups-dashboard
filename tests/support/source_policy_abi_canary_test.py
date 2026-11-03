@@ -157,6 +157,93 @@ class Tests(unittest.TestCase):
         with patch.dict(os.environ,{},clear=True), patch.object(o.Owner,'freeze',side_effect=AssertionError('source read')):
             with self.assertRaisesRegex(o.c.Refusal,'fixed-entry'): o.Owner()
 
+    def test_profile_diagnostics_preserve_original_guard_and_discriminate_fields(self):
+        original=inspect.getsource(c.container_readback).rstrip()
+        self.assertEqual('d2bf7e5ac211e4a315dd28c3ccc88e367165e46ef8c2d462cdc99100a5235280',c.sha(original.encode()))
+        positive=container()
+        self.assertTrue(c.container_diagnostics(positive,positive['Image'],FRAME,'amd64','seccomp=builtin')['matched'])
+        mutations=[('root','Image','other'),('root','Path','/bin/sh'),('root','Args',[]),
+            ('root','AppArmorProfile',''),('root','Mounts',[{}])]
+        mutations += [('Config',key,value) for key,value in dict(Labels={},Entrypoint=[],Cmd=[],User='0',
+            WorkingDir='/tmp',Env=['PRIVATE_SECRET=do-not-echo'],Hostname='other',OpenStdin=True,StdinOnce=True,
+            Tty=True,Volumes={'/x':{}},ExposedPorts={'1/tcp':{}},Healthcheck={'Test':['x']}).items()]
+        mutations += [('HostConfig',key,value) for key,value in dict(ReadonlyRootfs=False,NetworkMode='host',
+            Privileged=True,CapDrop=[],CapAdd=['SYS_ADMIN'],SecurityOpt=[],Memory=0,MemorySwap=-1,
+            NanoCpus=0,PidsLimit=0,PidMode='host',IpcMode='host',CgroupnsMode='host',Runtime='other',
+            UtsMode='host',UsernsMode='host',AutoRemove=True,Init=True,RestartPolicy={},Binds=['x'],Tmpfs={'x':'x'},
+            Devices=[{}],DeviceRequests=[{}],PortBindings={'x':[]},ExtraHosts=['x'],VolumesFrom=['x'],Links=['x'],
+            Dns=['x'],GroupAdd=['x'],Sysctls={'x':'x'},CgroupParent='x',PublishAllPorts=True,LogConfig={},Ulimits=[]).items()]
+        for section,key,value in mutations:
+            row=copy.deepcopy(positive);target=row if section=='root' else row[section];target[key]=value
+            with self.subTest(section=section,key=key):
+                with self.assertRaises(c.Refusal):c.container_readback(row,row['Image'] if key!='Image' else positive['Image'],FRAME,'amd64','seccomp=builtin')
+                report=c.container_diagnostics(row,positive['Image'],FRAME,'amd64','seccomp=builtin')
+                self.assertFalse(report['matched']);self.assertIn(section+'.'+key,report['mismatches'])
+                self.assertNotIn('PRIVATE_SECRET',c.encode(report).decode());self.assertLess(len(c.encode(report)),8192)
+        report=c.container_diagnostics(positive,positive['Image'],FRAME,'unknown','seccomp=builtin')
+        self.assertIn('selector.abi',report['mismatches'])
+
+    def test_profile_diagnostics_malformed_and_default_categories_never_echo_values(self):
+        for value in (None,[],{'Config':None},{'HostConfig':[]},dict(container(),HostConfig=dict(SecurityOpt=[None,'secret']))):
+            report=c.container_diagnostics(value,'sha256:'+'c'*64,FRAME,'amd64','seccomp=builtin')
+            self.assertFalse(report['matched']);self.assertNotIn('secret',c.encode(report).decode())
+        row=container();row['Config']['Env']=['PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin']
+        row['AppArmorProfile']=''
+        report=c.container_diagnostics(row,row['Image'],FRAME,'amd64','seccomp=builtin')
+        self.assertTrue(report['categories']['default_path_only'])
+        self.assertEqual('empty',report['categories']['apparmor'])
+        self.assertEqual(['root.AppArmorProfile','Config.Env'],report['mismatches'])
+        self.assertFalse(report['authority']);self.assertFalse(report['matched'])
+
+    def test_owner_diagnostics_preserve_first_exception_and_cannot_authorize(self):
+        owner=o.Owner.__new__(o.Owner);owner.image='sha256:'+'c'*64;owner.frame=FRAME;owner.phase='amd64-builtin'
+        owner.control=owner.observed=0;owner.profile_diagnostic=None
+        row=container();row['Config']['Env']=['PRIVATE_SECRET=do-not-echo']
+        with self.assertRaisesRegex(o.c.Refusal,'container-command'):
+            owner.profile_readback(row,'amd64','seccomp=builtin','created')
+        saved=copy.deepcopy(owner.profile_diagnostic)
+        self.assertEqual(['Config.Env'],saved['report']['mismatches'])
+        row['AppArmorProfile']=''
+        with self.assertRaises(o.c.Refusal):owner.profile_readback(row,'amd64','seccomp=builtin','pre-start')
+        self.assertEqual(saved,owner.profile_diagnostic)
+        error=o.c.Refusal('original-guard-error');owner.profile_diagnostic=None
+        with patch.object(o.c,'container_readback',side_effect=error),patch.object(o.c,'container_diagnostics',side_effect=RuntimeError('secret')):
+            with self.assertRaises(o.c.Refusal) as raised:owner.profile_readback(row,'amd64','seccomp=builtin','created')
+        self.assertIs(error,raised.exception);self.assertEqual('unavailable',owner.profile_diagnostic['status'])
+        self.assertNotIn('secret',c.encode(owner.profile_diagnostic).decode())
+
+    def test_diagnostic_budget_and_forged_matched_report_cannot_change_refusal(self):
+        owner=o.Owner.__new__(o.Owner);owner.image='sha256:'+'c'*64;owner.frame=FRAME;owner.phase='amd64-builtin'
+        owner.control=524288;owner.observed=2097152;owner.profile_diagnostic=None
+        row=container();row['Config']['Env']=['PRIVATE_SECRET=do-not-echo']
+        with self.assertRaises(o.c.Refusal):owner.profile_readback(row,'amd64','seccomp=builtin','created')
+        self.assertEqual(dict(status='unavailable',authority=False),owner.profile_diagnostic)
+        self.assertEqual((524288,2097152),(owner.control,owner.observed))
+        owner.profile_diagnostic=None;owner.control=owner.observed=0
+        with patch.object(o.c,'container_diagnostics',return_value=dict(matched=True,authority=False)):
+            with self.assertRaisesRegex(o.c.Refusal,'container-command'):
+                owner.profile_readback(row,'amd64','seccomp=builtin','created')
+        self.assertTrue(owner.profile_diagnostic['report']['matched'])
+        with patch.object(o.c,'container_diagnostics',side_effect=AssertionError('diagnostics before rejection')):
+            owner.profile_readback(container(),'amd64','seccomp=builtin','created')
+
+    def test_diagnostic_and_authoritative_guard_bypass_semantic_controls(self):
+        row=container();row['Config']['Env']=['PRIVATE_SECRET=do-not-echo']
+        self.assertFalse(c.container_diagnostics(row,row['Image'],FRAME,'amd64','seccomp=builtin')['matched'])
+        source=textwrap.dedent(inspect.getsource(c.container_diagnostics));needle="config.get('Env') in (None, [])"
+        self.assertEqual(1,source.count(needle));namespace=dict(c.__dict__)
+        exec(compile(source.replace(needle,'True'),'<owned-diagnostic-control>','exec'),namespace)
+        self.assertTrue(namespace['container_diagnostics'](row,row['Image'],FRAME,'amd64','seccomp=builtin')['matched'])
+        owner=o.Owner.__new__(o.Owner);owner.image=row['Image'];owner.frame=FRAME;owner.phase='amd64-builtin'
+        owner.profile_diagnostic=None;owner.control=owner.observed=0
+        with self.assertRaises(o.c.Refusal):owner.profile_readback(row,'amd64','seccomp=builtin','created')
+        source=textwrap.dedent(inspect.getsource(o.Owner.profile_readback))
+        needle='c.container_readback(row,self.image,self.frame,abi,security)'
+        self.assertEqual(1,source.count(needle));namespace=dict(o.__dict__)
+        exec(compile(source.replace(needle,'None'),'<owned-guard-control>','exec'),namespace)
+        namespace['profile_readback'](owner,row,'amd64','seccomp=builtin','created')
+        # The real rejection and mismatch assertions above would both be killed.
+
     def probe_fixture(self, function, bad=False):
         with tempfile.TemporaryDirectory(prefix='adb-abi-isolated-') as folder:
             owner=o.Owner.__new__(o.Owner);owner.stage=Path(folder);owner.frame=FRAME

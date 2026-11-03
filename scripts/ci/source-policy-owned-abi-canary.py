@@ -32,7 +32,7 @@ class Owner:
     def __init__(self):
         self.started=time.monotonic(); self.phase='admission'; self.observed=0; self.control=0; self.native=0
         self.cleaning=False; self.cleanup_bytes=0
-        self.diagnostics=[]
+        self.diagnostics=[]; self.profile_diagnostic=None
         env=os.environ
         c.need(sys.argv[1:] in (['--approved-owned-abi-proof'], ['--cleanup-only'])
             and platform.system() == 'Linux' and platform.machine() == 'x86_64'
@@ -208,6 +208,25 @@ class Owner:
         c.need(row['RootFS'] == dict(Type='layers',Layers=['sha256:'+layer]), 'layer-readback')
         return dict(image=self.image,canary_sha=c.sha(canary),host_sha=c.sha((self.stage/'host').read_bytes()))
 
+    def profile_readback(self, row, abi, security, point):
+        # The old guard is authoritative; diagnostics run ONLY after its failure.
+        try:
+            c.container_readback(row,self.image,self.frame,abi,security)
+        except Exception:
+            if self.profile_diagnostic is None:
+                try:
+                    c.need(point in ('created','pre-start','post-exit'), 'diagnostic-point')
+                    report=c.container_diagnostics(row,self.image,self.frame,abi,security)
+                    phase=self.phase if self.phase in tuple(a+s for a in c.ABIS for s in ('-builtin','-derived')) else 'unclassified'
+                    detail=dict(status='captured',phase=phase,point=point,report=report)
+                    size=len(c.encode(detail))
+                    c.need(size <= 8192 and self.control+size <= 524288 and self.observed+size <= 2097152,
+                           'diagnostic-existing-budget')
+                    self.control+=size; self.observed+=size; self.profile_diagnostic=detail
+                except Exception:
+                    self.profile_diagnostic=dict(status='unavailable',authority=False)
+            raise # Preserve the exact first guard exception, even if diagnostics fail.
+
     def probe(self, abi, negative, policy):
         self.phase=abi+('-derived' if negative else '-builtin')
         name='adb-abi-'+self.owner[:24]+'-'+abi+('-d' if negative else '-b')
@@ -222,16 +241,16 @@ class Owner:
             options+=['--label',key+'='+value]
         cid=self.docker(*options,self.image,abi).strip().decode()
         c.need(re.fullmatch('[a-f0-9]{64}',cid), 'created-cid')
-        row=self.inspect(cid); c.container_readback(row,self.image,self.frame,abi,security)
+        row=self.inspect(cid); self.profile_readback(row,abi,security,'created')
         c.need(row['State']['Status'] == 'created' and self.freeze() == self.source, 'before-start')
         target=self.stage/(abi+('-derived' if negative else '-builtin')+'.readback')
         c.need(not target.exists(), 'fresh-copy')
         self.docker('cp',cid+':/canary',str(target))
         c.need(target.is_file() and not target.is_symlink() and target.stat().st_size <= 131072
                and c.sha(target.read_bytes()) == c.sha((self.stage/'canary').read_bytes()), 'executable-readback')
-        c.container_readback(self.inspect(cid),self.image,self.frame,abi,security)
+        self.profile_readback(self.inspect(cid),abi,security,'pre-start')
         wire=self.docker('start','--attach',cid,timeout=15,limit=4096,native=True)
-        ended=self.inspect(cid); c.container_readback(ended,self.image,self.frame,abi,security)
+        ended=self.inspect(cid); self.profile_readback(ended,abi,security,'post-exit')
         c.need(ended['State']['Running'] is False and ended['State']['ExitCode'] == 0
                and ended['State']['OOMKilled'] is False and not ended['State']['Error'], 'native-exit')
         if abi == 'x32' and not negative:
@@ -317,6 +336,8 @@ def main():
     except Exception as error:
         failure=error; result['failure']=dict(phase=owner.phase,reason=str(error) if isinstance(error,c.Refusal)
                                              else type(error).__name__,commands=owner.diagnostics)
+        if owner.profile_diagnostic is not None:
+            result['failure']['profile_diagnostic']=owner.profile_diagnostic
     finally:
         try:
             result['cleanup']=owner.cleanup()
