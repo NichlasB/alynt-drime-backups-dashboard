@@ -18,10 +18,11 @@ jobs:
     timeout-minutes: 2
     env:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
-      AUDIT_RUNNER_ENVIRONMENT: ${{ runner.environment }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
       - name: Read-only engine metadata; no acquisition or fixture creation
+        env:
+          AUDIT_RUNNER_ENVIRONMENT: ${{ runner.environment }}
         run: node scripts/ci/source-policy-ubi-engine-audit.mjs --approved-read-only-engine-audit

@@ -77,20 +77,31 @@ It is **metadata discovery**, not an ordered candidate/native qualification;
 campaign native7/10 and static acquisitions9 are unchanged until an actual
 qualification begins. No completed product milestone is credited for this audit.
 
-Seven Node groups use the actual collector/command boundary with inert fixtures:
+Eight Node groups use the actual collector/command boundary with inert fixtures:
 positive projection, admission-before-read, source/endpoint ordering, malformed
 or unknown profiles, fixed bounded readonly argv/environment, source/workflow
-exclusions and two source-backed assertion-killed job/endpoint guard removals.
+exclusions, supported workflow-context placement and two source-backed
+assertion-killed job/endpoint guard removals.
 Stubbed fixtures prove those logic contracts, not actual engine/default-policy
 enforcement. Exact-head ordinary CI must succeed before manual metadata dispatch.
 Actual job/source results and continuation or blocked gate follow below after
 execution; historical CI is not substituted for current verification.
 
-Executed local validation:7 new Node groups (two semantic controls), full Node
-81/81 with no skips; full isolated PHP2,608/23,454 with two existing local Sodium
+Executed local validation:8 new Node groups (two semantic controls), full Node
+82/82 with no skips; full isolated PHP2,608/23,454 with two existing local Sodium
 skips and no failures/errors. PHPCS, structure, asset build, Composer strict
 validation/audit, npm audit (zero vulnerabilities), owning local links and diff
 checks pass. Source-scoped review confirms fixed read-only argv, bounded private
 child environment, no raw metadata/exception disclosure and no existing static/
 native workflow or production change. No whole-plugin release-readiness,
 Database Review, actual import or kernel-enforcement claim is refreshed.
+
+Publication recovery cycle1: initial head dfc5b8a registered a workflow parse
+failure [41632527238](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41632527238)
+with zero jobs, not a native attempt. Source audit against GitHub's official
+[context availability table](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#context-availability)
+identifies that runner is unavailable in job-level env and supported in step env.
+A red placement regression is added before moving the same github-hosted
+identity expression to the audit step; the guard is preserved, not removed.
+Fresh ordinary exact-head CI is required before any dispatch. No native/resource
+operation or failed qualification has happened during this workflow repair.

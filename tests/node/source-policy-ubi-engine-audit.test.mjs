@@ -97,3 +97,10 @@ test('source-backed job-order and endpoint guard removals are assertion-killed w
     assert.throws(()=>witness(mutant),assert.AssertionError);
   }
 });
+
+test('runner context is evaluated only in the supported step environment, never job-level env',()=>{
+  const workflow=readFileSync(new URL('../../.github/workflows/source-policy-ubi-engine-audit.yml',import.meta.url),'utf8');
+  const [before,steps]=workflow.split('    steps:\n');
+  assert.ok(!before.includes('${{ runner.'));
+  assert.match(steps,/      - name: Read-only engine metadata; no acquisition or fixture creation\n        env:\n          AUDIT_RUNNER_ENVIRONMENT: \$\{\{ runner.environment \}\}/);
+});
