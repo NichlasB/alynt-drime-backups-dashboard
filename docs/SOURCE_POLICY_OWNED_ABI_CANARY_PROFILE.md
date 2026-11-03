@@ -1,5 +1,65 @@
 # Owned Native ABI Canary Execution Profile
 
+## Final approved attempt: compatibility verified; startup fails; ceiling reached — 2026-11-03
+
+Repair **9425c79110111d0243e727297c6e235bf1ba9333** has successful
+[ordinary CI41700628672](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41700628672):
+PHP7.4 **2,610/23,464 assertions**, PHP8.3 **2,610/23,469**, Node88/88 each;
+no failures/skips and zero Composer/npm advisories. Local21 isolated groups,
+bridge1/4 and full local2,610/23,462 pass (two existing local Sodium skips).
+
+The one approved final [native run41701111079](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41701111079),
+attempt1/job126144319258, fails **2026-11-03 19:12:53–19:12:55 UTC**. Both repaired
+created/pre-start profile checks now pass in the real engine, as do source/state
+and copied-executable hash readbacks. There is no profile mismatch diagnostic.
+The first amd64 builtin control reaches **docker start --attach**, which returns
+CLI status1 and157 stderr bytes, then raises bounded-command-failed. No container
+syscall observation is admitted; no derived-policy/i386/x32 container control runs.
+
+The stderr SHA256 is
+`80a868096821299612792f8e0917bc2abf47d10457d368b829edc8e23bdf720e`.
+Raw text was deliberately not retained by the existing bounded runner. The exact
+daemon/runc/attach failure category therefore remains **unestablished**; do not
+guess a missing dependency, exec format, AppArmor, seccomp or namespace cause.
+No post-start state/exit/loaded-policy receipt was reached before cleanup, so do
+not claim either successful startup or that no process could have started.
+Native-output accounting180 includes23 harmless host bytes plus157 CLI stderr
+bytes, **not180 bytes of container syscall evidence**.
+
+| Actual binding/fact | Value |
+|---|---|
+| Source cohort |`999cda99026027fb9ca4ea733210847280702e6650031e0788560a79cf620e33`|
+| Owned image |`sha256:87116c3e6c9f9bfbdd6ae826ae25125bdb88aacb11d0bd325528db78ca666585`|
+| Canary/host/policy hashes |same exact three hashes as preceding attempts |
+| Runtime/tools/kernel |same pinned reported versions/tool hashes/kernel/config as preceding attempt |
+| Harmless host only |UID1001,NNP0,seccomp0;amd64/i386 getpid2287;x32 getpid-38 |
+| Observed bytes |48,089 primary;41 independent cleanup |
+
+Primary cleanup removes the proven owned container, imported image and staging
+files and reports **containers0/images0/stage_absent=true**. The separate always-
+run cleanup succeeds at19:12:55 UTC and independently confirms the same absence.
+Direct owned command children return and are reaped; Actions artifacts API0,
+no retained fixture files. No installation, candidate execution, SQL, installed-
+site, release or production operation occurred. SQL guards/budgets, native C and
+workflow are unchanged. Exact repair head has two successful ordinary checks,
+one failed native check, legacy status contexts0. Do not call all checks green.
+
+Implementation-plan progress: canonical namespace and explicit default-AppArmor
+compatibility are physically verified through pre-start readback; startup/syscall
+qualification is still blocked. Campaign remains **8/10 completed milestones,
+native10/10,static9**. No milestone credit for repair/retry/docs. The authorized
+native ceiling is exhausted; no rerun, changed workflow dispatch, alternative lab
+or implicit reset is allowed. Only this owning evidence closeout and ordinary
+exact-head publication verification continue under the current approval.
+
+**Recommended next gated slice: Repository-Only Bounded Owned-Canary Startup-
+Failure Evidence and Recovery Design (No Native Rerun).** Define finite, non-secret
+operation/failure-category diagnostics that preserve the first rejection and
+existing budgets, with source-backed synthetic regressions and no acceptance
+changes. Do not infer the lost stderr or extend execution authority. Any later
+physical attempt needs an explicit new campaign/attempt allowance after that
+evidence contract is reviewed; it is not authorized by this recommendation.
+
 ## Approved canonical UTS / explicit default-AppArmor repair — 2026-11-03
 
 User approval covers the identified fixed-profile compatibility repair and

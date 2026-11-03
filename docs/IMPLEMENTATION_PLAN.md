@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Canonical compatibility physically passes; native startup blocked; 10/10 used — 2026-11-03
+
+Repair9425c79 passes [ordinary CI41700628672](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41700628672)
+(PHP7.4/8.3 each2,610 tests;Node88/88;21 isolated groups). The final approved
+[native run41701111079](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41701111079)
+passes canonical UTS/explicit default-AppArmor and executable-byte checks in the
+real lab, then the first builtin start/attach command fails status1 with157
+withheld stderr bytes. Exact startup cause and runtime state are not established;
+no syscall qualification or negative/compat controls are admitted. Do not invent
+a daemon/dependency/security failure from a hash. Primary and independent cleanup
+confirm containers0/images0/stage absent; artifacts0. SQL/candidate/site/wiring
+and all budgets remain unchanged.
+
+Implementation-plan progress: the two compatibility blockers are resolved through
+real pre-start readback, but physical ABI qualification remains incomplete.
+Campaign **8/10 milestones,native10/10,static9**; no repair/retry/docs product
+credit. Native allowance is exhausted—no further attempt or implicit reset.
+**Recommended next gated slice: Repository-Only Bounded Owned-Canary Startup-
+Failure Evidence and Recovery Design (No Native Rerun)**, finite safe diagnostics
+and synthetic tests only; any later physical retry requires explicit new
+campaign/attempt authority. See the [owning actual-result record](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#final-approved-attempt-compatibility-verified-startup-fails-ceiling-reached--2026-11-03).
+
 ## Approved canonical UTS / explicit default-AppArmor compatibility repair — 2026-11-03
 
 The user approves the [fixed compatibility repair and final campaign proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#approved-canonical-uts--explicit-default-apparmor-repair--2026-11-03).
