@@ -1,5 +1,20 @@
 # Owned Native ABI Canary Execution Profile
 
+## Startup-failure evidence/recovery design approved — 2026-11-03
+
+The [repository-only design](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_DESIGN.md)
+binds finite non-authoritative diagnostics to the actual fixed CLI operation,
+preserves primary failure/budgets, and projects optional later state only from
+an already-existing owned cleanup row. No implementation, new inspect/exec/log
+read, raw-message retention, acceptance change or native attempt occurs here.
+Read-only pinned CLI source confirms attach/inspect can precede daemon start;
+status1 alone does not establish startup stage or container exit. Historical
+stderr remains unavailable; no cause is reconstructed from its length/hash.
+Campaign8/10 milestones,native10/10,static9 are not reset or incremented.
+Next gated slice: the design's combined **repository-only safety foundation and
+dormant harness integration**, isolated tests only and no native rerun. A later
+physical proof still needs separately renewed bounded native authority.
+
 ## Final approved attempt: compatibility verified; startup fails; ceiling reached — 2026-11-03
 
 Repair **9425c79110111d0243e727297c6e235bf1ba9333** has successful

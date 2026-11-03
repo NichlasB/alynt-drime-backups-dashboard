@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved repository-only startup-failure evidence/recovery design — 2026-11-03
+
+The [startup-failure design](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_DESIGN.md)
+defines a closed operation/source/owner-bound diagnostic packet, bounded message-
+to-enum projection and immutable first-failure capture. It distinguishes a
+submitted Docker CLI command from daemon start/container-exit evidence. Reuse
+only the existing first owned cleanup readback for optional later state context;
+no new command, raw-message logging, acceptance change, budget increase or retry.
+Historical157-byte stderr remains unavailable and its cause unestablished.
+
+Implementation-plan progress: the missing startup-evidence contract is designed,
+not implemented or physically qualified. Current approval is design-only through
+validation/publication/exact-head CI. Campaign8/10 milestones,native10/10,static9
+remain unchanged; no native dispatch, allowance reset or product credit.
+**Recommended next gated slice: Repository-Only Bounded Startup-Failure Evidence
+Safety Foundation and Dormant Harness Integration (Isolated Tests Only; No Native
+Rerun)**, one coherent pure/owner implementation with synthetic source-backed
+regressions and ordinary CI. A later physical attempt requires separate explicit
+new native allowance after that evidence contract is implemented and reviewed.
+
 ## Canonical compatibility physically passes; native startup blocked; 10/10 used — 2026-11-03
 
 Repair9425c79 passes [ordinary CI41700628672](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41700628672)
