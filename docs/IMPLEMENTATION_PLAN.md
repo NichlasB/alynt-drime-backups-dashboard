@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## UBI connection-free runtime admission designed; dormant foundation gated — 2026-11-03
+
+The approved [runtime-admission design](SOURCE_POLICY_UBI_CONNECTION_FREE_RUNTIME_ADMISSION_DESIGN.md)
+keeps the existing native image/version guards unchanged and specifies a separate
+default-off version-only scope. It identifies the same-attempt verified-byte
+import bridge needed to avoid an unmetered second pull, engine/file readback,
+non-weaker container-scoped effect denial (network:none alone is insufficient),
+bounded direct argv/output and exact owned cleanup. Import/default-profile/kernel
+feasibility and all actual execution remain unproven and disabled. Documents only.
+
+Implementation-plan progress: the next runtime trust/identity/effect boundaries
+are explicit, not activated. **Recommended next gated slice: Repository-only
+Socket-Free UBI Engine-Import and Launch-Admission Safety Foundation**, pure
+contracts/byte fixtures/inert adapters and meaningful isolated tests only through
+validation/publication/exact-head CI; no acquisition, engine operations, policy
+application, loading, execution, SQL or production wiring. Campaign8/10 milestones,
+native7/10,static9 unchanged; no design/commit credit. Earlier gates below are history.
+
 ## Actual static ELF/provider closure succeeds; runtime admission boundary — 2026-11-02
 
 The campaign [fixed-entry integration and actual proof41532634830](SOURCE_POLICY_UBI_LIBGCC_ENTRY_INTEGRATION.md#actual-exact-head-static-closure-and-owned-cleanup)
