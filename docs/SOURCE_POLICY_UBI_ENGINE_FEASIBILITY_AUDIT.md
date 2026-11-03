@@ -105,3 +105,86 @@ A red placement regression is added before moving the same github-hosted
 identity expression to the audit step; the guard is preserved, not removed.
 Fresh ordinary exact-head CI is required before any dispatch. No native/resource
 operation or failed qualification has happened during this workflow repair.
+
+## Actual exact-head audit and immutable-source comparison
+
+Recovered implementation head **6ea18d483746f4694e0d447c0fb7a349491307d0**:
+[ordinary CI41632777798](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41632777798)
+succeeds. Actual logs show PHP7.4 **2,608/23,456 assertions**, PHP8.3
+**2,608/23,461**; Node82/82 in each, no failures/skips, zero Composer/npm
+vulnerabilities. The earlier invalid workflow never started a job; it is retained
+as recovery evidence, not erased or represented as green.
+
+The separately dispatched exact-head read-only
+[audit41633106695](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41633106695),
+attempt1/job125907401869, succeeds **2026-11-03 12:07:48–12:07:59 UTC**.
+Actual output (not fixture values):
+
+| Observed field | Value |
+|---|---|
+| Runner image | ubuntu-24.04 /20261025.353.1 |
+| Engine/API | Docker28.0.4 /1.48 |
+| Reported engine commit | `6430e49` |
+| OS/architecture/storage | linux /amd64 /overlay2 |
+| Security options | apparmor; seccomp profile=builtin; cgroupns |
+| Kernel | `7.0.0-1017-azure` |
+| Exact three-file audit source SHA256 | `70f0cd0062c207c8674e6c62699ea00bc8ba3539f30051ee3d7da8e7c02a22f8` |
+| Resources/artifacts | resources_created0; workflow artifacts API0 |
+
+Image loading, candidate execution, database operations, qualification and
+runtime grant are false. `default_policy_source_established=false` remains
+truthful: engine/build metadata and public source mapping do not attest the
+effective builtin filter or a valid derived container profile.
+
+Official annotated v28.0.4 tag dereferences to full Moby commit
+**6430e49a55babd9b8f4d08e70ecb2b68900770fe**, matching the observed short commit.
+Read-only GitHub source API returns the following immutable bytes, hashed in
+memory (no downloaded profile/source file, runtime load or policy application):
+
+| Official source at that commit | Bytes | SHA256 |
+|---|---:|---|
+| [profiles/seccomp/default.json](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/profiles/seccomp/default.json) |12,828|`9c1025c88ccaa517b648da571961838744ea2137f176bfe6a48b21294cae9c76`|
+| [profiles/seccomp/default_linux.go](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/profiles/seccomp/default_linux.go) |15,905|`4529ff8a038f4365ba865d30be2468f6c64b80c832567d978e91906999cc632b`|
+| [profiles/seccomp/seccomp_linux.go](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/profiles/seccomp/seccomp_linux.go) |4,742|`b95bbcb005cd7f049b033e4f64d91a7f35c2faf707198bf2218075298d5c465e`|
+| [image/tarexport/load.go](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/image/tarexport/load.go) |11,786|`0eb425cc99c5bf76dac764cfd51892f93a8817751f463f4d973b4c983208421e`|
+
+The actual pinned JSON has31 rules,8 argument-filter rules,22 includes rules and3
+excludes rules, ALLOW and ERRNO actions, and amd64→x86/x32 mappings. Feeding these
+exact source bytes to the **unchanged actual pure `restrict_policy`** yields
+`Refusal('policy-shape')`. This is an executed compatibility comparison, not an
+invented failure or an engine filter proof. A synthetic tiny allowlist cannot
+substitute for it. The Go builtin constructor/resolver also needs preservation
+and source/profile correspondence, not only a version-string match.
+
+## Outcome, proof limits and next genuine gate
+
+**Read-only prerequisite audit complete; approved physical import/containment
+proof blocked before resource creation.** No acquisition, second pull, static
+rerun, Docker import/create/start, containment canary, profile application, fixture,
+SQL or candidate execution occurred. No owned resources require deletion; this
+is not a physical cleanup/containment claim. Artifact count0 is independently
+read from the Actions API. Existing guards, budgets, pins and wiring are intact.
+
+Do not repair this by broadening the old simple-profile guard, flattening real
+rules, dropping architectures/conditions, applying an unconfined/default-ALLOW
+profile or invoking only network:none. Such a real policy-admission decision is
+not an ordinary harness correction. The approved design explicitly requires a
+stop when non-weaker default-profile/ABI semantics cannot yet be established.
+
+**Recommended next gated slice: Repository-only Candidate-Bound Moby
+Builtin-Profile Preservation and ABI-Complete Effect-Denial Design.** Approve
+design-only work for a source-pinned, demonstrably non-weaker derivation that
+preserves actual conditional/argument/errno rules and all admitted ABIs, or
+rejects unsupported semantics. Define source-to-builtin correspondence and
+positive/denial control prerequisites before implementing or applying a real
+profile. Keep acquisition, import, native/canary/candidate execution, SQL and
+production wiring disabled during that design. After separately approved
+implementation, return to the retained owned import/containment proof authority;
+do not infer fresh static or engine evidence from this historical audit.
+
+Implementation-plan progress: a real source/profile compatibility blocker is now
+established before spending candidate resources. Campaign remains **8/10
+milestones,native7/10,static acquisitions9**; no metadata/repair/docs milestone
+credit. This approval has not completed actual import or kernel qualification.
+Docs-only closeout preserves the three audited source files; final publication
+head, actual CI checks/counts and clean/remote state are verified at handoff.

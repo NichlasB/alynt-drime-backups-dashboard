@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## UBI engine audit complete; real builtin-policy admission blocked — 2026-11-03
+
+The actual [exact-head audit41633106695](SOURCE_POLICY_UBI_ENGINE_FEASIBILITY_AUDIT.md#actual-exact-head-audit-and-immutable-source-comparison)
+at6ea18d4, after recovered ordinary CI41632777798 success, observes Docker28.0.4 /
+6430e49 /builtin seccomp on ephemeral Ubuntu24.04. Immutable official source at
+the matching full commit has conditional/argument/ERRNO rules and x86/x32 ABI
+mapping. The unchanged actual pure guard rejects its JSON with policy-shape.
+No candidate acquisition/import/containers/canaries/profile/SQL operations occur;
+resources0, artifacts0. This is metadata/compatibility evidence, not physical
+import, builtin-filter attestation or containment/cleanup qualification.
+
+Implementation-plan progress: genuine real-profile semantics now block the
+approved owned proof before resource creation. **Recommended next gated slice:
+Repository-only Candidate-Bound Moby Builtin-Profile Preservation and ABI-Complete
+Effect-Denial Design**, design-only source/baseline correspondence and provably
+non-weaker rule/ABI preservation before implementation/application. Keep all
+acquisition/import/native/candidate execution, SQL and production wiring disabled.
+Campaign8/10 milestones,native7/10,static9 unchanged; no preparatory/retry/docs
+credit. The later owned proof remains unfinished; earlier gates are historical.
+
 ## Approved UBI import/containment proof: audit first — 2026-11-03
 
 The approved [feasibility audit](SOURCE_POLICY_UBI_ENGINE_FEASIBILITY_AUDIT.md)
