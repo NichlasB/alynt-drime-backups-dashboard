@@ -1,5 +1,19 @@
 # Owned Native ABI Canary Execution Profile
 
+## Source-envelope coverage foundation: no native execution — 2026-11-03
+
+The approved [source-envelope foundation](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md#approved-isolated-safety-foundation-and-dormant-integration--2026-11-03)
+implements the five frozen recipes, strict independent DATA binding and dormant
+first-attempt integration. Twelve new isolated groups/five semantic controls pass,
+with the original21/15 groups and unchanged parent parser/runner/cleanup guards.
+No native C/workflow/cohort/SQL/candidate/profile/budget/production change or
+historical-message reconstruction occurs. Cause/ABI coverage remain unknown;
+campaign8/10,static9 and 11 consumed attempts are unchanged. Next gated slice is
+one explicitly additional native source-envelope discrimination/cleanup proof
+at the published head after CI, targeting actual stream/source correlation and
+matched family versus unmatched—not a presumed fix. No allowance is granted here;
+an unmatched outcome requires stopping further blind retries/catalog growth.
+
 ## Unclassified daemon coverage and privacy-safe recovery design — 2026-11-03
 
 The approved [design](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md)

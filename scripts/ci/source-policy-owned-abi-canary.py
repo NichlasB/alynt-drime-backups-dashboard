@@ -34,6 +34,8 @@ class Owner:
         self.cleaning=False; self.cleanup_bytes=0
         self.diagnostics=[]; self.profile_diagnostic=None
         self.startup_failure=None; self.command_cleanup_issue=False
+        self.startup_source_envelope=None; self.startup_source_unavailable=False
+        self.startup_source_attempted=False
         self.startup_cleanup_attempted=False; self.startup_cleanup_unavailable=False
         env=os.environ
         c.need(sys.argv[1:] in (['--approved-owned-abi-proof'], ['--cleanup-only'])
@@ -147,6 +149,24 @@ class Owner:
             self.control+=size;self.observed+=size;self.startup_failure=packet
         except Exception:
             self.startup_failure=dict(status='unavailable',authority=False)
+        # Optional coverage cannot downgrade the already-retained original failure.
+        try:self.capture_startup_source(self.startup_failure,binding,bytes(err))
+        except Exception:self.startup_source_unavailable=True
+
+    def capture_startup_source(self, packet, binding, raw):
+        if getattr(self,'startup_source_attempted',False):return
+        self.startup_source_attempted=True
+        try:
+            report=c.startup_source_envelope(packet,binding,raw)
+            if report is None:return
+            size=len(c.encode(dict(startup_source_envelope=report)))-1
+            # Keep 256 bytes of serialization room for the original bounded
+            # cleanup projection; this does not increase or spend a new quota.
+            c.need(len(c.encode(dict(startup_failure=packet,startup_source_envelope=report)))+256<=4096 and self.control+size<=524288
+                   and self.observed+size<=2097152,'source-envelope-existing-budget')
+            self.control+=size;self.observed+=size;self.startup_source_envelope=report
+        except Exception:
+            self.startup_source_unavailable=True # Absence means unavailable; no raw/over-budget fallback.
 
     def capture_startup_cleanup(self, cid, row):
         try:
@@ -413,6 +433,8 @@ def main():
         result['native_output_bytes']=owner.native
         if owner.startup_failure is not None:
             if failure is not None:result['failure']['startup_failure']=owner.startup_failure
+        source=getattr(owner,'startup_source_envelope',None)
+        if source is not None and failure is not None:result['failure']['startup_source_envelope']=source
         if owner.command_cleanup_issue:result['command_cleanup_issue']=True
         if owner.startup_cleanup_unavailable:result['startup_cleanup_unavailable']=True
         wire=c.encode(result); c.need(len(wire) <= 65536,'summary-budget')

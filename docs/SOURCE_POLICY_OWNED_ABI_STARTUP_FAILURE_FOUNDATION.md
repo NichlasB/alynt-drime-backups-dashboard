@@ -1,5 +1,12 @@
 # Bounded Startup-Failure Evidence Safety Foundation
 
+The separately approved [source-envelope implementation](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md#approved-isolated-safety-foundation-and-dormant-integration--2026-11-03)
+adds optional enum-only coverage after this original first failure is retained.
+This foundation's scanner/builder/validator/cleanup projection remain unchanged;
+no historical message, raw disclosure, new read or native allowance is added.
+Its isolated validation and exact next gated discrimination proof are recorded
+there; physical ABI qualification remains blocked.
+
 The separately approved [unclassified-daemon recovery design](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md)
 proposes five source-anchored whole-envelope cases and separate enum-only DATA.
 It does not change this implemented foundation, backfill its unknown native

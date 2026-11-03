@@ -227,6 +227,87 @@ START_TOPICS=('permission','missing-path','exec-format','apparmor','seccomp','cg
 START_KINDS=('spawn-error','cli-exited','timeout','overflow','command-error')
 START_STATES=('created','restarting','running','removing','paused','exited','dead')
 
+# Whole source envelopes, not a decoder for the historical unknown message.
+# Provenance/literal recipes are frozen here; no runtime source fetch or override.
+SOURCE_ENVELOPES=(
+    ('start-paused','moby/moby@6430e49a55babd9b8f4d08e70ecb2b68900770fe:daemon/start.go#32',
+     'cannot start a paused container, try unpause instead'),
+    ('start-removing','moby/moby@6430e49a55babd9b8f4d08e70ecb2b68900770fe:daemon/start.go#42,90',
+     'container is marked for removal and cannot be started'),
+    ('attach-paused','moby/moby@6430e49a55babd9b8f4d08e70ecb2b68900770fe:daemon/attach.go#36',
+     'container {cid} is paused, unpause the container before attach'),
+    ('attach-restarting','moby/moby@6430e49a55babd9b8f4d08e70ecb2b68900770fe:daemon/attach.go#39',
+     'container {cid} is restarting, wait until the container is running'),
+    ('api-empty-message-500','docker/cli@b8034c0ed70494a90c133461d145cd072d920d7c:vendor/github.com/docker/docker/client/request.go#262',
+     'API returned a 500 (Internal Server Error) but provided no error-message'),
+)
+SOURCE_ENVELOPE_SHA=sha(encode(SOURCE_ENVELOPES)) # Cached catalog bookkeeping, not a message lookup.
+
+
+def _source_templates(cid):
+    need(type(cid) is str and re.fullmatch('[a-f0-9]{64}',cid),'source-envelope-cid')
+    return tuple((family,('Error response from daemon: '+body.replace('{cid}',cid)).encode('ascii'))
+                 for family,_,body in SOURCE_ENVELOPES)
+
+
+def _source_envelope_scan(raw, cid):
+    if type(raw) is not bytes or len(raw)>4096:return 'invalid',None,0
+    # Charge one correlation-hash pass (performed by the caller), one validation
+    # pass, two fixed CID slots and the cached digest. The view makes no raw copy.
+    work=2*len(raw)+128+64
+    end=len(raw)
+    if raw.endswith(b'\n'):
+        end-=1
+        if end and raw[end-1]==13:end-=1
+    if not 0<end<=1024:return 'invalid',None,work
+    for index,byte in enumerate(raw):
+        if index<end and not 32<=byte<=126:return 'invalid',None,work
+    candidate=memoryview(raw)[:end];matches=[]
+    for family,envelope in _source_templates(cid):
+        work+=len(envelope)
+        if candidate == envelope:matches.append(family)
+    need(work<=2*len(raw)+1024,'source-envelope-work')
+    if len(matches)>1:return 'ambiguous',None,work
+    return ('matched',matches[0],work) if matches else ('unmatched',None,work)
+
+
+def _source_eligible(packet):
+    return packet['analysis']==dict(status='unclassified',layers=['docker-daemon'],topics=['unknown']) \
+        and packet['streams']['stdout_complete'] and packet['streams']['stderr_complete']
+
+
+def startup_source_envelope(packet, expected, raw):
+    validate_startup(packet,expected)
+    if not _source_eligible(packet):return None
+    status='unavailable';family=None
+    if raw is not None:
+        need(type(raw) is bytes and len(raw)<=4096 and len(raw)==packet['streams']['stderr_bytes']
+             and sha(raw)==packet['streams']['stderr_sha'],'source-envelope-correlation')
+        status,family,_=_source_envelope_scan(raw,expected['cid'])
+    result=dict(format='ADBOWNEDABISOURCEENV1',operation_sha=sha(encode(expected)),
+                stderr_sha=packet['streams']['stderr_sha'],catalog_sha=SOURCE_ENVELOPE_SHA,
+                status=status,family=family,authority=False,qualification=False)
+    validate_startup_source(result,packet,expected)
+    return result
+
+
+def validate_startup_source(report, packet, expected):
+    validate_startup(packet,expected)
+    need(_source_eligible(packet),'source-envelope-eligibility')
+    need(type(report) is dict and set(report)=={'format','operation_sha','stderr_sha','catalog_sha',
+         'status','family','authority','qualification'} and type(report['format']) is str
+         and report['format']=='ADBOWNEDABISOURCEENV1'
+         and all(type(report[key]) is str for key in ('operation_sha','stderr_sha','catalog_sha'))
+         and report['operation_sha']==sha(encode(expected)) and report['stderr_sha']==packet['streams']['stderr_sha']
+         and report['catalog_sha']==SOURCE_ENVELOPE_SHA and report['authority'] is False
+         and report['qualification'] is False,'source-envelope-packet')
+    need(type(report['status']) is str and report['status'] in ('matched','unmatched','ambiguous','invalid','unavailable')
+         and (report['status']=='matched' and type(report['family']) is str
+              and report['family'] in tuple(row[0] for row in SOURCE_ENVELOPES)
+              or report['status']!='matched' and report['family'] is None),'source-envelope-result')
+    need(len(encode(report))<=512
+         and len(encode(dict(startup_failure=packet,startup_source_envelope=report)))<=4096,'source-envelope-size')
+
 
 def startup_binding(frame, image, cid, abi, negative):
     need(type(frame) is dict and frame == context(frame.get('head'),frame.get('run'),

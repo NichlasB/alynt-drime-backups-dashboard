@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Source-anchored envelope foundation implemented; isolated only — 2026-11-03
+
+The approved [foundation and dormant integration](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md#approved-isolated-safety-foundation-and-dormant-integration--2026-11-03)
+implements five exact source envelopes and a separately bound enum-only report,
+preserving the original packet/parser/guard/runner/probe/cleanup functions.
+Twelve new groups, five semantic controls and over1,100 generated bound cases
+pass; existing21/15 groups and full local2,612 PHP tests also pass (two existing
+Sodium skips). No raw output, new read, command, workflow, budget/acceptance,
+SQL/candidate or production change. Owning record details proof limits and
+validation/publication/ordinary exact-head CI requirements.
+
+Implementation-plan progress: the selected diagnostic coverage contract is now
+implemented/isolated-validated; the actual startup cause and ABI qualification
+remain blocked. Campaign8/10 milestones,static9, original10/10 plus additional1/1
+consumed (11 native total) unchanged; no native allowance or product credit.
+**Recommended next gated slice: One Bounded Native Source-Envelope Discrimination
+and Owned Cleanup Proof**, with one newly explicit additional attempt, exact
+published head, fresh prerequisites and unchanged guards. Target the new native
+source/catalog/stream correlation and matched-family versus unmatched distinction,
+not assumed ABI success. If unmatched, stop blind retries/catalog expansion.
+
 ## Unclassified startup diagnostic coverage/recovery design — 2026-11-03
 
 The approved [repository-only design](SOURCE_POLICY_UNCLASSIFIED_STARTUP_DIAGNOSTIC_DESIGN.md)

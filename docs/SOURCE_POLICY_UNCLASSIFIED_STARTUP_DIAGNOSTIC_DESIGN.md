@@ -1,5 +1,92 @@
 # Unclassified Daemon Startup Diagnostic Coverage and Privacy-Safe Recovery Design
 
+## Approved isolated safety foundation and dormant integration — 2026-11-03
+
+The user separately approves implementation, validation, commit/push and ordinary
+exact-head CI using isolated tests only. This is the narrowly approved diagnostic
+privacy/owned-harness scope, not a general R3 authority increase. Restore/review
+baseline **4995c76b28ca44dac71ec6b6ff5f5de255d1d02d** is clean/synced and its
+[ordinary CI41722432712](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41722432712)
+is reverified successful. No native dispatch, new protected read, SQL, installed
+site, candidate execution, production wiring, package or release is authorized.
+
+The [existing contract](../scripts/manual/source_policy_abi_canary_contract.py)
+now holds exactly the five pinned recipes and provenance below. Their canonical
+catalog SHA256 is
+`c420258fa529bab9bdeb2bc2ab701accba01d7303f7fe1233efab3a246be1551`.
+The supplementary ADBOWNEDABISOURCEENV1 report strictly binds validated operation,
+complete stderr hash and catalog. Actual complete bytes are required for a match;
+missing bytes are unavailable, and foreign/type/length/hash failures precede
+matching. Complete unknown envelopes remain unmatched; no raw text is emitted.
+Matched families are source-format observations only, never actual API-stage,
+HTTP-status, root-cause, state, execution or qualification receipts.
+
+The [owner](../scripts/ci/source-policy-owned-abi-canary.py) attempts supplemental
+capture only after retaining the original failure. A first-attempt latch also
+prevents later replacement after a diagnostic fault. Optional failures cannot
+downgrade the original packet/refusal or trigger a retry. The old packet builder,
+validator, broad scanner, cleanup projection, containment guard, command runner,
+probe and cleanup functions are byte-identical to this approved baseline.
+No workflow, native C, source-cohort member, SQL/candidate policy or plugin
+runtime path changes. The new source report is separately optional in the outer
+failure summary; no historical receipt is rewritten or backfilled.
+
+The largest positive synthetic report is370 bytes, below512. The combined
+serialized startup fields, including field names, remain within4KiB. Admission
+leaves256 bytes of serialization headroom for the original strictly bounded
+cleanup projection, without adding/spending a new quota. The entire new JSON
+member is charged to existing body-control/observation budgets. If no reserve
+fits, **absence means unavailable**; an internal fixed unavailable flag is kept,
+but no unbudgeted output marker/raw fallback is published. This refines the
+design's unavailable indication without losing original evidence or raising a
+limit. Cached catalog bookkeeping, five bounded comparisons and a zero-copy
+input view preserve the combined16-input-pass plus1024-unit work ceiling.
+
+[New isolated tests](../tests/support/source_policy_abi_envelope_test.py) pass
+**12 groups**, zero failures/errors/network calls. Red evidence first showed the
+missing contract/integration. All five actual recipes have useful synthetic
+positive matches with no/LF/CRLF endings; unknown, quoted/foreign CID, partial,
+hostile, swapped, ambiguous and over-budget cases remain refused/non-matching.
+Five in-memory source-backed semantic controls discriminate removed whole-match,
+CID binding, hash correlation, first-attempt and quota guards. No tracked source
+is mutated for controls, and no artificial native success path is introduced.
+The existing21 and15 groups also pass; PHP bridge **3 tests/12 assertions**.
+An additional1,176 generated shape/length cases plus fixed boundaries check the
+combined work bound. Actual owner/outer-summary and existing cleanup functions
+run with fake processes/selectors/OS reads/signals and virtual clocks; owned
+temporary filesystem fixtures are cleaned. No Docker/compiler/canary child or
+engine is used; the existing inert Python/PHP test bridge is ordinary test IO.
+
+Review tightened first-attempt retention and full JSON-member accounting while
+preserving parent behavior. Local full PHPUnit passes **2,612 tests/23,470
+assertions**, two existing local Sodium skips. PHPCS255 files, Node88/88,
+structure/build, strict Composer validation, Composer/npm audits (zero advisories)
+and whitespace checks pass. Source-scoped engineering review covers privacy,
+binding/ordering, bounds, optional-failure isolation, cleanup and test integrity;
+it does not complete canonical whole-plugin security/Database/release reviews.
+Commit/push and ordinary exact-head CI verification are required before handoff.
+
+Implementation-plan progress: the approved source-anchored diagnostic contract
+and dormant integration are implemented and isolated-validated. The actual lost
+message/cause and physical ABI qualification remain unestablished. Campaign
+**8/10 milestones,static9; original native10/10 plus additional1/1 consumed
+(11 total)** is unchanged. No diagnostic implementation/docs credit is added as
+a product milestone, and no attempt allowance is renewed.
+
+**Recommended next gated slice: One Bounded Native Source-Envelope Discrimination
+and Owned Cleanup Proof**, on the published exact head after ordinary CI, requiring
+one explicitly additional attempt, fresh pinned prerequisites and unchanged
+guards/budgets. Its specific new evidence target is the source/catalog/complete-
+stream-correlated report under genuine CLI failure: a whole source-family match
+or explicit unmatched outcome, not a promise of ABI success. This is a proposed
+native integration qualification of the new DATA path, not a retry justified
+solely by catalog size. If unmatched, stop catalog growth/blind retries and seek
+a separate privacy/operational evidence-channel decision. No raw disclosure,
+State.Error read, profile change, SQL, candidate or production operation is
+included. Current approval does not authorize that native dispatch.
+
+The following design-stage scope and future-test statements remain historical.
+
 ## Authority and verified baseline — 2026-11-03
 
 The user approves repository-only **design**, validation, commit/push and ordinary
