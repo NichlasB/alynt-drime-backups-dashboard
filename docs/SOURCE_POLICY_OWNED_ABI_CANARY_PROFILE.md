@@ -1,5 +1,77 @@
 # Owned Native ABI Canary Execution Profile
 
+## Fresh diagnostic attempt: readback-model blockers identified — 2026-11-03
+
+Published diagnostics **c24226c1a598a3b0c209ddc726c91780f988c4a7** have successful
+[ordinary CI41683281342](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41683281342):
+PHP7.4 **2,610/23,464**, PHP8.3 **2,610/23,469**, Node88/88 each; no failures/skips,
+zero Composer/npm advisories. The authoritative guard remains byte-identical.
+
+The single approved fresh [native run41683627430](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41683627430),
+attempt1/job126083471886, fails **2026-11-03 17:22:39–17:22:40 UTC** at
+`amd64-builtin / created / container-command`. Its bounded first report contains
+exactly **root.AppArmorProfile** and **HostConfig.UtsMode** as mismatches;
+AppArmor category=empty,environment=empty,default_path_only=false,matched=false,
+authority=false. All other compared fields match. The original exception is
+preserved. No container start, network probe, derived-profile application or
+container ABI qualification occurs; the host observer alone emits23 native bytes.
+
+| Actual binding/fact | Value |
+|---|---|
+| Source cohort |`2565ee38d0155103e94dbea8b74a7a10ec139036cfa445a1735dc275de43d973`|
+| Owned image |`sha256:0c3c2a972fa885dc34983f01397c9f8a0938a5a76d2cdb13f7b235339c6d9a31`|
+| Compiled canary/host and policy |same exact three hashes as preceding attempt |
+| Runtime/compiler/kernel |same pinned runtime/tool hashes and kernel/config as preceding attempt |
+| Harmless host facts |UID1001,NNP0,seccomp0;amd64/i386 getpid2464;x32 getpid-38 |
+| Total observed output |39,636 bytes; independent cleanup41 bytes |
+
+Primary cleanup removes the owned created-but-never-started container, imported
+image and staging files, reporting containers0/images0/stage_absent=true. The
+separate always-run cleanup succeeds at17:22:41 UTC and independently confirms
+the same absence. Actions artifacts API0; no retained fixture files; owned direct
+command children returned and were reaped. No
+installation, candidate execution, SQL, LocalWP/site or production action. No
+second fresh attempt was dispatched under this approval. Exact diagnostic head
+has two successful ordinary checks, one failed native check, legacy contexts0.
+
+### Matching source interpretation, not a relaxed acceptance rule
+
+Read-only review of official Moby at6430e49a55babd9b8f4d08e70ecb2b68900770fe finds:
+
+- [HostConfig declares **UTSMode**](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/api/types/container/hostconfig.go),
+  not UtsMode. The existing guard and synthetic fixture share a wrong-case key.
+  The diagnostic identifies that lookup failure; it does not retain or prove
+  the actual canonical UTSMode value. Do not call this a host-namespace violation.
+- [parseSecurityOpt](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/daemon_unix.go)
+  assigns an explicit AppArmor request when present. [WithApparmor](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/oci_linux.go)
+  chooses the default for an empty, nonprivileged request at OCI construction.
+  Empty request metadata before startup is therefore not proof of an unconfined
+  running process. No process was started to establish loaded LSM enforcement.
+
+The19 isolated groups prove diagnostic/guard agreement, not that Docker emits
+the synthetic positive fixture. Real native evidence now exposes that shared
+model assumption. Do not silently accept empty AppArmor or missing namespace
+metadata, edit the pinned guard merely to go green, or infer all-ABI eligibility.
+
+**Recommended next gated slice: Owned Canary Canonical UTS Readback and Explicit
+Default-AppArmor Compatibility Repair, with One Fresh Qualification/Cleanup
+Attempt.** Correct the canonical key and require its private value, explicitly
+request the existing docker-default AppArmor profile, and match exactly the
+three intended security options (NNP, selected seccomp, fixed default AppArmor).
+Reject unconfined/custom/extra options, missing/host UTS and malformed data; use
+source-backed genuine-format regressions, then ordinary exact-head CI, fresh
+prerequisites and one approved attempt. This changes the fixed canary admission/
+construction contract, beyond this guard-preserving diagnostics approval; it
+does not authorize installation or changing a host policy. Preserve SQL lab
+guards, budgets and disabled candidate/production paths. A fresh attempt would
+consume native10/10; do not reset or extend the campaign limit implicitly.
+
+Implementation-plan progress: missing-field observability is resolved, and two
+concrete compatibility defects are identified. Physical qualification remains
+incomplete; campaign **8/10 milestones,native9/10,static9**, with no retry/docs
+product credit. Closeout changes only owning records; final docs exact-head CI
+must pass before handoff, without another native operation.
+
 ## Approved guard-preserving diagnostics and one fresh attempt — 2026-11-03
 
 The user approves recovery from the recorded pre-start refusal: add bounded

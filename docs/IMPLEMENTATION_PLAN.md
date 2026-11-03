@@ -1,5 +1,27 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Owned ABI diagnostics identify two compatibility defects; cleanup complete — 2026-11-03
+
+Diagnostics **c24226c** pass exact-head [ordinary CI41683281342](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41683281342).
+The one approved fresh [native run41683627430](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41683627430)
+again stops before any container start, now identifying empty AppArmor request
+metadata and the wrong-case HostConfig.UtsMode lookup. Matching official source
+declares UTSMode and distinguishes implicit default AppArmor from an explicit
+request. The synthetic positive fixture shared the incorrect key; isolated
+guard/diagnostic agreement did not prove genuine Docker compatibility. No guard
+was weakened. Primary/independent cleanup both confirm containers0/images0/stage
+absent; artifacts0. SQL/candidate/site/production paths remain untouched.
+
+Implementation-plan progress: observability blocker resolved; concrete readback/
+construction compatibility repair is the next meaningful gate. Campaign remains
+**8/10 milestones,native9/10,static9**; no qualification credit for the failed
+attempt. **Recommended next gated slice: Owned Canary Canonical UTS Readback and
+Explicit Default-AppArmor Compatibility Repair, with One Fresh Qualification/
+Cleanup Attempt**, canonical private UTS value plus exact explicit default-AppArmor/
+NNP/seccomp options, genuine-format regressions and fresh prerequisites; preserve
+all SQL guards/budgets and disabled candidate/wiring. A fresh attempt uses native
+10/10, with no implicit campaign extension. See the [owning actual-result record](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#fresh-diagnostic-attempt-readback-model-blockers-identified--2026-11-03).
+
 ## Approved owned ABI diagnostics recovery — 2026-11-03
 
 The user approves [guard-preserving per-field diagnostics and one fresh attempt](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#approved-guard-preserving-diagnostics-and-one-fresh-attempt--2026-11-03).
