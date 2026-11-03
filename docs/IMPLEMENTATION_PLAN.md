@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved separate owned native ABI canary profile — 2026-11-03
+
+The user approves the [separate default-off execution profile](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md)
+and one ordered bounded proof/cleanup. Owned no-libc controls have real source/run
+identity, no candidate graph placeholders, no SQL role and no changes to the
+existing SQL lab. Existing-tool feasibility first, no installation/downloads.
+Isolated14 groups/five semantic controls discriminate positives, guard bypasses,
+readback/start order and foreign ownership. Local QA passes with the existing two
+Sodium skips; final ordinary exact-head CI precedes one manual native dispatch.
+
+Implementation-plan progress: the previously gated profile is now approved and
+implemented; native available-ABI controls, inactive-ABI limits and owned cleanup
+must still be established. Campaign remains8/10 milestones,native7/10,static9
+before dispatch; the one attempt consumes native8/10, not a counter reset. No
+candidate execution, SQL, LocalWP/site operation or production wiring. Earlier
+gates below are historical; source-stage commits do not require another approval.
+
 ## Campaign reaches native ABI canary execution-profile gate — 2026-11-03
 
 The [preservation foundation](SOURCE_POLICY_MOBY_PRESERVATION_FOUNDATION.md) and

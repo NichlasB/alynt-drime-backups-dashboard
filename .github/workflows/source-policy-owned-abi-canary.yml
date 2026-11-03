@@ -1,0 +1,39 @@
+name: Source-policy owned native ABI canary qualification
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact approved master head; owned canaries only, no candidate or SQL
+        type: string
+        required: true
+      enable_owned_abi:
+        description: Explicitly approved single bounded owned qualification and cleanup
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-legacy-ubi-feasibility
+  cancel-in-progress: false
+jobs:
+  canary:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master' && inputs.enable_owned_abi
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      ENABLE_OWNED_ABI: ${{ inputs.enable_owned_abi }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Existing-tool audit then one owned native attempt
+        env:
+          AUDIT_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+        run: python3 -I -B scripts/ci/source-policy-owned-abi-canary.py --approved-owned-abi-proof
+      - name: Independent owned-resource cleanup and absence reconciliation
+        if: always()
+        env:
+          AUDIT_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+        run: python3 -I -B scripts/ci/source-policy-owned-abi-canary.py --cleanup-only
