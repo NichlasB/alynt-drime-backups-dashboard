@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Additional startup-diagnostic attempt: unclassified; owned cleanup verified — 2026-11-03
+
+The user separately approves one bounded native diagnostic proof at c2e2b4a,
+not a campaign-limit reset. [Run41719960658](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41719960658)
+passes fresh prerequisites and pre-start profile/executable readbacks, then the
+first amd64 builtin CLI start fails1. The real operation-bound packet validates:
+complete157-byte stderr, daemon envelope, **unclassified/unknown**, and first
+owned cleanup state created/not running/OOMfalse/exit null. No raw message, cause,
+process-exit or syscall success is inferred. Primary and independent cleanup
+confirm containers0/images0/stage absent; uploaded artifacts0. See the
+[actual-result record](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#additional-authorized-startup-diagnostic-proof-unclassified-daemon-message--2026-11-03).
+
+Implementation-plan progress: first-failure capture and existing-row cleanup
+projection now have genuine native evidence, but startup cause and physical ABI
+qualification remain blocked. Campaign stays **8/10 milestones,static9**; original
+native allowance10/10 plus separately approved additional1/1 are consumed
+(11 total). No retry or implicit extension is authorized. Guards, quotas, SQL,
+candidate execution and production wiring are unchanged.
+**Recommended next gated slice: Repository-Only Unclassified Daemon Startup
+Diagnostic Coverage and Privacy-Safe Recovery Design (No Native Rerun)**. Decide
+the minimum actionable, bounded diagnostic evidence needed for this unknown
+message without guessing from its hash or authorizing raw logging, new runtime
+permissions, weaker acceptance or another physical attempt.
+
 ## Startup evidence foundation implemented; isolated only — 2026-11-03
 
 The approved [bounded startup-evidence foundation](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_FOUNDATION.md)

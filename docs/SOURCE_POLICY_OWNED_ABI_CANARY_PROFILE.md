@@ -1,5 +1,74 @@
 # Owned Native ABI Canary Execution Profile
 
+## Additional authorized startup-diagnostic proof: unclassified daemon message — 2026-11-03
+
+The user approves **one** additional bounded native qualification/cleanup proof
+at **c2e2b4a4bdcb110cf148d934903d6f77d5faa58d**. This is narrowly scoped R3 owned
+ephemeral-lab authority, not a risk-tier increase, new campaign or attempt reset.
+The head is clean/synced and its [ordinary CI41716530416](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41716530416)
+is reverified successful before dispatch. Fresh isolated preflight passes2 PHP
+tests/8 assertions, covering the original21 and new15 Python groups. No installed
+site, SQL, candidate execution, installation, production wiring or policy change
+is authorized. Uploader/toolkit remain clean and untouched.
+
+One dispatch produces [native run41719960658](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41719960658),
+attempt1/job126209816181. Fresh audit and native step run **21:14:34–21:14:43 UTC**;
+the job concludes failure at21:14:45. The pinned engine/client28.0.4, runc1.5.2,
+libseccomp2.5.5, existing compiler and kernel7.0.0-1017-azure prerequisites pass.
+Created/pre-start containment and copied-executable bytes pass before the first
+amd64 builtin `docker start --attach` returns CLI1 with stdout0/stderr157 bytes.
+No derived-policy/i386/x32 container control or accepted syscall observation runs.
+
+The new **actual** ADBOWNEDABISTARTFAIL1 packet passes the current strict DATA
+validator against its owner, image, CID, ABI/policy and context. Independent
+read-only computation over the exact nine Git blobs matches the emitted source
+cohort. Both streams are complete; stderr SHA256 is
+`80a868096821299612792f8e0917bc2abf47d10457d368b829edc8e23bdf720e`.
+Only the daemon envelope is recognized: analysis **unclassified**, layers
+`[docker-daemon]`, topics`[unknown]`. No matching nested layer/topic, root cause or
+specific daemon failure is established. Raw text remains withheld; do not derive
+or reconstruct a message from the unchanged length/hash.
+
+The first already-existing owned cleanup readback projects **created**, Running
+false, OOMfalse and **exit_code=null**, with basis first-owned-cleanup-readback-
+after-failure. This is later cleanup-time state, not proof that the process never
+started or a default-zero process-exit receipt. CLI-spawned true confirms only the
+CLI child. All diagnostic/proof authority, qualification, SQL, candidate and
+production flags remain false; no ABI coverage is admitted.
+
+| Actual binding | Value |
+|---|---|
+| Source cohort |`d4bc44507dd9bfab73aaf244ab419d7df55b660303340a19ee044a08e6136615`|
+| Context hash |`54cf5fb2418233c258ca5a94a6ef60fe88e5c7a71c21ec4be53e158cf2188b7b`|
+| Owned image |`sha256:0899c07412581321b952654839e032fa09690121acd10722ae57d2f7a22a5df6`|
+| Owned CID |`a33fa78ba20332448ca0d65e2d43381f38cc2de6ccbed3d0d89a820af6c74544`|
+| Canary SHA256 |`4e27a6aa75b0e47f5818e040f4f98b91632e0a603ca216af38cfcbd1c4b051ee`|
+| Host SHA256 |`3a51b40bead7f3c2f9e87c13197e6b522caf5b124a16b5ec24e3998f3bbfc06a`|
+| Derived policy SHA256 |`3277296f5e2fa40d0e53fe3d2925e390174f3fcfc9ec2adfba8fd63852984fe4`|
+| Host only |UID1001/NNP0/seccomp0; amd64/i386 getpid2291; x32 getpid-38 |
+| Accounting |primary49,036 bytes; native180 (23 host +157 CLI stderr); independent cleanup41 |
+
+Primary cleanup and the separate always-run cleanup both report
+**containers0/images0/stage_absent=true**; independent cleanup succeeds at21:14:43.
+Actions artifacts API confirms0 uploaded artifacts. No cleanup issue or
+diagnostic-unavailable flag is emitted. The actual diagnostic reuses the existing
+cleanup read, with no new inspect/log/exec call. Native C, workflow, original
+readback/acceptance, source cohort, quotas and SQL/candidate/production paths are
+unchanged. The exact proof head has successful ordinary checks **and a failed
+native check**; do not report all checks green or whole-plugin readiness.
+
+Implementation-plan progress: native first-failure/cleanup diagnostics are now
+observed, not merely modeled; actionable startup cause and ABI qualification
+remain unresolved. Campaign **8/10 milestones,static9** unchanged. Original
+native10/10 plus separately approved additional1/1 are consumed (11 total);
+no second attempt, retry or source-policy widening is authorized.
+**Recommended next gated slice: Repository-Only Unclassified Daemon Startup
+Diagnostic Coverage and Privacy-Safe Recovery Design (No Native Rerun)**. Review
+the finite catalog and minimum safe evidence needed for this actual unknown
+envelope; do not hash-guess the message, log raw text, relax containment or retry
+without new explicit authority. This closeout changes owning records only;
+validation, commit/push and ordinary exact-head CI precede handoff.
+
 ## Startup evidence foundation: isolated implementation only — 2026-11-03
 
 The approved [foundation and dormant integration](SOURCE_POLICY_OWNED_ABI_STARTUP_FAILURE_FOUNDATION.md)

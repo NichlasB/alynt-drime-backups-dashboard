@@ -1,5 +1,19 @@
 # Bounded Startup-Failure Evidence Safety Foundation
 
+## Separately authorized native follow-through — 2026-11-03
+
+The one newly approved [actual diagnostic proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#additional-authorized-startup-diagnostic-proof-unclassified-daemon-message--2026-11-03)
+at c2e2b4a emits a valid operation/source-bound first-failure packet: complete
+daemon-prefixed157-byte stderr, unclassified/unknown, and first owned cleanup
+state created/not running/exit null. Both cleanup receipts prove owned absence.
+The diagnostic's narrow fail-closed behavior now has genuine native evidence,
+but the message's cause and ABI qualification remain unestablished. No raw text,
+extra read, acceptance/budget change or retry is authorized. The separate1/1
+allowance is consumed in addition to original10/10 (11 attempts total), not reset.
+Next gated slice is the profile record's repository-only unclassified-daemon
+diagnostic coverage/privacy-safe recovery **design**, with no native rerun.
+The foundation-stage authority and synthetic-only statements below are historical.
+
 ## Authority and baseline — 2026-11-03
 
 The user approves the combined repository-only implementation described by the
