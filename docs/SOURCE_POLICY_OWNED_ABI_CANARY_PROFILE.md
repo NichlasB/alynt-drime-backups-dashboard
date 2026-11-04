@@ -1,5 +1,128 @@
 # Owned Native ABI Canary Execution Profile
 
+## One-time private startup diagnosis: logging configuration cause established — 2026-11-04
+
+The user explicitly approves a dedicated private diagnostic repository, narrowly
+bounded private error disclosure and ONE fresh owned reproduction/cleanup run.
+This supersedes the proposed RSA-key setup as the immediate next action; it
+does not authorize implementation of the logging repair or a second native run.
+No risk-tier increase or privacy exception for public raw logs is inferred.
+
+Public restore baseline **cce28f456874d557f19891bcde73b69701920a8e** is clean and
+matches the freshly queried remote master before this evidence closeout.
+The dedicated repository `NichlasB/alynt-dashboard-private-canary-20261104`
+is API-verified private before publication, dispatch and closeout; only NichlasB
+is listed as a collaborator/admin, with zero Actions secrets/variables. It is not
+a fork/release/site, and public repository visibility/settings are unchanged.
+Logs remain private to GitHub/authorized readers; no log/repository deletion or
+secure-erasure claim is made. No ciphertext, key or crypto process is involved.
+
+### Source review, meaningful tests and exact native binding
+
+Private source head **ecd8e5ddecbf6b6f3aaded61dff1750d100c4bcb** is committed,
+pushed and verified against its remote. SOURCE_PROVENANCE.json records the
+original public head and LF-content SHA256 for every copied input. Eleven of
+thirteen copied files are identical; only the workflow/controller differ.
+AST comparison proves all fifteen unaffected pre-existing Owner methods are
+unchanged, including run, prerequisites, build,
+probe, profile readback and cleanup. The two existing-method changes add private
+admission/capture, not an admission bypass. Two new private methods validate
+the existing complete failure/source packets and publish only after primary
+owned cleanup; original nonzero failure and all resource guards are preserved.
+
+The workflow binds the exact private repository/master/head, owner actor,
+attempt1, private event metadata and explicit default-off input. An actual
+GitHub API privacy check precedes any native work; its read-only token is confined
+to that step and not inherited by the minimal command environment. Only the
+first amd64 builtin probe is selected; no derived/i386/x32 probe follows even
+on success, and qualification stays false.
+
+Local and exact private-run isolated tests pass **58 groups: 21 original,
+15 startup,12 source-envelope and10 private-disclosure**, with no failures,
+errors or skips; the first three suites report zero network calls. New tests
+include actual admitted-constructor/fake-command and useful disclosure positives,
+public/wrong-run/selector/hash/size/UTF8/quota/cleanup negatives, preserved original
+refusal and no early output, one-probe/no-grant behavior, and three assertion-
+killed authority/hash/cleanup bypass controls. These are synthetic API/IO tests,
+not physical ABI qualification. An initial local sandbox temp-directory
+permission failure is resolved by running the SAME unchanged tests with approved
+filesystem access; no guard or test is relaxed.
+
+[Private run41853335409](https://github.com/NichlasB/alynt-dashboard-private-canary-20261104/actions/runs/41853335409)
+at that exact head, attempt1/job126655235505, is dispatched **15:00:52 UTC**.
+The API privacy step and all isolated regressions pass. Native audit/probe runs
+**15:01:03–15:01:09 UTC** and retains the original failed start/attach status.
+The first amd64 builtin command returns CLI1, stdout0, complete stderr157 bytes.
+The original and supplemental packets validate; the source envelope is unmatched.
+The separately bounded private payload matches the same frame/binding/hash and
+contains only a reviewed non-secret Docker logging-configuration error.
+
+| Receipt | Verified value |
+|---|---|
+| Private source cohort | `ce22c0d8551bd3f23494b8006c0c9a7715fddf4a6d2bd8e4c6b1a7332239b05d` |
+| Complete stderr SHA256 | `80a868096821299612792f8e0917bc2abf47d10457d368b829edc8e23bdf720e` |
+| Primary cleanup | containers0,images0,stage_absent=true |
+| Separate always-run cleanup | success15:01:10 UTC; containers0,images0,stage_absent=true |
+| Observed output | primary50,447 bytes; independent41; native180 includes23 host +157 CLI error |
+| Uploaded artifacts | API0 |
+| Qualification/candidate/SQL/production wiring | all false |
+
+The stderr length/hash are identical to the earlier public failures. This is
+actual observed-byte correlation, not a reconstruction from an old hash.
+The private host reports the same pinned Docker28.0.4/client commits,
+runc1.5.2/libseccomp2.5.5 and kernel7.0.0-1017-azure. That agreement does NOT
+make a private runner identical to the original public runner or transfer
+physical qualification. The job conclusion remains **failure**; diagnostic
+success and independent cleanup do not make the native check green.
+
+### Established cause and smallest proposed correction
+
+The existing controller explicitly requests local log driver, max-size16k and
+max-file1, but omits compress. [Pinned Moby local.go](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/logger/local/local.go)
+defines compression true by default and parses an explicit compress option.
+[Pinned config.go](https://github.com/moby/moby/blob/6430e49a55babd9b8f4d08e70ecb2b68900770fe/daemon/logger/local/config.go)
+rejects compression with file count <=1. Its inspected raw SHA256 is
+`720776aab42ed5542876ff8f05afe878ab737f3b45940c00dfdf440b7d0b8407`.
+[Docker documentation](https://docs.docker.com/engine/logging/drivers/local/)
+also documents compress=false and the enabled default. The reviewed private
+error identifies this exact log-driver initialization conflict, not an
+AppArmor/seccomp/ELF or dashboard SQL failure.
+
+Recommend explicit **--log-opt compress=false**, retaining local/max-size16k/
+max-file1, rather than increasing file count, removing logging or relaxing
+security. The authoritative exact LogConfig readback, separate diagnostic
+comparison and source-backed positive/negative tests must be updated together:
+reject absent/true compression, extra log options, altered size/count and guard
+bypasses. This is a proposed harness-only correction, NOT implemented or
+physically verified here. Do not change daemon defaults or installed services.
+
+Implementation-plan progress: startup cause is now evidence-backed; minimum
+profile/ABI qualification and source-policy production wiring are still blocked.
+Campaign product milestones **8/10**, static9 unchanged; twelve prior native
+attempts plus this separately authorized **1/1 private diagnostic** are consumed
+(**13 total**). No product milestone credit for diagnostics or evidence commits.
+No candidate software, SQL, WordPress/site, installation, schedule, permission,
+release/package/deployment or production operation occurred.
+
+Evidence-only public closeout validation passes the existing isolated PHPUnit
+bridge **3 tests/12 assertions** (21/15/12 original Python groups), verifies
+all245 local file links in the three changed owning documents and passes Git
+diff/whitespace review. Independent local hashing reproduces the private run's
+actual nine-file source cohort. Only these three evidence/plan documents change;
+uploader/toolkit and both public/private runtime source trees remain unchanged
+during closeout. Ordinary exact-head CI must be verified after this docs-only
+publication; it cannot turn the failed private native check into a success.
+
+**Recommended next gated slice: Harness-Only Explicit Local-Log Compression
+Compatibility Repair and One Fresh Owned ABI Qualification/Cleanup Proof.**
+Approve the narrow controller/exact-readback/regression correction, ordinary
+validation/publication/exact-head CI, then ONE original public-workflow attempt
+after fresh prerequisites and cleanup verification. Keep raw disclosure disabled,
+all containment/budgets/candidate/SQL/production boundaries intact; no further
+RSA setup, catalog growth or unchanged retry is recommended. This approval
+has not yet been granted.
+
+
 ## One-time disclosure/retention design: no capture admitted — 2026-11-03
 
 The approved [decision](SOURCE_POLICY_ONE_TIME_DISCLOSURE_DECISION.md) records the

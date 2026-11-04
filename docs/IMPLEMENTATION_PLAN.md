@@ -1,5 +1,30 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Private startup diagnosis: cause established; explicit logging repair gated — 2026-11-04
+
+The approved [one-time private diagnosis](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#one-time-private-startup-diagnosis-logging-configuration-cause-established--2026-11-04)
+at private head ecd8e5d/run41853335409 reproduces the complete157-byte error,
+with the same SHA256 as earlier public failures. Reviewed non-secret evidence
+and pinned Moby source identify local-driver default compression conflicting
+with max-file1. All58 isolated groups pass locally/in that exact run; the native
+job remains failed, with primary and independent owned cleanup verified,
+artifacts0, no candidate/SQL/site/production operation or qualification.
+
+Implementation-plan progress: the startup cause is established; ABI/minimum-
+profile qualification remains blocked. Campaign8/10 product milestones,static9
+unchanged; prior12 native attempts plus separately approved private1/1 consumed
+(13 total). The RSA/public-ciphertext route is parked, not implemented.
+**Recommended next gated slice: Harness-Only Explicit Local-Log Compression
+Compatibility Repair and One Fresh Owned ABI Qualification/Cleanup Proof.**
+Set explicit compress=false while retaining local/max-size16k/max-file1; update
+the authoritative readback, independent diagnostic comparison and meaningful
+regressions together, validate/commit/push/verify ordinary exact-head CI, then
+ONE separately approved original public-workflow attempt with fresh prerequisites.
+No guard/budget widening, daemon configuration change, raw public disclosure,
+candidate/SQL operation or production wiring. Current approval covers diagnosis
+and evidence closeout, NOT that repair or another native attempt.
+
+
 ## One-time disclosure/retention decision: public repository, conditional encryption — 2026-11-03
 
 The approved [design-only decision](SOURCE_POLICY_ONE_TIME_DISCLOSURE_DECISION.md)

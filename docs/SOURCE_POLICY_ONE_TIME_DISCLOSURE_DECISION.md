@@ -1,5 +1,22 @@
 # One-Time Human-Supervised Startup Error Disclosure and Retention Decision
 
+## Current disposition — 2026-11-04: RSA route parked after private diagnosis
+
+The owner subsequently approves a simpler one-time private diagnostic repository,
+bounded private error disclosure and one owned startup reproduction/cleanup run.
+The [completed evidence](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#one-time-private-startup-diagnosis-logging-configuration-cause-established--2026-11-04)
+establishes a local-driver compression/max-file configuration conflict and verifies
+both cleanup receipts. No public key, crypto implementation, raw public log or
+privacy-setting change is needed for that finding. The historical conditional
+encryption proposal below is PARKED, not implemented or admitted; its previous
+recommendation to supply a key is no longer the current resume action.
+
+Recommend the narrow explicit compress=false harness/readback/regression repair
+and ONE separately approved original public-workflow qualification attempt, keeping
+local/max-size16k/max-file1 and all containment/budgets/candidate/SQL/production
+boundaries unchanged. Diagnosis approval does not authorize that repair/rerun.
+
+
 ## Current authority and source boundary — 2026-11-03
 
 The user approves **design only**, including ordinary repository validation,
