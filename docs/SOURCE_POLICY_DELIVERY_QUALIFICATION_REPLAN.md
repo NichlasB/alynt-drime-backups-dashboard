@@ -202,10 +202,21 @@ SupportedProfile, TransportProfile and AbiCanary cohort passes **271 tests/1,390
 assertions**, no failures/skips, using existing isolated tests only. The existing
 ABI bridge includes synthetic Python groups; no protected kernel reads or native
 canary is run. All **308 local file links** across the five changed documents
-resolve. Whitespace/differential ownership review passes; includes/scripts/tests/
+resolve before publication. Whitespace/differential ownership review passes; includes/scripts/tests/
 workflows and dependency manifests/locks match restore point9381ad0 exactly.
-Full hosted suites and ordinary exact-head publication CI remain required after
-commit/push; neither can accept the proposed lab policy on the owner's behalf.
+Neither isolated tests nor ordinary CI can accept the proposed lab policy on
+the owner's behalf.
+
+Design publication `0588b88caff51538df1d2e35890e7aea38ef5327` is pushed and
+[exact-head CI41923200874](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41923200874)
+completes successfully. Actual logs: PHP7.4 **2,612 tests/23,472 assertions**,
+PHP8.3 **2,612/23,477**, Node **88/88** per job, no failures/skips. Manifest,
+build, structure, PHPCS and both dependency audits pass; audits report zero
+known advisories/vulnerabilities. Both exact-head check runs conclude success.
+The evidence-only closeout receives its own ordinary exact-head CI/remote check
+at handoff; no code/native qualification is rerun or inferred. The additional
+run link brings the final local-file-link validation to the same308 links
+(external run URLs are excluded).
 
 Implementation-plan progress: the detour now has an explicit stop and a finite
 delivery path. Legacy M and actual provider/form delivery remain incomplete.
