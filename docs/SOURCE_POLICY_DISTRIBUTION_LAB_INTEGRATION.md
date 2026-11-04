@@ -125,6 +125,17 @@ All321 local file links across the seven owning documents resolve, extracted
 workflow shell/Node/PHP syntax checks pass, and final whitespace/scope review
 passes. These checks do not establish an engine, candidate or native result.
 
+Initial publication65e3cfa/[CI41928502586](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41928502586)
+passes both PHPUnit suites (7.4:2621/23562;8.3:2621/23567) and PHP8.3's98 Node
+tests, but PHP7.4's Node semantic fixture exits255 (97/98 passed). Inspection
+identifies its unnecessary json_decode setup in a PHP -n child; JSON can be a
+dynamic extension on7.4. This is a test portability failure, not native evidence
+or permission to suppress a guard. Recovery uses literal primitive PHP arrays,
+explicitly disables both JSON functions in that child as a permanent regression,
+and includes bounded stdout when a child fails. All six guard-removal controls
+and10 new Node cases still pass locally. Only test/evidence bytes change in this
+repair; fresh exact-head ordinary CI is required, with no native attempt.
+
 ## Progress, proof limits and next boundary
 
 Implementation-plan progress: the accepted route is integrated and isolated-tested,

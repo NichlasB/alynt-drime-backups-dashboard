@@ -66,10 +66,13 @@ test('in-memory JS semantic controls kill guard bypasses and an always-refused r
 test('PHP evidence controls kill source-substitution and cross-model construction bypasses',()=>{
   const source=read('scripts/ci/source-policy-minimum-distribution-contract.php').replace(/^<\?php\s*/,''),env={...job,MINIMUM_IMAGE:image};
   const evidence={model:DISTRIBUTION_MODEL,platform:'Linux',arch:'x86_64',php:'7.4.33',client:'mysqlnd 7.4.33',core_commit:'cc101b64012b16d087780657a2b828ccd7794a63',runtime_image:'sha256:08a1cb1fbe022cd08d5d19e6f95ab549194927959a297da41590d4f2d884f7b4',server_image:'sha256:14bab8cc945c08109a2175e844d46f4eaff1fbf4f59e95dcf2f9cac7961510e1',initial_mode:0,head,image,run:''};
+  // PHP 7.4 can load JSON dynamically: -n fixtures must not depend on it.
+  const literal=value=>typeof value==='string'?"'"+value.replaceAll('\\','\\\\').replaceAll("'","\\'")+"'":Number.isSafeInteger(value)?String(value):assert.fail('primitive fixture only');
+  const fixture=value=>'array('+Object.entries(value).map(([key,item])=>literal(key)+'=>'+literal(item)).join(',')+')';
   const invoke=(body,tail)=>{
-    const script=body+`$j=json_decode('${JSON.stringify(env)}',true);$e=json_decode('${JSON.stringify(evidence)}',true);$e['run']=substr(hash('sha256','123:1'),0,32);`+tail;
-    const r=spawnSync(process.env.PHP_BINARY??'php',['-n','-r',script],{encoding:'utf8',timeout:5000,maxBuffer:8192});
-    assert.equal(r.status,0,r.stderr);assert.equal(r.stderr,'');return r.stdout;
+    const script=body+`$j=${fixture(env)};$e=${fixture(evidence)};$e['run']=substr(hash('sha256','123:1'),0,32);`+tail;
+    const r=spawnSync(process.env.PHP_BINARY??'php',['-n','-d','disable_functions=json_encode,json_decode','-r',script],{encoding:'utf8',timeout:5000,maxBuffer:8192});
+    assert.equal(r.status,0,r.stderr||r.stdout);assert.equal(r.stderr,'');return r.stdout;
   };
   const sourceCheck=body=>assert.equal(invoke(body,`echo adbm_distribution_evidence($e,$j)?'yes':'no';$j['MINIMUM_IMAGE']=str_repeat('f',64);echo adbm_distribution_evidence($e,$j)?'yes':'no';`),'yesno');
   sourceCheck(source);
