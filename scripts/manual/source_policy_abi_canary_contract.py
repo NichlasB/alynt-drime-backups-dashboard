@@ -165,7 +165,7 @@ def container_readback(row, identity, frame, abi, security):
              'ExtraHosts','VolumesFrom','Links','Dns','GroupAdd','Sysctls','CgroupParent'))
          and not row.get('Mounts') and h.get('PublishAllPorts') is False,
          'container-containment')
-    need(h.get('LogConfig') == dict(Type='local', Config={'max-size':'16k','max-file':'1'})
+    need(h.get('LogConfig') == dict(Type='local', Config={'max-size':'16k','max-file':'1','compress':'false'})
          and sorted(h.get('Ulimits', []),key=lambda r:r['Name']) == [dict(Name='core',Hard=0,Soft=0),
              dict(Name='nofile',Hard=64,Soft=64)], 'container-limits')
 
@@ -203,7 +203,7 @@ def container_diagnostics(row, identity, frame, abi, security):
                           ('NanoCpus',1000000000),('PidsLimit',64),('PidMode',''),('IpcMode','private'),
                           ('CgroupnsMode','private'),('Runtime','runc'),('UTSMode',''),('UsernsMode',''),
                           ('RestartPolicy',dict(Name='no',MaximumRetryCount=0)),
-                          ('LogConfig',dict(Type='local',Config={'max-size':'16k','max-file':'1'}))):
+                          ('LogConfig',dict(Type='local',Config={'max-size':'16k','max-file':'1','compress':'false'}))):
         check('HostConfig.'+name,lambda name=name,expected=expected:host.get(name) == expected)
     check('HostConfig.SecurityOpt',lambda:sorted(host.get('SecurityOpt', [])) == sorted(['no-new-privileges',security,'apparmor=docker-default']))
     check('HostConfig.Ulimits',lambda:sorted(host.get('Ulimits', []),key=lambda r:r['Name']) ==

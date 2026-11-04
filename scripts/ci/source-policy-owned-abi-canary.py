@@ -318,7 +318,8 @@ class Owner:
                  '--security-opt','apparmor=docker-default',
                  '--user','65532:65532','--memory','512m','--memory-swap','512m','--cpus','1',
                  '--pids-limit','64','--restart','no','--log-driver','local','--log-opt','max-size=16k',
-                 '--log-opt','max-file=1','--ulimit','nofile=64:64','--ulimit','core=0:0','--entrypoint','/canary']
+                 '--log-opt','max-file=1','--log-opt','compress=false',
+                 '--ulimit','nofile=64:64','--ulimit','core=0:0','--entrypoint','/canary']
         for key,value in self.labels.items():
             options+=['--label',key+'='+value]
         cid=self.docker(*options,self.image,abi).strip().decode()

@@ -50,7 +50,7 @@ def container():
             NanoCpus=1000000000,PidsLimit=64,PidMode='',IpcMode='private',CgroupnsMode='private',
             Runtime='runc',UTSMode=PROFILE_CASES['explicit_default']['HostConfig']['UTSMode'],UsernsMode='',AutoRemove=False,
             RestartPolicy=dict(Name='no',MaximumRetryCount=0),PublishAllPorts=False,
-            LogConfig=dict(Type='local',Config={'max-size':'16k','max-file':'1'}),
+            LogConfig=dict(Type='local',Config={'max-size':'16k','max-file':'1','compress':'false'}),
             Ulimits=[dict(Name='core',Hard=0,Soft=0),dict(Name='nofile',Hard=64,Soft=64)]))
 
 
@@ -128,6 +128,49 @@ class Tests(unittest.TestCase):
             bad=copy.deepcopy(row);bad['Config'][key]=value
             with self.assertRaises(c.Refusal): c.container_readback(bad,identity,FRAME,'amd64','seccomp=builtin')
 
+    def test_explicit_single_file_uncompressed_log_contract(self):
+        row=container();identity=row['Image']
+        expected=dict(Type='local',Config={'max-size':'16k','max-file':'1','compress':'false'})
+        row['HostConfig']['LogConfig']=copy.deepcopy(expected)
+        c.container_readback(row,identity,FRAME,'amd64','seccomp=builtin')
+        self.assertTrue(c.container_diagnostics(row,identity,FRAME,'amd64','seccomp=builtin')['matched'])
+        bads=[]
+        for value in (None,'true',True,False,0,'FALSE','0',''):
+            bad=copy.deepcopy(expected)
+            if value is None:del bad['Config']['compress']
+            else:bad['Config']['compress']=value
+            bads.append(bad)
+        for key,value in (('max-size','32k'),('max-file','2'),('max-file',1),('extra','PRIVATE_LOG_VALUE')):
+            bad=copy.deepcopy(expected);bad['Config'][key]=value;bads.append(bad)
+        bad=copy.deepcopy(expected);bad['Type']='json-file';bads.append(bad)
+        bads.extend((None,{},dict(Type='local',Config={})))
+        for config in bads:
+            bad=copy.deepcopy(row);bad['HostConfig']['LogConfig']=config
+            with self.subTest(config=config):
+                with self.assertRaises(c.Refusal):c.container_readback(bad,identity,FRAME,'amd64','seccomp=builtin')
+                report=c.container_diagnostics(bad,identity,FRAME,'amd64','seccomp=builtin')
+                self.assertFalse(report['matched']);self.assertIn('HostConfig.LogConfig',report['mismatches'])
+                self.assertNotIn('PRIVATE_LOG_VALUE',c.encode(report).decode())
+
+    def test_explicit_log_request_guard_and_diagnostic_semantic_controls(self):
+        self.assertEqual(18,self.probe_fixture(o.Owner.probe)['routes'])
+        source=textwrap.dedent(inspect.getsource(o.Owner.probe));needle="'compress=false'"
+        self.assertEqual(1,source.count(needle));namespace=dict(o.__dict__)
+        exec(compile(source.replace(needle,"'compress=true'"),'<owned-log-request-control>','exec'),namespace)
+        with self.assertRaises(AssertionError):self.probe_fixture(namespace['probe'])
+        row=container();row['HostConfig']['LogConfig']['Config']['compress']='true';identity=row['Image']
+        with self.assertRaises(c.Refusal):c.container_readback(row,identity,FRAME,'amd64','seccomp=builtin')
+        source=textwrap.dedent(inspect.getsource(c.container_readback))
+        needle="h.get('LogConfig') == dict(Type='local', Config={'max-size':'16k','max-file':'1','compress':'false'})"
+        self.assertEqual(1,source.count(needle));namespace=dict(c.__dict__)
+        exec(compile(source.replace(needle,'True'),'<owned-log-guard-control>','exec'),namespace)
+        namespace['container_readback'](row,identity,FRAME,'amd64','seccomp=builtin')
+        self.assertFalse(c.container_diagnostics(row,identity,FRAME,'amd64','seccomp=builtin')['matched'])
+        source=textwrap.dedent(inspect.getsource(c.container_diagnostics));needle="'compress':'false'"
+        self.assertEqual(1,source.count(needle));namespace=dict(c.__dict__)
+        exec(compile(source.replace(needle,"'compress':'true'"),'<owned-log-diagnostic-control>','exec'),namespace)
+        self.assertTrue(namespace['container_diagnostics'](row,identity,FRAME,'amd64','seccomp=builtin')['matched'])
+
     def test_real_positive_required_before_negative_and_no_unavailable_pass(self):
         for abi in c.ABIS:
             self.assertTrue(c.observation(wire(abi),abi,False)['positive'])
@@ -175,11 +218,13 @@ class Tests(unittest.TestCase):
 
     def test_profile_diagnostics_preserve_original_guard_and_discriminate_fields(self):
         original=inspect.getsource(c.container_readback).rstrip()
-        # Only the two explicitly approved comparisons may differ from the old guard.
+        # Only approved namespace, AppArmor and explicit compression comparisons differ.
         self.assertEqual(1,original.count("h.get('UTSMode')"))
         self.assertEqual(1,original.count("['no-new-privileges', security, 'apparmor=docker-default']"))
+        self.assertEqual(1,original.count(",'compress':'false'"))
         restored=original.replace("h.get('UTSMode')","h.get('UtsMode')").replace(
-            "['no-new-privileges', security, 'apparmor=docker-default']","['no-new-privileges', security]")
+            "['no-new-privileges', security, 'apparmor=docker-default']","['no-new-privileges', security]").replace(
+            ",'compress':'false'",'')
         self.assertEqual('d2bf7e5ac211e4a315dd28c3ccc88e367165e46ef8c2d462cdc99100a5235280',c.sha(restored.encode()))
         positive=container()
         self.assertTrue(c.container_diagnostics(positive,positive['Image'],FRAME,'amd64','seccomp=builtin')['matched'])
@@ -303,6 +348,8 @@ class Tests(unittest.TestCase):
                 if args[0]=='create':
                     self.assertEqual(['no-new-privileges','seccomp=builtin','apparmor=docker-default'],
                                      [args[index+1] for index,arg in enumerate(args) if arg=='--security-opt'])
+                    self.assertEqual(['max-size=16k','max-file=1','compress=false'],
+                                     [args[index+1] for index,arg in enumerate(args) if arg=='--log-opt'])
                     return b'd'*64+b'\n'
                 if args[0]=='cp':Path(args[2]).write_bytes(b'changed' if bad else binary());return b''
                 if args[0]=='start':started.append(True);return wire('amd64')

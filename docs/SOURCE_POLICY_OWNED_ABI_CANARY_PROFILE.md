@@ -1,5 +1,40 @@
 # Owned Native ABI Canary Execution Profile
 
+## Explicit log compression compatibility repair — 2026-11-04
+
+The user approves the harness-only compress=false correction, matching exact
+readback/diagnostic comparisons and meaningful regressions, ordinary publication/
+exact-head CI, then ONE fresh original public ABI qualification/cleanup attempt.
+Restore point951f15655d079fe5c28fe5339db75adceba3f555 is clean, matches the fresh
+remote master and has successful ordinary CI41854353717. No global risk-tier
+increase, raw disclosure, private diagnostic rerun or candidate/SQL/site grant.
+
+Controller adds only --log-opt compress=false. Both authoritative LogConfig and
+independent diagnostic comparison now require exactly local/max-size16k/max-file1/
+compress=false. Limits, containment, C, workflow, startup privacy and cleanup
+remain unchanged. Full-source restoration proves the controller differs only
+by that option and the DATA contract only by those two exact comparisons.
+The historical whole-guard SHA256 remains asserted after removing only the three
+explicitly approved namespace/AppArmor/compression changes; it is not repinned.
+
+Two new isolated groups fail against the old implementation, then pass with the
+repair. Useful modeled engine positives and invalid/missing/true/nonstring
+compression, altered size/count/driver, extra-option and malformed-map negatives
+exercise both guards. Three source-mutated controls kill command/readback/
+diagnostic bypasses. The existing PHP bridge now expects23 original groups,
+not21; startup15 and source-envelope12 stay unchanged. Local **3 PHP tests/12
+assertions,23/15/12 isolated groups**, syntax, focused PHPCS, structure and Git
+diff checks pass. These checks involve no native or site/database operation.
+
+Implementation-plan progress: the diagnosed logging conflict is repaired in
+source; native verification is still required. Campaign8/10 milestones,static9
+and13 consumed native attempts unchanged until the single newly approved attempt
+actually runs. After ordinary exact-head CI, dispatch the original default-off
+public workflow ONCE at the verified head with fresh prerequisites; preserve
+both cleanup receipts and report actual ABI coverage without transferring private
+diagnostic evidence. No candidate execution, SQL, production wiring or limit
+increase follows. Stop after that attempt for actual-result/evidence closeout.
+
 ## One-time private startup diagnosis: logging configuration cause established — 2026-11-04
 
 The user explicitly approves a dedicated private diagnostic repository, narrowly

@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Explicit compression correction implemented; one public proof approved — 2026-11-04
+
+The approved [harness-only repair](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#explicit-log-compression-compatibility-repair--2026-11-04)
+adds explicit compress=false with matching exact readback and diagnostics,
+retaining local/max-size16k/max-file1 and every other limit/containment/privacy
+boundary. Two new red-to-green groups and three source-backed logging controls
+pass; local validation is3 PHP/12 assertions,23/15/12 Python groups, syntax,
+focused PHPCS, structure and whitespace. Only the controller option, matching
+contract comparisons, tests and owning records change; no production source.
+
+Implementation-plan progress: the observed logging incompatibility is repaired
+in source, but ABI/minimum-profile qualification remains open. Campaign8/10,
+static9 and13 consumed attempts stay unchanged before dispatch. Current approval
+includes ordinary commit/push/exact-head CI then ONE fresh original public ABI
+workflow attempt with unchanged prerequisites and both owned cleanup checks.
+No private rerun, raw public disclosure, candidate/SQL/site execution, daemon
+change or production wiring. Complete this approved attempt and actual-result
+evidence closeout before selecting any new gated slice.
+
 ## Private startup diagnosis: cause established; explicit logging repair gated — 2026-11-04
 
 The approved [one-time private diagnosis](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#one-time-private-startup-diagnosis-logging-configuration-cause-established--2026-11-04)
