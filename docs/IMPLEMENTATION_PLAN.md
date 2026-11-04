@@ -1,5 +1,26 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## x32 evidence decision: existing receipt insufficient; finite audit selected — 2026-11-04
+
+The approved [repository-only decision](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md)
+preserves x32-unestablished and closed candidate admission. Finite ENOSYS and
+the unbound /boot/config file do not satisfy complete-ABI non-callability.
+Pinned upstream source identifies existing /proc/config.gz as a possible
+evidence source, with explicit built-in/module, proc-origin, vendor-source and
+same-job limits. Its availability/sufficiency on this runner remains UNKNOWN;
+no kernel, runner, syscall or candidate experiment occurs.
+
+Implementation-plan progress: the exact gap and smallest finite existing-tool
+feasibility step are defined, not physically closed. Milestones8/10,static9 and
+14 native attempts remain unchanged. No scripts, acceptance rules or tooling
+change; no old receipt becomes qualified or candidate/production grant true.
+**Recommended next gated slice: One Existing-Runner Read-Only x32 Kernel-Evidence
+Feasibility Audit**, limited to bounded metadata/config reads and safe enum/hash
+output with existing Python, no canary/Docker/SQL/site execution or new tools.
+If that interface is unavailable/insufficient, stop rather than expand into
+kernel attestation or alternative infrastructure. Separate approval is required
+for the new protected reads/runner job; this task only publishes the decision.
+
 ## Public canary startup repaired; amd64/i386 verified, x32 gate remains — 2026-11-04
 
 The approved [single public repair proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#public-compression-repair-proof-passed-x32-coverage-remains-open--2026-11-04)

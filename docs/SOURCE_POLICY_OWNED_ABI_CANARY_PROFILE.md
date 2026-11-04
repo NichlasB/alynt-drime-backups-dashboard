@@ -1,5 +1,11 @@
 # Owned Native ABI Canary Execution Profile
 
+Current disposition: the [repository-only x32 decision](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md)
+retains this actual partial coverage and qualification=false. Next authority
+is one bounded existing-runner read-only kernel-evidence feasibility audit,
+not another canary, candidate execution, acceptance change or attestation tool.
+No new physical evidence or native-attempt allowance is created by that design.
+
 ## Public compression repair proof passed; x32 coverage remains open — 2026-11-04
 
 The single approved public attempt runs at repair head

@@ -14,9 +14,10 @@ recommendation to supply a key is no longer the current resume action.
 Subsequent separately approved compress=false repair and the single public proof
 are now [complete for startup/available ABIs](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#public-compression-repair-proof-passed-x32-coverage-remains-open--2026-11-04).
 amd64/i386 controls and both cleanups pass; x32 remains unestablished and full
-qualification/candidate admission stay false. The next gate is repository-only
-x32 evidence sufficiency/candidate admission review, not RSA setup or more
-diagnostic capture. All existing limits, privacy and production boundaries remain.
+qualification/candidate admission stay false. The completed [x32 decision](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md)
+selects a separately approved bounded read-only kernel-evidence feasibility audit,
+not RSA setup, more error capture, canary/candidate execution or new attestation
+tooling. All existing limits, privacy and production boundaries remain.
 
 
 ## Current authority and source boundary — 2026-11-03

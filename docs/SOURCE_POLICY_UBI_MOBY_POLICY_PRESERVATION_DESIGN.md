@@ -4,8 +4,10 @@ Current evidence: the [public compression repair proof](SOURCE_POLICY_OWNED_ABI_
 verifies genuine amd64/i386 builtin-positive/derived-denial controls and exact
 cleanup. x32 ENOSYS/config-file facts do not satisfy the unchanged independent
 non-callability requirement below; qualification/candidate admission remain false.
-Next gate is repository-only x32 evidence sufficiency/candidate admission review,
-not further native execution, acceptance relaxation or new attestation tooling.
+The completed [x32 evidence decision](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md)
+preserves those obligations. Next gate is one bounded existing-runner read-only
+kernel-evidence feasibility audit, not canary/candidate execution, acceptance
+relaxation or new attestation tooling; availability and sufficiency remain unknown.
 
 ## Authority, restore point and unchanged boundaries — 2026-11-03
 
