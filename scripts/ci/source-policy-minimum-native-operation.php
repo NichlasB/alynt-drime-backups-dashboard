@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) || ! function_exists( 'adbb_check' ) ) {
  */
 function adb0_owner() {
 	global $class, $frame, $binding, $owners, $ambient, $evidence;
-	$scope   = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope' ) )->newInstanceWithoutConstructor();
-	$owner   = adbb_construct( $class );
-	$context = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
+	$binding_mode = adbm_minimum_binding_mode( $evidence );
+	$owner        = adbb_construct( $class );
+	$context      = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context' ) )->newInstanceWithoutConstructor();
 	foreach ( array(
 		'owned'     => $owner,
 		'ambient'   => $ambient,
@@ -28,10 +28,15 @@ function adb0_owner() {
 		adbb_bind( $context, $key, $value );
 	}
 	adbb_bind( $owner, 'query_context', $context );
-	$constructor = new ReflectionMethod( $scope, '__construct' );
-	$constructor->setAccessible( true );
-	$constructor->invoke( $scope, $owner, $context, $frame, $evidence );
-	adbb_bind( $owner, 'minimum_lab_scope', $scope );
+	if ( 'lab' === $binding_mode ) {
+		$scope       = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope' ) )->newInstanceWithoutConstructor();
+		$constructor = new ReflectionMethod( $scope, '__construct' );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$constructor->setAccessible( true );
+		}
+		$constructor->invoke( $scope, $owner, $context, $frame, $evidence );
+		adbb_bind( $owner, 'minimum_lab_scope', $scope );
+	}
 	$bound = $binding;
 	foreach ( Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::hook_names() as $hook ) {
 		if ( isset( $GLOBALS['wp_filter'][ $hook ] ) ) {
@@ -44,7 +49,9 @@ function adb0_owner() {
 	$owners[] = $owner; // Retain before the first fallible native bootstrap.
 	adbb_check( 0 === ( new mysqli_driver() )->report_mode, 'core-selected OFF before owner allocation' );
 	$bootstrap = $class->getMethod( 'bootstrap' );
-	$bootstrap->setAccessible( true );
+	if ( PHP_VERSION_ID < 80100 ) {
+		$bootstrap->setAccessible( true );
+	}
 	$before = adbm_bootstrap_before( $owner, $context, $frame, $bound );
 	try {
 		$result = $bootstrap->invoke( $owner );

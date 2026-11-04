@@ -1,5 +1,9 @@
 # Owned Native ABI Canary Execution Profile
 
+Forward resume — 2026-11-04: [accepted distribution-lab integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md)
+is a separate default-off functional route, not completion or relaxation of this
+ABI profile. No native attempt runs; old controls remain partial/unqualified.
+
 Current disposition: the separately approved [temporary read-only audit](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md#approved-temporary-audit-interface-unavailable-evidence-lane-stopped--2026-11-04)
 reports the required proc interface missing; the workflow is removed and this
 evidence lane is STOPPED. This actual amd64/i386 coverage stays partial and

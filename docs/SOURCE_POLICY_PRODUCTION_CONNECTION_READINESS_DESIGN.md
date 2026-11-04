@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume — 2026-11-04: [accepted trusted-distribution integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md)
+provides the separate dormant legacy-minimum qualification route. Next gate is
+one explicitly approved owned native attempt; default admission, production
+factories/form/writer and all required-profile gaps remain unchanged. No physical
+evidence or runtime grant is supplied by isolated integration/publication.
+
 Current disposition — 2026-11-04: the approved [delivery replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)
 returns to the actual concurrent-save objective. The old whole-map writer is
 still active; native/provider/form delivery and required legacy M remain open.

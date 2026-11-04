@@ -1,5 +1,12 @@
 # Legacy-Minimum Exact-Server Candidate and Owned Qualification Design
 
+Forward resume — 2026-11-04: the owner accepts the [trusted-distribution tradeoff and repository-only integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md)
+using the SAME candidate pins below. Its dormant manual route keeps default
+legacy server/session admission intact; real identity/helper behavior remains
+unknown. Next gate is one separately approved owned qualification/cleanup attempt,
+not a new artifact selection or transferred static/ABI/native qualification.
+Earlier staged-route outcomes remain historical, not current dispatch authority.
+
 Current outcome: approved [owned static prerequisite](SOURCE_POLICY_LEGACY_UBI_FEASIBILITY_PROOF.md#exact-head-publication-and-single-owned-refusal)
 refuses first-layer critical-parent-not-directory; metadata/first compressed hash
 verify but no full layer/dependency/runtime proof. Exact primary/always cleanup

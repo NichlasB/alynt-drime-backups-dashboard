@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Accepted distribution lab integrated; native authority remains closed — 2026-11-04
+
+The owner accepts the replan's explicit assurance/accounting tradeoff and approves
+the [repository-only cohesive integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md).
+One default-off manual route reuses the existing controller/worker, with separate
+model/job/source/run/terminal identity and exact existing candidates. Legacy
+construction uses unchanged DEFAULT admission, not the newer-server lab scope;
+no raw version alias, session override or production source change is introduced.
+Isolated positive owner/view/save and refusal/semantic controls are implemented.
+No physical qualification, artifact/engine/native/SQL/site operation or grant.
+
+Implementation-plan progress: route integrated, legacy M/provider/form delivery
+still open; x32 stays unqualified. Campaign8/10,static9 and14 native attempts
+unchanged. Recommended next gated slice: **ONE Exact-Head Trusted-Distribution
+Legacy-Minimum Owned Qualification and Cleanup Attempt**, fresh prerequisites
+and exact disposable acquisition/storage/account/container/process cleanup scope;
+stop on default-identity/session mismatch or cleanup failure, no automatic retry.
+Current approval ends at validation/publication/ordinary exact-head CI, not dispatch.
+
 ## Delivery replan: return to conditional-save delivery, lab policy gate — 2026-11-04
 
 The approved [repository-only replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)

@@ -6,6 +6,7 @@ import {join, dirname, relative} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {reviewLog} from './source-policy-linux-qualification-controller.mjs';
 import {AUDIT_WORKFLOW,executionPhases,failureEvidence,releaseIssues} from './source-policy-minimum-audit-contract.mjs';
+import {DISTRIBUTION_MODEL,distributionJob,distributionServer,distributionContainment} from './source-policy-minimum-distribution-contract.mjs';
 export {failureEvidence} from './source-policy-minimum-audit-contract.mjs';
 
 export const MODEL='trusted-lab-functional-v1';
@@ -15,12 +16,15 @@ export const selections=Object.freeze({
 });
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const requireFact=(ok,label)=>{if(!ok){const error=Error(label);error.minimumReason=label;throw error;}};
-export function terminal(wire,run,image,cid) {
+export function terminal(wire,run,image,cid,model=MODEL) {
+  if(![MODEL,DISTRIBUTION_MODEL].includes(model))return false;
+  const prefix=model===DISTRIBUTION_MODEL?'ADBMD1':'ADBMC1';
   return typeof wire==='string' && typeof run==='string' && typeof image==='string' && typeof cid==='string' && /^[a-f0-9]{32}$/.test(run) && /^[a-f0-9]{64}$/.test(image) && /^[a-f0-9]{64}$/.test(cid)
-    && new RegExp('^ADBMC1\\|'+run+'\\|'+image+'\\|'+cid+'\\|1\\|[a-f0-9]{64}\\|[1-9][0-9]{0,4}\\|9\\|0\\|closed\\|trusted-lab-functional-v1\\|false\\|not-established\\|false\\|false\\n(?![\\s\\S])').test(wire);
+    && new RegExp('^'+prefix+'\\|'+run+'\\|'+image+'\\|'+cid+'\\|1\\|[a-f0-9]{64}\\|[1-9][0-9]{0,4}\\|9\\|0\\|closed\\|'+model+'\\|false\\|not-established\\|false\\|false\\n(?![\\s\\S])').test(wire);
 }
-export function imageProfile(row,role) {
-  const fixed=selections[role];
+export function imageProfile(row,role,model=MODEL) {
+  if(![MODEL,DISTRIBUTION_MODEL].includes(model))return false;
+  const fixed=model===DISTRIBUTION_MODEL&&role==='server'?distributionServer:selections[role];
   return Boolean(fixed&&row&&row.id===fixed.config&&row.os==='linux'&&row.arch==='amd64'
     && JSON.stringify(row.volumes)===JSON.stringify({[fixed.volume]:{}})
     && JSON.stringify(row.entry)===JSON.stringify(['docker-entrypoint.sh'])
@@ -45,15 +49,17 @@ export function containerProfile(row,role,owner,image,serverCid,uid,stage) {
     && row.mounts.every(m=>m.Type==='tmpfs'||(php&&m.Type==='bind'&&m.Destination==='/proof'&&m.Source===stage+'/source'&&m.RW===false)));
 }
 // Never print raw Docker diagnostics/inspect/Env, which can contain private payloads.
+let distributionAccounting=false,distributionOutputBytes=0,distributionCleanup=false;
 function command(args,input='',timeout=10000,limit=16384) {
   const r=spawnSync('docker',args,{input,encoding:'utf8',timeout,maxBuffer:limit,killSignal:'SIGKILL'});
   requireFact(!r.error&&!r.signal&&r.status===0&&Buffer.byteLength(r.stdout)+Buffer.byteLength(r.stderr)<=limit,'bounded engine command refused');
+  if(distributionAccounting){distributionOutputBytes+=Buffer.byteLength(r.stdout)+Buffer.byteLength(r.stderr);requireFact(distributionOutputBytes<=(distributionCleanup?65536:49152),'distribution engine output bound');}
   if(args[0]==='logs')return r.stdout+r.stderr;
   requireFact(args[0]==='pull'||r.stderr==='','unexpected engine/client diagnostic');
   return r.stdout;
 }
 function inspect(cid) {
-  return JSON.parse(command(['inspect','--format','{"entry":{{json .Config.Entrypoint}},"workdir":{{json .Config.WorkingDir}},"image":{{json .Image}},"label":{{json (index .Config.Labels "com.alynt.minimum")}},"user":{{json .Config.User}},"ro":{{json .HostConfig.ReadonlyRootfs}},"network":{{json .HostConfig.NetworkMode}},"memory":{{json .HostConfig.Memory}},"cpu":{{json .HostConfig.NanoCpus}},"pids":{{json .HostConfig.PidsLimit}},"privileged":{{json .HostConfig.Privileged}},"ports":{{json .HostConfig.PortBindings}},"caps":{{json .HostConfig.CapDrop}},"security":{{json .HostConfig.SecurityOpt}},"devices":{{json .HostConfig.Devices}},"tmpfs":{{json .HostConfig.Tmpfs}},"mounts":{{json .Mounts}},"pid":{{json .State.Pid}},"started":{{json .State.StartedAt}},"running":{{json .State.Running}},"exit":{{json .State.ExitCode}},"oom":{{json .State.OOMKilled}},"hostname":{{json .Config.Hostname}}}',cid]));
+  return JSON.parse(command(['inspect','--format','{"entry":{{json .Config.Entrypoint}},"workdir":{{json .Config.WorkingDir}},"image":{{json .Image}},"label":{{json (index .Config.Labels "com.alynt.minimum")}},"user":{{json .Config.User}},"ro":{{json .HostConfig.ReadonlyRootfs}},"network":{{json .HostConfig.NetworkMode}},"memory":{{json .HostConfig.Memory}},"cpu":{{json .HostConfig.NanoCpus}},"pids":{{json .HostConfig.PidsLimit}},"privileged":{{json .HostConfig.Privileged}},"ports":{{json .HostConfig.PortBindings}},"caps":{{json .HostConfig.CapDrop}},"security":{{json .HostConfig.SecurityOpt}},"devices":{{json .HostConfig.Devices}},"tmpfs":{{json .HostConfig.Tmpfs}},"mounts":{{json .Mounts}},"pid":{{json .State.Pid}},"started":{{json .State.StartedAt}},"running":{{json .State.Running}},"exit":{{json .State.ExitCode}},"oom":{{json .State.OOMKilled}},"hostname":{{json .Config.Hostname}},"apparmor":{{json .AppArmorProfile}},"cap_add":{{json .HostConfig.CapAdd}},"pid_mode":{{json .HostConfig.PidMode}},"ipc_mode":{{json .HostConfig.IpcMode}},"userns_mode":{{json .HostConfig.UsernsMode}},"log":{{json .HostConfig.LogConfig}},"cmd":{{json .Config.Cmd}}}',cid]));
 }
 function rootSQL(cid,sql) {
   return command(['exec','--interactive',cid,'mariadb','--no-defaults','--protocol=SOCKET','--socket=/tmp/minimum.sock','--user=root','--skip-reconnect','--connect-timeout=2','--batch','--raw','--skip-column-names'],sql,5000,4096);
@@ -99,7 +105,7 @@ function cleanup(owner,stage,auditOnly=false) {
   finally {process.stdout.write(JSON.stringify({minimum_cleanup:{scope:auditOnly?'audit-only':'qualification',issues:[...issues],containers_removed:containersRemoved,stage_removed:stageRemoved,strict_release_complete:issues.size===0&&containersRemoved&&stageRemoved}})+'\n');}
   requireFact(issues.size===0,'cleanup/release evidence incomplete');
 }
-async function worker(cid,run,image,serverCid,proof,modules=null) {
+async function worker(cid,run,image,serverCid,proof,modules=null,model=MODEL) {
   const child=spawn('docker',['start','--attach','--interactive',cid],{stdio:['pipe','pipe','pipe']});
   let out='',err='',accepted=false,failure=null;
   const deadline=setTimeout(()=>{failure=Error('fixed child deadline');child.kill('SIGKILL');},25000);
@@ -110,9 +116,9 @@ async function worker(cid,run,image,serverCid,proof,modules=null) {
     if(out.includes('\n')&&!accepted) {
       try {
         const identity=inspect(cid);requireFact(identity.running&&Number.isSafeInteger(identity.pid)&&identity.pid>0&&/^\d{4}-\d\d-\d\dT/.test(identity.started),'engine host PID/start identity unavailable');
-        requireFact(proof?terminal(out,run,image,serverCid):new RegExp('^ADBMA1\\|'+run+'\\|'+image+'\\|[a-f0-9]{64}\\n$').test(out),'held terminal refused');
+        requireFact(proof?terminal(out,run,image,serverCid,model):new RegExp('^'+(model===DISTRIBUTION_MODEL?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|[a-f0-9]{64}\\n$').test(out),'held terminal refused');
         if(proof){requireFact(out.split('|')[5]===modules,'audit/proof inventory mismatch');reconcile(serverCid);}
-        process.stdout.write(JSON.stringify({phase:proof?'closed-proof':'connection-free-audit',head:process.env.GITHUB_SHA,image,run,worker_cid:cid,server_cid:serverCid,engine_host_pid:identity.pid,engine_started:identity.started,namespace_pid:1,evidence_model:MODEL,independent_loaded_object_attestation:false,mapping_consistency:'not-established',runtime_grant:false,production_ready:false})+'\n');
+        process.stdout.write(JSON.stringify({phase:proof?'closed-proof':'connection-free-audit',head:process.env.GITHUB_SHA,image,run,worker_cid:cid,server_cid:serverCid,engine_host_pid:identity.pid,engine_started:identity.started,namespace_pid:1,evidence_model:model,independent_loaded_object_attestation:false,complete_abi_attestation:false,mapping_consistency:'not-established',runtime_grant:false,production_ready:false})+'\n');
         accepted=true;child.stdin.end('ACK:'+run+':'+image+'\n');
       }
       catch(error){failure=error;child.kill('SIGKILL');}
@@ -126,17 +132,22 @@ async function worker(cid,run,image,serverCid,proof,modules=null) {
 }
 async function main() {
   const env=process.env, cwd=process.cwd(), uid=process.getuid();
+  const distribution=distributionJob(env),model=distribution?DISTRIBUTION_MODEL:MODEL;
+  const fixed=distribution?{php:selections.php,server:distributionServer}:selections;
   requireFact(process.platform==='linux'&&process.arch==='x64'&&uid>0&&env.RUNNER_OS==='Linux'&&env.GITHUB_ACTIONS==='true'&&env.GITHUB_EVENT_NAME==='workflow_dispatch'
     &&env.GITHUB_REPOSITORY==='NichlasB/alynt-drime-backups-dashboard'&&env.GITHUB_REF==='refs/heads/master'&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&env.EXPECTED_SHA===env.GITHUB_SHA
-    &&/^[0-9]+$/.test(env.GITHUB_RUN_ID??'')&&/^[0-9]+$/.test(env.GITHUB_RUN_ATTEMPT??'')&&env.MINIMUM_MODEL===MODEL&&!env.DOCKER_HOST&&!env.DOCKER_CONTEXT,'exact approved manual job required');
+    &&/^[0-9]+$/.test(env.GITHUB_RUN_ID??'')&&/^[0-9]+$/.test(env.GITHUB_RUN_ATTEMPT??'')&&(env.MINIMUM_MODEL===MODEL||distribution)&&!env.DOCKER_HOST&&!env.DOCKER_CONTEXT,'exact approved manual job required');
+  requireFact(!env.GITHUB_WORKFLOW_REF?.includes('source-policy-minimum-distribution.yml')||distribution,'distribution route cannot fall back');
+  distributionAccounting=distribution;
   requireFact(command(['context','inspect','--format','{{.Endpoints.docker.Host}}']).trim()==='unix:///var/run/docker.sock','local trusted engine only');
+  if(distribution){const security=JSON.parse(command(['info','--format','{{json .SecurityOptions}}']));requireFact(Array.isArray(security)&&security.includes('name=apparmor')&&security.includes('name=seccomp,profile=builtin'),'builtin engine containment unavailable');}
   const auditOnly=env.MINIMUM_SCOPE==='audit-only-v1',recover=process.argv.length===3&&process.argv[2]==='--cleanup';
   const phases=executionPhases(env.MINIMUM_SCOPE,recover?(auditOnly?'--audit-only':undefined):process.argv[2],env.GITHUB_WORKFLOW_REF);
   requireFact(phases!==null&&(!auditOnly||env.GITHUB_WORKFLOW_REF===AUDIT_WORKFLOW),'fixed execution scope required');
-  const owner='adb-minimum-'+env.GITHUB_RUN_ID+'-'+env.GITHUB_RUN_ATTEMPT;
+  const owner=(distribution?'adb-distribution-':'adb-minimum-')+env.GITHUB_RUN_ID+'-'+env.GITHUB_RUN_ATTEMPT;
   const stage=join(realpathSync(env.RUNNER_TEMP),owner);
   requireFact(dirname(stage)===realpathSync(env.RUNNER_TEMP),'exact temporary child');
-  if(recover){cleanup(owner,stage,auditOnly);return;}
+  if(recover){distributionCleanup=distribution;cleanup(owner,stage,auditOnly);return;}
   requireFact(process.argv.length===(auditOnly?3:2)&&cwd===env.GITHUB_WORKSPACE&&!existsSync(stage)&&ownedIds(owner).length===0,'fresh owned namespace only');
   const git=spawnSync('git',['rev-parse','HEAD'],{encoding:'utf8',timeout:5000});requireFact(git.status===0&&git.stdout.trim()===env.GITHUB_SHA,'exact source head');
   const coreHead=spawnSync('git',['-C','.adb-minimum-core','rev-parse','HEAD'],{encoding:'utf8',timeout:5000});requireFact(coreHead.status===0&&coreHead.stdout.trim()==='cc101b64012b16d087780657a2b828ccd7794a63','exact genuine core checkout');
@@ -149,7 +160,7 @@ async function main() {
     for(const dir of ['includes','scripts/ci'])for(const item of readdirSync(dir,{recursive:true,withFileTypes:true})) {
       if(item.isFile()&&(dir==='includes'||item.name.startsWith('source-policy-minimum-')))files.push(relative(cwd,join(item.parentPath??item.path,item.name)).replaceAll('\\','/'));
     }
-    files.push('scripts/manual/source-policy-proof-reflection.php','scripts/manual/source-policy-supported-core-pins.php','scripts/ci/source-policy-linux-qualification-controller.mjs','.github/workflows/source-policy-minimum-qualification.yml','.github/workflows/source-policy-minimum-audit.yml');
+    files.push('scripts/manual/source-policy-proof-reflection.php','scripts/manual/source-policy-supported-core-pins.php','scripts/ci/source-policy-linux-qualification-controller.mjs','.github/workflows/source-policy-minimum-qualification.yml','.github/workflows/source-policy-minimum-audit.yml','.github/workflows/source-policy-minimum-distribution.yml');
     const core=['version.php','load.php','plugin.php','class-wp-hook.php','class-wp-error.php','wp-db.php','cache.php','class-wp-object-cache.php','formatting.php','functions.php','option.php'];
     let bytes=0;const rows=[];
     for(const file of files.sort()) {
@@ -160,22 +171,26 @@ async function main() {
     requireFact(bytes<16777216&&rows.length<512,'source-stage bound');mkdirSync(source+'/core/wp-content',{mode:0o700});
     const cohort=rows.sort().join('\n')+'\n', image=hash(cohort);writeFileSync(source+'/cohort.sha256',cohort,{mode:0o600,flag:'wx'});
     for(const role of ['php','server']) {
-      command(['pull','--platform','linux/amd64',selections[role].ref],'',120000);
-      const row=JSON.parse(command(['image','inspect','--format','{"id":{{json .Id}},"os":{{json .Os}},"arch":{{json .Architecture}},"volumes":{{json .Config.Volumes}},"entry":{{json .Config.Entrypoint}},"cmd":{{json .Config.Cmd}}}',selections[role].ref]));
-      requireFact(imageProfile(row,role),'pinned engine image/config profile');
+      command(['pull','--platform','linux/amd64',fixed[role].ref],'',120000);
+      const row=JSON.parse(command(['image','inspect','--format','{"id":{{json .Id}},"os":{{json .Os}},"arch":{{json .Architecture}},"volumes":{{json .Config.Volumes}},"entry":{{json .Config.Entrypoint}},"cmd":{{json .Config.Cmd}}}',fixed[role].ref]));
+      requireFact(imageProfile(row,role,model),'pinned engine image/config profile');
     }
     const common=['--pull','never','--read-only','--user',uid+':'+uid,'--cap-drop','ALL','--security-opt','no-new-privileges','--cpus','1','--no-healthcheck','--label','com.alynt.minimum='+owner];
+    if(distribution)common.push('--security-opt','apparmor=docker-default','--log-driver','local','--log-opt','compress=false','--log-opt','max-size=16k','--log-opt','max-file=1');
     const init='test ! -e /var/lib/mysql/mysql; timeout --signal=TERM --kill-after=2s 40s mariadb-install-db --no-defaults --basedir=/usr --datadir=/var/lib/mysql --auth-root-authentication-method=normal --skip-test-db --skip-name-resolve --skip-log-bin --innodb-buffer-pool-size=32M --innodb-log-file-size=8M --aria-pagecache-buffer-size=8M >/tmp/bootstrap.log 2>&1; exec mariadbd --no-defaults --datadir=/var/lib/mysql --socket=/tmp/minimum.sock --pid-file=/tmp/minimum.pid --bind-address=127.0.0.1 --port=3306 --skip-name-resolve --skip-log-bin --max-connections=10 --innodb-buffer-pool-size=32M --innodb-log-file-size=8M --aria-pagecache-buffer-size=8M --max-statement-time=2 --innodb-lock-wait-timeout=1 --lock-wait-timeout=1 --wait-timeout=15 --connect-timeout=2';
-    const serverCid=command(['create',...common,'--network','none','--memory','512m','--pids-limit','64','--tmpfs',`/var/lib/mysql:rw,nosuid,nodev,noexec,size=256m,mode=700,uid=${uid},gid=${uid}`,'--tmpfs',`/tmp:rw,nosuid,nodev,noexec,size=16m,mode=700,uid=${uid},gid=${uid}`,'--entrypoint','/bin/sh',selections.server.ref,'-ceu',init]).trim();
-    requireFact(/^[a-f0-9]{64}$/.test(serverCid)&&containerProfile(inspect(serverCid),'server',owner,selections.server.config,null,uid,stage),'server configuration');command(['start',serverCid]);
+    const serverCid=command(['create',...common,'--network','none','--memory','512m','--pids-limit','64','--tmpfs',`/var/lib/mysql:rw,nosuid,nodev,noexec,size=256m,mode=700,uid=${uid},gid=${uid}`,'--tmpfs',`/tmp:rw,nosuid,nodev,noexec,size=16m,mode=700,uid=${uid},gid=${uid}`,'--entrypoint','/bin/sh',fixed.server.ref,'-ceu',init]).trim();
+    const serverRow=inspect(serverCid);
+    requireFact(/^[a-f0-9]{64}$/.test(serverCid)&&containerProfile(serverRow,'server',owner,fixed.server.config,null,uid,stage)
+      &&(!distribution||(distributionContainment(serverRow)&&JSON.stringify(serverRow.cmd)===JSON.stringify(['-ceu',init]))),'server configuration');command(['start',serverCid]);
     const start=Date.now();let ready=false;
     while(Date.now()-start<50000){const probe=spawnSync('docker',['exec',serverCid,'test','-S','/tmp/minimum.sock'],{timeout:2000,maxBuffer:1024});if(probe.status===0){ready=true;break;}requireFact(inspect(serverCid).running,'server startup stopped');await new Promise(resolve=>setTimeout(resolve,250));}
     requireFact(ready,'bounded server startup');
     reviewLog(command(['exec',serverCid,'cat','/tmp/bootstrap.log'],'',3000,16384),serverCid.slice(0,12));
     reviewLog(command(['logs',serverCid],'',3000,16384),serverCid.slice(0,12));
-    requireFact(rootSQL(serverCid,'SELECT VERSION(),@@autocommit,@@in_transaction;')==='10.11.18-MariaDB-ubu2204\t1\t0\n','exact actual server');reconcile(serverCid);
+    requireFact(rootSQL(serverCid,'SELECT VERSION(),@@autocommit,@@in_transaction;')===(distribution?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204')+'\t1\t0\n','exact actual server');reconcile(serverCid);
     const password=auditOnly?null:randomBytes(32).toString('hex'),run=hash(env.GITHUB_RUN_ID+':'+env.GITHUB_RUN_ATTEMPT).slice(0,32);
     const vars=Object.fromEntries(['GITHUB_ACTIONS','GITHUB_EVENT_NAME','GITHUB_REPOSITORY','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','EXPECTED_SHA','MINIMUM_MODEL'].map(key=>[key,env[key]]));
+    if(distribution)for(const key of ['GITHUB_WORKFLOW_REF','GITHUB_ACTOR','RUNNER_OS','RUNNER_ENVIRONMENT','DISTRIBUTION_EXECUTION_APPROVED'])vars[key]=env[key];
     vars.MINIMUM_IMAGE=image;vars.MINIMUM_SERVER_CID=serverCid;vars.PHP_INI_SCAN_DIR='';
     if(auditOnly){vars.MINIMUM_SCOPE='audit-only-v1';vars.GITHUB_WORKFLOW_REF=AUDIT_WORKFLOW;}
     let moduleHash=null;
@@ -187,16 +202,19 @@ async function main() {
         vars.QUALIFICATION_PASSWORD=password;
       }
       const envfile=stage+'/private.env';writeFileSync(envfile,Object.entries(vars).map(([key,value])=>key+'='+value).join('\n')+'\n',{mode:0o600,flag:'wx'});
-      const cid=command(['create',...common,'--interactive','--network','container:'+serverCid,'--memory','128m','--pids-limit','16','--tmpfs',`/tmp:rw,nosuid,nodev,noexec,size=4m,mode=700,uid=${uid},gid=${uid}`,'--tmpfs',`/var/www/html:rw,nosuid,nodev,noexec,size=4k,mode=700,uid=${uid},gid=${uid}`,'--mount','type=bind,src='+source+',dst=/proof,readonly','--workdir','/proof','--env-file',envfile,'--entrypoint','/usr/local/bin/php',selections.php.ref,'-n','-d','extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mysqli.so','-d','memory_limit=64M','-d','mysqli.allow_persistent=0','-d','default_socket_timeout=3','-d','mysqlnd.net_read_timeout=3','scripts/ci/source-policy-minimum-qualification.php','--owned-minimum-qualification',phase]).trim();rmSync(envfile);
-      requireFact(containerProfile(inspect(cid),'php',owner,selections.php.config,serverCid,uid,stage),'worker configuration');
-      const out=await worker(cid,run,image,serverCid,phase==='proof',moduleHash);
-      if(phase==='audit'){const match=new RegExp('^ADBMA1\\|'+run+'\\|'+image+'\\|([a-f0-9]{64})\\n$').exec(out);requireFact(match,'source/runtime audit refused');moduleHash=match[1];}
-      else requireFact(moduleHash!==null&&terminal(out,run,image,serverCid),'ordered proof receipt');
+      const workerArgs=['-n','-d','extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mysqli.so','-d','memory_limit=64M','-d','mysqli.allow_persistent=0','-d','default_socket_timeout=3','-d','mysqlnd.net_read_timeout=3',distribution?'scripts/ci/source-policy-minimum-distribution-worker.php':'scripts/ci/source-policy-minimum-qualification.php','--owned-minimum-qualification',phase];
+      const cid=command(['create',...common,'--interactive','--network','container:'+serverCid,'--memory','128m','--pids-limit','16','--tmpfs',`/tmp:rw,nosuid,nodev,noexec,size=4m,mode=700,uid=${uid},gid=${uid}`,'--tmpfs',`/var/www/html:rw,nosuid,nodev,noexec,size=4k,mode=700,uid=${uid},gid=${uid}`,'--mount','type=bind,src='+source+',dst=/proof,readonly','--workdir','/proof','--env-file',envfile,'--entrypoint','/usr/local/bin/php',fixed.php.ref,...workerArgs]).trim();rmSync(envfile);
+      const workerRow=inspect(cid);
+      requireFact(containerProfile(workerRow,'php',owner,fixed.php.config,serverCid,uid,stage)
+        &&(!distribution||(distributionContainment(workerRow)&&JSON.stringify(workerRow.cmd)===JSON.stringify(workerArgs))),'worker configuration');
+      const out=await worker(cid,run,image,serverCid,phase==='proof',moduleHash,model);
+      if(phase==='audit'){const match=new RegExp('^'+(distribution?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|([a-f0-9]{64})\\n$').exec(out);requireFact(match,'source/runtime audit refused');moduleHash=match[1];}
+      else requireFact(moduleHash!==null&&terminal(out,run,image,serverCid,model),'ordered proof receipt');
       command(['rm','--volumes',cid]);
     }
     for(const row of rows){const [digest,file]=row.split('  ');requireFact(hash(readFileSync(source+'/'+file))===digest,'parent source readback');}
-    process.stdout.write((auditOnly?'Minimum audit-only completed; qualification_body_executed=false application_fixtures_created=false; ':'Minimum trusted-lab functional body passed; ')+'independent_loaded_object_attestation=false mapping_consistency=not-established runtime_grant=false production_ready=false\n');
+    process.stdout.write((auditOnly?'Minimum audit-only completed; qualification_body_executed=false application_fixtures_created=false; ':`Minimum ${model} functional body passed; `)+'independent_loaded_object_attestation=false complete_abi_attestation=false mapping_consistency=not-established runtime_grant=false production_ready=false\n');
   } catch(error) {primaryFailure=error;throw error;}
-  finally {try{cleanup(owner,stage,auditOnly);}catch(error){if(primaryFailure)process.stderr.write('Minimum cleanup also refused; original failure preserved.\n');else throw error;}}
+  finally {distributionCleanup=distribution;try{cleanup(owner,stage,auditOnly);}catch(error){if(primaryFailure)process.stderr.write('Minimum cleanup also refused; original failure preserved.\n');else throw error;}}
 }
 if(process.argv[1]===fileURLToPath(import.meta.url))main().catch(error=>{const reason=typeof error.minimumReason==='string'&&/^[A-Za-z0-9 /-]{1,100}$/.test(error.minimumReason)?error.minimumReason:'unclassified-host-or-child-failure';process.stderr.write('Fixed minimum lab refused: '+reason+'; owned cleanup required if recovery failed.\n');process.exitCode=1;});

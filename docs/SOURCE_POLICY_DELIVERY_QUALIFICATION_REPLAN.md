@@ -1,5 +1,12 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current disposition — 2026-11-04: the owner explicitly accepts the stated lab
+assurance tradeoff and approves the [repository-only integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md).
+Its new default-off route is integrated; no native/candidate or SQL operation
+is authorized or run. Next gate is ONE exact-head owned qualification attempt,
+not further acceptance of this already accepted contract. Original replan scope
+below remains historical; product/default admission and x32 limits are unchanged.
+
 ## Approved scope and restore point — 2026-11-04
 
 The owner approves the repository-only delivery/qualification replan recommended

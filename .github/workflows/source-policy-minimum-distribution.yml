@@ -1,0 +1,53 @@
+name: Source-policy trusted-distribution legacy lab (manual only)
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact separately approved master head
+        required: true
+        type: string
+      execute_owned_proof:
+        description: Separately approved ONE owned legacy-minimum native attempt
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-minimum-qualification
+  cancel-in-progress: false
+jobs:
+  qualification:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master' && github.actor == 'NichlasB' && inputs.execute_owned_proof == true && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      MINIMUM_MODEL: trusted-distribution-legacy-v1
+      DISTRIBUTION_EXECUTION_APPROVED: ${{ inputs.execute_owned_proof }}
+    steps:
+      - name: Admit separately approved exact job before checkout or acquisition
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$GITHUB_REPOSITORY" == NichlasB/alynt-drime-backups-dashboard && "$GITHUB_REF" == refs/heads/master && "$GITHUB_ACTOR" == NichlasB ]]
+          [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" && "$GITHUB_RUN_ATTEMPT" == 1 && "$DISTRIBUTION_EXECUTION_APPROVED" == true ]]
+          [[ "$RUNNER_OS" == Linux && "$RUNNER_ENVIRONMENT" == github-hosted && "$(uname -m)" == x86_64 && "$(id -u)" -gt 0 ]]
+          [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
+      - name: Checkout exact approved source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: ${{ inputs.expected_sha }}
+          persist-credentials: false
+      - name: Checkout genuine pinned core (not donor WordPress)
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: WordPress/WordPress
+          ref: cc101b64012b16d087780657a2b828ccd7794a63
+          path: .adb-minimum-core
+          persist-credentials: false
+      - name: Fresh prerequisites then one bounded default-admission proof and cleanup
+        run: node scripts/ci/source-policy-minimum-controller.mjs
+      - name: Always recover exact owned resources
+        if: always()
+        run: node scripts/ci/source-policy-minimum-controller.mjs --cleanup

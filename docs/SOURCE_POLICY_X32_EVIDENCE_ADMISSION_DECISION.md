@@ -1,5 +1,10 @@
 # x32 Evidence Sufficiency and Candidate Admission Decision
 
+Forward disposition — 2026-11-04: the separately accepted [distribution-lab integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md)
+does not satisfy or modify this stopped ABI gate. Its new functional model has
+explicitly narrower assurance and no native authority yet. Audit/old candidate
+qualification stays false; no further x32 read or canary is selected.
+
 Current disposition — 2026-11-04: the approved [delivery/qualification replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)
 retains this unavailable audit and qualification=false. It proposes a separately
 accepted trusted-distribution functional lab, with explicitly narrower assurance

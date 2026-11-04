@@ -5,14 +5,17 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-// Refuse before core/files/credentials/native IO outside the exact owned job.
+// Refuse before protected core/credentials/native IO outside the exact owned job.
+$adbm_distribution = defined( 'ADB_MINIMUM_DISTRIBUTION' ) && true === ADB_MINIMUM_DISTRIBUTION
+	&& function_exists( 'adbm_distribution_entry' ) && adbm_distribution_entry( getenv() );
 if ( PHP_SAPI !== 'cli' || 3 !== count( $argv ) || '--owned-minimum-qualification' !== $argv[1] || ! in_array( $argv[2], array( 'audit', 'proof' ), true )
 	|| defined( 'ABSPATH' ) || 'Linux' !== PHP_OS_FAMILY || '7.4.33' !== PHP_VERSION || 'x86_64' !== php_uname( 'm' ) || PHP_ZTS || 8 !== PHP_INT_SIZE
 	|| 'true' !== getenv( 'GITHUB_ACTIONS' ) || 'workflow_dispatch' !== getenv( 'GITHUB_EVENT_NAME' )
 	|| 'NichlasB/alynt-drime-backups-dashboard' !== getenv( 'GITHUB_REPOSITORY' ) || 'refs/heads/master' !== getenv( 'GITHUB_REF' )
 	|| ! preg_match( '/\A[a-f0-9]{40}\z/', (string) getenv( 'GITHUB_SHA' ) ) || getenv( 'GITHUB_SHA' ) !== getenv( 'EXPECTED_SHA' )
 	|| ! preg_match( '/\A[0-9]+\z/', (string) getenv( 'GITHUB_RUN_ID' ) ) || ! preg_match( '/\A[0-9]+\z/', (string) getenv( 'GITHUB_RUN_ATTEMPT' ) )
-	|| 1 !== getmypid() || 'trusted-lab-functional-v1' !== getenv( 'MINIMUM_MODEL' )
+	|| 1 !== getmypid() || ( 'trusted-lab-functional-v1' !== getenv( 'MINIMUM_MODEL' ) && ! $adbm_distribution )
+	|| ( defined( 'ADB_MINIMUM_DISTRIBUTION' ) && ! $adbm_distribution )
 	|| ! preg_match( '/\A[a-f0-9]{64}\z/', (string) getenv( 'MINIMUM_SERVER_CID' ) )
 	|| ( 'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master' === getenv( 'GITHUB_WORKFLOW_REF' ) && 'audit-only-v1' !== getenv( 'MINIMUM_SCOPE' ) )
 	|| ( false !== getenv( 'MINIMUM_SCOPE' ) && ( 'audit-only-v1' !== getenv( 'MINIMUM_SCOPE' ) || 'audit' !== $argv[2] || false !== getenv( 'QUALIFICATION_PASSWORD' )
@@ -128,7 +131,8 @@ set_error_handler(
 );
 try {
 	adbb_check( 'mysqlnd 7.4.33' === mysqli_get_client_info() && '3' === ini_get( 'default_socket_timeout' ) && '3' === ini_get( 'mysqlnd.net_read_timeout' ), 'bounded exact runtime' );
-	adbb_check( '' === ini_get( 'auto_prepend_file' ) && '' === ini_get( 'auto_append_file' ) && 1 === count( get_included_files() ), 'no injected entry' );
+	$entry_files = $adbm_distribution ? array( __DIR__ . '/source-policy-minimum-distribution-worker.php', __DIR__ . '/source-policy-minimum-distribution-contract.php', __FILE__ ) : array( __FILE__ );
+	adbb_check( '' === ini_get( 'auto_prepend_file' ) && '' === ini_get( 'auto_append_file' ) && array_map( 'realpath', $entry_files ) === get_included_files(), 'no injected entry' );
 	require_once __DIR__ . '/../manual/source-policy-proof-reflection.php'; // Definitions only, frozen with the loaded image below.
 	$phase = 'core-pins';
 	$core  = realpath( __DIR__ . '/../../core' );
@@ -153,6 +157,7 @@ try {
 		require_once ABSPATH . WPINC . '/' . $file;
 	}
 	$phase = 'owned-load';
+	require_once __DIR__ . '/source-policy-minimum-distribution-contract.php';
 	foreach ( array( 'class-source-policy.php', 'class-source-policy-native-profile.php', 'class-source-policy-query-context.php', 'class-source-policy-no-reconnect-connection.php', 'class-source-policy-save-contract.php', 'class-source-policy-stored-map.php', 'class-source-policy-native-adapter.php' ) as $file ) {
 		require_once dirname( __DIR__, 2 ) . '/includes/' . $file;
 	}
@@ -206,21 +211,21 @@ try {
 	$modules = adbm_modules();
 	adbb_check( 0 === ( new mysqli_driver() )->report_mode, 'initial report OFF' );
 	$evidence = array(
-		'model'         => 'trusted-lab-functional-v1',
+		'model'         => $adbm_distribution ? 'trusted-distribution-legacy-v1' : 'trusted-lab-functional-v1',
 		'platform'      => 'Linux',
 		'arch'          => 'x86_64',
 		'php'           => '7.4.33',
 		'client'        => 'mysqlnd 7.4.33',
 		'core_commit'   => 'cc101b64012b16d087780657a2b828ccd7794a63',
 		'runtime_image' => 'sha256:08a1cb1fbe022cd08d5d19e6f95ab549194927959a297da41590d4f2d884f7b4',
-		'server_image'  => 'sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5',
+		'server_image'  => $adbm_distribution ? 'sha256:14bab8cc945c08109a2175e844d46f4eaff1fbf4f59e95dcf2f9cac7961510e1' : 'sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5',
 		'initial_mode'  => 0,
 		'head'          => getenv( 'GITHUB_SHA' ),
 		'image'         => $image,
 		'run'           => $run,
 	);
 	if ( 'audit' === $argv[2] ) {
-		echo 'ADBMA1|' . $run . '|' . $image . '|' . $modules . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
+		echo ( $adbm_distribution ? 'ADBMDA1|' : 'ADBMA1|' ) . $run . '|' . $image . '|' . $modules . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
 		fflush( STDOUT );
 		adbb_check( hash_equals( 'ACK:' . $run . ':' . $image . "\n", (string) fgets( STDIN, 160 ) ), 'held audit identity acknowledgement' );
 		return;}
@@ -346,6 +351,6 @@ foreach ( $rows as $file => $hash ) {
 
 adbb_check( adbm_modules() === $modules, 'module inventory unchanged' );
 adbb_check( adbm_source_rows() === $rows, 'no late loaded source' );
-echo 'ADBMC1|' . $run . '|' . $image . '|' . getenv( 'MINIMUM_SERVER_CID' ) . '|1|' . $modules . '|' . $checks . '|9|0|closed|trusted-lab-functional-v1|false|not-established|false|false' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
+echo ( $adbm_distribution ? 'ADBMD1|' : 'ADBMC1|' ) . $run . '|' . $image . '|' . getenv( 'MINIMUM_SERVER_CID' ) . '|1|' . $modules . '|' . $checks . '|9|0|closed|' . $evidence['model'] . '|false|not-established|false|false' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
 fflush( STDOUT );
 adbb_check( hash_equals( 'ACK:' . $run . ':' . $image . "\n", (string) fgets( STDIN, 160 ) ), 'independent live release acknowledgement' );
