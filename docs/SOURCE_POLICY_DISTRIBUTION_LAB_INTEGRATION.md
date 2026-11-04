@@ -136,6 +136,18 @@ and includes bounded stdout when a child fails. All six guard-removal controls
 and10 new Node cases still pass locally. Only test/evidence bytes change in this
 repair; fresh exact-head ordinary CI is required, with no native attempt.
 
+Recovery publication `7c83c5733a2a12a33c7294117bccba4f056f53ca` passes
+[exact-head CI41928978340](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41928978340).
+Actual logs: PHP7.4 **2,621 tests/23,562 assertions**, PHP8.3 **2,621/23,567**;
+Node **98/98** on BOTH jobs, zero failures/skips. Manifest, dependency audits,
+build, structure and PHPCS pass; audits report zero known vulnerabilities.
+Only one test-portability repair cycle was needed; the failed initial run is
+retained honestly above. Canonical scoped Light/Security review also covers the
+fixture correction and JSON-disabled regression. This evidence-only closeout
+receives its own exact-head ordinary CI/remote verification at handoff; no
+manual/native workflow is rerun or inferred. Native workflow run inventory is
+empty; execution remains default-off and production wiring unchanged.
+
 ## Progress, proof limits and next boundary
 
 Implementation-plan progress: the accepted route is integrated and isolated-tested,
