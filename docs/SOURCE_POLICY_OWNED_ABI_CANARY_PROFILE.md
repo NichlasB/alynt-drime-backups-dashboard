@@ -1,5 +1,87 @@
 # Owned Native ABI Canary Execution Profile
 
+## Public compression repair proof passed; x32 coverage remains open — 2026-11-04
+
+The single approved public attempt runs at repair head
+**592fe457fe7a9e428e13f8fd7f04483a7a8e7f1e**, already pushed/remote-verified,
+clean and gated by successful [ordinary CI41855653899](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41855653899).
+Actual CI totals: PHP7.4 **2,612 tests/23,472 assertions**, PHP8.3
+**2,612/23,477**, each with no failures/skips; Node **88/88**, no failures/skips;
+Composer/npm audits report zero advisories/vulnerabilities. Fresh pre-dispatch
+isolated bridge passes **3 PHP/12 assertions**, original23/startup15/envelope12
+groups. The expected PHP count is unchanged; two new Python groups run inside
+the existing PHP bridge.
+
+[Public native run41856008408](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41856008408),
+attempt1/job126664698453, dispatches **15:16:29 UTC**. Existing-tool audit/native
+body runs **15:16:36–15:16:44 UTC** and succeeds; independent cleanup succeeds
+at15:16:44; job concludes success15:16:46. No retry or private workflow is run.
+Both fresh exact Docker/client/runc/libseccomp and source prerequisites pass.
+The first container starts successfully: the known log-driver startup conflict
+is resolved. Public raw startup disclosure remains absent.
+
+| Actual source-bound observation | Verified result |
+|---|---|
+| Nine-file source cohort | `0a67b48372a2e4ed7c41cb0c76bf7b8bf4a97bcd2ccaa100b3187285c0cb48bd` |
+| amd64 builtin / derived | health/positive18 routes; health/denial18 routes |
+| i386 builtin / derived | health/positive38 routes; health/denial38 routes, including socketcall |
+| x32 builtin | ENOSYS observed; qualification=false; derived x32 control not run |
+| Envelope coverage | amd64+i386-tested;x32-unestablished |
+| Policy SHA256 | `3277296f5e2fa40d0e53fe3d2925e390174f3fcfc9ec2adfba8fd63852984fe4` |
+| Owned canary SHA256 | `4e27a6aa75b0e47f5818e040f4f98b91632e0a603ca216af38cfcbd1c4b051ee` |
+| Owned host SHA256 | `3a51b40bead7f3c2f9e87c13197e6b522caf5b124a16b5ec24e3998f3bbfc06a` |
+| Owned image | `sha256:81a2aad548d087b7fb14c3bdfb8babaaca7429d3d96da7ea5d16ebed091fd855` |
+| Primary cleanup | containers0,images0,stage_absent=true |
+| Separate always-run cleanup | containers0,images0,stage_absent=true |
+| Output accounting | primary311,954 bytes; native499; independent41 |
+| Uploaded artifacts | API0 |
+| Candidate execution / SQL / production wiring | all false |
+
+Independent local hashing of the nine exact repair-head Git blobs reproduces
+the actual source cohort. Host/kernel facts remain Docker28.0.4/6430e49,
+client28.0.4/b8034c0, runc1.5.2/libseccomp2.5.5, kernel7.0.0-1017-azure;
+the config-file SHA59b49d17... declares IA32=y/X32=n but explicitly has
+boot_correspondence=false. That declaration plus finite ENOSYS probes does NOT
+independently establish complete x32 non-callability. Native output499 includes
+the harmless host and x32 observations; it is not499 bytes of qualified denied
+networking. Do not claim a passed x32 filter control.
+
+The actual packet reports available_abi_controls_verified=true but
+**qualification=false**, as required by the unchanged complete-ABI rule.
+The workflow/job legitimately succeeds for its available controls and cleanup;
+that green status is NOT a candidate admission or full runtime grant. Both
+structural policy and compiled canary/host hashes remain identical to earlier
+source-admitted values. All limits, exact log readback, no-network/capabilities/
+nonroot/read-only constraints, source privacy and cleanup are unchanged except
+the approved explicit compression compatibility setting.
+
+Implementation-plan progress: the concrete startup blocker is physically fixed,
+and genuine amd64/i386 positive/denial evidence is now established. Complete ABI
+coverage, legacy M candidate/minimum-profile qualification and production wiring
+remain blocked. Campaign product milestones **8/10**, static9 unchanged; prior13
+native attempts plus this separately approved public **1/1** are consumed
+(**14 total**). No product milestone is awarded for a partial prerequisite or
+its evidence commits. Uploader/toolkit and all installed/live state are untouched;
+no candidate/SQL/site, installation, credential/schedule, package/release/deploy
+or production operation occurs.
+
+**Recommended next gated slice: Repository-Only x32 Evidence Sufficiency and
+Candidate Admission Decision.** Design/review only: compare this actual partial
+receipt with the existing trusted-host and complete-ABI obligations and identify
+the smallest sufficient, source-backed closure path. Do not relabel ENOSYS as
+complete proof, drop x32/arch mappings, loosen the original acceptance rule,
+start a kernel-attestation/tooling project or dispatch another experiment by
+implication. Any changed assurance/support decision or new physical scope needs
+explicit approval. No further native allowance or candidate-execution grant is
+provided by this completed repair/proof.
+
+Actual-result closeout reruns the isolated bridge3/12 successfully, verifies252
+local file links across the four changed owning documents and passes whitespace
+review. Git verifies scripts/tests/workflow unchanged from the successful native
+head; this closeout edits evidence/resume documents only. Ordinary exact-head
+CI must be verified for that final docs publication; no native redispatch occurs.
+
+
 ## Explicit log compression compatibility repair — 2026-11-04
 
 The user approves the harness-only compress=false correction, matching exact

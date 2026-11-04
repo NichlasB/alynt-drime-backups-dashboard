@@ -1,5 +1,12 @@
 # Candidate-Bound Moby Builtin-Profile Preservation / ABI Effect-Denial Design
 
+Current evidence: the [public compression repair proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#public-compression-repair-proof-passed-x32-coverage-remains-open--2026-11-04)
+verifies genuine amd64/i386 builtin-positive/derived-denial controls and exact
+cleanup. x32 ENOSYS/config-file facts do not satisfy the unchanged independent
+non-callability requirement below; qualification/candidate admission remain false.
+Next gate is repository-only x32 evidence sufficiency/candidate admission review,
+not further native execution, acceptance relaxation or new attestation tooling.
+
 ## Authority, restore point and unchanged boundaries — 2026-11-03
 
 User approves **design only**, repository validation, commit/push and exact-head

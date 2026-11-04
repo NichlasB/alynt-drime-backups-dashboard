@@ -1,5 +1,29 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Public canary startup repaired; amd64/i386 verified, x32 gate remains — 2026-11-04
+
+The approved [single public repair proof](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#public-compression-repair-proof-passed-x32-coverage-remains-open--2026-11-04)
+at592fe45/run41856008408 succeeds after exact-head CI41855653899.
+Explicit compress=false resolves container startup without changing log size/
+count, security controls or resource budgets. Genuine builtin/derived controls
+verify amd64 18 routes and i38638 routes each. Both owned cleanup receipts report
+containers0/images0/stage absent; artifacts0; no candidate/SQL/site operation.
+
+Implementation-plan progress: the observed blocker is physically fixed and
+amd64/i386 controls are now established; x32 returns ENOSYS and remains
+unestablished. The actual packet correctly reports qualification=false despite
+workflow success, so candidate/minimum-profile and production admission remain
+closed. Product milestones8/10,static9 unchanged; prior13 plus this separately
+approved public1/1 are consumed (14 native total). No extra milestone for repair/
+partial prerequisite/evidence, and no implicit retry or candidate grant.
+
+**Recommended next gated slice: Repository-Only x32 Evidence Sufficiency and
+Candidate Admission Decision**, design/review only, to identify the smallest
+source-backed closure under the existing trusted-host/complete-ABI contract.
+Do not drop x32, weaken acceptance or initiate new kernel-attestation tooling,
+native experiments, candidate/SQL execution or production wiring without approval.
+
+
 ## Explicit compression correction implemented; one public proof approved — 2026-11-04
 
 The approved [harness-only repair](SOURCE_POLICY_OWNED_ABI_CANARY_PROFILE.md#explicit-log-compression-compatibility-repair--2026-11-04)
