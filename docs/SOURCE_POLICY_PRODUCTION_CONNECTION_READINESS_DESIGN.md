@@ -1,5 +1,16 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current disposition — 2026-11-04: the approved [delivery replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)
+returns to the actual concurrent-save objective. The old whole-map writer is
+still active; native/provider/form delivery and required legacy M remain open.
+The x32 audit's unavailable result stops that evidence lane. Next policy gate
+is explicit acceptance of the proposed candidate-bound trusted-distribution
+functional lab and its repository-only cohesive integration, not more kernel
+tooling or an already granted native attempt. Lab assurance/accounting changes
+require acceptance; product save/security/compatibility contracts stay intact.
+No production factory/wiring changes. Earlier resume paragraphs below are
+historical, not current instructions or transferred native qualification.
+
 Current resume: [fixed-owner budget/origin integration design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
 closes the specified bootstrap/grant/verification contract on paper only.
 Collector/entry/workflow, graph and production/provider/form behavior are unchanged;

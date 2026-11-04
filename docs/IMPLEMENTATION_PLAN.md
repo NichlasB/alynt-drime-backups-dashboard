@@ -1,5 +1,28 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Delivery replan: return to conditional-save delivery, lab policy gate — 2026-11-04
+
+The approved [repository-only replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)
+rechecks the actual old whole-map writer/form and existing dormant conditional
+owner. The lost-update repair is still unwired. Required legacy M remains open;
+the unavailable x32 lane stays stopped, with no transferred qualification.
+
+Preferred next gated slice: **Candidate-Bound Trusted-Distribution Functional
+Qualification Contract and Cohesive Legacy-Minimum Lab Integration**, repository-only.
+It requires explicit acceptance of narrower lab assurance and engine-managed
+acquisition accounting, not weakened plugin save/security/compatibility contracts.
+Reuse the exact existing candidates and native cases; no new kernel tooling,
+alternate artifact, parser framework or unrelated cleanup. Current approval is
+design/publication only, not that acceptance, implementation or native execution.
+Only after a qualified minimum attempt and required-profile reconciliation may
+one cohesive trusted-provider/form/legacy switch and genuine owned proof proceed.
+Release/full pre-release and live deployment retain separate gates.
+
+Implementation-plan progress: a finite delivery path replaces further infrastructure
+detours; actual persistence repair is not complete. Campaign8/10,static9 and14
+consumed native attempts stay unchanged. No source, acceptance, dependency,
+workflow, site state or production wiring changes in this replan.
+
 ## Existing-runner x32 audit unavailable; bounded evidence path stopped — 2026-11-04
 
 The separately approved temporary inline-Python workflow and its removal run

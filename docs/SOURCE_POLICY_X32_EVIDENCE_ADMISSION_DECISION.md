@@ -1,5 +1,12 @@
 # x32 Evidence Sufficiency and Candidate Admission Decision
 
+Current disposition — 2026-11-04: the approved [delivery/qualification replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)
+retains this unavailable audit and qualification=false. It proposes a separately
+accepted trusted-distribution functional lab, with explicitly narrower assurance
+claims, rather than another x32 probe or attestation tool. This does not satisfy,
+delete or loosen the existing complete-ABI gate. No new model is implemented or
+accepted and no candidate/native execution is authorized by the design.
+
 ## Approved temporary audit: interface unavailable; evidence lane stopped — 2026-11-04
 
 The owner explicitly approves ONE temporary manual CI workflow with bounded

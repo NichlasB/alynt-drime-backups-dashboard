@@ -3,8 +3,11 @@
 Current disposition: the separately approved [temporary read-only audit](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md#approved-temporary-audit-interface-unavailable-evidence-lane-stopped--2026-11-04)
 reports the required proc interface missing; the workflow is removed and this
 evidence lane is STOPPED. This actual amd64/i386 coverage stays partial and
-qualification=false. Next gate is repository-only source-policy delivery/
-qualification replanning, not more kernel tooling, retries or candidate execution.
+qualification=false. The [completed delivery replan](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md)
+proposes a new explicitly accepted functional-lab assurance contract; it does
+not qualify this ABI path or authorize another native attempt. Next gate is
+that policy acceptance and repository-only integration, not more kernel tooling,
+retries or candidate execution. Historical controls and failures remain unchanged.
 
 ## Public compression repair proof passed; x32 coverage remains open — 2026-11-04
 
