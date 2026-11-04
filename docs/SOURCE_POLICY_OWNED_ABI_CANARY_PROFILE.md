@@ -1,10 +1,10 @@
 # Owned Native ABI Canary Execution Profile
 
-Current disposition: the [repository-only x32 decision](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md)
-retains this actual partial coverage and qualification=false. Next authority
-is one bounded existing-runner read-only kernel-evidence feasibility audit,
-not another canary, candidate execution, acceptance change or attestation tool.
-No new physical evidence or native-attempt allowance is created by that design.
+Current disposition: the separately approved [temporary read-only audit](SOURCE_POLICY_X32_EVIDENCE_ADMISSION_DECISION.md#approved-temporary-audit-interface-unavailable-evidence-lane-stopped--2026-11-04)
+reports the required proc interface missing; the workflow is removed and this
+evidence lane is STOPPED. This actual amd64/i386 coverage stays partial and
+qualification=false. Next gate is repository-only source-policy delivery/
+qualification replanning, not more kernel tooling, retries or candidate execution.
 
 ## Public compression repair proof passed; x32 coverage remains open — 2026-11-04
 

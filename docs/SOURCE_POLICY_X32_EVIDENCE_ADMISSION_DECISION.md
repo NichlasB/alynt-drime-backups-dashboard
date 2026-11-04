@@ -1,5 +1,93 @@
 # x32 Evidence Sufficiency and Candidate Admission Decision
 
+## Approved temporary audit: interface unavailable; evidence lane stopped — 2026-11-04
+
+The owner explicitly approves ONE temporary manual CI workflow with bounded
+inline existing-Python reads and its removal after the audit. This follows the
+earlier scope-review rejection of a persistent helper/workflow: that rejected
+patch created no files and dispatched no job. The new exact temporary-workflow
+authority is separate; no standalone reader, installed program or attestation
+framework is created.
+
+Restore point **add57f5636501f3d510994932ec315fe32789458** is clean and matches
+remote master. The single temporary file
+`.github/workflows/source-policy-x32-evidence-audit-temporary.yml` is committed/
+pushed at **810d488c11ed997ad646b547abb8f10b4632faec**. Thirteen in-memory synthetic
+test groups pass with zero failures/errors/protected reads/native experiments:
+real available-channel and admission positives; missing-interface early stop;
+fixed read set, no-follow/read-only flags and closed handles; byte/expansion/
+global budgets; gzip EOF/CRC/single-member/trailing rejection; exact unique
+declarations; module/x32 insufficiency; proc-origin/bind-substitution rejection;
+no grant/private-error echo; and three source-mutated origin/builtin/bound controls.
+These checks are local synthetic validation of the exact inline body, not
+permanent new test tooling or physical kernel evidence.
+
+No ordinary push run was visible, so the EXISTING ordinary CI workflow is
+manually dispatched once. [CI41870082094](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41870082094)
+succeeds at that exact head before protected audit dispatch: PHP7.4
+**2,612 tests/23,472 assertions**, PHP8.3 **2,612/23,477**, Node **88/88** per
+matrix job, no failures/skips; Composer/npm audits0 advisories/vulnerabilities.
+No ordinary CI/manual read-only audit is counted as a new native qualification.
+
+[Audit41870452268](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41870452268),
+attempt1/job126715770378, runs the inline step at **17:44:33 Europe/Paris
+(16:44:33 UTC)**. Admission, exact detached checkout and workflow-source checks
+succeed. The first protected interface open reports **config-interface-missing**:
+status=unavailable, with the intended exit2/failing audit job. This is the
+explicit evidence-stop condition, not a broken script or permission to retry.
+No alternative file, privileged read, native canary or new runner is tried.
+
+| Actual receipt | Verified value |
+|---|---|
+| Exact head | `810d488c11ed997ad646b547abb8f10b4632faec` |
+| Workflow bytes/SHA256 | 10,542 / `1e9f98000cf515e378850d95cb7d3057db3f262550db4cd635baee50c0f4ac03` |
+| Single-file source cohort | `4f54ee590f069728ce9e61459c56ec399a18eb0329acb3d2e26aa71862e63123` |
+| Observed input bytes | 10,583 =41-byte checkout HEAD +10,542-byte workflow |
+| Kernel release | 7.0.0-1017-azure |
+| Config/mount payload reads | zero successful; mount callback not reached |
+| Audit handles | all closed |
+| Audit child processes/filesystem writes | 0 /false; ordinary checkout is not claimed write-free |
+| Uploaded artifacts | API0 |
+| Qualification/candidate admission/execution/SQL/production wiring | all false |
+
+Independent hashing of the exact Git workflow blob reproduces both hashes.
+Missing /proc/config.gz does NOT prove IKCONFIG is disabled, x32 is disabled,
+or any complete-ABI claim; its compiled-in/module/proc-origin/source sufficiency
+cannot be assessed through this approved route. The previous actual amd64/i386
+controls remain valid partial evidence; they are not promoted by this negative
+audit. The candidate and all production wiring stay closed.
+
+The exact owned temporary workflow is removed immediately after inspection of
+the unavailable receipt, as explicitly approved. Its historical Git/run evidence
+remains available; no workflow-history/log deletion or secure-erasure claim is
+made. No scripts, tests, existing workflows, dependencies, installed sites,
+database, containers, permissions, schedules or production state change.
+Removal/evidence publication and ordinary exact-head CI finish this task; there
+is no further audit, fallback, qualification attempt or infrastructure work.
+
+Cleanup/evidence validation passes the existing isolated bridge **3 PHP tests/12
+assertions**, verifies 260 local file links across the five owning documents and
+passes whitespace/diff review. Against restore point add57f5, all permanent
+source/tests/workflows/dependencies are byte-identical after removal; only owning
+records remain changed. Ordinary exact-head CI is required for this final
+removal/evidence publication; it does not erase the unavailable audit's failure.
+
+Implementation-plan progress: the finite existing-interface path is exhausted
+on the approved profile and this evidence lane is STOPPED, not qualified.
+Product milestones **8/10**, static9 and **14 consumed native attempts** remain
+unchanged; this is one separately authorized read-only metadata audit, not a
+native experiment or product milestone.
+
+**Recommended next gated slice: Repository-Only Source-Policy Delivery and
+Qualification Replan.** Return to the original concurrent-save objective and
+assess the smallest maintainable delivery/qualification route under unchanged
+PHP/WordPress compatibility and security contracts. Keep the current native
+adapter/production wiring dormant. Do not reopen kernel attestation, build a
+new lab, provision another runner, waive coverage or implement an alternative
+under this audit approval. This is a proposed product/architecture planning
+decision requiring separate approval, not an already selected implementation.
+
+
 ## Scope and decision — 2026-11-04
 
 Approved repository-only design/review, relevant isolated validation, commit/push
