@@ -1,5 +1,113 @@
 # Candidate-Bound Legacy Greeting and Core-Derived Session Admission Decision
 
+## Approved repository-only policy foundation — 2026-11-05
+
+The owner explicitly approves the Candidate-Bound Legacy Greeting and Genuine-Core
+Session Policy Safety Foundation, validation, commit/push and ordinary exact-head
+CI. This is the narrow private lab-policy exception described below, not a global
+R3 promotion or permission to run another native attempt. Restore/review baseline
+is clean/synced6e745adf25f2d91a76f38add1b8fdee4ee96535f; ordinary CI42017613711
+was successful. External restore-point inventory and clean Git baseline verified.
+No LocalWP/live/client/Drime, candidate acquisition/execution, SQL, WordPress,
+fixture accounts/storage, schedules, package/release/deploy or production wiring.
+Existing interpreters execute isolated synthetic APIs and owned SOURCE-copy tests.
+
+### Implemented bounded delta
+
+- [Minimum_Lab_Scope](../includes/class-source-policy-minimum-lab-scope.php)
+  retains the original newer-server row and adds exactly one distribution row.
+  That row requires the exact wrapper plus existing job/head/source-image/run/
+  candidate validator before binding, the original exact receiver/context/frame,
+  and fixed utf8/empty configured collation. Unknown/cross-model/candidate data
+  cannot pick fields from another row. No public mint, request selector, generic
+  version stripping or automatic policy learning is added.
+- [Entry contract](../scripts/ci/source-policy-minimum-distribution-contract.php)
+  selects distribution only after its existing exact correlation checks, before
+  owner construction. [Actual owner composition](../scripts/ci/source-policy-minimum-native-operation.php)
+  retains that validated private scope, rather than null/default admission.
+  No ready/facts/handle injection; the real dormant initializer must qualify it.
+- The row expects raw5.5.5-10.6.23-MariaDB and the genuine helper-derived
+  utf8mb4/unicode_ci connection. Existing shared bootstrap/session/final/active
+  paths already carry the same bound receiver; none is bypassed or rewritten.
+  Raw facts remain raw. Control SQL identity10.6.23-MariaDB and physical schema
+  _520_ci requirements are unchanged. No new SQL, probe, helper override or credit.
+- Transport_Profile, Bootstrap_Evidence, Native_Profile, bootstrap/setup traits,
+  No_Reconnect_Connection public factories, schema, writer/form and workflow
+  execution flags are byte-identical to the baseline. Null/default still refuses
+  the prefix and unicode_ci. Old lab mapping and its cases remain unchanged.
+  Candidate/source/configuration pins and all resource budgets are preserved.
+
+### Non-vacuous validation and review
+
+The added positive fails on the old code (one test/two assertions, expected
+failure), then passes through ACTUAL adb0_owner and real dormant admission/adapter
+methods with extension-free APIs. It covers view, saved, stale conflict and
+non-target preservation, never manually sets ready or qualification facts.
+The core helper double now has an explicit legacy-prefixed API answer alongside
+its old newer-server answer; this is modeled behavior, NOT genuine core proof.
+
+Final focused PHP set: **94 tests/444 assertions**, no failures/skips. Cases
+include all evidence fields, job correlation, frame/endpoint/charset/collation,
+exact API variants before metadata, cloned binding, late frame/context drift,
+separate helper charset/collation faults, session readbacks, schema drift,
+active facts/helper drift, revocation on close and unavailable public factory.
+Pre-allocation invalid-frame closure can honestly remain false because callback
+qualification never began: tests require zero native allocation, null handle,
+absent owned callback and revoked scope, not fabricated clean native release.
+
+Six new semantic controls mutate ONLY an owned temporary source copy and require
+PHPUnit assertion failure, not syntax/launcher failure: always-unavailable scope,
+missing retained context comparison, changed exact greeting, missing configured
+charset/collation restriction, ignored session collation and changed schema
+collation. Copy cleanup is verified in finally; working source is not mutated.
+Existing default-widening and source/job/model controls remain. Full Node suite
+passes **99/99**, no failures/skips. No artificial native success or test skip.
+
+Canonical source-scoped Feature Light: nine executable/test files plus owning
+records/direct callers, baseline6e745ad; private DB/profile boundary and owned
+test files only, no UI/REST/AJAX/cron. One test expectation corrected: an unsealed
+pre-allocation context is not confirmed clean release. Runtime cleanup was NOT
+changed. No remaining non-security issue. UI/UX is inapplicable.
+
+Canonical Bloat/Structure Phase1 uses explicit6e745ad. Helper reports seven PHP
+files, zero oversized: scope137, contract91, operation109, contract-test41,
+owner-test19, worker78, wpdb-double98 TOTAL lines. CODE=1 output is a helper
+limitation, not a meaningful code metric; .mjs files are outside that helper's
+catalog. Review both small Node files separately. Classification: Consolidate
+(keep cohesive; no cleanup/split needed) for all seven; Phase1 requires no Phase2
+edits, no deferred split. Configured structure check and PHPCS257 files pass.
+Strict Composer validation, build and Composer/npm audits pass (zero known
+advisories/vulnerabilities). Final frozen local PHP8.5.1 suite: **2667 tests/
+23744 assertions**, no failures, two existing Sodium-unavailable signer skips
+(individually reverified). All **313** local file links across five owning records
+resolve; final whitespace/scope review passes. Exact-head ordinary CI results
+are recorded in the scoped toolkit evidence, not inferred from this local run.
+Final focused Security finds no confirmed defect:
+no new request/output/SQL surface, permissive fallback, external secret or grant;
+private source/receiver and model checks plus semantic controls protect the delta.
+No confirmed security defect requires a new 07A handoff; required physical proof
+is explicitly still open. No whole-plugin review/readiness rows are refreshed.
+
+Shared source bytes changed, so old native W/L/M-lab receipts do not qualify this
+new executable cohort. Isolated tests prove ordering/policy only, not actual core
+authentication, session/escape/SQL behavior or held-live/post-exit release. The
+previous native refusal and primary/always-cleanup evidence remain historical;
+no native attempt is added by this repository-only task.
+
+Implementation-plan progress: the approved joint lab policy is implemented and
+isolated-tested, but legacy engine functional qualification, default/M/profile
+reconciliation and delivered concurrent-save repair remain OPEN. Campaign8/10,
+static9 and15 consumed native attempts unchanged; no count reset or product credit.
+
+**Recommended next gated slice: ONE Exact-Head Candidate-Bound Legacy Greeting/
+Session Owned Qualification and Cleanup Attempt**, only after publication CI.
+Require explicit ephemeral-lab acquisition, exact two disposable containers,
+owned schema/table/account/process and cleanup authority; fresh unchanged
+prerequisites, original nine groups/byte probe, independent held-live/post-exit
+reconciliation and strict release. No automatic retry or production/default
+admission expansion. Native execution remains default-off and undispatched here.
+Earlier design-only wording below describes its original approval boundary.
+
 ## Authority and disposition — 2026-11-05
 
 Owner approval covers this repository-only decision, isolated validation,

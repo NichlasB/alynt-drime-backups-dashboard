@@ -1,5 +1,13 @@
 # Legacy-Minimum Exact-Server Candidate and Owned Qualification Design
 
+Current foundation — 2026-11-05: [approved candidate-bound policy](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
+admits exactly this raw legacy greeting/helper-session row only within retained
+private lab scope. Candidate/configuration pins and default production rules
+remain unchanged. Isolated tests are not actual session/native proof. Next gate:
+ONE exact-head candidate-bound legacy greeting/session owned qualification and
+cleanup attempt, fresh prerequisites/explicit lab scope; no dispatch authorized
+by this repository-only foundation. Existing failed attempt remains unqualified.
+
 Current decision — 2026-11-05: [candidate-bound greeting/session decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
 retains these exact candidates and the failed run. It proposes one code-owned
 private lab row for the observed prefixed API and source-derived genuine session,

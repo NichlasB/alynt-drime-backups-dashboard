@@ -34,7 +34,7 @@ function adbm_distribution_entry( array $env ) {
 		&& ! isset( $env['MINIMUM_SCOPE'] ) && empty( $env['DOCKER_HOST'] ) && empty( $env['DOCKER_CONTEXT'] );
 }
 
-/** Exact source/run/candidate correlation; no observed version alias is accepted.
+/** Exact source/run/candidate correlation; never generic version normalization.
  *
  * @param array $evidence Fixed worker evidence, never a request grant.
  * @param array $env Private inherited job DATA, not credentials.
@@ -73,7 +73,7 @@ function adbm_distribution_evidence( array $evidence, array $env ) {
 		&& substr( hash( 'sha256', $env['GITHUB_RUN_ID'] . ':' . $env['GITHUB_RUN_ATTEMPT'] ), 0, 32 ) === $evidence['run'];
 }
 
-/** Keeps the old scoped lab distinct from unchanged default legacy admission.
+/** Keeps the two fixed private lab rows distinct from default admission.
  *
  * @param array $evidence Source-owned proof correlation, not a public grant.
  * @return string Fixed construction branch only.
@@ -85,7 +85,7 @@ function adbm_minimum_binding_mode( array $evidence ) {
 		return 'lab'; // The existing private scope still validates every old evidence field.
 	}
 	if ( $distribution && adbm_distribution_evidence( $evidence, getenv() ) ) {
-		return 'default'; // No scope, accepted server alias, helper override or ready/facts injection.
+		return 'distribution'; // Only the exact private legacy row; no default admission change.
 	}
 	throw new RuntimeException( 'Unknown minimum qualification model' );
 }

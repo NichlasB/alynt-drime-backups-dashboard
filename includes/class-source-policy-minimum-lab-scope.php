@@ -41,15 +41,20 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope {
 	 * @param array  $evidence Trusted-lab prerequisite correlation, not caller authority.
 	 */
 	private function __construct( $receiver, $context, $frame, $evidence ) {
+		$distribution = is_array( $evidence ) && 'trusted-distribution-legacy-v1' === ( $evidence['model'] ?? null );
+		if ( $distribution && ( ! defined( 'ADB_MINIMUM_DISTRIBUTION' ) || true !== ADB_MINIMUM_DISTRIBUTION
+			|| ! function_exists( 'adbm_distribution_evidence' ) || ! adbm_distribution_evidence( $evidence, getenv() ) ) ) {
+			return;
+		}
 		$fixed = array(
-			'model'         => 'trusted-lab-functional-v1',
+			'model'         => $distribution ? 'trusted-distribution-legacy-v1' : 'trusted-lab-functional-v1',
 			'platform'      => 'Linux',
 			'arch'          => 'x86_64',
 			'php'           => '7.4.33',
 			'client'        => 'mysqlnd 7.4.33',
 			'core_commit'   => 'cc101b64012b16d087780657a2b828ccd7794a63',
 			'runtime_image' => 'sha256:08a1cb1fbe022cd08d5d19e6f95ab549194927959a297da41590d4f2d884f7b4',
-			'server_image'  => 'sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5',
+			'server_image'  => $distribution ? 'sha256:14bab8cc945c08109a2175e844d46f4eaff1fbf4f59e95dcf2f9cac7961510e1' : 'sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5',
 			'initial_mode'  => 0,
 		);
 		if ( ! is_array( $evidence ) || 12 !== count( $evidence ) || array_diff( array_keys( $evidence ), array_merge( array_keys( $fixed ), array( 'head', 'image', 'run' ) ) )
@@ -75,7 +80,8 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope {
 		}
 		if ( '6.0' !== $frame['core'] || 'adb_minimum' !== $frame['database'] || 'adbm_' . substr( $evidence['run'], 0, 12 ) . '_options' !== $frame['table']
 			|| 'adbm' !== $frame['user'] || '127.0.0.1' !== $frame['host'] || 3306 !== $frame['port'] || null !== $frame['socket']
-			|| 'tcp_loopback' !== $frame['transport'] || '127.0.0.1:3306' !== $frame['db_host'] ) {
+			|| 'tcp_loopback' !== $frame['transport'] || '127.0.0.1:3306' !== $frame['db_host']
+			|| ( $distribution && ( 'utf8' !== $frame['charset'] || '' !== $frame['collate'] ) ) ) {
 			return;
 		}
 		$this->receiver = $receiver;
@@ -98,7 +104,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope {
 		return array(
 			'core'      => '6.0',
 			// Exact observed PHP 7.4.33/mysqlnd API identity, not SQL VERSION().
-			'server'    => '5.5.5-10.11.18-MariaDB-ubu2204',
+			'server'    => 'trusted-distribution-legacy-v1' === $this->evidence['model'] ? '5.5.5-10.6.23-MariaDB' : '5.5.5-10.11.18-MariaDB-ubu2204',
 			'collation' => '' === $this->frame['collate'] ? 'utf8mb4_unicode_ci' : 'utf8mb4_unicode_520_ci',
 			'database'  => $this->frame['database'],
 			'table'     => $this->frame['table'],

@@ -29,11 +29,11 @@ final class SourcePolicyDistributionContractTest extends TestCase {
 		$this->assertSame('lab',adbm_minimum_binding_mode(array('model'=>'trusted-lab-functional-v1')));
 		$this->expectException(RuntimeException::class);adbm_minimum_binding_mode($this->evidence());
 	}
-	public function test_explicit_wrapper_and_bound_evidence_select_only_default_admission() {
+	public function test_explicit_wrapper_and_bound_evidence_select_only_private_distribution_row() {
 		define('ADB_MINIMUM_DISTRIBUTION',true);
 		$prior=array();foreach($this->job()as$key=>$value){$prior[$key]=getenv($key);putenv($key.'='.$value);}
 		try{
-			$this->assertSame('default',adbm_minimum_binding_mode($this->evidence()));
+			$this->assertSame('distribution',adbm_minimum_binding_mode($this->evidence()));
 			foreach(array(array('model'=>'trusted-lab-functional-v1'),array('model'=>'unknown'))as$bad){$refused=false;try{adbm_minimum_binding_mode($bad);}catch(RuntimeException $error){$refused=true;}$this->assertTrue($refused,'no cross-model fallback');}
 			putenv('MINIMUM_IMAGE='.str_repeat('d',64));$refused=false;try{adbm_minimum_binding_mode($this->evidence());}catch(RuntimeException $error){$refused=true;}$this->assertTrue($refused,'source changed before construction');
 		}finally{foreach($prior as$key=>$value)putenv(false===$value?$key:$key.'='.$value);}

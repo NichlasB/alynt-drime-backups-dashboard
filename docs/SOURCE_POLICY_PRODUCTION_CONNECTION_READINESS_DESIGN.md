@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current foundation — 2026-11-05: [exact private legacy lab row](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
+is implemented with isolated construction/adapter/guard tests. Default admission,
+physical schema, provider/form and production wiring stay unchanged. Native
+execution remains disabled; next gate is ONE exact-head candidate-bound legacy
+greeting/session owned qualification/cleanup attempt, not a production grant.
+M/default/profile/provider/form reconciliation and actual concurrency delivery
+remain open; campaign8/10 and15 consumed attempts unchanged.
+
 Current decision — 2026-11-05: [joint legacy greeting/session decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
 proposes an exact private lab-only exception, not default/production eligibility.
 Genuine core source predicts_unicode_ci for the empty profile; no owned session

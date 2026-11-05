@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Joint private lab policy implemented; native execution remains closed — 2026-11-05
+
+The explicitly approved [foundation](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
+adds the exact distribution candidate row to the existing private lab scope and
+fixed owner branch. Same receiver carries greeting/session/final/active admission;
+strict null/default production rules, physical schema, public provisioning,
+workflow execution flags, budgets and writer/form remain unchanged. Actual
+construction/view/save/conflict and guard-removal tests use isolated APIs only.
+No native attempt, candidate/site execution, SQL or production wiring change.
+
+Implementation-plan progress: joint lab-policy blocker advances from decision
+to implemented/isolated-tested foundation, not physical M or concurrency delivery.
+Campaign8/10,static9,15 consumed native attempts unchanged. Exact next gated slice:
+**ONE Exact-Head Candidate-Bound Legacy Greeting/Session Owned Qualification and
+Cleanup Attempt**, fresh unchanged prerequisites and explicit ephemeral-lab
+fixture/container/process/cleanup approval. No automatic retry or transferred
+historical native qualification. Prior approval/result sections are historical.
+
 ## Joint legacy greeting/session decision; implementation remains gated — 2026-11-05
 
 The approved [candidate-bound decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)

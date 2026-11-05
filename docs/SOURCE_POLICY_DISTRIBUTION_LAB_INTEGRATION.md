@@ -1,5 +1,13 @@
 # Trusted-Distribution Legacy-Minimum Lab Integration
 
+Current foundation — 2026-11-05: the approved [joint greeting/session policy](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
+now uses one exact retained distribution lab scope; null/default production
+admission remains unchanged. It is isolated-tested, not natively qualified.
+Native workflow remains default-off/undispatched; next separate approval is ONE
+exact-head candidate-bound legacy greeting/session owned qualification/cleanup
+attempt with fresh prerequisites. Campaign8/10,15 attempts unchanged. Earlier
+null/default route description and failed run below are historical evidence.
+
 Current decision — 2026-11-05: the approved [joint greeting/session admission decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
 explains the exact failed API greeting and pinned core-derived empty-collation
 behavior without changing admission. It recommends one candidate/receiver-bound

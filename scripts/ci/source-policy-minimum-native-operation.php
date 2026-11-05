@@ -28,7 +28,7 @@ function adb0_owner() {
 		adbb_bind( $context, $key, $value );
 	}
 	adbb_bind( $owner, 'query_context', $context );
-	if ( 'lab' === $binding_mode ) {
+	if ( in_array( $binding_mode, array( 'lab', 'distribution' ), true ) ) {
 		$scope       = ( new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab_Scope' ) )->newInstanceWithoutConstructor();
 		$constructor = new ReflectionMethod( $scope, '__construct' );
 		if ( PHP_VERSION_ID < 80100 ) {

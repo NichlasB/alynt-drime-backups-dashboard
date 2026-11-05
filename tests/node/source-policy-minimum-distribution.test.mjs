@@ -47,7 +47,7 @@ test('default-off manual route stages exact worker and never dispatches itself',
   for(const token of ['source-policy-minimum-distribution.yml','source-policy-minimum-distribution-worker.php','distributionContainment','complete_abi_attestation:false','10.6.23-MariaDB'])assert.ok(controller.includes(token),token);
   const op=read('scripts/ci/source-policy-minimum-native-operation.php');
   assert.ok(op.indexOf('adbm_minimum_binding_mode')<op.indexOf('adbb_construct( $class )'));
-  assert.match(op,/if \( 'lab' === \$binding_mode \)/);
+  assert.match(op,/if \( in_array\( \$binding_mode, array\( 'lab', 'distribution' \), true \) \)/);
   assert.doesNotMatch(op,/bind\( \$owner, '(ready|dbh|qualification)'/);
 });
 test('in-memory JS semantic controls kill guard bypasses and an always-refused route',async()=>{
@@ -77,7 +77,7 @@ test('PHP evidence controls kill source-substitution and cross-model constructio
   const sourceCheck=body=>assert.equal(invoke(body,`echo adbm_distribution_evidence($e,$j)?'yes':'no';$j['MINIMUM_IMAGE']=str_repeat('f',64);echo adbm_distribution_evidence($e,$j)?'yes':'no';`),'yesno');
   sourceCheck(source);
   const mutant=source.replace("( $env['MINIMUM_IMAGE'] ?? null ) === $evidence['image']",'true');assert.notEqual(mutant,source);assert.throws(()=>sourceCheck(mutant),assert.AssertionError);
-  const modeCheck=body=>assert.equal(invoke(body,`define('ADB_MINIMUM_DISTRIBUTION',true);foreach($j as$k=>$v)putenv($k.'='.$v);echo adbm_minimum_binding_mode($e);try{adbm_minimum_binding_mode(array('model'=>'trusted-lab-functional-v1'));echo 'BAD';}catch(RuntimeException $x){echo 'closed';}`),'defaultclosed');
+  const modeCheck=body=>assert.equal(invoke(body,`define('ADB_MINIMUM_DISTRIBUTION',true);foreach($j as$k=>$v)putenv($k.'='.$v);echo adbm_minimum_binding_mode($e);try{adbm_minimum_binding_mode(array('model'=>'trusted-lab-functional-v1'));echo 'BAD';}catch(RuntimeException $x){echo 'closed';}`),'distributionclosed');
   modeCheck(source);
   const modeMutant=source.replace("! $distribution && 'trusted-lab-functional-v1'","'trusted-lab-functional-v1'");assert.notEqual(modeMutant,source);assert.throws(()=>modeCheck(modeMutant),assert.AssertionError);
 });
