@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Required-profile cohorts reconciled; trusted composition remains gated — 2026-11-05
+
+The approved [source-cohort/eligibility decision](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
+compares actual W28/L29-path entry/include/controller/preflight audit cohorts to
+b4c6eff. Only the loaded Minimum_Lab_Scope differs; historical W403/9 and L285/9
+remain successful but are not current-image grants. Legacy42032068093 qualifies
+unchanged current executable bytes under its PRIVATE model, not NULL/default M.
+Recorded intended-site CLI/FPM/static facts do not establish request eligibility.
+
+Implementation-plan progress: required-row/cohort status and finite remaining
+delivery gates are explicit; no runtime/product milestone credit. Campaign9/10,
+static9,16 native attempts unchanged. Exact next gated slice: **Repository-Only
+Trusted Production Context and Lazy-Provider Safety Foundation**, dormant isolated
+API tests, no real authentication/secrets/storage/native/wiring. Keep default
+policy strict; legacy production eligibility still requires an explicit decision.
+Freeze the final shared cohort before one approved affected-profile/request proof
+batch, then the cohesive form/provider/legacy-writer switch. No automatic rerun,
+receipt promotion, unavailable-everywhere release or old-writer fallback.
+
 ## Exact private legacy functional qualification passed; eligibility gate remains — 2026-11-05
 
 The separately approved [single native attempt42032068093](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)

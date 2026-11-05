@@ -1,5 +1,16 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current decision — 2026-11-05: [required-profile/source-cohort reconciliation](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
+preserves exact legacy private functional success and historical W/L results
+without granting default M/current W/L/installed FPM eligibility. The sole shared
+loaded change is Minimum_Lab_Scope; final shared-cohort requalification remains
+required, not an immediate rerun after each foundation. Next approval: dormant
+Repository-Only Trusted Production Context and Lazy-Provider Safety Foundation,
+isolated APIs only, strict default policy/public factories/wiring unchanged.
+Legacy production eligibility is a separate explicit unresolved decision before
+the application switch; no lab receipt or current-source self-hash grants it.
+Campaign9/10,16 native attempts unchanged. Earlier resumes are historical.
+
 Current qualification — 2026-11-05: [native42032068093 at e99dbc5](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
 passes exact private legacy greeting/session, byte probe/nine groups and strict
 independent release/cleanup. Default production admission and provider/form remain

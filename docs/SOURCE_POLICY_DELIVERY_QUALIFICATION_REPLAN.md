@@ -1,5 +1,18 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current reconciliation — 2026-11-05: [required-profile/cohort decision](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
+completes the repository-only part of step3. Historical W/L remain valid for
+their old images; one loaded shared file differs. Private legacy M succeeds on
+current executable bytes, but default/production eligibility is not closed.
+Next approval is the dormant Trusted Production Context and Lazy-Provider Safety
+Foundation already specified by production readiness, not more lab infrastructure.
+It keeps strict defaults/public factories/form/writer unchanged. This refines
+step3 sequencing: build the dormant composition before freezing/requalifying
+affected required rows, not repeatedly rerun rows before planned shared changes.
+Explicit legacy production policy and actual authorized request proof still
+gate the later SINGLE cohesive application switch. No evidence waiver or native
+authority; campaign9/10/static9/16 consumed attempts unchanged.
+
 Current progress — 2026-11-05: the [single exact legacy private lab attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
 at e99dbc5 succeeds through all nine groups, byte probe and strict independent
 release/cleanup. The bounded sequence now reaches required-profile/current-cohort

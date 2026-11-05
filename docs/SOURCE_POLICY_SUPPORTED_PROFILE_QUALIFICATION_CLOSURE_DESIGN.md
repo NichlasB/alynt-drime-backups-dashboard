@@ -1,5 +1,16 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current reconciliation — 2026-11-05: [exact cohort/eligibility matrix](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
+distinguishes successful source-bound W/L, changed loaded image/current-row gaps,
+and unchanged-source PRIVATE M functional success from default/production M.
+W28/L29 audited repository paths each have only Minimum_Lab_Scope changed; no
+historical proof is erased or transferred. Recorded static FPM facts are not
+authenticated request proof. Next gate: dormant Trusted Production Context and
+Lazy-Provider Safety Foundation, isolated only; no new production profile policy,
+native rerun or wiring. Explicit legacy production-eligibility decision plus
+affected final-cohort/request qualification still precede the application switch.
+Campaign9/10,16 native attempts unchanged. Earlier resumes remain historical.
+
 Current evidence — 2026-11-05: [exact legacy functional lab42032068093](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
 at e99dbc5 passes genuine core6.0/PHP7.4.33/exact10.6.23, private prefixed-greeting/
 unicode_ci connection with unchanged physical_520_ci schema, byte probe/nine

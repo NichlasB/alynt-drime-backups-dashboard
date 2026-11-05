@@ -1,5 +1,14 @@
 # Trusted-Distribution Legacy-Minimum Lab Integration
 
+Current interpretation — 2026-11-05: [required-profile/current-cohort reconciliation](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
+confirms e99dbc5 executable bytes unchanged at b4c6eff and preserves the exact
+success below. This PRIVATE receipt is not NULL/default M or production authority.
+Historical W/L images have a changed loaded scope file; their prior successes
+are retained, not silently refreshed. Next approval is dormant repository-only
+Trusted Production Context and Lazy-Provider Safety Foundation, isolated APIs
+only; actual legacy production eligibility still needs an explicit policy
+decision. No native rerun, fixture, admission or wiring change in reconciliation.
+
 ## Single candidate-bound legacy qualification passed and cleaned — 2026-11-05
 
 The owner separately approves ONE exact-head Candidate-Bound Legacy Greeting/
