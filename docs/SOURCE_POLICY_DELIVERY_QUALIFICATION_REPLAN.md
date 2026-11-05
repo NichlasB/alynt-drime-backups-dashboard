@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current progress — 2026-11-05: [legacy production-origin join42074540145](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md)
+passes first approved attempt at24a13ca:1455 terminal checks/nine join groups,
+genuine byte probe, fresh audit, independent release and both strict cleanups.
+Runtime unchanged812c052; no public provider/form/writer switch. The next finite
+gate is Repository-Only Non-Legacy Production-Join Eligibility and Genuine-Request
+Closure Design, design-only/no native/storage/wiring: close required W/L default
+composition and authenticated-request proof design before one application switch.
+No generic toolchain/lab loop or receipt promotion. Campaign10/10/static9 unchanged;
+17 native opportunities consumed, no repeat authority. Earlier resumes historical.
+
 Current foundation — 2026-11-05: [production-origin expectation/join](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
 advances trusted composition at the isolated API layer; capture no longer requires
 injected active facts on its new bootstrap path. No production delivery, native

@@ -1,5 +1,15 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current cohort — 2026-11-05: [production-origin legacy join native proof](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md)
+passed at24a13ca with genuine core6.0/PHP+mysqlnd7.4.33/Linux/TCP,1455 terminal
+checks/nine groups plus byte probe and strict cleanup. This is NOT the old private
+lab receipt/default admission promotion. Shared runtime stays812c052; prior W/L
+receipts remain historical and their production bootstrap path remains unspecified.
+Next approval: Repository-Only Non-Legacy Production-Join Eligibility and Genuine-
+Request Closure Design, design-only, no native/storage/wiring. Genuine authenticated
+request availability also remains open. Campaign10/10/static9 unchanged,17 consumed
+native opportunities, no new authority or production-readiness claim.
+
 Current source — 2026-11-05: [production-bound legacy join foundation](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
 implements the separate row and two-phase initializer join using isolated APIs
 only. No default/lab row promotion, actual native/auth/storage or wiring. Shared

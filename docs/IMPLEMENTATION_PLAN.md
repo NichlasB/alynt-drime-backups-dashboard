@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Production-origin legacy join genuine native proof passed/cleaned — 2026-11-05
+
+[Single native42074540145](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md#single-approved-attempt-passed-and-cleaned--2026-11-05)
+at24a13ca passes fresh audit,1455 terminal checks/nine NEW join groups and genuine
+byte round trip, with real fixed source/runtime observations and no lab scope or
+reflected ready/facts/runtime policy. Independent live/post-exit zero-session/
+transaction reconciliation and both strict cleanups pass; artifacts0. Runtime
+unchanged812c052, application writer/public provisioning/wiring remain disabled.
+
+Implementation-plan progress: legacy production-origin native join gap closed for
+its exact cohort, not all-profile/genuine authenticated request eligibility or
+production delivery. Campaign10/10/static9 unchanged;17 consumed native attempts
+(prior16 + approved1/1), no native allowance remains. Exact next gated slice:
+**Repository-Only Non-Legacy Production-Join Eligibility and Genuine-Request Closure
+Design**, design-only, no native/storage/wiring changes. Resolve required W/L
+default-profile composition and finite genuine guarded-request proof before the
+single application switch; no more generic lab infrastructure. Earlier resumes
+are historical and do not authorize another proof or activation.
+
 ## Production-origin legacy join native proof approved; preparation — 2026-11-05
 
 The [single owned CI proof](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md) is

@@ -1,5 +1,56 @@
 # Production-Origin Legacy Join Genuine-Core Native Qualification and Owned Cleanup
 
+## Single approved attempt passed and cleaned — 2026-11-05
+
+[Native42074540145](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42074540145)
+completed/success at exact24a13ca04090c6121d585644b76bdcdf64ae928b, after
+[ordinary CI42074130393](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42074130393)
+completed/success on that same head. ONE dispatch, no rerun or repaired native
+attempt. Fresh connection-free audit preceded fixtures and proof; observed
+operation=production-join, terminal checks1455/groups9. The terminal count is
+before the final live-release ACK assertion; ACK and successful exit also passed.
+Genuine quote/backslash/NUL/percent/utf8mb4 byte round trip is outside those nine
+groups and passed on the production-origin owner, not the private lab binding.
+
+Frozen source cohort:
+`14f4c6602c9e25087bb557ed409cdb7482db5f0ddf2cfdae17dc0870c500a266`.
+Run identity `c63f5ed5db427c61db89ea8c65ffc348`. Parent read back exact image,
+container/PID/start identity and matching audit/proof module inventory. Independent
+all-server process/transaction reconciliation required zero/zero at held terminal
+and post-exit; both passed. Primary cleanup and always-cleanup each reported
+issues=[],containers_removed=true,stage_removed=true,strict_release_complete=true.
+Owned DB/account absence was checked before owned server removal. Artifacts0.
+Do not confuse successful resource removal with skipped release checks.
+
+Actual preparation CI logs: PHP7.4 **2775 tests/24200 assertions**, PHP8.3
+**2775/24205**; Node **105/105** on both,0 failures/skips. Composer/npm audits
+report0 known advisories/vulnerabilities; manifest/build/structure/PHPCS pass.
+Application runtime/dependencies/schema/version stayed byte-identical to812c052;
+only proof routing/harness, tests and owning records changed. Final evidence-only
+publication must verify ordinary exact-head CI again; it does not consume a native
+attempt or refresh the frozen proof cohort if executable bytes are unchanged.
+
+This establishes the approved legacy production-origin join at genuine core/native
+layer under the accepted trusted host/configured-service assurance. No supplied
+ready/facts/runtime/source policy, no Minimum_Lab_Scope receiver, no unknown
+observer added to manufacture availability. It does NOT prove genuine authenticated
+HTTP/request admission, intended installed observer/cache eligibility, current W/L
+production-join coverage, independent binary/loaded-object/ABI attestation,
+simultaneous CAS contention or production readiness. No application switch,
+installed-site/LocalWP/live/client/Drime state, release or deployment occurred.
+
+Implementation-plan progress: the legacy native join gap is now closed for this
+source/cohort. Campaign10/10/static9 remain unchanged;17 consumed native
+opportunities (previous16 plus separately approved1/1), no extra attempt authority.
+Exact recommended next gated slice: **Repository-Only Non-Legacy Production-Join
+Eligibility and Genuine-Request Closure Design**, design-only. Specify the strict
+default-profile join for required W/L rows (the new bootstrap path currently admits
+only legacy6.0), and a finite genuine authenticated request/provider proof before
+the single application switch. Keep native execution, storage writes, public
+provisioning, production wiring, grants, activation and rollback disabled in that
+next design. This is a compatibility/composition decision, not another lab/toolchain
+installation or automatic implementation/requalification. Requires separate approval.
+
 ## Approved scope and restore point — 2026-11-05
 
 Explicit approval: prepare/validate/publish the bounded proof harness, verify

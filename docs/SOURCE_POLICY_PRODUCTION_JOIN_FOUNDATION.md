@@ -1,5 +1,13 @@
 # Production-Bound Legacy Expectation and Two-Phase Capture/Admission Join Foundation
 
+Successor — 2026-11-05: the separately approved [genuine native join proof](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md#single-approved-attempt-passed-and-cleaned--2026-11-05)
+passed at24a13ca (1455 terminal checks/nine groups plus byte probe), with fresh
+audit and both strict cleanups. Foundation runtime bytes unchanged from812c052.
+No real authenticated request, current W/L production join or wiring is qualified.
+Next approval: Repository-Only Non-Legacy Production-Join Eligibility and Genuine-
+Request Closure Design, design-only; native/storage/wiring disabled. The original
+isolated evidence and old next-gate text below remain historical, not retry authority.
+
 ## Authority and review baseline — 2026-11-05
 
 Explicit repository-only approval accepts the trusted-host/configured-database-service

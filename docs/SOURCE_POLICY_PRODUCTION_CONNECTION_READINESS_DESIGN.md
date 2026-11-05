@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current native evidence — 2026-11-05: [production-origin legacy join42074540145](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md)
+passes at24a13ca,1455 terminal checks/nine join groups plus genuine byte probe,
+fresh audit and strict owned cleanup. Runtime unchanged812c052. This closes only
+the legacy source-bound native join; current W/L production construction and
+genuine authenticated request/installed graph remain unqualified. Exact next gated
+slice: Repository-Only Non-Legacy Production-Join Eligibility and Genuine-Request
+Closure Design, design-only/no native/storage/wiring. Campaign10/10/static9
+unchanged,17 native opportunities consumed; no extra grant or application switch.
+
 Current implementation — 2026-11-05: [production-bound two-phase join](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
 is implemented with isolated APIs, explicit trusted-host/service assurance, strict
 origin/default separation and actual-initializer-owned admission. No public mint,
