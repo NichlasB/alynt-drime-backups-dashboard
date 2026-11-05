@@ -1,5 +1,14 @@
 # Candidate-Bound Legacy Greeting and Core-Derived Session Admission Decision
 
+Current native result — 2026-11-05: separately approved [one exact e99dbc5 attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
+passes the genuine helper/session/byte path, all nine groups, independent strict
+release and primary/always owned cleanup. This establishes the exact private
+legacy functional lab subcase, NOT null/default or production eligibility.
+No source/admission change or retry;16 consumed native attempts. Next approval:
+Repository-Only Required-Profile Source-Cohort and Production-Eligibility
+Reconciliation Design, no implementation/native/site/wiring. Earlier foundation
+and design-only limits below retain their historical approval scope.
+
 ## Approved repository-only policy foundation — 2026-11-05
 
 The owner explicitly approves the Candidate-Bound Legacy Greeting and Genuine-Core

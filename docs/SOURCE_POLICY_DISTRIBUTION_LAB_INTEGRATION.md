@@ -1,5 +1,118 @@
 # Trusted-Distribution Legacy-Minimum Lab Integration
 
+## Single candidate-bound legacy qualification passed and cleaned — 2026-11-05
+
+The owner separately approves ONE exact-head Candidate-Bound Legacy Greeting/
+Session Owned Qualification and Cleanup Attempt at
+`e99dbc554aa84d38b1b6d515c835506307c5de29`. This is the narrow R3 ephemeral-lab
+scope only, not a general tier increase, retry allowance or production grant.
+Clean local/remote master and ordinary CI42023592774 are reverified; actorNichlasB
+and no overlapping qualification are confirmed. Fresh isolated prerequisites:
+**516 PHP tests/1944 assertions**, **27 Node tests**, no failures/skips; controller
+Node syntax, worker PHP syntax and whitespace checks pass. No implementation or
+acceptance change before dispatch. Site Operations/registry checked: target is
+the approved ephemeral CI job, not a registered installed site; LocalWP/live
+target confirmation and Novamira operations are inapplicable and not performed.
+
+Exactly one dispatch:
+[run42032068093](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42032068093),
+attempt1/job127260746617, actorNichlasB, exact head above, workflow_dispatch.
+Created **2026-11-05 13:01:20 UTC /14:01:20 Europe/Paris**; job13:01:24–13:01:54UTC,
+conclusion **success**. Admission, pinned source/core checkout, main ordered
+qualification/cleanup and always-recovery all conclude success. The retained
+step label says default-admission, but exact e99dbc5 uses the approved PRIVATE
+distribution lab scope; that label does not establish default production support.
+
+| Actual support-safe correlated evidence | Value |
+| --- | --- |
+| Frozen executable/core cohort image | `64d3864ae0b86cc88728c25fae0b792f370ffda225651bf4edcb53c349bceaa1` |
+| Run identity, independently rederived from job/attempt | `7b63249c85c20032135d59a8ff0b3172` |
+| Owned server CID | `1f74aa5acf72305ed70a88e11bfca6f16ceaf9c1f9387fafd2f6a65e3f872596` |
+| Audit worker CID / host PID | `94ef964ea1d52e1b45747715cc25ffd62c8c902f6f6ef68ae67e982a341efec0` /2987 |
+| Proof worker CID / host PID | `9ff53ed1dcbc23b18001cd4d3ecd446222a3c5e496f6f7f685956362ee2db31e` /3130 |
+| Audit / held closed-proof accepted | 13:01:48.5742340 /13:01:51.2750357UTC; both namespace PID1, same head/image/run/server |
+| Evidence model | trusted-distribution-legacy-v1 |
+| Runtime grant / production ready | false /false |
+| Artifact API count | 0 |
+
+The exact fixed controller requires image/config/containment/startup, control
+SQL VERSION()10.6.23-MariaDB/autocommit1/no transaction and parent-frozen core/
+source/runtime/module checks before accepting the fresh connection-free PHP audit.
+This is trusted-distribution functional evidence, not independent attestation.
+The whole workflow is NOT SQL-free: initialization/control SQL and owned fixtures
+run. Only the audit PHP phase proves zero native activity before qualification.
+
+Actual genuine core6.0/PHP/mysqlnd7.4.33, numeric loopback TCP and the exact UBI
+10.6.23 candidate pass the approved raw5.5.5-10.6.23-MariaDB/helper unicode_ci
+scope, unchanged physical _520_ci schema and subsequent final/active admission.
+These are source-bound successful guards, not a newly exported raw session dump.
+No helper override, source-pin substitution, ready/facts injection, generic prefix
+stripping, default-policy change, budget increase or retry is used.
+
+The controller accepts the exact closed terminal only with **all nine groups**,
+zero open state, matching audit/proof inventory and bounded positive check count.
+Its public receipts do NOT export the exact assertion counter, so no numeric
+native-check total is invented or replaced by the516 isolated-test count.
+Successful source-bound path includes the quote/backslash/NUL/percent/four-byte
+UTF8 round-trip, actual saved/non-target bytes/autoload preservation, genuine
+non-empty hooks/cache invalidation, no-op/stale ordering, conditional removal,
+update race/CAS and creator duplicate conflicts, transform/reentry refusal,
+bounded lock error, post-change uncertainty and native1064/1062/1205 without
+replay/reconnect. Parent source readback and late include/module invariants pass.
+This is not whole WordPress authentication/bootstrap, provider/form or rollback.
+
+At the held closed terminal, independent all-server reconciliation requires zero
+other sessions and INNODB_TRX (observer excluded only), then exact run/image ACK,
+clean worker exit and distinct post-exit reconciliation. Main controller reports
+the functional body passed at13:01:51.3916532UTC. Primary cleanup at
+13:01:51.8718658UTC and always-recovery at13:01:52.0450644UTC BOTH report:
+issues=[],containers_removed=true,stage_removed=true,strict_release_complete=true.
+Unlike the preceding failure, strict primary functional release is complete.
+The fixed cleanup reconciles and removes owned database/table/account and verifies
+absence, stops/removes exact labeled containers and verifies owned staging absence.
+Audit/proof workers are sequential: server plus at most one worker concurrently,
+three recorded container lifetimes total. No retained owned resource or recovery
+is indicated. Removed fixtures held only disposable test data and are not retained
+for restoration. Shared image cache/ordinary checkouts/provider VM disposal remain
+trusted, not independently erased; no global prune, log/history deletion or new
+runner inspection is performed.
+
+**Outcome: exact candidate-bound legacy functional lab subcase qualified.**
+This does not qualify the unchanged NULL/default legacy profile, arbitrary MariaDB,
+all supported permutations, intended-site context, public provider/form or a
+delivered concurrency fix. W403/9 at2c28b1e and L285/9 at1c4f848 remain historical
+source-bound evidence. A limited read-only comparison of their source heads to
+e99dbc5 shows Minimum_Lab_Scope changed among the five inspected shared owner/
+bootstrap/profile files; that is not a complete cohort/eligibility reconciliation
+or automatic demand to rerun otherwise unaffected profiles. Do that finite owning
+review next; do not transfer old receipts or reopen x32/observer/toolchain work.
+
+Implementation-plan progress: this completes the missing exact legacy-engine
+functional experiment, not M/default/production closure. Once this evidence's
+ordinary exact-head CI succeeds, count ONE worthwhile qualification milestone:
+campaign8/10 → **9/10**; no separate credit for prerequisites, cleanup or docs.
+Static9 unchanged; prior15 plus approved1/1 = **16 consumed native attempts**.
+This attempt authority is exhausted; no follow-on dispatch is authorized.
+Production wiring/grants/activation/rollback, existing site/application data and
+all package/release/deploy boundaries remain untouched.
+
+Evidence closeout changes only seven directly owning Markdown records. Relevant
+post-record isolated validation passes **94 PHP tests/444 assertions**, no skips;
+all **358** local file links resolve, whitespace/privacy/diff review passes and
+every executable/test/workflow/dependency byte remains identical to native-tested
+e99dbc5. No full-plugin review/readiness row is refreshed. Publication receives
+its own ordinary exact-head CI; the exact results are recorded in the source-
+scoped toolkit evidence, not inferred from the native run or prior CI.
+
+**Recommended next gated slice: Repository-Only Required-Profile Source-Cohort
+and Production-Eligibility Reconciliation Design.** Reconcile M/W/L and exact
+default versus private-lab eligibility, inspect actual executable/include deltas,
+and define the smallest remaining evidence/compatibility decision before the
+planned cohesive lazy-provider/form/legacy-writer switch. Design/review/validation/
+publication only: no changed admission, implementation, native/site/SQL experiment
+or production wiring. Do not add another generic infrastructure foundation.
+Earlier pending gates and failed-run descriptions below remain historical.
+
 Current foundation — 2026-11-05: the approved [joint greeting/session policy](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
 now uses one exact retained distribution lab scope; null/default production
 admission remains unchanged. It is isolated-tested, not natively qualified.

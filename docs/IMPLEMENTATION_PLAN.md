@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Exact private legacy functional qualification passed; eligibility gate remains — 2026-11-05
+
+The separately approved [single native attempt42032068093](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
+at e99dbc5 passes fresh audit, genuine core6.0/PHP7.4.33/exact10.6.23 private
+greeting/session admission, byte probe, all nine groups and independent held-live/
+post-exit release. Primary and always cleanup both strict=true, issues=[];
+owned fixtures/containers/staging absent, artifacts0. No guard/code change/retry.
+Default production admission and wiring remain unchanged; success is not M/default
+eligibility, provider/form delivery or whole-plugin readiness.
+
+Implementation-plan progress: missing exact legacy-engine functional experiment
+now succeeds. On successful evidence publication/CI, ONE milestone makes campaign
+9/10; static9 unchanged;16 native opportunities consumed (prior15 plus approved1/1).
+Exact next gated slice: **Repository-Only Required-Profile Source-Cohort and
+Production-Eligibility Reconciliation Design**. Reconcile M/W/L and actual changed
+cohorts/private-versus-default eligibility before the planned cohesive provider/
+form/writer switch. No implementation, changed admission, site/native/SQL or
+production wiring in that proposed design slice. Prior sections are historical.
+
 ## Joint private lab policy implemented; native execution remains closed — 2026-11-05
 
 The explicitly approved [foundation](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)

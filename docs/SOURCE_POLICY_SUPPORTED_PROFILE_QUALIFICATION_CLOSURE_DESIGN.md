@@ -1,5 +1,17 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current evidence — 2026-11-05: [exact legacy functional lab42032068093](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
+at e99dbc5 passes genuine core6.0/PHP7.4.33/exact10.6.23, private prefixed-greeting/
+unicode_ci connection with unchanged physical_520_ci schema, byte probe/nine
+groups and independent held-live/post-exit release/strict owned cleanup.
+This closes the exact legacy ENGINE functional subcase, not NULL/default M
+admission, arbitrary supported profiles or production-provider readiness.
+W403/9 and L285/9 remain source-bound to their recorded heads; no transfer or
+unapproved rerun. Next gated slice is repository-only Required-Profile Source-
+Cohort and Production-Eligibility Reconciliation Design, inspecting actual cohort
+effects/default versus private authority before any further qualification/switch.
+16 native attempts consumed; earlier required-row state below is historical.
+
 Current resume: [fixed-owner integration design](SOURCE_POLICY_UBI_FIXED_OWNER_INTEGRATION_DESIGN.md)
 specifies one shared work authority and immutable origin admission; collectors
 retain the enforced1MiB guard and no new profile is wired. Next approval is its

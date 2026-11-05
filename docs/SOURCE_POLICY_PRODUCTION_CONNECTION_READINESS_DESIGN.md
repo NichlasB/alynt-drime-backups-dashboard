@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current qualification — 2026-11-05: [native42032068093 at e99dbc5](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
+passes exact private legacy greeting/session, byte probe/nine groups and strict
+independent release/cleanup. Default production admission and provider/form remain
+unwired. Next approval is Repository-Only Required-Profile Source-Cohort and
+Production-Eligibility Reconciliation Design, not another native experiment or
+an implicit default compatibility change. M/W/L/current-cohort and eligibility
+closure precede the planned cohesive switch.16 native attempts consumed.
+
 Current foundation — 2026-11-05: [exact private legacy lab row](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
 is implemented with isolated construction/adapter/guard tests. Default admission,
 physical schema, provider/form and production wiring stay unchanged. Native

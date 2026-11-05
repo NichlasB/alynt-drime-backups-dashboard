@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current progress — 2026-11-05: the [single exact legacy private lab attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
+at e99dbc5 succeeds through all nine groups, byte probe and strict independent
+release/cleanup. The bounded sequence now reaches required-profile/current-cohort
+and production-eligibility reconciliation (step3 below), not another infrastructure
+foundation. Recommended next gated slice: repository-only Required-Profile Source-
+Cohort and Production-Eligibility Reconciliation Design. No default admission,
+provider/form/writer or production wiring change; no further native authority.
+This is real legacy functional evidence, not delivered lost-update protection.
+
 Current disposition — 2026-11-04: the owner explicitly accepts the stated lab
 assurance tradeoff and approves the [repository-only integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md).
 Its new default-off route is integrated; no native/candidate or SQL operation

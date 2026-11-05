@@ -1,5 +1,13 @@
 # Legacy-Minimum Exact-Server Candidate and Owned Qualification Design
 
+Current result — 2026-11-05: [single e99dbc5 qualification42032068093](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-candidate-bound-legacy-qualification-passed-and-cleaned--2026-11-05)
+passes this exact candidate/core/runtime private lab profile, all nine groups,
+byte probe and strict independent release/owned cleanup. Pins/guards unchanged;
+no retry or production grant. Legacy functional candidate feasibility is now
+established, distinct from unchanged default/M/production eligibility. Next gate:
+repository-only Required-Profile Source-Cohort and Production-Eligibility
+Reconciliation Design; no new candidate, native or site work is authorized.
+
 Current foundation — 2026-11-05: [approved candidate-bound policy](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md#approved-repository-only-policy-foundation--2026-11-05)
 admits exactly this raw legacy greeting/helper-session row only within retained
 private lab scope. Candidate/configuration pins and default production rules
