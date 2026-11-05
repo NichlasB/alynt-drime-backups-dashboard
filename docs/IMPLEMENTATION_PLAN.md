@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant trusted capture/dispatch foundation implemented — 2026-11-05
+
+The approved [Trusted Context/Lazy Provider foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
+implements private code-owned declaration/configuration capture after request
+guards, single-use dispatch through the actual existing adapter, per-boundary
+revalidation and terminal reference/owner cleanup. Isolated positive view/save/
+no-op, adversarial cases and eleven assertion-killed controls; all public factories
+and actual native composition/wiring remain disabled. No real auth/storage/site
+operation. Old application writer unchanged: concurrency protection not delivered.
+
+Implementation-plan progress: the dormant trusted composition seam now has real
+implementation/control-flow evidence at the approved isolated layer. On exact-head
+CI/publication/evidence closeout, ONE foundation makes campaign10/10, static9 and
+16 native attempts unchanged. Shared adapter/trait bytes changed; prior M/W/L
+native receipts remain historical until approved final-cohort requalification.
+Exact next gated slice: **Repository-Only Legacy Production Greeting/Session
+Eligibility Decision**, design-only, keeping native execution and wiring disabled.
+Do not transfer a private lab model into production/default admission or wire an
+all-unavailable provider/unsafe legacy fallback. Earlier resumes are historical.
+
 ## Required-profile cohorts reconciled; trusted composition remains gated — 2026-11-05
 
 The approved [source-cohort/eligibility decision](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)

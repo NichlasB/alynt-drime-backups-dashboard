@@ -1,5 +1,14 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current source checkpoint — 2026-11-05: [trusted capture/dispatch foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
+changes shared Native_Adapter and adds its loaded operation trait. All prior M/W/L
+native images now remain historical for their source; none is transferred to this
+head. Isolated positives/negative controls are not genuine auth/storage/native
+proof. Exact next policy gate: Repository-Only Legacy Production Greeting/Session
+Eligibility Decision, design-only; no private-lab-to-production grant or default
+relaxation. Actual native composition/form/wiring remain disabled. Final shared
+cohort must be frozen before separately approved affected-profile/request proof.
+
 Current reconciliation — 2026-11-05: [exact cohort/eligibility matrix](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
 distinguishes successful source-bound W/L, changed loaded image/current-row gaps,
 and unchanged-source PRIVATE M functional success from default/production M.

@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current foundation — 2026-11-05: [dormant trusted context/lazy dispatch](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
+advances step3 at the isolated API layer. No native construction or actual writer/
+form switch is delivered; all public factories stay closed and no native operation
+runs. Next approval is the explicit Legacy Production Greeting/Session Eligibility
+Decision, repository-only/design-only, not another generic infrastructure slice.
+Settle that policy before final shared-cohort/native-request qualification; all
+M/W/L receipts remain historical after the adapter/trait change. On exact-head
+CI/evidence completion campaign10/10; static9/16 native attempts unchanged.
+
 Current reconciliation — 2026-11-05: [required-profile/cohort decision](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
 completes the repository-only part of step3. Historical W/L remain valid for
 their old images; one loaded shared file differs. Private legacy M succeeds on

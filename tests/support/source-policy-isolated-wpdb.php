@@ -19,6 +19,7 @@ class wpdb {
 	public function __get($name){return $this->$name;}
 	public function parse_db_host($host){
 		$GLOBALS['boot_parse_calls']=($GLOBALS['boot_parse_calls']??0)+1;
+		if(!empty($GLOBALS['boot_parser_warning']))trigger_error('owned-private-parser-warning',E_USER_WARNING);
 		if(array_key_exists('boot_parser_result',$GLOBALS))return $GLOBALS['boot_parser_result'];
 		if(!empty($GLOBALS['boot_parser_wrong']))return array('127.0.0.1',10005,null,false);
 		$known=policy_parser_tuple_data()[$GLOBALS['boot_parser_core']??'6.0']['tuples']??array();

@@ -1,5 +1,14 @@
 # Required-Profile Source-Cohort and Production-Eligibility Reconciliation
 
+Current implementation — 2026-11-05: the separately approved [dormant trusted
+context/lazy-provider foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
+implements the selected isolated capture/dispatch seam, NOT a native/production
+factory or admission change. Its adapter/loaded trait changes make all earlier
+M/W/L images historical for the new head; the comparisons below remain exact
+for their stated b4c6eff baseline, not current-source grants. Next policy gate:
+Repository-Only Legacy Production Greeting/Session Eligibility Decision, design-
+only. No real authentication/storage/native/site operation or wiring is enabled.
+
 ## Approved scope and baseline — 2026-11-05
 
 Repository-only design, validation, commit, push and exact-head ordinary CI.

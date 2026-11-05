@@ -48,7 +48,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_forbidden' );
 		}
-		if ( ( ! is_string( $site_id ) && ! is_int( $site_id ) ) || 'wpvivid' !== $source ) {
+		if ( ! $this->valid_site_id( $site_id ) || 'wpvivid' !== $source ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		$site_id = absint( $site_id );
@@ -81,6 +81,9 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 		if ( ! isset( $request['dashboard_site_id'], $request['source_key'], $request['source_mode'], $request['source_policy_revision'] ) || ( ! is_string( $request['dashboard_site_id'] ) && ! is_int( $request['dashboard_site_id'] ) ) || ! is_string( $request['source_key'] ) || ! is_string( $request['source_mode'] ) || ! is_string( $request['source_policy_revision'] ) ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
+		if ( ! $this->valid_site_id( $request['dashboard_site_id'] ) || strlen( $request['source_key'] ) > 16 || strlen( $request['source_mode'] ) > 32 || strlen( $request['source_policy_revision'] ) > 64 ) {
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
+		}
 		$site_id  = absint( wp_unslash( $request['dashboard_site_id'] ) );
 		$source   = wp_unslash( $request['source_key'] );
 		$mode     = wp_unslash( $request['source_mode'] );
@@ -98,6 +101,17 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 		return in_array( $result, array( 'saved', 'unchanged' ), true ) ? $result : Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_save_failed' );
 	}
 
+	/** Canonical bounded identity before absint/unslash or record/provider access.
+	 *
+	 * @param mixed $site Raw identity.
+	 * @return bool
+	 */
+	private function valid_site_id( $site ) {
+		$maximum = (string) PHP_INT_MAX;
+		return is_int( $site ) ? $site > 0 : ( is_string( $site ) && 1 === preg_match( '/\A[1-9][0-9]{0,18}\z/', $site )
+			&& ( strlen( $site ) < strlen( $maximum ) || ( strlen( $site ) === strlen( $maximum ) && strcmp( $site, $maximum ) <= 0 ) ) );
+	}
+
 	/**
 	 * Requires the resolved record to name the admitted site exactly.
 	 *
@@ -105,8 +119,12 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 	 * @return bool
 	 */
 	private function record_matches( $site_id ) {
-		$record = $this->sites->get( $site_id );
-		return is_array( $record ) && isset( $record['id'] ) && ( is_string( $record['id'] ) || is_int( $record['id'] ) ) && (string) $record['id'] === (string) $site_id;
+		try {
+			$record = $this->sites->get( $site_id );
+			return is_array( $record ) && isset( $record['id'] ) && ( is_string( $record['id'] ) || is_int( $record['id'] ) ) && (string) $record['id'] === (string) $site_id;
+		} catch ( Throwable $error ) {
+			return false; // No collaborator diagnostic or protected capture after failed resolution.
+		}
 	}
 
 	/**

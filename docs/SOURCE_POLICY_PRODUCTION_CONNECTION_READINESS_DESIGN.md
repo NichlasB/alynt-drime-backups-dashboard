@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current foundation — 2026-11-05: [dormant trusted capture/dispatch](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
+is implemented/tested with isolated APIs only. Guarded capture, exact receiver
+revalidation, single-use/error-safe cleanup exist; public mint/native constructor
+composition, actual form/writer/wiring remain absent/unchanged. Catalogue parity
+is not production eligibility; no actual authentication, config, storage or native
+operation ran. Next gated slice: Repository-Only Legacy Production Greeting/Session
+Eligibility Decision, design-only. Changed adapter/loaded trait stale ALL prior
+M/W/L images for current-cohort qualification, without erasing their successes.
+On complete publication/CI/evidence count campaign10/10;16 native attempts unchanged.
+
 Current decision — 2026-11-05: [required-profile/source-cohort reconciliation](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
 preserves exact legacy private functional success and historical W/L results
 without granting default M/current W/L/installed FPM eligibility. The sole shared

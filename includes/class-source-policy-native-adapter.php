@@ -9,9 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 require_once __DIR__ . '/class-source-policy-error.php';
+require_once __DIR__ . '/traits/trait-source-policy-adapter-operation.php';
 
 /** Private construction/connection/profile are provisioned only by isolated fixtures. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Adapter_Operation;
+
 	/**
 	 * Owned session, never global wpdb.
 	 *
@@ -46,25 +49,27 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	/**
 	 * Gets a bounded same-observation mode/revision view, never raw storage DATA.
 	 *
-	 * @param mixed $site_id Dashboard site identity.
-	 * @param mixed $source Source key.
+	 * @param mixed       $site_id Dashboard site identity.
+	 * @param mixed       $source Source key.
+	 * @param object|null $context Private dormant capture, never a native grant.
 	 * @return array|WP_Error
 	 */
-	public function view_source_mode( $site_id, $source ) {
-		return $this->run( 'view', null, $site_id, $source, 'required' );
+	public function view_source_mode( $site_id, $source, $context = null ) {
+		return $this->run( 'view', null, $site_id, $source, 'required', $context );
 	}
 
 	/**
 	 * Accepts a revision/command, never an observation, plan or caller connection.
 	 *
-	 * @param mixed $revision Exact lowercase consistency revision.
-	 * @param mixed $site_id Site identity.
-	 * @param mixed $source Source key.
-	 * @param mixed $mode Desired mode.
+	 * @param mixed       $revision Exact lowercase consistency revision.
+	 * @param mixed       $site_id Site identity.
+	 * @param mixed       $source Source key.
+	 * @param mixed       $mode Desired mode.
+	 * @param object|null $context Private dormant capture, never a native grant.
 	 * @return string|WP_Error Literal saved/unchanged only, not DATA model arrays.
 	 */
-	public function save_source_mode_if_current( $revision, $site_id, $source, $mode ) {
-		return $this->run( 'conditional', $revision, $site_id, $source, $mode );
+	public function save_source_mode_if_current( $revision, $site_id, $source, $mode, $context = null ) {
+		return $this->run( 'conditional', $revision, $site_id, $source, $mode, $context );
 	}
 
 	/**
@@ -77,39 +82,6 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 */
 	public function set_source_mode( $site_id, $source, $mode ) {
 		return in_array( $this->run( 'legacy', null, $site_id, $source, $mode ), array( 'saved', 'unchanged' ), true );
-	}
-
-	/**
-	 * Owns one operation and closes only its session, including rejected commands.
-	 *
-	 * @param string $operation Fixed internal operation, not request-selected.
-	 * @param mixed  $revision Expected revision.
-	 * @param mixed  $site_id Site identity.
-	 * @param mixed  $source Source key.
-	 * @param mixed  $mode Desired mode.
-	 * @return array|string|WP_Error
-	 */
-	private function run( $operation, $revision, $site_id, $source, $mode ) {
-		if ( $this->busy ) {
-			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
-		}
-		$this->busy      = true;
-		$this->submitted = false;
-		try {
-			$result = $this->perform( $operation, $revision, $site_id, $source, $mode );
-		} catch ( Throwable $error ) {
-			$result = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
-		}
-		try {
-			if ( $this->connection instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection && true !== $this->connection->close() ) {
-				$result = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
-			}
-		} catch ( Throwable $error ) {
-			$result = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( $this->submitted ? 'source_policy_write_uncertain' : 'source_policy_unavailable' );
-		} finally {
-			$this->busy = false;
-		}
-		return $result;
 	}
 
 	/**
@@ -230,6 +202,9 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
 	 * @throws RuntimeException For stale admission.
 	 */
 	private function require_profile() {
+		if ( null !== $this->operation_context && ! $this->operation_context->valid( $this->connection ) ) {
+			throw new RuntimeException( 'Policy capture changed' );
+		}
 		if ( Alynt_Drime_Backups_Dashboard_Source_Policy_Error::is_error( $this->admit() ) ) {
 			throw new RuntimeException( 'Policy profile changed' );
 		}

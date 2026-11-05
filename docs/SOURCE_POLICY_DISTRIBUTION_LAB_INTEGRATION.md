@@ -1,5 +1,13 @@
 # Trusted-Distribution Legacy-Minimum Lab Integration
 
+Current source checkpoint — 2026-11-05: the approved [trusted capture/dispatch
+foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md) changes
+shared Native_Adapter and adds a loaded operation trait. The exact legacy success
+below remains historical for e99dbc5/b4c6eff, NOT a qualification of the new image.
+No native rerun or production/default admission follows. Next approval is the
+repository-only Legacy Production Greeting/Session Eligibility Decision, design-
+only; actual native composition/wiring remain disabled and16 attempts unchanged.
+
 Current interpretation — 2026-11-05: [required-profile/current-cohort reconciliation](SOURCE_POLICY_PROFILE_COHORT_ELIGIBILITY_RECONCILIATION.md)
 confirms e99dbc5 executable bytes unchanged at b4c6eff and preserves the exact
 success below. This PRIVATE receipt is not NULL/default M or production authority.
