@@ -1,5 +1,11 @@
 # Production-Origin Legacy Join Genuine-Core Native Qualification and Owned Cleanup
 
+Successor design — 2026-11-05: [non-legacy eligibility/request closure](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
+is recorded, not implemented. Native1455/9 and its cleanup remain exact historical
+evidence for24a13ca; no executable byte changes or rerun. Next approval is the
+Repository-Only Non-Legacy Default-Profile Expectation and Join Safety Foundation,
+dormant isolated APIs only, no actual auth/storage/native/public mint/wiring.
+
 ## Single approved attempt passed and cleaned — 2026-11-05
 
 [Native42074540145](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42074540145)

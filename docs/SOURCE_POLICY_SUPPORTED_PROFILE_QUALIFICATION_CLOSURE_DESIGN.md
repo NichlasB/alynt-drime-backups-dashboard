@@ -1,5 +1,14 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current non-legacy design — 2026-11-05: [two default candidates/request closure](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
+retains historical W/L source limits and exact legacy1455/9. Proposed W7.1.3/
+Windows/TCP and L7.1.4/Linux/socket use post-ambient mode0 and strict default
+unprefixed server/_520_ci, not legacy exception promotion. W AMD64 is candidate
+DATA pending actual future preflight, not a measured architecture fact. Next
+approval: Repository-Only Non-Legacy Default-Profile Expectation and Join Safety
+Foundation, dormant isolated APIs only. No new cohort/native/request eligibility,
+manifest/runtime/wiring change or attempt; campaign10/10/static9/17 unchanged.
+
 Current cohort — 2026-11-05: [production-origin legacy join native proof](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md)
 passed at24a13ca with genuine core6.0/PHP+mysqlnd7.4.33/Linux/TCP,1455 terminal
 checks/nine groups plus byte probe and strict cleanup. This is NOT the old private

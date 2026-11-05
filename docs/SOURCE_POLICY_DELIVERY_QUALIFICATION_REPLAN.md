@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current design — 2026-11-05: [non-legacy join and genuine-request closure](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
+defines strict default candidate rows plus finite actual authentication/intent/
+provider/web evidence, keeping the existing writer/form untouched. Next gated
+slice: Repository-Only Non-Legacy Default-Profile Expectation and Join Safety
+Foundation, dormant isolated APIs only. Then close actual auth source/construction
+contract, freeze planned shared code and qualify affected profiles/requests before
+ONE application switch. No generic bootstrap-isolation/toolchain/attestation loop,
+native rerun, release or silent save-availability/support-floor change. Design
+is not implementation; campaign10/10/static9/17 native opportunities unchanged.
+
 Current progress — 2026-11-05: [legacy production-origin join42074540145](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md)
 passes first approved attempt at24a13ca:1455 terminal checks/nine join groups,
 genuine byte probe, fresh audit, independent release and both strict cleanups.

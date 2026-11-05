@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current design — 2026-11-05: [non-legacy eligibility and genuine-request closure](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
+selects two proposed strict default rows and separates credential/session auth,
+capability/nonce/record admission, native provider and true web/target evidence.
+No code/manifest/runtime/native/site/wiring change. Next gated slice: Repository-
+Only Non-Legacy Default-Profile Expectation and Join Safety Foundation, isolated
+API/DATA only; no actual auth/storage/native/public provisioning. Preserve genuine
+ambient-selected report0, default/lab/legacy rows and accepted trust limits. Final
+shared cohort and positive request/target availability precede ONE application
+switch. Campaign10/10/static9/17 consumed native opportunities unchanged.
+
 Current native evidence — 2026-11-05: [production-origin legacy join42074540145](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md)
 passes at24a13ca,1455 terminal checks/nine join groups plus genuine byte probe,
 fresh audit and strict owned cleanup. Runtime unchanged812c052. This closes only

@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Non-legacy eligibility and genuine-request closure designed — 2026-11-05
+
+The approved [repository-only design](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
+specifies two strict non-legacy default candidates in the SAME join, not new
+lab/default exceptions: W7.1.3/Windows/TCP and L7.1.4/Linux/socket, post-genuine-
+ambient report0 and default unprefixed greeting/_520_ci session/schema. W raw
+architecture AMD64 is a proposed candidate, NOT measured evidence. Separates
+genuine authentication, authorization/nonce and actual HTTP/installed-graph proof;
+no runtime/test/workflow/manifest/native/site operation or wiring changed.
+
+Implementation-plan progress: remaining profile/request gates and bounded delivery
+order are explicit, not implementation/qualification. Exact next gated slice:
+**Repository-Only Non-Legacy Default-Profile Expectation and Join Safety Foundation**,
+dormant isolated API/DATA tests only, preserving legacy/default/lab guards. Actual
+auth/storage/native/public provisioning/wiring/grants/activation/rollback disabled.
+Freeze shared code before separately approved affected-profile/request proof and
+ONE application switch. Campaign10/10/static9/17 native opportunities unchanged;
+no new attempt, support-floor change or receipt promotion. Earlier resumes historical.
+
 ## Production-origin legacy join genuine native proof passed/cleaned — 2026-11-05
 
 [Single native42074540145](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md#single-approved-attempt-passed-and-cleaned--2026-11-05)
