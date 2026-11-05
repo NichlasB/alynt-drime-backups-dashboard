@@ -1,5 +1,12 @@
 # Non-Legacy Production-Join Eligibility and Genuine-Request Closure Design
 
+Current successor — 2026-11-05: [genuine request construction design](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
+records actual pinned auth dependencies/effect limits, selected M cookie-session
+proof scope and the ordinary-visibility result-only peer-construction proposal.
+Next gated slice is its isolated Guarded Request-Scoped Composition and Admission
+Safety Foundation, not a native dispatch or application switch. Current design
+changes no source/runtime behavior and grants no auth/storage/native/wiring authority.
+
 Current implementation — 2026-11-05: delivery step1 was separately approved and
 implemented in the [Non-Legacy Join Foundation](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md).
 The proposed rows below are now dormant code expectations with isolated API/DATA

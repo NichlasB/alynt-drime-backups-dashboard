@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current design — 2026-11-05: [genuine request source/fixture/construction closure](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
+defines a finite statically pinned core6.0 session-auth branch and ordinary-visibility
+result-only composition proposal. Salt/RNG, role/autoload and metadata effects are
+not hidden as zero-SQL; static hashes are not an observed include graph. No actual
+auth/storage/native/WL/HTTP qualification or public factory/wiring change. Next
+gated slice: Repository-Only Guarded Request-Scoped Composition and Admission
+Safety Foundation, isolated APIs only, with explicit internal-callable authority;
+existing create() and actual auth/storage/native/wiring remain disabled.
+Campaign10/10/static9/17 opportunities unchanged; earlier resumes historical.
+
 Current implementation — 2026-11-05: [non-legacy expectation/join foundation](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md)
 implements strict default W/L candidate rows and typed immutable64-bit/NTS facts
 in the SAME dormant context; legacy/default/lab guards and public closure unchanged.

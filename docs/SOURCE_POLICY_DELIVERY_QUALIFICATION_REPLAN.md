@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current design — 2026-11-05: [genuine request source/fixture/private-construction closure](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
+pins the selected M session-auth library branch statically, separates setup/auth/
+policy effects and proposes ordinary class-owned result-only assembly. No runtime
+or native change; not password-login/HTTP/WL/installed-graph proof. Next gated
+slice: Repository-Only Guarded Request-Scoped Composition and Admission Safety
+Foundation, isolated API/DATA only with explicit narrow internal-callable approval,
+not public create()/application wiring or native authority. Final shared-cohort
+affected-profile/request proof and ONE switch remain later gates; no infrastructure
+detour or counter reset. Campaign10/10/static9/17 opportunities unchanged.
+
 Current foundation — 2026-11-05: [non-legacy default expectation/join](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md)
 implements design step1 with strict W/L candidates, immutable64-bit/NTS DATA and
 the unchanged legacy schema. Isolated API positives/refusals and semantic controls

@@ -1,5 +1,13 @@
 # Non-Legacy Default-Profile Expectation and Join Safety Foundation
 
+Current successor — 2026-11-05: the approved
+[genuine request source/fixture/construction design](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
+specifies the finite static auth branch and result-only normal-visibility assembly
+contract. Next gated approval is its Repository-Only Guarded Request-Scoped
+Composition and Admission Safety Foundation, isolated APIs only; actual auth/
+storage/native execution, existing create() and production wiring remain disabled.
+Historical foundation evidence below is unchanged.
+
 ## Approved scope and restore/review baseline — 2026-11-05
 
 Explicit approval for the repository-only dormant foundation, validation,

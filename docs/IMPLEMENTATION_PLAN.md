@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine request source/fixture and private construction designed — 2026-11-05
+
+The approved [source-backed design](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
+selects a first core6.0 genuine signed-cookie/session library proof, nine exact
+static auth blobs in addition to the existing11 core files, explicit auth/setup
+effect accounting and a result-only ordinary-visibility construction proposal.
+No source/test/workflow/runtime/native/site/wiring change. Salt/RNG fallback,
+role/alloptions and metadata read limits remain explicit; no fake zero-SQL/auth/
+HTTP or complete installed-graph claim. W/L eligibility remains separately gated.
+
+Implementation-plan progress: auth/fixture/construction closure is specified as
+design, not implemented or physically qualified. Exact next gated slice:
+**Repository-Only Guarded Request-Scoped Composition and Admission Safety Foundation**,
+isolated API/DATA only, explicitly approving its narrow unregistered result-only
+internal callable/peer construction contract. Existing public create() stays closed;
+actual auth/storage/native/wiring/grants/activation/rollback remain disabled.
+Freeze shared code before separately approved affected-profile/request proof and
+ONE application switch. Campaign10/10/static9/17 opportunities unchanged; older resumes historical.
+
 ## Non-legacy default expectation/join foundation implemented — 2026-11-05
 
 The approved [dormant foundation](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md)
