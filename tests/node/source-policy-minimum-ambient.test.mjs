@@ -5,7 +5,8 @@ import {spawnSync} from 'node:child_process';
 const root=new URL('../../',import.meta.url),read=p=>readFileSync(new URL(p,root),'utf8');
 const worker=read('scripts/ci/source-policy-minimum-qualification.php');
 function between(source,start,end){const a=source.indexOf(start),b=source.indexOf(end,a);assert.ok(a>=0&&b>a,start+' to '+end);return source.slice(a,b);}
-const setup=between(worker,"$ambient           = ( new ReflectionClass( 'wpdb' ) )",'\n\tadbb_check( 0 === ( new mysqli_driver() )');
+const setupStart=/\$ambient\s*=\s*\( new ReflectionClass\( 'wpdb' \) \)/.exec(worker);assert.ok(setupStart);
+const setup=between(worker,setupStart[0],'\n\tadbb_check( 0 === ( new mysqli_driver() )');
 const release=between(worker,'\tif ( $ambient instanceof wpdb ) {',"\n\t$frame['password'] = '';");
 // Execute only source-owned composition/cleanup excerpts against in-memory stand-ins.
 // No WordPress source is loaded, no native mysqli classes/calls, SQL or networking.

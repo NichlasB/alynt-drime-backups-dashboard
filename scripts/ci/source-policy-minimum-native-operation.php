@@ -16,6 +16,9 @@ if ( ! defined( 'ABSPATH' ) || ! function_exists( 'adbb_check' ) ) {
  * @throws Throwable Original bootstrap invocation failure, without replay.
  */
 function adb0_owner() {
+	if ( ! empty( $GLOBALS['adbm_production_join'] ) ) {
+		return adbp_owner();
+	}
 	global $class, $frame, $binding, $owners, $ambient, $evidence;
 	$binding_mode = adbm_minimum_binding_mode( $evidence );
 	$owner        = adbb_construct( $class );

@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Production-origin legacy join native proof approved; preparation — 2026-11-05
+
+The [single owned CI proof](SOURCE_POLICY_PRODUCTION_JOIN_NATIVE_PROOF.md) is
+approved. Prepare a separately gated mode in the existing ephemeral minimum lab,
+ordinary exact-head CI first, then ONE fresh genuine production-origin join
+attempt with strict owned cleanup. Application runtime stays812c052; no reflected
+ready/facts/runtime policy or Minimum_Lab_Scope, no site/LocalWP/public wiring.
+Implementation-plan progress: closing legacy production-origin native evidence
+is now authorized, not yet established. Required W/L and genuine authenticated
+request eligibility remain open; campaign10/10/static9 remain unchanged. Native
+opportunity17 is consumed only on dispatch. No automatic retry or application switch.
+
 ## Production-bound two-phase join implemented; genuine proof gated — 2026-11-05
 
 The approved [production join foundation](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)

@@ -66,7 +66,8 @@ test('source-backed integration observes one invocation, retains refusal and kee
   assert.match(op,/adbb_check\( true === \$result && \$owner->ready, 'actual ambient-bound bootstrap' \)/);
   assert.match(op,/adbm_bootstrap_failure'\] \?\? adbm_bootstrap_after/);assert.match(op,/throw \$error;/);
   assert.ok(op.indexOf('$owners[] = $owner')<op.indexOf('adbm_bootstrap_before('));
-  assert.ok(worker.indexOf("if ( 'audit' === $argv[2] )")<worker.indexOf("$stage             = 'ambient'"));
+  const audit=worker.indexOf("if ( 'audit' === $argv[2] )"),ambient=worker.search(/\$stage\s*=\s*'ambient'/);
+  assert.ok(audit>=0&&ambient>audit);
   const diagnostic=read('scripts/ci/source-policy-minimum-bootstrap-diagnostics.php');
   assert.doesNotMatch(diagnostic,/mysqli_(query|init|real_connect|close|report)\(|->bootstrap\(|->begin\(|->finish\(|->close\(|->setValue\(|json_encode\(/);
   assert.equal((diagnostic.match(/->invoke\(/g)??[]).length,1);assert.match(diagnostic,/new ReflectionMethod\( \$context, 'provenance' \)/);assert.match(diagnostic,/\$provenance->invoke\( \$context \)/);

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {distributionJob,DISTRIBUTION_MODEL,DISTRIBUTION_WORKFLOW,distributionServer,distributionContainment} from '../../scripts/ci/source-policy-minimum-distribution-contract.mjs';
+import {minimumOperation} from '../../scripts/ci/source-policy-minimum-production-contract.mjs';
 import {terminal,imageProfile,selections} from '../../scripts/ci/source-policy-minimum-controller.mjs';
 const root=new URL('../../',import.meta.url),read=p=>readFileSync(new URL(p,root),'utf8');
 const head='a'.repeat(40),run='b'.repeat(32),image='c'.repeat(64),cid='d'.repeat(64),modules='e'.repeat(64);
@@ -96,10 +97,10 @@ test('actual fixed worker entry refuses before loading core or reaching the nati
 test('actual controller admission prefix refuses substituted jobs before engine reads',async()=>{
   const source=read('scripts/ci/source-policy-minimum-controller.mjs');
   const prefix=source.slice(source.indexOf('async function main() {'),source.indexOf('  const auditOnly=env.MINIMUM_SCOPE'));
-  const build=Function('process','distributionJob','DISTRIBUTION_MODEL','MODEL','selections','distributionServer','requireFact','command',`let distributionAccounting=false;${prefix}return {distribution,model,fixed};}return main();`);
+  const build=Function('process','distributionJob','DISTRIBUTION_MODEL','MODEL','selections','distributionServer','requireFact','command','minimumOperation',`let distributionAccounting=false;${prefix}return {distribution,model,fixed};}return main();`);
   const exercise=async env=>{
     const calls=[],process={env,platform:'linux',arch:'x64',getuid:()=>1001,cwd:()=>'/owned'};
-    const invoke=()=>build(process,distributionJob,DISTRIBUTION_MODEL,'trusted-lab-functional-v1',selections,distributionServer,ok=>{if(!ok)throw Error('refused');},args=>{calls.push(args);return args[0]==='context'?'unix:///var/run/docker.sock\n':JSON.stringify(['name=apparmor','name=seccomp,profile=builtin']);});
+    const invoke=()=>build(process,distributionJob,DISTRIBUTION_MODEL,'trusted-lab-functional-v1',selections,distributionServer,ok=>{if(!ok)throw Error('refused');},args=>{calls.push(args);return args[0]==='context'?'unix:///var/run/docker.sock\n':JSON.stringify(['name=apparmor','name=seccomp,profile=builtin']);},minimumOperation);
     return {calls,invoke};
   };
   const positive=await exercise(job),accepted=await positive.invoke();

@@ -6,8 +6,9 @@
  */
 
 // Refuse before protected core/credentials/native IO outside the exact owned job.
-$adbm_distribution = defined( 'ADB_MINIMUM_DISTRIBUTION' ) && true === ADB_MINIMUM_DISTRIBUTION
+$adbm_distribution    = defined( 'ADB_MINIMUM_DISTRIBUTION' ) && true === ADB_MINIMUM_DISTRIBUTION
 	&& function_exists( 'adbm_distribution_entry' ) && adbm_distribution_entry( getenv() );
+$adbm_production_join = $adbm_distribution && 'true' === getenv( 'PRODUCTION_JOIN_APPROVED' ) && 'production-origin-join-v1' === getenv( 'MINIMUM_OPERATION' );
 if ( PHP_SAPI !== 'cli' || 3 !== count( $argv ) || '--owned-minimum-qualification' !== $argv[1] || ! in_array( $argv[2], array( 'audit', 'proof' ), true )
 	|| defined( 'ABSPATH' ) || 'Linux' !== PHP_OS_FAMILY || '7.4.33' !== PHP_VERSION || 'x86_64' !== php_uname( 'm' ) || PHP_ZTS || 8 !== PHP_INT_SIZE
 	|| 'true' !== getenv( 'GITHUB_ACTIONS' ) || 'workflow_dispatch' !== getenv( 'GITHUB_EVENT_NAME' )
@@ -16,6 +17,7 @@ if ( PHP_SAPI !== 'cli' || 3 !== count( $argv ) || '--owned-minimum-qualificatio
 	|| ! preg_match( '/\A[0-9]+\z/', (string) getenv( 'GITHUB_RUN_ID' ) ) || ! preg_match( '/\A[0-9]+\z/', (string) getenv( 'GITHUB_RUN_ATTEMPT' ) )
 	|| 1 !== getmypid() || ( 'trusted-lab-functional-v1' !== getenv( 'MINIMUM_MODEL' ) && ! $adbm_distribution )
 	|| ( defined( 'ADB_MINIMUM_DISTRIBUTION' ) && ! $adbm_distribution )
+	|| ( ( false !== getenv( 'MINIMUM_OPERATION' ) || false !== getenv( 'PRODUCTION_JOIN_APPROVED' ) ) && ! $adbm_production_join )
 	|| ! preg_match( '/\A[a-f0-9]{64}\z/', (string) getenv( 'MINIMUM_SERVER_CID' ) )
 	|| ( 'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master' === getenv( 'GITHUB_WORKFLOW_REF' ) && 'audit-only-v1' !== getenv( 'MINIMUM_SCOPE' ) )
 	|| ( false !== getenv( 'MINIMUM_SCOPE' ) && ( 'audit-only-v1' !== getenv( 'MINIMUM_SCOPE' ) || 'audit' !== $argv[2] || false !== getenv( 'QUALIFICATION_PASSWORD' )
@@ -168,6 +170,11 @@ try {
 	require __DIR__ . '/source-policy-minimum-bootstrap-diagnostics.php';
 	require __DIR__ . '/source-policy-minimum-failure-evidence.php';
 	require __DIR__ . '/source-policy-minimum-worker-source.php';
+	if ( $adbm_production_join ) {
+		require_once dirname( __DIR__, 2 ) . '/includes/class-source-policy-lazy-provider.php';
+		require __DIR__ . '/source-policy-minimum-production-owner.php';
+		require __DIR__ . '/source-policy-minimum-production-cases.php';
+	}
 	$phase = 'cache';
 	wp_using_ext_object_cache( false );
 	wp_cache_init();
@@ -225,18 +232,24 @@ try {
 		'run'           => $run,
 	);
 	if ( 'audit' === $argv[2] ) {
-		echo ( $adbm_distribution ? 'ADBMDA1|' : 'ADBMA1|' ) . $run . '|' . $image . '|' . $modules . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
+		echo ( $adbm_production_join ? 'ADBMJA1|' : ( $adbm_distribution ? 'ADBMDA1|' : 'ADBMA1|' ) ) . $run . '|' . $image . '|' . $modules . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
 		fflush( STDOUT );
 		adbb_check( hash_equals( 'ACK:' . $run . ':' . $image . "\n", (string) fgets( STDIN, 160 ) ), 'held audit identity acknowledgement' );
 		return;}
 	$phase = 'native';
 	adbb_check( getenv( 'MINIMUM_IMAGE' ) === $image && 1 === preg_match( '/\A[a-f0-9]{64}\z/', (string) getenv( 'QUALIFICATION_PASSWORD' ) ), 'frozen parent source and owned credential' );
 	$frame['password'] = getenv( 'QUALIFICATION_PASSWORD' );
-	$request           = array( __FILE__, '--owned-minimum-qualification', $prefix, $run, $image, 'proof' );
-	$stage             = 'ambient';
-	$started           = hrtime( true );
-	$ambient           = ( new ReflectionClass( 'wpdb' ) )->newInstanceWithoutConstructor();
-	$wpdb              = $ambient;
+	if ( $adbm_production_join ) {
+		define( 'DB_NAME', $frame['database'] );
+		define( 'DB_USER', $frame['user'] );
+		define( 'DB_PASSWORD', $frame['password'] );
+		define( 'DB_HOST', $frame['db_host'] );
+	}
+	$request = array( __FILE__, '--owned-minimum-qualification', $prefix, $run, $image, 'proof' );
+	$stage   = 'ambient';
+	$started = hrtime( true );
+	$ambient = ( new ReflectionClass( 'wpdb' ) )->newInstanceWithoutConstructor();
+	$wpdb    = $ambient;
 	// Retain the owned instance for finally cleanup even if genuine initialization throws.
 	$ambient->__construct( $frame['user'], $frame['password'], $frame['database'], $frame['db_host'] );
 	adbb_check( true === $ambient->ready && $ambient->dbh instanceof mysqli, 'genuine core creates ambient handle' );
@@ -308,7 +321,11 @@ try {
 		adb0_released( $escape_owner );
 		$GLOBALS['adbb_escape_release'] = true;
 	}
-	adb0_cases();
+	if ( $adbm_production_join ) {
+		adbp_cases();
+	} else {
+		adb0_cases();
+	}
 	adbb_check( 9 === $groups && hrtime( true ) - $started < 20000000000, 'original body deadline and complete groups' );
 } catch ( Throwable $error ) {
 	$failed = true;
@@ -351,6 +368,6 @@ foreach ( $rows as $file => $hash ) {
 
 adbb_check( adbm_modules() === $modules, 'module inventory unchanged' );
 adbb_check( adbm_source_rows() === $rows, 'no late loaded source' );
-echo ( $adbm_distribution ? 'ADBMD1|' : 'ADBMC1|' ) . $run . '|' . $image . '|' . getenv( 'MINIMUM_SERVER_CID' ) . '|1|' . $modules . '|' . $checks . '|9|0|closed|' . $evidence['model'] . '|false|not-established|false|false' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
+echo ( $adbm_production_join ? 'ADBMJP1|' : ( $adbm_distribution ? 'ADBMD1|' : 'ADBMC1|' ) ) . $run . '|' . $image . '|' . getenv( 'MINIMUM_SERVER_CID' ) . '|1|' . $modules . '|' . $checks . '|9|0|closed|' . $evidence['model'] . '|false|not-established|false|false' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Fixed bounded private ASCII transcript, not HTML.
 fflush( STDOUT );
 adbb_check( hash_equals( 'ACK:' . $run . ':' . $image . "\n", (string) fgets( STDIN, 160 ) ), 'independent live release acknowledgement' );

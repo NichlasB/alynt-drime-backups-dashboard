@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {reviewLog} from './source-policy-linux-qualification-controller.mjs';
 import {AUDIT_WORKFLOW,executionPhases,failureEvidence,releaseIssues} from './source-policy-minimum-audit-contract.mjs';
 import {DISTRIBUTION_MODEL,distributionJob,distributionServer,distributionContainment} from './source-policy-minimum-distribution-contract.mjs';
+import {minimumOperation,PRODUCTION_JOIN} from './source-policy-minimum-production-contract.mjs';
 export {failureEvidence} from './source-policy-minimum-audit-contract.mjs';
 
 export const MODEL='trusted-lab-functional-v1';
@@ -16,9 +17,10 @@ export const selections=Object.freeze({
 });
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const requireFact=(ok,label)=>{if(!ok){const error=Error(label);error.minimumReason=label;throw error;}};
-export function terminal(wire,run,image,cid,model=MODEL) {
+export function terminal(wire,run,image,cid,model=MODEL,operation='adapter') {
   if(![MODEL,DISTRIBUTION_MODEL].includes(model))return false;
-  const prefix=model===DISTRIBUTION_MODEL?'ADBMD1':'ADBMC1';
+  if(!['adapter','production-join'].includes(operation)||(operation==='production-join'&&model!==DISTRIBUTION_MODEL))return false;
+  const prefix=operation==='production-join'?'ADBMJP1':model===DISTRIBUTION_MODEL?'ADBMD1':'ADBMC1';
   return typeof wire==='string' && typeof run==='string' && typeof image==='string' && typeof cid==='string' && /^[a-f0-9]{32}$/.test(run) && /^[a-f0-9]{64}$/.test(image) && /^[a-f0-9]{64}$/.test(cid)
     && new RegExp('^'+prefix+'\\|'+run+'\\|'+image+'\\|'+cid+'\\|1\\|[a-f0-9]{64}\\|[1-9][0-9]{0,4}\\|9\\|0\\|closed\\|'+model+'\\|false\\|not-established\\|false\\|false\\n(?![\\s\\S])').test(wire);
 }
@@ -105,7 +107,7 @@ function cleanup(owner,stage,auditOnly=false) {
   finally {process.stdout.write(JSON.stringify({minimum_cleanup:{scope:auditOnly?'audit-only':'qualification',issues:[...issues],containers_removed:containersRemoved,stage_removed:stageRemoved,strict_release_complete:issues.size===0&&containersRemoved&&stageRemoved}})+'\n');}
   requireFact(issues.size===0,'cleanup/release evidence incomplete');
 }
-async function worker(cid,run,image,serverCid,proof,modules=null,model=MODEL) {
+async function worker(cid,run,image,serverCid,proof,modules=null,model=MODEL,operation='adapter') {
   const child=spawn('docker',['start','--attach','--interactive',cid],{stdio:['pipe','pipe','pipe']});
   let out='',err='',accepted=false,failure=null;
   const deadline=setTimeout(()=>{failure=Error('fixed child deadline');child.kill('SIGKILL');},25000);
@@ -116,9 +118,9 @@ async function worker(cid,run,image,serverCid,proof,modules=null,model=MODEL) {
     if(out.includes('\n')&&!accepted) {
       try {
         const identity=inspect(cid);requireFact(identity.running&&Number.isSafeInteger(identity.pid)&&identity.pid>0&&/^\d{4}-\d\d-\d\dT/.test(identity.started),'engine host PID/start identity unavailable');
-        requireFact(proof?terminal(out,run,image,serverCid,model):new RegExp('^'+(model===DISTRIBUTION_MODEL?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|[a-f0-9]{64}\\n$').test(out),'held terminal refused');
+        requireFact(proof?terminal(out,run,image,serverCid,model,operation):new RegExp('^'+(operation==='production-join'?'ADBMJA1':model===DISTRIBUTION_MODEL?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|[a-f0-9]{64}\\n$').test(out),'held terminal refused');
         if(proof){requireFact(out.split('|')[5]===modules,'audit/proof inventory mismatch');reconcile(serverCid);}
-        process.stdout.write(JSON.stringify({phase:proof?'closed-proof':'connection-free-audit',head:process.env.GITHUB_SHA,image,run,worker_cid:cid,server_cid:serverCid,engine_host_pid:identity.pid,engine_started:identity.started,namespace_pid:1,evidence_model:model,independent_loaded_object_attestation:false,complete_abi_attestation:false,mapping_consistency:'not-established',runtime_grant:false,production_ready:false})+'\n');
+        process.stdout.write(JSON.stringify({phase:proof?'closed-proof':'connection-free-audit',operation,checks:proof?Number(out.split('|')[6]):null,groups:proof?Number(out.split('|')[7]):null,head:process.env.GITHUB_SHA,image,run,worker_cid:cid,server_cid:serverCid,engine_host_pid:identity.pid,engine_started:identity.started,namespace_pid:1,evidence_model:model,independent_loaded_object_attestation:false,complete_abi_attestation:false,mapping_consistency:'not-established',runtime_grant:false,production_ready:false})+'\n');
         accepted=true;child.stdin.end('ACK:'+run+':'+image+'\n');
       }
       catch(error){failure=error;child.kill('SIGKILL');}
@@ -133,6 +135,7 @@ async function worker(cid,run,image,serverCid,proof,modules=null,model=MODEL) {
 async function main() {
   const env=process.env, cwd=process.cwd(), uid=process.getuid();
   const distribution=distributionJob(env),model=distribution?DISTRIBUTION_MODEL:MODEL;
+  const operation=minimumOperation(env);requireFact(operation!==null,'exact approved proof operation required');
   const fixed=distribution?{php:selections.php,server:distributionServer}:selections;
   requireFact(process.platform==='linux'&&process.arch==='x64'&&uid>0&&env.RUNNER_OS==='Linux'&&env.GITHUB_ACTIONS==='true'&&env.GITHUB_EVENT_NAME==='workflow_dispatch'
     &&env.GITHUB_REPOSITORY==='NichlasB/alynt-drime-backups-dashboard'&&env.GITHUB_REF==='refs/heads/master'&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&env.EXPECTED_SHA===env.GITHUB_SHA
@@ -191,6 +194,7 @@ async function main() {
     const password=auditOnly?null:randomBytes(32).toString('hex'),run=hash(env.GITHUB_RUN_ID+':'+env.GITHUB_RUN_ATTEMPT).slice(0,32);
     const vars=Object.fromEntries(['GITHUB_ACTIONS','GITHUB_EVENT_NAME','GITHUB_REPOSITORY','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','EXPECTED_SHA','MINIMUM_MODEL'].map(key=>[key,env[key]]));
     if(distribution)for(const key of ['GITHUB_WORKFLOW_REF','GITHUB_ACTOR','RUNNER_OS','RUNNER_ENVIRONMENT','DISTRIBUTION_EXECUTION_APPROVED'])vars[key]=env[key];
+    if(operation==='production-join'){vars.PRODUCTION_JOIN_APPROVED='true';vars.MINIMUM_OPERATION=PRODUCTION_JOIN;}
     vars.MINIMUM_IMAGE=image;vars.MINIMUM_SERVER_CID=serverCid;vars.PHP_INI_SCAN_DIR='';
     if(auditOnly){vars.MINIMUM_SCOPE='audit-only-v1';vars.GITHUB_WORKFLOW_REF=AUDIT_WORKFLOW;}
     let moduleHash=null;
@@ -207,9 +211,9 @@ async function main() {
       const workerRow=inspect(cid);
       requireFact(containerProfile(workerRow,'php',owner,fixed.php.config,serverCid,uid,stage)
         &&(!distribution||(distributionContainment(workerRow)&&JSON.stringify(workerRow.cmd)===JSON.stringify(workerArgs))),'worker configuration');
-      const out=await worker(cid,run,image,serverCid,phase==='proof',moduleHash,model);
-      if(phase==='audit'){const match=new RegExp('^'+(distribution?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|([a-f0-9]{64})\\n$').exec(out);requireFact(match,'source/runtime audit refused');moduleHash=match[1];}
-      else requireFact(moduleHash!==null&&terminal(out,run,image,serverCid,model),'ordered proof receipt');
+      const out=await worker(cid,run,image,serverCid,phase==='proof',moduleHash,model,operation);
+      if(phase==='audit'){const match=new RegExp('^'+(operation==='production-join'?'ADBMJA1':distribution?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|([a-f0-9]{64})\\n$').exec(out);requireFact(match,'source/runtime audit refused');moduleHash=match[1];}
+      else requireFact(moduleHash!==null&&terminal(out,run,image,serverCid,model,operation),'ordered proof receipt');
       command(['rm','--volumes',cid]);
     }
     for(const row of rows){const [digest,file]=row.split('  ');requireFact(hash(readFileSync(source+'/'+file))===digest,'parent source readback');}
