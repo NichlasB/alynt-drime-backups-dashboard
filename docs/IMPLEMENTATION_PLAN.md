@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Legacy production eligibility decision recorded; implementation gated — 2026-11-05
+
+The approved [design-only decision](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
+recommends one exact legacy expectation in a separate trusted production context,
+not a lab receipt/default-policy promotion. Explicit installed-host/configured-DB
+trust is an acceptance proposal, not image/build attestation or current production
+qualification. It resolves the active-facts-before-connect circularity by separate
+pre-connect capture and actual-initializer-owned active admission, without ready
+injection or a new query/budget. No executable/admission/native/site/wiring change.
+
+Implementation-plan progress: finite policy and join requirements are decided as
+design, not implemented. Exact next gated slice: **Repository-Only Production-Bound
+Legacy Expectation and Two-Phase Capture/Admission Join Safety Foundation**, with
+explicit acceptance of that assurance proposal, isolated APIs only; public mint,
+real auth/storage/native execution and wiring remain disabled. Campaign10/10 stays
+complete, static9/16 native attempts unchanged; no new milestone or attempt grant.
+Final-cohort/native/request qualification still precedes the one application switch.
+
 ## Dormant trusted capture/dispatch foundation implemented — 2026-11-05
 
 The approved [Trusted Context/Lazy Provider foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)

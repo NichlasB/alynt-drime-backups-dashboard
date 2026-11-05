@@ -1,5 +1,13 @@
 # Trusted Production Context and Lazy-Provider Safety Foundation
 
+Current successor decision — 2026-11-05: [legacy production eligibility/join design](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
+is now recorded, not implemented. It explicitly separates this foundation's
+already-active isolated owner validation from the future pre-connect/active join.
+Next approval is Production-Bound Legacy Expectation and Two-Phase Capture/
+Admission Join Safety Foundation, repository-only/isolated, with explicit trust-
+proposal acceptance. No source, native/public provisioning or wiring change here;
+earlier foundation proof remains source-bound and campaign10/10 unchanged.
+
 ## Authority, restore point and scope — 2026-11-05
 
 Explicit approval covers repository-only implementation, isolated tests, review,

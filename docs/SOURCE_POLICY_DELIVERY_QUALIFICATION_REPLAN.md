@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current decision — 2026-11-05: the [legacy production eligibility design](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
+defines the finite next join: separate exact production expectation, explicit
+trusted-host/service assurance acceptance, pre-connect capture versus actual
+initializer-owned active admission. It does not promote private lab evidence or
+enable anything. Next gated slice is its repository-only isolated Safety Foundation,
+not another lab/toolchain route. Required final-cohort/native/request availability
+and the single application writer/form switch stay gated. No new product credit,
+native attempt or reset; campaign10/10 and16 attempts unchanged.
+
 Current foundation — 2026-11-05: [dormant trusted context/lazy dispatch](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
 advances step3 at the isolated API layer. No native construction or actual writer/
 form switch is delivered; all public factories stay closed and no native operation

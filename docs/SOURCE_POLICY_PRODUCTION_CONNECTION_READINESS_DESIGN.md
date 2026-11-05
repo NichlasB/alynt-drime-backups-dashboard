@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current design — 2026-11-05: [legacy production eligibility decision](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
+selects a proposed separate exact production-context row and two-phase capture/
+active join, under an explicit trusted installed-host/configured-service assurance
+choice. Neither lab receipts nor version labels attest a production binary.
+Next approval: Production-Bound Legacy Expectation and Two-Phase Capture/Admission
+Join Safety Foundation, repository-only/isolated APIs, including acceptance of
+the stated proposal. Current defaults/lab guards/public factories and actual
+native/auth/storage/wiring stay unchanged. Campaign10/10,16 attempts unchanged.
+
 Current foundation — 2026-11-05: [dormant trusted capture/dispatch](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
 is implemented/tested with isolated APIs only. Guarded capture, exact receiver
 revalidation, single-use/error-safe cleanup exist; public mint/native constructor

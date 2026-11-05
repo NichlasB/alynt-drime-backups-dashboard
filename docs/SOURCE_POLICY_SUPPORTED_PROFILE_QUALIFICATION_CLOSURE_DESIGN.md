@@ -1,5 +1,13 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current policy decision — 2026-11-05: [design-only production expectation/join](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
+is proposed, not an implemented row or qualification. Strict NULL/default and
+private lab mappings remain unchanged. Exact next approval: repository-only
+Production-Bound Legacy Expectation and Two-Phase Capture/Admission Join Safety
+Foundation, accepting the explicit trusted-host/configured-service assurance
+proposal and using isolated APIs only. M/W/L current-cohort and genuine request/
+positive-availability proof remain open; campaign10/10,16 attempts unchanged.
+
 Current source checkpoint — 2026-11-05: [trusted capture/dispatch foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
 changes shared Native_Adapter and adds its loaded operation trait. All prior M/W/L
 native images now remain historical for their source; none is transferred to this
