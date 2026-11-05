@@ -1,5 +1,12 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current resume — 2026-11-05: the [single distribution attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-approved-native-attempt-legacy-greeting-refused-owned-cleanup-verified--2026-11-05)
+is consumed and failed at the default legacy-greeting guard. Owned resources are
+removed; primary release failure is not erased by successful empty recovery.
+Required legacy M/provider/form remain open. Next gate is repository-only
+Candidate-Bound Legacy Greeting and Core-Derived Session Admission Decision,
+not another native attempt, an alias/session waiver or production provisioning.
+
 Current resume — 2026-11-04: [accepted trusted-distribution integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md)
 provides the separate dormant legacy-minimum qualification route. Next gate is
 one explicitly approved owned native attempt; default admission, production

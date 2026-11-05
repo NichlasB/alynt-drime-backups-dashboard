@@ -1,5 +1,13 @@
 # Legacy-Minimum Exact-Server Candidate and Owned Qualification Design
 
+Current result — 2026-11-05: [owned run41996445940](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-approved-native-attempt-legacy-greeting-refused-owned-cleanup-verified--2026-11-05)
+launches this exact candidate and passes SQL VERSION() identity/PHP audit, but
+default owned admission refuses the exact5.5.5-10.6.23-MariaDB greeting. It is
+NOT legacy M qualification. Primary/always cleanup remove owned resources;
+strict worker-release failure remains recorded. The1/1 attempt is consumed.
+Next gate is a repository-only candidate-bound greeting AND core-derived session
+admission decision, not a new candidate, blind retry or generic version alias.
+
 Forward resume — 2026-11-04: the owner accepts the [trusted-distribution tradeoff and repository-only integration](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md)
 using the SAME candidate pins below. Its dormant manual route keeps default
 legacy server/session admission intact; real identity/helper behavior remains

@@ -1,5 +1,85 @@
 # Trusted-Distribution Legacy-Minimum Lab Integration
 
+## Single approved native attempt: legacy greeting refused, owned cleanup verified — 2026-11-05
+
+The owner separately approves ONE exact-head owned qualification/cleanup attempt
+at **52d881a9a0e5df63bdcdd1ff6adf26073807175a**, not a guard change or retry.
+Local/remote master are clean and identical; ordinary CI41929448632 is reverified
+successful. Fresh isolated prerequisites pass **161 PHP tests/889 assertions**
+and **28 Node tests**, no failures/skips; Node syntax passes. ActorNichlasB and
+empty prior workflow inventory are checked. No code changes before dispatch.
+Target is the ephemeral GitHub lab only; no LocalWP/registered/live site target
+is inspected or operated, so no site confirmation/Novamira operation applies.
+
+[Run41996445940](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/41996445940),
+attempt1/job127140688242, is the ONLY dispatch. Created **09:41:40 Europe/Paris
+(08:41:40 UTC)**; job ends09:42:15/08:42:15, conclusion **failure**. Admission,
+exact source/core checkout and the PHP connection-free audit succeed. By the
+fixed controller ordering, pinned image/config, engine/container restrictions,
+bounded server startup, exact SQL VERSION()10.6.23-MariaDB/autocommit/no-transaction
+gate and source/runtime/module checks precede the accepted audit terminal.
+This is trusted-distribution functional evidence, not independent attestation.
+The audit's zero PHP-native activity is NOT a claim that the whole workflow
+performed zero SQL: server control/initialization and later owned fixtures ran.
+
+| Actual correlated receipt | Value / limit |
+| --- | --- |
+| Head | `52d881a9a0e5df63bdcdd1ff6adf26073807175a` |
+| Parent-frozen source image | `552ce7bacd6cccdac7c04487d80aeb20f6fd5454a025a9a3a9dd129159392c5f` |
+| Proof run identity | `a9f179268ec01ceabca6206947c07f68` |
+| Audit worker CID / engine PID | `dc499cc34fec81034a2f2340a3ae24431302862e7763973212b8545fc350841e` /3176 |
+| Owned server CID | `d825bc727835b690e5595c0db73ac75f0ff55837bfc0c08f97aaa3aab94eee1d` |
+| Native failure | stage=escape, phase=native, checks=480, groups=0; NOT480 passed checks or completed qualification |
+| First cause | RuntimeException, bootstrap line127, connected_unqualified, legacy_greeting |
+| Native/default owner | No lab scope, position0/credits0, never ready; internal native/context state closed |
+| Artifacts | API0 |
+| Runtime grant / production ready | false /false |
+
+The failed assertion SHA256
+`1aa00c36be301dadbd7ebe59e90bc569df1ee9d0510b2dcf88e632eb3251e04d`
+is independently reproduced from the fixed label `actual ambient-bound bootstrap`.
+[Exact source guard](../includes/traits/trait-source-policy-native-bootstrap.php)
+line125 sets legacy_greeting ONLY when actual mysqli_get_server_info equals
+`5.5.5-` plus the unchanged expected server. Therefore the source/enum correlation
+establishes **5.5.5-10.6.23-MariaDB versus expected10.6.23-MariaDB**, not a generic
+version mismatch or inferred raw log. The equality guard correctly refuses at127
+before owner metadata queries, readiness or a policy operation. The original
+nine groups, quote/byte SELECT and full held-live/post-exit proof are NOT reached.
+Genuine private ambient core initialization occurred, but whole WordPress
+authentication/provider/form behavior and a core-derived session policy are not
+qualified. Do not infer the intended collation merely from the greeting.
+
+Primary cleanup reports containers_removed=true,stage_removed=true, but
+**strict_release_complete=false**, issues=[php-nonzero-exit]. That failure is
+preserved: a worker error is not clean release. No server-reconciliation,
+fixture-removal/readback or log-review issue is reported by the exact cleanup
+path; its owned database/user removal and absence guards execute before server
+stop/removal. Separate always-recovery succeeds with issues=[],containers/stage
+removed=true and strict_release_complete=true for its current empty inventory.
+That recovery proves owned-resource absence; it does NOT rewrite primary failure
+or establish successful held-live native release. Internal diagnostic retained
+handle presence is not treated as a native grant or evidence of a live session.
+No retained owned container/stage/fixture recovery is indicated. Shared image
+cache/provider VM disposal is trusted, not independently erased; no global prune,
+workflow/log deletion, extra runner audit or new native operation is performed.
+
+**Outcome: attempted and safely refused, NOT qualified.** Exactly1/1 newly
+approved opportunity is consumed; prior14 plus1 = **15 consumed native attempts**.
+Campaign8/10 product milestones andstatic9 stay unchanged. Runtime/default
+guards, dependencies, application writer/form and production wiring remain
+untouched. No automatic repair/retry, greeting normalization, session override,
+new image or acceptance expansion follows from this failed attempt.
+
+**Recommended next gated slice: Repository-Only Candidate-Bound Legacy Greeting
+and Core-Derived Session Admission Decision.** Trace the pinned core6.0/PHP7.4
+version/capability/charset helpers and the now-established exact API/SQL identity
+correspondence together, then decide whether a narrowly source/receiver/candidate-
+bound policy is justified. Keep default production admission unchanged; reject
+generic prefix stripping, imported-receipt grants or fabricated readiness. Design
+only: no implementation, new native/protected read, alias/session acceptance or
+production wiring under the current attempt approval. This gate is an actual
+compatibility/admission decision, not permission to rerun an unchanged failure.
+
 ## Accepted contract and repository-only authority — 2026-11-04
 
 The owner explicitly accepts the [delivery replan's assurance tradeoff](SOURCE_POLICY_DELIVERY_QUALIFICATION_REPLAN.md#proportionality-decision-and-explicit-tradeoff)
@@ -169,3 +249,6 @@ session/default admission; run nine groups only if those pass. Stop on mismatch,
 unexpected diagnostics, budget or cleanup failure. Do not silently repair/retry,
 substitute an image, widen admission, alter FIPS or enable production wiring.
 That native attempt is NOT authorized or dispatched in this repository-only task.
+
+The separately approved2026-11-05 attempt and current resume are recorded at the
+top of this document; the2026-11-04 gate above remains historical.

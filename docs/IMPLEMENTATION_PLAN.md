@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Single distribution attempt refused on legacy greeting; cleanup complete — 2026-11-05
+
+The separately approved [one exact-head native attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-approved-native-attempt-legacy-greeting-refused-owned-cleanup-verified--2026-11-05)
+at52d881a/run41996445940 passes admission/startup/exact SQL identity and PHP
+connection-free audit, then correctly refuses the first owned bootstrap on
+legacy_greeting. Exact source/enum correlation establishes actual
+`5.5.5-10.6.23-MariaDB` versus default expected `10.6.23-MariaDB`. Counter480/groups0 is
+not completed qualification; no option/byte/concurrency body or readiness grant.
+Primary cleanup removes containers/stage but retains php-nonzero-exit/strict
+failure; separate always-recovery verifies empty owned inventory, not proof success.
+Artifacts0; no installed-site state, runtime guard or production wiring change.
+
+Implementation-plan progress: candidate launch/SQL identity/PHP audit now have
+actual partial evidence; required legacy M and delivered concurrent-save repair
+remain OPEN. Campaign8/10,static9 unchanged;15 native opportunities consumed
+(prior14 plus this approved1/1), no automatic retry allowance. Next gated slice:
+**Repository-Only Candidate-Bound Legacy Greeting and Core-Derived Session
+Admission Decision**, design-only under unchanged default production admission.
+No generic prefix normalization or session override is authorized by the attempt.
+
 ## Accepted distribution lab integrated; native authority remains closed — 2026-11-04
 
 The owner accepts the replan's explicit assurance/accounting tradeoff and approves
