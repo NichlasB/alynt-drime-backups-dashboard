@@ -62,6 +62,10 @@ ceiling,2s connect/3s read,3s statement/1s locks. The isolated double observes s
 query commands/12 credits; charset/mode helpers are separately modeled effects.
 Existing nonempty observer paths remain; production context still admits only its
 known empty non-query subset, not an arbitrary installed hook/cache graph.
+This new bootstrap path admits ONLY the approved legacy row; it does not supply
+production-origin bootstrap composition for the other W/L cohorts. The earlier
+already-active capture path remains separate/unchanged. Do not claim universal
+provider availability or weaken the required-profile gate from this foundation.
 
 The new PHP -n worker loads no mysqli/pdo_mysql extension, genuine core or database.
 It models Linux/PHP7.4 immutable observations in private fixture state; that is NOT
@@ -111,7 +115,7 @@ shortcode/AJAX/REST/cron registrations checked and unchanged. No removals propos
 | includes/class-source-policy-bootstrap-evidence.php |153|
 | includes/class-source-policy-lazy-provider.php |129|
 | includes/class-source-policy-native-profile.php |161|
-| includes/class-source-policy-no-reconnect-connection.php |261|
+| includes/class-source-policy-no-reconnect-connection.php |264|
 | includes/class-source-policy-production-expectation.php |81|
 | includes/class-source-policy-trusted-context.php |162|
 | includes/traits/trait-source-policy-adapter-operation.php |81|
@@ -123,16 +127,22 @@ shortcode/AJAX/REST/cron registrations checked and unchanged. No removals propos
 | includes/traits/trait-source-policy-trusted-context-source.php |90|
 | tests/SourcePolicyProductionJoinTest.php |16|
 | tests/support/source-policy-bootstrap-driver.php |56|
-| tests/support/source-policy-production-cases.php |62|
+| tests/support/source-policy-production-cases.php |64|
 | tests/support/source-policy-production-data.php |20|
 | tests/support/source-policy-production-fixtures.php |31|
-| tests/support/source-policy-production-worker.php |22|
+| tests/support/source-policy-production-worker.php |23|
 
 Final FEATURE_SECURITY_REVIEW after fixes/validation: fixed input/nonce/record
 ordering, non-exporting private binding, default/origin separation, source/path
 limits, parameterized unchanged SQL, pre-connect execution denial, uncertainty and
 revocation checked. The query-identity defect has permanent isolated API regression
-and mutation coverage; no remaining confirmed defect or new 07A handoff. Hashing
+and mutation coverage. A second confirmed reference-lifetime defect was reproduced
+red: early capture/handoff refusal could retain the owner's bootstrap descriptor.
+close() now clears frame/binding/password before fallible cleanup; all new workers
+assert terminal release, including never-opened/refused paths, and a dedicated
+semantic control kills its removal. No remaining confirmed defect or new 07A
+handoff. These are isolated API regressions, not secure erasure/physical release.
+Hashing
 remains bounded by12 files/524288 bytes each; repeated boundary checks do not add
 native queries. No new raw diagnostics, network/file path input or user-facing
 output. No UI workflow, whole-plugin DS3/FULL/readiness refresh or physical proof.
@@ -141,7 +151,7 @@ Local evidence and exact publication/CI counts/run links are recorded truthfully
 in the owning toolkit source-scoped checklist after completion. Required gates:
 65 new PHP worker cases (260 parent assertions), including DATA, genuine-initializer
 positive view/save/no-op/conflict, pre-connect non-authority, all session fields,
-fault/drift/cleanup cases; ten assertion-killed new controls plus eleven retained
+fault/drift/cleanup cases; eleven assertion-killed new controls plus eleven retained
 trusted controls and existing lab/default mutants. Semantic controls mutate ONLY
 an owned temporary source copy, restore exact bytes and remove it, never this repo.
 Full PHP/Node/PHPCS/structure/whitespace are required before publication.
@@ -149,11 +159,24 @@ Full PHP/Node/PHPCS/structure/whitespace are required before publication.
 Actual local PHP8.5.1 full suite:2775 tests/24198 assertions,0 failures, two
 pre-existing Sodium signing skips (RemoteActionSignerTest and
 RemoteActionSignerFailureTest); targeted new worker suite65/260, no skips.
+Related bootstrap/distribution/trusted/join validation384/1390, no skips.
 Node101/101,0 failures/skips, including all semantic controls; full PHPCS and
 structure pass. Local PHP is not the PHP7.4/8.3 compatibility matrix; exact-head
 ordinary CI must independently finish. Source-scoped reviews cover29 changed
 source/test/document records and directly affected unchanged callers/contracts;
 they do not refresh historical whole-plugin release-readiness rows.
+
+Initial publication3e808dd/CI42058063374 passed PHP8.3 but PHP7.4 correctly
+exposed an environment-dependent TEST expectation: runtime-default assumed every
+host mismatched the row, although the runner is Linux/x86_64/PHP7.4.33. The repair
+independently compares those immutable observations to the exact row and requires
+full initializer/save/counts/cleanup on match, zero-allocation refusal otherwise.
+The portability correction changes no runtime predicates, budget or skips. The
+separately detected terminal reference-lifetime fix changes only close()'s reference
+release; it does not loosen admission or claim successful physical cleanup.
+Source/config/client/storage remain doubles on both branches, NOT native proof.
+Targeted/full validation and fresh ordinary exact-head CI are required again;
+the failed run is retained as history, never reported successful.
 
 ## Implementation-plan progress and exact next gate
 

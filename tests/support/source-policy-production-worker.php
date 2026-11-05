@@ -15,6 +15,7 @@ try {
 	A::assertFalse($receiver->query('SELECT never-dispatched'));A::assertSame(0,$store->reads);
 	$prior=static function(){return true;};set_error_handler($prior);
 	if('data'===$case){production_data($context,$receiver);A::assertFalse($context->finish());}else production_case($case,$entry,$provider,$context,$adapter,$receiver,$store,$sites,$query,$request);
+	A::assertTrue(null===boot_get($receiver,'bootstrap_frame'),'Terminal owner must drop the private credential descriptor even before initialization.');A::assertNull(boot_get($receiver,'bootstrap_binding'));A::assertSame('',boot_get($receiver,'dbpassword'));
 	$active=set_error_handler($prior);restore_error_handler();A::assertSame($prior,$active);restore_error_handler();
 	A::assertSame($handle,$ambient->dbh);A::assertSame(0,$ambient->closes);A::assertSame(0,$receiver->reconnects);A::assertSame(0,$GLOBALS['boot_counts']['unexpected_connect']);
 	A::assertSame(0,count(array_intersect(array('mysqli','pdo_mysql'),get_loaded_extensions())));

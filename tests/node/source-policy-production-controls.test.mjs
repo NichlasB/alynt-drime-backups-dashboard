@@ -6,7 +6,7 @@ import {dirname,join,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 
-test('production join assertion-kills 10 semantic controls in an owned source copy',()=>{
+test('production join assertion-kills 11 semantic controls in an owned source copy',()=>{
   const root=fileURLToPath(new URL('../../',import.meta.url));
   const temporary=mkdtempSync(join(tmpdir(),'adb-production-controls-'));
   const owned=()=>assert.ok(resolve(temporary).startsWith(resolve(tmpdir())+sep+'adb-production-controls-'));
@@ -27,6 +27,7 @@ test('production join assertion-kills 10 semantic controls in an owned source co
       [joinPolicy,'$this->production_query      = null;','/* retain query */','save'],
       [joinPolicy,"&& $this->production_runtime['client'] === mysqli_get_client_info()",'&& true','active-client'],
       [joinPolicy,"&& $this->production_projection === $this->settings( false )",'&& true','active-table'],
+      ['includes/class-source-policy-no-reconnect-connection.php','$this->bootstrap_frame    = null;','/* retain descriptor */','frame'],
       ['includes/traits/trait-source-policy-adapter-operation.php','return $this->connection->bootstrap_production( $context );','return true;','save'],
       ['includes/traits/trait-source-policy-native-bootstrap.php','! $this->production_context->activate( $this, $this->query_context )','false','save'],
       ['includes/class-source-policy-production-expectation.php',"'5.5.5-10.6.23-MariaDB'","'10.6.23-MariaDB'",'data'],

@@ -168,6 +168,9 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 			return $this->closed;
 		}
 		$this->close_attempted    = true;
+		$this->bootstrap_frame    = null; // Drop credentials even if capture/handoff refused before bootstrap() ran.
+		$this->bootstrap_binding  = null;
+		$this->dbpassword         = '';
 		$production               = $this->production_context;
 		$this->production_context = null;
 		if ( $production instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context ) {
