@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current implementation — 2026-11-05: [production-bound two-phase join](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
+is implemented with isolated APIs, explicit trusted-host/service assurance, strict
+origin/default separation and actual-initializer-owned admission. No public mint,
+actual authentication/storage/native operation or application wiring. All prior
+native cohorts remain historical. Next gated slice: Production-Origin Legacy Join
+Genuine-Core Native Qualification and Owned Cleanup Proof, ONE fresh exact-head
+ephemeral CI attempt; remaining affected-profile/request proof and application
+switch stay gated. Campaign10/10/static9/16 consumed attempts unchanged.
+
 Current design — 2026-11-05: [legacy production eligibility decision](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
 selects a proposed separate exact production-context row and two-phase capture/
 active join, under an explicit trusted installed-host/configured-service assurance

@@ -1,5 +1,13 @@
 # Trusted Production Context and Lazy-Provider Safety Foundation
 
+Current successor — 2026-11-05: [production-bound join foundation](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
+now implements pre-connect capture and actual-initializer-owned active admission
+at the isolated API layer. Unlike this record's original active-facts fixture,
+the new positive path does not reflect ready/qualification facts. Public factories
+and actual auth/storage/native/wiring remain disabled. Next gated approval is ONE
+Production-Origin Legacy Join Genuine-Core Native Qualification and Owned Cleanup
+Proof in the existing ephemeral CI lab, not another generic design loop.
+
 Current successor decision — 2026-11-05: [legacy production eligibility/join design](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
 is now recorded, not implemented. It explicitly separates this foundation's
 already-active isolated owner validation from the future pre-connect/active join.

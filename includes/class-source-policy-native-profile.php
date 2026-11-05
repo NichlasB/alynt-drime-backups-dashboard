@@ -72,7 +72,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 			|| ! $context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $context->owns( $receiver ) ) {
 			return false;
 		}
-		$expected = $receiver->minimum_lab_profile();
+		$expected = $receiver->bound_profile();
 		if ( ! is_array( $expected ) || spl_object_hash( $context ) !== $expected['context'] ) {
 			return false;
 		}

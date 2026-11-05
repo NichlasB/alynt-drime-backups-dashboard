@@ -148,7 +148,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$columns = $this->bootstrap_probe( 'columns' );
 			$indexes = $this->bootstrap_probe( 'indexes' );
 			$this->bootstrap_check();
-			if ( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session( $session, $frame, $this->charset, $this->collate, array_values( array_diff( $modes, $this->incompatible_modes ) ), null === $this->minimum_lab_scope ? null : $this )
+			if ( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::session( $session, $frame, $this->charset, $this->collate, array_values( array_diff( $modes, $this->incompatible_modes ) ), null === $this->minimum_lab_scope && null === $this->production_context ? null : $this )
 				|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence::schema( $table, $columns, $indexes ) ) {
 				throw new RuntimeException( 'Observed bootstrap evidence unavailable' );
 			}
@@ -173,7 +173,10 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			$this->qualification = $facts;
 			$this->native_state  = 'active';
 			$this->ready         = true;
-			$success             = true;
+			if ( null !== $this->production_context && ! $this->production_context->activate( $this, $this->query_context ) ) {
+				throw new RuntimeException( 'Production join unavailable' );
+			}
+			$success = true;
 			return true;
 		} catch ( Throwable $error ) {
 			$kind                    = get_class( $error );
@@ -211,6 +214,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap {
 			|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::settings( $this->bootstrap_frame )
 			|| ! Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::source( $this, $this->bootstrap_binding )
 			|| ( null !== $this->minimum_lab_scope && ! is_array( $this->minimum_lab_profile() ) )
+			|| ( null !== $this->production_context && ( null !== $this->minimum_lab_scope || ! $this->production_context->bootstrap_matches( $this, $this->query_context, $this->bootstrap_frame, $this->bootstrap_binding ) ) )
 			|| ( null !== $this->report_mode && $this->observed_report_mode() !== $this->report_mode )
 			|| ! $this->query_context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->query_context->owns( $this )
 			|| ( $sealed && ! $this->query_context->valid() ) || ( null !== $this->bootstrap_handle && $this->dbh !== $this->bootstrap_handle ) ) {

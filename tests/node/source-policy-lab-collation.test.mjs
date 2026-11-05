@@ -9,7 +9,7 @@ $row=array(array('db'=>'isolated','ac'=>'1','tx'=>'0','statement_limit'=>'3','ro
 $frame=array('core'=>'6.0','database'=>'isolated','table'=>'wp_options');$modes=array('NO_ENGINE_SUBSTITUTION');$name='Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence';
 verify($name::session($row,$frame,'utf8mb4','utf8mb4_unicode_520_ci',$modes));
 $mismatch=$row;$mismatch[0]['collation']='utf8mb4_unicode_ci';verify(!$name::session($mismatch,$frame,'utf8mb4','utf8mb4_unicode_520_ci',$modes));
-class UnknownCollationProfileDouble {public $calls=0;function minimum_lab_profile(){++$this->calls;return array('core'=>'6.0','database'=>'isolated','table'=>'wp_options','collation'=>'utf8mb4_unicode_ci');}}
+class UnknownCollationProfileDouble {public $calls=0;function bound_profile(){++$this->calls;return array('core'=>'6.0','database'=>'isolated','table'=>'wp_options','collation'=>'utf8mb4_unicode_ci');}}
 $unknown=new UnknownCollationProfileDouble();verify(!$name::session($mismatch,$frame,'utf8mb4','utf8mb4_unicode_ci',$modes,$unknown));verify($unknown->calls===0);
 $columns=array();foreach(array(array('option_id','bigint(20) unsigned','NO','PRI','auto_increment'),array('option_name','varchar(191)','NO','UNI',''),array('option_value','longtext','NO','',''),array('autoload','varchar(20)','NO','MUL','')) as $v)$columns[]=array_combine(array('name','type','nullable','key_kind','extra'),$v);
 $indexes=array();foreach(array(array('PRIMARY','0','option_id'),array('autoload','1','autoload'),array('option_name','0','option_name')) as $v)$indexes[]=array('name'=>$v[0],'non_unique'=>$v[1],'sequence'=>'1','column_name'=>$v[2],'prefix_length'=>null);
@@ -28,8 +28,11 @@ test('in-memory actual validator controls kill default widening, missing receive
 test('source-backed scope and runtime call choose the collation without a caller string, altered pins, SQL or production factory wiring',()=>{
   const scope=read('includes/class-source-policy-minimum-lab-scope.php'),bootstrap=read('includes/traits/trait-source-policy-native-bootstrap.php'),lab=read('includes/traits/trait-source-policy-minimum-lab.php');
   assert.match(scope,/'collation'\s*=> '' === \$this->frame\['collate'\] \? 'utf8mb4_unicode_ci' : 'utf8mb4_unicode_520_ci'/);
-  assert.match(bootstrap,/null === \$this->minimum_lab_scope \? null : \$this/);
+  assert.match(bootstrap,/null === \$this->minimum_lab_scope && null === \$this->production_context \? null : \$this/);
   assert.match(lab,/\$expected\['collation'\] !== \$this->collate/);assert.match(lab,/'utf8mb4' !== \$this->charset/);
-  assert.match(source,/get_class\( \$receiver \)/);assert.match(source,/getFileName\(\)/);assert.match(source,/\$receiver->minimum_lab_profile\(\)/);
+  assert.match(source,/get_class\( \$receiver \)/);assert.match(source,/getFileName\(\)/);assert.match(source,/\$receiver->bound_profile\(\)/);
+  const boundary=read('includes/traits/trait-source-policy-production-boundary.php');
+  assert.match(boundary,/null === \$this->production_context[\s\S]*return \$this->minimum_lab_profile\(\)/);
+  assert.match(boundary,/null !== \$this->minimum_lab_scope \|\| \$this->close_attempted/);
   assert.doesNotMatch(source,/mysqli_|->execute\(|->query\(|update_option|setValue\(/);
 });

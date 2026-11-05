@@ -18,6 +18,25 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Adapter_Operation {
 	private $operation_context = null;
 
 	/**
+	 * Fixed dormant handoff, no raw connection, settings or native grant returned.
+	 *
+	 * @param object $context Privately bound pre-connect capture.
+	 * @return true|WP_Error
+	 */
+	public function initialize_context( $context ) {
+		if ( $this->busy || ! $context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context
+			|| ! $this->connection instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection ) {
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
+		}
+		$this->busy = true;
+		try {
+			return $this->connection->bootstrap_production( $context );
+		} finally {
+			$this->busy = false;
+		}
+	}
+
+	/**
 	 * Own one operation and release only its connection, including refusals.
 	 *
 	 * @param string      $operation Internal literal.

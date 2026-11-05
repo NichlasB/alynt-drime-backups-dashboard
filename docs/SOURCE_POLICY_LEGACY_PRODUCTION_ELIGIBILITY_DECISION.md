@@ -1,5 +1,12 @@
 # Legacy Production Greeting/Session Eligibility Decision
 
+Successor — 2026-11-05: the separately approved [isolated join foundation](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
+implements this row and two-phase lifecycle after explicit acceptance of the
+trusted-host/configured-service model. This original design record remains
+historical. No actual auth/storage/native/public provisioning or wiring enabled.
+Next approval: Production-Origin Legacy Join Genuine-Core Native Qualification
+and Owned Cleanup Proof, one ephemeral CI attempt; no native grant from this record.
+
 ## Approved authority and disposition — 2026-11-05
 
 Repository-only DESIGN, isolated validation, commit/push and exact-head ordinary

@@ -27,16 +27,17 @@ test('trusted capture positives and refusals assertion-kill semantic guard bypas
     assert.match(positive.stdout,/^checks:[1-9][0-9]*\n$/);assert.equal(positive.stderr,'');
     const entry='includes/class-source-policy-guarded-entry.php';
     const context='includes/class-source-policy-trusted-context.php';
+    const declarations='includes/traits/trait-source-policy-trusted-context-source.php';
     const controls=[
       [context,'public function capture() {','public function capture() { return false;','positive-save'],
       [entry,"! current_user_can( 'manage_options' )",'false','capability'],
       [entry,"! wp_verify_nonce( wp_unslash( $request['_wpnonce'] ), 'alynt_drime_backups_dashboard_update_source_policy' )",'false','nonce-domain'],
       [entry,"! $this->valid_site_id( $request['dashboard_site_id'] )",'false','site-negative'],
       [entry,'! $this->record_matches( $site_id )','false','record'],
-      [context,"hash_file( 'sha256', $path ) !== $digest",'false','source'],
+      [declarations,"hash_file( 'sha256', $path ) !== $digest",'false','source'],
       ['includes/class-source-policy-bootstrap-profile.php',"$absint->getFileName() === realpath( $binding['parser_api_file'] )",'true','parser-source'],
       ['includes/class-source-policy-native-adapter.php','null !== $this->operation_context && ! $this->operation_context->valid( $this->connection )','false','late-core'],
-      [context,"( isset( $GLOBALS['wp_filter'] ) && ! is_array( $GLOBALS['wp_filter'] ) )",'false','registry-shape'],
+      [declarations,"( isset( $GLOBALS['wp_filter'] ) && ! is_array( $GLOBALS['wp_filter'] ) )",'false','registry-shape'],
       ['includes/class-source-policy-lazy-provider.php','$this->used || ! is_int( $site )','false || ! is_int( $site )','reentry'],
       [context,'restore_error_handler();','','positive-save']
     ];

@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current foundation — 2026-11-05: [production-origin expectation/join](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
+advances trusted composition at the isolated API layer; capture no longer requires
+injected active facts on its new bootstrap path. No production delivery, native
+qualification, writer switch or public mint. Next gated slice: Production-Origin
+Legacy Join Genuine-Core Native Qualification and Owned Cleanup Proof, ONE fresh
+exact-head existing ephemeral CI attempt, before affected-profile/request closure
+and the single application switch. Prior cohorts remain historical; campaign10/10,
+static9/16 consumed native attempts unchanged, no reset or automatic native grant.
+
 Current decision — 2026-11-05: the [legacy production eligibility design](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
 defines the finite next join: separate exact production expectation, explicit
 trusted-host/service assurance acceptance, pre-connect capture versus actual

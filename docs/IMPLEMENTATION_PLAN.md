@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Production-bound two-phase join implemented; genuine proof gated — 2026-11-05
+
+The approved [production join foundation](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
+implements one separate legacy expectation and pre-connect capture→actual private
+initializer→active admission, without ready/facts injection. Isolated positive
+view/save/no-op/conflict, denial/drift/cleanup and semantic controls advance the
+trusted composition seam. Strict defaults/lab rows/schema/budgets/public factories
+and application writer/wiring remain unchanged. No actual auth/storage/native/site
+operation. All prior M/W/L receipts remain historical for their source cohorts.
+
+Implementation-plan progress: the finite production-origin row and circular join
+are implemented at the isolated API layer, not production delivery/qualification.
+Exact next gated slice: **Production-Origin Legacy Join Genuine-Core Native
+Qualification and Owned Cleanup Proof**, one fresh exact-head attempt in the
+existing ephemeral CI lab with genuine pinned APIs and owned fixtures/cleanup,
+without lab-origin promotion or reflected ready/facts/runtime policy. Native
+authority, affected-profile/request proof and the application switch stay gated.
+Campaign10/10/static9/16 consumed native attempts unchanged. Earlier resumes below
+are historical, not instructions to repeat design or reset allowance.
+
 ## Legacy production eligibility decision recorded; implementation gated — 2026-11-05
 
 The approved [design-only decision](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)

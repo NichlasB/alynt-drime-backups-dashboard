@@ -1,5 +1,15 @@
 # Minimum-Core/PHP 7.4 and Current-Source Windows/TCP Qualification Design
 
+Current source — 2026-11-05: [production-bound legacy join foundation](SOURCE_POLICY_PRODUCTION_JOIN_FOUNDATION.md)
+implements the separate row and two-phase initializer join using isolated APIs
+only. No default/lab row promotion, actual native/auth/storage or wiring. Shared
+bootstrap/profile/context bytes changed; ALL M/W/L prior native receipts remain
+historical, not current-source grants. Exact next approval: Production-Origin
+Legacy Join Genuine-Core Native Qualification and Owned Cleanup Proof, ONE fresh
+exact-head ephemeral CI attempt with genuine source/runtime/configuration and
+owned cleanup. Affected required profiles and genuine authenticated request
+availability remain open. Campaign10/10/static9/16 consumed attempts unchanged.
+
 Current policy decision — 2026-11-05: [design-only production expectation/join](SOURCE_POLICY_LEGACY_PRODUCTION_ELIGIBILITY_DECISION.md)
 is proposed, not an implemented row or qualification. Strict NULL/default and
 private lab mappings remain unchanged. Exact next approval: repository-only

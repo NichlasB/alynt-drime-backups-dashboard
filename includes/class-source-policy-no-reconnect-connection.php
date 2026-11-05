@@ -15,12 +15,14 @@ require_once __DIR__ . '/class-source-policy-minimum-lab-scope.php';
 require_once __DIR__ . '/traits/trait-source-policy-minimum-lab.php';
 require_once __DIR__ . '/traits/trait-source-policy-native-bootstrap.php';
 require_once __DIR__ . '/traits/trait-source-policy-bootstrap-setup.php';
+require_once __DIR__ . '/traits/trait-source-policy-production-boundary.php';
 
 /** Native construction remains closed pending separately approved qualification. */
 class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extends wpdb {
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Setup;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab;
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Boundary;
 
 	/**
 	 * Private qualification DATA, never accepted by an application command.
@@ -165,7 +167,12 @@ class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extend
 		if ( $this->close_attempted ) {
 			return $this->closed;
 		}
-		$this->close_attempted   = true;
+		$this->close_attempted    = true;
+		$production               = $this->production_context;
+		$this->production_context = null;
+		if ( $production instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context ) {
+			$production->revoke_production( $this );
+		}
 		$this->minimum_lab_scope = null; // Revoke lab scope before any fallible/reentrant native or callback cleanup.
 		$this->qualification     = null; // Revoke terminal DATA before any fallible or reentrant cleanup.
 		$this->report_mode       = null;

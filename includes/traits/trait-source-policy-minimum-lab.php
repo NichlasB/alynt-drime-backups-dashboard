@@ -61,10 +61,10 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab {
 	 * @return string|false
 	 */
 	private function bootstrap_expected_server( $core ) {
-		if ( null === $this->minimum_lab_scope ) {
+		if ( null === $this->minimum_lab_scope && null === $this->production_context ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $core );
 		}
-		$expected = $this->minimum_lab_profile();
+		$expected = $this->bound_profile();
 		return is_array( $expected ) && $expected['core'] === $core ? $expected['server'] : false;
 	}
 
@@ -76,7 +76,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab {
 	 * @return array|WP_Error
 	 */
 	private function admit_bound_profile( $facts, $table ) {
-		return null === $this->minimum_lab_scope
+		return null === $this->minimum_lab_scope && null === $this->production_context
 			? Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $facts, $table, $this->query_context )
 			: Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile::admit( $facts, $table, $this->query_context, $this );
 	}

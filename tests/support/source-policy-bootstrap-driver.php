@@ -30,7 +30,7 @@ function mysqli_real_connect($handle,$host,$user,$password,$database,$port,$sock
 	PHPUnit\Framework\Assert::assertSame($GLOBALS['boot_expected_endpoint']??array('127.0.0.1','owned','owned-private-password','isolated',10004,null,0),$GLOBALS['boot_actual_endpoint']);
 	if('connect-false'===$GLOBALS['boot_fault'])return false; $handle->connected=true; return true;
 }
-function mysqli_get_client_info(){return 'bad-client'===$GLOBALS['boot_fault']?'unknown':'mysqlnd synthetic';}
+function mysqli_get_client_info(){return 'bad-client'===$GLOBALS['boot_fault']?'unknown':($GLOBALS['boot_client']??'mysqlnd synthetic');}
 function mysqli_get_server_info($handle){unset($handle); return 'bad-server'===$GLOBALS['boot_fault']?'unknown':($GLOBALS['boot_server']??'10.6.23-MariaDB');}
 function mysqli_errno($handle){return $handle->errno;}
 function mysqli_query($handle,$sql){

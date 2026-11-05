@@ -96,7 +96,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Evidence {
 			|| realpath( __DIR__ . '/class-source-policy-no-reconnect-connection.php' ) !== ( new ReflectionClass( $receiver ) )->getFileName() ) {
 			return false;
 		}
-		$expected = $receiver->minimum_lab_profile();
+		$expected = $receiver->bound_profile();
 		if ( ! is_array( $expected ) || ! in_array( $expected['collation'] ?? null, array( 'utf8mb4_unicode_ci', 'utf8mb4_unicode_520_ci' ), true ) ) {
 			return false;
 		}

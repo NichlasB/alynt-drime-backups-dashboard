@@ -27,6 +27,11 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Lazy_Provider {
 	 * @var bool
 	 */
 	private $used = false;
+	/** Fixed private composition choice, never a request/environment selector.
+	 *
+	 * @var bool
+	 */
+	private $bootstrap = false;
 
 	/** Constructing a wrapper opens/reads nothing. */
 	private function __construct() {}
@@ -79,8 +84,13 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Lazy_Provider {
 		$this->used = true;
 		$result     = Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		try {
-			if ( $this->owner instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter
-				&& $this->context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context && $this->context->capture() ) {
+			$captured = false;
+			if ( $this->owner instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter && $this->context instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context ) {
+				$captured = true === $this->bootstrap
+					? ( $this->context->capture_bootstrap() && true === $this->owner->initialize_context( $this->context ) )
+					: ( false === $this->bootstrap && $this->context->capture() );
+			}
+			if ( $captured ) {
 				$result = null === $revision ? $this->owner->view_source_mode( $site, $source, $this->context )
 					: $this->owner->save_source_mode_if_current( $revision, $site, $source, $mode, $this->context );
 			}
