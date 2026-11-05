@@ -1,7 +1,7 @@
 <?php
 /** Private isolated composition only; never imports ready state or qualification facts. */
 if(defined('ADB_POLICY_ISOLATED')) {
-function production_fixture() {
+function production_fixture($profile='m') {
 	$GLOBALS['policy_bootstrap_model']=true;$GLOBALS['policy_capable']=true;$GLOBALS['policy_trace']=array();$GLOBALS['wp_filter']=array();$GLOBALS['policy_cache_fail']=false;$GLOBALS['policy_cache']=array();
 	$GLOBALS['policy_ext_cache']=false;$GLOBALS['wp_object_cache']=new WP_Object_Cache();$GLOBALS['boot_fault']='';$GLOBALS['boot_report_mode']=0;$GLOBALS['boot_client']='mysqlnd 7.4.33';
 	$GLOBALS['wp_version']='6.0';$GLOBALS['boot_parser_core']='6.0';$GLOBALS['boot_events']=array();$GLOBALS['boot_after']=array();$GLOBALS['boot_rewrite']=array();
@@ -19,8 +19,15 @@ function production_fixture() {
 	$policy=array('core'=>'6.0','php'=>PHP_VERSION,'root'=>__DIR__.'/','pins'=>$pins,'files'=>$files,'driver'=>__DIR__.'/source-policy-bootstrap-driver.php');
 	// Models immutable process observations, NOT real Linux/PHP 7.4 or native qualification.
 	$runtime=array('platform'=>'Linux','arch'=>'x86_64','php'=>'7.4.33','client'=>'mysqlnd 7.4.33','mode'=>0);
+	if('m'!==$profile){
+		$core='w'===$profile?'7.1.3':'7.1.4';$GLOBALS['wp_version']=$core;$GLOBALS['boot_parser_core']=$core;$policy['core']=$core;
+		$runtime=array('platform'=>'w'===$profile?'Windows':'Linux','arch'=>'w'===$profile?'AMD64':'x86_64','php'=>'8.5.12','client'=>'mysqlnd 8.5.12','mode'=>0,'word_size'=>8,'nts'=>true);
+		$GLOBALS['boot_client']='mysqlnd 8.5.12';$GLOBALS['boot_server']='w'===$profile?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204';unset($GLOBALS['boot_rewrite']['session']);
+		if('l'===$profile)$GLOBALS['boot_expected_endpoint']=array('localhost','owned','owned-private-password','isolated',null,'/tmp/owned.sock',0);
+	}
 	foreach(array('receiver'=>$receiver,'policy'=>$policy,'production_query'=>$query,'production_runtime'=>$runtime)as$key=>$value)boot_set($context,$key,$value);
 	$frame=array('core'=>'6.0','database'=>DB_NAME,'table'=>'wp_options','host'=>'127.0.0.1','port'=>10004,'user'=>DB_USER,'password'=>DB_PASSWORD,'charset'=>DB_CHARSET,'collate'=>DB_COLLATE,'transport'=>'tcp_loopback','socket'=>null,'db_host'=>DB_HOST);
+	$frame['core']=$policy['core'];if('l'===$profile){$frame['host']='localhost';$frame['port']=null;$frame['transport']='unix_socket';$frame['socket']='/tmp/owned.sock';}
 	$binding=array('driver_file'=>$policy['driver'],'observers'=>array(),'observer_files'=>array());foreach($files as$key=>$file)$binding[$key]=realpath(__DIR__.'/'.$file);
 	foreach(array('bootstrap_frame'=>$frame,'bootstrap_binding'=>$binding,'query_context'=>$query)as$key=>$value)boot_set($receiver,$key,$value);
 	$adapter=(new ReflectionClass(Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter::class))->newInstanceWithoutConstructor();boot_set($adapter,'connection',$receiver);

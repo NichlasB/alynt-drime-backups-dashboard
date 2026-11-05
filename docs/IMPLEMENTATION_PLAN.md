@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Non-legacy default expectation/join foundation implemented — 2026-11-05
+
+The approved [dormant foundation](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md)
+implements strict W7.1.3/Windows/TCP and L7.1.4/Linux/socket candidate expectations
+in the SAME join, with report0 and immutable64-bit/NTS facts. Legacy five-field
+runtime/default/lab behavior, source/identity/session/schema/budget guards and
+closed public factories remain unchanged. Evidence is isolated API/DATA only;
+Windows AMD64 is still unmeasured, no actual auth/storage/native/site/wiring action.
+
+Implementation-plan progress: delivery step1 of the
+[closure design](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md) is implemented,
+not native/request-qualified. Exact next gated slice: **Repository-Only Genuine
+Authenticated Request Source/Fixture and Private-Construction Closure Design**,
+design-only; establish finite actual auth and ordinary-visibility handoff contracts
+before proof implementation. Freeze shared code before separately approved affected
+profile/request qualification and ONE application switch. No native grant/counter
+reset; campaign10/10/static9/17 consumed opportunities unchanged. Older resumes historical.
+
 ## Non-legacy eligibility and genuine-request closure designed — 2026-11-05
 
 The approved [repository-only design](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)

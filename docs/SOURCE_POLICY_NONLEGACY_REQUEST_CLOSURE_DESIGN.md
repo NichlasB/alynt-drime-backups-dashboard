@@ -1,5 +1,13 @@
 # Non-Legacy Production-Join Eligibility and Genuine-Request Closure Design
 
+Current implementation — 2026-11-05: delivery step1 was separately approved and
+implemented in the [Non-Legacy Join Foundation](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md).
+The proposed rows below are now dormant code expectations with isolated API/DATA
+evidence, NOT native eligibility or genuine auth/HTTP proof. Historical design scope
+and results below remain intact. Next gated slice is the repository-only genuine
+authenticated-request source/fixture/private-construction closure DESIGN, with
+actual auth/storage/native execution and production wiring still disabled.
+
 ## Approved scope and baseline — 2026-11-05
 
 Repository-only DESIGN, validation, commit/push and exact-head ordinary CI.

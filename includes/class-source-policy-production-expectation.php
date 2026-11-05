@@ -1,6 +1,6 @@
 <?php
 /**
- * One exact legacy compatibility row, DATA only, not a context or native mint.
+ * Finite default compatibility rows, DATA only, not a context or native mint.
  *
  * @package Alynt_Drime_Backups_Dashboard
  */
@@ -48,6 +48,10 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation {
 	 * @return array|false
 	 */
 	private static function row( array $frame, $runtime ) {
+		$core = $frame['core'] ?? null;
+		if ( ! in_array( $core, array( '6.0', '7.1.3', '7.1.4' ), true ) ) {
+			return false;
+		}
 		$fixed = array(
 			'platform' => 'Linux',
 			'arch'     => 'x86_64',
@@ -55,6 +59,15 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation {
 			'client'   => 'mysqlnd 7.4.33',
 			'mode'     => 0,
 		);
+		if ( '6.0' !== $core ) {
+			$fixed['platform'] = '7.1.3' === $core ? 'Windows' : 'Linux';
+			// AMD64 is an explicit unmeasured W candidate, not an alias or native receipt.
+			$fixed['arch']      = '7.1.3' === $core ? 'AMD64' : 'x86_64';
+			$fixed['php']       = '8.5.12';
+			$fixed['client']    = 'mysqlnd 8.5.12';
+			$fixed['word_size'] = 8;
+			$fixed['nts']       = true;
+		}
 		if ( ! is_array( $runtime ) || count( $fixed ) !== count( $runtime ) || array_diff( array_keys( $runtime ), array_keys( $fixed ) ) ) {
 			return false;
 		}
@@ -63,17 +76,18 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation {
 				return false;
 			}
 		}
-		if ( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::valid( $frame, 'Linux' )
-			|| '6.0' !== ( $frame['core'] ?? null ) || 'tcp_loopback' !== $frame['transport'] || '127.0.0.1' !== $frame['host']
-			|| 'utf8' !== ( $frame['charset'] ?? null ) || '' !== ( $frame['collate'] ?? null )
+		if ( ! Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::valid( $frame, $fixed['platform'] )
+			|| ( '7.1.4' === $core ? ( 'unix_socket' !== $frame['transport'] || 'localhost' !== $frame['host'] )
+				: ( 'tcp_loopback' !== $frame['transport'] || '127.0.0.1' !== $frame['host'] ) )
+			|| ( '7.1.3' === $core ? 'utf8mb4' : 'utf8' ) !== ( $frame['charset'] ?? null ) || '' !== ( $frame['collate'] ?? null )
 			|| ! is_string( $frame['database'] ?? null ) || 1 !== preg_match( '/\A[A-Za-z0-9_-]{1,64}\z/', $frame['database'] )
 			|| ! is_string( $frame['table'] ?? null ) || strlen( $frame['table'] ) > 64 || 1 !== preg_match( '/\A[A-Za-z0-9_]+options\z/', $frame['table'] ) ) {
 			return false;
 		}
 		return array(
-			'core'      => '6.0',
-			'server'    => '5.5.5-10.6.23-MariaDB',
-			'collation' => 'utf8mb4_unicode_ci',
+			'core'      => $core,
+			'server'    => '6.0' === $core ? '5.5.5-10.6.23-MariaDB' : Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $core ),
+			'collation' => '6.0' === $core ? 'utf8mb4_unicode_ci' : 'utf8mb4_unicode_520_ci',
 			'database'  => $frame['database'],
 			'table'     => $frame['table'],
 		);

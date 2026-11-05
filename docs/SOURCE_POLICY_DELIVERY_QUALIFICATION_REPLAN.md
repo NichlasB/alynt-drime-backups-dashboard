@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current foundation — 2026-11-05: [non-legacy default expectation/join](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md)
+implements design step1 with strict W/L candidates, immutable64-bit/NTS DATA and
+the unchanged legacy schema. Isolated API positives/refusals and semantic controls
+are not native/authentication/HTTP qualification. No public provisioning or writer
+switch. Next gated slice: Repository-Only Genuine Authenticated Request
+Source/Fixture and Private-Construction Closure Design, design-only; close finite
+auth source/effects and normal-visibility composition before proof implementation.
+No generic infrastructure loop, native allowance or campaign-counter reset.
+Campaign10/10/static9/17 consumed native opportunities unchanged; older resumes historical.
+
 Current design — 2026-11-05: [non-legacy join and genuine-request closure](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
 defines strict default candidate rows plus finite actual authentication/intent/
 provider/web evidence, keeping the existing writer/form untouched. Next gated

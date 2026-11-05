@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current implementation — 2026-11-05: [non-legacy expectation/join foundation](SOURCE_POLICY_NONLEGACY_JOIN_FOUNDATION.md)
+implements strict default W/L candidate rows and typed immutable64-bit/NTS facts
+in the SAME dormant context; legacy/default/lab guards and public closure unchanged.
+Actual auth/storage/native/site/wiring remain disabled; Windows AMD64 is unmeasured,
+prior native receipts do not qualify this cohort. Next gated slice: Repository-Only
+Genuine Authenticated Request Source/Fixture and Private-Construction Closure
+Design, design-only, before affected-profile/request proof and ONE application
+switch. Campaign10/10/static9/17 consumed native opportunities unchanged.
+
 Current design — 2026-11-05: [non-legacy eligibility and genuine-request closure](SOURCE_POLICY_NONLEGACY_REQUEST_CLOSURE_DESIGN.md)
 selects two proposed strict default rows and separates credential/session auth,
 capability/nonce/record admission, native provider and true web/target evidence.

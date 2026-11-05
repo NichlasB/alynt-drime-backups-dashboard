@@ -4,7 +4,14 @@ use PHPUnit\Framework\Assert as A;
 if(defined('ADB_POLICY_ISOLATED')) {
 function production_case($case,$entry,$provider,$context,$adapter,$receiver,$store,$sites,$query,$request) {
 	// The real immutable observer can match on CI PHP7.4.33/Linux. All IO/source APIs remain doubles.
-	$observedMatch='runtime-default'===$case&&PHP_OS_FAMILY==='Linux'&&php_uname('m')==='x86_64'&&PHP_VERSION==='7.4.33';
+	$legacy='6.0'===$GLOBALS['wp_version'];
+	$observedMatch='runtime-default'===$case&&($legacy?(PHP_OS_FAMILY==='Linux'&&php_uname('m')==='x86_64'&&PHP_VERSION==='7.4.33'):(PHP_VERSION==='8.5.12'&&PHP_INT_SIZE===8&&PHP_ZTS===0&&PHP_OS_FAMILY===('7.1.3'===$GLOBALS['wp_version']?'Windows':'Linux')&&php_uname('m')===('7.1.3'===$GLOBALS['wp_version']?'AMD64':'x86_64')));
+	if('runtime-observation'===$case){
+		boot_set($context,'production_runtime',null);$context->capture_bootstrap();$actual=boot_get($context,'production_runtime');
+		$expected=array('platform'=>PHP_OS_FAMILY,'arch'=>php_uname('m'),'php'=>PHP_VERSION,'client'=>$GLOBALS['boot_client'],'mode'=>0);
+		if(!$legacy){$expected['word_size']=PHP_INT_SIZE;$expected['nts']=0===PHP_ZTS;}
+		A::assertSame($expected,$actual,'Immutable facts come from PHP, never candidate expectations.');A::assertFalse($context->valid($receiver));A::assertSame(0,$GLOBALS['boot_counts']['allocate']);A::assertSame(0,$store->reads);A::assertFalse($context->finish());return;
+	}
 	if('capability'===$case)$GLOBALS['policy_capable']=false;
 	if('nonce'===$case)$request['_wpnonce']='other-action';
 	if('record'===$case)$sites->record_override=array('id'=>8);
@@ -12,7 +19,9 @@ function production_case($case,$entry,$provider,$context,$adapter,$receiver,$sto
 	if('unchanged'===$case)$request['source_mode']='required';
 	if('source'===$case){$policy=boot_get($context,'policy');$policy['pins']['source-policy-isolated-wpdb.php']=str_repeat('f',64);boot_set($context,'policy',$policy);}
 	if('runtime-default'===$case)boot_set($context,'production_runtime',null);
-	if(0===strpos($case,'runtime-')&&'runtime-default'!==$case){$runtime=boot_get($context,'production_runtime');$runtime[substr($case,8)]='wrong';boot_set($context,'production_runtime',$runtime);}
+	if('runtime-32bit'===$case){$runtime=boot_get($context,'production_runtime');$runtime['word_size']=4;boot_set($context,'production_runtime',$runtime);}
+	if('runtime-zts'===$case){$runtime=boot_get($context,'production_runtime');$runtime['nts']=false;boot_set($context,'production_runtime',$runtime);}
+	if(0===strpos($case,'runtime-')&&!in_array($case,array('runtime-default','runtime-32bit','runtime-zts'),true)){$runtime=boot_get($context,'production_runtime');$runtime[substr($case,8)]='wrong';boot_set($context,'production_runtime',$runtime);}
 	if('client'===$case)$GLOBALS['boot_client']='mysqlnd unknown';
 	if('report'===$case)$GLOBALS['boot_report_mode']=3;
 	if('mixed-origin'===$case)boot_set($receiver,'minimum_lab_scope',new stdClass());
@@ -21,8 +30,8 @@ function production_case($case,$entry,$provider,$context,$adapter,$receiver,$sto
 	if('binding'===$case){$binding=boot_get($receiver,'bootstrap_binding');$binding['cache_file']='other';boot_set($receiver,'bootstrap_binding',$binding);}
 	if('helper'===$case)$GLOBALS['boot_helper_wrong']=true;
 	if('schema'===$case)$GLOBALS['boot_rewrite']['table']=static function($rows){$rows[0]['collation']='utf8mb4_unicode_ci';return$rows;};
-	$servers=array('unprefixed'=>'10.6.23-MariaDB','double-prefix'=>'5.5.5-5.5.5-10.6.23-MariaDB','newer'=>'5.5.5-10.11.18-MariaDB-ubu2204');if(isset($servers[$case]))$GLOBALS['boot_server']=$servers[$case];
-	if(0===strpos($case,'session-')){$key=substr($case,8);$GLOBALS['boot_rewrite']['session']=static function($rows)use($key){$rows[0]['collation']='utf8mb4_unicode_ci';$rows[0][$key]='wrong';return$rows;};}
+	$servers=array('unprefixed'=>'10.6.23-MariaDB','prefixed'=>'5.5.5-'.$GLOBALS['boot_server'],'double-prefix'=>'5.5.5-5.5.5-10.6.23-MariaDB','newer'=>$legacy?'5.5.5-10.11.18-MariaDB-ubu2204':('7.1.3'===$GLOBALS['wp_version']?'10.11.18-MariaDB-ubu2204':'10.6.23-MariaDB'));if(isset($servers[$case]))$GLOBALS['boot_server']=$servers[$case];
+	if(0===strpos($case,'session-')){$key=substr($case,8);$GLOBALS['boot_rewrite']['session']=static function($rows)use($key,$legacy){$rows[0]['collation']=$legacy?'utf8mb4_unicode_ci':'utf8mb4_unicode_520_ci';$rows[0][$key]='wrong';return$rows;};}
 	if(0===strpos($case,'fault-'))$GLOBALS['boot_fault']=substr($case,6).'-throw';
 	if(in_array($case,array('late-query','late-global','late-frame','late-client','late-mode','late-hook'),true))$GLOBALS['boot_after']['identity']=static function()use($case,$receiver,$context,$query){
 		if('late-query'===$case)boot_set($receiver,'query_context',clone $query);
@@ -36,6 +45,7 @@ function production_case($case,$entry,$provider,$context,$adapter,$receiver,$sto
 		if('preconnect'===$case){A::assertFalse($receiver->query('SELECT never-dispatched'));A::assertTrue($context->bootstrap_matches($receiver,$query,boot_get($receiver,'bootstrap_frame'),boot_get($receiver,'bootstrap_binding')));A::assertFalse($context->bootstrap_matches($receiver,clone $query,boot_get($receiver,'bootstrap_frame'),boot_get($receiver,'bootstrap_binding')));A::assertFalse($context->finish());return;}
 		A::assertTrue($adapter->initialize_context($context));production_active($context,$receiver,$query);
 		if('active-frame'===$case)A::assertArrayNotHasKey('password',boot_get($context,'frame'));
+		elseif('active-runtime'===$case){$runtime=boot_get($context,'production_runtime');$runtime['nts']=false;boot_set($context,'production_runtime',$runtime);A::assertFalse($context->valid($receiver));trusted_error($adapter->view_source_mode(7,'wpvivid',$context),'source_policy_unavailable');A::assertSame(0,$store->reads);}
 		else {if('active-client'===$case)$GLOBALS['boot_client']='mysqlnd wrong';if('active-table'===$case)$GLOBALS['wpdb']->options='other_options';if('active-query'===$case)boot_set($receiver,'query_context',clone $query);if('active-close'===$case)A::assertTrue($receiver->close());A::assertFalse($context->valid($receiver));trusted_error($adapter->view_source_mode(7,'wpvivid',$context),'source_policy_unavailable');A::assertSame(0,$store->reads);}
 		A::assertTrue($context->finish());A::assertFalse($context->valid($receiver));return;
 	}
@@ -57,7 +67,7 @@ function production_case($case,$entry,$provider,$context,$adapter,$receiver,$sto
 }
 function production_active($context,$receiver,$query) {
 	A::assertTrue($receiver->ready);A::assertTrue($context->valid($receiver));A::assertTrue($receiver->production_completed($context,$query));A::assertSame('production_active',boot_get($context,'state'));
-	A::assertSame('5.5.5-10.6.23-MariaDB',$receiver->profile()['server']);A::assertSame('utf8mb4_unicode_ci',$receiver->collate);A::assertSame(8,boot_get($receiver,'bootstrap_position'));A::assertSame(12,boot_get($receiver,'bootstrap_credits'));
+	$legacy='6.0'===$GLOBALS['wp_version'];A::assertSame($legacy?'5.5.5-10.6.23-MariaDB':('7.1.3'===$GLOBALS['wp_version']?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204'),$receiver->profile()['server']);A::assertSame($legacy?'utf8mb4_unicode_ci':'utf8mb4_unicode_520_ci',$receiver->collate);A::assertSame(8,boot_get($receiver,'bootstrap_position'));A::assertSame(12,boot_get($receiver,'bootstrap_credits'));
 	A::assertArrayNotHasKey('password',boot_get($context,'frame'));A::assertArrayNotHasKey('user',boot_get($context,'frame'));A::assertSame('',boot_get($receiver,'dbpassword'));A::assertNull(boot_get($receiver,'bootstrap_frame'));A::assertNull(boot_get($receiver,'bootstrap_binding'));
 	A::assertFalse($context->activate($receiver,$query));trusted_error($receiver->bootstrap_production($context),'source_policy_unavailable');A::assertNull(boot_get($receiver,'minimum_lab_scope'));
 }

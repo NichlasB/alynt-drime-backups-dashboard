@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 /** Isolated actual-initializer tests, not genuine WordPress or native qualification. */
 final class SourcePolicyProductionJoinTest extends TestCase {
 	public function test_expectation_is_exact_non_secret_data_only() { $this->test_two_phase_capture_and_actual_initializer('data'); }
+	public function test_legacy_observation_retains_exact_five_field_schema() { $this->test_two_phase_capture_and_actual_initializer('runtime-observation'); }
 	/** @dataProvider cases */
 	public function test_two_phase_capture_and_actual_initializer($case) {
 		$process=proc_open(array(PHP_BINARY,'-n',__DIR__.'/support/source-policy-production-worker.php',$case),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);

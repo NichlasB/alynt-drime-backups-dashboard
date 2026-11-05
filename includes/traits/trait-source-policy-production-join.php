@@ -61,6 +61,11 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Join {
 					'client'   => mysqli_get_client_info(),
 					'mode'     => Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Profile::report_mode( $this->binding['driver_file'] ),
 				);
+				if ( '6.0' !== $core ) {
+					// Immutable source-owned facts; preserve the legacy five-field snapshot.
+					$this->production_runtime['word_size'] = PHP_INT_SIZE;
+					$this->production_runtime['nts']       = 0 === PHP_ZTS;
+				}
 			}
 			$this->production_expected = Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation::select( $this->frame, $this->production_runtime );
 			if ( false === $this->production_expected ) {
