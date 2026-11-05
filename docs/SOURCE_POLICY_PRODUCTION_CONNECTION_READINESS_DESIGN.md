@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current decision — 2026-11-05: [joint legacy greeting/session decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
+proposes an exact private lab-only exception, not default/production eligibility.
+Genuine core source predicts_unicode_ci for the empty profile; no owned session
+is newly observed. Next gated slice is repository-only Candidate-Bound Legacy
+Greeting and Genuine-Core Session Policy Safety Foundation, with native execution
+and wiring disabled. M/default-profile/provider/form reconciliation stays open;
+campaign8/10 and15 native attempts unchanged. Earlier resumes remain historical.
+
 Current resume — 2026-11-05: the [single distribution attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-approved-native-attempt-legacy-greeting-refused-owned-cleanup-verified--2026-11-05)
 is consumed and failed at the default legacy-greeting guard. Owned resources are
 removed; primary release failure is not erased by successful empty recovery.

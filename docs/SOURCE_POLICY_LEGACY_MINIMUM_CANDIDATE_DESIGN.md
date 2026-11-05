@@ -1,5 +1,13 @@
 # Legacy-Minimum Exact-Server Candidate and Owned Qualification Design
 
+Current decision — 2026-11-05: [candidate-bound greeting/session decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
+retains these exact candidates and the failed run. It proposes one code-owned
+private lab row for the observed prefixed API and source-derived genuine session,
+not a new artifact, generic alias or production grant. Next approval is the
+repository-only Candidate-Bound Legacy Greeting and Genuine-Core Session Policy
+Safety Foundation; isolated-only, no native retry or wiring. Legacy engine lab
+success, default eligibility and M closure remain distinct and unestablished.
+
 Current result — 2026-11-05: [owned run41996445940](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-approved-native-attempt-legacy-greeting-refused-owned-cleanup-verified--2026-11-05)
 launches this exact candidate and passes SQL VERSION() identity/PHP audit, but
 default owned admission refuses the exact5.5.5-10.6.23-MariaDB greeting. It is

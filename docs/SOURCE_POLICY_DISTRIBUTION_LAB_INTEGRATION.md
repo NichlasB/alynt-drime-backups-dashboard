@@ -1,5 +1,14 @@
 # Trusted-Distribution Legacy-Minimum Lab Integration
 
+Current decision — 2026-11-05: the approved [joint greeting/session admission decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
+explains the exact failed API greeting and pinned core-derived empty-collation
+behavior without changing admission. It recommends one candidate/receiver-bound
+private lab exception, not generic normalization or default production expansion.
+Next approval: repository-only Candidate-Bound Legacy Greeting and Genuine-Core
+Session Policy Safety Foundation, isolated tests/publication only. No native
+retry authorized;15 attempts consumed, campaign8/10 unchanged. Actual failure,
+cleanup and historical route below remain unaltered evidence.
+
 ## Single approved native attempt: legacy greeting refused, owned cleanup verified — 2026-11-05
 
 The owner separately approves ONE exact-head owned qualification/cleanup attempt

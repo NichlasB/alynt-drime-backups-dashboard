@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Joint legacy greeting/session decision; implementation remains gated — 2026-11-05
+
+The approved [candidate-bound decision](SOURCE_POLICY_LEGACY_GREETING_SESSION_ADMISSION_DECISION.md)
+traces the exact failed raw greeting and pinned genuine core6.0 helpers together.
+It recommends one finite private distribution-lab exception: exact prefixed API
+identity plus genuine empty-collation utf8mb4_unicode_ci, unchanged physical_520_ci
+schema, receiver/context/source/run binding and strict default production rules.
+This is design only, not acceptance implementation or a measured owned session.
+No source/test/workflow/dependency/site/native/wiring change or attempt occurs.
+
+Implementation-plan progress: joint policy decision advances the legacy-lab
+blocker, not actual M/default eligibility or delivered concurrency repair.
+Campaign8/10,static9,15 native attempts unchanged. Recommended next gated slice:
+**Repository-Only Candidate-Bound Legacy Greeting and Genuine-Core Session Policy
+Safety Foundation**, isolated tests and publication only; explicit approval of
+the narrow lab exception required, with native execution and wiring disabled.
+Earlier result/approval gates below are historical, not dispatch authority.
+
 ## Single distribution attempt refused on legacy greeting; cleanup complete — 2026-11-05
 
 The separately approved [one exact-head native attempt](SOURCE_POLICY_DISTRIBUTION_LAB_INTEGRATION.md#single-approved-native-attempt-legacy-greeting-refused-owned-cleanup-verified--2026-11-05)
