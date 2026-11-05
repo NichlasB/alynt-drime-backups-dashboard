@@ -59,7 +59,7 @@ separate exact row; no lab+production origin or cross-row field mixing.
 | Field | W reference candidate | L reference candidate |
 | --- | --- | --- |
 | Source | exact7.1.3, existing pinned library/method roles | exact7.1.4, its own version identity and pinned library/method roles |
-| Runtime | Windows, PHP8.5.12/internal mysqlnd8.5.12 | Linux/x86_64, PHP8.5.12/internal mysqlnd8.5.12 |
+| Runtime | Windows,64-bit NTS PHP8.5.12/internal mysqlnd8.5.12 | Linux/x86_64,64-bit NTS PHP8.5.12/internal mysqlnd8.5.12 |
 | Architecture | proposed exact raw `AMD64` candidate ONLY; not a recorded php_uname measurement | exact recorded x86_64 candidate |
 | Report at capture and later effects |0, as already selected by genuine stock ambient initialization |0, as already selected by genuine stock ambient initialization |
 | Transport |127.0.0.1 numeric TCP, explicit integer port1..65535, null socket/flags0 |localhost Unix socket, null port, existing bounded absolute socket/raw-host equality, flags0 |
@@ -76,6 +76,15 @@ native attempt merely to learn this string is selected. Synthetic W DATA tests
 cannot convert that candidate into measured Windows eligibility.
 
 The standalone audit's initial mode3 is NOT the request-context expectation.
+
+For the NEW rows require immutable 64-bit/non-thread-safe observations as well
+as platform/version/client: exact word size8 and the source-owned NTS predicate.
+Extend only the non-legacy runtime DATA schema with finite typed facts as needed;
+preserve the existing five-field legacy snapshot/selection unchanged. Schema is
+chosen by fixed core/source row, not a caller model. Missing/extra/wrong-type,
+32-bit or thread-safe variants refuse. No execution is authorized to collect them
+here; future synthetic cases and genuine preflight must cover those exact limits.
+
 Do not toggle/restore shared reporting to satisfy a row or pretend that an
 unqualified synthetic ambient changed it. Genuine ambient initialization is a
 future proof prerequisite, never an action authorized by this document.
