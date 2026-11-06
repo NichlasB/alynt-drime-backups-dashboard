@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {runInNewContext} from 'node:vm';
+import {Script} from 'node:vm';
 import {requestAuditResult} from '../../scripts/ci/source-policy-linux-qualification-controller.mjs';
 import {wlLinuxJob,wlEnvelope,validRequestAudit,requestBatch,wlRequestFailure,parseRequestWire} from '../../scripts/ci/source-policy-wl-request-contract.mjs';
 
@@ -26,8 +26,12 @@ async function invoke(result,env={},source=original){
     process:{platform:'linux',argv:['node','/virtual/controller.mjs','audit'],env:{...job,...env},stdout:{write:s=>output.push(s)}},
     spawnSync:(command,args,options)=>{calls.push({command,args:Array.from(args),options});return result;},
     spawn:forbidden('spawn'),readFileSync:forbidden('read'),lstatSync:forbidden('stat'),reconcile:forbidden('SQL'),launchRequest:forbidden('request')};
+  const program=new Script(prelude+source.slice(argsStart,argsEnd)+'\n'+source.slice(mainStart,mainEnd)+'\nmain();');
   let error=null;
-  try{await runInNewContext(prelude+source.slice(argsStart,argsEnd)+'\n'+source.slice(mainStart,mainEnd)+'\nmain();',context,{timeout:1000});}catch(caught){error=caught.message;}
+  try{await program.runInNewContext(context,{timeout:1000});}catch(caught){
+    if(['SyntaxError','ReferenceError'].includes(caught.name)||caught.code==='ERR_SCRIPT_EXECUTION_TIMEOUT')throw caught;
+    error=caught.message;
+  }
   assert.deepEqual(effects,[]);
   return {error,calls,output};
 }
@@ -84,6 +88,8 @@ test('actual job admission still rejects before any process call and preserves l
 });
 
 test('source-backed audit controls assertion-kill missing projection, foreign binding and always-unavailable audit',async()=>{
+  await assert.rejects(()=>invoke(refused(failure),{},'const =;\n'+original),{name:'SyntaxError'});
+  await assert.rejects(()=>invoke(refused(failure),{},original.replace('requestAuditResult(result,run);','undefinedAuditFunction(result,run);')),{name:'ReferenceError'});
   const controls=[
     s=>s.replace("fact.profile==='l'","true"),
     s=>s.replace('fact.case_index===0','true'),

@@ -74,7 +74,9 @@ exit/signal/spawn/stdout, raw/Unicode/oversized/trailing/legacy channels, origin
 error facts, no success on refusal and exact timeout/argv are covered. Seven
 in-memory source controls are ASSERTION-killed: profile, case, stage, omitted
 projection, wrong exit, invalid success and always-unavailable audit. No parser/
-launcher kill counts. The VM is a test vehicle for trusted source, not hostile-
+launcher kill counts: compile outside refusal capture, propagate syntax/reference/
+timeout errors, and explicit invalid-program controls prove those are not converted
+to assertion kills. The VM is a test vehicle for trusted source, not hostile-
 code containment or a native-runtime proof; no OS child/SQL/file read is performed
 by the modeled invocation. No artificial native success, guard waiver or skip.
 
@@ -84,7 +86,7 @@ fixed1, manual decisions0. Final security:0 new confirmed defects or uncovered
 regression handoff; strict parser/context and privacy tests cover the repair.
 No security claim about untested native execution. CLI JSON is not HTML; no new
 public requests, SQL, file paths or permission checks. Bloat/structure review is
-unnecessary: cohesive213-line existing controller gains13 net lines and a107-line
+unnecessary: cohesive213-line existing controller gains13 net lines and a113-line
 isolated test; no duplication of production algorithms, new framework, file move,
 unusually large class or PHP growth. UI/Database/full release workflows not run
 or falsely completed; historical whole-plugin readiness rows stay untouched.
