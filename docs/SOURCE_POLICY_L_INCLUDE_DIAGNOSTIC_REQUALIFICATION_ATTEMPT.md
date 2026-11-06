@@ -1,5 +1,13 @@
 # L Include-Diagnostic Genuine-Session Requalification — Closed Catalog Refusal
 
+Repository-only follow-on — 2026-11-06: [independent class dependency audit/pin](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+repairs only the known L catalog omission (L22/W21); exact guards/limits retained.
+This failed physical result is not changed/requalified by isolated tests. Next
+gated slice: ONE New-Head L Genuine-Session Request Owned Requalification and
+Cleanup Attempt, exact repair head/fresh prerequisites/strict owned CI-lab cleanup.
+Separate approval; no native rerun/wiring, opportunities22 unchanged. Older resumes
+below historical; W catalog unchanged and no readiness grant.
+
 ## ONE approved attempt and baseline — 2026-11-06
 
 Explicit approval of ONE L genuine-session request requalification at

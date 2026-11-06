@@ -1,5 +1,13 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current L catalog repair — 2026-11-06: [exact metadata-lazyloader audit](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+permits one independently pinned L declaration, not an auth/runtime grant; L22/
+W21, original guard/resource/profile boundaries retained. No native rerun/wiring.
+Next gated slice: ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt, exact published repair head/fresh prerequisites/strict owned
+CI-lab cleanup. Separate approval; historical42302410128 failed/opportunities22
+unchanged; older recommendations historical, M/W/HTTP/target/ONE switch gated.
+
 Current L attempt — 2026-11-06: [b8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9, request audit refused core-scope ordinal31. Name
 digest matches metadata lazyloader transitively required by pinned meta.php;

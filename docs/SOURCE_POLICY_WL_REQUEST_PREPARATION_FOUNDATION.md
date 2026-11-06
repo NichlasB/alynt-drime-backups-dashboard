@@ -1,5 +1,13 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current L catalog repair — 2026-11-06: [exact transitive dependency audit](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+adds one literal L-only size/hash pin (L22/W21), preserving fixed origin/size/
+image/resource guards. Isolated actual catalog/pin/include regressions only;
+no native retry/wiring. Next gated slice: ONE New-Head L Genuine-Session Request
+Owned Requalification and Cleanup Attempt, exact repair head/fresh prerequisites/
+strict owned CI-lab cleanup. Separate approval;42302410128 failed/opportunities22
+unchanged; earlier resumes historical, W admission not silently expanded.
+
 Current L attempt — 2026-11-06: [b8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9, refused request audit core-scope ordinal31, with
 strict cleanup. Bounded name matches metadata lazyloader required by pinned meta;

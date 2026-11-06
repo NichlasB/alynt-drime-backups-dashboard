@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## L metadata-lazyloader catalog repaired in isolation — 2026-11-06
+
+The [exact-source audit/repair](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+independently hashes the declaration-only transitive class, adds its exact pin to
+L only (L22/W21), preserves origin/size/identity/resource guards and verifies actual
+catalog/pin/include positives and guard-removal controls. No native retry/wiring;
+historical42302410128 remains failed, W catalog and production allowance unchanged.
+
+Implementation-plan progress: known L transitive catalog omission closed in
+isolation, not physical qualification. Recommended next gated slice: **ONE New-
+Head L Genuine-Session Request Owned Requalification and Cleanup Attempt**, exact
+published repair head, fresh prerequisites/strict ephemeral CI-lab cleanup.
+Separate approval; opportunities22/campaign10/10/static9 unchanged. M/W/HTTP/target/
+ONE switch remain gated; all earlier next-step recommendations below historical.
+
 ## L attempt identified metadata-lazyloader catalog refusal — 2026-11-06
 
 [ONEb8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)

@@ -7,7 +7,7 @@ if(PHP_SAPI!=='cli'||count($argv)!==3||\extension_loaded('mysqli')||\extension_l
 require \dirname(__DIR__,2).'/vendor/autoload.php';
 define('ADB_WL_REQUEST_PROOF',true);define('ABSPATH','/repo/core/');define('WPINC','wp-includes');
 function adbg_check($condition,$label){$GLOBALS['labels'][]=$label;if(!$condition)throw new \RuntimeException('Modeled guard refusal');}
-function adbwl_catalog(){return array('pins'=>array('known.php'=>'fixed'),'auth'=>array());}
+function adbwl_catalog(){return $GLOBALS['dependency']?\adbwl_catalog():array('pins'=>array('known.php'=>'fixed'),'auth'=>array());}
 function get_included_files(){return $GLOBALS['loaded'];}
 function realpath($path){if($path===$GLOBALS['root_input'])return '/repo';return $path==='/missing.php'?false:$path;}
 function filesize($path){
@@ -15,7 +15,7 @@ function filesize($path){
  if($path===$GLOBALS['candidate']){
   if($GLOBALS['scenario']==='stat-throw')throw new \RuntimeException('Modeled metadata refusal');
   if($GLOBALS['scenario']==='stat-false')return false;
-  if($GLOBALS['scenario']==='size')return 1048577;
+  if(\in_array($GLOBALS['scenario'],array('size','dependency-size'),true))return 1048577;
   if($GLOBALS['scenario']==='boundary')return 1048576;
  }
  return 100;
@@ -23,24 +23,28 @@ function filesize($path){
 function is_file($path){return true;}
 function hash_file($algorithm,$path){A::assertSame('sha256',$algorithm);return \hash('sha256',$path);}
 $scenario=$argv[1];$copy=$argv[2];$GLOBALS['scenario']=$scenario;$GLOBALS['root_input']=\dirname(\dirname($copy),2);
+$GLOBALS['dependency']=0===\strpos($scenario,'dependency-');
+if($GLOBALS['dependency']){define('ADB_M_REQUEST_PROOF',true);require \dirname(__DIR__,2).'/scripts/ci/source-policy-wl-request-bootstrap.php';}
 $paths=array('scope'=>'/repo/core/wp-includes/unknown.php','first'=>'/repo/core/wp-includes/unknown.php','nested'=>'/repo/core/wp-includes/nested/known.php','repo'=>'/repo/tests/private.php','boundary-path'=>'/repo/includes-other/private.php','foreign'=>'/elsewhere/private.php','missing'=>'/missing.php','size'=>'/repo/includes/target.php','stat-false'=>'/repo/includes/target.php','stat-throw'=>'/repo/includes/target.php','w'=>'/repo/core/wp-includes/unknown.php','proof'=>'/repo/core/wp-includes/unknown.php','ordinal'=>'/repo/core/wp-includes/unknown.php','overflow'=>'/repo/core/wp-includes/unknown.php');
 $candidate=$paths[$scenario]??'/repo/core/wp-includes/known.php';$GLOBALS['candidate']=$candidate;
+if($GLOBALS['dependency']){$candidate=($scenario==='dependency-foreign'?'/elsewhere/':'/repo/core/wp-includes/').($scenario==='dependency-nested'?'nested/':'').'class-wp-metadata-lazyloader.php';$GLOBALS['candidate']=$candidate;}
 $GLOBALS['loaded']=array();for($i=0;$i<32;$i++)$GLOBALS['loaded'][]='/repo/includes/fixed-'.$i.'.php';
 $ordinal=$scenario==='ordinal'?511:($scenario==='overflow'?512:32);$GLOBALS['loaded'][$ordinal]=$candidate;
 $GLOBALS['stats']=array();$GLOBALS['labels']=array();
-\putenv('WL_REQUEST_PROFILE='.($scenario==='w'?'w':'l'));\putenv('WL_REQUEST_MODE='.($scenario==='proof'?'proof':'audit'));
+\putenv('WL_REQUEST_PROFILE='.(\in_array($scenario,array('w','dependency-w'),true)?'w':'l'));\putenv('WL_REQUEST_MODE='.($scenario==='proof'?'proof':'audit'));
 try{
  require $copy;$failed=false;
  try{$rows=adbm_source_rows();}catch(\RuntimeException $error){$failed=true;}
- $positive=\in_array($scenario,array('positive','boundary','late'),true);A::assertSame(!$positive,$failed,'Actual guard decision, not diagnostic availability');
- $outside=\in_array($scenario,array('scope','first','nested','repo','boundary-path','foreign','missing','w','proof','ordinal','overflow'),true);
+ $positive=\in_array($scenario,array('positive','boundary','late','dependency-l'),true);A::assertSame(!$positive,$failed,'Actual guard decision, not diagnostic availability');
+ $outside=\in_array($scenario,array('scope','first','nested','repo','boundary-path','foreign','missing','w','proof','ordinal','overflow','dependency-w','dependency-nested','dependency-foreign'),true);
  A::assertCount($outside?32:33,$GLOBALS['stats'],'No stat before origin/catalog admission');
  if($outside)A::assertNotContains($candidate,$GLOBALS['stats']);
- if($positive||\in_array($scenario,array('w','proof','overflow'),true))A::assertArrayNotHasKey('adbwl_include_failure',$GLOBALS);
+ if($positive||\in_array($scenario,array('w','proof','overflow','dependency-w'),true))A::assertArrayNotHasKey('adbwl_include_failure',$GLOBALS);
  else{
   $origin=\in_array($scenario,array('scope','first','nested','ordinal'),true)?'core':(\in_array($scenario,array('repo','boundary-path','size','stat-false','stat-throw'),true)?'repo':($scenario==='missing'?'unresolved':'foreign'));
+  if($GLOBALS['dependency'])$origin=$scenario==='dependency-foreign'?'foreign':'core';
   $identity=$origin==='core'?\substr($candidate,\strlen('/repo/core/wp-includes/')):($origin==='repo'?\substr($candidate,\strlen('/repo/')):($origin==='unresolved'?'':$candidate));
-  $reason=$scenario==='size'?'size':(\in_array($scenario,array('stat-false','stat-throw'),true)?'stat':'scope');
+  $reason=\in_array($scenario,array('size','dependency-size'),true)?'size':(\in_array($scenario,array('stat-false','stat-throw'),true)?'stat':'scope');
   A::assertSame(array('ordinal'=>$ordinal,'origin'=>$origin,'reason'=>$reason,'path_digest'=>\hash('sha256',$identity)),$GLOBALS['adbwl_include_failure']??null,'Actual first failed include context');
  }
  if($scenario==='first'){

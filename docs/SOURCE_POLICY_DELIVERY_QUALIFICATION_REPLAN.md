@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current L catalog repair — 2026-11-06: [independent dependency audit](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+adds exactly one L-only metadata-lazyloader size/hash pin, L22/W21, with isolated
+actual-source positives/guard controls; origins/limits/production allowance intact.
+Historical42302410128 failed; no native rerun/wiring. Next gated slice: ONE New-
+Head L Genuine-Session Request Owned Requalification and Cleanup Attempt, exact
+published repair head/fresh prerequisites/strict owned CI-lab cleanup. Separate
+approval; opportunities22 unchanged; all earlier recommendations historical.
+
 Current L attempt — 2026-11-06: [b8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
 passed fresh original adapter291/9, then audit refused core-scope ordinal31.
 Bounded digest matches metadata lazyloader required by pinned meta.php; catalog

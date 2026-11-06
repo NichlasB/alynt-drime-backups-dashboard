@@ -18,6 +18,7 @@ test('CLI doubles are definition-free when discovered by the ordinary PHP suite'
   const files=['auth','process','fixture','sql-shape'].map(name=>join(root,'tests/support/source-policy-minimum-request-'+name+'-model.php'));
   files.push(join(root,'tests/support/source-policy-wl-request-fixture-model.php'));
   files.push(join(root,'tests/support/source-policy-wl-include-model.php'));
+  files.push(join(root,'tests/support/source-policy-wl-pin-model.php'));
   assert.equal(phpRun(files.map(file=>`require ${literal(file)};`).join('')+`if(function_exists('adbg_check')||function_exists('wp_set_current_user')||class_exists('WP_Hook',false)||defined('ADB_M_REQUEST_PROOF'))throw new RuntimeException('discovery leaked definitions');echo 'inert';`),'inert');
 });
 test('exact genuine route is separately default-off and PHP/JS reject malformed or cross-mode jobs',()=>{

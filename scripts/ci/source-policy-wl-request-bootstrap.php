@@ -26,6 +26,10 @@ function adbwl_catalog() {
 		$row['commit']              = 'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a';
 	}
 	$row['auth'] = require __DIR__ . '/source-policy-wl-request-pins.php';
+	// Independently audited L-only transitive meta.php declaration, not a wider runtime allowance.
+	if ( 'l' === getenv( 'WL_REQUEST_PROFILE' ) ) {
+		$row['auth']['class-wp-metadata-lazyloader.php'] = array( 6833, 'c1df481157f06db91ab7f81fe68981db206beaa38721e6cab49a064110219467' );
+	}
 	return $row;
 }
 
@@ -61,7 +65,7 @@ function adbwl_load() {
 	adbg_check( 8 === count( array_unique( $keys ) ), 'distinct owned secrets without fallback options' );
 	unset( $keys, $key );
 	$row = adbwl_catalog();
-	adbg_check( 12 === count( $row['pins'] ) && 9 === count( $row['auth'] ) && ! array_intersect_key( $row['pins'], $row['auth'] ), 'twenty-one pinned proof files, runtime allowance unchanged' );
+	adbg_check( 12 === count( $row['pins'] ) && ( $w ? 9 : 10 ) === count( $row['auth'] ) && ! array_intersect_key( $row['pins'], $row['auth'] ), 'fixed profile pinned proof files, runtime allowance unchanged' );
 	foreach ( $row['pins'] as $name => $hash ) {
 		adbg_check( hash_equals( $hash, hash_file( 'sha256', ABSPATH . WPINC . '/' . $name ) ), 'pinned base source' );
 	}

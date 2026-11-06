@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current L repair — 2026-11-06: [independent metadata declaration audit/pin](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+closes the known L catalog gap in isolation only. L22/W21; W catalog unchanged,
+shared bootstrap needs new request images, no HTTP/native readiness. Next gated
+slice: ONE New-Head L Genuine-Session Request Owned Requalification and Cleanup
+Attempt, exact repair head/fresh prerequisites/strict owned CI-lab cleanup.
+Separate approval; no rerun/wiring here;42302410128 failed/opportunities22 unchanged.
+M/W/HTTP/target/ONE switch remain gated; earlier resumes historical.
+
 Current L attempt — 2026-11-06: [ONEb8d39d0](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9, failed request audit at metadata-lazyloader core-
 scope catalog boundary; no23 cases/HTTP or readiness proof. Strict cleanup passed.

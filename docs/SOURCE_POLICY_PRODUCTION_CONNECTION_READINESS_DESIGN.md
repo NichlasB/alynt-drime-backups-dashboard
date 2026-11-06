@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current L repair — 2026-11-06: [audited finite metadata dependency](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+now pinned for L only before core loading. L22/W21, exact origins/size/hash/limits
+retained; no production allowance/wiring/native change or readiness claim. Next
+gated slice: ONE New-Head L Genuine-Session Request Owned Requalification and
+Cleanup Attempt, exact repair head/fresh prerequisites/strict owned CI-lab cleanup.
+Separate approval; historical42302410128 failed/opportunities22 unchanged;
+M/W/HTTP/target/ONE switch gated, earlier resumes historical.
+
 Current L attempt — 2026-11-06: [ONEb8d39d0 result](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
 fresh original adapter291/9 passed; request audit core-scope refusal maps to the
 metadata lazyloader dependency outside closed catalog. No request case loop,

@@ -1,5 +1,13 @@
 # L Finite Include-Closure Diagnosis and Guard-Preserving Harness Repair
 
+Repository-only dependency repair — 2026-11-06: [independently audited lazyloader pin](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
+adds one exact L-only catalog member with positive/pin/include guard controls;
+L22/W21, origin/size/identity/resource limits unchanged. Historical42302410128
+failed; no native rerun/wiring. Next gated slice: ONE New-Head L Genuine-Session
+Request Owned Requalification and Cleanup Attempt, exact repair head/fresh
+prerequisites/strict owned CI-lab cleanup. Separate approval; opportunities22
+unchanged; earlier recommendations historical.
+
 Native follow-on — 2026-11-06: [ONEb8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9, then request audit refused ordinal31/core/scope.
 New diagnostic worked: name digest uniquely matches pinned-tree metadata lazyloader

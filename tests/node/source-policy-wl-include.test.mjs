@@ -18,7 +18,7 @@ function emit(f,profile='l',mode='audit',base=`ADBMGRF1|child|0|audit|RuntimeExc
   const code=`require ${literal(join(root,'scripts/ci/source-policy-wl-request-contract.php'))};putenv('WL_REQUEST_PROFILE=${profile}');putenv('WL_REQUEST_MODE=${mode}');$GLOBALS['adbwl_include_failure']=${literal(f)};echo ${prefixOnly?'adbwl_include_prefix':'adbwl_failure_wire'}(${literal(base)});`;
   const r=spawnSync(php,['-n','-d','disable_functions=json_encode,json_decode','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr);assert.equal(r.stderr,'');return r.stdout;
 }
-function model(change=code=>code,scenarios=['positive','boundary','scope','first','nested','repo','boundary-path','foreign','missing','size','stat-false','stat-throw','w','proof','ordinal','overflow','late'],control=false){
+function model(change=code=>code,scenarios=['positive','boundary','scope','first','nested','repo','boundary-path','foreign','missing','size','stat-false','stat-throw','w','proof','ordinal','overflow','late','dependency-l','dependency-w','dependency-nested','dependency-foreign','dependency-size'],control=false){
   const temporary=mkdtempSync(join(tmpdir(),'adb-wl-include-')),folder=join(temporary,'scripts','ci'),file=join(folder,'source.php');
   assert.ok(resolve(temporary).startsWith(resolve(tmpdir())+sep+'adb-wl-include-'));
   try{
@@ -54,6 +54,9 @@ test('source-backed guard controls are assertion-killed, not parser/native launc
     [s=>s.replace(" && ! isset( $GLOBALS['adbwl_include_failure'] )",''),'first'],
     [s=>s.replace("'l' === getenv( 'WL_REQUEST_PROFILE' )",'true'),'w'],
     [s=>s.replace("'audit' === getenv( 'WL_REQUEST_MODE' )",'true'),'proof'],
-    [s=>s.replace('$ordinal <= 511','true'),'overflow']
+    [s=>s.replace('$ordinal <= 511','true'),'overflow'],
+    [s=>s.replace("dirname( $file ) === $core &&",'true &&'),'dependency-nested'],
+    [s=>s.replace('in_array( basename( $file ), $allowed, true )','true'),'dependency-w'],
+    [s=>s.replace('$bytes <= 1048576','true'),'dependency-size']
   ])model(change,[scenario],true);
 });
