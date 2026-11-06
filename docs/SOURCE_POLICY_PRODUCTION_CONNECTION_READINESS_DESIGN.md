@@ -1,5 +1,12 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current include repair — 2026-11-06: [L audit-only first-include DATA](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+closes the diagnostic gap, not native readiness. Catalog/origin/size/identity/
+limits retained; actual historical file/clause Unknown,42295828908 still failed.
+Next gated slice: ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt, fresh prerequisites/new image/strict owned CI-lab cleanup.
+No native rerun/wiring; opportunities21 unchanged; earlier resumes historical.
+
 Current L requalification — 2026-11-06: [ONE6b90143 run](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9, refused request source audit at finite include
 closure; actual file/clause Unknown, no23-case proof. Strict cleanup/recovery

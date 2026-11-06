@@ -46,7 +46,11 @@ async function checkProjected(source=original){
   assert.equal(result.calls[0].options.timeout,20000);assert.equal(result.calls[0].options.maxBuffer,16384);
 }
 
-test('actual L audit caller projects only the bounded request failure and retains nonzero refusal',()=>checkProjected());
+test('actual L audit caller projects only the bounded request failure and retains nonzero refusal',async()=>{
+  await checkProjected();const label=createHash('sha256').update('finite actual include closure').digest('hex');
+  const context='ADBWLIC1|l|0|audit|32|core|scope|'+'e'.repeat(64)+'\n'+failure.replace('d'.repeat(64),label);
+  assert.deepEqual(summary(await invoke(refused(context))).request_failure.include,{ordinal:32,origin:'core',reason:'scope',path_digest:'e'.repeat(64)});
+});
 
 test('actual L audit has a non-vacuous positive and rejects changed or malformed success evidence',async()=>{
   const stdout=JSON.stringify(audit)+'\n',ok={status:0,signal:null,error:null,stdout,stderr:''};

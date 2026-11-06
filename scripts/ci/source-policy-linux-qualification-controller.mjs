@@ -58,7 +58,7 @@ export function childFailureSummary(result) {
 // Fixed L audit invocation only: failure DATA never supplies a success or native grant.
 export function requestAuditResult(result, run) {
   if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || !/^\{[^\r\n]+\}\n$/.test(result.stdout)) {
-    const fact=wlRequestFailure(result.stderr);
+    const fact=wlRequestFailure(result.stderr,true);
     const bound=typeof run==='string'&&/^[a-f0-9]{32}$/.test(run)&&result.status===1&&!result.signal&&!result.error&&result.stdout===''
       &&fact&&fact.profile==='l'&&fact.case_index===0&&fact.stage==='audit';
     throw Error('Source audit refused: '+JSON.stringify({...childFailureSummary(result),request_failure:bound?fact:null}));

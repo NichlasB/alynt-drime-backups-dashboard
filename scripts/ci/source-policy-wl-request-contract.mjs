@@ -8,10 +8,21 @@ export function wlLinuxJob(env){
     &&env.GITHUB_REPOSITORY==='NichlasB/alynt-drime-backups-dashboard'&&env.GITHUB_REF==='refs/heads/master'&&env.GITHUB_ACTOR==='NichlasB'
     &&env.GITHUB_RUN_ATTEMPT==='1'&&typeof env.GITHUB_RUN_ID==='string'&&/^[1-9][0-9]*$/.test(env.GITHUB_RUN_ID)&&hex(env.GITHUB_SHA,40)&&env.EXPECTED_SHA===env.GITHUB_SHA);
 }
-export function wlRequestFailure(raw){
+export function wlRequestFailure(raw,allowInclude=false){
   if(typeof raw!=='string'||Buffer.byteLength(raw)>256)return null;
+  let include=null;
+  if(raw.startsWith('ADBWLIC1|')){
+    if(allowInclude!==true)return null;
+    const lines=raw.split('\n');if(lines.length!==3||lines[2]!=='')return null;
+    const p=/^ADBWLIC1\|l\|0\|audit\|([0-9]|[1-9][0-9]|[1-4][0-9]{2}|50[0-9]|51[01])\|(repo|core|foreign|unresolved)\|(scope|size|stat)\|([a-f0-9]{64})$/.exec(lines[0]);
+    if(!p||(p[3]!=='scope'&&!['repo','core'].includes(p[2])))return null;
+    include={ordinal:Number(p[1]),origin:p[2],reason:p[3],path_digest:p[4]};raw=lines[1]+'\n';
+  }
   const m=/^ADBWLRF1\|([wl])\|child\|([0-9]|1[0-9]|2[0-2])\|(audit|ambient|setup|auth|entry|verify|cleanup)\|(RuntimeException|Error|TypeError|ValueError|ParseError|ArgumentCountError|ReflectionException|other)\|([a-f0-9]{64})\n(?![\s\S])/.exec(raw);
-  return m?{profile:m[1],case_index:Number(m[2]),stage:m[3],exception:m[4],assertion:m[5]}:null;
+  if(!m)return null;
+  if(include&&(m[1]!=='l'||m[2]!=='0'||m[3]!=='audit'||(m[5]!==createHash('sha256').update('finite actual include closure').digest('hex')&&!(include.reason==='stat'&&m[5]==='0'.repeat(64)))))return null;
+  const fact={profile:m[1],case_index:Number(m[2]),stage:m[3],exception:m[4],assertion:m[5]};
+  return include?{...fact,include}:fact;
 }
 export function parseRequestWire(raw){
   if(typeof raw!=='string'||Buffer.byteLength(raw)>4096||!/^\{[^\r\n]+\}\n$/.test(raw))return null;

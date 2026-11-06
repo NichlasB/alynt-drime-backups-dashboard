@@ -1,5 +1,12 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current include repair — 2026-11-06: [bounded first-include diagnostics](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+retain exact catalog/origin/size/identity/limits and add no allowed file. Isolated
+tests only; historical42295828908 failed, actual file/clause Unknown. Next gated
+slice: ONE New-Head L Genuine-Session Request Owned Requalification and Cleanup
+Attempt, new image/fresh prerequisites/strict owned CI-lab cleanup. No native
+rerun/wiring; opportunities21 unchanged. Earlier recommendations historical.
+
 Current L requalification — 2026-11-06: [ONE6b90143 attempt](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 passed fresh original adapter291/9, refused request audit at finite include closure
 (file/clause Unknown), verified strict cleanup/recovery. Next gated slice:

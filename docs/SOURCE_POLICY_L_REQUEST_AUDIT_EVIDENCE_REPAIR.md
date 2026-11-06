@@ -1,5 +1,12 @@
 # L Request Source-Audit Failure Evidence Diagnosis and Guard-Preserving Repair
 
+Repository-only next repair — 2026-11-06: [L first-include diagnostic DATA](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+now distinguishes scope/size/stat with bounded origin/ordinal/digest, preserving
+catalog/origin/size/identity/refusal/limits. Isolated evidence only; actual failed
+include remains Unknown. Next gated slice: ONE New-Head L Genuine-Session Request
+Owned Requalification and Cleanup Attempt, fresh prerequisites/owned CI-lab
+cleanup. No native rerun/wiring; opportunities21 unchanged; older resumes historical.
+
 Native follow-on — 2026-11-06: [ONE6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 reconfirmed original adapter291/9, then refused request audit. The repaired
 projection worked: audit/RuntimeException/assertion uniquely maps to finite actual

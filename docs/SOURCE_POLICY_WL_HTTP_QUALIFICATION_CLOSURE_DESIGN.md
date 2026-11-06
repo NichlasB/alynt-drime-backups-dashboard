@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current include repair — 2026-11-06: [L audit cause DATA](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+validated in isolation, without loosening include/catalog/size gates. Changed
+shared bytes require fresh profile images; no HTTP/native readiness established.
+Next gated slice: ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt, fresh prerequisites/strict owned CI-lab cleanup. No rerun/
+wiring here; historical42295828908 failed/file Unknown; opportunities21 unchanged.
+Earlier recommendations below historical.
+
 ## L requalification refused include closure; no HTTP/readiness grant — 2026-11-06
 
 [ONE6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)

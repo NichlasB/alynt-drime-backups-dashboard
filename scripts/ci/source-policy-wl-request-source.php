@@ -8,21 +8,61 @@
 if ( ! defined( 'ADB_WL_REQUEST_PROOF' ) ) {
 	exit( 1 ); }
 
+/** Fixed include identity DATA only; never a path or an admission decision.
+ *
+ * @param string $file Resolved normalized file.
+ * @param string $root Fixed repository root.
+ * @param string $core Fixed core include root.
+ * @param int    $ordinal Actual included-file ordinal.
+ * @param string $reason Fixed pending/refusal category.
+ * @return array
+ */
+function adbwl_include_fact( $file, $root, $core, $ordinal, $reason ) {
+	$origin = '' === $file ? 'unresolved' : 'foreign';
+	$name   = $file;
+	if ( 0 === strpos( $file, $core . '/' ) ) {
+		$origin = 'core';
+		$name   = substr( $file, strlen( $core ) + 1 );
+	} elseif ( 0 === strpos( $file, $root . '/' ) ) {
+		$origin = 'repo';
+		$name   = substr( $file, strlen( $root ) + 1 );
+	}
+	return array(
+		'ordinal'     => $ordinal,
+		'origin'      => $origin,
+		'reason'      => $reason,
+		'path_digest' => hash( 'sha256', $name ),
+	);
+}
+
 /** Shared case algorithm's source-reader contract, not M job eligibility.
  *
  * @return array
  */
 function adbm_source_rows() {
-	$root    = str_replace( '\\', '/', realpath( dirname( __DIR__, 2 ) ) );
-	$core    = str_replace( '\\', '/', realpath( ABSPATH . WPINC ) );
-	$catalog = adbwl_catalog();
-	$allowed = array_merge( array_keys( $catalog['pins'] ), array_keys( $catalog['auth'] ) );
-	$loaded  = get_included_files();
-	$files   = array();
-	foreach ( $loaded as $path ) {
-		$file = str_replace( '\\', '/', realpath( $path ) );
-		$code = strpos( $file, $root . '/includes/' ) === 0 || strpos( $file, $root . '/scripts/ci/' ) === 0 || strpos( $file, $root . '/scripts/manual/' ) === 0;
-		adbg_check( ( $code || ( dirname( $file ) === $core && in_array( basename( $file ), $allowed, true ) ) ) && filesize( $file ) <= 1048576, 'finite actual include closure' );
+	$root     = str_replace( '\\', '/', realpath( dirname( __DIR__, 2 ) ) );
+	$core     = str_replace( '\\', '/', realpath( ABSPATH . WPINC ) );
+	$catalog  = adbwl_catalog();
+	$allowed  = array_merge( array_keys( $catalog['pins'] ), array_keys( $catalog['auth'] ) );
+	$loaded   = get_included_files();
+	$files    = array();
+	$diagnose = 'l' === getenv( 'WL_REQUEST_PROFILE' ) && 'audit' === getenv( 'WL_REQUEST_MODE' ) && ! isset( $GLOBALS['adbwl_include_failure'] );
+	foreach ( $loaded as $ordinal => $path ) {
+		$file    = str_replace( '\\', '/', realpath( $path ) );
+		$code    = strpos( $file, $root . '/includes/' ) === 0 || strpos( $file, $root . '/scripts/ci/' ) === 0 || strpos( $file, $root . '/scripts/manual/' ) === 0;
+		$scope   = $code || ( dirname( $file ) === $core && in_array( basename( $file ), $allowed, true ) );
+		$capture = $diagnose && is_int( $ordinal ) && $ordinal >= 0 && $ordinal <= 511;
+		if ( $capture ) {
+			$GLOBALS['adbwl_include_failure'] = adbwl_include_fact( $file, $root, $core, $ordinal, $scope ? 'stat' : 'scope' );
+		}
+		$bytes = $scope ? filesize( $file ) : null; // Never stat an unapproved origin/catalog path.
+		if ( $capture && is_int( $bytes ) && $bytes > 1048576 ) {
+			$GLOBALS['adbwl_include_failure']['reason'] = 'size';
+		}
+		adbg_check( $scope && is_int( $bytes ) && $bytes >= 0 && $bytes <= 1048576, 'finite actual include closure' );
+		if ( $capture ) {
+			unset( $GLOBALS['adbwl_include_failure'] );
+		}
 		$files[] = $file;
 	}
 	if ( isset( $GLOBALS['adbwl_included'] ) ) {

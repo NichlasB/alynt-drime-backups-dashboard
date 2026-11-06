@@ -1,5 +1,12 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current include repair — 2026-11-06: [bounded L audit evidence](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+preserves catalog/origin/size/refusal/identity/limits; isolated positives and
+assertion-killed controls only. Historical42295828908 failed; file/clause Unknown.
+Next gated slice: ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt, fresh prerequisites/new image/strict owned CI-lab cleanup.
+No native rerun/wiring; opportunities21 unchanged. Earlier resumes historical.
+
 Current L requalification — 2026-11-06: [6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9/fresh preflight, then audit refused at the finite
 include-closure guard (actual file/clause Unknown). Repaired reporting worked;

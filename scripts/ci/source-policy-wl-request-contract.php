@@ -104,5 +104,33 @@ function adbwl_case_wire( $index, $records, $connects, $commands ) {
  * @return string
  */
 function adbwl_failure_wire( $wire ) {
-	return adbg_failure_valid( $wire ) ? str_replace( 'ADBMGRF1|', 'ADBWLRF1|' . getenv( 'WL_REQUEST_PROFILE' ) . '|', $wire ) : '';
+	if ( ! adbg_failure_valid( $wire ) ) {
+		return '';
+	}
+	return adbwl_include_prefix( $wire ) . str_replace( 'ADBMGRF1|', 'ADBWLRF1|' . getenv( 'WL_REQUEST_PROFILE' ) . '|', $wire );
+}
+
+/** Optional bounded include cause; legacy failure stays intact on malformed DATA.
+ *
+ * @param string $wire Already validated base failure.
+ * @return string
+ */
+function adbwl_include_prefix( $wire ) {
+	if ( ! adbg_failure_valid( $wire ) ) {
+		return '';
+	}
+	$fact = $GLOBALS['adbwl_include_failure'] ?? null;
+	if ( 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'audit' !== getenv( 'WL_REQUEST_MODE' ) || ! is_array( $fact )
+		|| array_keys( $fact ) !== array( 'ordinal', 'origin', 'reason', 'path_digest' ) || ! is_int( $fact['ordinal'] ) || $fact['ordinal'] < 0 || $fact['ordinal'] > 511
+		|| ! in_array( $fact['origin'], array( 'repo', 'core', 'foreign', 'unresolved' ), true ) || ! in_array( $fact['reason'], array( 'scope', 'size', 'stat' ), true )
+		|| ! is_string( $fact['path_digest'] ) || 1 !== preg_match( '/\A[a-f0-9]{64}\z/', $fact['path_digest'] )
+		|| ( 'scope' !== $fact['reason'] && ! in_array( $fact['origin'], array( 'repo', 'core' ), true ) ) ) {
+		return '';
+	}
+	$parts = explode( '|', rtrim( $wire, "\n" ) );
+	if ( 'child' !== $parts[1] || '0' !== $parts[2] || 'audit' !== $parts[3]
+		|| ( hash( 'sha256', 'finite actual include closure' ) !== $parts[5] && ! ( 'stat' === $fact['reason'] && str_repeat( '0', 64 ) === $parts[5] ) ) ) {
+		return '';
+	}
+	return implode( '|', array( 'ADBWLIC1', 'l', '0', 'audit', $fact['ordinal'], $fact['origin'], $fact['reason'], $fact['path_digest'] ) ) . "\n";
 }

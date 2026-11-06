@@ -1,5 +1,12 @@
 # L Genuine-Session Request Owned Requalification — Blocked at Include Closure
 
+Repository-only follow-on — 2026-11-06: [bounded diagnostic repair](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+preserves refusal/catalog/origin/size/identity/limits and passes isolated tests.
+This historical failed run and its unknown actual offending file/clause are not
+changed or requalified. Next gated slice: ONE New-Head L Genuine-Session Request
+Owned Requalification and Cleanup Attempt, fresh prerequisites/owned CI-lab
+cleanup; no native retry or wiring authorized here. Earlier resumes historical.
+
 ## Approval and fresh prerequisites — 2026-11-06
 
 ONE explicitly approved attempt at

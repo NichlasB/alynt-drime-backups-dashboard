@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## L include-closure diagnostic repair complete in isolation — 2026-11-06
+
+The [guard-preserving repair](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+adds bounded first-include origin/reason/digest DATA only for L audit. Exact
+catalog/origin/size/image gates retained; false metadata explicitly refuses.
+Actual-source positives/negative controls pass. Historical42295828908 remains
+failed; actual offending file/clause Unknown; no native rerun or wiring change.
+
+Implementation-plan progress: include-refusal evidence gap closed, not native
+qualification. Recommended next gated slice: **ONE New-Head L Genuine-Session
+Request Owned Requalification and Cleanup Attempt**, published repair head,
+fresh prerequisites and strict ephemeral CI-lab cleanup. Separate approval;
+opportunities21/campaign10/10/static9 unchanged. M/W/HTTP/target/ONE switch remain
+gates; all earlier next-step recommendations below are historical.
+
 ## L requalification localized include-closure refusal; cleanup verified — 2026-11-06
 
 The [ONE6b90143 attempt/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)

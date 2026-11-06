@@ -1,5 +1,13 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current include repair — 2026-11-06: [bounded L-only audit cause](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
+is failure DATA, not an admission grant. Catalog/origin/size/identity/resource
+guards preserved; isolated tests cannot identify the historical offending file.
+Next gated slice: ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt, fresh prerequisites/new image/strict owned CI-lab cleanup.
+No native rerun/wiring;42295828908 failed/opportunities21 unchanged. Older resumes
+below historical; M/W/HTTP/target/ONE application switch still gated.
+
 Current L requalification — 2026-11-06: [6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 passed fresh original adapter291/9 but failed request source audit at finite
 include closure. Actual file/clause Unknown; bounded reporting/strict cleanup
