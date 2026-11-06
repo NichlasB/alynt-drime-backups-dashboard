@@ -1,5 +1,17 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+## L genuine request blocked; no HTTP/readiness grant — 2026-11-06
+
+The [ONE50136d3 attempt/run42291536738](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+passed fresh environment and original L adapter291/9, then request source audit
+failed child1/no receipt before new container/case loop. Cause Unknown from
+retained bounded diagnostics. Strict primary/recovery cleanup0 resources and
+reconciliation0; no code/guard/wiring change or automatic retry. Next gated slice:
+**Repository-Only L Request Source-Audit Failure Evidence Diagnosis and Guard-
+Preserving Harness Repair**, isolated tests only, no native rerun. Current L
+genuine request/M refresh/W/HTTP/target/ONE switch stay gated; allowance exhausted,
+opportunities20,10/10/static9 unchanged. Earlier recommendations below historical.
+
 ## Preparation implemented; historical matrix below retained — 2026-11-06
 
 The approved [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)

@@ -1,5 +1,14 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current L attempt — 2026-11-06: [ONE exact-head proof](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+at50136d3/run42291536738 passed original adapter291/9 after fresh preflight but
+failed request source audit before case execution. Child cause Unknown; primary/
+recovery cleanup0 retained resources/reconciliation0. No request qualification.
+Next gated slice: **Repository-Only L Request Source-Audit Failure Evidence
+Diagnosis and Guard-Preserving Harness Repair**, isolated tests only, no rerun.
+No code/guard/wiring change. Allowance exhausted, opportunities20; M/W/HTTP/target/
+ONE switch remain gated. Earlier resume recommendations below historical.
+
 Current preparation — 2026-11-06: [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
 implements exact W/L dormant declarations and private genuine-session proof
 preparation. Isolated positive and semantic controls do not qualify native auth,

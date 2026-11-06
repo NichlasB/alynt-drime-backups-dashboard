@@ -1,5 +1,14 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current qualification — 2026-11-06: [ONE L attempt](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+at50136d3/run42291536738 passed fresh environment/original adapter291/9, failed
+request source audit before receipt/case loop, and completed strict primary/
+recovery cleanup with0 retained resources/reconciliation0. Child cause Unknown;
+no request qualification, code/guard/wiring change or retry. Next gated slice:
+Repository-Only L Request Source-Audit Failure Evidence Diagnosis and Guard-
+Preserving Harness Repair, isolated tests only/no rerun. One allowance exhausted,
+opportunities20; earlier recommendations below historical.
+
 ## Approval, scope and coherent baseline — 2026-11-06
 
 Explicit repository-only R3 preparation through validation, review, commit/push

@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current L attempt — 2026-11-06: [exact50136d3/run42291536738](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+passed fresh environment/original adapter291/9, failed request source audit
+(child1/no receipt), and verified strict cleanup/recovery0 retained resources.
+Actual child cause Unknown; do not infer from107 bytes/digest or adapter success.
+Next gated slice: **Repository-Only L Request Source-Audit Failure Evidence
+Diagnosis and Guard-Preserving Harness Repair**, isolated tests only, no rerun.
+No production readiness/wiring; M/W/genuineL/HTTP/target/ONE switch remain gated.
+Allowance exhausted; opportunities20,10/10/static9 unchanged; older resumes historical.
+
 Current preparation — 2026-11-06: [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
 implements exact dormant request admission and fixed private preparation, not
 native availability or production readiness. Shared loaded source changed;

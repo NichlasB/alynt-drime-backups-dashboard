@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current L attempt — 2026-11-06: [ONE owned run](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+at50136d3/run42291536738 passed original adapter291/9 after fresh preflight, then
+failed request source audit before container/case loop. Child cause Unknown;
+bounded evidence only, cleanup/recovery0 retained resources/reconciliation0.
+Next gated slice: **Repository-Only L Request Source-Audit Failure Evidence
+Diagnosis and Guard-Preserving Harness Repair**, isolated tests, no native rerun.
+One allowance exhausted; opportunities20,10/10/static9 unchanged. L genuine
+request/M refresh/W/HTTP/target/ONE switch stay gated; older resumes historical.
+
 Current preparation — 2026-11-06: [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
 closes the dormant declaration/static-source/private-proof preparation gap with
 isolated tests only. Shared loaded changes stale M440430e for this cohort; older

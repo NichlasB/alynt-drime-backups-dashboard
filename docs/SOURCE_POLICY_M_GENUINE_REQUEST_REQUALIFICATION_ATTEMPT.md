@@ -1,5 +1,12 @@
 # M Genuine-Session Request Owned Requalification — Passed
 
+Current follow-on — 2026-11-06: [ONE L attempt at50136d3/run42291536738](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+passed original adapter291/9 but failed request source audit; cleanup/recovery
+verified, no retry. Next gated slice is Repository-Only L Request Source-Audit
+Failure Evidence Diagnosis and Guard-Preserving Harness Repair, isolated only.
+M remains historical pending refresh; no native/wiring authority from this note.
+One allowance exhausted, opportunities20; earlier resumes below historical.
+
 Current cohort warning — 2026-11-06: the [W/L preparation foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
 changes shared loaded bootstrap/child/observer source. This genuine success remains
 historical at440430e/run42279779134; it does NOT qualify the new cohort and is not
