@@ -7,13 +7,15 @@ import {pathToFileURL,fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {wlLinuxJob,wlEnvelope,validRequestAudit,validRequestCase,wlSchemaSQL,requestBatch,wlRequestFailure,parseRequestWire} from '../../scripts/ci/source-policy-wl-request-contract.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url)),php=process.env.PHP_BINARY??'php';
-const read=p=>readFileSync(join(root,p),'utf8'),literal=v=>`json_decode('${JSON.stringify(v).replaceAll('\\','\\\\').replaceAll("'","\\'")}',true)`;
-const runPHP=code=>{const r=spawnSync(php,['-n','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:16384});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;};
+const read=p=>readFileSync(join(root,p),'utf8');
+const literal=v=>typeof v==='string'?"'"+v.replaceAll('\\','\\\\').replaceAll("'","\\'")+"'":v===null?'null':typeof v==='boolean'?(v?'true':'false'):Number.isSafeInteger(v)?String(v):'array('+Object.entries(v).map(([k,x])=>literal(k)+'=>'+literal(x)).join(',')+')';
+const runPHP=code=>{const r=spawnSync(php,['-n','-d','disable_functions=json_encode,json_decode','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:16384});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;};
 const base={QUALIFICATION_GENUINE_REQUEST_APPROVED:'true',GITHUB_ACTIONS:'true',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW_REF:'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-linux-qualification.yml@refs/heads/master',GITHUB_REPOSITORY:'NichlasB/alynt-drime-backups-dashboard',GITHUB_REF:'refs/heads/master',GITHUB_ACTOR:'NichlasB',GITHUB_RUN_ATTEMPT:'1',GITHUB_RUN_ID:'12345',GITHUB_SHA:'a'.repeat(40),EXPECTED_SHA:'a'.repeat(40)};
 const identity={profile:'l',run:wlEnvelope(base,'b'.repeat(64),'audit').WL_REQUEST_RUN,image:'b'.repeat(64)};
 const contract=join(root,'scripts/ci/source-policy-wl-request-contract.php').replaceAll('\\','/');
 const admit=(env,args=['child','--owned-wl-request-child','0'])=>runPHP(`require '${contract}';echo adbwl_entry(${literal(env)},${literal(args)})?'yes':'no';`);
 test('PHP/JS exact separately approved W/L envelopes agree and mixed/unknown jobs refuse before effects',()=>{
+  for(const value of ["quote'",'back\\slash','line\nfeed','\u00e9'])assert.equal(runPHP(`echo bin2hex(${literal(value)});`),Buffer.from(value).toString('hex'));
   assert.equal(wlLinuxJob(base),true);const env={...base,...wlEnvelope(base,identity.image,'proof','c'.repeat(64))};assert.equal(admit(env),'yes');
   const w={...env,WL_REQUEST_PROFILE:'w',WL_REQUEST_TARGET:'plugin-tester-local-only'};assert.equal(admit(w),'yes');
   assert.throws(()=>wlEnvelope(base,identity.image,'proof'));
@@ -32,9 +34,7 @@ test('nonlegacy source-derived autoload query is exact, core-bound and never bro
 });
 test('both independently audited nonlegacy catalogs bind 21 distinct files; definitions do not load core',()=>{
   const bootstrap=join(root,'scripts/ci/source-policy-wl-request-bootstrap.php').replaceAll('\\','/');
-  const rows=JSON.parse(runPHP(`define('ADB_WL_REQUEST_PROOF',true);define('ADB_M_REQUEST_PROOF',true);require '${bootstrap}';$out=array();foreach(array('w','l')as$p){putenv('WL_REQUEST_PROFILE='.$p);$out[$p]=adbwl_catalog();}if(defined('ABSPATH')||class_exists('wpdb',false)||function_exists('mysqli_init'))throw new RuntimeException('effects');echo json_encode($out);`));
-  for(const row of Object.values(rows)){assert.equal(Object.keys(row.pins).length,12);assert.equal(Object.keys(row.auth).length,9);assert.equal(new Set([...Object.keys(row.pins),...Object.keys(row.auth)]).size,21);assert.equal(row.auth['pluggable.php'][1],'3a2482a65b50d62ebae75a728be98b78985d3a3f5a3e007cb2d0c1338bf05777');}
-  assert.equal(rows.w.commit,'fc9832bef919c2a08541248db23af90d14ffb082');assert.equal(rows.l.commit,'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a');assert.notEqual(rows.w.pins['version.php'],rows.l.pins['version.php']);assert.deepEqual(rows.w.auth,rows.l.auth);
+  assert.equal(runPHP(`define('ADB_WL_REQUEST_PROOF',true);define('ADB_M_REQUEST_PROOF',true);require '${bootstrap}';$out=array();foreach(array('w','l')as$p){putenv('WL_REQUEST_PROFILE='.$p);$row=adbwl_catalog();$out[$p]=$row;if(count($row['pins'])!==12||count($row['auth'])!==9||count(array_unique(array_merge(array_keys($row['pins']),array_keys($row['auth']))))!==21||$row['auth']['pluggable.php'][1]!=='3a2482a65b50d62ebae75a728be98b78985d3a3f5a3e007cb2d0c1338bf05777')throw new RuntimeException('catalog identity');}if($out['w']['commit']!=='fc9832bef919c2a08541248db23af90d14ffb082'||$out['l']['commit']!=='db96f5eaa77a8d3e8eec8923a518fa2326f0d46a'||$out['w']['pins']['version.php']===$out['l']['pins']['version.php']||$out['w']['auth']!==$out['l']['auth'])throw new RuntimeException('profile isolation');if(defined('ABSPATH')||class_exists('wpdb',false)||function_exists('mysqli_init'))throw new RuntimeException('effects');echo 'catalogs-ok';`),'catalogs-ok');
   assert.equal(runPHP(`define('ADB_WL_REQUEST_PROOF',true);define('ADB_M_REQUEST_PROOF',true);require '${bootstrap}';putenv('WL_REQUEST_PROFILE=unknown');echo adbwl_catalog()===false?'closed':'bad';`),'closed');
   assert.match(read('scripts/ci/source-policy-wl-request-bootstrap.php'),/global \$wp_version;/);assert.doesNotMatch(read('scripts/ci/source-policy-wl-request-bootstrap.php'),/\$wp_version\s*=|newInstanceWithoutConstructor|setValue\(/);
 });

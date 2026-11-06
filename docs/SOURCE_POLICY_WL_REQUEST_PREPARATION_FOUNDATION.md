@@ -216,6 +216,14 @@ publication results are retained in the owning checklist.
 
 ## Implementation-plan progress and exact next gate
 
+Publication compatibility repair: first ordinary CI42290410435 at d7556e4 passed
+both PHP suites (7.4:2952/24915,8.3:2952/24920), but PHP7.4 Node bridge had3 failures
+because -n has no optional JSON extension. PHP8.3 Node128/128 passed. Test-only
+repair uses the existing literal-DATA pattern and equivalent direct PHP catalog
+assertions, with json_encode/json_decode explicitly disabled and escaping vectors.
+No native/runtime/acceptance/source-pin change or test skip; final exact-head CI
+must complete before publication is considered verified.
+
 W/L request declaration and proof preparation are implemented, not physically
 qualified or wired. Shared loaded source changed: M440430e/run42279779134 is now
 HISTORICAL for this cohort, not failed or refreshed by isolated tests. W/L older
