@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## M genuine-session qualification prepared, execution gated — 2026-11-06
+
+The approved [preparation foundation](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
+implements admission-design step2: separate default-off existing-lab route, fixed
+20-file source/owned fixture and effect contracts, genuine-API request driver and
+fresh-process supervisor, validated ONLY with isolated DATA/API/IO tests. No
+acquisition, actual authentication/fixtures/storage/native dispatch or wiring.
+Application code, version0.1.77/schema8 and uploader remain unchanged.
+
+Implementation-plan progress: M admission and proof integration are prepared,
+NOT genuine-session/native/HTTP or target-qualified. Recommended next gated slice:
+**ONE Exact-Head M Genuine-Session Request Owned Qualification and Cleanup Attempt**
+on the reviewed/frozen preparation head, existing ephemeral CI lab only. Explicit
+approval must include fresh prerequisites, acquisition, owned session/fixture SQL,
+native execution and exact cleanup; no retries or budget/source enlargement.
+Affected W/L and HTTP/target evidence still precede ONE application switch.
+Campaign10/10/static9/17 consumed opportunities unchanged; older resumes historical.
+
 ## M request admission and private catalog binding implemented — 2026-11-06
 
 The approved [foundation](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md) adds

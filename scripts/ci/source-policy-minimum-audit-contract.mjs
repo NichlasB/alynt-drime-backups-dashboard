@@ -1,4 +1,5 @@
 // Pure diagnostic DATA contracts. No engine, source, SQL or native execution.
+import {requestFailureEvidence} from './source-policy-minimum-request-contract.mjs';
 export const AUDIT_WORKFLOW='NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-minimum-audit.yml@refs/heads/master';
 const stage='(source-audit|ambient|escape|positive|noop-stale|update|race|duplicate|transform-reentry|lock|post-change|errno)';
 const phase='(runtime|core-pins|core-load|owned-load|cache|profile|image|native)';
@@ -12,6 +13,7 @@ export function bootstrapEvidence(raw) {
 }
 export function failureEvidence(raw) {
   if(typeof raw!=='string'||Buffer.byteLength(raw)>4608)return null;
+  if(raw.startsWith('ADBMGRF1|'))return requestFailureEvidence(raw);
   let bootstrap=null,cause=null;
   if(raw.startsWith('ADBMBC1|')||raw.startsWith('ADBMBC2|')){
     const end=raw.indexOf('\n');if(end<0)return null;

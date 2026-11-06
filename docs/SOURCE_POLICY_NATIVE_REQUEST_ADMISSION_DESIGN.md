@@ -1,5 +1,16 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current preparation — 2026-11-06: [step2 integration foundation](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
+adds the separate default-off genuine-session operation,20-file proof catalog,
+owned fixture/effect contracts, real-API driver and fresh child supervisor using
+isolated DATA/API/IO tests only. No acquisition, actual fixtures/auth/storage/native
+dispatch or production wiring. Descriptions below of the previously missing route
+are historical baseline findings; native closure/timing/cleanup remain unproved.
+Next gated slice: **ONE Exact-Head M Genuine-Session Request Owned Qualification
+and Cleanup Attempt**, reviewed/frozen head and existing ephemeral CI lab only,
+fresh prerequisites and explicit acquisition/owned SQL/native/cleanup approval.
+No automatic retry/limit expansion; W/L and HTTP/target gates remain.
+
 Current implementation — 2026-11-06: [M admission foundation](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
 implements step1 below: exact M declaration branch and private root/context catalog
 binding before capture/revalidation. Original catalogs/limits preserved; W/L native

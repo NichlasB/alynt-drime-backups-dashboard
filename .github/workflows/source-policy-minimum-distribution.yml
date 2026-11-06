@@ -16,6 +16,11 @@ on:
         required: true
         type: boolean
         default: false
+      execute_genuine_request:
+        description: Separately approved ONE genuine-session request proof (not production wiring)
+        required: true
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -31,7 +36,8 @@ jobs:
       MINIMUM_MODEL: trusted-distribution-legacy-v1
       DISTRIBUTION_EXECUTION_APPROVED: ${{ inputs.execute_owned_proof }}
       PRODUCTION_JOIN_APPROVED: ${{ inputs.execute_production_join }}
-      MINIMUM_OPERATION: ${{ inputs.execute_production_join && 'production-origin-join-v1' || '' }}
+      GENUINE_REQUEST_APPROVED: ${{ inputs.execute_genuine_request }}
+      MINIMUM_OPERATION: ${{ inputs.execute_genuine_request && 'genuine-session-request-v1' || inputs.execute_production_join && 'production-origin-join-v1' || '' }}
     steps:
       - name: Admit separately approved exact job before checkout or acquisition
         shell: bash
@@ -41,6 +47,7 @@ jobs:
           [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" && "$GITHUB_RUN_ATTEMPT" == 1 && "$DISTRIBUTION_EXECUTION_APPROVED" == true ]]
           [[ "$RUNNER_OS" == Linux && "$RUNNER_ENVIRONMENT" == github-hosted && "$(uname -m)" == x86_64 && "$(id -u)" -gt 0 ]]
           [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
+          [[ "$GENUINE_REQUEST_APPROVED" == false || "$PRODUCTION_JOIN_APPROVED" == false ]]
       - name: Checkout exact approved source
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:

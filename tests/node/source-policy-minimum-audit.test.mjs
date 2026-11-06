@@ -60,7 +60,7 @@ test('release classification never treats nonzero worker exit as clean removal p
   assert.deepEqual(releaseIssues('server',{oom:true,running:true,exit:137}),['server-oom','server-still-running','server-nonzero-exit']);
 });
 test('isolated semantic controls kill audit fallback and nonzero-exit bypasses without editing source',async()=>{
-  const source=read('scripts/ci/source-policy-minimum-audit-contract.mjs');
+  const source=read('scripts/ci/source-policy-minimum-audit-contract.mjs').replace("'./source-policy-minimum-request-contract.mjs'",JSON.stringify(new URL('scripts/ci/source-policy-minimum-request-contract.mjs',root).href));
   for(const [original,mutated,verify]of [
     ['&&workflow!==AUDIT_WORKFLOW','',m=>assert.equal(m.executionPhases(undefined,undefined,AUDIT_WORKFLOW),null)],
     ["row.exit!==0?role+'-nonzero-exit':null",'null',m=>assert.deepEqual(m.releaseIssues('php',{oom:false,running:false,exit:1}),['php-nonzero-exit'])]

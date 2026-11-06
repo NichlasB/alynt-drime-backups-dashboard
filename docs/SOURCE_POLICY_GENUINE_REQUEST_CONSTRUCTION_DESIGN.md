@@ -1,5 +1,16 @@
 # Genuine Authenticated Request Source/Fixture and Private-Construction Closure Design
 
+Current preparation — 2026-11-06: [M genuine-session integration foundation](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
+implements these finite proof contracts in a separate default-off existing-lab
+operation using isolated API/DATA/IO tests only. Static20-file pins are not loaded
+closure; real authentication, fixtures/storage/native execution and wiring did not
+run. No acquisition or attempt granted. Exact next gate: **ONE Exact-Head M Genuine-
+Session Request Owned Qualification and Cleanup Attempt**, reviewed/frozen head,
+existing ephemeral CI lab, fresh prerequisites and explicit acquisition/owned SQL/
+native/cleanup scope. Unmet dependencies, limits or cleanup refuse without expansion
+or automatic retry; W/L and HTTP/target evidence remain separate. Older resumes
+below are historical, not current execution authority.
+
 Current admission foundation — 2026-11-06: [M eligibility/private catalog binding](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
 implements the admission design's first step with isolated API/DATA evidence only.
 No genuine session/storage/native execution or wiring. Next approval: Repository-

@@ -1,5 +1,15 @@
 # M Native Request-Composition Admission and Catalog-Binding Safety Foundation
 
+Current follow-on — 2026-11-06: the separately approved
+[M genuine-session preparation foundation](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
+implements admission-design step2 with isolated DATA/API/IO evidence only, behind
+a default-off existing-lab operation. No actual auth/fixtures/storage/native dispatch
+or wiring. The preparation approval named at this historical record's end is now
+completed, not a native permit. Exact next gate: ONE Exact-Head M Genuine-Session
+Request Owned Qualification and Cleanup Attempt, reviewed/frozen head and existing
+ephemeral CI lab only, requiring separate acquisition/owned SQL/native/cleanup
+authority and fresh prerequisites. W/L and HTTP/target gates remain.
+
 ## Approved scope and baseline — 2026-11-06
 
 Explicit repository-only R3 approval for the dormant M declaration branch and

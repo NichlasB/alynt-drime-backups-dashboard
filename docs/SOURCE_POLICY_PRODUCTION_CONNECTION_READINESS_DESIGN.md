@@ -1,5 +1,16 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current preparation — 2026-11-06: [M genuine-session qualification integration](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
+is source/isolated-tested behind a separate default-off existing-lab operation.
+Step2 is prepared, not an executed proof/readiness grant. Application code, actual
+auth/storage/native execution/dispatch and wiring unchanged; uploader untouched.
+Exact next approval: **ONE Exact-Head M Genuine-Session Request Owned Qualification
+and Cleanup Attempt**, reviewed/frozen preparation head, existing ephemeral CI lab
+only, fresh prerequisites and explicit acquisition/owned SQL/native/cleanup scope.
+Actual loaded closure, timing and release are unmeasured; no budget/source expansion
+or automatic retry. W/L and genuine HTTP/target evidence remain gates before ONE
+application switch. Campaign10/10/static9/17 unchanged; older resumes historical.
+
 Current foundation — 2026-11-06: [M request admission/catalog binding](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
 implements exact M declaration eligibility and the root/context comparison, not
 native readiness. W/L native request rows remain closed; no actual auth/storage/

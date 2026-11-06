@@ -8,6 +8,7 @@ import {reviewLog} from './source-policy-linux-qualification-controller.mjs';
 import {AUDIT_WORKFLOW,executionPhases,failureEvidence,releaseIssues} from './source-policy-minimum-audit-contract.mjs';
 import {DISTRIBUTION_MODEL,distributionJob,distributionServer,distributionContainment} from './source-policy-minimum-distribution-contract.mjs';
 import {minimumOperation,PRODUCTION_JOIN} from './source-policy-minimum-production-contract.mjs';
+import {GENUINE_REQUEST,requestCoreFiles,requestSchemaSQL} from './source-policy-minimum-request-contract.mjs';
 export {failureEvidence} from './source-policy-minimum-audit-contract.mjs';
 
 export const MODEL='trusted-lab-functional-v1';
@@ -19,8 +20,8 @@ const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const requireFact=(ok,label)=>{if(!ok){const error=Error(label);error.minimumReason=label;throw error;}};
 export function terminal(wire,run,image,cid,model=MODEL,operation='adapter') {
   if(![MODEL,DISTRIBUTION_MODEL].includes(model))return false;
-  if(!['adapter','production-join'].includes(operation)||(operation==='production-join'&&model!==DISTRIBUTION_MODEL))return false;
-  const prefix=operation==='production-join'?'ADBMJP1':model===DISTRIBUTION_MODEL?'ADBMD1':'ADBMC1';
+  if(!['adapter','production-join','genuine-request'].includes(operation)||(operation!=='adapter'&&model!==DISTRIBUTION_MODEL))return false;
+  const prefix=operation==='genuine-request'?'ADBMGR1':operation==='production-join'?'ADBMJP1':model===DISTRIBUTION_MODEL?'ADBMD1':'ADBMC1';
   return typeof wire==='string' && typeof run==='string' && typeof image==='string' && typeof cid==='string' && /^[a-f0-9]{32}$/.test(run) && /^[a-f0-9]{64}$/.test(image) && /^[a-f0-9]{64}$/.test(cid)
     && new RegExp('^'+prefix+'\\|'+run+'\\|'+image+'\\|'+cid+'\\|1\\|[a-f0-9]{64}\\|[1-9][0-9]{0,4}\\|9\\|0\\|closed\\|'+model+'\\|false\\|not-established\\|false\\|false\\n(?![\\s\\S])').test(wire);
 }
@@ -118,7 +119,7 @@ async function worker(cid,run,image,serverCid,proof,modules=null,model=MODEL,ope
     if(out.includes('\n')&&!accepted) {
       try {
         const identity=inspect(cid);requireFact(identity.running&&Number.isSafeInteger(identity.pid)&&identity.pid>0&&/^\d{4}-\d\d-\d\dT/.test(identity.started),'engine host PID/start identity unavailable');
-        requireFact(proof?terminal(out,run,image,serverCid,model,operation):new RegExp('^'+(operation==='production-join'?'ADBMJA1':model===DISTRIBUTION_MODEL?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|[a-f0-9]{64}\\n$').test(out),'held terminal refused');
+        requireFact(proof?terminal(out,run,image,serverCid,model,operation):new RegExp('^'+(operation==='genuine-request'?'ADBMGA1':operation==='production-join'?'ADBMJA1':model===DISTRIBUTION_MODEL?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|[a-f0-9]{64}\\n$').test(out),'held terminal refused');
         if(proof){requireFact(out.split('|')[5]===modules,'audit/proof inventory mismatch');reconcile(serverCid);}
         process.stdout.write(JSON.stringify({phase:proof?'closed-proof':'connection-free-audit',operation,checks:proof?Number(out.split('|')[6]):null,groups:proof?Number(out.split('|')[7]):null,head:process.env.GITHUB_SHA,image,run,worker_cid:cid,server_cid:serverCid,engine_host_pid:identity.pid,engine_started:identity.started,namespace_pid:1,evidence_model:model,independent_loaded_object_attestation:false,complete_abi_attestation:false,mapping_consistency:'not-established',runtime_grant:false,production_ready:false})+'\n');
         accepted=true;child.stdin.end('ACK:'+run+':'+image+'\n');
@@ -164,7 +165,7 @@ async function main() {
       if(item.isFile()&&(dir==='includes'||item.name.startsWith('source-policy-minimum-')))files.push(relative(cwd,join(item.parentPath??item.path,item.name)).replaceAll('\\','/'));
     }
     files.push('scripts/manual/source-policy-proof-reflection.php','scripts/manual/source-policy-supported-core-pins.php','scripts/ci/source-policy-linux-qualification-controller.mjs','.github/workflows/source-policy-minimum-qualification.yml','.github/workflows/source-policy-minimum-audit.yml','.github/workflows/source-policy-minimum-distribution.yml');
-    const core=['version.php','load.php','plugin.php','class-wp-hook.php','class-wp-error.php','wp-db.php','cache.php','class-wp-object-cache.php','formatting.php','functions.php','option.php'];
+    const core=requestCoreFiles(operation);
     let bytes=0;const rows=[];
     for(const file of files.sort()) {
       const info=lstatSync(file);requireFact(info.isFile()&&!info.isSymbolicLink()&&info.size<1048576,'finite regular source');bytes+=info.size;
@@ -195,6 +196,7 @@ async function main() {
     const vars=Object.fromEntries(['GITHUB_ACTIONS','GITHUB_EVENT_NAME','GITHUB_REPOSITORY','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','EXPECTED_SHA','MINIMUM_MODEL'].map(key=>[key,env[key]]));
     if(distribution)for(const key of ['GITHUB_WORKFLOW_REF','GITHUB_ACTOR','RUNNER_OS','RUNNER_ENVIRONMENT','DISTRIBUTION_EXECUTION_APPROVED'])vars[key]=env[key];
     if(operation==='production-join'){vars.PRODUCTION_JOIN_APPROVED='true';vars.MINIMUM_OPERATION=PRODUCTION_JOIN;}
+    if(operation==='genuine-request'){vars.GENUINE_REQUEST_APPROVED='true';vars.MINIMUM_OPERATION=GENUINE_REQUEST;}
     vars.MINIMUM_IMAGE=image;vars.MINIMUM_SERVER_CID=serverCid;vars.PHP_INI_SCAN_DIR='';
     if(auditOnly){vars.MINIMUM_SCOPE='audit-only-v1';vars.GITHUB_WORKFLOW_REF=AUDIT_WORKFLOW;}
     let moduleHash=null;
@@ -203,6 +205,7 @@ async function main() {
         requireFact(!auditOnly,'audit cannot create application fixtures');
         const table='adbm_'+run.slice(0,12)+'_options';
         rootSQL(serverCid,`CREATE DATABASE adb_minimum CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; CREATE TABLE adb_minimum.${table} (option_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,option_name varchar(191) NOT NULL,option_value longtext NOT NULL,autoload varchar(20) NOT NULL,PRIMARY KEY(option_id),UNIQUE KEY option_name(option_name),KEY autoload(autoload)) ENGINE=InnoDB COLLATE=utf8mb4_unicode_520_ci; CREATE USER 'adbm'@'127.0.0.1' IDENTIFIED BY '${password}'; GRANT SELECT,INSERT,UPDATE,DELETE ON adb_minimum.${table} TO 'adbm'@'127.0.0.1';`);
+        if(operation==='genuine-request'){const schema=requestSchemaSQL('adbm_'+run.slice(0,12)+'_');requireFact(schema!==null,'fixed request schema');rootSQL(serverCid,schema);}
         vars.QUALIFICATION_PASSWORD=password;
       }
       const envfile=stage+'/private.env';writeFileSync(envfile,Object.entries(vars).map(([key,value])=>key+'='+value).join('\n')+'\n',{mode:0o600,flag:'wx'});
@@ -212,7 +215,7 @@ async function main() {
       requireFact(containerProfile(workerRow,'php',owner,fixed.php.config,serverCid,uid,stage)
         &&(!distribution||(distributionContainment(workerRow)&&JSON.stringify(workerRow.cmd)===JSON.stringify(workerArgs))),'worker configuration');
       const out=await worker(cid,run,image,serverCid,phase==='proof',moduleHash,model,operation);
-      if(phase==='audit'){const match=new RegExp('^'+(operation==='production-join'?'ADBMJA1':distribution?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|([a-f0-9]{64})\\n$').exec(out);requireFact(match,'source/runtime audit refused');moduleHash=match[1];}
+      if(phase==='audit'){const match=new RegExp('^'+(operation==='genuine-request'?'ADBMGA1':operation==='production-join'?'ADBMJA1':distribution?'ADBMDA1':'ADBMA1')+'\\|'+run+'\\|'+image+'\\|([a-f0-9]{64})\\n$').exec(out);requireFact(match,'source/runtime audit refused');moduleHash=match[1];}
       else requireFact(moduleHash!==null&&terminal(out,run,image,serverCid,model,operation),'ordered proof receipt');
       command(['rm','--volumes',cid]);
     }

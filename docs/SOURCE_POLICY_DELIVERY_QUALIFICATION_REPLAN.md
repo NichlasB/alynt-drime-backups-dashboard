@@ -1,5 +1,17 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current preparation — 2026-11-06: [M genuine-session proof integration](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
+implements admission-design step2 behind a separate default-off manual route.
+Fixed source/fixture/effect/auth/request/supervision contracts are isolated-tested,
+not genuine-session or native-qualified. No acquisition, actual fixtures/auth/
+storage/native dispatch, application code or production wiring change; uploader
+untouched. Exact next gated slice: **ONE Exact-Head M Genuine-Session Request Owned
+Qualification and Cleanup Attempt**, reviewed preparation head/existing ephemeral
+CI lab only, fresh prerequisites, explicit acquisition/owned SQL/native/cleanup
+authority. Unknown dependencies, limits or cleanup stop the attempt; no automatic
+retry/expansion. W/L and HTTP/target gates remain before ONE switch.
+Campaign10/10/static9/17 opportunities unchanged; older resumes historical.
+
 Current foundation — 2026-11-06: [M request admission/catalog binding](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
 implements design step1, exact M declaration eligibility and private comparison
 before capture/revalidation. W/L native request rows closed; isolated API/DATA only,
