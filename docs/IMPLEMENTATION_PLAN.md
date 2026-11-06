@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## L requalification localized include-closure refusal; cleanup verified — 2026-11-06
+
+The [ONE6b90143 attempt/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+passed fresh environment/original adapter291/9, then request source audit failed.
+Bounded projection now identifies audit/RuntimeException; the assertion digest
+matches `finite actual include closure`. Offending file/clause Unknown. No request
+case loop; strict primary/recovery cleanup0 retained resources/reconciliation0.
+
+Implementation-plan progress: reporting works and blocker is localized, but native
+genuine-session gate Blocked. Next gated slice: **Repository-Only L Finite Include-
+Closure Diagnosis and Guard-Preserving Harness Repair**, isolated tests only,
+preserve catalog/origin/size/identity/resource guards; no native retry/wiring.
+ONE allowance exhausted; opportunities21,10/10/static9 unchanged. M/W/HTTP/target/
+ONE switch remain gates; earlier recommendations below historical.
+
 ## L audit evidence repaired in isolation; native requalification gated — 2026-11-06
 
 The approved [repository-only repair](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)

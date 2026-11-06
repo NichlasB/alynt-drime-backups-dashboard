@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current L requalification — 2026-11-06: [ONE6b90143 run](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9, refused request source audit at finite include
+closure; actual file/clause Unknown, no23-case proof. Strict cleanup/recovery
+passed, no code/wiring/retry. Next gated slice: **Repository-Only L Finite Include-
+Closure Diagnosis and Guard-Preserving Harness Repair**, isolated tests only,
+no catalog widening/native rerun. Opportunities21; readiness/M/W/HTTP/target/ONE
+switch remain gated. Earlier recommendations historical.
+
 Current L repair — 2026-11-06: [repository-only audit projection](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
 preserves refusal/privacy/budgets while covering the confirmed failure-format
 omission. Underlying child cause Unknown; historical native run remains failed.

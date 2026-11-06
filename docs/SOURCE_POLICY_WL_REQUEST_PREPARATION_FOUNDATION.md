@@ -1,5 +1,12 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current L requalification — 2026-11-06: [ONE6b90143 attempt](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+passed fresh original adapter291/9, refused request audit at finite include closure
+(file/clause Unknown), verified strict cleanup/recovery. Next gated slice:
+Repository-Only L Finite Include-Closure Diagnosis and Guard-Preserving Harness
+Repair, isolated only, no catalog widening/native retry/wiring. Opportunities21;
+native request/HTTP readiness unproved. Earlier recommendations historical.
+
 Current L audit repair — 2026-11-06: [isolated evidence projection](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
 fixes only the confirmed audit failure-format omission. Underlying child cause
 Unknown; historical failed attempt preserved. Next gated slice: ONE New-Head L

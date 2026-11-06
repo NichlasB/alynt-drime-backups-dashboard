@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current L requalification — 2026-11-06: [6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9/fresh preflight, then audit refused at the finite
+include-closure guard (actual file/clause Unknown). Repaired reporting worked;
+strict cleanup/recovery0 resources/reconciliation0, no repair/retry/wiring.
+Next gated slice: **Repository-Only L Finite Include-Closure Diagnosis and Guard-
+Preserving Harness Repair**, isolated only, catalog/identity/limits unchanged.
+Allowance exhausted; opportunities21; M/W/genuineL/HTTP/target/ONE switch gated.
+Earlier recommendations historical.
+
 Current L repair — 2026-11-06: [audit evidence](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
 closes the confirmed JSON/WL diagnostic mismatch with isolated actual-source
 positives/negatives and assertion-killed controls. Original failure/unknown child

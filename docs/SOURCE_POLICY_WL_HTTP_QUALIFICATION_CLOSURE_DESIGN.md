@@ -1,5 +1,15 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+## L requalification refused include closure; no HTTP/readiness grant — 2026-11-06
+
+[ONE6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+passed fresh original adapter291/9 then request audit failed at finite include
+closure; file/clause Unknown. Repaired projection localized guard, strict cleanup/
+recovery passed; no source change/retry/wiring or request case proof. Next gated
+slice: **Repository-Only L Finite Include-Closure Diagnosis and Guard-Preserving
+Harness Repair**, isolated tests, no catalog widening/native rerun. Opportunities21;
+M/W/genuineL/HTTP/target/ONE switch remain gates. Earlier recommendations historical.
+
 ## L audit evidence repaired, qualification still unproved — 2026-11-06
 
 The [isolated repair](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md) closes only

@@ -1,5 +1,14 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current L requalification — 2026-11-06: [6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+passed fresh original adapter291/9 but failed request source audit at finite
+include closure. Actual file/clause Unknown; bounded reporting/strict cleanup
+worked, no genuine-session case/native request proof. Next gated slice:
+**Repository-Only L Finite Include-Closure Diagnosis and Guard-Preserving Harness
+Repair**, isolated only, preserve guards/catalog/limits; no rerun/wiring.
+Allowance exhausted/opportunities21; M/W/HTTP/target/ONE switch still gated.
+Earlier recommendations below historical.
+
 Current L repair — 2026-11-06: [bounded audit failure evidence](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
 now uses the existing WL parser under exact invocation binding, preserving all
 original success/refusal guards. Isolated tests only; underlying native error

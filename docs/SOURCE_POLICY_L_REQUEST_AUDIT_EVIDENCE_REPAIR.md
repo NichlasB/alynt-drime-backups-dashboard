@@ -1,5 +1,13 @@
 # L Request Source-Audit Failure Evidence Diagnosis and Guard-Preserving Repair
 
+Native follow-on — 2026-11-06: [ONE6b90143/run42295828908](SOURCE_POLICY_L_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+reconfirmed original adapter291/9, then refused request audit. The repaired
+projection worked: audit/RuntimeException/assertion uniquely maps to finite actual
+include closure. Offending file/clause Unknown; strict cleanup/recovery passed.
+Next gated slice: Repository-Only L Finite Include-Closure Diagnosis and Guard-
+Preserving Harness Repair, isolated only, no native rerun/catalog widening/wiring.
+Allowance exhausted/opportunities21; earlier recommendations historical.
+
 ## Approval, baseline and limits — 2026-11-06
 
 Explicit repository-only repair through isolated validation, review, commit/push
