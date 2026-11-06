@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current qualification — 2026-11-06: [ONE attempt at1b28963](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+run42260737470 passed initial source/runtime audit but failed first-case auth SQL
+allowlist admission. Owned resources absent after recovery; failed worker exit is
+not a passed proof. No repair/rerun or wiring; genuine-session/native qualification
+Blocked. Next gated slice: **Repository-Only M Genuine-Session Auth SQL Shape
+Compatibility Diagnosis and Guard-Preserving Harness Repair**, pinned-source and
+isolated regressions only, no acquisition/fixtures/native retry or weaker guards.
+One allowance consumed; opportunities18, campaign10/10/static9 unchanged. W/L and
+HTTP/target gates remain before ONE switch; prior resumes below are historical.
+
 Current preparation — 2026-11-06: [M genuine-session proof integration](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
 implements admission-design step2 behind a separate default-off manual route.
 Fixed source/fixture/effect/auth/request/supervision contracts are isolated-tested,

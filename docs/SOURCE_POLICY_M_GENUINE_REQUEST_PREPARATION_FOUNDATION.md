@@ -1,5 +1,15 @@
 # M Genuine-Session Request Qualification Integration Safety Foundation (Preparation Only)
 
+Follow-on outcome — 2026-11-06: the separately approved
+[ONE exact-head attempt](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+at1b28963/run42260737470 passed the initial source/runtime audit but refused the
+first auth case with `unexpected auth SQL`. Recovery confirms owned resource
+absence; the failed worker exit remains a failed qualification. No source change
+or rerun. Next gated slice is Repository-Only M Genuine-Session Auth SQL Shape
+Compatibility Diagnosis and Guard-Preserving Harness Repair, isolated/source-backed
+only, not a native retry. The preparation evidence below remains historical and
+does not establish genuine-session availability. Production wiring stays disabled.
+
 ## Approved scope and baseline — 2026-11-06
 
 Explicit repository-only preparation of step2 in the

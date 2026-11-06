@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current qualification — 2026-11-06: [single request attempt](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+run42260737470 at1b28963 accepted initial source/runtime audit, then rejected
+`unexpected auth SQL` in case0. No positive guarded result/native qualification.
+Resources removed/recovery absence verified without treating failed-worker exit
+as success. No repair/rerun or production wiring. Exact next gated slice:
+**Repository-Only M Genuine-Session Auth SQL Shape Compatibility Diagnosis and
+Guard-Preserving Harness Repair**, source-backed isolated work only; no new native
+allowance. Opportunities18, campaign10/10/static9 unchanged. W/L and HTTP/target
+evidence remain separate before ONE switch; older resumes are historical.
+
 Current preparation — 2026-11-06: [M genuine-session qualification integration](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
 is source/isolated-tested behind a separate default-off existing-lab operation.
 Step2 is prepared, not an executed proof/readiness grant. Application code, actual

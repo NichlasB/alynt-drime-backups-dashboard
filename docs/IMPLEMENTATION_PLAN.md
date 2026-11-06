@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## M genuine-session attempt blocked at auth SQL ledger — 2026-11-06
+
+The separately approved [single attempt](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
+at1b28963/run42260737470 passed initial exact-source/runtime audit, then refused
+case0 during auth with `unexpected auth SQL`. No guarded result/final qualification
+receipt. Owned containers/stage removed and recovery absence verified; the original
+nonzero worker exit remains a failed qualification, not a cleanup success override.
+No repair/rerun, application code or production wiring change; uploader untouched.
+
+Implementation-plan progress: M prerequisites observed, genuine-session/native
+qualification **Blocked**. Recommended next gated slice: **Repository-Only M
+Genuine-Session Auth SQL Shape Compatibility Diagnosis and Guard-Preserving Harness
+Repair**, source-backed isolated tests only, no acquisition/fixtures/native rerun.
+Keep strict unknown-SQL refusal and budgets; a later one-attempt proof requires
+fresh approval on its frozen head. This one allowance is exhausted; consumed
+native opportunities18, campaign10/10/static9 unchanged. Older resumes historical.
+
 ## M genuine-session qualification prepared, execution gated — 2026-11-06
 
 The approved [preparation foundation](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
