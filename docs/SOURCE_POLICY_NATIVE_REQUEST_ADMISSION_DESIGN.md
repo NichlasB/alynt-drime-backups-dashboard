@@ -1,5 +1,13 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current L repair — 2026-11-06: [bounded audit failure evidence](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+now uses the existing WL parser under exact invocation binding, preserving all
+original success/refusal guards. Isolated tests only; underlying native error
+Unknown/run42291536738 still failed. Next gated slice: **ONE New-Head L Genuine-
+Session Request Owned Requalification and Cleanup Attempt**, new image/fresh
+prerequisites and strict owned CI cleanup. No rerun/wiring; opportunities20.
+M/W/HTTP/target/ONE switch remain gated; older recommendations historical.
+
 Current L attempt — 2026-11-06: [ONE exact-head proof](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 at50136d3/run42291536738 passed original adapter291/9 after fresh preflight but
 failed request source audit before case execution. Child cause Unknown; primary/

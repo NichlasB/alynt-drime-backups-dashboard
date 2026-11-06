@@ -1,5 +1,11 @@
 # M Genuine-Session Request Owned Requalification — Passed
 
+Current L follow-on — 2026-11-06: [isolated audit evidence repair](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+does not diagnose the historical child cause or qualify native requests. Next
+gated slice: ONE New-Head L Genuine-Session Request Owned Requalification and
+Cleanup Attempt, fresh prerequisites and strict owned CI cleanup only after
+approval. No native rerun/wiring; opportunities20; earlier resumes historical.
+
 Current follow-on — 2026-11-06: [ONE L attempt at50136d3/run42291536738](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 but failed request source audit; cleanup/recovery
 verified, no retry. Next gated slice is Repository-Only L Request Source-Audit

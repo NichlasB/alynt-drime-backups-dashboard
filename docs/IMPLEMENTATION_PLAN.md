@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## L audit evidence repaired in isolation; native requalification gated — 2026-11-06
+
+The approved [repository-only repair](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+adds strictly profile/case/stage-bound audit failure DATA while preserving the
+original nonzero refusal, success guards, privacy and limits. Actual-source red-
+to-green regression, positive audit and seven assertion-killed controls pass.
+Historical run42291536738 remains failed; underlying child cause Unknown, no rerun.
+
+Implementation-plan progress: confirmed diagnostic coverage gap closed, not
+native availability. Next gated slice: **ONE New-Head L Genuine-Session Request
+Owned Requalification and Cleanup Attempt**, existing ephemeral CI lab, fresh
+prerequisites and strict owned cleanup. Changed controller means a new L image;
+prior291/9 stays historical. No production wiring; opportunities20,10/10/static9
+unchanged. M/W/HTTP/target/ONE switch remain gates; older resumes historical.
+
 ## L request attempt blocked at source audit; cleanup verified — 2026-11-06
 
 The approved [ONE L attempt](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)

@@ -1,5 +1,15 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+## L audit evidence repaired, qualification still unproved — 2026-11-06
+
+The [isolated repair](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md) closes only
+the confirmed audit-format reporting gap, not the unknown historical child error.
+Original failure/cleanup facts retained; no native rerun or production wiring.
+Next gated slice: **ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt**, existing CI lab/new image/fresh prerequisites/strict owned
+cleanup. Controller bytes stale old L image, not guards/acceptance; M/W/HTTP/
+target/ONE switch remain gates. Opportunities20 unchanged; older resumes historical.
+
 ## L genuine request blocked; no HTTP/readiness grant — 2026-11-06
 
 The [ONE50136d3 attempt/run42291536738](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)

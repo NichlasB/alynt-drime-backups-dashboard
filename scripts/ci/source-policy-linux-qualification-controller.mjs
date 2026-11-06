@@ -55,6 +55,19 @@ export function childFailureSummary(result) {
     stdout: channel(result.stdout), stderr: channel(result.stderr), worker };
 }
 
+// Fixed L audit invocation only: failure DATA never supplies a success or native grant.
+export function requestAuditResult(result, run) {
+  if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || !/^\{[^\r\n]+\}\n$/.test(result.stdout)) {
+    const fact=wlRequestFailure(result.stderr);
+    const bound=typeof run==='string'&&/^[a-f0-9]{32}$/.test(run)&&result.status===1&&!result.signal&&!result.error&&result.stdout===''
+      &&fact&&fact.profile==='l'&&fact.case_index===0&&fact.stage==='audit';
+    throw Error('Source audit refused: '+JSON.stringify({...childFailureSummary(result),request_failure:bound?fact:null}));
+  }
+  const row=parseRequestWire(result.stdout);
+  if(!validRequestAudit(row,'l',run))throw Error('Exact request audit refused');
+  return row;
+}
+
 // Context-limited diagnostic review, not a general harmless-warning whitelist.
 export function reviewLog(raw, hostname) {
   if (typeof raw !== 'string' || Buffer.byteLength(raw) > 65536 || /[^\x09\x0a\x0d\x20-\x7e]/.test(raw) || typeof hostname !== 'string' || !/^[a-f0-9]{12}$/.test(hostname)
@@ -140,10 +153,10 @@ async function main() {
   if (process.argv[2] === 'audit') {
     const auditArgs=request?[...args.slice(0,-2),'scripts/ci/source-policy-wl-request-child.php','--owned-wl-request-child','0']:[...args,'audit'];
     const result = spawnSync('php', auditArgs, { timeout: 20000, maxBuffer: 16384, encoding: 'utf8',env:request?{...process.env,...wlEnvelope(process.env,'0'.repeat(64),'audit')}:process.env });
+    if(request){requestAuditResult(result,run);process.stdout.write(result.stdout);return;}
     if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || !/^\{[^\r\n]+\}\n$/.test(result.stdout))
       throw Error('Source audit refused: ' + JSON.stringify(childFailureSummary(result)));
-    const row = request?parseRequestWire(result.stdout):JSON.parse(result.stdout);
-    if(request){if(!validRequestAudit(row,'l',run))throw Error('Exact request audit refused');process.stdout.write(result.stdout);return;}
+    const row = JSON.parse(result.stdout);
     if (row.event !== 'audit' || !/^[a-f0-9]{64}$/.test(row.image) || row.run !== run || row.native_connections !== 0 || row.sql_queries !== 0 || row.checks < 1) throw Error('Invalid source audit');
     process.stdout.write(result.stdout); return;
   }

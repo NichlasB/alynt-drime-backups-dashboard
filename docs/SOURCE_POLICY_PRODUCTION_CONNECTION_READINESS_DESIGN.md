@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current L repair — 2026-11-06: [repository-only audit projection](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+preserves refusal/privacy/budgets while covering the confirmed failure-format
+omission. Underlying child cause Unknown; historical native run remains failed.
+Next gated slice: **ONE New-Head L Genuine-Session Request Owned Requalification
+and Cleanup Attempt**, existing CI lab, new image/fresh prerequisites and strict
+owned cleanup. No native rerun/readiness/wiring grant; opportunities20 unchanged.
+M/W/HTTP/target/ONE switch remain gated; prior resume recommendations historical.
+
 Current L attempt — 2026-11-06: [exact50136d3/run42291536738](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 passed fresh environment/original adapter291/9, failed request source audit
 (child1/no receipt), and verified strict cleanup/recovery0 retained resources.

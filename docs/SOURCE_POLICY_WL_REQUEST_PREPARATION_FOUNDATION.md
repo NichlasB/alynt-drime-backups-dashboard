@@ -1,5 +1,12 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current L audit repair — 2026-11-06: [isolated evidence projection](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+fixes only the confirmed audit failure-format omission. Underlying child cause
+Unknown; historical failed attempt preserved. Next gated slice: ONE New-Head L
+Genuine-Session Request Owned Requalification and Cleanup Attempt, existing CI lab,
+new image/fresh prerequisites and strict owned cleanup. No native rerun/wiring;
+opportunities20 unchanged. Earlier recommendations below historical.
+
 Current qualification — 2026-11-06: [ONE L attempt](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 at50136d3/run42291536738 passed fresh environment/original adapter291/9, failed
 request source audit before receipt/case loop, and completed strict primary/

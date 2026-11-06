@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current L repair — 2026-11-06: [audit evidence](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+closes the confirmed JSON/WL diagnostic mismatch with isolated actual-source
+positives/negatives and assertion-killed controls. Original failure/unknown child
+cause retained; no native rerun/wiring. Next gated slice: **ONE New-Head L Genuine-
+Session Request Owned Requalification and Cleanup Attempt**, existing CI lab,
+fresh prerequisites/new L image and strict owned cleanup. Opportunities20,
+10/10/static9 unchanged; M/W/HTTP/target/ONE switch and older resumes stay gated.
+
 Current L attempt — 2026-11-06: [ONE owned run](SOURCE_POLICY_L_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 at50136d3/run42291536738 passed original adapter291/9 after fresh preflight, then
 failed request source audit before container/case loop. Child cause Unknown;

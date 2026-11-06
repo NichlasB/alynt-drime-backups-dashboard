@@ -1,5 +1,12 @@
 # L Genuine-Session Request Owned Qualification — Blocked at Source Audit
 
+Follow-on repair — 2026-11-06: [repository-only audit evidence](SOURCE_POLICY_L_REQUEST_AUDIT_EVIDENCE_REPAIR.md)
+closes the confirmed failure-format projection gap in isolation. This native
+failure remains unchanged, its child cause Unknown, no rerun. Next gated slice:
+ONE New-Head L Genuine-Session Request Owned Requalification and Cleanup Attempt,
+new image/fresh prerequisites/strict owned CI cleanup, separately approved only.
+No production wiring; opportunities20 unchanged. Earlier recommendations historical.
+
 ## Approval and fresh prerequisites — 2026-11-06
 
 ONE explicitly approved attempt at
