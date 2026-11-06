@@ -1,5 +1,12 @@
 # M Genuine-Session Auth SQL Shape Compatibility Diagnosis and Harness Repair
 
+Follow-on — 2026-11-06: separately approved [ONE requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+at440430e/run42279779134 passed48231 checks/9 groups, all23 genuine-session cases
+and strict cleanup/recovery. This does not identify the original uncaptured query.
+M bounded request gate closes at the new cohort, not W/L/HTTP/target readiness.
+Next gate: Repository-Only Current-Cohort W/L and Genuine-HTTP Qualification Closure
+Design; no production wiring. Opportunities19, campaign10/10/static9 unchanged.
+
 ## Approval and coherent baseline — 2026-11-06
 
 Explicit repository-only R3 diagnosis/guard-preserving harness repair, isolated

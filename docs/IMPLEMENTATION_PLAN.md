@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## M genuine-session requalification passed; remaining profile/HTTP gates — 2026-11-06
+
+The approved [ONE requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+at440430e/run42279779134 passed48231 checks/9 groups, all23 genuine-session child
+cases, independent held-live/post-exit release and strict owned cleanup/recovery.
+No source, acceptance/budget, application or production-wiring change. Previous
+failed run remains historical; opportunities19, campaign10/10/static9 unchanged.
+
+Implementation-plan progress: the exact-cohort bounded M genuine-session/native
+request qualification gate is closed, not W/L, genuine HTTP/installed-graph or
+target readiness. Recommended next gated slice: **Repository-Only Current-Cohort
+W/L and Genuine-HTTP Qualification Closure Design**, reconcile required remaining
+profile/source/request evidence and finite next proof before ONE application
+switch; no execution/acquisition/storage/site/wiring. Older resumes historical.
+
 ## M auth SQL cold-metadata compatibility repaired, native proof gated — 2026-11-06
 
 The approved [repository-only repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)

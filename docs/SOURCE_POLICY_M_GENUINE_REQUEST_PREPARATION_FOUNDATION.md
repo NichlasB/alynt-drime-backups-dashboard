@@ -1,5 +1,13 @@
 # M Genuine-Session Request Qualification Integration Safety Foundation (Preparation Only)
 
+Current outcome — 2026-11-06: [new-head requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+at440430e/run42279779134 passed48231 checks/9 groups, all23 genuine-session cases,
+independent held-live/post-exit release and strict cleanup/recovery. M request gate
+qualified at that cohort only; W/L/HTTP/installed-graph/target gates remain. Next:
+Repository-Only Current-Cohort W/L and Genuine-HTTP Qualification Closure Design,
+design-only/no execution or wiring. Prior attempt remains failed/historical;
+opportunities19, campaign10/10/static9 unchanged.
+
 Current follow-on — 2026-11-06: [repository-only auth SQL compatibility repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
 recognizes only the pinned core's exact cold usermeta column lookup during setup,
 under the existing call budget. Isolated regressions/controls pass; no native

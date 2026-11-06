@@ -1,5 +1,11 @@
 # M Genuine-Session Request Owned Qualification Attempt — Blocked
 
+Later outcome — 2026-11-06: [separately approved new-head requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+at440430e/run42279779134 passed48231 checks/9 groups and strict cleanup/recovery.
+This first run remains failed; its raw unknown SQL was never captured. Current M
+request gate closes only on the new cohort. Opportunities19, no production wiring;
+remaining W/L and HTTP/target reconciliation is the next design-only approval gate.
+
 Follow-on — 2026-11-06: the separately approved
 [repository-only compatibility repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
 fixes a source-confirmed missing cold usermeta column read with isolated tests.

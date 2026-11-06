@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current requalification — 2026-11-06: [M genuine-session owned proof](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+at440430e/run42279779134 passed48231 checks/9 groups, all23 cases and strict owned
+cleanup/recovery. Independent held-live/post-exit release predicates passed; no
+production readiness grant or wiring. Current W/L and genuine HTTP/installed-graph/
+target evidence remain gates. Opportunities19, campaign10/10/static9 unchanged.
+Next gated slice: **Repository-Only Current-Cohort W/L and Genuine-HTTP Qualification
+Closure Design**, exact evidence reconciliation and finite next proof, design-only
+without execution/acquisition/storage/site/wiring. Older resumes historical.
+
 Current repair — 2026-11-06: [isolated auth SQL compatibility repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
 recognizes the pinned wpdb cold usermeta metadata read, exact setup-only form and
 unchanged accounting. Unknown SQL/auth discovery still refuses; no app/wiring/native

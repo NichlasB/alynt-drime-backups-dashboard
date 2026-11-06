@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current requalification — 2026-11-06: [M genuine-session requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
+at440430e/run42279779134 passed48231/9, all23 cases and strict cleanup/recovery,
+including fixed independent held-live/post-exit release predicates. M CLI/owned
+native request gate closes at this cohort; W/L and HTTP/installed-graph/target
+evidence do not. No application/wiring change. Opportunities19, campaign10/10/
+static9 unchanged. Next gated slice: **Repository-Only Current-Cohort W/L and
+Genuine-HTTP Qualification Closure Design**, finite remaining evidence reconciliation
+before ONE switch, no execution/acquisition/storage/site/wiring. Older resumes historical.
+
 Current repair — 2026-11-06: [auth SQL compatibility](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
 adds only the exact source-backed cold usermeta schema read during setup, charged
 under unchanged bounds and isolated-tested. No general SHOW/auth schema allowance,
