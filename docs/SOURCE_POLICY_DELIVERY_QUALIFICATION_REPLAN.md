@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current foundation — 2026-11-06: [guarded request composition](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md)
+implements ordinary class-owned assembly behind result-only unregistered wrappers;
+API-copy positives are explicitly catalog-rebound, shipped native catalogs stay
+closed. No genuine auth/native/request/HTTP proof or application switch. Next
+gated slice: Repository-Only Native Request-Composition Admission and Genuine-Request
+Qualification Integration Design, design-only; resolve the remaining native gate
+under the existing exact auth source/fixture contract before any approved proof.
+Campaign10/10/static9/17 opportunities unchanged; no native/reset/toolchain detour.
+
 Current design — 2026-11-05: [genuine request source/fixture/private-construction closure](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
 pins the selected M session-auth library branch statically, separates setup/auth/
 policy effects and proposes ordinary class-owned result-only assembly. No runtime

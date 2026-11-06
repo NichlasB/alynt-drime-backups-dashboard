@@ -1,5 +1,13 @@
 # Genuine Authenticated Request Source/Fixture and Private-Construction Closure Design
 
+Current foundation — 2026-11-06: [guarded request composition](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md)
+implements result-only wrappers, unexported root/ordinary class-owned constructors
+and one-time source-first context push with isolated API catalog-copy evidence.
+Shipped native admission is deliberately still closed. Next gated slice is its
+Native Request-Composition Admission and Genuine-Request Qualification Integration
+Design, design-only; no actual auth/storage/native/wiring authority. Historical
+source/fixture requirements below remain applicable, not physically verified.
+
 ## Approved scope and baseline — 2026-11-05
 
 Repository-only DESIGN, focused validation, commit/push and ordinary exact-head

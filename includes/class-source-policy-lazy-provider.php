@@ -9,9 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 require_once __DIR__ . '/class-source-policy-trusted-context.php';
+require_once __DIR__ . '/traits/trait-source-policy-request-provider.php';
 
 /** The fixed owner/context pair remains private and isolated-fixture composed. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Lazy_Provider {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Provider;
+
 	/** Exact fixed adapter, never a request callback.
 	 *
 	 * @var object|null

@@ -10,9 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 require_once __DIR__ . '/class-source-policy-error.php';
 require_once __DIR__ . '/traits/trait-source-policy-adapter-operation.php';
+require_once __DIR__ . '/traits/trait-source-policy-request-adapter.php';
 
 /** Private construction/connection/profile are provisioned only by isolated fixtures. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Adapter {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Adapter;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Adapter_Operation;
 
 	/**

@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current implementation — 2026-11-06: [request composition foundation](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md)
+provides ordinary class-owned private assembly and source-first frame push;
+result-only wrappers are unregistered and shipped native request admission remains
+closed. API catalog-copy evidence is not genuine auth/storage/native qualification.
+Next gated slice: Repository-Only Native Request-Composition Admission and Genuine-
+Request Qualification Integration Design, design-only, before the shared-code freeze,
+separately approved affected-profile/request proof and ONE application switch.
+Actual auth/storage/native/wiring/grants/activation/rollback remain disabled;
+campaign10/10/static9/17 opportunities unchanged.
+
 Current design — 2026-11-05: [genuine request source/fixture/construction closure](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)
 defines a finite statically pinned core6.0 session-auth branch and ordinary-visibility
 result-only composition proposal. Salt/RNG, role/autoload and metadata effects are

@@ -9,9 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 require_once __DIR__ . '/class-source-policy-error.php';
+require_once __DIR__ . '/traits/trait-source-policy-request-query.php';
 
 /** Receivers/source bindings are provisioned only by isolated fixtures here. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Query;
+
 	/** Fixed owned receiver.
 	 *
 	 * @var object|null

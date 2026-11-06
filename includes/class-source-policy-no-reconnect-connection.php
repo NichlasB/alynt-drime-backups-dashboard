@@ -16,9 +16,11 @@ require_once __DIR__ . '/traits/trait-source-policy-minimum-lab.php';
 require_once __DIR__ . '/traits/trait-source-policy-native-bootstrap.php';
 require_once __DIR__ . '/traits/trait-source-policy-bootstrap-setup.php';
 require_once __DIR__ . '/traits/trait-source-policy-production-boundary.php';
+require_once __DIR__ . '/traits/trait-source-policy-request-connection.php';
 
 /** Native construction remains closed pending separately approved qualification. */
 class Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection extends wpdb {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Connection;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Bootstrap;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Bootstrap_Setup;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab;

@@ -33,7 +33,7 @@ test('trusted capture positives and refusals assertion-kill semantic guard bypas
       [entry,"! current_user_can( 'manage_options' )",'false','capability'],
       [entry,"! wp_verify_nonce( wp_unslash( $request['_wpnonce'] ), 'alynt_drime_backups_dashboard_update_source_policy' )",'false','nonce-domain'],
       [entry,"! $this->valid_site_id( $request['dashboard_site_id'] )",'false','site-negative'],
-      [entry,'! $this->record_matches( $site_id )','false','record'],
+      ['includes/traits/trait-source-policy-request-composition.php','! $this->record_matches( $site )','false','record'],
       [declarations,"hash_file( 'sha256', $path ) !== $digest",'false','source'],
       ['includes/class-source-policy-bootstrap-profile.php',"$absint->getFileName() === realpath( $binding['parser_api_file'] )",'true','parser-source'],
       ['includes/class-source-policy-native-adapter.php','null !== $this->operation_context && ! $this->operation_context->valid( $this->connection )','false','late-core'],

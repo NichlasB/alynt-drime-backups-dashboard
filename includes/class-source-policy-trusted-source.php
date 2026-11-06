@@ -11,6 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Previously pinned core-library cohorts, not authentication of arbitrary code. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source {
+	/** Native request construction is not approved by this isolated foundation.
+	 *
+	 * @param mixed $core Fixed core identity.
+	 * @return array|false Non-secret catalog only; never a root or handle.
+	 */
+	public static function request_policy( $core ) {
+		$policy = self::policy( $core );
+		return is_array( $policy ) && is_string( $policy['driver'] ?? null ) && '' !== $policy['driver'] ? $policy : false;
+	}
+
 	/**
 	 * Returns code-owned expectations without IO, discovery or learned hashes.
 	 *

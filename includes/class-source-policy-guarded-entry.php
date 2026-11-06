@@ -9,9 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 require_once __DIR__ . '/class-source-policy-error.php';
+require_once __DIR__ . '/traits/trait-source-policy-request-composition.php';
 
 /** Private collaborators have no production factory in this foundation. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Composition;
+
 	/**
 	 * Fixed owner, provisioned only by isolated fixtures here.
 	 *
@@ -52,7 +55,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
 		$site_id = absint( $site_id );
-		if ( $site_id <= 0 || ! $this->sites || ! $this->owner || ! $this->record_matches( $site_id ) ) {
+		if ( $site_id <= 0 || ! $this->request_owner( $site_id ) ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$view = $this->owner->view_source_mode( $site_id, 'wpvivid' );
@@ -91,7 +94,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry {
 		if ( $site_id <= 0 || 'wpvivid' !== $source || ! in_array( $mode, array( 'required', 'external_optional' ), true ) || ! $this->revision_valid( $revision ) ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_invalid' );
 		}
-		if ( ! $this->sites || ! $this->owner || ! $this->record_matches( $site_id ) ) {
+		if ( ! $this->request_owner( $site_id ) ) {
 			return Alynt_Drime_Backups_Dashboard_Source_Policy_Error::refusal( 'source_policy_unavailable' );
 		}
 		$result = $this->owner->save_source_mode_if_current( $revision, $site_id, $source, $mode );

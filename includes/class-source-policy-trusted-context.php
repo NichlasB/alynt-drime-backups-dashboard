@@ -12,9 +12,11 @@ require_once __DIR__ . '/class-source-policy-trusted-source.php';
 require_once __DIR__ . '/traits/trait-source-policy-trusted-context-source.php';
 require_once __DIR__ . '/traits/trait-source-policy-trusted-context-settings.php';
 require_once __DIR__ . '/traits/trait-source-policy-production-join.php';
+require_once __DIR__ . '/traits/trait-source-policy-request-context.php';
 
 /** Private bindings are composed only by isolated fixtures in this foundation. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context {
+	use Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Context;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context_Source;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Context_Settings;
 	use Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Join;

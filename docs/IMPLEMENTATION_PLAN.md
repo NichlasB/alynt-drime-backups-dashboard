@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Guarded request-scoped composition foundation implemented — 2026-11-06
+
+The approved [foundation](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md) adds
+unregistered result-only wrappers, a private single-use root, class-owned ordinary
+constructors and one-time context push, preserving guards/budgets/old factories.
+ALL shipped native catalogs remain explicitly closed before peer/config capture.
+Positive tests use owned source copies with fixed API-double catalog DATA, not
+private state injection or genuine authentication/storage/native admission.
+No application wiring, native dispatch or site operation; uploader unchanged.
+
+Implementation-plan progress: ordinary construction is implemented at isolated API
+layer, not native/request-qualified or production-delivered. Exact next gated
+slice: **Repository-Only Native Request-Composition Admission and Genuine-Request
+Qualification Integration Design**, design-only. Resolve the closed native gate
+and exact auth/fixture/effect contract before separately approved affected-profile/
+genuine-request proof and ONE application switch. Campaign10/10/static9/17 consumed
+native opportunities unchanged; no new allowance or generic infrastructure work.
+
 ## Genuine request source/fixture and private construction designed — 2026-11-05
 
 The approved [source-backed design](SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md)

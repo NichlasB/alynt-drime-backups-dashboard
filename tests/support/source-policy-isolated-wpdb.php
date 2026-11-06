@@ -4,7 +4,7 @@ if ( defined( 'ADB_POLICY_ISOLATED' ) ) {
 if ( class_exists( 'wpdb', false ) ) throw new RuntimeException( 'Never replace a genuine wpdb.' );
 require_once __DIR__.'/source-policy-parser-tuple-data.php';
 class wpdb {
-	public $ready = true, $options = 'wp_options', $last_result = array(), $last_error = '', $error_code = 0;
+	public $ready = true, $options = 'wp_options', $last_result = array(), $last_error = '', $error_code = 0, $prefix='wp_';
 	public $store, $prepared = array(), $queries = array(), $physical = 0, $reconnects = 0, $closes = 0;
 	public $dbh = null, $placeholder_calls = 0;
 	private $marker = null;
@@ -12,11 +12,18 @@ class wpdb {
 	public $num_queries=0, $charset, $collate, $is_mysql, $dbpassword='';
 	protected $incompatible_modes=array('NO_ZERO_DATE');
 	public function __construct(...$args) {
+		if(!$args&&!empty($GLOBALS['request_ambient_model'])){$this->dbh=new stdClass();return;} // API-only ambient construction, never a native session.
 		if(empty($GLOBALS['policy_bootstrap_model'])) throw new RuntimeException('A parent/native constructor must never run.');
+		$GLOBALS['boot_connection']=$this; // Observed actual initializer receiver, not supplied ready/facts state.
 		$GLOBALS['boot_constructor_args']=$args;
 		++$GLOBALS['boot_counts']['object']; $this->use_mysqli=empty($GLOBALS['boot_legacy']); $this->ready=false; $this->dbh=null; $this->store=$GLOBALS['boot_store']; boot_event('object'); $this->db_connect(false);
 	}
 	public function __get($name){return $this->$name;}
+	public function get_row($sql,$format=null){
+		PHPUnit\Framework\Assert::assertSame(ARRAY_A,$format);++$GLOBALS['request_record_reads'];$GLOBALS['policy_trace'][]='record';
+		list($id)=explode('|',$sql,2);PHPUnit\Framework\Assert::assertSame(array('SELECT * FROM wp_alynt_drime_dashboard_sites WHERE id = %d',array(7)),$this->prepared[$id]);
+		if(!empty($GLOBALS['request_record_throw']))throw new RuntimeException('owned-private-record');return$GLOBALS['request_record'];
+	}
 	public function parse_db_host($host){
 		$GLOBALS['boot_parse_calls']=($GLOBALS['boot_parse_calls']??0)+1;
 		if(!empty($GLOBALS['boot_parser_warning']))trigger_error('owned-private-parser-warning',E_USER_WARNING);

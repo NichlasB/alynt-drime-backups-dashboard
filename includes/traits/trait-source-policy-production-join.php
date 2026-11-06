@@ -73,7 +73,10 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Join {
 			}
 			$this->production_projection = $this->projection( $this->frame );
 			$this->state                 = 'bootstrap';
-			return $this->production_current();
+			if ( ! $this->production_current() ) {
+				return false;
+			}
+			return null === $this->request_root || $this->receiver->bind_request_frame( $this->request_root, $this, $this->production_query, $this->frame, $this->binding );
 		} catch ( Throwable $error ) {
 			return false;
 		}
