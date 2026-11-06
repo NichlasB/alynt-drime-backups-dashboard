@@ -1,5 +1,13 @@
 # Guarded Request-Scoped Composition and Admission Safety Foundation
 
+Current successor design — 2026-11-06: [native admission/integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
+settles the deliberately closed native gate as a future M-only dormant declaration
+branch plus exact root/context catalog binding. This foundation's shipped gate and
+API-only proof limits are unchanged. Next approval: Repository-Only M Native Request-
+Composition Admission and Catalog-Binding Safety Foundation, isolated API/DATA only;
+actual auth/storage/native execution and production wiring remain disabled. The
+historical next-design recommendation at the end is now completed as DESIGN only.
+
 ## Approved scope and baseline — 2026-11-06
 
 Explicit repository-only R3 approval includes the narrow UNREGISTERED result-only

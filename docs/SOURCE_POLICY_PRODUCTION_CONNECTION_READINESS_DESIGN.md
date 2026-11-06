@@ -1,5 +1,15 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current design — 2026-11-06: [native request admission/integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
+specifies M-only dormant native declaration eligibility, exact root/context catalog
+binding and finite genuine-session qualification preparation. No source/runtime/
+native/site/wiring change. Next gate: Repository-Only M Native Request-Composition
+Admission and Catalog-Binding Safety Foundation, isolated API/DATA only, explicitly
+including changed reachability of the unregistered result-only callable. Actual
+auth/storage/native execution and production wiring remain disabled. Proof prep,
+final-cohort single attempt, affected W/L and HTTP/target availability remain gated
+before ONE application switch; campaign10/10/static9/17 opportunities unchanged.
+
 Current implementation — 2026-11-06: [request composition foundation](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md)
 provides ordinary class-owned private assembly and source-first frame push;
 result-only wrappers are unregistered and shipped native request admission remains

@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Native request admission and genuine-request integration designed — 2026-11-06
+
+The approved [design](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md) selects
+M-only dormant native declaration eligibility, exact private root/context catalog
+binding and a finite genuine-session proof on the existing ephemeral CI lab.
+Driver=null is not readiness; W/L native request rows remain closed in this stage.
+No executable/workflow/source-pin/limit/native/site/wiring change; uploader untouched.
+
+Implementation-plan progress: native admission and genuine-session integration
+contracts are specified, not implemented or physically qualified. Exact next gate:
+**Repository-Only M Native Request-Composition Admission and Catalog-Binding Safety
+Foundation**, isolated API/DATA only, explicitly covering the changed native
+eligibility of the unregistered internal callable. Actual auth/storage/native
+execution, public factories and production wiring remain disabled. Then separately
+approve fixed proof preparation, freeze the cohort and approve one native attempt;
+affected W/L and HTTP/target evidence still precede ONE application switch.
+Campaign10/10/static9/17 opportunities unchanged; older resumes are historical.
+
 ## Guarded request-scoped composition foundation implemented — 2026-11-06
 
 The approved [foundation](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md) adds

@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current design — 2026-11-06: [native request admission/integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
+settles M-only dormant native declaration eligibility and exact root/context catalog
+binding, then finite genuine-session proof preparation on the existing CI lab.
+No runtime/native/site/wiring change or new allowance. Exact next gate: Repository-
+Only M Native Request-Composition Admission and Catalog-Binding Safety Foundation,
+isolated API/DATA only; actual auth/storage/native execution remain disabled.
+Separately approved proof preparation/final cohort/one attempt, required W/L and
+HTTP/target evidence still precede ONE application switch. Campaign10/10/static9/17
+opportunities unchanged; previous resumes below are historical.
+
 Current foundation — 2026-11-06: [guarded request composition](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md)
 implements ordinary class-owned assembly behind result-only unregistered wrappers;
 API-copy positives are explicitly catalog-rebound, shipped native catalogs stay

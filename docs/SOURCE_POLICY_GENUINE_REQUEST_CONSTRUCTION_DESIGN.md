@@ -1,5 +1,13 @@
 # Genuine Authenticated Request Source/Fixture and Private-Construction Closure Design
 
+Current admission design — 2026-11-06: [native request integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
+specifies the M-only native declaration and root/context catalog-binding contract,
+preserving this document's exact auth source/fixture/effect requirements. No code,
+auth/storage/native execution or wiring change. Next gate: Repository-Only M Native
+Request-Composition Admission and Catalog-Binding Safety Foundation, isolated APIs/
+DATA only; fixed genuine proof preparation and dispatch need separate approval.
+Older next-slice statements below are historical, not current authorization.
+
 Current foundation — 2026-11-06: [guarded request composition](SOURCE_POLICY_REQUEST_COMPOSITION_FOUNDATION.md)
 implements result-only wrappers, unexported root/ordinary class-owned constructors
 and one-time source-first context push with isolated API catalog-copy evidence.
