@@ -1,5 +1,15 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current preparation — 2026-11-06: [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
+implements exact W/L dormant declarations and private genuine-session proof
+preparation. Isolated positive and semantic controls do not qualify native auth,
+storage or cleanup. Shared loaded source changed; M440430e is now historical for
+this cohort. Next gated slice: **ONE Exact-Head L Genuine-Session Request Owned
+Qualification and Cleanup Attempt**, fresh original prerequisites and strict owned
+CI-lab cleanup only after approval. Current M refresh, exact-target W and HTTP/
+installed-graph eligibility remain before ONE switch. No dispatch/site/wiring;
+opportunities19 unchanged. Earlier resume recommendations below are historical.
+
 Current closure design — 2026-11-06: [W/L and HTTP qualification order](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
 retains M440430e/run42279779134 positive48231/9 and strict cleanup at its unchanged
 cohort. Existing W/L expectation rows remain isolated candidates; request_policy

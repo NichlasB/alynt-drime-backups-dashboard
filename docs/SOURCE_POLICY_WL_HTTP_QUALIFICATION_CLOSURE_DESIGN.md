@@ -1,5 +1,19 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+## Preparation implemented; historical matrix below retained — 2026-11-06
+
+The approved [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
+implements this design's cohesive dormant declaration/static-source/private-proof
+preparation using isolated tests only. Shared loaded changes mean M440430e is
+historical for the new cohort, not failed; the matrix below describes its original
+docs-only baseline, not refreshed evidence. W/L runtime availability remains
+unproved. Next gated slice: **ONE Exact-Head L Genuine-Session Request Owned
+Qualification and Cleanup Attempt**, existing ephemeral CI lab, explicit request
+flag, fresh original prerequisites, owned session/SQL/native fixtures and strict
+cleanup. M refresh, W exact-target approval and HTTP/installed-graph/target closure
+remain before ONE application switch. No native/site/wiring operation here;
+campaign10/10/static9/opportunities19 unchanged. Historical recommendations below.
+
 ## Approval, baseline and non-goals — 2026-11-06
 
 Explicit repository-only DESIGN through validation, commit/push and ordinary

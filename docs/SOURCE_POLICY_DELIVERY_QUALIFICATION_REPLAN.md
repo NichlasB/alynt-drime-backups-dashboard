@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current preparation — 2026-11-06: [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
+closes the dormant declaration/static-source/private-proof preparation gap with
+isolated tests only. Shared loaded changes stale M440430e for this cohort; older
+W/L native receipts remain historical, not failures. Next gated slice: **ONE
+Exact-Head L Genuine-Session Request Owned Qualification and Cleanup Attempt**,
+existing ephemeral CI lab, fresh original prerequisites and strict owned cleanup.
+No native/site/wiring operation here. M refresh, exact-target W and genuine HTTP/
+installed-graph eligibility still precede ONE switch.10/10/static9/opportunities19
+unchanged; earlier resume recommendations below are historical.
+
 Current closure design — 2026-11-06: [W/L and genuine HTTP](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
 reconciles8 changed paths per historical W/L audit cohort, existing expectation
 rows versus missing W/L request admission, and CLI versus installed web evidence.

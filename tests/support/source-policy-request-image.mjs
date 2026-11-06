@@ -36,12 +36,13 @@ export function requestImage(callback,rebind=true) {
         if(scenario.startsWith('admission-')){
           assert.equal(rebind,false,'Pure native catalog cases must not use the API declaration catalog.');
           if(scenario!=='admission-shipped'){
-            const version=scenario==='admission-php'?'7.4.32':scenario==='admission-w'?'8.5.12':'7.4.33';
+            const version=scenario==='admission-php'?'7.4.32':['admission-w','admission-l','admission-unknown-native'].includes(scenario)?'8.5.12':'7.4.33';
             alter(catalogs[0],source=>source.replace('PHP_VERSION !==',`'${version}' !==`)); // Pure process-version DATA only, never native initialization.
           }
           if(scenario==='admission-malformed')alter(catalogs[0],source=>source.replace('public static function policy( $core ) {',"public static function policy( $core ) { return array('core'=>$core,'php'=>'7.4.33');"));
           if(scenario==='admission-core')alter(catalogs[0],source=>source.replace("'core'   => $core,","'core'   => 'unbound',"));
           if(scenario==='admission-driver')alter(catalogs[0],source=>source.replace("'driver' => null,","'driver' => false,"));
+          if(scenario==='admission-unknown-native')alter(catalogs[0],source=>source.replace("array( '6.0', '7.1.3', '7.1.4' )","array( '6.0', '7.1.3', '7.1.4', '7.1.5' )"));
           return spawnSync(php,['-n',join(temporary,'tests/support/source-policy-request-admission-worker.php'),scenario],{encoding:'utf8',timeout:15000,maxBuffer:32768});
         }
         // Negative/identity-control images only: passive witnesses, never private-state input.

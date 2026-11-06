@@ -1,5 +1,11 @@
-param([switch]$ConfirmedPluginTesterOwnedAmbient,[string]$Prefix)
+param([switch]$ConfirmedPluginTesterOwnedAmbient,[string]$Prefix,[switch]$ConfirmedPluginTesterOwnedGenuineRequest,[string]$ExpectedSha,[string]$ExpectedImage,[switch]$AuditOnly)
 $ErrorActionPreference='Stop'
+if($ConfirmedPluginTesterOwnedGenuineRequest){
+ if($ConfirmedPluginTesterOwnedAmbient -or $args.Count -ne 0){throw 'Mixed owned operation refused'}
+ & "$PSScriptRoot/source-policy-wl-request-controller.ps1" -ConfirmedPluginTesterOwnedGenuineRequest -Prefix $Prefix -ExpectedSha $ExpectedSha -ExpectedImage $ExpectedImage -AuditOnly:$AuditOnly
+ return
+}
+if($ExpectedSha -or $ExpectedImage -or $AuditOnly){throw 'Request-only inputs cannot select the ambient route'}
 if(-not $ConfirmedPluginTesterOwnedAmbient -or $Prefix -cnotmatch '\Aadbb_[a-f0-9]{12}_\z' -or $args.Count -ne 0 -or -not $IsWindows -or -not $env:MYSQL_PWD){throw 'Exact confirmed owned ambient scope required'}
 $script:AdbcScope=$true
 . "$PSScriptRoot/source-policy-cleanup-process.ps1"

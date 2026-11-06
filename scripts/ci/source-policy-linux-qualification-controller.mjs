@@ -3,6 +3,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFileSync, lstatSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import {wlLinuxJob,wlEnvelope,validRequestAudit,requestBatch,wlRequestFailure,parseRequestWire} from './source-policy-wl-request-contract.mjs';
 
 export function validTerminal(row, image, run, pid) {
   return Boolean(row && typeof row === 'object' && !Array.isArray(row) && Object.keys(row).join(',') === 'event,image,run,pid,checks,groups,mode,closed'
@@ -81,13 +82,49 @@ const args = ['-n', '-d', 'extension=mysqlnd', '-d', 'extension=mysqli', '-d', '
   '-d', 'mysqli.allow_persistent=0', '-d', 'default_socket_timeout=3', '-d', 'mysqlnd.net_read_timeout=3',
   'scripts/ci/source-policy-linux-qualification.php', '--owned-linux-qualification'];
 
-function reconcile(cid) {
+function reconcile(cid, limit = 5000) {
+  if (!Number.isSafeInteger(limit) || limit <= 0) throw Error('Original reconciliation deadline exhausted');
   const sql = 'SELECT (SELECT COUNT(*) FROM information_schema.PROCESSLIST WHERE ID<>CONNECTION_ID()),(SELECT COUNT(*) FROM information_schema.INNODB_TRX);';
   const result = spawnSync('docker', ['exec', cid, 'mariadb', '--no-defaults', '--protocol=SOCKET',
     '--socket=/run/adb-owned/native.sock', '--user=root', '--skip-reconnect', '--connect-timeout=2',
-    '--batch', '--raw', '--skip-column-names', '--execute=' + sql], { timeout: 5000, maxBuffer: 4096, encoding: 'utf8' });
+    '--batch', '--raw', '--skip-column-names', '--execute=' + sql], { timeout: Math.min(5000,limit), maxBuffer: 4096, encoding: 'utf8' });
   if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || result.stdout !== '0\t0\n')
     throw Error('Independent all-server release reconciliation failed');
+}
+
+// Each child is owned directly by this controller, not an untracked PHP descendant.
+async function launchRequest(index, env, remaining) {
+  const argv=[...args.slice(0,-2),'scripts/ci/source-policy-wl-request-child.php','--owned-wl-request-child',String(index)];
+  const child=spawn('php',argv,{stdio:['pipe','pipe','pipe'],env});
+  let out='',err='',failure=null,closed=null,settled=false,accept,reject;
+  const first=new Promise((resolve,deny)=>{accept=resolve;reject=deny;});
+  const deny=()=>{failure=Error('Private request child refused');child.kill('SIGKILL');if(!settled){settled=true;reject(failure);}};
+  const timer=setTimeout(deny,remaining);
+  const ended=new Promise(resolve=>{
+    child.on('error',deny);
+    child.on('close',(code,signal)=>{closed={code,signal};clearTimeout(timer);if(!settled)deny();resolve();});
+  });
+  child.stdin.on('error',deny);
+  child.stdout.on('data',chunk=>{
+    out+=chunk.toString('utf8');
+    if(Buffer.byteLength(out)>4096||settled){deny();return;}
+    if(out.includes('\n')){
+      try{const row=parseRequestWire(out);if(!row)throw Error();settled=true;accept(row);}catch{deny();}
+    }
+  });
+  child.stderr.on('data',chunk=>{err+=chunk.toString('utf8');if(err.includes('\n')||Buffer.byteLength(err)>256){const fact=wlRequestFailure(err);if(fact&&fact.profile==='l'&&fact.case_index===index)process.stderr.write(JSON.stringify({request_failure:fact})+'\n');deny();}});
+  const cleanup=async()=>{
+    clearTimeout(timer);if(!closed)child.kill('SIGKILL');
+    let timeout;await Promise.race([ended,new Promise((_,deny)=>{timeout=setTimeout(()=>deny(Error('Exact child cleanup unconfirmed')),1000);})]).finally(()=>clearTimeout(timeout));
+    child.stdin.destroy();if(!closed)throw Error('Exact child exit unavailable');
+  };
+  try{
+    const row=await first;
+    return {row,pid:child.pid,alive:()=>closed===null&&child.exitCode===null&&child.signalCode===null,cleanup,release:async ack=>{
+      child.stdin.end(ack);await ended;
+      if(failure||err!==''||closed.code!==0||closed.signal)throw Error('Clean request child exit required');
+    }};
+  }catch(error){await cleanup();throw error;}
 }
 
 async function main() {
@@ -96,13 +133,17 @@ async function main() {
     || !/^[a-f0-9]{40}$/.test(process.env.EXPECTED_SHA ?? '') || process.env.EXPECTED_SHA !== process.env.GITHUB_SHA
     || !/^[0-9]+$/.test(process.env.GITHUB_RUN_ID ?? '') || !/^[0-9]+$/.test(process.env.GITHUB_RUN_ATTEMPT ?? '')
     || process.argv.length !== 3 || !['audit', 'proof', 'diagnostics'].includes(process.argv[2])) throw Error('Fixed owned job required');
+  const request=process.env.QUALIFICATION_GENUINE_REQUEST_APPROVED==='true';
+  if(![undefined,'false','true'].includes(process.env.QUALIFICATION_GENUINE_REQUEST_APPROVED)||(request&&!wlLinuxJob(process.env)))throw Error('Exact separately approved request job required');
   const stage = process.env.RUNNER_TEMP + '/adb-linux-qualification-' + process.env.GITHUB_RUN_ID + '-' + process.env.GITHUB_RUN_ATTEMPT;
   const run = createHash('sha256').update(process.env.GITHUB_RUN_ID + ':' + process.env.GITHUB_RUN_ATTEMPT).digest('hex').slice(0, 32);
   if (process.argv[2] === 'audit') {
-    const result = spawnSync('php', [...args, 'audit'], { timeout: 20000, maxBuffer: 16384, encoding: 'utf8' });
+    const auditArgs=request?[...args.slice(0,-2),'scripts/ci/source-policy-wl-request-child.php','--owned-wl-request-child','0']:[...args,'audit'];
+    const result = spawnSync('php', auditArgs, { timeout: 20000, maxBuffer: 16384, encoding: 'utf8',env:request?{...process.env,...wlEnvelope(process.env,'0'.repeat(64),'audit')}:process.env });
     if (result.error || result.signal || result.status !== 0 || result.stderr !== '' || !/^\{[^\r\n]+\}\n$/.test(result.stdout))
       throw Error('Source audit refused: ' + JSON.stringify(childFailureSummary(result)));
-    const row = JSON.parse(result.stdout);
+    const row = request?parseRequestWire(result.stdout):JSON.parse(result.stdout);
+    if(request){if(!validRequestAudit(row,'l',run))throw Error('Exact request audit refused');process.stdout.write(result.stdout);return;}
     if (row.event !== 'audit' || !/^[a-f0-9]{64}$/.test(row.image) || row.run !== run || row.native_connections !== 0 || row.sql_queries !== 0 || row.checks < 1) throw Error('Invalid source audit');
     process.stdout.write(result.stdout); return;
   }
@@ -120,6 +161,11 @@ async function main() {
   }
   if (!/^[a-f0-9]{64}$/.test(process.env.QUALIFICATION_IMAGE ?? '')) throw Error('Audited image required');
   reconcile(cid);
+  if(request){
+    const env={...process.env,...wlEnvelope(process.env,process.env.QUALIFICATION_IMAGE,'proof',process.env.QUALIFICATION_REQUEST_MODULES)};
+    const summary=await requestBatch({now:()=>performance.now(),reconcile:limit=>reconcile(cid,Math.ceil(limit)),launch:(index,left)=>launchRequest(index,env,Math.ceil(left))},{profile:'l',run,image:process.env.QUALIFICATION_IMAGE});
+    process.stdout.write(JSON.stringify(summary)+'\n');return;
+  }
   const child = spawn('php', [...args, 'proof'], { stdio: ['pipe', 'pipe', 'pipe'] });
   let out = '', err = '', terminal = null, failure = null;
   const deadline = setTimeout(() => { failure = Error('Owned child deadline'); child.kill('SIGKILL'); }, 25000);

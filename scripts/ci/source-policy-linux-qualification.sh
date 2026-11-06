@@ -5,6 +5,8 @@ set -euo pipefail
 [[ "${GITHUB_REPOSITORY:-}" == NichlasB/alynt-drime-backups-dashboard && "${GITHUB_REF:-}" == refs/heads/master ]]
 [[ "${GITHUB_SHA:-}" =~ ^[a-f0-9]{40}$ && "${EXPECTED_SHA:-}" == "$GITHUB_SHA" ]]
 [[ "${GITHUB_RUN_ID:-}" =~ ^[0-9]+$ && "${GITHUB_RUN_ATTEMPT:-}" =~ ^[0-9]+$ ]]
+request="${QUALIFICATION_GENUINE_REQUEST_APPROVED:-false}"
+[[ "$request" == false || ( "$request" == true && "${GITHUB_ACTOR:-}" == NichlasB && "$GITHUB_RUN_ATTEMPT" == 1 && "${GITHUB_WORKFLOW_REF:-}" == NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-linux-qualification.yml@refs/heads/master ) ]]
 [[ "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 && "$(git rev-parse HEAD)" == "$GITHUB_SHA" ]]
 [[ "$PWD" == "$GITHUB_WORKSPACE" && "$(realpath "$RUNNER_TEMP")" == "$RUNNER_TEMP" ]]
 [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
@@ -15,6 +17,7 @@ image='mariadb@sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd
 uid="$(id -u)"; gid="$(id -g)"
 run="$(printf '%s' "$GITHUB_RUN_ID:$GITHUB_RUN_ATTEMPT" | sha256sum | cut -c1-32)"
 table="adbb_${run:0:12}_options"
+if [[ "$request" == true ]]; then table="adbm_${run:0:12}_options"; fi
 
 root_sql() {
   # Fixed internal statements via stdin; no secret-bearing argv or raw errors.
@@ -88,6 +91,10 @@ trap 'exit 143' TERM
 audit="$(node scripts/ci/source-policy-linux-qualification-controller.mjs audit)"
 printf '%s\n' "$audit"
 export QUALIFICATION_IMAGE="$(printf '%s' "$audit" | node -e 'let s="";process.stdin.on("data",b=>s+=b);process.stdin.on("end",()=>process.stdout.write(JSON.parse(s).image))')"
+if [[ "$request" == true ]]; then
+  export QUALIFICATION_REQUEST_MODULES="$(printf '%s' "$audit" | node -e 'let s="";process.stdin.on("data",b=>s+=b);process.stdin.on("end",()=>process.stdout.write(JSON.parse(s).modules))')"
+  [[ "$QUALIFICATION_REQUEST_MODULES" =~ ^[a-f0-9]{64}$ ]]
+fi
 export QUALIFICATION_PASSWORD="$(node -e 'process.stdout.write(require("node:crypto").randomBytes(32).toString("hex"))')"
 [[ "$QUALIFICATION_IMAGE" =~ ^[a-f0-9]{64}$ && "$QUALIFICATION_PASSWORD" =~ ^[a-f0-9]{64}$ ]]
 [[ "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$image")" == linux/amd64 ]]
@@ -123,6 +130,9 @@ profile="$(printf 'SELECT VERSION(),@@skip_networking,@@wsrep_on,@@innodb_use_na
 printf 'OWNED_QUALIFICATION_BASELINE version/no_tcp/wsrep/native_aio/ac/tx/sessions/trx/schemas:%s\n' "$profile"
 printf 'OWNED_KERNEL io_uring_disabled:%s\n' "$(cat /proc/sys/kernel/io_uring_disabled)"
 printf "CREATE DATABASE adb_owned CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci; CREATE TABLE adb_owned.%s (option_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,option_name varchar(191) NOT NULL,option_value longtext NOT NULL,autoload varchar(20) NOT NULL,PRIMARY KEY(option_id),UNIQUE KEY option_name(option_name),KEY autoload(autoload)) ENGINE=InnoDB COLLATE=utf8mb4_unicode_520_ci; CREATE USER 'adbp'@'localhost' IDENTIFIED BY '%s'; GRANT SELECT,INSERT,UPDATE,DELETE ON adb_owned.%s TO 'adbp'@'localhost';" "$table" "$QUALIFICATION_PASSWORD" "$table" | root_sql
+if [[ "$request" == true ]]; then
+  node --input-type=module -e 'import {wlSchemaSQL} from "./scripts/ci/source-policy-wl-request-contract.mjs";import {createHash} from "node:crypto";const r=createHash("sha256").update(process.env.GITHUB_RUN_ID+":1").digest("hex").slice(0,12);process.stdout.write(wlSchemaSQL("adbm_"+r+"_"));' | root_sql
+fi
 node scripts/ci/source-policy-linux-qualification-controller.mjs proof
 cleanup
 trap - EXIT

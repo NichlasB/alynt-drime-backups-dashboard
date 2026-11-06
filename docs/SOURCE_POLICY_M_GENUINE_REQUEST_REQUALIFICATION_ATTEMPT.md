@@ -1,5 +1,14 @@
 # M Genuine-Session Request Owned Requalification — Passed
 
+Current cohort warning — 2026-11-06: the [W/L preparation foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
+changes shared loaded bootstrap/child/observer source. This genuine success remains
+historical at440430e/run42279779134; it does NOT qualify the new cohort and is not
+a failure. Fresh M qualification remains required after the cohort is frozen.
+The selected next gated slice is ONE Exact-Head L Genuine-Session Request Owned
+Qualification and Cleanup Attempt in the existing ephemeral CI lab with fresh
+original prerequisites and strict owned cleanup. No native/site/wiring operation
+or new allowance here; opportunities19 unchanged. Prior resumes below historical.
+
 Follow-on design — 2026-11-06: [W/L and HTTP closure](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
 retains this success at its unchanged executable cohort and selects one repository-
 only W/L admission/qualification preparation slice next. Recompare after its last

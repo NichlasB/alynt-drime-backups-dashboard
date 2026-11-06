@@ -16,6 +16,7 @@ function phpRun(code){const r=spawnSync(php,['-n','-d','disable_functions=json_e
 const job={GITHUB_ACTIONS:'true',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'NichlasB/alynt-drime-backups-dashboard',GITHUB_REF:'refs/heads/master',GITHUB_WORKFLOW_REF:DISTRIBUTION_WORKFLOW,GITHUB_ACTOR:'NichlasB',RUNNER_OS:'Linux',RUNNER_ENVIRONMENT:'github-hosted',GITHUB_RUN_ATTEMPT:'1',GITHUB_RUN_ID:'123',GITHUB_SHA:'a'.repeat(40),EXPECTED_SHA:'a'.repeat(40),MINIMUM_MODEL:DISTRIBUTION_MODEL,DISTRIBUTION_EXECUTION_APPROVED:'true',GENUINE_REQUEST_APPROVED:'true',MINIMUM_OPERATION:GENUINE_REQUEST};
 test('CLI doubles are definition-free when discovered by the ordinary PHP suite',()=>{
   const files=['auth','process','fixture','sql-shape'].map(name=>join(root,'tests/support/source-policy-minimum-request-'+name+'-model.php'));
+  files.push(join(root,'tests/support/source-policy-wl-request-fixture-model.php'));
   assert.equal(phpRun(files.map(file=>`require ${literal(file)};`).join('')+`if(function_exists('adbg_check')||function_exists('wp_set_current_user')||class_exists('WP_Hook',false)||defined('ADB_M_REQUEST_PROOF'))throw new RuntimeException('discovery leaked definitions');echo 'inert';`),'inert');
 });
 test('exact genuine route is separately default-off and PHP/JS reject malformed or cross-mode jobs',()=>{
@@ -111,7 +112,7 @@ test('actual entries refuse before core/native work and prepared path preserves 
   for(const [file,args]of [['source-policy-minimum-request-worker.php',['--owned-minimum-qualification','proof']],['source-policy-minimum-request-child.php',['--owned-minimum-request-child','0']]]){
     const r=spawnSync(php,['-n',join(root,'scripts/ci',file),...args],{encoding:'utf8',timeout:5000,maxBuffer:4096,env:{PATH:process.env.PATH,SystemRoot:process.env.SystemRoot??'',GITHUB_EVENT_NAME:'push'}});assert.equal(r.status,1);assert.equal(r.stdout,'');assert.match(r.stderr,/Requires exact owned genuine request (job|child)\n/);
   }
-  const child=read('scripts/ci/source-policy-minimum-request-child.php'),worker=read('scripts/ci/source-policy-minimum-request-worker.php'),flow=read('.github/workflows/source-policy-minimum-distribution.yml'),processSource=read('scripts/ci/source-policy-minimum-request-process.php');
+  const child=read('scripts/ci/source-policy-minimum-request-child.php')+read('scripts/ci/source-policy-minimum-request-child-body.php'),worker=read('scripts/ci/source-policy-minimum-request-worker.php'),flow=read('.github/workflows/source-policy-minimum-distribution.yml'),processSource=read('scripts/ci/source-policy-minimum-request-process.php');
   assert.match(flow,/execute_genuine_request:[\s\S]*?default: false/);assert.doesNotMatch(flow,/^  (push|pull_request|schedule):/m);assert.match(flow,/timeout-minutes: 10/);
   assert.ok(child.indexOf("remove_filter( 'query', 'adbg_observe_query'")<child.indexOf('$class::request_view'));assert.match(child,/\$class::request_submit\( \$request \)/);
   assert.doesNotMatch(child+worker,/newInstanceWithoutConstructor|setValue\(|Closure::bind|adbb_bind|Minimum_Lab_Scope/);

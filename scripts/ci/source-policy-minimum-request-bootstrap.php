@@ -44,6 +44,9 @@ function adbb_check( $condition, $label ) {
  */
 function adbg_load() {
 	global $wp_version;
+	if ( defined( 'ADB_WL_REQUEST_PROOF' ) ) {
+		return adbwl_load();
+	}
 	adbg_check( false === php_ini_loaded_file() && false === php_ini_scanned_files() && '' === (string) ini_get( 'auto_prepend_file' ) && '' === (string) ini_get( 'auto_append_file' ), 'no injected process configuration' );
 	$core = realpath( dirname( __DIR__, 2 ) . '/core' );
 	adbg_check( false !== $core && dirname( $core ) === realpath( dirname( __DIR__, 2 ) ), 'fixed core child' );
@@ -114,6 +117,9 @@ function adbg_load() {
  * @return wpdb Owned proof ambient.
  */
 function adbg_ambient() {
+	if ( defined( 'ADB_WL_REQUEST_PROOF' ) ) {
+		return adbwl_ambient();
+	}
 	adbg_check( 1 === preg_match( '/\A[a-f0-9]{64}\z/', (string) getenv( 'QUALIFICATION_PASSWORD' ) ), 'owned private credential' );
 	define( 'DB_NAME', 'adb_minimum' );
 	define( 'DB_USER', 'adbm' );

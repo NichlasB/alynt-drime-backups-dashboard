@@ -1,5 +1,16 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current preparation — 2026-11-06: [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
+implements exact dormant request admission and fixed private preparation, not
+native availability or production readiness. Shared loaded source changed;
+M440430e and historical W/L receipts no longer establish this current cohort.
+Next gated slice: **ONE Exact-Head L Genuine-Session Request Owned Qualification
+and Cleanup Attempt**, existing ephemeral CI lab, fresh original prerequisites,
+owned session/SQL/native fixtures and strict cleanup, separately approved only.
+M refresh, W target/fixture approval and HTTP/installed-graph/target evidence
+remain before ONE switch. No native/site/wiring here;10/10/static9/opportunities19
+unchanged. Earlier resume recommendations below are historical.
+
 Current closure design — 2026-11-06: [current-cohort W/L/HTTP plan](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
 distinguishes passed M at unchanged cohort, historical W/L adapter images and
 unproved native W/L request admission/HTTP/installed graph. Existing nonlegacy

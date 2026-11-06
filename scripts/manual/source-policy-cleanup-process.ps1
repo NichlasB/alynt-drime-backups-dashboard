@@ -28,6 +28,9 @@ function Get-AdbcRemaining($Clock, [int]$Limit) {
 
 function Get-AdbcErrorFact([string]$Prefix) {
     if ($Prefix.Length -gt 256) { return '' }
+    if ($Prefix -cmatch '\AADBWLRF1\|([wl])\|child\|([0-9]|1[0-9]|2[0-2])\|(audit|ambient|setup|auth|entry|verify|cleanup)\|(RuntimeException|Error|TypeError|ValueError|ParseError|ArgumentCountError|ReflectionException|other)\|([a-f0-9]{64})\n\z') {
+        return ('request_profile:'+$Matches[1]+' case:'+$Matches[2]+' stage:'+$Matches[3]+' class:'+$Matches[4]+' assertion:'+$Matches[5])
+    }
     $newline=$Prefix.IndexOf("`n")
     if ($newline -ge 0) {
         $line=$Prefix.Substring(0,$newline+1)

@@ -35,14 +35,16 @@ test('ordinary request composition uses unchanged guard/peer algorithms and asse
   }
 }));
 
-test('pure native catalog DATA distinguishes exact M admission from availability and wrong rows',()=>requestImage(({temporary,run})=>{
-  for(const scenario of ['admission-shipped','admission-m','admission-php','admission-w','admission-malformed','admission-core','admission-driver']){
+test('pure native catalog DATA distinguishes exact M/W/L admission from availability and wrong rows',()=>requestImage(({temporary,run})=>{
+  for(const scenario of ['admission-shipped','admission-m','admission-php','admission-w','admission-l','admission-unknown-native','admission-malformed','admission-core','admission-driver']){
     const result=run(scenario);assert.equal(result.error,undefined);assert.equal(result.status,0,result.stderr+result.stdout);assert.equal(result.stderr,'');assert.match(result.stdout,/^checks:[1-9][0-9]*\n$/);
   }
   const file=join(temporary,'includes/class-source-policy-trusted-source.php');
   const controls=[
     ['public static function request_policy( $core ) {','public static function request_policy( $core ) { return false;','admission-m'],
-    ["'6.0' === $core && '7.4.33' === $policy['php'] && null === $policy['driver']","null === $policy['driver']",'admission-w'],
+    ["isset( $rows[ $core ] ) && $rows[ $core ] === $policy['php'] && null === $policy['driver']","null === $policy['driver']",'admission-unknown-native'],
+    ["'7.1.3' => '8.5.12'","'7.1.3' => '8.5.11'",'admission-w'],
+    ["'7.1.4' => '8.5.12'","'7.1.4' => '8.5.11'",'admission-l'],
     ["PHP_VERSION !== $policy['php']","( false && PHP_VERSION !== $policy['php'] )",'admission-php'],
     ["$core !== $policy['core']",'false','admission-core'],
     ["null === $policy['driver']",'true','admission-driver'],

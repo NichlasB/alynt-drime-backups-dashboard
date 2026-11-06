@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## W/L native request preparation implemented; physical qualification gated — 2026-11-06
+
+The approved [W/L foundation](SOURCE_POLICY_WL_REQUEST_PREPARATION_FOUNDATION.md)
+adds exact dormant W/L request declarations, independently audited static auth
+pins, fixed private proof entries and bounded default-off controllers. Isolated
+positives, guard-removal controls and ordinary QA are not native availability.
+Shared loaded source changed: M440430e is now historical for this cohort, not
+failed. Historical W/L receipts also do not qualify these request compositions.
+
+Implementation-plan progress: the planned admission/preparation gap is closed;
+current-cohort native M/W/L and genuine HTTP/installed-target evidence remain.
+Recommended next gated slice: **ONE Exact-Head L Genuine-Session Request Owned
+Qualification and Cleanup Attempt**, existing ephemeral CI lab, explicit request
+flag, fresh original prerequisites, owned session/SQL/native fixtures and strict
+cleanup. No attempt authorized here; M refresh and exact-target W approval follow
+on the frozen cohort before HTTP/target closure and ONE application switch.
+Production wiring unchanged; campaign10/10/static9/opportunities19 unchanged.
+All earlier resume recommendations below are historical.
+
 ## Current-cohort W/L and HTTP closure designed — 2026-11-06
 
 The approved [closure design](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)

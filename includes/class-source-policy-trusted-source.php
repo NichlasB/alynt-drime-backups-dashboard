@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Previously pinned core-library cohorts, not authentication of arbitrary code. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source {
-	/** Fixed M native declaration eligibility, not initialization or readiness.
+	/** Fixed M/W/L native declaration eligibility, not initialization or readiness.
 	 *
 	 * @param mixed $core Fixed core identity.
 	 * @return array|false Non-secret catalog only; never a root or handle.
@@ -21,7 +21,12 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source {
 		if ( ! is_array( $policy ) || ! isset( $policy['core'], $policy['php'] ) || $core !== $policy['core'] || PHP_VERSION !== $policy['php'] || ! array_key_exists( 'driver', $policy ) ) {
 			return false;
 		}
-		$native = '6.0' === $core && '7.4.33' === $policy['php'] && null === $policy['driver'];
+		$rows   = array(
+			'6.0'   => '7.4.33',
+			'7.1.3' => '8.5.12',
+			'7.1.4' => '8.5.12',
+		);
+		$native = isset( $rows[ $core ] ) && $rows[ $core ] === $policy['php'] && null === $policy['driver'];
 		return $native || ( is_string( $policy['driver'] ) && '' !== $policy['driver'] ) ? $policy : false;
 	}
 

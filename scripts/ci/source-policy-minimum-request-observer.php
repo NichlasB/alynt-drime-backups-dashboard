@@ -54,10 +54,11 @@ function adbg_sql_tokens( $sql ) {
  *
  * @param mixed  $sql Source-bound core SQL, returned unchanged by its observer.
  * @param string $prefix Owned prefix.
+ * @param string $core Fixed proof core identity; M by default.
  * @return string|null Fixed classification.
  */
-function adbg_sql_class( $sql, $prefix ) {
-	if ( ! is_string( $prefix ) || 1 !== preg_match( '/\Aadbm_[a-f0-9]{12}_\z/', $prefix ) ) {
+function adbg_sql_class( $sql, $prefix, $core = '6.0' ) {
+	if ( ! in_array( $core, array( '6.0', '7.1.3', '7.1.4' ), true ) || ! is_string( $prefix ) || 1 !== preg_match( '/\Aadbm_[a-f0-9]{12}_\z/', $prefix ) ) {
 		return null;
 	}
 	// Pinned wpdb::get_table_charset cold path before the owned session-token insert.
@@ -70,7 +71,10 @@ function adbg_sql_class( $sql, $prefix ) {
 	}
 	list( $shape, $values ) = $tokens;
 	$p                      = preg_quote( $prefix, '/' );
-	if ( "SELECT option_name, option_value FROM {$prefix}options WHERE autoload = ?" === $shape && array( 'yes' ) === $values ) {
+	if ( in_array( $core, array( '7.1.3', '7.1.4' ), true ) && "SELECT option_name, option_value FROM {$prefix}options WHERE autoload IN ( ?, ?, ?, ? )" === $shape && array( 'yes', 'on', 'auto-on', 'auto' ) === $values ) {
+		return 'role-read';
+	}
+	if ( '6.0' === $core && "SELECT option_name, option_value FROM {$prefix}options WHERE autoload = ?" === $shape && array( 'yes' ) === $values ) {
 		return 'role-read';
 	}
 	if ( "SELECT option_value FROM {$prefix}options WHERE option_name = ? LIMIT 1" === $shape && array( $prefix . 'user_roles' ) === $values ) {
@@ -112,7 +116,7 @@ function adbg_sql_class( $sql, $prefix ) {
  * @return string Exact same bytes.
  */
 function adbg_observe_query( $sql ) {
-	$class = adbg_sql_class( $sql, $GLOBALS['wpdb']->prefix );
+	$class = adbg_sql_class( $sql, $GLOBALS['wpdb']->prefix, defined( 'ADB_WL_REQUEST_PROOF' ) ? ( $GLOBALS['wp_version'] ?? null ) : '6.0' );
 	adbg_check( null !== $class, 'unexpected auth SQL' );
 	$phase = $GLOBALS['adbg_auth_phase'];
 	adbg_check( in_array( $phase, array( 'setup', 'auth' ), true ), 'observer phase' );
