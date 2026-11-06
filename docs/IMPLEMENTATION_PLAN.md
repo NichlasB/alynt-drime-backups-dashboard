@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## M request admission and private catalog binding implemented — 2026-11-06
+
+The approved [foundation](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md) adds
+exact core6.0/PHP7.4.33 native declaration eligibility and a boolean-only exact
+root/context catalog comparison before source/config capture and revalidation.
+W/L request-native rows stay closed; no public factory/application caller/wiring,
+actual auth/storage/native execution, workflow or limit change. Isolated API/DATA
+evidence is not genuine-session, native or target availability; uploader untouched.
+
+Implementation-plan progress: admission-design step1 is implemented, not physically
+qualified or delivered. Exact next approval: **Repository-Only M Genuine-Session
+Request Qualification Integration Safety Foundation (Preparation Only)**, finite
+existing-lab proof integration with isolated tests, no execution/acquisition/dispatch
+or actual fixtures/auth/storage/native operations. Freeze the reviewed executable
+cohort before a separately approved one-attempt M proof; affected W/L and HTTP/target
+evidence remain required before ONE application switch. Campaign10/10/static9/17
+opportunities unchanged; previous resumes below are historical.
+
 ## Native request admission and genuine-request integration designed — 2026-11-06
 
 The approved [design](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md) selects

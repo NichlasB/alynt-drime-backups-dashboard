@@ -1,5 +1,14 @@
 # Guarded Request-Scoped Composition and Admission Safety Foundation
 
+Current successor — 2026-11-06: [M admission/catalog-binding foundation](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
+implements exact M declaration eligibility and root/context comparison; this older
+foundation's all-native-closed status is historical. W/L native request rows stay
+closed and no actual native execution/application wiring occurs. API-copy evidence
+is still not genuine auth/storage/native qualification. Next approval: Repository-
+Only M Genuine-Session Request Qualification Integration Safety Foundation
+(Preparation Only), isolated preparation on the existing lab, no actual fixtures,
+acquisition, auth/storage/native execution or dispatch.
+
 Current successor design — 2026-11-06: [native admission/integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
 settles the deliberately closed native gate as a future M-only dormant declaration
 branch plus exact root/context catalog binding. This foundation's shipped gate and

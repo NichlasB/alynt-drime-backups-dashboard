@@ -45,6 +45,9 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Join {
 		try {
 			$core   = $GLOBALS['wp_version'] ?? null;
 			$policy = $this->policy ?? Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source::policy( $core );
+			if ( null !== $this->request_root && ( ! $this->request_root instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry || ! $this->request_root->request_catalog_matches( $this, $policy ) ) ) {
+				return false; // Catalog agreement precedes declaration IO and protected settings.
+			}
 			if ( ! is_array( $policy ) || $core !== $policy['core'] || PHP_VERSION !== $policy['php'] || ! $this->checked_declarations( $policy )
 				|| ! $this->production_query instanceof Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context || ! $this->production_query->owns( $this->receiver ) ) {
 				return false;
@@ -181,7 +184,8 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Join {
 	private function production_current() {
 		try {
 			return is_array( $this->production_projection ) && is_array( $this->policy ) && ( $GLOBALS['wpdb'] ?? null ) === $this->ambient
-				&& ( $GLOBALS['wp_version'] ?? null ) === $this->policy['core'] && $this->checked_declarations( $this->policy )
+				&& ( $GLOBALS['wp_version'] ?? null ) === $this->policy['core']
+				&& ( null === $this->request_root || $this->request_root->request_catalog_matches( $this, $this->policy ) ) && $this->checked_declarations( $this->policy )
 				&& $this->production_projection === $this->settings( false )
 				&& Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation::matches( $this->production_projection, $this->production_runtime, $this->production_expected )
 				// phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_get_client_info,WordPress.PHP.YodaConditions -- Exact frozen observation comparison, not connection or SQL.

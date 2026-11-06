@@ -5,7 +5,7 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {requestImage} from '../support/source-policy-request-image.mjs';
 
 test('ordinary request composition uses unchanged guard/peer algorithms and assertion-kills semantic controls',()=>requestImage(({temporary,run})=>{
-  for(const scenario of ['save','view','root-controls','native-policy']){const result=run(scenario);assert.equal(result.error,undefined);assert.equal(result.status,0,result.stderr+result.stdout);assert.match(result.stdout,/^checks:[1-9][0-9]*\n$/);assert.equal(result.stderr,'');}
+  for(const scenario of ['save','view','root-controls','native-policy','catalog-extra','catalog-order','catalog-drift']){const result=run(scenario);assert.equal(result.error,undefined);assert.equal(result.status,0,result.stderr+result.stdout);assert.match(result.stdout,/^checks:[1-9][0-9]*\n$/);assert.equal(result.stderr,'');}
   const root='includes/traits/trait-source-policy-request-composition.php';
   const entry='includes/class-source-policy-guarded-entry.php';
   const peers='includes/traits/trait-source-policy-request-connection.php';
@@ -21,7 +21,12 @@ test('ordinary request composition uses unchanged guard/peer algorithms and asse
     [peers,'$this->request_frame_attempted = true;','/* missing consumption */','root-controls'],
     [root,"( $closing ? 'closing' : 'running' ) === $this->request_phase &&",'','root-controls'],
     ['includes/traits/trait-source-policy-production-join.php','return null === $this->request_root || $this->receiver->bind_request_frame( $this->request_root, $this, $this->production_query, $this->frame, $this->binding );','return true;','save'],
-    ['includes/class-source-policy-trusted-source.php',"is_string( $policy['driver'] ?? null ) && '' !== $policy['driver']",'true','native-policy']
+    ['includes/class-source-policy-trusted-source.php','public static function request_policy( $core ) {','public static function request_policy( $core ) { return self::policy( $core );','native-policy'],
+    [root,'$this->request_policy === $policy','true','catalog-extra'],
+    [root,"$this->request_peers['context'] === $context",'true','root-controls'],
+    [root,"return 'running' === $this->request_phase && isset( $this->request_peers['context'] )","return isset( $this->request_peers['context'] )",'root-controls'],
+    ['includes/traits/trait-source-policy-production-join.php','! $this->request_root->request_catalog_matches( $this, $policy )','false','catalog-extra'],
+    ['includes/traits/trait-source-policy-production-join.php','$this->request_root->request_catalog_matches( $this, $this->policy )','true','catalog-drift']
   ];
   for(const [path,before,after,scenario]of controls){
     const file=join(temporary,path),source=readFileSync(file,'utf8'),mutant=source.replaceAll(before,after);assert.notEqual(mutant,source,before);writeFileSync(file,mutant);
@@ -29,6 +34,26 @@ test('ordinary request composition uses unchanged guard/peer algorithms and asse
     finally{writeFileSync(file,source);assert.equal(readFileSync(file,'utf8'),source);}
   }
 }));
+
+test('pure native catalog DATA distinguishes exact M admission from availability and wrong rows',()=>requestImage(({temporary,run})=>{
+  for(const scenario of ['admission-shipped','admission-m','admission-php','admission-w','admission-malformed','admission-core','admission-driver']){
+    const result=run(scenario);assert.equal(result.error,undefined);assert.equal(result.status,0,result.stderr+result.stdout);assert.equal(result.stderr,'');assert.match(result.stdout,/^checks:[1-9][0-9]*\n$/);
+  }
+  const file=join(temporary,'includes/class-source-policy-trusted-source.php');
+  const controls=[
+    ['public static function request_policy( $core ) {','public static function request_policy( $core ) { return false;','admission-m'],
+    ["'6.0' === $core && '7.4.33' === $policy['php'] && null === $policy['driver']","null === $policy['driver']",'admission-w'],
+    ["PHP_VERSION !== $policy['php']","( false && PHP_VERSION !== $policy['php'] )",'admission-php'],
+    ["$core !== $policy['core']",'false','admission-core'],
+    ["null === $policy['driver']",'true','admission-driver'],
+    ["is_string( $policy['driver'] )",'true','admission-driver']
+  ];
+  for(const [before,after,scenario]of controls){
+    const source=readFileSync(file,'utf8'),mutant=source.replaceAll(before,after);assert.notEqual(mutant,source,before);writeFileSync(file,mutant);
+    try{const result=run(scenario);assert.equal(result.error,undefined);assert.notEqual(result.status,0,before);assert.match(result.stderr,/PHPUnit\\Framework\\ExpectationFailedException/,result.stderr+result.stdout);}
+    finally{writeFileSync(file,source);assert.equal(readFileSync(file,'utf8'),source);}
+  }
+},false));
 
 test('positive construction image never supplies private state or ready/facts/handle/policy fields',()=>{
   const worker=readFileSync(new URL('../support/source-policy-request-worker.php',import.meta.url),'utf8');

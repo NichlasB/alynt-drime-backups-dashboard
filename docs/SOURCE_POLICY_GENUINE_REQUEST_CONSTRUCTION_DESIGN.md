@@ -1,5 +1,13 @@
 # Genuine Authenticated Request Source/Fixture and Private-Construction Closure Design
 
+Current admission foundation — 2026-11-06: [M eligibility/private catalog binding](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
+implements the admission design's first step with isolated API/DATA evidence only.
+No genuine session/storage/native execution or wiring. Next approval: Repository-
+Only M Genuine-Session Request Qualification Integration Safety Foundation
+(Preparation Only), implementing this exact source/fixture/effect contract on the
+existing CI lab without acquisition, actual fixtures or dispatch. Freeze reviewed
+code before separately approving one native attempt; older resumes are historical.
+
 Current admission design — 2026-11-06: [native request integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
 specifies the M-only native declaration and root/context catalog-binding contract,
 preserving this document's exact auth source/fixture/effect requirements. No code,

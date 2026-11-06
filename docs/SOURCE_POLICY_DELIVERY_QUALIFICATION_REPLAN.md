@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current foundation — 2026-11-06: [M request admission/catalog binding](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
+implements design step1, exact M declaration eligibility and private comparison
+before capture/revalidation. W/L native request rows closed; isolated API/DATA only,
+no actual auth/storage/native execution, workflow or wiring change. Next approval:
+Repository-Only M Genuine-Session Request Qualification Integration Safety Foundation
+(Preparation Only), the finite existing-lab proof integration, no acquisition,
+fixture creation or dispatch. Freeze reviewed code before separately approving one
+M attempt; affected W/L and HTTP/target evidence precede ONE application switch.
+Campaign10/10/static9/17 opportunities unchanged; older resumes are historical.
+
 Current design — 2026-11-06: [native request admission/integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
 settles M-only dormant native declaration eligibility and exact root/context catalog
 binding, then finite genuine-session proof preparation on the existing CI lab.

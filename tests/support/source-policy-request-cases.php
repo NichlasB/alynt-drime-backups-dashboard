@@ -20,10 +20,13 @@ function request_case($case,$request,$store) {
 	if('uncertain'===$case)$store->throw_after_write=true;
 	if('close-error'===$case)$GLOBALS['boot_after']['indexes']=static function(){$GLOBALS['boot_fault']='close-false';};
 	if('native-policy'===$case)A::assertFalse(Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source::request_policy('6.0'));
-	if('original-policy'===$case)foreach(array('6.0','7.1.3','7.1.4','unknown',null)as$core)A::assertFalse(Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source::request_policy($core));
+	if('original-policy'===$case)foreach(array('6.0','7.1.3','7.1.4','unknown',null)as$core){$actual=Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source::request_policy($core);if('6.0'===$core&&'7.4.33'===PHP_VERSION)A::assertSame(Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source::policy($core),$actual);else A::assertFalse($actual);}
 	if('root-controls'===$case)$GLOBALS['boot_after']['indexes']=static function(){
 		$receiver=$GLOBALS['boot_connection'];$root=$GLOBALS['request_observed_root'];$peers=$GLOBALS['request_observed_peers'];
 		A::assertCount(5,$peers);A::assertTrue($root->request_bound($receiver,$peers['query'],$peers['context']));
+		$policy=$GLOBALS['request_observed_policy'];A::assertTrue($root->request_catalog_matches($peers['context'],$policy));
+		A::assertFalse($root->request_catalog_matches(new stdClass(),$policy));A::assertFalse($root->request_catalog_matches(null,$policy));
+		foreach(array(null,false,new stdClass(),array(),array_merge($policy,array('extra'=>'changed')))as$wrong)A::assertFalse($root->request_catalog_matches($peers['context'],$wrong));
 		A::assertFalse($root->request_claim('connection'));A::assertFalse($root->request_retain(new stdClass()));
 		A::assertFalse($root->request_bound($receiver,new stdClass(),$peers['context']));A::assertFalse($root->request_bound(new stdClass(),$peers['query'],$peers['context']));A::assertFalse($root->request_bound($receiver,$peers['query'],new stdClass()));
 		A::assertNull(Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection::from_request($root));A::assertNull(Alynt_Drime_Backups_Dashboard_Source_Policy_Query_Context::from_request($root,$receiver,'wrong'));
@@ -40,10 +43,20 @@ function request_case($case,$request,$store) {
 	$early=array('capability','nonce','site','revision','compound-nonce','compound-site','compound-mode','source-key','request-object');
 	if(in_array($case,$early,true)){A::assertSame(0,$GLOBALS['request_record_reads']);A::assertSame(0,$GLOBALS['boot_counts']['allocate']);A::assertSame(0,$store->reads);}
 	if(in_array($case,array('record','record-throw','native-policy','original-policy','source'),true)){A::assertSame(0,$GLOBALS['boot_counts']['allocate']);A::assertSame(0,$store->reads);}
+	if(in_array($case,array('catalog-extra','catalog-order','catalog-drift'),true)){
+		$captured='catalog-drift'===$case?1:0;
+		A::assertSame(2,$GLOBALS['request_catalog_reads']);A::assertSame($captured,$GLOBALS['request_declaration_checks']??0,'Reject disagreement before further declaration IO.');
+		A::assertSame($captured,$GLOBALS['boot_parse_calls']??0);A::assertSame(0,$GLOBALS['boot_counts']['object']);A::assertSame(0,$GLOBALS['boot_counts']['allocate']);A::assertSame(0,$store->reads);A::assertSame(0,$store->mutations);
+	}
 	if(isset($GLOBALS['boot_connection'])){
 		$receiver=$GLOBALS['boot_connection'];A::assertFalse($receiver->ready);A::assertNull(boot_get($receiver,'request_root'));A::assertNull(boot_get($receiver,'bootstrap_frame'));A::assertTrue(boot_get($receiver,'request_frame_attempted'));A::assertSame('',boot_get($receiver,'dbpassword'));A::assertSame(1,$GLOBALS['boot_counts']['close']);A::assertSame(7,$GLOBALS['boot_counts']['commands']);
 	}
 	if(isset($GLOBALS['request_observed_root'])){$root=$GLOBALS['request_observed_root'];A::assertSame('closed',boot_get($root,'request_phase'));A::assertSame(array(),boot_get($root,'request_peers'));A::assertNull(boot_get($root,'request_policy'));A::assertFalse($root->request_claim('connection'));trusted_error($root->view(7,'wpvivid'),'source_policy_unavailable');}
+	if(isset($GLOBALS['request_observed_peers'])){
+		foreach($GLOBALS['request_observed_peers']as$peer)A::assertNull(boot_get($peer,'request_root'),'Even partial graphs release every root link.');
+		A::assertFalse($root->request_catalog_matches($GLOBALS['request_observed_peers']['context'],$GLOBALS['request_observed_policy']));
+		foreach(array('policy','frame','binding','production_query','receiver')as$field)A::assertNull(boot_get($GLOBALS['request_observed_peers']['context'],$field));
+	}
 	if(in_array($case,array_merge($early,array('record','record-throw')),true))A::assertFalse(class_exists(Alynt_Drime_Backups_Dashboard_Source_Policy_Lazy_Provider::class,false),'Guard denial must not load the provider.');
 	require_once ABSPATH.'includes/class-source-policy-lazy-provider.php'; // Definition-only refusal checks after guard-order observations.
 	foreach(array('No_Reconnect_Connection','Query_Context','Trusted_Context','Native_Adapter','Lazy_Provider')as$name){$peer='Alynt_Drime_Backups_Dashboard_Source_Policy_'.$name;$args=array(null);if(in_array($name,array('Query_Context','Trusted_Context','Lazy_Provider'),true))$args=array(null,null,null);elseif('Native_Adapter'===$name)$args=array(null,null);A::assertNull(call_user_func_array(array($peer,'from_request'),$args));$args[0]=new stdClass();A::assertNull(call_user_func_array(array($peer,'from_request'),$args));trusted_error($peer::create(),'source_policy_unavailable');}

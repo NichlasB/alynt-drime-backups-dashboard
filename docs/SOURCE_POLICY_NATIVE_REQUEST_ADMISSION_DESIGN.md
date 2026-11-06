@@ -1,5 +1,14 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current implementation — 2026-11-06: [M admission foundation](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
+implements step1 below: exact M declaration branch and private root/context catalog
+binding before capture/revalidation. Original catalogs/limits preserved; W/L native
+request rows closed. Evidence isolated API/DATA only; no actual auth/storage/native
+execution or wiring. Next approval is step2: Repository-Only M Genuine-Session
+Request Qualification Integration Safety Foundation (Preparation Only), fixed
+existing-lab integration with isolated tests and no acquisition/fixtures/dispatch.
+Historical future-tense step1 below is now implemented, not physically qualified.
+
 ## Approved scope and baseline — 2026-11-06
 
 Repository-only DESIGN, validation, commit/push and ordinary exact-head CI.

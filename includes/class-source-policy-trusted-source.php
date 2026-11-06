@@ -11,14 +11,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Previously pinned core-library cohorts, not authentication of arbitrary code. */
 final class Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source {
-	/** Native request construction is not approved by this isolated foundation.
+	/** Fixed M native declaration eligibility, not initialization or readiness.
 	 *
 	 * @param mixed $core Fixed core identity.
 	 * @return array|false Non-secret catalog only; never a root or handle.
 	 */
 	public static function request_policy( $core ) {
 		$policy = self::policy( $core );
-		return is_array( $policy ) && is_string( $policy['driver'] ?? null ) && '' !== $policy['driver'] ? $policy : false;
+		if ( ! is_array( $policy ) || ! isset( $policy['core'], $policy['php'] ) || $core !== $policy['core'] || PHP_VERSION !== $policy['php'] || ! array_key_exists( 'driver', $policy ) ) {
+			return false;
+		}
+		$native = '6.0' === $core && '7.4.33' === $policy['php'] && null === $policy['driver'];
+		return $native || ( is_string( $policy['driver'] ) && '' !== $policy['driver'] ) ? $policy : false;
 	}
 
 	/**

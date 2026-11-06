@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current foundation — 2026-11-06: [M request admission/catalog binding](SOURCE_POLICY_M_REQUEST_ADMISSION_FOUNDATION.md)
+implements exact M declaration eligibility and the root/context comparison, not
+native readiness. W/L native request rows remain closed; no actual auth/storage/
+native/workflow/wiring change. Next approval: Repository-Only M Genuine-Session
+Request Qualification Integration Safety Foundation (Preparation Only), isolated
+fixed existing-lab integration without acquisition, fixtures, execution or dispatch.
+Reviewed/frozen cohort and one separately approved M attempt, affected W/L and
+HTTP/target evidence remain gates before ONE switch. Campaign10/10/static9/17 unchanged.
+
 Current design — 2026-11-06: [native request admission/integration](SOURCE_POLICY_NATIVE_REQUEST_ADMISSION_DESIGN.md)
 specifies M-only dormant native declaration eligibility, exact root/context catalog
 binding and finite genuine-session qualification preparation. No source/runtime/

@@ -1,6 +1,6 @@
 <?php
 /**
- * Unregistered result-only request composition. Native admission stays closed.
+ * Unregistered result-only request composition. No application caller or wiring.
  *
  * @package Alynt_Drime_Backups_Dashboard
  */
@@ -128,7 +128,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Composition {
 		require_once dirname( __DIR__ ) . '/class-source-policy-lazy-provider.php';
 		$this->request_policy = Alynt_Drime_Backups_Dashboard_Source_Policy_Trusted_Source::request_policy( $GLOBALS['wp_version'] ?? null );
 		if ( false === $this->request_policy || ! class_exists( 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection', false ) ) {
-			return false; // Native rows are deliberately unavailable before config/peer allocation.
+			return false; // Unsupported declarations refuse before config/peer allocation.
 		}
 		$this->request_phase = 'assembling';
 		$connection          = Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection::from_request( $this );
@@ -216,6 +216,18 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Request_Composition {
 	public function request_bound( $receiver, $query, $context ) {
 		return 'running' === $this->request_phase && ( $this->request_peers['connection'] ?? null ) === $receiver
 			&& ( $this->request_peers['query'] ?? null ) === $query && ( $this->request_peers['context'] ?? null ) === $context;
+	}
+
+	/** Compare the context's own selection to our frozen catalog, never export it.
+	 *
+	 * @param object $context Exact retained context.
+	 * @param mixed  $policy Context-selected non-secret declaration DATA.
+	 * @return bool
+	 */
+	public function request_catalog_matches( $context, $policy ) {
+		return 'running' === $this->request_phase && isset( $this->request_peers['context'] ) && $this->request_peers['context'] === $context
+			// phpcs:ignore WordPress.PHP.YodaConditions -- Exact frozen catalog identity, never caller-supplied authority.
+			&& is_array( $policy ) && $this->request_policy === $policy;
 	}
 
 	/** Reject serialization of the operation identity.
