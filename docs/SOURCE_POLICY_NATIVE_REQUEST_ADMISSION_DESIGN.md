@@ -1,5 +1,14 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current closure design — 2026-11-06: [W/L and HTTP qualification order](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
+retains M440430e/run42279779134 positive48231/9 and strict cleanup at its unchanged
+cohort. Existing W/L expectation rows remain isolated candidates; request_policy
+still excludes their native declarations. Next approval: Repository-Only W/L Native
+Request Admission and Qualification Preparation Safety Foundation, one cohesive
+isolated/static-source preparation; no native/site/wiring. Final shared cohort
+comparison, exact affected-profile proofs and real HTTP/target eligibility still
+precede ONE switch. Opportunities19 unchanged; earlier descriptions historical.
+
 Current preparation — 2026-11-06: [step2 integration foundation](SOURCE_POLICY_M_GENUINE_REQUEST_PREPARATION_FOUNDATION.md)
 adds the separate default-off genuine-session operation,20-file proof catalog,
 owned fixture/effect contracts, real-API driver and fresh child supervisor using

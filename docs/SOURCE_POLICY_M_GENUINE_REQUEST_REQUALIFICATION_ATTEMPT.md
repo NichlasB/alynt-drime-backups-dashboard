@@ -1,5 +1,12 @@
 # M Genuine-Session Request Owned Requalification — Passed
 
+Follow-on design — 2026-11-06: [W/L and HTTP closure](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
+retains this success at its unchanged executable cohort and selects one repository-
+only W/L admission/qualification preparation slice next. Recompare after its last
+shared change: a changed loaded M file requires fresh M proof, not transfer of this
+receipt. No current native/site/wiring operation or new allowance; opportunities19.
+The historical recommendation at the end was the approval that produced that design.
+
 ## Approval and fresh prerequisites — 2026-11-06
 
 ONE explicitly approved attempt at

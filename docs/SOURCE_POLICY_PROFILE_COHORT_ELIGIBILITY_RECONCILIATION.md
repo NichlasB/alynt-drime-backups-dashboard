@@ -1,5 +1,14 @@
 # Required-Profile Source-Cohort and Production-Eligibility Reconciliation
 
+Current reconciliation — 2026-11-06: [W/L/HTTP closure design](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
+repeats actual Git comparisons at614d946:8 modified runtime paths in BOTH recorded
+W28/L29 audit sets; other members identical. The single-file result below applies
+only to its oldb4c6eff baseline. M genuine-session proof passed at440430e and
+executable bytes remain identical; W/L request admission and web/target eligibility
+are not promoted. Next gate: Repository-Only W/L Native Request Admission and
+Qualification Preparation Safety Foundation, no execution/site/wiring. Freeze
+then recompare affected rows; campaign10/10/static9/opportunities19 unchanged.
+
 Current implementation — 2026-11-05: the separately approved [dormant trusted
 context/lazy-provider foundation](SOURCE_POLICY_TRUSTED_CONTEXT_LAZY_PROVIDER_FOUNDATION.md)
 implements the selected isolated capture/dispatch seam, NOT a native/production

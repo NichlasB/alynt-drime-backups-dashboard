@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current closure design — 2026-11-06: [W/L and genuine HTTP](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
+reconciles8 changed paths per historical W/L audit cohort, existing expectation
+rows versus missing W/L request admission, and CLI versus installed web evidence.
+M remains passed at unchanged440430e executable bytes; shared preparation may
+stale it and requires final-cohort comparison, not blind per-commit native reruns.
+Next gated slice: **Repository-Only W/L Native Request Admission and Qualification
+Preparation Safety Foundation**, cohesive dormant/static-source/isolated preparation
+only. Exact affected-profile proofs, HTTP/target eligibility then ONE application
+switch remain separate gates. No execution/site/wiring;10/10,static9,opportunities19.
+
 Current requalification — 2026-11-06: [M genuine-session requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 at440430e/run42279779134 passed48231/9, all23 cases and strict cleanup/recovery,
 including fixed independent held-live/post-exit release predicates. M CLI/owned

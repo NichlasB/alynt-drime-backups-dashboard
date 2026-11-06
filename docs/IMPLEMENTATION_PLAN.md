@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Current-cohort W/L and HTTP closure designed — 2026-11-06
+
+The approved [closure design](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
+finds8 changed runtime paths in each historical W/L audit set, existing isolated
+nonlegacy expectations but M-only native request admission. M440430e proof remains
+valid at this docs-only cohort; future loaded changes require final-cohort comparison.
+HTTP/installed-graph/target eligibility remains separate; no native/site/wiring work.
+
+Implementation-plan progress: finite remaining gates reconciled, not qualified.
+Recommended next gated slice: **Repository-Only W/L Native Request Admission and
+Qualification Preparation Safety Foundation**, one cohesive dormant admission/
+static-auth-source/proof preparation with isolated tests; no native dispatch,
+actual auth/SQL/fixtures/site/wiring. Freeze after preparation, then approve exact
+affected-profile proofs before HTTP/target closure and ONE application switch.
+Campaign10/10/static9/opportunities19 unchanged; older resumes historical.
+
 ## M genuine-session requalification passed; remaining profile/HTTP gates — 2026-11-06
 
 The approved [ONE requalification](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)

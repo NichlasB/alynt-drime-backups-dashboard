@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current closure design — 2026-11-06: [current-cohort W/L/HTTP plan](SOURCE_POLICY_WL_HTTP_QUALIFICATION_CLOSURE_DESIGN.md)
+distinguishes passed M at unchanged cohort, historical W/L adapter images and
+unproved native W/L request admission/HTTP/installed graph. Existing nonlegacy
+expectations do not require redesign. Next gated slice: **Repository-Only W/L
+Native Request Admission and Qualification Preparation Safety Foundation**,
+isolated/static-source preparation only; freeze shared cohort before necessary
+profile proofs. Genuine HTTP/target evidence and ONE application switch remain
+gated. No native/site/wiring change; campaign10/10/static9/opportunities19 unchanged.
+
 Current requalification — 2026-11-06: [M genuine-session owned proof](SOURCE_POLICY_M_GENUINE_REQUEST_REQUALIFICATION_ATTEMPT.md)
 at440430e/run42279779134 passed48231 checks/9 groups, all23 cases and strict owned
 cleanup/recovery. Independent held-live/post-exit release predicates passed; no
