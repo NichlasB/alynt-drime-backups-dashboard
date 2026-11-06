@@ -1,5 +1,13 @@
 # M Genuine-Session Request Owned Qualification Attempt — Blocked
 
+Follow-on — 2026-11-06: the separately approved
+[repository-only compatibility repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
+fixes a source-confirmed missing cold usermeta column read with isolated tests.
+It does not identify the raw historical query, rerun this job or change its failed
+outcome. Next gate is ONE New-Head M Genuine-Session Request Owned Requalification
+and Cleanup Attempt on the final repair cohort; separate native approval required.
+Production wiring and consumed opportunity count18 remain unchanged.
+
 ## Exact approval, target and baseline — 2026-11-06
 
 ONE explicitly approved exact-head attempt at

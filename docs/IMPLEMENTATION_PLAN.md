@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## M auth SQL cold-metadata compatibility repaired, native proof gated — 2026-11-06
+
+The approved [repository-only repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
+identifies stock wpdb's cold usermeta column lookup before a session INSERT. The
+private observer now accepts only that exact owned-table read during setup, paid
+under the unchanged call cap; all unknown SQL/native query seals remain closed.
+Isolated red-to-green regression and five assertion-killed controls, no native
+rerun or production wiring. The historical failed query itself remains uncaptured.
+
+Implementation-plan progress: one confirmed harness/source compatibility omission
+addressed, not actual genuine-session qualification. Recommended next gated slice:
+**ONE New-Head M Genuine-Session Request Owned Requalification and Cleanup Attempt**,
+final reviewed repair head, existing ephemeral CI lab, fresh prerequisites and
+explicit acquisition/owned session-SQL/native/cleanup approval. Historical run
+42260737470 remains failed; opportunities18, campaign10/10/static9 unchanged.
+W/L and HTTP/target evidence remain before ONE switch; older resumes historical.
+
 ## M genuine-session attempt blocked at auth SQL ledger — 2026-11-06
 
 The separately approved [single attempt](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)

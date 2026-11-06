@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current repair — 2026-11-06: [auth SQL compatibility](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
+adds only the exact source-backed cold usermeta schema read during setup, charged
+under unchanged bounds and isolated-tested. No general SHOW/auth schema allowance,
+native rerun or wiring. Failed historical query remains unidentified; physical
+qualification still pending. Next gated slice: **ONE New-Head M Genuine-Session
+Request Owned Requalification and Cleanup Attempt**, reviewed repair head/existing
+CI lab, fresh prerequisites and explicit acquisition/owned SQL/native/cleanup
+authority. Opportunities18, campaign10/10/static9 unchanged; older resumes historical.
+
 Current qualification — 2026-11-06: [ONE attempt at1b28963](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 run42260737470 passed initial source/runtime audit but failed first-case auth SQL
 allowlist admission. Owned resources absent after recovery; failed worker exit is

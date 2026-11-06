@@ -60,6 +60,10 @@ function adbg_sql_class( $sql, $prefix ) {
 	if ( ! is_string( $prefix ) || 1 !== preg_match( '/\Aadbm_[a-f0-9]{12}_\z/', $prefix ) ) {
 		return null;
 	}
+	// Pinned wpdb::get_table_charset cold path before the owned session-token insert.
+	if ( "SHOW FULL COLUMNS FROM `{$prefix}usermeta`" === $sql ) {
+		return 'session-schema-read';
+	}
 	$tokens = adbg_sql_tokens( $sql );
 	if ( null === $tokens ) {
 		return null;
@@ -112,6 +116,7 @@ function adbg_observe_query( $sql ) {
 	adbg_check( null !== $class, 'unexpected auth SQL' );
 	$phase = $GLOBALS['adbg_auth_phase'];
 	adbg_check( in_array( $phase, array( 'setup', 'auth' ), true ), 'observer phase' );
+	adbg_check( 'setup' === $phase || 'session-schema-read' !== $class, 'schema discovery confined to owned setup' );
 	$GLOBALS['adbg_ledger'][ $phase ] = ( $GLOBALS['adbg_ledger'][ $phase ] ?? 0 ) + 1;
 	adbg_check( $GLOBALS['adbg_ledger'][ $phase ] <= 256, 'finite auth calls within unchanged outer deadline' );
 	adbg_check( 'auth' !== $phase || 'session-write' !== $class, 'request authentication has no metadata writes' );

@@ -1,5 +1,12 @@
 # M Genuine-Session Request Qualification Integration Safety Foundation (Preparation Only)
 
+Current follow-on — 2026-11-06: [repository-only auth SQL compatibility repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
+recognizes only the pinned core's exact cold usermeta column lookup during setup,
+under the existing call budget. Isolated regressions/controls pass; no native
+rerun or production wiring. The historical unknown query is not retroactively
+captured or qualified. Next gate is ONE New-Head M Genuine-Session Request Owned
+Requalification and Cleanup Attempt on the reviewed repair head, separately approved.
+
 Follow-on outcome — 2026-11-06: the separately approved
 [ONE exact-head attempt](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 at1b28963/run42260737470 passed the initial source/runtime audit but refused the

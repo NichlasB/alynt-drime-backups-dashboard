@@ -1,5 +1,14 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current repair — 2026-11-06: [isolated auth SQL compatibility repair](SOURCE_POLICY_M_AUTH_SQL_COMPATIBILITY_REPAIR.md)
+recognizes the pinned wpdb cold usermeta metadata read, exact setup-only form and
+unchanged accounting. Unknown SQL/auth discovery still refuses; no app/wiring/native
+change or newly passed native proof. Next gate: **ONE New-Head M Genuine-Session
+Request Owned Requalification and Cleanup Attempt**, final reviewed head/existing
+ephemeral CI lab, fresh prerequisites and explicit acquisition/owned SQL/native/
+cleanup approval. Historical first query remains uncaptured; opportunities18 and
+campaign10/10/static9 unchanged, W/L and HTTP/target gates remain. Older resumes historical.
+
 Current qualification — 2026-11-06: [single request attempt](SOURCE_POLICY_M_GENUINE_REQUEST_QUALIFICATION_ATTEMPT.md)
 run42260737470 at1b28963 accepted initial source/runtime audit, then rejected
 `unexpected auth SQL` in case0. No positive guarded result/native qualification.

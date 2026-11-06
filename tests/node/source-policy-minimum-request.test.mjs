@@ -15,7 +15,7 @@ const literal=v=>typeof v==='string'?"'"+v.replaceAll('\\','\\\\').replaceAll("'
 function phpRun(code){const r=spawnSync(php,['-n','-d','disable_functions=json_encode,ctype_digit','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:8192});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;}
 const job={GITHUB_ACTIONS:'true',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'NichlasB/alynt-drime-backups-dashboard',GITHUB_REF:'refs/heads/master',GITHUB_WORKFLOW_REF:DISTRIBUTION_WORKFLOW,GITHUB_ACTOR:'NichlasB',RUNNER_OS:'Linux',RUNNER_ENVIRONMENT:'github-hosted',GITHUB_RUN_ATTEMPT:'1',GITHUB_RUN_ID:'123',GITHUB_SHA:'a'.repeat(40),EXPECTED_SHA:'a'.repeat(40),MINIMUM_MODEL:DISTRIBUTION_MODEL,DISTRIBUTION_EXECUTION_APPROVED:'true',GENUINE_REQUEST_APPROVED:'true',MINIMUM_OPERATION:GENUINE_REQUEST};
 test('CLI doubles are definition-free when discovered by the ordinary PHP suite',()=>{
-  const files=['auth','process','fixture'].map(name=>join(root,'tests/support/source-policy-minimum-request-'+name+'-model.php'));
+  const files=['auth','process','fixture','sql-shape'].map(name=>join(root,'tests/support/source-policy-minimum-request-'+name+'-model.php'));
   assert.equal(phpRun(files.map(file=>`require ${literal(file)};`).join('')+`if(function_exists('adbg_check')||function_exists('wp_set_current_user')||class_exists('WP_Hook',false)||defined('ADB_M_REQUEST_PROOF'))throw new RuntimeException('discovery leaked definitions');echo 'inert';`),'inert');
 });
 test('exact genuine route is separately default-off and PHP/JS reject malformed or cross-mode jobs',()=>{
@@ -64,6 +64,15 @@ function ownedModel(callback){
   const temporary=mkdtempSync(join(tmpdir(),'adb-genuine-prep-')),owned=()=>assert.ok(resolve(temporary).startsWith(resolve(tmpdir())+sep+'adb-genuine-prep-'));
   owned();try{return callback(temporary);}finally{owned();rmSync(temporary,{recursive:true,force:false});assert.equal(existsSync(temporary),false);}
 }
+
+test('cold usermeta schema read is exact, setup-only and charged without any native dispatch',()=>ownedModel(temporary=>{
+  const original=read('scripts/ci/source-policy-minimum-request-observer.php'),file=join(temporary,'observer.php');writeFileSync(file,original);
+  const run=()=>spawnSync(php,['-n',join(root,'tests/support/source-policy-minimum-request-sql-shape-model.php'),file],{encoding:'utf8',timeout:5000,maxBuffer:8192});
+  const positive=run();assert.equal(positive.error,undefined);assert.equal(positive.status,0,positive.stderr+positive.stdout);assert.equal(positive.stderr,'');assert.match(positive.stdout,/^checks:[1-9][0-9]*\n$/);
+  for(const [before,after]of [["return 'session-schema-read';",'return null;'],['"SHOW FULL COLUMNS FROM `{$prefix}usermeta`" === $sql',"is_string( $sql ) && 0 === strpos( $sql, 'SHOW FULL COLUMNS FROM ' )"],["'setup' === $phase || 'session-schema-read' !== $class",'true'],["$GLOBALS['adbg_ledger'][ $phase ] <= 256",'true'],['return $sql;',"return 'changed';"]]){
+    const mutant=original.replace(before,after);assert.notEqual(mutant,original,before);writeFileSync(file,mutant);try{const r=run();assert.equal(r.error,undefined);assert.notEqual(r.status,0);assert.match(r.stderr,/PHPUnit\\Framework\\ExpectationFailedException/);}finally{writeFileSync(file,original);assert.equal(readFileSync(file,'utf8'),original);}
+  }
+}));
 test('authentication fixture driver has discriminating isolated API positives and negatives, not genuine auth',()=>ownedModel(temporary=>{
   const original=read('scripts/ci/source-policy-minimum-request-auth.php'),file=join(temporary,'auth.php');writeFileSync(file,original);
   const cases=['view','save','noop','stale','cookie-missing','cookie-malformed','cookie-expired','cookie-tampered','cookie-user','cookie-destroyed','incapable','nonce-action','nonce-user','nonce-session','nonce-empty','nonce-compound','nonce-expired','site-compound','site-padded','revision-bad','mode-compound','record-missing','record-wrong'];
