@@ -1,5 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current L attempt — 2026-11-06: [ONEb8d39d0 result](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
+fresh original adapter291/9 passed; request audit core-scope refusal maps to the
+metadata lazyloader dependency outside closed catalog. No request case loop,
+readiness grant or catalog edit; cleanup verified. Next gated slice: Repository-
+Only L Metadata-Lazyloader Dependency-Closure Audit and Guard-Preserving Catalog
+Repair, independent audit/isolated tests only, no native retry/wiring. Allowance
+exhausted/opportunities22; M/W/HTTP/target/ONE switch gated; old resumes historical.
+
 Current include repair — 2026-11-06: [L audit-only first-include DATA](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
 closes the diagnostic gap, not native readiness. Catalog/origin/size/identity/
 limits retained; actual historical file/clause Unknown,42295828908 still failed.

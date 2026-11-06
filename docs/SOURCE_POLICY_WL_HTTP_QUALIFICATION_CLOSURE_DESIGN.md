@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current L attempt — 2026-11-06: [ONEb8d39d0](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9, failed request audit at metadata-lazyloader core-
+scope catalog boundary; no23 cases/HTTP or readiness proof. Strict cleanup passed.
+Next gated slice: Repository-Only L Metadata-Lazyloader Dependency-Closure Audit
+and Guard-Preserving Catalog Repair, independent audit/isolated tests, shared W/L
+impact review, no native retry/wiring. Allowance exhausted/opportunities22;
+M/W/HTTP/target/ONE switch remain gated; earlier resumes historical.
+
 Current include repair — 2026-11-06: [L audit cause DATA](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
 validated in isolation, without loosening include/catalog/size gates. Changed
 shared bytes require fresh profile images; no HTTP/native readiness established.

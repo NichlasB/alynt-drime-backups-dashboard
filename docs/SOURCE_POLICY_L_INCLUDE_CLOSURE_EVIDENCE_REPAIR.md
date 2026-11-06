@@ -1,5 +1,13 @@
 # L Finite Include-Closure Diagnosis and Guard-Preserving Harness Repair
 
+Native follow-on — 2026-11-06: [ONEb8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9, then request audit refused ordinal31/core/scope.
+New diagnostic worked: name digest uniquely matches pinned-tree metadata lazyloader
+required by already-pinned meta.php. No catalog/pin/guard change; cleanup passed.
+Next gated slice: Repository-Only L Metadata-Lazyloader Dependency-Closure Audit
+and Guard-Preserving Catalog Repair, independent audit/isolated tests only, no
+native retry/wiring. Allowance exhausted/opportunities22; older resumes historical.
+
 ## Approval, coherent baseline and diagnosis — 2026-11-06
 
 Explicit repository-only implementation, isolated validation, focused reviews,

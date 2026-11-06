@@ -1,5 +1,13 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current L attempt — 2026-11-06: [b8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9, request audit refused core-scope ordinal31. Name
+digest matches metadata lazyloader transitively required by pinned meta.php;
+no new admission/pin or case proof. Cleanup passed. Next gated slice: Repository-
+Only L Metadata-Lazyloader Dependency-Closure Audit and Guard-Preserving Catalog
+Repair, independent audit/isolated tests only, no native retry/wiring. Allowance
+exhausted/opportunities22; earlier recommendations historical.
+
 Current include repair — 2026-11-06: [bounded L-only audit cause](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
 is failure DATA, not an admission grant. Catalog/origin/size/identity/resource
 guards preserved; isolated tests cannot identify the historical offending file.

@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current L attempt — 2026-11-06: [b8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
+passed fresh original adapter291/9, then audit refused core-scope ordinal31.
+Bounded digest matches metadata lazyloader required by pinned meta.php; catalog
+remains closed, request gate Blocked, cleanup passed. Next gated slice: Repository-
+Only L Metadata-Lazyloader Dependency-Closure Audit and Guard-Preserving Catalog
+Repair, independent audit/isolated tests only, no native retry/wiring. Allowance
+exhausted/opportunities22; earlier recommendations below historical.
+
 Current include repair — 2026-11-06: [bounded L audit evidence](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
 preserves catalog/origin/size/refusal/identity/limits; isolated positives and
 assertion-killed controls only. Historical42295828908 failed; file/clause Unknown.

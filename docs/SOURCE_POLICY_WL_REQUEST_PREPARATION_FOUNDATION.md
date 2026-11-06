@@ -1,5 +1,13 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current L attempt — 2026-11-06: [b8d39d0/run42302410128](SOURCE_POLICY_L_INCLUDE_DIAGNOSTIC_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9, refused request audit core-scope ordinal31, with
+strict cleanup. Bounded name matches metadata lazyloader required by pinned meta;
+no catalog/guard edit or case proof. Next gated slice: Repository-Only L Metadata-
+Lazyloader Dependency-Closure Audit and Guard-Preserving Catalog Repair, independent
+audit/isolated tests only, no native retry/wiring. Allowance exhausted/opportunities22;
+earlier resumes historical.
+
 Current include repair — 2026-11-06: [bounded first-include diagnostics](SOURCE_POLICY_L_INCLUDE_CLOSURE_EVIDENCE_REPAIR.md)
 retain exact catalog/origin/size/identity/limits and add no allowed file. Isolated
 tests only; historical42295828908 failed, actual file/clause Unknown. Next gated
