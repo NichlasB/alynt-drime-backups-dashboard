@@ -137,9 +137,10 @@ exercise PHP/JS strict job mirrors, receipt/mode separation,9 pin/design equalit
 owned schema DATA, positive/negative SQL forms, privacy envelopes/identities and
 early real entry refusal. Extension-free child API models exercise23 auth cases,
 13 fixture/verifier scenarios and11 process/IO scenarios, not genuine WordPress,
-SQL, kernel exit or native effects. Seven semantic controls are assertion-killed:
+SQL, kernel exit or native effects. Eight semantic controls are assertion-killed:
 always-unavailable auth, validator bypass, wrong principal, lost nonce action,
-omitted session destruction, skipped session reconciliation and omitted reap.
+omitted session destruction, skipped session reconciliation, omitted reap and
+missing included-version global binding.
 Original helpers are copied only into validated owned temporary directories,
 restored/read back and removed; no actual users/tables/listeners are created.
 
@@ -148,7 +149,17 @@ import in the predecessor in-memory mutation loader. Doubles now define nothing
 under ordinary PHPUnit discovery, with a permanent isolated regression; the
 mutation loader binds its real pure dependency without weakening its controls.
 Verifier null/error-to-zero, unbound SQL-form acceptance, query-callback admission,
-bounded pipe reads and observed-exit cleanup were tightened during review.
+bounded pipe reads and observed-exit cleanup were tightened during review. A final
+include-scope review bound the loader's wp_version global so the actual pinned
+version include supplies the ambient identity, not a fabricated version assignment.
+An include-scope DATA regression assertion-kills omission of that binding; it does
+not load WordPress or claim the full source closure. Intermediate ordinary
+CI42248830444 failed on extension-free Linux children: PHP7.4 json_encode and
+both matrix versions' ctype_digit were unavailable under -n. Fixed the test pin
+readout to bounded ASCII and verifier digits to exact ASCII regex, retaining all
+typed/error/bound checks and the unchanged native module catalog. Tests explicitly
+disable those optional functions so Windows static extensions cannot mask it.
+No dependency, installation, weakened expectation or native rerun was used.
 
 Canonical FEATURE_LIGHT_REVIEW: source-scoped preparation files/direct consumers;
 Other risk areas: dormant CI/file/process/auth/fixture source, no UI/REST/cron or
@@ -161,7 +172,7 @@ Consolidate/retain; no dead/debug/fallback framework or split-now need. Changed
 structure edits required; historical pre-release02 deferrals are not reopened.
 
 Canonical TOTAL before/after review: distribution entry25/25; auth119/119;
-bootstrap131/131; child109/109; contract100/100; fixtures204/204;
+bootstrap131/132; child109/109; contract100/100; fixtures204/204;
 observer133/143 (exact callback checks); pins18/18; supervisor109/110;
 parent93/93; auth model38/40; fixture model82/87; process model31/34.
 The substantive callback/failure tests were routine Light-review fixes, not
@@ -178,7 +189,7 @@ readiness remains pending. Actual final local and exact-head ordinary CI counts
 are recorded in the toolkit; ordinary CI does NOT dispatch this native route.
 
 Actual local validation: related isolated PHP283 tests/1519 assertions, complete
-Node118/118 including10 new preparation tests, zero failures/skips; PHPCS284/284,
+Node119/119 including11 new preparation tests, zero failures/skips; PHPCS284/284,
 nine new PHP syntax checks, asset build, structure guard,382 local documentation
 links and whitespace checks pass. The first broader runs exposed the two harness
 integration defects described above; repaired reruns passed without skips or

@@ -158,7 +158,7 @@ function adbg_preflight() {
 		'alynt_drime_dashboard_sites' => 1,
 	) as $suffix => $max ) {
 		$count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $prefix . $suffix );
-		adbg_check( '' === $wpdb->last_error && is_string( $count ) && ctype_digit( $count ) && (int) $count <= $max, 'bounded fixture cardinality' );
+		adbg_check( '' === $wpdb->last_error && is_string( $count ) && 1 === preg_match( '/\A[0-9]+\z/', $count ) && (int) $count <= $max, 'bounded fixture cardinality' );
 	}
 	$large = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $prefix . 'usermeta WHERE OCTET_LENGTH(meta_value)>4096' );
 	adbg_check( '' === $wpdb->last_error && '0' === $large, 'bounded metadata values, not a failed verifier read' );
@@ -182,7 +182,7 @@ function adbg_preflight() {
 		}
 	}
 	$policy = $wpdb->get_row( $wpdb->prepare( 'SELECT OCTET_LENGTH(option_value) AS bytes,autoload FROM ' . $prefix . 'options WHERE BINARY option_name=BINARY %s', 'alynt_drime_backups_dashboard_source_policies' ), ARRAY_A );
-	adbg_check( '' === $wpdb->last_error && is_array( $policy ) && is_string( $policy['bytes'] ) && ctype_digit( $policy['bytes'] ) && (int) $policy['bytes'] <= 16384 && 'no' === $policy['autoload'], 'bounded non-autoloaded policy metadata' );
+	adbg_check( '' === $wpdb->last_error && is_array( $policy ) && is_string( $policy['bytes'] ) && 1 === preg_match( '/\A[0-9]+\z/', $policy['bytes'] ) && (int) $policy['bytes'] <= 16384 && 'no' === $policy['autoload'], 'bounded non-autoloaded policy metadata' );
 }
 
 /**

@@ -43,6 +43,7 @@ function adbb_check( $condition, $label ) {
  * @return array Parent-frozen rows and module digest.
  */
 function adbg_load() {
+	global $wp_version;
 	adbg_check( false === php_ini_loaded_file() && false === php_ini_scanned_files() && '' === (string) ini_get( 'auto_prepend_file' ) && '' === (string) ini_get( 'auto_append_file' ), 'no injected process configuration' );
 	$core = realpath( dirname( __DIR__, 2 ) . '/core' );
 	adbg_check( false !== $core && dirname( $core ) === realpath( dirname( __DIR__, 2 ) ), 'fixed core child' );

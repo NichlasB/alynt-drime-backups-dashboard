@@ -12,7 +12,7 @@ import {DISTRIBUTION_MODEL,DISTRIBUTION_WORKFLOW} from '../../scripts/ci/source-
 import {terminal,MODEL} from '../../scripts/ci/source-policy-minimum-controller.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url)),read=p=>readFileSync(join(root,p),'utf8'),php=process.env.PHP_BINARY??'php';
 const literal=v=>typeof v==='string'?"'"+v.replaceAll('\\','\\\\').replaceAll("'","\\'")+"'":v===null?'null':typeof v==='boolean'?(v?'true':'false'):Number.isSafeInteger(v)?String(v):'array('+Object.entries(v).map(([k,x])=>literal(k)+'=>'+literal(x)).join(',')+')';
-function phpRun(code){const r=spawnSync(php,['-n','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:8192});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;}
+function phpRun(code){const r=spawnSync(php,['-n','-d','disable_functions=json_encode,ctype_digit','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:8192});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;}
 const job={GITHUB_ACTIONS:'true',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'NichlasB/alynt-drime-backups-dashboard',GITHUB_REF:'refs/heads/master',GITHUB_WORKFLOW_REF:DISTRIBUTION_WORKFLOW,GITHUB_ACTOR:'NichlasB',RUNNER_OS:'Linux',RUNNER_ENVIRONMENT:'github-hosted',GITHUB_RUN_ATTEMPT:'1',GITHUB_RUN_ID:'123',GITHUB_SHA:'a'.repeat(40),EXPECTED_SHA:'a'.repeat(40),MINIMUM_MODEL:DISTRIBUTION_MODEL,DISTRIBUTION_EXECUTION_APPROVED:'true',GENUINE_REQUEST_APPROVED:'true',MINIMUM_OPERATION:GENUINE_REQUEST};
 test('CLI doubles are definition-free when discovered by the ordinary PHP suite',()=>{
   const files=['auth','process','fixture'].map(name=>join(root,'tests/support/source-policy-minimum-request-'+name+'-model.php'));
@@ -38,12 +38,21 @@ test('distinct receipts and twenty-file source/owned schema definitions cannot q
 });
 
 test('additional static pins exactly match the approved nine-file design, without loading core',()=>{
-  const pins=JSON.parse(phpRun(`echo json_encode(require ${literal(join(root,'scripts/ci/source-policy-minimum-request-pins.php'))});`)),design=read('docs/SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md');
+  const wire=phpRun(`$pins=require ${literal(join(root,'scripts/ci/source-policy-minimum-request-pins.php'))};foreach($pins as$name=>$row){echo $name,'|',$row[0],'|',$row[1],"\n";}`),pins=Object.fromEntries(wire.trimEnd().split('\n').map(line=>{const [file,bytes,digest]=line.split('|');assert.match(bytes,/^[1-9][0-9]{0,6}$/);return[file,[Number(bytes),digest]];})),design=read('docs/SOURCE_POLICY_GENUINE_REQUEST_CONSTRUCTION_DESIGN.md');
+  assert.equal(wire.trimEnd().split('\n').length,9);
   assert.deepEqual(Object.keys(pins).sort(),[...AUTH_FILES].sort());
   for(const [file,[bytes,digest]]of Object.entries(pins)){assert.match(digest,/^[a-f0-9]{64}$/);assert.ok(bytes>0&&bytes<1048576);assert.ok(design.includes(`|${file}|${bytes}|${digest}|`));}
   const bootstrap=read('scripts/ci/source-policy-minimum-request-bootstrap.php');
   assert.doesNotMatch(bootstrap,/wp-settings\.php|default-filters\.php|class-phpass\.php/);assert.match(bootstrap,/unknown|source-policy-minimum-worker-source/);
 });
+
+test('library include scope retains the loaded version, not an injected version constant',()=>ownedModel(temporary=>{
+  const source=read('scripts/ci/source-policy-minimum-request-bootstrap.php'),prelude=source.slice(source.indexOf('function adbg_load() {')+'function adbg_load() {'.length,source.indexOf('\tadbg_check(',source.indexOf('function adbg_load() {'))),file=join(temporary,'version-data.php');
+  writeFileSync(file,"<?php $wp_version='owned-version-data';");
+  const verify=body=>assert.equal(phpRun(`function modeled_include(){${body}require ${literal(file)};}modeled_include();echo $GLOBALS['wp_version']??'missing';`),'owned-version-data');
+  verify(prelude);const mutant=prelude.replace('global $wp_version;','');assert.notEqual(mutant,prelude);assert.throws(()=>verify(mutant),assert.AssertionError);
+  assert.match(source,/actual pinned core version/);assert.doesNotMatch(source,/\$GLOBALS\['wp_version'\]\s*=|\$wp_version\s*=/);
+}));
 test('auth-only SQL ledger accepts fixed core forms and denies policy/fallback/unknown effects',()=>{
   const p='adbm_123456abcdef_',source=join(root,'scripts/ci/source-policy-minimum-request-observer.php');
   const yes=[`SELECT * FROM ${p}users WHERE user_login = 'owned_one' LIMIT 1`,`SELECT * FROM ${p}users WHERE ID = '1' LIMIT 1`,`SELECT option_name, option_value FROM ${p}options WHERE autoload = 'yes'`,`SELECT option_value FROM ${p}options WHERE option_name = '${p}user_roles' LIMIT 1`,`SELECT user_id, meta_key, meta_value FROM ${p}usermeta WHERE user_id IN (1) ORDER BY umeta_id ASC`,`SELECT umeta_id FROM ${p}usermeta WHERE meta_key = 'session_tokens' AND user_id = 1`,`INSERT INTO \`${p}usermeta\` (\`user_id\`, \`meta_key\`, \`meta_value\`) VALUES ('1', 'session_tokens', 'a:0:{}')`,`UPDATE \`${p}usermeta\` SET \`meta_value\` = 'a:0:{}' WHERE \`user_id\` = '1' AND \`meta_key\` = 'session_tokens'`,`DELETE FROM ${p}usermeta WHERE umeta_id IN( 4,5 )`];
@@ -76,7 +85,7 @@ test('fresh-child supervision and cleanup run against in-memory IO doubles only'
 
 test('fixture bounds and non-target preservation are error-safe in-memory contracts, not storage proof',()=>{
   for(const scenario of ['positive','failed-large-read','large-value','failed-count','cardinality','per-user','failed-session-read','sessions','session-shape','failed-policy-read','policy-large','policy-malformed','autoload']){
-    const r=spawnSync(php,['-n',join(root,'tests/support/source-policy-minimum-request-fixture-model.php'),scenario,join(root,'scripts/ci/source-policy-minimum-request-fixtures.php')],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');assert.match(r.stdout,/^checks:[1-9][0-9]*\n$/);
+    const r=spawnSync(php,['-n','-d','disable_functions=ctype_digit',join(root,'tests/support/source-policy-minimum-request-fixture-model.php'),scenario,join(root,'scripts/ci/source-policy-minimum-request-fixtures.php')],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');assert.match(r.stdout,/^checks:[1-9][0-9]*\n$/);
   }
 });
 
