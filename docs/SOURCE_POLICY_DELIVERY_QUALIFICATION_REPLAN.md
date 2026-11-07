@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current installer preparation — 2026-11-07:[completed isolated foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
+adds fixed callback/sidecar algorithms and supervisor composition,not a real
+HTTP/core/SQL/native adapter. Next gated slice:Genuine-HTTP Owned Bootstrap/
+Request IO Integration with Installer Containment and ONE Ephemeral-CI
+Qualification/Cleanup Attempt,audit-first/fresh prerequisites/exact owned cleanup.
+Campaign4/10 milestones,8 attempts,cumulative31 unchanged;ONE held attempt unused,
+wiring off. Prior foundation approval request fulfilled;physical proof pending.
+
 Current installer decision — 2026-11-07:[approved design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
 selects genuine early hooks, denied installer HTTP probes and four soft-only
 rewrite flushes;no operative fix or execution. Next gated slice:Repository-Only

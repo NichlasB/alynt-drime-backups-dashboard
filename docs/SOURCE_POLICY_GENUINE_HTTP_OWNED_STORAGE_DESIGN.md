@@ -1,5 +1,13 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
+Current installer preparation — 2026-11-07:[dormant foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
+adds fixed containment callbacks and mandatory setup/request sidecar composition
+under isolated API/IO only. No physical HTTP/bootstrap/storage proof. Next gated
+slice:Genuine-HTTP Owned Bootstrap/Request IO Integration with Installer
+Containment and ONE Ephemeral-CI Qualification/Cleanup Attempt,audit-first/fresh
+prerequisites/exact cleanup. ONE held attempt unused;prior foundation request
+fulfilled,not authority to run native or change production wiring.
+
 Current selected amendment — 2026-11-07:[installer containment design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
 supersedes the incomplete external-only setup assumption below. Early genuine
 hook API registration, two real error-denied probes and all four soft-only

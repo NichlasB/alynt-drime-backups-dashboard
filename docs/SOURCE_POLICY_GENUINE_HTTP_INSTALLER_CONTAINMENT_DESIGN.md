@@ -1,5 +1,13 @@
 # Core-Backed Installer Local-HTTP and Rewrite Containment Design
 
+Current implementation — 2026-11-07:[approved dormant foundation/preparation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
+implements the fixed callbacks/sidecar and isolated supervisor composition only.
+No actual core/auth/SQL/HTTP/native execution. Earlier foundation request is
+fulfilled;next gated slice:Genuine-HTTP Owned Bootstrap/Request IO Integration
+with Installer Containment and ONE Ephemeral-CI Qualification/Cleanup Attempt,
+audit-first/fresh prerequisites/exact cleanup. Physical containment is still
+unproved;ONE held attempt unused,production wiring disabled.
+
 ## Authority and baseline — 2026-11-07 UTC
 
 Approved repository-only DESIGN through validation, commit, push and ordinary

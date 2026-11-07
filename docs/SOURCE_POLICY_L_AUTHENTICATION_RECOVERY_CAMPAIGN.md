@@ -37,10 +37,16 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | Installer containment design selected;implementation/proof pending,ONE held attempt unused. Next gated slice:Repository-Only Core-Backed Installer Containment Safety Foundation and Owned-Integration Preparation,isolated API/IO only;production wiring disabled |
+| Exact next meaningful item | Dormant installer callback/sidecar foundation and isolated composition complete;physical proof pending,ONE held attempt unused. Next gated slice:Genuine-HTTP Owned Bootstrap/Request IO Integration with Installer Containment and ONE Ephemeral-CI Qualification/Cleanup Attempt,audit-first/fresh prerequisites/exact owned cleanup;production wiring disabled |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+The [approved installer foundation/preparation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
+implements fixed callback and sidecar algorithms with isolated supervisor
+composition.48 edge/denial scenarios/15 semantic controls;no actual core/auth/SQL/
+HTTP/native execution. Next is the gated owned integration/ONE attempt above,
+not another local foundation request. Counters unchanged;prior requests fulfilled.
 
 The [approved installer containment design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
 resolves the HTTP/rewrite decision at specification level only: early genuine

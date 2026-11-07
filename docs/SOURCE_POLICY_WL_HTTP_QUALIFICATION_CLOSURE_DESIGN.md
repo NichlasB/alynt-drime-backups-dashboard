@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current installer preparation — 2026-11-07:[isolated callback/sidecar foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
+composes the existing13-case supervisor with mandatory setup/request containment
+DATA. Genuine core/source/file/HTTP/native proof still pending. Next gated slice:
+Genuine-HTTP Owned Bootstrap/Request IO Integration with Installer Containment
+and ONE Ephemeral-CI Qualification/Cleanup Attempt,audit-first/fresh prerequisites/
+exact owned cleanup. Campaign4/10 milestones,8 attempts,cumulative31 unchanged;
+ONE held attempt unused,production wiring off;earlier foundation request fulfilled.
+
 Current installer decision — 2026-11-07:[finite containment design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
 keeps real core installation/fallback, short-circuits both probes with WP_Error
 and denies four hard flushes without pretending option writes disappear.
