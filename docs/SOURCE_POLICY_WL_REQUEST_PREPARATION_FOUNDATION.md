@@ -3,15 +3,19 @@
 Shared cohort repair — 2026-11-07:the [current campaign owner](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
 records exact selected W26/L26 declaration closure,strict boolean PHP8.5 NTS
 observation and phase-specific existing save/off versus non-writing/no verifier
-repairs. Shared images must be frozen after preparation;no physical W/HTTP or
-production readiness is supplied by isolated tests. LocalWP remains outside this
-campaign;earlier W21/L22 catalogs below are historical snapshots.
+repairs. Final shared executable cohort63b728a passed ordinary CI42361617753,
+actual L23 cases/12006 checks/9 groups(run42361807156),and affected M44637/9
+(run42361945178);strict owned cleanup passed. No physical W/HTTP or production
+readiness is supplied by isolated tests or the L/M results. LocalWP remains outside
+this campaign;earlier W21/L22 catalogs below are historical snapshots.
 
 Current auth campaign — 2026-11-07: [actual recovery ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-continues bounded repository/CI-lab recovery at L authentication under current
-explicit campaign authority; fixed guards and source identities preserved. No
-LocalWP/W qualification or production/HTTP/wiring grant is supplied. Actual
-counts/evidence/resume centralized; older one-attempt resumes below historical.
+closes3/10 worthwhile milestones after final publication/evidence,5/10 native
+attempts,cumulative28;fixed guards/source identities preserved. Next gated slice:
+Plugin Tester local-only Current-Cohort W Genuine-Session Request Qualification
+and Owned Cleanup Proof,audit-first,fresh prerequisites and exact target/fixture
+confirmation. Actual counts/identities/proof limits centralized;no LocalWP/W/
+HTTP/wiring grant,older dated resumes below historical.
 
 Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and repaired source audit198/native0/SQL0. Case0

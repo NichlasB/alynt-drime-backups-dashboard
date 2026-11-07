@@ -3,20 +3,23 @@
 ## Authorized auth recovery campaign — 2026-11-07
 
 The [current campaign owner/ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-continues the first unfinished plan item: L genuine-session qualification, not
-completed transport-tuple work. Stock authentication now advances after the exact
-localization repair;the positive view then refused. The PHP8.5 boolean NTS producer
-and exact post-save verifier are repaired in isolation,selected W/L declaration
-closure parity is prepared before freezing shared images,and fresh L proof plus
-affected M refresh remain required. W/HTTP/installed-target readiness is not inferred.
-It authorizes bounded repository recovery and existing
-ephemeral CI-lab proofs without per-slice confirmation, up to10 worthwhile
-milestones/10 native attempts/3 recovery cycles per distinct blocker. Historical
-10/10/static9 and cumulative23 are preserved separately; current actual counters,
-coherent review baseline, source-scoped evidence and exact resume are centralized
-there. Production wiring/LocalWP/live/release/other explicit boundaries remain.
-Prior one-attempt approval requests below are historical, not current campaign
-stop points when the next action remains in scope.
+advanced the first unfinished L genuine-session item,not completed transport-tuple
+work. Final source cohort63b728a passed ordinary CI42361617753,L native
+42361807156 (23 cases/12006 checks/9 groups) and affected M refresh42361945178
+(44637/9),strict owned cleanup verified. Finite stock auth closure,strict boolean
+NTS observation and exact save/off verifier repaired without relaxed guards;
+selected W/L declaration parity prepared,not physical W readiness.
+
+Implementation-plan progress:3/10 worthwhile milestones on final evidence closeout,
+5/10 native attempts,cumulative28;actual identities,review/CI/publication evidence
+and unchanged assurance limits centralized in the owner. Historical10/10/static9
+and prior23 opportunities retained. **Next gated slice:Plugin Tester local-only
+Current-Cohort W Genuine-Session Request Qualification and Owned Cleanup Proof**,
+audit-first,fresh prerequisites and exact target/owned fixture confirmation.
+This is a LocalWP boundary outside current campaign authority;existing application
+state/lifecycle and production wiring stay untouched. HTTP/installed-target/
+release readiness is not inferred. Dated prior attempt resumes below are
+historical and superseded by this current checkpoint.
 
 ## L source audit passed; first-case authentication Error — 2026-11-07 UTC
 

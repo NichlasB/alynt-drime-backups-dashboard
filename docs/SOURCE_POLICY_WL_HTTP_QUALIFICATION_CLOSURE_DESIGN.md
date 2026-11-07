@@ -1,10 +1,15 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
 Current auth recovery campaign — 2026-11-07: [owning ledger/evidence](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-continues first unfinished L auth gate under explicit bounded repository/ephemeral
-CI-lab authority. Fresh cohort images remain mandatory; M/W/HTTP/installed-target
-evidence is not inferred. Any LocalWP/live/wiring/release or out-of-scope profile
-decision remains gated. Earlier one-attempt approval resumes below are historical.
+closes actual L and affected M genuine-session lab qualification at SAME63b728a,
+runs42361807156/42361945178,ordinary CI42361617753,strict cleanup verified.
+3/10 milestones on final evidence closeout,5/10 attempts,cumulative28. Current W
+declarations prepared but physical Windows NTS/AMD64/auth/session evidence remains
+unestablished;HTTP is a later distinct gate. Exact next action:approve Plugin
+Tester local-only Current-Cohort W Genuine-Session Request Qualification and
+Owned Cleanup Proof,audit-first/fresh prerequisites/exact target and fixture
+confirmation. LocalWP/live/wiring/release boundaries remain;dated resumes below
+are historical,not current L blockers.
 
 Current L attempt — 2026-11-07 UTC: [ONEa8fbbe3](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and request source gate198/native0/SQL0. Case0 auth

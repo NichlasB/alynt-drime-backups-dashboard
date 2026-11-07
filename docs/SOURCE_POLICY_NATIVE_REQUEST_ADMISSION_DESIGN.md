@@ -1,11 +1,13 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
 Current authorized auth campaign — 2026-11-07: [owner/actual counters](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-continues bounded failure localization, guard-preserving repair and fresh CI-lab
-qualification without per-slice task confirmation. Diagnostics never grant a
-principal/native availability; original auth/nonce/SQL/resource/source gates
-remain. LocalWP/live/wiring/release/out-of-scope policy decisions still require
-stopping. Earlier isolated one-attempt resumes below are historical.
+records successful current L qualification and affected M refresh at frozen
+63b728a,runs42361807156/42361945178,ordinary CI42361617753,strict owned cleanup.
+3/10 worthwhile milestones on final evidence closeout,5/10 attempts,cumulative28.
+Diagnostics never grant availability;auth/nonce/SQL/resource/source gates remain.
+Actual current W/Plugin Tester qualification is next and crosses the LocalWP
+approval boundary:fresh prerequisites/exact target and owned fixture confirmation
+required. HTTP/production wiring stays disabled;dated earlier resumes historical.
 
 Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed request source audit198/native0/SQL0 after fresh original adapter291/9.

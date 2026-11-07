@@ -1,11 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
 Current authorized campaign — 2026-11-07: [auth recovery ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-resumes L auth engine Error with bounded diagnostics, recovery and ephemeral CI-lab
-qualification under the current10-milestone/10-attempt/3-cycle authority. Actual
-counts/evidence/resume centralized there; no maintenance churn or completed tuple
-work reopened. Production/LocalWP/release/explicit policy boundaries still stop;
-historical individual-attempt approval resumes below do not govern this campaign.
+closes current L and affected M genuine-session CI-lab qualification at SAME
+63b728a (runs42361807156/42361945178,ordinary CI42361617753),strict cleanup passed.
+3/10 worthwhile milestones on final evidence closeout,5/10 attempts,cumulative28;
+exact identities/counts/assurance limits centralized there. Next meaningful row:
+Plugin Tester local-only Current-Cohort W Genuine-Session Request Qualification
+and Owned Cleanup Proof,audit-first/fresh prerequisites/exact target and fixture
+confirmation. LocalWP requires separate approval;W/HTTP/production/release
+readiness remains unestablished. No maintenance churn/completed tuple reopening;
+dated individual-attempt resumes below are historical.
 
 Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and request source audit198/native0/SQL0, then case0

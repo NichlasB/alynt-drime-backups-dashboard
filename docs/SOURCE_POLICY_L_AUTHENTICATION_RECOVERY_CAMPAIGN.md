@@ -17,7 +17,7 @@ reverified completed/success. Toolkita15956f49bf1084d7e592a00f37d9d2c7a5b2afb cl
 uploader3dfcb15b5cab8191df7d984251986ead140ded52 clean/untouched. No plugin switch.
 Version0.1.77/schema8/PHP7.4/WordPress6.0 and support decisions unchanged.
 Completed Genuine-Core Transport Tuple Compatibility work is not reopened: the
-[owning implementation plan](IMPLEMENTATION_PLAN.md) currently resumes at the
+[owning implementation plan](IMPLEMENTATION_PLAN.md) resumed at baseline at the
 [L first-case auth Error](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md).
 That baseline failed run42353171757 passed source audit198/native0/SQL0 and cleanup;
 its engine cause was Unknown at campaign start. Later actual/source evidence below
@@ -28,13 +28,14 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 
 | Current campaign item | State |
 | --- | --- |
-| Completed worthwhile milestones | 1/10: published/verified diagnostic foundation |
-| Native qualification attempts | 3/10; historical23 plus this campaign3 = cumulative26 |
+| Completed worthwhile milestones | 3/10 on final publication/evidence closeout: coherent failure-evidence foundation, current L qualification, affected M refresh; final docs/checklist publication is tracked below and in the canonical toolkit record |
+| Native qualification attempts | 5/10; historical23 plus this campaign5 = cumulative28 |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
-| Positive-view refusal recovery cycles | Cycle1 result evidence;cycle2 failed-connect accounting;cycle3/3 strict PHP8.5 boolean NTS observation repair in progress |
-| Milestone1: bounded auth failure localization foundation | Complete: a6d952f/ordinary CI42356467065/toolkit ed3a95d; physical RF2 evidence in42356770856 |
-| Milestone2: L genuine-session qualification | Pending; new source audit211 and actual auth phase advanced, positive view refused |
-| Next in-scope action | Publish/verify strict NTS producer fix, then fresh prerequisites and campaign attempt4 at new final cohort |
+| Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
+| Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
+| Milestone2: L genuine-session qualification | Passed at63b728a/run42361807156: source audit211/native0/SQL0,23 cases/12006 checks/9 groups, strict cleanup |
+| Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
+| Exact next meaningful item | W/Plugin Tester current-cohort genuine-session request qualification and owned cleanup; LocalWP operation is outside this campaign and requires approval |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -524,10 +525,117 @@ No new registrations/UI/full-release claim. Native attempt count remains3/10;
 next attempt4 must use final published/green head with fresh prerequisites and
 exact owned cleanup,not either intermediate efa8f20/b9ae1c2 head.
 
-## Continuation
+## Frozen-cohort qualification and final source-scoped closeout
 
-Current recommendation is to continue automatically through in-scope publication,
-fresh qualification and evidence-backed correction under this campaign authority.
-Do not treat a newly named auth repair as a new approval boundary. Stop only when
-one of the explicit boundaries/limits is actually reached; diagnose Unknown facts
-without guessing, weakening guards or blindly rerunning unchanged failures.
+Both native successes below use SAME executable cohort
+`63b728a06774feabbf1d762691f578fa8313d14e`, after all shared preparation.
+[Ordinary CI42361617753](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42361617753)
+actually completed/success:PHP7.4=2952 tests/24915 assertions,PHP8.3=2952/24920,
+no failures/skips;Node152/152 each,fail0/skips0;PHPCS291/291,strict manifest,
+build/structure and Composer/npm audits0 vulnerabilities. Both exact-head test
+check-runs succeeded;legacy status contexts0 is not another pending check.
+
+### Native attempt4/10: L current-cohort genuine-session qualification passed
+
+[Run42361807156](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42361807156)
+completed/success at63b728a/master,manual/actorNichlasB/run_attempt1,
+2026-11-07 09:56:20–09:57:05 UTC. Fresh unchanged environment prerequisite and
+cleanup passed. Original adapter291 checks/9 groups,PID3411/mode0,independent
+live/post-exit zero;image
+`10e0973666514add2806f7c810e3a182914cd467c2a2e6632d0bae86d20f6b47`.
+Run identity `d8f5d3fd488fed62e63af9c647c8594f`.
+
+Request source audit211/native_connections0/sql_queries0 preceded actual request
+execution;image
+`7cdec4df8f0ae9b64284cdf7bc8a44f31d08bb28806a991b14046c629adf5219`,
+modules `e5efa746f6acdb3183701c6216d2a2823f24357f0a9ba2862e72cd0eb2191629`.
+Actual request-batch-closed receipt:profile L,**23 cases/12006 checks/9 groups**,
+independent_live/post_exit zero,production_ready:false. Source-owned view/save/
+no-op/stale and cookie/capability/nonce/malformed/record denials completed;
+exact serialized policy/autoload and non-target preservation assertions passed.
+The successful batch closes the auth and view blockers;earlier failed receipts
+remain failures,not retroactively successful proofs.
+
+Primary/trap/recovery receipts:containers0/directories0/tmpfs released/
+reconciliation_failure0;final prerequisite cleanup private_directory0/core_checkout0.
+Both clean MariaDB10.11.18-MariaDB-ubu2204 server baselines had noTCP1,wsrep0,
+native_aio1,autocommit1,transaction0,sessions0/transactions0/non-system schemas0.
+Cleanup was verified before the next attempt;no installed application touched.
+
+### Native attempt5/10: affected legacy M genuine-session refresh passed
+
+[Run42361945178](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42361945178)
+completed/success at SAME63b728a/master,manual/actorNichlasB/run_attempt1,
+2026-11-07 09:58:31–09:59:16 UTC. Existing trusted minimum-distribution workflow:
+owned proof/genuine-request enabled,production-join disabled. Connection-free
+audit then actual closed-proof **44637 checks/9 groups**;image
+`d4fa3b47986b73003fc69951b468fbae0b65e51658e9ad1c7133e4175b5f7195`,
+run identity `71098d2651799f502eb8e2368b4bddbd`.
+Worker CID `5a656999f701c30ecd1bb27ddaaa8d48a2e1602e5bf6dc266f0fa015a1455b42`,
+hostPID3194/namespacePID1;server CID
+`db07fd1ba8c7827a8e1125529c415f26c78078bfdd72436146b8d68380568686`.
+The source-defined fixed23-case loop must finish before terminal emission;the M
+receipt itself has no cases field. Its actual count is44637,not an old cohort's
+count. Primary and always-recovery receipts both issues:[],containers_removed:true,
+stage_removed:true,strict_release_complete:true. No invented M core-checkout0
+receipt;ephemeral runner source checkout remains runner-managed.
+
+M evidence model remains trusted-distribution-legacy-v1:
+independent_loaded_object_attestation:false,complete_abi_attestation:false,
+mapping_consistency:not-established,runtime_grant:false,production_ready:false.
+These are functional lab results under the approved assurance tradeoff,not full
+independent loaded-object/ABI attestation or a production admission grant.
+
+### Consolidated canonical review and proof limits
+
+Source-scoped canonical Feature Light,Feature Bloat/Structure Phase1 and final
+Feature Security checkpoints cover explicit coherent boundary
+`0c984010ca46e1afd0e1cdfb9e3e47a38a58b157` through63b728a,not a docs tail.
+23 code/test files plus8 owner docs;no workflow/dependency/lockfile change.
+Four confirmed gaps addressed:failure provenance,finite stock auth/localization
+closure,boolean NTS observation,and exact post-save autoload verification. No
+remaining significant scoped issue/manual decision/confirmed security defect or
+new unprotected07A handoff found. Existing auth/nonce/capability/record ordering,
+source identity,SQL/timeout/memory/output/cleanup guards remain strict. The sole
+application include change is the one-line dormant NTS observation correction;
+no public registration,wiring,execution grant,compatibility or schema change.
+
+Bloat helper measured whole coherent code boundary:12 PHP files,0 oversized/
+cleanup/split/defer,all Consolidate-retain. TOTAL lines226/119/206/130/281/77/105/
+91/74/65/35/41,each limit300/over0;helper CODE1 is not meaningful executable-line
+evidence. Eleven changed mjs files TOTAL213/94/128/54/19/76/55/47/65/48/101,
+all below250. No Phase2 structure edits needed;no cosmetic split/churn. UI/UX
+inapplicable;no whole-plugin pre-release/Database Review/HTTP claim from this
+source-scoped checkpoint.
+
+Meaningful regression proof and assertion-killed guard controls are recorded in
+the chronological sections above;isolated API/IO/DATA models are not genuine
+authentication or physical storage proof. Final local targeted PHP317/2505 and
+Node152/152 passed,no failures/skips. Full local PHP2952/24913/two existing Sodium
+signer skips predates the final verifier/definition edits;final ordinary matrix
+CI above,not that earlier local run,covers the frozen executable cohort. Actual
+L/M native receipts now supply their limited physical qualification layer.
+
+Final publication is docs-only. The canonical toolkit campaign section records
+the actual final documentation head,ordinary exact-head CI and publication
+completion after they occur;native results stay bound to63b728a,with executable
+cohort equality checked rather than falsely claiming a rerun at the docs head.
+Historical whole-plugin release-readiness records remain untouched.
+
+## Implementation-plan progress and exact next gate
+
+Three worthwhile milestones out of10;5 native attempts out of10,cumulative28.
+Retries,diagnostic revisions,W definition preparation,cleanup and evidence commits
+are bundled necessary work,not extra milestones. All current CI-lab L/M request
+qualification is complete on one frozen source cohort. The next meaningful row
+is actual W current-cohort authentication/session/native qualification;repository
+closure parity and green CI do NOT establish Windows NTS/AMD64 or installed-graph
+proof. Genuine HTTP qualification remains a later separate gate. No further
+worthwhile in-scope work is substituted merely to reach10.
+
+**Recommended next action: approve Plugin Tester local-only Current-Cohort W
+Genuine-Session Request Qualification and Owned Cleanup Proof**,audit-first with
+fresh prerequisites and exact target/owned disposable fixture confirmation.
+Preserve existing application tables/options/users/cron/lifecycle and keep
+production wiring disabled. No LocalWP inspection/proof is authorized by this
+campaign;no release/package/deploy or new milestone begins at closeout.

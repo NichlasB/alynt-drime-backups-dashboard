@@ -1,10 +1,13 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
 Current auth recovery campaign — 2026-11-07: [bounded continuation owner](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-tracks actual counters/CI/native evidence while continuing the L auth blocker
-under the current explicit repository/ephemeral-lab authority. No readiness or
-production-wiring grant; LocalWP/live/release and out-of-scope decisions remain
-separate gates. Earlier one-attempt approval recommendations below are historical.
+records completed current L and affected M lab proofs at63b728a,
+runs42361807156/42361945178,ordinary CI42361617753 and strict owned cleanup.
+3/10 milestones on evidence closeout,5/10 attempts,cumulative28. Next actual
+W/Plugin Tester genuine-session qualification requires LocalWP approval,fresh
+prerequisites and exact target/owned fixture confirmation. No HTTP/installed-
+graph readiness,independent M ABI attestation or production-wiring grant;
+earlier dated attempt recommendations below are historical.
 
 Current L attempt — 2026-11-07 UTC: [ONEa8fbbe3](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and source audit198/native0/SQL0; case0 auth engine
