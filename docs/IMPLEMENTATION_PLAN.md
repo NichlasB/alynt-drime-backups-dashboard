@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Authorized auth recovery campaign — 2026-11-07
+
+The [current campaign owner/ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
+continues the first unfinished plan item: L authentication Error, not completed
+transport-tuple work. It authorizes bounded repository recovery and existing
+ephemeral CI-lab proofs without per-slice confirmation, up to10 worthwhile
+milestones/10 native attempts/3 recovery cycles per distinct blocker. Historical
+10/10/static9 and cumulative23 are preserved separately; current actual counters,
+coherent review baseline, source-scoped evidence and exact resume are centralized
+there. Production wiring/LocalWP/live/release/other explicit boundaries remain.
+Prior one-attempt approval requests below are historical, not current campaign
+stop points when the next action remains in scope.
+
 ## L source audit passed; first-case authentication Error — 2026-11-07 UTC
 
 [ONEa8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)

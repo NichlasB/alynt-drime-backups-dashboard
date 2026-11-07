@@ -80,7 +80,10 @@ try {
 	adbg_auth_hooks();
 	adbg_check( adbm_source_rows() === $rows && adbm_modules() === $modules, 'fixed loaded cohort through guarded entry' );
 } catch ( Throwable $error ) {
-	$failed  = true;
+	$failed = true;
+	if ( defined( 'ADB_WL_REQUEST_PROOF' ) ) {
+		adbwl_auth_capture( $stage, (int) $argv[2], $error );
+	}
 	$failure = adbg_failure( 'child', (int) $argv[2], $stage, $error );
 } finally {
 	$stage = 'cleanup';

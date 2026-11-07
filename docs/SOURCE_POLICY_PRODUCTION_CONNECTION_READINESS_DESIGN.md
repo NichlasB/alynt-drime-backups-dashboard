@@ -1,5 +1,11 @@
 # Source-Policy Production-Connection Readiness and Remaining Qualification Design
 
+Current auth recovery campaign — 2026-11-07: [bounded continuation owner](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
+tracks actual counters/CI/native evidence while continuing the L auth blocker
+under the current explicit repository/ephemeral-lab authority. No readiness or
+production-wiring grant; LocalWP/live/release and out-of-scope decisions remain
+separate gates. Earlier one-attempt approval recommendations below are historical.
+
 Current L attempt — 2026-11-07 UTC: [ONEa8fbbe3](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and source audit198/native0/SQL0; case0 auth engine
 Error, cause Unknown, no successful request proof. Strict cleanup passed. Next

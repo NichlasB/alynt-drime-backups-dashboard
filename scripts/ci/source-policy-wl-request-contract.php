@@ -107,7 +107,75 @@ function adbwl_failure_wire( $wire ) {
 	if ( ! adbg_failure_valid( $wire ) ) {
 		return '';
 	}
-	return adbwl_include_prefix( $wire ) . str_replace( 'ADBMGRF1|', 'ADBWLRF1|' . getenv( 'WL_REQUEST_PROFILE' ) . '|', $wire );
+	$auth = adbwl_auth_failure_wire( $wire );
+	return '' !== $auth ? $auth : adbwl_include_prefix( $wire ) . str_replace( 'ADBMGRF1|', 'ADBWLRF1|' . getenv( 'WL_REQUEST_PROFILE' ) . '|', $wire );
+}
+
+/** Retain first L proof/auth engine Error location DATA; no IO, message or trace.
+ *
+ * @param string    $stage Fixed stage.
+ * @param int       $index Fixed case index.
+ * @param Throwable $error Caught failure.
+ * @return void
+ */
+function adbwl_auth_capture( $stage, $index, Throwable $error ) {
+	if ( 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'proof' !== getenv( 'WL_REQUEST_MODE' ) || 'auth' !== $stage || 'Error' !== get_class( $error )
+		|| ! is_int( $index ) || $index < 0 || $index > 22 || isset( $GLOBALS['adbwl_auth_failure'] ) || ! defined( 'ABSPATH' ) || ! defined( 'WPINC' ) ) {
+		return;
+	}
+	$source = 'other';
+	$digest = str_repeat( '0', 64 );
+	$line   = 0;
+	$file   = str_replace( '\\', '/', $error->getFile() );
+	$core   = str_replace( '\\', '/', ABSPATH . WPINC );
+	$names  = $GLOBALS['adbwl_auth_sources'] ?? array();
+	$known  = is_array( $names ) && count( $names ) <= 32;
+	foreach ( $known ? $names : array() as $name ) {
+		$known = $known && is_string( $name ) && 1 === preg_match( '/\A[a-z0-9-]{1,100}\.php\z/', $name );
+	}
+	if ( strlen( $file ) <= 4096 && $error->getLine() > 0 && $error->getLine() <= 100000 ) {
+		if ( $known && dirname( $file ) === $core && in_array( basename( $file ), $names, true ) ) {
+			$source = 'core';
+		} elseif ( dirname( $file ) === str_replace( '\\', '/', __DIR__ ) && in_array( basename( $file ), array( 'source-policy-minimum-request-auth.php', 'source-policy-minimum-request-observer.php', 'source-policy-minimum-request-child-body.php' ), true ) ) {
+			$source = 'helper';
+		}
+		if ( 'other' !== $source ) {
+			$digest = hash( 'sha256', basename( $file ) );
+			$line   = $error->getLine();
+		}
+	}
+	$phase                         = $GLOBALS['adbg_auth_phase'] ?? null;
+	$GLOBALS['adbwl_auth_failure'] = array(
+		'index'       => $index,
+		'phase'       => in_array( $phase, array( 'setup', 'auth' ), true ) ? $phase : 'none',
+		'source'      => $source,
+		'line'        => $line,
+		'path_digest' => $digest,
+	);
+}
+
+/** Versioned single-line auth failure only; preserves the legacy refusal otherwise.
+ *
+ * @param string $wire Existing validated failure.
+ * @return string
+ */
+function adbwl_auth_failure_wire( $wire ) {
+	if ( ! adbg_failure_valid( $wire ) || 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'proof' !== getenv( 'WL_REQUEST_MODE' ) ) {
+		return '';
+	}
+	$fact = $GLOBALS['adbwl_auth_failure'] ?? null;
+	if ( ! is_array( $fact ) || array_keys( $fact ) !== array( 'index', 'phase', 'source', 'line', 'path_digest' ) || ! is_int( $fact['index'] ) || $fact['index'] < 0 || $fact['index'] > 22
+		|| ! in_array( $fact['phase'], array( 'none', 'setup', 'auth' ), true ) || ! in_array( $fact['source'], array( 'core', 'helper', 'other' ), true ) || ! is_int( $fact['line'] ) || $fact['line'] < 0 || $fact['line'] > 100000
+		|| ! is_string( $fact['path_digest'] ) || 1 !== preg_match( '/\A[a-f0-9]{64}\z/', $fact['path_digest'] )
+		|| ( 'other' === $fact['source'] ? ( 0 !== $fact['line'] || str_repeat( '0', 64 ) !== $fact['path_digest'] ) : ( 0 === $fact['line'] || str_repeat( '0', 64 ) === $fact['path_digest'] ) ) ) {
+		return '';
+	}
+	$parts = explode( '|', rtrim( $wire, "\n" ) );
+	if ( 'child' !== $parts[1] || $fact['index'] !== (int) $parts[2] || 'auth' !== $parts[3] || 'Error' !== $parts[4] || str_repeat( '0', 64 ) !== $parts[5] ) {
+		return '';
+	}
+	$out = str_replace( 'ADBMGRF1|', 'ADBWLRF2|l|', rtrim( $wire, "\n" ) ) . '|' . implode( '|', array( $fact['phase'], $fact['source'], $fact['line'], $fact['path_digest'] ) ) . "\n";
+	return strlen( $out ) <= 256 ? $out : '';
 }
 
 /** Optional bounded include cause; legacy failure stays intact on malformed DATA.

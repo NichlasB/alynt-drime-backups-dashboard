@@ -34,3 +34,11 @@ test('actual dependency pin/profile/count/hash guards are non-vacuous assertion-
     [s=>s.replace("! array_intersect_key( $row['pins'], $row['auth'] )",'true'),'overlap']
   ])model(change,[scenario],true);
 });
+test('actual post-audit source map is finite L-only DATA; missing assignment or W widening cannot pass',()=>{
+  const start=original.indexOf('\tif ( ! $w ) {',original.indexOf('definition audit zero native effects')),end=original.indexOf('\treturn array( $rows, $modules );',start);assert.ok(start>0&&end>start);
+  const block=original.slice(start,end);
+  const run=(code,profile)=>{const script=`define('ADB_WL_REQUEST_PROOF',true);define('ADB_M_REQUEST_PROOF',true);require ${literal(join(root,'scripts/ci/source-policy-wl-request-bootstrap.php'))};putenv('WL_REQUEST_PROFILE=${profile}');$row=adbwl_catalog();$w='${profile}'==='w';${code}echo implode(',', $GLOBALS['adbwl_auth_sources']??array());if(defined('ABSPATH')||class_exists('wpdb',false)||function_exists('mysqli_init'))throw new RuntimeException('effects');`;const r=spawnSync(php,['-n','-r',script],{encoding:'utf8',timeout:5000,maxBuffer:4096});if(r.error||r.status!==0||r.stderr!=='')throw Error('Map setup failure, not a semantic kill');return r.stdout;};
+  const expected=run(block,'l').split(',');assert.equal(expected.length,22);assert.ok(expected.includes('class-wp-metadata-lazyloader.php'));assert.equal(run(block,'w'),'');
+  const absent=block.replace("$GLOBALS['adbwl_auth_sources'] = array_merge( array_keys( $row['pins'] ), array_keys( $row['auth'] ) );",'/* omitted map */');assert.notEqual(absent,block);assert.throws(()=>assert.deepEqual(run(absent,'l').split(','),expected),{code:'ERR_ASSERTION'});
+  const wide=block.replace('if ( ! $w )','if ( true )');assert.notEqual(wide,block);assert.throws(()=>assert.equal(run(wide,'w'),''),{code:'ERR_ASSERTION'});
+});

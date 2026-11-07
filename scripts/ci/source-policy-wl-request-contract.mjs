@@ -8,8 +8,14 @@ export function wlLinuxJob(env){
     &&env.GITHUB_REPOSITORY==='NichlasB/alynt-drime-backups-dashboard'&&env.GITHUB_REF==='refs/heads/master'&&env.GITHUB_ACTOR==='NichlasB'
     &&env.GITHUB_RUN_ATTEMPT==='1'&&typeof env.GITHUB_RUN_ID==='string'&&/^[1-9][0-9]*$/.test(env.GITHUB_RUN_ID)&&hex(env.GITHUB_SHA,40)&&env.EXPECTED_SHA===env.GITHUB_SHA);
 }
-export function wlRequestFailure(raw,allowInclude=false){
+export function wlRequestFailure(raw,allowInclude=false,allowAuth=false){
   if(typeof raw!=='string'||Buffer.byteLength(raw)>256)return null;
+  if(raw.startsWith('ADBWLRF2|')){
+    if(allowAuth!==true)return null;
+    const a=/^ADBWLRF2\|l\|child\|([0-9]|1[0-9]|2[0-2])\|auth\|Error\|(0{64})\|(none|setup|auth)\|(core|helper|other)\|(0|[1-9][0-9]{0,5})\|([a-f0-9]{64})\n(?![\s\S])/.exec(raw);
+    if(!a||Number(a[5])>100000||(a[4]==='other'?(a[5]!=='0'||a[6]!=='0'.repeat(64)):(a[5]==='0'||a[6]==='0'.repeat(64))))return null;
+    return {profile:'l',case_index:Number(a[1]),stage:'auth',exception:'Error',assertion:a[2],auth:{phase:a[3],source:a[4],line:Number(a[5]),path_digest:a[6]}};
+  }
   let include=null;
   if(raw.startsWith('ADBWLIC1|')){
     if(allowInclude!==true)return null;

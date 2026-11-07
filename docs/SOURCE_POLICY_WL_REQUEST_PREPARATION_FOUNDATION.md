@@ -1,5 +1,11 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current auth campaign — 2026-11-07: [actual recovery ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
+continues bounded repository/CI-lab recovery at L authentication under current
+explicit campaign authority; fixed guards and source identities preserved. No
+LocalWP/W qualification or production/HTTP/wiring grant is supplied. Actual
+counts/evidence/resume centralized; older one-attempt resumes below historical.
+
 Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and repaired source audit198/native0/SQL0. Case0
 failed auth/Error/zero assertion, precise cause Unknown; cleanup verified. Next

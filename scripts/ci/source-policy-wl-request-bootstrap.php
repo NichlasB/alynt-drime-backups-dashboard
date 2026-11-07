@@ -94,6 +94,9 @@ function adbwl_load() {
 	$modules = adbm_modules();
 	adbg_check( 'audit' === getenv( 'WL_REQUEST_MODE' ) || hash_equals( getenv( 'WL_REQUEST_MODULES' ), $modules ), 'audit and proof module inventory agree' );
 	adbg_check( '0' === mysqli_get_client_stats()['connect_success'] && '0' === mysqli_get_client_stats()['com_query'], 'definition audit zero native effects' );
+	if ( ! $w ) {
+		$GLOBALS['adbwl_auth_sources'] = array_merge( array_keys( $row['pins'] ), array_keys( $row['auth'] ) );
+	}
 	return array( $rows, $modules );
 }
 

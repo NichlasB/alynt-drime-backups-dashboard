@@ -1,5 +1,12 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current authorized campaign — 2026-11-07: [auth recovery ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
+resumes L auth engine Error with bounded diagnostics, recovery and ephemeral CI-lab
+qualification under the current10-milestone/10-attempt/3-cycle authority. Actual
+counts/evidence/resume centralized there; no maintenance churn or completed tuple
+work reopened. Production/LocalWP/release/explicit policy boundaries still stop;
+historical individual-attempt approval resumes below do not govern this campaign.
+
 Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
 passed original adapter291/9 and request source audit198/native0/SQL0, then case0
 auth/Error/zero assertion, cause Unknown. Cleanup passed; no successful request

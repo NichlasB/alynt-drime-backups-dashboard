@@ -1,5 +1,12 @@
 # L Post-Catalog Genuine-Session Requalification — Authentication Error
 
+Authorized follow-on campaign — 2026-11-07: [bounded auth recovery owner](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
+now governs in-scope repository recovery and existing ephemeral CI-lab attempts,
+with separate actual counters/limits and no per-slice task confirmations. This
+historical native failure is unchanged; diagnostic/qualification outcomes will
+not be inferred from isolated tests or old receipts. Explicit production/LocalWP/
+release/out-of-scope policy boundaries remain; older next-approval text historical.
+
 ## ONE exact-head approval and baseline — 2026-11-07 UTC
 
 Explicit approval of ONE attempt at

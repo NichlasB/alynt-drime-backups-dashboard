@@ -125,7 +125,7 @@ async function launchRequest(index, env, remaining) {
       try{const row=parseRequestWire(out);if(!row)throw Error();settled=true;accept(row);}catch{deny();}
     }
   });
-  child.stderr.on('data',chunk=>{err+=chunk.toString('utf8');if(err.includes('\n')||Buffer.byteLength(err)>256){const fact=wlRequestFailure(err);if(fact&&fact.profile==='l'&&fact.case_index===index)process.stderr.write(JSON.stringify({request_failure:fact})+'\n');deny();}});
+  child.stderr.on('data',chunk=>{err+=chunk.toString('utf8');if(err.includes('\n')||Buffer.byteLength(err)>256){const fact=wlRequestFailure(err,false,true);if(fact&&fact.profile==='l'&&fact.case_index===index)process.stderr.write(JSON.stringify({request_failure:fact})+'\n');deny();}});
   const cleanup=async()=>{
     clearTimeout(timer);if(!closed)child.kill('SIGKILL');
     let timeout;await Promise.race([ended,new Promise((_,deny)=>{timeout=setTimeout(()=>deny(Error('Exact child cleanup unconfirmed')),1000);})]).finally(()=>clearTimeout(timeout));
