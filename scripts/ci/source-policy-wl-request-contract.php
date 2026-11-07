@@ -114,14 +114,15 @@ function adbwl_failure_wire( $wire ) {
 
 /** Immediate result/effect enums only; never retain a view, error or receiver.
  *
- * @param mixed $view Actual guarded result.
- * @param int   $index Fixed positive case.
- * @param int   $records Observed ambient query delta.
- * @param int   $connects Observed native connect delta.
- * @param int   $commands Observed native command delta.
+ * @param mixed    $view Actual guarded result.
+ * @param int      $index Fixed positive case.
+ * @param int      $records Observed ambient query delta.
+ * @param int      $connects Observed native connect delta.
+ * @param int      $commands Observed native command delta.
+ * @param int|null $failed_connects Observed failed connects; null retains legacy DATA.
  * @return void
  */
-function adbwl_entry_capture( $view, $index, $records, $connects, $commands ) {
+function adbwl_entry_capture( $view, $index, $records, $connects, $commands, $failed_connects = null ) {
 	if ( 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'proof' !== getenv( 'WL_REQUEST_MODE' ) || ! is_int( $index ) || $index < 0 || $index > 3 || isset( $GLOBALS['adbwl_entry_failure'] ) ) {
 		return;
 	}
@@ -150,6 +151,13 @@ function adbwl_entry_capture( $view, $index, $records, $connects, $commands ) {
 		'connects' => $connects,
 		'commands' => $commands,
 	);
+	if ( null !== $failed_connects ) {
+		if ( ! is_int( $failed_connects ) || $failed_connects < 0 || $failed_connects > 4096 ) {
+			unset( $GLOBALS['adbwl_entry_failure'] );
+			return;
+		}
+		$GLOBALS['adbwl_entry_failure']['failed_connects'] = $failed_connects;
+	}
 }
 
 /** Closed one-line metadata for the original positive-view assertion only.
@@ -159,13 +167,15 @@ function adbwl_entry_capture( $view, $index, $records, $connects, $commands ) {
  */
 function adbwl_entry_failure_wire( $wire ) {
 	$fact = $GLOBALS['adbwl_entry_failure'] ?? null;
+	$keys = array( 'index', 'result', 'code', 'records', 'connects', 'commands' );
 	if ( ! adbg_failure_valid( $wire ) || 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'proof' !== getenv( 'WL_REQUEST_MODE' ) || ! is_array( $fact )
-		|| array_keys( $fact ) !== array( 'index', 'result', 'code', 'records', 'connects', 'commands' ) || ! is_int( $fact['index'] ) || $fact['index'] < 0 || $fact['index'] > 3
+		|| ( array_keys( $fact ) !== $keys && array_keys( $fact ) !== array_merge( $keys, array( 'failed_connects' ) ) ) || ! is_int( $fact['index'] ) || $fact['index'] < 0 || $fact['index'] > 3
 		|| ! in_array( $fact['result'], array( 'array', 'error', 'other' ), true ) || ! in_array( $fact['code'], array( 'none', 'forbidden', 'invalid', 'unavailable', 'other' ), true )
 		|| ( 'error' === $fact['result'] ? 'none' === $fact['code'] : 'none' !== $fact['code'] ) ) {
 		return '';
 	}
-	foreach ( array( 'records', 'connects', 'commands' ) as $key ) {
+	$extended = array_key_exists( 'failed_connects', $fact );
+	foreach ( $extended ? array( 'records', 'connects', 'commands', 'failed_connects' ) : array( 'records', 'connects', 'commands' ) as $key ) {
 		if ( ! is_int( $fact[ $key ] ) || $fact[ $key ] < 0 || $fact[ $key ] > 4096 ) {
 			return '';
 		}
@@ -174,7 +184,7 @@ function adbwl_entry_failure_wire( $wire ) {
 	if ( $expected !== $wire ) { // phpcs:ignore WordPress.PHP.YodaConditions -- Exact private original refusal identity, no scalar normalization.
 		return '';
 	}
-	$out = str_replace( 'ADBMGRF1|', 'ADBWLRF3|l|', rtrim( $wire, "\n" ) ) . '|' . implode( '|', array( $fact['result'], $fact['code'], $fact['records'], $fact['connects'], $fact['commands'] ) ) . "\n";
+	$out = str_replace( 'ADBMGRF1|', $extended ? 'ADBWLRF4|l|' : 'ADBWLRF3|l|', rtrim( $wire, "\n" ) ) . '|' . implode( '|', array( $fact['result'], $fact['code'], $fact['records'], $fact['connects'], $fact['commands'] ) ) . ( $extended ? '|' . $fact['failed_connects'] : '' ) . "\n";
 	return strlen( $out ) <= 256 ? $out : '';
 }
 

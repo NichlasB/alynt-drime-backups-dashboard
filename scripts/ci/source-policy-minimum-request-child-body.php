@@ -53,7 +53,7 @@ try {
 		$view = $class::request_view( 7, 'wpvivid' );
 		if ( defined( 'ADB_WL_REQUEST_PROOF' ) ) {
 			$entry_stats = mysqli_get_client_stats();
-			adbwl_entry_capture( $view, (int) $argv[2], $ambient->num_queries - $before_queries, (int) $entry_stats['connect_success'] - (int) $before['connect_success'], (int) $entry_stats['com_query'] - (int) $before['com_query'] );
+			adbwl_entry_capture( $view, (int) $argv[2], $ambient->num_queries - $before_queries, (int) $entry_stats['connect_success'] - (int) $before['connect_success'], (int) $entry_stats['com_query'] - (int) $before['com_query'], (int) $entry_stats['connect_failure'] - (int) $before['connect_failure'] );
 		}
 		adbg_check( is_array( $view ) && array( 'mode', 'revision' ) === array_keys( $view ) && 'required' === $view['mode'], 'genuine same-observation view available' );
 		$request['source_policy_revision'] = 'stale' === $scenario ? str_repeat( 'f', 64 ) : $view['revision'];

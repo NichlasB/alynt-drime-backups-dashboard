@@ -28,12 +28,12 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 1/10: published/verified diagnostic foundation |
-| Native qualification attempts | 2/10; historical23 plus this campaign2 = cumulative25 |
+| Native qualification attempts | 3/10; historical23 plus this campaign3 = cumulative26 |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
-| Positive-view refusal recovery cycles | New blocker, cycle1/3 value-free result/effect localization in progress |
+| Positive-view refusal recovery cycles | Cycle1/3 located unavailable/one ambient query/no successful connect; cycle2/3 honest failed-connect accounting in progress |
 | Milestone1: bounded auth failure localization foundation | Complete: a6d952f/ordinary CI42356467065/toolkit ed3a95d; physical RF2 evidence in42356770856 |
 | Milestone2: L genuine-session qualification | Pending; new source audit211 and actual auth phase advanced, positive view refused |
-| Next in-scope action | Publish/verify bounded entry diagnostics, then fresh prerequisites and campaign attempt3 |
+| Next in-scope action | Publish/verify failed-connect diagnostic extension, then fresh prerequisites and campaign attempt4 |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -296,6 +296,68 @@ failure binding,legacy fallback,explicit proof opt-in and no success/grant. No
 residual confirmed security defect/new unprotected07A handoff. Synthetic fixtures
 and inert process doubles are not genuine auth/native/storage proof; UI/full
 release suite inapplicable,historical whole-plugin rows remain unchanged.
+
+Published d6ffafc2c20f95e35dd479aa7788720b34df4b97,
+[ordinary CI42358683858](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42358683858)
+actual completed/success:PHP7.4=2952/24915,PHP8.3=2952/24920,no failures/skips;
+Node151/151 each,no failures/skips;PHPCS291/291/manifest/build/structure/audits,
+0 vulnerabilities;both exact-head check-runs success,legacy contexts0. Toolkit
+ae63ac2d5e1c26ee9ce3a8b7dfdf9a25b39a495c exact remote verified,workflows0/checks0/
+legacy contexts0,no toolkit CI claim. Below is actual new physical evidence,
+not a separately completed product milestone for the diagnostic substep.
+
+## Attempt3 and cycle2: unavailable does not imply zero native attempts
+
+[Run42358934714](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42358934714),
+exactd6ffafc,actual completed/failure. Fresh environment/original291/9 passed,
+held PID3413/live+post-exit zero,same original image10e09736...,
+run2be951d18823fbdeaffab90058ccbb77. Request source audit211/native0/SQL0,
+imageaf041f23b93e364abdd05a716fbedd1955cf0f9644d65d8e88540a02debfc20d,
+modulese5efa746... unchanged. Both owned baselines unchanged (noTCP1/wsrep0/
+native_aio1/ac1/tx0/sessions0/trx0/non-system schemas0). Case0 again fails the exact
+positive-view assertion, now RF3 error/unavailable/records1/connects0/commands1.
+No successful new connection is observed; **this does not establish zero failed
+connects, native allocations, attempted connects, or a particular internal guard**.
+Failure counter was not captured. Never relabel this as a successful view/auth
+batch, no-native-attempt proof, or diagnosed production-source defect.
+Primary/trap/recovery cleanup containers0/directories0/tmpfs released/
+reconciliation_failure0; preflight private_directory0/core_checkout0.
+
+Read-only source tracing covered record resolution, class-owned root/peer leases,
+declaration/cache/hook provenance, settings/transport/runtime expectation,
+bootstrap and independent cleanup. None of the strict predicates is known faulty
+from the retained facts. No guard removed, new ready/facts/handle injection, raw
+diagnostic, speculative source/compatibility fix or unchanged native rerun.
+
+Small in-scope counter correction before deciding on deeper provenance:the same
+already-existing before/after mysqlnd snapshots now pass connect_failure delta.
+RF4 adds exactly one strict integer0..4096 to the same original refusal,still one
+line<=256. RF3 six-key DATA/receiver remain supported, not mislabeled as observed
+zero failures. New caller always provides seventh field; malformed/negative/
+oversize/typed-string values refuse/fall back, no new native operation or extra
+stats call. Exact case/stage/class/assertion,first cause,L/proof-only,opt-in,
+deadlines/reaping/cleanup and all success guards/budgets unchanged. A zero failure
+counter still cannot prove that no handle was allocated or no pre-connect step
+was attempted. No public/internal application diagnostic interface is introduced.
+
+Actual caller counter-erasure control (one failed connection changed to zero)
+is assertion-killed; legacy/profile/mode/origin/first-cause controls remain active.
+Strict PHP/JS RF4 positives0/1/4096 and malformed counters,old RF3 distinction,
+actual inert supervisor split projection/rejection/reaping pass targeted7/7.
+Initial profile/mode mutation check correctly failed when its test still looked
+only for RF3; updated to reject both RF3/RF4,not weakened. Five mechanical PHPDoc
+alignment errors fixed by PHPCBF; no behavioral change. Further validation and
+exact-head publication/physical evidence pending.
+
+Local full Node151/151,targeted PHP107/754,no failures/skips;changed PHP PHPCS2/2,
+syntax/build/structure/strict manifest/Composer+Node audits0 vulnerabilities and
+whitespace passed. Full PHP not rerun locally for this one-counter delta; full
+exact-head matrix remains required. Scoped canonical Light/final Feature Security
+baseline d6ffafc,5 code/test files:no remaining significant quality issue/manual
+decision/security defect/new unprotected07A handoff. Bloat Phase1 helper:2 PHP,
+0 oversized/cleanup/split/defer,contract281/child119 TOTAL,limit300/over0,CODE1
+limitation;three mjs94/76/47 below250,Consolidate-retain/no Phase2 edits needed.
+No source/application guard or production wiring change; no UI/full-release claim.
 
 ## Continuation
 

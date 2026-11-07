@@ -10,6 +10,12 @@ export function wlLinuxJob(env){
 }
 export function wlRequestFailure(raw,allowInclude=false,allowAuth=false){
   if(typeof raw!=='string'||Buffer.byteLength(raw)>256)return null;
+  if(raw.startsWith('ADBWLRF4|')){
+    const tail=/\|(0|[1-9][0-9]{0,3})\n(?![\s\S])/.exec(raw);
+    if(!tail||Number(tail[1])>4096)return null;
+    const base=wlRequestFailure((raw.slice(0,tail.index)+'\n').replace('ADBWLRF4|','ADBWLRF3|'),false,allowAuth);
+    return base?.entry?{...base,entry:{...base.entry,failed_connects:Number(tail[1])}}:null;
+  }
   if(raw.startsWith('ADBWLRF3|')){
     if(allowAuth!==true)return null;
     const e=/^ADBWLRF3\|l\|child\|([0-3])\|entry\|RuntimeException\|(113bc67f76c37d203efc9ce41814ae27055775e06935d86a4eb235af6900e1a5)\|(array|error|other)\|(none|forbidden|invalid|unavailable|other)\|(0|[1-9][0-9]{0,3})\|(0|[1-9][0-9]{0,3})\|(0|[1-9][0-9]{0,3})\n(?![\s\S])/.exec(raw);

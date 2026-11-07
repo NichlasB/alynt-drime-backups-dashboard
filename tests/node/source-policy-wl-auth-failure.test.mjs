@@ -54,6 +54,7 @@ async function supervise(raw,source=supervisor){
 test('actual proof stderr caller projects the new fact and still rejects/reaps without native IO or success grants',async()=>{
   assert.deepEqual(await supervise(null),[]);const facts=await supervise(wire());assert.equal(facts.length,1);assert.equal(facts[0].request_failure.auth.line,3);
   const entry='ADBWLRF3|l|child|0|entry|RuntimeException|113bc67f76c37d203efc9ce41814ae27055775e06935d86a4eb235af6900e1a5|error|unavailable|1|0|1\n';assert.equal((await supervise(entry))[0].request_failure.entry.records,1);for(const bad of [entry.replace('|0|entry|','|1|entry|'),entry+'PRIVATE'])assert.deepEqual(await supervise(bad),[]);
+  const extended=entry.replace('ADBWLRF3|','ADBWLRF4|').replace('\n','|1\n');assert.equal((await supervise(extended))[0].request_failure.entry.failed_connects,1);assert.deepEqual(await supervise(extended.replace('|1\n','|4097\n')),[]);
   for(const bad of [wire(1),wire()+'PRIVATE',wire().replace('|l|','|w|')])assert.deepEqual(await supervise(bad),[]);
   const mutant=supervisor.replace('wlRequestFailure(err,false,true)','wlRequestFailure(err)');assert.notEqual(mutant,supervisor);await assert.rejects(async()=>assert.equal((await supervise(wire(),mutant)).length,1),{code:'ERR_ASSERTION'});
 });
