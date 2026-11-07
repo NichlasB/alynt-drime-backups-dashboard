@@ -1,5 +1,14 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current approved W714 design — 2026-11-07:[exact tuple/source/prerequisite rebaseline](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)
+resolves the measured W7.1.3-versus-installed7.1.4 mismatch as a finite proposed
+Windows tuple,not a source-pin exception or imported L proof. Standalone server/
+default-facts and bound-context selection must both agree;M/L/W713 remain strict.
+Next gated slice:Repository-Only W7.1.4 Finite Tuple and Prerequisite Rebaseline
+Safety Foundation,isolated tests only. No implementation/site/native operation
+or current W/HTTP readiness in this design;earlier rebaseline-design resumes
+below are historical. Existing campaign counters unchanged.
+
 Current W prerequisite — 2026-11-07:exact Plugin Tester target/owned fixture scope
 approved and confirmed;connection-free source audit refused pinned base source.
 Installed core is7.1.4,not fixed W7.1.3;runtime Windows/AMD64/PHP8.5.12/NTS64

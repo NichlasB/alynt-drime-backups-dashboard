@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current W714 rebaseline design — 2026-11-07:[approved repository-only contract](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)
+addresses prior installed7.1.4 versus fixed W7.1.3 source refusal. Finite full
+Windows tuple and standalone/bound admission paths are mapped;no code/site/native
+change or downgraded installation. Next gated slice:Repository-Only W7.1.4 Finite
+Tuple and Prerequisite Rebaseline Safety Foundation,isolated tests only. Design
+does not complete W qualification or add milestone/attempt credit;L/M frozen
+results remain scoped,HTTP/production wiring later gated. Earlier W proof/design
+resume instructions below are historical for the new source decision.
+
 Current authorized campaign — 2026-11-07: [auth recovery ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
 closes current L and affected M genuine-session CI-lab qualification at SAME
 63b728a (runs42361807156/42361945178,ordinary CI42361617753),strict cleanup passed.

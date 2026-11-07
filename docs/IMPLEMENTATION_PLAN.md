@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## W7.1.4 rebaseline design — 2026-11-07
+
+The approved [repository-only design](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)
+selects one exact additional Windows/AMD64/NTS64/PHP8.5.12/TCP/MariaDB10.6.23
+candidate for core7.1.4,not a pin-only edit or Linux-profile reuse. It maps finite
+transport/runtime/server/charset ownership,including standalone prerequisite and
+default-facts consumers,and preserves M/L/W713 rules and all budgets. Installed
+source/runtime observations below are prior evidence,not rerun in this design.
+No code/pin/test/workflow/site/SQL/native operation or wiring changes here.
+
+Implementation-plan progress:necessary design stage of the blocked W milestone,
+not a separate product milestone;campaign3/10 milestones,5/10 native attempts,
+cumulative28 unchanged. **Next gated slice:Repository-Only W7.1.4 Finite Tuple and
+Prerequisite Rebaseline Safety Foundation**,isolated API/DATA/source-backed tests
+only,with focused reviews/local validation/publication/exact-head CI. Actual
+authentication/storage/native/site execution stays disabled;owned W proof and
+affected L/M refresh/HTTP/wiring remain later separately scoped gates.
+
 ## Confirmed W prerequisite blocked by installed core drift — 2026-11-07
 
 The approved Plugin Tester local-only current-cohort genuine-session proof

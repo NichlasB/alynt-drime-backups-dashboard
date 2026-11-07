@@ -1,5 +1,13 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current W714 design — 2026-11-07:[bounded source/runtime/server/transport plan](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)
+specifies exact W7.1.4 candidate and transitive ADBC2/ambient/request prerequisite
+rebaseline,with no pin/guard/code/site change. Existing W713/L/M semantics and
+source identities remain;future shared edits need new frozen affected images.
+Next gated slice:Repository-Only W7.1.4 Finite Tuple and Prerequisite Rebaseline
+Safety Foundation,isolated API/DATA/source-backed tests only;no native execution
+or wiring. Earlier design approval requests below superseded,not physical proof.
+
 Current W prerequisite — 2026-11-07:[confirmed-target audit evidence](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#w-current-cohort-prerequisite-refusal--2026-11-07)
 shows installed core7.1.4 while current exact W catalog admits7.1.3. The pinned
 base source guard correctly refuses before fixtures/auth/native qualification;

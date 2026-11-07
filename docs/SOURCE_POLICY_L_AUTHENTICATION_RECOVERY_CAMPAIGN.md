@@ -35,7 +35,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
 | Milestone2: L genuine-session qualification | Passed at63b728a/run42361807156: source audit211/native0/SQL0,23 cases/12006 checks/9 groups, strict cleanup |
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
-| Exact next meaningful item | W proof was separately approved/confirmed but connection-free prerequisite found installed7.1.4 versus pinned W7.1.3;repository-only current-source profile rebaseline DESIGN now requires approval,see final checkpoint |
+| Exact next meaningful item | W714 rebaseline DESIGN approved and recorded in SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md;next is separately approved repository-only finite tuple/prerequisite foundation with isolated tests,no native/site/wiring |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -716,3 +716,22 @@ the measured Windows candidate's exact source/tuple/session/transport admission,
 affected L/M/W receipts and finite closure/precondition/cleanup order before
 implementation/proof. Preserve installed application state and all strict guards;
 no native execution,site writes,downgrade or production wiring in that design.
+
+### Approved W714 rebaseline design, not a native retry
+
+The [repository-only design](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)
+addresses the measured mismatch without editing pins/code or inspecting the
+installed site again. W714 is a finite Windows/AMD64/NTS64/PHP8.5.12/TCP/exact
+10.6.23 candidate distinct from L7.1.4/Linux/socket/utf8/exact10.11.18-ubu2204.
+The design explicitly covers transport,production expectation,standalone greeting
+AND default-facts admission,base/version catalog,transitive ADBC2/ambient worker
+and request-controller/source-image dependencies. It retains legacy one-argument
+server DATA lookup and M/L/W713 rules;no broader version/server/architecture alias.
+
+Next gated slice:Repository-Only W7.1.4 Finite Tuple and Prerequisite Rebaseline
+Safety Foundation,isolated API/DATA/source-backed tests and focused reviews only,
+through validation/commit/push/exact-head CI. No actual auth/storage/native/site
+execution,wiring,package/release or automatic owned proof. Source-scoped design
+review/publication evidence belongs to the canonical toolkit section;no historical
+whole-plugin readiness refresh. Design is part of the pending W qualification
+milestone,not extra count;campaign3/10 milestones,5/10 attempts,cumulative28 remain.
