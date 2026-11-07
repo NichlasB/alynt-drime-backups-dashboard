@@ -146,10 +146,12 @@ function adbg_non_target() {
 /**
  * Bound every owned fixture before a fresh request process, never trim it.
  *
+ * @param string $expected_autoload Exact fixed phase representation; off only after a W/L save.
  * @return void
  */
-function adbg_preflight() {
+function adbg_preflight( $expected_autoload = 'no' ) {
 	global $wpdb;
+	adbg_check( 'no' === $expected_autoload || ( 'off' === $expected_autoload && defined( 'ADB_WL_REQUEST_PROOF' ) ), 'fixed non-autoloaded proof phase' );
 	$prefix = adbg_prefix();
 	foreach ( array(
 		'users'                       => 3,
@@ -182,7 +184,7 @@ function adbg_preflight() {
 		}
 	}
 	$policy = $wpdb->get_row( $wpdb->prepare( 'SELECT OCTET_LENGTH(option_value) AS bytes,autoload FROM ' . $prefix . 'options WHERE BINARY option_name=BINARY %s', 'alynt_drime_backups_dashboard_source_policies' ), ARRAY_A );
-	adbg_check( '' === $wpdb->last_error && is_array( $policy ) && is_string( $policy['bytes'] ) && 1 === preg_match( '/\A[0-9]+\z/', $policy['bytes'] ) && (int) $policy['bytes'] <= 16384 && 'no' === $policy['autoload'], 'bounded non-autoloaded policy metadata' );
+	adbg_check( '' === $wpdb->last_error && is_array( $policy ) && is_string( $policy['bytes'] ) && 1 === preg_match( '/\A[0-9]+\z/', $policy['bytes'] ) && (int) $policy['bytes'] <= 16384 && $expected_autoload === $policy['autoload'], 'bounded non-autoloaded policy metadata' );
 }
 
 /**

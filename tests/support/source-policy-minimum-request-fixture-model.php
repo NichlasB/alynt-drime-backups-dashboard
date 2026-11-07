@@ -9,10 +9,12 @@ define('ARRAY_A', 'ARRAY_A');
 function adbg_check($condition, $label) { A::assertTrue($condition, $label); }
 class WP_Hook { public $callbacks = array(); }
 $scenario = $argv[1];
+if(strpos($scenario,'wl-')===0){define('ADB_WL_REQUEST_PROOF',true);$GLOBALS['wp_version']='7.1.4';}
 $GLOBALS['wpdb'] = new class {
 	public $prefix = 'adbm_123456abcdef_';
 	public $last_error = '';
 	public $effects = array();
+	public $reads = 0;
 	function prepare($sql, $value) { return str_replace('%s', "'" . $value . "'", $sql); }
 	function query($sql) {
 		A::assertSame("DELETE FROM {$this->prefix}options WHERE BINARY option_name=BINARY 'alynt_drime_backups_dashboard_source_policies'", $sql);
@@ -24,6 +26,7 @@ $GLOBALS['wpdb'] = new class {
 		$this->effects[] = 'policy-insert'; return 1;
 	}
 	function get_var($sql) {
+		++$this->reads;
 		global $scenario;
 		$this->last_error = '';
 		if (strpos($sql, 'OCTET_LENGTH(meta_value)') !== false) {
@@ -53,14 +56,15 @@ $GLOBALS['wpdb'] = new class {
 		A::assertSame(ARRAY_A, $format); $this->last_error = '';
 		A::assertSame("SELECT OCTET_LENGTH(option_value) AS bytes,autoload FROM {$this->prefix}options WHERE BINARY option_name=BINARY 'alynt_drime_backups_dashboard_source_policies'", $sql);
 		if ($scenario === 'failed-policy-read') { $this->last_error = 'modeled'; return null; }
-		return array('bytes'=>$scenario==='policy-large'?'16385':($scenario==='policy-malformed'?'invalid':'64'),'autoload'=>$scenario==='autoload'?'yes':'no');
+		return array('bytes'=>$scenario==='policy-large'?'16385':($scenario==='policy-malformed'?'invalid':'64'),'autoload'=>$scenario==='autoload'?'yes':($scenario==='wl-off'?'off':'no'));
 	}
 };
 try {
 	require $argv[2];
 	$failed = false;
-	try { adbg_preflight(); } catch (PHPUnit\Framework\ExpectationFailedException $error) { $failed = true; }
-	A::assertSame($scenario !== 'positive', $failed);
+	try { adbg_preflight(in_array($scenario,array('wl-off','wl-off-wrong','legacy-off'),true)?'off':($scenario==='wl-on'?'on':'no')); } catch (PHPUnit\Framework\ExpectationFailedException $error) { $failed = true; }
+	A::assertSame(!in_array($scenario,array('positive','wl-off','wl-no'),true), $failed);
+	if(in_array($scenario,array('legacy-off','wl-on'),true))A::assertSame(0,$GLOBALS['wpdb']->reads,'Invalid phase refused before fixture reads');
 	if (!$failed) {
 		$before = adbg_non_target(); adbg_seed_policy(); A::assertSame($before,adbg_non_target());
 		A::assertSame(array('policy-delete','policy-insert'),$GLOBALS['wpdb']->effects);

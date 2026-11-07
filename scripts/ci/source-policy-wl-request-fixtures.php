@@ -65,12 +65,13 @@ function adbwl_prepare_case( $scenario ) {
  */
 function adbwl_verify_case( $scenario, $before ) {
 	global $wpdb;
-	adbg_preflight();
+	$expected_autoload = 'save' === $scenario ? 'off' : 'no';
+	adbg_preflight( $expected_autoload );
 	adbg_check( adbg_non_target() === $before, 'non-target invariant after request' );
 	$expected = array( 9 => array( 'wpvivid' => 'external_optional' ) );
 	if ( 'save' === $scenario ) {
 		$expected[7] = array( 'wpvivid' => 'external_optional' );
 	}
 	$row = $wpdb->get_row( $wpdb->prepare( 'SELECT option_value,autoload FROM ' . adbg_prefix() . 'options WHERE BINARY option_name=BINARY %s', 'alynt_drime_backups_dashboard_source_policies' ), ARRAY_A );
-	adbg_check( '' === $wpdb->last_error && is_array( $row ) && serialize( $expected ) === $row['option_value'] && 'no' === $row['autoload'], 'physical exact request result' );
+	adbg_check( '' === $wpdb->last_error && is_array( $row ) && serialize( $expected ) === $row['option_value'] && $expected_autoload === $row['autoload'], 'physical exact request result' );
 }

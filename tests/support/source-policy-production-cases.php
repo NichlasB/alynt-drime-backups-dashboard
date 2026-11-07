@@ -5,11 +5,11 @@ if(defined('ADB_POLICY_ISOLATED')) {
 function production_case($case,$entry,$provider,$context,$adapter,$receiver,$store,$sites,$query,$request) {
 	// The real immutable observer can match on CI PHP7.4.33/Linux. All IO/source APIs remain doubles.
 	$legacy='6.0'===$GLOBALS['wp_version'];
-	$observedMatch='runtime-default'===$case&&($legacy?(PHP_OS_FAMILY==='Linux'&&php_uname('m')==='x86_64'&&PHP_VERSION==='7.4.33'):(PHP_VERSION==='8.5.12'&&PHP_INT_SIZE===8&&PHP_ZTS===0&&PHP_OS_FAMILY===('7.1.3'===$GLOBALS['wp_version']?'Windows':'Linux')&&php_uname('m')===('7.1.3'===$GLOBALS['wp_version']?'AMD64':'x86_64')));
+	$observedMatch='runtime-default'===$case&&($legacy?(PHP_OS_FAMILY==='Linux'&&php_uname('m')==='x86_64'&&PHP_VERSION==='7.4.33'):(PHP_VERSION==='8.5.12'&&PHP_INT_SIZE===8&&PHP_ZTS===false&&PHP_OS_FAMILY===('7.1.3'===$GLOBALS['wp_version']?'Windows':'Linux')&&php_uname('m')===('7.1.3'===$GLOBALS['wp_version']?'AMD64':'x86_64')));
 	if('runtime-observation'===$case){
 		boot_set($context,'production_runtime',null);$context->capture_bootstrap();$actual=boot_get($context,'production_runtime');
 		$expected=array('platform'=>PHP_OS_FAMILY,'arch'=>php_uname('m'),'php'=>PHP_VERSION,'client'=>$GLOBALS['boot_client'],'mode'=>0);
-		if(!$legacy){$expected['word_size']=PHP_INT_SIZE;$expected['nts']=0===PHP_ZTS;}
+		if(!$legacy){$expected['word_size']=PHP_INT_SIZE;$expected['nts']=false===PHP_ZTS;}
 		A::assertSame($expected,$actual,'Immutable facts come from PHP, never candidate expectations.');A::assertFalse($context->valid($receiver));A::assertSame(0,$GLOBALS['boot_counts']['allocate']);A::assertSame(0,$store->reads);A::assertFalse($context->finish());return;
 	}
 	if('capability'===$case)$GLOBALS['policy_capable']=false;

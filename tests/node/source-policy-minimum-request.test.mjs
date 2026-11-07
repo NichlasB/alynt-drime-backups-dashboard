@@ -96,9 +96,15 @@ test('fresh-child supervision and cleanup run against in-memory IO doubles only'
 }));
 
 test('fixture bounds and non-target preservation are error-safe in-memory contracts, not storage proof',()=>{
-  for(const scenario of ['positive','failed-large-read','large-value','failed-count','cardinality','per-user','failed-session-read','sessions','session-shape','failed-policy-read','policy-large','policy-malformed','autoload']){
+  for(const scenario of ['positive','wl-no','wl-off','wl-off-wrong','legacy-off','wl-on','failed-large-read','large-value','failed-count','cardinality','per-user','failed-session-read','sessions','session-shape','failed-policy-read','policy-large','policy-malformed','autoload']){
     const r=spawnSync(php,['-n','-d','disable_functions=ctype_digit',join(root,'tests/support/source-policy-minimum-request-fixture-model.php'),scenario,join(root,'scripts/ci/source-policy-minimum-request-fixtures.php')],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');assert.match(r.stdout,/^checks:[1-9][0-9]*\n$/);
   }
+  const temporary=mkdtempSync(join(tmpdir(),'adb-preflight-phase-')),file=join(temporary,'fixtures.php'),original=read('scripts/ci/source-policy-minimum-request-fixtures.php');assert.ok(resolve(temporary).startsWith(resolve(tmpdir())+sep+'adb-preflight-phase-'));
+  try{
+    for(const [before,after,scenario]of [["'off' === $expected_autoload && defined( 'ADB_WL_REQUEST_PROOF' )","'off' === $expected_autoload",'legacy-off'],["'no' === $expected_autoload || ( 'off' === $expected_autoload && defined( 'ADB_WL_REQUEST_PROOF' ) )",'true','wl-on'],["$expected_autoload === $policy['autoload']",'true','wl-off-wrong']]){
+      const changed=original.replace(before,after);assert.notEqual(changed,original);writeFileSync(file,changed);const r=spawnSync(php,['-n',join(root,'tests/support/source-policy-minimum-request-fixture-model.php'),scenario,file],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);assert.notEqual(r.status,0);assert.match(r.stderr,/PHPUnit\\Framework\\ExpectationFailedException/);
+    }
+  }finally{writeFileSync(file,original);assert.equal(readFileSync(file,'utf8'),original);rmSync(temporary,{recursive:true,force:false});assert.equal(existsSync(temporary),false);}
 });
 
 test('diagnostics carry only bounded enum/label-digest DATA and strict identities precede source load',()=>{

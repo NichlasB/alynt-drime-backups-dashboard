@@ -43,7 +43,7 @@ test('production join assertion-kills legacy and non-legacy semantic controls in
       [joinPolicy,'Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation::matches( $this->production_projection, $this->production_runtime, $this->production_expected )','true','w:active-runtime'],
       [boundary,'&& $this->query_context === $query','&& true','w:active-query'],
       [joinPolicy,"$this->production_runtime['word_size'] = PHP_INT_SIZE;",'/* missing immutable fact */','w:runtime-observation'],
-      [joinPolicy,"$this->production_runtime['nts']       = 0 === PHP_ZTS;",'/* missing immutable fact */','w:runtime-observation']
+      [joinPolicy,"$this->production_runtime['nts']       = false === PHP_ZTS;",'/* missing immutable fact */','w:runtime-observation']
     ];
     for(const [path,before,after,scenario]of controls){
       const file=join(temporary,path),source=readFileSync(file,'utf8'),mutant=source.replaceAll(before,after);assert.notEqual(mutant,source,before);writeFileSync(file,mutant);

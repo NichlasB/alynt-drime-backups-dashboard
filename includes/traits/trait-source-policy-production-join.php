@@ -67,7 +67,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Join {
 				if ( '6.0' !== $core ) {
 					// Immutable source-owned facts; preserve the legacy five-field snapshot.
 					$this->production_runtime['word_size'] = PHP_INT_SIZE;
-					$this->production_runtime['nts']       = 0 === PHP_ZTS;
+					$this->production_runtime['nts']       = false === PHP_ZTS;
 				}
 			}
 			$this->production_expected = Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation::select( $this->frame, $this->production_runtime );

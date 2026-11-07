@@ -30,10 +30,10 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Completed worthwhile milestones | 1/10: published/verified diagnostic foundation |
 | Native qualification attempts | 3/10; historical23 plus this campaign3 = cumulative26 |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
-| Positive-view refusal recovery cycles | Cycle1/3 located unavailable/one ambient query/no successful connect; cycle2/3 honest failed-connect accounting in progress |
+| Positive-view refusal recovery cycles | Cycle1 result evidence;cycle2 failed-connect accounting;cycle3/3 strict PHP8.5 boolean NTS observation repair in progress |
 | Milestone1: bounded auth failure localization foundation | Complete: a6d952f/ordinary CI42356467065/toolkit ed3a95d; physical RF2 evidence in42356770856 |
 | Milestone2: L genuine-session qualification | Pending; new source audit211 and actual auth phase advanced, positive view refused |
-| Next in-scope action | Publish/verify failed-connect diagnostic extension, then fresh prerequisites and campaign attempt4 |
+| Next in-scope action | Publish/verify strict NTS producer fix, then fresh prerequisites and campaign attempt4 at new final cohort |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -358,6 +358,110 @@ decision/security defect/new unprotected07A handoff. Bloat Phase1 helper:2 PHP,
 0 oversized/cleanup/split/defer,contract281/child119 TOTAL,limit300/over0,CODE1
 limitation;three mjs94/76/47 below250,Consolidate-retain/no Phase2 edits needed.
 No source/application guard or production wiring change; no UI/full-release claim.
+
+Counter extension published efa8f20aee814a681443263a0bbcf370eb775d3d,
+[CI42359810681](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42359810681)
+actual completed/success:PHP7.4=2952/24915,PHP8.3=2952/24920,no failures/skips;
+Node151/151 each,no failures/skips;PHPCS291/291/audits0 vulnerabilities;both exact-
+head check-runs success. No native attempt was dispatched at efa8f20:continued
+read-only review identified the deterministic producer defect below first. No
+blind diagnostic-only run or attempt-counter increment for that undispatched head.
+
+## Positive-view cycle3: PHP8.5 NTS constant type, not a new profile decision
+
+Official PHP8.5.12 source at immutable commit
+136e049ac10b032c83018e65b63b6df858943750 independently read/hashed:
+
+- [main/main_arginfo.h:16](https://github.com/php/php-src/blob/136e049ac10b032c83018e65b63b6df858943750/main/main_arginfo.h#L16),
+  6792 bytes,SHA256f9645c741ebea311502a80964efd13fe8e89f1811682e0c01ebbf862854c68c2,
+  registers PHP_ZTS with REGISTER_BOOL_CONSTANT,not an integer constant.
+- [main/main.stub.php:53](https://github.com/php/php-src/blob/136e049ac10b032c83018e65b63b6df858943750/main/main.stub.php#L53),
+  6754 bytes,SHA2569a4dccd8587343b532f066345c5eb846cdc7ed6c02b7d83dac7fcaffd8e18207,
+  declares PHP_ZTS @var bool. The first inspected main/main.c has no registration;
+  it is not used as evidence for the constant type.
+
+Current nonlegacy observer computes `0 === PHP_ZTS`,which is false for both
+boolean false(NTS) and true(ZTS). Production_Expectation requires nts=true,so an
+actual8.5 NTS runtime is deterministically misclassified. This confirmed observer
+defect can explain the opaque unavailable result; native4 must establish whether
+it is the sole remaining failure. Local existing development PHP8.5.1 reports a
+boolean too (true/ZTS on this Windows host),not evidence of the Linux candidate's
+actual threading posture. No Linux NTS fact inferred from Windows.
+
+Repair changes ONLY the nonlegacy source-owned observation to
+`false === PHP_ZTS`. Expected `nts=true`,64-bit/runtime/platform/version/source/
+transport/profile/selection and all unknown/ZTS refusals remain intact. Boolean
+true and integer0/1/null/string/array inputs are not accepted as NTS. No loose
+negation/cast/alias/new supported profile or compatibility-floor change. Legacy
+6.0/PHP7.4 retains its five-field snapshot and exact acceptance unchanged. Existing
+isolated fixture oracle corrected to the verified upstream type and the omitted-
+observation guard-removal control retained with its updated exact source spelling.
+
+Independent red regression extracts the ACTUAL observer expression and evaluates
+synthetic false,true,0,1,null,'0','',array():old `00100000` versus required
+`10000000`. Fixed positive and old-integer/loose-negation/always-true controls are
+assertion-killed; parser/launcher errors are not kills. No genuine core/native/
+installed-site execution. Existing production semantic controls and entry-data
+tests passed targeted5/5. No new logging/introspection/handle export/API or wiring.
+
+Review baseline efa8f20 (last green restore point),entire one-line observer delta
+plus directly affected fixture/control/new test. Canonical Light4 code/test files:
+one confirmed type-observation defect fixed,no remaining significant issue/manual
+decision. Bloat Phase1 helper2 PHP,0 oversized/cleanup/split/defer,trait226/helper74
+TOTAL/limit300/over0,CODE1 limitation;two mjs19/54 below250,Consolidate-retain,no
+Phase2 edits needed. Final Feature Security:strict NTS invariant preserved and
+malformed-type denial strengthened,no public/credential/SQL/privacy/authority
+change;regression covered,no new unprotected07A handoff. No full-release/UI claim.
+Full QA/publication/new qualification pending. Changed shared trait bytes require
+fresh M/W/L images; no old proof silently relabeled current, no native opportunity
+count reset. Conservatively this is the third cycle for this view blocker;if new
+attempt4 still refuses the same view gate,stop at the stated repair limit.
+
+### Preflight prevention: exact existing nonlegacy autoload contract
+
+Before native4,static source tracing identified a second deterministic verifier
+inconsistency,not a native result learned into acceptance. Existing
+Native_Profile::admit selects autoload=`off` for7.1.3/7.1.4; Native_Adapter passes
+that exact field to its mutation SQL after a successful changed save. W/L verifier
+and shared preflight instead hardcoded `no` even after that successful write.
+M6.0 requires no; non-writing W/L cases must retain seeded no. No runtime policy,
+SQL,write result or non-target invariant is changed to fit the test.
+
+Actual verifier now selects off ONLY for source-owned `save`,no for every other
+case. It passes that SAME exact value to bounded preflight and physical value/
+autoload readback. Shared preflight defaults to no; off is permitted only in an
+already-admitted W/L proof,all other expected types/values fail before fixture
+reads. This is not an allowlist accepting either value opportunistically. All
+cardinality/length/session/schema/error/non-target/serialized policy guards and
+M call sites/default remain unchanged. Actual initial/reset preflight still uses
+no; post-save verifier checks off after the actual saved result was already
+asserted. No application data/schema/state/SQL operation added.
+
+Independent in-memory red:modeled existing save/off positive failed against old
+actual verifier. New save/off and view/no-op/stale/denial/no positives;wrong-save-
+no and wrong-view-off negatives. Required autoload comparison and always-no/
+always-off controls assertion-killed. Actual shared preflight W/L off/no positives,
+wrong phase/storage and M-off/unknown-value negatives; removals of W/L phase,
+pre-read expected-value and exact stored-value guards assertion-killed,invalid
+phase reads0. No parser/launcher failures counted. Setup and post-state semantics
+remain independently asserted; no physical write proof claimed from models.
+
+Final local QA after verifier adjustment:Node152/152,no failures/skips; targeted
+PHP production/nonlegacy/request/context/qualification317 tests/2505 assertions,
+no failures/skips;PHPCS291/291,build/structure/strict manifest/audits0 vulnerabilities/
+whitespace passed. Full local PHP2952/24913/two existing Sodium signer skips passed
+for the NTS producer BEFORE the final verifier adjustment (4:13.001);the last
+fixture delta is covered by final targeted checks and pending full exact-head CI,
+not silently relabeled as that earlier full-suite run.
+
+Final coherent scoped review baseline efa8f20 now includes10 code/test files.
+Canonical Light/final Security:confirmed observer/verifier defects fixed,no
+remaining significant issue/manual decision/security defect/new unprotected07A
+handoff;genuine native availability still not claimed. Remeasured Bloat Phase1
+SAME baseline:6 PHP,0 oversized/cleanup/split/defer,TOTAL226/206/77/91/74/41,
+each limit300/over0,CODE1 limitation;4 mjs below250. Consolidate-retain/no Phase2
+edits,call sites/default M paths checked,no new WP registrations/UI/full-release
+claims. Shared-source images must be re-frozen after all necessary preparation.
 
 ## Continuation
 

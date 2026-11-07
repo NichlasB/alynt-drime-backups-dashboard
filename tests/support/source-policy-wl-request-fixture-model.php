@@ -15,9 +15,9 @@ function adbg_non_target(){
  if($GLOBALS['scenario']==='nontarget'&&$GLOBALS['verified'])$rows[1]['option_value']='changed';
  return $rows;
 }
-function adbg_reset_case($scenario){A::assertSame('save',$scenario);$GLOBALS['trace'][]='reset';}
-function adbg_preflight(){$GLOBALS['trace'][]='preflight';if($GLOBALS['scenario']==='preflight')adbg_check(false,'modeled bounded verifier failure');}
-$GLOBALS['scenario']=$argv[1];$GLOBALS['trace']=array();$GLOBALS['verified']=false;
+function adbg_reset_case($scenario){A::assertSame($GLOBALS['operation'],$scenario);$GLOBALS['trace'][]='reset';}
+function adbg_preflight($expected='no'){A::assertSame($GLOBALS['operation']==='save'?'off':'no',$expected,'Exact post-write/preflight expectation');$GLOBALS['trace'][]='preflight';if($GLOBALS['scenario']==='preflight')adbg_check(false,'modeled bounded verifier failure');}
+$GLOBALS['scenario']=$argv[1];$GLOBALS['trace']=array();$GLOBALS['verified']=false;$GLOBALS['operation']=array('view'=>'view','noop'=>'noop','stale'=>'stale','denial'=>'cookie-missing','view-autoload-off'=>'view')[$argv[1]]??'save';
 $GLOBALS['wpdb']=new class {
  public $last_error='';
  function get_var($sql){A::assertMatchesRegularExpression('/\ASELECT COUNT\(\*\) FROM adbm_123456789abc_(users|usermeta|options|alynt_drime_dashboard_sites)\z/',$sql);$GLOBALS['trace'][]='empty';if($GLOBALS['scenario']==='empty-read'){$this->last_error='modeled';return null;}return $GLOBALS['scenario']==='nonempty'?'1':'0';}
@@ -25,14 +25,16 @@ $GLOBALS['wpdb']=new class {
  function get_row($sql,$format){
   A::assertSame(ARRAY_A,$format);A::assertSame("SELECT option_value,autoload FROM adbm_123456789abc_options WHERE BINARY option_name=BINARY 'alynt_drime_backups_dashboard_source_policies'",$sql);$GLOBALS['trace'][]='policy';
   if($GLOBALS['scenario']==='verify-read'){$this->last_error='modeled';return null;}
-  return array('option_value'=>$GLOBALS['scenario']==='policy'?'wrong':serialize(array(9=>array('wpvivid'=>'external_optional'),7=>array('wpvivid'=>'external_optional'))),'autoload'=>$GLOBALS['scenario']==='autoload'?'yes':'no');
+  $map=array(9=>array('wpvivid'=>'external_optional'));if($GLOBALS['operation']==='save')$map[7]=array('wpvivid'=>'external_optional');
+  $autoload=$GLOBALS['operation']==='save'?'off':'no';if($GLOBALS['scenario']==='autoload')$autoload='yes';if($GLOBALS['scenario']==='save-autoload-no')$autoload='no';if($GLOBALS['scenario']==='view-autoload-off')$autoload='off';
+  return array('option_value'=>$GLOBALS['scenario']==='policy'?'wrong':serialize($map),'autoload'=>$autoload);
  }
 };
 try{
  require $argv[2];$scenario=$GLOBALS['scenario'];$GLOBALS['argv'][2]=$scenario==='next'?'1':'0';$failed=false;
- try{$before=adbwl_prepare_case('save');$GLOBALS['verified']=true;adbwl_verify_case('save',$before);}catch(PHPUnit\Framework\ExpectationFailedException $error){$failed=true;}
- A::assertSame(!in_array($scenario,array('positive','next'),true),$failed,'Discriminating actual invariant/failed-read guard');
- if(!$failed){$expected=$scenario==='positive'?array('empty','empty','empty','empty','seed'):array();$expected=array_merge($expected,array('non-target','reset','preflight','non-target','policy'));A::assertSame($expected,$GLOBALS['trace'],'Exact case seed/reset/preflight/readback order');}
+ try{$before=adbwl_prepare_case($GLOBALS['operation']);$GLOBALS['verified']=true;adbwl_verify_case($GLOBALS['operation'],$before);}catch(PHPUnit\Framework\ExpectationFailedException $error){$failed=true;}
+ A::assertSame(!in_array($scenario,array('positive','next','view','noop','stale','denial'),true),$failed,'Discriminating actual invariant/failed-read guard');
+ if(!$failed){$expected=$scenario!=='next'?array('empty','empty','empty','empty','seed'):array();$expected=array_merge($expected,array('non-target','reset','preflight','non-target','policy'));A::assertSame($expected,$GLOBALS['trace'],'Exact case seed/reset/preflight/readback order');}
  A::assertFalse(class_exists('wpdb',false));A::assertFalse(function_exists('mysqli_init'));
  echo 'checks:',A::getCount(),"\n";
 }catch(Throwable $error){fwrite(STDERR,get_class($error).' '.$error->getMessage()."\n");exit(1);}
