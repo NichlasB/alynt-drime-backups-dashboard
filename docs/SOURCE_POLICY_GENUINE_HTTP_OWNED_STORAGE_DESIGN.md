@@ -16,8 +16,11 @@ the restore/review boundary,not a database backup.
 
 No installed-site/LocalWP/live/SSH/client/Drime inspection or operation,HTTP probe,
 core bootstrap/authentication,SQL/storage/native experiment,workflow dispatch,
-fixture/account/permission/credential/cron write,listener/process launch,download
-to disk/runtime acquisition or installation. Public immutable source was read
+fixture/account/permission/credential/cron write,qualification listener/server/
+native-process launch,download to disk/runtime acquisition or installation.
+Routine isolated validation children and owned synthetic source copies are allowed;
+they do not load installed core or create site/storage/network fixtures.
+Public immutable source was read
 into memory only. No source/test/catalog/runtime policy/workflow/dependency edit,
 public endpoint,production wiring,grant/activation/rollback,package/tag/release/
 deployment. Existing site target confirmations do NOT authorize this new profile.
@@ -272,8 +275,8 @@ Feature scope:HTTP owned-storage/profile/graph design and four owning resumes.
 Files reviewed:5 changed Markdown files,plus the directly referenced read-only
 entry/context/storage/proof/workflow and immutable public core/theme sources.
 Risk areas touched:Other,future HTTP/authentication/DB/file/process proof;no
-operative UI/AJAX/REST/cron/SQL change. Canonical FEATURE_LIGHT_REVIEW found4
-documentation/specification issues,auto-fixed4,manual defect decisions0:
+operative UI/AJAX/REST/cron/SQL change. Canonical FEATURE_LIGHT_REVIEW found5
+documentation/specification issues,auto-fixed5,manual defect decisions0:
 
 - Documentation:clarified that only harness/bridge manual user selection is
   forbidden;stock core's own user-selection/authentication calls are retained.
@@ -285,6 +288,9 @@ documentation/specification issues,auto-fixed4,manual defect decisions0:
   name to PHP_CLI_SERVER_WORKERS and makes unknown-route delegation explicitly
   forbidden. The earlier design head is superseded by the corrected docs-only head;
   no HTTP process was launched and no runtime or native guard was changed.
+- Documentation:qualified the no-process-launch boundary as no qualification
+  server/native process;ordinary isolated test children/source-copy controls did
+  execute and are not misreported as absent or as physical qualification.
 
 No significant remaining scoped non-security issue. FEATURE_BLOAT_AND_STRUCTURE
 is unnecessary:Markdown-only,no added executable code,duplicate implementation,
