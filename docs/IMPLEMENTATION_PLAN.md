@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-HTTP audit stopped before execution — 2026-11-07
+
+The [approved owned-integration source audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
+found pinned-core installer same-site HTTP probes not contained by
+`WP_HTTP_BLOCK_EXTERNAL`, plus an unresolved hard-rewrite effect decision.
+No native dispatch/prerequisites or actual HTTP/core/auth/SQL/storage operation;
+the approved ONE attempt remains unused. Provisional unpublished helpers were
+archived and removed; executable source/workflows and production wiring unchanged.
+
+Implementation-plan progress: pending HTTP qualification now reaches a fixture-
+effect policy gate, not a completed milestone. Campaign4/10 milestones,8/10
+attempts,cumulative31 unchanged. **Next gated slice:Repository-Only Core-Backed
+Installer Local-HTTP and Rewrite Containment Design**,design-only; no silent
+installer bypass,guard weakening or native retry. Earlier HTTP execution
+recommendations below are historical: approval was received,then held by audit.
+
 ## Genuine-HTTP dormant bridge/supervisor preparation complete — 2026-11-07
 
 The [approved integration preparation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)

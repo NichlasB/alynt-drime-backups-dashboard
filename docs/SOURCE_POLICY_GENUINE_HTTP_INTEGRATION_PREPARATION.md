@@ -1,5 +1,12 @@
 # Genuine-HTTP Guarded Bridge and Bounded Supervisor Integration Preparation
 
+Current audit stop — 2026-11-07:the subsequently approved owned integration
+[stopped at pinned installer HTTP/rewrite containment](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
+before native dispatch;ONE attempt unused. This dormant preparation remains
+isolated-layer evidence,not physical bootstrap containment. Next gated slice:
+Repository-Only Core-Backed Installer Local-HTTP and Rewrite Containment Design,
+design-only. No retained executable/workflow changes from the stopped audit.
+
 ## Approval and baseline — 2026-11-07 UTC
 
 Approved repository-only preparation,isolated API/IO/virtual-clock tests only.

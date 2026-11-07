@@ -37,10 +37,17 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | Approved dormant bridge/supervisor preparation complete;next is Genuine-HTTP Owned Bootstrap/Request IO Integration and ONE Ephemeral-CI Qualification/Cleanup Attempt,new audit-first execution authority/fresh prerequisites/owned fixtures/exact cleanup,production wiring disabled |
+| Exact next meaningful item | Approved HTTP integration held before dispatch by pinned installer same-site HTTP/rewrite containment gap;ONE attempt unused. Next gated slice:Repository-Only Core-Backed Installer Local-HTTP and Rewrite Containment Design,design-only;production wiring disabled |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+The [subsequent approved integration audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
+stopped before native prerequisites/dispatch. External-only HTTP blocking exempts
+installer same-site probes;hard-rewrite effects also need an explicit decision.
+Provisional helpers archived/removed;no retained runtime/workflow change. Next
+gated slice is the design-only installer containment decision above,not another
+native attempt. Earlier execution requests below were approved but are now held.
 
 The [approved HTTP bridge/supervisor preparation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
 connects the unchanged entry under isolated API/IO only,with25 exchanges/13 cases,

@@ -1,5 +1,14 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
+Current audit stop — 2026-11-07:[approved bootstrap source audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
+found the fixture recipe incomplete:external-only HTTP blocking exempts the
+installer's same-site probes,and hard-rewrite effects require an explicit policy.
+Do not treat the constants below as complete setup containment. ONE approved
+attempt unused;no native dispatch or retained integration. Next gated slice:
+Repository-Only Core-Backed Installer Local-HTTP and Rewrite Containment Design,
+design-only. Earlier execution recommendations received approval but are held;
+historical design/review outcomes do not prove physical containment.
+
 Current implementation — 2026-11-07:the separately approved
 [dormant bridge/supervisor preparation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
 consumes the [profile/owned-storage DATA foundation](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)

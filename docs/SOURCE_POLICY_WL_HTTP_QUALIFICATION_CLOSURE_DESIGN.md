@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current audit stop — 2026-11-07:[owned bootstrap audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
+found same-site installer HTTP/rewrite effects outside the selected setup
+containment. Approved ONE attempt unused;no native dispatch or retained code
+change. Next gated slice:Repository-Only Core-Backed Installer Local-HTTP and
+Rewrite Containment Design,design-only. Campaign4/10 milestones,8 attempts,
+cumulative31 unchanged;production wiring off. Prior execution recommendations
+below received approval but are held by the source-audit stop.
+
 Current HTTP preparation — 2026-11-07:[dormant bridge/supervisor](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
 now forwards through unchanged entry and enforces finite isolated-IO lifecycle,
 including protected observations for extra views and exact phase counters. This

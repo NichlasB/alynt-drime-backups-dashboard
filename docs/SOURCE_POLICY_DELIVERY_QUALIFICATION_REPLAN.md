@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current audit stop — 2026-11-07:[pinned installer containment gap](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
+holds the approved HTTP integration before dispatch;ONE attempt unused. Same-site
+installer probes bypass external-only blocking;hard-rewrite effects need a
+decision. Next gated slice:Repository-Only Core-Backed Installer Local-HTTP and
+Rewrite Containment Design,design-only. No retained code/workflow/wiring change;
+campaign4/10 milestones,8 attempts,cumulative31 unchanged. Earlier execution
+recommendations below received approval but are now held,not authority to retry.
+
 Current HTTP bridge/supervisor preparation — 2026-11-07:[approved implementation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
 connects definition-only bridge/unchanged entry and isolated-IO25-exchange model;
 31 guard controls,no actual core/auth/HTTP/storage/native execution or wiring.
