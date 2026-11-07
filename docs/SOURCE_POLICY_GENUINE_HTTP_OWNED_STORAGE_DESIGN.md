@@ -1,5 +1,13 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
+Current selected amendment — 2026-11-07:[installer containment design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
+supersedes the incomplete external-only setup assumption below. Early genuine
+hook API registration, two real error-denied probes and all four soft-only
+flushes preserve stock fallback; finite sidecar/file/hook verification required.
+No code/runtime/native execution. Next gated slice:Repository-Only Core-Backed
+Installer Containment Safety Foundation and Owned-Integration Preparation,
+isolated API/IO only. Physical proof pending;ONE held attempt remains unused.
+
 Current audit stop — 2026-11-07:[approved bootstrap source audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
 found the fixture recipe incomplete:external-only HTTP blocking exempts the
 installer's same-site probes,and hard-rewrite effects require an explicit policy.

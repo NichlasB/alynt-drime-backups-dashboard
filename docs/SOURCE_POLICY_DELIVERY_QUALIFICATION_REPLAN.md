@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current installer decision — 2026-11-07:[approved design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
+selects genuine early hooks, denied installer HTTP probes and four soft-only
+rewrite flushes;no operative fix or execution. Next gated slice:Repository-Only
+Core-Backed Installer Containment Safety Foundation and Owned-Integration
+Preparation,isolated API/IO only. Campaign4/10 milestones,8 attempts,cumulative31
+unchanged;ONE attempt unused,wiring off. Prior design request fulfilled;physical
+containment/native execution remain pending and separately gated.
+
 Current audit stop — 2026-11-07:[pinned installer containment gap](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
 holds the approved HTTP integration before dispatch;ONE attempt unused. Same-site
 installer probes bypass external-only blocking;hard-rewrite effects need a

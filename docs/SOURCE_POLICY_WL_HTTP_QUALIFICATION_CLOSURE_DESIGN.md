@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current installer decision — 2026-11-07:[finite containment design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
+keeps real core installation/fallback, short-circuits both probes with WP_Error
+and denies four hard flushes without pretending option writes disappear.
+Design only,no native attempt. Next gated slice:Repository-Only Core-Backed
+Installer Containment Safety Foundation and Owned-Integration Preparation,
+isolated API/IO only. Campaign4/10 milestones,8 attempts,cumulative31 unchanged;
+ONE held attempt unused,production wiring off. Earlier design request fulfilled.
+
 Current audit stop — 2026-11-07:[owned bootstrap audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
 found same-site installer HTTP/rewrite effects outside the selected setup
 containment. Approved ONE attempt unused;no native dispatch or retained code

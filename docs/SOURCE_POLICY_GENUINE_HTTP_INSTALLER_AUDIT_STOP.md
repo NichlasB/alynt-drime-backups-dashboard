@@ -1,5 +1,12 @@
 # Genuine-HTTP Installer Containment — Audit Stop
 
+Subsequent approved decision — 2026-11-07:[design-only amendment](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
+selects supported early HTTP/error and hard-rewrite denial hooks, including the
+fourth post-routine flush. The finding below remains historical; containment is
+not yet implemented/proved. Next gated slice:Repository-Only Core-Backed Installer
+Containment Safety Foundation and Owned-Integration Preparation,isolated API/IO
+only. The ONE held attempt remains unused;no native dispatch is authorized here.
+
 ## Approved scope and outcome — 2026-11-07 UTC
 
 The user approved Genuine-HTTP Owned Bootstrap/Request IO Integration and ONE

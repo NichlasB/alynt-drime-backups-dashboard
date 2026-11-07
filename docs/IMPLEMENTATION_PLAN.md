@@ -1,5 +1,21 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Installer containment design selected — 2026-11-07
+
+The [approved repository-only containment design](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_CONTAINMENT_DESIGN.md)
+selects early genuine hook registration, real WP_Error denial of both installer
+HTTP probes and hard-flush false for all four install calls. Stock installation
+chooses plain permalinks; normal owned rewrite-option updates remain accounted.
+No implementation/core/auth/SQL/native operation or production wiring change.
+
+Implementation-plan progress: the fixture-effect decision is resolved at design
+level; actual containment and HTTP qualification remain pending. Campaign4/10
+milestones,8/10 attempts,cumulative31 unchanged;ONE held attempt unused. **Next
+gated slice:Repository-Only Core-Backed Installer Containment Safety Foundation
+and Owned-Integration Preparation**,isolated API/IO only. Native execution still
+needs fresh prerequisites/revised exact-head approval. Earlier design-approval
+recommendations below are fulfilled;the audit's physical proof limits remain.
+
 ## Genuine-HTTP audit stopped before execution — 2026-11-07
 
 The [approved owned-integration source audit](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_AUDIT_STOP.md)
