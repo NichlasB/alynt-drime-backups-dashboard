@@ -92,13 +92,13 @@ Bloat/Structure Phase1 uses complete cb9a0df boundary,not a documentation tail.
 Canonical helper reports2 PHP files:bridge TOTAL112/CODE1 and bridge-cases44/1,
 both under300;its CODE output is not used as a credible executable-line metric.
 It excludes MJS. Supplemental deterministic TOTAL:contract55,lifecycle78,
-supervisor64,bridge-tests53,supervisor-tests94,controls55,fixtures19,
+supervisor64,bridge-tests64,supervisor-tests94,controls55,fixtures19,
 lifecycle-tests82;all under250. All10 files classified Consolidate/retain intact;
 cleanup/split/defer0,no Phase2 edits required. Fixed PHP/JS metadata duplication
 has an explicit parity test;fixture expectations remain independent. No unused
 runtime fallback or registered callback was removed;no architectural split.
 
-New/affected HTTP tests36/36 within full local Node191/191,fail0/skips0.
+New/affected HTTP tests37/37 within full local Node192/192,fail0/skips0.
 The PHP bridge API image uses existing ordinary constructors/guards/algorithms
 with EXPLICIT source/runtime catalog rebinding to in-memory API/IO doubles.
 Fifteen bridge scenarios include real algorithmic view/save/no-op/conflict,
@@ -126,6 +126,24 @@ Sodium skips2. PHPCS,build,structure,strict Composer manifest and Composer/npm
 audits pass,zero advisories. Actual ordinary exact-head CI is recorded in the
 canonical toolkit source-scoped section after completion. FULL_PRE_RELEASE remains
 required for a coherent release candidate;no packaging/release/deployment here.
+
+### Ordinary CI recovery cycle1: JSON-free PHP7.4 test transport
+
+First published95b2d1a/run42399678331 actually FAILED,not a successful final head:
+PHP7.4 PHPUnit3070/25342 passed,but Node189/191 failed2 helpers calling missing
+json_decode under php -n;PHP8.3 job succeeded with3070/25347 and Node191/191.
+The two failures were reproduced locally by explicitly disabling JSON functions.
+This is a test-child dependency assumption,not an application/guard failure.
+Replaced only fixed synthetic fixture transport with escaped typed PHP literals
+and finite enum lines;no extension loading,host INI fallback,JSON polyfill,
+dependency/compatibility decision or assertion relaxation. Added quote/backslash/
+newline/UTF8/type tests with JSON deliberately disabled. All original bridge
+assertions and31 guard controls remain. Final local Node192/192;scoped Light,
+Bloat(same cb9a0df) and Security rechecked the test-only repair. Runtime/bridge/
+native acceptance bytes unchanged by this recovery;zero new native attempts.
+Final recovery head's actual CI,not the failed run,owns completion evidence in
+the canonical toolkit section. One in-scope diagnosis/repair cycle,not a new
+product milestone or automatically authorized HTTP qualification.
 
 ## Plan progress, proof limits and exact next approval
 

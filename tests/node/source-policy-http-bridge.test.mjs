@@ -7,19 +7,30 @@ import {requestImage} from '../support/source-policy-request-image.mjs';
 import {route} from '../../scripts/ci/source-policy-http-contract.mjs';
 import * as f from './source-policy-http-fixtures.mjs';
 const root=new URL('../../',import.meta.url),source=readFileSync(new URL('scripts/ci/source-policy-http-bridge.php',root),'utf8'),php=process.env.PHP_BINARY??'php';
-const run=code=>{const r=spawnSync(php,['-n','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:32768});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;};
+const run=code=>{const r=spawnSync(php,['-n','-d','disable_functions=json_encode,json_decode','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:32768});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');return r.stdout;};
 const literal=s=>"'"+s.replaceAll('\\','\\\\').replaceAll("'","\\'")+"'";
+// Fixed synthetic fixtures only: preserve PHP scalar/array types without JSON.
+function phpData(value){
+ if(value===null)return'null';if(typeof value==='string')return literal(value);if(typeof value==='boolean')return value?'true':'false';if(Number.isSafeInteger(value))return String(value);
+ if(value&&typeof value==='object'&&[Object.prototype,Array.prototype].includes(Object.getPrototypeOf(value)))return'array('+Object.entries(value).map(([key,item])=>literal(key)+'=>'+phpData(item)).join(',')+')';
+ throw Error('Unsupported fixed PHP fixture');
+}
+test('fixed PHP fixture transport retains quotes/backslashes/scalar types with JSON disabled',()=>{
+ for(const value of ["quote'",'back\\slash','line\nfeed','\u00e9'])assert.equal(run(`echo bin2hex(${phpData(value)});`),Buffer.from(value).toString('hex'));
+ assert.equal(run(`$r=${phpData({n:null,b:false,i:7,s:'7',a:['x']})};echo implode(',',array_map('gettype',$r));`),'NULL,boolean,integer,string,array');
+ assert.throws(()=>phpData(undefined));assert.throws(()=>phpData(new Date(0)));
+});
 test('PHP bridge definitions do not load core/classes/native; PHP and JS metadata admission agree',()=>{
  const path=new URL('scripts/ci/source-policy-http-bridge.php',root).pathname.replace(/^\/([A-Za-z]:\/)/,'$1');
  assert.equal(run(`require ${literal(decodeURIComponent(path))};if(defined('ABSPATH')||class_exists('wpdb',false)||class_exists('Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry',false)||function_exists('mysqli_init'))throw new RuntimeException('effects');echo 'definitions-only';`),'definitions-only');
  const metas=['login-form','login-submit','view','submit','nonce-control'].map(f.meta);
  metas.push(...[{host:'localhost:18777'},{method:'DELETE'},{target:'/wp-admin/'},{challenge:f.run},{header_bytes:32769},{body_bytes:16385},{content_length:'010'},{content_type:'application/json'},{transfer_encoding:'chunked'},{extra:1}].map(change=>({...f.meta(),...change})));
- const json=Buffer.from(JSON.stringify(metas)).toString('base64');
- assert.deepEqual(JSON.parse(run(`require ${literal(decodeURIComponent(path))};$out=array();foreach(json_decode(base64_decode('${json}'),true)as$m)$out[]=adbh_route($m,'${f.challenge}');echo json_encode($out);`)),metas.map(meta=>route(meta,f.challenge)));
+ const observed=run(`require ${literal(decodeURIComponent(path))};foreach(${phpData(metas)}as$m){$r=adbh_route($m,'${f.challenge}');echo false===$r?'false':$r;echo "\n";}`);
+ assert.deepEqual(observed.split('\n').slice(0,-1).map(value=>value==='false'?false:value),metas.map(meta=>route(meta,f.challenge)));
 });
 test('error objects cannot masquerade as saved/view success or export diagnostic data',()=>{
- const path=new URL('scripts/ci/source-policy-http-bridge.php',root).pathname.replace(/^\/([A-Za-z]:\/)/,'$1'),meta=Buffer.from(JSON.stringify(f.meta())).toString('base64');
- assert.equal(run(`require ${literal(decodeURIComponent(path))};class WP_Error{public function get_error_code(){return $GLOBALS['code'];}}class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry{public static function request_submit($r){return new WP_Error();}}foreach(array('saved','view','unchanged','owned-private-secret',array('saved'))as$c){$GLOBALS['code']=$c;$r=adbh_bridge(json_decode(base64_decode('${meta}'),true),array(),'${f.challenge}');if($r!==adbh_result('source_policy_unavailable'))throw new RuntimeException('error accepted');}echo 'closed';`),'closed');
+ const path=new URL('scripts/ci/source-policy-http-bridge.php',root).pathname.replace(/^\/([A-Za-z]:\/)/,'$1');
+ assert.equal(run(`require ${literal(decodeURIComponent(path))};class WP_Error{public function get_error_code(){return $GLOBALS['code'];}}class Alynt_Drime_Backups_Dashboard_Source_Policy_Guarded_Entry{public static function request_submit($r){return new WP_Error();}}foreach(array('saved','view','unchanged','owned-private-secret',array('saved'))as$c){$GLOBALS['code']=$c;$r=adbh_bridge(${phpData(f.meta())},array(),'${f.challenge}');if($r!==adbh_result('source_policy_unavailable'))throw new RuntimeException('error accepted');}echo 'closed';`),'closed');
 });
 function image(callback){return requestImage(({temporary,run:execute})=>{
  mkdirSync(join(temporary,'scripts/ci'),{recursive:true});const file=join(temporary,'scripts/ci/source-policy-http-bridge.php');writeFileSync(file,source);
