@@ -28,17 +28,29 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 
 | Current campaign item | State |
 | --- | --- |
-| Completed worthwhile milestones | 3/10 on final publication/evidence closeout: coherent failure-evidence foundation, current L qualification, affected M refresh; final docs/checklist publication is tracked below and in the canonical toolkit record |
-| Native qualification attempts | 5/10; historical23 plus this campaign5 = cumulative28 |
+| Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
+| Native qualification attempts | 6/10; historical23 plus this campaign6 = cumulative29; W prerequisites/cleanup are one ordered proof, not separate attempts |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
 | Milestone2: L genuine-session qualification | Passed at63b728a/run42361807156: source audit211/native0/SQL0,23 cases/12006 checks/9 groups, strict cleanup |
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
-| Exact next meaningful item | W714 finite tuple/prerequisite foundation approved/implemented with isolated tests;next is separately scoped Plugin Tester W714 genuine-session/fresh prerequisite owned proof,fresh target/fixture confirmation,no production wiring |
+| Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
+| Exact next meaningful item | Current-Cohort L/M Genuine-Session Owned Requalification and Cleanup Batch in existing trusted ephemeral CI lab, frozen efc7aff executable or docs-only descendant, fresh prerequisites/strict cleanup; no production wiring or new LocalWP operation |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+W714 source/physical/evidence owner:
+[Genuine-Session Request and Fresh Prerequisite Owned Proof](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md).
+Explicit separate LocalWP approval and fresh exact target/fixture confirmation
+extended only the W proof scope;application state/lifecycle stayed untouched.
+W request image7e1e64aa68d7ff490ef2656f5d5fd2365ad63628b88af5280d21b8a66baea966,
+modules969f1c37006203b8e879fbc09b088177a2c899a80e936d03c321450e98317574,
+run416f3dcab962aa95958167d94c6b818d;production_ready:false. The earlier63b728a
+L/M successes below are historical for shared changed efc7aff loaded bytes and
+need affected refresh,not a repeat W attempt for documentation-only publication.
+Genuine HTTP/installed graph and public production switch remain separate gates.
 
 Stop for live/client/production/Drime or any LocalWP operation, existing application
 state/account/permission/credential/lifecycle/schedule change, production wiring/

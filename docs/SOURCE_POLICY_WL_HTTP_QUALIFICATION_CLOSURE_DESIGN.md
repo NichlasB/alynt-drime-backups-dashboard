@@ -1,5 +1,15 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current W714 actual proof — 2026-11-07:[owned genuine-session result](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)
+passed source209/native0/SQL0,ADBC2/ambient425/9 and23 cases/11914 checks/9 groups
+on efc7aff. Exact five-table cleanup,78 application checksums unchanged,sessions/
+trx0;production_ready:false and wiring disabled. W now has physical CLI request
+evidence,not HTTP/installed graph. Next gated slice:Current-Cohort L/M Genuine-
+Session Owned Requalification and Cleanup Batch,existing ephemeral CI lab on the
+same executable cohort,fresh prerequisites/strict cleanup. Shared changes stale
+old L/M images,not historical successes. HTTP and cohesive production switch
+remain distinct later gates;earlier next-W recommendations are historical.
+
 Current W714 foundation — 2026-11-07:[repository-only implementation/evidence](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md)
 prepares the exact W7.1.4 tuple and transitive prerequisite/source catalog using
 isolated tests,not a native W or HTTP proof. New shared loaded bytes require fresh

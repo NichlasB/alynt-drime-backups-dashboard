@@ -1,5 +1,14 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current W714 physical closeout — 2026-11-07:[approved owned proof](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)
+passed fresh source209/native0/SQL0,ADBC2/ambient425/9 andONE23-case/11914-check/
+9-group genuine-session batch at efc7aff. Five exact owned tables removed,all78
+application checksums unchanged,other sessions/trx0;no acceptance/budget/wiring
+change. This is CLI/native/auth evidence,not HTTP/installed-graph readiness.
+Next gated slice:Current-Cohort L/M Genuine-Session Owned Requalification and
+Cleanup Batch,existing trusted CI lab,same frozen executable/fresh prerequisites/
+strict cleanup. No repeat W proof for docs-only publication;older resumes historical.
+
 Current W714 foundation — 2026-11-07:[exact tuple and prerequisite rebaseline](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md)
 selects fixed current W7.1.4 artifact/candidate;L shares core DATA,not Windows
 runtime/transport authority. M/W713 retained;strict source,typed parser,NTS,

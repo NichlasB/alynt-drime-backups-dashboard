@@ -1,5 +1,16 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current W714 owned proof — 2026-11-07:[actual exact-target evidence](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)
+closes W genuine-session availability on efc7aff:source209/native0/SQL0,fresh
+ADBC2 two cases,ambient425/9,ONE23 cases/11914 checks/9 groups. Five owned tables
+removed,78 application checksums unchanged,all-server sessions/trx0. No wiring or
+installed lifecycle change;CLI proof is not HTTP/installed graph or readiness.
+Campaign4/10 milestones on publication/exact-head closeout,6/10 attempts,cumulative29.
+Next gated slice:Current-Cohort L/M Genuine-Session Owned Requalification and
+Cleanup Batch,existing ephemeral CI lab,frozen loaded cohort/fresh prerequisites/
+strict cleanup;old L/M successes remain historical after shared source changes.
+HTTP/production switch/release remain later approvals;earlier W resumes historical.
+
 Current W714 foundation — 2026-11-07:[approved bounded implementation](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md)
 prepares the finite tuple,standalone/bound server admission and transitive exact
 bootstrap/adapter/request candidates with isolated API/DATA tests. No physical
