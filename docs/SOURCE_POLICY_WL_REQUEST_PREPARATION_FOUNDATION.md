@@ -1,5 +1,13 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
+passed original adapter291/9 and repaired source audit198/native0/SQL0. Case0
+failed auth/Error/zero assertion, precise cause Unknown; cleanup verified. Next
+gated slice: Repository-Only L Genuine-Session Authentication Failure Localization
+and Guard-Preserving Harness Repair, private-safe fixed evidence/isolated tests,
+no guessed fix/native retry/wiring. Allowance exhausted/opportunities23; W/HTTP/
+target and ONE switch still gated; earlier resumes historical.
+
 Current L catalog repair — 2026-11-06: [exact transitive dependency audit](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
 adds one literal L-only size/hash pin (L22/W21), preserving fixed origin/size/
 image/resource guards. Isolated actual catalog/pin/include regressions only;

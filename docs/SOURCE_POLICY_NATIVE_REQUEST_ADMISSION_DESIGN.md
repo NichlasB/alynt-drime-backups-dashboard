@@ -1,5 +1,13 @@
 # Native Request-Composition Admission and Genuine-Request Qualification Integration Design
 
+Current L attempt — 2026-11-07 UTC: [a8fbbe3/run42353171757](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md)
+passed request source audit198/native0/SQL0 after fresh original adapter291/9.
+First child auth/Error/zero assertion refused; precise cause Unknown, cleanup
+passed. No successful request grant/proof. Next gated slice: Repository-Only L
+Genuine-Session Authentication Failure Localization and Guard-Preserving Harness
+Repair, private-safe bounded evidence/isolated tests, no guessed fix/native retry/
+wiring. Allowance exhausted/opportunities23; older recommendations historical.
+
 Current L catalog repair — 2026-11-06: [exact metadata-lazyloader audit](SOURCE_POLICY_L_METADATA_LAZYLOADER_CATALOG_REPAIR.md)
 permits one independently pinned L declaration, not an auth/runtime grant; L22/
 W21, original guard/resource/profile boundaries retained. No native rerun/wiring.
