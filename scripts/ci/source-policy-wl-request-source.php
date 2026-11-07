@@ -50,7 +50,7 @@ function adbm_source_rows() {
 	foreach ( $loaded as $ordinal => $path ) {
 		$file    = str_replace( '\\', '/', realpath( $path ) );
 		$code    = strpos( $file, $root . '/includes/' ) === 0 || strpos( $file, $root . '/scripts/ci/' ) === 0 || strpos( $file, $root . '/scripts/manual/' ) === 0;
-		$scope   = $code || ( dirname( $file ) === $core && in_array( basename( $file ), $allowed, true ) );
+		$scope   = $code || ( 0 === strpos( $file, $core . '/' ) && in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true ) );
 		$capture = $diagnose && is_int( $ordinal ) && $ordinal >= 0 && $ordinal <= 511;
 		if ( $capture ) {
 			$GLOBALS['adbwl_include_failure'] = adbwl_include_fact( $file, $root, $core, $ordinal, $scope ? 'stat' : 'scope' );

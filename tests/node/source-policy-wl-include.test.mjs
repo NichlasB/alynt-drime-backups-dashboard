@@ -18,7 +18,7 @@ function emit(f,profile='l',mode='audit',base=`ADBMGRF1|child|0|audit|RuntimeExc
   const code=`require ${literal(join(root,'scripts/ci/source-policy-wl-request-contract.php'))};putenv('WL_REQUEST_PROFILE=${profile}');putenv('WL_REQUEST_MODE=${mode}');$GLOBALS['adbwl_include_failure']=${literal(f)};echo ${prefixOnly?'adbwl_include_prefix':'adbwl_failure_wire'}(${literal(base)});`;
   const r=spawnSync(php,['-n','-d','disable_functions=json_encode,json_decode','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr);assert.equal(r.stderr,'');return r.stdout;
 }
-function model(change=code=>code,scenarios=['positive','boundary','scope','first','nested','repo','boundary-path','foreign','missing','size','stat-false','stat-throw','w','proof','ordinal','overflow','late','dependency-l','dependency-w','dependency-nested','dependency-foreign','dependency-size'],control=false){
+function model(change=code=>code,scenarios=['positive','boundary','scope','first','nested','repo','boundary-path','foreign','foreign-equal','missing','size','stat-false','stat-throw','w','proof','ordinal','overflow','late','dependency-l','dependency-w','dependency-nested','dependency-foreign','dependency-size','localization-l','localization-w','localization-nested','localization-root','localization-foreign','localization-size'],control=false){
   const temporary=mkdtempSync(join(tmpdir(),'adb-wl-include-')),folder=join(temporary,'scripts','ci'),file=join(folder,'source.php');
   assert.ok(resolve(temporary).startsWith(resolve(tmpdir())+sep+'adb-wl-include-'));
   try{
@@ -46,8 +46,9 @@ test('strict receiver keeps legacy wire unchanged, refuses foreign/trailing cont
 });
 test('source-backed guard controls are assertion-killed, not parser/native launcher failures',()=>{
   for(const [change,scenario]of [
-    [s=>s.replace("dirname( $file ) === $core &&",'true &&'),'nested'],
-    [s=>s.replace('in_array( basename( $file ), $allowed, true )','true'),'scope'],
+    [s=>s.replace("0 === strpos( $file, $core . '/' )",'true'),'foreign-equal'],
+    [s=>s.replace('substr( $file, strlen( $core ) + 1 )','basename( $file )'),'nested'],
+    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'scope'],
     [s=>s.replace('$bytes <= 1048576','true'),'size'],
     [s=>s.replace("unset( $GLOBALS['adbwl_include_failure'] );",'/* omitted context clearing */'),'positive'],
     [s=>s.replace('$scope && is_int( $bytes ) &&','$scope &&'),'stat-false'],
@@ -55,8 +56,10 @@ test('source-backed guard controls are assertion-killed, not parser/native launc
     [s=>s.replace("'l' === getenv( 'WL_REQUEST_PROFILE' )",'true'),'w'],
     [s=>s.replace("'audit' === getenv( 'WL_REQUEST_MODE' )",'true'),'proof'],
     [s=>s.replace('$ordinal <= 511','true'),'overflow'],
-    [s=>s.replace("dirname( $file ) === $core &&",'true &&'),'dependency-nested'],
-    [s=>s.replace('in_array( basename( $file ), $allowed, true )','true'),'dependency-w'],
-    [s=>s.replace('$bytes <= 1048576','true'),'dependency-size']
+    [s=>s.replace('substr( $file, strlen( $core ) + 1 )','basename( $file )'),'dependency-nested'],
+    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'dependency-w'],
+    [s=>s.replace('$bytes <= 1048576','true'),'dependency-size'],
+    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'localization-w'],
+    [s=>s.replace('$bytes <= 1048576','true'),'localization-size']
   ])model(change,[scenario],true);
 });

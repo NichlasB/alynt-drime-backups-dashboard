@@ -29,6 +29,11 @@ function adbwl_catalog() {
 	// Independently audited L-only transitive meta.php declaration, not a wider runtime allowance.
 	if ( 'l' === getenv( 'WL_REQUEST_PROFILE' ) ) {
 		$row['auth']['class-wp-metadata-lazyloader.php'] = array( 6833, 'c1df481157f06db91ab7f81fe68981db206beaa38721e6cab49a064110219467' );
+		// Genuine default-domain wp_salt() localization plus its two declaration dependencies.
+		$row['auth']['l10n.php']              = array( 71415, '43c9af6b687ee3eb92608fea4697ebe7b62b3d45490a7657efce71033ac82ed7' );
+		$row['auth']['pomo/translations.php'] = array( 12743, '9aa073438aafe5a4ea0d4f60fea9bd40a1f153653cea3e7567135e25e5099b34' );
+		$row['auth']['pomo/plural-forms.php'] = array( 7623, '8123b38a4baefd1156f7003e2649c26202b461c103306ea6847dff7a30a1ed59' );
+		$row['auth']['pomo/entry.php']        = array( 3863, '3d503be0ce77eb150f9e7452d2f098b517e9ff9773c310024956719b16d8e5fc' );
 	}
 	return $row;
 }
@@ -65,7 +70,7 @@ function adbwl_load() {
 	adbg_check( 8 === count( array_unique( $keys ) ), 'distinct owned secrets without fallback options' );
 	unset( $keys, $key );
 	$row = adbwl_catalog();
-	adbg_check( 12 === count( $row['pins'] ) && ( $w ? 9 : 10 ) === count( $row['auth'] ) && ! array_intersect_key( $row['pins'], $row['auth'] ), 'fixed profile pinned proof files, runtime allowance unchanged' );
+	adbg_check( 12 === count( $row['pins'] ) && ( $w ? 9 : 14 ) === count( $row['auth'] ) && ! array_intersect_key( $row['pins'], $row['auth'] ), 'fixed profile pinned proof files, runtime allowance unchanged' );
 	foreach ( $row['pins'] as $name => $hash ) {
 		adbg_check( hash_equals( $hash, hash_file( 'sha256', ABSPATH . WPINC . '/' . $name ) ), 'pinned base source' );
 	}
@@ -74,6 +79,12 @@ function adbwl_load() {
 	}
 	foreach ( array_merge( $row['includes'], array( 'class-wp-role.php', 'class-wp-roles.php', 'class-wp-user.php', 'capabilities.php', 'meta.php', 'class-wp-session-tokens.php', 'class-wp-user-meta-session-tokens.php', 'user.php', 'pluggable.php' ) ) as $name ) {
 		require_once ABSPATH . WPINC . '/' . $name;
+	}
+	if ( ! $w ) {
+		foreach ( array( 'pomo/translations.php', 'l10n.php' ) as $name ) {
+			require_once ABSPATH . WPINC . '/' . $name;
+		}
+		adbg_check( ( new ReflectionFunction( '__' ) )->getFileName() === realpath( ABSPATH . WPINC . '/l10n.php' ) && ( new ReflectionClass( 'NOOP_Translations' ) )->getFileName() === realpath( ABSPATH . WPINC . '/pomo/translations.php' ), 'genuine core default-domain localization, no override' );
 	}
 	adbg_check( ( $w ? '7.1.3' : '7.1.4' ) === $wp_version, 'actual version include, never an injected version' );
 	wp_using_ext_object_cache( false );
@@ -95,7 +106,7 @@ function adbwl_load() {
 	adbg_check( 'audit' === getenv( 'WL_REQUEST_MODE' ) || hash_equals( getenv( 'WL_REQUEST_MODULES' ), $modules ), 'audit and proof module inventory agree' );
 	adbg_check( '0' === mysqli_get_client_stats()['connect_success'] && '0' === mysqli_get_client_stats()['com_query'], 'definition audit zero native effects' );
 	if ( ! $w ) {
-		$GLOBALS['adbwl_auth_sources'] = array_merge( array_keys( $row['pins'] ), array_keys( $row['auth'] ) );
+		$GLOBALS['adbwl_auth_sources'] = array_values( preg_grep( '/\A[a-z0-9-]{1,100}\.php\z/', array_merge( array_keys( $row['pins'] ), array_keys( $row['auth'] ) ) ) );
 	}
 	return array( $rows, $modules );
 }
