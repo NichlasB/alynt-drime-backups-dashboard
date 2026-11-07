@@ -105,12 +105,16 @@ HTTP server,WordPress installation or fixture bootstrap operation. No workflow
 or endpoint is created by this design. Keep any future manual workflow default-
 off,exact-head/actor/run_attempt1 bound,with separately approved execution flag.
 Launch with -n,the same explicitly qualified mysqli module,empty INI scan and
-auto-prepend/append,display_errors off and CLI_SERVER_WORKERS unset. Unknown
+auto-prepend/append,display_errors off and PHP_CLI_SERVER_WORKERS unset. Unknown
 required extension/SAPI/runtime or effective memory drift refuses;no host-INI
 fallback or new installation. Restrict wp-login to its stock form GET/login POST
 only,not registration/lost-password/reset actions;redirect_to is the fixed private
 bridge,not admin or caller-selected URLs. Server logs/bodies never expose raw PHP
 diagnostics,even when bootstrap fails.
+The [official PHP development-server manual](https://www.php.net/manual/en/features.commandline.webserver.php)
+confirms cli-server/router behaviour and the exact PHP_CLI_SERVER_WORKERS name.
+Router false means normal resource serving:never return false for an unknown path
+or rely on index-file fallback;only the exact checked stock-login path may delegate.
 
 The minimal graph deliberately excludes the installed dashboard main/plugin graph
 and third-party plugins. It can establish core-bootstrapped HTTP behaviour ONLY.
@@ -268,8 +272,8 @@ Feature scope:HTTP owned-storage/profile/graph design and four owning resumes.
 Files reviewed:5 changed Markdown files,plus the directly referenced read-only
 entry/context/storage/proof/workflow and immutable public core/theme sources.
 Risk areas touched:Other,future HTTP/authentication/DB/file/process proof;no
-operative UI/AJAX/REST/cron/SQL change. Canonical FEATURE_LIGHT_REVIEW found3
-documentation/specification issues,auto-fixed3,manual defect decisions0:
+operative UI/AJAX/REST/cron/SQL change. Canonical FEATURE_LIGHT_REVIEW found4
+documentation/specification issues,auto-fixed4,manual defect decisions0:
 
 - Documentation:clarified that only harness/bridge manual user selection is
   forbidden;stock core's own user-selection/authentication calls are retained.
@@ -277,6 +281,10 @@ documentation/specification issues,auto-fixed3,manual defect decisions0:
   separate normal bootstrap configuration from owner capture/guard-order controls.
 - Performance/specification:made setup/bootstrap/auth SQL ceilings finite and
   explicitly proposed,not measured throughput or relaxed native credit rules.
+- Documentation:official PHP manual cross-check corrected the worker environment
+  name to PHP_CLI_SERVER_WORKERS and makes unknown-route delegation explicitly
+  forbidden. The earlier design head is superseded by the corrected docs-only head;
+  no HTTP process was launched and no runtime or native guard was changed.
 
 No significant remaining scoped non-security issue. FEATURE_BLOAT_AND_STRUCTURE
 is unnecessary:Markdown-only,no added executable code,duplicate implementation,
