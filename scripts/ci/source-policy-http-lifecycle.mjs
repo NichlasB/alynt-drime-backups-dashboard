@@ -1,6 +1,6 @@
 // Virtual original-job elapsed milliseconds ONLY (not Date.now). No callbacks/IO.
 import {HTTP_PROFILE,LIMITS,record,integer,hex,identityData,profileMatches,storageMatches,manifestMatches} from './source-policy-http-profile.mjs';
-import {route,ledgerMatches,responseMatches,caseMatches,HTTP_CASES} from './source-policy-http-contract.mjs';
+import {route,ledgerMatches,responseMatches,caseMatches,viewObservationMatches,HTTP_CASES} from './source-policy-http-contract.mjs';
 export class HttpDataLifecycle {
  #id;#challenge;#state='fresh';#created;#last;#setupAt;#started;#requestAt;#cleanupAt;
  #manifest;#pid;#start;#kind;#pending=null;#index=0;#transactions=0;#refused=false;
@@ -43,9 +43,11 @@ export class HttpDataLifecycle {
  receive(envelope,result,expected,bootstrap,auth,at){
   this.#httpTime(at);this.#require(this.#state==='response'&&at-this.#requestAt<LIMITS.transaction_ms);
   this.#require(responseMatches(envelope,this.#kind)&&ledgerMatches(bootstrap,'bootstrap')&&ledgerMatches(auth,'auth'));
-  if(this.#pending===null)this.#require(result===null&&expected===null);
+  const observed=this.#pending!==null||['view','nonce-control'].includes(this.#kind);
+  if(!observed)this.#require(result===null&&expected===null);
   else{
-   this.#require(caseMatches(result,expected,this.#pending));
+   this.#require(this.#pending===null?viewObservationMatches(result,expected):caseMatches(result,expected,this.#pending));
+   this.#require(result.bootstrap===bootstrap.sql&&result.auth===auth.sql);
    this.#require(expected.run===this.#id.run&&expected.head===this.#id.head&&expected.image===this.#id.image&&expected.root===this.#id.root&&envelope.status===result.status);
    this.#require((this.#policy===null||result.before===this.#policy)&&(this.#sentinel===null||result.sentinel===this.#sentinel));
    this.#pendingAfter=result.after;this.#sentinel=result.sentinel;
@@ -56,7 +58,8 @@ export class HttpDataLifecycle {
   this.#httpTime(at);const row=record(value,['run','head','image','pid','start','alive','manifest','scope','sessions','transactions']);
   this.#require(this.#state==='release'&&at-this.#requestAt<LIMITS.transaction_ms);
   this.#require(this.#owned(row)&&row.pid===this.#pid&&row.start===this.#start&&row.scope==='all-server'&&row.sessions===0&&row.transactions===0);
-  if(this.#pending!==null){this.#index++;this.#policy=this.#pendingAfter;}
+  if(this.#pending!==null)this.#index++;
+  if(this.#pendingAfter!==null)this.#policy=this.#pendingAfter;
   this.#pendingAfter=null;
   this.#pending=null;this.#kind=null;
   this.#state=this.#index===HTTP_CASES.length?'cleanup':'http';if(this.#state==='cleanup')this.#cleanupAt=at;

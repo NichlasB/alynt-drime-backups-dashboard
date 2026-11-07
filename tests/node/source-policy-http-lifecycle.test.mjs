@@ -49,12 +49,22 @@ test('original setup/startup/request/whole-phase/job deadlines and monotonic tim
  const reserve=new HttpDataLifecycle(f.identity(),510000,f.challenge);reserve.admit(f.profile(),f.storage(),f.manifest(),f.manifestExpectation(),510001);reserve.setup(f.ledger('setup'),510002);assert.throws(()=>reserve.server(f.server(),f.profile(),510003));
 });
 test('max64 transaction budget includes auxiliary traffic; cases cannot be manufactured by logins',()=>{
- const m=prepared();for(let i=0;i<64;i++){const at=4+i*3;m.begin(f.meta('view'),'view',null,at);m.receive(f.response(),null,null,f.ledger(),f.ledger('auth'),at+1);m.release(f.release(),at+2);}
+ const m=prepared();for(let i=0;i<64;i++){const at=4+i*3;m.begin(f.meta('login-form'),'login-form',null,at);m.receive(f.response(),null,null,f.ledger(),f.ledger('auth'),at+1);m.release(f.release(),at+2);}
  assert.throws(()=>m.begin(f.meta('view'),'view',0,200));const terminal=m.close(f.cleanup(),201);assert.equal(terminal.cases,0);assert.equal(terminal.completed,false);
 });
 test('unknown routes cannot self-match false, and auxiliary traffic cannot hide a submit',()=>{
  const bad=prepared();assert.throws(()=>bad.begin({...f.meta(),target:'/wp-config.php'},false,null,4));
  const hidden=prepared();assert.throws(()=>hidden.begin(f.meta(),'submit',null,4));
+});
+
+test('an auxiliary guarded view cannot discard its protected read observation',()=>{
+ const m=prepared();m.begin(f.meta('view'),'view',null,4);
+ assert.throws(()=>m.receive(f.response(),null,null,f.ledger(),f.ledger('auth'),5));
+});
+
+test('observed phase counts cannot disagree with the retained bootstrap/auth ledger',()=>{
+ const m=prepared();m.begin(f.meta('view'),'view',0,4);
+ assert.throws(()=>m.receive(f.response(),{...f.result(0),bootstrap:99},f.expected(0),f.ledger(),f.ledger('auth'),5));
 });
 test('a saved policy observation cannot silently reset before later cases',()=>{
  const m=prepared();respond(m,0,4);respond(m,1,7);m.begin(f.meta(),'submit',2,10);

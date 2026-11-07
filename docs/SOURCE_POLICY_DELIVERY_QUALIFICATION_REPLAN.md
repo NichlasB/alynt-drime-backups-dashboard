@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current HTTP bridge/supervisor preparation — 2026-11-07:[approved implementation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
+connects definition-only bridge/unchanged entry and isolated-IO25-exchange model;
+31 guard controls,no actual core/auth/HTTP/storage/native execution or wiring.
+Next gated slice:Genuine-HTTP Owned Bootstrap/Request IO Integration and ONE
+Ephemeral-CI Qualification/Cleanup Attempt,audit-first/new execution authority,
+fresh prerequisites/owned fixtures/strict cleanup. Source/stock-hook/bootstrap
+feasibility may refuse;do not weaken guards. Campaign4/10 milestones,8 attempts,
+cumulative31 unchanged;earlier preparation requests below are historical/fulfilled.
+
 Current HTTP foundation — 2026-11-07:[completed dormant contracts](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
 add exact profile/storage/manifest DATA,finite result/ledger checks and original-
 clock lifecycle/release/cleanup continuity,with non-vacuous source controls.

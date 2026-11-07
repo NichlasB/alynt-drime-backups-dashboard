@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-HTTP dormant bridge/supervisor preparation complete — 2026-11-07
+
+The [approved integration preparation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
+adds definition-only fixed PHP bridge and isolated-IO supervisor for25 exchanges/
+13 logical cases. Unchanged entry positives/denials and31 assertion-killed source
+controls pass;auxiliary-view accounting and phase-ledger binding gaps fixed.
+No actual HTTP/core/auth/SQL/storage/native operation or production wiring.
+
+Implementation-plan progress:pending HTTP milestone advances through adapter
+preparation;campaign4/10 milestones,8/10 attempts,cumulative31 unchanged. **Next
+gated slice:Genuine-HTTP Owned Bootstrap/Request IO Integration and ONE Ephemeral-
+CI Qualification/Cleanup Attempt**,audit-first/new exact HTTP execution authority,
+fresh prerequisites/owned fixtures/exact cleanup. Unknown source/stock-hook/
+bootstrap feasibility stops;no guard weakening or generic lab. Installed-target
+eligibility/public switch/release remain later gates. Earlier preparation requests
+below are fulfilled/historical,not another safe-local approval loop.
+
 ## Genuine-HTTP dormant admission foundation complete — 2026-11-07
 
 The [approved foundation](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)

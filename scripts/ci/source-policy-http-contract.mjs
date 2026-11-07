@@ -43,3 +43,13 @@ export function caseMatches(value,expected,index){
  if(index===1?row.before===row.after:row.before!==row.after)return false;
  return index===0?row.mode==='required'&&hex(want.revision,64)&&row.revision===want.revision:row.mode===null&&want.revision===null&&row.revision===null;
 }
+// Extra genuine views refresh private nonce/revision DATA, never extra case credit.
+export function viewObservationMatches(value,expected){
+ const keys=['event','model','run','head','image','index','status','result','checks','bootstrap','auth','records','connects','commands','policy_reads','policy_writes','before','after','sentinel','revision','mode','unknown_changes','production_ready'];
+ const row=record(value,keys),want=record(expected,['run','head','image','root','before','after','sentinel','revision','mode']);
+ if(!row||!want||!['required','external_optional'].includes(want.mode)||row.mode!==want.mode||row.event!=='http-view-complete'||row.index!==null)return false;
+ // Only the already-validated auxiliary tag/mode are adapted to the shared view
+ // invariant; physical identity/counts/revision/policy DATA are never repaired.
+ const {mode,...base}=want;
+ return caseMatches({...row,event:'http-case-complete',index:0,mode:'required'},base,0);
+}

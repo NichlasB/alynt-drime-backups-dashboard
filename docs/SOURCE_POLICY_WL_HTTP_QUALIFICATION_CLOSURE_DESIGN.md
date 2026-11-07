@@ -1,5 +1,15 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current HTTP preparation — 2026-11-07:[dormant bridge/supervisor](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
+now forwards through unchanged entry and enforces finite isolated-IO lifecycle,
+including protected observations for extra views and exact phase counters. This
+is not physical HTTP/stock auth/bootstrap/storage proof. Next gated slice:Genuine-
+HTTP Owned Bootstrap/Request IO Integration and ONE Ephemeral-CI Qualification/
+Cleanup Attempt,new audit-first execution authority/fresh prerequisites/exact
+owned cleanup. Keep unknown graph/profile facts as refusal,production wiring off.
+Counters4/10 milestones,8 attempts,cumulative31 unchanged;earlier preparation
+approval recommendations are fulfilled/historical,not product milestone credit.
+
 Current HTTP contract foundation — 2026-11-07:[implemented dormant DATA](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
 checks selected profile/storage/source bounds,finite positive/denial outcomes and
 virtual original-job lifecycle/release/cleanup with retained policy/sentinel state.

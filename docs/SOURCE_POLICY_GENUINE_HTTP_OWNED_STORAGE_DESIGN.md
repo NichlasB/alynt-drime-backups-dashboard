@@ -1,13 +1,14 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
 Current implementation — 2026-11-07:the separately approved
-[dormant profile/owned-storage foundation](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
-now implements DATA contracts and virtual-clock consistency checks only. No
-actual HTTP/core/authentication/storage/native execution or production wiring.
-The next finite gated stage is Repository-Only Genuine-HTTP Guarded Bridge and
-Bounded Supervisor Integration Preparation,isolated API/IO only. Earlier next-
-foundation recommendations in this historical design are fulfilled;physical
-HTTP obligations and all execution/switch approvals remain outstanding.
+[dormant bridge/supervisor preparation](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
+consumes the [profile/owned-storage DATA foundation](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
+under isolated API/IO only. No actual HTTP/core/authentication/storage/native
+execution or production wiring. Next gated slice:Genuine-HTTP Owned Bootstrap/
+Request IO Integration and ONE Ephemeral-CI Qualification/Cleanup Attempt,new
+audit-first execution authority,fresh prerequisites/exact owned cleanup. Earlier
+foundation/preparation recommendations are fulfilled/historical;physical HTTP
+obligations and all execution/switch approvals remain outstanding.
 
 ## Approval, source baseline and non-goals — 2026-11-07 UTC
 

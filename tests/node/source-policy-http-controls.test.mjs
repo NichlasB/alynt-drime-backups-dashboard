@@ -29,7 +29,7 @@ test('actual DATA guards and required availability are assertion-killed by bound
 });
 test('actual lifecycle release, budget, deadline and cleanup guards have independent semantic kills',async()=>{
  await killed('lifecycle','row.pid===this.#pid&&','',m=>{const model=prepare(m.HttpDataLifecycle);model.begin(f.meta('view'),'view',0,4);model.receive(f.response(),f.result(0),f.expected(0),f.ledger(),f.ledger('auth'),5);assert.throws(()=>model.release({...f.release(),pid:124},6));});
- await killed('lifecycle','this.#transactions<LIMITS.transactions&&','',m=>{const model=prepare(m.HttpDataLifecycle);for(let i=0;i<64;i++){const at=4+i*3;model.begin(f.meta('view'),'view',null,at);model.receive(f.response(),null,null,f.ledger(),f.ledger('auth'),at+1);model.release(f.release(),at+2);}assert.throws(()=>model.begin(f.meta('view'),'view',0,200));});
+ await killed('lifecycle','this.#transactions<LIMITS.transactions&&','',m=>{const model=prepare(m.HttpDataLifecycle);for(let i=0;i<64;i++){const at=4+i*3;model.begin(f.meta('login-form'),'login-form',null,at);model.receive(f.response(),null,null,f.ledger(),f.ledger('auth'),at+1);model.release(f.release(),at+2);}assert.throws(()=>model.begin(f.meta('view'),'view',0,200));});
  await killed('lifecycle','at-this.#started<LIMITS.http_ms','true',m=>{const model=prepare(m.HttpDataLifecycle);assert.throws(()=>model.begin(f.meta('view'),'view',0,60003));});
  await killed('lifecycle','integer(at,LIMITS.job_ms-1)&&at>=this.#last','integer(at,Number.MAX_SAFE_INTEGER)&&at>=this.#last',m=>{const model=new m.HttpDataLifecycle(f.identity(),599999,f.challenge);assert.throws(()=>model.admit(f.profile(),f.storage(),f.manifest(),f.manifestExpectation(),600000));});
  await killed('lifecycle','row.ownership===true&&','',m=>{const model=prepare(m.HttpDataLifecycle);model.fail(4);assert.throws(()=>model.close({...f.cleanup(),ownership:false},5));});
@@ -43,6 +43,8 @@ test('actual lifecycle release, budget, deadline and cleanup guards have indepen
  });
  await killed('lifecycle',"['login-form','login-submit','view','submit','nonce-control'].includes(kind)&&",'',m=>{const model=prepare(m.HttpDataLifecycle);assert.throws(()=>model.begin({...f.meta(),target:'/wp-config.php'},false,null,4));});
  await killed('lifecycle',"index===null?kind!=='submit':",'index===null?true:',m=>{const model=prepare(m.HttpDataLifecycle);assert.throws(()=>model.begin(f.meta(),'submit',null,4));});
+ await killed('lifecycle','result.bootstrap===bootstrap.sql&&result.auth===auth.sql','true',m=>{const model=prepare(m.HttpDataLifecycle);model.begin(f.meta('view'),'view',0,4);assert.throws(()=>model.receive(f.response(),{...f.result(0),bootstrap:99},f.expected(0),f.ledger(),f.ledger('auth'),5));});
+ await killed('lifecycle','viewObservationMatches(result,expected)','true',m=>{const model=prepare(m.HttpDataLifecycle);model.begin(f.meta('view'),'view',null,4);assert.throws(()=>model.receive(f.response(),{...f.result(0),event:'http-view-complete',index:null,policy_writes:1},{...f.expected(0),mode:'required'},f.ledger(),f.ledger('auth'),5));});
 });
 test('dormant imports contain no executor/IO adapter or caller and old CLI/production entry stays unchanged',()=>{
  for(const source of Object.values(sources)){

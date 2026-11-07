@@ -1,5 +1,13 @@
 # Genuine-HTTP Profile and Owned-Storage Admission Safety Foundation
 
+Current preparation — 2026-11-07:[separately approved bridge/supervisor](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_PREPARATION.md)
+now consumes these contracts under isolated IO only. Integration tightened
+auxiliary-view observations and exact phase-ledger count binding;historical
+foundation metrics below are not a claim about the later source head. No actual
+HTTP/core/auth/storage/native execution or wiring. Earlier next-preparation
+request is fulfilled;next gate is audit-first Genuine-HTTP Owned Bootstrap/Request
+IO Integration and ONE Ephemeral-CI Qualification/Cleanup Attempt.
+
 ## Authority, restore point and scope — 2026-11-07 UTC
 
 Approved repository-only foundation under the [selected HTTP design](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md).
