@@ -1,5 +1,22 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-HTTP dormant admission foundation complete — 2026-11-07
+
+The [approved foundation](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
+implements exact profile/owned-storage/source DATA,finite request/result ledgers
+and a virtual-clock13-case lifecycle with release/cleanup and cross-case state
+continuity. Positive availability and17 assertion-killed source controls prevent
+vacuous success. No existing executable source,workflow,site,HTTP/core/auth/SQL/
+native operation or production wiring changed;successful DATA is not a grant.
+
+Implementation-plan progress:pending HTTP milestone advances through its contract
+foundation;campaign4/10 milestones,8/10 attempts,cumulative31 unchanged. Existing
+W/L/M cohort remains current. **Next gated slice:Repository-Only Genuine-HTTP
+Guarded Bridge and Bounded Supervisor Integration Preparation**,isolated API/IO
+only,no actual server/core/auth/storage/native/dispatch/wiring. Actual HTTP proof,
+installed-target eligibility and public switch remain separate later approvals.
+Earlier foundation approval recommendations below are fulfilled/historical.
+
 ## Genuine-HTTP owned-storage contract selected — 2026-11-07
 
 The [approved repository-only design](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md)

@@ -1,0 +1,19 @@
+// Synthetic DATA only. No installed core, cookie, socket, runtime or database.
+import {createHash} from 'node:crypto';
+export const run='a'.repeat(32),head='b'.repeat(40),image='c'.repeat(64),digest='d'.repeat(64);
+export const challenge='9'.repeat(32);
+export const identity=()=>({run,head,image,root:'/tmp'});
+export const profile=()=>({model:'owned-http-l714-v1',platform:'Linux',arch:'x86_64',php:'8.5.12',client:'mysqlnd 8.5.12',nts:true,word_size:8,sapi:'cli-server',core:'7.1.4',commit:'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a',theme:'twentytwentyfive',theme_tree:'8602b07f7973be84dec0238215aeb16251dead5e',server:'10.11.18-MariaDB-ubu2204',server_image:'mariadb@sha256:161be354206906ea8584929bde5ac59cdce0770fbfd5dd76131429f7dd80aab5',transport:'unix_socket',charset:'utf8',collate:'',report_mode:0,external_cache:false,dropins:false,plugins:0,mu_plugins:0,workers:1,host_ini:false,prepend:false,append:false,display_errors:false});
+export function storage(){const tag=run.slice(0,12),stage='/tmp/adb-http-'+run,prefix='adbh_'+tag+'_';return {run,head,image,root:'/tmp',stage,core_path:stage+'/core',content_path:stage+'/content',socket:stage+'/socket/native.sock',database:'adb_http_'+tag,user:'adbh_'+tag,prefix,options:prefix+'options',sites:prefix+'alynt_drime_dashboard_sites',origin:'http://127.0.0.1:18777',before_bootstrap:true,existing_application:false};}
+export const manifest=()=>[{path:'wp-includes/load.php',size:12,type:'file',digest},{path:'wp-settings.php',size:5,type:'file',digest:image}];
+export function manifestExpectation(rows=manifest()){return {files:rows.length,bytes:rows.reduce((n,r)=>n+r.size,0),digest:createHash('sha256').update(JSON.stringify(rows)).digest('hex')};}
+export const meta=(route='submit')=>({host:'127.0.0.1:18777',method:route==='submit'||route==='login-submit'?'POST':'GET',target:route.startsWith('login')?'/wp-login.php':route==='nonce-control'?'/_adb-owned-source-policy?control=wrong-action':'/_adb-owned-source-policy',challenge,header_bytes:120,body_bytes:route==='submit'||route==='login-submit'?10:0,content_length:route==='submit'||route==='login-submit'?'10':null,transfer_encoding:null,content_type:route==='submit'||route==='login-submit'?'application/x-www-form-urlencoded':null});
+export const login=()=>({log:'owned-capable-a',pwd:'unit-only-not-a-secret','wp-submit':'Log In',redirect_to:'http://127.0.0.1:18777/_adb-owned-source-policy',testcookie:'1'});
+export const ledger=(phase='bootstrap')=>({phase,sql:2,policy_reads:phase==='setup'?1:0,policy_writes:phase==='setup'?1:0,owner_allocations:0,unknown_changes:0,mail:phase==='setup'?1:0,outbound:0});
+const results=['view','saved','unchanged','source_policy_conflict','source_policy_forbidden','source_policy_forbidden',...Array(7).fill('source_policy_invalid')];
+export function expected(index){return {...identity(),before:index>=2?'e'.repeat(64):digest,after:index>=1?'e'.repeat(64):digest,sentinel:'f'.repeat(64),revision:index===0?'1'.repeat(64):null};}
+export function result(index){const e=expected(index);return {event:'http-case-complete',model:'owned-http-l714-v1',run,head,image,index,status:index<3?200:index===3?409:index<6?403:400,result:results[index],checks:7,bootstrap:4,auth:2,records:index<4?1:0,connects:index<4?1:0,commands:index<4?8:0,policy_reads:index<4?1:0,policy_writes:index===1?1:0,before:e.before,after:e.after,sentinel:e.sentinel,revision:e.revision,mode:index===0?'required':null,unknown_changes:0,production_ready:false};}
+export const response=()=>({status:200,body_bytes:200,header_bytes:120,eof:true,location:null});
+export const server=()=>({run,head,image,pid:123,start:digest,alive:true,manifest:manifestExpectation().digest});
+export const release=()=>({...server(),scope:'all-server',sessions:0,transactions:0});
+export const cleanup=()=>({run,head,image,ownership:true,processes:0,listeners:0,containers:0,schemas:0,accounts:0,files:0,sessions:0,transactions:0});

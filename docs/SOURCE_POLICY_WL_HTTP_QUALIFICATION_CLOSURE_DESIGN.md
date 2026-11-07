@@ -1,5 +1,14 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current HTTP contract foundation — 2026-11-07:[implemented dormant DATA](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
+checks selected profile/storage/source bounds,finite positive/denial outcomes and
+virtual original-job lifecycle/release/cleanup with retained policy/sentinel state.
+It is not actual HTTP/auth/storage or native proof;old W/L/M executable cohort
+unchanged. Next gated slice:Repository-Only Genuine-HTTP Guarded Bridge and Bounded
+Supervisor Integration Preparation,isolated API/IO only,not server/core/SQL/native
+execution or wiring. Campaign4/10 milestones/8 attempts/cumulative31 unchanged;
+foundation approval requests below are historical and fulfilled.
+
 Current HTTP/storage decision — 2026-11-07:[approved design-only candidate](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md)
 selects one disposable CI cli-server/full stock7.1.4 bootstrap using existing L
 runtime/socket DB,private owned config/prefix before capture,real login cookies

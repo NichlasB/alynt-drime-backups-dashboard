@@ -37,10 +37,19 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | Approved HTTP owned-storage design selects disposable CI cli-server/full stock bootstrap;next is Repository-Only Genuine-HTTP Profile and Owned-Storage Admission Safety Foundation,pure/isolated contracts only,no actual HTTP/core/auth/storage/native/dispatch/wiring |
+| Exact next meaningful item | Approved HTTP profile/owned-storage DATA foundation complete;next is Repository-Only Genuine-HTTP Guarded Bridge and Bounded Supervisor Integration Preparation,isolated API/IO only,no actual HTTP/core/auth/storage/native/dispatch/wiring |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+The [subsequent approved HTTP DATA foundation](SOURCE_POLICY_GENUINE_HTTP_ADMISSION_FOUNDATION.md)
+implements dormant exact profile/storage/source contracts,finite13-case ledgers
+and original-job virtual-clock lifecycle with cross-case state/release/cleanup.
+Positive availability plus17 source controls protect the synthetic layer only.
+No existing executable cohort change or physical HTTP/auth/storage/native proof.
+Next gated slice:Repository-Only Genuine-HTTP Guarded Bridge and Bounded Supervisor
+Integration Preparation,isolated API/IO only. Counters4/10 milestones,8/10 attempts,
+cumulative31 unchanged;earlier foundation requests are historical/fulfilled.
 
 The [subsequent approved HTTP/storage design](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md)
 selects one proportionate CI cli-server candidate reusing the L runtime/database,
