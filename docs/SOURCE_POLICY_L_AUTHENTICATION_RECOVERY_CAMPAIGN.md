@@ -35,7 +35,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
 | Milestone2: L genuine-session qualification | Passed at63b728a/run42361807156: source audit211/native0/SQL0,23 cases/12006 checks/9 groups, strict cleanup |
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
-| Exact next meaningful item | W/Plugin Tester current-cohort genuine-session request qualification and owned cleanup; LocalWP operation is outside this campaign and requires approval |
+| Exact next meaningful item | W proof was separately approved/confirmed but connection-free prerequisite found installed7.1.4 versus pinned W7.1.3;repository-only current-source profile rebaseline DESIGN now requires approval,see final checkpoint |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -639,3 +639,80 @@ fresh prerequisites and exact target/owned disposable fixture confirmation.
 Preserve existing application tables/options/users/cron/lifecycle and keep
 production wiring disabled. No LocalWP inspection/proof is authorized by this
 campaign;no release/package/deploy or new milestone begins at closeout.
+
+## W current-cohort prerequisite refusal — 2026-11-07
+
+The next W proof was separately approved,end-to-end,with fresh prerequisites,
+owned disposable users/storage/process fixtures and exact cleanup,preserving
+existing application state/lifecycle and disabled production wiring. User then
+confirmed exact site_key plugin-tester/mode local-only,LocalWP Plugin Tester,
+http://plugin-tester.local,WordPress
+`C:\Users\Captain\Local Sites\plugin-tester\app\public`,database10004/web10005.
+Site Operations and LocalWP database workflow read;Novamira HQ guide/complete
+inventory identified exact connected plugin-tester.local. No WordPress Ability,
+installed bootstrap,HTTP request,service restart or installed configuration edit.
+Initial sandbox listener reads were false negatives;explicit host-level probes
+confirmed BOTH ports listening. No further user restart was required.
+
+Fresh clean/synced repository/restore baseline
+`827796602089907f10492ab799465c4316c2de48`,ordinary
+[CI42362734370](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42362734370)
+reverified completed/success;executable cohort identical to native-qualified
+63b728a. Toolkit baseline3bd5b84cc2d1856870ad9aa30f34c051f60b5877 clean.
+
+Bundled LocalWP mysql.exe initial read-only reconciliation,not PHP/wp-load.php:
+actual10.6.23-MariaDB/autocommit1,**78 current existing base tables** (not historical
+77),no adbb_/adbm_ tables,zero other all-server sessions and INNODB_TRX. Four
+source schema candidates are InnoDB/utf8mb4_unicode_520_ci. No application rows
+or credentials were copied/read into evidence. Inventory/count checks are not a
+claimed full checksum preservation comparison;no write operation began.
+
+Connection-free W controller audit-only at exact8277966 with proposed uncreated
+prefix adbm_2228fde81786_ refused before an audit receipt. Original bounded
+underlying cause retrieved through the existing controller,without code change:
+request_profile:w/case0/stage:audit/class:RuntimeException/assertion
+`85ca3e8e467284dd1c3fc0774a35959f9dcb555e8e06455f31507d6dc5d6cae7`.
+Exact source digest maps to `pinned base source` in
+scripts/ci/source-policy-wl-request-bootstrap.php. Second invocation was audit-only
+original-cause isolation,not an unchanged native qualification retry. Owned
+controller processes were reaped by existing finally cleanup;no cleanup-unknown
+error or retained fixture arose. Neither audit reached authentication/native SQL.
+
+Independent fixed runtime DATA:PHP8.5.12/Windows/AMD64,PHP_ZTS boolean false,
+word_size8,mysqli/mysqlnd true,PDO-MySQL false,initial reporting3. No architecture
+normalization or runtime-profile mismatch. Read-only comparison of all12 W base
+pins found EXACTLY ONE mismatch,version.php:
+
+- Required W7.1.3 SHA256:
+  `7513dacf90ade66347561ffc2e79d27e74b6a3f05d869bd455144ed7cd378a04`.
+- Actual installed1103-byte SHA256:
+  `7163a7bfaf1fbac5024c0382931f17f9993076e15ff245e93254f009e0e34cc5`.
+- Public version.php text independently declares `$wp_version = '7.1.4';`.
+
+The actual hash equals the already-recorded L7.1.4 version source,NOT permission
+to reuse the Linux profile/expectations or merely replace a pin. W remains a
+different OS/architecture/TCP/MariaDB tuple. No auth14/full installed graph or
+physical compatibility success is claimed from the12-base-file comparison.
+Source drift time/cause Unknown;the historical W7.1.3 evidence is not rewritten.
+No downgrade,installed-state change,new profile,accepted alias or bypass applied.
+
+Post-audit bundled-client reconciliation again78 base tables,proof tables0,
+other all-server sessions0,transactions0;temporary credential environment restored.
+Fixture creation0,fixture user/session seed0,application mutations0,native
+qualification attempts0. Fresh ADBC2/ambient/request body prerequisites did NOT
+run after the source gate refused. No successful W image/case/batch receipt,
+no full application checksum comparison or physical authentication/storage proof.
+Campaign remains3/10 completed milestones,5/10 attempts,cumulative28;this blocked
+prerequisite/evidence publication is not another product milestone/native attempt.
+
+Only owning documentation/evidence is published for this refusal,with ordinary
+exact-head CI/remote completion recorded in the canonical toolkit scoped section;
+no source/tests/workflow/dependency/installed-site mutation or native rerun.
+Historical whole-plugin reviews/release readiness remain untouched.
+
+**Recommended next gated slice:Repository-Only W7.1.4/PHP8.5.12 Current-Source
+Profile Rebaseline and Qualification Integration Design**,design-only. Evaluate
+the measured Windows candidate's exact source/tuple/session/transport admission,
+affected L/M/W receipts and finite closure/precondition/cleanup order before
+implementation/proof. Preserve installed application state and all strict guards;
+no native execution,site writes,downgrade or production wiring in that design.

@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Confirmed W prerequisite blocked by installed core drift — 2026-11-07
+
+The approved Plugin Tester local-only current-cohort genuine-session proof
+stopped BEFORE fixtures/authentication/native qualification. Host listeners and
+fixed PHP8.5.12/Windows/AMD64/NTS64 matched,but installed public version.php is
+7.1.4,not the W catalog's exact7.1.3. The strict pinned-base-source assertion
+refused;no pin,acceptance,site or wiring change. [Actual scoped evidence and
+reconciliation](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#w-current-cohort-prerequisite-refusal--2026-11-07)
+preserve the prior successful L/M frozen cohort and3/10 campaign milestones,
+5/10 native attempts/cumulative28;zero new native attempts or milestone credit.
+
+**Next gated slice:Repository-Only W7.1.4/PHP8.5.12 Current-Source Profile
+Rebaseline and Qualification Integration Design**,design-only. Resolve distinct
+Windows/TCP expectations/source ownership/finite closure/affected receipts and
+fresh prerequisite order without executing native work,loosening pins or
+downgrading the installed site. Any later implementation/proof remains separately
+gated;existing application state/lifecycle and production wiring stay untouched.
+The earlier W7.1.3 proof recommendation below is superseded by this measured gate.
+
 ## Authorized auth recovery campaign — 2026-11-07
 
 The [current campaign owner/ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)

@@ -1,5 +1,16 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current W prerequisite — 2026-11-07:exact Plugin Tester target/owned fixture scope
+approved and confirmed;connection-free source audit refused pinned base source.
+Installed core is7.1.4,not fixed W7.1.3;runtime Windows/AMD64/PHP8.5.12/NTS64
+matched. [Evidence](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#w-current-cohort-prerequisite-refusal--2026-11-07):
+no fixtures/auth/native proof,zero post-audit proof tables/other sessions/trx.
+Next gated slice:Repository-Only W7.1.4/PHP8.5.12 Current-Source Profile Rebaseline
+and Qualification Integration Design,design-only;no implicit Linux-profile reuse,
+pin relaxation,installed downgrade or wiring. Prior L/M results remain scoped to
+their frozen executable cohort;no new milestone/native-attempt count. Earlier
+W7.1.3 proof resume is superseded;HTTP remains a later separate gate.
+
 Current auth recovery campaign — 2026-11-07: [owning ledger/evidence](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
 closes actual L and affected M genuine-session lab qualification at SAME63b728a,
 runs42361807156/42361945178,ordinary CI42361617753,strict cleanup verified.

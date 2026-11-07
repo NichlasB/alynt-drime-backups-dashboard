@@ -1,5 +1,14 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current W prerequisite — 2026-11-07:[confirmed-target audit evidence](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#w-current-cohort-prerequisite-refusal--2026-11-07)
+shows installed core7.1.4 while current exact W catalog admits7.1.3. The pinned
+base source guard correctly refuses before fixtures/auth/native qualification;
+Windows/AMD64/PHP8.5.12/NTS64 matched. No guard/pin/runtime/site change or retry.
+Next gated slice:Repository-Only W7.1.4/PHP8.5.12 Current-Source Profile Rebaseline
+and Qualification Integration Design,design-only;affected source/expectation/
+receipt closure must be evaluated before any implementation or new W proof.
+L/M successes and previous campaign counts remain unchanged;HTTP/wiring disabled.
+
 Shared cohort repair — 2026-11-07:the [current campaign owner](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
 records exact selected W26/L26 declaration closure,strict boolean PHP8.5 NTS
 observation and phase-specific existing save/off versus non-writing/no verifier
