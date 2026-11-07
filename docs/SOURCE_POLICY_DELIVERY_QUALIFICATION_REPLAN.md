@@ -1,5 +1,15 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current cohort closure — 2026-11-07:[exact L/M refresh and HTTP boundary](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
+records successful W23/11914/9,L23/12006/9,M42309/9 on the same executable bytes.
+Affected L/M runs42372977592/42373083692 used remaining existing campaign authority
+at docs-only1b34b4b,ordinary CI42372744834 success;fresh prerequisites/strict cleanup.
+4/10 product milestones,8/10 attempts,cumulative31;no refresh/docs milestone inflation.
+Next gated slice:Genuine-HTTP Owned-Storage and Installed-Graph Qualification
+Design,design-only for the new HTTP/SAPI ingress/bootstrap-owned storage decision.
+CLI-only children/unregistered entry/immutable context do not prove HTTP. No more
+CLI or containment-tooling churn;site/native execution and production wiring gated.
+
 Current W714 owned proof — 2026-11-07:[actual exact-target evidence](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)
 closes W genuine-session availability on efc7aff:source209/native0/SQL0,fresh
 ADBC2 two cases,ambient425/9,ONE23 cases/11914 checks/9 groups. Five owned tables

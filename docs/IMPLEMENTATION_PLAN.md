@@ -1,5 +1,25 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Current-cohort W/L/M CLI evidence closed; HTTP decision next — 2026-11-07
+
+The [owning campaign/actual refresh receipts](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
+now close all three CLI functional/request profiles on the same efc7aff executable
+cohort:W23/11914/9;affected L23/12006/9(run42372977592),M42309/9(run42373083692).
+L/M used existing remaining campaign CI-lab authority at docs-only1b34b4b after
+ordinary CI42372744834 succeeded;fresh prerequisites and strict owned cleanup
+passed before each next attempt. No source/guard/budget/wiring change or retry.
+
+Implementation-plan progress:4/10 product milestones,8/10 native attempts,
+cumulative31;refreshes/docs/cleanup add no product milestone. Existing application
+state preserved;M assurance/ABI limits and production_ready:false remain. No more
+CLI requalification or maintenance churn is needed for this unchanged cohort.
+**Recommended next gated slice:Genuine-HTTP Owned-Storage and Installed-Graph
+Qualification Design**,design-only approval for the NEW HTTP profile/ingress and
+bootstrap-owned storage decision outside the existing CLI workflow. Current child
+is CLI-only,entry unregistered,immutable context must not be prefix-swapped. No
+HTTP/site/SQL/native execution or production switch is authorized by this proposal.
+Earlier W/L/M proof requests below are historical,not outstanding current blockers.
+
 ## W714 genuine-session owned qualification complete — 2026-11-07
 
 The [approved exact-target proof](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)

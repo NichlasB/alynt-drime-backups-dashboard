@@ -1,5 +1,15 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current affected refresh closure — 2026-11-07:[campaign receipts/next HTTP gate](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
+W23/11914/9,L23/12006/9,M42309/9 all pass on the same executable bytes,exact
+owned cleanup verified. Existing campaign CI-lab authority covered L/M refresh
+at docs-only1b34b4b,runs42372977592/42373083692,ordinary CI42372744834 success.
+No source/guard/budget/wiring edits or new product milestone for refreshes.
+Next gated slice:Genuine-HTTP Owned-Storage and Installed-Graph Qualification
+Design,design-only;current CLI-only children/unregistered entry and immutable
+settings leave the new HTTP profile/owned bootstrap contract unresolved. No new
+native/site/HTTP operation or production wiring;older proof recommendations historical.
+
 Current W714 physical closeout — 2026-11-07:[approved owned proof](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)
 passed fresh source209/native0/SQL0,ADBC2/ambient425/9 andONE23-case/11914-check/
 9-group genuine-session batch at efc7aff. Five exact owned tables removed,all78

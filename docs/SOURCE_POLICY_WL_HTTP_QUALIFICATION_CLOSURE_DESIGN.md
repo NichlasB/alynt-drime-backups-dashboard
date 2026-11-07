@@ -1,5 +1,16 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current W/L/M CLI closure — 2026-11-07:[actual affected refresh receipts](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
+W23/11914/9,L23/12006/9,M42309/9 now pass for the SAME efc7aff executable cohort,
+with exact cleanup;L/M42372977592/42373083692 at docs-only1b34b4b after green ordinary
+CI42372744834. Existing campaign authority covered the refreshes,not a new site
+operation. Four milestones/eight attempts,cumulative31;no extra refresh milestone.
+This closes finite CLI rows,not genuine HTTP/installed graph or production readiness.
+Next gated slice:Genuine-HTTP Owned-Storage and Installed-Graph Qualification
+Design,design-only approval for one new HTTP profile/ingress/owned bootstrap
+contract before any execution. Retain the finite HTTP obligations below;no late
+prefix/callback swap,new generic containment lab or implicit public switch.
+
 Current W714 actual proof — 2026-11-07:[owned genuine-session result](SOURCE_POLICY_W714_GENUINE_REQUEST_OWNED_PROOF.md)
 passed source209/native0/SQL0,ADBC2/ambient425/9 and23 cases/11914 checks/9 groups
 on efc7aff. Exact five-table cleanup,78 application checksums unchanged,sessions/

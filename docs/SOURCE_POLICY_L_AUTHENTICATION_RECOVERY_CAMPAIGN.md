@@ -29,14 +29,15 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | 6/10; historical23 plus this campaign6 = cumulative29; W prerequisites/cleanup are one ordered proof, not separate attempts |
+| Native qualification attempts | 8/10; historical23 plus this campaign8 = cumulative31; W prerequisites/cleanup are one ordered proof, not separate attempts; affected L/M refreshes are attempts7/8, not new product milestones |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
 | Milestone2: L genuine-session qualification | Passed at63b728a/run42361807156: source audit211/native0/SQL0,23 cases/12006 checks/9 groups, strict cleanup |
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
-| Exact next meaningful item | Current-Cohort L/M Genuine-Session Owned Requalification and Cleanup Batch in existing trusted ephemeral CI lab, frozen efc7aff executable or docs-only descendant, fresh prerequisites/strict cleanup; no production wiring or new LocalWP operation |
+| Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
+| Exact next meaningful item | Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design, design-only approval for the new HTTP profile/ingress/storage decision outside the existing CLI workflow; no site/native/HTTP operation or production wiring |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -51,6 +52,92 @@ run416f3dcab962aa95958167d94c6b818d;production_ready:false. The earlier63b728a
 L/M successes below are historical for shared changed efc7aff loaded bytes and
 need affected refresh,not a repeat W attempt for documentation-only publication.
 Genuine HTTP/installed graph and public production switch remain separate gates.
+
+### Affected current-cohort L/M refresh and HTTP boundary — 2026-11-07 UTC
+
+After W evidence publication, ordinary exact-head
+[CI42372744834](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42372744834)
+ACTUALLY completed/success at `1b34b4b48f87a1c4512a51cc473a9a80e4e9f04a`.
+PHP7.4=3070 tests/25342 assertions,PHP8.3=3070/25347,no failures/skips;
+Node155/155 each,fail0/skips0,PHPCS291/291,manifest/build/structure/audits0
+vulnerabilities. Both test check-runs succeeded;legacy status contexts0.
+W toolkit closeout ed709f05d69d72925b3b2aa6f703b8ac48b401fe published/remote
+verified,workflows0/check-runs0/legacy contexts0,not toolkit CIgreen.
+
+The original campaign explicitly authorizes existing ephemeral CI-lab qualification
+without another task-scope confirmation. Used that REMAINING authority,not the
+LocalWP approval,to refresh necessary affected L/M images. Both manual jobs ran
+as actorNichlasB/run_attempt1 on SAME1b34b4b/master,whose only delta from efc7aff
+is six Markdown files. All executable/source/test/workflow/dependency bytes are
+unchanged,so W remains current;no repeat W/native run for documentation. No new
+policy exception,trust model,compatibility tuple,profile or resource allowance.
+
+Attempt7/10 [L42372977592](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42372977592)
+actually completed/success,12:32:56–12:33:41 UTC. Fresh unchanged environment
+prerequisite passed. Original adapter audit29/native0/SQL0 then actual291 checks/
+9 groups/reportmode0/live+post0;image
+`a5660005a218221bf01112a2c467df83864a2929abf551876ab68ca5b4f40098`.
+Request audit211/native0/SQL0 then **23 cases/12006 checks/9 groups**,image
+`e02ee799325f0a35090c991215f39ce3e6d9b6cf380b29f517e7e1d459b68b5f`,
+modules `e5efa746f6acdb3183701c6216d2a2823f24357f0a9ba2862e72cd0eb2191629`,
+run `25818bc5ab7cd2ab16f35e08d4fc13dc`. Exact held-live/post-exit zero,production_ready:false.
+Both actual server baselines exact10.11.18-MariaDB-ubu2204,noTCP1/wsrep0/nativeAIO1/
+autocommit1/transaction0/other sessions0/trx0/non-system schemas0. Primary and
+always-recovery cleanup:containers0/directories0/tmpfs released/reconciliation_failure0;
+preflight private_directory0/core_checkout0. Verified before starting M.
+
+Attempt8/10 [M42373083692](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42373083692)
+actually completed/success,12:34:21–12:34:57 UTC. Existing trusted minimum-
+distribution job owned-proof/genuine-request true,production-join false.
+Connection-free audit then actual closed-proof **42309 checks/9 groups**,image
+`edfc65f651c5f3789d5b5696cf03be955076e35bee73f076f3e8e01a7e020d49`,
+run `8f967f528eb8b7b103e86e3d31f908b5`. Actual count is42309,not historical44637.
+WorkerCID3ebc81e4de19d984b36abb6e1d42fc4250c8f32fa72dd62da50d5d734ed1a49b,
+hostPID3172/namespacePID1;serverCIDc4491c6555efac52c80eb39cff1b0f3dbd4594445455c1a6e4f5adc7199d8575.
+Fixed source-owned23-case loop must finish before M emission;the M receipt itself
+has no cases field. Held-live/post-exit independent all-server release passed;
+primary and recovery cleanup issues:[],containers_removed:true,stage_removed:true,
+strict_release_complete:true. No invented core_checkout0 claim for the runner-
+managed checkout. No installed site/application state was used or changed.
+
+M assurance limits remain trusted-distribution-legacy-v1,
+independent_loaded_object_attestation:false,complete_abi_attestation:false,
+mapping_consistency:not-established,runtime_grant:false,production_ready:false.
+Neither native row nor the W receipt is full ABI attestation or a production grant.
+No retry/diagnosis cycle/source repair was needed;no guard/acceptance/budget change.
+
+Implementation-plan progress:all three required CLI functional/request profiles
+now have successful evidence for the SAME executable cohort. Four worthwhile
+campaign milestones remain4/10;affected refreshes/docs/cleanup are not extra
+product milestones. Attempts8/10/cumulative31. No further necessary CLI refresh
+or maintenance slice is selected merely to fill the ceiling.
+
+Next genuine HTTP/installed-graph row is NOT supplied by CLI cookies or these
+receipts. Repository inspection confirms W/L child admission explicitly requires
+PHP_SAPI=cli,request_view/request_submit remain unregistered with no application
+caller,and immutable trusted settings capture DB constants plus stock ambient
+options table after guards. A late prefix/handle/callback swap is not acceptable.
+Existing workflows provide no approved HTTP/SAPI ingress/owned bootstrap target.
+Selecting that new profile and fixture-isolated request entry is the next
+architecture/operations boundary outside the existing CLI-lab campaign scope.
+
+**Recommended next gated slice:Genuine-HTTP Owned-Storage and Installed-Graph
+Qualification Design**,repository-only/design-only. Specify one proportionate
+off-production HTTP profile,real cookie/header/POST flow,unchanged request guards,
+owned storage selected at bootstrap before immutable capture,finite source/hooks/
+SAPI eligibility,non-vacuous positives/denials and bounded cleanup. Reuse the
+existing closure design;do not restart generic containment/attestation/toolchain
+work. No site/bootstrap/SQL/HTTP/native operation,fixture/endpoint/workflow creation,
+production wiring,grants/activation/rollback or packaging/release/deploy is granted
+by this recommendation. Later execution requires its exact approved target/scope.
+
+Final evidence-only diff review: six Markdown owners/resumes,380 local file links
+and whitespace pass;all includes/scripts/tests/workflows/dependency bytes exactly
+match frozen efc7aff. This turn's isolated PHP360/1540 and Node13/13 passed with
+no failures/skips;not rerun as a native body or relabeled as HTTP proof. Both native
+and ordinary check-runs at1b34b4b actually succeeded. Final docs publication's
+exact-head CI and scoped canonical toolkit closeout are verified separately after
+completion;no historical whole-plugin pre-release row is refreshed.
 
 Stop for live/client/production/Drime or any LocalWP operation, existing application
 state/account/permission/credential/lifecycle/schedule change, production wiring/
