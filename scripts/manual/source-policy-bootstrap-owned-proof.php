@@ -11,14 +11,14 @@ if ( PHP_SAPI !== 'cli' || 4 !== count( $argv ) || '--confirmed-plugin-tester-ow
 	fwrite( STDERR, "Requires confirmed Plugin Tester owned bootstrap proof scope\n" );
 	exit( 1 );
 }
-if ( 'Windows' !== PHP_OS_FAMILY || '8.5.12' !== PHP_VERSION || ! extension_loaded( 'mysqli' ) || extension_loaded( 'pdo_mysql' )
+if ( 'Windows' !== PHP_OS_FAMILY || 'AMD64' !== php_uname( 'm' ) || '8.5.12' !== PHP_VERSION || false !== PHP_ZTS || 8 !== PHP_INT_SIZE || ! extension_loaded( 'mysqli' ) || extension_loaded( 'pdo_mysql' )
 	|| ( 'audit' !== $argv[3] && ! getenv( 'MYSQL_PWD' ) ) ) {
 	fwrite( STDERR, "Requires the audited bundled PHP8.5.12 mysqli-only profile\n" );
 	exit( 1 );
 }
 require_once __DIR__ . '/source-policy-supported-profile.php';
 require_once __DIR__ . '/source-policy-proof-reflection.php';
-$profile = adbp_profile( '7.1.3' ); // Fixed existing Windows candidate; no minimum native runner enabled.
+$profile = adbp_profile( '7.1.4' ); // Fixed current Windows candidate; no installed-source discovery.
 define( 'ABSPATH', 'C:/Users/Captain/Local Sites/plugin-tester/app/public/' );
 define( 'WPINC', 'wp-includes' );
 define( 'WP_DEBUG', false );
@@ -74,7 +74,7 @@ try {
 	$class   = new ReflectionClass( 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' );
 	$owner   = adbb_construct( $class );
 	$frame   = array(
-		'core'      => '7.1.3',
+		'core'      => '7.1.4',
 		'database'  => 'local',
 		'table'     => $argv[2] . 'options',
 		'host'      => '127.0.0.1',

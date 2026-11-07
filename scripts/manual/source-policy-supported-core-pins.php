@@ -5,7 +5,7 @@
  * @package Alynt_Drime_Backups_Dashboard
  */
 
-return array(
+$profiles = array(
 	'6.0'   => array(
 		'commit'          => 'cc101b64012b16d087780657a2b828ccd7794a63',
 		'php'             => '7.4.33',
@@ -56,3 +56,9 @@ return array(
 		),
 	),
 );
+
+// Same independently pinned library bytes; distinct immutable version/commit DATA.
+$profiles['7.1.4']                        = $profiles['7.1.3'];
+$profiles['7.1.4']['commit']              = 'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a';
+$profiles['7.1.4']['pins']['version.php'] = '7163a7bfaf1fbac5024c0382931f17f9993076e15ff245e93254f009e0e34cc5';
+return $profiles;

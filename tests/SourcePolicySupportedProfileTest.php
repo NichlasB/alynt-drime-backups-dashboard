@@ -5,14 +5,17 @@ use PHPUnit\Framework\TestCase;
 final class SourcePolicySupportedProfileTest extends TestCase {
 	public function test_fixed_core_rows_and_no_unknown_version_fallback() {
 		require_once dirname(__DIR__).'/scripts/manual/source-policy-supported-profile.php';
-		$minimum=adbp_profile('6.0');$windows=adbp_profile('7.1.3');
+		$minimum=adbp_profile('6.0');$windows=adbp_profile('7.1.3');$current=adbp_profile('7.1.4');
 		$this->assertSame('cc101b64012b16d087780657a2b828ccd7794a63',$minimum['commit']);
 		$this->assertSame('fc9832bef919c2a08541248db23af90d14ffb082',$windows['commit']);
 		$this->assertSame('wp-db.php',$minimum['core_file']);$this->assertSame('functions.php',$minimum['parser_api_file']);
 		$this->assertSame('class-wpdb.php',$windows['core_file']);$this->assertSame('load.php',$windows['parser_api_file']);
 		$this->assertCount(11,$minimum['pins']);$this->assertCount(12,$windows['pins']);
-		foreach(array('6','6.0.0','7.1.4','7.1.3-dev',null,6,array(),new stdClass()) as $unknown)$this->assertFalse(adbp_profile($unknown));
-		foreach(array($minimum,$windows) as $row){
+		$this->assertSame('db96f5eaa77a8d3e8eec8923a518fa2326f0d46a',$current['commit']);
+		$this->assertSame('7163a7bfaf1fbac5024c0382931f17f9993076e15ff245e93254f009e0e34cc5',$current['pins']['version.php']);
+		$old=$windows['pins'];$new=$current['pins'];unset($old['version.php'],$new['version.php']);$this->assertSame($old,$new);$this->assertCount(12,$current['pins']);
+		foreach(array('6','6.0.0','7.1.5','7.1.4-dev','7.1.3-dev',null,6,array(),new stdClass()) as $unknown)$this->assertFalse(adbp_profile($unknown));
+		foreach(array($minimum,$windows,$current) as $row){
 			$this->assertSame('load.php',$row['cache_api_file']);$this->assertSame('class-wp-object-cache.php',$row['cache_file']);
 			$this->assertArrayHasKey('version.php',$row['pins']);$this->assertSame('version.php',$row['includes'][0]);
 			foreach($row['includes'] as $file)$this->assertArrayHasKey($file,$row['pins']);
@@ -23,10 +26,10 @@ final class SourcePolicySupportedProfileTest extends TestCase {
 	}
 	public function test_source_only_runtime_candidates_are_exact_and_never_authority() {
 		require_once dirname(__DIR__).'/scripts/manual/source-policy-supported-profile.php';
-		foreach(array('6.0'=>array('7.4.33',0,'php7.dll'),'7.1.3'=>array('8.5.12',3,'php8.dll')) as $core=>$expected){
+		foreach(array('6.0'=>array('7.4.33',0,'php7.dll'),'7.1.3'=>array('8.5.12',3,'php8.dll'),'7.1.4'=>array('8.5.12',3,'php8.dll')) as $core=>$expected){
 			$row=adbp_profile($core);$this->assertSame($expected,array($row['php'],$row['initial_mode'],$row['runtime_module']));
 			$this->assertTrue(adbp_initial_mode($core,$expected[0],$expected[1]));
-			foreach(array(array($core,$expected[0],(string)$expected[1]),array($core,$expected[0],1),array($core,'8.5.1',$expected[1]),array('7.1.4',$expected[0],$expected[1]),array($core,$expected[0],0===$expected[1]?3:0)) as $bad)$this->assertFalse(adbp_initial_mode(...$bad));
+			foreach(array(array($core,$expected[0],(string)$expected[1]),array($core,$expected[0],1),array($core,'8.5.1',$expected[1]),array('7.1.5',$expected[0],$expected[1]),array($core,$expected[0],0===$expected[1]?3:0)) as $bad)$this->assertFalse(adbp_initial_mode(...$bad));
 		}
 		$this->assertFalse(adbp_initial_mode('6.0',null,0));$this->assertFalse(adbp_initial_mode(array(),'7.4.33',0));
 	}
@@ -49,7 +52,8 @@ final class SourcePolicySupportedProfileTest extends TestCase {
 	public static function semantic_controls(){return array(array('none',0),array('php',1),array('mode',1));}
 	public function test_windows_source_composition_is_fixed_and_existing_native_gates_stay_closed() {
 		$root=dirname(__DIR__);$source=file_get_contents($root.'/scripts/manual/source-policy-bootstrap-owned-proof.php');
-		$this->assertStringContainsString("adbp_profile( '7.1.3' )",$source);
+		$this->assertStringContainsString("adbp_profile( '7.1.4' )",$source);
+		foreach(array("'AMD64' !== php_uname( 'm' )","false !== PHP_ZTS","8 !== PHP_INT_SIZE") as $guard)$this->assertStringContainsString($guard,$source);
 		$this->assertStringContainsString("\$profile['parser_api_file']",$source);$this->assertStringNotContainsString("'parser_api_file' => ABSPATH . WPINC . '/functions.php'",$source);
 		$this->assertStringContainsString("\$profile['pins']",$source);$this->assertStringContainsString("\$profile['includes']",$source);
 		$this->assertStringContainsString("'8.5.12' !== PHP_VERSION",$source);$this->assertStringContainsString("'Windows' !== PHP_OS_FAMILY",$source);

@@ -20,9 +20,9 @@ function production_fixture($profile='m') {
 	// Models immutable process observations, NOT real Linux/PHP 7.4 or native qualification.
 	$runtime=array('platform'=>'Linux','arch'=>'x86_64','php'=>'7.4.33','client'=>'mysqlnd 7.4.33','mode'=>0);
 	if('m'!==$profile){
-		$core='w'===$profile?'7.1.3':'7.1.4';$GLOBALS['wp_version']=$core;$GLOBALS['boot_parser_core']=$core;$policy['core']=$core;
-		$runtime=array('platform'=>'w'===$profile?'Windows':'Linux','arch'=>'w'===$profile?'AMD64':'x86_64','php'=>'8.5.12','client'=>'mysqlnd 8.5.12','mode'=>0,'word_size'=>8,'nts'=>true);
-		$GLOBALS['boot_client']='mysqlnd 8.5.12';$GLOBALS['boot_server']='w'===$profile?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204';unset($GLOBALS['boot_rewrite']['session']);
+		$core='w'===$profile?'7.1.3':'7.1.4';$GLOBALS['wp_version']=$core;$GLOBALS['boot_parser_core']=$core;$policy['core']=$core;$windows=in_array($profile,array('w','w714'),true);
+		$runtime=array('platform'=>$windows?'Windows':'Linux','arch'=>$windows?'AMD64':'x86_64','php'=>'8.5.12','client'=>'mysqlnd 8.5.12','mode'=>0,'word_size'=>8,'nts'=>true);
+		$GLOBALS['boot_client']='mysqlnd 8.5.12';$GLOBALS['boot_server']=$windows?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204';unset($GLOBALS['boot_rewrite']['session']);
 		if('l'===$profile)$GLOBALS['boot_expected_endpoint']=array('localhost','owned','owned-private-password','isolated',null,'/tmp/owned.sock',0);
 	}
 	foreach(array('receiver'=>$receiver,'policy'=>$policy,'production_query'=>$query,'production_runtime'=>$runtime)as$key=>$value)boot_set($context,$key,$value);

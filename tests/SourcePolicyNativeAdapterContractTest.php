@@ -76,7 +76,7 @@ final class SourcePolicyNativeAdapterContractTest extends TestCase {
 	}
 	public static function exact_build_profiles() {
 		return array(
-			'linux-exact'=>array('7.1.4','10.11.18-MariaDB-ubu2204',true),
+			'linux-exact-host-bound'=>array('7.1.4','10.11.18-MariaDB-ubu2204','Linux'===PHP_OS_FAMILY),
 			'minimum-lab-unscoped'=>array('6.0','10.11.18-MariaDB-ubu2204',false),
 			'minimum-lab-wire-unscoped'=>array('6.0','5.5.5-10.11.18-MariaDB-ubu2204',false),
 			'minimum-preserved'=>array('6.0','10.6.23-MariaDB',true),'windows-preserved'=>array('7.1.3','10.6.23-MariaDB',true),
@@ -84,7 +84,7 @@ final class SourcePolicyNativeAdapterContractTest extends TestCase {
 			'other-build'=>array('7.1.4','10.11.18-MariaDB-ubu2404',false),'other-patch'=>array('7.1.4','10.11.19-MariaDB-ubu2204',false),
 			'trailing'=>array('7.1.4','10.11.18-MariaDB-ubu2204-extra',false),'nul'=>array('7.1.4',"10.11.18-MariaDB-ubu2204\0",false),
 			'type'=>array('7.1.4',new stdClass(),false),'wrong-core'=>array('7.1.3','10.11.18-MariaDB-ubu2204',false),
-			'wrong-server'=>array('7.1.4','10.6.23-MariaDB',false),'unknown-core'=>array('7.1.5','10.11.18-MariaDB-ubu2204',false)
+			'windows714-exact-host-bound'=>array('7.1.4','10.6.23-MariaDB','Windows'===PHP_OS_FAMILY),'unknown-core'=>array('7.1.5','10.11.18-MariaDB-ubu2204',false)
 		);
 	}
 }

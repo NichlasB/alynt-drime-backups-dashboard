@@ -1,5 +1,14 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Current W714 foundation — 2026-11-07:[exact tuple and prerequisite rebaseline](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md)
+selects fixed current W7.1.4 artifact/candidate;L shares core DATA,not Windows
+runtime/transport authority. M/W713 retained;strict source,typed parser,NTS,
+server/charset/session/guard/budget/receipt/cleanup boundaries unchanged. Isolated
+API/DATA evidence only,no native/site/wiring. Next gated slice:Plugin Tester
+local-only W7.1.4 Genuine-Session Request and Fresh Prerequisite Owned Qualification/
+Cleanup Proof,fresh exact target/owned fixture confirmation and full audit/ADBC2/
+ambient/one23-case/exact cleanup. Prior design-only resumes below historical.
+
 Current W714 design — 2026-11-07:[bounded source/runtime/server/transport plan](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)
 specifies exact W7.1.4 candidate and transitive ADBC2/ambient/request prerequisite
 rebaseline,with no pin/guard/code/site change. Existing W713/L/M semantics and

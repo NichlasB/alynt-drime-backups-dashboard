@@ -18,7 +18,8 @@ try{
  A::assertSame(14,\count($row['auth']));A::assertSame($pin,$row['auth'][$dependency]??null);
  $localization=array('l10n.php'=>array(71415,'43c9af6b687ee3eb92608fea4697ebe7b62b3d45490a7657efce71033ac82ed7'),'pomo/translations.php'=>array(12743,'9aa073438aafe5a4ea0d4f60fea9bd40a1f153653cea3e7567135e25e5099b34'),'pomo/plural-forms.php'=>array(7623,'8123b38a4baefd1156f7003e2649c26202b461c103306ea6847dff7a30a1ed59'),'pomo/entry.php'=>array(3863,'3d503be0ce77eb150f9e7452d2f098b517e9ff9773c310024956719b16d8e5fc'));
  foreach($localization as$name=>$value)A::assertSame($value,$row['auth'][$name]??null,'Independently audited localization catalog');
- A::assertSame($w?'fc9832bef919c2a08541248db23af90d14ffb082':'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a',$row['commit']);
+ A::assertSame('db96f5eaa77a8d3e8eec8923a518fa2326f0d46a',$row['commit']);
+ A::assertSame('7163a7bfaf1fbac5024c0382931f17f9993076e15ff245e93254f009e0e34cc5',$row['pins']['version.php']);
  A::assertCount(12,$row['pins']);A::assertSame(array(),\array_intersect_key($row['pins'],$row['auth']));
  if($scenario==='extra')$row['auth']['unapproved.php']=array(100,\str_repeat('a',64));
  if($scenario==='overlap'){unset($row['auth']['pluggable.php']);$row['auth']['version.php']=array(100,$row['pins']['version.php']);}

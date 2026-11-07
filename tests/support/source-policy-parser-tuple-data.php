@@ -4,7 +4,7 @@
  * 7.1.3 uses absint. No parser implementation, runtime loading, IO or native grant.
  */
 function policy_parser_tuple_data() {
-	return array(
+	$rows = array(
 		'6.0'=>array(
 			'commit'=>'cc101b64012b16d087780657a2b828ccd7794a63',
 			'file'=>'wp-db.php',
@@ -32,4 +32,8 @@ function policy_parser_tuple_data() {
 			),
 		),
 	);
+	// The independently pinned 7.1.4 class-wpdb bytes are identical, not a copied parser.
+	$rows['7.1.4'] = $rows['7.1.3'];
+	$rows['7.1.4']['commit'] = 'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a';
+	return $rows;
 }

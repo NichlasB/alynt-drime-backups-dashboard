@@ -5,7 +5,8 @@ if(defined('ADB_POLICY_ISOLATED')) {
 function production_case($case,$entry,$provider,$context,$adapter,$receiver,$store,$sites,$query,$request) {
 	// The real immutable observer can match on CI PHP7.4.33/Linux. All IO/source APIs remain doubles.
 	$legacy='6.0'===$GLOBALS['wp_version'];
-	$observedMatch='runtime-default'===$case&&($legacy?(PHP_OS_FAMILY==='Linux'&&php_uname('m')==='x86_64'&&PHP_VERSION==='7.4.33'):(PHP_VERSION==='8.5.12'&&PHP_INT_SIZE===8&&PHP_ZTS===false&&PHP_OS_FAMILY===('7.1.3'===$GLOBALS['wp_version']?'Windows':'Linux')&&php_uname('m')===('7.1.3'===$GLOBALS['wp_version']?'AMD64':'x86_64')));
+	$windows=!$legacy&&'tcp_loopback'===boot_get($receiver,'bootstrap_frame')['transport'];
+	$observedMatch='runtime-default'===$case&&($legacy?(PHP_OS_FAMILY==='Linux'&&php_uname('m')==='x86_64'&&PHP_VERSION==='7.4.33'):(PHP_VERSION==='8.5.12'&&PHP_INT_SIZE===8&&PHP_ZTS===false&&PHP_OS_FAMILY===($windows?'Windows':'Linux')&&php_uname('m')===($windows?'AMD64':'x86_64')));
 	if('runtime-observation'===$case){
 		boot_set($context,'production_runtime',null);$context->capture_bootstrap();$actual=boot_get($context,'production_runtime');
 		$expected=array('platform'=>PHP_OS_FAMILY,'arch'=>php_uname('m'),'php'=>PHP_VERSION,'client'=>$GLOBALS['boot_client'],'mode'=>0);
@@ -30,7 +31,7 @@ function production_case($case,$entry,$provider,$context,$adapter,$receiver,$sto
 	if('binding'===$case){$binding=boot_get($receiver,'bootstrap_binding');$binding['cache_file']='other';boot_set($receiver,'bootstrap_binding',$binding);}
 	if('helper'===$case)$GLOBALS['boot_helper_wrong']=true;
 	if('schema'===$case)$GLOBALS['boot_rewrite']['table']=static function($rows){$rows[0]['collation']='utf8mb4_unicode_ci';return$rows;};
-	$servers=array('unprefixed'=>'10.6.23-MariaDB','prefixed'=>'5.5.5-'.$GLOBALS['boot_server'],'double-prefix'=>'5.5.5-5.5.5-10.6.23-MariaDB','newer'=>$legacy?'5.5.5-10.11.18-MariaDB-ubu2204':('7.1.3'===$GLOBALS['wp_version']?'10.11.18-MariaDB-ubu2204':'10.6.23-MariaDB'));if(isset($servers[$case]))$GLOBALS['boot_server']=$servers[$case];
+	$servers=array('unprefixed'=>'10.6.23-MariaDB','prefixed'=>'5.5.5-'.$GLOBALS['boot_server'],'double-prefix'=>'5.5.5-5.5.5-10.6.23-MariaDB','newer'=>$legacy?'5.5.5-10.11.18-MariaDB-ubu2204':($windows?'10.11.18-MariaDB-ubu2204':'10.6.23-MariaDB'));if(isset($servers[$case]))$GLOBALS['boot_server']=$servers[$case];
 	if(0===strpos($case,'session-')){$key=substr($case,8);$GLOBALS['boot_rewrite']['session']=static function($rows)use($key,$legacy){$rows[0]['collation']=$legacy?'utf8mb4_unicode_ci':'utf8mb4_unicode_520_ci';$rows[0][$key]='wrong';return$rows;};}
 	if(0===strpos($case,'fault-'))$GLOBALS['boot_fault']=substr($case,6).'-throw';
 	if(in_array($case,array('late-query','late-global','late-frame','late-client','late-mode','late-hook'),true))$GLOBALS['boot_after']['identity']=static function()use($case,$receiver,$context,$query){
@@ -67,7 +68,7 @@ function production_case($case,$entry,$provider,$context,$adapter,$receiver,$sto
 }
 function production_active($context,$receiver,$query) {
 	A::assertTrue($receiver->ready);A::assertTrue($context->valid($receiver));A::assertTrue($receiver->production_completed($context,$query));A::assertSame('production_active',boot_get($context,'state'));
-	$legacy='6.0'===$GLOBALS['wp_version'];A::assertSame($legacy?'5.5.5-10.6.23-MariaDB':('7.1.3'===$GLOBALS['wp_version']?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204'),$receiver->profile()['server']);A::assertSame($legacy?'utf8mb4_unicode_ci':'utf8mb4_unicode_520_ci',$receiver->collate);A::assertSame(8,boot_get($receiver,'bootstrap_position'));A::assertSame(12,boot_get($receiver,'bootstrap_credits'));
+	$legacy='6.0'===$GLOBALS['wp_version'];$windows=!$legacy&&'Windows'===boot_get($context,'production_runtime')['platform'];A::assertSame($legacy?'5.5.5-10.6.23-MariaDB':($windows?'10.6.23-MariaDB':'10.11.18-MariaDB-ubu2204'),$receiver->profile()['server']);A::assertSame($legacy?'utf8mb4_unicode_ci':'utf8mb4_unicode_520_ci',$receiver->collate);A::assertSame(8,boot_get($receiver,'bootstrap_position'));A::assertSame(12,boot_get($receiver,'bootstrap_credits'));
 	A::assertArrayNotHasKey('password',boot_get($context,'frame'));A::assertArrayNotHasKey('user',boot_get($context,'frame'));A::assertSame('',boot_get($receiver,'dbpassword'));A::assertNull(boot_get($receiver,'bootstrap_frame'));A::assertNull(boot_get($receiver,'bootstrap_binding'));
 	A::assertFalse($context->activate($receiver,$query));trusted_error($receiver->bootstrap_production($context),'source_policy_unavailable');A::assertNull(boot_get($receiver,'minimum_lab_scope'));
 }

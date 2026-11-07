@@ -26,7 +26,8 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile {
 		}
 		if ( 'tcp_loopback' === $frame['transport'] ) {
 			$host = '::1' === $frame['host'] ? '[::1]' : $frame['host'];
-			return in_array( $frame['core'], array( '6.0', '7.1.3' ), true )
+			return ( in_array( $frame['core'], array( '6.0', '7.1.3' ), true )
+					|| ( '7.1.4' === $frame['core'] && 'Windows' === $platform && '127.0.0.1' === $frame['host'] ) )
 				&& in_array( $frame['host'], array( '127.0.0.1', '::1' ), true ) && null === $frame['socket']
 				&& is_int( $frame['port'] ) && $frame['port'] > 0 && $frame['port'] <= 65535
 				&& $host . ':' . $frame['port'] === $frame['db_host'];
@@ -58,12 +59,16 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile {
 	 * Explicit candidate server row; never a version-prefix or installed-binary grant.
 	 *
 	 * @param mixed $core Exact internally bound core row.
+	 * @param mixed $platform Explicit trusted platform, or null for historical DATA lookup.
 	 * @return string|false Expected connected server identity.
 	 */
-	public static function server( $core ) {
+	public static function server( $core, $platform = null ) {
+		if ( null !== $platform && ! in_array( $platform, array( 'Windows', 'Linux' ), true ) ) {
+			return false;
+		}
 		if ( in_array( $core, array( '6.0', '7.1.3' ), true ) ) {
 			return '10.6.23-MariaDB';
 		}
-		return '7.1.4' === $core ? '10.11.18-MariaDB-ubu2204' : false;
+		return '7.1.4' === $core ? ( 'Windows' === $platform ? '10.6.23-MariaDB' : '10.11.18-MariaDB-ubu2204' ) : false;
 	}
 }

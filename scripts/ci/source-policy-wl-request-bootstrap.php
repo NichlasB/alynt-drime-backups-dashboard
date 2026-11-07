@@ -19,12 +19,8 @@ function adbwl_catalog() {
 	if ( ! in_array( getenv( 'WL_REQUEST_PROFILE' ), array( 'w', 'l' ), true ) ) {
 		return false;
 	}
-	$base = require __DIR__ . '/../manual/source-policy-supported-core-pins.php';
-	$row  = $base['7.1.3'];
-	if ( 'l' === getenv( 'WL_REQUEST_PROFILE' ) ) {
-		$row['pins']['version.php'] = '7163a7bfaf1fbac5024c0382931f17f9993076e15ff245e93254f009e0e34cc5';
-		$row['commit']              = 'db96f5eaa77a8d3e8eec8923a518fa2326f0d46a';
-	}
+	$base        = require __DIR__ . '/../manual/source-policy-supported-core-pins.php';
+	$row         = $base['7.1.4']; // Same core artifact, distinct W/L runtime and transport envelopes.
 	$row['auth'] = require __DIR__ . '/source-policy-wl-request-pins.php';
 	// Independently verified at BOTH fixed W/L commits; proof-only, not runtime allowance.
 	$row['auth']['class-wp-metadata-lazyloader.php'] = array( 6833, 'c1df481157f06db91ab7f81fe68981db206beaa38721e6cab49a064110219467' );
@@ -81,7 +77,7 @@ function adbwl_load() {
 		require_once ABSPATH . WPINC . '/' . $name;
 	}
 	adbg_check( ( new ReflectionFunction( '__' ) )->getFileName() === realpath( ABSPATH . WPINC . '/l10n.php' ) && ( new ReflectionClass( 'NOOP_Translations' ) )->getFileName() === realpath( ABSPATH . WPINC . '/pomo/translations.php' ), 'genuine core default-domain localization, no override' );
-	adbg_check( ( $w ? '7.1.3' : '7.1.4' ) === $wp_version, 'actual version include, never an injected version' );
+	adbg_check( '7.1.4' === $wp_version, 'actual version include, never an injected version' );
 	wp_using_ext_object_cache( false );
 	wp_cache_init();
 	foreach ( array( 'source-policy', 'source-policy-native-profile', 'source-policy-query-context', 'source-policy-no-reconnect-connection', 'source-policy-save-contract', 'source-policy-stored-map', 'source-policy-native-adapter', 'source-policy-guarded-entry', 'source-policy-lazy-provider', 'storage' ) as $name ) {

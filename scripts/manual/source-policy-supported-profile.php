@@ -11,7 +11,7 @@
  * @return array|false
  */
 function adbp_profile( $core ) {
-	if ( ! in_array( $core, array( '6.0', '7.1.3' ), true ) ) {
+	if ( ! in_array( $core, array( '6.0', '7.1.3', '7.1.4' ), true ) ) {
 		return false;
 	}
 	$profiles = require __DIR__ . '/source-policy-supported-core-pins.php';

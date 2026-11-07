@@ -35,7 +35,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
 | Milestone2: L genuine-session qualification | Passed at63b728a/run42361807156: source audit211/native0/SQL0,23 cases/12006 checks/9 groups, strict cleanup |
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
-| Exact next meaningful item | W714 rebaseline DESIGN approved and recorded in SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md;next is separately approved repository-only finite tuple/prerequisite foundation with isolated tests,no native/site/wiring |
+| Exact next meaningful item | W714 finite tuple/prerequisite foundation approved/implemented with isolated tests;next is separately scoped Plugin Tester W714 genuine-session/fresh prerequisite owned proof,fresh target/fixture confirmation,no production wiring |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -735,3 +735,20 @@ execution,wiring,package/release or automatic owned proof. Source-scoped design
 review/publication evidence belongs to the canonical toolkit section;no historical
 whole-plugin readiness refresh. Design is part of the pending W qualification
 milestone,not extra count;campaign3/10 milestones,5/10 attempts,cumulative28 remain.
+
+### Approved W714 finite tuple/prerequisite foundation
+
+The [foundation record](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md) owns actual
+repository implementation,red/green/caller-control regressions,canonical focused
+reviews and publication. Exact W714 runtime/transport/server/base/request and
+standalone bootstrap/final-facts paths now agree;M/W713/L semantics retained.
+No installed source/runtime reread,actual authentication/storage/native/site proof
+or wiring. Shared loaded changes make63b728a L/M receipts historical exact images,
+not failed or current-head proofs. W26 installed closure and physical availability
+remain Unknown;no extra product milestone/native-attempt credit.
+
+Next gated slice:Plugin Tester local-only W7.1.4 Genuine-Session Request and Fresh
+Prerequisite Owned Qualification/Cleanup Proof,audit-first with fresh exact
+target/owned fixture confirmation,ADBC2+ambient/one23-case request and exact cleanup.
+Preserve actual application tables/options/users/cron/lifecycle and disabled
+production wiring;affected L/M refresh/HTTP/public switch remain later gates.

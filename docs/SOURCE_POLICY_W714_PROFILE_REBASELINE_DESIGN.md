@@ -1,5 +1,14 @@
 # W7.1.4/PHP8.5.12 Current-Source Profile Rebaseline and Qualification Design
 
+Implementation checkpoint — 2026-11-07:the separately approved
+[finite tuple/prerequisite foundation](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md)
+implements this bounded design using isolated tests only. No installed source,
+authentication/storage/native/site execution or wiring. Current next gated slice:
+Plugin Tester local-only W7.1.4 Genuine-Session Request and Fresh Prerequisite
+Owned Qualification/Cleanup Proof,fresh exact target/owned fixture confirmation,
+audit-first/fresh ADBC2+ambient/one23-case request/exact cleanup. Earlier design-
+only foundation approval recommendations below are historical,not a proof grant.
+
 ## Approval, source boundary and non-goals — 2026-11-07
 
 Approved repository-only DESIGN through validation,commit,push and exact-head CI.

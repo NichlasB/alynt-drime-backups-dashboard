@@ -38,7 +38,7 @@ test('production join assertion-kills legacy and non-legacy semantic controls in
       ['includes/class-source-policy-production-expectation.php',"$fixed['nts']       = true;","$fixed['nts']       = false;",'w:data'],
       ['includes/class-source-policy-production-expectation.php',"if ( ( $runtime[ $key ] ?? null ) !== $value )",'if ( false )','w:data'],
       ['includes/class-source-policy-production-expectation.php',"! Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::valid( $frame, $fixed['platform'] )",'false','w:data'],
-      ['includes/class-source-policy-production-expectation.php',"'7.1.3' === $core ? 'AMD64' : 'x86_64'","'x86_64'",'w:data'],
+      ['includes/class-source-policy-production-expectation.php',"$windows ? 'AMD64' : 'x86_64'","'x86_64'",'w:data'],
       ['includes/class-source-policy-production-expectation.php',"'6.0' === $core ? 'utf8mb4_unicode_ci' : 'utf8mb4_unicode_520_ci'","'utf8mb4_unicode_ci'",'l:data'],
       [joinPolicy,'Alynt_Drime_Backups_Dashboard_Source_Policy_Production_Expectation::matches( $this->production_projection, $this->production_runtime, $this->production_expected )','true','w:active-runtime'],
       [boundary,'&& $this->query_context === $query','&& true','w:active-query'],

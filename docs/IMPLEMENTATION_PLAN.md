@@ -1,5 +1,24 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## W714 finite tuple/prerequisite foundation — 2026-11-07
+
+The approved [repository-only safety foundation](SOURCE_POLICY_W714_REBASELINE_FOUNDATION.md)
+implements exact Windows7.1.4/PHP8.5.12/AMD64/NTS64/TCP/10.6.23 DATA alongside
+retained M/W713/L rules. Standalone greeting AND default-facts admission carry
+actual platform;fixed base/request/bootstrap/adapter candidates agree. Isolated
+positive/denial/caller-control tests preserve typed parser,NTS,source/identity,
+guard ordering and original budgets. No actual auth/storage/site/native proof
+or production wiring;old L/M63b728a receipts become historical for changed images.
+
+Implementation-plan progress:W repository preparation advanced,not physical
+qualification;campaign3/10 milestones,5/10 native attempts,cumulative28 unchanged.
+**Next gated slice:Plugin Tester local-only W7.1.4 Genuine-Session Request and
+Fresh Prerequisite Owned Qualification/Cleanup Proof**,audit-first with fresh
+exact target/owned fixture confirmation,full candidate/source/runtime audit,
+fresh ADBC2/ambient prerequisites,one23-case request proof and exact cleanup.
+Preserve existing application state/lifecycle and disabled production wiring;
+affected L/M refresh,HTTP/installed graph and public switch remain later gates.
+
 ## W7.1.4 rebaseline design — 2026-11-07
 
 The approved [repository-only design](SOURCE_POLICY_W714_PROFILE_REBASELINE_DESIGN.md)

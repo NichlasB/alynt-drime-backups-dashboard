@@ -43,7 +43,7 @@ foreach ( get_included_files() as $file ) {
 	}
 }
 $driver = new mysqli_driver();
-adbb_check( adbp_initial_mode( '7.1.3', PHP_VERSION, $driver->report_mode ), 'unchanged strict mysqli reporting profile' );
+adbb_check( adbp_initial_mode( '7.1.4', PHP_VERSION, $driver->report_mode ), 'unchanged strict mysqli reporting profile' );
 $fresh = mysqli_get_client_stats();
 adbb_check( '0' === $fresh['connect_success'] && '0' === $fresh['connect_failure'] && '0' === $fresh['com_query'] && ! isset( $GLOBALS['wpdb'] ), 'helper audit has no session SQL or ambient handle' );
 $files = array_merge( get_included_files(), array( PHP_BINARY, dirname( PHP_BINARY ) . '/' . $profile['runtime_module'], ini_get( 'extension_dir' ) . '/php_mysqli.dll', __DIR__ . '/source-policy-adapter-proof-controller.ps1', __DIR__ . '/source-policy-cleanup-process.ps1' ) );

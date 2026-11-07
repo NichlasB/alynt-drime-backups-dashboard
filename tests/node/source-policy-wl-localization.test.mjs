@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 const root=fileURLToPath(new URL('../../',import.meta.url)),php=process.env.PHP_BINARY??'php';
 const source=readFileSync(join(root,'scripts/ci/source-policy-wl-request-bootstrap.php'),'utf8').replaceAll('\r\n','\n');
-const start=source.indexOf("\tforeach ( array( 'pomo/translations.php', 'l10n.php' )"),end=source.indexOf("\tadbg_check( ( $w ? '7.1.3'",start);
+const start=source.indexOf("\tforeach ( array( 'pomo/translations.php', 'l10n.php' )"),end=source.indexOf("\tadbg_check( '7.1.4' === $wp_version",start);
 const literal=value=>"'"+value.replaceAll('\\','\\\\').replaceAll("'","\\'")+"'";
 const fragment=()=>{assert.ok(start>0&&end>start);return source.slice(start,end);};
 

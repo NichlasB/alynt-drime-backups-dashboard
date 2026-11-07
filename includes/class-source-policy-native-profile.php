@@ -65,7 +65,7 @@ final class Alynt_Drime_Backups_Dashboard_Source_Policy_Native_Profile {
 	 */
 	private static function expected_server( $facts, $context, $receiver ) {
 		if ( null === $receiver ) {
-			return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'] );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $facts['core'], PHP_OS_FAMILY );
 		}
 		if ( ! is_object( $receiver ) || 'Alynt_Drime_Backups_Dashboard_Source_Policy_No_Reconnect_Connection' !== get_class( $receiver )
 			|| realpath( __DIR__ . '/class-source-policy-no-reconnect-connection.php' ) !== ( new ReflectionClass( $receiver ) )->getFileName()

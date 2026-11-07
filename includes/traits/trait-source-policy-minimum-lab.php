@@ -62,7 +62,7 @@ trait Alynt_Drime_Backups_Dashboard_Source_Policy_Minimum_Lab {
 	 */
 	private function bootstrap_expected_server( $core ) {
 		if ( null === $this->minimum_lab_scope && null === $this->production_context ) {
-			return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $core );
+			return Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::server( $core, PHP_OS_FAMILY );
 		}
 		$expected = $this->bound_profile();
 		return is_array( $expected ) && $expected['core'] === $core ? $expected['server'] : false;

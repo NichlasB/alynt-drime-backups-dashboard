@@ -9,15 +9,15 @@ final class SourcePolicyParsedTransportTest extends TestCase {
 		return array('core'=>$core,'transport'=>'tcp_loopback','host'=>$host,'port'=>$port,'socket'=>null,'db_host'=>('::1'===$host?'[::1]':$host).':'.$port);
 	}
 	/** @dataProvider source_tuples */
-	public function test_source_derived_tcp_output_is_accepted_without_casting_parser_data($frame,$tuple) {
-		$this->assertTrue(Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::matches_parsed($frame,$tuple));
+	public function test_source_derived_tcp_output_is_accepted_without_casting_parser_data($frame,$tuple,$expected) {
+		$this->assertSame($expected,Alynt_Drime_Backups_Dashboard_Source_Policy_Transport_Profile::matches_parsed($frame,$tuple));
 	}
 	public static function source_tuples() {
 		$cases=array();
 		foreach(policy_parser_tuple_data() as $core=>$data)foreach($data['tuples'] as $input=>$tuple) {
 			if(null===$tuple[1])continue; // The socket profile has a separate Linux-only contract.
 			$frame=self::frame($core,(int)$tuple[1],$tuple[0]);
-			$cases[$core.' '.$input]=array($frame,$tuple);
+			$cases[$core.' '.$input]=array($frame,$tuple,'7.1.4'!==$core||('Windows'===PHP_OS_FAMILY&&'127.0.0.1'===$tuple[0]));
 		}
 		return $cases;
 	}
@@ -37,7 +37,7 @@ final class SourcePolicyParsedTransportTest extends TestCase {
 	}
 	public static function invalid_tuples() {
 		$cases=array();
-		foreach(array('6.0','7.1.3') as $core){
+		foreach(array('6.0','7.1.3','7.1.4') as $core){
 			$good=array('127.0.0.1','6.0'===$core?'3306':3306,null,false);
 			foreach(array(null,false,true,0,'3306',new stdClass(),array(),array_slice($good,0,3),array_merge($good,array('extra')),array_reverse($good,true)) as $tuple)$cases[]=array($core,$tuple);
 			foreach(array(null,false,true,3306.0,'03306','+3306','3306 ','3306tail',"3306\0",'3.306e3',0,'0',65536,'65536',str_repeat('3',1025),new stdClass(),'6.0'===$core?3306:'3306') as $port){$tuple=$good;$tuple[1]=$port;$cases[]=array($core,$tuple);}
