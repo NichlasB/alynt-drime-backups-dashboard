@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 const root=fileURLToPath(new URL('../../',import.meta.url)),php=process.env.PHP_BINARY??'php';
 const source=readFileSync(join(root,'scripts/ci/source-policy-wl-request-bootstrap.php'),'utf8').replaceAll('\r\n','\n');
-const start=source.indexOf("\tif ( ! $w ) {\n\t\tforeach ( array( 'pomo/translations.php', 'l10n.php' )"),end=source.indexOf("\tadbg_check( ( $w ? '7.1.3'",start);
+const start=source.indexOf("\tforeach ( array( 'pomo/translations.php', 'l10n.php' )"),end=source.indexOf("\tadbg_check( ( $w ? '7.1.3'",start);
 const literal=value=>"'"+value.replaceAll('\\','\\\\').replaceAll("'","\\'")+"'";
 const fragment=()=>{assert.ok(start>0&&end>start);return source.slice(start,end);};
 
@@ -32,15 +32,15 @@ function run(code=fragment(),profile='l',override='none'){
   }
 }
 
-test('actual L-only loader selects finite localization order and rejects shadow function/class origins',()=>{
-  assert.equal(run(),'accepted|plural,entry,translations,l10n');assert.equal(run(fragment(),'w'),'accepted|');
+test('actual selected W/L loader selects finite localization order and rejects shadow function/class origins',()=>{
+  assert.equal(run(),'accepted|plural,entry,translations,l10n');assert.equal(run(fragment(),'w'),'accepted|plural,entry,translations,l10n');
   for(const override of ['function','class'])assert.equal(run(fragment(),'l',override),'refused|plural,entry,translations,l10n');
 });
 
-test('localization load, L-only gate and both genuine-origin checks are assertion-killed controls',()=>{
+test('localization load in both selected profiles and both genuine-origin checks are assertion-killed controls',()=>{
   const code=fragment(),none='/* omitted localization load */';
   assert.throws(()=>assert.equal(run(none),'accepted|plural,entry,translations,l10n'),{code:'ERR_ASSERTION'});
-  const wide=code.replace('if ( ! $w )','if ( true )');assert.notEqual(wide,code);assert.throws(()=>assert.equal(run(wide,'w'),'accepted|'),{code:'ERR_ASSERTION'});
+  const omittedW='if ( ! $w ) {'+code+'}';assert.throws(()=>assert.equal(run(omittedW,'w'),'accepted|plural,entry,translations,l10n'),{code:'ERR_ASSERTION'});
   for(const [needle,override]of [
     ["( new ReflectionFunction( '__' ) )->getFileName() === realpath( ABSPATH . WPINC . '/l10n.php' )",'function'],
     ["( new ReflectionClass( 'NOOP_Translations' ) )->getFileName() === realpath( ABSPATH . WPINC . '/pomo/translations.php' )",'class']

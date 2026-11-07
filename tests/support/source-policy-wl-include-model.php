@@ -37,8 +37,8 @@ $GLOBALS['stats']=array();$GLOBALS['labels']=array();
 try{
  require $copy;$failed=false;
  try{$rows=adbm_source_rows();}catch(\RuntimeException $error){$failed=true;}
- $positive=\in_array($scenario,array('positive','boundary','late','dependency-l','localization-l'),true);A::assertSame(!$positive,$failed,'Actual guard decision, not diagnostic availability');
- $outside=\in_array($scenario,array('scope','first','nested','repo','boundary-path','foreign','foreign-equal','missing','w','proof','ordinal','overflow','dependency-w','dependency-nested','dependency-foreign','localization-w','localization-nested','localization-root','localization-foreign'),true);
+ $positive=\in_array($scenario,array('positive','boundary','late','dependency-l','dependency-w','localization-l','localization-w'),true);A::assertSame(!$positive,$failed,'Actual guard decision, not diagnostic availability');
+ $outside=\in_array($scenario,array('scope','first','nested','repo','boundary-path','foreign','foreign-equal','missing','w','proof','ordinal','overflow','dependency-nested','dependency-foreign','localization-nested','localization-root','localization-foreign'),true);
  A::assertCount($outside?32:33,$GLOBALS['stats'],'No stat before origin/catalog admission');
  if($outside)A::assertNotContains($candidate,$GLOBALS['stats']);
  if($positive||\in_array($scenario,array('w','proof','overflow','dependency-w','localization-w'),true))A::assertArrayNotHasKey('adbwl_include_failure',$GLOBALS);

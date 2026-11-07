@@ -3,8 +3,13 @@
 ## Authorized auth recovery campaign — 2026-11-07
 
 The [current campaign owner/ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
-continues the first unfinished plan item: L authentication Error, not completed
-transport-tuple work. It authorizes bounded repository recovery and existing
+continues the first unfinished plan item: L genuine-session qualification, not
+completed transport-tuple work. Stock authentication now advances after the exact
+localization repair;the positive view then refused. The PHP8.5 boolean NTS producer
+and exact post-save verifier are repaired in isolation,selected W/L declaration
+closure parity is prepared before freezing shared images,and fresh L proof plus
+affected M refresh remain required. W/HTTP/installed-target readiness is not inferred.
+It authorizes bounded repository recovery and existing
 ephemeral CI-lab proofs without per-slice confirmation, up to10 worthwhile
 milestones/10 native attempts/3 recovery cycles per distinct blocker. Historical
 10/10/static9 and cumulative23 are preserved separately; current actual counters,

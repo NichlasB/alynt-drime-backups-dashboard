@@ -19,8 +19,9 @@ Version0.1.77/schema8/PHP7.4/WordPress6.0 and support decisions unchanged.
 Completed Genuine-Core Transport Tuple Compatibility work is not reopened: the
 [owning implementation plan](IMPLEMENTATION_PLAN.md) currently resumes at the
 [L first-case auth Error](SOURCE_POLICY_L_POST_CATALOG_AUTHENTICATION_REQUALIFICATION_ATTEMPT.md).
-That actual failed run42353171757 passed source audit198/native0/SQL0 and cleanup;
-its engine cause remains Unknown until new evidence. No inferred missing symbol.
+That baseline failed run42353171757 passed source audit198/native0/SQL0 and cleanup;
+its engine cause was Unknown at campaign start. Later actual/source evidence below
+locates and repairs the missing localization closure,without a guessed symbol.
 
 Campaign counters are separate from the historical10/10/static9 ledger and23
 cumulative native opportunities. Do not reset/relabel those old outcomes.
@@ -462,6 +463,66 @@ SAME baseline:6 PHP,0 oversized/cleanup/split/defer,TOTAL226/206/77/91/74/41,
 each limit300/over0,CODE1 limitation;4 mjs below250. Consolidate-retain/no Phase2
 edits,call sites/default M paths checked,no new WP registrations/UI/full-release
 claims. Shared-source images must be re-frozen after all necessary preparation.
+
+Published b9ae1c25e0557256a1528220f94ea45eca1fd6e4,
+[CI42361112279](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42361112279)
+actual completed/success:PHP7.4=2952/24915,PHP8.3=2952/24920,no failures/skips;
+Node152/152 each,no failures/skips;PHPCS291/291/audits0 vulnerabilities,both
+exact-head check-runs success. No native4 at this intermediate head:the known
+selected-W declaration omission is prepared below before freezing shared images.
+
+### Selected W declaration closure parity before the final cohort freeze
+
+Current plan requires affected M/W/L images to be frozen AFTER necessary shared
+preparation,not repeatedly requalified only to stale them. W is an existing
+selected dashboard profile,not another plugin,new compatibility row or deferred
+feature. Repository-only audit of official fixed W core
+fc9832bef919c2a08541248db23af90d14ffb082 independently read/hashed all five missing
+auth declaration dependencies:metadata-lazyloader6833/c1df4811...,l10n71415/43c9af6b...,
+POMO translations12743/9aa07343...,plural-forms7623/8123b38a...,entry3863/3d503be0... .
+Each exact FULL SHA256 equals the independently audited L row recorded above;
+the common pinned meta/pluggable bytes call the same transitive declaration and
+localization closure. No installed W source/config/path/site inspection,LocalWP
+service/SQL/auth/fixture/native operation or new source acquired/executed locally.
+
+Prepare those exact five source DATA rows for BOTH already-selected W/L commits.
+Both catalogs now base12/auth14=26;version file hashes/commits/host/core/runtime/
+transport expectations remain distinct and immutable. Same two stock localization
+definition files load after all size/hash checks in either selected profile;
+their two POMO siblings are already explicitly pinned before transitive require.
+Only these exact files become W proof inputs;no subtree/basename wildcard,learned
+hash,unknown profile,external dependency or runtime12-pin allowance change. L's
+accepted file set and behavior are unchanged;L-only RF2/RF3/RF4 diagnostic opt-in
+and direct-name map stay L-only. W physical NTS/AMD64/auth/session/cleanup readiness
+is NOT established by shared hashes or synthetic tests,still requires its own
+future LocalWP target approval outside this campaign.
+
+Red before prep:actual catalog/pin positive W assertion-failed against W21.
+Independent expected26-member catalogs/exact five pins now positive for W and L;
+wrong/missing/size/hash/count/overlap/foreign/nested/oversize remain refusals before
+load/stat as applicable. Historical W-absence expectations are deliberately
+replaced by audited W-presence positives,not deletion of unknown-source guards.
+Unknown-profile admission and W-only pin omission controls assertion-killed;
+required complete-relative-path controls retain unknown/nested refusals. Actual
+loader fragment's omitted-W load and both function/class-origin guards are
+assertion-killed;fake declarations are NOT a genuine W proof. Targeted18/18,
+changed PHPCS1/1 passed after two mechanical alignment fixes;full validation and
+exact-head publication pending. This related preparation/repair is bundled into
+the current coherent qualification milestone,not another milestone count merely
+because it has a separate publication commit.
+
+Final W/L preparation QA:full Node152/152,targeted PHP317/2505,no failures/skips;
+changed source PHPCS1/1,build/structure/strict manifest/Composer+Node audits0
+vulnerabilities/whitespace passed. Full PHP not rerun locally for definition-only
+W preparation;previous b9ae1c2 full matrix success remains historical for these
+changed bootstrap bytes until new exact-head CI. Scoped canonical Light/final
+Security baseline b9ae1c2,7 code/test files:no remaining significant issue/manual
+decision/security defect/new unprotected07A handoff. Bloat Phase1 helper3 PHP,
+0 oversized/cleanup/split/defer,bootstrap130/include-model65/pin-model35 TOTAL,
+each limit300/over0,CODE1 limitation;four mjs below250,Consolidate-retain/no Phase2.
+No new registrations/UI/full-release claim. Native attempt count remains3/10;
+next attempt4 must use final published/green head with fresh prerequisites and
+exact owned cleanup,not either intermediate efa8f20/b9ae1c2 head.
 
 ## Continuation
 

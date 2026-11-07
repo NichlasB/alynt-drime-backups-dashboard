@@ -57,9 +57,9 @@ test('source-backed guard controls are assertion-killed, not parser/native launc
     [s=>s.replace("'audit' === getenv( 'WL_REQUEST_MODE' )",'true'),'proof'],
     [s=>s.replace('$ordinal <= 511','true'),'overflow'],
     [s=>s.replace('substr( $file, strlen( $core ) + 1 )','basename( $file )'),'dependency-nested'],
-    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'dependency-w'],
+    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'dependency-nested'],
     [s=>s.replace('$bytes <= 1048576','true'),'dependency-size'],
-    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'localization-w'],
+    [s=>s.replace('in_array( substr( $file, strlen( $core ) + 1 ), $allowed, true )','true'),'localization-nested'],
     [s=>s.replace('$bytes <= 1048576','true'),'localization-size']
   ])model(change,[scenario],true);
 });

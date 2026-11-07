@@ -21,16 +21,17 @@ function model(change=source=>source,scenarios=['positive','w','size','missing',
     for(const scenario of scenarios){const r=spawnSync(php,['-n',join(root,'tests/support/source-policy-wl-pin-model.php'),scenario,bootstrap,fragment],{env:{...process.env,ADB_MODEL_PIN_TARGET:target},encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.error,undefined);if(control){assert.notEqual(r.status,0,scenario);assert.equal(r.stderr,'PHPUnit\\Framework\\ExpectationFailedException\n');}else{assert.equal(r.status,0,scenario+': '+r.stderr);assert.equal(r.stderr,'');assert.match(r.stdout,/^checks:[1-9][0-9]*\n$/);}}
   }finally{writeFileSync(bootstrap,original);assert.equal(readFileSync(bootstrap,'utf8'),original);rmSync(temporary,{recursive:true,force:false});assert.equal(existsSync(temporary),false);}
 }
-test('actual L-only dependency catalog and pin guards accept a finite positive and refuse changed metadata before core load',()=>model());
+test('actual selected W/L dependency catalog and pin guards accept finite positives and refuse changed metadata before core load',()=>model());
 test('actual dependency pin/profile/count/hash guards are non-vacuous assertion-killed controls',()=>{
   for(const [change,scenario]of [
     [s=>s.replace(dependency,'/* omitted dependency */'),'positive'],
-    [s=>s.replace("if ( 'l' === getenv( 'WL_REQUEST_PROFILE' ) ) {\n\t\t"+dependency,'if ( true ) {\n\t\t'+dependency),'w'],
+    [s=>s.replace("! in_array( getenv( 'WL_REQUEST_PROFILE' ), array( 'w', 'l' ), true )",'false'),'unknown'],
+    [s=>s.replace("return $row;","if ( 'w' === getenv( 'WL_REQUEST_PROFILE' ) ) { unset( $row['auth']['l10n.php'] ); } return $row;"),'w'],
     [s=>s.replace("array( 6833, 'c1df", "array( 6834, 'c1df"),'positive'],
     [s=>s.replace('c1df481157f06db91ab7f81fe68981db206beaa38721e6cab49a064110219467','f'.repeat(64)),'positive'],
     [s=>s.replace("$pin[0] === filesize( ABSPATH . WPINC . '/' . $name )",'true'),'size'],
     [s=>s.replace("hash_equals( $pin[1], hash_file( 'sha256', ABSPATH . WPINC . '/' . $name ) )",'true'),'hash'],
-    [s=>s.replace("( $w ? 9 : 14 ) === count( $row['auth'] )",'true'),'extra'],
+    [s=>s.replace("14 === count( $row['auth'] )",'true'),'extra'],
     [s=>s.replace("! array_intersect_key( $row['pins'], $row['auth'] )",'true'),'overlap']
   ])model(change,[scenario],true);
 });

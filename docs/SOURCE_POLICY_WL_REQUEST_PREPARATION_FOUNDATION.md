@@ -1,5 +1,12 @@
 # W/L Native Request Admission and Qualification Preparation Safety Foundation
 
+Shared cohort repair — 2026-11-07:the [current campaign owner](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
+records exact selected W26/L26 declaration closure,strict boolean PHP8.5 NTS
+observation and phase-specific existing save/off versus non-writing/no verifier
+repairs. Shared images must be frozen after preparation;no physical W/HTTP or
+production readiness is supplied by isolated tests. LocalWP remains outside this
+campaign;earlier W21/L22 catalogs below are historical snapshots.
+
 Current auth campaign — 2026-11-07: [actual recovery ledger](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md)
 continues bounded repository/CI-lab recovery at L authentication under current
 explicit campaign authority; fixed guards and source identities preserved. No
