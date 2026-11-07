@@ -1,5 +1,14 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current HTTP design — 2026-11-07:[selected disposable HTTP/storage contract](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md)
+uses existing L runtime/database tuple with PHP built-in cli-server,full stock
+bootstrap and genuinely owned configuration/database from before wp-load. Real
+stock-login cookie/POST13-case proof is proposed,not executed;CLI/FPM/installed
+graph claims remain distinct. No new containment/toolchain lab or callback/prefix
+swap. Next gated slice:Repository-Only Genuine-HTTP Profile and Owned-Storage
+Admission Safety Foundation,pure/isolated contracts only,no HTTP/core/auth/SQL/
+native/dispatch/wiring. Counters4/10 milestones,8/10 attempts,cumulative31 unchanged.
+
 Current cohort closure — 2026-11-07:[exact L/M refresh and HTTP boundary](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
 records successful W23/11914/9,L23/12006/9,M42309/9 on the same executable bytes.
 Affected L/M runs42372977592/42373083692 used remaining existing campaign authority

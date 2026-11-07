@@ -1,5 +1,15 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current HTTP/storage decision — 2026-11-07:[approved design-only candidate](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md)
+selects one disposable CI cli-server/full stock7.1.4 bootstrap using existing L
+runtime/socket DB,private owned config/prefix before capture,real login cookies
+and unchanged entry. It does not certify FPM/installed plugin graph or execute
+HTTP/SQL/native work. Finite13-case oracle,bootstrap/auth/policy effect separation,
+source/shutdown/cleanup bounds avoid another generic containment project. Next
+gated slice:Repository-Only Genuine-HTTP Profile and Owned-Storage Admission
+Safety Foundation,isolated DATA/API/IO/virtual clocks only;no core/auth/server/
+storage/dispatch/wiring. W/L/M receipts and4/10 milestones/8 attempts stay current.
+
 Current W/L/M CLI closure — 2026-11-07:[actual affected refresh receipts](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
 W23/11914/9,L23/12006/9,M42309/9 now pass for the SAME efc7aff executable cohort,
 with exact cleanup;L/M42372977592/42373083692 at docs-only1b34b4b after green ordinary

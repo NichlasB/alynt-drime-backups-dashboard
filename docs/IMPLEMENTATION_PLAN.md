@@ -1,5 +1,23 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-HTTP owned-storage contract selected — 2026-11-07
+
+The [approved repository-only design](SOURCE_POLICY_GENUINE_HTTP_OWNED_STORAGE_DESIGN.md)
+selects a disposable CI PHP cli-server/core7.1.4/L-runtime/socket profile with
+complete stock bootstrap,owned DB/config/prefix from the start,stock login cookies
+and unchanged guarded entry. No late prefix/callback swap,CLI cookie surrogate or
+production FPM/installed-plugin readiness claim. Finite13-case HTTP oracle and
+separate bootstrap/auth/policy ledgers,source/normal shutdown/cleanup obligations
+are specified;no code,workflow,site,SQL,HTTP or native operation ran.
+
+Implementation-plan progress:HTTP contract advanced,not qualified;campaign4/10
+milestones,8/10 native attempts,cumulative31 unchanged. Existing W/L/M successful
+executable cohort remains current. **Next gated slice:Repository-Only Genuine-HTTP
+Profile and Owned-Storage Admission Safety Foundation**,pure DATA/isolated API/IO/
+virtual clocks only;no server/core/auth/storage/dispatch or production wiring.
+Actual integration/owned proof,installed-target eligibility and public switch are
+later distinct approvals. Earlier request for this design is now fulfilled.
+
 ## Current-cohort W/L/M CLI evidence closed; HTTP decision next — 2026-11-07
 
 The [owning campaign/actual refresh receipts](SOURCE_POLICY_L_AUTHENTICATION_RECOVERY_CAMPAIGN.md#affected-current-cohort-lm-refresh-and-http-boundary--2026-11-07-utc)
