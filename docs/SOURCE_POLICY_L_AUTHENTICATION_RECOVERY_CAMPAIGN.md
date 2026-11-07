@@ -28,11 +28,12 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 1/10: published/verified diagnostic foundation |
-| Native qualification attempts | 1/10; historical23 plus this campaign1 = cumulative24 |
-| Auth Error recovery cycles | Cycle1 localized cause; cycle2/3 finite genuine localization closure repair in progress |
+| Native qualification attempts | 2/10; historical23 plus this campaign2 = cumulative25 |
+| Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
+| Positive-view refusal recovery cycles | New blocker, cycle1/3 value-free result/effect localization in progress |
 | Milestone1: bounded auth failure localization foundation | Complete: a6d952f/ordinary CI42356467065/toolkit ed3a95d; physical RF2 evidence in42356770856 |
-| Milestone2: L genuine-session qualification | Pending; prerequisite291/9 and source audit198 passed, first auth case refused |
-| Next in-scope action | Publish/verify finite localization repair, then fresh prerequisites and campaign attempt2 |
+| Milestone2: L genuine-session qualification | Pending; new source audit211 and actual auth phase advanced, positive view refused |
+| Next in-scope action | Publish/verify bounded entry diagnostics, then fresh prerequisites and campaign attempt3 |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
@@ -200,8 +201,14 @@ No local real core/auth/SQL/native execution. Targeted22/22/full Node148/148
 passed, no failures/skips. Full local PHP8.5.1:2952 tests/24913 assertions/two
 existing Sodium-unavailable signer skips, no failures (5:06.863). PHPCS291/291,
 syntax/build/structure/strict Composer validate/audit/npm audit0 vulnerabilities,
-whitespace and both campaign local links passed. Exact-head publication and fresh
-native qualification remain pending, not claimed complete.
+whitespace and both campaign local links passed. Published10839f4dbb37cdfce7f94047fd90863315d26752,
+[CI42357669230](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42357669230)
+actual completed/success:PHP7.4=2952/24915,PHP8.3=2952/24920,no failures/skips;
+Node148/148 each,no failures/skips;PHPCS291/291/manifest/build/structure/audits,
+0 vulnerabilities. Both exact-head check-runs success,legacy contexts0. Toolkit
+783b7c8c1c6c138aa6c0e03df6893fad3829cdf6 exact remote verified,workflows0/checks0/
+legacy contexts0,no toolkit CI claim. Native attempt2 below is not a complete
+genuine-session qualification or production admission.
 
 Focused review boundary:a6d952f (whole finite-closure repair, not a docs tail).
 Canonical Light:8 code/test files, private harness/core dependency and source/file
@@ -220,6 +227,75 @@ no new raw diagnostics/SQL/grants/nonce bypass/production surface. No residual
 confirmed security defect/new unprotected07A handoff. Synthetic origin guards are
 not independently verified genuine-auth/storage proof. UI/full release suite not
 applicable to this checkpoint; historical whole-plugin rows remain unchanged.
+
+## Attempt2: genuine auth advances; positive view refuses
+
+[Run42357883163](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/42357883163),
+exact10839f4,actual completed/failure. Fresh environment preflight and original
+291/9 passed,held PID3421/live+post-exit zero; same original image10e09736...
+as attempt1,run46e6c1765c399536bc3f5dec510457d9. Request source audit211/native0/
+SQL0,image5d0bf7b17cc8398a54ee90aff106ffd0930a661e000269d9824f746e6e06e37e,
+modules unchanged e5efa746...; exact metadata/module values retained above.
+Both owned server baselines retained noTCP1/wsrep0/native_aio1/ac1/tx0/sessions0/
+trx0/non-system schemas0. Case0 now reaches stage entry,RuntimeException,
+assertion113bc67f76c37d203efc9ce41814ae27055775e06935d86a4eb235af6900e1a5.
+Exact source hash match is `genuine same-observation view available`. Reaching
+entry means preceding stock session/cookie/nonce construction/authentication,
+hook inventory, observer removal and no-policy-cache assertions returned; this
+is actual phase advancement, not a positive held case or all23-case receipt.
+The returned value/error code and post-entry effect deltas were not retained;
+why the view is unavailable remains Unknown. No blind retry or inferred faulty
+permission/source/tuple/server guard. No zero-SQL claim for the request phase.
+Primary/trap/recovery cleanup containers0/directories0/tmpfs released/
+reconciliation_failure0; preflight private_directory0/core_checkout0.
+
+## Positive-view cycle1: value-free result/effect evidence foundation
+
+New coherent review baseline10839f4, no application/include/workflow/catalog/pin/
+dependency change. After the single existing view returns, capture only array/
+exact-WP_Error/other plus a closed forbidden/invalid/unavailable/other code enum
+and observed ambient-query/native-connect/native-command deltas. No repeated
+guard/auth/request call, source instrumentation, private state inspection, new
+callback, reflection-based construction, query warm-up, settings read or handle
+capture. Only exact WP_Error's getter may run; subclasses/foreign getters never
+invoked. Do not retain view/error object/message/data/revision/user/cookie/SQL.
+
+L/proof-only first fact,indices0..3,strict integer deltas0..4096. New single-line
+ADBWLRF3 stays <=256 bytes and binds to the ORIGINAL same-view assertion,case,
+entry/RuntimeException. Other failures and malformed DATA retain original
+refusal. Strict explicitly opted-in proof decoder checks identity,enum pairing,
+canonical integers and bounds; audit/default/W/M remain closed. Existing actual
+supervisor rejects/reaps split-line RF3 without changing deadline,callback or
+cleanup semantics. Counter reads are read-only mysqlnd stats, not native opens.
+No positive-path result/assertion, guard, acceptance rule or budget is changed.
+No internal production logging/error surface added, no speculative view fix.
+
+Regression red:old actual formatter emitted RF1 versus expected RF3, assertion
+failure not parser/launcher failure. Actual post-view caller/producer/formatter
+accept finite positives, preserve first cause and redact arbitrary error codes;
+foreign subclass getter throws if invoked and is never called. Removed caller,
+first-fact,L-only and proof-only controls assertion-killed. Receiver rejects wrong
+case/stage/class/assertion/counter/type/code combinations,suffix/duplicate/CRLF.
+Actual inert supervisor projects only valid case0 metadata while refusing/reaping;
+no real core/auth/SQL/native execution in local tests. Validation/publication and
+new physical evidence remain pending, not a separately completed product milestone.
+
+Local validation complete:full Node151/151,no failures/skips; targeted PHP request/
+guarded-entry/context/Linux-qualification107 tests/754 assertions,no failures/skips.
+Full PHP was2952/24913/two existing signer skips on10839f4, not rerun locally for
+this diagnostic-only delta; ordinary exact-head CI remains required for full
+matrix validation. PHPCS291/291,syntax/build/structure/strict manifest/Composer
+audit/npm audit0 vulnerabilities/whitespace passed. PHPCBF fixed two mechanical
+array-layout issues, no behavioral change. Scoped Light review5 code/test files,
+same private evidence gap fixed/no remaining significant issue/manual decision.
+Canonical Bloat Phase1 explicit10839f4:2 PHP,0 oversized/cleanup/split/defer;
+contract271TOTAL/child119,limit300/over0,CODE1 helper limitation,Consolidate-retain;
+three mjs88/75/45 below250,no Phase2 edits needed. Final canonical Feature Security:
+exact-source WP_Error getter only,closed enums/canonical bounded counters/original
+failure binding,legacy fallback,explicit proof opt-in and no success/grant. No
+residual confirmed security defect/new unprotected07A handoff. Synthetic fixtures
+and inert process doubles are not genuine auth/native/storage proof; UI/full
+release suite inapplicable,historical whole-plugin rows remain unchanged.
 
 ## Continuation
 

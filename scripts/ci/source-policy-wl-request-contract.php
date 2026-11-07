@@ -107,8 +107,75 @@ function adbwl_failure_wire( $wire ) {
 	if ( ! adbg_failure_valid( $wire ) ) {
 		return '';
 	}
-	$auth = adbwl_auth_failure_wire( $wire );
-	return '' !== $auth ? $auth : adbwl_include_prefix( $wire ) . str_replace( 'ADBMGRF1|', 'ADBWLRF1|' . getenv( 'WL_REQUEST_PROFILE' ) . '|', $wire );
+	$entry = adbwl_entry_failure_wire( $wire );
+	$auth  = adbwl_auth_failure_wire( $wire );
+	return '' !== $entry ? $entry : ( '' !== $auth ? $auth : adbwl_include_prefix( $wire ) . str_replace( 'ADBMGRF1|', 'ADBWLRF1|' . getenv( 'WL_REQUEST_PROFILE' ) . '|', $wire ) );
+}
+
+/** Immediate result/effect enums only; never retain a view, error or receiver.
+ *
+ * @param mixed $view Actual guarded result.
+ * @param int   $index Fixed positive case.
+ * @param int   $records Observed ambient query delta.
+ * @param int   $connects Observed native connect delta.
+ * @param int   $commands Observed native command delta.
+ * @return void
+ */
+function adbwl_entry_capture( $view, $index, $records, $connects, $commands ) {
+	if ( 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'proof' !== getenv( 'WL_REQUEST_MODE' ) || ! is_int( $index ) || $index < 0 || $index > 3 || isset( $GLOBALS['adbwl_entry_failure'] ) ) {
+		return;
+	}
+	foreach ( array( $records, $connects, $commands ) as $count ) {
+		if ( ! is_int( $count ) || $count < 0 || $count > 4096 ) {
+			return;
+		}
+	}
+	$kind = is_array( $view ) ? 'array' : 'other';
+	$code = 'none';
+	if ( is_object( $view ) && 'WP_Error' === get_class( $view ) ) {
+		$kind   = 'error';
+		$actual = $view->get_error_code();
+		$codes  = array(
+			'source_policy_forbidden'   => 'forbidden',
+			'source_policy_invalid'     => 'invalid',
+			'source_policy_unavailable' => 'unavailable',
+		);
+		$code   = is_string( $actual ) ? ( $codes[ $actual ] ?? 'other' ) : 'other';
+	}
+	$GLOBALS['adbwl_entry_failure'] = array(
+		'index'    => $index,
+		'result'   => $kind,
+		'code'     => $code,
+		'records'  => $records,
+		'connects' => $connects,
+		'commands' => $commands,
+	);
+}
+
+/** Closed one-line metadata for the original positive-view assertion only.
+ *
+ * @param string $wire Already validated original refusal.
+ * @return string Empty preserves legacy refusal.
+ */
+function adbwl_entry_failure_wire( $wire ) {
+	$fact = $GLOBALS['adbwl_entry_failure'] ?? null;
+	if ( ! adbg_failure_valid( $wire ) || 'l' !== getenv( 'WL_REQUEST_PROFILE' ) || 'proof' !== getenv( 'WL_REQUEST_MODE' ) || ! is_array( $fact )
+		|| array_keys( $fact ) !== array( 'index', 'result', 'code', 'records', 'connects', 'commands' ) || ! is_int( $fact['index'] ) || $fact['index'] < 0 || $fact['index'] > 3
+		|| ! in_array( $fact['result'], array( 'array', 'error', 'other' ), true ) || ! in_array( $fact['code'], array( 'none', 'forbidden', 'invalid', 'unavailable', 'other' ), true )
+		|| ( 'error' === $fact['result'] ? 'none' === $fact['code'] : 'none' !== $fact['code'] ) ) {
+		return '';
+	}
+	foreach ( array( 'records', 'connects', 'commands' ) as $key ) {
+		if ( ! is_int( $fact[ $key ] ) || $fact[ $key ] < 0 || $fact[ $key ] > 4096 ) {
+			return '';
+		}
+	}
+	$expected = 'ADBMGRF1|child|' . $fact['index'] . '|entry|RuntimeException|' . hash( 'sha256', 'genuine same-observation view available' ) . "\n";
+	if ( $expected !== $wire ) { // phpcs:ignore WordPress.PHP.YodaConditions -- Exact private original refusal identity, no scalar normalization.
+		return '';
+	}
+	$out = str_replace( 'ADBMGRF1|', 'ADBWLRF3|l|', rtrim( $wire, "\n" ) ) . '|' . implode( '|', array( $fact['result'], $fact['code'], $fact['records'], $fact['connects'], $fact['commands'] ) ) . "\n";
+	return strlen( $out ) <= 256 ? $out : '';
 }
 
 /** Retain first L proof/auth engine Error location DATA; no IO, message or trace.

@@ -10,6 +10,12 @@ export function wlLinuxJob(env){
 }
 export function wlRequestFailure(raw,allowInclude=false,allowAuth=false){
   if(typeof raw!=='string'||Buffer.byteLength(raw)>256)return null;
+  if(raw.startsWith('ADBWLRF3|')){
+    if(allowAuth!==true)return null;
+    const e=/^ADBWLRF3\|l\|child\|([0-3])\|entry\|RuntimeException\|(113bc67f76c37d203efc9ce41814ae27055775e06935d86a4eb235af6900e1a5)\|(array|error|other)\|(none|forbidden|invalid|unavailable|other)\|(0|[1-9][0-9]{0,3})\|(0|[1-9][0-9]{0,3})\|(0|[1-9][0-9]{0,3})\n(?![\s\S])/.exec(raw);
+    if(!e||[e[5],e[6],e[7]].some(n=>Number(n)>4096)||(e[3]==='error'?(e[4]==='none'):(e[4]!=='none')))return null;
+    return {profile:'l',case_index:Number(e[1]),stage:'entry',exception:'RuntimeException',assertion:e[2],entry:{result:e[3],code:e[4],records:Number(e[5]),connects:Number(e[6]),commands:Number(e[7])}};
+  }
   if(raw.startsWith('ADBWLRF2|')){
     if(allowAuth!==true)return null;
     const a=/^ADBWLRF2\|l\|child\|([0-9]|1[0-9]|2[0-2])\|auth\|Error\|(0{64})\|(none|setup|auth)\|(core|helper|other)\|(0|[1-9][0-9]{0,5})\|([a-f0-9]{64})\n(?![\s\S])/.exec(raw);
