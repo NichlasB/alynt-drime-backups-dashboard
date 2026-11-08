@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current source audit — 2026-11-08: [pre-router allocation finding](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
+leaves HTTP proof pending and the approved ONE attempt unused. Private functional
+input bounds cannot be labeled pre-router resource containment without an explicit
+decision. Next gated slice: Repository-Only Private-Producer HTTP Envelope and
+Pre-Router Resource Admission Decision, design-only. No execution/wiring change;
+campaign4/10 milestones,8/10 attempts,cumulative31 unchanged. Historical execution
+recommendations below are approved but held; W/L/M evidence is not refreshed.
+
 Current installer preparation — 2026-11-07:[isolated callback/sidecar foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
 composes the existing13-case supervisor with mandatory setup/request containment
 DATA. Genuine core/source/file/HTTP/native proof still pending. Next gated slice:

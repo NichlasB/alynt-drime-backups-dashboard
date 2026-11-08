@@ -1,5 +1,13 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
+Current source audit — 2026-11-08: [cli-server pre-router resource boundary](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
+is unresolved. The body/header/PHP budgets below remain unchanged; no silent
+reinterpretation as ingress-allocation guarantees or proof from isolated tests.
+Next gated slice: Repository-Only Private-Producer HTTP Envelope and Pre-Router
+Resource Admission Decision, design-only. No implementation/native attempt;
+approved ONE attempt unused, production wiring disabled. Prior execution steps
+remain historical approvals held by this assurance decision.
+
 Current installer preparation — 2026-11-07:[dormant foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
 adds fixed containment callbacks and mandatory setup/request sidecar composition
 under isolated API/IO only. No physical HTTP/bootstrap/storage proof. Next gated

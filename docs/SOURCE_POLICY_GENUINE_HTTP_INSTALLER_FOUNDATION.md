@@ -1,5 +1,11 @@
 # Core-Backed Installer Containment Safety Foundation and Integration Preparation
 
+Current integration audit — 2026-11-08: [pre-router resource admission gate](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
+holds the approved owned integration/ONE attempt before execution. This dormant
+foundation remains unchanged and is not physical HTTP containment proof. Next
+gated slice: Repository-Only Private-Producer HTTP Envelope and Pre-Router Resource
+Admission Decision, design-only; preserve guards/budgets and disabled wiring.
+
 ## Authority, baseline and restore — 2026-11-07 UTC
 
 Approved repository-only dormant foundation/preparation under the

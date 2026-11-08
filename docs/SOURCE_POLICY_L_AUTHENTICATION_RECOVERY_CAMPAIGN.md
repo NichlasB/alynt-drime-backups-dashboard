@@ -37,10 +37,17 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | Dormant installer callback/sidecar foundation and isolated composition complete;physical proof pending,ONE held attempt unused. Next gated slice:Genuine-HTTP Owned Bootstrap/Request IO Integration with Installer Containment and ONE Ephemeral-CI Qualification/Cleanup Attempt,audit-first/fresh prerequisites/exact owned cleanup;production wiring disabled |
+| Exact next meaningful item | Approved integration held by [pre-router resource admission audit](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md);ONE attempt unused. Next gated slice:Repository-Only Private-Producer HTTP Envelope and Pre-Router Resource Admission Decision,design-only;preserve budgets/guards and disabled production wiring |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current audit — 2026-11-08: the pinned cli-server body allocation precedes the
+router. Select private-producer functional bounds versus pre-router containment
+claims explicitly before implementing/running the held integration. No native
+dispatch, fixtures or runtime changes; counters4/10,8/10,cumulative31 unchanged.
+The approved ONE attempt remains unused. Earlier next-step paragraphs below are
+historical and held by this new assurance-scope decision, not fresh native grants.
 
 The [approved installer foundation/preparation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
 implements fixed callback and sidecar algorithms with isolated supervisor

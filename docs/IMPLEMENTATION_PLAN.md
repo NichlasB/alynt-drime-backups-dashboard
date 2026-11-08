@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-HTTP pre-router resource admission held — 2026-11-08
+
+The [approved integration's source audit](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
+found cli-server buffers bodies before the PHP router. A private producer's
+emission bounds do not independently prove pre-router allocation containment.
+No implementation/native attempt; the approved ONE attempt remains unused.
+Campaign4/10 milestones,8/10 attempts,cumulative31 unchanged; wiring disabled.
+Implementation-plan progress: HTTP qualification reaches a specific assurance
+decision, not a completed product milestone. **Next gated slice: Repository-Only
+Private-Producer HTTP Envelope and Pre-Router Resource Admission Decision**,
+design-only; preserve budgets/guards and select claims explicitly. Earlier
+execution recommendations below are approved historical steps, held by this gate.
+
 ## Dormant installer containment/preparation complete — 2026-11-07
 
 The [approved foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)

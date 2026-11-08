@@ -1,5 +1,13 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current source audit — 2026-11-08: [pre-router resource admission stop](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
+holds the approved integration/ONE attempt unused. cli-server body allocation
+precedes the router; private producer bounds versus ingress containment require
+an explicit assurance decision. Next gated slice: Repository-Only Private-Producer
+HTTP Envelope and Pre-Router Resource Admission Decision, design-only. No runtime
+change; campaign4/10 milestones,8/10 attempts,cumulative31 unchanged; wiring off.
+Earlier execution recommendations below are historical and held, not revoked.
+
 Current installer preparation — 2026-11-07:[completed isolated foundation](SOURCE_POLICY_GENUINE_HTTP_INSTALLER_FOUNDATION.md)
 adds fixed callback/sidecar algorithms and supervisor composition,not a real
 HTTP/core/SQL/native adapter. Next gated slice:Genuine-HTTP Owned Bootstrap/
