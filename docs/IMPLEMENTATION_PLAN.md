@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Setup diagnostic localized SQL refusal; attempt ceiling reached — 2026-11-14
+
+[Exact74558e/run43523692149 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records install-stage `sql-shape` refusal, not the exact statement or an engine
+failure. Fresh prerequisites passed; exact owned cleanup/recovery and final
+reconciliation verified. HTTP server/matrix never started. Ordinary repaired-head
+CI43523411893 succeeded; no physical HTTP qualification claim. Progress remains
+4/10 milestones; native10/10 exhausted,cumulative33. No guard/budget/wiring change.
+Recommended next action: repository-only Installer SQL-Shape Rejection Source
+Diagnosis and Guard-Preserving Repair. Identify the finite source-backed mismatch
+before modifying admission; any later native proof requires renewed authority.
+Earlier unused-attempt/recommendation statements below are historical, not grants.
+
 ## Owned HTTP attempt9 failed at setup; cleanup verified — 2026-11-13
 
 [Run43486567610 and owning evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | 9/10;historical23 plus this campaign9 = cumulative32. Attempt9/run43486567610 passed fresh prerequisites but HTTP install child terminal refused;exact owned cleanup verified. ONE authorization consumed,no extra credit for prerequisites |
+| Native qualification attempts | 10/10 EXHAUSTED;historical23 plus this campaign10 = cumulative33. Setup diagnostic10/run43523692149 at74558e passed fresh prerequisites, then install-stage sql-shape refusal; exact owned cleanup/recovery verified. No extra credit for diagnostics/prerequisites |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,19 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Owned integration/attempt9 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md):install child terminal refused,engine cause Unknown,cleanup verified. Safe failure reporting repaired repository-only. Next gated slice:ONE bounded owned installer setup diagnostic with fresh prerequisites/exact cleanup;ONE consumed,production wiring/guards/budgets unchanged |
+| Exact next meaningful item | [Owned integration/attempt10 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): repository-only Installer SQL-Shape Rejection Source Diagnosis and Guard-Preserving Repair; exact rejected statement unresolved. Native ceiling exhausted; a later proof needs renewed explicit authority. Production wiring/guards/budgets unchanged |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current attempt10 outcome — 2026-11-14: exact74558e/run43523692149 completed
+failure with bounded install/RuntimeException/proof22 evidence; assertion SHA256
+maps to sql-shape, not a uniquely identified query. Fresh291/9 and23/12006/9
+prerequisites passed; HTTP server/matrix never started. Exact owned cleanup,
+recovery absent and final zero-resource reconciliation verified. Repaired-head
+ordinary CI43523411893 succeeded. Milestones4/10; attempts10/10 exhausted,
+cumulative33. No new native grant or automatic reset; earlier counters below
+are historical. Physical HTTP remains blocked, not a completed milestone.
 
 Current attempt9 outcome — 2026-11-13: native prerequisites291/9 and genuine
 L23/12006/9 passed;HTTP install refused before startup/matrix;cleanup exact-owned

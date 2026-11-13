@@ -1,5 +1,49 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Setup-only diagnostic failed cleanly; native budget exhausted — 2026-11-14
+
+The approved ONE setup-only [run43523692149](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/43523692149)
+actually completed/FAILURE on exact `74558e6012a3ef9d89cad009c4136cf4d408ae2f`.
+Safe child evidence: stage=install, exception=RuntimeException, origin=proof,
+line=22, assertion=`a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac`.
+Independent source-label SHA256 mapping identifies `sql-shape`, at the unchanged
+observer's classification guard. This establishes an installer statement refusal,
+not a database-engine error or the identity/legitimacy of the rejected statement.
+No SQL/message/private path was exported. The proof line is the common assertion
+throw site, not a uniquely identified core call. Read-only exact pinned core
+upgrade.php inspection confirms multiple installer SQL paths; it does not bind
+the observed refusal to any one of them. Do not guess or broaden the allowlist.
+
+Fresh environment preflight/cleanup passed; native291 checks/9 groups and genuine
+L audit211/native0/SQL0 plus23 cases/12006 checks/9 groups passed. Independent
+live/post-exit sessions and transactions zero; prerequisite reconciliation_failure0.
+HTTP cleanup explicitly `OWNED_HTTP_CLEANUP exact-owned-zero`, always recovery
+`OWNED_HTTP_RECOVERY absent`; final cleanup containers/directories/core checkout0,
+tmpfs released, reconciliation_failure0. No retained resources reported. Setup
+refused before any HTTP server/matrix; this is NOT functional HTTP qualification.
+
+Initial diagnostic head e6af891/ordinary CI43522991459 failed its PHP7.4 Node
+fixture (child exit255); PHP8.3 passed. The pure helper test's `php -n` JSON output
+dependency was replaced with exact field-by-field delimiter serialization, not
+skipped/weakened assertions or runtime guards. Repaired exact74558e
+[ordinary CI43523411893](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/43523411893)
+actually succeeded in both jobs: PHP7.4 3070/25342, PHP8.3 3070/25347,
+plain OK/no skips; Node216/216 each,failures/skips0; Composer/npm audits0
+vulnerabilities. Final focused Node14/14 and focused PHPCS3/3 passed locally.
+Source-scoped light/security scope and privacy limits remain as recorded below.
+Publication of this closeout requires a new ordinary exact-head CI receipt;
+that docs-only receipt cannot turn the failed native diagnostic into success.
+
+Implementation-plan progress: installer refusal localized to SQL classification,
+but exact rejected shape and physical HTTP qualification remain unresolved.
+Completed milestones4/10; attempts10/10 EXHAUSTED; historical23+10=cumulative33.
+No milestone credit for diagnostics/retries/docs. Production wiring, acceptance
+criteria, budgets and installed application state unchanged; uploader untouched.
+Recommended next action: repository-only Installer SQL-Shape Rejection Source
+Diagnosis and Guard-Preserving Repair, identifying a finite source-backed mismatch
+before any allowlist change. No further native dispatch is authorized by the
+exhausted campaign; a later proof needs explicit renewed attempt authority.
+
 ## Approved setup-only diagnostic preparation — 2026-11-13
 
 The user approved the recommended ONE bounded setup diagnostic, not another full
