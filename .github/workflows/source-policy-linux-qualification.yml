@@ -12,6 +12,11 @@ on:
         required: true
         type: boolean
         default: false
+      execute_genuine_http:
+        description: Approved ONE private functional HTTP proof after all fresh prerequisites
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -22,17 +27,19 @@ concurrency:
 
 jobs:
   qualification:
-    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master' && (inputs.execute_genuine_request != true || (github.actor == 'NichlasB' && github.run_attempt == 1))
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master' && (inputs.execute_genuine_request != true || (github.actor == 'NichlasB' && github.run_attempt == 1)) && (inputs.execute_genuine_http != true || (inputs.execute_genuine_request == true && github.actor == 'NichlasB' && github.run_attempt == 1))
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
       QUALIFICATION_GENUINE_REQUEST_APPROVED: ${{ inputs.execute_genuine_request }}
+      QUALIFICATION_HTTP_APPROVED: ${{ inputs.execute_genuine_http }}
     steps:
       - name: Admit exact source and fresh private directories
         shell: bash
         run: |
           set -euo pipefail
+          printf 'ADB_ORIGINAL_JOB_NS=%s\n' "$(node -p 'process.hrtime.bigint().toString()')" >> "$GITHUB_ENV"
           [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" ]]
           [[ "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
           [[ -z "${DOCKER_HOST:-}" && -z "${DOCKER_CONTEXT:-}" ]]
@@ -92,6 +99,16 @@ jobs:
           umask 077
           mkdir -- "$stage" "$stage/socket"
           bash scripts/ci/source-policy-linux-qualification.sh
+
+      - name: Approved ONE functional HTTP qualification and owned cleanup
+        if: inputs.execute_genuine_http == true
+        shell: bash
+        run: node scripts/ci/source-policy-http-owned-controller.mjs
+
+      - name: Always recover owned HTTP resources
+        if: always() && inputs.execute_genuine_http == true
+        shell: bash
+        run: node scripts/ci/source-policy-http-owned-controller.mjs --cleanup
 
       - name: Always reconcile owned instance and source checkout
         if: always()

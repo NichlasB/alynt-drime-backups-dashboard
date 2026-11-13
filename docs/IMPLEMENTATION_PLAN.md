@@ -1,5 +1,14 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Owned functional HTTP integration staged — 2026-11-13
+
+The [integration/review record](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+owns the fixed private adapters, original-job/shared-cleanup safeguards and
+default-off manual workflow. Local suites pass with explicit PHP skip limits;
+ordinary exact-head CI and the authorized ONE native attempt are next, not yet
+physical proof. Budgets/guards and production wiring unchanged; functional HTTP
+only. Campaign4/10 milestones,8/10 attempts,cumulative31 until actual dispatch.
+
 ## Private functional HTTP assurance selected — 2026-11-13
 
 The [approved admission decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)

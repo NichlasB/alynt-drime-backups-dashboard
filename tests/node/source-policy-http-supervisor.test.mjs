@@ -47,11 +47,12 @@ test('fixed finite schedule distinguishes actual-jar/revision intents without mi
  assert.equal(intent(8).intent,'wrong-user');assert.equal(intent(9).intent,'wrong-session');
  assert.ok(HTTP_FLOW.some(s=>s.kind==='view'&&s.jar==='other'));assert.ok(HTTP_FLOW.some(s=>s.kind==='view'&&s.jar==='second'));
 });
-test('preparation ships no launcher/network/bootstrap adapter or production/workflow caller',()=>{
+test('preparation remains inert; only the separately approved manual workflow may call the owned adapter',()=>{
  const read=file=>readFileSync(new URL('../../'+file,import.meta.url),'utf8');
  assert.doesNotMatch(read('scripts/ci/source-policy-http-supervisor.mjs'),/node:(?:fs|child_process|http|https|net)|process\.(?:env|argv)|fetch\(|setTimeout\(/);
  assert.doesNotMatch(read('scripts/ci/source-policy-http-bridge.php'),/\b(?:require|include)(?:_once)?\s*\(?\s*['"]|\$_(?:POST|GET|COOKIE|SERVER)|\b(?:add_action|add_filter|wp_set_current_user|update_option|mysqli_connect)\s*\(/);
- for(const file of ['alynt-drime-backups-dashboard.php','.github/workflows/ci.yml','.github/workflows/source-policy-linux-qualification.yml','.github/workflows/source-policy-minimum-distribution.yml'])assert.doesNotMatch(read(file),/source-policy-http-/);
+ for(const file of ['alynt-drime-backups-dashboard.php','.github/workflows/ci.yml','.github/workflows/source-policy-minimum-distribution.yml'])assert.doesNotMatch(read(file),/source-policy-http-/);
+ const manual=read('.github/workflows/source-policy-linux-qualification.yml');assert.match(manual,/execute_genuine_http:[\s\S]*?default: false/);assert.match(manual,/if: inputs.execute_genuine_http == true/);assert.match(manual,/if: always\(\) && inputs.execute_genuine_http == true/);assert.match(manual,/source-policy-http-owned-controller\.mjs --cleanup/);
 });
 test('actual preparation supervisor completes all cases only through live release and owned cleanup DATA',()=>success());
 test('exact profile admission precedes every IO effect and does not treat callback labels as authority',async()=>{
