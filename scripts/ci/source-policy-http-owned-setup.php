@@ -9,6 +9,7 @@
 if ( 'cli' !== PHP_SAPI || array( __FILE__, '--owned-http-setup' ) !== $argv ) {
 	exit( 1 ); }
 require __DIR__ . '/source-policy-http-owned-worker.php';
+require_once __DIR__ . '/source-policy-http-owned-diagnostic.php';
 try {
 	$_SERVER['HTTP_HOST']      = '127.0.0.1:18777';
 	$_SERVER['SERVER_NAME']    = '127.0.0.1';
@@ -19,11 +20,13 @@ try {
 	adbh_bootstrap( 'setup' );
 	require ABSPATH . 'wp-admin/includes/upgrade.php';
 	$GLOBALS['adbh_containment']->begin_install();
-	$p      = $GLOBALS['adbh_private'];
-	$result = wp_install( 'Owned HTTP proof', 'owned_one', 'owned-one@example.invalid', 0, '', $p['password'] );
+	$p                     = $GLOBALS['adbh_private'];
+	$GLOBALS['adbh_stage'] = 'install';
+	$result                = wp_install( 'Owned HTTP proof', 'owned_one', 'owned-one@example.invalid', 0, '', $p['password'] );
 	adbh_check( is_array( $result ) && 1 === $result['user_id'], 'genuine-install' );
 	unset( $result );
 	wp_installing( false );
+	$GLOBALS['adbh_stage'] = 'seed';
 	foreach ( array( array( 'owned_two', 'owned-two@example.invalid', 'administrator' ), array( 'owned_low', 'owned-low@example.invalid', 'subscriber' ) ) as $index => $row ) {
 		$owned_user_id = wp_create_user( $row[0], $p['password'], $row[1] );
 		adbh_check( $index + 2 === $owned_user_id, 'owned-user-id' );
@@ -37,7 +40,8 @@ try {
 	register_shutdown_function(
 		static function () use ( $owned_post ) {
 			try {
-				$containment = adbh_finish_packet( $owned_post );
+				$GLOBALS['adbh_stage'] = 'finalize';
+				$containment           = adbh_finish_packet( $owned_post );
 				echo json_encode(
 					array(
 						'ledger'      => adbh_ledger_packet( 'setup' ),
@@ -45,11 +49,11 @@ try {
 					)
 				) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Private bounded count-only stdout, no HTTP response.
 			} catch ( Throwable $error ) {
-				fwrite( STDERR, "Owned HTTP setup finalization refused\n" );
+				fwrite( STDERR, json_encode( adbh_setup_diagnostic( $error, dirname( __DIR__, 3 ) ) ) . "\n" );
 				exit( 1 ); }
 		}
 	);
 } catch ( Throwable $error ) {
-	fwrite( STDERR, 'Owned HTTP setup refused:' . ( $GLOBALS['adbh_failure'] ?? str_repeat( '0', 64 ) ) . "\n" );
+	fwrite( STDERR, json_encode( adbh_setup_diagnostic( $error, dirname( __DIR__, 3 ) ) ) . "\n" );
 	exit( 1 );
 }

@@ -17,6 +17,11 @@ on:
         required: true
         type: boolean
         default: false
+      http_setup_diagnostic_only:
+        description: Approved bounded setup-only diagnostic, never starts HTTP requests
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -34,6 +39,7 @@ jobs:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
       QUALIFICATION_GENUINE_REQUEST_APPROVED: ${{ inputs.execute_genuine_request }}
       QUALIFICATION_HTTP_APPROVED: ${{ inputs.execute_genuine_http }}
+      QUALIFICATION_HTTP_SETUP_DIAGNOSTIC: ${{ inputs.http_setup_diagnostic_only }}
     steps:
       - name: Admit exact source and fresh private directories
         shell: bash

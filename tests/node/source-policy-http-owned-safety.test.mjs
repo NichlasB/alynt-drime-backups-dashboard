@@ -28,6 +28,12 @@ test('physical policy revision requires exact bytes/autoload rather than a synth
 test('installer failure reporting retains bounded counts/assertion identity but no child text',()=>{
  const label='c'.repeat(64),r=setupFailureSummary(1,null,'private-password','Owned HTTP setup refused:'+label+'\n');assert.equal(r.status,1);assert.equal(r.assertion,label);assert.equal(r.stdout_bytes,16);assert.equal(JSON.stringify(r).includes('private-password'),false);
  const bad=setupFailureSummary(null,'private-token','x'.repeat(9000),'Unknown private-sql');assert.equal(bad.assertion,null);assert.equal(bad.signal,null);assert.equal(bad.stdout_bytes,9000);assert.equal(JSON.stringify(bad).includes('private-sql'),false);
+ const detail={event:'owned-setup-refused',stage:'core-bootstrap',exception:'Error',origin:'core',line:123,assertion:null};assert.deepEqual(setupFailureSummary(1,null,'',JSON.stringify(detail)).detail,detail);
+ for(const delta of [{line:100001},{origin:'private-path'},{exception:'private-sql'},{raw:'secret'},{assertion:'not-a-digest'}])assert.equal(setupFailureSummary(1,null,'',JSON.stringify({...detail,...delta})).detail,null);
+});
+test('setup-only source branch precedes every server start and reports no HTTP qualification',()=>{
+ const text=readFileSync(new URL('../../scripts/ci/source-policy-http-owned-controller.mjs',import.meta.url),'utf8');
+ const branch=text.indexOf("if(process.env.QUALIFICATION_HTTP_SETUP_DIAGNOSTIC==='true')"),server=text.indexOf("child=spawn('php',[...phpArgs,'-S'");assert.ok(branch>0&&branch<server);assert.match(text.slice(branch,server),/http_server_started:false,http_cases:0/);assert.match(text.slice(branch,server),/return;/);
 });
 test('HTTP dispatch requires both explicit flags and fixed actor/head/attempt',()=>{
  const e={GITHUB_ACTIONS:'true',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'NichlasB/alynt-drime-backups-dashboard',GITHUB_REF:'refs/heads/master',GITHUB_ACTOR:'NichlasB',GITHUB_RUN_ATTEMPT:'1',GITHUB_WORKFLOW_REF:'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-linux-qualification.yml@refs/heads/master',QUALIFICATION_HTTP_APPROVED:'true',QUALIFICATION_GENUINE_REQUEST_APPROVED:'true',GITHUB_RUN_ID:'123',GITHUB_SHA:'a'.repeat(40),EXPECTED_SHA:'a'.repeat(40),RUNNER_OS:'Linux'};

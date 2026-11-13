@@ -47,7 +47,9 @@ function adbh_source_check() {
  */
 function adbh_bootstrap( $purpose ) {
 	global $table_prefix;
-	$root = dirname( __DIR__, 3 );
+	$root                  = dirname( __DIR__, 3 );
+	$GLOBALS['adbh_stage'] = 'early-hooks';
+	require_once __DIR__ . '/source-policy-http-owned-diagnostic.php';
 	adbh_check( false === strpos( $root, ' ' ) && realpath( $root ) === $root && 'true' === getenv( 'ADB_HTTP_OWNED_APPROVED' ), 'owned-worker-root' );
 	$p = require $root . '/private.php';
 	adbh_check( is_array( $p ) && preg_match( '/\A[a-f0-9]{32}\z/', $p['run'] ) && $root === $p['root'] . '/adb-http-' . $p['run'] && preg_match( '/\Aadbh_[a-f0-9]{12}_\z/', $p['prefix'] ), 'owned-private-context' );
@@ -60,7 +62,8 @@ function adbh_bootstrap( $purpose ) {
 	define( 'ADB_HTTP_WORKER', $purpose );
 	// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler -- Safe refusal, never raw diagnostics.
 	set_error_handler(
-		static function () {
+		static function ( $severity, $message, $file, $line ) use ( $root ) {
+			$GLOBALS['adbh_diagnostic_location'] = adbh_diagnostic_location( $file, $line, $root );
 			adbh_check( false, 'php-diagnostic' );
 		}
 	);
@@ -72,7 +75,9 @@ function adbh_bootstrap( $purpose ) {
 	add_filter( 'query', 'adbh_owned_observe', PHP_INT_MIN, 1 );
 	if ( 'setup' === $purpose ) {
 		define( 'WP_INSTALLING', true ); }
+	$GLOBALS['adbh_stage'] = 'core-bootstrap';
 	require $root . '/core/wp-load.php';
+	$GLOBALS['adbh_stage'] = 'core-ready';
 	adbh_source_check();
 }
 

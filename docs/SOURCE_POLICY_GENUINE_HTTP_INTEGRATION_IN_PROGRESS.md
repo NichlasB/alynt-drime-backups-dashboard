@@ -1,5 +1,27 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Approved setup-only diagnostic preparation — 2026-11-13
+
+The user approved the recommended ONE bounded setup diagnostic, not another full
+HTTP matrix. Clean baseline8233bf3/ordinary CI43487211761 reverified success.
+New default-false manual input `http_setup_diagnostic_only` retains all actor/
+head/first-attempt/fresh-prerequisite guards. Its source-owned controller branch
+cleans after successful setup and returns BEFORE every HTTP server start;it
+exports http_server_started=false/http_cases0,not qualification success. Failed
+setup still takes original shared cleanup/recovery. No budgets/guards changed.
+
+Pure PHP failure DATA adds fixed stage/exception/origin enums, bounded line and
+assertion digest;actual messages,SQL,paths and secrets never exported. Parent
+strictly checks shape/types/enums/ranges;unknown diagnostics remain count/digest
+only. Canonical source-scoped light/security review: no remaining scoped
+validation/privacy defect;no runtime claim from doubles. Tiny cohesive DATA helper
+does not require splitting;earlier broad bloat review retained. No UI workflow.
+Local full Node215/215 before final pure-PHP diagnostic test addition;that actual
+helper test separately validates positive source-category/line/identity and no
+raw content. Focused PHPCS3/3 passes;exact ordinary CI required before dispatch.
+Native9/10/cumulative32 until actual dispatch;ONE newly approved setup diagnostic
+unused at this preparation checkpoint. Production wiring remains disabled.
+
 ## ONE attempt failed cleanly — 2026-11-13
 
 Integration head `16a8f412ac0c52eb0cb042eb1d950da2435a5a20` pushed;

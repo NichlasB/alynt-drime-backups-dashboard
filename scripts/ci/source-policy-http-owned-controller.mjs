@@ -17,7 +17,8 @@ const saved='a:2:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}i:7;a:1:{s:7:
 export function setupFailureSummary(code,signal,out,err){
  const bounded=v=>typeof v==='string'&&Buffer.byteLength(v)<=8192?v:'';
  const stdout=bounded(out),stderr=bounded(err),match=/^Owned HTTP setup refused:([a-f0-9]{64})\n$/.exec(stderr);
- return {event:'owned-http-setup-failure',status:Number.isInteger(code)&&code>=0&&code<=255?code:null,signal:['SIGTERM','SIGKILL'].includes(signal)?signal:null,assertion:match?match[1]:null,stdout_bytes:typeof out==='string'?Buffer.byteLength(out):null,stderr_bytes:typeof err==='string'?Buffer.byteLength(err):null,stdout_digest:sha(stdout),stderr_digest:sha(stderr)};
+ let detail=null;try{const r=JSON.parse(stderr);if(record(r,['event','stage','exception','origin','line','assertion'])&&r.event==='owned-setup-refused'&&['entry','early-hooks','core-bootstrap','core-ready','install','seed','finalize'].includes(r.stage)&&['RuntimeException','Error','TypeError','ValueError','ParseError','other'].includes(r.exception)&&['core','proof','other'].includes(r.origin)&&Number.isInteger(r.line)&&r.line>=0&&r.line<=100000&&(r.assertion===null||typeof r.assertion==='string'&&/^[a-f0-9]{64}$/.test(r.assertion)))detail=r;}catch{/* Unknown child DATA remains count/digest only. */}
+ return {event:'owned-http-setup-failure',status:Number.isInteger(code)&&code>=0&&code<=255?code:null,signal:['SIGTERM','SIGKILL'].includes(signal)?signal:null,assertion:match?match[1]:null,detail,stdout_bytes:typeof out==='string'?Buffer.byteLength(out):null,stderr_bytes:typeof err==='string'?Buffer.byteLength(err):null,stdout_digest:sha(stdout),stderr_digest:sha(stderr)};
 }
 export function physicalPolicy(raw,storage){
  const parts=raw.trimEnd().split('\t');need(parts.length===2&&parts.every(p=>/^(?:[A-F0-9]{2})+$/.test(p)),'policy-row');
@@ -49,6 +50,7 @@ async function stopChild(child,ended,left){
 }
 export async function main(){
  need(ownedHttpJob(process.env),'authorized-job');process.umask(0o077);
+ need([undefined,'false','true'].includes(process.env.QUALIFICATION_HTTP_SETUP_DIAGNOSTIC),'diagnostic-mode');
  const clock=new OwnedHttpClock(process.env.ADB_ORIGINAL_JOB_NS);clock.admit();const created=clock.now(),setupDeadline=created+LIMITS.setup_ms;
  const owner=createOwnedStage(process.env),db=new OwnedHttpDatabase(owner);saveOwnership(owner,null);let child=null,ended=null,model=null,s=null,failure=null,stage='source',cleaned=false,diagnosticBytes=0;
  const now=()=>clock.now(),left=deadline=>clock.left(deadline);
@@ -71,6 +73,10 @@ export async function main(){
   if(failure||setupCode!==0||setupSignal||setupErr!=='')process.stderr.write(JSON.stringify(setupFailureSummary(setupCode,setupSignal,raw,setupErr))+'\n');
   need(!failure&&setupCode===0&&!setupSignal&&setupErr==='','owned-setup-terminal');child=null;saveOwnership(owner,null);
   const setup=JSON.parse(raw);need(installerSidecarMatches(setup.containment,id,'setup'),'setup-sidecar');unchanged();db.reconcile(left(setupDeadline));db.seal(s,left(setupDeadline));model.setup(setup.ledger,now());
+  if(process.env.QUALIFICATION_HTTP_SETUP_DIAGNOSTIC==='true'){
+   stage='diagnostic-cleanup';const deadline=clock.cleanupDeadline();db.cleanup(s,left(deadline));unchanged();left(deadline);removeOwnedStage(owner);cleaned=true;
+   process.stdout.write(JSON.stringify({event:'owned-http-setup-diagnostic-complete',head:id.head,run:id.run,setup:'completed',http_server_started:false,http_cases:0,production_ready:false,cleanup:'exact-owned-zero'})+'\n');return;
+  }
   // Fixed independent uncached rows; setup's non-autoloaded rows are modern off.
   const policy=()=>physicalPolicy(db.sql(`SELECT HEX(option_value),HEX(autoload) FROM ${s.database}.${s.options} WHERE BINARY option_name=BINARY 'alynt_drime_backups_dashboard_source_policies';`,Math.min(5000,left(LIMITS.job_ms-LIMITS.cleanup_ms))),s);
   const sentinel=()=>{const r=db.sql(`SELECT SHA2(CONCAT(option_value,':',autoload),256) FROM ${s.database}.${s.options} WHERE BINARY option_name=BINARY 'owned_non_target';`,5000).trim();need(/^[a-f0-9]{64}$/.test(r),'sentinel');return r;};
