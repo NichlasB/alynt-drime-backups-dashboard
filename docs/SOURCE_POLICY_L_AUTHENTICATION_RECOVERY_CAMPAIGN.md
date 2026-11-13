@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | 8/10; historical23 plus this campaign8 = cumulative31; W prerequisites/cleanup are one ordered proof, not separate attempts; affected L/M refreshes are attempts7/8, not new product milestones |
+| Native qualification attempts | 9/10;historical23 plus this campaign9 = cumulative32. Attempt9/run43486567610 passed fresh prerequisites but HTTP install child terminal refused;exact owned cleanup verified. ONE authorization consumed,no extra credit for prerequisites |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,16 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Functional-only private-producer admission approved](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md);assurance-choice gate resolved,ONE attempt unused. Next:owned bootstrap/request IO integration with installer containment/private envelope,audit-first/fresh prerequisites/held ONE exact-head CI attempt within existing authority;budgets/guards/wiring unchanged |
+| Exact next meaningful item | [Owned integration/attempt9 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md):install child terminal refused,engine cause Unknown,cleanup verified. Safe failure reporting repaired repository-only. Next gated slice:ONE bounded owned installer setup diagnostic with fresh prerequisites/exact cleanup;ONE consumed,production wiring/guards/budgets unchanged |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current attempt9 outcome — 2026-11-13: native prerequisites291/9 and genuine
+L23/12006/9 passed;HTTP install refused before startup/matrix;cleanup exact-owned
+zero and recovery absent verified. Completed milestones4/10;attempts9/10,
+cumulative32. Earlier unused-attempt statements below are historical,not current
+execution authority. No second native attempt has been dispatched.
 
 Current admission — 2026-11-13: functional HTTP only, no pre-router containment
 claim, explicitly approved. Numerical budgets/guards unchanged; integration and

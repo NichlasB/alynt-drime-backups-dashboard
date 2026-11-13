@@ -1,5 +1,48 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## ONE attempt failed cleanly — 2026-11-13
+
+Integration head `16a8f412ac0c52eb0cb042eb1d950da2435a5a20` pushed;
+[ordinary CI43486223302](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/43486223302)
+actually completed/success,both matching-head checks. PHP7.4 3070/25342;
+PHP8.3 3070/25347,plain OK/no skips;Node213/213 each,no failures/skips;
+PHPCS298/298,manifest/build/structure/audits pass,0 advisories.
+
+The explicitly authorized ONE [run43486567610](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/43486567610)
+on that SAME head actually completed/FAILURE at `install`, before HTTP server
+startup or the13-case HTTP matrix. Reason digest
+`8e814ec924b1852c3db360d4b328f0f395e1a0885119d883a3c18e4e762771c1`
+matches the fixed `owned-setup-terminal` assertion. It establishes a refused child
+terminal, NOT which child failure/exception caused it. Engine cause remains
+Unknown;do not infer hook,SQL,profile,PHP dependency or installer cause.
+
+Fresh prerequisites succeeded: environment/runtime/core/container preflight and
+cleanup; native body291 checks/9 groups; genuine L audit211 checks/native0/SQL0;
+genuine-session23 cases/12006 checks/9 groups. Both native prerequisites report
+live/post-exit sessions/transactions zero and reconciliation_failure0 cleanup.
+HTTP failure cleanup reports `OWNED_HTTP_CLEANUP exact-owned-zero`; the always
+recovery step succeeds with `absent`; final prerequisite cleanup succeeds with
+containers/directories/core checkout0. The generic final refused/unknown message
+does not override those specific successful cleanup receipts. No owned leftovers
+reported;no installed/live/client/Drime operation or production wiring change.
+
+The setup parent originally collapsed child details into one terminal assertion.
+A repository-only reporting correction now preserves only bounded exit/signal,
+byte counts,stream digests and the existing fixed worker assertion digest when
+its exact grammar matches. No raw child text,secret,SQL/path or success/admission
+grant is exported. Actual diagnostic regression6/6 incl.3 RAM semantic controls
+passes;acceptance,guards and budgets unchanged. This correction has NOT been run
+natively;the consumed attempt remains a failure. No second dispatch occurred.
+
+Implementation-plan progress: fixed owned integration published/ordinary-CI
+verified,but physical HTTP qualification BLOCKED by the setup failure. Campaign
+4/10 completed milestones,9/10 native attempts,cumulative32. The ONE authorized
+attempt is consumed;no new milestone credit for prerequisites/diagnostics/docs.
+Exact next gated recommendation: **ONE bounded owned installer setup diagnostic
+with fresh prerequisites and exact cleanup**, exposing only the reviewed safe
+failure facts,not a blind full HTTP rerun. It needs fresh native-attempt authority;
+routine repository-only diagnostic preparation remains within existing scope.
+
 ## Integration validation — 2026-11-13
 
 The user approved finishing safety corrections, publishing/ordinary exact-head

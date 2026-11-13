@@ -14,6 +14,11 @@ import {OwnedHttpDatabase} from './source-policy-http-owned-database.mjs';
 import {OwnedHttpClock,processStart,saveOwnership,readOwnership,processStillOwned,verifyRecoveryProcess,OWNED_PHP_ARGS as phpArgs} from './source-policy-http-owned-safety.mjs';
 const initial='a:1:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}}';
 const saved='a:2:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}i:7;a:1:{s:7:"wpvivid";s:17:"external_optional";}}';
+export function setupFailureSummary(code,signal,out,err){
+ const bounded=v=>typeof v==='string'&&Buffer.byteLength(v)<=8192?v:'';
+ const stdout=bounded(out),stderr=bounded(err),match=/^Owned HTTP setup refused:([a-f0-9]{64})\n$/.exec(stderr);
+ return {event:'owned-http-setup-failure',status:Number.isInteger(code)&&code>=0&&code<=255?code:null,signal:['SIGTERM','SIGKILL'].includes(signal)?signal:null,assertion:match?match[1]:null,stdout_bytes:typeof out==='string'?Buffer.byteLength(out):null,stderr_bytes:typeof err==='string'?Buffer.byteLength(err):null,stdout_digest:sha(stdout),stderr_digest:sha(stderr)};
+}
 export function physicalPolicy(raw,storage){
  const parts=raw.trimEnd().split('\t');need(parts.length===2&&parts.every(p=>/^(?:[A-F0-9]{2})+$/.test(p)),'policy-row');
  const bytes=Buffer.from(parts[0],'hex').toString(),autoload=Buffer.from(parts[1],'hex').toString();need(bytes===initial&&autoload==='off'||bytes===saved&&autoload==='off','policy-bytes');
@@ -63,6 +68,7 @@ export async function main(){
   const boundSetup=()=>{if(Buffer.byteLength(raw)>8192||Buffer.byteLength(setupErr)>1024){failure=Error('Owned setup channel refused');child.kill('SIGKILL');}};
   child.stdout.on('data',b=>{raw+=b;boundSetup();});child.stderr.on('data',b=>{setupErr+=b;boundSetup();});
   const setupTimer=setTimeout(()=>{failure=Error('Owned setup deadline');child.kill('SIGKILL');},left(setupDeadline));await ended;clearTimeout(setupTimer);
+  if(failure||setupCode!==0||setupSignal||setupErr!=='')process.stderr.write(JSON.stringify(setupFailureSummary(setupCode,setupSignal,raw,setupErr))+'\n');
   need(!failure&&setupCode===0&&!setupSignal&&setupErr==='','owned-setup-terminal');child=null;saveOwnership(owner,null);
   const setup=JSON.parse(raw);need(installerSidecarMatches(setup.containment,id,'setup'),'setup-sidecar');unchanged();db.reconcile(left(setupDeadline));db.seal(s,left(setupDeadline));model.setup(setup.ledger,now());
   // Fixed independent uncached rows; setup's non-autoloaded rows are modern off.

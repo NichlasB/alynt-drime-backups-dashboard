@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {OwnedHttpClock,processStart,processStillOwned} from '../../scripts/ci/source-policy-http-owned-safety.mjs';
-import {physicalPolicy} from '../../scripts/ci/source-policy-http-owned-controller.mjs';
+import {physicalPolicy,setupFailureSummary} from '../../scripts/ci/source-policy-http-owned-controller.mjs';
 import {ownedHttpJob} from '../../scripts/ci/source-policy-http-owned-source.mjs';
 test('original job age and a single cleanup deadline cannot be reset by phases',()=>{
  let ns=1000000000n;const c=new OwnedHttpClock('1000000000',()=>ns);c.admit();ns+=400000000000n;assert.equal(c.now(),400000);c.admit();
@@ -24,6 +24,10 @@ test('physical policy revision requires exact bytes/autoload rather than a synth
  const initial='a:1:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}}',s={database:'adb_http_abcdef123456',options:'adbh_abcdef123456_options'};
  const wire=Buffer.from(initial).toString('hex').toUpperCase()+'\t'+Buffer.from('off').toString('hex').toUpperCase()+'\n';
  assert.match(physicalPolicy(wire,s).revision,/^[a-f0-9]{64}$/);assert.equal(physicalPolicy(wire,s).mode,'required');assert.throws(()=>physicalPolicy(wire.replace(/\t.*/,'\t6E6F'),s));assert.throws(()=>physicalPolicy('unknown',s));
+});
+test('installer failure reporting retains bounded counts/assertion identity but no child text',()=>{
+ const label='c'.repeat(64),r=setupFailureSummary(1,null,'private-password','Owned HTTP setup refused:'+label+'\n');assert.equal(r.status,1);assert.equal(r.assertion,label);assert.equal(r.stdout_bytes,16);assert.equal(JSON.stringify(r).includes('private-password'),false);
+ const bad=setupFailureSummary(null,'private-token','x'.repeat(9000),'Unknown private-sql');assert.equal(bad.assertion,null);assert.equal(bad.signal,null);assert.equal(bad.stdout_bytes,9000);assert.equal(JSON.stringify(bad).includes('private-sql'),false);
 });
 test('HTTP dispatch requires both explicit flags and fixed actor/head/attempt',()=>{
  const e={GITHUB_ACTIONS:'true',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'NichlasB/alynt-drime-backups-dashboard',GITHUB_REF:'refs/heads/master',GITHUB_ACTOR:'NichlasB',GITHUB_RUN_ATTEMPT:'1',GITHUB_WORKFLOW_REF:'NichlasB/alynt-drime-backups-dashboard/.github/workflows/source-policy-linux-qualification.yml@refs/heads/master',QUALIFICATION_HTTP_APPROVED:'true',QUALIFICATION_GENUINE_REQUEST_APPROVED:'true',GITHUB_RUN_ID:'123',GITHUB_SHA:'a'.repeat(40),EXPECTED_SHA:'a'.repeat(40),RUNNER_OS:'Linux'};
