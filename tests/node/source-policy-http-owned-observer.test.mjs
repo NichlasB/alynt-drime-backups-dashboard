@@ -9,6 +9,8 @@ test('actual socket-free SQL observer preserves allowed bytes and rejects protec
 });
 test('actual PHP diagnostic exports bounded identity without exception text or absolute paths',()=>{
  const path=fileURLToPath(new URL('../../scripts/ci/source-policy-http-owned-diagnostic.php',import.meta.url));
- const php=`require ${JSON.stringify(path)};$GLOBALS['adbh_stage']='core-bootstrap';$GLOBALS['adbh_failure']=str_repeat('a',64);$GLOBALS['adbh_diagnostic_location']=adbh_diagnostic_location('/owned/core/wp-includes/load.php',123,'/owned');echo json_encode(adbh_setup_diagnostic(new RuntimeException('secret-sql-password'),'/owned'));`;
- const r=spawnSync(process.env.PHP_BINARY??'php',['-n','-r',php],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.status,0,r.stderr);assert.equal(r.stderr,'');const p=JSON.parse(r.stdout);assert.equal(p.stage,'core-bootstrap');assert.equal(p.origin,'core');assert.equal(p.line,123);assert.equal(p.assertion,'a'.repeat(64));assert.equal(r.stdout.includes('/owned'),false);assert.equal(r.stdout.includes('secret-sql-password'),false);
+ // PHP7.4 -n does not guarantee the JSON extension; this fixture tests the pure
+ // DATA helper using a fixed scalar wire, not the PHP8.5 native JSON transport.
+ const php=`require ${JSON.stringify(path)};$GLOBALS['adbh_stage']='core-bootstrap';$GLOBALS['adbh_failure']=str_repeat('a',64);$GLOBALS['adbh_diagnostic_location']=adbh_diagnostic_location('/owned/core/wp-includes/load.php',123,'/owned');echo implode('|',array_values(adbh_setup_diagnostic(new RuntimeException('secret-sql-password'),'/owned')));`;
+ const r=spawnSync(process.env.PHP_BINARY??'php',['-n','-r',php],{encoding:'utf8',timeout:5000,maxBuffer:4096});assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');assert.equal(r.stdout,'owned-setup-refused|core-bootstrap|RuntimeException|core|123|'+'a'.repeat(64));assert.equal(r.stdout.includes('/owned'),false);assert.equal(r.stdout.includes('secret-sql-password'),false);
 });
