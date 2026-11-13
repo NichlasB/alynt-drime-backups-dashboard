@@ -37,10 +37,19 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Owned integration/attempt10 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): repository-only Installer SQL-Shape Rejection Source Diagnosis and Guard-Preserving Repair; exact rejected statement unresolved. Native ceiling exhausted; a later proof needs renewed explicit authority. Production wiring/guards/budgets unchanged |
+| Exact next meaningful item | [Pinned transient-expiry repair/evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): isolated red/green compatibility fix for two owned-setup alias DELETE shapes; historical first rejected statement unresolved. Next gated slice: ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with fresh prerequisites/exact cleanup. Native ceiling exhausted; renewed explicit authority required. Production wiring/guards/budgets unchanged |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current repository-only repair — 2026-11-14: pinned installer source proves two
+single-site transient-expiry alias DELETE shapes incompatible with the original
+classifier. Actual-helper red/green tests and six assertion-killed controls now
+protect exact setup-only admission,both owned aliases,literal/predicate pairs and
+availability. Node219/219;no native/site/SQL operation. This does not uniquely
+identify the historical first refusal or prove physical HTTP completion. Counts
+remain4/10 milestones,10/10 exhausted attempts,cumulative33;fresh ONE attempt
+requires explicit renewed authority. Earlier repo-diagnosis gate is fulfilled.
 
 Current attempt10 outcome — 2026-11-14: exact74558e/run43523692149 completed
 failure with bounded install/RuntimeException/proof22 evidence; assertion SHA256

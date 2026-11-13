@@ -1,5 +1,61 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repository-only pinned transient-expiry classifier repair — 2026-11-14
+
+Approved repository-only diagnosis/guard-preserving repair; clean restore/review
+baseline9161bd663cf6eda9e8de8e8508a0c313fec82976. No native rerun, SQL,
+WordPress bootstrap, site/fixture operation, acquisition or production wiring.
+R2 proof-harness parser/test change only; installed runtime classes unchanged.
+
+Exact pinned public source audit found a finite incompatibility:
+[wp_install calls populate_options](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-admin/includes/upgrade.php#L77),
+[populate_options calls delete_expired_transients(true)](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-admin/includes/schema.php#L710),
+whose [two single-site statements](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/option.php#L1645)
+use DELETE a,b alias syntax. The actual classifier rejected both: red regression
+failed at fixed-expiry-positive before the repair. This proves an incompatibility
+on the pinned installer path, NOT that it was the first statement refused in
+run43523692149. That failed run did not identify exact SQL or its core call site.
+The suspected INSERT IGNORE variant was ruled out by pinned source, not admitted.
+
+Repair admits only these two exact normalized shapes during owned setup: both
+aliases must reference the same fixed-prefix options table; all predicates,
+escaped LIKE literal tuples, timeout stem/substring-offset pairing and bounded
+decimal cutoff must match. No generic multi-table DELETE support, SQL rewriting,
+new execution path or request/login write grant. Existing tokenizer bounds,
+protected-read guard,1024 setup SQL ceiling and all shared cleanup/job budgets
+remain unchanged. The observer returns the original bytes and counts each query.
+
+Focused actual-helper tests5/5,related installer/safety/wire22/22; full local
+Node219/219,failures/skips0. Two positive shapes,20 malformed/foreign variants,
+four request/login denials,same-byte/1024-budget refusal. Six RAM semantic controls
+assertion-killed setup,second-alias,literal,predicate,variant and availability
+bypasses; mutation transport corrected to base64 to avoid PHP interpolation,
+with explicit rejection of syntax-error credit. No source file overwritten by
+controls. These are synthetic bytes/isolated algorithms,not genuine core/SQL proof.
+Focused PHPCS1/1,full PHPCS299/299 and structure guard pass. Initial full local
+PHP run3070/25237 reported21 errors/4 failures/2 skips: all25 errors/failures
+were absent /usr/bin/python3 or its failed process launch because this invocation
+omitted the existing ADB_STATIC_ANALYSIS_PYTHON setting. No source fix/skip; a
+correctly configured rerun is separate evidence,not inferred success. Final
+local/CI results belong in the source-scoped toolkit publication evidence.
+
+Canonical source-scoped Feature Light and final focused Security:2 executable/
+test files plus directly affected unchanged worker/setup callers. Confirmed
+compatibility issue fixed;no remaining scoped finding. Fixed private operands,
+both alias identities and setup-only phase,denials/privacy/budget preserved.
+No user input/output/new DB executor or installed hook/auth change. Cohesive
+observer/test remain small;no bloat/split review needed. No UI or whole-plugin
+pre-release/Database Review refresh. Test-only RAM eval uses repository-owned
+mutations,never external/user input,and never executes a SQL statement.
+
+Implementation-plan progress: pinned installer compatibility gap repaired at
+isolated layer; physical HTTP qualification remains unproved. Campaign4/10
+milestones,10/10 native attempts exhausted,cumulative33 unchanged. Recommended
+next gated slice: ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup
+Attempt,with fresh prerequisites and exact owned cleanup. Explicit renewed native
+attempt authority is required; this repository-only approval does not reset the
+campaign ceiling or authorize dispatch. Functional HTTP only,no pre-router claim.
+
 ## Setup-only diagnostic failed cleanly; native budget exhausted — 2026-11-14
 
 The approved ONE setup-only [run43523692149](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/43523692149)

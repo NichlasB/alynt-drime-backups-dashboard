@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Pinned installer transient-expiry compatibility repaired, isolated only — 2026-11-14
+
+[Source audit and red/green helper evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+identify the pinned single-site transient-expiry alias DELETE incompatibility.
+Only two fixed owned-setup options-table shapes are admitted; request writes,
+foreign aliases,changed predicates and unknown SQL still refuse. Original bytes,
+query ceilings,cleanup/budgets and production wiring preserved. No native run or
+site/SQL operation;the historical first rejected statement remains unidentified.
+Implementation-plan progress: installer compatibility preparation advances,not
+physical HTTP qualification or another product milestone. Counts4/10 milestones,
+10/10 native attempts exhausted,cumulative33. Next gated slice: ONE Exact-Head
+Genuine-HTTP Owned Requalification and Cleanup Attempt,fresh prerequisites/exact
+owned cleanup;requires renewed native-attempt authority,not another repo repair.
+
 ## Setup diagnostic localized SQL refusal; attempt ceiling reached — 2026-11-14
 
 [Exact74558e/run43523692149 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

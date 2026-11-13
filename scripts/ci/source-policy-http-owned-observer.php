@@ -61,6 +61,17 @@ function adbh_owned_sql_class( $sql, $prefix, $setup, $login ) {
 		return 'bootstrap-read'; }
 	if ( 'SHOW TABLES' === $shape || 'SHOW TABLES LIKE ?' === $shape ) {
 		return $setup && ( ! $values || ( 1 === count( $values ) && 0 === strpos( $values[0], $prefix ) ) ) ? 'bootstrap-read' : null; }
+	// Pinned single-site delete_expired_transients(), only in the owned installer.
+	// Match both aliases and all predicates; never admit generic multi-table DELETE.
+	if ( $setup && 0 === strpos( $shape, 'DELETE a, b FROM ' ) ) {
+		$options = preg_quote( $prefix . 'options', '/' );
+		$expiry  = '/\ADELETE a, b FROM ' . $options . ' a, ' . $options . ' b WHERE a\.option_name LIKE \? AND a\.option_name NOT LIKE \? AND b\.option_name = CONCAT\( \?, SUBSTRING\( a\.option_name, (12|17) \) \) AND b\.option_value < [0-9]{1,10}\z/';
+		if ( ! preg_match( $expiry, $shape, $offset ) ) {
+			return null; }
+		$name    = '12' === $offset[1] ? '_transient_' : '_site_transient_';
+		$timeout = $name . 'timeout_';
+		return array( addcslashes( $name, '_%\\' ) . '%', addcslashes( $timeout, '_%\\' ) . '%', $timeout ) === $values ? 'setup-write' : null;
+	}
 	if ( ! preg_match( '/\A(?:SELECT\b|SHOW (?:FULL )?(?:COLUMNS|INDEX|INDEXES) FROM\b|DESCRIBE\b|CREATE TABLE\b|ALTER TABLE\b|INSERT INTO\b|UPDATE\b|DELETE FROM\b)/i', $shape ) ) {
 		return null; }
 	$tables = array();
