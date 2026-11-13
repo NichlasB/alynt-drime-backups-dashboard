@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Private functional HTTP assurance selected — 2026-11-13
+
+The [approved admission decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
+selects functional HTTP qualification only, not pre-router allocation containment.
+Keep existing numeric budgets/guards and private fixed producer; code/workflows
+unchanged. Implementation-plan progress: the resource-assurance decision is
+resolved; genuine HTTP integration/proof remain pending. Next: Genuine-HTTP Owned
+Bootstrap/Request IO Integration with Installer Containment and Private-Producer
+Envelope, audit-first/fresh prerequisites/held ONE exact-head owned CI attempt.
+Existing campaign authority remains bounded; no native execution in this
+repository-only decision. Counters4/10 milestones,8/10 attempts,cumulative31
+unchanged; wiring disabled. Earlier design-approval request below is fulfilled.
+
 ## Genuine-HTTP pre-router resource admission held — 2026-11-08
 
 The [approved integration's source audit](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)

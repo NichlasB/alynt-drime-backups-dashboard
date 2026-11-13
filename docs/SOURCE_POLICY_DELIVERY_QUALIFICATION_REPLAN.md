@@ -1,5 +1,12 @@
 # Source-Policy Delivery and Qualification Replan
 
+Current admission — 2026-11-13: [functional-only private-producer decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
+resolves the pre-router assurance gate; no claim of ingress/allocation containment.
+Next is owned bootstrap/request IO integration with installer containment/private
+envelope, audit-first/fresh prerequisites/held ONE CI attempt under existing
+authority. No runtime/wiring change here;4/10 milestones,8/10 attempts,cumulative31
+unchanged. Earlier same-design approval requests below are fulfilled.
+
 Current source audit — 2026-11-08: [pre-router resource admission stop](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
 holds the approved integration/ONE attempt unused. cli-server body allocation
 precedes the router; private producer bounds versus ingress containment require

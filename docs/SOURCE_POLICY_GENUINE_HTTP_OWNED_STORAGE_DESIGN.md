@@ -1,5 +1,13 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
+Selected assurance amendment — 2026-11-13: [private-producer admission decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
+resolves the audit gate below. Functional HTTP only: body/header limits apply to
+bounded producer emission and independently checked router input, not pre-router
+C allocation. PHP/WP64MiB settings do not attest whole-process RSS. All numerical
+limits/source/auth/native/installer/release/cleanup guards remain unchanged.
+This amendment governs interpretation of the historical profile below; it adds
+no runtime/workflow or production wiring and proves no physical qualification.
+
 Current source audit — 2026-11-08: [cli-server pre-router resource boundary](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
 is unresolved. The body/header/PHP budgets below remain unchanged; no silent
 reinterpretation as ingress-allocation guarantees or proof from isolated tests.

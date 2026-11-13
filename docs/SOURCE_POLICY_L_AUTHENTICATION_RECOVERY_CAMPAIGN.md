@@ -37,10 +37,16 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | Approved integration held by [pre-router resource admission audit](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md);ONE attempt unused. Next gated slice:Repository-Only Private-Producer HTTP Envelope and Pre-Router Resource Admission Decision,design-only;preserve budgets/guards and disabled production wiring |
+| Exact next meaningful item | [Functional-only private-producer admission approved](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md);assurance-choice gate resolved,ONE attempt unused. Next:owned bootstrap/request IO integration with installer containment/private envelope,audit-first/fresh prerequisites/held ONE exact-head CI attempt within existing authority;budgets/guards/wiring unchanged |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current admission — 2026-11-13: functional HTTP only, no pre-router containment
+claim, explicitly approved. Numerical budgets/guards unchanged; integration and
+physical proof pending. No native execution/fixtures in this repository-only
+decision. Counters4/10,8/10,cumulative31 unchanged. Earlier assurance-decision
+approval requests below are fulfilled, not a new gate for the same choice.
 
 Current audit — 2026-11-08: the pinned cli-server body allocation precedes the
 router. Select private-producer functional bounds versus pre-router containment

@@ -1,5 +1,12 @@
 # Genuine-HTTP Pre-Router Resource Admission Audit Stop
 
+Resolution — 2026-11-13: the user approved the [functional-only private-producer
+decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md), preserving
+budgets/guards and excluding pre-router containment claims. The source finding
+below remains valid; its assurance-choice gate is resolved, not a runtime fix.
+Historical approval requests here are fulfilled. Integration/physical HTTP proof
+remain pending; ONE attempt unused, production wiring disabled.
+
 ## Authority and checkpoint — 2026-11-08 UTC
 
 The user approved Genuine-HTTP Owned Bootstrap/Request IO Integration with

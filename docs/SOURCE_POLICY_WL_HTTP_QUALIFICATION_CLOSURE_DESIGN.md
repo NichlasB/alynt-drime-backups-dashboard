@@ -1,5 +1,13 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current admission — 2026-11-13: [private functional HTTP selected](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
+with unchanged budgets/guards and no pre-router containment claim. Resource
+decision below resolved; genuine HTTP integration/proof still pending. Next is
+owned integration with installer containment/private envelope and fresh
+prerequisites/held ONE CI attempt within existing authority. No native/wiring
+change here;4/10 milestones,8/10 attempts,cumulative31 unchanged. Prior W/L/M
+receipts retain original narrower scope; no same-design approval loop.
+
 Current source audit — 2026-11-08: [pre-router allocation finding](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
 leaves HTTP proof pending and the approved ONE attempt unused. Private functional
 input bounds cannot be labeled pre-router resource containment without an explicit

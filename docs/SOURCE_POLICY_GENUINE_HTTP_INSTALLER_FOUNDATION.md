@@ -1,5 +1,11 @@
 # Core-Backed Installer Containment Safety Foundation and Integration Preparation
 
+Current admission — 2026-11-13: the [approved private-producer decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
+resolves the resource-assurance gate below, functional HTTP only with unchanged
+budgets/guards. Next is owned HTTP integration including this dormant installer
+foundation and bounded private emission, then fresh prerequisites/held ONE owned
+CI attempt. No execution or physical-containment claim from this decision.
+
 Current integration audit — 2026-11-08: [pre-router resource admission gate](SOURCE_POLICY_GENUINE_HTTP_PREROUTER_AUDIT_STOP.md)
 holds the approved owned integration/ONE attempt before execution. This dormant
 foundation remains unchanged and is not physical HTTP containment proof. Next
