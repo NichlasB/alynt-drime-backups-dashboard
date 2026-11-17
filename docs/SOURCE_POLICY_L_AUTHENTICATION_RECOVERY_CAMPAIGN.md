@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | Original10/10 EXHAUSTED plus separately approved supplement1/1 consumed;historical23+10+1=cumulative34. Supplemental run44041153010 atd857440 passed fresh prerequisites,then install-stage sql-shape refusal;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
+| Native qualification attempts | Original10/10 EXHAUSTED plus2 separately approved ONE supplements consumed;historical23+10+2=cumulative35. Latest setup-only run44066287705 at66d674b passed fresh prerequisites,then install/sql-shape expiry-values atoption.php1645;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,20 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [SQL-refusal diagnostic foundation/evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Bounded Installer SQL-Rejection Diagnostic and Owned Cleanup Attempt,exact published head,existing setup-only mode/fresh prerequisites/exact cleanup,no HTTP server/matrix. Fixed value-free branch/caller preparation passed isolated tests;actual refused statement remains Unknown. Separate native authority required;no guard/budget or wiring change |
+| Exact next meaningful item | [Native branch/caller and pinned source evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only Genuine-Core Placeholder-Escape Query-Observer Ordering Repair,isolated hook-order/same-byte/pre-executor denial regressions. Observer precedes genuine priority0 placeholder restoration;strict literals/ownership/budgets remain required. No native rerun or production wiring included |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current second supplemental ONE diagnostic — 2026-11-17: user approved one
+exact66d674b setup-only run,not a ceiling reset. Run44066287705 completed/failure
+after fresh native291/9 and genuine23/12006/9 passed. New actual packet identifies
+expiry-values/option.php1645;read-only pinned source reveals observer PHP_INT_MIN
+before core priority0 placeholder restoration. No raw values captured or engine
+cause inferred. Exact owned zero cleanup,recovery absent,final reconciliation0
+verified;HTTP never started. Milestones4/10;original10/10+2 supplements consumed,
+cumulative35. Next is isolated repository-only ordering repair above,not another
+blind attempt. No implementation or second dispatch in this diagnostic turn.
 
 Current repository-only diagnostic foundation — 2026-11-17: fixed refusal branch/
 bounded core-caller DATA,first-fact retention,strict optional emitter/receiver and

@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Native diagnostic localizes genuine-core query-filter ordering — 2026-11-17
+
+[Exact66d674b/run44066287705 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records install/sql-shape with expiry-values,option.php1645. Read-only pinned
+source audit shows the observer at PHP_INT_MIN precedes core's priority0 %
+placeholder restoration,explaining a literal-pattern mismatch before execution.
+Fresh291/9 and genuine23/12006/9 prerequisites and exact owned zero cleanup/
+recovery passed;HTTP never started. No repair/second attempt/guard or budget change.
+Implementation-plan progress: blocker localized with native bounded evidence,
+HTTP not qualified. Milestones4/10;original10/10 plus2 separately approved ONE
+supplements consumed,cumulative35. Next gated slice: Repository-Only Genuine-Core
+Placeholder-Escape Query-Observer Ordering Repair,isolated order/same-byte/
+pre-executor denial regressions;no native rerun or production wiring change.
+
 ## Value-free SQL-refusal diagnostics prepared, isolated only — 2026-11-17
 
 [Owning diagnostic foundation/review evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

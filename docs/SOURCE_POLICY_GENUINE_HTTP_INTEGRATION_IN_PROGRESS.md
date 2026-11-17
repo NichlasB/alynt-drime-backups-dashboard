@@ -1,5 +1,58 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Setup-only diagnostic localized placeholder/filter ordering — 2026-11-17
+
+User approved ONE bounded installer diagnostic/exact cleanup at66d674b,not another
+HTTP matrix or repair. Clean local/remote66d674b63c19e6c8fbbaa71b92e0a81170326298
+and ordinary CI44046391108 completed/success reverified before the single dispatch.
+Toolkit639c3ff and uploader3dfcb15b5cab8191df7d984251986ead140ded52 clean.
+Existing trusted ephemeral CI lab,R3 owned disposable SQL/native fixtures only;
+no LocalWP/installed/live/client/Drime operation,production wiring or Novamira
+site operation. Existing http_setup_diagnostic_only=true prevents HTTP startup.
+
+ONE [run44066287705](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44066287705)
+actually completed/FAILURE on that exact head. Fresh environment prerequisite/
+cleanup passed;native audit29/native0/SQL0 then291 checks/9 groups;genuine L
+audit211/native0/SQL0 then23 cases/12006 checks/9 groups passed. Independent
+live/post-exit sessions/trx0;prerequisite reconciliation_failure0. No repeat run.
+
+Actual bounded packet:exit1,no signal,install/RuntimeException/proof22,
+sql-shape assertion a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac,
+sql={branch:expiry-values,caller:option,line:1645}. Parent owned-setup-terminal
+digest unchanged. The new diagnostic was received with exact fixed fields;
+no raw SQL/values/arguments/private path/message exported. This establishes the
+first captured refusal's classifier branch and pinned core call site,not an
+engine SQL error or successful installation/HTTP qualification.
+
+Read-only exact pinned public source audit explains the ordering incompatibility:
+[option.php1645-1655](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/option.php#L1645)
+prepares two escaped LIKE values containing %. wpdb::_real_escape calls
+add_placeholder_escape,which replaces every % with its private placeholder;
+[placeholder_escape registers remove_placeholder_escape at priority0](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wpdb.php#L2423).
+The owned worker registers adbh_owned_observe at PHP_INT_MIN,so it observes
+pre-restoration values,whereas expiry-values requires restored literal patterns.
+wpdb::query applies the query filter before execution. This is a source-backed
+ordering explanation consistent with the native branch/caller,not a claim that
+private SQL bytes or placeholder contents were captured. The prior alias-DELETE
+repair addressed a real source shape,but did not account for genuine preparation.
+No callback-order/classifier/source/guard/budget fix implemented in this attempt.
+
+Cleanup:OWNED_HTTP_CLEANUP exact-owned-zero;always recovery absent;recovery and
+final reconciliation steps successful. Final containers/directories/core checkout0,
+tmpfs released,reconciliation_failure0. No owned leftovers reported. HTTP server/
+matrix never started;no actual HTTP success,pre-router containment or production
+readiness claim. Diagnostic failure and clean cleanup are distinct outcomes.
+
+Implementation-plan progress: native value-free evidence now localizes the blocker
+to genuine-core placeholder/filter ordering;HTTP still blocked,not another product
+milestone. Counts4/10 milestones;original10/10 native allowance exhausted plus
+two separately approved ONE supplements consumed,historical23+10+2=cumulative35.
+Exact next recommended gated slice: Repository-Only Genuine-Core Placeholder-Escape
+Query-Observer Ordering Repair,isolated hook-order/byte-preservation and pre-executor
+denial regressions only. Preserve strict literal/ownership admission and all
+budgets;do not admit arbitrary markers or broaden SQL to get green. No native
+rerun is included;another attempt requires separate explicit authority after repair.
+
 ## Repository-only SQL-refusal branch/core-origin diagnostic foundation — 2026-11-17
 
 Approved isolated implementation/validation/publication only;R2 proof-only DATA
