@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | Original10/10 EXHAUSTED plus2 separately approved ONE supplements consumed;historical23+10+2=cumulative35. Latest setup-only run44066287705 at66d674b passed fresh prerequisites,then install/sql-shape expiry-values atoption.php1645;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
+| Native qualification attempts | Original10/10 EXHAUSTED plus3 separately approved ONE supplements consumed;historical23+10+3=cumulative36. Latest full HTTP run44181172393 at1262ab1 passed fresh prerequisites and installer setup,then request-1 first-receipt absence;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,21 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Published ordering repair and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt,fresh prerequisites/exact owned cleanup,existing ephemeral CI lab only. Observer/restoration ordering repaired with isolated tests;strict literals/ownership/budgets preserved. Fresh explicit native authority required;production wiring disabled |
+| Exact next meaningful item | [First HTTP receipt failure and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only First-HTTP-Receipt Failure Classification and Diagnostic Safety Foundation,isolated tests/value-free stage/status/assertion evidence only. Installer passed;missing receipt's router cause remains Unknown. No receipt bypass,native rerun or production wiring;fresh approval required |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current third supplemental ONE outcome — 2026-11-17:explicitly approved full
+HTTP run44181172393 at1262ab1 completed/failure after fresh native291/9 and
+genuine23/12006/9 passed. Genuine installer setup/sidecar,source checks,sealing
+and server readiness cleared. Request1 failed at missing first shutdown receipt;
+bounded digest matches source-derived ENOENT/lstat,but actual response status/
+router cause remain Unknown. No validated HTTP case or matrix completion.
+Exact owned zero cleanup,recovery absent and final zero-resource reconciliation
+passed. No code/guard/budget/wiring change or retry. Milestones4/10;original10/10
+plus3 consumed ONE supplements,cumulative36. Next is the isolated diagnostic
+foundation above,not another native attempt or a campaign ceiling reset.
 
 Current repository-only ordering repair — 2026-11-17:observer initial priority1
 follows genuine restoration0;router exact removal/reattachment updated consistently.

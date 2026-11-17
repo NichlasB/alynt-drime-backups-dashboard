@@ -1,5 +1,60 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repaired-head ONE qualification reaches first HTTP receipt failure — 2026-11-17
+
+User approved ONE Exact-Head Genuine-HTTP Owned Requalification/Cleanup Attempt
+at1262ab150aa1ed364de4c1bc161f72aec438adcf,not a campaign allowance reset.
+Clean local/remote exact head and ordinary CI44148295278 completed/success,
+both PHP jobs,reverified before the single dispatch. Toolkitd1c4760 and
+uploader3dfcb15 clean;uploader untouched. Existing trusted ephemeral CI lab,
+R3 owned disposable fixtures only;no LocalWP/installed/live/client/Drime target,
+production wiring,release/package/tag/deploy or unrelated state change.
+Novamira site operations not applicable to this CI-only target.
+
+ONE [run44181172393](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44181172393)
+ACTUALLY completed/FAILURE at SAME1262ab1,manual full functional HTTP mode,
+http_setup_diagnostic_only=false. Fresh environment preflight/cleanup passed.
+Native audit29/native0/SQL0 then291 checks/9 groups passed;genuine L audit211/
+native0/SQL0 then23 cases/12006 checks/9 groups passed. Independent live/post-exit
+sessions/trx zero;prerequisite exact cleanup/reconciliation_failure0.
+
+HTTP failure advanced from install to request-1. Frozen controller order proves
+the setup child completed successfully,its containment sidecar/source checks,
+database reconciliation/sealing and setup ledger passed,and the HTTP server
+reached readiness before the first login-form exchange. No setup-failure packet
+or repeated expiry-values refusal was reported. This establishes genuine owned
+installer progress at the repaired head,NOT complete HTTP qualification.
+
+Actual bounded packet:stage=request-1,reason SHA256
+3572086e456f1730183104d450cf77b9448f56f6e6ad21c0fa1b943d9a3f6bc1.
+Read-only offline comparison using source-derived run identity/first-receipt
+location matches Node's ENOENT/lstat message for the first receipt. No path or
+private response/SQL/cookie/message was exported into this record. Source order
+therefore localizes the immediate failure to unavailable first shutdown receipt
+after response parsing/cookie acceptance,not the installer or an exchange-parser
+label. Actual response status/body,router assertion/call site and underlying
+reason for absent receipt remain Unknown;do not infer bootstrap,shutdown,timing
+or authentication success/failure from that absence. No receipt/case was validated;
+the13-case HTTP matrix and genuine nonce/save/denial behavior remain unqualified.
+
+Cleanup verified separately from proof failure:OWNED_HTTP_CLEANUP exact-owned-zero;
+always recovery absent;both recovery/final reconciliation steps successful.
+Final containers/directories/core checkout0,tmpfs released,reconciliation_failure0.
+No unknown cleanup or owned leftovers reported. No second dispatch,repair,
+guard/admission/budget/source-identity change or production wiring in this turn.
+
+Implementation-plan progress:ordering repair now clears genuine installer setup
+and reaches HTTP request1;the next blocker is missing first receipt with unknown
+router cause. Milestones remain4/10;original10/10 native allowance exhausted,
+three separately approved ONE supplements consumed,historical23+10+3=cumulative36.
+This ONE approval is consumed;no automatic retry or new milestone credit.
+Recommended next gated slice:Repository-Only First-HTTP-Receipt Failure
+Classification and Diagnostic Safety Foundation,isolated tests only. Inspect
+early router/bootstrap/shutdown failure paths and add strictly bounded,value-free
+status/stage/assertion evidence where justified,preserving all existing guards,
+budgets,source identities and receipt requirements. No raw response/cookie/SQL,
+invented success,receipt bypass or native rerun;fresh approval needed.
+
 ## Repository-only genuine-core placeholder/query ordering repair — 2026-11-17
 
 User approved the recommended repository-only ordering repair,not a native retry.
