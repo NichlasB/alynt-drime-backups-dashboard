@@ -37,10 +37,20 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [First HTTP receipt failure and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only First-HTTP-Receipt Failure Classification and Diagnostic Safety Foundation,isolated tests/value-free stage/status/assertion evidence only. Installer passed;missing receipt's router cause remains Unknown. No receipt bypass,native rerun or production wiring;fresh approval required |
+| Exact next meaningful item | [First-receipt diagnostic foundation and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with First-Receipt Diagnostics,fresh prerequisites/exact cleanup,existing ephemeral CI lab only. Historical router cause/status remain Unknown;no receipt bypass or production wiring. Fresh explicit native approval required |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current repository-only first-receipt diagnostic foundation — 2026-11-17:fixed
+first-only PHP failure fields and bounded decoder,counts/status/receipt summary
+prepared. Same-error rethrow/required receipts,guards,budgets,source identities,
+cleanup and wiring preserved. New8/8,focused33/33,full Node240/240,PHPCS/structure/
+build pass;six assertion-killed semantic controls. No genuine core/auth/storage/
+HTTP/native/site operation or dispatch. Historical cause remains Unknown;counts
+4/10 milestones,original10/10+3 consumed ONE supplements,cumulative36 unchanged.
+Next gated ONE diagnostic-enabled qualification above requires fresh explicit
+native approval;no automatic retry or new milestone credit for this preparation.
 
 Current third supplemental ONE outcome — 2026-11-17:explicitly approved full
 HTTP run44181172393 at1262ab1 completed/failure after fresh native291/9 and

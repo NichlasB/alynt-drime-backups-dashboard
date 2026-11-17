@@ -12,6 +12,7 @@ import {OwnedCookieJar,encodeOwnedForm,ownedRequestPacket,sendOwnedPacket} from 
 import {need,sha,phpString,command,ownedHttpJob,createOwnedStage,stageSource,storageFor,writePrivate,frozenRows,removeOwnedStage} from './source-policy-http-owned-source.mjs';
 import {OwnedHttpDatabase} from './source-policy-http-owned-database.mjs';
 import {OwnedHttpClock,processStart,saveOwnership,readOwnership,processStillOwned,verifyRecoveryProcess,OWNED_PHP_ARGS as phpArgs} from './source-policy-http-owned-safety.mjs';
+import {RequestDiagnosticStream,readRequiredReceipt} from './source-policy-http-request-diagnostic.mjs';
 const initial='a:1:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}}';
 const saved='a:2:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}i:7;a:1:{s:7:"wpvivid";s:17:"external_optional";}}';
 export function setupFailureSummary(code,signal,out,err){
@@ -61,7 +62,8 @@ export async function main(){
  need(ownedHttpJob(process.env),'authorized-job');process.umask(0o077);
  need([undefined,'false','true'].includes(process.env.QUALIFICATION_HTTP_SETUP_DIAGNOSTIC),'diagnostic-mode');
  const clock=new OwnedHttpClock(process.env.ADB_ORIGINAL_JOB_NS);clock.admit();const created=clock.now(),setupDeadline=created+LIMITS.setup_ms;
- const owner=createOwnedStage(process.env),db=new OwnedHttpDatabase(owner);saveOwnership(owner,null);let child=null,ended=null,model=null,s=null,failure=null,stage='source',cleaned=false,diagnosticBytes=0;
+ const owner=createOwnedStage(process.env),db=new OwnedHttpDatabase(owner);saveOwnership(owner,null);let child=null,ended=null,model=null,s=null,failure=null,stage='source',cleaned=false,diagnosticBytes=0,receiptFailure=null;
+ const requestDiagnostics=new RequestDiagnosticStream();
  const now=()=>clock.now(),left=deadline=>clock.left(deadline);
  const jars=Object.fromEntries(['primary','anonymous','incapable','other','second'].map(k=>[k,new OwnedCookieJar()]));
  try{
@@ -97,7 +99,7 @@ export async function main(){
   ended=new Promise(resolve=>{child.on('error',()=>{failure=Error('Owned server launch refused');resolve();});child.on('close',()=>resolve());});
   saveOwnership(owner,{pid:child.pid,start:procIdentity(child),role:'server',executable:sha(readFileSync('/proc/'+child.pid+'/exe'))});
   const diagnostic=b=>{diagnosticBytes+=b.length;if(diagnosticBytes>LIMITS.diagnostic_bytes){failure=Error('Owned diagnostics budget refused');child.kill('SIGKILL');}};
-  child.stdout.on('data',diagnostic);child.stderr.on('data',b=>{diagnostic(b);if(b.toString().includes('PHP 8.5.12 Development Server (http://127.0.0.1:18777) started'))ready=true;});
+  child.stdout.on('data',diagnostic);child.stderr.on('data',b=>{diagnostic(b);if(diagnosticBytes<=LIMITS.diagnostic_bytes)requestDiagnostics.push(b);if(b.toString().includes('PHP 8.5.12 Development Server (http://127.0.0.1:18777) started'))ready=true;});
   while(!ready){need(!failure&&now()<startup&&child.exitCode===null,'one-server-startup');await pause(10);}
   const start=procIdentity(child),server={...id,pid:child.pid,start,alive:true,manifest:expectation.digest};delete server.root;
   model.server(server,HTTP_PROFILE,now());const httpDeadline=now()+LIMITS.http_ms;let exchange=0,current=original,firstView=null,freshView=null,wrongAction=null,otherView=null,secondView=null,checks=0;
@@ -114,7 +116,7 @@ export async function main(){
     if(item.intent==='missing-nonce')pairs.shift();if(item.intent==='compound-nonce')pairs[0][0]='_wpnonce[]';if(item.intent==='compound-site')pairs[1][0]='dashboard_site_id[]';
    }
    const packet=ownedRequestPacket({method,path,challenge,exchange:++exchange,body:method==='POST'?encodeOwnedForm(pairs):Buffer.alloc(0),jar});model.begin(packet.meta,item.kind,item.index,now());const deadline=Math.min(now()+LIMITS.transaction_ms,httpDeadline);
-   const response=await sendOwnedPacket(packet,Math.min(LIMITS.transaction_ms,left(deadline)));jar.accept(response.cookies,Date.now());const receipt=readReceipt(owner,exchange);
+   const response=await sendOwnedPacket(packet,Math.min(LIMITS.transaction_ms,left(deadline)));jar.accept(response.cookies,Date.now());const receipt=readRequiredReceipt(()=>readReceipt(owner,exchange),exchange,response,summary=>{receiptFailure=summary;});
    need(receipt.run===id.run&&receipt.head===id.head&&receipt.image===id.image&&receipt.exchange===exchange&&JSON.stringify(receipt.meta)===JSON.stringify(packet.meta)&&installerSidecarMatches(receipt.containment,id,'request'),'request-sidecar');
    unchanged();const after=policy();need(sentinel()===sentinelHash&&invariant()===nonTarget,'non-target-preserved');
    const observed=item.index!==null||['view','nonce-control'].includes(item.kind);let result=null,expected=null;
@@ -133,7 +135,9 @@ export async function main(){
   const terminal=model.close({run:id.run,head:id.head,image:id.image,ownership:true,processes:0,listeners:0,containers:0,schemas:0,accounts:0,files:0,sessions:0,transactions:0},now());need(terminal.completed&&checks>0,'complete-physical-proof');
   process.stdout.write(JSON.stringify({event:'owned-http-qualification-complete',head:id.head,run:id.run,cases:terminal.cases,transactions:terminal.transactions,checks,functional_only:true,pre_router_containment:false,production_ready:false,cleanup:'exact-owned-zero'})+'\n');
  }catch(error){failure=error;process.stderr.write(JSON.stringify({event:'owned-http-failure',stage,reason:sha(String(error.message))})+'\n');}
- finally{for(const jar of Object.values(jars))jar.clear();if(!cleaned){let bad=false;const deadline=clock.cleanupDeadline();try{await stopChild(child,ended,left(deadline));saveOwnership(owner,null);}catch{bad=true;}try{const fixed=s??storageFor(owner,'0'.repeat(64),process.env.GITHUB_SHA).storage;db.cleanup(fixed,left(deadline),LIMITS.diagnostic_bytes-diagnosticBytes);}catch{bad=true;}if(!bad){left(deadline);removeOwnedStage(owner);process.stdout.write('OWNED_HTTP_CLEANUP exact-owned-zero\n');}else{process.stderr.write('OWNED_HTTP_CLEANUP unknown\n');failure=Error('Owned cleanup unknown');}}}
+ finally{for(const jar of Object.values(jars))jar.clear();if(!cleaned){let bad=false;const deadline=clock.cleanupDeadline();try{await stopChild(child,ended,left(deadline));saveOwnership(owner,null);}catch{bad=true;}
+  try{if(receiptFailure)process.stderr.write(JSON.stringify({...receiptFailure,diagnostic:requestDiagnostics.evidence(receiptFailure.exchange)})+'\n');}catch{/* Diagnostic output failure must not interrupt owned cleanup. */}
+  try{const fixed=s??storageFor(owner,'0'.repeat(64),process.env.GITHUB_SHA).storage;db.cleanup(fixed,left(deadline),LIMITS.diagnostic_bytes-diagnosticBytes);}catch{bad=true;}if(!bad){left(deadline);removeOwnedStage(owner);process.stdout.write('OWNED_HTTP_CLEANUP exact-owned-zero\n');}else{process.stderr.write('OWNED_HTTP_CLEANUP unknown\n');failure=Error('Owned cleanup unknown');}}}
  if(failure)throw Error('Owned functional HTTP qualification refused');
 }
 async function recover(){

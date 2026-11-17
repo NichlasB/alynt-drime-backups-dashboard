@@ -1,5 +1,99 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repository-only first-receipt diagnostic safety foundation — 2026-11-17
+
+Explicit user approval:repository-only classification/diagnostic foundation,
+isolated tests,validation/commit/push/exact-head ordinary CI;no native rerun or
+production wiring. Clean local/remote restore/review baseline:
+1969fb317fbf5744e1cf3c2af0ab4532bdab12c1. R2 bounded proof-harness DATA and
+failure observation only. No acquisition,genuine core/bootstrap/authentication,
+SQL/native/site/fixture operation,manual workflow dispatch or installed state.
+
+Source audit:exchange/route refusals exit400 before receipt registration;bootstrap
+may throw before registration;login/bridge can fail after registration;shutdown
+finalization or receipt serialization/write can throw. Existing catches returned
+503 without a bounded private classification. Parent lstat/JSON/receipt-file
+failure threw before sidecar validation and exported only the coarse digest.
+These are distinct possible paths,NOT proven causes of run44181172393's absence.
+
+New PHP definitions produce fixed event/exchange/stage/exception/origin/line/
+assertion DATA. Four existing failure sites report privately:invalid exchange,
+invalid route,outer catch and shutdown catch. Stage markers separate transport,
+early-hooks/core-bootstrap/core-ready,login,bridge,shutdown and receipt. Unknown
+stages/classes/locations/ranges become unavailable/other/0/null,never raw text.
+One attempted stderr frame per request,maximum1024 bytes;first-failure latch
+prevents later shutdown failure from replacing it. JSON/output failure returns
+unavailable,not success or an exception that replaces the original refusal.
+No trace,raw exception/message/path,response/cookie/SQL/value or SQL-derived hash.
+
+Parent incremental decoder retains at most1023 pre-newline bytes and one exact
+allowlisted frame;oversized/unknown/malformed lines discard and resynchronize.
+Exact keys/types/enums/ranges enforced;copied evidence attaches ONLY to matching
+exchange. stdout is not parsed. Existing combined stdout/stderr65536 ceiling and
+kill path remain;decoding occurs only within that allowance. No new channel,
+wait/retry/deadline extension or larger resource budget. New PHP helper is copied
+by existing fixed-prefix staging and included in actual frozen source manifests.
+
+Required receipt reader wraps the existing lstat/file checks/JSON parsing and
+rethrows the SAME exception,even if diagnostic projection fails. Positive reads
+return the exact original receipt;missing/invalid receipts never become success.
+Failure summary contains only exchange,receipt absence/invalid-json/unavailable,
+allowlisted status,bounded header/body counts and EOF flag. It does not read the
+body,cookie,redirect or error-message values. Optional child diagnostic attaches
+during existing cleanup after the bounded stop/reap attempt,allowing stderr drain
+without another wait. Sidecar/source/containment/ownership checks,model acceptance,
+classifier/literal/phase/budget/protected-read guards and required receipts remain.
+No synthetic receipt,HTTP-response change,source-pin bypass or production wiring.
+
+Actual new8/8 and focused33/33 pass. Tests execute real PHP producer/emitter and
+source-extracted actual catch bodies with503/no receipt,plus real decoder/required
+reader algorithms. Every stream split boundary,oversized-line resynchronization,
+unknown/extra/malformed/stale exchange fields,first retention,output unavailability,
+positive receipt identity,same-error rethrow and diagnostic-callback failure tested.
+Six semantic controls assertion-kill PHP first-latch removal,JS first retention,
+fixed event,frame ceiling,exchange binding and required-reader rethrow removal;
+no syntax/include-error credit. The initial missing-module scaffold failure was
+NOT behavioral evidence;after helpers existed,the actual router integration
+check failed on absent reporting sites before the integration was implemented.
+Full local Node240/240,failures/skips0;PHPCS300/300,focused2/2,structure/build pass.
+Full local PHP3070/25340,errors/failures0,Sodium-unavailable skips2;verbose signer
+5/9 confirms both reasons. Actual ordinary exact-head CI publication results are
+recorded in the toolkit source-scoped closeout only after completion.
+
+Canonical Feature Light SOURCE-SCOPED:5 changed code/test files plus unchanged
+worker/setup/observer/diagnostic and receipt/model/source-manifest consumers.
+Risk area:Other/private CI error handling. Two draft error-handling issues fixed:
+diagnostic callback failure must not replace the original receipt exception,and
+final diagnostic output failure must not interrupt owned cleanup. Permanent
+same-object and source-extracted output-failure tests protect them.
+Issues2,auto-fixed2,manual decisions0;
+no remaining significant scoped non-security issue. No bloat workflow warranted:
+cohesive60-line PHP/41-line MJS helpers,63-line test,120-line router/152-line
+controller;no new runtime framework or production algorithm duplication. No UI.
+
+Final canonical Feature Security SOURCE-SCOPED:strict private-only DATA,exact
+exchange binding,bounded framing/combined budget,unchanged status/receipt failure
+and cleanup/source/SQL admission reviewed. No remaining scoped security defect;
+regression handoff:no confirmed security defect requires coverage beyond these
+implemented failure/projection controls. No Database Review,physical transaction
+proof or historical whole-plugin release-readiness row refreshed.
+
+Proof limits:isolated functions/pipes/catch fragments only,not genuine router,
+core/auth/storage/HTTP/cleanup execution. Early worker/include failure,fatal exit,
+wp_die/uncaught shutdown termination or unavailable stderr can still yield no
+child frame;summary remains bounded with diagnostic=null. A matching private
+frame is diagnostic DATA,not independent attestation,receipt or admission grant.
+Historical response status/router cause remain Unknown;no repair/qualification
+claim about that native failure is made from these synthetic tests.
+
+Implementation-plan progress:first-HTTP-receipt diagnostic preparation advances;
+functional HTTP remains unqualified. Counts4/10 milestones,original10/10 native
+allowance+3 consumed ONE supplements,cumulative36 unchanged. Recommended next
+gated slice:ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt
+with First-Receipt Diagnostics,published exact head,fresh prerequisites/exact owned
+cleanup,existing ephemeral CI lab only,functional HTTP/no pre-router containment
+claim. Fresh explicit native authority required;this approval excludes dispatch.
+
 ## Repaired-head ONE qualification reaches first HTTP receipt failure — 2026-11-17
 
 User approved ONE Exact-Head Genuine-HTTP Owned Requalification/Cleanup Attempt

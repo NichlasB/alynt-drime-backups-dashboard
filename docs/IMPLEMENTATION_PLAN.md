@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## First-HTTP-receipt diagnostics prepared, isolated only — 2026-11-17
+
+[Owning diagnostic/review evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records first-only fixed PHP failure DATA,bounded incremental private decoder and
+counts/status/receipt classification. Required receipt reads still rethrow the
+same exception;status/guards/budgets/source identities/cleanup/wiring unchanged.
+New8/8,focused33/33,Node240/240,PHPCS/structure/build pass. No native/site/SQL
+operation;historical router cause/status remain Unknown. Implementation-plan
+progress:HTTP diagnostic preparation advances,not genuine HTTP qualification.
+Milestones4/10;original10/10 plus3 consumed ONE supplements,cumulative36 unchanged.
+Next gated slice:ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup
+Attempt with First-Receipt Diagnostics,fresh prerequisites/exact owned cleanup,
+existing ephemeral CI lab only. Fresh explicit native approval required.
+
 ## Installer cleared; first HTTP receipt remains blocked — 2026-11-17
 
 [Exact1262ab1/run44181172393 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

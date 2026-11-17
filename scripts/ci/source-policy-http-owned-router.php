@@ -10,19 +10,22 @@
 if ( 'cli-server' !== PHP_SAPI || 'true' !== getenv( 'ADB_HTTP_OWNED_APPROVED' ) ) {
 	exit( 1 ); }
 require __DIR__ . '/source-policy-http-owned-worker.php';
+require_once __DIR__ . '/source-policy-http-request-diagnostic.php';
 require __DIR__ . '/source-policy-http-bridge.php';
-$root     = dirname( __DIR__, 3 );
-$private  = require $root . '/private.php';
-$exchange = $_SERVER['HTTP_X_ADB_EXCHANGE'] ?? '';
+$root                  = dirname( __DIR__, 3 );
+$private               = require $root . '/private.php';
+$exchange              = $_SERVER['HTTP_X_ADB_EXCHANGE'] ?? '';
+$GLOBALS['adbh_stage'] = 'exchange';
 if ( ! is_string( $exchange ) || ! preg_match( '/\A[1-9][0-9]?\z/', $exchange ) || (int) $exchange > 64 ) {
 	http_response_code( 400 );
+	adbh_request_report( null, 0, $root );
 	exit; }
 $raw          = file_get_contents( 'php://input', false, null, 0, 16385 );
 $headers      = getallheaders();
 $header_bytes = 2;
 foreach ( $headers as $key => $value ) {
 	$header_bytes += strlen( $key ) + 2 + strlen( $value ) + 2; }
-$meta = array(
+$meta                  = array(
 	'host'              => $_SERVER['HTTP_HOST'] ?? null,
 	'method'            => $_SERVER['REQUEST_METHOD'] ?? null,
 	'target'            => $_SERVER['REQUEST_URI'] ?? null,
@@ -33,9 +36,11 @@ $meta = array(
 	'transfer_encoding' => $_SERVER['HTTP_TRANSFER_ENCODING'] ?? null,
 	'content_type'      => $_SERVER['CONTENT_TYPE'] ?? null,
 );
-$kind = adbh_route( $meta, $private['challenge'] );
+$GLOBALS['adbh_stage'] = 'route';
+$kind                  = adbh_route( $meta, $private['challenge'] );
 if ( false === $kind ) {
 	http_response_code( 400 );
+	adbh_request_report( null, (int) $exchange, $root );
 	exit; }
 $GLOBALS['adbh_route']        = $kind;
 $GLOBALS['adbh_entry_counts'] = array(
@@ -50,10 +55,11 @@ try {
 	// sidecar completion reflects real stock shutdown, never an early response.
 	register_shutdown_function(
 		static function () use ( $root, $exchange, $meta ) {
+			$GLOBALS['adbh_stage'] = 'shutdown';
 			try {
 				$containment = adbh_finish_packet();
 				adbh_check( ! error_get_last() || ! in_array( error_get_last()['type'], array( E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ), true ), 'shutdown-fatal' );
-				$packet = array(
+				$packet                = array(
 					'run'         => $GLOBALS['adbh_private']['run'],
 					'head'        => $GLOBALS['adbh_private']['head'],
 					'image'       => $GLOBALS['adbh_private']['image'],
@@ -65,20 +71,24 @@ try {
 					'containment' => $containment,
 					'checks'      => $GLOBALS['adbh_checks'],
 				);
-				$bytes  = json_encode( $packet );
+				$GLOBALS['adbh_stage'] = 'receipt';
+				$bytes                 = json_encode( $packet );
 				adbh_check( is_string( $bytes ) && strlen( $bytes ) <= 8192, 'receipt-bytes' );
 				$file = $root . '/receipts/' . $exchange . '.json';
 				adbh_check( ! file_exists( $file ), 'receipt-absence' );
 				adbh_check( strlen( $bytes ) === file_put_contents( $file, $bytes, LOCK_EX ), 'receipt-write' );
 			} catch ( Throwable $error ) {
+				adbh_request_report( $error, (int) $exchange, $root );
 				http_response_code( 503 ); }
 		}
 	);
 	if ( in_array( $kind, array( 'login-form', 'login-submit' ), true ) ) {
+		$GLOBALS['adbh_stage'] = 'login';
 		require ABSPATH . 'wp-login.php';
 		exit;
 	}
-	$proof = dirname( __DIR__, 2 );
+	$GLOBALS['adbh_stage'] = 'bridge';
+	$proof                 = dirname( __DIR__, 2 );
 	foreach ( array( 'source-policy', 'source-policy-native-profile', 'source-policy-query-context', 'source-policy-no-reconnect-connection', 'source-policy-save-contract', 'source-policy-stored-map', 'source-policy-native-adapter', 'source-policy-guarded-entry', 'source-policy-lazy-provider', 'storage' ) as $name ) {
 		require_once $proof . '/includes/class-' . $name . '.php'; }
 	foreach ( array( 'reads', 'local-state-writes', 'writes', 'runtime-writes' ) as $name ) {
@@ -104,6 +114,7 @@ try {
 	http_response_code( $result['status'] );
 	echo json_encode( $result ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Private fixed JSON result projection; never diagnostics or handles.
 } catch ( Throwable $error ) {
+	adbh_request_report( $error, (int) $exchange, $root );
 	$GLOBALS['adbh_failure'] = $GLOBALS['adbh_failure'] ?? str_repeat( '0', 64 );
 	http_response_code( 503 );
 }
