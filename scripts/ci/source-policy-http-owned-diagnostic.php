@@ -37,7 +37,7 @@ function adbh_setup_diagnostic( Throwable $error, $root ) {
 	$stage     = $GLOBALS['adbh_stage'] ?? 'entry';
 	$location  = $GLOBALS['adbh_diagnostic_location'] ?? adbh_diagnostic_location( $error->getFile(), $error->getLine(), $root );
 	$assertion = $GLOBALS['adbh_failure'] ?? '';
-	return array(
+	$packet    = array(
 		'event'     => 'owned-setup-refused',
 		'stage'     => in_array( $stage, array( 'entry', 'early-hooks', 'core-bootstrap', 'core-ready', 'install', 'seed', 'finalize' ), true ) ? $stage : 'entry',
 		'exception' => in_array( $class, array( 'RuntimeException', 'Error', 'TypeError', 'ValueError', 'ParseError' ), true ) ? $class : 'other',
@@ -45,4 +45,9 @@ function adbh_setup_diagnostic( Throwable $error, $root ) {
 		'line'      => $location['line'],
 		'assertion' => is_string( $assertion ) && preg_match( '/\A[a-f0-9]{64}\z/', $assertion ) ? $assertion : null,
 	);
+	$sql       = $GLOBALS['adbh_sql_refusal'] ?? null;
+	if ( 'RuntimeException' === $class && 'a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac' === $assertion && is_array( $sql ) && array( 'branch', 'caller', 'line' ) === array_keys( $sql ) && in_array( $sql['branch'], array( 'prefix', 'tokens-input', 'tokens-escape', 'tokens-literal', 'tokens-skeleton', 'show-tables', 'expiry-shape', 'expiry-values', 'verb', 'tables', 'table-scope', 'write-scope' ), true ) && in_array( $sql['caller'], array( 'unavailable', 'wpdb', 'other-core', 'upgrade', 'schema', 'option', 'user', 'meta', 'functions', 'load', 'post', 'taxonomy', 'pluggable', 'capabilities', 'formatting' ), true ) && is_int( $sql['line'] ) && $sql['line'] >= 0 && $sql['line'] <= 100000 && ( 'unavailable' !== $sql['caller'] || 0 === $sql['line'] ) ) {
+		$packet['sql'] = $sql;
+	}
+	return $packet;
 }

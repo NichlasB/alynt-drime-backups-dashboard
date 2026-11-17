@@ -17,7 +17,16 @@ const saved='a:2:{i:9;a:1:{s:7:"wpvivid";s:17:"external_optional";}i:7;a:1:{s:7:
 export function setupFailureSummary(code,signal,out,err){
  const bounded=v=>typeof v==='string'&&Buffer.byteLength(v)<=8192?v:'';
  const stdout=bounded(out),stderr=bounded(err),match=/^Owned HTTP setup refused:([a-f0-9]{64})\n$/.exec(stderr);
- let detail=null;try{const r=JSON.parse(stderr);if(record(r,['event','stage','exception','origin','line','assertion'])&&r.event==='owned-setup-refused'&&['entry','early-hooks','core-bootstrap','core-ready','install','seed','finalize'].includes(r.stage)&&['RuntimeException','Error','TypeError','ValueError','ParseError','other'].includes(r.exception)&&['core','proof','other'].includes(r.origin)&&Number.isInteger(r.line)&&r.line>=0&&r.line<=100000&&(r.assertion===null||typeof r.assertion==='string'&&/^[a-f0-9]{64}$/.test(r.assertion)))detail=r;}catch{/* Unknown child DATA remains count/digest only. */}
+ let detail=null;try{
+  const r=JSON.parse(stderr),keys=['event','stage','exception','origin','line','assertion'];
+  const sql=record(r,[...keys,'sql'])
+   &&r.assertion==='a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac'&&r.exception==='RuntimeException'
+   &&record(r.sql,['branch','caller','line'])
+   &&['prefix','tokens-input','tokens-escape','tokens-literal','tokens-skeleton','show-tables','expiry-shape','expiry-values','verb','tables','table-scope','write-scope'].includes(r.sql.branch)
+   &&['unavailable','wpdb','other-core','upgrade','schema','option','user','meta','functions','load','post','taxonomy','pluggable','capabilities','formatting'].includes(r.sql.caller)
+   &&Number.isInteger(r.sql.line)&&r.sql.line>=0&&r.sql.line<=100000&&(r.sql.caller!=='unavailable'||r.sql.line===0);
+  if((record(r,keys)||sql)&&r.event==='owned-setup-refused'&&['entry','early-hooks','core-bootstrap','core-ready','install','seed','finalize'].includes(r.stage)&&['RuntimeException','Error','TypeError','ValueError','ParseError','other'].includes(r.exception)&&['core','proof','other'].includes(r.origin)&&Number.isInteger(r.line)&&r.line>=0&&r.line<=100000&&(r.assertion===null||typeof r.assertion==='string'&&/^[a-f0-9]{64}$/.test(r.assertion)))detail=r;
+ }catch{/* Unknown child DATA remains count/digest only. */}
  return {event:'owned-http-setup-failure',status:Number.isInteger(code)&&code>=0&&code<=255?code:null,signal:['SIGTERM','SIGKILL'].includes(signal)?signal:null,assertion:match?match[1]:null,detail,stdout_bytes:typeof out==='string'?Buffer.byteLength(out):null,stderr_bytes:typeof err==='string'?Buffer.byteLength(err):null,stdout_digest:sha(stdout),stderr_digest:sha(stderr)};
 }
 export function physicalPolicy(raw,storage){

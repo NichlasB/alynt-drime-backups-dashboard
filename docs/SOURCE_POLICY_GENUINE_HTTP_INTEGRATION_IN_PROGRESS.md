@@ -1,5 +1,66 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repository-only SQL-refusal branch/core-origin diagnostic foundation — 2026-11-17
+
+Approved isolated implementation/validation/publication only;R2 proof-only DATA
+and observation change. Clean restore/review baseline25265c973217dc9f84e965616b4d8e25cd3dfe9c.
+No acquisition,WordPress bootstrap,authentication,SQL/native/site/fixture operation,
+workflow dispatch,production wiring,installation,release/package/tag/deploy.
+No new native-attempt authority. The actual refused statement remains Unknown.
+
+Tokenizer/classifier report12 fixed refusal labels by optional reference; their
+return values,acceptance predicates,table/phase allowlists and query bytes are
+unchanged. Permanent guard-source comparison removes only diagnostic assignments/
+reference plumbing and whitespace;clean baseline SHA256
+74293a2710d49ba090f3b2be378e7473e981b9a09780d184e3f38f76125f498b.
+Existing positive/denial tests still execute actual algorithms. No new SQL shape
+is admitted and the original sql-shape throw and pre-accounting refusal remain.
+
+On the first setup-only refusal,one arguments-free trace is limited to16 frames.
+Pure mapping bounds frame/path/line DATA,requires fixed owned-root/core prefix,
+skips hook wrappers and selects a fixed source-file label/line;wpdb-only fallback,
+other-core and unavailable are explicit limitations,not guessed origins. No path
+read,raw path/frame/argument/object/SQL/literal/message or SQL-derived digest is
+retained/exported. Lines bound0..100000;unknown/unavailable evidence is never a
+qualification grant. A truncated trace or unmapped core file can remain insufficient.
+Native source identity/profile still depend on the existing frozen-manifest job;
+synthetic trace mapping is not genuine core provenance or an engine-cause proof.
+
+Optional nested sql={branch,caller,line} attaches ONLY to the matching sql-shape
+assertion and RuntimeException. PHP producer and JS receiver enforce exact keys,
+all fixed enums,integer/range and unavailable-line pairing. Legacy packets remain
+unchanged;unknown/malformed packets retain original count/digest-only reporting.
+No new phase,transport,channel budget,success path,cleanup or admission rule.
+Captured facts latch first;request-mode refusals do not collect them. Actual
+caller/branch values have NOT been observed natively at this head.
+
+Local focused new diagnostic9/9 plus existing observer/safety regressions pass;
+final full Node228/228,failures/skips0. All12 branch labels/all15 caller labels
+have producer/receiver positives;malformed fields,stale/non-SQL assertion binding,
+foreign roots,traversal,oversized trace/path and invalid lines refuse safely.
+Five assertion-killed RAM controls cover capture,retention,origin availability,
+trace ceiling and root binding;not parse failures or native fault experiments.
+Full local PHP3070/25340,errors/failures0,Sodium signing skips2;verbose signer5/9
+confirms both reasons. PHPCS299/299,focused2/2 and structure guard pass. New tests
+use PHP7.4-compatible scalar assertions under -n,not a required JSON extension.
+
+Canonical SOURCE-SCOPED Feature Light:4 changed code/test files plus unchanged
+worker/setup callers;diagnostic-only scope,no remaining non-security finding.
+Final focused Security:fixed-only outputs,arguments-free bounded capture,first
+fact retention,assertion/exception binding and malformed receiver rejection;
+no remaining scoped defect. Small cohesive files194/53 PHP and148/93 MJS lines,
+no bloat/split workflow warranted. No UI workflow,Database Review or historical
+whole-plugin release-readiness refresh. Ordinary exact-head CI/publication is
+recorded after actual completion in the owning toolkit source-scoped evidence.
+
+Implementation-plan progress: diagnostic foundation complete at isolated layer;
+HTTP remains blocked pending actual refusal evidence. Milestones4/10;original
+10/10 native allowance exhausted plus supplement1/1 consumed,cumulative34 unchanged.
+Recommended next gated slice: ONE Bounded Installer SQL-Rejection Diagnostic and
+Owned Cleanup Attempt on the published exact head,using existing
+http_setup_diagnostic_only=true with fresh prerequisites and exact cleanup;never
+start the HTTP server/matrix. Requires separate explicit native-attempt authority.
+
 ## Separately approved ONE requalification failed cleanly — 2026-11-17
 
 User explicitly renewed authority for ONE exact-head Genuine-HTTP owned attempt

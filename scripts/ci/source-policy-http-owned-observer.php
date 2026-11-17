@@ -8,9 +8,11 @@
 /** Bounded transient SQL skeleton; no literal/SQL is retained in evidence.
  *
  * @param mixed $sql Genuine core statement.
+ * @param mixed $reason Fixed refusal branch, not SQL content.
  * @return array|null
  */
-function adbh_owned_tokens( $sql ) {
+function adbh_owned_tokens( $sql, &$reason = null ) {
+	$reason = 'tokens-input';
 	if ( ! is_string( $sql ) || strlen( $sql ) > 65536 || false !== strpos( $sql, "\0" ) ) {
 		return null;
 	}
@@ -23,6 +25,7 @@ function adbh_owned_tokens( $sql ) {
 			continue; }
 		$value  = '';
 		$closed = false;
+		$reason = 'tokens-escape';
 		while ( ++$i < $length ) {
 			if ( "'" === $sql[ $i ] ) {
 				$closed = true;
@@ -31,12 +34,14 @@ function adbh_owned_tokens( $sql ) {
 				return null; }
 			$value .= $sql[ $i ];
 		}
+		$reason = 'tokens-literal';
 		if ( ! $closed || count( $values ) >= 2048 ) {
 			return null; }
 		$values[] = $value;
 		$shape   .= '?';
 	}
-	$shape = rtrim( preg_replace( '/\s+/', ' ', trim( str_replace( '`', '', $shape ) ) ), ';' );
+	$shape  = rtrim( preg_replace( '/\s+/', ' ', trim( str_replace( '`', '', $shape ) ) ), ';' );
+	$reason = 'tokens-skeleton';
 	if ( preg_match( '/[;\x00-\x08\x0b\x0c\x0e-\x1f]|--|\/\*|#|\b(?:OUTFILE|DUMPFILE|LOAD_FILE|SLEEP|BENCHMARK|UNION|GRANT|REVOKE|CALL)\b/i', $shape ) ) {
 		return null; }
 	return array( $shape, $values );
@@ -48,30 +53,36 @@ function adbh_owned_tokens( $sql ) {
  * @param string $prefix Owned prefix.
  * @param bool   $setup Setup stage.
  * @param bool   $login Exact login POST stage.
+ * @param mixed  $reason Fixed refusal branch, not SQL content.
  * @return string|null
  */
-function adbh_owned_sql_class( $sql, $prefix, $setup, $login ) {
+function adbh_owned_sql_class( $sql, $prefix, $setup, $login, &$reason = null ) {
+	$reason = 'prefix';
 	if ( ! is_string( $prefix ) || 1 !== preg_match( '/\Aadbh_[a-f0-9]{12}_\z/', $prefix ) ) {
 		return null; }
-	$tokens = adbh_owned_tokens( $sql );
+	$tokens = adbh_owned_tokens( $sql, $reason );
 	if ( null === $tokens ) {
 		return null; }
 	list( $shape, $values ) = $tokens;
 	if ( in_array( $shape, array( 'SELECT @@SESSION.sql_mode', 'SELECT VERSION()', 'SELECT FOUND_ROWS()' ), true ) ) {
 		return 'bootstrap-read'; }
 	if ( 'SHOW TABLES' === $shape || 'SHOW TABLES LIKE ?' === $shape ) {
+		$reason = 'show-tables';
 		return $setup && ( ! $values || ( 1 === count( $values ) && 0 === strpos( $values[0], $prefix ) ) ) ? 'bootstrap-read' : null; }
 	// Pinned single-site delete_expired_transients(), only in the owned installer.
 	// Match both aliases and all predicates; never admit generic multi-table DELETE.
 	if ( $setup && 0 === strpos( $shape, 'DELETE a, b FROM ' ) ) {
 		$options = preg_quote( $prefix . 'options', '/' );
 		$expiry  = '/\ADELETE a, b FROM ' . $options . ' a, ' . $options . ' b WHERE a\.option_name LIKE \? AND a\.option_name NOT LIKE \? AND b\.option_name = CONCAT\( \?, SUBSTRING\( a\.option_name, (12|17) \) \) AND b\.option_value < [0-9]{1,10}\z/';
+		$reason  = 'expiry-shape';
 		if ( ! preg_match( $expiry, $shape, $offset ) ) {
 			return null; }
 		$name    = '12' === $offset[1] ? '_transient_' : '_site_transient_';
 		$timeout = $name . 'timeout_';
+		$reason  = 'expiry-values';
 		return array( addcslashes( $name, '_%\\' ) . '%', addcslashes( $timeout, '_%\\' ) . '%', $timeout ) === $values ? 'setup-write' : null;
 	}
+	$reason = 'verb';
 	if ( ! preg_match( '/\A(?:SELECT\b|SHOW (?:FULL )?(?:COLUMNS|INDEX|INDEXES) FROM\b|DESCRIBE\b|CREATE TABLE\b|ALTER TABLE\b|INSERT INTO\b|UPDATE\b|DELETE FROM\b)/i', $shape ) ) {
 		return null; }
 	$tables = array();
@@ -80,8 +91,10 @@ function adbh_owned_sql_class( $sql, $prefix, $setup, $login ) {
 	preg_match_all( '/\b(?:FROM|JOIN|INTO)\s+([A-Za-z0-9_.]+)/i', $shape, $matches );
 	if ( preg_match( '/\A(?:UPDATE|(?:CREATE|ALTER) TABLE(?: IF NOT EXISTS)?|DESCRIBE)\s+([A-Za-z0-9_.]+)/i', $shape, $first ) ) {
 		$matches[1][] = $first[1]; }
+	$reason = 'tables';
 	if ( ! $matches[1] || preg_match( '/\bREFERENCES\b/i', $shape ) ) {
 		return null; }
+	$reason = 'table-scope';
 	foreach ( $matches[1] as $table ) {
 		if ( ! in_array( $table, $tables, true ) ) {
 			return null; }
@@ -92,6 +105,7 @@ function adbh_owned_sql_class( $sql, $prefix, $setup, $login ) {
 		return $auth ? 'auth-read' : 'bootstrap-read'; }
 	if ( $setup ) {
 		return 'setup-write'; }
+	$reason = 'write-scope';
 	if ( $login && array( $prefix . 'usermeta' ) === $matches[1] ) {
 		$p = preg_quote( $prefix, '/' );
 		if ( preg_match( '/\AINSERT INTO ' . $p . 'usermeta \(user_id, meta_key, meta_value\) VALUES \(([1-3]|\?), \?, \?\)\z/', $shape, $m ) ) {
@@ -107,6 +121,58 @@ function adbh_owned_sql_class( $sql, $prefix, $setup, $login ) {
 	return null;
 }
 
+/** Fixed core call-site DATA only; never export a path, frame, argument or object.
+ *
+ * @param mixed  $frames Bounded ignore-arguments trace DATA.
+ * @param string $root Fixed owned stage, not a filesystem read.
+ * @return array
+ */
+function adbh_owned_sql_origin( $frames, $root ) {
+	$unknown = array(
+		'caller' => 'unavailable',
+		'line'   => 0,
+	);
+	if ( ! is_array( $frames ) || count( $frames ) > 16 || ! is_string( $root ) || '' === $root || strlen( $root ) > 4096 ) {
+		return $unknown; }
+	$files    = array(
+		'wp-admin/includes/upgrade.php' => 'upgrade',
+		'wp-admin/includes/schema.php'  => 'schema',
+		'wp-includes/option.php'        => 'option',
+		'wp-includes/user.php'          => 'user',
+		'wp-includes/meta.php'          => 'meta',
+		'wp-includes/functions.php'     => 'functions',
+		'wp-includes/load.php'          => 'load',
+		'wp-includes/post.php'          => 'post',
+		'wp-includes/taxonomy.php'      => 'taxonomy',
+		'wp-includes/pluggable.php'     => 'pluggable',
+		'wp-includes/capabilities.php'  => 'capabilities',
+		'wp-includes/formatting.php'    => 'formatting',
+	);
+	$fallback = $unknown;
+	foreach ( $frames as $frame ) {
+		if ( ! is_array( $frame ) || ! isset( $frame['file'] ) || ! is_string( $frame['file'] ) || strlen( $frame['file'] ) > 4096 || 0 !== strpos( $frame['file'], $root . '/core/' ) ) {
+			continue; }
+		$file = substr( $frame['file'], strlen( $root . '/core/' ) );
+		if ( ! preg_match( '/\A[a-zA-Z0-9_\/-]+\.php\z/', $file ) || false !== strpos( $file, '//' ) ) {
+			continue; }
+		$line = isset( $frame['line'] ) && is_int( $frame['line'] ) && $frame['line'] > 0 && $frame['line'] <= 100000 ? $frame['line'] : 0;
+		if ( in_array( $file, array( 'wp-includes/class-wp-hook.php', 'wp-includes/plugin.php' ), true ) ) {
+			continue; }
+		if ( 'wp-includes/class-wpdb.php' === $file ) {
+			if ( 'unavailable' === $fallback['caller'] ) {
+				$fallback = array(
+					'caller' => 'wpdb',
+					'line'   => $line,
+				); }
+			continue; }
+		return array(
+			'caller' => $files[ $file ] ?? 'other-core',
+			'line'   => $line,
+		);
+	}
+	return $fallback;
+}
+
 /** Same-byte query observer; it never returns a replacement statement.
  *
  * @param string $sql Stock statement.
@@ -115,7 +181,10 @@ function adbh_owned_sql_class( $sql, $prefix, $setup, $login ) {
 function adbh_owned_observe( $sql ) {
 	$setup = 'setup' === ADB_HTTP_WORKER;
 	$login = $GLOBALS['adbh_route'] ?? '';
-	$class = adbh_owned_sql_class( $sql, $GLOBALS['adbh_private']['prefix'], $setup, 'login-submit' === $login );
+	$class = adbh_owned_sql_class( $sql, $GLOBALS['adbh_private']['prefix'], $setup, 'login-submit' === $login, $reason );
+	if ( null === $class && $setup && ! isset( $GLOBALS['adbh_sql_refusal'] ) ) {
+		$GLOBALS['adbh_sql_refusal'] = array_merge( array( 'branch' => $reason ), adbh_owned_sql_origin( debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 16 ), dirname( __DIR__, 3 ) ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- Bounded arguments-free private refusal DATA only.
+	}
 	adbh_check( null !== $class, 'sql-shape' );
 	$phase = $setup ? 'setup' : ( 0 === strpos( $class, 'auth-' ) || 'session-write' === $class ? 'auth' : 'bootstrap' );
 	++$GLOBALS['adbh_ledger'][ $phase ];
