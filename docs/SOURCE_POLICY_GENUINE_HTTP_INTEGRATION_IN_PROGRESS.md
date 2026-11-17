@@ -60,15 +60,25 @@ Full local PHP3070/25340,errors/failures0,Sodium-unavailable skips2;verbose sign
 5/9 confirms both reasons. Actual ordinary exact-head CI publication results are
 recorded in the toolkit source-scoped closeout only after completion.
 
+Initial ordinary CI44184720375 at e96dfe8 completed/failure:PHP8.3 succeeded;
+PHP7.4 Node239/240 failed only the disabled-output fixture's empty-stderr check.
+Actual log:PHP7.4 disabled file_put_contents warns;PHP8 throws Error. The fixture
+had omitted the real worker's warnings-to-exceptions boundary. Repository-only
+test repair extracts the unchanged actual adbh_check/error-handler source into
+the isolated child;the disabled output,unavailable result and empty-stderr
+assertions remain. No skip,suppression,guard/acceptance/runtime fix or native run.
+The failed run remains historical,not recast as a successful publication.
+
 Canonical Feature Light SOURCE-SCOPED:5 changed code/test files plus unchanged
 worker/setup/observer/diagnostic and receipt/model/source-manifest consumers.
-Risk area:Other/private CI error handling. Two draft error-handling issues fixed:
+Risk area:Other/private CI error handling. Three scoped issues fixed:
 diagnostic callback failure must not replace the original receipt exception,and
 final diagnostic output failure must not interrupt owned cleanup. Permanent
 same-object and source-extracted output-failure tests protect them.
-Issues2,auto-fixed2,manual decisions0;
+The PHP7.4 fixture's omitted real warning boundary was corrected as above.
+Issues3,auto-fixed3,manual decisions0;
 no remaining significant scoped non-security issue. No bloat workflow warranted:
-cohesive60-line PHP/41-line MJS helpers,63-line test,120-line router/152-line
+cohesive60-line PHP/41-line MJS helpers,67-line test,120-line router/152-line
 controller;no new runtime framework or production algorithm duplication. No UI.
 
 Final canonical Feature Security SOURCE-SCOPED:strict private-only DATA,exact

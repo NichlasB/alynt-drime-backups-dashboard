@@ -18,7 +18,11 @@ test('actual router catch bodies preserve first diagnostics and 503 without prod
  const router=readFileSync(new URL('../../scripts/ci/source-policy-http-owned-router.php',import.meta.url),'utf8');
  const catches=[...router.matchAll(/\} catch \( Throwable \$error \) \{\s*(adbh_request_report\([^]*?http_response_code\( 503 \);)/g)];assert.equal(catches.length,2);
  for(const [i,m]of catches.entries()){const r=run(`$root='/owned';$exchange='1';$GLOBALS['adbh_stage']='${i===0?'shutdown':'core-bootstrap'}';$error=new RuntimeException('secret');${m[1]}if(503!==http_response_code())throw new RuntimeException('status-preserved');echo 'no-receipt';`);passed(r);assert.equal(r.stdout,'no-receipt');const fact=JSON.parse(r.stderr.slice(REQUEST_DIAGNOSTIC_PREFIX.length));assert.equal(fact.stage,i===0?'shutdown':'core-bootstrap');assert.equal(fact.exception,'RuntimeException');assert.equal(fact.exchange,1);assert.equal(fact.assertion,null);}
- const r=run(`$GLOBALS['adbh_stage']='login';if(adbh_request_report(new Error('secret'),1,'/owned'))throw new RuntimeException('output-unavailable');echo 'unavailable';`,null,['-d','disable_functions=file_put_contents']);passed(r);assert.equal(r.stdout,'unavailable');assert.equal(r.stderr,'');
+ // PHP7.4 warns for disabled functions; PHP8 throws Error. Use the actual worker
+ // warning boundary, not suppression or a relaxed assertion, on both runtimes.
+ const worker=readFileSync(new URL('../../scripts/ci/source-policy-http-owned-worker.php',import.meta.url),'utf8');
+ const warningBoundary=worker.match(/function adbh_check\([^]*?\n}/)[0]+"$root='/owned';"+worker.match(/set_error_handler\([^]*?\n\t\);/)[0];
+ const r=run(warningBoundary+`$GLOBALS['adbh_stage']='login';if(adbh_request_report(new Error('secret'),1,'/owned'))throw new RuntimeException('output-unavailable');echo 'unavailable';`,null,['-d','disable_functions=file_put_contents']);passed(r);assert.equal(r.stdout,'unavailable');assert.equal(r.stderr,'');
 });
 test('PHP stages/types/ranges are allowlisted and malformed location/assertion inputs cannot escape',()=>{
  const stages=['exchange','route','early-hooks','core-bootstrap','core-ready','login','bridge','shutdown','receipt','unavailable'];
