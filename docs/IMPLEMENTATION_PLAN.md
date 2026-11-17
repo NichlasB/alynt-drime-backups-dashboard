@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## First-receipt evidence identifies request-bootstrap SQL refusal — 2026-11-17
+
+[Exact0c21776/run44187040461 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records fresh291/9 and genuine23/12006/9 prerequisites,then request1/receipt absent,
+HTTP503/empty body and matching core-bootstrap/RuntimeException/sql-shape diagnostic.
+Exact SQL branch/core caller remain Unknown;proof22 is the assertion throw,not
+the core origin. Exact owned zero cleanup/recovery/final reconciliation passed.
+No retry,implementation or guard/budget/wiring change. Implementation-plan
+progress:HTTP blocker classified more precisely,not full qualification.
+Milestones4/10;original10/10 plus4 consumed ONE supplements,cumulative37.
+Next gated slice:Repository-Only Request-Bootstrap SQL-Refusal Branch/Core-Origin
+Diagnostic Integration,reusing existing fixed bounded mapper with isolated tests,
+strict binding/unchanged acceptance;no raw SQL or native rerun.
+
 ## First-HTTP-receipt diagnostics prepared, isolated only — 2026-11-17
 
 [Owning diagnostic/review evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

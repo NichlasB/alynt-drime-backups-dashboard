@@ -1,5 +1,62 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Diagnostic-enabled ONE run localizes request-bootstrap SQL refusal — 2026-11-17
+
+User approved ONE Exact-Head Genuine-HTTP Owned Requalification/Cleanup Attempt
+with First-Receipt Diagnostics at0c21776a19de3d16859e7c539484034f4605b071.
+Clean local/remote exact head and ordinary CI44185224738 completed/success,both
+matching PHP jobs,reverified before single dispatch. Toolkitb99a0a6 and uploader
+3dfcb15 clean;uploader untouched. Existing trusted ephemeral CI lab,R3 exclusively
+owned disposable fixtures only;no LocalWP/installed/live/client/Drime target,
+production wiring or release/package/tag/deploy. Novamira site operations not
+applicable to this CI-only target. This is not a campaign allowance reset.
+
+ONE [run44187040461](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44187040461)
+ACTUALLY completed/FAILURE at SAME0c21776,full HTTP mode,setup diagnostic=false.
+Fresh environment preflight/cleanup passed. Native audit29/native0/SQL0 then
+291 checks/9 groups passed;genuine L audit211/native0/SQL0 then23 cases/12006
+checks/9 groups passed. Independent live/post-exit sessions/trx zero;prerequisite
+exact cleanup/reconciliation_failure0. No second dispatch or native rerun.
+
+HTTP setup/containment/source checks,reconciliation/sealing and server readiness
+cleared before request1,as established by the frozen controller's stage order.
+Actual parent packet:request-1,reason
+581c01bf729d5fe86c0f0e5716eaf7b9f0eb8515365ea0b7cab7fa71c927f0f9.
+New actual receipt-failure summary:exchange1,receipt absent,status503,body_bytes0,
+header_bytes181,eof true. Matching private child diagnostic:
+event owned-request-refused,exchange1,stage core-bootstrap,
+exception RuntimeException,origin proof,line22,assertion
+a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac.
+Independent offline hashing maps that code-label digest to sql-shape. This
+localizes the missing receipt to the owned request-bootstrap SQL-admission
+refusal,not a guessed timeout,transport parse failure or engine SQL error.
+No raw response/cookie/SQL/literal/message/path/trace exported.
+
+Exact statement,classifier refusal branch and genuine core caller remain Unknown.
+Existing bounded branch/core-origin capture is setup-only;request diagnostic
+currently carries stage/exception/assertion only. Do not infer a statement,
+change SQL acceptance or treat proof22 as the core call site. The sql-shape
+throw remains before observer accounting and database execution through that
+query filter. No valid first receipt/HTTP case or13-case matrix completed.
+Setup progress and working failure diagnostics are not functional qualification.
+
+Cleanup verified separately:OWNED_HTTP_CLEANUP exact-owned-zero;always recovery
+absent;recovery and final reconciliation steps successful. Final containers/
+directories/core checkout0,tmpfs released,reconciliation_failure0. No owned
+leftovers/unknown cleanup reported. No implementation,guard,admission,budget,
+source-identity or production-wiring change during this attempt/closeout.
+
+Implementation-plan progress:first-receipt evidence now identifies a request-
+bootstrap SQL-shape refusal;finite branch/caller diagnosis still needed before
+a compatibility repair. Milestones4/10;original10/10 native allowance exhausted,
+four separately approved ONE supplements consumed,historical23+10+4=cumulative37.
+This ONE is consumed;no automatic retry or new milestone credit.
+Recommended next gated slice:Repository-Only Request-Bootstrap SQL-Refusal
+Branch/Core-Origin Diagnostic Integration. Reuse the existing bounded fixed
+branch/caller mapper for request refusals with strict assertion/exception binding,
+isolated tests and unchanged guards/budgets/required receipts. No raw SQL/values,
+new diagnostic framework,admission broadening or native rerun;fresh approval needed.
+
 ## Repository-only first-receipt diagnostic safety foundation — 2026-11-17
 
 Explicit user approval:repository-only classification/diagnostic foundation,

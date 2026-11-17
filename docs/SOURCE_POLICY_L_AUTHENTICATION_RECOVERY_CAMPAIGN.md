@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | Original10/10 EXHAUSTED plus3 separately approved ONE supplements consumed;historical23+10+3=cumulative36. Latest full HTTP run44181172393 at1262ab1 passed fresh prerequisites and installer setup,then request-1 first-receipt absence;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
+| Native qualification attempts | Original10/10 EXHAUSTED plus4 separately approved ONE supplements consumed;historical23+10+4=cumulative37. Latest full HTTP run44187040461 at0c21776 passed fresh prerequisites/setup,then request1/503/receipt absent with core-bootstrap/RuntimeException/sql-shape diagnostic;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,20 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [First-receipt diagnostic foundation and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with First-Receipt Diagnostics,fresh prerequisites/exact cleanup,existing ephemeral CI lab only. Historical router cause/status remain Unknown;no receipt bypass or production wiring. Fresh explicit native approval required |
+| Exact next meaningful item | [Request-bootstrap SQL-refusal evidence and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only Request-Bootstrap SQL-Refusal Branch/Core-Origin Diagnostic Integration,reuse existing fixed bounded mapper with isolated tests/strict binding. Exact SQL branch/core caller remain Unknown;no acceptance broadening,native rerun or production wiring. Fresh approval required |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current fourth supplemental ONE outcome — 2026-11-17:run44187040461 at0c21776
+completed/failure after fresh native291/9 and genuine23/12006/9 passed. New actual
+summary reports request1/receipt absent/status503/body0/header181/EOF true;matching
+child core-bootstrap/RuntimeException/proof22 assertion maps to sql-shape.
+Underlying classifier branch/statement/core caller remain Unknown;no HTTP case
+validated. Exact owned zero cleanup,recovery absent and final reconciliation0
+passed. No code/guard/budget/wiring change or second dispatch. Milestones4/10;
+original10/10 plus4 consumed ONE supplements,cumulative37. Next is the isolated
+existing-mapper integration above,not another native attempt or budget reset.
 
 Current repository-only first-receipt diagnostic foundation — 2026-11-17:fixed
 first-only PHP failure fields and bounded decoder,counts/status/receipt summary
