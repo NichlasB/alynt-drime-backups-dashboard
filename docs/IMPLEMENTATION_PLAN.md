@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Supplemental ONE HTTP attempt still blocked at setup — 2026-11-17
+
+[Exactd857440/run44041153010 and cleanup evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+record fresh291/9 and genuine23/12006/9 prerequisite success,then install-stage
+sql-shape refusal before HTTP startup/matrix. Exact owned zero cleanup,recovery
+absent and final zero-resource reconciliation verified. Transient-expiry repair
+did not clear the blocker;exact rejected statement/core caller remains Unknown.
+No code/guard/budget/wiring change or automatic retry. Progress4/10 milestones;
+original10/10 attempts exhausted plus approved supplement1/1 consumed,cumulative34.
+Next gated slice: Repository-Only Installer SQL-Rejection Classification and
+Core-Origin Diagnostic Safety Foundation,isolated tests only,value-free fixed
+branch/caller evidence;no raw SQL,admission weakening or native rerun. Diagnose
+the remaining refusal more precisely before another native-attempt request.
+
 ## Pinned installer transient-expiry compatibility repaired, isolated only — 2026-11-14
 
 [Source audit and red/green helper evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

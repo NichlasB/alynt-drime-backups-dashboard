@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | 10/10 EXHAUSTED;historical23 plus this campaign10 = cumulative33. Setup diagnostic10/run43523692149 at74558e passed fresh prerequisites, then install-stage sql-shape refusal; exact owned cleanup/recovery verified. No extra credit for diagnostics/prerequisites |
+| Native qualification attempts | Original10/10 EXHAUSTED plus separately approved supplement1/1 consumed;historical23+10+1=cumulative34. Supplemental run44041153010 atd857440 passed fresh prerequisites,then install-stage sql-shape refusal;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,20 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Pinned transient-expiry repair/evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): isolated red/green compatibility fix for two owned-setup alias DELETE shapes; historical first rejected statement unresolved. Next gated slice: ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with fresh prerequisites/exact cleanup. Native ceiling exhausted; renewed explicit authority required. Production wiring/guards/budgets unchanged |
+| Exact next meaningful item | [Supplemental failed ONE attempt/evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only Installer SQL-Rejection Classification and Core-Origin Diagnostic Safety Foundation,isolated tests only,value-free fixed branch/caller evidence before another native attempt. Transient-expiry repair did not clear the remaining setup refusal;no raw SQL,guard/budget weakening or wiring change |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current supplemental ONE outcome — 2026-11-17: user explicitly approved the
+recommended exact-head d857440 requalification,not a campaign ceiling reset.
+Run44041153010 completed/failure after fresh native291/9 and genuine23/12006/9
+prerequisites passed. Setup install/sql-shape refusal remains too coarse to name
+the exact statement/core caller;HTTP never started. Exact owned zero cleanup,
+recovery absent,final reconciliation_failure0/zero resources verified. No rerun.
+Counts4/10 milestones,original10/10 exhausted plus supplement1/1 consumed,
+cumulative34. Next is value-free repository-only refusal diagnosis above,not
+another blind native qualification request. Earlier attempt grants are consumed.
 
 Current repository-only repair — 2026-11-14: pinned installer source proves two
 single-site transient-expiry alias DELETE shapes incompatible with the original

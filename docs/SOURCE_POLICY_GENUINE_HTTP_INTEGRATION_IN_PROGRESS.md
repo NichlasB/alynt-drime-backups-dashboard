@@ -1,5 +1,53 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Separately approved ONE requalification failed cleanly — 2026-11-17
+
+User explicitly renewed authority for ONE exact-head Genuine-HTTP owned attempt
+after the exhausted campaign,not a new10-attempt allowance. Clean local/remote
+`d857440d9c273bdcad93bc0cca5ede665b9ba863` and ordinary CI43526204228
+completed/success reverified before dispatch. Toolkit8f7c441 clean;uploader
+3dfcb15b5cab8191df7d984251986ead140ded52 clean/untouched. Existing trusted
+ephemeral lab only,R3 owned disposable SQL/native/HTTP scope;no installed-site
+target,LocalWP,live/client/Drime operation or production wiring. Novamira is not
+applicable to this ephemeral CI-only target. No code/workflow/budget/guard change.
+
+ONE [run44041153010](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44041153010)
+on SAME d857440 actually completed/FAILURE. Fresh environment prerequisite and
+cleanup succeeded;native audit29/native0/SQL0 then291 checks/9 groups;genuine
+L audit211/native0/SQL0 then23 cases/12006 checks/9 groups succeeded. Both
+native bodies report independent live/post-exit zero,production_ready:false
+and exact cleanup/reconciliation_failure0.
+
+HTTP setup again refused BEFORE server startup/matrix: child exit1,no signal,
+stage install,RuntimeException,origin proof,line22,assertion
+`a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac`
+maps to the fixed sql-shape guard. Parent fixed owned-setup-terminal digest
+`8e814ec924b1852c3db360d4b328f0f395e1a0885119d883a3c18e4e762771c1`.
+The same diagnostic is NOT proof of the same underlying SQL. The pinned
+transient-expiry source incompatibility remains a valid isolated repair,but did
+not clear this blocker;it was never established as the first native refusal.
+Current evidence does not identify the rejected statement,classification branch,
+core caller or engine cause. No inferred hook/SQL/profile/installer explanation.
+
+HTTP cleanup explicitly exact-owned-zero;always recovery absent;both recovery
+and final reconciliation steps succeeded. Final containers/directories/core
+checkout0,tmpfs released,reconciliation_failure0. No retained resources reported;
+generic refused-or-cleanup-unknown text does not negate these specific receipts.
+No second dispatch,rerun or additional experiment. No actual HTTP/auth/storage
+matrix success or pre-router containment claim;production wiring stays disabled.
+
+Implementation-plan progress: fresh native prerequisites reconfirmed,but genuine
+HTTP remains BLOCKED at setup,not a completed milestone. Campaign4/10 milestones;
+original native allowance10/10 exhausted PLUS separately approved supplement1/1
+consumed;historical23+10+1=cumulative34. No ceiling reset or retry/docs credit.
+Exact next recommended gated slice: Repository-Only Installer SQL-Rejection
+Classification and Core-Origin Diagnostic Safety Foundation,isolated tests only.
+Establish fixed value-free refusal-branch/caller evidence before another attempt;
+no raw SQL/literals/messages,allowlist widening,budget changes or native rerun.
+The shared throw line and sql-shape digest are too coarse for another justified
+native attempt;do not request a blind requalification. New native authority is
+not included in that repository-only diagnostic recommendation.
+
 ## Repository-only pinned transient-expiry classifier repair — 2026-11-14
 
 Approved repository-only diagnosis/guard-preserving repair; clean restore/review
