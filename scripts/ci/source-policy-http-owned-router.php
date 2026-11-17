@@ -87,7 +87,7 @@ try {
 	adbh_check( false === wp_cache_get( 'alynt_drime_backups_dashboard_source_policies', 'options' ), 'no-protected-cache' );
 	$all = wp_cache_get( 'alloptions', 'options' );
 	adbh_check( ! is_array( $all ) || ! array_key_exists( 'alynt_drime_backups_dashboard_source_policies', $all ), 'no-protected-autoload' );
-	adbh_check( remove_filter( 'query', 'adbh_owned_observe', PHP_INT_MIN ) && false === has_filter( 'query', 'adbh_owned_observe' ), 'exact-observer-removal' );
+	adbh_check( remove_filter( 'query', 'adbh_owned_observe', 1 ) && false === has_filter( 'query', 'adbh_owned_observe' ), 'exact-observer-removal' );
 	$before                       = mysqli_get_client_stats();
 	$queries                      = $GLOBALS['wpdb']->num_queries;
 	$result                       = adbh_bridge( $meta, $_POST, $private['challenge'] );
@@ -98,7 +98,8 @@ try {
 		'commands' => (int) $after['com_query'] - (int) $before['com_query'],
 	);
 	adbh_check( (int) $after['connect_failure'] === (int) $before['connect_failure'] && 0 === ( new mysqli_driver() )->report_mode, 'no-reconnect-mode-drift' );
-	add_filter( 'query', 'adbh_owned_observe', PHP_INT_MIN, 1 );
+	// Restore the same post-placeholder, pre-execution priority used at bootstrap.
+	add_filter( 'query', 'adbh_owned_observe', 1, 1 );
 	header( 'Content-Type: application/json' );
 	http_response_code( $result['status'] );
 	echo json_encode( $result ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Private fixed JSON result projection; never diagnostics or handles.

@@ -37,10 +37,19 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Native branch/caller and pinned source evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only Genuine-Core Placeholder-Escape Query-Observer Ordering Repair,isolated hook-order/same-byte/pre-executor denial regressions. Observer precedes genuine priority0 placeholder restoration;strict literals/ownership/budgets remain required. No native rerun or production wiring included |
+| Exact next meaningful item | [Published ordering repair and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt,fresh prerequisites/exact owned cleanup,existing ephemeral CI lab only. Observer/restoration ordering repaired with isolated tests;strict literals/ownership/budgets preserved. Fresh explicit native authority required;production wiring disabled |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current repository-only ordering repair — 2026-11-17:observer initial priority1
+follows genuine restoration0;router exact removal/reattachment updated consistently.
+New isolated4/4 and focused25/25,full Node232/232,PHPCS/structure/build pass;
+seven assertion-killed source controls. No classifier/guard/budget/wiring change,
+SQL/native/site/fixture operation or dispatch. Genuine HTTP remains unqualified;
+models are not core/storage proof. Milestones4/10,original10/10+2 consumed ONE
+supplements,cumulative35 unchanged. Next gated ONE qualification above requires
+fresh explicit authority,no automatic retry or ceiling reset.
 
 Current second supplemental ONE diagnostic — 2026-11-17: user approved one
 exact66d674b setup-only run,not a ceiling reset. Run44066287705 completed/failure

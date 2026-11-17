@@ -72,7 +72,9 @@ function adbh_bootstrap( $purpose ) {
 	require_once __DIR__ . '/source-policy-http-owned-observer.php';
 	$GLOBALS['adbh_containment'] = new Adbh_Installer_Containment( array_intersect_key( $p, array_flip( array( 'run', 'head', 'image', 'root' ) ) ), $purpose );
 	$GLOBALS['adbh_containment']->register();
-	add_filter( 'query', 'adbh_owned_observe', PHP_INT_MIN, 1 );
+	// Core restores prepared % placeholders at priority 0. Observe afterwards,
+	// still inside wpdb::query's pre-execution filter; never normalize SQL here.
+	add_filter( 'query', 'adbh_owned_observe', 1, 1 );
 	if ( 'setup' === $purpose ) {
 		define( 'WP_INSTALLING', true ); }
 	$GLOBALS['adbh_stage'] = 'core-bootstrap';

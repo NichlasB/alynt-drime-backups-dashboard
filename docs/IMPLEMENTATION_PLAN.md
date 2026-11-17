@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Genuine-core query ordering repaired, isolated only — 2026-11-17
+
+[Owning repair/review evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records observer priority1 after core placeholder restoration0,including matching
+router removal/reattachment. Red/green isolated call-site/model tests preserve
+bytes,strict SQL admission,pre-executor refusal and budgets;Node232/232,PHPCS/
+structure/build pass. No native/site/SQL operation or production wiring change.
+Implementation-plan progress:installer compatibility preparation advances,not
+physical HTTP qualification or a new product milestone. Counts4/10 milestones,
+original10/10 attempts+2 consumed ONE supplements,cumulative35 unchanged.
+Next gated slice:ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup
+Attempt,fresh prerequisites/exact cleanup,existing ephemeral CI lab only. Fresh
+explicit native authority required;repository-only repair approval is fulfilled.
+
 ## Native diagnostic localizes genuine-core query-filter ordering — 2026-11-17
 
 [Exact66d674b/run44066287705 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

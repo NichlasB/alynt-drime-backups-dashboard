@@ -1,5 +1,82 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repository-only genuine-core placeholder/query ordering repair — 2026-11-17
+
+User approved the recommended repository-only ordering repair,not a native retry.
+Clean local/remote restore and SOURCE-SCOPED review baseline:
+4bfd9bc1196e8dccb5191b496e7cc2078ded1ce8. Toolkit6857545 clean;uploader3dfcb15
+unchanged. R2 bounded CI-harness compatibility repair,not production SQL policy.
+No acquisition,core/runtime loading,authentication,SQL,WordPress/bootstrap,
+LocalWP/site/native/fixture operation,manual dispatch or production wiring.
+
+Pinned core db96f5eaa77a8d3e8eec8923a518fa2326f0d46a source rechecked read-only:
+[wpdb query filter2230](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wpdb.php#L2230)
+precedes execution;placeholder_escape registers restoration at0 at2427-2428,
+and remove_placeholder_escape restores only its own marker at2458-2459.
+[WP_Hook registration semantics85-88](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wp-hook.php#L85)
+specify ascending priorities and insertion order within one priority. Hence0
+is NOT a sufficient observer fix:the observer is installed before core prepares
+its first value. Pinned default-filters.php has no query-hook registration.
+This is not an assertion of arbitrary third-party callback compatibility.
+
+Worker initial registration now uses1,immediately after core restoration0.
+Router exact removal and reattachment both use the same1;removal still checks
+that only the owned observer is absent. Core's normalizer remains registered.
+Observer/tokenizer/classifier,strict expiry literals and ownership/phase checks,
+1024/256 SQL ceilings,source identities,private diagnostics,resource budgets,
+cleanup and workflow flags are unchanged. No marker matching/rewriting is added
+to the observer;it still returns its exact input bytes. Only genuine core owns
+normalization. Existing frozen stage manifests derive new worker/router identities
+from actual bytes;no stale digest is bypassed or new executable cohort admitted.
+
+New isolated test extracts/executes the three actual registration/removal calls
+and the actual observer through an explicit minimal hook-order/placeholder model.
+Red baseline:prepared expiry failed sql-shape before any simulated executor;
+after the repair new4/4 and focused25/25 pass. Two marker variants,both expiry
+shapes,quoted/percent literals,normalization absence,unknown markers,foreign
+aliases,multi-statement/comments,setup/request budgets,protected reads,request
+writes and router handoff are covered. Denials cannot reach the simulated
+executor;positive accounting/byte equality prevent an always-unavailable owner
+from passing. Seven RAM controls assertion-kill early/equal priority,wrong
+removal/reattachment,missing shape/budget guard and changed return bytes;no
+syntax/TypeError credit. Existing classifier guard hash remains unchanged.
+
+Final local Node232/232,failures/skips0;PHPCS299/299,focused2/2,structure and
+asset build pass. Full local PHP3070/25340,errors/failures0,skips2. Signer-only
+local5/9 confirms both Sodium-unavailable skips,not silent success. Ordinary
+exact-head publication results belong in the toolkit source-scoped closeout
+after actual CI completion,not inferred from these local results.
+
+Canonical Feature Light SOURCE-SCOPED:4 files reviewed(two PHP call sites,new
+ordering test,unchanged observer),plus direct setup/installer/source-manifest
+consumers. Scope:Other/CI-only SQL observation;no UI/public API. Issues found0,
+auto-fixed0,manual decisions0 after the requested ordering repair. No significant
+non-security issue remains. No bloat review warranted:three changed hook calls,
+short comments,one cohesive85-line test,no duplication of production algorithms
+or new runtime abstraction. No UI workflow or full pre-release refresh.
+
+Final canonical Feature Security SOURCE-SCOPED:fixed hook priority,unchanged
+literal/phase/ownership/budget/protected-read refusal,exact remove/re-add and
+same-byte observer reviewed. No new input,output,write authority or callback
+executor;fixed test eval only contains repository source,not request input.
+No remaining scoped security defect;regression handoff:no confirmed security
+defect requires new coverage beyond the ordering/guard tests implemented here.
+
+Proof limits:the hook API and placeholder are explicit models,not genuine
+WP_Hook/wpdb/authentication/storage/transaction or HTTP proof. No SQL executed.
+No physical installer success,full callback-registry containment,pre-router
+containment or production readiness claim. Historical native evidence is retained
+at its original frozen head,not promoted to the repaired source cohort.
+
+Implementation-plan progress:source-backed installer compatibility corrected at
+the isolated layer;functional HTTP qualification still pending. Milestones4/10,
+original10/10 native allowance plus2 consumed ONE supplements,cumulative35,
+unchanged. Recommended next gated slice:ONE Exact-Head Genuine-HTTP Owned
+Requalification and Cleanup Attempt on the published repaired head,with fresh
+prerequisites and exact owned cleanup,existing ephemeral CI lab only,functional
+HTTP/no pre-router containment claim. Requires fresh explicit native authority;
+this approval is fulfilled without a dispatch or ceiling reset.
+
 ## Setup-only diagnostic localized placeholder/filter ordering — 2026-11-17
 
 User approved ONE bounded installer diagnostic/exact cleanup at66d674b,not another
