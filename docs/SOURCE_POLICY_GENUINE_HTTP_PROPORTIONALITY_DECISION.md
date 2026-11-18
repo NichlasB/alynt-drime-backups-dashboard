@@ -2,6 +2,12 @@
 
 ## Subsequent contract admission and isolated implementation — 2026-11-18
 
+Current resume:the [worker/controller preparation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md)
+is now implemented with isolated tests,execution disabled. Next gate is fixed
+native loader/controller integration plus ONE owned CI qualification/cleanup
+attempt with separate authority,not repeated approval of the admitted contract.
+The admission checkpoint below is historical;HTTP feasibility remains Unknown.
+
 User has now explicitly admitted the initialized-fixture v2 contract and approved
 the repository-only [dormant foundation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md).
 The recommendation/proposed-authority language below records the completed

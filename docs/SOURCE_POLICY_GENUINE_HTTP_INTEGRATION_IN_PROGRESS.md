@@ -1,5 +1,17 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Initialized-fixture worker/controller preparation — 2026-11-18
+
+[Owning completed preparation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md)
+adds isolated fixed worker/query-guard and controller/release/baseline/cleanup
+composition. PHP completion packets round-trip into the JS lifecycle/controller;
+no native loader,actual WordPress/SQL/fixtures/HTTP or production wiring added.
+V1 executable path and all measured guards/budgets unchanged;execution false.
+HTTP remains unqualified,3/3 recovery exhausted,cumulative41,milestones4/10.
+Next gated slice:Initialized-Fixture Native Loader/Controller Integration and ONE
+Owned Ephemeral-CI Qualification/Cleanup Attempt,audit first/fresh prerequisites/
+exact cleanup. Separate native authority required;no automatic allowance reset.
+
 ## Initialized-fixture contract admitted; isolated foundation — 2026-11-18
 
 [Owning source-scoped foundation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md)

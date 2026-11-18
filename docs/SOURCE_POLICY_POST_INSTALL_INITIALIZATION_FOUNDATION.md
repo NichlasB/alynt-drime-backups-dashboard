@@ -1,5 +1,84 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Worker/controller integration preparation — 2026-11-18
+
+User approved Repository-Only Initialized-Fixture Worker/Controller Integration
+Preparation through isolated validation,commit/push/exact-head ordinary CI;
+execution and production wiring stay disabled. R2 preparation only,not authority
+for a native bootstrap/authentication/SQL/fixture or manual qualification attempt.
+Coherent clean/synced source/review/restore baseline:
+`df1de0ac0015a03de42ebacb24a249d68330d526` (ordinary CI44399780458 reverified
+actually successful). Toolkit baseline`fb4ff82d337eb9e6ae0b0bea6e591378066a6e3a`.
+Version0.1.77/schema8/PHP7.4/WordPress6.0 unchanged;uploader outside this scope.
+
+The new definitions-only [worker preparation](../scripts/ci/source-policy-http-initialized-worker.php)
+binds the foundation ticket to its supplied run/head/image/root identity before
+registering callbacks. One modeled bootstrap and shutdown run under the existing
+per-query credit/SQL guard;query priority1 follows core placeholder restoration0.
+Transport,mail,local-network and hard-rewrite attempts immediately poison/fail,
+including swallowed or late attempts. Full bootstrap/non-installing/no-SHORTINIT,
+protected/cache/owner/session/source/anchor facts must be supplied and valid;
+unobserved fields are not silently filled with zero. A count/binding completion
+packet is emitted only after exact owned callback removal. Unrelated callbacks
+are preserved;unknown removal or failed observations cannot become completion.
+
+The pure [controller preparation](../scripts/ci/source-policy-http-initialized-controller.mjs)
+admits the exact v2 profile/manifest before callbacks,then consumes the installer
+receipt,ONE versioned worker packet,separate all-server release DATA and complete
+baseline in order. Remaining installer+initializer credit/time never resets.
+Original600s job,60s setup,60s future HTTP and30s cleanup reserve remain. Cleanup
+is attempted after owned setup starts,even when setup/worker/release/baseline fails;
+matching zero-resource DATA is mandatory. First safe failure stage and unknown
+cleanup are both retained,without callback error text or a second initialization.
+The isolated result is closed after modeled cleanup,not a live HTTP handoff.
+
+All execution markers remain false. There is no native adapter,core loader,
+CLI entry,process/listener/SQL executor,HTTP start or workflow dispatch/caller.
+Existing v1 native worker/setup/controller/router/safety/workflows and production
+includes remain byte-identical to this source baseline. Adding source files can
+change future staged image identities;no prior native receipt is refreshed or
+silently relabeled v2. No dependency/install/package/tag/release/deploy action.
+
+SOURCE-SCOPED canonical Feature Light:four new code/test files plus this record
+and four owning resumes;direct unchanged profile/lifecycle/query guard/native
+caller/source-staging/recovery paths inspected. Fixed loss of the original safe
+failure when callback cleanup also fails. No remaining scoped quality issue.
+Two cohesive helpers reuse the foundation instead of duplicating its SQL/model
+logic;no meaningful bloat/structure or UI/UX workflow trigger (backend-only).
+Final Feature Security SOURCE-SCOPED:fixed late-effect poisoning being overwritten
+by closed state and first-clock callback errors escaping safe labels. Permanent
+isolated tests protect both,plus guard ordering,role/cohort/credit/replay and
+denied-before-executor behavior. No remaining scoped confirmed defect or07A
+handoff. No whole-plugin review row or release prerequisite is refreshed.
+
+New tests:13 isolated tests with8 RAM-only behavioral guard/omission controls;
+actual PHP packet round-trips into the JS controller/lifecycle without JSON or
+filled-in success fields. All HTTP isolated tests129/129 passed,no skips. Red
+late-poison and dual-failure assertions were observed before the fixes. Full local
+Node284/284,no failures/skips;PHP3070/25340,0 errors/failures,2 existing Sodium-
+unavailable skips (signer verbose5/9 confirms both reasons). PHPCS302/302,
+structure,build,330 relative links and whitespace passed. Exact-head CI evidence
+is recorded in the source-scoped toolkit closeout after actual completion,not
+inferred from model output.
+
+Proof limits:API closures and hook doubles are NOT genuine full-core/bootstrap,
+stock shutdown/destructor completion,source origins,complete native hook-graph
+admission,protected/cache absence,physical release/cleanup or cancellation proof.
+The fixed native loader/private transport/recovery wiring and measured v2 HTTP
+receipt path are still absent. Actual containment/source/readback observers and
+full strict13-case/25-exchange HTTP phase must be integrated and qualified under
+separate authority;the finite candidate SQL grammar may still refuse core.
+No Database Review,pre-router containment,installed graph or product completion.
+
+Implementation-plan progress:worker/query guard/controller completion ordering
+now has tested dormant preparation,not native qualification. Recovery3/3 remains
+exhausted,cumulative41 and milestones4/10 unchanged. Recommended next gated slice:
+**Initialized-Fixture Native Loader/Controller Integration and ONE Owned
+Ephemeral-CI Qualification/Cleanup Attempt**,audit first with fresh prerequisites,
+exact owned cleanup and unchanged guards/budgets. That requires separate explicit
+native authority;no LocalWP,production wiring or application switch is included.
+The original foundation checkpoint below is historical,not an outstanding approval.
+
 ## Approved boundary and implementation — 2026-11-18
 
 User admitted the [initialized-fixture contract](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md)

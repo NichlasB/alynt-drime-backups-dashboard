@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Worker/controller preparation complete; native integration remains gated — 2026-11-18
+
+[Owning preparation and proof limits](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md)
+now connects the fixed query guard to a one-use isolated worker packet and a
+controller requiring installer credit,initializer completion,independent release,
+full baseline and owned cleanup DATA. Existing native entry/callers and production
+wiring unchanged;execution markers false. Isolated tests are not genuine bootstrap,
+SQL,shutdown,HTTP or cleanup proof. Recovery3/3 exhausted,cumulative41,
+milestones4/10 unchanged. Next gated slice:Initialized-Fixture Native Loader/
+Controller Integration and ONE Owned Ephemeral-CI Qualification/Cleanup Attempt,
+audit first with fresh prerequisites and exact cleanup. No native attempt has
+been authorized or consumed in this repository-only preparation.
+
 ## Initialized-fixture contract admitted; dormant foundation — 2026-11-18
 
 [Owning foundation and proof limits](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md):
