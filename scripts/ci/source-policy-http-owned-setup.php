@@ -37,6 +37,41 @@ function adbh_prepare_core_events() {
 	}
 }
 
+/** Complete only the pinned default-widget initialization skipped before install. */
+function adbh_prepare_core_widgets() {
+	global $wp_widget_factory;
+	adbh_check( 'setup' === ADB_HTTP_WORKER && 'seed' === $GLOBALS['adbh_stage'] && ! wp_installing() && true === DISABLE_WP_CRON, 'core-widgets-context' );
+	adbh_check( is_object( $wp_widget_factory ) && 'WP_Widget_Factory' === get_class( $wp_widget_factory ) && array() === $wp_widget_factory->widgets, 'core-widgets-before' );
+	// wp_widgets_init returned before registration when the database was absent.
+	// Its fixed core callbacks now prepare missing settings before the seal.
+	wp_widgets_init();
+	$classes = array(
+		'WP_Widget_Pages',
+		'WP_Widget_Calendar',
+		'WP_Widget_Archives',
+		'WP_Widget_Media_Audio',
+		'WP_Widget_Media_Image',
+		'WP_Widget_Media_Gallery',
+		'WP_Widget_Media_Video',
+		'WP_Widget_Meta',
+		'WP_Widget_Search',
+		'WP_Widget_Text',
+		'WP_Widget_Categories',
+		'WP_Widget_Recent_Posts',
+		'WP_Widget_Recent_Comments',
+		'WP_Widget_RSS',
+		'WP_Widget_Tag_Cloud',
+		'WP_Nav_Menu_Widget',
+		'WP_Widget_Custom_HTML',
+		'WP_Widget_Block',
+	);
+	adbh_check( array_keys( $wp_widget_factory->widgets ) === $classes, 'core-widgets-registry' );
+	foreach ( $classes as $class ) {
+		$widget = $wp_widget_factory->widgets[ $class ];
+		adbh_check( is_object( $widget ) && get_class( $widget ) === $class && is_array( get_option( $widget->option_name ) ), 'core-widget-readback' );
+	}
+}
+
 try {
 	$_SERVER['HTTP_HOST']      = '127.0.0.1:18777';
 	$_SERVER['SERVER_NAME']    = '127.0.0.1';
@@ -55,6 +90,7 @@ try {
 	wp_installing( false );
 	$GLOBALS['adbh_stage'] = 'seed';
 	adbh_prepare_core_events();
+	adbh_prepare_core_widgets();
 	foreach ( array( array( 'owned_two', 'owned-two@example.invalid', 'administrator' ), array( 'owned_low', 'owned-low@example.invalid', 'subscriber' ) ) as $index => $row ) {
 		$owned_user_id = wp_create_user( $row[0], $p['password'], $row[1] );
 		adbh_check( $index + 2 === $owned_user_id, 'owned-user-id' );

@@ -41,14 +41,19 @@ four-write availability positive; wrong context/install mode/stage/cron flag,
 preexisting events, false/error scheduling and missing/malformed readback refuse.
 Six RAM semantic controls cover event identity/recurrence, omitted scheduling,
 absence/readback and setup admission. These are doubles, not genuine core/SQL or
-physical scheduling proof. Actual red0/5,green5/5,six assertion-killed controls;
-full Node250/250,no failures/skips in normal Windows execution. The sandboxed
+physical scheduling proof. Actual initial red0/5,green5/5,six event controls;
+subsequent widget source extension below gives6/6,nine total semantic controls.
+Full initial Node250/250,no failures/skips in normal Windows execution. The sandboxed
 Node run had two existing path-sensitive failures;unchanged targeted8/8 and full
 250/250 pass outside path virtualization. PHP syntax,PHPCS300/300,structure,
 build and314 owning relative links pass. Initial sandbox build output writes
 were denied;normal repository build succeeds with no generated diff. Full local
-PHP sandbox run is not accepted as validation (owned filesystem-fixture errors);
-normal-context rerun and ordinary exact-head CI remain required/pending. No test
+PHP sandbox run is not accepted as validation (owned filesystem-fixture errors
+and omitted existing ADB_STATIC_ANALYSIS_PYTHON setting). Correctly configured
+normal-context PHP3070/25340 has0 errors/failures and2 existing Sodium skips.
+Initial e402cfe ordinary CI44378254175 actually completed/success:PHP7.4 3070/25342,
+PHP8.3 3070/25347,plain OK/no skips;Node250/250 each,no failures/skips,audits0.
+Final widget-extension exact-head CI remains required before native dispatch. No test
 or source-identity guard was weakened to accommodate sandbox artifacts.
 
 Canonical Feature Light and final Feature Security SOURCE-SCOPED cover the two
@@ -59,6 +64,25 @@ No public UI touched; UI review N/A. No meaningful duplication/bloat or need for
 an additional structural framework. Checked core API failures, fixed hook set,
 setup-only scope and unchanged pre-execution denial/source/cleanup boundaries.
 No whole-plugin release-readiness refresh or Database Review claim.
+
+Pre-dispatch adjacent pinned source audit found another deterministic setup gap,
+without consuming a native attempt or adding diagnostics:
+[wp_widgets_init1836-1839](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/widgets.php#L1836)
+returns before registration on the uninstalled bootstrap, while
+[WP_Widget::get_settings611-625](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wp-widget.php#L611)
+saves absent settings during first registration. Installer populate_options seeds
+only widget_categories/text/rss (schema509-511); installer defaults seed a subset
+of other widgets, not the entire registry. Setup now runs this single pinned
+core routine after installation, validates the empty-before/exact18-class-after
+factory and array settings readback before seal. No blanket bootstrap or hooks
+removed;future request registration remains genuine. Fixed callbacks run only
+inside already owned setup admission. Isolated model proves missing-setting
+availability,existing-setting preservation,scope/readback/registry rejection and
+three further assertion-killed controls;it is not physical core-widget proof.
+Final local Node251/251,failures/skips0;focused6/6,PHP syntax and focused PHPCS pass.
+The existing full PHP suite passed3070/25340 with only the2 documented Sodium
+skips;signer5/9 verbose confirms both reasons. No native attempt consumed during
+this source-backed extension;ordinary exact-head CI must cover the new bytes.
 
 Implementation-plan progress: concrete setup preparation, not HTTP completion.
 Next within authorization: exact-head ordinary CI, fresh prerequisites and first

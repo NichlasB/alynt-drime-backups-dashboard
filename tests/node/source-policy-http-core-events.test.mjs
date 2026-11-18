@@ -6,7 +6,7 @@ const root=new URL('../../',import.meta.url);
 const read=p=>readFileSync(new URL(p,root),'utf8');
 const setup=read('scripts/ci/source-policy-http-owned-setup.php');
 const observer=read('scripts/ci/source-policy-http-owned-observer.php');
-function body(source=setup){const m=source.match(/function adbh_prepare_core_events\(\) \{[\s\S]+?\n\}/);assert.ok(m,'actual setup preparation exists');return m[0];}
+function body(source=setup,name='events'){const m=source.match(new RegExp('function adbh_prepare_core_'+name+'\\(\\) \\{[\\s\\S]+?\\n\\}'));assert.ok(m,'actual setup preparation exists');return m[0];}
 const api=String.raw`
 function need($ok,$label){if(!$ok)throw new RuntimeException($label);}
 function adbh_check($ok,$label){need($ok,$label);}
@@ -33,10 +33,22 @@ function proof(){
  need(4===$GLOBALS['adbh_ledger']['setup'] && 0===$GLOBALS['adbh_ledger']['bootstrap'],'setup-accounting');
 }
 `;
-function run({source=setup,fault='',purpose='setup',installing=false,stage='seed',cron=true,existing=false}={}){
+const widgetApi=String.raw`
+class WP_Widget_Factory {public $widgets=array();}
+$GLOBALS['wp_widget_factory']=new WP_Widget_Factory();$GLOBALS['options']=array();
+$GLOBALS['classes']=array('WP_Widget_Pages','WP_Widget_Calendar','WP_Widget_Archives','WP_Widget_Media_Audio','WP_Widget_Media_Image','WP_Widget_Media_Gallery','WP_Widget_Media_Video','WP_Widget_Meta','WP_Widget_Search','WP_Widget_Text','WP_Widget_Categories','WP_Widget_Recent_Posts','WP_Widget_Recent_Comments','WP_Widget_RSS','WP_Widget_Tag_Cloud','WP_Nav_Menu_Widget','WP_Widget_Custom_HTML','WP_Widget_Block');
+foreach($GLOBALS['classes'] as $index=>$class){eval('class '.$class.' {public $option_name="widget_'.$index.'";}');if(in_array($index,array(9,10,13),true))$GLOBALS['options']['widget_'.$index]=array();}
+function wp_widgets_init(){
+ foreach($GLOBALS['classes'] as $class){$w=new $class();$GLOBALS['wp_widget_factory']->widgets[$class]=$w;if(!isset($GLOBALS['options'][$w->option_name])){adbh_owned_observe("INSERT INTO adbh_abcdef123456_options (option_name, option_value) VALUES ('synthetic-widget', 'synthetic-setting')");++$GLOBALS['executed'];$GLOBALS['options'][$w->option_name]=array('_multiwidget'=>1);}}
+ if($GLOBALS['fault']==='registry')unset($GLOBALS['wp_widget_factory']->widgets['WP_Widget_Block']);
+}
+function get_option($name){return $GLOBALS['fault']==='setting'?false:($GLOBALS['options'][$name]??false);}
+function widgetProof(){adbh_prepare_core_widgets();need(array_keys($GLOBALS['wp_widget_factory']->widgets)===$GLOBALS['classes'],'all-eighteen-registered');need(15===$GLOBALS['executed'],'only-missing-settings-written');need(18===count($GLOBALS['options']),'all-settings-ready');foreach(array(9,10,13) as $i)need(array()===$GLOBALS['options']['widget_'.$i],'existing-settings-preserved');}
+`;
+function run({source=setup,fault='',purpose='setup',installing=false,stage='seed',cron=true,existing=false,name='events'}={}){
  const header=`define('ADB_HTTP_WORKER',${JSON.stringify(purpose)});define('DISABLE_WP_CRON',${cron?'true':'false'});$GLOBALS['adbh_stage']=${JSON.stringify(stage)};$GLOBALS['installing']=${installing?'true':'false'};$GLOBALS['fault']=${JSON.stringify(fault)};$GLOBALS['events']=array();$GLOBALS['executed']=0;$GLOBALS['adbh_private']=array('prefix'=>'adbh_abcdef123456_');$GLOBALS['adbh_ledger']=array('setup'=>0,'bootstrap'=>0,'auth'=>0);`;
  const init=existing?"$GLOBALS['events']['recovery_mode_clean_expired_keys']=(object)array('timestamp'=>123);":'';
- const code=header+observer.replace(/^<\?php/,'')+api+body(source)+init+`proof();echo 'ok';`;
+ const code=header+observer.replace(/^<\?php/,'')+api+(name==='widgets'?widgetApi:'')+body(source,name)+init+(name==='widgets'?'widgetProof();':'proof();')+`echo 'ok';`;
  return spawnSync(process.env.PHP_BINARY??'php',['-n','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:8192});
 }
 function passed(r){assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');assert.equal(r.stdout,'ok');}
@@ -52,6 +64,16 @@ test('failed scheduling and missing or malformed event readback fail closed',()=
 test('source call remains after install-mode exit and before setup finalization/baseline sealing',()=>{
  const call=setup.indexOf('\n\tadbh_prepare_core_events();');assert.ok(call>setup.indexOf('\n\twp_installing( false );'));assert.ok(call<setup.indexOf('\n\tregister_shutdown_function('));
  const controller=read('scripts/ci/source-policy-http-owned-controller.mjs');assert.ok(controller.indexOf('const setup=JSON.parse(raw)')<controller.indexOf('db.seal(s,'));
+});
+test('actual finite core-widget preparation preserves existing settings and uses only setup admission',()=>{
+ passed(run({name:'widgets'}));for(const options of [{purpose:'request'},{installing:true},{stage:'core-bootstrap'},{cron:false}])failed(run({...options,name:'widgets'}),'core-widgets-context');
+ failed(run({name:'widgets',fault:'registry'}),'core-widgets-registry');failed(run({name:'widgets',fault:'setting'}),'core-widget-readback');
+ const call=setup.indexOf('\n\tadbh_prepare_core_widgets();');assert.ok(call>setup.indexOf('\n\tadbh_prepare_core_events();'));assert.ok(call<setup.indexOf('\n\tregister_shutdown_function('));
+ for(const [from,to,options,oracle]of [
+  ['\n\twp_widgets_init();','\n\t/* omitted */',{},passed],
+  ["is_array( get_option( $widget->option_name ) )",'true',{fault:'setting'},r=>failed(r,'core-widget-readback')],
+  ["array_keys( $wp_widget_factory->widgets ) === $classes",'true',{fault:'registry'},r=>failed(r,'core-widgets-registry')],
+ ]){assert.ok(setup.includes(from));const r=run({...options,name:'widgets',source:setup.replace(from,to)});assert.equal(r.error,undefined);assert.doesNotMatch(r.stderr+r.stdout,/Parse error|syntax error|TypeError/);assert.throws(()=>oracle(r),{code:'ERR_ASSERTION'});}
 });
 test('guard removal, missing preparation and altered event controls are assertion-killed',()=>{
  const controls=[

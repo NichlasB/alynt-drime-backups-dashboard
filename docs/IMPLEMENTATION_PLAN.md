@@ -4,8 +4,9 @@
 
 [Owning diagnosis/repair/authorization record](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
 identifies recovery-mode cron initialization skipped by installation and three
-later same-pattern core events. Prepare exactly those four during owned setup,
-verify core API success/readback before baseline seal, retain every request-write
+later same-pattern core events,plus default-widget registration skipped before
+the database exists. Prepare the four events and finite pinned widget registry
+during owned setup,verify API/registry/settings readback before baseline seal,retain every request-write
 and non-target invariant. Isolated preparation is not physical HTTP proof.
 User approved implementation/publication plus a separate new up-to3-attempt CI-lab
 recovery allowance;used0/3,cumulative38,milestones4/10 unchanged at preparation.
