@@ -1,5 +1,14 @@
 # Genuine-HTTP Owned-Storage and Installed-Graph Qualification Design
 
+Proportionality review — 2026-11-18:
+[initialized-fixture decision proposal](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md)
+recommends one bounded genuine normal post-install bootstrap during fixture setup,
+then unchanged strict measured HTTP guards/full non-target invariants. This is
+NOT an active amendment or native authority;existing v1 remains unchanged and
+unqualified,3/3 recovery allowance exhausted,cumulative41,milestones4/10. Explicit
+v2 fixture-contract admission/isolated foundation approval is next;no request
+write exceptions,extra diagnostics,budget increase or production wiring selected.
+
 Selected assurance amendment — 2026-11-13: [private-producer admission decision](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
 resolves the audit gate below. Functional HTTP only: body/header limits apply to
 bounded producer emission and independently checked router input, not pre-router

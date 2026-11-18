@@ -1,5 +1,29 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Design-only proportionality review completed — 2026-11-18
+
+[Owning decision](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md) finds
+the current cold whole-core write prohibition stronger than the product-specific
+save/auth contract and original owned-storage design. Selected recommendation:
+one bounded genuine post-install normal CLI bootstrap in fixture setup,then
+the SAME strict HTTP phase,not request-write exceptions,namespace exclusions,
+CLI HTTP credit or repeat-until-quiet initialization. Total setup clock/SQL credit
+must span installer and initializer;protected policy/owner effects remain forbidden
+in the new role,source/containment/release/cleanup preserved. No new diagnostic
+framework or resource allowance. Fresh initializer is a proposed fixture-contract
+change,not an implemented or proven solution to the Unknown remaining writer.
+
+Explicit scope this turn:documentation/isolated validation/publication/exact-head
+ordinary CI only. No executable/test/workflow/dependency/pin/acceptance change,
+native/site/SQL/fixture operation or production wiring. Existing isolated HTTP101/101
+and targeted PHP183/1039 pass,no errors/failures/skips;381 relative links/whitespace
+pass. Exact-head publication evidence belongs in the
+toolkit source-scoped closeout. Historical failed runs and Unknowns remain intact.
+HTTP not qualified;3/3 allowance exhausted,cumulative41,milestones4/10 unchanged.
+Next gated slice:admit the proposed initialized-fixture v2 contract and Repository-
+Only Post-Install Bootstrap Fixture Initialization Safety Foundation,isolated
+API/DATA/virtual-clock tests only;native integration/attempt remain separately gated.
+
 ## Bounded recovery exhausted; HTTP remains unqualified — 2026-11-18
 
 User-approved autonomous recovery completed through implementation,isolated

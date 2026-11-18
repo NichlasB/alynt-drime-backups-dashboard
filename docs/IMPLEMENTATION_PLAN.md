@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Proportional HTTP proof review complete; initialized-fixture proposal — 2026-11-18
+
+[Design decision](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md) separates
+the actual source-policy conditional-save/authentication requirements from the
+stronger cold whole-core immutability premise. Recommend ONE genuine normal
+post-install CLI bootstrap as bounded fixture setup,then the SAME strict measured
+HTTP13-case phase/full non-target invariants. CLI setup is not HTTP/auth success.
+This is a proposal only:runtime/acceptance/tests/diagnostics/workflows/wiring are
+unchanged,HTTP remains unqualified.3/3 allowance exhausted,cumulative41,
+milestones4/10 unchanged. Next genuine gate:approve the proposed initialized-
+fixture v2 contract and Repository-Only Post-Install Bootstrap Fixture
+Initialization Safety Foundation,isolated tests only. No native attempt or
+production switch is implied;shared setup60s/1024 SQL and all other budgets stay.
+
 ## Bounded recovery closeout; next proof-design decision — 2026-11-18
 
 [Final d9845b9/run44382372626 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

@@ -1,5 +1,14 @@
 # Current-Cohort W/L and Genuine-HTTP Qualification Closure Design
 
+Current design review — 2026-11-18:
+[proportional initialized-fixture proposal](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md)
+recommends one genuine normal post-install CLI bootstrap as setup,not HTTP proof,
+then the existing strict13-case HTTP/normal-login contract. No runtime/acceptance
+change enacted,HTTP remains unqualified and later installed-graph/cohesive-switch
+gates remain.3/3 recovery allowance exhausted,cumulative41,milestones4/10 unchanged.
+Next gate:explicit v2 fixture-contract admission and repository-only initializer
+safety foundation using isolated tests;no native attempt or diagnostic extension.
+
 Current admission — 2026-11-13: [private functional HTTP selected](SOURCE_POLICY_PRIVATE_HTTP_ENVELOPE_ADMISSION_DECISION.md)
 with unchanged budgets/guards and no pre-router containment claim. Resource
 decision below resolved; genuine HTTP integration/proof still pending. Next is
