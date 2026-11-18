@@ -10,6 +10,33 @@ if ( 'cli' !== PHP_SAPI || array( __FILE__, '--owned-http-setup' ) !== $argv ) {
 	exit( 1 ); }
 require __DIR__ . '/source-policy-http-owned-worker.php';
 require_once __DIR__ . '/source-policy-http-owned-diagnostic.php';
+
+/** Prepare install-skipped core events in owned setup, never in request scope. */
+function adbh_prepare_core_events() {
+	adbh_check( 'setup' === ADB_HTTP_WORKER && 'seed' === $GLOBALS['adbh_stage'] && ! wp_installing() && true === DISABLE_WP_CRON, 'core-events-context' );
+	// Pinned recovery mode, Site Health and privacy bootstrap callbacks schedule
+	// these only outside installation. DISABLE_WP_CRON prevents spawning, not seeding.
+	$events = array(
+		'recovery_mode_clean_expired_keys'          => array( 'daily', 86400, 0 ),
+		'wp_site_health_scheduled_check'            => array( 'weekly', 604800, 86400 ),
+		'wp_privacy_delete_old_export_files'        => array( 'hourly', 3600, 0 ),
+		'wp_privacy_personal_data_cleanup_requests' => array( 'daily', 86400, 0 ),
+	);
+	$now    = time();
+	foreach ( $events as $hook => $spec ) {
+		adbh_check( false === wp_next_scheduled( $hook ), 'core-event-absence' );
+		$timestamp = $now + $spec[2];
+		adbh_check( true === wp_schedule_event( $timestamp, $spec[0], $hook, array(), true ), 'core-event-schedule' );
+		$event = wp_get_scheduled_event( $hook );
+		adbh_check(
+			is_object( $event ) && 'stdClass' === get_class( $event )
+			&& $event->timestamp === $timestamp && $event->schedule === $spec[0]
+			&& array() === $event->args && $event->interval === $spec[1],
+			'core-event-readback'
+		);
+	}
+}
+
 try {
 	$_SERVER['HTTP_HOST']      = '127.0.0.1:18777';
 	$_SERVER['SERVER_NAME']    = '127.0.0.1';
@@ -27,6 +54,7 @@ try {
 	unset( $result );
 	wp_installing( false );
 	$GLOBALS['adbh_stage'] = 'seed';
+	adbh_prepare_core_events();
 	foreach ( array( array( 'owned_two', 'owned-two@example.invalid', 'administrator' ), array( 'owned_low', 'owned-low@example.invalid', 'subscriber' ) ) as $index => $row ) {
 		$owned_user_id = wp_create_user( $row[0], $p['password'], $row[1] );
 		adbh_check( $index + 2 === $owned_user_id, 'owned-user-id' );

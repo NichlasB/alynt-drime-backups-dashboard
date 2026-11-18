@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Finite bootstrap fixture preparation and bounded recovery — 2026-11-18
+
+[Owning diagnosis/repair/authorization record](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+identifies recovery-mode cron initialization skipped by installation and three
+later same-pattern core events. Prepare exactly those four during owned setup,
+verify core API success/readback before baseline seal, retain every request-write
+and non-target invariant. Isolated preparation is not physical HTTP proof.
+User approved implementation/publication plus a separate new up-to3-attempt CI-lab
+recovery allowance;used0/3,cumulative38,milestones4/10 unchanged at preparation.
+Next: finish ordinary exact-head CI then fresh prerequisites/owned qualification
+and cleanup;continue bounded in-scope recovery, no new slice approval pauses.
+No installed/local/live site operation, production wiring, release or deployment.
+
 ## Native evidence identifies blocked request-bootstrap option write — 2026-11-18
 
 [Exact11e0479/run44334984726 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

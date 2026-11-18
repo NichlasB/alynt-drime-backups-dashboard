@@ -1,5 +1,69 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Bounded fixture-preparation recovery authorized — 2026-11-18
+
+User approved the complete diagnosed recovery sequence: finite owned setup repair,
+meaningful isolated regressions, validation/commit/push/exact-head ordinary CI,
+then up to THREE new native attempts in the existing ephemeral CI lab, with
+evidence-backed correction and verified prior cleanup before every retry. This
+new allowance is separate from the consumed original10/10 and5 ONE supplements;
+historical cumulative38 and milestones4/10 are not reset. Used0/3 at preparation.
+No LocalWP/installed/live/client/Drime operation, production wiring, release,
+package, tag or deployment. No guard, acceptance or resource-budget relaxation.
+
+Source-scoped review/restore baseline:8b31b0b7123232bd4a56f617f5ca935f37bb1961,
+clean/synced before edits. Source diagnosis of pinned core
+db96f5eaa77a8d3e8eec8923a518fa2326f0d46a identifies a concrete install/request gap:
+[wp-settings.php573-575](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-settings.php#L573)
+calls recovery initialize;
+[recovery99-100](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wp-recovery-mode.php#L99)
+skips its daily cleanup event while installing, otherwise schedules it;
+[cron1304](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/cron.php#L1304)
+updates the cron option. Setup bootstraps with WP_INSTALLING true, later clears
+installation mode without repeating that preparation. DISABLE_WP_CRON stops
+spawning, not event registration. The native trace itself captured only the
+generic option update boundary; this upstream identification is source evidence,
+not a newly captured option key or proof of successful HTTP execution.
+
+Three later install-skipped callbacks have the same gap: Site Health weekly
+check at day+1
+([source3343](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-admin/includes/class-wp-site-health.php#L3343)),
+privacy export hourly cleanup and personal-data-request daily cleanup
+([source8551-8575](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/functions.php#L8551)).
+The repair prepares exactly these four events via genuine core APIs during owned
+setup seed only, checks absence, strict scheduling success and exact event
+readback before sealing. No blanket warm-up bootstrap, hook suppression, request
+write exception, diagnostic layer or request installation-mode bypass. Existing
+request SQL guard/non-target checks, source manifest and budgets remain intact.
+
+New isolated API/SQL-classifier tests exercise actual preparation source with a
+four-write availability positive; wrong context/install mode/stage/cron flag,
+preexisting events, false/error scheduling and missing/malformed readback refuse.
+Six RAM semantic controls cover event identity/recurrence, omitted scheduling,
+absence/readback and setup admission. These are doubles, not genuine core/SQL or
+physical scheduling proof. Actual red0/5,green5/5,six assertion-killed controls;
+full Node250/250,no failures/skips in normal Windows execution. The sandboxed
+Node run had two existing path-sensitive failures;unchanged targeted8/8 and full
+250/250 pass outside path virtualization. PHP syntax,PHPCS300/300,structure,
+build and314 owning relative links pass. Initial sandbox build output writes
+were denied;normal repository build succeeds with no generated diff. Full local
+PHP sandbox run is not accepted as validation (owned filesystem-fixture errors);
+normal-context rerun and ordinary exact-head CI remain required/pending. No test
+or source-identity guard was weakened to accommodate sandbox artifacts.
+
+Canonical Feature Light and final Feature Security SOURCE-SCOPED cover the two
+changed code/test files plus worker/controller/observer and source staging callers.
+Risk: R2 harness repair; separately approved R3 exclusively owned native fixtures.
+No significant remaining scoped quality/security finding or manual decision.
+No public UI touched; UI review N/A. No meaningful duplication/bloat or need for
+an additional structural framework. Checked core API failures, fixed hook set,
+setup-only scope and unchanged pre-execution denial/source/cleanup boundaries.
+No whole-plugin release-readiness refresh or Database Review claim.
+
+Implementation-plan progress: concrete setup preparation, not HTTP completion.
+Next within authorization: exact-head ordinary CI, fresh prerequisites and first
+new-allowance owned full HTTP attempt, then evidence-backed recovery if needed.
+
 ## ONE run identifies blocked bootstrap option write — 2026-11-18
 
 User explicitly approved ONE Exact-Head Genuine-HTTP Owned Requalification/Cleanup
