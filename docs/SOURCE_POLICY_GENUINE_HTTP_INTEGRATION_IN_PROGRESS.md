@@ -1,5 +1,58 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Recovery attempt1 and source-backed theme-cache preparation — 2026-11-18
+
+Final initial repair328ec56bf10040d360e2636ad42b9a6aef65f76c ordinary
+[CI44379141841](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44379141841)
+actually completed/success,both matching-head jobs:PHP7.4 3070/25342,PHP8.3
+3070/25347,plain OK/no skips;Node251/251 each,failures/skips0,Composer/npm audits0.
+Clean local/remote exact head and no concurrent native run verified before dispatch.
+
+New allowance attempt1/3
+[run44379644504](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44379644504)
+actually completed/failure at SAME328ec56. Fresh preflight/cleanup and native
+audit29/native0/SQL0 then291 checks/9 groups passed;genuine L audit211/native0/SQL0
+then23 cases/12006 checks/9 groups passed,independent live/post-exit zero.
+Setup including four-event/widget readback,containment,seal and server readiness
+cleared. Request1 still503/receipt absent/body0/header181/EOF true;actual bounded
+diagnostic core-bootstrap,RuntimeException,proof22,sql-shape digest unchanged,
+sql={branch:write-scope,caller:option,line:1142}. This is now the pinned add_option
+INSERT boundary,not the former update_option963. No HTTP matrix case completed.
+Exact native option key/upstream frame still not captured;do not present source
+inference as a recorded SQL value or complete bootstrap closure.
+
+HTTP exact-owned-zero,always recovery absent,final containers/directories/core
+checkout0,tmpfs released,reconciliation_failure0;all recovery steps successful.
+No leftover/unknown ownership. Used1/3 new allowance;historical23+10+5+1=
+cumulative39. Milestones4/10 unchanged;no retry or documentation milestone credit.
+
+Existing evidence justified source-only recovery,not another diagnostic layer:
+[theme pattern registration414-439](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/block-patterns.php#L414)
+skips absent active themes during installer bootstrap,then calls the genuine
+theme's get_block_patterns on request init. Its cold
+[cache setter2033-2064](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wp-theme.php#L2033)
+uses set_site_transient,which inserts owned options on a fresh single-site DB.
+This is a concrete additional write path;not proof it is the sole remaining one.
+
+Setup now calls only the pinned theme method,requiring exact WP_Theme,existing
+twentytwentyfive,no parent,exact private theme root and non-development mode.
+It verifies nonempty generated patterns and genuine transient/version/pattern
+readback plus expiry beyond the unchanged600-second outer job limit. It neither
+manufactures pattern data nor disables theme caching/hooks. Baseline is still
+sealed only after setup;every request write/protected-read/non-target/source/
+receipt/cleanup guard and budget stays unchanged. No production code/wiring.
+
+Source-scoped Feature Light/final Security extend the same8b31b0b coherent
+baseline and unchanged callers:fixed scope,strict checked readback,no output of
+cache contents or new diagnostic path. No remaining scoped quality/security
+finding;no UI/bloat workflow need or whole-plugin review claim. New isolated
+theme cases cover positive preparation and scope/theme/mode/cache/expiry refusals;
+three further assertion-killed controls,12 total. Focused7/7,full Node252/252,
+failures/skips0;PHP syntax/focused PHPCS,structure and315 relative links pass.
+These are isolated API/classifier models,not genuine core-cache/HTTP proof.
+Next within authorization:validate/publish exact new head,ordinary CI,then fresh
+prerequisites and attempt2/3 only after verified prior cleanup above.
+
 ## Bounded fixture-preparation recovery authorized — 2026-11-18
 
 User approved the complete diagnosed recovery sequence: finite owned setup repair,

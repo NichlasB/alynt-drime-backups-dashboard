@@ -72,6 +72,32 @@ function adbh_prepare_core_widgets() {
 	}
 }
 
+/** Seed the pinned theme's genuine pattern cache, not a synthetic request result. */
+function adbh_prepare_core_patterns() {
+	adbh_check( 'setup' === ADB_HTTP_WORKER && 'seed' === $GLOBALS['adbh_stage'] && ! wp_installing() && true === DISABLE_WP_CRON, 'core-patterns-context' );
+	adbh_check( false === wp_is_development_mode( 'theme' ), 'core-patterns-mode' );
+	$theme = wp_get_theme();
+	$root  = $GLOBALS['adbh_private']['content_path'] . '/themes';
+	adbh_check(
+		is_object( $theme ) && 'WP_Theme' === get_class( $theme ) && $theme->exists()
+		&& 'twentytwentyfive' === $theme->get_stylesheet() && false === $theme->parent()
+		&& $theme->get_theme_root() === $root,
+		'core-patterns-theme'
+	);
+	$now      = time();
+	$patterns = $theme->get_block_patterns();
+	$key      = 'wp_theme_files_patterns-' . md5( $root . '/twentytwentyfive' );
+	$cached   = get_site_transient( $key );
+	$expires  = get_option( '_site_transient_timeout_' . $key );
+	adbh_check(
+		is_array( $patterns ) && count( $patterns ) > 0 && is_array( $cached )
+		&& array( 'version', 'patterns' ) === array_keys( $cached )
+		&& $cached['version'] === $theme->get( 'Version' ) && $cached['patterns'] === $patterns
+		&& is_int( $expires ) && $expires >= $now + 600,
+		'core-patterns-readback'
+	); // Cache must outlive the unchanged ten-minute outer job ceiling.
+}
+
 try {
 	$_SERVER['HTTP_HOST']      = '127.0.0.1:18777';
 	$_SERVER['SERVER_NAME']    = '127.0.0.1';
@@ -91,6 +117,7 @@ try {
 	$GLOBALS['adbh_stage'] = 'seed';
 	adbh_prepare_core_events();
 	adbh_prepare_core_widgets();
+	adbh_prepare_core_patterns();
 	foreach ( array( array( 'owned_two', 'owned-two@example.invalid', 'administrator' ), array( 'owned_low', 'owned-low@example.invalid', 'subscriber' ) ) as $index => $row ) {
 		$owned_user_id = wp_create_user( $row[0], $p['password'], $row[1] );
 		adbh_check( $index + 2 === $owned_user_id, 'owned-user-id' );

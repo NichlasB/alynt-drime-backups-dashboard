@@ -45,10 +45,26 @@ function wp_widgets_init(){
 function get_option($name){return $GLOBALS['fault']==='setting'?false:($GLOBALS['options'][$name]??false);}
 function widgetProof(){adbh_prepare_core_widgets();need(array_keys($GLOBALS['wp_widget_factory']->widgets)===$GLOBALS['classes'],'all-eighteen-registered');need(15===$GLOBALS['executed'],'only-missing-settings-written');need(18===count($GLOBALS['options']),'all-settings-ready');foreach(array(9,10,13) as $i)need(array()===$GLOBALS['options']['widget_'.$i],'existing-settings-preserved');}
 `;
+const patternApi=String.raw`
+$GLOBALS['adbh_private']['content_path']='/owned/content';$GLOBALS['cached']=false;$GLOBALS['expiry']=false;
+function wp_is_development_mode($mode){need($mode==='theme','fixed-mode');return $GLOBALS['fault']==='development';}
+class WP_Theme {
+ function exists(){return true;}function get_stylesheet(){return $GLOBALS['fault']==='foreign-theme'?'other':'twentytwentyfive';}function parent(){return false;}function get_theme_root(){return '/owned/content/themes';}function get($name){need($name==='Version','fixed-version');return '1.4';}
+ function get_block_patterns(){
+  $patterns=array('owned/pattern'=>array('title'=>'Synthetic only'));
+  if($GLOBALS['fault']!=='missing-cache'){adbh_owned_observe("INSERT INTO adbh_abcdef123456_options (option_name, option_value) VALUES ('synthetic-pattern-cache', 'synthetic-setting')");++$GLOBALS['executed'];$GLOBALS['cached']=array('version'=>'1.4','patterns'=>$patterns);$GLOBALS['expiry']=time()+1800;}
+  return $GLOBALS['fault']==='empty'?array():$patterns;
+ }
+}
+function wp_get_theme(){return new WP_Theme();}
+function get_site_transient($key){need($key==='wp_theme_files_patterns-'.md5('/owned/content/themes/twentytwentyfive'),'fixed-cache-key');$v=$GLOBALS['cached'];if(is_array($v)&&$GLOBALS['fault']==='version')$v['version']='wrong';return $v;}
+function get_option($key){need($key==='_site_transient_timeout_wp_theme_files_patterns-'.md5('/owned/content/themes/twentytwentyfive'),'fixed-expiry-key');return $GLOBALS['fault']==='expired'?time()-1:$GLOBALS['expiry'];}
+function patternProof(){adbh_prepare_core_patterns();need(1===$GLOBALS['executed']&&is_array($GLOBALS['cached']),'actual-cache-preparation');}
+`;
 function run({source=setup,fault='',purpose='setup',installing=false,stage='seed',cron=true,existing=false,name='events'}={}){
  const header=`define('ADB_HTTP_WORKER',${JSON.stringify(purpose)});define('DISABLE_WP_CRON',${cron?'true':'false'});$GLOBALS['adbh_stage']=${JSON.stringify(stage)};$GLOBALS['installing']=${installing?'true':'false'};$GLOBALS['fault']=${JSON.stringify(fault)};$GLOBALS['events']=array();$GLOBALS['executed']=0;$GLOBALS['adbh_private']=array('prefix'=>'adbh_abcdef123456_');$GLOBALS['adbh_ledger']=array('setup'=>0,'bootstrap'=>0,'auth'=>0);`;
  const init=existing?"$GLOBALS['events']['recovery_mode_clean_expired_keys']=(object)array('timestamp'=>123);":'';
- const code=header+observer.replace(/^<\?php/,'')+api+(name==='widgets'?widgetApi:'')+body(source,name)+init+(name==='widgets'?'widgetProof();':'proof();')+`echo 'ok';`;
+ const code=header+observer.replace(/^<\?php/,'')+api+({widgets:widgetApi,patterns:patternApi}[name]??'')+body(source,name)+init+({widgets:'widgetProof();',patterns:'patternProof();'}[name]??'proof();')+`echo 'ok';`;
  return spawnSync(process.env.PHP_BINARY??'php',['-n','-r',code],{encoding:'utf8',timeout:5000,maxBuffer:8192});
 }
 function passed(r){assert.equal(r.error,undefined);assert.equal(r.status,0,r.stderr+r.stdout);assert.equal(r.stderr,'');assert.equal(r.stdout,'ok');}
@@ -74,6 +90,16 @@ test('actual finite core-widget preparation preserves existing settings and uses
   ["is_array( get_option( $widget->option_name ) )",'true',{fault:'setting'},r=>failed(r,'core-widget-readback')],
   ["array_keys( $wp_widget_factory->widgets ) === $classes",'true',{fault:'registry'},r=>failed(r,'core-widgets-registry')],
  ]){assert.ok(setup.includes(from));const r=run({...options,name:'widgets',source:setup.replace(from,to)});assert.equal(r.error,undefined);assert.doesNotMatch(r.stderr+r.stdout,/Parse error|syntax error|TypeError/);assert.throws(()=>oracle(r),{code:'ERR_ASSERTION'});}
+});
+test('genuine theme-cache preparation requires fixed theme/mode and durable matching readback before seal',()=>{
+ passed(run({name:'patterns'}));failed(run({name:'patterns',purpose:'request'}),'core-patterns-context');failed(run({name:'patterns',fault:'development'}),'core-patterns-mode');failed(run({name:'patterns',fault:'foreign-theme'}),'core-patterns-theme');
+ for(const fault of ['missing-cache','version','empty','expired'])failed(run({name:'patterns',fault}),'core-patterns-readback');
+ const call=setup.indexOf('\n\tadbh_prepare_core_patterns();');assert.ok(call>setup.indexOf('\n\tadbh_prepare_core_widgets();'));assert.ok(call<setup.indexOf('\n\tregister_shutdown_function('));
+ for(const [from,to,options,oracle]of [
+  ['$expires >= $now + 600','true',{fault:'expired'},r=>failed(r,'core-patterns-readback')],
+  ["$cached['version'] === $theme->get( 'Version' )",'true',{fault:'version'},r=>failed(r,'core-patterns-readback')],
+  ["'twentytwentyfive' === $theme->get_stylesheet()",'true',{fault:'foreign-theme'},r=>failed(r,'core-patterns-theme')],
+ ]){assert.ok(setup.includes(from));const r=run({...options,name:'patterns',source:setup.replace(from,to)});assert.equal(r.error,undefined);assert.doesNotMatch(r.stderr+r.stdout,/Parse error|syntax error|TypeError/);assert.throws(()=>oracle(r),{code:'ERR_ASSERTION'});}
 });
 test('guard removal, missing preparation and altered event controls are assertion-killed',()=>{
  const controls=[
