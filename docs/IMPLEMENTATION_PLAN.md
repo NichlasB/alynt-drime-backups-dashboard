@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Second bounded recovery attempt and compact invariant repair — 2026-11-18
+
+[Owning actual run44381011176 and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records fresh291/9 and23/12006/9 prerequisites,then generic bounded command
+refusal after setup/before HTTP startup. Exact command/cause Unknown;cleanup
+verified zero. Source confirms the full hex-value invariant can exceed the same
+65536-byte command cap. Retain every field/ID/order/table checksum using server
+row SHA256 of NULL/length/hex-byte framing plus the existing outer hash;do not
+increase budgets or skip comparisons. Isolated reproduction is not native cause
+confirmation. Used2/3,cumulative40,milestones4/10;HTTP remains unqualified.
+Next within authority:validate/publish/exact-head CI,then fresh prerequisites and
+final3/3 owned attempt. Stop/reassess if unresolved;no new diagnostic layer or
+automatic allowance extension. Production wiring and installed sites untouched.
+
 ## First bounded recovery attempt and finite theme-cache correction — 2026-11-18
 
 [Owning actual run44379644504/source evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

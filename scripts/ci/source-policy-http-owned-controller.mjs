@@ -31,6 +31,14 @@ export function physicalPolicy(raw,storage){
  let framed='adbd-source-policy-save-v1';for(const p of [sha(storage.database+':'+storage.options),'1',bytes,autoload])framed+=Buffer.byteLength(p)+':'+p;
  return {digest:sha(bytes+':'+autoload),revision:sha(framed),mode:bytes===initial?'required':'external_optional',bytes,autoload};
 }
+// Keep every field byte-sensitive without exporting large cached option values.
+// N and V+octet-length+hex distinguish NULL, empty, separators and binary data.
+export function nonTargetInvariantSql(s){
+ need(/^adb_http_[a-f0-9]{12}$/.test(s.database)&&/^adbh_[a-f0-9]{12}_$/.test(s.prefix)&&s.options===s.prefix+'options','invariant-storage');
+ const frame=column=>`IF(${column} IS NULL,'N',CONCAT('V',OCTET_LENGTH(${column}),':',HEX(${column})))`;
+ const digest=(kind,columns)=>`SHA2(CONCAT('${kind}:',${columns.map(frame).join(',')}),256)`;
+ return `SELECT option_id,${digest('option-v1',['option_name','option_value','autoload'])} FROM ${s.database}.${s.options} WHERE BINARY option_name<>BINARY 'alynt_drime_backups_dashboard_source_policies' ORDER BY option_id;SELECT umeta_id,user_id,${digest('usermeta-v1',['meta_key','meta_value'])} FROM ${s.database}.${s.prefix}usermeta WHERE (meta_key IS NULL OR BINARY meta_key<>BINARY 'session_tokens') ORDER BY umeta_id;CHECKSUM TABLE ${['commentmeta','comments','links','postmeta','posts','term_relationships','term_taxonomy','termmeta','terms','users','alynt_drime_dashboard_sites'].map(t=>s.database+'.'+s.prefix+t).join(',')};`;
+}
 function privateConfig(owner,id,s,password,challenge){
  const values={...id,...s,password,challenge};const pairs=Object.entries(values).map(([k,v])=>phpString(k)+' => '+(typeof v==='boolean'?(v?'true':'false'):phpString(v)));
  writePrivate(owner.stage+'/private.php','<?php return array('+pairs.join(',')+');');
@@ -87,7 +95,7 @@ export async function main(){
   const policy=()=>physicalPolicy(db.sql(`SELECT HEX(option_value),HEX(autoload) FROM ${s.database}.${s.options} WHERE BINARY option_name=BINARY 'alynt_drime_backups_dashboard_source_policies';`,Math.min(5000,left(LIMITS.job_ms-LIMITS.cleanup_ms))),s);
   const sentinel=()=>{const r=db.sql(`SELECT SHA2(CONCAT(option_value,':',autoload),256) FROM ${s.database}.${s.options} WHERE BINARY option_name=BINARY 'owned_non_target';`,5000).trim();need(/^[a-f0-9]{64}$/.test(r),'sentinel');return r;};
   const original=policy(),sentinelHash=sentinel();need(original.bytes===initial,'initial-physical');
-  const invariant=()=>sha(db.sql(`SELECT option_id,HEX(option_name),HEX(option_value),HEX(autoload) FROM ${s.database}.${s.options} WHERE BINARY option_name<>BINARY 'alynt_drime_backups_dashboard_source_policies' ORDER BY option_id;SELECT umeta_id,user_id,HEX(meta_key),HEX(meta_value) FROM ${s.database}.${s.prefix}usermeta WHERE BINARY meta_key<>BINARY 'session_tokens' ORDER BY umeta_id;CHECKSUM TABLE ${['commentmeta','comments','links','postmeta','posts','term_relationships','term_taxonomy','termmeta','terms','users','alynt_drime_dashboard_sites'].map(t=>s.database+'.'+s.prefix+t).join(',')};`,Math.min(5000,left(LIMITS.job_ms-LIMITS.cleanup_ms))));
+  const invariant=()=>sha(db.sql(nonTargetInvariantSql(s),Math.min(5000,left(LIMITS.job_ms-LIMITS.cleanup_ms))));
   const nonTarget=invariant();
   stage='startup';const startup=now()+LIMITS.transaction_ms;let ready=false;saveOwnership(owner,{pending:true});
   child=spawn('php',[...phpArgs,'-S','127.0.0.1:18777','-t',s.core_path,owner.stage+'/proof/scripts/ci/source-policy-http-owned-router.php'],{env,stdio:['ignore','pipe','pipe']});

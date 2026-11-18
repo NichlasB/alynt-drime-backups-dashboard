@@ -1,5 +1,65 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Recovery attempt2 and bounded invariant projection repair — 2026-11-18
+
+80bb60790ada9cc760affcc64e95f2ee65b696b0 ordinary
+[CI44380625945](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44380625945)
+actually completed/success,both matching-head jobs:PHP7.4 3070/25342,PHP8.3
+3070/25347,plain OK/no skips;Node252/252 each,failures/skips0,Composer/npm audits0.
+Clean local/remote exact head and attempt1 cleanup verified before dispatch.
+
+New allowance attempt2/3
+[run44381011176](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44381011176)
+actually completed/failure at SAME80bb607. Fresh preflight/cleanup,native291/9
+and genuine L23/12006/9 passed,independent live/post-exit zero. HTTP parent
+stage=install,reason413448e717ef322f612d3ef4ad12cb410c573f1721aacee0991204ec8d15aa78.
+Offline hashing of the existing fixed label maps this to
+`Owned HTTP refused: command`,not a new raw subprocess message. No setup-failure
+packet or HTTP receipt-failure packet was emitted. Source ordering places this
+generic command refusal after successful child setup/sidecar/source checks and
+before server startup;remaining calls are DB reconciliation/seal/baseline reads.
+The specific subprocess and native output size/cause remain Unknown. Do not
+claim the log establishes buffer overflow,SQL failure or a completed HTTP case.
+
+Exact-owned-zero HTTP cleanup,always recovery absent,final containers/directories/
+core checkout0,tmpfs released,reconciliation_failure0. All recovery steps passed.
+Used2/3 new allowance;historical23+10+5+2=cumulative40,milestones4/10 unchanged.
+
+Source review identifies a concrete resource defect regardless of that unknown
+subcause:the invariant exported every option and usermeta value as hex through
+the same65536-byte subprocess buffer. A legitimate large theme cache expands
+that wire representation,while the guard correctly refuses oversized output.
+Isolated reproduction of the unchanged command primitive rejects70000 output
+bytes with the SAME fixed command label and accepts a64-byte digest. This proves
+the mechanism,not which command failed in run44381011176. No extra diagnostics,
+native rerun or buffer/acceptance enlargement was used for this diagnosis.
+
+The repair retains all non-policy option fields/IDs,all non-session usermeta
+fields/IDs/user IDs,stable primary-key ordering and the SAME11 table checksums.
+It emits per-row server SHA256 of domain-separated NULL/length/hex-byte framing,
+then the existing outer wire hash. NULL and empty remain distinct;nullable
+meta_key rows are now explicitly retained rather than lost to SQL NULL comparison.
+No field is dropped or value truncated,no GROUP_CONCAT or aggregate length cap,
+no collation-dependent normalization or raw large-value export. The65536-byte
+command buffer,deadlines,query/diagnostic budgets and every per-response comparison
+remain unchanged. This is an owned invariant-read projection,not a write grant,
+production SQL change or new diagnostic layer.
+
+Source-scoped canonical Light/final Security extend the SAME8b31b0b baseline to
+the controller and new invariant test plus directly affected unchanged database/
+command/HTTP callers. Reviewed fixed storage validation,all fields/null framing,
+unchanged exclusions/checksums/response comparisons and source/budget boundaries.
+No remaining scoped quality/security defect;no UI/bloat workflow or whole-plugin
+readiness/Database Review claim. New4/4 isolated tests include exact generated SQL,
+independent framing with70000-byte last-byte mutations,null/empty/binary/field
+boundary cases,actual unchanged command-budget refusal and3 semantic source
+controls for dropped field/null framing/table checksum. Full Node256/256,
+failures/skips0;JS syntax,structure and316 owning relative links pass. No actual MariaDB hash
+semantics or physical invariants claimed from these models. Next within current
+authority:validation/publication/exact-head CI,then fresh prerequisites and FINAL
+attempt3/3;on unresolved failure stop and reassess proof proportionality,not an
+automatic request for another diagnostic layer or allowance extension.
+
 ## Recovery attempt1 and source-backed theme-cache preparation — 2026-11-18
 
 Final initial repair328ec56bf10040d360e2636ad42b9a6aef65f76c ordinary
