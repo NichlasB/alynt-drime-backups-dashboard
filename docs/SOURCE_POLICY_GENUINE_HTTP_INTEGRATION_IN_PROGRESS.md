@@ -1,13 +1,18 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
-## Initialized-v2 native integration/ONE allowance — 2026-11-18
+## Initialized-v2 native integration/ONE outcome — 2026-11-18
 
-[Current integration and pending native gate](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+[Current integration and actual native outcome](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
 adds a fixed fresh initializer between installed fixture verification/DDL seal and
 the full measured baseline. Same shared setup60s/1024 credit and all strict HTTP
-guards;no request-write exception. Publication/exact-head ordinary CI precede ONE
-fresh-prerequisite native run. New0/1 not dispatched;old3/3 exhausted,cumulative41,
-milestones4/10 unchanged. No native success or production wiring is claimed.
+guards;no request-write exception. Integration dab8026/ordinary CI44409706066
+passed. ONE run44410105113 passed fresh291/9 and genuine23/12006/9,then initializer
+core-bootstrap query-refused before completion/baseline/HTTP. Exact failed condition
+Unknown;source maps the fixed label,not a query/core caller. Exact owned cleanup,
+recovery absent and final reconciliation0 passed. New1/1 consumed;old3/3 exhausted,
+cumulative42,milestones4/10 unchanged. Next gated slice:Repository-Only Initializer
+Query-Refusal Source Diagnosis and Guard-Preserving Repair,source/isolated only.
+No native retry,new diagnostic layer or production wiring is authorized.
 
 ## Initialized-fixture worker/controller preparation — 2026-11-18
 

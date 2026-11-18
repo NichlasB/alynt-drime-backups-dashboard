@@ -1,13 +1,20 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
-## Native integration now separately authorized — 2026-11-18
+## Native integration published; initializer qualification blocked — 2026-11-18
 
 The [owning native integration/ONE allowance](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
-now implements the fixed native loader/controller path with separate manual
+implements the fixed native loader/controller path with separate manual
 admission and real shutdown/parent release/anchor observations. The isolated
 preparation API below remains dormant and is not relabeled genuine execution.
 Historical "next gated" entries below have been approved for this one CI-lab
 attempt only;no production wiring,public activation or automatic retry grant.
+Integration dab8026/CI44409706066 passed. ONE run44410105113 passed fresh native
+291/9 and genuine23/12006/9 prerequisites,then initializer core-bootstrap query-
+refused;which registry/clock/filter condition failed remains Unknown. No initializer
+completion or HTTP success. Exact owned cleanup/recovery/reconciliation passed.
+New1/1 consumed,cumulative42,milestones4/10 unchanged. Next gated source/isolated
+slice:Repository-Only Initializer Query-Refusal Source Diagnosis and Guard-
+Preserving Repair;no native retry or added diagnostics implied.
 
 ## Worker/controller integration preparation — 2026-11-18
 

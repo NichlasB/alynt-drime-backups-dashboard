@@ -1,14 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
-## Initialized native integration and ONE attempt authorized — 2026-11-18
+## Initialized native integration published; ONE initializer refusal — 2026-11-18
 
 [Owning integration/allowance record](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
 implements the fixed fresh CLI initializer,shared setup deadline/credit,protected
-anchor comparison,versioned strict HTTP and fixed recovery path under explicit
-CI-lab-only approval. Next within this task:publish/verify ordinary exact-head CI,
-then fresh prerequisites and ONE owned initialized-v2 qualification/cleanup run.
-New allowance0/1 until dispatched;old3/3 exhausted,cumulative41,milestones4/10.
-No native result claimed yet,no LocalWP/site or production wiring change.
+anchor comparison,versioned strict HTTP and fixed recovery path. Integration
+dab8026/ordinary CI44409706066 passed. ONE run44410105113 passed fresh291/9 and
+genuine23/12006/9 prerequisites,then initializer core-bootstrap query-refused;
+exact condition remains Unknown. No HTTP matrix qualified. Exact owned cleanup,
+always recovery absent and final reconciliation0 passed. New1/1 consumed,old3/3
+exhausted,cumulative42,milestones4/10 unchanged. Next gated slice:Repository-Only
+Initializer Query-Refusal Source Diagnosis and Guard-Preserving Repair,isolated
+source-backed reproduction only;no native retry,new diagnostic layer or wiring.
+Safe qualification lane stops at this exhausted allowance,not product completion.
 
 ## Worker/controller preparation complete; native integration remains gated — 2026-11-18
 

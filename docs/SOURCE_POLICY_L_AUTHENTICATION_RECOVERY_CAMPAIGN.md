@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | Original10/10 EXHAUSTED plus5 consumed ONE supplements;new recovery allowance3/3 EXHAUSTED. Final d9845b9/run44382372626 passed fresh prerequisites/setup/baseline,then request1/add_option1142 write-scope refusal. Exact owned cleanup verified. Historical23+10+5+3=cumulative41;no fourth dispatch or milestone credit |
+| Native qualification attempts | Original10/10 EXHAUSTED plus5 consumed ONE supplements;recovery3/3 EXHAUSTED. New initialized-v2 ONE1/1 CONSUMED at dab8026/run44410105113:fresh291/9 and genuine23/12006/9 passed,initializer core-bootstrap query-refused before HTTP;exact failed condition Unknown. Exact owned cleanup/recovery/reconciliation passed. Historical23+10+5+3+1=cumulative42;no retry or milestone credit |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,7 +37,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Native initialized-v2 integration and ONE allowance](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md) now explicitly approved: publish/verify ordinary exact-head CI,then fresh prerequisites and ONE owned native qualification/cleanup. New0/1 not dispatched;existing3/3 exhausted/cumulative41/milestones4/10 preserved until actual outcome. No site/production wiring or automatic retry |
+| Exact next meaningful item | [Native initialized-v2 outcome](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):integration dab8026/ordinary CI44409706066 passed,but ONE native attempt refused and allowance is exhausted. Next gated slice:Repository-Only Initializer Query-Refusal Source Diagnosis and Guard-Preserving Repair,source-backed isolated reproduction only;no new diagnostics/native retry or wiring. Milestones4/10/cumulative42 |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.

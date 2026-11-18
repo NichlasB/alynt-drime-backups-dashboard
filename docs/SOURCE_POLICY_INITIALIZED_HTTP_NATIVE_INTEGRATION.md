@@ -15,7 +15,8 @@ actually successful. Toolkit baseline`f5e44544bc1e109299eb5a7dc39abbace6534482`;
 uploader3dfcb15 unchanged/outside scope. Version0.1.77/schema8/PHP7.4/WordPress6.0,
 core7.1.4/runtime/theme/server/source pins and public/storage contracts unchanged.
 Original recovery3/3 remains exhausted,cumulative41,product milestones4/10.
-New separately approved initialized-v2 ONE allowance:0/1,not yet dispatched.
+New separately approved initialized-v2 ONE allowance:1/1 CONSUMED at run44410105113;
+cumulative42,product milestones4/10 unchanged. No second native attempt authorized.
 No repeat-until-quiet initialization,new seed list,diagnostic layer or extra run.
 
 ## Fixed native path, not the isolated preparation adapter
@@ -103,15 +104,53 @@ structure/build and321 relative links passed. No tests/skips/timeouts or limits
 were weakened. Ordinary exact-head CI and the ONE native outcome are recorded
 after actual completion. No genuine native success or retry credit is inferred.
 
-## Required closeout and proof limits
+## Actual publication, ONE outcome and exact cleanup — 2026-11-18
 
-Within current approval:finish validation,commit/push/verify ordinary exact-head
-CI,then dispatch ONE exact-head workflow with both fresh native/genuine-session
-prerequisites and initialized HTTP enabled. Wait for actual outcome/recovery/final
-reconciliation. Record run/head,cases/checks,first refusal if any,owned cleanup
-and consumed allowance. Do not rerun a failed attempt or manufacture success.
+Published integration `dab8026a4808b35c7c3609401f342e8c6b349973` on master.
+[Ordinary exact-head CI44409706066](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44409706066)
+ACTUALLY completed/success,both matching-head checks. PHP7.4 3070/25342 and
+PHP8.3 3070/25347,plain OK/no skips;Node294/294 each,failures/skips0;PHPCS305/305,
+structure/build pass,Composer/npm audits0. Legacy status contexts0 is not failure.
+Clean local/remote exact head verified before dispatch. Installed runtime,
+dependencies,source pins,assets and production wiring unchanged.
 
-This qualifies functional private HTTP against an initialized disposable fixture,
+[ONE native run44410105113](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44410105113)
+at the SAME integration head ACTUALLY completed/failure. Fresh unchanged
+environment prerequisite passed;native audit29/zero execution then291 checks/9
+groups passed with independent live/post-exit zero. Fresh genuine-session source
+audit211/zero execution then23 cases/12006 checks/9 groups passed,independent
+live/post-exit zero. Each prerequisite's owned cleanup/reconciliation passed.
+
+Installer and parent pre-initializer admission reached the fresh initializer.
+The initializer refused at core-bootstrap with exit1/no signal,stdout0/stderr194.
+Existing bounded packet:RuntimeException,proof line24,assertion
+`c7e681bc049d4e561fc6c944e7a797fbd2b0aa5cbbaeb2337f8d3632c81c6478`.
+Source hash comparison identifies the fixed `initializer-query-refused` label,
+not a specific query or core caller. The catch covers hook-registry validation,
+shared-clock evaluation and query-guard filtering;which condition failed and
+whether any SQL was denied remain Unknown. Line24 is the synthetic refusal
+emitter,not an upstream core location. No initializer-completion/shutdown receipt,
+post-initializer anchor comparison,full baseline or HTTP case is proven.
+Do not confuse this refusal with the historical v1 request write-scope cause.
+
+Exact `OWNED_HTTP_CLEANUP exact-owned-zero`;always recovery reports absent;
+final native reconciliation containers0/directories0/tmpfs released/
+reconciliation_failure0 and preflight containers0/private_directory0/core_checkout0.
+Both always steps completed/success. The generic summary "refused or cleanup
+unknown" does not override those explicit cleanup observations. No owned
+resource remains reported;no retry,site operation or application change ran.
+
+Implementation/publication/reviews are complete;native HTTP qualification remains
+BLOCKED,not complete. The ONE allowance is exhausted,cumulative42,milestones4/10.
+Recommended next gated slice:Repository-Only Initializer Query-Refusal Source
+Diagnosis and Guard-Preserving Repair. Bound the investigation to the three
+existing catch branches and source-backed isolated reproductions;identify a
+concrete correction or recommend reassessment. No new diagnostics/native retry,
+acceptance relaxation,budget/source-pin or production-wiring change is implied.
+
+## Proof limits
+
+The intended qualification is functional private HTTP against an initialized disposable fixture,
 not cold-after-install immutability,FPM/third-party/installed-graph eligibility,
 pre-router containment,hostile-runner resistance or the still-unwired real form.
 The actual lost-update application switch remains disabled and separately gated.
