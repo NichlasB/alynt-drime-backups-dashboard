@@ -1,5 +1,16 @@
 # Genuine-HTTP Proof Proportionality and Acceptance-Contract Review
 
+## Subsequent contract admission and isolated implementation — 2026-11-18
+
+User has now explicitly admitted the initialized-fixture v2 contract and approved
+the repository-only [dormant foundation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md).
+The recommendation/proposed-authority language below records the completed
+earlier design checkpoint,not a still-unanswered request. Separate v2 DATA/SQL
+credit helpers and isolated tests now exist;v1 native admission/workflow/wiring
+remain unchanged. No native attempt,actual initializer or HTTP success granted
+or claimed. Next gate is repository-only worker/controller integration preparation,
+not reapproval of this contract. All original limits and exhausted counters remain.
+
 ## Status, authority and immutable review boundary — 2026-11-18
 
 **Design review complete; the replacement below is a recommendation, not an

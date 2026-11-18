@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Initialized-fixture contract admitted; dormant foundation — 2026-11-18
+
+[Owning foundation and proof limits](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md):
+approved v2 fixture contract now has a separate single-initializer DATA lifecycle,
+immutable cohort/anchor/remaining-credit ticket,pre-query PHP credit/SQL guard and
+full-baseline-after-release ordering. Isolated tests only;v1 native/production
+paths unchanged. No native bootstrap,authentication,SQL,fixtures or dispatch.
+Shared setup60s/1024 SQL and original job/cleanup limits preserved. HTTP remains
+unqualified,recovery3/3 exhausted,cumulative41,milestones4/10 unchanged.
+Next gated slice:Repository-Only Initialized-Fixture Worker/Controller Integration
+Preparation,execution disabled;actual native attempt remains separately gated.
+The earlier proposal/recovery entries below are historical,not current approval.
+
 ## Proportional HTTP proof review complete; initialized-fixture proposal — 2026-11-18
 
 [Design decision](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md) separates

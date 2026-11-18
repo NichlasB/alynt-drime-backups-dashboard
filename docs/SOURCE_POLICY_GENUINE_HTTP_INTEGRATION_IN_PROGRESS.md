@@ -1,5 +1,17 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Initialized-fixture contract admitted; isolated foundation — 2026-11-18
+
+[Owning source-scoped foundation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md)
+implements v2 DATA admission,one required initializer,shared original setup clock/
+remaining SQL credit,protected/sentinel query denials and baseline-after-release
+ordering. User approved this contract/foundation only. V1 executable native path,
+measured HTTP guards,diagnostics and production wiring are unchanged. No actual
+initializer/SQL/authentication/HTTP evidence added;native feasibility Unknown.
+Next gated slice:Repository-Only Initialized-Fixture Worker/Controller Integration
+Preparation,execution disabled. No new attempt allowance:3/3 exhausted,
+cumulative41,milestones4/10 unchanged. Historical refusals below remain intact.
+
 ## Design-only proportionality review completed — 2026-11-18
 
 [Owning decision](SOURCE_POLICY_GENUINE_HTTP_PROPORTIONALITY_DECISION.md) finds
