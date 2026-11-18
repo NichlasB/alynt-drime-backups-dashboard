@@ -1,5 +1,81 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repository-only request-bootstrap branch/core-origin integration — 2026-11-18
+
+Explicit user approval:repository-only diagnostic integration,isolated validation,
+commit/push/exact-head ordinary CI;preserve acceptance,no native rerun or wiring.
+Clean local/remote restore and coherent SOURCE-SCOPED review baseline:
+611dae87ca32f8b0b1f9fd1b088ed3b8018bc6d3. R2 private proof-harness observation
+only. No acquisition,genuine core/auth/bootstrap,SQL/native/site/fixture operation,
+manual dispatch,installation,release/package/tag/deploy or production change.
+
+Observer reuses the SAME arguments-free16-frame capture and fixed core-label
+mapper only on first refused request query during core-bootstrap;setup capture
+continues unchanged. Other request stages do not capture. Only eligibility and
+assignment alignment changed in the observer;tokenizer/classifier,mapper,return
+bytes,sql-shape throw before accounting/execution,phase/literal/table/protected-
+read guards,query ceilings and budgets are untouched. Permanent normalized
+classifier guard hash remains74293a2710d49ba090f3b2be378e7473e981b9a09780d184e3f38f76125f498b.
+No SQL/literal/message/path/argument/object/trace or SQL-derived hash exported.
+
+Existing PHP tuple validation extracted once and reused by setup/request;existing
+JS tuple validation likewise shared by setup receiver and request decoder. Same
+12 branch labels,15 caller labels,exact branch/caller/line keys and bounded line/
+unavailable-line pairing;no new labels or admission rule. Optional request sql
+attaches ONLY for actual RuntimeException,matching sql-shape code-label digest,
+core-bootstrap stage and positive validated exchange. Unknown/stale/malformed
+facts do not attach;malformed extended wire frames reject rather than silently
+repair. Legacy packets remain accepted. Nested retained facts are defensively
+copied so callers cannot rewrite first-refusal evidence. No new diagnostic
+framework,file/channel,registration,read handle or runtime grant.
+
+Existing1024-byte private frame and65536-byte combined diagnostic ceilings,
+line decoder cap,first-only retention,exact exchange binding,required receipts,
+same-error rethrow,503 behavior,cleanup/deadlines and source-identity enforcement
+remain. New source bytes participate in the existing frozen manifest,not stale
+identity exceptions. No production factory,public endpoint or wiring change.
+
+Actual red baseline failed request capture/attachment availability;green new5/5
+and full Node245/245,failures/skips0. Tests execute actual observer refusal,
+allowed-query byte/count positive,PHP request producer and JS decoder end to end
+through isolated process pipes;no genuine core or SQL executor. First retention,
+pre-accounting refusal,non-bootstrap capture denial,legacy setup compatibility,
+all existing labels,malformed/stale bindings and nested-copy mutation tested.
+Six assertion-killed controls cover request availability,PHP/JS stage binding,
+exception/assertion binding and nested-copy preservation;no parser/include failure
+credit. Existing setup capture control anchor updated for renamed eligibility
+variable only,not relaxed. Existing classifier/origin/receipt/budget tests pass.
+
+Full local PHP8.5.1 3070/25340,errors/failures0,Sodium-unavailable skips2;verbose
+signer5/9 confirms both reasons. PHPCS300/300,focused3/3,structure/build and
+whitespace pass. Actual ordinary exact-head CI belongs in the toolkit scoped
+closeout after completion;local skips are not presented as zero-skip proof.
+
+Canonical Feature Light SOURCE-SCOPED:7 changed code/test files plus unchanged
+worker/router/model/source-manifest callers. Scope:Other/private CI diagnostics.
+Nested DATA defensive-copy requirement implemented and regression-tested;
+no remaining significant non-security finding,manual decisions0. Shared schema
+helpers remove duplication without a framework;files remain cohesive195/67/65
+PHP,56/147 MJS and61-line new test. No meaningful bloat/UI workflow need.
+Final canonical Feature Security SOURCE-SCOPED:bounded argument-free capture,
+strict exception/assertion/stage/exchange binding,malformed rejection,first-fact
+copying and unchanged acceptance/cleanup/source guards reviewed;no remaining
+scoped security defect. Regression handoff:no additional confirmed defect needs
+coverage beyond implemented binding/copy controls. No Database Review,physical
+transaction proof or historical whole-plugin release-readiness refresh.
+
+Proof limits:API/DATA functions and pipes only,not genuine core-caller provenance,
+authentication,storage or HTTP qualification. A truncated/unmapped trace remains
+unavailable,never guessed. The historical request's actual SQL branch/core caller
+remain Unknown;synthetic tuples are not native observations or authority.
+Implementation-plan progress:request-bootstrap diagnostic preparation advances;
+HTTP remains unqualified. Milestones4/10,original10/10 native allowance+4 consumed
+ONE supplements,cumulative37 unchanged. Recommended next gated slice:ONE
+Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with Request-
+Bootstrap SQL Diagnostics,published head,fresh prerequisites/exact owned cleanup,
+existing ephemeral CI lab only,functional HTTP/no pre-router containment claim.
+Fresh explicit native authority required;no dispatch in this approval.
+
 ## Diagnostic-enabled ONE run localizes request-bootstrap SQL refusal — 2026-11-17
 
 User approved ONE Exact-Head Genuine-HTTP Owned Requalification/Cleanup Attempt

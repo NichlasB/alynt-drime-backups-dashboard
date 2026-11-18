@@ -1,5 +1,19 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Request-bootstrap branch/core-origin diagnostics integrated, isolated only — 2026-11-18
+
+[Owning integration/review evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)
+records reuse of bounded first-refusal mapper,shared setup/request DATA validation,
+strict bootstrap/exception/assertion/exchange binding and defensive nested copies.
+Acceptance rules,receipts,budgets,cleanup,source guards and wiring preserved.
+New5/5,Node245/245,local PHP3070/25340 with2 Sodium skips,lint/structure/build pass.
+No native/site/SQL operation;historical branch/core caller remain Unknown.
+Implementation-plan progress:diagnostic integration advances,not genuine HTTP
+qualification. Milestones4/10;original10/10+4 consumed ONE supplements,cumulative37.
+Next gated slice:ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup
+Attempt with Request-Bootstrap SQL Diagnostics,fresh prerequisites/exact cleanup,
+existing ephemeral CI lab only. Fresh explicit native approval required.
+
 ## First-receipt evidence identifies request-bootstrap SQL refusal — 2026-11-17
 
 [Exact0c21776/run44187040461 evidence](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md)

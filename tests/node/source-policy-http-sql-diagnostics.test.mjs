@@ -71,7 +71,7 @@ test('parent accepts optional exact SQL DATA only under the matching legacy SQL 
 });
 test('capture/retention guards are assertion-killed controls, not parse failures',()=>{
  for(const [before,after,label] of [
-  ['null === $class && $setup && ! isset( $GLOBALS[\'adbh_sql_refusal\'] )','false','capture-required'],
+  ['null === $class && $diagnose && ! isset( $GLOBALS[\'adbh_sql_refusal\'] )','false','capture-required'],
   ['&& ! isset( $GLOBALS[\'adbh_sql_refusal\'] )','','first-only'],
  ]){
   assert.equal(source.split(before).length,2);const r=run(captureProof,source.replace(before,after));assert.notEqual(r.status,0);assert.match(r.stdout+r.stderr,new RegExp('RuntimeException: '+label));assert.doesNotMatch(r.stdout+r.stderr,/Parse error|syntax error/);

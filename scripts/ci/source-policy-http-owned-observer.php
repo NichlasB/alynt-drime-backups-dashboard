@@ -179,10 +179,11 @@ function adbh_owned_sql_origin( $frames, $root ) {
  * @return string
  */
 function adbh_owned_observe( $sql ) {
-	$setup = 'setup' === ADB_HTTP_WORKER;
-	$login = $GLOBALS['adbh_route'] ?? '';
-	$class = adbh_owned_sql_class( $sql, $GLOBALS['adbh_private']['prefix'], $setup, 'login-submit' === $login, $reason );
-	if ( null === $class && $setup && ! isset( $GLOBALS['adbh_sql_refusal'] ) ) {
+	$setup    = 'setup' === ADB_HTTP_WORKER;
+	$login    = $GLOBALS['adbh_route'] ?? '';
+	$class    = adbh_owned_sql_class( $sql, $GLOBALS['adbh_private']['prefix'], $setup, 'login-submit' === $login, $reason );
+	$diagnose = $setup || ( 'request' === ADB_HTTP_WORKER && 'core-bootstrap' === ( $GLOBALS['adbh_stage'] ?? '' ) );
+	if ( null === $class && $diagnose && ! isset( $GLOBALS['adbh_sql_refusal'] ) ) {
 		$GLOBALS['adbh_sql_refusal'] = array_merge( array( 'branch' => $reason ), adbh_owned_sql_origin( debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 16 ), dirname( __DIR__, 3 ) ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- Bounded arguments-free private refusal DATA only.
 	}
 	adbh_check( null !== $class, 'sql-shape' );

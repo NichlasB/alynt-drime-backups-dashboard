@@ -37,10 +37,21 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Request-bootstrap SQL-refusal evidence and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only Request-Bootstrap SQL-Refusal Branch/Core-Origin Diagnostic Integration,reuse existing fixed bounded mapper with isolated tests/strict binding. Exact SQL branch/core caller remain Unknown;no acceptance broadening,native rerun or production wiring. Fresh approval required |
+| Exact next meaningful item | [Request-bootstrap diagnostic integration and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with Request-Bootstrap SQL Diagnostics,fresh prerequisites/exact cleanup,existing ephemeral CI lab only. Actual historical branch/core caller remain Unknown;guards/receipts/budgets and production wiring preserved. Fresh explicit native approval required |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current repository-only request-bootstrap integration — 2026-11-18:existing
+fixed bounded mapper reused for first core-bootstrap query refusal,shared
+setup/request projection and strict exception/assertion/stage/exchange binding.
+Nested evidence defensively copied;legacy packets/acceptance rules preserved.
+New5/5,full Node245/245,local PHP3070/25340 with2 Sodium skips,lint/structure/
+build pass;six assertion-killed controls. No genuine core/auth/storage/HTTP/native/
+site operation or dispatch. Historical branch/core caller remain Unknown.
+Milestones4/10,original10/10+4 consumed ONE supplements,cumulative37 unchanged.
+Next gated ONE qualification above requires fresh native approval,no automatic
+retry or milestone credit for preparation.
 
 Current fourth supplemental ONE outcome — 2026-11-17:run44187040461 at0c21776
 completed/failure after fresh native291/9 and genuine23/12006/9 passed. New actual

@@ -26,6 +26,20 @@ function adbh_diagnostic_location( $file, $line, $root ) {
 	);
 }
 
+/** Shared setup/request SQL DATA projection; never a new admission rule.
+ *
+ * @param string $exception_class Actual caught exception class.
+ * @param mixed  $assertion Fixed code-label digest.
+ * @return array|null
+ */
+function adbh_sql_diagnostic( $exception_class, $assertion ) {
+	$sql = $GLOBALS['adbh_sql_refusal'] ?? null;
+	if ( 'RuntimeException' === $exception_class && 'a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac' === $assertion && is_array( $sql ) && array( 'branch', 'caller', 'line' ) === array_keys( $sql ) && in_array( $sql['branch'], array( 'prefix', 'tokens-input', 'tokens-escape', 'tokens-literal', 'tokens-skeleton', 'show-tables', 'expiry-shape', 'expiry-values', 'verb', 'tables', 'table-scope', 'write-scope' ), true ) && in_array( $sql['caller'], array( 'unavailable', 'wpdb', 'other-core', 'upgrade', 'schema', 'option', 'user', 'meta', 'functions', 'load', 'post', 'taxonomy', 'pluggable', 'capabilities', 'formatting' ), true ) && is_int( $sql['line'] ) && $sql['line'] >= 0 && $sql['line'] <= 100000 && ( 'unavailable' !== $sql['caller'] || 0 === $sql['line'] ) ) {
+		return $sql;
+	}
+	return null;
+}
+
 /** Fixed diagnostic packet; supplied exception/message content never exported.
  *
  * @param Throwable $error Caught engine/core failure.
@@ -45,8 +59,8 @@ function adbh_setup_diagnostic( Throwable $error, $root ) {
 		'line'      => $location['line'],
 		'assertion' => is_string( $assertion ) && preg_match( '/\A[a-f0-9]{64}\z/', $assertion ) ? $assertion : null,
 	);
-	$sql       = $GLOBALS['adbh_sql_refusal'] ?? null;
-	if ( 'RuntimeException' === $class && 'a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac' === $assertion && is_array( $sql ) && array( 'branch', 'caller', 'line' ) === array_keys( $sql ) && in_array( $sql['branch'], array( 'prefix', 'tokens-input', 'tokens-escape', 'tokens-literal', 'tokens-skeleton', 'show-tables', 'expiry-shape', 'expiry-values', 'verb', 'tables', 'table-scope', 'write-scope' ), true ) && in_array( $sql['caller'], array( 'unavailable', 'wpdb', 'other-core', 'upgrade', 'schema', 'option', 'user', 'meta', 'functions', 'load', 'post', 'taxonomy', 'pluggable', 'capabilities', 'formatting' ), true ) && is_int( $sql['line'] ) && $sql['line'] >= 0 && $sql['line'] <= 100000 && ( 'unavailable' !== $sql['caller'] || 0 === $sql['line'] ) ) {
+	$sql       = adbh_sql_diagnostic( $class, $assertion );
+	if ( null !== $sql ) {
 		$packet['sql'] = $sql;
 	}
 	return $packet;

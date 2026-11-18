@@ -23,7 +23,7 @@ function adbh_request_diagnostic( ?Throwable $error, $exchange, $root ) {
 	$origin   = $location['origin'] ?? '';
 	$line     = $location['line'] ?? 0;
 	$label    = $GLOBALS['adbh_failure'] ?? '';
-	return array(
+	$packet   = array(
 		'event'     => 'owned-request-refused',
 		'exchange'  => is_int( $exchange ) && $exchange >= 1 && $exchange <= 64 ? $exchange : 0,
 		'stage'     => in_array( $stage, array( 'exchange', 'route', 'early-hooks', 'core-bootstrap', 'core-ready', 'login', 'bridge', 'shutdown', 'receipt' ), true ) ? $stage : 'unavailable',
@@ -32,6 +32,11 @@ function adbh_request_diagnostic( ?Throwable $error, $exchange, $root ) {
 		'line'      => is_int( $line ) && $line > 0 && $line <= 100000 ? $line : 0,
 		'assertion' => is_string( $label ) && preg_match( '/\A[a-f0-9]{64}\z/', $label ) ? $label : null,
 	);
+	$sql      = adbh_sql_diagnostic( $class, $label );
+	if ( 'core-bootstrap' === $stage && $packet['exchange'] > 0 && null !== $sql ) {
+		$packet['sql'] = $sql;
+	}
+	return $packet;
 }
 
 /** Emit at most one bounded private frame; never replace the original failure.
