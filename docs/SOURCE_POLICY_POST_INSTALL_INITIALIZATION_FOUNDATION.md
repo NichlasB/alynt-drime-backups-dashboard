@@ -1,5 +1,14 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Native integration now separately authorized — 2026-11-18
+
+The [owning native integration/ONE allowance](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+now implements the fixed native loader/controller path with separate manual
+admission and real shutdown/parent release/anchor observations. The isolated
+preparation API below remains dormant and is not relabeled genuine execution.
+Historical "next gated" entries below have been approved for this one CI-lab
+attempt only;no production wiring,public activation or automatic retry grant.
+
 ## Worker/controller integration preparation — 2026-11-18
 
 User approved Repository-Only Initialized-Fixture Worker/Controller Integration

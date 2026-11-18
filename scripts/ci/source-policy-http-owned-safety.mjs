@@ -4,7 +4,7 @@ import {need,sha,ownedHttpJob} from './source-policy-http-owned-source.mjs';
 import {LIMITS} from './source-policy-http-profile.mjs';
 export const OWNED_PHP_ARGS=['-n','-d','extension=mysqlnd','-d','extension=mysqli','-d','memory_limit=64M','-d','mysqli.allow_persistent=0','-d','default_socket_timeout=3','-d','mysqlnd.net_read_timeout=3','-d','display_errors=0','-d','log_errors=0'];
 export function recoveryArguments(owner,role){
- need(['setup','server'].includes(role),'recovery-role');return role==='setup'?[...OWNED_PHP_ARGS,owner.stage+'/proof/scripts/ci/source-policy-http-owned-setup.php','--owned-http-setup']:[...OWNED_PHP_ARGS,'-S','127.0.0.1:18777','-t',owner.stage+'/core',owner.stage+'/proof/scripts/ci/source-policy-http-owned-router.php'];
+ need(['setup','server','initializer'].includes(role),'recovery-role');return role==='initializer'?[...OWNED_PHP_ARGS,owner.stage+'/proof/scripts/ci/source-policy-http-initialized-native.php','--owned-http-initializer']:role==='setup'?[...OWNED_PHP_ARGS,owner.stage+'/proof/scripts/ci/source-policy-http-owned-setup.php','--owned-http-setup']:[...OWNED_PHP_ARGS,'-S','127.0.0.1:18777','-t',owner.stage+'/core',owner.stage+'/proof/scripts/ci/source-policy-http-owned-router.php'];
 }
 export class OwnedHttpClock {
  #origin;#read;#cleanup=null;
@@ -31,7 +31,7 @@ export function readOwnership(env){
  const st=lstatSync(stage),file=stage+'/ownership.json';need(st.isDirectory()&&!st.isSymbolicLink()&&st.uid===process.getuid()&&(st.mode&0o777)===0o700,'recovery-directory');
  const f=lstatSync(file);need(f.isFile()&&!f.isSymbolicLink()&&f.uid===st.uid&&f.size<=4096&&(f.mode&0o077)===0,'recovery-record');
  const o=JSON.parse(readFileSync(file,'utf8'));need(o.stage===stage&&o.root===env.RUNNER_TEMP&&o.owner==='adb-http-'+run&&o.run===run&&o.inode===st.ino&&o.device===st.dev&&realpathSync(stage)===stage,'recovery-binding');
- need(o.server===null||o.server&&Number.isSafeInteger(o.server.pid)&&o.server.pid>0&&/^[a-f0-9]{64}$/.test(o.server.start)&&/^[a-f0-9]{64}$/.test(o.server.executable)&&['setup','server'].includes(o.server.role),'recovery-server');return o;
+ need(o.server===null||o.server&&Number.isSafeInteger(o.server.pid)&&o.server.pid>0&&/^[a-f0-9]{64}$/.test(o.server.start)&&/^[a-f0-9]{64}$/.test(o.server.executable)&&['setup','server','initializer'].includes(o.server.role)&&(o.server.role!=='initializer'||env.QUALIFICATION_HTTP_INITIALIZED_APPROVED==='true'),'recovery-server');return o;
 }
 export function verifyRecoveryProcess(owner){
  const s=owner.server,p='/proc/'+s.pid;need(lstatSync(p).uid===process.getuid(),'recovery-process-owner');

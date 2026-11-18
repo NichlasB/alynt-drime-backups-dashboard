@@ -72,7 +72,10 @@ try {
 					'checks'      => $GLOBALS['adbh_checks'],
 				);
 				$GLOBALS['adbh_stage'] = 'receipt';
-				$bytes                 = json_encode( $packet );
+				if ( 'owned-http-l714-initialized-v2' === ADB_HTTP_MODEL ) {
+					$packet['model'] = ADB_HTTP_MODEL;
+				}
+				$bytes = json_encode( $packet );
 				adbh_check( is_string( $bytes ) && strlen( $bytes ) <= 8192, 'receipt-bytes' );
 				$file = $root . '/receipts/' . $exchange . '.json';
 				adbh_check( ! file_exists( $file ), 'receipt-absence' );

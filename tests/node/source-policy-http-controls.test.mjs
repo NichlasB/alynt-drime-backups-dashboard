@@ -8,7 +8,7 @@ const sources=Object.fromEntries(['profile','contract','lifecycle'].map(name=>[n
 function prepare(Class=HttpDataLifecycle){const m=new Class(f.identity(),0,f.challenge);m.admit(f.profile(),f.storage(),f.manifest(),f.manifestExpectation(),1);m.setup(f.ledger('setup'),2);m.server(f.server(),f.profile(),3);return m;}
 async function killed(name,from,to,oracle){
  const original=sources[name],changed=original.replace(from,to);assert.notEqual(changed,original,'Control target must change actual source');
- const code=changed.replaceAll("'./source-policy-http-profile.mjs'",JSON.stringify(new URL('source-policy-http-profile.mjs',base).href)).replaceAll("'./source-policy-http-contract.mjs'",JSON.stringify(new URL('source-policy-http-contract.mjs',base).href));
+ const code=changed.replaceAll("'./source-policy-http-profile.mjs'",JSON.stringify(new URL('source-policy-http-profile.mjs',base).href)).replaceAll("'./source-policy-http-contract.mjs'",JSON.stringify(new URL('source-policy-http-contract.mjs',base).href)).replaceAll("'./source-policy-http-initialization.mjs'",JSON.stringify(new URL('source-policy-http-initialization.mjs',base).href));
  // Parsing/import/setup failures occur outside the semantic-kill capture.
  const namespace=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
  let failure;try{oracle(namespace);}catch(error){failure=error;}

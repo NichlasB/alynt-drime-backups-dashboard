@@ -53,6 +53,10 @@ function adbh_bootstrap( $purpose ) {
 	adbh_check( false === strpos( $root, ' ' ) && realpath( $root ) === $root && 'true' === getenv( 'ADB_HTTP_OWNED_APPROVED' ), 'owned-worker-root' );
 	$p = require $root . '/private.php';
 	adbh_check( is_array( $p ) && preg_match( '/\A[a-f0-9]{32}\z/', $p['run'] ) && $root === $p['root'] . '/adb-http-' . $p['run'] && preg_match( '/\Aadbh_[a-f0-9]{12}_\z/', $p['prefix'] ), 'owned-private-context' );
+	require_once __DIR__ . '/source-policy-http-initialized-clock.php';
+	$model = adbh_initialized_model( $p, getenv( 'ADB_HTTP_INITIALIZED_APPROVED' ) );
+	adbh_check( false !== $model, 'owned-worker-model' );
+	define( 'ADB_HTTP_MODEL', $model );
 	$GLOBALS['adbh_private'] = $p;
 	$GLOBALS['adbh_ledger']  = array(
 		'setup'     => 0,
@@ -75,6 +79,11 @@ function adbh_bootstrap( $purpose ) {
 	// Core restores prepared % placeholders at priority 0. Observe afterwards,
 	// still inside wpdb::query's pre-execution filter; never normalize SQL here.
 	add_filter( 'query', 'adbh_owned_observe', 1, 1 );
+	if ( 'setup' === $purpose && 'owned-http-l714-initialized-v2' === $model ) {
+		require_once __DIR__ . '/source-policy-http-initialized-clock.php';
+		$GLOBALS['adbh_initialized_clock'] = adbh_initialized_clock( $p );
+		add_filter( 'query', 'adbh_initialized_setup_deadline', -1, 1 );
+	}
 	if ( 'setup' === $purpose ) {
 		define( 'WP_INSTALLING', true ); }
 	$GLOBALS['adbh_stage'] = 'core-bootstrap';

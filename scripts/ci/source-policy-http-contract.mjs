@@ -32,9 +32,13 @@ export function responseMatches(value,kind){
  return row.location===null&&[200,400,403,409].includes(row.status)&&(kind==='submit'||row.status===200);
 }
 export function caseMatches(value,expected,index){
+ return caseMatchesForModel(value,expected,index,HTTP_PROFILE.model);
+}
+// Explicit version binding, never relabel a supplied v1 receipt as v2.
+export function caseMatchesForModel(value,expected,index,model){
  const keys=['event','model','run','head','image','index','status','result','checks','bootstrap','auth','records','connects','commands','policy_reads','policy_writes','before','after','sentinel','revision','mode','unknown_changes','production_ready'];
  const row=record(value,keys),want=record(expected,['run','head','image','root','before','after','sentinel','revision']);
- if(!row||!want||!identityData({run:want.run,head:want.head,image:want.image,root:want.root})||!integer(index,12)||row.event!=='http-case-complete'||row.model!==HTTP_PROFILE.model||row.index!==index||row.production_ready!==false)return false;
+ if(!['owned-http-l714-v1','owned-http-l714-initialized-v2'].includes(model)||!row||!want||!identityData({run:want.run,head:want.head,image:want.image,root:want.root})||!integer(index,12)||row.event!=='http-case-complete'||row.model!==model||row.index!==index||row.production_ready!==false)return false;
  for(const [key,n]of [['run',32],['head',40],['image',64],['before',64],['after',64],['sentinel',64]])if(!hex(want[key],n)||row[key]!==want[key])return false;
  const status=index<3?200:index===3?409:index<6?403:400;
  if(row.status!==status||row.result!==results[index]||!integer(row.checks,99999)||row.checks===0||!integer(row.bootstrap,256)||!integer(row.auth,256)||row.unknown_changes!==0)return false;
@@ -45,11 +49,14 @@ export function caseMatches(value,expected,index){
 }
 // Extra genuine views refresh private nonce/revision DATA, never extra case credit.
 export function viewObservationMatches(value,expected){
+ return viewObservationMatchesForModel(value,expected,HTTP_PROFILE.model);
+}
+export function viewObservationMatchesForModel(value,expected,model){
  const keys=['event','model','run','head','image','index','status','result','checks','bootstrap','auth','records','connects','commands','policy_reads','policy_writes','before','after','sentinel','revision','mode','unknown_changes','production_ready'];
  const row=record(value,keys),want=record(expected,['run','head','image','root','before','after','sentinel','revision','mode']);
  if(!row||!want||!['required','external_optional'].includes(want.mode)||row.mode!==want.mode||row.event!=='http-view-complete'||row.index!==null)return false;
  // Only the already-validated auxiliary tag/mode are adapted to the shared view
  // invariant; physical identity/counts/revision/policy DATA are never repaired.
  const {mode,...base}=want;
- return caseMatches({...row,event:'http-case-complete',index:0,mode:'required'},base,0);
+ return caseMatchesForModel({...row,event:'http-case-complete',index:0,mode:'required'},base,0,model);
 }

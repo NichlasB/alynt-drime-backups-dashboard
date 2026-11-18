@@ -1,14 +1,17 @@
 // Virtual original-job elapsed milliseconds ONLY (not Date.now). No callbacks/IO.
 import {HTTP_PROFILE,LIMITS,record,integer,hex,identityData,profileMatches,storageMatches,manifestMatches} from './source-policy-http-profile.mjs';
-import {route,ledgerMatches,responseMatches,caseMatches,viewObservationMatches,HTTP_CASES} from './source-policy-http-contract.mjs';
+import {route,ledgerMatches,responseMatches,caseMatches,viewObservationMatches,caseMatchesForModel,viewObservationMatchesForModel,HTTP_CASES} from './source-policy-http-contract.mjs';
+import {INITIALIZED_HTTP_PROFILE,initializedProfileMatches,initializedSetupMatches} from './source-policy-http-initialization.mjs';
 export class HttpDataLifecycle {
  #id;#challenge;#state='fresh';#created;#last;#setupAt;#started;#requestAt;#cleanupAt;
  #manifest;#pid;#start;#kind;#pending=null;#index=0;#transactions=0;#refused=false;
- #policy=null;#sentinel=null;#pendingAfter=null;
- constructor(identity,at,challenge){
+ #policy=null;#sentinel=null;#pendingAfter=null;#profile;
+ constructor(identity,at,challenge,profile=HTTP_PROFILE){
   const id=identityData(identity);
   if(!id||!integer(at,LIMITS.job_ms-1)||!hex(challenge,32)||challenge===id.run)throw Error('HTTP DATA identity refused');
   this.#id=id;this.#created=at;this.#last=at;this.#challenge=challenge;
+  if(!profileMatches(profile)&&!initializedProfileMatches(profile))throw Error('HTTP DATA profile refused');
+  this.#profile=profileMatches(profile)?HTTP_PROFILE:INITIALIZED_HTTP_PROFILE;
  }
  get state(){return this.#state;}
  #require(condition){
@@ -20,11 +23,12 @@ export class HttpDataLifecycle {
  #httpTime(at){this.#time(at);this.#require(at-this.#started<LIMITS.http_ms);}
  admit(candidate,storage,manifest,expectation,at){
   this.#time(at);this.#require(this.#state==='fresh'&&at-this.#created<LIMITS.setup_ms);
-  this.#require(profileMatches(candidate)&&storageMatches(storage,this.#id)&&manifestMatches(manifest,expectation));
+  this.#require((this.#profile===HTTP_PROFILE?profileMatches(candidate):initializedProfileMatches(candidate))&&storageMatches(storage,this.#id)&&manifestMatches(manifest,expectation));
   this.#manifest=expectation.digest;this.#state='profiled';
  }
- setup(ledger,at){
+ setup(ledger,at,initialization=null){
   this.#time(at);this.#require(this.#state==='profiled'&&at-this.#created<LIMITS.setup_ms&&ledgerMatches(ledger,'setup'));
+  this.#require(this.#profile===HTTP_PROFILE?initialization===null:initializedSetupMatches(initialization,this.#id,this.#manifest,ledger.sql));
   this.#setupAt=at;this.#state='prepared';
  }
  #owned(value){
@@ -33,7 +37,7 @@ export class HttpDataLifecycle {
  server(value,profile,at){
   this.#time(at);const row=record(value,['run','head','image','pid','start','alive','manifest']);
   this.#require(this.#state==='prepared'&&at-this.#setupAt<LIMITS.transaction_ms&&LIMITS.job_ms-at>=LIMITS.http_ms+LIMITS.cleanup_ms);
-  this.#require(this.#owned(row)&&profileMatches(profile));this.#pid=row.pid;this.#start=row.start;this.#started=at;this.#state='http';
+  this.#require(this.#owned(row)&&(this.#profile===HTTP_PROFILE?profileMatches(profile):initializedProfileMatches(profile)));this.#pid=row.pid;this.#start=row.start;this.#started=at;this.#state='http';
  }
  begin(meta,kind,index,at){
   this.#httpTime(at);this.#require(this.#state==='http'&&this.#transactions<LIMITS.transactions&&['login-form','login-submit','view','submit','nonce-control'].includes(kind)&&route(meta,this.#challenge)===kind);
@@ -46,7 +50,7 @@ export class HttpDataLifecycle {
   const observed=this.#pending!==null||['view','nonce-control'].includes(this.#kind);
   if(!observed)this.#require(result===null&&expected===null);
   else{
-   this.#require(this.#pending===null?viewObservationMatches(result,expected):caseMatches(result,expected,this.#pending));
+   this.#require(this.#profile===HTTP_PROFILE?(this.#pending===null?viewObservationMatches(result,expected):caseMatches(result,expected,this.#pending)):(this.#pending===null?viewObservationMatchesForModel(result,expected,this.#profile.model):caseMatchesForModel(result,expected,this.#pending,this.#profile.model)));
    this.#require(result.bootstrap===bootstrap.sql&&result.auth===auth.sql);
    this.#require(expected.run===this.#id.run&&expected.head===this.#id.head&&expected.image===this.#id.image&&expected.root===this.#id.root&&envelope.status===result.status);
    this.#require((this.#policy===null||result.before===this.#policy)&&(this.#sentinel===null||result.sentinel===this.#sentinel));
@@ -73,6 +77,6 @@ export class HttpDataLifecycle {
    this.#require(row&&row.run===this.#id.run&&row.head===this.#id.head&&row.image===this.#id.image&&row.ownership===true&&['processes','listeners','containers','schemas','accounts','files','sessions','transactions'].every(k=>row[k]===0));
   }catch{this.#state='cleanup-unknown';throw Error('HTTP DATA cleanup unconfirmed');}
   this.#state='closed';
-  return Object.freeze({event:'http-data-model-closed',model:HTTP_PROFILE.model,run:this.#id.run,head:this.#id.head,image:this.#id.image,cases:this.#index,transactions:this.#transactions,completed:!this.#refused&&this.#index===HTTP_CASES.length,runtime_grant:false,production_ready:false,qualification:'not-established'});
+  return Object.freeze({event:'http-data-model-closed',model:this.#profile.model,run:this.#id.run,head:this.#id.head,image:this.#id.image,cases:this.#index,transactions:this.#transactions,completed:!this.#refused&&this.#index===HTTP_CASES.length,runtime_grant:false,production_ready:false,qualification:'not-established'});
  }
 }

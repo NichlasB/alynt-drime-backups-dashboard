@@ -82,15 +82,28 @@ test('unknown/failed initializer never obtains baseline or ready credit',async()
  }
 });
 
-test('native callers and the old observer remain byte-identical; no dormant v2 import or launch',()=>{
+test('all original native callers remain covered: SQL identity and explicit v2 gates, no implicit activation',()=>{
  const root=new URL('../../',import.meta.url);
  const hashes={
   'scripts/ci/source-policy-http-owned-observer.php':'03792be06bfed2ddb0962ab50cc37d5e2e09fc5082b14d9ecf5fddee19e87418',
  };
  for(const [path,hash] of Object.entries(hashes))assert.equal(createHash('sha256').update(readFileSync(new URL(path,root),'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash);
  for(const path of ['scripts/ci/source-policy-http-owned-controller.mjs','scripts/ci/source-policy-http-owned-worker.php','scripts/ci/source-policy-http-owned-setup.php','.github/workflows/source-policy-minimum-qualification.yml']){
-  const source=readFileSync(new URL(path,root),'utf8');assert.doesNotMatch(source,/source-policy-http-initialization|owned-http-l714-initialized-v2/);
+  const source=readFileSync(new URL(path,root),'utf8');
+  // The user now authorized explicit native integration. Preserve every file in
+  // this guard's coverage; replace the historical absence expectation with the
+  // actual default-off/version binding tested in initialized-native.test.mjs.
+  if(path.endsWith('owned-controller.mjs')){
+   const admission=source.indexOf('const profile=httpExecutionProfile(process.env)');assert.ok(admission>0&&admission<source.indexOf('const owner=createOwnedStage'));
+   assert.match(source,/initialized\?INITIALIZED_HTTP_PROFILE:HTTP_PROFILE/);
+   assert.match(source,/need\(!initialized\|\|receipt.model===profile.model,'initialized-request-model'\)/);
+  }else if(path.endsWith('owned-worker.php')){
+   assert.match(source,/adbh_initialized_model\( \$p, getenv\( 'ADB_HTTP_INITIALIZED_APPROVED' \) \)/);
+   assert.match(source,/adbh_check\( false !== \$model, 'owned-worker-model' \)/);
+   assert.match(source,/'setup' === \$purpose && 'owned-http-l714-initialized-v2' === \$model/);
+  }else assert.doesNotMatch(source,/source-policy-http-initialization|owned-http-l714-initialized-v2/);
  }
+ const installed=readFileSync(new URL('alynt-drime-backups-dashboard.php',root),'utf8');assert.doesNotMatch(installed,/source-policy-http-/);
 });
 
 test('five semantic controls fail assertions instead of passing on unavailable receipts',async()=>{

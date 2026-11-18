@@ -1,5 +1,14 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Initialized-v2 native integration/ONE allowance — 2026-11-18
+
+[Current integration and pending native gate](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+adds a fixed fresh initializer between installed fixture verification/DDL seal and
+the full measured baseline. Same shared setup60s/1024 credit and all strict HTTP
+guards;no request-write exception. Publication/exact-head ordinary CI precede ONE
+fresh-prerequisite native run. New0/1 not dispatched;old3/3 exhausted,cumulative41,
+milestones4/10 unchanged. No native success or production wiring is claimed.
+
 ## Initialized-fixture worker/controller preparation — 2026-11-18
 
 [Owning completed preparation](SOURCE_POLICY_POST_INSTALL_INITIALIZATION_FOUNDATION.md)

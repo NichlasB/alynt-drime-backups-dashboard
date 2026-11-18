@@ -4,6 +4,13 @@ import {HTTP_PROFILE,LIMITS,record,integer,hex,identityData,storageMatches,manif
 
 export const INITIALIZATION_EXECUTION_ENABLED=false;
 export const INITIALIZED_HTTP_PROFILE=Object.freeze({...HTTP_PROFILE,model:'owned-http-l714-initialized-v2'});
+export function initializedProfileMatches(value){const row=record(value,Object.keys(INITIALIZED_HTTP_PROFILE));return row!==null&&Object.keys(INITIALIZED_HTTP_PROFILE).every(k=>row[k]===INITIALIZED_HTTP_PROFILE[k]);}
+export function initializedSetupMatches(value,identity,manifest,sql){
+ const row=record(value,['binding','result']),id=identityData(identity);
+ const binding=row&&record(row.binding,['model','run','head','image','owner','manifest','anchors']);
+ const result=row&&record(row.result,['state','total_setup_sql','baseline','isolated_only','runtime_grant','production_ready','http_qualified']);
+ return !!(id&&binding&&result&&binding.model===INITIALIZED_HTTP_PROFILE.model&&binding.run===id.run&&binding.head===id.head&&binding.image===id.image&&binding.owner===createHash('sha256').update(JSON.stringify(id)).digest('hex')&&binding.manifest===manifest&&hex(binding.anchors,64)&&result.state==='ready'&&result.total_setup_sql===sql&&integer(sql,LIMITS.setup_sql)&&sql>0&&hex(result.baseline,64)&&result.isolated_only===true&&result.runtime_grant===false&&result.production_ready===false&&result.http_qualified===false);
+}
 const bindingKeys=['model','run','head','image','owner','manifest','anchors'];
 const ticketKeys=[...bindingKeys,'role','setup_sql_used','sql_remaining','setup_started','setup_deadline'];
 const completionKeys=[...ticketKeys,'sql','full_bootstrap','installing','short_init','protected_reads','protected_writes','owner_allocations','session_writes','mail','outbound','file_writes','source_unchanged','anchors_unchanged'];
