@@ -29,7 +29,7 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Current campaign item | State |
 | --- | --- |
 | Completed worthwhile milestones | 4/10 on final W publication/evidence closeout: coherent failure-evidence foundation, prior frozen L qualification, affected M refresh and approved W714 owned qualification; docs/checklist publication is tracked in the canonical toolkit record |
-| Native qualification attempts | Original10/10 EXHAUSTED plus4 separately approved ONE supplements consumed;historical23+10+4=cumulative37. Latest full HTTP run44187040461 at0c21776 passed fresh prerequisites/setup,then request1/503/receipt absent with core-bootstrap/RuntimeException/sql-shape diagnostic;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
+| Native qualification attempts | Original10/10 EXHAUSTED plus5 separately approved ONE supplements consumed;historical23+10+5=cumulative38. Latest full HTTP run44334984726 at11e0479 passed fresh prerequisites/setup,then request1/503/receipt absent with write-scope/option.php963;exact owned cleanup/recovery verified. No ceiling reset or extra milestone credit |
 | Auth Error recovery cycles | Cycle1 localized cause; cycle2 verified genuine localization/auth phase advancement, closed |
 | Positive-view refusal recovery cycles | Closed at cycle3/3: strict PHP8.5 boolean NTS producer corrected; actual L view/save and all23 cases passed |
 | Milestone1: bounded failure-evidence foundation | Coherent RF2/RF3/RF4 foundation, published/verified through63b728a; diagnostic substeps/retries are not extra milestones |
@@ -37,10 +37,21 @@ cumulative native opportunities. Do not reset/relabel those old outcomes.
 | Milestone3: affected legacy M compatibility refresh | Passed at SAME63b728a/run42361945178:44637 checks/9 groups, trusted-distribution assurance limits retained, strict cleanup |
 | Milestone4: W714 genuine-session owned qualification | Passed at efc7aff: source209/native0/SQL0, fresh ADBC2 two cases/ambient425/9, ONE23 cases/11914 checks/9 groups; five owned tables removed, all78 application checksums unchanged, all-server sessions/trx0; exact owning proof below |
 | Affected current-cohort L/M refresh | Existing campaign authority used at docs-only descendant1b34b4b: L42372977592 passed23/12006/9;M42373083692 passed42309/9;fresh prerequisites/strict cleanup, no new milestone credit |
-| Exact next meaningful item | [Request-bootstrap diagnostic integration and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): ONE Exact-Head Genuine-HTTP Owned Requalification and Cleanup Attempt with Request-Bootstrap SQL Diagnostics,fresh prerequisites/exact cleanup,existing ephemeral CI lab only. Actual historical branch/core caller remain Unknown;guards/receipts/budgets and production wiring preserved. Fresh explicit native approval required |
+| Exact next meaningful item | [Blocked bootstrap option-write evidence and proof limits](SOURCE_POLICY_GENUINE_HTTP_INTEGRATION_IN_PROGRESS.md): Repository-Only Request-Bootstrap Option-Write Source Diagnosis and Write-Free Fixture Preparation Design,pinned source/design only. Upstream writer/key/value Unknown;prefer finite setup preparation that preserves request-write guards/non-target invariants. No SQL/native/fixture operation,acceptance broadening or production wiring;fresh approval required |
 
 Retries/docs-only commits/cleanup are not separate product milestones. Keep this
 ledger current after actual results; no count increment for pending or failed work.
+
+Current fifth supplemental ONE outcome — 2026-11-18:run44334984726 at11e0479
+completed/failure after fresh native291/9 and genuine23/12006/9 passed. Actual
+request1/receipt absent/status503/body0/header181/EOF true;matching core-bootstrap/
+RuntimeException/sql-shape packet now carries write-scope/option.php963. Pinned
+source is update_option's generic write boundary;upstream writer/key/value Unknown.
+Guard held,no HTTP case validated. Exact owned zero cleanup,recovery absent and
+final reconciliation0 passed. No code/guard/budget/wiring change or second run.
+Milestones4/10,original10/10+5 consumed ONE supplements,cumulative38. Next is the
+source/design-only write-free preparation slice above,not a generic write exception
+or blind native retry. No budget reset or milestone credit for diagnostic attempts.
 
 Current repository-only request-bootstrap integration — 2026-11-18:existing
 fixed bounded mapper reused for first core-bootstrap query refusal,shared

@@ -1,5 +1,62 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## ONE run identifies blocked bootstrap option write — 2026-11-18
+
+User explicitly approved ONE Exact-Head Genuine-HTTP Owned Requalification/Cleanup
+Attempt with Request-Bootstrap SQL Diagnostics at11e04796d3f3103f091a6fedaa284370b69c5f5c.
+Clean local/remote exact head and ordinary CI44308064208 completed/success,both PHP
+jobs,reverified before single dispatch. Toolkit59e92d1 and uploader3dfcb15 clean;
+uploader untouched. Existing trusted ephemeral CI lab,R3 exclusively owned
+disposable fixtures only;no LocalWP/installed/live/client/Drime target,production
+wiring or release/package/tag/deploy. Novamira site operations not applicable to
+this CI-only target. Existing manual workflow unchanged;no allowance reset.
+
+ONE [run44334984726](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44334984726)
+ACTUALLY completed/FAILURE at SAME11e0479,full HTTP mode,setup diagnostic=false.
+Fresh environment preflight/cleanup passed. Native audit29/native0/SQL0 then291
+checks/9 groups passed;genuine L audit211/native0/SQL0 then23 cases/12006 checks/
+9 groups passed. Independent live/post-exit sessions/trx zero;prerequisite exact
+cleanup/reconciliation_failure0. No second dispatch or native rerun.
+
+HTTP setup/source/containment/reconciliation/sealing and server readiness cleared.
+Actual failure at request-1,reason deb2fb061a609a75e56a8bb43d0d18feb61d3d65f45a3ee6ff5a1c94a8fe6c1e.
+Receipt summary:exchange1,absent,status503,body_bytes0,header_bytes181,eof true.
+Matching private diagnostic:core-bootstrap,RuntimeException,origin proof,line22,
+sql-shape assertion a2d19317633ec1cec3dce5975aa0e3604cc4afba6aedcc747c06f07ca63effac,
+sql={branch:write-scope,caller:option,line:963}. First valid HTTP receipt/case
+and13-case matrix still incomplete. No raw SQL/value/key/message/path/trace/
+response/cookie exported;these are actual bounded facts,not synthetic provenance.
+
+Read-only exact pinned core db96f5eaa77a8d3e8eec8923a518fa2326f0d46a audit:
+[option.php963](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/option.php#L963)
+is update_option()'s generic $wpdb->update boundary for the options table.
+The unchanged classifier rejects request option writes;only setup writes and
+the finite login session-usermeta shapes have admission. The write-scope guard
+held and threw before this filtered query's execution. This is not evidence of
+an engine SQL error or a reason to allow generic request writes. Exact option
+key/value and upstream bootstrap writer remain Unknown;the generic API line
+does not identify them. Do not guess cache/theme/cron/upgrade causes or weaken
+non-target preservation/acceptance. Existing setup seed is distinct from request
+bootstrap;whether finite write-free setup preparation can solve this is unproved.
+
+Cleanup independently verified:OWNED_HTTP_CLEANUP exact-owned-zero;always recovery
+absent;recovery and final reconciliation steps successful. Final containers/
+directories/core checkout0,tmpfs released,reconciliation_failure0. No owned
+leftovers/unknown cleanup reported. No implementation,guard,admission,budget,
+source-identity or production-wiring change during this attempt/closeout.
+
+Implementation-plan progress:the actual refusal is now a blocked request-bootstrap
+option write at a pinned core API boundary,not an unidentified SQL class. HTTP
+remains unqualified. Milestones4/10;original10/10 native allowance exhausted plus
+five consumed separately approved ONE supplements,historical23+10+5=cumulative38.
+This ONE is consumed;no retry or new milestone credit. Recommended next gated
+slice:Repository-Only Request-Bootstrap Option-Write Source Diagnosis and
+Write-Free Fixture Preparation Design. Audit pinned upstream write paths and
+whether finite owned setup preparation can avoid request writes while preserving
+all guards/non-target invariants;do not broaden acceptance or guess the option.
+Design/source analysis only,no SQL/native/site/fixture operation or wiring change;
+fresh approval required before that next slice or any further native attempt.
+
 ## Repository-only request-bootstrap branch/core-origin integration — 2026-11-18
 
 Explicit user approval:repository-only diagnostic integration,isolated validation,
