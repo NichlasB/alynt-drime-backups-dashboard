@@ -1,5 +1,73 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Repository-only query-refusal diagnosis and metadata repair — 2026-11-18
+
+User approved the prior recommended Repository-Only Initializer Query-Refusal
+Source Diagnosis and Guard-Preserving Repair. Scope:R2 source/isolated tests,
+reviews,publication/exact-head ordinary CI;NO new native attempt,core bootstrap,
+SQL/site/LocalWP/fixture operation or added diagnostics. Clean/synced review and
+restore baseline `d8c70438c93eb9028775b92641efbc3d18004805`;
+CI44410655884 reverified actually successful. Toolkit baseline9ce52c15ac41c67edadda6c3502d11a5d554c74c.
+
+Bounded three-branch review:query registry permits only the exact observer and
+pinned wpdb placeholder restorer;the shared clock retains the original parent
+origin/deadline and monotonic/time/SQL credit. Neither is bypassed or changed.
+The SQL branch has a confirmed source-compatibility omission. Exact pinned core
+db96f5eaa77a8d3e8eec8923a518fa2326f0d46a class-wpdb.php was read in memory,
+not loaded;SHA256 e15403e90032dd0508811301505e491d4212de5152581a98f51b744a1a3903bd
+matches the existing pin. [Pinned source](https://github.com/WordPress/WordPress/blob/db96f5eaa77a8d3e8eec8923a518fa2326f0d46a/wp-includes/class-wpdb.php#L3305):
+update2680 → process_fields2812 → process_field_charsets2934 → get_col_charset3375
+→ uncached get_table_charset3276 → line3305 SHOW FULL COLUMNS FROM the table.
+The existing options-only initializer grammar rejected that read-only metadata
+shape,even though its ordinary option UPDATE/INSERT shapes were admitted.
+
+Repair:add precisely `SHOW FULL COLUMNS FROM <derived owned options table>` to
+the initializer grammar after the existing bounded tokenizer. This IS a narrow
+finite grammar addition,not a claim that acceptance bytes are unchanged. It
+preserves the existing options-only/no protected-row read/no DDL or foreign-table
+policy. Metadata returns column definitions,not option values. No LIKE/WHERE,
+database-qualified name,other table,generic SHOW/DESCRIBE or additional statement
+is admitted. Every metadata query consumes the same original SQL/time credits;
+the real native registry/refusal/shutdown/anchor/release path stays unchanged.
+Measured HTTP SQL observer remains byte-identical. No callback/provider/handle,
+new seed list,query rewrite,resource increase or production wiring added.
+
+Red-to-green:the exact source-shaped quoted-table metadata fixture failed before
+repair with initialization-sql (not syntax/tooling);afterwards metadata then an
+ordinary cron UPDATE return same bytes and finish with exactly2 charged queries.
+Nine hostile metadata/protected-write variants refuse and poison the guard;
+one remaining credit cannot buy another query and original deadline still expires.
+Two new RAM-only controls are behaviorally killed:remove metadata availability,
+or replace exact-table equality with a broad prefix match. Existing seven guard
+controls and native approval/clock/registry/non-catchable refusal oracles retained.
+These are synthetic SQL/isolated APIs/virtual clocks,not genuine core or DB proof.
+
+Canonical Feature Light SOURCE-SCOPED:three code/test files plus four owning
+resumes,this record and direct unchanged initializer/clock/registry/controller/
+observer callers. One compatibility finding fixed;no remaining scoped quality
+finding/manual decision. Five-line cohesive guard addition with reused helpers;
+no meaningful bloat/structure trigger,no UI/UX (backend-only). Final Feature
+Security SOURCE-SCOPED:exact typed table binding,pre-query charging,protected
+reads/writes/DDL/foreign effects and original fail-closed terminal preserved;
+no confirmed security defect or07A handoff. No whole-plugin review/readiness row
+or historical refusal is refreshed. Local validation:focused native-model11/11,
+guard5/5 (nine semantic controls),HTTP140/140,canonical Node295/295,no failures/
+skips. Full PHP3070/25340,0 errors/failures,two existing Sodium-unavailable skips
+confirmed separately by signer verbose5/9. PHPCS305/305,PHP/Node syntax,
+structure/build,334 local links and whitespace pass. No new native attempt.
+Ordinary exact-head CI evidence belongs in the canonical toolkit closeout after
+actual completion;do not infer native success from ordinary CI.
+
+Native causal limit:run44410105113 did NOT export the failing registry/clock/SQL
+condition or query. This source-backed incompatibility is fixed,but it is NOT
+established as that run's actual cause and may not be its earliest refusal.
+No completed initializer/shutdown/full-baseline/HTTP evidence is added;other
+finite grammar incompatibilities remain possible. ONE1/1 exhausted,cumulative42,
+milestones4/10 unchanged. Stop before native execution. Recommended next gated
+slice:ONE New-Head Initialized-Fixture HTTP Owned Requalification and Cleanup
+Attempt,with fresh existing prerequisites and exact owned cleanup. Separate
+explicit authority required;do not add diagnostics or auto-retry on failure.
+
 ## Approval, source boundary and allowance — 2026-11-18
 
 User approved native loader/controller integration plus **ONE** owned ephemeral-

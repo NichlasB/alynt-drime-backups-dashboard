@@ -1,5 +1,17 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Repository-only initializer metadata repair; native gate remains — 2026-11-18
+
+[Source diagnosis/repair](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+adds exact derived-options column metadata shape required by pinned wpdb field
+validation,with same original query/time charging and protected/foreign denials.
+Red-to-green isolated coverage only;registry/clock/native diagnostics and measured
+HTTP rules unchanged. Actual failed condition in44410105113 still Unknown;this
+confirmed incompatibility is not claimed as its native cause. No new native
+attempt or HTTP result. ONE1/1 exhausted,cumulative42,milestones4/10 unchanged.
+Next gated slice:ONE New-Head Initialized-Fixture HTTP Owned Requalification and
+Cleanup Attempt,fresh prerequisites/exact cleanup;separate approval required.
+
 ## Initialized-v2 native integration/ONE outcome — 2026-11-18
 
 [Current integration and actual native outcome](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)

@@ -99,9 +99,11 @@ test('time rollback, expiry, replay, malformed roles, preflight and copied credi
  echo 'time/preflight/terminal/copied-credit';`;
  assert.equal(passes(php),'time/preflight/terminal/copied-credit');
 });
-test('seven source-backed semantic controls are assertion-killed, not syntax failures',()=>{
+test('nine source-backed semantic controls are assertion-killed, not syntax failures',()=>{
  const source=readFileSync(path,'utf8');
  const controls=[
+  ["'SHOW FULL COLUMNS FROM ' . $this->table === $shape",'false',"$g=guard($ticket,$facts);try{$g->filter('SHOW FULL COLUMNS FROM adbh_aaaaaaaaaaaa_options',3);}catch(RuntimeException $e){throw new RuntimeException('assert-metadata-unavailable');}",'assert-metadata-unavailable'],
+  ["'SHOW FULL COLUMNS FROM ' . $this->table === $shape","0 === strpos( $shape, 'SHOW FULL COLUMNS FROM ' )","$g=guard($ticket,$facts);denied(function()use($g){$g->filter('SHOW FULL COLUMNS FROM foreign_options',3);},'initialization-sql');",'assert-denial-initialization-sql'],
   ["$this->used < $this->ticket['sql_remaining']",'true',creditProbe,'assert-denial-initialization-credit'],
   ["$at >= $this->last && $at < $this->ticket['setup_deadline']",'true',"$g=guard($ticket,$facts);denied(function()use($g){$g->filter('SELECT VERSION()',60000);},'initialization-time');",'assert-denial-initialization-time'],
   ["false === stripos( $key, 'alynt_drime' )",'true',protectedProbe,'assert-denial-initialization-sql'],

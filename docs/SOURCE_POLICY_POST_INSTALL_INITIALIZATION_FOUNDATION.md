@@ -1,5 +1,15 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Repository-only metadata compatibility repair — 2026-11-18
+
+[Owning source diagnosis and proof limits](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+adds only exact derived-options SHOW FULL COLUMNS to initializer query admission:
+pinned wpdb uses it before option-write charset/length validation. Same original
+SQL/time charge,protected row/DDL/foreign denials and actual registry remain.
+No native attempt,core/SQL/fixture execution,new diagnostics or wiring change.
+Native failure cause and full HTTP qualification remain unproven. New-head ONE
+requalification needs explicit approval;ONE1/1 exhausted,cumulative42,milestones4/10.
+
 ## Native integration published; initializer qualification blocked — 2026-11-18
 
 The [owning native integration/ONE allowance](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)

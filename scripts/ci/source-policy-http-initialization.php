@@ -139,6 +139,11 @@ final class ADBH_Initialization_Query_Guard {
 		}
 		list( $shape, $values ) = $tokens;
 		$table                  = preg_quote( $this->table, '/' );
+		// Pinned wpdb validates option field charset/length before a core write.
+		// Column metadata only: no option rows, other tables, DDL or extra clauses.
+		if ( 'SHOW FULL COLUMNS FROM ' . $this->table === $shape ) {
+			return true;
+		}
 		if ( in_array( $shape, array( 'SELECT @@SESSION.sql_mode', 'SELECT VERSION()', 'SELECT FOUND_ROWS()' ), true ) ) {
 			return true;
 		}

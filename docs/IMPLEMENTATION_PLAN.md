@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Repository-only initializer metadata compatibility repair — 2026-11-18
+
+[Owning source diagnosis and limits](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+confirms pinned wpdb option-write charset/length validation can emit exact
+owned-options SHOW FULL COLUMNS,missing from the initializer grammar. Narrow
+read-only metadata addition;protected-row/foreign/DDL denials,registry,shared
+credits,measured HTTP observer and wiring unchanged. Red-to-green isolated proof,
+not a confirmed explanation of run44410105113 or genuine bootstrap success.
+No native attempt authorized/consumed;ONE1/1 exhausted,cumulative42,milestones4/10.
+Next gated slice:ONE New-Head Initialized-Fixture HTTP Owned Requalification and
+Cleanup Attempt,fresh prerequisites/exact cleanup;no automatic retry/diagnostics.
+
 ## Initialized native integration published; ONE initializer refusal — 2026-11-18
 
 [Owning integration/allowance record](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
