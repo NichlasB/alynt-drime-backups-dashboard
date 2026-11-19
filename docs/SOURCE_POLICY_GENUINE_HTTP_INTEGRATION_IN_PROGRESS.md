@@ -1,5 +1,17 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## c72f691 ONE attempt stopped before native bodies — 2026-11-19
+
+[Owning actual run44560537218/evidence](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):
+setup requested8.5.12 but reportedPHP8.5.13;unchanged exact-PHP preflight refused.
+Native adapter,genuine-session and initialized-HTTP bodies skipped,not passed.
+Metadata repair never reached;previous initializer refusal cause still unproven.
+Exact owned cleanup,HTTP recovery absent and final reconciliation0 passed.
+New ONE1/1 consumed,cumulative43,milestones4/10 unchanged;HTTP unqualified.
+Next gated slice:Repository-Only Exact PHP8.5.12 Provisioning Diagnosis and Guard-
+Preserving Workflow Repair,isolated/ordinary CI only,no native retry/rebaseline.
+Execution source,guards,budgets,pins and production wiring unchanged this turn.
+
 ## Repository-only initializer metadata repair; native gate remains — 2026-11-18
 
 [Source diagnosis/repair](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)

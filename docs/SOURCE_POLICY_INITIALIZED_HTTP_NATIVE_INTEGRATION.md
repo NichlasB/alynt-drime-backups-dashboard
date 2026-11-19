@@ -1,5 +1,53 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## ONE c72f691 requalification: exact-PHP prerequisite refused — 2026-11-19
+
+User approved ONE New-Head Initialized-Fixture HTTP Owned Requalification and
+Cleanup Attempt at `c72f69119d63cc03f24c2fe56af59ecdf49bda21`,fresh existing
+prerequisites/exact owned cleanup,production wiring disabled. Scoped R3 ephemeral
+CI-lab exception only;no registered site/LocalWP/live/client/Drime/application
+operation or general permission increase. No execution-source/guard/budget change.
+Clean/synced exact head and ordinary CI44415935441 reverified completed/success
+before dispatch,actorNichlasB/master,previous exact-owned-zero cleanup verified.
+Toolkit baseline`ab6934c17ec700a5dd16d6be84bb3193313495c3`. No unfinished run.
+
+[ONE run44560537218](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44560537218)
+ACTUALLY completed/failure at SAME c72f691 head,run_attempt1. Exact source/private
+directories and pinned-core checkout admitted. PHP setup input was8.5.12,but its
+existing log explicitly reports **Installed PHP8.5.13**. Fresh environment stage
+then refused:Owned PHP profile failed or emitted diagnostics;no alternate module/
+backend attempted. Source preflight requires PHP_VERSION8.5.12 before reading
+core/allocating handles;the reported installed version violates that predicate.
+The child profile packet/module digests were not emitted,so those remain Unknown;
+do not infer a missing-module/server/SQL fault from the generic parent message.
+Why setup supplied a newer patch despite the requested input remains uninvestigated.
+
+Reacquisition,native adapter body,genuine-session request body and initialized
+HTTP body were all SKIPPED. No291/9 or23/12006/9 prerequisite credit for this run,
+no initializer invocation,HTTP case,baseline or SQL/native-session success.
+The c72f691 metadata correction was NOT reached:neither validated nor disproved.
+No workflow rerun,second dispatch,new diagnostics,PHP rebaseline or guard change.
+
+Preflight trap:containers0/private_directory0/core_checkout0. Always HTTP recovery:
+absent. Always final qualification cleanup:containers0/directories0/tmpfs released/
+reconciliation_failure0;final preflight cleanup again all0. Both always steps
+completed/success. No unresolved owned fixture/process/checkout remains reported.
+No database daemon/bootstrap/body started before this environment refusal.
+
+This separately approved ONE allowance1/1 CONSUMED,including prerequisite failure;
+previous initialized-v2 ONE1/1 and recovery3/3 remain exhausted. Cumulative43
+qualification opportunities,milestones4/10 unchanged. HTTP remains BLOCKED and
+unqualified;ordinary CI success is not native success. Owning records/evidence
+closeout only this turn;historical review/release-readiness rows preserved.
+
+Recommended next gated slice:Repository-Only Exact PHP8.5.12 Provisioning Diagnosis
+and Guard-Preserving Workflow Repair. Inspect the existing pinned setup action's
+patch-selection behavior and identify a bounded way to supply the approved patch;
+isolated validation/publication/exact-head ordinary CI only. Keep PHP/mysqlnd/core
+pins and all acceptance/budgets unchanged;no new dependency/install/native attempt
+or automatic8.5.13 rebaseline. If exact provisioning requires a new artifact or
+support decision,stop with that concrete proposal instead of improvising.
+
 ## Repository-only query-refusal diagnosis and metadata repair — 2026-11-18
 
 User approved the prior recommended Repository-Only Initializer Query-Refusal

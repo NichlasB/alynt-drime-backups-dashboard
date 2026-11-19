@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## ONE requalification blocked by exact-PHP prerequisite — 2026-11-19
+
+[Actual c72f691/run44560537218 outcome](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):
+setup requested PHP8.5.12 but reported8.5.13;unchanged exact-profile preflight
+refused before native/genuine-session/initializer/HTTP bodies,all skipped. No
+HTTP or metadata-repair runtime credit. Exact owned cleanup/recovery/final
+reconciliation all passed. New ONE1/1 consumed,cumulative43,milestones4/10 unchanged.
+Next gated slice:Repository-Only Exact PHP8.5.12 Provisioning Diagnosis and Guard-
+Preserving Workflow Repair,isolated/ordinary CI only. Preserve pins/budgets/wiring;
+no native retry or automatic8.5.13 rebaseline. Why setup chose a newer patch is
+not yet established;no new artifact/dependency decision authorized by this proof.
+
 ## Repository-only initializer metadata compatibility repair — 2026-11-18
 
 [Owning source diagnosis and limits](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)

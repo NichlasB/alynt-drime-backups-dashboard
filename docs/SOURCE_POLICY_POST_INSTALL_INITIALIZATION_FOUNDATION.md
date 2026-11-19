@@ -1,5 +1,16 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## c72f691 native opportunity stopped at PHP prerequisite — 2026-11-19
+
+[ONE run44560537218](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md) failed
+the unchanged exact-PHP prerequisite:setup requested8.5.12 but reported8.5.13.
+All subsequent native/genuine-session/initializer/HTTP bodies skipped. No runtime
+proof of the metadata repair added. Exact owned cleanup/recovery/reconciliation
+passed. New ONE1/1 consumed,cumulative43,milestones4/10,HTTP remains unqualified.
+Next gated slice:Repository-Only Exact PHP8.5.12 Provisioning Diagnosis and Guard-
+Preserving Workflow Repair,not a native retry or automatic patch rebaseline.
+No execution-source/budget/acceptance/pin/production-wiring change this turn.
+
 ## Repository-only metadata compatibility repair — 2026-11-18
 
 [Owning source diagnosis and proof limits](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
