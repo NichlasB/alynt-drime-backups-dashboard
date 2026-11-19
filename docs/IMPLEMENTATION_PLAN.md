@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Same-supplier exact archive identified; static qualification next — 2026-11-19
+
+[Archived-build trust/provisioning decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+identifies php-ubuntu asset747285397,exact8.5.12/NTS/Ubuntu24.04 name,
+41,599,355 bytes/SHA256 pin. Metadata only,no contents/modules/dependency closure
+or runnable/private-provisioning proof. Stock installer excluded for root/package/
+service effects. Proposed bounded DATA-only inventory before any private prefix.
+No executable/workflow/pin change,artifact acquisition/install/native attempt.
+Next gated slice:ONE Owned PHP8.5.12 Archive Acquisition,Static Inventory and
+Cleanup Proof,existing-tool/resource preflight first,no filesystem extraction/
+runtime loading/SQL. Milestones4/10,cumulative43/exhausted allowances unchanged.
+
 ## Exact patch selector absent; provisioning repair blocked — 2026-11-19
 
 [Source-backed provisioning diagnosis](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):

@@ -1,5 +1,16 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Archived-build design complete; no runtime provisioning yet — 2026-11-19
+
+[Current same-supplier candidate/trust decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+finds exact-name asset747285397,size41,599,355/SHA256 pin;no archive bytes acquired.
+Exclude root-extracting supplier installer. Require bounded static inventory/
+module-library closure first,then a separate concrete private-provisioning proof.
+Candidate is NOT runnable/provisionable from metadata. Existing profiles/checks/
+workflows/wiring unchanged. Next gated slice:ONE Owned PHP8.5.12 Archive
+Acquisition,Static Inventory and Cleanup Proof,no filesystem extraction/install/
+runtime loading/native attempt. Milestones4/10,cumulative43 unchanged.
+
 ## Exact-PHP provisioning diagnosis; repair requires an artifact decision — 2026-11-19
 
 User approved repository-only Exact PHP8.5.12 Provisioning Diagnosis and Guard-

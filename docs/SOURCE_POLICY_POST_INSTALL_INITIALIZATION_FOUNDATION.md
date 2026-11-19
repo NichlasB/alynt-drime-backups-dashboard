@@ -1,5 +1,14 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Same-supplier archived candidate; static admission pending — 2026-11-19
+
+[Current archived-build decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+selects exact asset747285397/size/SHA256 for a proposed bounded static proof,not
+runtime admission. No download/extraction/install/loading/native/SQL this turn.
+Existing initializer/workflows/pins/guards/wiring unchanged. Next gated ONE
+acquisition/static-inventory/cleanup proof;private provisioning and HTTP remain
+unqualified,milestones4/10,cumulative43 unchanged.
+
 ## Exact-PHP provisioning needs artifact decision — 2026-11-19
 
 [Bounded pinned-action diagnosis](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)

@@ -1,5 +1,14 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Exact archived candidate selected for proposed static proof — 2026-11-19
+
+[Design/trust decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+identifies a retained same-supplier exact8.5.12 archive by asset/size/SHA256,not
+binary contents. Static dependency/relocation/resource feasibility open;stock
+root/package/service installer excluded. No workflow/runtime/pin/native change.
+Next gated ONE acquisition/static-inventory/owned-cleanup proof only,no extraction/
+install/loading/SQL. HTTP unqualified,milestones4/10,cumulative43 unchanged.
+
 ## Exact-PHP diagnosis complete; fix requires artifact decision — 2026-11-19
 
 [Pinned source and shipped-parser evidence](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
