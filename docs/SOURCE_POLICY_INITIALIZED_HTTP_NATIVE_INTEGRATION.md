@@ -1,5 +1,70 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Exact-PHP provisioning diagnosis; repair requires an artifact decision — 2026-11-19
+
+User approved repository-only Exact PHP8.5.12 Provisioning Diagnosis and Guard-
+Preserving Workflow Repair through validation/publication/ordinary CI,all pins/
+checks preserved,no native attempt/wiring change. Clean/synced source/review/
+restore baseline `eacf597e4de5a3337cc85c62cc3797d3dce717df`,ordinary CI44561189995
+reverified actually successful. Toolkit baseline42a8be96bf9fbfa9c1d860a9ffc5612b13ad8ea5.
+R0 source diagnosis/R1 evidence publication;NO runtime/installer acquisition,
+installation,action dispatch,WordPress/SQL/fixture or registered-site operation.
+
+Confirmed cause at the EXISTING immutable setup-action commit
+`eb7c497e18156a6bbabfef1d3a82760b9eda3962`:
+
+- [src/utils.ts parseVersion](https://github.com/shivammathur/setup-php/blob/eb7c497e18156a6bbabfef1d3a82760b9eda3962/src/utils.ts)
+  validates numeric input,then returns version.slice(0,3).8.5.12 is8.5,NOT a patch
+  pin. src/install.ts passes that parsed value to the Linux shell.
+- action.yml actually runs dist/index.js. The same function is present in that
+  shipped bundle (Git blobb0563b496b13056f4152a873048e6d501d359961,63642 bytes,
+  SHA256962a84155335f33379118ba0aa619fe9a01e659e7a0f42fe86742ca5427a1de8).
+  Bounded function-only extraction and isolated VM numeric-input checks passed:
+  8.5.12→8.5,8.5.13→8.5,8.5→8.5;8.5.12-custom rejects. Four checks,no action
+  entry/installer executed and no network branch allowed in this reproduction.
+- [src/scripts/linux.sh](https://github.com/shivammathur/setup-php/blob/eb7c497e18156a6bbabfef1d3a82760b9eda3962/src/scripts/linux.sh)
+  setup_cached_versions calls run_script php-ubuntu with only minor/debug/NTS.
+  Other existing package/builder paths also receive minor,not the discarded patch.
+- [src/scripts/unix.sh](https://github.com/shivammathur/setup-php/blob/eb7c497e18156a6bbabfef1d3a82760b9eda3962/src/scripts/unix.sh)
+  run_script resolves releases/latest/download/install.sh with existing main/CDN
+  fallbacks. Pinning the ACTION does not pin those downstream scripts/builds.
+  read_env may force update when the PPA is missing. The README's update flag
+  means latest patch,not an exact-patch selector;update:false is not a repair.
+
+This explains the observed8.5.13 installation after an8.5.12 input. Exact route
+through dynamic downstream builds in run44560537218 was not captured;do not claim
+a specific package/cache/forced-update branch. No supported exact-patch selector
+found in bounded review of existing inputs/parser/install/Linux/unix/README.
+Affected direct consumers:manual Linux preflight,identity and qualification
+workflows;all use the SAME setup pin/8.5.12 input. Ordinary matrix CI is a
+different compatibility check,not qualification-profile provisioning proof.
+
+No honest config-only fix established within the preserved action/runtime pins.
+Workflow repair is BLOCKED,NOT implemented. Do not rename a minor selector as an
+exact pin,add update:false/retry/custom fallback,patch upstream action code,
+silently select8.5.13,or add a new download/build/install pipeline to claim success.
+Historical8.5.12 binary/module acquisition needs an explicit artifact-origin,
+identity/dependency-closure and provisioning decision before implementation.
+No new artifact candidate selected/acquired,checks weakened or diagnostics added.
+
+Source-scoped Feature Light:one provisioning-assumption finding,not auto-fixed;
+manual artifact decision required. Security-focused boundary review preserves
+existing fail-closed refusal and trust limits;no new code/security fix to claim.
+No bloat/structure or UI/UX trigger for evidence-only changes;no whole-plugin
+review,Database Review or release-readiness row refreshed. Local existing profile/
+identity/qualification PHP tests57/451 and isolated HTTP140/140 passed,no errors/
+failures/skips;340 local links/whitespace pass. No full local suite/build or genuine
+provisioning check claimed. Exact-head ordinary publication evidence belongs in
+toolkit after actual completion;it does not resolve the artifact decision.
+
+Recommended next gated slice:Repository-Only PHP8.5.12 Archived-Build Provisioning
+and Trust Decision,design only. Prefer evaluating a retained build from the
+existing supplier with its exact PHP/mysqlnd/mysqli/dependency identities and
+same limits;do not start a new build framework. If unavailable,report that before
+proposing a cohort/support change. No acquisition/install/native run in that
+design. Native HTTP remains unqualified;milestones4/10,cumulative43 unchanged,
+all ONE/recovery allowances remain exhausted. Production wiring disabled.
+
 ## ONE c72f691 requalification: exact-PHP prerequisite refused — 2026-11-19
 
 User approved ONE New-Head Initialized-Fixture HTTP Owned Requalification and

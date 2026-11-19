@@ -1,5 +1,14 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Exact-PHP provisioning needs artifact decision — 2026-11-19
+
+[Bounded pinned-action diagnosis](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+confirms the shipped parser strips8.5.12 to8.5,no supported exact-patch selector.
+No guard/workflow/pin/native change;repair BLOCKED until artifact/provisioning
+decision. Next gated design:Repository-Only PHP8.5.12 Archived-Build Provisioning
+and Trust Decision,existing supplier first,no acquisition/install/native attempt.
+Initializer/HTTP runtime still unqualified,milestones4/10,cumulative43 unchanged.
+
 ## c72f691 native opportunity stopped at PHP prerequisite — 2026-11-19
 
 [ONE run44560537218](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md) failed

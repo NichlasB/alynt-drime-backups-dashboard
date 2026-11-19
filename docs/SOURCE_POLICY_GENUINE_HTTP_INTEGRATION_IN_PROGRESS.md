@@ -1,5 +1,15 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Exact-PHP diagnosis complete; fix requires artifact decision — 2026-11-19
+
+[Pinned source and shipped-parser evidence](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md)
+establish8.5.12→8.5 before downstream installation. No existing exact-patch
+selector found;update flag is not a pin. Repair BLOCKED on artifact/provisioning
+decision,not solved by config churn or relaxing checks. No workflow/native/source
+guard change or attempt this turn. Next gated slice:Repository-Only PHP8.5.12
+Archived-Build Provisioning and Trust Decision,design-only/existing supplier first.
+No acquisition/install/native experiment;HTTP unqualified,milestones4/10,cumulative43.
+
 ## c72f691 ONE attempt stopped before native bodies — 2026-11-19
 
 [Owning actual run44560537218/evidence](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):

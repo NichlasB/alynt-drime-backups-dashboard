@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Exact patch selector absent; provisioning repair blocked — 2026-11-19
+
+[Source-backed provisioning diagnosis](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):
+pinned action source AND shipped parser truncate8.5.12 to8.5;Linux downstream
+installer/build selection is not patch-bound. Four isolated shipped-parser checks
+confirm truncation,not runtime provisioning. No supported exact-patch switch found;
+update:false cannot fix it. Workflows,pins and all executable checks unchanged.
+Repair requires a new artifact/provisioning decision,not another native attempt.
+Next gated slice:Repository-Only PHP8.5.12 Archived-Build Provisioning and Trust
+Decision,design-only/evaluate existing supplier first,no acquisition/install/run.
+HTTP unqualified,milestones4/10,cumulative43 and exhausted allowances unchanged.
+
 ## ONE requalification blocked by exact-PHP prerequisite — 2026-11-19
 
 [Actual c72f691/run44560537218 outcome](SOURCE_POLICY_INITIALIZED_HTTP_NATIVE_INTEGRATION.md):
