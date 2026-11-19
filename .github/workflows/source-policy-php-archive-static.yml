@@ -1,0 +1,44 @@
+name: Source-policy owned PHP archive static proof
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact approved master head for ONE DATA-only archive proof
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-php-archive-static
+  cancel-in-progress: false
+jobs:
+  static:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master' && github.actor == 'NichlasB'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+    steps:
+      - name: Admit exact approved head and first attempt
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" ]]
+          [[ "$GITHUB_RUN_ATTEMPT" == 1 && "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Admit source closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$(git rev-parse HEAD)" == "$EXPECTED_SHA" ]]
+          git diff --no-ext-diff --no-textconv --quiet "$EXPECTED_SHA" -- \
+            .github/workflows/source-policy-php-archive-static.yml \
+            scripts/ci/source-policy-php-archive-static.py \
+            scripts/manual/source_policy_linux_minimum_static.py
+      - name: Existing-tool preflight and ONE static proof
+        run: python3 -I -S -B scripts/ci/source-policy-php-archive-static.py --approved-static-proof
+      - name: Always reconcile exact owned archive
+        if: always()
+        run: python3 -I -S -B scripts/ci/source-policy-php-archive-static.py --cleanup

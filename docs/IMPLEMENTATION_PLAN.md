@@ -1,5 +1,14 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved fixed archive static harness; ONE proof pending — 2026-11-19
+
+[Owning implementation and proof limits](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+adds manual exact-head acquisition/static DATA/owned cleanup only,with existing-
+tool/resource preflight before download. Isolated tests are not archive/native
+qualification. Runtime/pins/HTTP checks/wiring unchanged;milestones4/10,cumulative43
+and exhausted native allowances unchanged. Continue the approved ONE static proof
+only after validation and ordinary exact-head CI;no extraction/install/loading.
+
 ## Same-supplier exact archive identified; static qualification next — 2026-11-19
 
 [Archived-build trust/provisioning decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)

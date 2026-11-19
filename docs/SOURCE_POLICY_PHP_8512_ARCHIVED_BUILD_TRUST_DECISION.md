@@ -1,5 +1,62 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Approved static proof implementation — 2026-11-19
+
+User approved ONE owned ephemeral-CI acquisition/static-inventory/cleanup proof
+at the fixed candidate below. R3 is limited to those owned files/processes and
+fixed public delivery;no general tier increase. Implementation/review/restore
+baseline `fa9bb2cf750aecf5ff261bd5e5458f0c0b33378f`,ordinary CI44581483597
+reverified completed/success. No extraction,installation,runtime/module loading,
+SQL,site operation or new native opportunity;production wiring remains disabled.
+
+Manual/default-off `source-policy-php-archive-static.yml` binds repository,actor,
+master,exact checked-out head and attempt1;read-only token,pinned checkout,no
+installer/cache/upload. Existing Python standard library and /usr/bin/zstd only.
+Before acquisition,a synthetic raw-block frame must decode under enforced
+address-space/CPU/time ceilings. No missing-tool install or automatic retry.
+Concurrent parent40MiB/decoder24MiB address-space caps sum to64MiB;decoder window
+8MiB fits that partition. This conservative partition is an implementation
+admission limit,NOT proof that every larger window intrinsically exceeds64MiB.
+Receipt retains observed window separately so a whole-budget violation can be
+distinguished from a partition refusal. No budget is increased to fit this asset.
+
+TLS delivery is fixed,proxy-disabled,redirect-count/host restricted;no signed URL
+or raw exception text is emitted. Newly created owned archive must match BOTH
+41,599,355 bytes and pinned SHA256 before frame/stream inspection. Compressed
+staging plus all expanded headers,padding,skipped members and trailers count
+against192MiB. Entries8192/member16MiB/path240bytes/depth32/output64KiB/job600s/
+cleanup30s stay bounded. Strict raw tar reader refuses PAX,long-name,device,
+ambiguous/dot/drive/traversal/duplicate paths rather than inheriting UBI policies.
+It hashes regular member DATA and records finite selected CLI/mysqlnd/mysqli ELF
+identities,interpreter/NEEDED/search paths;no links or archive members are written.
+Versioned symbols,full dependency origin closure,relocation,NTS and actual runtime
+versions remain Unknown;even completed inventory is not executable admission.
+The generic existing ELF reader is reused,not the UBI candidate exceptions.
+
+Cleanup validates exact root/mode/uid/owner marker,finite allowed regular files and
+link counts before unlinking only owned artifacts. Unexpected membership refuses
+without deleting it. A separate always step rechecks absence after success/refusal.
+Receipt zero is explicitly archive-only;normal decoder paths kill/reap the one
+trusted child in finally,retain runner tracking without credential forwarding and
+record observed reaping separately. Hard-killed/unobservable execution is not a
+complete process-cleanup proof and must stop,not infer success from file absence.
+No unobservable cleanup is converted into a zero-remaining receipt.
+
+Canonical Feature Light SOURCE-SCOPED:four new harness/workflow/test files plus
+direct existing generic reader;no WP/public/UI/runtime caller. Review corrected
+preexisting-root reporting and bounded the independent cleanup entry. Bloat Phase1
+explicit same baseline:canonical helper reports one PHP bridge20 total lines,
+one code line,no oversize;Python/YAML outside its PHP/JS/CSS measurement are
+reviewed supplementally,cohesive fixed proof without a new framework or forced
+split. No Phase2 cleanup required after verification;no historical whole-plugin
+row refreshed. Final Feature Security SOURCE-SCOPED:fixed remote trust,resource/
+type/path/identity/ownership/cleanup guards and DATA-only output reviewed;no
+remaining confirmed security defect. Synthetic positives exercise actual parser/
+ELF/digest paths;removing the actual window guard assertion-kills its real test.
+Nine synthetic groups and PHP bridge2/22 pass,no network;genuine runner decoder,
+archive contents and physical cleanup remain unproven until the ONE job executes.
+Publication CI and actual owned outcome are pending,not inferred from tests.
+
 ## Scope and decision — 2026-11-19
 
 User approved this repository-only design following the
