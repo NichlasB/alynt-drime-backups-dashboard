@@ -1,5 +1,42 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## ONE outcome:decoder preflight refused before acquisition — 2026-11-19
+
+Implemented/pushed source `8e1c121f557a410247fd7a9a78111831385e2e17`.
+[Ordinary exact-head CI44584079936](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44584079936)
+actually completed/success:PHP7.4 3072/25364,PHP8.3 3072/25369,plain OK/no skips;
+Node295/295 each,failures/skips0;PHPCS305/305,build/structure pass,Composer/npm
+audits0. Local full PHP3072/25362 with2 unavailable-Sodium skips,Node295/295,
+lint305/305,build/structure and final targeted PHP2/22 plus9 synthetic groups
+passed. Local platform skips are not archive-proof skips or CI qualification.
+
+ONE authorized [static run44584546393](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44584546393)
+at that SAME exact head actually completed/failure. Repository/actor/first-attempt/
+checkout/source admission passed. Existing-tool preflight returned:
+`format=ADBPHPARCHIVE1,reason=decoder-cap-preflight,qualified=false,executed=false,extracted=false,owned_archive_remaining=0`.
+The trusted decoder process returned from the synthetic preflight,but its checked
+exit/output condition failed. Exact exit status/stdout/cause are NOT retained by
+this receipt:do not guess a memory-limit,decoder-version,flag or fixture defect.
+The archive download and frame/tar/ELF inventory were never reached. No actual
+asset byte count/digest/window/member/dependency identity has been verified.
+This is NOT evidence that the candidate archive itself violates a limit.
+
+Preflight precedes owned directory creation/acquisition;no candidate file existed.
+Independent always cleanup actually succeeded with `owned_archive_remaining=0`;
+normal returned synthetic subprocess was reaped. No extracted members,installation,
+candidate/module execution,SQL/native/site operation or production change. No
+second dispatch,runtime fallback,tool install,guard/budget/acceptance weakening.
+The separate static ONE1/1 is consumed;original native allowances/cumulative43
+and product milestones4/10 remain unchanged. Archive/HTTP qualification BLOCKED.
+Failed static check remains failure even though ordinary publication CI passed.
+
+Recommended next gated slice:Repository-Only Existing-Decoder Resource-Preflight
+Diagnosis and Guard-Preserving Repair,source/synthetic tests only. Establish the
+actual failed preflight predicate before changing anything;no archive acquisition,
+new CI-lab attempt,native execution,budget increase or production wiring. A fresh
+owned static proof would require a separate explicit ONE allowance after repair
+validation/ordinary exact-head CI. Do not infer success or blindly rerun this job.
+
 ## Approved static proof implementation — 2026-11-19
 
 User approved ONE owned ephemeral-CI acquisition/static-inventory/cleanup proof

@@ -1,5 +1,15 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## ONE static attempt blocked before acquisition — 2026-11-19
+
+[Owning actual receipt](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+8e1c121/ordinary44584079936 passed;static44584546393 failed decoder-cap-preflight,
+exact cause Unknown,before any archive download/inventory. Independent owned-
+archive cleanup0 passed. Static ONE1/1 consumed,no native opportunity or HTTP
+credit;milestones4/10,cumulative43/pins/guards/wiring unchanged. Next gated slice:
+Repository-Only Existing-Decoder Resource-Preflight Diagnosis and Guard-Preserving
+Repair,source/synthetic only,no acquisition/new attempt/budget increase.
+
 ## Exact archived candidate selected for proposed static proof — 2026-11-19
 
 [Design/trust decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)

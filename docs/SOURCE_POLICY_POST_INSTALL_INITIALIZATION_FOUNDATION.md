@@ -1,5 +1,16 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## ONE static preflight refusal; no archive/runtime evidence — 2026-11-19
+
+[Actual source/result](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+8e1c121 ordinary44584079936 passed;static44584546393 failed decoder-cap-preflight
+before acquisition. Cause Unknown;archive contents/window/identity still unverified.
+Independent owned-archive cleanup0 passed;no extraction/native/SQL/site operation.
+Static ONE1/1 consumed,HTTP/initializer runtime unqualified,production wiring
+disabled,milestones4/10/cumulative43 unchanged. Next gated source/synthetic-only
+Existing-Decoder Resource-Preflight Diagnosis and Guard-Preserving Repair;
+no acquisition,new attempt or budget change authorized by this failed receipt.
+
 ## Same-supplier archived candidate; static admission pending — 2026-11-19
 
 [Current archived-build decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)

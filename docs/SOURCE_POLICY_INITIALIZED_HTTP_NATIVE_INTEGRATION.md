@@ -1,5 +1,16 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## ONE static proof blocked before download — 2026-11-19
+
+[Owning receipt and proof limits](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+8e1c121/ordinary44584079936 passed;static44584546393 failed decoder-cap-preflight
+before archive acquisition. Exact cause Unknown,no archive defect inferred.
+Always archive cleanup0 passed. Static ONE1/1 consumed,no native operation or
+initializer/HTTP credit;milestones4/10/cumulative43 unchanged,wiring disabled.
+Next gated slice:Repository-Only Existing-Decoder Resource-Preflight Diagnosis
+and Guard-Preserving Repair,source/synthetic only,no acquisition/new attempt or
+budget increase. Exact PHP provisioning and genuine HTTP remain blocked.
+
 ## Archived-build design complete; no runtime provisioning yet — 2026-11-19
 
 [Current same-supplier candidate/trust decision](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)

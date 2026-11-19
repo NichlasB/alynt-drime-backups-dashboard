@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## ONE static proof refused before archive acquisition — 2026-11-19
+
+[Actual outcome and limits](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+8e1c121 ordinary CI44584079936 passed,both jobs;ONE static44584546393 failed
+decoder-cap-preflight before download. Exact cause Unknown,not an archive defect
+claim. Always owned-archive reconciliation0 passed;no extraction/native/SQL/site
+operation or wiring. Static ONE1/1 consumed;native cumulative43/exhausted allowances
+and milestones4/10 unchanged. Next gated slice:Repository-Only Existing-Decoder
+Resource-Preflight Diagnosis and Guard-Preserving Repair,source/synthetic only,
+no acquisition/new attempt/budget increase. HTTP remains unqualified.
+
 ## Approved fixed archive static harness; ONE proof pending — 2026-11-19
 
 [Owning implementation and proof limits](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
