@@ -2,6 +2,14 @@
 use PHPUnit\Framework\TestCase;
 
 final class SourcePolicyPhpArchiveStaticTest extends TestCase {
+ public function test_decoder_preflight_regressions_without_acquisition() {
+  $python=getenv('ADB_STATIC_ANALYSIS_PYTHON')?:'/usr/bin/python3';
+  $p=proc_open(array($python,'-I','-S','-B',__DIR__.'/support/source_policy_php_decoder_test.py'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);
+  $this->assertIsResource($p);fclose($pipes[0]);$out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
+  $this->assertSame(0,proc_close($p),$err);$this->assertSame('',$err);$row=json_decode($out,true);
+  $this->assertSame(PHP_OS_FAMILY==='Linux'?8:7,$row['tests']);$this->assertSame(0,$row['failures']);$this->assertSame(0,$row['errors']);$this->assertSame(0,$row['network_calls']);
+  if(PHP_OS_FAMILY==='Linux'){$this->assertSame('passed',$row['tool']['synchronous']);$this->assertSame(0,$row['tool']['archive_calls']);echo "\nSynthetic decoder regression: ".json_encode($row['tool'])."\n";}else{$this->assertNull($row['tool']);}
+ }
  public function test_synthetic_archive_and_owned_cleanup_guards() {
   $python=getenv('ADB_STATIC_ANALYSIS_PYTHON')?:'/usr/bin/python3';
   $p=proc_open(array($python,'-I','-S','-B',__DIR__.'/support/source_policy_php_archive_test.py'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);

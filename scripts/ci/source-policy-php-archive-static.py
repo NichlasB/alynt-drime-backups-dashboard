@@ -25,6 +25,9 @@ URL = 'https://github.com/shivammathur/php-ubuntu/releases/download/builds/php_8
 PARENT_MEMORY, DECODER_MEMORY, WINDOW = 40*MIB, 24*MIB, 8*MIB
 EXPANDED = 192*MIB - SIZE
 WORKFLOW = 'source-policy-php-archive-static.yml'
+# No optional I/O thread pools inside the fixed decoder address-space ceiling.
+DECODER_ARGS = ('/usr/bin/zstd', '-d', '-q', '--no-asyncio', '-M8MB', '-c')
+DECODER_SAMPLE = b'\x28\xb5\x2f\xfd\x20\x01\x09\x00\x00x'
 
 
 def frame(data):
@@ -149,11 +152,13 @@ def preflight():
     resource.setrlimit(resource.RLIMIT_AS, (PARENT_MEMORY, PARENT_MEMORY))
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     # One synthetic raw-block frame: decode DATA only, not a candidate program.
-    sample = b'\x28\xb5\x2f\xfd\x20\x01\x09\x00\x00x'
-    result = subprocess.run(['/usr/bin/zstd', '-d', '-q', '-M8MB', '-c'], input=sample,
+    result = subprocess.run(list(DECODER_ARGS), input=DECODER_SAMPLE,
                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5,
                             preexec_fn=decoder_limit, env=decoder_environment())
-    S.require(result.returncode == 0 and result.stdout == b'x', 'decoder-cap-preflight')
+    if result.returncode != 0 or result.stdout != b'x':
+        error = S.Refusal('decoder-cap-preflight')
+        error.decoder_preflight = {'exit_code': result.returncode, 'stdout_bytes': len(result.stdout), 'stdout_matches': result.stdout == b'x'}
+        raise error
     return {'parent_address_space': PARENT_MEMORY, 'decoder_address_space': DECODER_MEMORY, 'decoder_window': WINDOW, 'synthetic_child_reaped': True}
 
 
@@ -234,7 +239,7 @@ def inventory(source):
 
 
 def scan(path):
-    process = subprocess.Popen(['/usr/bin/zstd', '-d', '-q', '-M8MB', '-c', str(path)],
+    process = subprocess.Popen([*DECODER_ARGS, str(path)],
                                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, preexec_fn=decoder_limit,
                                env=decoder_environment())
     try:
@@ -278,6 +283,8 @@ def main():
         receipt['reason'] = 'static-inventory-only-dependency-closure-unverified'
     except S.Refusal as error:
         receipt['reason'] = str(error)
+        if str(error) == 'decoder-cap-preflight' and hasattr(error, 'decoder_preflight'):
+            receipt['decoder_preflight'] = error.decoder_preflight
     except Exception as error:
         receipt['reason'] = 'bounded-proof-error'
         receipt['error_class'] = type(error).__name__

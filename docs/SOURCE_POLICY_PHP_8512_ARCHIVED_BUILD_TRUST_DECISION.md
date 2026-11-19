@@ -1,5 +1,63 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Repository-only decoder preflight repair — 2026-11-19
+
+User approved diagnosis/guard-preserving repair through validation,commit,push and
+ordinary exact-head CI only. R2 repository/isolated-test work,no archive acquisition,
+manual lab dispatch,native/candidate attempt,installation,SQL/site operation or
+production wiring. Review/restore baseline6108f0d4a9017d6bf283a912b12e85853cf48cf2,
+ordinary44585051327 reverified actually successful;toolkit822f0addf8ebb29529bccdc8c0f82095e5d54edf.
+
+Confirmed source issue:both bounded decoder calls inherited optional async I/O,
+while the fixed24MiB decoder address-space ceiling did not reserve thread-pool
+overhead. Upstream v1.5.5 [CLI](https://github.com/facebook/zstd/blob/v1.5.5/programs/zstdcli.c)
+accepts -M8MB and --no-asyncio;[preferences](https://github.com/facebook/zstd/blob/v1.5.5/programs/fileio.c)
+enable supported async I/O by default;[I/O implementation](https://github.com/facebook/zstd/blob/v1.5.5/programs/fileio_asyncio.c)
+creates read/write thread pools and extra buffers when enabled. These are source
+references,NOT the missing historical stderr/exit receipt or an exact installed-
+tool version attestation. Existing local Node decoded the identical10-byte raw
+frame to hex78,so the synthetic frame is not malformed in that decoder.
+Historical run44584546393's exact cause remains unobserved;do not retrofit a
+definitive cause from supplier source or isolated mocks.
+
+Small repair:one shared immutable decoder argument tuple now explicitly disables
+optional async I/O in BOTH preflight and archive scan. No tool/library installation
+or new profile;parent40MiB/decoder24MiB,sum64MiB,window8MiB,CPU60s/preflight5s and
+all archive/time/output/cleanup limits unchanged. Zero exit AND exact single-byte
+x remain required. On refusal,retain only exit code,stdout byte count and match
+boolean in the existing private receipt;no raw stderr/stdout,URLs or host details.
+This also repairs the confirmed evidence-erasure defect without relaxing admission.
+
+Two pre-repair isolated assertions failed with0 errors:missing synchronous mode
+and missing failure facts. They pass after repair. New tests exercise successful
+and nonzero/signaled/empty/wrong-output refusals,actual resource-limit hooks,
+unavailable-tool-before-spawn,scan kill/reap and main receipt BEFORE any owned
+directory/download. Removing synchronous mode assertion-kills its real test;
+an always-unavailable preflight fails the positive. Existing9 archive synthetic
+groups remain unchanged. New decoder groups7 on Windows;Linux ordinary CI adds
+one existing-tool synthetic-only comparison under identical caps,not an archive
+or native qualification workflow. No manual entry,target,fixture,installer or
+download function is called by that test. Its finite public summary contains only
+legacy exit/output predicates and synchronous pass status,not tool messages.
+Actual Linux result/publication counts remain pending until CI concludes.
+
+Canonical Feature Light SOURCE-SCOPED:three implementation/test files plus direct
+unchanged workflow/generic reader and owning record. Two issues above fixed,no
+unresolved code decision. Bloat Phase1/Phase2 same explicit baseline:PHP bridge
+28 total/code1,no oversize;Python harness305/new helper126 supplemental lines.
+Removed one unused test import;no obsolete fallback or meaningful split needed,
+no forced framework/file split. Final Feature Security SOURCE-SCOPED:strict result/
+resource/ownership/acquisition ordering,finite failure facts and disabled manual
+runtime reviewed;no remaining confirmed security defect. No UI,Database Review,
+physical transaction,whole-plugin release-readiness or artifact proof claim.
+
+The previous static ONE1/1 remains consumed and failed;no retry/native allowance
+is created by this repair. HTTP/archive still unqualified;milestones4/10,
+cumulative43/exhausted native limits and production wiring unchanged. If ordinary
+CI verifies the repair,the next gated slice is ONE New-Head Owned PHP8.5.12 Archive
+Acquisition,Static Inventory and Cleanup Proof,fresh existing-tool/resource
+preflight and exact cleanup,no extraction/install/loading/native/SQL/site work.
+
 ## ONE outcome:decoder preflight refused before acquisition — 2026-11-19
 
 Implemented/pushed source `8e1c121f557a410247fd7a9a78111831385e2e17`.
