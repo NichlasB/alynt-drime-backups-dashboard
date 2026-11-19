@@ -1,5 +1,15 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Actual archive window exceeds unchanged ceiling — 2026-11-20
+
+[ONE dc625d6/static44640498572](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+passed tool preflight/exact compressed size/hash,then refused declared128MiB
+window BEFORE archive decompression. Whole64MiB/decoder8MiB caps preserved;
+both owned cleanup checks0 passed. Initializer/HTTP/archive still unqualified;
+new static ONE1/1 consumed,no native opportunity or milestone,cumulative43 and
+wiring unchanged. Next gated Repository-Only Resource-Compatible Exact-PHP8.5.12
+Artifact Selection Decision,metadata/design only,no new acquisition/native action.
+
 ## Synthetic decoder resource repair verified — 2026-11-19
 
 [Owning evidence](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

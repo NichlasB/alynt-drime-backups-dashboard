@@ -1,5 +1,15 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Verified archive bytes;declared window refused — 2026-11-20
+
+[Actual dc625d6/static44640498572](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+passed tool preflight and fixed41,599,355 bytes/SHA256,then refused declared128MiB
+window against8MiB decoder and whole64MiB memory limits. No decompression/member/
+runtime/native/SQL/site proof;both owned cleanup checks0 passed. New ONE1/1
+consumed,HTTP unqualified,milestones4/10/cumulative43/wiring unchanged. Next gated
+Repository-Only Resource-Compatible Exact-PHP8.5.12 Artifact Selection Decision,
+metadata/design only,existing budgets/pins,no new acquisition/execution authority.
+
 ## Synchronous decoder preflight repair verified — 2026-11-19
 
 [Source and actual CI](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

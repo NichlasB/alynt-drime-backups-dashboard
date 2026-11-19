@@ -1,5 +1,63 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## New ONE:identity verified,128MiB window refused — 2026-11-20
+
+User approved ONE new-head owned archive acquisition/static-inventory/cleanup
+proof at dc625d6dd0e011683c5c2b5715cf8bf0104abd13. R3 limited to that pinned
+public delivery and owned disposable archive/process cleanup;no general tier
+increase,member extraction,installation,candidate/module execution,SQL/site action,
+native qualification or production wiring. Clean/synced review/restore baseline
+is that exact head;ordinary44593611789 reverified completed/success. Toolkit
+baseline2a2c453dc5bb0b8645826cb773b362b554560ef4 clean/synced;uploader untouched.
+
+ONE [static run44640498572](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44640498572)
+ACTUALLY completed/FAILURE at that exact head. Exact repository/actor/first-attempt/
+checkout/source admission passed. Existing synchronous decoder preflight PASSED,
+synthetic_child_reaped=true,parent41,943,040/decoder25,165,824/window8,388,608 bytes.
+Fixed public archive acquisition verified BOTH41,599,355 bytes AND SHA256
+6eec9def9f436e192051dda270ed531be5e4dabb87ad3bcbe5c8d24fad6ccab5.
+This is verified compressed content identity,not just supplier API metadata.
+
+Actual frame DATA reports window134,217,728 bytes=128MiB,declared content size
+Unknown and checksum flag true. Flag presence is NOT decompressed checksum
+verification. Strict decoder-window-budget refusal occurred BEFORE archive
+decompression/tar/member/ELF inventory. The window exceeds the fixed8MiB decoder
+cap and even the WHOLE64MiB memory ceiling,not merely the40/24 partition. The
+current trusted decoder/profile cannot admit this cache under unchanged budgets.
+Do not infer expanded size,member identities,PHP/NTS/module versions,dependencies,
+relocation,or executable safety from the filename/hash/header. Those remain
+unverified. No custom decoder,recompression,limit increase or implicit fallback.
+
+Receipt qualified=false,extracted=false,executed=false,owned_archive_remaining0.
+Normal exact-owner cleanup removed the temporary compressed archive and marker;
+independent always reconciliation actually passed with owned_archive_remaining0.
+No archive decoder child was started after the frame refusal;the synthetic
+preflight child was reaped. No retained candidate files,extracted paths,installation,
+runtime loading,SQL/native/site operations or existing application-state changes.
+The failure is an EXPECTED safety refusal,NOT successful static qualification or
+an unfixed preflight error. No second dispatch,harness repair or policy weakening.
+
+New ONE1/1 CONSUMED;old static44584546393/ONE1/1 remains consumed and failed before
+acquisition. Two static dispatches total,not two new native opportunities.
+Native cumulative43/exhausted allowances and product milestones4/10 unchanged;
+HTTP/archive qualification blocked and production wiring disabled. Repeating this
+unchanged candidate/profile cannot repair its declared-window incompatibility.
+
+Evidence-only verification:actual exact-head run/step/receipt/always-cleanup facts
+compared with unchanged pin/resource/source;local targeted PHP3 tests/30 assertions
+passed,no errors/failures/skips. No full local suite/build or feature/pre-release
+review rerun claimed for this docs-only closeout. No executable/workflow/dependency
+or acceptance change;prior scoped reviews are historical,not refreshed whole-plugin
+readiness. Final evidence publication CI belongs in the canonical toolkit record.
+
+Recommended next gated slice:Repository-Only Resource-Compatible Exact-PHP8.5.12
+Artifact Selection Decision. Keep all existing budgets/pins/guards and evaluate
+a smaller exact-version artifact/profile before any new acquisition. Design/source/
+metadata only,no downloads,extraction,installation,runtime/native/SQL/site operation
+or production wiring. No new artifact,tool,compatibility or budget decision is
+authorized by this exhausted ONE. Prefer a bounded existing-supplier alternative;
+do not reopen this128MiB cache with another unchanged attempt.
+
 ## Repository-only decoder preflight repair — 2026-11-19
 
 User approved diagnosis/guard-preserving repair through validation,commit,push and

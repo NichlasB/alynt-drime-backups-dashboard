@@ -1,5 +1,15 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Archive window incompatibility established — 2026-11-20
+
+[Actual dc625d6/static44640498572](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
+passed decoder preflight and pinned compressed size/hash,then refused actual128MiB
+window against8MiB decoder/64MiB total caps. No decompression/member/runtime proof;
+both owned cleanup checks0 passed. New static ONE1/1 consumed,no native attempt,
+milestones4/10/cumulative43/wiring unchanged. Next gated Repository-Only Resource-
+Compatible Exact-PHP8.5.12 Artifact Selection Decision,preserve budgets/pins,
+metadata/design only,no new acquisition/extraction/install/native/site operation.
+
 ## Decoder preflight repair verified; no archive attempt — 2026-11-19
 
 [Actual source/CI comparison](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

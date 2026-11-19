@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Pinned archive verified;128MiB window blocks admission — 2026-11-20
+
+[Actual ONE result](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+dc625d6/static44640498572 failed decoder-window-budget AFTER successful tool
+preflight and exact41,599,355-byte/SHA256 verification. Actual declared window
+128MiB exceeds decoder8MiB and whole64MiB caps;no archive decompression/inventory/
+execution. Both owned archive cleanup checks0 passed. New ONE1/1 consumed,old
+static allowance exhausted,native cumulative43/milestones4/10 unchanged,wiring
+disabled. Next gated slice:Repository-Only Resource-Compatible Exact-PHP8.5.12
+Artifact Selection Decision,existing budgets/pins preserved,metadata/design only,
+no new acquisition/extraction/install/native/site operation. HTTP unqualified.
+
 ## Decoder resource preflight repaired; archive proof still gated — 2026-11-19
 
 [Source/actual CI evidence](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
