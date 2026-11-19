@@ -39,7 +39,19 @@ one existing-tool synthetic-only comparison under identical caps,not an archive
 or native qualification workflow. No manual entry,target,fixture,installer or
 download function is called by that test. Its finite public summary contains only
 legacy exit/output predicates and synchronous pass status,not tool messages.
-Actual Linux result/publication counts remain pending until CI concludes.
+Actual source a2e828efdb44b88c314fbbd68e27f827c0457647 published on master;
+[ordinary exact-head CI44592982130](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44592982130)
+ACTUALLY completed/success,both jobs. EACH independently reproduced legacy
+exit104/stdout0/matchfalse and synchronous pass under identical40+24MiB/8MiB/
+5s limits,archive_calls0. Upstream I/O source maps104 to failed I/O thread-pool
+creation:the measured differential supports this bounded resource/profile repair,
+not a recovered exit/stderr receipt for historical44584546393 or an installed-
+binary attestation. No source fixture/frame repair or cap increase was necessary.
+Actual PHP7.4 3073/25373,PHP8.3 3073/25378,plain OK/no skips;Node295/295 each,
+failures/skips0;PHPCS305/305,build/structure pass,Composer/npm audits0. Local full
+PHP3073/25370 with2 unavailable-Sodium skips;targeted3/30,new decoder7 groups
+and existing archive9 groups,Node295/295,lint/build/structure pass. Windows has
+no genuine zstd resource claim;Linux CI's additional eighth group is explicit.
 
 Canonical Feature Light SOURCE-SCOPED:three implementation/test files plus direct
 unchanged workflow/generic reader and owning record. Two issues above fixed,no
@@ -53,8 +65,8 @@ physical transaction,whole-plugin release-readiness or artifact proof claim.
 
 The previous static ONE1/1 remains consumed and failed;no retry/native allowance
 is created by this repair. HTTP/archive still unqualified;milestones4/10,
-cumulative43/exhausted native limits and production wiring unchanged. If ordinary
-CI verifies the repair,the next gated slice is ONE New-Head Owned PHP8.5.12 Archive
+cumulative43/exhausted native limits and production wiring unchanged. Ordinary
+CI verified the repair;the next gated slice is ONE New-Head Owned PHP8.5.12 Archive
 Acquisition,Static Inventory and Cleanup Proof,fresh existing-tool/resource
 preflight and exact cleanup,no extraction/install/loading/native/SQL/site work.
 

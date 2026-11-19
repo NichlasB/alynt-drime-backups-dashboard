@@ -1,5 +1,16 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Synchronous decoder preflight repair verified — 2026-11-19
+
+[Source and actual CI](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+a2e828e/ordinary44592982130 passed,both synthetic-only tool comparisons. Legacy
+exit104/no output,synchronous pass under identical40+24MiB/8MiB caps;finite
+refusal facts retained. No acquisition/manual/static/native/site operation or
+production change. HTTP/archive unqualified,static ONE1/1 consumed,milestones4/10/
+cumulative43 unchanged. Next gated ONE New-Head Owned PHP8.5.12 Archive Acquisition,
+Static Inventory and Cleanup Proof,preflight first/exact cleanup,no extraction/
+install/loading/SQL/native operation. Ordinary CI does not qualify the archive.
+
 ## ONE static proof blocked before download — 2026-11-19
 
 [Owning receipt and proof limits](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

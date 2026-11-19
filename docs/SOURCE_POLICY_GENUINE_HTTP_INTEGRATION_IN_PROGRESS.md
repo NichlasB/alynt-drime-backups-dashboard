@@ -1,5 +1,15 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Decoder preflight repair verified; no archive attempt — 2026-11-19
+
+[Actual source/CI comparison](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+a2e828e/ordinary44592982130 passed;both jobs reproduced old synthetic decoder
+exit104/no output versus synchronous pass under unchanged caps. Refusal facts
+retained,guards preserved;no archive acquisition/manual/static/native/site action.
+HTTP unqualified,milestones4/10/cumulative43/static ONE1/1 consumed unchanged.
+Next gated ONE New-Head Owned PHP8.5.12 Archive Acquisition,Static Inventory and
+Cleanup Proof,fresh preflight/exact cleanup,no extraction/install/loading/SQL.
+
 ## ONE static attempt blocked before acquisition — 2026-11-19
 
 [Owning actual receipt](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

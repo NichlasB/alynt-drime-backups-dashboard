@@ -1,5 +1,16 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Synthetic decoder resource repair verified — 2026-11-19
+
+[Owning evidence](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+a2e828e/ordinary44592982130 passed,both jobs;legacy synthetic exit104 versus
+synchronous pass at unchanged40+24MiB/8MiB caps. Finite failure facts retained.
+No archive acquisition/manual/static/native/SQL/site attempt or wiring change.
+Initializer/HTTP/archive remain unqualified;milestones4/10/cumulative43 and old
+static ONE1/1 consumed unchanged. Next gated ONE New-Head Owned PHP8.5.12 Archive
+Acquisition,Static Inventory and Cleanup Proof,preflight first/exact cleanup,
+no extraction/install/loading/native/SQL/site operation.
+
 ## ONE static preflight refusal; no archive/runtime evidence — 2026-11-19
 
 [Actual source/result](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

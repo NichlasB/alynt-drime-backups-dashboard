@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Decoder resource preflight repaired; archive proof still gated — 2026-11-19
+
+[Source/actual CI evidence](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
+a2e828e/ordinary44592982130 passed,both jobs. Synthetic-only existing-tool
+comparison reproduced legacy exit104/no output;explicit synchronous I/O passed
+at unchanged40+24MiB/8MiB caps. Finite refusal facts now retained;no acquisition,
+manual/static/native attempt,installation or wiring change. Archive/HTTP remain
+unqualified;static ONE1/1 exhausted,milestones4/10/cumulative43 unchanged. Next
+gated slice:ONE New-Head Owned PHP8.5.12 Archive Acquisition,Static Inventory and
+Cleanup Proof,fresh preflight/exact cleanup,no extraction/install/loading/SQL.
+
 ## ONE static proof refused before archive acquisition — 2026-11-19
 
 [Actual outcome and limits](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):
