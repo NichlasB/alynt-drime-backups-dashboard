@@ -1,5 +1,14 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Conditional finite package candidate;HTTP still unqualified — 2026-11-20
+
+[Metadata/design selection](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)
+freezes exact8.5.12 Noble/amd64 CLI/common/mysql metadata tuple,total4,146,302 bytes.
+No downloads/dispatch/resource/runtime proof or wiring change. Next gated Candidate-
+Bound PPA DEB Static Admission Foundation and ONE Owned Acquisition/Inventory/
+Cleanup Proof,explicit origin/closed-format DATA approval,unchanged caps/pins,
+no extraction/install/execution/SQL/site authority. Milestones4/10/native43 unchanged.
+
 ## Archive window incompatibility established — 2026-11-20
 
 [Actual dc625d6/static44640498572](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)

@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Finite DEB alternative proposed;resource qualification pending — 2026-11-20
+
+[Resource-compatible artifact decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)
+selects a conditional exact8.5.12 Noble/amd64 CLI/common/mysql candidate tuple,
+4,146,302 metadata bytes,one publisher build/sizes/SHA256. No artifact bytes,
+inner format/resource/member/runtime proof. Next gated Candidate-Bound PPA DEB
+Static Admission Foundation and ONE Owned Acquisition/Inventory/Cleanup Proof,
+explicit direct-origin trust/closed nested DATA policy,ordinary synthetic tests
+first. No acquisition/dispatch now;caps/pins/wiring/milestones4/10/native43 unchanged.
+
 ## Pinned archive verified;128MiB window blocks admission — 2026-11-20
 
 [Actual ONE result](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md):

@@ -1,5 +1,17 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Resource-bounded alternative selected conditionally — 2026-11-20
+
+[New metadata/design decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)
+prefers exact Noble/amd64 CLI/common/mysql DEBs,total4,146,302 bytes from one
+publisher build,with frozen metadata sizes/SHA256. No package bytes downloaded,
+no resource/member/runtime qualification. Existing-supplier rolling archives are
+not an exact-patch fallback;the verified128MiB cache remains inadmissible.
+Next gated Candidate-Bound PPA DEB Static Admission Foundation and ONE Owned
+Acquisition/Inventory/Cleanup Proof,including explicit direct-origin trust and
+closed nested-format DATA policy. Existing caps/pins/no-execution/wiring preserved;
+no new attempt now,milestones4/10/native cumulative43 unchanged.
+
 ## New ONE:identity verified,128MiB window refused — 2026-11-20
 
 User approved ONE new-head owned archive acquisition/static-inventory/cleanup

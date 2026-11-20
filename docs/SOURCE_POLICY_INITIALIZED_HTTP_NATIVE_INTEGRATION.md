@@ -1,5 +1,15 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Exact package alternative needs static admission — 2026-11-20
+
+[Metadata-only decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)
+proposes a fixed exact8.5.12 Noble/amd64 CLI/common/mysql tuple,4,146,302 metadata
+bytes,one publisher build with sizes/SHA256. No package/member/resource/runtime
+verification or dispatch. Next gated Candidate-Bound PPA DEB Static Admission
+Foundation and ONE Owned Acquisition/Inventory/Cleanup Proof,explicit new delivery
+trust/closed-format DATA policy,caps/pins/no-execution/wiring unchanged. Product
+milestones4/10/native43 remain;this is not HTTP or provisioning qualification.
+
 ## Verified archive bytes;declared window refused — 2026-11-20
 
 [Actual dc625d6/static44640498572](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)

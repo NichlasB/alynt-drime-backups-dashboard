@@ -1,5 +1,14 @@
 # Post-Install Bootstrap Fixture Initialization Safety Foundation
 
+## Alternative package tuple proposed,not admitted — 2026-11-20
+
+[Current artifact decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)
+selects exact Noble/amd64 CLI/common/mysql DEBs conditionally,metadata only.
+No package acquisition/resource/member/runtime/native proof;initializer/HTTP
+unqualified,caps/pins/wiring/milestones4/10/native43 unchanged. Next gated Candidate-
+Bound PPA DEB Static Admission Foundation and ONE Owned Acquisition/Inventory/
+Cleanup Proof,explicit direct-origin/closed-format DATA approval,no execution.
+
 ## Actual archive window exceeds unchanged ceiling — 2026-11-20
 
 [ONE dc625d6/static44640498572](SOURCE_POLICY_PHP_8512_ARCHIVED_BUILD_TRUST_DECISION.md)
