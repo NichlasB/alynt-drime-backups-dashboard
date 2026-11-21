@@ -160,14 +160,17 @@ def tar_inventory(source, budget, package, category):
         selected = role is not None or (category == 'control' and name == 'control')
         S.require(not selected or kind in (b'0', b'\0'), 'selected-regular')
         S.require(not (category == 'control' and name == 'control') or size <= 65536, 'control-bound')
-        payload, digest, remaining = bytearray(), hashlib.sha256(), size
+        # Selected length is already bounded. One exact allocation avoids the
+        # old+new backing-store peak of repeated bytearray growth/reallocation.
+        payload, digest, remaining = bytearray(size) if selected else None, hashlib.sha256(), size
         while remaining:
             chunk = source.read(min(remaining, 65536))
             S.require(chunk, 'tar-member-truncated')
-            remaining -= len(chunk)
             digest.update(chunk)
             if selected:
-                payload.extend(chunk)
+                offset = size-remaining
+                payload[offset:offset+len(chunk)] = chunk
+            remaining -= len(chunk)
         S.require(not exact(source, (-size) % 512).strip(b'\0'), 'tar-padding')
         link = A.text(block[157:257])
         budget.inventory.update(json.dumps([package, category, name, kind.hex(), size, digest.hexdigest(), link], separators=(',', ':')).encode('ascii')+b'\n')

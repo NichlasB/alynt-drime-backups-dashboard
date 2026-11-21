@@ -23,6 +23,20 @@ def http_refusal(error):
     return {'reason': 'ppa-http-refusal', 'http_status': code if type(code) is int and 100 <= code <= 599 else 'Unknown'}
 
 
+def memory_site(error):
+    # Finite owned-code labels only; never traceback text, paths, locals or DATA.
+    sites = {tar_inventory.__code__: 'tar-inventory', S.elf.__code__: 'elf-data',
+             ar_members.__code__: 'ar-index', Decoder.__init__.__code__: 'decoder-setup',
+             Decoder.read.__code__: 'decoder-read', download.__code__: 'acquisition'}
+    trace, label = error.__traceback__, 'Unknown'
+    for depth in range(32):
+        if trace is None:
+            return label
+        label = sites.get(trace.tb_frame.f_code, label)
+        trace = trace.tb_next
+    return 'Unknown'
+
+
 def filename(package):
     S.require(package in {row[0] for row in PINS}, 'package-selection')
     return package+'_'+REVISION+'_amd64.deb'
@@ -159,6 +173,9 @@ def main():
             receipt.update(http_refusal(error))
         finally:
             error.close()
+    except MemoryError as error:
+        receipt['reason'], receipt['error_class'] = 'parent-memory-refusal', 'MemoryError'
+        receipt['memory_site'] = memory_site(error)
     except Exception as error:
         receipt['reason'], receipt['error_class'] = 'bounded-proof-error', type(error).__name__
     finally:

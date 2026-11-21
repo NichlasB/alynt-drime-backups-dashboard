@@ -1,5 +1,44 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Campaign attempt1: all byte pins verified; memory refusal — 2026-11-21
+
+Delivery repair71b88ad6cd1ef9c9faf4ccba8f55905554b29274 published on master;
+[ordinary44893449818](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44893449818)
+ACTUALLY completed/success,both exact-head jobs. PHP7.4 3075/25395,PHP8.3
+3075/25400,plain OK/no skips;Node295/295 each,failures/skips0;lint/build/structure
+and both dependency audits passed. This establishes source publication,not DATA fit.
+
+Campaign [static attempt1/3,44893646808](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44893646808)
+ACTUALLY completed/FAILURE at SAME71b88ad,first run attempt. Exact-job/source/
+preflight passed. ALL THREE fixed DEBs now acquired and verified against frozen
+sizes/SHA256,total4,146,302 bytes. Delivery recovery is real,not HEAD-only evidence.
+Then inspection raised MemoryError;initial exception site Unknown,no completed
+inventory/member/codec-window/ELF/runtime qualification is inferred. Receipt
+static_inventory_complete/qualified/extracted/executed false. Both in-process
+owned-file cleanup0 AND independent always-cleanup0 passed;runner orphan-process
+reconciliation completed. No installation/materialization/candidate/SQL/site
+execution or wiring. Campaign1/3 consumed,old PPA/archive allowances unchanged;
+native43/product4/10 remain. No unchanged failed proof is rerun.
+
+Memory blocker repair cycle1/3:source confirms selected members grew bytearrays
+repeatedly,allowing avoidable old+new backing-store allocation peaks. An isolated
+131072-byte synthetic ELF/no-growth oracle assertion-failed at actual extend,
+then passed with ONE exact-sized buffer after unchanged member/control bounds;
+incremental fill yields identical member SHA256/size. This removes unnecessary
+reallocation,not a proven retrospective attribution of the first native exception.
+40+24MiB/64MiB and ALL other caps/acceptance/pins remain unchanged. No alternate
+ELF parser,member staging,dependency/tool installation or architecture expansion.
+
+Failure-only memory classification emits one finite owned-code label from at
+most32 traceback frames,never paths,locals,traceback text or member DATA;foreign
+code/over-depth is Unknown. Synthetic allocator failure exercises actual tar-
+inventory mapping;foreign MemoryError cannot expose private text or grant success.
+Targeted bridge/archive5/52,PHP bridge lint,structure and whitespace passed;
+Windows17/Linux18 isolated groups. Canonical Light/final Security SOURCE-SCOPED
+rechecked buffer bounds,full byte/hash equivalence and safe failure ownership.
+No UI/DB/full release-readiness claim. Ordinary exact-head CI must pass before
+fresh campaign attempt2/3;recovery of actual memory fit is NOT claimed yet.
+
 ## 60-minute campaign: exact-build delivery recovered — 2026-11-21
 
 User authorizes routine same-publisher delivery/artifact decisions,repository

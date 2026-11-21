@@ -1,5 +1,12 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Package byte identity recovered; HTTP remains unqualified — 2026-11-21
+
+[Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+44893646808 verified three exact DEBs before MemoryError,both cleanup0;
+71b88ad ordinary44893449818 passed. Source-only fixed buffer/safe refusal enum
+recovery,CI then fresh static2/3;no execution/SQL/wiring or native43/product4/10 change.
+
 ## Fixed publisher delivery recovery; HTTP still unqualified — 2026-11-21
 
 [Current campaign/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)

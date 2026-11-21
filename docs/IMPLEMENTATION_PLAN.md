@@ -1,5 +1,13 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Exact DEB identities verified; memory recovery in scope — 2026-11-21
+
+[Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):71b88ad
+ordinary44893449818 passed,static44893646808 verified all3 fixed byte pins then
+MemoryError during inspection;both file cleanup0. Source-only fixed allocation/
+safe enum recovery cycle1/3,targeted5/52 passed. Continue ordinary exact-head CI
+then fresh static2/3;no cap/acceptance/production change,native43/product4/10 remain.
+
 ## Time-boxed same-publisher DATA campaign authorized — 2026-11-21
 
 [Current delivery/authority ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)

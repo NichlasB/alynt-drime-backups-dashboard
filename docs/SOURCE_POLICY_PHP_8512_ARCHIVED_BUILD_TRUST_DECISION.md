@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Three DEB identities verified; static fit still pending — 2026-11-21
+
+[Actual campaign result](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static1/3
+44893646808 verified unchanged3-pin tuple then MemoryError,both cleanup0;
+ordinary44893449818 passed. Fixed allocation recovery/CI then fresh2/3,not old
+archive retry or budget expansion. Native43/product4/10/wiring unchanged.
+
 ## Same-publisher DEB delivery recovery — 2026-11-21
 
 [Current campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) resolves

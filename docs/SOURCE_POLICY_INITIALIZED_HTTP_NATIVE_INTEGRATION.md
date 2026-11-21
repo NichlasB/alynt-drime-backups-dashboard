@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Three byte pins verified; memory qualification incomplete — 2026-11-21
+
+[Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static1/3
+44893646808 verified all fixed DEBs,then MemoryError,both cleanup0;
+ordinary44893449818 passed. Continue guard-preserving buffer repair/CI/fresh2/3,
+not loader/runtime/native/SQL execution;native43/product4/10/wiring unchanged.
+
 ## Publisher-bound DATA delivery recovery — 2026-11-21
 
 [Current campaign/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)

@@ -1,5 +1,12 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Candidate byte identities now verified,not resource-qualified — 2026-11-21
+
+[Campaign actual/static ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+44893646808 at71b88ad verified all3 existing sizes/SHA256,then MemoryError in
+inspection,both cleanup0. Ordinary44893449818 passed. Fixed allocation/safe enum
+repair in scope;CI before fresh2/3. No pin/budget change or runtime/native/wiring.
+
 ## Same exact bytes available through publisher build files — 2026-11-21
 
 [Campaign/source/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)

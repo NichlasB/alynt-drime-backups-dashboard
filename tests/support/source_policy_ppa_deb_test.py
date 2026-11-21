@@ -97,6 +97,39 @@ class Checks(unittest.TestCase):
         self.assertEqual('Unknown', budget.roles['cli']['versioned_symbols'])
         self.assertEqual(5, budget.entries)
 
+    def test_selected_payload_does_not_grow_or_reallocate(self):
+        class FixedBuffer(bytearray):
+            def extend(self, chunk):
+                # Header assembly is bounded at512; selected payloads must be
+                # allocated once at their already-validated exact length.
+                if len(self)+len(chunk) > 512:
+                    raise AssertionError('selected member grew instead of fixed allocation')
+                super().extend(chunk)
+        data = F.member()[512:576]+bytes(131008)
+        budget = D.Budget()
+        with patch.object(D, 'bytearray', FixedBuffer, create=True):
+            self.inventory(tar(F.member(data=data)), budget)
+        self.assertEqual(131072, budget.roles['cli']['bytes'])
+        self.assertEqual(hashlib.sha256(data).hexdigest(), budget.roles['cli']['sha256'])
+
+    def test_memory_refusal_reports_only_owned_code_label(self):
+        allocate = bytearray
+        def limited(size=0):
+            if size > 512:
+                raise MemoryError('private allocation details')
+            return allocate(size)
+        with patch.object(D, 'bytearray', limited, create=True):
+            try:
+                self.inventory(tar(F.member(data=F.member()[512:576]+bytes(1024))))
+            except MemoryError as error:
+                self.assertEqual('tar-inventory', M.memory_site(error))
+            else:
+                self.fail('selected allocation must reach the exercised boundary')
+        try:
+            raise MemoryError('private traceback details')
+        except MemoryError as error:
+            self.assertEqual('Unknown', M.memory_site(error))
+
     def test_virtual_names_and_original_profile_remain_separate(self):
         self.assertEqual('usr/bin/x', D.virtual_name('./usr/bin/x', b'0', 1))
         for name in ('../x', '/x', '././x', 'a//x', 'C:/x', 'a\\x', ''):
