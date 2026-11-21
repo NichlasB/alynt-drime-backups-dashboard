@@ -1,5 +1,14 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## First fixed delivery unavailable to proof — 2026-11-21
+
+[Actual proof and exact cleanup](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+ONE44884665960 at375140a failed HTTPError on first package open before identity;
+codec preflight passed,both cleanup0. Ordinary44884502743 passed. Separate body-
+free HEAD of that URL404,not the unrecorded original status/cause. No repin/latest
+fallback,format/resource/runtime admission or retry. ONE1/1 consumed;next gated
+available exact-artifact/provisioning decision,unchanged budgets/no execution.
+
 ## Foundation now approved; qualification still pending — 2026-11-21
 
 User explicitly approved direct PPA trust,closed DATA foundation and ONE static

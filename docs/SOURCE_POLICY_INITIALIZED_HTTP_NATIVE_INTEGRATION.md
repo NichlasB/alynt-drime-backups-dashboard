@@ -1,5 +1,13 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Static delivery gate not passed — 2026-11-21
+
+[Actual ONE result/resume](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):375140a
+ordinary44884502743 passed;static44884665960 HTTPError before package identity,
+successful codec preflight and both cleanup checks0. Separate HEAD404,not original
+status evidence. ONE1/1 consumed;no runtime/native/wiring or product4/10/native43
+change. Next gated available exact-artifact/provisioning decision,no blind retry.
+
 ## Approved DATA-only alternative foundation — 2026-11-21
 
 [Foundation and proof ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) implement

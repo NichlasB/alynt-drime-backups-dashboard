@@ -1,5 +1,53 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Current result: delivery refused; ONE consumed — 2026-11-21
+
+Foundation375140a59789ce88beeb098209d8bc610b049d33 published on master.
+[Ordinary CI44884502743](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44884502743)
+ACTUALLY completed/success,both exact-head jobs. Actual PHP7.4:3075/25395;
+PHP8.3:3075/25400,plain OK/no skips. Node295/295 each,failures/skips0;
+PHPCS305/305/build/structure pass;Composer/npm audits0. Linux synthetic codec
+preflight and larger-than-pipe input/output/reaping/refusal tests passed, not
+candidate-package/resource qualification.
+
+ONE [static44884665960](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44884665960)
+ACTUALLY completed/FAILURE at that exact head,first dispatch/attempt. Job/head/
+source checks passed. Actual preflight gzip/XZ/Zstd passed at40+24MiB address-space
+and8MiB window ceilings. First package open raised HTTPError;receipt had
+`identities:[]`, `static_inventory_complete:false`, `qualified:false`,
+`extracted:false`, `executed:false`, `reason:bounded-proof-error` and
+`error_class:HTTPError`. Original status code was NOT retained and is Unknown;
+do not retroactively fill it from another request. Source order establishes
+failure before first compressed-file creation or any nested/member inspection.
+No candidate hash/format/window/ELF/module/runtime/resource fit was established.
+
+Actual in-process cleanup0 and independent always-cleanup0 both succeeded;
+job completed with runner-owned orphan-process reconciliation. Owned compressed
+fixtures/marker removed,not retained;no member path/installation/candidate/native/
+SQL/site execution or production wiring. New PPA ONE1/1 consumed;no retry or
+additional acquisition dispatched. Old archive allowances/native43/product4/10
+unchanged;HTTP remains unqualified.
+
+One separate bounded metadata-only HEAD of the same first fixed encoded URL
+returned404,body bytes read0,no redirect/retry/file write. This is current delivery
+availability evidence,not the missing original status or proof of why the object
+is unavailable. Do not silently repin a Superseded tuple or choose8.5.13.
+
+Routine repository-only recovery adds a bounded status-only HTTPError branch;
+no URL/headers/message/body/credentials. Synthetic classification tests include
+404/503 and invalid types/ranges;actual main refusal/cleanup is exercised with
+isolated API doubles/owned temporary marker,not networking or a fresh native
+proof. Final targeted5/52 passed. Acceptance,caps,pins/default wiring unchanged.
+Canonical Light/final Security rechecked the correction within the same e75cb828
+coherent baseline;privacy-safe recovery fixed,not a new diagnostic framework.
+
+Recommended next gated slice:Repository-Only Exact-PHP8.5.12 Artifact Availability
+and Provisioning Decision. Approve selection of a demonstrably available exact
+candidate/tuple under unchanged resource limits before any new acquisition proof;
+no unchanged retry,new trust/budget exception,installation/extraction/execution,
+SQL/site/production operation. The fixed delivery is blocked and this ONE is
+exhausted,so do not invent extra rounds or product milestones to reach a count.
+
 ## Authority, baseline and outcome boundary — 2026-11-21
 
 User approved the foundation and ONE owned static proof, explicitly including
@@ -105,9 +153,9 @@ Do not mark unrelated historical checklist rows complete from this checkpoint.
 
 ## Validation and ONE proof ledger
 
-Local synthetic13 groups passed, network0; targeted bridge/archive5 tests52
+Local synthetic14 groups passed, network0; targeted bridge/archive5 tests52
 assertions passed without failures/errors/skips. Ordinary Linux CI must also
-run the fourteenth real-tool synthetic group (all codec pipes, preflight/caps and
+run the fifteenth real-tool synthetic group (all codec pipes, preflight/caps and
 reaping). Windows has no Linux codec execution; this is explicitly reported,
 not a skipped candidate qualification. Full QA/publication results and the
 actual one-shot receipt belong below and in the canonical toolkit closeout.
@@ -123,12 +171,13 @@ failures/skips;PHPCS305/305,build,structure,Python AST and356 scoped local links
 whitespace passed. Build produced no tracked runtime changes. Real Linux codec
 proof remains pending ordinary CI; no Linux result is inferred from Windows.
 
-Status: implementation pending ordinary exact-head publication/CI; PPA proof
-not yet dispatched. No DEB acquired/extracted/installed/executed in local tests.
+Initial status (superseded by actual result above): implementation pending
+ordinary exact-head publication/CI; PPA proof not yet dispatched. No real DEB
+acquired/extracted/installed/executed in local tests.
 Product milestones4/10 and native cumulative43 unchanged; earlier static archive
 allowances remain consumed. New ONE PPA DATA allowance is separate,not native.
 
-Next action within approval: publish/verify foundation exact-head ordinary CI,
+Initial next action within approval: publish/verify foundation exact-head ordinary CI,
 then ONE fixed three-DEB DATA acquisition/inventory/cleanup dispatch. Stop on
 unresolved verification/ownership or a need to alter caps/format/trust, materialize
 members, install/load/execute candidates or begin native/SQL/site operations.

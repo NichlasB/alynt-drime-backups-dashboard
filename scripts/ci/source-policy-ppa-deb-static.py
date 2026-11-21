@@ -7,6 +7,7 @@ import re
 import signal
 import stat
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -15,6 +16,12 @@ from source_policy_deb_data import A, S, PINS, BASE, REVISION, Budget, Slice, ar
 from source_policy_deb_stream import Decoder, preflight
 
 WORKFLOW = 'source-policy-ppa-deb-static.yml'
+
+
+def http_refusal(error):
+    # Status only: never URL, headers, message, body or transport credentials.
+    code = error.code
+    return {'reason': 'ppa-http-refusal', 'http_status': code if type(code) is int and 100 <= code <= 599 else 'Unknown'}
 
 
 def filename(package):
@@ -148,6 +155,11 @@ def main():
         receipt['reason'] = 'data-inventory-only-no-runtime-admission'
     except S.Refusal as error:
         receipt['reason'] = str(error)
+    except urllib.error.HTTPError as error:
+        try:
+            receipt.update(http_refusal(error))
+        finally:
+            error.close()
     except Exception as error:
         receipt['reason'], receipt['error_class'] = 'bounded-proof-error', type(error).__name__
     finally:

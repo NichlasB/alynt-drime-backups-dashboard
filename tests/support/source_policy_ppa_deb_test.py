@@ -1,4 +1,5 @@
 """Synthetic DEBs and owned temporary fixtures only; no PPA acquisition."""
+import contextlib
 import gzip
 import hashlib
 import importlib.util
@@ -180,6 +181,27 @@ class Checks(unittest.TestCase):
                 (root/M.filename('php8.5-cli')).write_bytes(b'owned compressed DATA')
                 self.assertEqual(0, M.cleanup(root))
                 self.assertFalse(root.exists())
+
+    def test_http_refusal_retains_only_bounded_status(self):
+        for code in (404, 503, True, 0, 600, 'private-status'):
+            error = M.urllib.error.HTTPError('https://private.invalid/', code, 'private-message', {'Private': 'private-value'}, io.BytesIO(b'private-body'))
+            facts = M.http_refusal(error)
+            self.assertEqual({'reason': 'ppa-http-refusal', 'http_status': code if type(code) is int and 100 <= code <= 599 else 'Unknown'}, facts)
+            self.assertNotIn('private', json.dumps(facts))
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'EXPECTED_SHA': 'a'*40}), patch.object(M.os, 'getuid', return_value=os.stat(temp).st_uid, create=True):
+            root, output = Path(temp)/'owned', io.StringIO()
+            original = M.stat.S_IMODE
+            error = M.urllib.error.HTTPError('https://private.invalid/', 404, 'private-message', {}, None)
+            with patch.object(M.stat, 'S_IMODE', side_effect=lambda mode: 0o700 if M.stat.S_ISDIR(mode) else original(mode)), patch.object(M, 'target', return_value=root), patch.object(M, 'preflight', return_value={}), patch.object(M, 'download', side_effect=error), patch.object(M.sys, 'argv', ['owned', '--approved-static-proof']), patch.object(M.signal, 'SIGALRM', 14, create=True), patch.object(M.signal, 'signal'), patch.object(M.signal, 'alarm', create=True), contextlib.redirect_stdout(output):
+                self.assertEqual(1, M.main())
+            receipt = json.loads(output.getvalue())
+            self.assertEqual('ppa-http-refusal', receipt['reason'])
+            self.assertEqual(404, receipt['http_status'])
+            self.assertEqual(0, receipt['owned_deb_remaining'])
+            self.assertFalse(receipt['static_inventory_complete'])
+            self.assertFalse(root.exists())
+            self.assertNotIn('private', output.getvalue())
+            self.assertTrue(error.closed)
 
     def test_guard_controls_are_assertion_killed(self):
         for method, replacement, test in (

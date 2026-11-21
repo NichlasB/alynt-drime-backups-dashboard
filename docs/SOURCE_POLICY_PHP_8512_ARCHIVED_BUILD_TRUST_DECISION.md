@@ -1,5 +1,13 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## DEB alternative blocked before identity — 2026-11-21
+
+[Actual result/ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):375140a ordinary
+44884502743 passed;ONE44884665960 failed HTTPError after successful tool preflight,
+both cleanup0. Separate metadata HEAD404,not original status. No package/resource/
+runtime proof or retry;all static ONE allowances consumed,product4/10/native43/
+wiring unchanged. Next gated available exact-artifact/provisioning decision.
+
 ## Approved finite DEB DATA foundation — 2026-11-21
 
 [New foundation/ONE ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) implements

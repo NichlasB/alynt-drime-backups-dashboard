@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## PPA static ONE consumed; delivery blocked — 2026-11-21
+
+[Exact proof/cleanup/CI ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+ordinary44884502743 passed at375140a;static44884665960 HTTPError before identity,
+preflight passed,both cleanup0. Separate body-free HEAD404;original status Unknown.
+No retry/native opportunity/product milestone:4/10/native43/wiring unchanged.
+Next gated available exact-artifact/provisioning decision under unchanged budgets.
+
 ## Approved fixed DEB DATA foundation — 2026-11-21
 
 [Foundation/ONE ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) advances the
