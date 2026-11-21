@@ -1,5 +1,15 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Source-only range-design continuation — 2026-11-21
+
+User's next hour is the recommended [design-only slice](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md),
+not renewal of3/3. Source audit/16 pure oracle probes establish ordering/parity
+requirements and a bounded conditional range/replay plan. No physical-fit or
+implementation claim;all code/tests/workflows/pins/budgets unchanged. Next gated
+socket-free range-collector/oracle-parity foundation,synthetic-only;no new proof,
+installation/materialization/execution/SQL/site or wiring authority. Native43/
+product4/10 and all prior attempts remain unchanged.
+
 ## Campaign closed:3/3 consumed; memory admission blocked — 2026-11-21
 
 Transport-lifetime repairf55725fc5d4c6ab1f5028c850ed015385170a0cc published;

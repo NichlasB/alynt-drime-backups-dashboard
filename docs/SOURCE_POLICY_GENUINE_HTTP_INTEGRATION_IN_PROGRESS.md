@@ -1,5 +1,12 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Source-only memory-proportionality design — 2026-11-21
+
+[Bounded range/replay design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+advances a conditional implementation path,not resource/runtime/HTTP readiness.
+Sixteen unchanged-oracle probes passed;no code/acquisition/site/native/wiring
+operation.3/3/native43/product4/10 unchanged;next gated pure DATA foundation.
+
 ## DATA campaign exhausted; HTTP remains unqualified — 2026-11-21
 
 [Final actual ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):f55725f ordinary

@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Bounded range-reader design,not archive retry — 2026-11-21
+
+[Source-only design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) conditionally
+selects metadata ranges/replays under unchanged caps/shared oracle. No artifact,
+runtime or physical-fit proof,code/workflow change or allowance reset. Next gated
+socket-free collector/oracle-parity foundation;native43/product4/10/wiring remain.
+
 ## DEB campaign exhausted; bounded inventory still blocked — 2026-11-21
 
 [Final campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):44895357995

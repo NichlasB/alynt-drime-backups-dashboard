@@ -1,5 +1,13 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Resource-path design advanced,not candidate admission — 2026-11-21
+
+[New source-only range design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+preserves exact tuple/trust/caps and the shared ELF oracle,with bounded ranges/
+replays and no full selected-body retention. Sixteen oracle probes/arithmetic,
+not implementation or actual fit.3/3 exhausted;next gated pure DATA foundation,
+no new acquisition/candidate/SQL/site execution or production wiring.
+
 ## Current candidate:byte-verified,resource admission blocked — 2026-11-21
 
 [Final campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static3/3

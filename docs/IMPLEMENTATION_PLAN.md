@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Selected-ELF range design completed;implementation not authorized — 2026-11-21
+
+[Source-only feasibility/acceptance design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+selects bounded metadata ranges/at most2 replays,unchanged shared ELF oracle,
+same cumulative limits and final commit barriers. Sixteen existing-oracle spot
+probes passed;raw reservation arithmetic is not physical fit. No executable/test/
+workflow change or new acquisition;3/3 remains exhausted,native43/product4/10
+and wiring unchanged. Next gated:Socket-Free Selected-ELF Range Collector and
+Oracle-Parity Safety Foundation,synthetic DATA only.
+
 ## Campaign closed at static3/3: identities proven,memory gate blocked — 2026-11-21
 
 [Final actual ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):f55725f ordinary

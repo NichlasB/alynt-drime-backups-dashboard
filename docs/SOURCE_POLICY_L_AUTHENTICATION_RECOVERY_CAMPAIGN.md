@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## New hour design-only;no fresh static/native allowance — 2026-11-21
+
+[Selected-ELF feasibility design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+owns10:56:36–11:56:36 UTC source-only continuation. Conditional range/replay path,
+16 pure oracle probes,not implementation or fit. Prior3/3/older allowances remain
+consumed,native43/product4/10/wiring unchanged. Next gated socket-free DATA
+collector/oracle-parity foundation,no acquisition/execution authority.
+
 ## Time-boxed DATA campaign closed at3/3 limit — 2026-11-21
 
 [Final actual ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):44895357995

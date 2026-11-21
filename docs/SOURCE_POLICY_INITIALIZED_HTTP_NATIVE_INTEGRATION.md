@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Source-only selected-ELF design,loader unchanged — 2026-11-21
+
+[Range-reader feasibility design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+keeps existing ELF acceptance/limits and all loader/native/SQL/wiring disabled.
+No code/artifact operation or physical fit established;3/3/native43/product4/10
+unchanged. Next gated socket-free range collector/oracle-parity foundation only.
+
 ## Static3/3 consumed without memory admission — 2026-11-21
 
 [Final campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):44895357995
