@@ -1,5 +1,13 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Dormant range collector implemented,not wired — 2026-11-21
+
+[Approved socket-free foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md):
+21 pure synthetic groups/7 assertion-killed controls,unchanged shared oracle and
+DEB owner/codec/workflow. No actual acquisition/replay/fit or inventory grant.
+Next gated isolated replay/commit-barrier preparation;3/3/native43/product4/10
+and production wiring unchanged. Actual final CI evidence is toolkit-scoped.
+
 ## Source-only range-design continuation — 2026-11-21
 
 User's next hour is the recommended [design-only slice](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md),

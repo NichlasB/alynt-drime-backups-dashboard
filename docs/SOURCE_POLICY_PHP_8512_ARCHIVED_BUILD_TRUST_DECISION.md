@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Dormant member-range foundation,not archive retry — 2026-11-21
+
+[Pure collector/parity foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+implemented with synthetic tests only,unchanged shared oracle and trust/budgets.
+No archive/candidate/physical proof. Next gated isolated replay/commit-barrier
+preparation;3/3/native43/product4/10/disabled wiring remain unchanged.
+
 ## Bounded range-reader design,not archive retry — 2026-11-21
 
 [Source-only design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) conditionally

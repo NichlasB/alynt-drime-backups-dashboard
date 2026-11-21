@@ -1,5 +1,12 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Pure member collector foundation,not candidate qualification — 2026-11-21
+
+[Implemented dormant foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+has21 synthetic groups/7 semantic controls;no acquisition,execution,actual replay
+or physical fit. Same pins/trust/limits. Next gated isolated replay/commit-barrier
+preparation;3/3/native43/product4/10/disabled wiring unchanged.
+
 ## Resource-path design advanced,not candidate admission — 2026-11-21
 
 [New source-only range design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

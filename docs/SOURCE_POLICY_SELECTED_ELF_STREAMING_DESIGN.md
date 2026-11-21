@@ -1,5 +1,93 @@
 # Selected-ELF Range Inventory Feasibility and Memory-Proportionality Design
 
+## Approved socket-free collector foundation implemented — 2026-11-21
+
+User explicitly approved Repository-Only Socket-Free Selected-ELF Range Collector
+and Oracle-Parity Safety Foundation through validation/commit/push/exact-head CI,
+synthetic DATA only. R2 bounded parser code; no artifact acquisition/execution,
+owned replay/IO integration,site/database/native operations or production wiring.
+Restore/review baseline8b42cc098832ac4fbc99221f28eb0beb7a5c241c,clean/synced master,
+ordinary44898334775 success;toolkit031b09315ad367dc11d0e978d832af532bc40e75.
+Review boundary is this complete new primitive/test delta against8b42cc0,with the
+unchanged shared oracle and DEB owner/decoder/manifest consumers inspected,not
+just a later documentation commit. Historical design and frozen source IDs below
+remain unchanged;source counters3/3 exhausted/native43/product4/10 not reset.
+
+### Dormant API and proof boundary
+
+- New scripts/ci/source_policy_elf_ranges.py imports only hashlib/struct; no IO,
+  callbacks,code loader,source paths,network,archive materialization or execution.
+  Existing DEB runner/walker/codec/workflow/root plugin do NOT import it. Their
+  source-identity closure is unchanged because this helper is not loaded there.
+- Collector(size,budget=None) accepts exact bounded integers and an optional
+  exact Budget. feed(offset,chunk) accepts only contiguous exact ints/bytes,
+  nonempty chunks<=65536 and a member<=16MiB. No supplied hashes/range plans/
+  readiness flags;invalid input or parse/scan failure is terminal.
+- finish_scan() advances only primary -> metadata -> strings -> done,skipping
+  empty phases where the actual plan permits. Each scan must consume the ENTIRE
+  member;every replay SHA256 must match the primary,including unselected bytes.
+  No fourth scan/retry on the same collector. result() before done,or input after
+  done,refuses terminally. Returned lists are fresh copies of private tuples.
+- Primary retains64 bytes plus<=7168 program-table bytes. Metadata retains only
+  bounded interpreter spans plus a16-byte dynamic carry,with capped offsets/tags.
+  Strings retain at most66 windows of<=241 bytes,in semantic rather than physical
+  order. Hashes cover all fed bytes. No whole-member buffer or fabricated ELF.
+- One shared Budget accounts owned retained bytearrays under1MiB and cumulative
+  fed bytes under192MiB;reserve precedes allocation and cancellation/failure
+  releases only that collector's reservations. Work credit is never returned.
+  Caller chunks are separately bounded64KiB;Python object/import/allocator costs
+  are NOT measured by this accounting. A later fixed owner must share the Budget
+  across its collectors AND retain the original global compressed/decoded-read,
+  entry/deadline/process/decoder limits. This counter is not their substitute.
+- Result matches S.elf's member-level keys,including ordered duplicates,full body
+  hash/size and false executed/dependency_closure_verified. The later unchanged
+  DEB owner adds versioned_symbols:Unknown;this primitive grants no artifact,
+  package/tar/decoder/source provenance,inventory completion or runtime admission.
+
+### Source-scoped checks and reviews
+
+Permanent Python suite:21 groups,0 failures/errors/skips. Exact differential
+positives include nonempty needed/search paths/interpreters and full hashes;
+zero/late/overlapping/max128 PHT;128 interpreter spans;first NULL;unused large
+STRSZ;duplicate/order behavior;empty/240/241-char strings;64/65 needed and2/3
+paths;all segment extents;replay tail mutation;partial scans/results;wrong types,
+subclasses and hostile conversion objects;shared reservation ownership;allocation
+failure/cancellation;max16MiB synthetic body;80 seeded positive/mutated pairs.
+Chunk partitions1/7/63/64/511/512/4093/65536. Seven isolated,restored semantic
+controls assertion-kill replay identity,full-scan completion,ordering,scratch,
+work,result-availability and segment-bound bypasses,with zero setup errors.
+No source mutation files,network or candidate bytes used by this suite.
+
+Initial new-suite run had three fixture-construction errors (offset overlap,
+string index and header overlap) plus one non-discriminating control;corrected
+the fixture/control,not the unchanged oracle or accepted policy. This is not
+red-to-green evidence of a previously deployed production defect. Permanent
+guards are instead supported by the seven assertion-killed counterfactuals.
+
+Canonical Feature Light SOURCE-SCOPED:3 new source/test files plus owning records
+and unchanged direct consumers. One minor transient-copy concern was removed by
+decoding bounded memoryviews rather than slicing bytearrays;no contract changes.
+No unresolved non-security issue. Bloat workflow unnecessary:one cohesive dormant
+phase machine,one synthetic corpus and one small PHP bridge;no unrelated split,
+debug layer,outsized PHP/JS/CSS growth or UI. Resource/edge/adversarial inspection is
+focused engineering review,NOT a refreshed whole-plugin DS3 06/07/07A result.
+Final Feature Security SOURCE-SCOPED:exact inputs,pre-allocation bounds,all file
+extents,hash/phase/commit barriers,terminal refusal and reservation ownership
+checked;no confirmed security defect remains. No WordPress auth/storage/runtime,
+Database Review,physical memory fit or full release readiness claimed.
+
+Existing-reader bridges plus new bridge:8 PHP tests/69 assertions,plain OK,
+no skips. Local full PHP:3076 tests/25397 assertions,0 failures/errors,2 existing
+Sodium-unavailable skips (RemoteActionSigner round-trip/invalid-private-key),
+confirmed separately;not a no-skip full-local claim. Local Node295/295,no skips/
+failures;PHPCS305/305,PHP syntax/structure/in-memory Python compile/diff checks
+passed;401 local document paths resolved. Actual exact-head CI counts belong in
+the canonical toolkit closeout,not inferred from synthetic group counts.
+Next gated:Repository-Only Selected-ELF Replay and Commit-Barrier Integration
+Preparation,isolated IO/synthetic codec fixtures only. Existing3/3 stays consumed;
+actual acquisition/static resource qualification still needs fresh explicit
+authority AFTER integration and ordinary gates. Production wiring remains off.
+
 ## Authority, baseline and decision — 2026-11-21
 
 User requested another hour after the exhausted DATA campaign. This continuation

@@ -1,5 +1,12 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Separately approved pure collector foundation implemented — 2026-11-21
+
+[Dormant member-DATA foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+passed21 synthetic groups/7 semantic controls,not actual resource/HTTP proof.
+No acquisition/execution or allowance reset;3/3/native43/product4/10/wiring remain.
+Next gated isolated replay/commit-barrier preparation,not a new proof attempt.
+
 ## New hour design-only;no fresh static/native allowance — 2026-11-21
 
 [Selected-ELF feasibility design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Dormant ELF foundation;loader unchanged — 2026-11-21
+
+[Socket-free collector](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) has21
+synthetic groups/7 semantic controls,no artifact/native/physical-fit grant.
+Next gated isolated replay/commit-barrier preparation;existing loader and all
+production wiring/counters unchanged,3/3 exhausted/native43/product4/10.
+
 ## Source-only selected-ELF design,loader unchanged — 2026-11-21
 
 [Range-reader feasibility design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

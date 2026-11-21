@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Socket-free ELF collector foundation implemented;integration gated — 2026-11-21
+
+[Approved pure-DATA foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+adds dormant range/hash/phase accounting and unchanged-oracle parity tests:
+21 synthetic groups,7 assertion-killed controls,no acquisition/execution/wiring.
+Member facts are not complete inventory,provenance or physical-fit evidence.
+Next gated:Repository-Only Selected-ELF Replay and Commit-Barrier Integration
+Preparation,isolated IO/synthetic codec fixtures only;3/3/native43/product4/10
+unchanged. Actual final publication counts are in the toolkit scoped closeout.
+
 ## Selected-ELF range design completed;implementation not authorized — 2026-11-21
 
 [Source-only feasibility/acceptance design](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
