@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Final in-scope memory recovery,not native qualification — 2026-11-21
+
+[Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static2/3
+44894434152 atbb42516 reverified3 identities,then tar-inventory OOM,both cleanup0;
+ordinary44894135187 passed. Verified TLS lifetime/release repair/CI then final3/3;
+no loader/native/SQL/runtime/wiring change,native43/product4/10 remain.
+
 ## Three byte pins verified; memory qualification incomplete — 2026-11-21
 
 [Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static1/3

@@ -1,5 +1,12 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Static2/3 refused memory; HTTP remains unqualified — 2026-11-21
+
+[Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):bb42516
+ordinary44894135187 passed;static44894434152 all3 hashes verified,tar-inventory
+OOM,both cleanup0. TLS lifetime repair/CI then fresh3/3,unchanged caps/pins;
+no execution/native/SQL/site/wiring authority or product4/10/native43 change.
+
 ## Package byte identity recovered; HTTP remains unqualified — 2026-11-21
 
 [Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

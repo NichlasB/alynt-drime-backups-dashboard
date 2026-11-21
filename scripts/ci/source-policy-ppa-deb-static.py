@@ -1,14 +1,17 @@
 """ONE fixed PPA tuple: DATA inventory and owned cleanup, never installation."""
 import hashlib
+import gc
 import json
 import os
 from pathlib import Path
 import re
 import signal
 import stat
+import ssl
 import sys
 import urllib.error
 import urllib.request
+import weakref
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from source_policy_deb_data import A, S, PINS, DELIVERIES, REVISION, Budget, Slice, ar_members, tar_inventory
@@ -27,7 +30,8 @@ def memory_site(error):
     # Finite owned-code labels only; never traceback text, paths, locals or DATA.
     sites = {tar_inventory.__code__: 'tar-inventory', S.elf.__code__: 'elf-data',
              ar_members.__code__: 'ar-index', Decoder.__init__.__code__: 'decoder-setup',
-             Decoder.read.__code__: 'decoder-read', download.__code__: 'acquisition'}
+             Decoder.read.__code__: 'decoder-read', download.__code__: 'acquisition',
+             acquire.__code__: 'acquisition'}
     trace, label = error.__traceback__, 'Unknown'
     for depth in range(32):
         if trace is None:
@@ -90,11 +94,10 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         raise S.Refusal('ppa-redirect-refused')
 
 
-def download(root, pin, budget):
+def download(root, pin, budget, opener):
     package, expected_size, expected_sha = pin
     path = root/filename(package)
     uri = DELIVERIES[package]
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
     size, digest = 0, hashlib.sha256()
     with opener.open(uri, timeout=10) as response, path.open('xb') as output:
         S.require(response.status == 200 and response.headers.get('Content-Length') == str(expected_size)
@@ -110,6 +113,25 @@ def download(root, pin, budget):
             output.write(chunk)
     S.require(size == expected_size and digest.hexdigest() == expected_sha, 'ppa-identity')
     return {'package': package, 'bytes': size, 'sha256': digest.hexdigest()}
+
+
+def acquire(root, budget, identities):
+    # One default-verifying context for all fixed files; no per-file CA reloads.
+    context = ssl.create_default_context()
+    S.require(context.verify_mode == ssl.CERT_REQUIRED and context.check_hostname is True, 'tls-verification')
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect(),
+                                        urllib.request.HTTPSHandler(context=context))
+    try:
+        for pin in PINS:
+            identities.append(download(root, pin, budget, opener))
+    finally:
+        opener.close()
+    # Opener handlers retain their parent. Drop the entire owned transport cycle
+    # before allocating selected ELF DATA; no heap/limit/acceptance relaxation.
+    leases = weakref.ref(opener), weakref.ref(context)
+    del opener, context
+    gc.collect()
+    S.require(all(lease() is None for lease in leases), 'transport-not-released')
 
 
 def inspect(root, budget):
@@ -161,8 +183,8 @@ def main():
             budget.charge(len(data))
             owner.write(data)
         receipt['identities'] = []
-        for pin in PINS:
-            receipt['identities'].append(download(root, pin, budget))
+        acquire(root, budget, receipt['identities'])
+        receipt['transport_released'] = True
         receipt['inventory'] = inspect(root, budget)
         receipt['static_inventory_complete'] = True
         receipt['reason'] = 'data-inventory-only-no-runtime-admission'

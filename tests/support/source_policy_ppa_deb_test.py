@@ -1,5 +1,6 @@
 """Synthetic DEBs and owned temporary fixtures only; no PPA acquisition."""
 import contextlib
+import gc
 import gzip
 import hashlib
 import importlib.util
@@ -14,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import weakref
 from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -82,7 +84,7 @@ class Checks(unittest.TestCase):
             for name, size, sha, number in expected:
                 with patch.object(M.urllib.request, 'build_opener') as opener:
                     opener.return_value.open.return_value = Response(b'abc')
-                    M.download(Path(temp), (name, 3, hashlib.sha256(b'abc').hexdigest()), D.Budget())
+                    M.download(Path(temp), (name, 3, hashlib.sha256(b'abc').hexdigest()), D.Budget(), opener.return_value)
                     self.assertEqual('https://launchpadlibrarian.net/'+number+'/'+name+'_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb', opener.return_value.open.call_args.args[0])
 
     def test_positive_three_role_inventory_and_control(self):
@@ -212,11 +214,45 @@ class Checks(unittest.TestCase):
                     opener.return_value.open.return_value = Response(body)
                     pin = ('php8.5-cli', 3, hashlib.sha256(b'abc').hexdigest())
                     if index == 0:
-                        self.assertEqual(3, M.download(root, pin, D.Budget())['bytes'])
+                        self.assertEqual(3, M.download(root, pin, D.Budget(), opener.return_value)['bytes'])
                         self.assertEqual('https://launchpadlibrarian.net/882014196/php8.5-cli_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb', opener.return_value.open.call_args.args[0])
                     else:
                         with self.assertRaises(D.S.Refusal):
-                            M.download(root, pin, D.Budget())
+                            M.download(root, pin, D.Budget(), opener.return_value)
+
+    def test_owned_tls_cycle_released_before_inventory_credit(self):
+        build, collect, enabled = M.urllib.request.build_opener, gc.collect, gc.isenabled()
+        refs, clients, retained = [], [], []
+        def make(*handlers):
+            opener = build(*handlers)
+            refs.append(weakref.ref(opener))
+            refs.extend(weakref.ref(handler._context) for handler in handlers if isinstance(handler, M.urllib.request.HTTPSHandler))
+            if retained:
+                retained.append(opener)
+            return opener
+        def synthetic(root, pin, budget, opener):
+            clients.append(id(opener))
+            return {'package': pin[0]}
+        try:
+            gc.disable()  # Explicit collection must break the real owned cycle.
+            with patch.object(M.ssl, 'create_default_context', new=lambda: M.ssl.SSLContext(M.ssl.PROTOCOL_TLS_CLIENT)), patch.object(M.urllib.request, 'build_opener', new=make), patch.object(M, 'download', new=synthetic):
+                identities = []
+                M.acquire(None, D.Budget(), identities)
+                self.assertEqual([row[0] for row in D.PINS], [row['package'] for row in identities])
+                self.assertEqual(1, len(set(clients)))
+                self.assertTrue(refs and all(ref() is None for ref in refs))
+                retained.append('retain-positive-client')
+                with self.assertRaisesRegex(D.S.Refusal, 'transport-not-released'):
+                    M.acquire(None, D.Budget(), [])
+            with patch.object(M.ssl, 'create_default_context', return_value=Mock(verify_mode=M.ssl.CERT_NONE, check_hostname=False)), patch.object(M.urllib.request, 'build_opener') as forbidden:
+                with self.assertRaisesRegex(D.S.Refusal, 'tls-verification'):
+                    M.acquire(None, D.Budget(), [])
+                forbidden.assert_not_called()
+        finally:
+            retained.clear()
+            collect()
+            if enabled:
+                gc.enable()
 
     def test_owned_cleanup_preserves_foreign_files(self):
         with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, {'EXPECTED_SHA': 'a'*40}), patch.object(M.os, 'getuid', return_value=os.stat(temp).st_uid, create=True):

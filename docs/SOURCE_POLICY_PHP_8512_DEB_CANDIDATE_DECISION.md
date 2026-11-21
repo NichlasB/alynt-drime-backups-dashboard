@@ -1,5 +1,12 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Static2/3 still memory-refused,not candidate-qualified — 2026-11-21
+
+[Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+44894434152 atbb42516 verified all3 frozen identities,then tar-inventory OOM,
+both cleanup0;ordinary44894135187 passed. Shared verified TLS ownership/release
+repair,CI before final3/3. No cap/pin/trust/runtime/native/production change.
+
 ## Candidate byte identities now verified,not resource-qualified — 2026-11-21
 
 [Campaign actual/static ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

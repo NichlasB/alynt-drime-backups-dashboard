@@ -1,5 +1,13 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Static2/3 located memory refusal; final recovery in scope — 2026-11-21
+
+[Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+bb42516 ordinary44894135187 passed,static44894434152 verified all3 pins then
+tar-inventory MemoryError,both cleanup0. Shared default-verifying TLS ownership/
+mandatory release repair cycle2/3,targeted5/52 passed. Continue exact-head CI then
+fresh3/3,not budget expansion;product4/10/native43/wiring and old counts unchanged.
+
 ## Exact DEB identities verified; memory recovery in scope — 2026-11-21
 
 [Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):71b88ad

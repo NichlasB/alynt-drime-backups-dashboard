@@ -1,5 +1,46 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Campaign attempt2: tar-inventory memory refusal; transport lifetime repair — 2026-11-21
+
+Fixed-allocation repairbb42516a911d11a8c4a26648de9b7704909c63e6 published;
+[ordinary44894135187](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44894135187)
+ACTUALLY completed/success,both exact-head jobs. PHP7.4 3075/25395,PHP8.3
+3075/25400,plain OK/no skips;Node295/295 each,failures/skips0;lint/build/structure
+and both audits passed. No native memory recovery was inferred from those tests.
+
+Fresh [static attempt2/3,44894434152](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44894434152)
+ACTUALLY completed/FAILURE at SAMEbb42516,first run attempt. All THREE sizes/
+SHA256 and exact-job/source/preflight checks passed again. Actual reason
+parent-memory-refusal,MemoryError,memory_site:tar-inventory. Fixed allocation
+alone was insufficient;no claim that it solved actual fit. No completed inventory/
+codec/member/ELF/runtime proof. Both owned-file cleanup checks0 passed;runner
+orphan reconciliation completed. Campaign2/3 consumed,ONE fresh attempt remains;
+native43/product4/10/prior allowances and disabled wiring unchanged.
+
+Memory repair cycle2/3 targets owned acquisition lifetime,not larger limits:
+one default-verifying TLS context/opener shared across the fixed three downloads,
+mandatory CERT_REQUIRED/hostname checks,no proxy or redirects,all original size/
+hash/read/deadline checks unchanged. Close the opener,drop strong references,
+collect its parent/handler cycle and require BOTH opener/context weakrefs gone
+BEFORE inspection. If either is retained,refuse rather than grant inventory credit.
+No allocator/native calls,process replacement,alternate ELF parser,member staging,
+new dependency,trust exception or resource/acceptance change. This is an observed
+source lifetime improvement,not a retrospective proof that TLS caused either OOM.
+
+Permanent non-network regression constructs real owned handler/context cycles
+with automatic GC disabled (CA-less TLS_CLIENT fixture,not real HTTPS/auth),
+proves one client/all3 callbacks and explicit release;retained strong client must
+refuse. CERT_NONE/hostname-disabled fixture refuses BEFORE opener construction.
+Actual download URL/size/hash tests retain fixed independent positives/negatives.
+Targeted5/52,PHP bridge lint,structure/whitespace passed;Windows18/Linux19 groups.
+Canonical Light/final Security SOURCE-SCOPED reviewed certificate verification,
+foreign-client refusal,cleanup on failure and unchanged pins/budgets. Existing
+51b615c coherent campaign baseline retained;no UI/DB/full readiness claim.
+
+Next within campaign:publish/verify ordinary exact-head CI,then fresh static3/3
+only after prior cleanup remains established. No unchanged fourth attempt or
+budget expansion is authorized;actual complete DATA fit remains unestablished.
+
 ## Campaign attempt1: all byte pins verified; memory refusal — 2026-11-21
 
 Delivery repair71b88ad6cd1ef9c9faf4ccba8f55905554b29274 published on master;

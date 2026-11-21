@@ -1,5 +1,12 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Time-boxed static2/3 consumed; memory cycle2/3 — 2026-11-21
+
+[Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
+44894434152 atbb42516 verified3 byte pins,tar-inventory OOM,both cleanup0;
+ordinary44894135187 passed. TLS ownership/release repair/CI then final3/3 within
+clock/caps,no fourth attempt. Old allowances/native43/product4/10/wiring unchanged.
+
 ## Time-boxed static1/3 consumed; identity success/memory refusal — 2026-11-21
 
 [Actual ledger and memory cycle1/3](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## DEB static2/3 memory-refused; final in-scope recovery — 2026-11-21
+
+[Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):all3 hashes
+verified again in44894434152 atbb42516,then tar-inventory OOM,both cleanup0;
+ordinary44894135187 passed. TLS lifetime repair/CI then final3/3,not archive
+retry,cap increase or runtime authority. Product4/10/native43/wiring unchanged.
+
 ## Three DEB identities verified; static fit still pending — 2026-11-21
 
 [Actual campaign result](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static1/3
