@@ -1,5 +1,48 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Campaign closed:3/3 consumed; memory admission blocked — 2026-11-21
+
+Transport-lifetime repairf55725fc5d4c6ab1f5028c850ed015385170a0cc published;
+[ordinary44895130836](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44895130836)
+ACTUALLY completed/success,both exact-head jobs. PHP7.4 3075/25395,PHP8.3
+3075/25400,plain OK/no skips;Node295/295 each,failures/skips0;PHPCS305/305,
+build/structure and Composer/npm audits0 pass. These are ordinary QA results,
+not a passing static or runtime qualification.
+
+Final [static attempt3/3,44895357995](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/44895357995)
+ACTUALLY completed/FAILURE at SAMEf55725f,first run attempt. All THREE exact
+sizes/SHA256 and job/source/preflight checks passed. Actual transport_released:true
+proves the owned opener/context release boundary was reached. Still refused with
+parent-memory-refusal,MemoryError,memory_site:tar-inventory;inventory_complete/
+qualified/extracted/executed false. The two allocation/lifetime corrections did
+NOT establish actual fit. Exact failing allocation and decoded member/window/
+ELF/dependency/runtime facts remain Unknown;do not attribute cause beyond evidence.
+
+Both in-process owned-file cleanup0 and independent always-cleanup0 passed;
+runner orphan reconciliation completed. All three campaign runs verified the
+same4,146,302-byte tuple (12,438,906 acquired bytes total),then failed inspection;
+all SIX file-cleanup checks0. No actual member materialization,installation,
+candidate/module/PHP/SQL/site execution,production wiring or resource increase.
+Current campaign3/3 exhausted;memory repair cycles2/3 used,attempt ceiling takes
+precedence. Stop new implementation/diagnostic/qualification work;finish only
+truthful owning-record/publication closeout. Do not fill the remaining hour with
+maintenance or quietly grant a fourth attempt. Historical PPA/archive allowances,
+native43/product4/10 and release-readiness state remain unchanged.
+
+Actual plan progress:availability/delivery and all compressed byte identities
+are now established,with source-backed no-growth/TLS-release regressions. Bounded
+complete DATA inventory,resource admission and genuine-HTTP qualification remain
+BLOCKED. This is prerequisite progress,not another product milestone. Neither
+ordinary CI nor a successful hash can substitute for the failed inventory gate.
+
+Recommended next gated slice:Repository-Only Streaming Selected-ELF Inventory
+Feasibility and Memory-Proportionality Design. Establish the smallest justified
+way to avoid whole-member residency while preserving existing ELF validation,
+hash-before-parse,all cumulative work/entry/time/memory caps and exact ownership.
+No new acquisition/native attempt,alternate acceptance,cap increase,installation,
+materialization or runtime/wiring change is approved by this recommendation.
+Do not add another diagnostic layer without a concrete guard-preserving design.
+
 ## Campaign attempt2: tar-inventory memory refusal; transport lifetime repair — 2026-11-21
 
 Fixed-allocation repairbb42516a911d11a8c4a26648de9b7704909c63e6 published;

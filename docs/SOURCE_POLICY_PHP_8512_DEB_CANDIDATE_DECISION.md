@@ -1,5 +1,13 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Current candidate:byte-verified,resource admission blocked — 2026-11-21
+
+[Final campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static3/3
+44895357995 atf55725f verified all3 byte pins/transport release,then tar-inventory
+MemoryError,both cleanup0;ordinary44895130836 passed. All3 attempts exhausted,
+no resource/runtime admission. Next gated streaming selected-ELF feasibility/
+memory-proportionality design,no acquisition/cap/acceptance or production change.
+
 ## Static2/3 still memory-refused,not candidate-qualified — 2026-11-21
 
 [Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

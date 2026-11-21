@@ -1,5 +1,13 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## DEB campaign exhausted; bounded inventory still blocked — 2026-11-21
+
+[Final campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):44895357995
+atf55725f verified3 byte pins/TLS release,then tar-inventory OOM,both cleanup0;
+ordinary44895130836 passed. Current3/3 exhausted,old archive/PPA allowances stay
+consumed. Next gated streaming selected-ELF feasibility/memory-proportionality
+design only,no fourth proof/budget increase/native/runtime or wiring authority.
+
 ## DEB static2/3 memory-refused; final in-scope recovery — 2026-11-21
 
 [Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):all3 hashes

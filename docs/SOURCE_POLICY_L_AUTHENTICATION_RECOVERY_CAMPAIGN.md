@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Time-boxed DATA campaign closed at3/3 limit — 2026-11-21
+
+[Final actual ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):44895357995
+atf55725f verified3 byte pins/TLS release,then tar-inventory OOM,both cleanup0;
+ordinary44895130836 passed. Current3/3 and2 memory repair cycles consumed;stop
+new work at attempt ceiling,not another proof. All6 file cleanup checks0,old
+allowances/native43/product4/10/wiring unchanged. Next gated streaming ELF memory-
+proportionality design,no fresh acquisition/acceptance or resource relaxation.
+
 ## Time-boxed static2/3 consumed; memory cycle2/3 — 2026-11-21
 
 [Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

@@ -1,5 +1,14 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Campaign closed at static3/3: identities proven,memory gate blocked — 2026-11-21
+
+[Final actual ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):f55725f ordinary
+44895130836 passed;final static44895357995 all3 hashes/transport release verified,
+then tar-inventory MemoryError,both cleanup0. Three campaign attempts consumed,
+all6 file cleanup checks0;no fourth attempt or budget change. Product4/10/native43/
+wiring unchanged;HTTP unqualified. Next gated:Repository-Only Streaming Selected-
+ELF Inventory Feasibility and Memory-Proportionality Design,no new acquisition.
+
 ## Static2/3 located memory refusal; final recovery in scope — 2026-11-21
 
 [Actual campaign/repair ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

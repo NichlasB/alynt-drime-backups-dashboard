@@ -1,5 +1,13 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Static3/3 consumed without memory admission — 2026-11-21
+
+[Final campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):44895357995
+atf55725f verified3 byte pins/transport release,then tar-inventory OOM,both cleanup0;
+ordinary44895130836 passed. Complete inventory and loader/native/HTTP proof absent.
+Next gated streaming selected-ELF feasibility/memory-proportionality design only;
+no new attempt/cap/runtime/wiring change,native43/product4/10 unchanged.
+
 ## Final in-scope memory recovery,not native qualification — 2026-11-21
 
 [Actual campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):static2/3
