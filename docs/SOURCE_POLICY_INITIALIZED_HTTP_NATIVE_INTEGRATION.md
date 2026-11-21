@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Dormant replay preparation;loader unchanged — 2026-11-21
+
+[Shared parser/preparation coordinator](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+synthetic tests only;no new artifact/native/descriptor/physical or HTTP grant.
+Next gated fixed descriptor-admission/replay-owner DESIGN;existing loader and
+wiring remain unchanged,3/3 exhausted/native43/product4/10.
+
 ## Dormant ELF foundation;loader unchanged — 2026-11-21
 
 [Socket-free collector](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) has21

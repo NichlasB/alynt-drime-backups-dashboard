@@ -127,8 +127,13 @@ def control(data, package):
     return {'package': package, 'version': REVISION, 'architecture': 'amd64', 'depends': deps}
 
 
-def tar_inventory(source, budget, package, category):
-    seen, control_data, count = set(), None, 0
+def walk_tar(source, budget, package, category):
+    """Shared strict parser; events alone are not a completed scan receipt.
+
+    Consumers must exhaust trailer/EOF and establish decoder exit before commit.
+    Canonical registration belongs to the primary consumer, never a replay.
+    """
+    seen = set()
     while True:
         block = exact(source, 512)
         if block == bytes(512):
@@ -140,7 +145,6 @@ def tar_inventory(source, budget, package, category):
                 S.require(not trailer.strip(b'\0'), 'tar-trailer')
             break
         budget.entry()
-        count += 1
         S.require(A.number(block[148:156]) == sum(block[:148])+256+sum(block[156:]), 'tar-checksum')
         S.require(block[257:263] in (b'ustar\0', b'ustar '), 'tar-format')
         raw, kind, size = A.text(block[:100]), block[156:157], A.number(block[124:136])
@@ -150,9 +154,7 @@ def tar_inventory(source, budget, package, category):
         name = virtual_name(raw, kind, size)
         S.require(name not in seen and (kind in (b'0', b'\0') or size == 0), 'tar-duplicate-size')
         seen.add(name)
-        if category == 'data' and name != '.':
-            S.require(name not in budget.paths or kind == budget.paths[name] == b'5', 'package-path-collision')
-            budget.paths[name] = kind
+        yield 'header', (name, kind, size)
         role = 'cli' if category == 'data' and package == 'php8.5-cli' and name == 'usr/bin/php8.5' else None
         match = re.fullmatch(r'usr/lib/php/[0-9]{8}/(mysqlnd|mysqli)\.so', name)
         if category == 'data' and package == 'php8.5-mysql' and match:
@@ -160,25 +162,44 @@ def tar_inventory(source, budget, package, category):
         selected = role is not None or (category == 'control' and name == 'control')
         S.require(not selected or kind in (b'0', b'\0'), 'selected-regular')
         S.require(not (category == 'control' and name == 'control') or size <= 65536, 'control-bound')
-        # Selected length is already bounded. One exact allocation avoids the
-        # old+new backing-store peak of repeated bytearray growth/reallocation.
-        payload, digest, remaining = bytearray(size) if selected else None, hashlib.sha256(), size
+        yield 'start', (role, selected)
+        digest, remaining = hashlib.sha256(), size
         while remaining:
             chunk = source.read(min(remaining, 65536))
             S.require(chunk, 'tar-member-truncated')
             digest.update(chunk)
-            if selected:
-                offset = size-remaining
-                payload[offset:offset+len(chunk)] = chunk
+            yield 'chunk', chunk
             remaining -= len(chunk)
         S.require(not exact(source, (-size) % 512).strip(b'\0'), 'tar-padding')
         link = A.text(block[157:257])
-        budget.inventory.update(json.dumps([package, category, name, kind.hex(), size, digest.hexdigest(), link], separators=(',', ':')).encode('ascii')+b'\n')
-        budget.types[kind.hex()] = budget.types.get(kind.hex(), 0)+1
-        if role:
-            S.require(role not in budget.roles, 'duplicate-role')
-            budget.roles[role] = {'package': package, 'path': name, **S.elf(payload), 'versioned_symbols': 'Unknown'}
-        elif selected:
-            control_data = control(payload, package)
+        yield 'end', (digest.hexdigest(), link)
+
+
+def tar_inventory(source, budget, package, category):
+    control_data, count = None, 0
+    for event, value in walk_tar(source, budget, package, category):
+        if event == 'header':
+            name, kind, size = value
+            count += 1
+            if category == 'data' and name != '.':
+                S.require(name not in budget.paths or kind == budget.paths[name] == b'5', 'package-path-collision')
+                budget.paths[name] = kind
+        elif event == 'start':
+            role, selected = value
+            # Preserve legacy exact selected allocation and unchanged S.elf.
+            payload, offset = bytearray(size) if selected else None, 0
+        elif event == 'chunk':
+            if selected:
+                payload[offset:offset+len(value)] = value
+                offset += len(value)
+        else:
+            digest, link = value
+            budget.inventory.update(json.dumps([package, category, name, kind.hex(), size, digest, link], separators=(',', ':')).encode('ascii')+b'\n')
+            budget.types[kind.hex()] = budget.types.get(kind.hex(), 0)+1
+            if role:
+                S.require(role not in budget.roles, 'duplicate-role')
+                budget.roles[role] = {'package': package, 'path': name, **S.elf(payload), 'versioned_symbols': 'Unknown'}
+            elif selected:
+                control_data = control(payload, package)
     S.require(category != 'control' or control_data is not None, 'control-missing')
     return {'entries': count, 'control': control_data} if category == 'control' else {'entries': count}

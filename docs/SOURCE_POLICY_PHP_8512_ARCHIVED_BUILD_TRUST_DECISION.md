@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Dormant replay preparation,not archive retry — 2026-11-21
+
+[Shared walker and closed preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+implemented with synthetic tests only,no new pins/trust/budgets or acquisition.
+Next gated actual descriptor-admission/replay-owner DESIGN;no physical/HTTP grant,
+3/3/native43/product4/10 and disabled production wiring unchanged.
+
 ## Dormant member-range foundation,not archive retry — 2026-11-21
 
 [Pure collector/parity foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

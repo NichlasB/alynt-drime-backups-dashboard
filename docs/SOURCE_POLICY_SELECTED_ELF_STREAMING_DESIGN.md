@@ -1,5 +1,110 @@
 # Selected-ELF Range Inventory Feasibility and Memory-Proportionality Design
 
+## Shared walker and dormant replay preparation implemented — 2026-11-21
+
+Explicit follow-up approval covers extracting the shared tar walker in
+source_policy_deb_data.py plus the dormant replay/commit-barrier coordinator,
+synthetic tests,validation,commit,push and exact-head CI;legacy behavior and
+disabled production wiring preserved. The preceding hour's attempted edit was
+permission-rejected before application;no workaround or source change occurred
+until this explicit approval. R2 bounded repository preparation,not artifact/
+native/site operations. Restore/review baseline30ca1dcedb788204c7a9a61eeea6d81dee117a67
+clean/synced master,ordinary44901933213 success;toolkit141d5546b98972b659cca78033f7f51352326364.
+Review boundary is this complete shared-parser/coordinator/test delta,not merely
+the later evidence commit. Product4/10/native43 and exhausted3/3 unchanged.
+
+### Shared policy and separate preparation surface
+
+- D.walk_tar is now the ONE strict parser used by legacy tar_inventory and the
+  dormant coordinator. Header/start/chunk/end events are internal progress,NOT
+  complete-scan receipts. Exhausting tar terminators/trailer/EOF remains required.
+  Original header/type/name/duplicate/size/padding/link/control/role policies and
+  cross-package guard ordering remain;legacy selected-buffer allocation,S.elf,
+  canonical digest and return shape remain unchanged. The old manual runner
+  still imports tar_inventory,not the new coordinator or range collector.
+- New scripts/ci/source_policy_deb_replay.py has NO CLI,acquisition,file-open,
+  installation or production caller. prepare accepts only an exact tuple of
+  three exact immutable bytes objects;no caller pins,readers,callbacks or ready
+  flags. All fixed catalog sizes/SHA256 pass before ANY nested parser. Tests
+  patch synthetic catalog bytes only inside isolated fixtures,not via an API.
+- A private read-only cursor borrows immutable input without whole-input copying.
+  This is a preparation adapter,NOT an on-disk ownership/stability factory or a
+  proposed whole-artifact storage model for the eventual low-memory proof owner.
+  The retained caller inputs are outside scratch accounting and do NOT prove fit.
+- All scans use the same walker and original Budget. Whole-source rehashes,
+  compressed/decoded bytes,skipped data and replayed headers/entries are charged;
+  no per-pass credit/reset. Canonical paths/types/inventory register PRIMARY only.
+  Replay stream length/SHA256,entry count and normalized ledger must all match.
+  Selected members additionally obey the unchanged Collector's full-body hashes.
+- At most one package/two selected roles is active and at most3 data scans occur.
+  Finished collectors are not re-fed while a sibling still needs another phase.
+  Same original AR slice/codec per replay;control is primary-only. Return waits
+  for full trailer/EOF,slice consumption,clean decoder exit and owned reaping,
+  matching replay transcripts,all packages/all3 roles and zero retained scratch.
+  Private provisional metadata never reaches a caller on failure.
+- Collector and control buffers reserve the shared1MiB scratch counter BEFORE
+  allocation,release only their own reservation on success/failure,and never
+  refund work credit. Existing64KiB chunks/control/output,192MiB work,8192 entries,
+  540s work and original decoder limits remain. Input storage,IO/JSON temporaries,
+  Python object/import/allocator costs and full process memory are NOT measured
+  by this counter;no physical-fit or all-process accounting claim.
+- Returned source_profile is immutable-input-bytes-only,prepared_only:true.
+  static_inventory_complete/qualified/executed/extracted/dependency closure all
+  remain FALSE. No real artifact,descriptor ownership,40/24MiB residency,HTTP,
+  SQL,authentication,versioned closure or runtime qualification follows.
+
+### Actual scoped tests and reviews
+
+Before extraction,captured a legacy mixed regular/directory/link witness:
+4 entries,4096 charged bytes,types30:2/32:1/35:1,inventory SHA256
+15ba01c96c2fefea93608d4ea28623bb35f13292d281d6f0ad18ed64565b09af.
+Permanent assertions preserve that exact baseline and cross-package guard order.
+Preparation also matches legacy full role facts,primary inventory and types with
+nonempty ordered needed/search paths. The sample has7 primary entries and15
+scanned entries,passes3/1/3;an independently calculated byte ledger includes all
+whole-source rehashes and replayed streams,not just a permissive upper bound.
+
+Local new Python corpus18 groups,0 failures/errors/skips;related PHP bridges9
+tests/74 assertions,plain OK/no skips. Seven restored semantic controls are
+assertion-killed (not setup errors):whole-stream identity,all-pin admission,EOF
+ordering,decoder release,required role set,work/deadline and entry budgets.
+Malformed tar/checksum/padding/trailer/type/path/duplicate/selected-link inputs,
+source recheck refusal,unselected replay mutation,partial-event termination,
+role/path collisions,allocation/parse cleanup,three-pass limit and64KiB output
+refusal covered. Input type/subclass/conversion-hook and cursor boundaries covered.
+Windows gzip close/exit tests are explicitly stubbed API evidence,NOT native
+decoder proof. Ordinary Linux CI adds one synthetic existing-tool gzip/xz/zstd
+pipe/reaping group (19 total),not candidate execution or a physical-fit proof.
+
+Canonical Feature Light SOURCE-SCOPED:4 source/test files plus8 owning records,
+unchanged manual runner/codec/oracle/workflow consumers. One resource finding:
+control buffer was bounded but not reserved in shared scratch;the new regression
+first failed with a missing-reservation assertion,then passed after reservation/
+finally-release correction. One initial identity control replaced the parser
+with a Mock and was not assertion-killed;changed to a wrapping spy,not a weaker
+gate or artificial success path. No unresolved non-security issue. Bloat/UI
+workflows unnecessary:cohesive common parser/coordinator/corpus/small bridge,
+no new UI,dependency,tooling framework or arbitrary file splitting.
+Final Feature Security SOURCE-SCOPED:typed closed inputs,pre-parser identity,
+unchanged path/type policy,whole-stream/member consistency,publication order,
+budgets and owned cleanup checked;no confirmed security defect remains.
+No whole-plugin DS3/Database Review/physical runtime/release-readiness refresh.
+
+Local full PHP3077 tests/25402 assertions,0 failures/errors,2 independently
+confirmed pre-existing Sodium-unavailable Windows signer skips. Final related
+bridges9/74,no skips,also cover the last decoder-close failure/outer cleanup
+strengthening. Node295/295,no failures/skips;PHPCS305/305,PHP syntax,structure,
+in-memory Python compile,diff checks and408 local document paths passed.
+Actual exact-head full CI evidence belongs in the scoped toolkit closeout.
+Existing source-bound native/static evidence remains HISTORICAL after the shared
+parser source change;ordinary tests do not requalify those old physical receipts.
+The manual workflow already binds D's path;R/E remain absent because not loaded.
+Before any future caller/dispatch,the exact source closure must include R/E.
+Next gated:Repository-Only Fixed Read-Only Descriptor Source Admission and Replay
+Owner Integration Design. Establish the actual descriptor/root/identity/cleanup
+contract and aggregate memory plan before implementing a real-source factory or
+requesting any NEW static attempt. Existing3/3 remains exhausted,wiring disabled.
+
 ## Approved socket-free collector foundation implemented — 2026-11-21
 
 User explicitly approved Repository-Only Socket-Free Selected-ELF Range Collector

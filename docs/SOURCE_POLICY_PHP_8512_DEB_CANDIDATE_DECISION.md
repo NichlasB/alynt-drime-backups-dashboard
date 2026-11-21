@@ -1,5 +1,12 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Replay preparation implemented,not candidate admission — 2026-11-21
+
+[Shared-walker/coordinator preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+preserves legacy behavior and fixed pins/trust/budgets;synthetic barriers only,
+no artifact acquisition/execution or on-disk/physical fit. Next gated fixed
+descriptor-admission/replay-owner DESIGN;3/3/native43/product4/10/wiring unchanged.
+
 ## Pure member collector foundation,not candidate qualification — 2026-11-21
 
 [Implemented dormant foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Shared walker and dormant replay preparation complete — 2026-11-21
+
+[Explicitly approved preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
+shares one strict walker with legacy;preserves golden digest/work/guard order;
+adds closed immutable-byte preparation,global replay accounting and commit/cleanup
+barriers. Local18 groups/7 semantic controls;Linux ordinary CI adds synthetic codec
+coverage. No actual artifact/descriptor/physical-fit or HTTP grant;3/3/native43/
+product4/10/wiring unchanged. Actual final CI counts are toolkit-scoped.
+Next gated:Repository-Only Fixed Read-Only Descriptor Source Admission and Replay
+Owner Integration Design,before a real-source factory or new proof authority.
+
 ## Socket-free ELF collector foundation implemented;integration gated — 2026-11-21
 
 [Approved pure-DATA foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

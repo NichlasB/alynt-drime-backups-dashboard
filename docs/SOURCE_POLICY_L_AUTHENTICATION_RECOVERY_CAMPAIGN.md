@@ -1,5 +1,12 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Explicit shared-walker and preparation approval implemented — 2026-11-21
+
+[Scoped replay preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) preserves
+legacy behavior;immutable synthetic inputs/commit barriers,not owned-source or
+physical qualification. No allowance renewal;3/3/native43/product4/10/wiring remain.
+Next gated fixed descriptor-admission/replay-owner DESIGN,not another proof run.
+
 ## Separately approved pure collector foundation implemented — 2026-11-21
 
 [Dormant member-DATA foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

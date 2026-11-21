@@ -1,5 +1,15 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Shared parser and dormant replay preparation — 2026-11-21
+
+[Approved implementation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) preserves
+legacy golden digest/work and uses the same strict walker for dormant preparation.
+All-pin/full-stream/EOF/decoder/budget/role/cleanup barriers tested synthetically;
+not actual owned-descriptor or physical-fit proof. Manual runner stays legacy,
+new helpers not loaded there;historical source-bound proofs not refreshed.
+Next gated descriptor-admission/replay-owner DESIGN;3/3/native43/product4/10 and
+production wiring unchanged. Exact final evidence is the toolkit scoped closeout.
+
 ## Dormant range collector implemented,not wired — 2026-11-21
 
 [Approved socket-free foundation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md):
