@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Same-publisher DEB delivery recovery — 2026-11-21
+
+[Current campaign ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) resolves
+exact publisher build-file URLs with HEAD200 and unchanged changesfile pins.
+No old archive/window-policy change. Continue approved QA/CI then static attempt
+1/3,not a native opportunity;prior counts/native43/product4/10/wiring unchanged.
+
 ## DEB alternative blocked before identity — 2026-11-21
 
 [Actual result/ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):375140a ordinary

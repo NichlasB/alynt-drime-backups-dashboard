@@ -7,7 +7,7 @@ final class SourcePolicyPpaDebStaticTest extends TestCase {
   $p=proc_open(array($python,'-I','-S','-B',__DIR__.'/support/source_policy_ppa_deb_test.py'),array(0=>array('pipe','r'),1=>array('pipe','w'),2=>array('pipe','w')),$pipes);
   $this->assertIsResource($p);fclose($pipes[0]);$out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
   $this->assertSame(0,proc_close($p),$err);$this->assertSame('',$err);
-  $this->assertSame(array('tests'=>PHP_OS_FAMILY==='Linux'?15:14,'failures'=>0,'errors'=>0,'network_calls'=>0,'linux_codec_test'=>PHP_OS_FAMILY==='Linux'),json_decode($out,true));
+  $this->assertSame(array('tests'=>PHP_OS_FAMILY==='Linux'?16:15,'failures'=>0,'errors'=>0,'network_calls'=>0,'linux_codec_test'=>PHP_OS_FAMILY==='Linux'),json_decode($out,true));
  }
  public function test_manual_only_workflow_and_no_runtime_wiring() {
   $root=dirname(__DIR__);$workflow=file_get_contents($root.'/.github/workflows/source-policy-ppa-deb-static.yml');

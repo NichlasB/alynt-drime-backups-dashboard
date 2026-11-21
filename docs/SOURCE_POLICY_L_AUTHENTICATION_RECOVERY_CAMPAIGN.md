@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## New 60-minute DATA-only allowance,not a historical reset — 2026-11-21
+
+[Authority/source/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)
+owns10:05:11–11:05:11 UTC campaign and up to3 fresh static attempts. Same-publisher
+exact build-file delivery recovered with HEAD200/unchanged SHA256,size tuple.
+Continue QA/CI then static1/3;no execution/SQL/site authority. Old allowances stay
+consumed,native43/product4/10 and disabled production wiring remain unchanged.
+
 ## PPA static ONE consumed; delivery blocked — 2026-11-21
 
 [Exact proof/cleanup/CI ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

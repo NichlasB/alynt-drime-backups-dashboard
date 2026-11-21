@@ -17,7 +17,12 @@ PINS = (
     ('php8.5-common', 850622, 'fc3adc82865c0046614cd577ad816db44a8923672236f7637eb7256673efc7d1'),
     ('php8.5-mysql', 129750, '81cf7b2d0330ce86d9287bed2bdbb7210f41ab3846bee9c161babdecdf436279'),
 )
-BASE = 'https://ppa.launchpadcontent.net/ondrej/php/ubuntu/pool/main/p/php8.5/'
+# Literal publisher build33861482 deliveries. No rolling pool, redirects or fallback.
+DELIVERIES = {
+    'php8.5-cli': 'https://launchpadlibrarian.net/882014196/php8.5-cli_'+REVISION+'_amd64.deb',
+    'php8.5-common': 'https://launchpadlibrarian.net/882014197/php8.5-common_'+REVISION+'_amd64.deb',
+    'php8.5-mysql': 'https://launchpadlibrarian.net/882014209/php8.5-mysql_'+REVISION+'_amd64.deb',
+}
 LIMIT = 192*A.MIB
 
 

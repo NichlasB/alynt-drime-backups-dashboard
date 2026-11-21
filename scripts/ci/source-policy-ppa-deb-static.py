@@ -8,11 +8,10 @@ import signal
 import stat
 import sys
 import urllib.error
-import urllib.parse
 import urllib.request
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from source_policy_deb_data import A, S, PINS, BASE, REVISION, Budget, Slice, ar_members, tar_inventory
+from source_policy_deb_data import A, S, PINS, DELIVERIES, REVISION, Budget, Slice, ar_members, tar_inventory
 from source_policy_deb_stream import Decoder, preflight
 
 WORKFLOW = 'source-policy-ppa-deb-static.yml'
@@ -80,7 +79,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 def download(root, pin, budget):
     package, expected_size, expected_sha = pin
     path = root/filename(package)
-    uri = BASE+urllib.parse.quote(path.name)
+    uri = DELIVERIES[package]
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
     size, digest = 0, hashlib.sha256()
     with opener.open(uri, timeout=10) as response, path.open('xb') as output:

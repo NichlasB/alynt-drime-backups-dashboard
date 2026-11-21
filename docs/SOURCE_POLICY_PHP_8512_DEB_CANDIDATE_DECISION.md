@@ -1,5 +1,14 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Same exact bytes available through publisher build files — 2026-11-21
+
+[Campaign/source/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)
+binds publisher build33861482's three fixed file-service IDs882014196/197/209;
+HEAD200/sizes and bounded changesfile26326 bytes reverify existing SHA256 tuple.
+No replacement build/pin/publisher/trust exception,package acquisition or runtime
+claim. Current campaign allows up to3 static attempts,ordinary CI first;all caps
+and disabled execution/wiring retained. Earlier proof allowance remains consumed.
+
 ## First fixed delivery unavailable to proof — 2026-11-21
 
 [Actual proof and exact cleanup](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

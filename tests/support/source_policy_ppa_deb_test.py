@@ -65,6 +65,26 @@ class Checks(unittest.TestCase):
             with self.assertRaises(D.S.Refusal):
                 D.ar_members(io.BytesIO(bad), D.Budget())
 
+    def test_exact_publisher_build_delivery_keeps_byte_pins(self):
+        expected = (
+            ('php8.5-cli', 3165930, '9ee42a60bccc4b2fb91624a05535702d9c45699e61d20ace18e39d69bf7e53c8', '882014196'),
+            ('php8.5-common', 850622, 'fc3adc82865c0046614cd577ad816db44a8923672236f7637eb7256673efc7d1', '882014197'),
+            ('php8.5-mysql', 129750, '81cf7b2d0330ce86d9287bed2bdbb7210f41ab3846bee9c161babdecdf436279', '882014209'),
+        )
+        self.assertEqual(tuple(row[:3] for row in expected), D.PINS)
+        self.assertEqual({row[0] for row in expected}, set(D.DELIVERIES))
+        for name, size, sha, number in expected:
+            self.assertEqual('https://launchpadlibrarian.net/'+number+'/'+name+'_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb', D.DELIVERIES[name])
+        self.assertEqual(4146302, sum(row[1] for row in D.PINS))
+        class Response(io.BytesIO):
+            status, headers = 200, {'Content-Length': '3'}
+        with tempfile.TemporaryDirectory() as temp:
+            for name, size, sha, number in expected:
+                with patch.object(M.urllib.request, 'build_opener') as opener:
+                    opener.return_value.open.return_value = Response(b'abc')
+                    M.download(Path(temp), (name, 3, hashlib.sha256(b'abc').hexdigest()), D.Budget())
+                    self.assertEqual('https://launchpadlibrarian.net/'+number+'/'+name+'_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb', opener.return_value.open.call_args.args[0])
+
     def test_positive_three_role_inventory_and_control(self):
         budget = D.Budget()
         self.inventory(tar(F.member('./', b'', b'5'), F.member('./usr/bin/php8.5')), budget)
@@ -160,7 +180,7 @@ class Checks(unittest.TestCase):
                     pin = ('php8.5-cli', 3, hashlib.sha256(b'abc').hexdigest())
                     if index == 0:
                         self.assertEqual(3, M.download(root, pin, D.Budget())['bytes'])
-                        self.assertTrue(opener.return_value.open.call_args.args[0].startswith(D.BASE))
+                        self.assertEqual('https://launchpadlibrarian.net/882014196/php8.5-cli_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb', opener.return_value.open.call_args.args[0])
                     else:
                         with self.assertRaises(D.S.Refusal):
                             M.download(root, pin, D.Budget())
@@ -216,6 +236,12 @@ class Checks(unittest.TestCase):
         with patch.object(D.Budget, 'charge', lambda self, count: None):
             result = unittest.TestResult()
             Checks('test_shared_work_entry_and_deadline_bounds').run(result)
+        self.assertEqual(1, len(result.failures))
+        self.assertEqual(0, len(result.errors))
+        wrong = {name: D.DELIVERIES['php8.5-cli'] for name in D.DELIVERIES}
+        with patch.object(M, 'DELIVERIES', wrong):
+            result = unittest.TestResult()
+            Checks('test_exact_publisher_build_delivery_keeps_byte_pins').run(result)
         self.assertEqual(1, len(result.failures))
         self.assertEqual(0, len(result.errors))
 

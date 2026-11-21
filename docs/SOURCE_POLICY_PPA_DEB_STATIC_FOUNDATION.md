@@ -1,5 +1,68 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## 60-minute campaign: exact-build delivery recovered — 2026-11-21
+
+User authorizes routine same-publisher delivery/artifact decisions,repository
+recovery/publication and up to THREE fresh DATA-only static attempts in this
+campaign,not installation/extraction/candidate execution/SQL/site operations.
+Clock10:05:11–11:05:11 UTC (11:05:11–12:05:11 Paris);no new work after deadline.
+Prior PPA ONE1/1 and archive allowances remain consumed;new campaign0/3 static
+attempts initially,native43/product4/10 unchanged. Restore/review baseline
+51b615ccab00c620a605229c0d880937bd896fa5 clean/synced;ordinary44885018366
+reverified completed/success. Toolkitf0bfd2430214a6eee890f42960d16ea419087c79
+clean/synced;uploader unchanged. Narrow R3 owned public DATA proof only.
+
+Fresh [publisher build33861482](https://api.launchpad.net/1.0/~ondrej/+archive/ubuntu/php/+build/33861482)
+still reports Successfully built,exact revision8.5.12-1+ubuntu24.04.1+deb.sury.org+1,
+source php8.5,noble/amd64. CLI publication252311224 still binds that exact build/
+revision and Superseded status. The rolling pool index now lists8.5.13,not a
+fallback. The SAME publisher's exact build-file HEAD responses return303 to the
+following fixed file-service URLs;separate direct HEADs each200 with matching
+Content-Length,artifact body bytes read0. No candidate package was acquired locally.
+
+| Package | Exact publisher-issued delivery | HEAD bytes |
+| --- | --- | ---: |
+| php8.5-cli | https://launchpadlibrarian.net/882014196/php8.5-cli_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb | 3165930 |
+| php8.5-common | https://launchpadlibrarian.net/882014197/php8.5-common_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb | 850622 |
+| php8.5-mysql | https://launchpadlibrarian.net/882014209/php8.5-mysql_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.deb | 129750 |
+
+The publisher build's exact changesfile HEAD independently returns
+[metadata object882014153](https://launchpadlibrarian.net/882014153/php8.5_8.5.12-1+ubuntu24.04.1+deb.sury.org+1_amd64.changes).
+Bounded textual GET26326 bytes reverified all THREE existing SHA256/size rows
+verbatim,total4,146,302;no pin/revision/architecture/API fallback. This is the
+same approved publisher/build/byte tuple via its own authoritative delivery
+links,not a new publisher,mirror,signature/attestation guarantee or trust exception.
+Direct publisher/TLS/frozen-hash assurance unchanged;future availability unproven.
+
+Code replaces only the rolling pool constructor with three literal build-file
+deliveries. No runtime metadata lookup,automatic redirect,host wildcard,URL/env
+override,repinning or fallback is added. Every actual proof still refuses redirects
+and verifies all compressed identities before nested DATA parsing. All formats,
+resource/ownership/cleanup guards and disabled runtime/wiring remain unchanged.
+
+Source-scoped canonical Light/final Security:four changed executable/test files,
+seven owning records plus directly affected unchanged codec/workflow,explicit
+51b615c baseline. Confirmed delivery-availability defect fixed without relaxation.
+Permanent isolated request-URL regression first assertion-failed (14 groups,
+one failure,zero errors/network),then bridge/archive5/52 passed. New independent
+catalog test freezes all three delivery IDs/revision/sizes/SHA256 and finite key
+set,exercises all actual download consumers;wrong consumer-delivery binding is
+assertion-killed (not an import/error failure). Windows15/Linux16 groups.
+No UI/DB/full release-readiness review applies.
+Bloat helper is PHP/JS/CSS-only;one changed PHP bridge20 TOTAL/1 CODE,zero oversize;
+manual DATA/owner/test review needs no further split or diagnostic layer.
+
+Executed local QA:PHP3075/25392,two existing Sodium-unavailable skips,using the
+previously diagnosed process-local GIT_CONFIG_COUNT=0 offline-fixture workaround;
+no persistent Git/credential change. Node295/295,no failures/skips;PHPCS305/305,
+build,structure,AST,368 local links/whitespace pass. Final targeted5/52 revalidated
+all three actual delivery consumers and the new assertion-killed control after
+the full-suite start. No tracked generated/runtime/dependency/workflow change.
+
+Next within current authorization:complete local QA,commit/push/ordinary exact-head
+CI,then fresh campaign attempt1/3 with exact owned cleanup. This supersedes the
+previous next-approval gate below for this campaign only,not historical counts.
+
 ## Current result: delivery refused; ONE consumed — 2026-11-21
 
 Foundation375140a59789ce88beeb098209d8bc610b049d33 published on master.

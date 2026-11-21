@@ -1,5 +1,12 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Fixed publisher delivery recovery; HTTP still unqualified — 2026-11-21
+
+[Current campaign/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)
+rebinds same-build/same-hash DEBs to three authoritative publisher file URLs,
+HEAD200;no installation/runtime/native/HTTP authority. Approved campaign continues
+QA/exact-head CI then static1/3;all caps,old counts,product4/10/native43/wiring remain.
+
 ## DEB delivery blocked; HTTP still unqualified — 2026-11-21
 
 [Actual foundation/ONE result](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):

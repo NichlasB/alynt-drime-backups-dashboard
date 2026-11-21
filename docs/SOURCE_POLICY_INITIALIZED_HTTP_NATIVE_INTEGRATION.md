@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Publisher-bound DATA delivery recovery — 2026-11-21
+
+[Current campaign/metadata ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)
+preserves exact DEB byte pins while selecting three publisher build-file URLs,
+HEAD200. QA/ordinary CI before approved static1/3;no runtime loader,SQL/native/
+site/wiring change. Product4/10/native43/old allowance histories unchanged.
+
 ## Static delivery gate not passed — 2026-11-21
 
 [Actual ONE result/resume](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):375140a

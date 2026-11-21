@@ -1,5 +1,13 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Time-boxed same-publisher DATA campaign authorized — 2026-11-21
+
+[Current delivery/authority ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)
+recovers three publisher-issued exact-build URLs,HEAD200 and unchanged manifest
+sizes/SHA256. Same publisher/build/bytes,no new trust or resource exception.
+Continue local QA/ordinary exact-head CI then campaign attempt1/3;old allowances
+stay consumed,native43/product4/10/wiring unchanged. No candidate execution.
+
 ## PPA DATA proof blocked at delivery; exact cleanup complete — 2026-11-21
 
 [Actual proof/receipt and resume](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md):
