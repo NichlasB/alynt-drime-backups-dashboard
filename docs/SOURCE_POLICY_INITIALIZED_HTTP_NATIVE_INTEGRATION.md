@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Approved DATA-only alternative foundation — 2026-11-21
+
+[Foundation and proof ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) implement
+closed fixed-tuple DEB admission/pipe resource checks/owned cleanup,not runtime
+provisioning. Ordinary exact-head CI precedes ONE approved static dispatch.
+No loader/runtime/native/SQL/site/wiring change;product4/10/native43 unchanged.
+
 ## Exact package alternative needs static admission — 2026-11-20
 
 [Metadata-only decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)

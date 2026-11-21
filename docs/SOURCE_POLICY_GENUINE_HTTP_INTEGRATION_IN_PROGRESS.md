@@ -1,5 +1,12 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Approved DEB DATA foundation; runtime still gated — 2026-11-21
+
+[Foundation/ONE ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) owns the fixed
+tuple,closed DATA reader,unchanged caps and exact cleanup. Continue approved
+ordinary CI then ONE static proof only;no candidate execution/private prefix,
+SQL/site or wiring authority. HTTP unqualified;product4/10/native43 unchanged.
+
 ## Conditional finite package candidate;HTTP still unqualified — 2026-11-20
 
 [Metadata/design selection](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)

@@ -1,5 +1,13 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Foundation now approved; qualification still pending — 2026-11-21
+
+User explicitly approved direct PPA trust,closed DATA foundation and ONE static
+proof. [Implementation and exact ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md)
+preserve this tuple/all resource caps and add synthetic-before-acquisition gates.
+No broader trust,extraction,installation,candidate execution or production wiring
+authority. The earlier design-only restrictions below are historical evidence.
+
 ## Decision and authority — 2026-11-20
 
 User approved repository-only artifact selection,source/metadata/design only,

@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Approved fixed DEB DATA foundation — 2026-11-21
+
+[Foundation/ONE ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) advances the
+bounded artifact-admission prerequisite,not a separate product milestone or
+native opportunity. Direct PPA trust/ONE static acquisition now explicitly
+approved;ordinary CI first. Existing budgets,pins,product4/10/native43 and disabled
+wiring remain. No install/extraction/candidate execution/native/SQL/site authority.
+
 ## Campaign checkpoint — 2026-11-07
 
 Current user authorizes up to10 worthwhile published/verified milestones and10

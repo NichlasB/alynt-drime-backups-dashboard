@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Approved finite DEB DATA foundation — 2026-11-21
+
+[New foundation/ONE ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) implements
+the approved closed DEB alternative without relaxing the original archive/window
+policy. Ordinary exact-head CI then ONE bounded static dispatch;old archive
+allowances remain consumed. No candidate extraction/install/execution or wiring.
+
 ## Resource-bounded alternative selected conditionally — 2026-11-20
 
 [New metadata/design decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)

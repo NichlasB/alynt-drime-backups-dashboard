@@ -1,5 +1,14 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Approved bounded PPA DATA foundation; ONE proof pending — 2026-11-21
+
+[Foundation and exact ledger](SOURCE_POLICY_PPA_DEB_STATIC_FOUNDATION.md) implement
+the approved direct-PPA three-DEB tuple,closed AR/tar virtual DATA policy,shared
+resource caps,existing-tool pipe preflight and owned cleanup. Synthetic tests
+are not candidate qualification. Publish/verify ordinary exact-head CI before
+ONE approved static dispatch;no extraction/install/candidate execution/SQL/site
+operation or wiring. Product4/10/native43 unchanged;HTTP remains unqualified.
+
 ## Finite DEB alternative proposed;resource qualification pending — 2026-11-20
 
 [Resource-compatible artifact decision](SOURCE_POLICY_PHP_8512_DEB_CANDIDATE_DECISION.md)
