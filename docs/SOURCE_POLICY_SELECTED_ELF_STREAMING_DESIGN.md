@@ -1,5 +1,14 @@
 # Selected-ELF Range Inventory Feasibility and Memory-Proportionality Design
 
+## Actual owned descriptor/replay fit passed — 2026-11-22
+
+[Source-bound proof](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)45048700606
+atd6da62e passed12 groups/all3 pins,40/24MiB caps,107599159 work/67946 raw peak,
+CLI3/common1/mysql3 passes and both cleanup0. Full-body buffering fit blocker is
+closed;not candidate/dependency/HTTP admission. New1/1 consumed,historical3/3/
+native43/product4/10 unchanged. Next gated selected-ELF dependency-closure/private-
+prefix admission DESIGN;no new acquisition/materialization/execution/wiring.
+
 ## Dormant descriptor/replay owner implemented — 2026-11-22
 
 [Lease/source-set foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

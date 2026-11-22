@@ -1,13 +1,14 @@
 # Fixed Read-Only Descriptor Source Admission and Replay Owner Integration Design
 
-## Owned ephemeral qualification separately approved — 2026-11-22
+## Owned ephemeral qualification passed — 2026-11-22
 
 The [current qualification record](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)
-owns the explicitly approved actual CI descriptor/source/replay and cleanup scope,
-including a fresh fixed DATA allowance. Earlier no-real-descriptor foundation
-restrictions below describe their historical scope,not this new approval.
-Source closure/validation/ordinary CI precede any owned dispatch. No candidate
-execution or production wiring;historical counters are not reset.
+records actual45048700606 atd6da62e after ordinary45048515913 success:all12 physical
+groups,all3 pins/replay,unchanged40/24MiB caps,work107599159/raw peak67946 and both
+cleanup checks0. This closes source/replay fit,not runtime/dependency/HTTP admission.
+Earlier no-real-descriptor restrictions below are historical. New1/1 consumed,
+historical3/3/native43/product4/10 unchanged. Next gated dependency-closure/private-
+prefix admission DESIGN;no materialization,candidate execution or wiring.
 
 ## Approved dormant lease/source-set foundation — 2026-11-22
 

@@ -1,5 +1,16 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Fresh owned descriptor/replay proof passed — 2026-11-22
+
+[Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e
+ACTUALLY passed after ordinary45048515913 success:12 physical groups,all3 pins,
+source/replay fit under unchanged caps and both cleanup0. New explicit1/1 consumed;
+the old3/3 refusals below remain historical,not rewritten. Work107599159/raw peak
+67946,CLI3/common1/mysql3 passes;no candidate execution or full dependency/runtime/
+HTTP admission. Next gated selected-ELF dependency-closure/private-prefix admission
+DESIGN,no new acquisition/materialization/execution/wiring. Native43/product4/10
+unchanged;exact source/evidence boundaries remain in the current owning record.
+
 ## Dormant descriptor/replay foundation implemented — 2026-11-22
 
 [Approved source-set foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

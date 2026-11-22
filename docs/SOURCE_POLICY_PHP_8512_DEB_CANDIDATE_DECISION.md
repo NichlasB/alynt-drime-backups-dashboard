@@ -1,5 +1,15 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Source/replay memory fit passed;runtime admission pending — 2026-11-22
+
+[Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e
+passed12 groups/all3 fixed pins/replay with40/24MiB caps,107599159 work/67946 raw
+peak and both cleanup0. The selected12MiB CLI was not fully buffered. Observed
+ELF needed names/interpreter/member identities are recorded,not an admitted
+library/ABI/versioned-symbol closure. Next gated repository-only selected-ELF
+dependency-closure/private-prefix admission DESIGN,before materialization or
+execution. New1/1 consumed,historical3/3/native43/product4/10/wiring unchanged.
+
 ## Dormant source-set implementation,not candidate admission — 2026-11-22
 
 [Approved foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) adds

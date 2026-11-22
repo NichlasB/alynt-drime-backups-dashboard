@@ -18,11 +18,11 @@ merely a later evidence commit. Historical3/3 remains exhausted,native43/product
 unchanged. This authorizes one fresh owned-qualification dispatch and at most one
 fixed three-DEB acquisition;no silent historical counter reset or unchanged retry.
 
-Current status:integration prepared,isolated controller/API models passed;NO real
-descriptor qualification or new acquisition has run yet. Ordinary exact-head CI
-must actually succeed before dispatching the fixed owned proof. Physical result,
-attempt consumption,source identities and cleanup are recorded below only after
-actual workflow execution. Preparation alone is not a product milestone.
+Current status:the ONE freshly authorized owned qualification ACTUALLY passed,
+including acquisition/replay and independent always cleanup. New allowance1/1
+consumed;historical3/3/native43/product4/10 are unchanged,not reset. This closes
+the source/replay memory-fit blocker,not candidate/runtime/HTTP qualification.
+Actual result and source-bound scope are recorded below;no second dispatch.
 
 ## Fixed integration and order
 
@@ -122,6 +122,73 @@ These are preparation/model results,not an assertion that the CI proof passed.
 
 ## Actual qualification and publication evidence
 
-Pending validation/publication,ordinary exact-head CI and the single owned proof.
-No dispatch/acquisition counted yet. Exact run links/counts,source blobs,result,
-remaining proof limits and resource cleanup will replace this pending entry.
+Integration head d6da62e9105dbefb5fb88aad0f782117216449ac committed/pushed;
+[ordinary45048515913](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45048515913)
+ACTUALLY completed/success,both exact-head jobs,BEFORE dispatch. Actual logs PHP7.4
+3077/25405,PHP8.3 3077/25410,plain OK/no skips;separate API32/controller15 groups
+in EACH job,failures/errors/skips0. Node295/295 each,failures/skips0;PHPCS305/305,
+build/structure pass;Composer/npm audits0. No acquisition occurred in ordinary CI.
+
+[Owned45048700606](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45048700606)
+at SAME d6da62e,workflow_dispatch/run_attempt1,ACTUALLY completed/success in8s.
+Exact-head/job/source closure,existing-tool preflight,all THREE existing size/
+SHA256 pins (4146302 acquired bytes),writer/TLS release,ALL12 physical groups,
+replay and in-process final cleanup succeeded. Independent always cleanup also
+completed/success and printed owned_deb_remaining0/owned_extra_remaining0.
+
+Receipt ADBPPADESCRIPTOR1:descriptor_proof_complete:true,stage:complete,
+reason:owned-source-replay-only-no-runtime-admission. Owned files0,extra0,
+own-process descriptor delta0 and children0 after teardown,not total process FD0.
+No foreign process/host or existing application state was touched. All source
+leases were admitted/released and physical positive replay succeeded,not an
+always-unavailable owner. Native permission checks are read-only write denial,
+owned mode/nlink/fingerprint and no-follow refusal,not arbitrary-user access proof.
+
+Actual cap-enforced run retained41943040-byte parent/25165824-byte child address
+space limits and8388608-byte codec windows. Charged aggregate work107599159 bytes
+is below201326592;raw counter peak67946 below1048576. This is counter/cap evidence,
+NOT a measured all-process/RSS high-water or complete Python-object memory model.
+12MiB selected CLI (12282976 bytes) was scanned without retaining its entire body.
+Data passes CLI3/common1/mysql3;primary entries152,total scanned entries272;
+primary types regular88/symlink5/directory59. Canonical inventory SHA256:
+271d16c1d438e9c13a6571943bed889726175d5892e0f637f4d35b51dabd0074.
+
+| Selected DATA role | Bytes | SHA256 |
+| --- | ---: | --- |
+| CLI | 12282976 | eb85560c0bea6c5d1c06a93a602697efe94ad9803da400211469529f041929fa |
+| mysqlnd | 218952 | 837b346b8f11c34669bca7874bfc027c866ebe7ae1d954c2e496ce83341d0b20 |
+| mysqli | 170248 | 6dfd427a916d649b7404d4f9c9aea94caaa1821d08c7c7c8852606d42c35fcd5 |
+
+All selected ELF facts are64-bit/x86_64/type3,not executed. CLI interpreter DATA
+is /lib64/ld-linux-x86-64.so.2;needed names:libm.so.6,libxml2.so.2,libssl.so.3,
+libcrypto.so.3,libpcre2-8.so.0,libz.so.1,libsodium.so.23,libargon2.so.1,
+libgcc_s.so.1,libc.so.6. mysqlnd needs libz.so.1/libcrypto.so.3/libc.so.6;
+mysqli needs libc.so.6. These names and the package control dependencies are
+observed DATA,NOT an admitted runtime dependency closure. Versioned symbols remain
+Unknown;dependency_closure_verified/static_inventory_complete/qualified/extracted/
+executed remain FALSE. No package/member materialization,installation,candidate
+PHP/module,WordPress/SQL/HTTP or production operation occurred.
+
+| Exact qualification source | Git blob OID at d6da62e |
+| --- | --- |
+| .github/workflows/source-policy-ppa-deb-static.yml | f349495a1cd965f3210f52ca1a890da1c1129132 |
+| scripts/ci/source-policy-ppa-deb-static.py | c07569381e0641e3788e15e99f2c466b7a58e6b3 |
+| scripts/ci/source_policy_deb_data.py | cf0bb99c8ab1ad8e70e09e88d465df607d5b5855 |
+| scripts/ci/source_policy_deb_stream.py | 8e3cf5e2915bf317e69257cbac2c4104ffbb5647 |
+| scripts/ci/source_policy_deb_sources.py | 8ed0482d00dab378547abef9cf9c16c5245576b6 |
+| scripts/ci/source_policy_deb_replay.py | 28aca2f6879c1e1bbcec9b3c70791330760518d2 |
+| scripts/ci/source_policy_elf_ranges.py | c90abfa70a22b077558d517dc7d6581478b5a351 |
+| scripts/ci/source-policy-php-archive-static.py | f3bb249f937fbe89cb811513603a1e1136a24e16 |
+| scripts/manual/source_policy_linux_minimum_static.py | ed76a7653c4dd040ab3ae4462f6b7e94ccd90f67 |
+
+The later evidence closeout is docs-only and must preserve ALL these source,
+workflow,test and dependency bytes. Its ordinary exact-head CI is separate and
+recorded in the toolkit;the native receipt remains bound to d6da62e,not relabeled
+as a run at the docs-only head. No historical whole-plugin readiness refresh.
+
+Recommended next gated slice:Repository-Only PPA Selected-ELF Dependency-Closure
+and Private-Prefix Admission Design. Reconcile these observed dependencies and
+remaining ABI/version/layout requirements with the existing trusted lab contract
+before authorizing any materialization or candidate execution. Design-only,
+no acquisition/SQL/native experiment,installation or production wiring. The
+source/replay fit blocker is closed;runtime admission is still a real decision.

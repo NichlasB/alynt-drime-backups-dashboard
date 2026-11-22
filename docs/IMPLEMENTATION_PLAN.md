@@ -1,13 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
-## Owned descriptor/source replay qualification approved — 2026-11-22
+## Owned descriptor/source replay qualification complete — 2026-11-22
 
 [Current owned qualification](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)
-integrates the fixed source closure/manual entry,physical owned guards and exact
-cleanup under unchanged caps. Candidate execution and production wiring remain
-disabled. Isolated controller/API tests are preparation,not physical evidence;
-ordinary CI and one fresh owned dispatch/acquisition remain pending. Historical
-3/3 exhausted,native43/product4/10 unchanged;no main-work or release claim.
+passed atd6da62e:ordinary45048515913 then owned45048700606,all12 physical groups,
+all3 pins/replay and both cleanup checks0 under unchanged40/24MiB caps. Work
+107599159/raw peak67946;no whole CLI buffer. Source/replay fit blocker CLOSED,
+not candidate/ABI/dependency/HTTP admission. New allowance1/1 consumed,historical
+3/3/native43/product4/10 unchanged. Next gated:Repository-Only PPA Selected-ELF
+Dependency-Closure and Private-Prefix Admission Design,no acquisition/execution/
+materialization or wiring. Exact source identities/limits are in the owning record.
 
 ## Fixed descriptor lease/replay source-set foundation — 2026-11-22
 

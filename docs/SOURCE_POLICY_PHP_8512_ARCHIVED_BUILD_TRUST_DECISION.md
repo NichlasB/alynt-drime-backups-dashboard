@@ -1,5 +1,14 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Fixed PPA source/replay fit passed — 2026-11-22
+
+[Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e
+passed12 physical groups/all3 existing pins/replay with unchanged caps and both
+cleanup0. No archive repin/trust change,extraction,installation or candidate
+execution. Next gated selected-ELF dependency-closure/private-prefix admission
+DESIGN;source-read fit is proved,runtime/HTTP admission is not. New1/1 consumed,
+historical3/3/native43/product4/10 and disabled production wiring unchanged.
+
 ## Dormant descriptor foundation,not archive retry — 2026-11-22
 
 [Fixed lease/source-set implementation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
