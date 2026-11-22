@@ -1,5 +1,12 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Descriptor ownership contract selected,not candidate fit — 2026-11-22
+
+[Approved design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) preserves
+pins/trust/caps and defines fixed leases,namespace/hash checks and safe teardown.
+No source/native/acquisition/physical qualification. Next gated dormant syscall/
+API foundation;3/3/native43/product4/10 and production wiring unchanged.
+
 ## Replay preparation implemented,not candidate admission — 2026-11-21
 
 [Shared-walker/coordinator preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

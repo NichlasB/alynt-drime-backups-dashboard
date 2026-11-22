@@ -1,5 +1,13 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Descriptor-source admission DESIGN complete — 2026-11-22
+
+[Fixed source-set design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+specifies root-relative read-only FDs,observed provenance,global work accounting
+and close-before-publication. No actual opens/acquisition/native proof or source
+change. Next gated dormant lease/source-set foundation with isolated API tests;
+3/3 exhausted/native43/product4/10,wiring and all historical proof limits remain.
+
 ## Shared parser and dormant replay preparation — 2026-11-21
 
 [Approved implementation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) preserves

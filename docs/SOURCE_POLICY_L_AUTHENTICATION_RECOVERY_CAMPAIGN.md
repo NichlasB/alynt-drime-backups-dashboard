@@ -1,5 +1,12 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Explicit design-only descriptor source contract — 2026-11-22
+
+[Approved design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) advances
+fixed leases/namespace observations/teardown/resource planning only. No code,
+native/actual descriptor/acquisition or allowance reset. Next gated dormant
+lease/source-set isolated API foundation;3/3/native43/product4/10/wiring unchanged.
+
 ## Explicit shared-walker and preparation approval implemented — 2026-11-21
 
 [Scoped replay preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md) preserves

@@ -1,5 +1,12 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Descriptor-source DESIGN;HTTP status unchanged — 2026-11-22
+
+[Source-set/replay-owner design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+defines the next read-only lifecycle,not actual source/physical/HTTP qualification.
+Next gated dormant isolated API foundation;no source/native/acquisition/wiring
+change,3/3/native43/product4/10 unchanged.
+
 ## Synthetic replay preparation;HTTP qualification unchanged — 2026-11-21
 
 [Shared walker/dormant coordinator](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

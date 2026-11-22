@@ -1,5 +1,12 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Descriptor admission design;loader unchanged — 2026-11-22
+
+[Fixed source lifecycle design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+owns the proposed lease/provenance/close-first contract,not actual descriptor or
+physical/runtime proof. Next gated dormant isolated API foundation;no source/
+acquisition/native/wiring change,3/3 exhausted/native43/product4/10 remain.
+
 ## Dormant replay preparation;loader unchanged — 2026-11-21
 
 [Shared parser/preparation coordinator](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

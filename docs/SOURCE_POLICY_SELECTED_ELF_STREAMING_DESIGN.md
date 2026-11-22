@@ -1,5 +1,13 @@
 # Selected-ELF Range Inventory Feasibility and Memory-Proportionality Design
 
+## Descriptor admission/owner integration design selected — 2026-11-22
+
+[Design-only source-set contract](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+owns the next fixed-descriptor lifecycle,namespace/hash/cursor/cleanup and resource
+requirements. No implementation,artifact/native experiment or wiring change.
+Next gated dormant lease/source-set foundation,isolated syscall/API tests only;
+actual source/physical proof still required,3/3/native43/product4/10 unchanged.
+
 ## Shared walker and dormant replay preparation implemented — 2026-11-21
 
 Explicit follow-up approval covers extracting the shared tar walker in

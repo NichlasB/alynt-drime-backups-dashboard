@@ -1,5 +1,12 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Descriptor lifecycle design,not archive retry — 2026-11-22
+
+[Fixed read-only source-set design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+selects the next lease/provenance/teardown contract under unchanged pins/budgets.
+No source/acquisition/native experiment or host-profile proof. Next gated dormant
+isolated API foundation;3/3/native43/product4/10/disabled wiring unchanged.
+
 ## Dormant replay preparation,not archive retry — 2026-11-21
 
 [Shared walker and closed preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)

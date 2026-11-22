@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed descriptor source/replay integration DESIGN complete — 2026-11-22
+
+[Approved design-only contract](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+selects fixed root-relative read-only leases,same-FD pread,namespace/content
+rechecks,close-before-publication and bounded teardown. No source implementation,
+actual descriptors/acquisition/native proof or wiring. Hash work/FD/raw-buffer
+planning is not physical fit;3/3/native43/product4/10 unchanged. Next gated:
+Repository-Only Fixed Descriptor Lease and Replay Source-Set Safety Foundation,
+dormant isolated syscall/API tests only;no real IO or default-mode change.
+
 ## Shared walker and dormant replay preparation complete — 2026-11-21
 
 [Explicitly approved preparation](SOURCE_POLICY_SELECTED_ELF_STREAMING_DESIGN.md)
