@@ -322,6 +322,9 @@ class Leases(unittest.TestCase):
                 # The source owner, not a caller flag, rejects expiry before IO.
             with self.assertRaisesRegex(D.S.Refusal, 'work-deadline'):
                 M._descriptor_preparation(expired)
+            with patch.object(R.E, 'Collector', side_effect=R.E.Refusal('elf-scratch-budget')):
+                with self.assertRaisesRegex(D.S.Refusal, 'elf-scratch-budget'):
+                    M._descriptor_preparation(D.Budget())
         self.assertEqual(3, len(result['identities']))
         self.clean()
         with patch.dict(M.os.environ, {}, clear=True):

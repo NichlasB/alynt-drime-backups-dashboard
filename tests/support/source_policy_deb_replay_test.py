@@ -331,13 +331,18 @@ class Checks(unittest.TestCase):
         self.assertFalse(calls & {'open', 'eval', 'exec', '__import__'})
         self.assertNotIn('__main__', source)
         manual = ast.parse((ROOT/'scripts/ci/source-policy-ppa-deb-static.py').read_text())
-        dormant = [node for node in manual.body if isinstance(node, ast.FunctionDef) and node.name == '_descriptor_preparation']
-        self.assertEqual(1, len(dormant))
-        manual.body.remove(dormant[0])
+        dormant = [node for node in manual.body if isinstance(node, ast.FunctionDef)
+                   and node.name in ('_descriptor_sources', '_descriptor_preparation', 'descriptor_main')]
+        self.assertEqual(3, len(dormant))
+        for node in dormant:
+            manual.body.remove(node)
         self.assertNotIn('source_policy_deb_replay', ast.unparse(manual))
         self.assertNotIn('_descriptor_preparation', ast.unparse(manual))
-        for name in ('.github/workflows/source-policy-ppa-deb-static.yml',
-                     'alynt-drime-backups-dashboard.php', 'scripts/ci/source_policy_deb_data.py'):
+        workflow = (ROOT/'.github/workflows/source-policy-ppa-deb-static.yml').read_text()
+        self.assertEqual(1, workflow.count('scripts/ci/source_policy_deb_replay.py'))
+        self.assertIn('--approved-descriptor-proof', workflow)
+        self.assertIn('--cleanup-descriptor-proof', workflow)
+        for name in ('alynt-drime-backups-dashboard.php', 'scripts/ci/source_policy_deb_data.py'):
             self.assertNotIn('source_policy_deb_replay', (ROOT/name).read_text())
 
     def test_semantic_controls_are_assertion_killed_not_setup_errors(self):

@@ -1,5 +1,14 @@
 # Fixed Read-Only Descriptor Source Admission and Replay Owner Integration Design
 
+## Owned ephemeral qualification separately approved — 2026-11-22
+
+The [current qualification record](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)
+owns the explicitly approved actual CI descriptor/source/replay and cleanup scope,
+including a fresh fixed DATA allowance. Earlier no-real-descriptor foundation
+restrictions below describe their historical scope,not this new approval.
+Source closure/validation/ordinary CI precede any owned dispatch. No candidate
+execution or production wiring;historical counters are not reset.
+
 ## Approved dormant lease/source-set foundation — 2026-11-22
 
 Latest explicit approval IMPLEMENTS this repository-only foundation and its

@@ -64,7 +64,9 @@ jobs:
         run: npm test
 
       - name: Run isolated descriptor API regressions
-        run: python3 -I -S -B tests/support/source_policy_deb_sources_test.py
+        run: |
+          python3 -I -S -B tests/support/source_policy_deb_sources_test.py
+          python3 -I -S -B tests/support/source_policy_descriptor_controller_test.py
 
       - name: Run admin interaction regressions
         run: npm run test:admin

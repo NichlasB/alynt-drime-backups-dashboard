@@ -1,5 +1,6 @@
 """ONE fixed PPA tuple: DATA inventory and owned cleanup, never installation."""
 import hashlib
+import errno
 import gc
 import json
 import os
@@ -7,6 +8,7 @@ from pathlib import Path
 import re
 import signal
 import stat
+import subprocess
 import ssl
 import sys
 import urllib.error
@@ -63,24 +65,165 @@ def marker(root):
     return json.dumps({'head': os.environ['EXPECTED_SHA'], 'root': root.name}, sort_keys=True).encode('ascii')
 
 
-def _descriptor_preparation(budget):
-    """Dormant ONLY: future trusted caller must first release acquisition writers.
-
-    No public mode selects this entry, and main()/inspect()/cleanup() are unchanged.
-    A future native integration also requires source-closure admission before imports.
-    """
+def _descriptor_sources(budget):
+    """Fixed private construction; trusted owner releases writers/transport first."""
     root = target(os.environ)
     expected = marker(root)
     S.require(type(budget) is Budget, 'descriptor-owner-budget')
     import source_policy_deb_sources as L
-    import source_policy_deb_replay as R
     import source_policy_elf_ranges as E
-    sources = L._SourceSet(str(root.parent), root.name, expected,
-                           tuple(filename(pin[0]) for pin in PINS), budget, E.Budget())
+    return L._SourceSet(str(root.parent), root.name, expected,
+                        tuple(filename(pin[0]) for pin in PINS), budget, E.Budget())
+
+
+def _descriptor_preparation(budget):
+    """Fixed manual DATA qualification only; never production or candidate execution."""
+    import source_policy_deb_replay as R
+    sources = _descriptor_sources(budget)
     try:
         return R._LeasePreparation(sources).run()
+    except R.E.Refusal as error:
+        raise S.Refusal(str(error)) from None
     finally:
         sources.close()
+
+
+def _fd_state():
+    """Bounded metadata of THIS process only; never emit numbers or paths."""
+    result = {}
+    with os.scandir('/proc/self/fd') as entries:
+        for entry in entries:
+            S.require(len(result) < 128 and entry.name.isascii() and entry.name.isdecimal(), 'descriptor-proc-bound')
+            info = os.fstat(int(entry.name))
+            result[int(entry.name)] = (info.st_dev, info.st_ino, info.st_mode)
+    return result
+
+
+def _children_empty():
+    with open('/proc/self/task/'+str(os.getpid())+'/children', 'rb') as source:
+        S.require(source.read(4097) == b'', 'descriptor-child-remaining')
+
+
+def _must_refuse(action, reason):
+    try:
+        action()
+    except S.Refusal as error:
+        if str(error) != reason:
+            raise  # Preserve the real finite prerequisite refusal,not a new layer.
+    else:
+        raise S.Refusal('descriptor-guard-unavailable')
+
+
+def _fixture_cleanup(root, budget=None):
+    """Only ONE fixed extra fixture, never broaden legacy compressed-file cleanup."""
+    if not root.exists() and not root.is_symlink():
+        return
+    info = root.lstat()
+    S.require(stat.S_ISDIR(info.st_mode) and not root.is_symlink() and root.resolve() == root
+              and info.st_uid == os.getuid() and stat.S_IMODE(info.st_mode) == 0o700, 'descriptor-fixture-root')
+    owner = root/'owner.json'
+    info = owner.lstat()
+    S.require(stat.S_ISREG(info.st_mode) and info.st_uid == os.getuid() and info.st_nlink == 1
+              and info.st_size <= 256, 'descriptor-fixture-marker')
+    with owner.open('rb') as source:
+        value = source.read(257)
+        if budget is not None:
+            budget.charge(len(value))
+        S.require(value == marker(root), 'descriptor-fixture-marker')
+    extra = root/'.descriptor-proof-extra'
+    if not extra.exists() and not extra.is_symlink():
+        return
+    info = extra.lstat()
+    S.require(info.st_uid == os.getuid(), 'descriptor-fixture-owner')
+    if stat.S_ISLNK(info.st_mode):
+        S.require(os.readlink(extra) == filename(PINS[0][0]), 'descriptor-fixture-link')
+    else:
+        first = (root/filename(PINS[0][0])).lstat()
+        S.require(stat.S_ISREG(info.st_mode) and ((info.st_size == 0 and info.st_nlink == 1)
+                  or (info.st_dev, info.st_ino, info.st_nlink, info.st_size)
+                  == (first.st_dev, first.st_ino, 2, PINS[0][1])), 'descriptor-fixture-shape')
+    extra.unlink()
+
+
+def _descriptor_checks(root, budget):
+    """Real owned guards, no syscall substitution; failures never grant replay."""
+    baseline, groups = _fd_state(), []
+    previous_mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
+    sources = _descriptor_sources(budget)
+    try:
+        S.require(len(_fd_state()) == len(baseline)+6, 'descriptor-live-count')
+        S.require(len(sources.seal()) == 3, 'descriptor-all-pins')
+        groups.append('six-leases-and-all-pins')
+        for fd, info in sources._sources:
+            S.require(sources._api.flags(fd) == os.O_RDONLY and not os.get_inheritable(fd), 'descriptor-access')
+            try:
+                os.write(fd, b'X')
+            except OSError as error:
+                S.require(error.errno == errno.EBADF, 'descriptor-write-error')
+            else:
+                raise S.Refusal('descriptor-write-not-denied')
+        groups.append('readonly-write-denial')
+        child = "import errno,json,os,sys\nfor fd in json.loads(sys.argv[1]):\n try: os.fstat(fd)\n except OSError as e:\n  if e.errno!=errno.EBADF: sys.exit(2)\n else: sys.exit(3)\nprint('closed')"
+        result = subprocess.run([sys.executable, '-I', '-S', '-B', '-c', child,
+                                 json.dumps([item[1] for item in sources._owned if item[0] == 'fd'])],
+                                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5,
+                                close_fds=True, pass_fds=(), preexec_fn=A.decoder_limit, env=A.decoder_environment())
+        S.require(result.returncode == 0 and result.stdout == b'closed\n', 'descriptor-child-inheritance')
+        budget.charge(len(result.stdout))
+        groups.append('trusted-child-no-inheritance')
+        for unused in range(3):
+            sources.check(True)
+        groups.append('repeat-directory-rewind')
+        cursor = sources.cursor(0)
+    finally:
+        sources.close()
+    _must_refuse(cursor.tell, 'lease-retired')
+    groups.append('retired-cursor')
+    S.require(_fd_state() == baseline, 'descriptor-close-reconciliation')
+    extra, first = root/'.descriptor-proof-extra', root/filename(PINS[0][0])
+    try:
+        with extra.open('xb'):
+            pass
+        _must_refuse(lambda: _descriptor_sources(budget), 'lease-membership-bound')
+        groups.append('extra-membership')
+    finally:
+        _fixture_cleanup(root, budget)
+    sources = _descriptor_sources(budget)
+    try:
+        os.link(first, extra)
+        fd, original = sources._sources[0]
+        _must_refuse(lambda: sources._bound(filename(PINS[0][0]), fd, original), 'lease-file-changed')
+        _must_refuse(sources.check, 'lease-root-changed')
+        groups.append('hardlink-fingerprint')
+    finally:
+        sources.close()
+        _fixture_cleanup(root, budget)
+    original_mode = stat.S_IMODE(first.lstat().st_mode)
+    try:
+        os.chmod(first, 0o622, follow_symlinks=False)
+        _must_refuse(lambda: _descriptor_sources(budget), 'lease-file')
+        groups.append('writable-mode-refusal')
+    finally:
+        os.chmod(first, original_mode, follow_symlinks=False)
+    sources = _descriptor_sources(budget)
+    try:
+        os.symlink(filename(PINS[0][0]), extra)
+        try:
+            sources._open(extra.name, sources._flags, sources._root)
+        except OSError as error:
+            S.require(error.errno == errno.ELOOP, 'descriptor-nofollow-error')
+        else:
+            raise S.Refusal('descriptor-symlink-not-denied')
+        groups.append('native-nofollow')
+    finally:
+        sources.close()
+        _fixture_cleanup(root, budget)
+    S.require(signal.pthread_sigmask(signal.SIG_BLOCK, set()) == previous_mask, 'descriptor-mask-reconciliation')
+    S.require(_fd_state() == baseline, 'descriptor-guard-reconciliation')
+    _children_empty()
+    groups.append('mask-fd-and-child-reconciliation')
+    budget.charge(0)
+    return groups
 
 
 def cleanup(root):
@@ -232,5 +375,99 @@ def main():
     return 0 if receipt['static_inventory_complete'] else 1
 
 
+def descriptor_main():
+    """ONE exact-job owned DATA-only qualification; legacy main stays separate."""
+    root = target(os.environ)
+    def expired(signum, frame):
+        raise S.Refusal('job-deadline')
+    signal.signal(signal.SIGALRM, expired)
+    cleanup_only = sys.argv[1:] == ['--cleanup-descriptor-proof']
+    S.require(cleanup_only or sys.argv[1:] == ['--approved-descriptor-proof'], 'descriptor-entry-mode')
+    signal.alarm(30 if cleanup_only else 540)
+    if cleanup_only:
+        _fixture_cleanup(root)
+        cleanup(root)
+        signal.alarm(0)
+        print('{"owned_deb_remaining":0,"owned_extra_remaining":0}')
+        return 0
+    receipt = {'format': 'ADBPPADESCRIPTOR1', 'descriptor_proof_complete': False,
+               'static_inventory_complete': False, 'qualified': False, 'executed': False, 'extracted': False}
+    created, complete, baseline, inventory = False, False, None, None
+    try:
+        budget = Budget()
+        receipt['stage'] = 'preflight'
+        baseline = _fd_state()
+        _children_empty()
+        receipt['preflight'] = preflight()  # Original 40/24MiB caps and fixed codecs.
+        S.require(_fd_state() == baseline, 'descriptor-preflight-reconciliation')
+        S.require(not root.exists() and not root.is_symlink(), 'preexisting-owned-root')
+        root.mkdir(mode=0o700)
+        created = True
+        with (root/'owner.json').open('xb') as owner:
+            data = marker(root)
+            budget.charge(len(data))
+            owner.write(data)
+        # Parent/type/access/capability admission before any PPA acquisition.
+        receipt['stage'] = 'parent-admission'
+        _must_refuse(lambda: _descriptor_sources(budget), 'lease-membership')
+        S.require(_fd_state() == baseline, 'descriptor-parent-reconciliation')
+        receipt['stage'] = 'acquisition'
+        identities = []
+        acquire(root, budget, identities)  # Fixed pins,TLS,no redirect,all writers/transport released.
+        receipt['transport_released'] = True
+        receipt['stage'] = 'owned-descriptor-guards'
+        groups = ['parent-admission-and-missing-membership', *_descriptor_checks(root, budget)]
+        receipt['stage'] = 'fixed-replay'
+        inventory = _descriptor_preparation(budget)
+        S.require(inventory['prepared_only'] is True and inventory['qualified'] is False
+                  and inventory['identities'] == identities, 'descriptor-replay-identity')
+        _children_empty()
+        S.require(_fd_state() == baseline, 'descriptor-replay-reconciliation')
+        groups.append('fixed-artifact-replay-and-reconciliation')
+        receipt['groups'] = groups
+        receipt['work_bytes'] = budget.total
+        receipt['reason'] = 'owned-source-replay-only-no-runtime-admission'
+        complete = True
+    except S.Refusal as error:
+        receipt['reason'] = str(error)
+    except urllib.error.HTTPError as error:
+        try:
+            receipt.update(http_refusal(error))
+        finally:
+            error.close()
+    except Exception as error:
+        receipt['reason'], receipt['error_class'] = 'descriptor-proof-error', type(error).__name__
+    finally:
+        signal.alarm(30)
+        try:
+            if created:
+                _fixture_cleanup(root)
+                cleanup(root)
+            _children_empty()
+            S.require(baseline is not None and _fd_state() == baseline, 'descriptor-final-reconciliation')
+            receipt['owned_deb_remaining'] = 0 if not root.exists() and not root.is_symlink() else 'Unknown'
+            S.require(receipt['owned_deb_remaining'] == 0, 'descriptor-files-remaining')
+            receipt['owned_extra_remaining'] = receipt['owned_descriptor_delta'] = receipt['owned_children_remaining'] = 0
+        except Exception as error:
+            complete = False
+            receipt['reason'], receipt['cleanup_error_class'] = 'descriptor-cleanup-unknown', type(error).__name__
+            receipt['owned_deb_remaining'] = receipt['owned_extra_remaining'] = receipt['owned_descriptor_delta'] = receipt['owned_children_remaining'] = 'Unknown'
+        finally:
+            signal.alarm(0)
+    if complete:
+        try:
+            budget.charge(0)  # Cleanup cannot extend the original work deadline.
+            receipt['descriptor_proof_complete'] = True
+            receipt['inventory'] = inventory  # AFTER owned file/process/FD cleanup.
+            receipt['stage'] = 'complete'
+        except S.Refusal as error:
+            complete = False
+            receipt['reason'] = str(error)
+    output = json.dumps(receipt, sort_keys=True)
+    S.require(len(output.encode('ascii')) <= 65536, 'diagnostic-bound')
+    print(output)
+    return 0 if complete else 1
+
+
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(descriptor_main() if sys.argv[1:] in (['--approved-descriptor-proof'], ['--cleanup-descriptor-proof']) else main())
