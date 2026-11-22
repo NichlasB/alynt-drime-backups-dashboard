@@ -1,5 +1,13 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Dormant source-set implementation,not candidate admission — 2026-11-22
+
+[Approved foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) adds
+fixed leases/replay/teardown with32 isolated API groups/eight semantic controls.
+Pins,trust,caps and active path stay unchanged;no actual artifact/descriptor/fit
+or HTTP claim. Next gated owned ephemeral-CI source/replay qualification/cleanup,
+source closure and any NEW artifact allowance;3/3/native43/product4/10/wiring remain.
+
 ## Descriptor ownership contract selected,not candidate fit — 2026-11-22
 
 [Approved design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) preserves

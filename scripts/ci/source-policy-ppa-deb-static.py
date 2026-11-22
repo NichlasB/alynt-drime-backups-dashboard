@@ -63,6 +63,25 @@ def marker(root):
     return json.dumps({'head': os.environ['EXPECTED_SHA'], 'root': root.name}, sort_keys=True).encode('ascii')
 
 
+def _descriptor_preparation():
+    """Dormant ONLY: future trusted caller must first release acquisition writers.
+
+    No public mode selects this entry, and main()/inspect()/cleanup() are unchanged.
+    A future native integration also requires source-closure admission before imports.
+    """
+    root = target(os.environ)
+    expected = marker(root)
+    import source_policy_deb_sources as L
+    import source_policy_deb_replay as R
+    import source_policy_elf_ranges as E
+    sources = L._SourceSet(str(root.parent), root.name, expected,
+                           tuple(filename(pin[0]) for pin in PINS), Budget(), E.Budget())
+    try:
+        return R._LeasePreparation(sources).run()
+    finally:
+        sources.close()
+
+
 def cleanup(root):
     if not root.exists() and not root.is_symlink():
         return 0

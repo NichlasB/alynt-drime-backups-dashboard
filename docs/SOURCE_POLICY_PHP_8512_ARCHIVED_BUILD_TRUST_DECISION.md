@@ -1,5 +1,13 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Dormant descriptor foundation,not archive retry — 2026-11-22
+
+[Fixed lease/source-set implementation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+passes32 isolated API groups/eight controls,with original pins/trust/budgets.
+No actual descriptor/acquisition/native or physical qualification. Next gated
+owned ephemeral-CI source/replay qualification/cleanup and exact source closure,
+with any NEW artifact allowance;3/3/native43/product4/10/wiring unchanged.
+
 ## Descriptor lifecycle design,not archive retry — 2026-11-22
 
 [Fixed read-only source-set design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

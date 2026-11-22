@@ -1,5 +1,13 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Dormant lease/source-set foundation;loader unchanged — 2026-11-22
+
+[Approved isolated foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+passes32 API groups/eight controls,not physical source/resource/HTTP qualification.
+No actual descriptors/acquisition/native operations or loader/wiring change.
+Next gated owned ephemeral-CI descriptor/replay qualification/cleanup with source
+closure and any NEW artifact allowance;3/3/native43/product4/10 unchanged.
+
 ## Descriptor admission design;loader unchanged — 2026-11-22
 
 [Fixed source lifecycle design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

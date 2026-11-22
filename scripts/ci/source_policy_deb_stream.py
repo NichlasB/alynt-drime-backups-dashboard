@@ -47,7 +47,8 @@ class Decoder:
         self.source, self.budget, self.pending, self.ended = source, budget, b'', False
         self.selector = None
         self.process = subprocess.Popen(list(COMMANDS[suffix]), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                        stderr=subprocess.DEVNULL, preexec_fn=A.decoder_limit, env=A.decoder_environment())
+                                        stderr=subprocess.DEVNULL, preexec_fn=A.decoder_limit, env=A.decoder_environment(),
+                                        close_fds=True, pass_fds=())
         try:
             self.selector = selectors.DefaultSelector()
             for pipe, event in ((self.process.stdin, selectors.EVENT_WRITE), (self.process.stdout, selectors.EVENT_READ)):

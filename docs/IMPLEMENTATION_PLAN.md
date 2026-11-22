@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed descriptor lease/replay source-set foundation — 2026-11-22
+
+[Approved dormant implementation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+adds fixed least-access leases,pre/post/final provenance,signal-safe bookkeeping
+and close-before-publication with32 isolated API groups/eight semantic controls.
+Active manual path unchanged;no actual descriptors/acquisition/native/wiring.
+Implementation-plan advancement is preparation,not physical/HTTP qualification
+or a product-milestone increment:3/3 exhausted,native43/product4/10 unchanged.
+Next gated:Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and
+Cleanup Proof,including exact source-closure integration and NEW artifact allowance
+if needed. Actual publication CI belongs to the scoped toolkit closeout.
+
 ## Fixed descriptor source/replay integration DESIGN complete — 2026-11-22
 
 [Approved design-only contract](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

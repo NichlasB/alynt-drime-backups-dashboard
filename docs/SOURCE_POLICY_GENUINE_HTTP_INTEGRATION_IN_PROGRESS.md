@@ -1,5 +1,13 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Dormant source leases;HTTP qualification unchanged — 2026-11-22
+
+[Approved foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) uses
+isolated API models only:32 groups/eight controls,not actual descriptor,physical
+fit or HTTP proof. Active manual path/wiring unchanged. Next gated owned ephemeral
+CI source/replay qualification/cleanup and source closure,with NEW artifact
+allowance if needed;3/3 exhausted/native43/product4/10 unchanged.
+
 ## Descriptor-source DESIGN;HTTP status unchanged — 2026-11-22
 
 [Source-set/replay-owner design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

@@ -2,7 +2,7 @@
 
 No files, acquisition or candidate execution. The fixed catalog is checked before
 nested parsing. This adapter does not establish on-disk ownership or process fit.
-The manual runner still uses its legacy path and does not import this module.
+The active manual path remains legacy; its private dormant entry is unselected.
 """
 import hashlib
 import json
@@ -78,6 +78,18 @@ class _Preparation:
         self._collectors, self._selected, self._roles = {}, {}, {}
         self._primary_entries = 0
 
+    def _source(self, packet, pin):
+        return _MemorySource(packet)
+
+    def _identity(self, packet, pin):
+        return _identity(packet, pin, self._budget)
+
+    def _checked_scan(self, source, member, package, category, primary):
+        return self._scan(source, member, package, category, primary)
+
+    def _profile(self):
+        return 'immutable-input-bytes-only'
+
     def _scan(self, source, member, package, category, primary):
         name, start, length = member
         raw = D.Slice(source, start, length, self._budget)
@@ -145,15 +157,15 @@ class _Preparation:
 
     def _package(self, packet, pin):
         package = pin[0]
-        source = _MemorySource(packet)
+        source = self._source(packet, pin)
         members = D.ar_members(source, self._budget)
-        control_facts, control = self._scan(source, members[0], package, 'control', True)
-        primary, unused = self._scan(source, members[1], package, 'data', True)
+        control_facts, control = self._checked_scan(source, members[0], package, 'control', True)
+        primary, unused = self._checked_scan(source, members[1], package, 'data', True)
         passes = 1
         while any(c.phase != 'done' for c in self._collectors.values()):
             D.S.require(passes < 3, 'replay-pass-bound')
-            _identity(packet, pin, self._budget)
-            replay, unused = self._scan(source, members[1], package, 'data', False)
+            self._identity(packet, pin)
+            replay, unused = self._checked_scan(source, members[1], package, 'data', False)
             _same_transcript(primary, replay)
             passes += 1
         # These remain private until every package and final barrier succeeds.
@@ -180,7 +192,7 @@ class _Preparation:
         self._budget.charge(0)
         D.S.require(set(self._roles) == {'cli', 'mysqlnd', 'mysqli'}, 'selected-roles-missing')
         D.S.require(self._scratch.usage[0] == 0, 'replay-scratch-retained')
-        result = {'prepared_only': True, 'source_profile': 'immutable-input-bytes-only',
+        result = {'prepared_only': True, 'source_profile': self._profile(),
                   'static_inventory_complete': False, 'qualified': False, 'executed': False, 'extracted': False,
                   'dependency_closure_verified': False, 'identities': identities, 'packages': packages,
                   'roles': self._roles, 'primary_entries': self._primary_entries,
@@ -205,3 +217,48 @@ def prepare(packets):
         return owner.run()
     except E.Refusal as error:
         raise D.S.Refusal(str(error)) from None
+
+
+class _LeasePreparation(_Preparation):
+    """Private exact lease adapter; callers cannot substitute readers or pins."""
+
+    def __init__(self, sources):
+        import source_policy_deb_sources as L
+        D.S.require(type(sources) is L._SourceSet and not sources._closed, 'replay-source-owner')
+        super().__init__((0, 1, 2), sources._pins, sources._budget, sources._scratch)
+        self._sources = sources
+
+    def _source(self, index, pin):
+        self._sources.check()
+        return self._sources.cursor(index)
+
+    def _identity(self, index, pin):
+        # _checked_scan owns the required hashes, including replay scans.
+        self._sources.check()
+
+    def _profile(self):
+        return 'fixed-readonly-descriptor-leases-preparation-only'
+
+    def _checked_scan(self, source, member, package, category, primary):
+        index = next(i for i, pin in enumerate(self._pins) if pin[0] == package)
+        self._sources.check(True)
+        self._sources.identity(index)
+        result = self._scan(source, member, package, category, primary)
+        self._sources.identity(index)
+        self._sources.check(True)
+        return result
+
+    def run(self):
+        try:
+            identities = self._sources.seal()  # All three before ANY AR/parser.
+            packages = [self._package(index, pin) for index, pin in enumerate(self._pins)]
+            D.S.require(self._sources.seal() == identities, 'replay-final-source-seal')
+        finally:
+            try:
+                for collector in self._collectors.values():
+                    collector.close()
+                self._collectors.clear()
+            finally:
+                self._sources.close()
+        # No return from the try: every close/restore must succeed first.
+        return self._commit(identities, packages)

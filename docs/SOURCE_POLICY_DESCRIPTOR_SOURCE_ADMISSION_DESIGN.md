@@ -1,5 +1,109 @@
 # Fixed Read-Only Descriptor Source Admission and Replay Owner Integration Design
 
+## Approved dormant lease/source-set foundation — 2026-11-22
+
+Latest explicit approval IMPLEMENTS this repository-only foundation and its
+validation/publication;the original design-only approval below is historical.
+Review/restore baseline f8ddd16e615004d65aa9eb4ef88cbd469c9c26a9,clean/synced
+master. R2 dormant code/API models within the approved file-operation contract;
+NO actual source descriptors,acquisition,filesystem fixtures,native/manual proof,
+installation,site/storage operations or production wiring. Existing3/3 exhausted,
+native43/product4/10 unchanged. Toolkit baseline e39a768ddf6979ea2f0c5e77abf4ea53951e6832.
+
+### Implementation and active-path preservation
+
+- New source_policy_deb_sources.py owns the fixed parent/root/marker/three source
+  leases,one bounded iterator and pread cursors. The fixed native API is dormant:
+  Linux/main-thread/UID/capability admission,no-follow root-relative opens,
+  pre-stat/fstat equality,regular single-link owner/mode/size guards,O_RDONLY=0
+  access checks and noninheritability. It has no CLI,public reader factory,
+  caller pins,write API or caller-ready flags. Only the existing manual owner's
+  unselected private _descriptor_preparation derives arguments via target(),
+  marker() and filename();the job policy is not copied.
+- Active main,inspect,acquire,download and filesystem cleanup remain unchanged.
+  The future trusted caller MUST release acquisition/writers before selecting
+  the dormant entry and admit every loaded source path first. This foundation
+  does not establish that future callgraph/source closure or grant a new mode.
+  New helper imports occur only inside that unselected private entry.
+- A private exact _SourceSet adapter reuses the unchanged walker,ELF collector,
+  decoder,scratch and original global work/entry/deadline budgets. Public
+  prepare(tuple-of-bytes) retains its immutable-input profile and golden facts.
+  All three hashes precede ANY AR/parser;per-stream pre/post hashes,metadata and
+  full namespace checks plus final all-source seal precede teardown. Primary
+  canonical inventory only;maximum3 data passes;no per-pass accounting reset.
+- Logical seek/pread cursors never expose fileno/write/dup. Short reads make
+  bounded progress;early physical EOF and a byte beyond the pin refuse. File
+  fingerprints exclude atime;parent child timestamps are not frozen. Checks
+  detect observed changes,not hostile-host races or an atomic source snapshot.
+- Open/iterator bookkeeping is allocated BEFORE the acquisition syscall and
+  registered before exact prior signal-mask restoration. SIGALRM/SIGINT are
+  deferred only across syscall/bookkeeping,no handlers,timers or threads added.
+  Cursors invalidate before reverse teardown;normal os.close returns None.
+  Ambiguous close is retired exactly once,no retry on a potentially reused FD;
+  other owned handles are attempted within30seconds. Iterator/restore/close
+  failure or remaining handles makes cleanup Unknown and forbids publication.
+- Decoder Popen now explicitly sets close_fds=True/pass_fds=(),preserving its
+  prior Linux default. Fake API tests check these arguments,not actual inheritance.
+  Output is preparation-only,static_inventory_complete/qualified/extracted/
+  executed/dependency_closure_verified remain False. Commit occurs AFTER final
+  seal,collector/decoder/source release and original role/scratch/output/deadline
+  gates;there is no return-inside-finally publication of owned-source facts.
+
+### Isolated evidence and review disposition
+
+32 in-process Python API groups pass without skips,including eight permanent
+assertion-killed semantic controls (membership,binding,read-only access,content
+hash,physical EOF,all-hashes-before-parser,close-before-commit,and always-unavailable
+owner). Non-vacuous fake-backed successful admission/read/replay returns exact
+role/package/inventory facts;31-byte short-read replay also succeeds. Models
+cover descriptor0,wrong modes/types/UID/link/binding,extra/missing member,marker
+mutation,pre/post/final hash changes,read bounds,interruption/registration,
+ambiguous iterator/FD/mask cleanup,reverse teardown,deadline/scratch refusal,
+unsupported profile and explicit decoder inheritance policy. A cleanup deadline
+test truthfully retains five VIRTUAL handles/Unknown,not fabricated zero.
+
+The success model observes six long-lived leases plus one iterator at peak,
+26 full package hashes,10 streams,22 full namespace/marker checks plus one
+pre-open directory-only membership check (23 iterations total). Work equality
+against immutable replay includes every added hash and marker byte,no double
+charging of Slice reads. The earlier22 full-check/5632 marker-byte planning is
+unchanged;the extra initial directory-only iteration is explicit metadata work.
+This is not actual FD/kernel/permission/signal/inheritance/40+24MiB-fit evidence.
+
+Canonical Feature Light:source-scoped9 source/test/ordinary-CI files plus owning
+records and directly affected helpers,baseline above. Two implementation hazards
+found/fixed:post-open bookkeeping allocation risk and iterator-close uncertainty
+not being terminal. Registration is now preallocated;every retirement exception
+marks uncertainty. Existing import-absence tests now permit ONLY the explicitly
+approved dormant private entry and still reject active/main/module-level wiring.
+No public API,WordPress UI/SQL/schema/runtime behavior or compatibility change.
+Feature Bloat Phase1 helper measurement:0 changed PHP/JS/CSS files,0 oversized;
+Python owner/API/cursor responsibilities reviewed directly,not misrepresented as
+helper coverage. No duplicate runner or speculative split;no Phase2 cleanup needed.
+UI workflow N/A. Final focused Feature Security:least access,fixed provenance,
+path/identity/resource/error/cleanup/publication boundaries reviewed;no unresolved
+source-scoped finding. No refreshed whole-plugin DS3/Database/release-readiness row.
+Final review also caught profile relabeling after the output-size gate;the actual
+fixed profile is now built INSIDE _commit. A discriminating65536/65537-byte API
+regression proves the boundary with the descriptor profile,not a shorter label.
+
+Safety review rejected adding a new PHP proc_open/pipe wrapper under this scope.
+It was not applied. Tests instead run directly in the existing trusted Python
+interpreter via a separate ordinary-CI step with the native API replaced by RAM
+fakes;no new PHP bridge or source-descriptor experiment. Existing full-suite
+wrappers are unchanged. Local/actual exact-head CI totals and publication links
+belong to the toolkit's separately scoped closeout,not self-referential claims.
+
+### Exact next gate
+
+Recommend approving Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification
+and Cleanup Proof:source-closure/owner integration,actual owned filesystem/FD/
+namespace/inheritance/teardown and unchanged-cap resource qualification,with a
+NEW explicit DATA-only allowance if real pinned artifacts are acquired. Existing
+3/3 remains exhausted;no proof dispatch,acquisition or default/manual mode switch
+is authorized by this foundation. Candidate execution and production wiring stay
+disabled. Physical/API/HTTP provenance and historical proof limits remain distinct.
+
 ## Authority and baseline — 2026-11-22
 
 Explicit approval is DESIGN ONLY,including validation,commit,push and exact-head

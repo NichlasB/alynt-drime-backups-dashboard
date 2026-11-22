@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Explicit dormant descriptor foundation implemented — 2026-11-22
+
+[Approved lease/replay foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+passes32 isolated API groups/eight controls;active path unchanged,no physical
+source/HTTP proof. Next gated owned ephemeral-CI descriptor/replay qualification
+and cleanup with exact source closure and any NEW artifact allowance. Historical
+3/3 exhausted/native43/product4/10 and disabled wiring remain unchanged.
+
 ## Explicit design-only descriptor source contract — 2026-11-22
 
 [Approved design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md) advances

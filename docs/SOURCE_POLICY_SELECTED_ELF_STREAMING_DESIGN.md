@@ -1,5 +1,14 @@
 # Selected-ELF Range Inventory Feasibility and Memory-Proportionality Design
 
+## Dormant descriptor/replay owner implemented — 2026-11-22
+
+[Lease/source-set foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+now reuses the existing walker/collector with isolated API models only:32 groups,
+eight semantic controls,all-hash/namespace/close-first barriers and unchanged public
+immutable adapter. No actual descriptor,artifact/physical/HTTP or wiring grant.
+Next gated owned ephemeral-CI source/replay qualification and cleanup,including
+source closure and any NEW artifact allowance;3/3/native43/product4/10 unchanged.
+
 ## Descriptor admission/owner integration design selected — 2026-11-22
 
 [Design-only source-set contract](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

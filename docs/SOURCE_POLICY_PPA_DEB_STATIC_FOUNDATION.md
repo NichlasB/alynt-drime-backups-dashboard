@@ -1,5 +1,13 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Dormant descriptor/replay foundation implemented — 2026-11-22
+
+[Approved source-set foundation](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)
+passes32 isolated API groups/eight controls;legacy manual selection and file
+cleanup unchanged. No actual source/physical proof,acquisition or native retry.
+Next gated owned ephemeral-CI descriptor/replay qualification/cleanup including
+source closure and any NEW artifact allowance;3/3/native43/product4/10/wiring remain.
+
 ## Descriptor-source admission DESIGN complete — 2026-11-22
 
 [Fixed source-set design](SOURCE_POLICY_DESCRIPTOR_SOURCE_ADMISSION_DESIGN.md)

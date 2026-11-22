@@ -366,7 +366,13 @@ class Checks(unittest.TestCase):
         self.assertFalse(any(isinstance(node, ast.ImportFrom) for node in ast.walk(tree)))
         calls = {node.func.id for node in ast.walk(tree) if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)}
         self.assertFalse(calls & {'open', 'eval', 'exec', '__import__', 'compile'})
-        for relative in ('scripts/ci/source_policy_deb_data.py', 'scripts/ci/source-policy-ppa-deb-static.py',
+        manual = ast.parse((ROOT/'scripts/ci/source-policy-ppa-deb-static.py').read_text())
+        dormant = [node for node in manual.body if isinstance(node, ast.FunctionDef) and node.name == '_descriptor_preparation']
+        self.assertEqual(1, len(dormant))
+        manual.body.remove(dormant[0])
+        self.assertNotIn('source_policy_elf_ranges', ast.unparse(manual))
+        self.assertNotIn('_descriptor_preparation', ast.unparse(manual))
+        for relative in ('scripts/ci/source_policy_deb_data.py',
                          '.github/workflows/source-policy-ppa-deb-static.yml', 'alynt-drime-backups-dashboard.php'):
             self.assertNotIn('source_policy_elf_ranges', (ROOT/relative).read_text())
 
