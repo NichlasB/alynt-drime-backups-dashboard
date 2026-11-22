@@ -20,6 +20,10 @@ native43/product4/10 unchanged. Toolkit baseline e39a768ddf6979ea2f0c5e77abf4ea5
   caller pins,write API or caller-ready flags. Only the existing manual owner's
   unselected private _descriptor_preparation derives arguments via target(),
   marker() and filename();the job policy is not copied.
+  Its only internal argument is the exact existing acquisition-owner Budget,
+  reused without resetting charges/deadline;foreign accounting objects refuse.
+  Already-expired work refuses before profile/filesystem API calls. This is not
+  a public source/ready API or authorization token.
 - Active main,inspect,acquire,download and filesystem cleanup remain unchanged.
   The future trusted caller MUST release acquisition/writers before selecting
   the dormant entry and admit every loaded source path first. This foundation
@@ -86,6 +90,8 @@ source-scoped finding. No refreshed whole-plugin DS3/Database/release-readiness 
 Final review also caught profile relabeling after the output-size gate;the actual
 fixed profile is now built INSIDE _commit. A discriminating65536/65537-byte API
 regression proves the boundary with the descriptor profile,not a shorter label.
+The private accounting handoff also preserves acquisition work/deadline;isolated
+tests seed prior charges and verify the same object/result total and deadline.
 
 Safety review rejected adding a new PHP proc_open/pipe wrapper under this scope.
 It was not applied. Tests instead run directly in the existing trusted Python

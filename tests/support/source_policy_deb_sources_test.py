@@ -306,14 +306,28 @@ class Leases(unittest.TestCase):
         marker = json.dumps({'head': 'a'*40, 'root': 'adb-ppa-deb-1'}, sort_keys=True).encode('ascii')
         self.api.bytes['owner.json'] = marker
         self.api.infos['owner.json'].st_size = len(marker)
+        budget = D.Budget()
+        budget.charge(123)
+        deadline = budget.deadline
         with patch.dict(M.os.environ, env, clear=True), patch.object(M, 'Path', FakePath):
-            result = M._descriptor_preparation()
+            result = M._descriptor_preparation(budget)
+            self.assertEqual(deadline, budget.deadline)
+            self.assertEqual(result['work_bytes'], budget.total)
+            self.assertGreater(budget.total, 123)
+            with patch.object(L, '_SourceSet', side_effect=AssertionError('IO reached')):
+                with self.assertRaisesRegex(D.S.Refusal, 'owner-budget'):
+                    M._descriptor_preparation(Mock())
+                expired = D.Budget()
+                expired.deadline = 0
+                # The source owner, not a caller flag, rejects expiry before IO.
+            with self.assertRaisesRegex(D.S.Refusal, 'work-deadline'):
+                M._descriptor_preparation(expired)
         self.assertEqual(3, len(result['identities']))
         self.clean()
         with patch.dict(M.os.environ, {}, clear=True):
             count = len(self.api.events)
             with self.assertRaisesRegex(D.S.Refusal, 'exact-job'):
-                M._descriptor_preparation()
+                M._descriptor_preparation(budget)
             self.assertEqual(count, len(self.api.events))
         tree = ast.parse((ROOT/'scripts/ci/source-policy-ppa-deb-static.py').read_text())
         main = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == 'main')

@@ -118,6 +118,7 @@ class _SourceSet:
         self._parent_path, self._basename, self._marker_bytes = parent, basename, marker
         self._names, self._pins = names, D.PINS
         try:
+            self._budget.charge(0)
             self._uid, self._flags, directory = self._api.profile()
             D.S.require(type(parent) is str and parent.startswith('/') and type(basename) is str
                         and basename.startswith('adb-ppa-deb-') and basename[12:].isdigit()
