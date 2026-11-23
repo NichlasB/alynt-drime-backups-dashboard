@@ -1,5 +1,14 @@
 # Genuine-HTTP Owned Integration and Qualification Record
 
+## Private-prefix launch admission design;HTTP still gated — 2026-11-23
+
+[Current repository-only design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md)
+maps setup/initializer/server/recovery and prerequisite consumers to ONE future
+absolute launch description,not PATH substitution or short host-module lookup.
+No consumers/wiring change now. Next gated read-only host-provider/profile/launch
+feasibility audit;candidate/module/ABI and actual HTTP proof remain open. No
+acquisition/materialization/native/SQL authority;3/3,new1/1,native43/product4/10 remain.
+
 ## Source/replay fit now proved;HTTP still gated — 2026-11-22
 
 [Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e

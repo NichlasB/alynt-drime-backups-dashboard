@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Private runtime launch/recovery design — 2026-11-23
+
+[Dependency/private-prefix design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md)
+requires same admitted executable/modules/config across initializer,setup,server
+and recovery;no current loader/controller/runtime edit or new candidate cohort.
+Next gated read-only provider/profile/launch feasibility audit before any prefix
+materialization or candidate startup. HTTP/SQL proof remains gated;historical3/3,
+new1/1,native43/product4/10 and production wiring unchanged.
+
 ## Owned source/replay proof passed;loader unchanged — 2026-11-22
 
 [Actual45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e

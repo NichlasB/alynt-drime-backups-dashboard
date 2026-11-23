@@ -1,5 +1,14 @@
 # Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and Cleanup Proof
 
+## Next admission design selected — 2026-11-23
+
+[Dependency/private-prefix design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md)
+uses the exact successful receipt below without transferring it to runtime/provider/
+ABI eligibility. Only repository design/validation/publication is approved now.
+Next gated read-only existing-runner provider/profile/launch feasibility audit;
+no new acquisition,materialization,candidate/native run or wiring allowance.
+Both source-fit/cleanup success and exhausted historical/new counters stay intact.
+
 ## Authority,baseline and status — 2026-11-22
 
 Explicit approval covers owned ephemeral-CI source/descriptor/replay qualification,

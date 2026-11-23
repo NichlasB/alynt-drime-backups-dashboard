@@ -1,5 +1,14 @@
 # Candidate-Bound PPA DEB Static Admission Foundation
 
+## Dependency/private-prefix design,not a fresh attempt — 2026-11-23
+
+[Current design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md) preserves
+the qualified source cohort and selects fixed three-leaf prefix/launch/cleanup
+requirements only. Provider names are not closure;host availability and runtime
+remain unknown. Next gated read-only provider/profile/launch feasibility audit,
+not another DATA/native dispatch or materialization. Old3/3,new1/1 consumed;
+native43/product4/10 and disabled production wiring remain unchanged.
+
 ## Fresh owned descriptor/replay proof passed — 2026-11-22
 
 [Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e

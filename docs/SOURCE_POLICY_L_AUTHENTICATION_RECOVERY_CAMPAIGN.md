@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Repository-only dependency/private-prefix design — 2026-11-23
+
+[Current design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md) advances
+provider/PHP compatibility and one fixed prefix/launch/cleanup contract,not another
+native or acquisition attempt. No full-closure/ABI/trust waiver,materialization,
+candidate execution or wiring. Next gated ONE read-only existing-runner provider/
+profile/launch feasibility audit. Historical3/3,new1/1 consumed,native43/product4/10
+remain;the successful source-fit proof is retained without runtime promotion.
+
 ## Owned source/replay fit blocker closed — 2026-11-22
 
 [Actual45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e

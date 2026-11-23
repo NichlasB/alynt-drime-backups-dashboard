@@ -1,5 +1,14 @@
 # Resource-Compatible Exact PHP 8.5.12 Artifact Selection Decision
 
+## Dependency/private-prefix admission design — 2026-11-23
+
+[Approved repository-only design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md)
+keeps the exact three member identities and pins;no install/rootfs/host-lib copy,
+implicit module expansion,PATH shim or loader workaround. Actual host providers,
+PHP extension/API closure and runtime remain unqualified. Next gated read-only
+existing-runner provider/profile/launch feasibility audit,no candidate loading,
+acquisition or materialization.3/3,new1/1,native43/product4/10/wiring unchanged.
+
 ## Source/replay memory fit passed;runtime admission pending — 2026-11-22
 
 [Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e

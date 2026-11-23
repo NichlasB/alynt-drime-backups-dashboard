@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PPA dependency/private-prefix admission design — 2026-11-23
+
+[Repository-only design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md)
+separates artifact,host-provider/PHP compatibility and launch/effect authority.
+Proposes only three fixed payloads in a private sibling prefix,one absolute launch
+description across all phases/recovery,and unchanged streaming/work/cleanup gates.
+No source/implementation or new proof authority. Actual providers,PHP module/API
+and runtime compatibility remain unproved;no borrowed UBI/legacy trust or ABI waiver.
+Next gated:ONE Existing-Runner Read-Only PPA Provider/Profile and Launch Feasibility
+Audit,bounded metadata/static reads only. No acquisition,materialization,candidate
+execution,SQL or wiring. Historical3/3,new1/1,native43/product4/10 unchanged.
+
 ## Owned descriptor/source replay qualification complete — 2026-11-22
 
 [Current owned qualification](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)
