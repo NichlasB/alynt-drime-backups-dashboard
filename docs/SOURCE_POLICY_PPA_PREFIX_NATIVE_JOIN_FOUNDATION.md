@@ -1,5 +1,13 @@
 # Fixed Native Prefix Storage and Source-Stream Join Safety Foundation
 
+## Subsequent explicit owned lab authority — 2026-11-23
+
+[Campaign qualification owner](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md)
+adds a fixed exact-job manual entry and truthful physical receipt. Ordinary
+entry/syscall/output defaults stay closed;production/candidate execution is NOT
+authorized. The isolated foundation below remains historical,not a physical
+materialization result. Up to3 new owned DATA/proof attempts are tracked separately.
+
 ## Authority, baseline and scope — 2026-11-23
 
 Explicit approval:repository-only foundation through isolated tests,validation,

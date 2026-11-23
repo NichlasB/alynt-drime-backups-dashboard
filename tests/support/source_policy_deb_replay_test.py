@@ -340,8 +340,10 @@ class Checks(unittest.TestCase):
         self.assertNotIn('_descriptor_preparation', ast.unparse(manual))
         workflow = (ROOT/'.github/workflows/source-policy-ppa-deb-static.yml').read_text()
         self.assertEqual(1, workflow.count('scripts/ci/source_policy_deb_replay.py'))
-        self.assertIn('--approved-descriptor-proof', workflow)
-        self.assertIn('--cleanup-descriptor-proof', workflow)
+        self.assertIn('--approved-prefix-proof', workflow)
+        self.assertIn('--reconcile-prefix-proof', workflow)
+        self.assertIn('workflow_dispatch:', workflow)
+        self.assertNotIn('  push:', workflow)
         for name in ('alynt-drime-backups-dashboard.php', 'scripts/ci/source_policy_deb_data.py'):
             self.assertNotIn('source_policy_deb_replay', (ROOT/name).read_text())
 

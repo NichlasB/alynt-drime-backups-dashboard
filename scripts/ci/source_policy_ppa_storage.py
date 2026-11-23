@@ -1,7 +1,8 @@
-"""Dormant fixed POSIX output adapter; no factory selects real calls.
+"""Fixed POSIX output adapter;ordinary/default callers cannot select real calls.
 
 The default syscall provider refuses before IO. Isolated tests replace _CALLS,
-not directory/candidate policy. Python privacy is not an interpreter sandbox.
+not directory/candidate policy. Only the exact-job manual proof binds _PosixCalls.
+Python privacy is not an interpreter sandbox.
 """
 import os
 import stat

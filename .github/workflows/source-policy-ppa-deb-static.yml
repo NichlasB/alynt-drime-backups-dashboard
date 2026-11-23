@@ -1,9 +1,9 @@
-name: Source-policy owned PPA DEB DATA proof
+name: Source-policy owned PPA prefix materialization proof
 on:
   workflow_dispatch:
     inputs:
       expected_sha:
-        description: Exact approved master head for ONE owned descriptor/replay DATA proof
+        description: Exact approved master head for ONE owned prefix source-join proof
         required: true
         type: string
 permissions:
@@ -36,11 +36,13 @@ jobs:
           git diff --no-ext-diff --no-textconv --quiet "$EXPECTED_SHA" -- \
             .github/workflows/source-policy-ppa-deb-static.yml \
             scripts/ci/source-policy-ppa-deb-static.py \
+            scripts/ci/source-policy-ppa-prefix-proof.py \
+            scripts/ci/source_policy_ppa_join.py scripts/ci/source_policy_ppa_storage.py scripts/ci/source_policy_ppa_prefix.py \
             scripts/ci/source_policy_deb_data.py scripts/ci/source_policy_deb_stream.py \
             scripts/ci/source_policy_deb_sources.py scripts/ci/source_policy_deb_replay.py scripts/ci/source_policy_elf_ranges.py \
             scripts/ci/source-policy-php-archive-static.py scripts/manual/source_policy_linux_minimum_static.py
-      - name: Existing-tool preflight and ONE owned descriptor DATA proof
-        run: python3 -I -S -B scripts/ci/source-policy-ppa-deb-static.py --approved-descriptor-proof
-      - name: Always reconcile exact owned DEBs
+      - name: Existing-tool preflight and ONE owned prefix source-join proof
+        run: python3 -I -S -B scripts/ci/source-policy-ppa-prefix-proof.py --approved-prefix-proof
+      - name: Always reconcile exact owned source and runtime roots
         if: always()
-        run: python3 -I -S -B scripts/ci/source-policy-ppa-deb-static.py --cleanup-descriptor-proof
+        run: python3 -I -S -B scripts/ci/source-policy-ppa-prefix-proof.py --reconcile-prefix-proof

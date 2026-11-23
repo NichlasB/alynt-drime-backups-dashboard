@@ -1,7 +1,7 @@
-"""Dormant fixed output-owner policy. Native storage is unconditionally disabled.
+"""Fixed output-owner policy. Default native storage is unconditionally disabled.
 
 Tests replace the PRIVATE storage boundary with a RAM model, never a caller
-provider. No parser/source join, public factory, syscall adapter or launch path.
+provider. The fixed join subclass alone binds its separately guarded backend.
 An output seal is only policy preparation, not source or execution authority.
 """
 import hashlib
@@ -48,9 +48,9 @@ def _identity(info):
 class _OutputOwner:
     """Internal lifecycle only. Never accepts catalog, storage or source facts.
 
-    The future fixed trusted owner must construct this behind job/source/root
-    admission. No current workflow imports it. Storage contracts are modeled,
-    not evidence of POSIX atomic creation, no-follow or crash recovery.
+    The fixed trusted owner constructs this behind job/source/root admission.
+    The policy return remains preparation DATA;physical effects need a separate
+    exact-job proof,not claims of atomic transactions or crash recovery.
     """
 
     def _storage_owner(self, budget, scratch):

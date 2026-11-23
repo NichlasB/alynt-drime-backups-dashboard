@@ -270,11 +270,13 @@ class Cleanup(unittest.TestCase):
         source = (ROOT/'.github/workflows/source-policy-ppa-deb-static.yml').read_text()
         required = ('source_policy_deb_sources.py', 'source_policy_deb_replay.py', 'source_policy_elf_ranges.py',
                     'source_policy_deb_data.py', 'source_policy_deb_stream.py', 'source-policy-ppa-deb-static.py',
-                    'source-policy-php-archive-static.py', 'source_policy_linux_minimum_static.py')
+                    'source-policy-php-archive-static.py', 'source_policy_linux_minimum_static.py',
+                    'source_policy_ppa_join.py', 'source_policy_ppa_storage.py', 'source_policy_ppa_prefix.py',
+                    'source-policy-ppa-prefix-proof.py')
         for name in required:
-            self.assertLess(source.index(name), source.index('--approved-descriptor-proof'))
+            self.assertLess(source.index(name), source.index('--approved-prefix-proof'))
         self.assertIn('if: always()', source)
-        self.assertIn('--cleanup-descriptor-proof', source)
+        self.assertIn('--reconcile-prefix-proof', source)
         self.assertNotIn('pip install', source)
         self.assertNotIn('apt-get', source)
         tree = ast.parse((ROOT/'scripts/ci/source-policy-ppa-deb-static.py').read_text())

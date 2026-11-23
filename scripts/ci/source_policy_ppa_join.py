@@ -40,6 +40,7 @@ class _Context:
         self._cleanup_deadline = None
         self._decoder_unknown = False
         self._entered = False
+        self._output_sealed = False
 
     def check(self):
         self._budget.charge(0)
@@ -218,6 +219,7 @@ def _second_pass(context, summary):
         prepared = output.seal()
         D.S.require(prepared['output_policy_sealed'] is True and prepared['source_joined'] is False
                     and prepared['materialized'] is False and prepared['native_enabled'] is False, 'join-output-result')
+        context._output_sealed = True  # Private fact, not a runtime/JSON capability.
         result = {'prepared_only': True, 'join_policy_complete': True, 'materialized': False,
                   'qualified': False, 'executed': False, 'native_enabled': False,
                   'dependency_closure_verified': False, 'source_joined': False}

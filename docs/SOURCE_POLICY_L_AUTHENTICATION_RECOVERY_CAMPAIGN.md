@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## New time-boxed owned prefix/source-join allowance — 2026-11-23
+
+[Campaign and exact counters](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md):
+up to3 new DATA acquisitions and3 owned ephemeral-CI prefix materialization/
+cleanup attempts,after fresh prerequisites and ordinary exact-head CI. Preserve
+historical DATA3/3,new1/1,audits each1/1,native43/product4/10;no counter reset.
+No candidate/module execution,SQL/sites/LocalWP or production wiring authorized.
+No product milestone counted from design/integration/cleanup/evidence alone.
+
 ## Fixed native output/source join implemented but disabled — 2026-11-23
 
 [Foundation/evidence limits](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md):

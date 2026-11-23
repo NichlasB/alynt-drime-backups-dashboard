@@ -1,5 +1,14 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Owned prefix/source-join campaign authorized — 2026-11-23
+
+[Fixed proof integration and counters](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md):
+time-boxed repository plus ephemeral-CI materialization/cleanup authority,up to
+three new acquisitions/proofs,with fresh source guards and original ledgers.
+Exact-job manual entry only;ordinary defaults/production/candidate execution
+remain disabled. Historical native43/product4/10 retained. Ordinary exact-head
+CI precedes any dispatch;actual attempt/cleanup evidence will be appended there.
+
 ## Dormant native prefix/source join foundation complete — 2026-11-23
 
 [Foundation and proof limits](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md):

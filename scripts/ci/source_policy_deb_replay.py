@@ -2,7 +2,8 @@
 
 No files, acquisition or candidate execution. The fixed catalog is checked before
 nested parsing. This adapter does not establish on-disk ownership or process fit.
-The active manual path remains legacy; its private dormant entry is unselected.
+Only fixed guarded manual owners construct the read-only lease integration;
+ordinary immutable-input callers gain no file or acquisition capability.
 """
 import hashlib
 import json

@@ -1,5 +1,14 @@
 # Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and Cleanup Proof
 
+## Fresh source guards required by owned prefix campaign — 2026-11-23
+
+[Current qualification owner](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md)
+uses the existing exact-job PPA manual workflow for fixed prefix/source-join
+materialization/cleanup,with fresh source guards inside the same original job
+ledger. Historical descriptor receipt is not reused as current-source admission.
+Legacy source cleanup is NOT extended to adopt a lost runtime root;always-step
+runtime presence is Unknown/refusal. No candidate execution or production wiring.
+
 ## Subsequent source retirement hooks;historical proof not refreshed — 2026-11-23
 
 [Dormant output/join foundation](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md)
