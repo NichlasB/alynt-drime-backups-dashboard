@@ -1,5 +1,15 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Materialization/source join now proved;runtime contract still closed — 2026-11-23
+
+[Actual owned45252680968](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md)at0fbd909
+passed three selected0400 payloads/12672176 bytes,source/decoder closure/readback
+and exact cleanup under original192MiB/40+24MiB caps. No candidate/module execution,
+ABI/PHP/loaded-path compatibility or production grant. Next genuine decision:
+PPA-candidate-specific connection-free execution/trust and fixed-launch admission
+contract. Do not import old UBI assurance or declare transitive closure verified.
+The historical design/gates below remain scoped to their recorded stage.
+
 ## Native output/source join design selected — 2026-11-23
 
 [Fixed integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) specifies
