@@ -1,5 +1,14 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Host-provider audit insufficient; artifact pins unchanged — 2026-11-23
+
+[Actual audit/resume](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md):single read-only
+45212967734 refused unclassified loader configs before provider/tool inspection.
+No acquisition/materialization/loading/execution or new publisher/trust decision.
+Temporary workflow removed; audit files/children0. Next gated bounded loader-search
+classification repair and ONE fresh read-only provider audit. Original source fit
+remains proved;candidate/HTTP admission and historical counters remain unchanged.
+
 ## Fixed PPA source/replay fit passed — 2026-11-22
 
 [Owned45048700606](SOURCE_POLICY_DESCRIPTOR_SOURCE_QUALIFICATION.md)atd6da62e

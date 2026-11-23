@@ -1,5 +1,14 @@
 # Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and Cleanup Proof
 
+## Provider audit insufficient; source proof unchanged — 2026-11-23
+
+[Actual audit/resume](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md):45212967734
+refused unclassified loader configuration before provider/tool reads. No new
+source acquisition, candidate action or fixture; audit files/children0 and its
+temporary workflow removed. Next gated bounded loader-search classification
+repair and ONE fresh read-only provider audit. Existing source proof below and
+DATA3/3,new1/1,native43/product4/10 remain; no runtime grant.
+
 ## Next admission design selected — 2026-11-23
 
 [Dependency/private-prefix design](SOURCE_POLICY_PPA_DEPENDENCY_PREFIX_ADMISSION_DESIGN.md)

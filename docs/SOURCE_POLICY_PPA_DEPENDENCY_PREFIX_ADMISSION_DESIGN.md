@@ -1,5 +1,15 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Later approved audit outcome — 2026-11-23
+
+[Actual audit/resume](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md) supersedes the
+next-action wording below, not this historical design's authority. ONE audit
+45212967734 at3b71c4c refused unclassified loader config before any provider/tool
+inspection. No candidate or host repair; temporary workflow removed, created
+files/children0. Provider/launch readiness remains unproved. Next approval is the
+bounded loader-search classification repair and ONE fresh read-only audit named
+in that record, not prefix materialization/execution or an ABI/trust waiver.
+
 ## Authority and baseline — 2026-11-23
 
 Explicit approval is repository-only DESIGN through validation,commit,push and

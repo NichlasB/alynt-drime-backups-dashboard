@@ -43,13 +43,68 @@ HTTP setup/initializer/server and recovery still select existing php/short modul
 names. This audit cannot qualify that launch as a private PPA prefix. Later
 integration must use one absolute fixed launch description across all phases.
 
-## Publication and actual result
+## Publication and actual result — insufficient; no retry
 
-Pending local validation, ordinary exact-head CI, ONE manual audit, temporary
-workflow removal and final evidence/publication verification. Do not infer a
-successful audit or compatibility from this preparation record. Missing,
-ambiguous, unavailable or unclassified evidence stops admission and further
-host work; no unchanged rerun or host repair is authorized.
+Temporary workflow published at 3b71c4c56e07f8d268a8541029d971aacd1a110e.
+[Ordinary CI 45212460666](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45212460666)
+completed/success BEFORE the manual audit. Actual logs: PHP7.4 3077 tests/25405
+assertions, PHP8.3 3077/25410, both plain OK; each matrix job API32/controller15
+with no failures/errors/skips, Node295/295 with no failures/skips; Composer/npm
+vulnerability audits0. Local unchanged API32/controller15 also passed without skips.
+
+[ONE audit 45212967734](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45212967734)
+at that exact head, workflow_dispatch/run_attempt1, completed/FAILURE. Job
+137826403323: exact-head/first-attempt guard and checkout succeeded; audit refused
+with `loader_search_unclassified`; post-checkout cleanup and Complete job succeeded.
+Do not call this a successful provider qualification or overall green audit.
+
+Observed ubuntu24/x86_64, image20261116.376.1. No nonempty allowlisted loader
+override was observed; preload check reached the configuration stage. Five fixed
+configuration files were read. Three matched the small literal allowlist:
+/etc/ld.so.conf, libc.conf and x86_64-linux-gnu.conf. Two did not:
+
+| Config under /etc/ld.so.conf.d | Non-comment lines | Observed content SHA256 |
+| --- | ---: | --- |
+| fakeroot-x86_64-linux-gnu.conf | 1 | af7edc777dd224bade078ba540538444db69856533c02e18a7f9fbbdd23bd181 |
+| zz_i386-biarch-compat.conf | 2 | 4e3c617050427d51497a0e5969b0159421580cf5e7c9649e39f45b5e2fcb47b6 |
+
+Actual directory values were NOT emitted, so their filenames/digests alone do not
+establish safe search behavior, malicious configuration or a missing provider.
+This is the temporary audit's too-narrow classification contract, not evidence
+of a candidate/plugin defect. Do not silently add paths by inference from names.
+No loader/cache/hwcaps resolution, provider ownership/ELF data, readelf availability,
+distribution file binding or launch feasibility was established. The stop occurred
+BEFORE static-tool construction: providers0, audit_complete=false,
+direct_profile_observed=false; dependency_closure_verified/runtime_grant false,
+candidate_compatibility UNKNOWN. No actual selected-ELF or PHP compatibility claim.
+
+Cleanup: audit-created files0, children_remaining0; no readelf child ever started,
+no fixture/listener/process file was created and no candidate acquired/materialized/
+invoked. Runner Complete job reported orphan-process cleanup. This is not an
+independent host-wide absence/immutability assertion. Temporary workflow removed
+after this sole observation; its exact source remains in Git at the audit head.
+No rerun, host repair, permission/config change or extra tool was performed.
+
+## Exact next gated slice
+
+Recommend approval of Repository-Only Bounded Loader-Search Classification Repair
+and ONE Fresh Existing-Runner Read-Only PPA Provider/Profile Audit. Scope the
+correction to finite non-secret search-directory observations/classification of
+these two existing config forms, retain refusal of unknown/untrusted overrides,
+all budgets and no arbitrary search/installation. The new observation is needed
+because the completed ephemeral runner is gone and its receipt lacks those
+values. First validate the positive/negative classifications in isolated tests,
+then ordinary exact-head CI before ONE fresh read-only audit and removal.
+No candidate acquisition/materialization/loading/execution or trust/ABI waiver.
+The original one-audit allowance is consumed; no new audit is authorized here.
+Do not build another resolver/attestation layer or start prefix implementation
+until this narrowly defined availability question has useful evidence.
+
+Implementation-plan progress: the approved audit was performed and its precise
+classification limit is recorded, but provider/private-prefix readiness remains
+BLOCKED. Product4/10/native43 and exhausted DATA allowances are unchanged. Final
+ordinary exact-head publication verification belongs to the scoped toolkit
+closeout; removal/evidence publication is not an extra product milestone.
 
 ## Source-scoped review and local validation
 
