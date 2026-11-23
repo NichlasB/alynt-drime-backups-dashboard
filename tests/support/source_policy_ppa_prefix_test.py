@@ -170,6 +170,18 @@ class Prefix(unittest.TestCase):
                 owner.finish()
             setattr(info, field, original)
             self.clean(owner)
+        for field, value in (('st_mode', stat.S_IFLNK | 0o600), ('st_nlink', 2), ('st_uid', 0), ('st_size', 999)):
+            owner = self.owner()
+            self.populate(owner)
+            info = self.storage.infos['php']
+            original = getattr(info, field)
+            setattr(info, field, value)
+            with self.assertRaisesRegex(P.D.S.Refusal, 'pre-mode-binding'):
+                owner.seal()
+            self.assertFalse(any(row[0] == 'mode' for row in self.storage.events))
+            setattr(info, field, original)
+            self.clean(owner)
+            self.storage.events.clear()
 
     def test_foreign_membership_blocks_seal_and_cleanup(self):
         owner = self.owner()
@@ -327,6 +339,7 @@ class Prefix(unittest.TestCase):
             ('member-hash', 'test_wrong_hash_never_seals', 'prefix-member-identity'),
             ('file-binding', 'test_member_metadata_guards', 'prefix-file-binding'),
             ('namespace', 'test_foreign_membership_blocks_seal_and_cleanup', 'prefix-membership'),
+            ('pre-mode-binding', 'test_member_metadata_guards', 'prefix-pre-mode-binding'),
         )
         for label, name, reason in checks:
             with self.subTest(label=label):

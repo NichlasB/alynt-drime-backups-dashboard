@@ -97,10 +97,16 @@ Permanent tests cover these at the isolated policy layer. Final focused Security
 after fixes:no unresolved confirmed defect in this dormant boundary. Native syscall/
 race/cleanup claims remain explicitly out of scope,not silently accepted risks.
 
-Actual final local tests:24 isolated groups,0 failures/errors/skips,including four
+Final post-publication ordering check additionally found/fixed pre-mode metadata
+drift:all four captured entries must still be regular,single-link,same owner/
+identity/size and0600 BEFORE any0400 transition. Permanent subcases reject drift
+after writer close and assert no mode transition occurred. Native atomicity
+between checks and syscalls remains future adapter work,not claimed here.
+
+Actual final local tests:24 isolated groups,0 failures/errors/skips,including five
 assertion-killed semantic controls (always-unavailable,member hash,file identity,
-namespace guard);nested controls had0 errors. Related PHP5 tests/37 assertions
-plain OK. Full local suite3078 tests/25407 assertions,0 failures/errors,TWO existing
+namespace and pre-mode guards);nested controls had0 errors. Related PHP5 tests/37 assertions
+plain OK. Full local suite before the final pre-mode refinement:3078 tests/25407 assertions,0 failures/errors,TWO existing
 Sodium-unavailable skips;not plain OK. Full PHPCS305/305,Node295/295 with0 failures/
 skips,structure guard and398 local documentation links/diff checks passed.
 Unchanged source API32/controller15 groups also passed without failures/errors/

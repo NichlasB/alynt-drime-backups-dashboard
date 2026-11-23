@@ -224,6 +224,13 @@ class _OutputOwner:
         D.S.require(self._active is None and self._complete == {row[0] for row in _CATALOG}, 'prefix-incomplete')
         expected = {'owner.json', *(row[3] for row in _CATALOG)}
         D.S.require(self._storage.members(self._root, 4) == expected, 'prefix-membership')
+        sizes = {'owner.json': len(self._marker), **{row[3]: row[4] for row in _CATALOG}}
+        for leaf in sorted(expected):
+            info = self._storage.lookup(self._root, leaf)
+            D.S.require(_identity(info) == self._files[leaf] and stat.S_ISREG(info.st_mode)
+                        and info.st_uid == self._uid and info.st_nlink == 1
+                        and info.st_size == sizes[leaf] and stat.S_IMODE(info.st_mode) == 0o600,
+                        'prefix-pre-mode-binding')
         for leaf in sorted(expected):
             # Metadata is checked again through the new read-only handle.
             self._storage.readonly_mode(self._root, leaf, self._files[leaf], 0o400)
