@@ -50,7 +50,7 @@ def _facts(raw, modules):
     S.require(type(value) is dict and set(value) == keys and value.get('php') == '8.5.12' and value.get('sapi') == 'cli'
               and value.get('os') == 'Linux' and value.get('arch') == 'x86_64'
               and type(value.get('word_size')) is int and value['word_size'] == 8
-              and value.get('zts') == 0 and type(value.get('zts')) is int, 'candidate-runtime-profile')
+              and value.get('zts') is False, 'candidate-runtime-profile')
     S.require(value.get('binary_matches') is True and value.get('extension_dir_matches') is True
               and value.get('ini_loaded') is False and value.get('ini_scanned') is False
               and type(value.get('included')) is int and value['included'] == 0 and value.get('prepend') == value.get('append') == ''

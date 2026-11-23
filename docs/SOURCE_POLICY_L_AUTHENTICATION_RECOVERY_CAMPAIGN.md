@@ -1,5 +1,15 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Approved AS attempt consumed; boolean-NTS repair only — 2026-11-23
+
+[Actual223ad769/45265615789 and next gate](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+ordinary45265148616 passed;fresh prerequisites/new AS profile passed,baseline exit0,
+strict runtime-profile refusal,no module phase. Owned cleanup/mask/always0 verified.
+Source-backed PHP8.5 boolean-false NTS repair passes31 isolated groups;no new native
+attempt. New DATA1/1,CF1/1 exhausted,native45/product4/10 unchanged;earlier hour/prefix
+allowances stay historical. Next ONE new-head strict boolean-NTS requalification/
+cleanup with fresh pinned acquisition;no added cap or production/HTTP/SQL authority.
+
 ## ONE new resource-exception connection-free attempt approved — 2026-11-23
 
 [Fixed admission and ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):

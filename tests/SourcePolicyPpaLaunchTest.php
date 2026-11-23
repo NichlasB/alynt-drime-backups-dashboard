@@ -21,7 +21,7 @@ final class SourcePolicyPpaLaunchTest extends TestCase {
 		$this->assertSame( 0, proc_close( $process ), $error );
 		$this->assertSame( '', $error );
 		$this->assertSame(
-			array( 'tests' => 30, 'failures' => 0, 'errors' => 0, 'skips' => 0 ),
+			array( 'tests' => 31, 'failures' => 0, 'errors' => 0, 'skips' => 0 ),
 			json_decode( $output, true )
 		);
 	}

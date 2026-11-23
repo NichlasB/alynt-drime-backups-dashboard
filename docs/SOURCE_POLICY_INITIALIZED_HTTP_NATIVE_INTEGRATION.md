@@ -1,5 +1,15 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## New AS profile reached exit0,not HTTP/runtime eligibility — 2026-11-23
+
+[Actual45265615789 and next strict-NTS gate](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+parent40/128/PHP128/128 with unchanged24/24 codecs passed prerequisites;baseline
+exit0 but candidate-runtime-profile refused,no accepted observation/module phase.
+Exact cleanup/always0 verified. Source-backed bool-false PHP_ZTS repair has isolated
+evidence only;ONE new-head connection-free proof/fresh acquisition needs approval.
+HTTP/runtime/recovery/source-cohort selection remains unchanged,no SQL/bootstrap/
+HTTP operation or production wiring;this is not a refreshed genuine-request cohort.
+
 ## PPA startup did not reach functional observation — 2026-11-23
 
 [Actual45261161938](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):fresh source/

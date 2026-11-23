@@ -1,5 +1,14 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Approved AS attempt reached exit0; native qualification still refused — 2026-11-23
+
+[45265615789 and boolean-NTS repair](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+fixed resource/source/output prerequisites passed,baseline exit0 then strict
+runtime-profile refusal,no module phase;all cleanup0/always success. PHP8.5 bool
+PHP_ZTS contract corrected to EXACT false in isolated tests only,no native retry.
+ONE new-head proof/fresh acquisition is the next gate;no dependency/loaded-object/
+production grant or new memory increase. Existing limits and production wiring stay.
+
 ## Scoped connection-free AS exception approved; runtime proof pending — 2026-11-23
 
 [New fixed resource admission](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)

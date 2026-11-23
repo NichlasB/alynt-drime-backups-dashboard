@@ -20,7 +20,7 @@ J, Q, S = X.J, C.Q, X.S
 
 
 def facts(modules=False):
-    return {'php': '8.5.12', 'sapi': 'cli', 'os': 'Linux', 'arch': 'x86_64', 'word_size': 8, 'zts': 0,
+    return {'php': '8.5.12', 'sapi': 'cli', 'os': 'Linux', 'arch': 'x86_64', 'word_size': 8, 'zts': False,
             'binary_matches': True, 'extension_dir_matches': True, 'ini_loaded': False, 'ini_scanned': False,
             'included': 0, 'prepend': '', 'append': '', 'pdo_mysql': False,
             'modules': sorted(['Core', 'json', 'pcre', 'standard']+(['mysqlnd', 'mysqli'] if modules else [])),
@@ -337,6 +337,19 @@ class Launch(unittest.TestCase):
 
 
 class NativeShape(unittest.TestCase):
+    def test_boolean_nts_is_strict_and_rejects_integer_or_string_substitutes(self):
+        row = facts()
+        row['zts'] = False  # PHP8.5 registers PHP_ZTS as a bool,not the old integer fixture.
+        try:
+            observed = X._facts(json.dumps(row).encode('ascii'), False)
+        except S.Refusal as error:
+            self.fail('Exact boolean false NTS must be admitted: '+str(error))
+        self.assertIs(False, observed['zts'])
+        for invalid in (0, 1, '0', None, True):
+            row['zts'] = invalid
+            with self.assertRaisesRegex(S.Refusal, 'runtime-profile'):
+                X._facts(json.dumps(row).encode('ascii'), False)
+
     def test_nonroot_linux_identity_is_required_before_process_effects(self):
         with (patch.object(X.sys, 'platform', 'linux'),
               patch.dict(sys.modules, {'resource': Resources()}),

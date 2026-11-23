@@ -1,6 +1,75 @@
 # PPA Candidate Connection-Free Functional Admission and Qualification
 
-## Explicit soft/hard exception approved; ONE fresh attempt pending — 2026-11-23
+## Approved exception reached exit0; strict runtime-profile refusal and repair — 2026-11-23
+
+Implementation223ad7698a73968ad6701992151f9791afdcb3f6 committed/pushed;
+[ordinary45265148616](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45265148616)
+completed/SUCCESS,BOTH exact-head checks/jobs success,remote matched/clean BEFORE
+dispatch. Actual PHP7.4 3081/25425,PHP8.3 3081/25430,plain OK/no skips;each source
+API32/controller15,Node295/295 with0 failures/skips,PHPCS305/305,Composer/npm0
+vulnerabilities,build/structure passed. Corrected process-only local environment
+full PHP3081/25422 completed with0 failures/errors,TWO existing Sodium skips;
+PHPCS305/305. This full local run predates the following boolean-only repair;
+final targeted/CI validation must not be conflated with a second full local run.
+
+[ONE new attempt45265615789](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45265615789)
+at EXACT223ad769,workflow_dispatch/run_attempt1,job138011614952,completed/FAILURE;
+receipt21:03:11 UTC. It is a truthful qualification refusal,not success:
+
+| Domain | Actual evidence |
+| --- | --- |
+| Fresh pins/guards | All3 unchanged pins/bytes,all10 source guard groups,transport released |
+| Fixed preflight | ppa-connection-free-as-40-128-v1;parent41943040/134217728,PHP134217728,codecs25165824,8MiB window,all3 codec samples/reaping passed |
+| Output | materialized/extracted TRUE,12672176 bytes,readback/source retirement passed |
+| Baseline process | attempted/executed TRUE,exit0,736 output bytes,diagnostic none |
+| Admission | candidate-runtime-profile refusal;accepted observations EMPTY,module phase NOT REACHED |
+| Grants | connection_free_complete/prefix_proof_complete/qualified/dependency_closure_verified/production_wiring FALSE |
+| Work | 186912463/201326592 bytes,remaining14414129;no work/time/output increase |
+| Owned retirement | release_unknown FALSE,PHP restored0400,roots0/0,FD delta0,children0,mask barrier passed |
+| Independent always step | SUCCESS,source/runtime roots0/0;not inferred from runner disposal |
+
+The approved AS profile removed the earlier observed nonzero-startup symptom in
+this finite attempt. It does NOT establish full build/module/function compatibility,
+minimal memory,independent dependencies,loaded objects,universal ABI or production
+readiness. No raw JSON/loader paths/diagnostic text retained or public field dump.
+
+Bounded source-only check found a concrete harness defect:the pinned upstream
+[PHP8.5.12 constant declaration](https://raw.githubusercontent.com/php/php-src/php-8.5.12/main/main.stub.php)
+defines PHP_ZTS as bool and its
+[generated registration](https://raw.githubusercontent.com/php/php-src/php-8.5.12/main/main_arginfo.h)
+uses REGISTER_BOOL_CONSTANT. The old fixture/validator required integer0. Thus a
+valid boolean-false NTS observation was necessarily rejected;native receipt does
+not retain individual rejected fields,so it cannot prove this was the ONLY field
+mismatch. No additional diagnostics/native rerun was used to assert that.
+
+Guard-preserving repair requires EXACT boolean false (not bool-cast/truthiness or
+accepting both representations),and fixes the synthetic fixture to the actual
+PHP8.5 contract. All other version/platform/config/module/function/source/resource
+guards unchanged. New regression first FAILED1/0errors against old validator,then
+31 isolated groups passed0 failures/errors/skips. Integer0/1,string0,null and true
+are explicitly rejected. One independently run removed-runtime-guard semantic
+control assertion-killed1 failure/0errors,besides the eight permanent controls.
+Final targeted PHP4/20 plain OK,targeted PHPCS/diff pass. Source-scoped Light and
+Security follow-up confirms no relaxed NTS/build acceptance or new public/production
+surface. Repair ordinary exact-head publication/check results are closed in the
+toolkit source-scoped evidence record;ordinary CI never substitutes for native
+requalification of the changed validator.
+
+New specifically approved DATA1/1,CF1/1 CONSUMED;no second attempt. Earlier hour
+DATA1/3,CF1/3 and prior prefix/DATA/audit ledgers retained separately,not borrowed.
+Cumulative native44+1=45,product4/10 unchanged;no successful connection-free product
+milestone. ONE evidence-backed repository repair,no hidden native retry. No WP/
+HTTP/SQL/LocalWP/live/installed-state or production wiring changes. All owned
+resources retired;no prefix/descriptor/process retained for a later invocation.
+
+Exact recommended next action:approve ONE New-Head Strict Boolean-NTS Connection-
+Free Requalification and Cleanup Attempt,including ONE fresh exactly pinned tuple
+acquisition after ordinary exact-head CI/fresh prerequisites. Keep the already
+approved40/128+128/128 AS profile,codecs24/24 and all other guards/caps unchanged.
+This authority is exhausted;the boolean repair has isolated evidence only,no
+successful repaired native observation and no justification for increasing caps.
+
+## Explicit soft/hard exception authority and implementation baseline — 2026-11-23
 
 User separately approves the exact resource proposal below and ONE fresh pinned
 tuple acquisition/connection-free qualification/cleanup attempt,end-to-end through

@@ -1,5 +1,18 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Resource exception reached exit0; boolean-NTS repair needs requalification — 2026-11-23
+
+[Actual45265615789 and source-backed repair](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+223ad769 ordinary45265148616 passed before ONE fresh attempt;new AS profile/codecs/
+pins/source/output prerequisites passed,baseline exit0/736 bytes but strict
+candidate-runtime-profile refused,no accepted observations/module phase. Cleanup/
+always roots0/0,FD delta0,children0 verified. PHP8.5.12 registers PHP_ZTS as bool;
+old integer0 fixture/validator was wrong. Exact-false NTS repair preserves guards,
+red-to-green31 isolated groups and assertion-killed removed-guard control. No native
+rerun. New DATA1/1+CF1/1 consumed,cumulative native45/product4/10 unchanged. Next
+gated ONE new-head boolean-NTS connection-free proof/fresh pinned acquisition,
+not more memory or WordPress/HTTP/SQL/production admission.
+
 ## Fixed connection-free soft/hard resource exception approved — 2026-11-23
 
 [Owning profile,validation and attempt ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
