@@ -1,5 +1,13 @@
 # Fixed Three-Payload PPA Prefix Output Safety Foundation
 
+## Subsequent approved native/join design — 2026-11-23
+
+[Fixed integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) resolves
+the modeled-to-native ownership/registration/close contracts and source-stream
+join ordering,without implementing or enabling them. Existing policy/tests remain
+unchanged/default closed. Next gated dormant native adapter/join safety foundation,
+isolated tests only;no actual storage/materialization,source-proof rerun or launch.
+
 ## Authority and review baseline — 2026-11-23
 
 Explicit approval:repository-only dormant prefix foundation,isolated tests,

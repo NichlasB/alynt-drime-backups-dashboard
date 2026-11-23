@@ -1,5 +1,14 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Native output/source join design selected — 2026-11-23
+
+[Fixed integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) specifies
+captured directory ownership,backend-before-return registration,identity-bound
+mode/deletion and a same-original-ledger second pass. No atomic mkdir/open or
+hostile namespace immunity claimed;uncertain crash ownership is not path-recovered.
+Next gated isolated native adapter/join foundation,not physical materialization,
+candidate execution,dependency/ABI waiver or production wiring. DESIGN ONLY.
+
 ## Approved output-policy foundation,not native materialization — 2026-11-23
 
 [Dormant fixed output policy](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) advances

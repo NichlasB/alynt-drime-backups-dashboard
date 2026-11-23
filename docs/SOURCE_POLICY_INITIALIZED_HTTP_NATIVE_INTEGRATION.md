@@ -1,5 +1,13 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Prefix native/source join design remains off the launch path — 2026-11-23
+
+[Fixed integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) covers
+ownership,source/decoder closure,output seal and truthful cleanup-only receipts.
+No prefix/native adapter/controller implementation or runtime grant. Next gated
+isolated native-storage/source-stream join foundation,actual entry disabled;
+current PHP selection,HTTP/SQL profile and production wiring stay unchanged.
+
 ## Output policy isolated from current loader — 2026-11-23
 
 [Fixed prefix foundation](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) implements

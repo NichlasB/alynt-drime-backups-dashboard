@@ -1,5 +1,14 @@
 # Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and Cleanup Proof
 
+## Source-stream join integration design;reader unchanged — 2026-11-23
+
+[Join design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) retains the existing
+close-before-commit source contract. A future private fixed owner must reopen/
+re-admit second-pass read-only leases under the original context/budget;no JSON
+receipt or retired cursor grants authority. Current source/proof code and receipts
+are unchanged. Next gated isolated native output/join safety foundation,no actual
+acquisition,descriptors,materialization or candidate execution authorized here.
+
 ## Separate dormant output policy;read-only leases unchanged — 2026-11-23
 
 [Output foundation](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) uses the original

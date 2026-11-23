@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed native-storage/source-stream join design complete — 2026-11-23
+
+[Integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) separates
+exclusive creation from captured ownership,requires backend registration before
+unmask/return and a private same-job second-pass summary/join. All source/decoder
+closure precedes output seal;lost ownership stays Unknown,not marker-only cleanup.
+Original resource ledger/caps remain,combined physical fit unproved. DESIGN ONLY:
+no source/test/workflow change,native storage/materialization or wiring. Next gated:
+Repository-Only Fixed Native Prefix Storage and Source-Stream Join Safety Foundation,
+isolated syscall/API tests only,actual native entry/execution still disabled.
+Historical artifact/audit/native43/product4/10 counters remain unchanged.
+
 ## Dormant fixed-prefix output policy implemented — 2026-11-23
 
 [Output safety foundation](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) adds the

@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Fixed native prefix/source join design complete — 2026-11-23
+
+[Owning design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) closes the next
+integration contract,not a physical qualification. Private provenance,registration,
+full second-pass/source closure and Unknown cleanup preserve original budgets.
+Next gated dormant native adapter/join safety foundation with isolated tests only.
+No source/native/manual attempt,materialization,launch or wiring. DATA3/3,new1/1,
+original/fresh audits each1/1,native43/product4/10 remain;no design milestone inflated.
+
 ## Fixed prefix output policy foundation complete in RAM — 2026-11-23
 
 [Owning foundation/evidence](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) adds
