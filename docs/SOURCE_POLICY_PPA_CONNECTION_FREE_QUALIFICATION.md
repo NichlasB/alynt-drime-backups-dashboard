@@ -1,5 +1,16 @@
 # PPA Candidate Connection-Free Functional Admission and Qualification
 
+## Subsequent initialized-fixture admission design only — 2026-11-23
+
+[Approved design](SOURCE_POLICY_PPA_INITIALIZED_LAUNCH_ADMISSION_DESIGN.md) records
+one absolute role/recovery identity,function-origin phases and current Python/
+Node ownership/resource gaps. Exact pinned core compat can supply missing native
+mb_strlen/mb_substr;this selected source evidence is not full bootstrap/runtime
+closure. No new artifact/native attempt or change to the successful8bd4ee3 source.
+Native46/product4/10 and all historical allowances remain. Next gated dormant
+socket-free launch/recovery/function DATA foundation,not another native proof,
+HTTP/SQL/bootstrap operation or production wiring.
+
 ## Strict boolean-NTS connection-free qualification PASSED — 2026-11-23
 
 User explicitly approves ONE New-Head Strict Boolean-NTS Connection-Free

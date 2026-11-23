@@ -1,5 +1,14 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Initialized lifetime/role/function admission design recorded — 2026-11-23
+
+[Selected repository-only design](SOURCE_POLICY_PPA_INITIALIZED_LAUNCH_ADMISSION_DESIGN.md)
+keeps the functional trust limitation and one private absolute tuple across all
+roles/recovery;no old JSON receipt or released prefix is a launch authority.
+Native lifetime/resource handoff and genuine function-use closure remain unproved.
+Next gated socket-free DATA foundation,all real entry/ownership/wiring closed.
+No transitive/loaded-object/production grant,artifact or execution allowance added.
+
 ## Candidate-specific connection-free functionality now observed — 2026-11-23
 
 [8bd4ee3/45269436859](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md) SUCCESS:

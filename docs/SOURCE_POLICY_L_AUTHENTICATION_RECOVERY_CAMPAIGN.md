@@ -1,5 +1,16 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## PPA initialized launch/function admission design only — 2026-11-23
+
+[Owning design](SOURCE_POLICY_PPA_INITIALIZED_LAUNCH_ADMISSION_DESIGN.md) maps fixed
+prerequisite/install/initialize/server/recovery identities,stock core fallback
+provenance and unproved lifetime/exec/resource admission. All current source,
+workflow,SQL/auth guards,compatibility/pins and execution defaults unchanged.
+No acquisition,materialization,native/HTTP/SQL/WordPress/LocalWP or wiring;native46/
+product4/10 and all prior attempt ledgers unchanged. Next gated repository-only
+socket-free launch/recovery/function DATA foundation with isolated tests only,
+not an automatic new genuine-request or initialized HTTP proof.
+
 ## Strict boolean-NTS connection-free requalification passed — 2026-11-23
 
 [8bd4ee3/45269436859](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md) completed/

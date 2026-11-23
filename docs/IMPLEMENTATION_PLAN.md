@@ -1,5 +1,20 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Candidate-bound initialized launch/function admission design completed — 2026-11-23
+
+[Repository-only design](SOURCE_POLICY_PPA_INITIALIZED_LAUNCH_ADMISSION_DESIGN.md)
+maps all prerequisite/setup/initializer/server/recovery consumers to ONE private
+absolute description,with phase/native/core function provenance. Pinned compat
+supplies mb_strlen/mb_substr fallbacks;native absence is not whole-core failure or
+permission for extra modules. Genuine role/vendor closure still requires evidence.
+Current one-shot Python prefix is deleted before return;future outer lifetime owner
+and limit-setting same-PID exec/recovery need native proof,not marker/receipt adoption.
+Combined PPA-work/HTTP-manifest domains and HTTP AS-role expansion remain unadmitted.
+DESIGN ONLY:no source/tests/workflow/execution change,acquisition or attempt;
+native46/product4/10 retained. Next gated Repository-Only Socket-Free PPA Launch/
+Recovery Description and Function-Profile Admission DATA Safety Foundation,
+synthetic/isolated tests only;all real ownership/exec/wiring stays closed.
+
 ## PPA connection-free functional qualification completed — 2026-11-23
 
 [Actual8bd4ee3/45269436859](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)

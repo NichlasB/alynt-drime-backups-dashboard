@@ -1,5 +1,17 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Candidate-bound launch/recovery and function-profile design complete — 2026-11-23
+
+[New repository-only design](SOURCE_POLICY_PPA_INITIALIZED_LAUNCH_ADMISSION_DESIGN.md)
+binds all prerequisites,installer,initializer,server and recovery to one private
+absolute runtime description. Current PATH/short-module consumers unchanged.
+Future outer namespace ownership and same-PID limit/exec recovery require physical
+proof;one-shot prefix success is not a retained handle. Stock mb_* fallback phases
+must bind exact core sources;optional absence alone cannot change SQL guards or
+admit HTTP. Resource-role/domain admission remains closed. Next gated socket-free
+DATA foundation only,no artifact/candidate/WordPress/HTTP/SQL/wiring in this slice;
+native46/product4/10 retained,not refreshed initialized/cohort proof.
+
 ## Connection-free candidate qualified; HTTP integration still gated — 2026-11-23
 
 [Actual8bd4ee3/45269436859](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)
