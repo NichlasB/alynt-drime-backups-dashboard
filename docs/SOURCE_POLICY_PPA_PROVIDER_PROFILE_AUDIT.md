@@ -1,5 +1,53 @@
 # Existing-Runner PPA Provider/Profile and Launch Feasibility Audit
 
+## Approved bounded classification repair and one fresh audit — 2026-11-23
+
+User approved the exact next slice below:repository repair/validation/publication,
+ONE fresh existing-runner read-only audit and temporary workflow removal. Baseline
+8cafaa196dde8ff835b1ba3e5aef37780bb80443 clean/synced;ordinary45213384207 freshly
+reverified success. Toolkit665d133b5cef9d8a081332e56f6806a3db098dae clean/synced.
+R2 temporary harness change;no additional candidate/DATA/native attempt,trust/ABI
+waiver,site/SQL/permission/configuration operation or execution grant.
+
+The two proposed config contents reproduce the PRIOR ACTUAL receipt's SHA256
+exactly in memory,including the biarch comment/newline. Fixed forms:
+fakeroot config `/usr/lib/x86_64-linux-gnu/libfakeroot` plus newline;
+biarch config `# Legacy biarch compatibility support`, `/lib32`, `/usr/lib32`,
+each newline-terminated. Prior exact digests are retained below. This confirms
+those proposed bytes against historical observations,not current runner state.
+[Debian's primary package inventory](https://packages.debian.org/sid/amd64/libfakeroot/filelist)
+corroborates the fakeroot config/library directory;the
+[maintainer report](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=882255)
+documents the biarch form. Neither is current Ubuntu runner attestation.
+
+Correction binds each new form to its literal config path,exact raw digest AND
+parsed ordered lines. No blanket /usr/lib or multiarch-path acceptance. Unknown
+files/paths/changed contents still refuse. Receipt ADBPPAPROVIDER2 emits only
+classified finite non-secret search lines;unknown values stay redacted. Existing
+base literals,budgets,tool arguments/head/attempt guards and false runtime/closure
+flags remain. No library is selected from those new directories;only the original
+ten names/two standard paths plus interpreter may be inspected as host DATA.
+Cache/hwcaps selection and actual compatibility remain UNKNOWN even if this
+read-only availability audit succeeds. No new resolver/attestation layer.
+
+Fresh audit and publication verification pending;historical failure below is
+preserved. No success,physical provider proof or renewed allowance is inferred.
+
+Source-scoped canonical Feature Light:temporary workflow plus this owning record
+against8cafaa196dde8ff835b1ba3e5aef37780bb80443;fixed-path/digest/ordered-line
+binding addresses the observed classification omission,not production policy.
+12 isolated classifier cases passed,including both positives,comment drift,
+changed/foreign paths,wrong-file content,duplicates,reordering,empty and unknown
+configuration;both historical denials reproduced. Four semantic controls killed:
+always-deny,always-allow,raw-digest bypass and wrong-filename fallback. Python
+syntax/unchanged resource constants checked;targeted PHP4/32 plain OK,0 skips.
+These are in-memory checks,not physical provider/cleanup proof or a persistent
+test framework. No bloat split or UI workflow warranted for the temporary audit.
+Final focused Feature Security SOURCE-SCOPED:least access,fixed finite command/
+path domains,classified-only non-secret output,no dynamic path promotion and
+unchanged refusal/runtime flags reviewed;no unresolved confirmed defect in this
+correction. No historical whole-plugin/Database/release-readiness row refreshed.
+
 ## Authority and explicit review baseline — 2026-11-23
 
 Approved ONE existing-runner read-only audit, including a temporary manual

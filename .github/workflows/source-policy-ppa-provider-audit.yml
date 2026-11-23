@@ -1,0 +1,233 @@
+name: Temporary read-only PPA provider profile audit
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact approved master head for ONE read-only host audit
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: source-policy-ppa-provider-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    if: github.repository == 'NichlasB/alynt-drime-backups-dashboard' && github.ref == 'refs/heads/master' && github.actor == 'NichlasB'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+    steps:
+      - name: Admit exact head and first attempt
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" ]]
+          [[ "$GITHUB_RUN_ATTEMPT" == 1 && "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Bounded existing-host metadata and static provider reads only
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$(git rev-parse HEAD)" == "$EXPECTED_SHA" ]]
+          python3 -I -S -B - <<'PY'
+          import hashlib, json, os, re, resource, selectors, signal, stat, subprocess, time
+
+          # Temporary observation, not a loader resolver, runtime grant or package verifier.
+          NAMES = ('libm.so.6', 'libxml2.so.2', 'libssl.so.3', 'libcrypto.so.3',
+                   'libpcre2-8.so.0', 'libz.so.1', 'libsodium.so.23', 'libargon2.so.1',
+                   'libgcc_s.so.1', 'libc.so.6')
+          BASES = ('/lib/x86_64-linux-gnu/', '/usr/lib/x86_64-linux-gnu/')
+          SAFE = re.compile(r'[A-Za-z0-9_./+:-]{1,240}\Z')
+          DEADLINE = time.monotonic() + 45
+          remaining_output = 65536
+          resource.setrlimit(resource.RLIMIT_AS, (40 * 1048576, 40 * 1048576))
+          resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+          signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(TimeoutError()))
+          signal.alarm(50)
+          receipt = dict(format='ADBPPAPROVIDER2', providers=[], reasons=[],
+                         acquired=False, materialized=False, candidate_invoked=False,
+                         dependency_closure_verified=False, runtime_grant=False,
+                         children_remaining=0, created_files=0)
+
+          def bounded(path, cap):
+              with open(path, 'rb') as handle:
+                  raw = handle.read(cap + 1)
+              if len(raw) > cap:
+                  raise ValueError('read_limit')
+              return raw
+
+          def metadata(path):
+              # Linux realpath's strict resolver rejects loops; additionally cap link count.
+              current = path
+              for _ in range(16):
+                  if not SAFE.fullmatch(current) or not current.startswith(('/lib', '/usr/lib', '/usr/bin', '/etc/alternatives/')):
+                      raise ValueError('path_domain')
+                  if not os.path.islink(current):
+                      break
+                  link = os.lstat(current)
+                  if link.st_uid != 0:
+                      raise ValueError('link_owner')
+                  target = os.readlink(current)
+                  current = os.path.normpath(os.path.join(os.path.dirname(current), target))
+              else:
+                  raise ValueError('link_limit')
+              canonical = os.path.realpath(current, strict=True)
+              if not SAFE.fullmatch(canonical) or not canonical.startswith(('/usr/lib/', '/lib/', '/usr/bin/')):
+                  raise ValueError('canonical_domain')
+              info = os.stat(canonical, follow_symlinks=False)
+              if not stat.S_ISREG(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
+                  raise ValueError('provider_owner_mode_type')
+              parent = os.path.dirname(canonical)
+              for _ in range(12):
+                  directory = os.stat(parent, follow_symlinks=False)
+                  if not stat.S_ISDIR(directory.st_mode) or directory.st_uid != 0 or directory.st_mode & 0o022:
+                      raise ValueError('parent_owner_mode_type')
+                  if parent == '/':
+                      break
+                  parent = os.path.dirname(parent)
+              else:
+                  raise ValueError('parent_limit')
+              identity = (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
+              return dict(path=path, canonical=canonical, uid=info.st_uid,
+                          mode=oct(stat.S_IMODE(info.st_mode)), bytes=info.st_size), identity
+
+          def tool_limits():
+              resource.setrlimit(resource.RLIMIT_AS, (24 * 1048576, 24 * 1048576))
+              resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+
+          def classify_config(path, text):
+              lines = tuple(line.split('#', 1)[0].strip() for line in text.splitlines() if line.split('#', 1)[0].strip())
+              digest = hashlib.sha256(text.encode('ascii')).hexdigest()
+              known = {'include /etc/ld.so.conf.d/*.conf', '/usr/local/lib', '/usr/local/lib/x86_64-linux-gnu', '/lib/x86_64-linux-gnu', '/usr/lib/x86_64-linux-gnu'}
+              # Exact reconstructed bytes match the prior actual receipt; not guessed host authority.
+              forms = {
+                  '/etc/ld.so.conf.d/fakeroot-x86_64-linux-gnu.conf':
+                      (('/usr/lib/x86_64-linux-gnu/libfakeroot',), 'af7edc777dd224bade078ba540538444db69856533c02e18a7f9fbbdd23bd181'),
+                  '/etc/ld.so.conf.d/zz_i386-biarch-compat.conf':
+                      (('/lib32', '/usr/lib32'), '4e3c617050427d51497a0e5969b0159421580cf5e7c9649e39f45b5e2fcb47b6'),
+              }
+              fixed = forms.get(path)
+              classified = ((lines, digest) == fixed) if fixed else all(line in known for line in lines)
+              return dict(path=path, classified=classified, sha256=digest, lines=len(lines),
+                          observed_search_lines=list(lines) if classified else [],
+                          classification='prior_receipt_exact_form' if fixed and classified else 'literal_base' if classified else 'UNKNOWN')
+
+          def parse_static(text):
+              if not all(value in text for value in ('ELF64', "2's complement, little endian", 'Advanced Micro Devices X86-64')) or not re.search(r'Type:\s+DYN\b', text):
+                  raise ValueError('host_elf_profile')
+              needed = re.findall(r'\(NEEDED\).*?\[([^\]]+)\]', text)
+              soname = re.findall(r'\(SONAME\).*?\[([^\]]+)\]', text)
+              if len(needed) > 64 or len(soname) > 1 or any(not re.fullmatch(r'[A-Za-z0-9_.+-]{1,128}', item) for item in needed + soname):
+                  raise ValueError('dynamic_names')
+              return dict(needed=needed, soname=soname, search_paths_present=bool(re.search(r'\((RPATH|RUNPATH)\)', text)))
+
+          def readelf(path):
+              global remaining_output
+              selector = selectors.DefaultSelector()
+              process = None
+              raw = bytearray()
+              try:
+                  process = subprocess.Popen([tool['canonical'], '--wide', '--file-header', '--dynamic', path],
+                      stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                      env={'PATH': '/usr/bin:/bin', 'LC_ALL': 'C'}, close_fds=True,
+                      preexec_fn=tool_limits)
+                  for pipe in (process.stdout, process.stderr):
+                      os.set_blocking(pipe.fileno(), False)
+                      selector.register(pipe, selectors.EVENT_READ)
+                  end = min(DEADLINE, time.monotonic() + 3)
+                  while selector.get_map():
+                      if time.monotonic() >= end:
+                          raise TimeoutError('static_tool_timeout')
+                      for key, _ in selector.select(0.05):
+                          chunk = os.read(key.fileobj.fileno(), 4096)
+                          remaining_output -= len(chunk)
+                          if remaining_output < 0:
+                              raise ValueError('tool_output_limit')
+                          if chunk:
+                              raw.extend(chunk)
+                          else:
+                              selector.unregister(key.fileobj)
+                  if process.wait(timeout=max(0.01, end - time.monotonic())) != 0:
+                      raise ValueError('static_tool_refused')
+                  text = raw.decode('ascii', 'strict')
+                  return dict(parse_static(text), static_bytes=len(raw), static_sha256=hashlib.sha256(raw).hexdigest())
+              finally:
+                  if process is not None:
+                      try:
+                          if process.poll() is None:
+                              process.kill()
+                          process.wait(timeout=2)
+                      finally:
+                          for pipe in (process.stdout, process.stderr):
+                              if pipe is not None:
+                                  pipe.close()
+                          receipt['children_remaining'] += int(process.poll() is None)
+                  selector.close()
+
+          try:
+              release = bounded('/etc/os-release', 4096).decode('ascii')
+              if not re.search(r'^ID=ubuntu$', release, re.M) or not re.search(r'^VERSION_ID="24\.04"$', release, re.M) or os.uname().machine != 'x86_64':
+                  raise ValueError('host_profile')
+              receipt['host'] = dict(os='ubuntu', version='24.04', machine=os.uname().machine)
+              receipt['image'] = {key: value for key in ('ImageOS', 'ImageVersion')
+                                  if (value := os.environ.get(key, '')) and re.fullmatch(r'[A-Za-z0-9_.-]{1,80}', value)}
+              overrides = [key for key in ('LD_PRELOAD', 'LD_LIBRARY_PATH', 'LD_AUDIT', 'LD_DEBUG', 'LD_TRACE_LOADED_OBJECTS', 'GLIBC_TUNABLES') if os.environ.get(key)]
+              receipt['loader_overrides_present'] = overrides
+              if overrides:
+                  raise ValueError('loader_override')
+              preload = bounded('/etc/ld.so.preload', 8192) if os.path.exists('/etc/ld.so.preload') else b''
+              if any(line.split(b'#', 1)[0].strip() for line in preload.splitlines()):
+                  raise ValueError('loader_preload')
+              config = bounded('/etc/ld.so.conf', 8192).decode('ascii')
+              with os.scandir('/etc/ld.so.conf.d') as directory:
+                  entries = []
+                  for entry in directory:
+                      if len(entries) >= 16 or not re.fullmatch(r'[A-Za-z0-9_.+-]{1,80}', entry.name):
+                          raise ValueError('loader_config_entries')
+                      entries.append(entry.name)
+              configs = [('/etc/ld.so.conf', config)] + [('/etc/ld.so.conf.d/' + name, bounded('/etc/ld.so.conf.d/' + name, 8192).decode('ascii')) for name in sorted(entries) if name.endswith('.conf')]
+              receipt['loader_config'] = [classify_config(path, text) for path, text in configs]
+              if not all(row['classified'] for row in receipt['loader_config']):
+                  raise ValueError('loader_search_unclassified')
+              cache = os.stat('/etc/ld.so.cache')
+              receipt['cache'] = dict(bytes=cache.st_size, uid=cache.st_uid, mode=oct(stat.S_IMODE(cache.st_mode)), resolution='NOT_DECODED')
+              hwcaps = '/usr/lib/x86_64-linux-gnu/glibc-hwcaps'
+              receipt['hwcaps_directory_present'] = os.path.lexists(hwcaps)
+              receipt['actual_loader_selection'] = 'UNKNOWN_CACHE_HWCAPS_NOT_RESOLVED'
+              tool, tool_identity = metadata('/usr/bin/readelf')
+              receipt['static_tool'] = tool
+              for name in ('ld-linux-x86-64.so.2',) + NAMES:
+                  paths = ('/lib64/' + name,) if name == 'ld-linux-x86-64.so.2' else tuple(base + name for base in BASES)
+                  try:
+                      found = [metadata(path) for path in paths if os.path.lexists(path)]
+                      if not found or len({identity[:2] for _, identity in found}) != 1:
+                          raise ValueError('missing_or_ambiguous')
+                      row, identity = found[0]
+                      row.update(name=name, aliases=[item['path'] for item, _ in found])
+                      if metadata('/usr/bin/readelf')[1] != tool_identity:
+                          raise ValueError('tool_changed')
+                      row.update(readelf(row['canonical']))
+                      if metadata(row['canonical'])[1] != identity:
+                          raise ValueError('provider_changed')
+                      if row['soname'] and row['soname'] != [name]:
+                          raise ValueError('soname_mismatch')
+                      receipt['providers'].append(row)
+                  except (OSError, ValueError, TimeoutError, subprocess.SubprocessError, UnicodeError) as error:
+                      receipt['reasons'].append(dict(name=name, kind=type(error).__name__, reason=str(error) if type(error) is ValueError else 'unavailable'))
+                      if receipt['children_remaining']:
+                          raise ValueError('owned_child_cleanup_unconfirmed')
+              receipt['audit_complete'] = True
+          except (OSError, ValueError, TimeoutError, UnicodeError) as error:
+              receipt['audit_complete'] = False
+              receipt['reasons'].append(dict(kind=type(error).__name__, reason=str(error) if type(error) is ValueError else 'unavailable'))
+          receipt['direct_profile_observed'] = len(receipt['providers']) == 11 and not receipt['reasons']
+          receipt['additional_direct_host_needs'] = sorted({name for row in receipt['providers'] for name in row['needed']} - set(NAMES))
+          receipt['distribution_file_binding'] = 'NOT_ESTABLISHED'
+          receipt['candidate_compatibility'] = 'UNKNOWN'
+          print(json.dumps(receipt, sort_keys=True, separators=(',', ':')))
+          raise SystemExit(0 if receipt['direct_profile_observed'] and receipt['children_remaining'] == 0 else 1)
+          PY
