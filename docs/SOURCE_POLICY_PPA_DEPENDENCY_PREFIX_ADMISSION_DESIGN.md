@@ -1,5 +1,15 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Fixed direct-provider audit passed — 2026-11-23
+
+[Actual45216510189 and next scope](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md)
+at56842f8 succeeded after ordinary45215956304:fixed configs,interpreter+ten direct
+host providers observed with root-owned metadata/static ELF/SONAME checks,files/
+children0. Temporary workflow removed. This closes direct availability,not full
+ABI/transitive/loader/PHP compatibility or launch authority. Next gated repository-
+only fixed three-payload prefix materialization safety foundation,isolated tests
+only;the proposed owned prefix remains uncreated and runtime/wiring disabled.
+
 ## Later approved audit outcome — 2026-11-23
 
 [Actual audit/resume](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md) supersedes the

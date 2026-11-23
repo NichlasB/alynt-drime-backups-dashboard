@@ -1,5 +1,81 @@
 # Existing-Runner PPA Provider/Profile and Launch Feasibility Audit
 
+## Fresh audit passed; direct availability observed — 2026-11-23
+
+Repair head56842f8694b2ca4c0e8f90098e4edea90e4e2bfc was committed/pushed;
+[ordinary45215956304](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45215956304)
+completed/success BEFORE the ONE fresh manual audit. Actual logs:PHP7.4 3077/
+25405,PHP8.3 3077/25410,plain OK;each matrix job API32/controller15 and Node295/
+295 with0 failures/errors/skips,Composer/npm vulnerabilities0.
+
+[Fresh audit45216510189](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45216510189)
+at that exact head,workflow_dispatch/run_attempt1,completed/SUCCESS. Job
+137838996255 ran16:26:26–16:26:34 UTC;all steps including cleanup completed/success.
+ADBPPAPROVIDER2: audit_complete/direct_profile_observed true,reasons0,providers11.
+Ubuntu24.04/x86_64,image20261116.376.1;five configuration files classified. Both
+new fixed forms matched their PRIOR digests and emitted exactly the directories
+recorded below. No nonempty allowlisted loader override or active preload refusal.
+
+Existing `/usr/bin/readelf` resolved to root-owned0755
+`/usr/bin/x86_64-linux-gnu-readelf` (789280 bytes). All eleven host files passed
+fixed metadata checks,ELF64/little-endian/x86-64/DYN and matching SONAME checks,
+with no observed RPATH/RUNPATH. No provider's metadata identity changed during
+its observation. Ten /lib and /usr/lib paths resolved to same-object merged-usr
+aliases;the interpreter's /lib64 path resolved to the canonical directory below.
+These are host observations,NOT new candidate pins or independently attested
+loaded paths. Static hashes in the run receipt hash readelf OUTPUT,not library bytes.
+
+All canonical leaves below are under `/usr/lib/x86_64-linux-gnu/`,UID0:
+
+| Requested name | Observed canonical leaf | Bytes | Mode |
+| --- | --- | ---: | --- |
+| ld-linux-x86-64.so.2 | ld-linux-x86-64.so.2 | 236616 | 0755 |
+| libm.so.6 | libm.so.6 | 952616 | 0644 |
+| libxml2.so.2 | libxml2.so.2.9.14 | 1967424 | 0644 |
+| libssl.so.3 | libssl.so.3 | 696512 | 0644 |
+| libcrypto.so.3 | libcrypto.so.3 | 5309400 | 0644 |
+| libpcre2-8.so.0 | libpcre2-8.so.0.11.2 | 625344 | 0644 |
+| libz.so.1 | libz.so.1.3 | 113000 | 0644 |
+| libsodium.so.23 | libsodium.so.23.3.0 | 355040 | 0644 |
+| libargon2.so.1 | libargon2.so.1 | 34808 | 0644 |
+| libgcc_s.so.1 | libgcc_s.so.1 | 183024 | 0644 |
+| libc.so.6 | libc.so.6 | 2129424 | 0755 |
+
+Host libxml2 reports libicuuc.so.74/liblzma.so.5 beyond the selected candidate's
+original ten direct names;these two were NOT recursively inspected. The loader
+is another dependency name outside that ten-name set,but already among the11
+observed files. No full transitive graph/version/relocation closure is claimed.
+Root-owned0644 ld.so.cache was38396 bytes,NOT decoded;the one bounded canonical
+glibc-hwcaps directory was absent,not proof of all possible loader choices.
+Actual loader selection UNKNOWN_CACHE_HWCAPS_NOT_RESOLVED,distribution file binding
+NOT_ESTABLISHED,candidate compatibility UNKNOWN;dependency_closure_verified and
+runtime_grant remain false. PHP/API/module/NTS/function and HTTP qualification
+remain unproved. Do not turn direct availability into a launch/ABI grant.
+
+Actual aggregate static-tool output27796 bytes,below65536;existing45s/50s/600s,
+40MiB parent/24MiB child and per-read/time caps unchanged. This is not full RSS
+measurement or a resource increase. Receipt files0/remaining children0;all owned
+readelf children were reaped/pipes closed by the fixed finally path. Runner post-
+checkout/Complete job cleanup succeeded. No candidate acquired/materialized/invoked,
+no fixture/listener,SQL/site/LocalWP,host permission/configuration change or rerun.
+Temporary workflow removed after the sole fresh audit;exact source retained in
+Git at56842f8. This does not claim independent host-wide cleanup or immutability.
+
+Implementation-plan progress:the specific loader-classification/direct-provider
+availability blocker is CLOSED. Original audit1/1 plus separately approved fresh
+audit1/1 consumed;DATA historical3/3,new1/1,native43/product4/10 unchanged. No
+product milestone counted and no renewal implied. Final ordinary exact-head
+removal/evidence CI and toolkit publication are recorded in the scoped checklist.
+
+Recommended next gated slice:Repository-Only Fixed Three-Payload PPA Prefix
+Materialization Safety Foundation,using isolated tests only. Implement the
+already designed dormant fixed output-owner/seal/cleanup contract,original shared
+budget and exact CLI/mysqlnd/mysqli identities without actual acquisition,
+materialization,descriptors/native execution or wiring. Missing transitive/PHP
+compatibility evidence stays explicit;later owned materialization and connection-
+free startup require their own authority. No new resolver/attestation layer or
+trust exception is recommended. This next foundation is NOT authorized here.
+
 ## Approved bounded classification repair and one fresh audit — 2026-11-23
 
 User approved the exact next slice below:repository repair/validation/publication,
@@ -30,8 +106,8 @@ ten names/two standard paths plus interpreter may be inspected as host DATA.
 Cache/hwcaps selection and actual compatibility remain UNKNOWN even if this
 read-only availability audit succeeds. No new resolver/attestation layer.
 
-Fresh audit and publication verification pending;historical failure below is
-preserved. No success,physical provider proof or renewed allowance is inferred.
+The actual fresh result is recorded above;the historical failure below remains
+preserved. No candidate proof or renewed allowance is inferred.
 
 Source-scoped canonical Feature Light:temporary workflow plus this owning record
 against8cafaa196dde8ff835b1ba3e5aef37780bb80443;fixed-path/digest/ordered-line

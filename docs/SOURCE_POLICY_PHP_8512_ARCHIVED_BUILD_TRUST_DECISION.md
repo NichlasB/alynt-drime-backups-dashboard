@@ -1,5 +1,14 @@
 # PHP 8.5.12 Archived-Build Provisioning and Trust Decision
 
+## Host direct-provider availability observed; no artifact/runtime grant — 2026-11-23
+
+[Fresh45216510189](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md)at56842f8 passed
+fixed config/interpreter+ten direct host observations,files/children0;temporary
+workflow removed. Pins/publishers/trust unchanged,no acquisition/materialization/
+candidate execution or full ABI/PHP claim. Next gated repository-only fixed three-
+payload prefix materialization safety foundation,isolated tests only. Actual
+prefix/startup/HTTP admission and wiring remain disabled;historical counters remain.
+
 ## Host-provider audit insufficient; artifact pins unchanged — 2026-11-23
 
 [Actual audit/resume](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md):single read-only
