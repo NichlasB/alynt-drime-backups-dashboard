@@ -1,5 +1,15 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## First PPA connection-free attempt resource-refused — 2026-11-23
+
+[Actual371bb4b/45261161938 and next decision](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+ordinary45260745218 success preceded ONE owned attempt. Fresh source/output guards
+passed;baseline exit127,memory-indication,no PHP facts,module phase not reached.
+Exact cleanup0/0 roots,FD delta0,children0,mask/always checks passed. DATA1/3 and
+CF1/3 consumed;historical native43+new1=cumulative44,product4/10 unchanged. No retry/
+new-native repair cycle. Next gated scoped soft/hard runtime AS exception and ONE
+fresh proof;no cap increase or WP/HTTP/SQL/production mutation occurred here.
+
 ## New PPA connection-free hour/allowances — 2026-11-23
 
 [Owning admission/attempt ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):

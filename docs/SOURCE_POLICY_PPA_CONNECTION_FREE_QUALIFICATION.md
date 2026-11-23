@@ -157,10 +157,110 @@ diagnostic classification avoids an extra raw-buffer lowercase copy. No UI,
 Database/physical transaction or historical whole-plugin
 release-readiness row is refreshed from this scoped campaign.
 
-## Publication/attempt ledger
+## Exact-head publication and actual FIRST attempt
 
-Initial state:acquisitions0/3,connection-free0/3. No native dispatch/candidate
-execution or artifact acquisition yet in THIS campaign. Verify exact remote head,
-ordinary CI and no conflicting owned proof before dispatch. Record actual results
-and cleanup even on refusal. Do not rerun unchanged failure or fill the hour with
-maintenance. Stop at unavailable/insufficient safe admission or a new boundary.
+Implementation371bb4b2f2e6b472e936bae5e28a6ab848cddb95 committed/pushed;
+[ordinary45260745218](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45260745218)
+completed/SUCCESS,BOTH exact-head jobs/checks success BEFORE dispatch. Actual logs:
+PHP7.4 3081 tests/25425 assertions,PHP8.3 3081/25430,plain OK/no skips;each source
+API32/controller15,Node295/295 with0 failures/skips,PHPCS305/305,Composer/npm
+vulnerabilities0,build/structure successful. Exact remote master matched and
+worktree clean,no conflicting PPA proof. Final guarded local21 groups/five
+assertion-killed controls also passed;no ordinary-test/native evidence conflation.
+
+[Owned attempt45261161938](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45261161938)
+at EXACT371bb4b,workflow_dispatch/run_attempt1,completed/FAILURE. Job137995969478
+completed in16s;receipt2026-11-23 20:37:00 UTC. The proof body refused;the independent
+always-reconciliation step SUCCESSFULLY completed. ADBPPARUNTIME1 actual facts:
+
+| Domain | Actual result,not inferred success |
+| --- | --- |
+| Acquisition/transport | All3 unchanged PPA pins/bytes acquired,transport released |
+| Source prerequisites | All10 fresh native source guard groups passed |
+| Materialized payloads | TRUE,12672176 bytes;no claim this was prepared-only |
+| Candidate attempt | attempted/executed TRUE means the exec/loader launch occurred,NOT that PHP produced a functional observation |
+| Baseline startup | exit127,finite memory-indication diagnostic,152 output bytes,observations EMPTY |
+| Module phase | NOT REACHED;no module/PHP build/API/NTS/function/zero-SQL statistics observation minted |
+| Complete/grants | connection_free_complete/prefix_proof_complete/qualified/dependency_closure_verified/production_wiring FALSE |
+| Work | 186911879/201326592 bytes;remaining14414713;no increased work budget |
+| Cleanup | release_unknown FALSE;PHP restored0400 before owned removal;source/runtime roots0/0,own FD delta0,children0,original mask barrier passed |
+| Independent always step | source/runtime roots0/0,step success;runner disposal not used as cleanup evidence |
+
+This is a qualification REFUSAL,not a cleanup failure or a successful native test.
+Do not call all checks green:ordinary matrix tests passed while the manual static
+check FAILED at this exact head. Native observations remain unavailable;no
+WordPress/HTTP/SQL body was dispatched. No raw loader text/path was published.
+The diagnostic is a memory indication only,not a measured minimum or proof of
+the exact library/allocation that failed. No corrupted pin,missing optional PHP
+function,API mismatch or application bug is established by this result.
+
+Campaign DATA1/3 and connection-free1/3 CONSUMED;two of each UNUSED. Historical
+native43 + this new dispatch1 = cumulative44,including this refused launch,not a
+ceiling reset. Prior prefix campaign DATA1/3,prefix1/3 and earlier DATA/audit/product
+ledgers stay intact. No unchanged rerun,extra acquisition or native repair cycle.
+Initial isolated test expectation/ownership refinements occurred before dispatch,
+not hidden native retries. Product4/10 is not inflated;startup/module qualification
+has NOT completed. The fixed guarded launch foundation is published/tested,not a
+successful functional runtime milestone.
+
+## Bounded source-only diagnosis and next resource-admission decision
+
+No native rerun or new diagnostic layer. Source inspection confirms
+source_policy_ppa_launch._NativeProcess.spawn passes the EXISTING
+source-policy-php-archive-static.decoder_limit callback. It sets RLIMIT_AS soft AND
+hard to24MiB,CPU60s,core0. Earlier A.preflight irreversibly lowers the parent soft
+AND hard RLIMIT_AS to40MiB. That retained envelope was appropriate admission data
+for the original materialization/codecs;it did NOT promise PHP startup would fit.
+
+[Linux resource-limit semantics](https://man7.org/linux/man-pages/man2/getrlimit.2.html)
+define RLIMIT_AS as virtual address space affecting mappings/stack,inherit limits
+across fork/exec,and prevent an unprivileged child raising its inherited hard
+ceiling. Therefore changing only the PHP child callback to a value above40MiB
+would itself be an invalid recovery. No privilege/elevation/prlimit escape is
+authorized. The old HTTP -d memory_limit=64M is a
+[PHP script-allocation setting](https://www.php.net/manual/en/ini.core.php#ini.memory-limit),
+NOT an already approved64MiB OS address-space budget. On-disk ELF/library sizes
+are not mapped-memory measurements. Do not add them and pretend to know the
+minimum required cap,or silently borrow the old HTTP budget.
+
+Evidence supports a runtime resource-admission blocker under the current profile;
+it does not prove a specific replacement limit will succeed. No guard-preserving
+in-scope code correction can authorize increased memory. Current runtime source,
+limits,pins,compatibility and all guards remain unchanged after the failed proof.
+
+### Preferred narrowly scoped proposal — NOT APPLIED/AUTHORIZED
+
+Recommend an explicit diagnostic-only PPA connection-free soft/hard admission
+exception,ONE fresh exactly pinned tuple acquisition and ONE fresh qualification/
+cleanup attempt,after isolated validation
+and ordinary exact-head CI. Proposed fixed limits:
+
+| Owned process/phase | Current soft/hard MiB | Proposed soft/hard MiB |
+| --- | --- | --- |
+| Trusted controller | 40/40 | 40/128,from initial admission BEFORE any irreversible hard lowering |
+| gzip/xz/zstd codec child | 24/24 | UNCHANGED24/24 |
+| Candidate PHP child,only after all codecs reaped | 24/24 | 128/128 |
+
+The128MiB value is a finite feasibility ceiling,NOT a measured minimum,guaranteed
+fit or production recommendation. Parent kernel-enforced soft limit stays40MiB,
+but its hard headroom changes explicitly;planned simultaneous enforced soft
+ceilings become168MiB during runtime (64MiB during codec phase). Parent hard
+headroom also means a theoretical pair of hard ceilings256MiB,NOT a hard168MiB
+job guarantee. This is a real,scoped resource/safety-contract change requiring
+approval—not permission already hidden in the current trust contract.
+
+Prefer a small manual-only fixed preflight/limiter seam,reusing the existing
+codec probes and preserving every LEGACY default40/40+24/24 limit. No public
+numeric resource selector,new broker/supervisor/toolchain,privilege or host policy.
+Read back expected soft/hard limits and check phase ordering;never simply disable
+RLIMIT_AS. If this approved fixed profile cannot fit,refuse without a cap ladder.
+Keep CPU/core,540s work/30s cleanup/600s job,192MiB work,raw/chunk/output caps,
+exact pins,nonroot/minimal env/absolute modules/recovery identity and no WP/HTTP/
+SQL/production grants. Any further allowance must be explicit and counted;do not
+silently spend the two unused current attempts with different resource semantics.
+
+Exact recommended next action:approve this Candidate-Specific Soft/Hard Address-
+Space Admission Exception and ONE Fresh Connection-Free Qualification/Cleanup
+Attempt. No exception was implemented and no second attempt was run. The current
+campaign stops at its explicit resource-budget boundary after truthful evidence
+closeout,not after a renamed implementation slice or to fill the remaining hour.

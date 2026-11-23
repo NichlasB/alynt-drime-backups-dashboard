@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Connection-free launch refused at retained resource envelope — 2026-11-23
+
+[Actual45261161938 and source-only resource decision](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+371bb4b ordinary45260745218 passed;fresh pinned source/output prerequisites passed,
+baseline exec exited127/memory-indication with no PHP JSON,module phase not reached.
+Work186911879/201326592,materialized12672176 bytes then restored/cleaned,roots/FD/
+children0,always reconciliation passed. New DATA1/3,CF1/3 consumed,cumulative native44;
+no retry/product credit. Next real gate:explicit candidate-specific soft/hard AS
+exception (proposal parent40/128,candidate128/128,codecs24/24) and ONE new proof.
+Current limits unchanged;no WordPress/HTTP/SQL/production admission. Full runtime
+compatibility remains unproved,not another missing-source or artifact-pin repair.
+
 ## PPA connection-free functional campaign authorized — 2026-11-23
 
 [Fixed admission/launch and current ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):

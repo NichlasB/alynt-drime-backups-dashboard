@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## PPA startup did not reach functional observation — 2026-11-23
+
+[Actual45261161938](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):fresh source/
+output admission passed,but baseline exit127/memory-indication under retained24MiB
+child AS produced no PHP JSON;module phase not reached. Cleanup/always verified
+zero roots/FD delta/children. Existing setup-php/PATH/HTTP/recovery consumers and
+production wiring unchanged. Next gated candidate runtime soft/hard AS exception,
+NOT a WordPress/bootstrap/HTTP/SQL attempt or refreshed current-cohort admission.
+
 ## Prefix proof passed,not HTTP/runtime admission — 2026-11-23
 
 [Actual45252680968 and readiness gaps](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md):

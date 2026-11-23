@@ -1,5 +1,14 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Functional contract accepted,but current startup resource admission refused — 2026-11-23
+
+[Actual45261161938 and resource proposal](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)
+at371bb4b retained all pins/guards:source/output prerequisites passed,baseline
+exec127/memory-indication,no PHP/module facts,cleanup/always roots0/0. Trusted-host
+functional approval is not permission to raise the24MiB child/40MiB parent hard
+limits or claim closure. Next explicit soft/hard AS admission exception and ONE
+fresh proof;all runtime compatibility/transitive/production grants remain false.
+
 ## Candidate-specific functional contract explicitly accepted — 2026-11-23
 
 [Current bounded campaign](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)
