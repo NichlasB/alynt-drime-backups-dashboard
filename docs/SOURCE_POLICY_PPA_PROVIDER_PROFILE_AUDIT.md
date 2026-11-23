@@ -1,5 +1,14 @@
 # Existing-Runner PPA Provider/Profile and Launch Feasibility Audit
 
+## Subsequent approved dormant output foundation — 2026-11-23
+
+[Fixed output policy](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) now implements
+the recommended isolated foundation,not a fresh audit or native proof. Actual
+availability receipts below remain historical and unmodified. No candidate prefix
+was created and PHP/ABI/transitive compatibility remains unproved. Next gated
+repository-only native-storage/source-stream join integration DESIGN;all actual
+materialization/execution and production wiring remain disabled.
+
 ## Fresh audit passed; direct availability observed — 2026-11-23
 
 Repair head56842f8694b2ca4c0e8f90098e4edea90e4e2bfc was committed/pushed;

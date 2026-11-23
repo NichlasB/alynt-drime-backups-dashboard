@@ -1,5 +1,14 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Approved output-policy foundation,not native materialization — 2026-11-23
+
+[Dormant fixed output policy](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) advances
+this design's three-payload identity/write/readback/seal/cleanup contract through
+isolated API tests. Default storage boundary refuses before resource access;no
+native adapter,source join or prefix/launch grant. Next gated repository-only
+native-storage/source-stream join integration DESIGN,not actual materialization
+or candidate execution. Original source reader,budgets,pins and wiring unchanged.
+
 ## Fixed direct-provider audit passed — 2026-11-23
 
 [Actual45216510189 and next scope](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md)

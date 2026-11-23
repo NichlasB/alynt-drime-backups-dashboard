@@ -1,5 +1,14 @@
 # Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and Cleanup Proof
 
+## Separate dormant output policy;read-only leases unchanged — 2026-11-23
+
+[Output foundation](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) uses the original
+budget interfaces but does not modify/widen this read-only source owner. No source
+receipt or caller boolean grants construction/launch authority. Next gated fixed
+native-storage/source-stream join integration DESIGN,including source/decoder
+closure before any usable prefix. Existing physical source proof/counters remain;
+no acquisition,real descriptors,materialization or execution in this foundation.
+
 ## Host direct-provider availability observed; source proof unchanged — 2026-11-23
 
 [Fresh audit45216510189](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md)at56842f8

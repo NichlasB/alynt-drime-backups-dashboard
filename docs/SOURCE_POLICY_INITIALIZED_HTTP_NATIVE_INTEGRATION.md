@@ -1,5 +1,13 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Output policy isolated from current loader — 2026-11-23
+
+[Fixed prefix foundation](SOURCE_POLICY_PPA_PREFIX_OUTPUT_FOUNDATION.md) implements
+RAM-tested identity/readback/seal/cleanup policy only. No native storage adapter,
+prefix path/handle,source join,launch description or loader/controller/wiring change.
+Next gated repository-only native-storage/source-stream join integration DESIGN;
+actual prefix/startup/HTTP/SQL qualification and production wiring remain disabled.
+
 ## Direct-provider observation passed; private launch still dormant — 2026-11-23
 
 [Fresh45216510189](SOURCE_POLICY_PPA_PROVIDER_PROFILE_AUDIT.md)at56842f8 passed
