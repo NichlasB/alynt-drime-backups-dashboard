@@ -1,9 +1,13 @@
-name: Source-policy owned PPA prefix materialization proof
+name: Source-policy owned PPA connection-free functional proof
 on:
   workflow_dispatch:
     inputs:
       expected_sha:
-        description: Exact approved master head for ONE owned prefix source-join proof
+        description: Exact approved master head for ONE owned connection-free proof
+        required: true
+        type: string
+      execution_contract:
+        description: Approved ppa-connection-free-functional-v1, no WordPress/HTTP/SQL
         required: true
         type: string
 permissions:
@@ -18,6 +22,7 @@ jobs:
     timeout-minutes: 10
     env:
       EXPECTED_SHA: ${{ inputs.expected_sha }}
+      PPA_EXECUTION_CONTRACT: ${{ inputs.execution_contract }}
     steps:
       - name: Admit exact approved head and first attempt
         shell: bash
@@ -25,6 +30,7 @@ jobs:
           set -euo pipefail
           [[ "$GITHUB_EVENT_NAME" == workflow_dispatch && "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ && "$EXPECTED_SHA" == "$GITHUB_SHA" ]]
           [[ "$GITHUB_RUN_ATTEMPT" == 1 && "$RUNNER_OS" == Linux && "$(uname -m)" == x86_64 ]]
+          [[ "$PPA_EXECUTION_CONTRACT" == ppa-connection-free-functional-v1 ]]
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
@@ -37,12 +43,13 @@ jobs:
             .github/workflows/source-policy-ppa-deb-static.yml \
             scripts/ci/source-policy-ppa-deb-static.py \
             scripts/ci/source-policy-ppa-prefix-proof.py \
+            scripts/ci/source_policy_ppa_launch.py \
             scripts/ci/source_policy_ppa_join.py scripts/ci/source_policy_ppa_storage.py scripts/ci/source_policy_ppa_prefix.py \
             scripts/ci/source_policy_deb_data.py scripts/ci/source_policy_deb_stream.py \
             scripts/ci/source_policy_deb_sources.py scripts/ci/source_policy_deb_replay.py scripts/ci/source_policy_elf_ranges.py \
             scripts/ci/source-policy-php-archive-static.py scripts/manual/source_policy_linux_minimum_static.py
-      - name: Existing-tool preflight and ONE owned prefix source-join proof
-        run: python3 -I -S -B scripts/ci/source-policy-ppa-prefix-proof.py --approved-prefix-proof
+      - name: Fresh prerequisites and ONE owned connection-free functional proof
+        run: python3 -I -S -B scripts/ci/source-policy-ppa-prefix-proof.py --approved-connection-free-proof
       - name: Always reconcile exact owned source and runtime roots
         if: always()
         run: python3 -I -S -B scripts/ci/source-policy-ppa-prefix-proof.py --reconcile-prefix-proof

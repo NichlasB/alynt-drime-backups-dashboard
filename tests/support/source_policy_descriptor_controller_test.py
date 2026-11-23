@@ -272,9 +272,9 @@ class Cleanup(unittest.TestCase):
                     'source_policy_deb_data.py', 'source_policy_deb_stream.py', 'source-policy-ppa-deb-static.py',
                     'source-policy-php-archive-static.py', 'source_policy_linux_minimum_static.py',
                     'source_policy_ppa_join.py', 'source_policy_ppa_storage.py', 'source_policy_ppa_prefix.py',
-                    'source-policy-ppa-prefix-proof.py')
+                    'source-policy-ppa-prefix-proof.py', 'source_policy_ppa_launch.py')
         for name in required:
-            self.assertLess(source.index(name), source.index('--approved-prefix-proof'))
+            self.assertLess(source.index(name), source.index('--approved-connection-free-proof'))
         self.assertIn('if: always()', source)
         self.assertIn('--reconcile-prefix-proof', source)
         self.assertNotIn('pip install', source)

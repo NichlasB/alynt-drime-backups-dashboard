@@ -1,5 +1,14 @@
 # Owned Fixed Native Prefix Materialization/Source-Join Qualification
 
+## Subsequent explicitly approved connection-free scope — 2026-11-23
+
+[Separate current campaign](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)
+accepts PPA trusted-host FUNCTIONAL execution only,with fresh original-ledger
+source/output prerequisites and a fixed private launch description. The prefix-
+only mode and successful0fbd909/45252680968 receipt below remain historical;
+they grant no new runtime/production authority. Prior DATA1/3,prefix1/3 are not
+reset/borrowed;new acquisition/connection-free counters are separate.
+
 ## Time-boxed authority and fresh baseline — 2026-11-23
 
 User explicitly authorizes an autonomous campaign from2026-11-23 19:35:44 UTC

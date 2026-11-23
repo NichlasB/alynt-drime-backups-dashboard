@@ -1,5 +1,15 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Candidate-specific functional contract explicitly accepted — 2026-11-23
+
+[Current bounded campaign](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)
+authorizes connection-free startup/module/function observations using the fixed
+PPA payloads and trusted stock Ubuntu host. This is NOT independent transitive/
+loaded-object assurance or a broader UBI/production exception. Keep dependency
+closure/production grants false,source identities and all budgets. Manual-only
+private absolute launch/recovery integration is tested before fresh qualification;
+no additional extension,installed-module/PATH/INI/loader fallback or SQL/HTTP work.
+
 ## Materialization/source join now proved;runtime contract still closed — 2026-11-23
 
 [Actual owned45252680968](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md)at0fbd909

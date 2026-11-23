@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PPA connection-free functional campaign authorized — 2026-11-23
+
+[Fixed admission/launch and current ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+explicit PPA trusted-host FUNCTIONAL contract,not transitive/loaded-object proof.
+Manual-only absolute executable/module/env and bound recovery;fresh source/output
+prerequisites,unchanged40/24MiB/192MiB budgets,three NEW acquisition/connection-free
+attempt allowances. No extra modules,WordPress/HTTP/SQL or production wiring.
+Historical prefix1/3 and native43/product4/10 retained;ordinary exact-head CI and
+owned cleanup required before any attempt. Actual results pending,not assumed.
+
 ## Owned prefix/source-join qualification passed — 2026-11-23
 
 [Actual45252680968 and readiness assessment](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md)

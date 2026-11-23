@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## New PPA connection-free hour/allowances — 2026-11-23
+
+[Owning admission/attempt ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+explicit PPA trusted-host FUNCTIONAL execution/model,three NEW acquisitions and
+three connection-free attempts,up to3 repair cycles per distinct blocker. Preserve
+historical DATA/audits,prior prefix campaign1/3 and native43/product4/10;no counter
+reset. Fixed same-prefix executable/module/env/recovery and original caps;no
+WordPress,HTTP,SQL or production selection. Actual qualification remains pending.
+
 ## Owned materialization passed;next runtime boundary reached — 2026-11-23
 
 [Actual proof/readiness](SOURCE_POLICY_PPA_PREFIX_NATIVE_QUALIFICATION.md):exact

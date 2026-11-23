@@ -1,4 +1,7 @@
-"""Exact-job owned prefix materialization/cleanup ONLY. Never execute a payload."""
+"""Exact-job owned prefix proofs. Candidate execution requires its separate contract.
+
+The legacy prefix-only mode never executes a payload. No production entry.
+"""
 import importlib.util
 import json
 import math
@@ -65,11 +68,29 @@ class _FixedEntry:
             J._ENTRY, J.N._CALLS = previous
 
 
+class _ConnectionFreeEntry(_FixedEntry):
+    def run(self):
+        import source_policy_ppa_launch as X
+        S.require(os.environ.get('PPA_EXECUTION_CONTRACT') == X.CONTRACT, 'candidate-contract')
+        previous = J._JoinedOutput, X._PROCESS
+        try:
+            J._JoinedOutput, X._PROCESS = X._ConnectionFreeOutput, X._NativeProcess()
+            facts = super().run()
+            observed = self._context._candidate_observation
+            S.require(observed.complete and observed.started and not observed.unknown, 'candidate-final-barrier')
+            return {**facts, 'connection_free': observed.receipt()}
+        finally:
+            J._JoinedOutput, X._PROCESS = previous
+
+
 def main():
     root = M.target(os.environ)  # No file/API access before exact-job admission.
     runtime = _runtime(root)
     cleanup_only = sys.argv[1:] == ['--reconcile-prefix-proof']
-    S.require(cleanup_only or sys.argv[1:] == ['--approved-prefix-proof'], 'prefix-proof-entry')
+    connection_free = sys.argv[1:] == ['--approved-connection-free-proof']
+    S.require(cleanup_only or connection_free or sys.argv[1:] == ['--approved-prefix-proof'], 'prefix-proof-entry')
+    if connection_free:
+        S.require(os.environ.get('PPA_EXECUTION_CONTRACT') == 'ppa-connection-free-functional-v1', 'candidate-contract')
     entry, cleanup_deadline = None, None
 
     def arm_cleanup():
@@ -102,6 +123,8 @@ def main():
                'materialized': False, 'extracted': False, 'executed': False,
                'qualified': False, 'dependency_closure_verified': False,
                'versioned_symbols': 'Unknown', 'production_wiring': False}
+    if connection_free:
+        receipt.update(format='ADBPPARUNTIME1', connection_free_complete=False)
     created, complete, baseline, mask, facts = False, False, None, None, None
     budget = J.D.Budget()  # ONE original ledger for acquisition,guards,both passes/output.
     try:
@@ -130,11 +153,11 @@ def main():
         receipt['stage'] = 'fresh-owned-source-guards'
         receipt['groups'] = M._descriptor_checks(root, budget)
         receipt['stage'] = 'fixed-native-prefix-source-join'
-        entry = _FixedEntry(budget)
+        entry = _ConnectionFreeEntry(budget) if connection_free else _FixedEntry(budget)
         facts = entry.run()
         _absent(runtime)
         complete = True
-        receipt['reason'] = 'materialized-sealed-cleaned-only-no-runtime-admission'
+        receipt['reason'] = 'connection-free-functional-only' if connection_free else 'materialized-sealed-cleaned-only-no-runtime-admission'
     except S.Refusal as error:
         receipt['reason'] = str(error)
     except urllib.error.HTTPError as error:
@@ -152,6 +175,10 @@ def main():
                 # Truthful even on partial-write failure;never call RAM DATA physical proof.
                 receipt['materialized_payload_bytes'] = sum(size for leaf, size in storage._sizes.items() if leaf != 'owner.json')
                 receipt['materialized'] = receipt['extracted'] = any(leaf != 'owner.json' for leaf in storage._sizes)
+            observed = getattr(entry._context, '_candidate_observation', None) if entry is not None else None
+            if observed is not None:
+                receipt['candidate'] = observed.receipt()
+                receipt['executed'] = observed.started
             _absent(runtime)  # No cleanup fallback for an unknown/retained prefix.
             if created:
                 M._fixture_cleanup(root)
@@ -175,7 +202,12 @@ def main():
         try:
             budget.charge(0)  # Cleanup never extends original work acceptance.
             S.require(receipt['materialized'] is True, 'prefix-materialization-evidence')
+            if connection_free:
+                S.require(receipt.get('candidate', {}).get('complete') is True and receipt['executed'] is True
+                          and receipt['candidate']['release_unknown'] is False, 'candidate-result-barrier')
             receipt.update(prefix_proof_complete=True, stage='complete', output=facts)
+            if connection_free:
+                receipt['connection_free_complete'] = True
         except S.Refusal as error:
             complete, receipt['reason'] = False, str(error)
     receipt['work_bytes'] = budget.total
