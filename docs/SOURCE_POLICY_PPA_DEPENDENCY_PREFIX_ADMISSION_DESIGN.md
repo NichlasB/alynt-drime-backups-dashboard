@@ -1,5 +1,16 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Candidate-specific connection-free functionality now observed — 2026-11-23
+
+[8bd4ee3/45269436859](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md) SUCCESS:
+exact8.5.12/NTS64 baseline and mysqlnd/mysqli phases,required function availability,
+zero native client counters;all source/runtime cleanup0. Original approved AS/
+codec/work caps preserved. This does NOT establish transitive/loaded-object/
+universal ABI/production closure;all those grants remain FALSE/Unknown. Optional
+ctype/iconv/mbstring functions absent. Next gated repository-only initialized-
+fixture absolute launch/recovery identity and function-profile admission DESIGN,
+not another acquisition,additional module or HTTP/SQL execution.
+
 ## Approved AS attempt reached exit0; native qualification still refused — 2026-11-23
 
 [45265615789 and boolean-NTS repair](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):

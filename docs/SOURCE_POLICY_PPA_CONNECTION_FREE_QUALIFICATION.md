@@ -1,5 +1,78 @@
 # PPA Candidate Connection-Free Functional Admission and Qualification
 
+## Strict boolean-NTS connection-free qualification PASSED — 2026-11-23
+
+User explicitly approves ONE New-Head Strict Boolean-NTS Connection-Free
+Requalification/Cleanup Attempt at8bd4ee34160c6f61169440bfc5aa7949cf48585e,including
+ONE fresh unchanged pinned PPA tuple acquisition. Narrow R3 ephemeral-lab authority
+only;no broad campaign reset,new cap,module,publisher,trust or production permission.
+Fresh baseline:HEAD/origin/master/GitHub exact8bd4ee3,clean/synced;toolkit exact
+b395ef3706050430540027a3b7a61897fd09985f clean/synced. Prior45265615789 cleanup and
+independent always0/0 reverified,no conflicting active PPA proof. Local isolated31
+groups pass0 failures/errors/skips;no source/test/workflow edit before dispatch.
+
+[Ordinary45266275344](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45266275344)
+freshly reverified completed/SUCCESS at exact8bd4ee3 BEFORE dispatch,both checks.
+Actual logs PHP7.4 3081/25425,PHP8.3 3081/25430,plain OK/no skips;each API32/
+controller15,Node295/295 with0 failures/skips,PHPCS305/305,Composer/npm0
+vulnerabilities,build/structure successful. Historical local full-suite/Sodium
+limits below remain scoped to their original bytes,not falsely rerun here.
+
+[Owned45269436859](https://github.com/NichlasB/alynt-drime-backups-dashboard/actions/runs/45269436859)
+EXACT8bd4ee3,workflow_dispatch/run_attempt1,job138025004488,completed/SUCCESS;
+receipt2026-11-23 21:25:17 UTC (22:25:17 Europe/Paris). Actual final run conclusion,
+not merely green steps,reverified. All three exact-head checks (ordinary7.4/8.3 and
+manual static) completed/success. Actual ADBPPARUNTIME1 facts:
+
+| Domain | Accepted finite result |
+| --- | --- |
+| Prerequisites | All3 unchanged pins/bytes,all10 fresh source guard groups,transport released |
+| AS/codecs | Fixed parent40/128MiB,candidate128/128,codecs24/24,8MiB window;all3 codec samples/reaping passed |
+| Prefix | Three payloads12672176 bytes materialized/sealed/read back,source/decoder closure before launch |
+| Baseline | Exact8.5.12,CLI,Linux/x86_64,64-bit,NTS boolean false;exit0 |
+| Module phase | Exit0,exact inventory delta mysqlnd+mysqli,19 baseline/21 module entries;client/mysqlnd mysqlnd8.5.12,mysqli8.5.12,report_mode3 |
+| Launch binding | Binary/private extension_dir match TRUE,no INI/scanned/prepend/append/includes,pdo_mysql FALSE |
+| Required functions | All10 required function_exists observations TRUE in both phases,not algorithm/correctness testing |
+| Optional observations | ctype_digit/iconv/mb_strlen FALSE in both phases;no fallback or additional extension loaded |
+| Native stats | connect_success/connect_failure/com_query all string0;no connection or SQL was constructed |
+| Functional result | candidate.complete/connection_free_complete/prefix_proof_complete TRUE,executed/materialized/extracted TRUE |
+| Limits on grants | qualified/dependency_closure_verified/production_wiring FALSE,versioned_symbols Unknown |
+| Work/output | 186921494/201326592 bytes,remaining14405098,1573 child output bytes,raw scratch peak131072 |
+| Owned cleanup | release_unknown FALSE,PHP restored0400,roots0/0,own FD delta0,children0,mask barrier passed |
+| Independent always | SUCCESS,source/runtime roots0/0,not inferred from runner disposal |
+
+This completes ONE bounded candidate-specific trusted-host connection-free
+FUNCTIONAL qualification milestone. It does not prove transitive dependency
+closure,loaded-object attestation,universal ABI,minimum memory,hostile-host/pre-router
+containment,genuine authentication,WordPress bootstrap/HTTP/SQL or production
+readiness. No installed PHP/module fallback,INI/PATH selection,additional module,
+cap change,WordPress/LocalWP/live/client/Drime or production operation. All owned
+artifacts/processes retired;the successful receipt is not a retained launch grant.
+
+New specifically approved DATA1/1,CF1/1 CONSUMED,repair cycles0;no retry/repeated
+success. Previous exception DATA1/1+CF1/1,earlier hour DATA1/3+CF1/3,prefix/DATA/
+audit ledgers stay separate/historical. Cumulative native45+1=46,product4/10
+unchanged;do not count this evidence/docs/cleanup as additional product milestones.
+
+Implementation-plan advancement:fixed candidate startup/build/NTS/module/function
+availability and lifecycle now have actual positive evidence,not only RAM tests.
+The remaining gap is integration with initialized-fixture launch and recovery,
+not another static acquisition or repetition of this successful probe. Direct
+source check shows HTTP OWNED_PHP_ARGS still short extension names and its
+controller inherits PATH;initializer/setup/server/recovery must share one admitted
+absolute private launch identity. The optional-absent functions require a genuine
+core use/fallback admission review,not silent extra modules or presumed readiness.
+This is a bounded next-slice recommendation,not a completed integration design.
+
+Exact recommended next action:approve Repository-Only PPA Candidate-Bound
+Initialized-Fixture Launch/Recovery and Function-Profile Admission Design.
+Design only;no acquisition,materialization,candidate/native/bootstrap/HTTP/SQL
+execution,additional module,resource/trust change or production wiring. The current
+ONE-attempt authority is exhausted;new execution requires separate approval.
+This closeout changes only directly owning evidence/plans,not source/tests/workflow
+or historical whole-plugin release readiness. Publication exact-head CI is tracked
+in the toolkit scoped record;native success remains bound to8bd4ee3 source bytes.
+
 ## Approved exception reached exit0; strict runtime-profile refusal and repair — 2026-11-23
 
 Implementation223ad7698a73968ad6701992151f9791afdcb3f6 committed/pushed;
