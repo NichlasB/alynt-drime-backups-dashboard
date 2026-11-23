@@ -7,7 +7,7 @@ on:
         required: true
         type: string
       execution_contract:
-        description: Approved ppa-connection-free-functional-v1, no WordPress/HTTP/SQL
+        description: Approved ppa-connection-free-functional-v1 with fixed40/128 parent and128/128 PHP, codecs24/24; no WordPress/HTTP/SQL
         required: true
         type: string
 permissions:

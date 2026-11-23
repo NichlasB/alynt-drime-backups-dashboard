@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Fixed connection-free soft/hard resource exception approved — 2026-11-23
+
+[Owning profile,validation and attempt ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+explicit user approval for parent AS40/128,PHP128/128 after decoder closure,codecs
+UNCHANGED24/24,legacy40/40 defaults unchanged. Fixed manual-only preflight/child
+readbacks and isolated30 groups/eight assertion-killed controls;no resource selector
+or production admission. ONE new acquisition/attempt pending ordinary exact-head CI,
+DATA0/1,CF0/1,cumulative native44/product4/10 unchanged. No successful functional
+qualification claimed. Original source identities,work/time/output/cleanup caps
+and no WordPress/HTTP/SQL/production boundary retained.
+
 ## Connection-free launch refused at retained resource envelope — 2026-11-23
 
 [Actual45261161938 and source-only resource decision](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):

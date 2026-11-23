@@ -192,6 +192,15 @@ class Launch(unittest.TestCase):
             X._Launch(output).run()
         self.assertEqual([], self.api.processes)
 
+    def test_unknown_decoder_blocks_mode_change_and_candidate(self):
+        context = self.entry._context
+        context._decoder_unknown, context._source_count = True, 2
+        output = SimpleNamespace(_context=context, _storage=self.model.calls, _sealed=True, _active=None)
+        with patch.object(X, '_PROCESS', self.api), self.assertRaisesRegex(S.Refusal, 'source-output-barrier'):
+            X._Launch(output).run()
+        self.assertEqual([], self.api.processes)
+        self.assertFalse(any(event[0] == 'chmod' for event in self.model.calls.events))
+
     def test_wrong_version_and_configuration_refuse_without_fallback(self):
         self.api.change = lambda row, modules: row.update(php='8.5.13')
         with self.assertRaisesRegex(S.Refusal, 'runtime-profile'):
@@ -330,6 +339,7 @@ class Launch(unittest.TestCase):
 class NativeShape(unittest.TestCase):
     def test_nonroot_linux_identity_is_required_before_process_effects(self):
         with (patch.object(X.sys, 'platform', 'linux'),
+              patch.dict(sys.modules, {'resource': Resources()}),
               patch.object(X.os, 'getuid', return_value=0, create=True) as uid,
               patch.object(X.os, 'geteuid', return_value=0, create=True) as euid):
             with self.assertRaisesRegex(S.Refusal, 'process-platform'):
@@ -344,6 +354,9 @@ class NativeShape(unittest.TestCase):
         model = C.Controller('test_positive_requires_fresh_guards_and_retirement')
         model.setUp()
         self.addCleanup(model.doCleanups)
+        control = patch.object(X, '_preflight', side_effect=model.preflight)
+        control.start()
+        self.addCleanup(control.stop)
         if observed:
             model.context._candidate_observation = SimpleNamespace(started=True, receipt=lambda: {'complete': True, 'release_unknown': False})
         return model
@@ -391,7 +404,7 @@ class NativeShape(unittest.TestCase):
             X._NativeProcess().spawn(argv)
         args = spawn.call_args
         self.assertEqual((argv,), args.args)
-        self.assertIs(J.D.A.decoder_limit, args.kwargs['preexec_fn'])
+        self.assertIs(X._candidate_limit, args.kwargs['preexec_fn'])
         self.assertTrue(args.kwargs['close_fds'])
         self.assertTrue(args.kwargs['start_new_session'])
         self.assertEqual((), args.kwargs['pass_fds'])
@@ -414,9 +427,128 @@ class NativeShape(unittest.TestCase):
             kill.assert_called_once_with(123, 9)
 
 
+class Resources:
+    """In-memory resource API; never changes host/child limits."""
+    RLIMIT_AS, RLIMIT_CPU, RLIMIT_CORE = 9, 0, 4
+
+    def __init__(self):
+        self.values = {9: (X.PARENT_SOFT, X.CANDIDATE_MEMORY), 0: (-1, -1), 4: (0, 0)}
+        self.calls, self.ignore = [], False
+
+    def getrlimit(self, key):
+        return self.values[key]
+
+    def setrlimit(self, key, value):
+        self.calls.append((key, value))
+        if not self.ignore:
+            self.values[key] = value
+
+
+class AddressAdmission(unittest.TestCase):
+    def setUp(self):
+        self.api = Resources()
+        self.control = patch.dict(sys.modules, {'resource': self.api})
+        self.control.start()
+        self.addCleanup(self.control.stop)
+
+    def archive(self):
+        stack = patch.object(X.sys, 'platform', 'linux')
+        stack.start()
+        self.addCleanup(stack.stop)
+        stack = patch.object(J.D.A.Path, 'is_file', return_value=True)
+        stack.start()
+        self.addCleanup(stack.stop)
+        stack = patch.object(J.D.A.subprocess, 'run', return_value=SimpleNamespace(returncode=0, stdout=b'x'))
+        probe = stack.start()
+        self.addCleanup(stack.stop)
+        return probe
+
+    def test_fixed_parent_profile_keeps_soft40_hard128_and_same_codec_probe(self):
+        probe = self.archive()
+        self.api.values[9] = (-1, -1)
+        row = X._archive_preflight()
+        self.assertEqual((40*1024*1024, 128*1024*1024), self.api.values[9])
+        self.assertEqual(24*1024*1024, row['decoder_address_space'])
+        self.assertEqual(X.ADDRESS_PROFILE, row['address_profile'])
+        self.assertEqual(X.CANDIDATE_MEMORY, row['parent_address_space_hard'])
+        self.assertIs(J.D.A.decoder_limit, probe.call_args.kwargs['preexec_fn'])
+        self.assertEqual(list(J.D.A.DECODER_ARGS), probe.call_args.args[0])
+
+    def test_parent_readback_failure_blocks_codec_start(self):
+        probe = self.archive()
+        self.api.values[9], self.api.ignore = (-1, -1), True
+        with self.assertRaisesRegex(S.Refusal, 'parent-limits'):
+            X._archive_preflight()
+        probe.assert_not_called()
+
+    def test_candidate_limit_requires_inherited_exact_profile_before_changes(self):
+        for limits in ((X.PARENT_SOFT, X.PARENT_SOFT), (-1, -1), (X.CANDIDATE_MEMORY, X.CANDIDATE_MEMORY)):
+            self.api.values[9] = limits
+            with self.assertRaisesRegex(S.Refusal, 'inherited-limits'):
+                X._candidate_limit()
+            self.assertEqual([], self.api.calls)
+        self.api.values[9] = (X.PARENT_SOFT, X.CANDIDATE_MEMORY)
+        X._candidate_limit()
+        self.assertEqual([(9, (X.CANDIDATE_MEMORY, X.CANDIDATE_MEMORY)), (0, (60, 60)), (4, (0, 0))], self.api.calls)
+
+    def test_candidate_limit_readback_refuses_ineffective_set(self):
+        self.api.ignore = True
+        with self.assertRaisesRegex(S.Refusal, 'child-limits'):
+            X._candidate_limit()
+
+    def test_legacy_parent40_and_codec24_limits_are_unchanged(self):
+        self.archive()
+        J.D.A.preflight()
+        self.assertEqual((40*1024*1024, 40*1024*1024), self.api.values[9])
+        J.D.A.decoder_limit()
+        self.assertEqual((24*1024*1024, 24*1024*1024), self.api.values[9])
+        self.assertEqual((60, 60), self.api.values[0])
+        self.assertEqual((0, 0), self.api.values[4])
+
+    def test_fixed_override_restores_legacy_preflight_on_success_and_failure(self):
+        original = J.D.A.preflight
+        for failing in (False, True):
+            def probe():
+                self.assertIs(X._archive_preflight, J.D.A.preflight)
+                if failing:
+                    raise S.Refusal('synthetic-codec')
+                return {'model': True}
+            with patch.object(X.B, 'preflight', side_effect=probe):
+                if failing:
+                    with self.assertRaisesRegex(S.Refusal, 'synthetic-codec'):
+                        X._preflight()
+                else:
+                    self.assertEqual({'model': True}, X._preflight())
+            self.assertIs(original, J.D.A.preflight)
+
+    def test_native_profile_rejects_wrong_parent_soft_hard_or_core_readback(self):
+        with (patch.object(X.sys, 'platform', 'linux'),
+              patch.object(X.os, 'getuid', return_value=1000, create=True),
+              patch.object(X.os, 'geteuid', return_value=1000, create=True)):
+            X._NativeProcess().profile()
+            for key, value in ((9, (X.PARENT_SOFT, X.PARENT_SOFT)), (4, (-1, -1))):
+                self.api.values[key] = value
+                with self.assertRaisesRegex(S.Refusal, 'parent-limits'):
+                    X._NativeProcess().profile()
+                self.api.values = Resources().values
+
+    def test_resource_guard_semantic_controls_are_assertion_killed(self):
+        original = S.require
+        controls = (
+            ('candidate-parent-limits', 'test_parent_readback_failure_blocks_codec_start'),
+            ('candidate-inherited-limits', 'test_candidate_limit_requires_inherited_exact_profile_before_changes'),
+            ('candidate-child-limits', 'test_candidate_limit_readback_refuses_ineffective_set'),
+        )
+        for guard, name in controls:
+            with self.subTest(guard=guard), patch.object(S, 'require', side_effect=lambda ok, why: None if why == guard else original(ok, why)):
+                result = unittest.TextTestRunner(stream=io.StringIO()).run(AddressAdmission(name))
+                self.assertGreater(len(result.failures), 0, guard)
+                self.assertEqual([], result.errors, guard)
+
+
 if __name__ == '__main__':
     output = io.StringIO()
-    suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(case) for case in (Launch, NativeShape))
+    suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(case) for case in (Launch, NativeShape, AddressAdmission))
     result = unittest.TextTestRunner(stream=output).run(suite)
     if not result.wasSuccessful():
         sys.stderr.write(output.getvalue()[:8000])

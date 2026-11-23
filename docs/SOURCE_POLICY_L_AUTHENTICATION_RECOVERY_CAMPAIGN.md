@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## ONE new resource-exception connection-free attempt approved — 2026-11-23
+
+[Fixed admission and ledger](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):
+approved parent40/128+candidate128/128 AS,codecs24/24 and all legacy defaults/caps
+preserved. New specific DATA0/1,CF0/1 pending validation/ordinary exact-head CI;
+prior campaign1/3+1/3,native44/product4/10 not reset. No cap ladder or second native
+retry implied;functional trusted-host only,no dependency/loaded-object/production
+claim. Actual startup/module compatibility and owned cleanup remain to be proved.
+
 ## First PPA connection-free attempt resource-refused — 2026-11-23
 
 [Actual371bb4b/45261161938 and next decision](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md):

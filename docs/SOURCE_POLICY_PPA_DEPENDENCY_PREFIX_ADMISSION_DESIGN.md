@@ -1,5 +1,14 @@
 # PPA Selected-ELF Dependency-Closure and Private-Prefix Admission Design
 
+## Scoped connection-free AS exception approved; runtime proof pending — 2026-11-23
+
+[New fixed resource admission](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)
+has explicit parent40/128+PHP128/128 AS authority for ONE fresh connection-free
+attempt;codecs24/24 and legacy40/40 are unchanged. Readbacks and source retirement
+precede launch;no cap ladder or new general trust exception. Dependency closure,
+loaded-object attestation and production readiness remain FALSE/unknown regardless
+of future functional success. No WordPress/HTTP/SQL or production wiring.
+
 ## Functional contract accepted,but current startup resource admission refused — 2026-11-23
 
 [Actual45261161938 and resource proposal](SOURCE_POLICY_PPA_CONNECTION_FREE_QUALIFICATION.md)

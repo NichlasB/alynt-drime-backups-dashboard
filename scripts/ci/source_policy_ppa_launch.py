@@ -9,9 +9,13 @@ import sys
 import time
 
 import source_policy_ppa_join as J
+import source_policy_deb_stream as B
 
 S = J.D.S
 CONTRACT = 'ppa-connection-free-functional-v1'
+ADDRESS_PROFILE = 'ppa-connection-free-as-40-128-v1'
+PARENT_SOFT = 40*1024*1024
+CANDIDATE_MEMORY = 128*1024*1024
 ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'PHP_INI_SCAN_DIR': ''}
 REQUIRED = ('json_encode', 'json_decode', 'hash', 'hash_equals', 'hash_hmac',
             'random_bytes', 'preg_match', 'serialize', 'unserialize', 'hrtime')
@@ -70,6 +74,48 @@ def _facts(raw, modules):
     return value
 
 
+def _archive_preflight():
+    """Fixed manual-only replacement; legacy archive preflight is untouched."""
+    import resource
+    A = J.D.A
+    S.require(sys.platform == 'linux' and A.struct.calcsize('P') == 8
+              and A.Path('/usr/bin/zstd').is_file(), 'existing-decoder')
+    resource.setrlimit(resource.RLIMIT_AS, (PARENT_SOFT, CANDIDATE_MEMORY))
+    resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+    S.require(resource.getrlimit(resource.RLIMIT_AS) == (PARENT_SOFT, CANDIDATE_MEMORY)
+              and resource.getrlimit(resource.RLIMIT_CORE) == (0, 0), 'candidate-parent-limits')
+    result = A.subprocess.run(list(A.DECODER_ARGS), input=A.DECODER_SAMPLE,
+                              stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5,
+                              preexec_fn=A.decoder_limit, env=A.decoder_environment())
+    S.require(result.returncode == 0 and result.stdout == b'x', 'decoder-cap-preflight')
+    return {'parent_address_space': PARENT_SOFT, 'parent_address_space_hard': CANDIDATE_MEMORY,
+            'decoder_address_space': A.DECODER_MEMORY, 'decoder_window': A.WINDOW,
+            'candidate_address_space': CANDIDATE_MEMORY, 'address_profile': ADDRESS_PROFILE,
+            'synthetic_child_reaped': True}
+
+
+def _preflight():
+    # ONLY the exact-job connection-free controller calls this. No numeric input.
+    previous = J.D.A.preflight
+    try:
+        J.D.A.preflight = _archive_preflight
+        return B.preflight()  # Same zstd/gzip/xz samples,commands and24/24 codec callback.
+    finally:
+        J.D.A.preflight = previous
+
+
+def _candidate_limit():
+    import resource
+    S.require(resource.getrlimit(resource.RLIMIT_AS) == (PARENT_SOFT, CANDIDATE_MEMORY)
+              and resource.getrlimit(resource.RLIMIT_CORE) == (0, 0), 'candidate-inherited-limits')
+    resource.setrlimit(resource.RLIMIT_AS, (CANDIDATE_MEMORY, CANDIDATE_MEMORY))
+    resource.setrlimit(resource.RLIMIT_CPU, (60, 60))
+    resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+    S.require(resource.getrlimit(resource.RLIMIT_AS) == (CANDIDATE_MEMORY, CANDIDATE_MEMORY)
+              and resource.getrlimit(resource.RLIMIT_CPU) == (60, 60)
+              and resource.getrlimit(resource.RLIMIT_CORE) == (0, 0), 'candidate-child-limits')
+
+
 class _ClosedProcess:
     def profile(self):
         raise S.Refusal('candidate-process-disabled')
@@ -78,11 +124,14 @@ class _ClosedProcess:
 class _NativeProcess:
     def profile(self):
         S.require(sys.platform == 'linux' and os.getuid() > 0 and os.getuid() == os.geteuid(), 'candidate-process-platform')
+        import resource
+        S.require(resource.getrlimit(resource.RLIMIT_AS) == (PARENT_SOFT, CANDIDATE_MEMORY)
+                  and resource.getrlimit(resource.RLIMIT_CORE) == (0, 0), 'candidate-parent-limits')
 
     def spawn(self, argv):
         return subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                 close_fds=True, pass_fds=(), start_new_session=True, cwd='/', env=dict(ENV),
-                                preexec_fn=J.D.A.decoder_limit)  # SAME24MiB/60CPU/zero-core,not PHP64M.
+                                preexec_fn=_candidate_limit)  # Approved128/128 ONLY for PHP,not codecs.
 
     def identity(self, process):
         S.require(type(process.pid) is int and process.pid > 0, 'candidate-pid')
@@ -231,7 +280,8 @@ class _Launch:
         self.api.profile()  # Default is CLOSED before mode/process effects.
         output, storage = self.output, self.output._storage
         S.require(output._sealed and output._active is None and self.context._source_count == 2
-                  and self.context._scratch.usage[0] == 0, 'candidate-source-output-barrier')
+                  and not self.context._decoder_unknown and self.context._scratch.usage[0] == 0,
+                  'candidate-source-output-barrier')
         changed = False
         try:
             def acquire_mode():

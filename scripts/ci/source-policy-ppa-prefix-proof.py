@@ -132,7 +132,11 @@ def main():
         baseline = M._fd_state()
         mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
         M._children_empty()
-        receipt['preflight'] = M.preflight()  # Original40/24MiB,zero-core,fixed codecs.
+        if connection_free:
+            import source_policy_ppa_launch as X
+            receipt['preflight'] = X._preflight()  # Approved40/128 parent;codecs still24/24.
+        else:
+            receipt['preflight'] = M.preflight()  # LEGACY40/40 parent,24/24 codecs.
         J.N._PosixCalls().profile()
         S.require(M._fd_state() == baseline, 'prefix-preflight-reconciliation')
         _absent(root)

@@ -1,5 +1,59 @@
 # PPA Candidate Connection-Free Functional Admission and Qualification
 
+## Explicit soft/hard exception approved; ONE fresh attempt pending — 2026-11-23
+
+User separately approves the exact resource proposal below and ONE fresh pinned
+tuple acquisition/connection-free qualification/cleanup attempt,end-to-end through
+validation/publication/ordinary exact-head CI. Baseline ca8f148ec83a43410e642140ce4f87cc9030436a
+clean/synced/remote verified. This is the scoped R3 exception,not a general budget,
+trust,system-policy or production permission. No new native retry allowance is
+inferred from the earlier hour. New specific allowance DATA0/1,CF0/1 pending;
+earlier campaign DATA1/3,CF1/3,cumulative native44/product4/10 remain historical.
+
+Fixed profile ppa-connection-free-as-40-128-v1:controller AS40/128MiB from its FIRST
+preflight,PHP child AS128/128 only after sealed source/decoder closure. Parent soft
+stays40,codecs remain24/24 with the same60CPU/core0 callbacks and existing samples.
+All legacy archive/stream/prefix-only entries retain40/40 parent+24/24 codecs.
+No numeric selector,cap ladder,broker,privilege,dependency or installed-site change.
+Manual exact-contract controller alone calls the fixed private preflight;the
+temporary archive-preflight binding restores on success/failure. Readbacks refuse
+unexpected parent AS/core,inherited child AS/core and applied child AS/CPU/core.
+Original540/30/600s deadlines,192MiB work,codec window/raw/output caps,pins,minimal
+environment,absolute argv/module order,mode/identity/recovery/cleanup guards stay.
+Planned runtime soft pair168MiB,theoretical hard pair256MiB;NOT a hard168MiB job
+guarantee.128MiB remains a diagnostic ceiling,not a measured minimum or production
+recommendation. Actual runtime resource feasibility is still pending.
+
+Source-scoped canonical Feature Light review:5 changed code/workflow/test files
+and directly owning plan records,explicit ca8f148 boundary. Risk:private ephemeral
+file/process/resource admission only,no admin/REST/AJAX/DB/cron/UI/public hook.
+No unresolved confirmed non-security defect. The small fixed zstd preflight is
+intentionally local to avoid adding a numeric resource selector or altering legacy
+preflight semantics;remaining gzip/xz probes reuse the existing stream preflight.
+Canonical Bloat/Structure helper:explicit ca8f148,1 changed PHP bridge28 TOTAL/1
+CODE,limit300,oversized0;direct PHPUnit discovery,no WP registrations. Classification
+Defer to pre-release02,no current cleanup/split;Phase1 no updates needed,no Phase2
+edits. Python ownership/temporary binding reviewed separately,not measured by that
+PHP/JS/CSS helper. Final focused Feature Security review checks fixed admission,
+readback failures,source-close-before-mode,unchanged codec/pin/default boundaries,
+exact recovery and false closure/production grants;no confirmed security defect
+requiring a separate07A handoff. Regression layer is isolated resource API/RAM,
+not physical resource or native compatibility proof. No UI/Database/full release
+review claims or historical whole-plugin checklist refresh.
+
+Local final isolated30 groups,0 failures/errors/skips,includes old five and THREE
+new assertion-killed semantic controls (parent/inherited/child resource readback),
+all0 errors. Real resource syscalls/processes are replaced,never candidate execution
+locally. Legacy40/40 and24/24 remain exercised against the actual legacy functions
+with in-memory resource API. Related controller15/join28 pass;PHP bridge4/20 plain
+OK,Node295/295 with0 failures/skips,structure/diff and targeted PHPCS pass. Full local
+PHP and ordinary exact-head CI are pending;PHPCS305/305 passed. Initial full local
+PHP3081/25420 had1 unrelated Git-fixture failure and2 existing Sodium skips:
+inherited GIT_CONFIG_COUNT referenced missing GIT_CONFIG_VALUE_0. Bounded offline
+diagnosis established that error;process-only GIT_CONFIG_COUNT=0 makes the unchanged
+isolated UBI test pass1/4. No credentials/global Git config/test assertions changed.
+Full rerun uses that process-only environment;no acquisition/native dispatch yet.
+
 ## Authority, baseline and bounded decision — 2026-11-23
 
 User approves the PPA-candidate-specific trusted-host FUNCTIONAL contract and an
@@ -228,7 +282,7 @@ it does not prove a specific replacement limit will succeed. No guard-preserving
 in-scope code correction can authorize increased memory. Current runtime source,
 limits,pins,compatibility and all guards remain unchanged after the failed proof.
 
-### Preferred narrowly scoped proposal — NOT APPLIED/AUTHORIZED
+### Historical proposed exception — subsequently approved above
 
 Recommend an explicit diagnostic-only PPA connection-free soft/hard admission
 exception,ONE fresh exactly pinned tuple acquisition and ONE fresh qualification/
