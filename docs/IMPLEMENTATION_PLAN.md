@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant native prefix/source join foundation complete — 2026-11-23
+
+[Foundation and proof limits](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md):
+fixed output adapter/private two-pass owner,registered acquisition/retirement,
+same-origin source transcript and source/decoder-close-before-seal safeguards.
+Isolated28 groups/seven assertion-killed controls;all default entries closed,
+no actual materialization/native attempt or wiring. Historical source receipts
+remain bound to old bytes;changed retirement hooks require fresh prerequisites.
+Next gated:Owned Ephemeral-CI Fixed Native Prefix Materialization/Source-Join
+Integration and Cleanup Proof,ONE owned attempt/fresh DATA allowance if needed,
+no candidate execution. DATA/audit/native43/product4/10 counters unchanged.
+
 ## Fixed native-storage/source-stream join design complete — 2026-11-23
 
 [Integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) separates

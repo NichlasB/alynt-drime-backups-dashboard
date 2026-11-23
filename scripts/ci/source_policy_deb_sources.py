@@ -278,7 +278,7 @@ class _SourceSet:
         self.check(True)
         return [self.identity(index) for index in range(3)]
 
-    def close(self):
+    def close(self, *, _deadline=None):
         if self._closed:
             D.S.require(not self._owned and not self._uncertain, 'lease-cleanup-unknown')
             return
@@ -286,7 +286,7 @@ class _SourceSet:
         for cursor in self._cursors:
             cursor._release()
         self._cursors.clear()
-        deadline = self._api.clock()+30
+        deadline = self._api.clock()+30 if _deadline is None else min(self._api.clock()+30, _deadline)
         for item in tuple(reversed(self._owned)):
             if self._api.clock() >= deadline:
                 self._uncertain = True

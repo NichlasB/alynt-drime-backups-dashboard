@@ -1,5 +1,15 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Fixed native output/source join implemented but disabled — 2026-11-23
+
+[Foundation/evidence limits](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md):
+private fixed adapter and full same-budget two-pass join,RAM/API tests only;
+native entry/materialization/execution/wiring disabled. No new native/static
+attempt or product milestone;DATA3/3,new1/1,audits each1/1,native43/product4/10
+unchanged. Next gated ONE owned ephemeral-CI prefix materialization/source-join
+integration/cleanup proof with fresh current-source prerequisites and explicit
+DATA acquisition allowance if needed;physical fit remains unproved.
+
 ## Fixed native prefix/source join design complete — 2026-11-23
 
 [Owning design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) closes the next

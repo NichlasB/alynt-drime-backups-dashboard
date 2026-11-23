@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Dormant prefix source-join implementation;no launch — 2026-11-23
+
+[Foundation](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md) implements only
+closed adapter/coordinator logic with RAM/API tests. Native entry/default output
+storage remain off;HTTP/SQL/controller/launch/production wiring unchanged. Changed
+retirement helpers invalidate reuse of old source receipts as current-source
+proof. Next gated owned prefix materialization/source-join integration/cleanup
+proof,fresh prerequisites and explicit DATA allowance if needed,NO candidate run.
+
 ## Prefix native/source join design remains off the launch path — 2026-11-23
 
 [Fixed integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) covers

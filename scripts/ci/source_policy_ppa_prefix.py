@@ -53,6 +53,12 @@ class _OutputOwner:
     not evidence of POSIX atomic creation, no-follow or crash recovery.
     """
 
+    def _storage_owner(self, budget, scratch):
+        return _STORAGE
+
+    def _cleanup_storage(self):
+        pass  # RAM/default owner has no backend cleanup clock.
+
     def __init__(self, parent, basename, marker, budget, scratch):
         D.S.require(type(budget) is D.Budget and type(scratch) is E.Budget, 'prefix-original-budget')
         D.S.require(type(parent) is str and parent.startswith('/') and parent != '/'
@@ -67,7 +73,7 @@ class _OutputOwner:
                     and value['root'] == basename and type(value['head']) is str
                     and re.fullmatch('[a-f0-9]{40}', value['head'])
                     and marker == json.dumps(value, sort_keys=True).encode('ascii'), 'prefix-marker')
-        self._storage, self._budget, self._scratch = _STORAGE, budget, scratch
+        self._storage, self._budget, self._scratch = self._storage_owner(budget, scratch), budget, scratch
         self._uid = self._storage.profile()  # Closed BEFORE any resource access.
         D.S.require(type(self._uid) is int and self._uid >= 0, 'prefix-owner-profile')
         self._parent, self._basename = parent, basename
@@ -252,6 +258,7 @@ class _OutputOwner:
             return
         self._closed = True  # Invalidate operations/seals even on cleanup failure.
         try:
+            self._cleanup_storage()
             if self._active is not None:
                 self._retire(self._active)
             D.S.require(not self._uncertain, 'prefix-cleanup-unknown')

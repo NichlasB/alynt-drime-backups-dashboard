@@ -1,5 +1,15 @@
 # Owned Ephemeral-CI Fixed Descriptor Source/Replay Qualification and Cleanup Proof
 
+## Subsequent source retirement hooks;historical proof not refreshed — 2026-11-23
+
+[Dormant output/join foundation](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md)
+keeps source leases READ-ONLY but adds private deadline/release hooks to share one
+cleanup window with output/codecs. Default source entry/workflow unchanged;no
+actual descriptors or source proof rerun. d6da62e/run45048700606 remains historical
+for those bytes,NOT current-source qualification. Before the next gated owned
+ephemeral-CI materialization/source-join proof,run fresh exact-source prerequisites;
+explicit DATA allowance if needed,no candidate execution or production wiring.
+
 ## Source-stream join integration design;reader unchanged — 2026-11-23
 
 [Join design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) retains the existing

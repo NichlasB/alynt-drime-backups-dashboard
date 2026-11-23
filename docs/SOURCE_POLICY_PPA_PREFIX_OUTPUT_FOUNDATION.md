@@ -1,5 +1,14 @@
 # Fixed Three-Payload PPA Prefix Output Safety Foundation
 
+## Subsequent isolated native adapter/join foundation — 2026-11-23
+
+[Fixed implementation](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md) adds
+private fixed-storage/cleanup hooks without selecting this owner's default
+storage or enabling native entry. Output24 groups/five controls remain;new join28
+groups/seven controls are RAM/API evidence,not physical materialization/cleanup.
+Next gated owned ephemeral-CI materialization/source-join integration and cleanup
+proof,fresh prerequisites/explicit DATA allowance if needed,no candidate execution.
+
 ## Subsequent approved native/join design — 2026-11-23
 
 [Fixed integration design](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_DESIGN.md) resolves

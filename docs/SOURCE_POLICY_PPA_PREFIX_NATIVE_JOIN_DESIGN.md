@@ -1,5 +1,15 @@
 # Fixed Prefix Native Storage and Source-Stream Join Integration Design
 
+## Subsequent dormant implementation — 2026-11-23
+
+[Approved foundation](SOURCE_POLICY_PPA_PREFIX_NATIVE_JOIN_FOUNDATION.md) now
+implements the fixed adapter/join with isolated RAM/API tests only. Native entry,
+syscall provider and default output owner remain closed. Small shared-deadline/
+retirement hooks changed source/codec bytes;old physical receipts are not current
+requalification. Next gated ONE owned ephemeral-CI materialization/source-join
+integration/cleanup proof with fresh prerequisites and DATA allowance if needed;
+no candidate execution/wiring. Original design/counters/limits remain below.
+
 ## Authority,baseline and decision — 2026-11-23
 
 Explicit DESIGN-ONLY approval through validation,commit,push and ordinary exact-

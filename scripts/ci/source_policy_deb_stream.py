@@ -92,12 +92,15 @@ class Decoder:
                     S.require(self.process.wait(timeout=5) == 0, 'codec-exit')
                     return b''
 
-    def close(self):
+    def close(self, *, _deadline=None):
         if self.process.poll() is None:
             self.process.kill()
-        self.process.wait(timeout=5)
-        for pipe in (self.process.stdin, self.process.stdout):
-            if not pipe.closed:
-                pipe.close()
-        if self.selector is not None:
-            self.selector.close()
+        timeout = 5 if _deadline is None else min(5, max(0, _deadline-time.monotonic()))
+        try:
+            self.process.wait(timeout=timeout)
+        finally:
+            for pipe in (self.process.stdin, self.process.stdout):
+                if not pipe.closed:
+                    pipe.close()
+            if self.selector is not None:
+                self.selector.close()

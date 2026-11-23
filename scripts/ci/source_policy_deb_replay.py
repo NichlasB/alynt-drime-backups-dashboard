@@ -90,6 +90,9 @@ class _Preparation:
     def _profile(self):
         return 'immutable-input-bytes-only'
 
+    def _release_decoder(self, decoder):
+        decoder.close()
+
     def _scan(self, source, member, package, category, primary):
         name, start, length = member
         raw = D.Slice(source, start, length, self._budget)
@@ -147,7 +150,7 @@ class _Preparation:
         finally:
             self._scratch._retained -= control_held
             if decoder is not None:
-                decoder.close()
+                self._release_decoder(decoder)
         if decoder is not None:
             D.S.require(type(decoder.process.returncode) is int and decoder.process.returncode == 0
                         and decoder.process.poll() is not None, 'replay-decoder-release')
@@ -239,6 +242,9 @@ class _LeasePreparation(_Preparation):
     def _profile(self):
         return 'fixed-readonly-descriptor-leases-preparation-only'
 
+    def _release_sources(self):
+        self._sources.close()
+
     def _checked_scan(self, source, member, package, category, primary):
         index = next(i for i, pin in enumerate(self._pins) if pin[0] == package)
         self._sources.check(True)
@@ -259,6 +265,6 @@ class _LeasePreparation(_Preparation):
                     collector.close()
                 self._collectors.clear()
             finally:
-                self._sources.close()
+                self._release_sources()
         # No return from the try: every close/restore must succeed first.
         return self._commit(identities, packages)
