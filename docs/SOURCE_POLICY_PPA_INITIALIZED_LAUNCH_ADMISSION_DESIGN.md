@@ -1,5 +1,14 @@
 # PPA Initialized-Fixture Launch/Recovery and Function-Profile Admission Design
 
+## Subsequent approved DATA foundation — 2026-11-24
+
+[Implemented isolated policy](SOURCE_POLICY_PPA_LAUNCH_DATA_FOUNDATION.md) provides
+eight fixed role/recovery descriptions,strict function-phase/provider schemas and
+sticky failure,with all native grants false. Native factory/workflow/HTTP callers
+remain unchanged. This implements delivery step1 below,not its physical ownership,
+core/vendor function closure or combined-resource requirements. Next gated bounded
+repository-only pinned-core function-use/catalog provenance audit,no execution.
+
 ## Authority, baseline and decision — 2026-11-23
 
 Approved repository-only DESIGN through validation,commit,push and exact-head CI.

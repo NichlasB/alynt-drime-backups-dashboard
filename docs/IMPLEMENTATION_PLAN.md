@@ -1,5 +1,17 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## Dormant PPA launch/recovery/function DATA foundation implemented — 2026-11-24
+
+[Owning foundation/evidence](SOURCE_POLICY_PPA_LAUNCH_DATA_FOUNDATION.md) adds fixed
+eight-role descriptions,exact immutable recovery identity and finite phase-aware
+function/provider DATA validators. New14 tests/ten assertion-killed controls and
+all309 Node tests pass;no native provider or current caller wiring. Complete DATA
+keeps all native/HTTP/production grants false;real function-use provenance and
+physical lifetime/resource/exec admission remain unproved. Native46/product4/10
+and all attempt allowances unchanged. Next gated Repository-Only PPA Pinned-Core
+Function-Use Closure and Catalog Provenance Audit,read-only source analysis only,
+not a new artifact/WordPress/HTTP/SQL/native operation.
+
 ## Candidate-bound initialized launch/function admission design completed — 2026-11-23
 
 [Repository-only design](SOURCE_POLICY_PPA_INITIALIZED_LAUNCH_ADMISSION_DESIGN.md)
