@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Private condition/charset anchor design complete, not integrated — 2026-11-24
+
+[Design/source findings](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md)
+specify pre-bootstrap receiver and parent charset-anchor joins. Stock core's two
+option_blog_charset callbacks invalidate the v1 empty-hook native profile; no
+callback removed or guard weakened. First-use lifetime/cache/resource closure
+remains UNKNOWN. Current source, SQL, workflow and wiring unchanged; native46/
+product4/10 retained. Next gated stock-hook/anchor-projection DATA foundation only.
+
 ## Fixed cookie/charset condition DATA implemented,not wired — 2026-11-24
 
 [Foundation/evidence](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md) models

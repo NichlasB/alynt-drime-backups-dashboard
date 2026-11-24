@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PPA private condition/charset-anchor integration design — 2026-11-24
+
+[Owning design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md) maps fixed
+private producer/receiver and independent anchor handoffs. Pinned core registers
+two stock charset callbacks: the v1 empty-hook DATA profile cannot qualify stock
+bootstrap. Stock effects stay intact; first-use hook lifetime/cache feasibility
+and exact anchor/resource joins remain blockers. Docs only, all execution/wiring
+disabled; native46/product4/10 unchanged. Next gated Stock Charset Hook and
+Anchor-Projection DATA Safety Foundation, isolated tests only, not a native proof.
+
 ## PPA fixed-producer cookie/charset condition DATA foundation — 2026-11-24
 
 [Owning foundation](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md) binds24

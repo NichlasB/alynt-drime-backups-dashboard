@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## PPA private condition/anchor integration DESIGN completed — 2026-11-24
+
+[Current design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md) maps
+fixed owners and independent charset anchors without changing runtime behavior.
+Pinned stock charset callbacks mean v1 empty-hook DATA cannot admit genuine core;
+all/autoload hooks and first-use lifetime/cache state remain explicit blockers.
+No acquisition/native attempt, source/query change or wiring; native46/product4/10
+unchanged. Next gated stock charset hook/anchor-projection isolated DATA foundation.
+
 ## PPA cookie/charset condition DATA foundation complete — 2026-11-24
 
 [Current owner](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md) adds test-only

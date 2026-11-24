@@ -1,5 +1,15 @@
 # PPA Fixed-Producer Cookie and Charset-Effect Condition DATA Foundation
 
+## Successor design finding — 2026-11-24
+
+The approved [private integration design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md)
+confirms pinned stock core registers two option_blog_charset callbacks. Therefore
+this v1 empty-selected-hook DATA profile is NOT a feasible post-default-filters
+native profile. Its source/tests/refusal behavior remain unchanged, not weakened.
+All/autoload hook, first-use lifetime, cache and anchor joins remain unproved.
+Next gated stock charset hook/anchor-projection versioned DATA foundation only;
+no native proof or production grant follows from existing positive fixtures.
+
 ## Approved scope and baseline — 2026-11-24
 
 User approved repository-only implementation,isolated DATA validation,commit/push

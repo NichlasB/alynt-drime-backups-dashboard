@@ -1,5 +1,14 @@
 # PPA Fixed HTTP Consumer-Condition and Encoding-Effect Closure Design
 
+## Private integration successor — 2026-11-24
+
+[Owner/anchor design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md)
+resolves the next repository-only design gate. Two stock charset callbacks must
+be preserved, not replaced with the DATA foundation's empty-hook projection.
+Extra all/autoload hooks, first-use registration lifetime and passive cache
+projection require closure before physical integration. No current UNKNOWN,
+source, budget, worker/query or production-wiring behavior changes.
+
 ## Approved scope and baseline — 2026-11-24
 
 User approved the recommended repository-only DESIGN through validation,commit,
