@@ -108,9 +108,10 @@ policy,not labels or caller-chosen hashes. Remaining consumer conditions cannot 
 forged into readiness. This is not native qualification,global function closure,
 resource fit,physical lifetime/exec proof or a new historical product milestone.
 
-Exact recommended next gated slice:Repository-Only PPA Fixed HTTP Consumer-Condition
-and Encoding-Effect Closure Design. Resolve the exact fixed-request/recovery-cookie
-exclusion and omitted-encoding option-effect requirements from owning source,
-or explicitly retain a blocker;no new diagnostics,shim,module,guard relaxation or
-native attempt. Physical provider/lifetime/exec/resource and any real HTTP proof
-remain separately gated;execution and production wiring stay disabled.
+The approved [closure design](SOURCE_POLICY_PPA_HTTP_CONSUMER_CONDITION_DESIGN.md)
+now records fixed-producer evidence,missing receiver checks and charset-anchor
+requirements without changing this DATA implementation or clearing UNKNOWN.
+Next gated Repository-Only PPA Fixed-Producer Cookie and Charset-Effect Condition
+DATA Safety Foundation,isolated DATA only. No new diagnostics,shim,module,guard
+relaxation or native attempt. Physical provider/lifetime/exec/resource and actual
+HTTP proof remain separately gated;execution and production wiring stay disabled.

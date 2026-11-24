@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## PPA consumer-condition/charset design complete,not integrated — 2026-11-24
+
+[Source-only design](SOURCE_POLICY_PPA_HTTP_CONSUMER_CONDITION_DESIGN.md) identifies
+missing pre-bootstrap cookie enforcement and blog_charset initializer anchoring.
+Stock default-encoding effects remain accounted,not excluded or rewritten. No
+current worker/guard/catalog/workflow change;residual UNKNOWN still blocks HTTP.
+Next gated fixed-producer cookie/charset-effect isolated DATA foundation only;
+native46/product4/10 and disabled production wiring retained.
+
 ## Source-bound function/algorithm DATA implemented,HTTP still blocked — 2026-11-24
 
 [Successor foundation](SOURCE_POLICY_PPA_SOURCE_CATALOG_DATA_FOUNDATION.md) uses
