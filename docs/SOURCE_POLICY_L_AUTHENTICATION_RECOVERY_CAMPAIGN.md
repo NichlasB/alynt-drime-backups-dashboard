@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## PPA source-bound function/algorithm DATA foundation — 2026-11-24
+
+[Owning successor](SOURCE_POLICY_PPA_SOURCE_CATALOG_DATA_FOUNDATION.md) replaces
+supplied hashes/global gating with audited anchors,domain-specific algorithms and
+condition-aware UNKNOWN refusal. All319 Node tests pass;no native proof,actual
+auth/storage,workflow or production wiring. Native46/product4/10 and allowances
+unchanged. Next gated fixed HTTP consumer-condition/encoding-effect closure design.
+
 ## PPA pinned-core catalog audit complete,not native qualification — 2026-11-24
 
 [Audit/evidence](SOURCE_POLICY_PPA_PINNED_FUNCTION_CATALOG_AUDIT.md) byte-verifies

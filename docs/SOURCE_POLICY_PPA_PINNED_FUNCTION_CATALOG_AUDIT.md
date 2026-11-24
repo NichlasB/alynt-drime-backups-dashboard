@@ -182,9 +182,9 @@ Implementation-plan progress:exact source provenance,conditional fallback/ctype
 paths and concrete HMAC-MD5 requirements replace unreviewed assumptions. This is
 not a new native/product milestone. No native/artifact allowance consumed.
 
-Exact recommended next gated slice:Repository-Only PPA Source-Bound Function
-Catalog and Algorithm Admission Safety Foundation. Fixed source anchors,role/
-phase/condition-aware UNKNOWN refusal and explicit algorithm domains,isolated DATA
-tests and assertion-killed missing-guard controls only. No source provider,core
-loading,shim/module addition,artifact/native proof or wiring. Real consumer
-exclusion/lifetime/exec/combined resource proof stays separately gated.
+The approved [source-bound DATA foundation](SOURCE_POLICY_PPA_SOURCE_CATALOG_DATA_FOUNDATION.md)
+now implements fixed anchors,algorithm domains and condition-aware UNKNOWN refusal.
+It does not close the audit's runtime gaps. Next gated repository-only PPA Fixed
+HTTP Consumer-Condition and Encoding-Effect Closure Design,with actual consumer
+exclusion/lifetime/exec/resource proof still separate. No source provider,core
+loading,shim/module addition,artifact/native proof or wiring is admitted here.

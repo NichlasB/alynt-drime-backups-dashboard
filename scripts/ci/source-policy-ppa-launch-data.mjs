@@ -3,9 +3,10 @@ import {createHash} from 'node:crypto';
 import {record,hex,HTTP_PROFILE} from './source-policy-http-profile.mjs';
 import {REQUEST_CASES} from './source-policy-wl-request-contract.mjs';
 import {freezeData,coreSourceData,validateFunctionData,LAUNCH_ROLES,HTTP_ROLES} from './source-policy-ppa-function-data.mjs';
+import {SOURCE_CATALOG,SOURCE_CATALOG_DIGEST} from './source-policy-ppa-function-catalog.mjs';
 
 export const PPA_LAUNCH_EXECUTION_ENABLED=false;
-export const LAUNCH_MODEL='ppa-initialized-launch-preparation-v1';
+export const LAUNCH_MODEL='ppa-initialized-launch-preparation-v2';
 const REPO='NichlasB/alynt-drime-backups-dashboard';
 const WORKFLOW=REPO+'/.github/workflows/source-policy-linux-qualification.yml@refs/heads/master';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -20,7 +21,8 @@ export const PPA_IDENTITY=sha(JSON.stringify(PPA_IDENTITIES));
 export const RESOURCE_DATA=freezeData({profile:'ppa-connection-free-as-40-128-v1',parent_soft:41943040,parent_hard:134217728,
   candidate_as:134217728,codec_as:25165824,cpu:60,core:0,ppa_work:201326592,http_manifest:201326592,
   job_ms:600000,ppa_ms:540000,cleanup_ms:30000,php_heap:67108864});
-const CLOSED={native_admitted:false,runtime_grant:false,http_qualified:false,dependency_closure_verified:false,production_ready:false};
+const CLOSED={native_admitted:false,runtime_grant:false,http_qualified:false,dependency_closure_verified:false,production_ready:false,
+  source_observed:false,consumer_closure_verified:false};
 const fail=label=>Error('PPA launch DATA refused: '+label);
 const posix=value=>typeof value==='string'&&value.length<=180&&value.startsWith('/')&&value!=='/'
   &&!/[\x00-\x20\x7f\\:]/.test(value)&&value.slice(1).split('/').every(p=>p!==''&&p!=='.'&&p!=='..');
@@ -32,7 +34,7 @@ function originData(value){
     ||row.actor!=='NichlasB'||row.attempt!==1||row.platform!=='Linux'||row.arch!=='x86_64'
     ||typeof row.run!=='string'||!(/^[1-9][0-9]{0,19}$/).test(row.run)||!hex(row.head,40)||row.expected_head!==row.head
     ||!posix(row.root)||!posix(row.workspace)||row.root===row.workspace||row.root.startsWith(row.workspace+'/')
-    ||row.workspace.startsWith(row.root+'/')||row.core_commit!==HTTP_PROFILE.commit
+    ||row.workspace.startsWith(row.root+'/')||row.core_commit!==HTTP_PROFILE.commit||row.core_commit!==SOURCE_CATALOG.commit
     ||![row.image,row.modules,row.prefix_identity].every(v=>hex(v,64))||row.ppa_identity!==PPA_IDENTITY)throw fail('origin');
   const limits=record(row.resources,Object.keys(RESOURCE_DATA));
   if(!limits||!Object.keys(RESOURCE_DATA).every(k=>limits[k]===RESOURCE_DATA[k]))throw fail('resource-profile');
@@ -85,7 +87,7 @@ export class PpaLaunchPreparation {
   #origin;#binding;#catalog;#state='origin';#description;#phase;
   constructor(value){
     this.#origin=originData(value);this.#binding=sha(JSON.stringify(this.#origin));
-    this.#catalog=sha(JSON.stringify(this.#origin.core_sources));
+    this.#catalog=SOURCE_CATALOG_DIGEST;
   }
   #require(ok,label){if(!ok){this.#state='failed';throw fail(label);}}
   binding(){return freezeData({model:LAUNCH_MODEL,binding:this.#binding,catalog:this.#catalog});}

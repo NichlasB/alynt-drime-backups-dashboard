@@ -1,5 +1,14 @@
 # Socket-Free PPA Launch/Recovery and Function Admission DATA Foundation
 
+## Source-bound v2 successor implemented — 2026-11-24
+
+[Successor/evidence](SOURCE_POLICY_PPA_SOURCE_CATALOG_DATA_FOUNDATION.md) replaces
+the historical two-member/supplied-review contract below with nine fixed audited
+anchors,whole-catalog identity and separate algorithm/consumer conditions. Old v1
+DATA is not silently accepted. HTTP descriptions remain DATA;post-core UNKNOWN
+now prevents completion. Positive pre-core/component cases persist,all grants
+false. No native/workflow/wiring change;native46/product4/10 retained.
+
 ## Approved scope and fresh baseline — 2026-11-24
 
 User approves the NEXT foundation in the

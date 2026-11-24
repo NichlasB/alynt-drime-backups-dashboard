@@ -1,5 +1,13 @@
 # PPA Initialized-Fixture Launch/Recovery and Function-Profile Admission Design
 
+## Source-bound catalog/algorithm DATA implemented — 2026-11-24
+
+[Current successor](SOURCE_POLICY_PPA_SOURCE_CATALOG_DATA_FOUNDATION.md) binds exact
+audited sources and required algorithm domains;caller statuses cannot erase
+UNKNOWN recovery/encoding/vendor conditions. This supersedes old NEXT pointers:
+next gated fixed HTTP consumer-condition/encoding-effect closure design only.
+No physical resource/owner/exec/HTTP authority or wiring;native46/product4/10 retained.
+
 ## Pinned function/catalog audit completed — 2026-11-24
 
 [Read-only audit](SOURCE_POLICY_PPA_PINNED_FUNCTION_CATALOG_AUDIT.md) verifies1,900
