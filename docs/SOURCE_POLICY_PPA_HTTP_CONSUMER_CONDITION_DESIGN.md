@@ -181,7 +181,8 @@ PHP suite,UI/UX,Database/transaction or whole-plugin release review is claimed.
 
 Implementation-plan progress:separates provable producer exclusions from missing
 receiver enforcement,and required charset effects from the missing initializer
-anchor. Exact recommended next gated slice:Repository-Only PPA Fixed-Producer
-Cookie and Charset-Effect Condition DATA Safety Foundation,isolated DATA only.
-No worker/SQL/HTTP/fixture implementation,source provider,native proof or wiring;
-remaining UNKNOWN and physical integration stay separately gated.
+anchor. The approved [condition DATA foundation](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md)
+now implements finite projections only,not actual enforcement or observed state.
+Next gated Private Condition Projection and Charset-Anchor Integration Design;
+no worker/SQL/HTTP/fixture implementation,source provider,native proof or wiring.
+Remaining UNKNOWN and physical integration stay separately gated.

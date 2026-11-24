@@ -1,5 +1,14 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## PPA cookie/charset condition DATA foundation complete — 2026-11-24
+
+[Current owner](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md) adds test-only
+finite source/flow/phase/name/state/effect predicates,12 tests/18 controls,full331
+Node tests pass. Empty selected-hook projections are synthetic component DATA,
+not genuine-core feasibility evidence. Old post-core UNKNOWN/native/wiring stay
+closed,native46/product4/10 unchanged. Next gated private condition-projection and
+charset-anchor integration design;no actual worker/query/fixture/native operation.
+
 ## PPA consumer/encoding-effect closure DESIGN only — 2026-11-24
 
 [Owning requirements](SOURCE_POLICY_PPA_HTTP_CONSUMER_CONDITION_DESIGN.md) separate

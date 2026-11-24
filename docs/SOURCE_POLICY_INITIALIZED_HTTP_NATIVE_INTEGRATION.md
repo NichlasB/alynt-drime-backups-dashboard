@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Fixed cookie/charset condition DATA implemented,not wired — 2026-11-24
+
+[Foundation/evidence](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md) models
+source-bound producer/receiver joins and before/call/after charset/hook/effect DATA.
+Actual receiver enforcement,charset-anchor queries and selected-hook feasibility
+remain unproved;existing worker/controller/catalog/workflow unchanged. Next gated
+private condition-projection/charset-anchor integration DESIGN only. Native46/
+product4/10 retained,no native/HTTP/storage experiment or production wiring.
+
 ## PPA consumer-condition/charset design complete,not integrated — 2026-11-24
 
 [Source-only design](SOURCE_POLICY_PPA_HTTP_CONSUMER_CONDITION_DESIGN.md) identifies

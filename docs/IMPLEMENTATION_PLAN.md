@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PPA fixed-producer cookie/charset condition DATA foundation — 2026-11-24
+
+[Owning foundation](SOURCE_POLICY_PPA_HTTP_CONDITION_DATA_FOUNDATION.md) binds24
+recorded sources/exact25-exchange flow and finite producer/receiver/charset-effect
+DATA. All three roles have positive cases;18 semantic controls and331 Node tests
+pass. No actual pre-bootstrap/hook/charset observation,query or owner wiring;all
+physical grants false and existing post-core UNKNOWN refuses. Native46/product4/10
+unchanged. Next gated Private Condition Projection and Charset-Anchor Integration
+Design,not a native attempt or assumed empty-hook feasibility.
+
 ## PPA fixed HTTP consumer/encoding-effect closure design completed — 2026-11-24
 
 [Design/source evidence](SOURCE_POLICY_PPA_HTTP_CONSUMER_CONDITION_DESIGN.md) separates
