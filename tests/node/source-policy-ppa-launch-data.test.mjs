@@ -138,6 +138,13 @@ test('HTTP readiness requires both phase profiles; copied receipts, repetition a
   const f=started('audit');f.model.functions(packet(f.model,'audit'));assert.throws(()=>f.model.functions(packet(f.model,'audit')));
 });
 test('function binding, NTS types, algorithms and native membership are exact, never truthiness or missing-function success',()=>{
+  const base=['json_encode','json_decode','hash','hash_equals','hash_hmac','random_bytes','preg_match','serialize','unserialize','hrtime'];
+  const auth=['password_hash','password_verify','password_needs_rehash','password_algos','hash_algos','hash_hmac_algos'];
+  assert.deepEqual(F.BASE_FUNCTIONS,base);assert.deepEqual(F.functionRequirements('environment','pre-core').native,base);
+  assert.deepEqual(F.functionRequirements('installer','pre-core').native,[...base,...auth]);
+  assert.deepEqual(F.functionRequirements('server','post-core').native,[...base,...auth,'getallheaders']);
+  assert.deepEqual(F.functionRequirements('installer','post-core').core,['mb_strlen','mb_substr']);
+  assert.deepEqual(F.functionRequirements('installer','pre-core').absent,['ctype_digit','iconv','mb_strlen']);
   const changes=[p=>p.binding='0'.repeat(64),p=>p.catalog='0'.repeat(64),p=>p.role='server',p=>p.php='8.5.13',
     p=>p.zts=0,p=>p.zts=true,p=>p.sapi='cli-server',p=>p.algorithms.bcrypt=false,p=>p.rows.shift(),
     p=>p.rows[0].available=false,p=>p.rows[0].provider='core',p=>p.rows[0].extra='secret',p=>p.rows.push({...p.rows[0]})];

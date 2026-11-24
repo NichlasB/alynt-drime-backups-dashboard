@@ -71,15 +71,17 @@ existing test runtime,not candidate/WordPress/authentication/storage execution.
 Repository structure guard and whitespace checks pass.
 
 Canonical Feature Light SOURCE-SCOPED:3 new source/test files,minimum direct DATA/
-role callers and owning records;no UI/AJAX/REST/DB/cron surface. Two routine issues
+role callers and owning records;no UI/AJAX/REST/DB/cron surface. Three routine issues
 fixed in scope:exported function-source arguments now validated too;module-positive
-oracle strengthened to require BOTH exact ordered entries,not only index ordering.
+oracle strengthened to require BOTH exact ordered entries,not only index ordering;
+independent literal base/auth/server/core function-set oracles prevent fixture/helper
+coupling from hiding a removed requirement.
 No remaining confirmed quality/error-handling defect. Private DATA failure poisons
 state with finite labels;no raw caller values or callback/secret retention.
 
 Canonical Bloat/Structure Phase1:explicit2914a1c,0 eligible PHP/JS/CSS files because
 the helper excludes .mjs;not falsely called an automatic JS pass. Separate actual
-Get-Content measurements:launch121,function75,test196 lines,all below250 JS guide;
+Get-Content measurements:launch121,function75,test203 lines,all below250 JS guide;
 cohesive role-state/function-validation/test boundaries,no forced split or cleanup.
 Whole-repo reference checks confirm test-only imports,no WP/cron/route registration.
 No Phase2 edits required. Final canonical Feature Security SOURCE-SCOPED after
@@ -92,6 +94,9 @@ Exact-head ordinary publication CI and actual PHP/Node/audit counts are closed i
 the toolkit scoped evidence record. Current implementation is not physically
 qualified and does not refresh the old8bd4ee3 native cohort. No artifact/native
 attempt or cleanup experiment consumed;no owned lab resources created.
+Initial60ccef9 ordinary45445420101 completed/success before the final independent
+function-set test oracles;the follow-up changes tests/records only,not runtime DATA
+source or existing callers. Final exact-head CI is verified separately,not inferred.
 
 ## Implementation-plan progress and exact next gate
 
