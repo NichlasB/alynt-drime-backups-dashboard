@@ -1,5 +1,16 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PPA pinned-core function/catalog provenance audit completed — 2026-11-24
+
+[Source-scoped audit](SOURCE_POLICY_PPA_PINNED_FUNCTION_CATALOG_AUDIT.md) byte-verifies
+all1,900 pinned PHP/INC blobs and records55 lexical matching lines across20 files,
+not a universal call-graph proof. Confirmed gaps:conditional recovery-cookie ctype
+use,omitted-encoding option dependencies,HMAC-MD5 auth/nonce requirement,and supplied
+catalog hashes not actual provenance. Source/tests/workflows unchanged;no native
+operation or new product milestone,native46/product4/10 retained. Next gated
+Repository-Only PPA Source-Bound Function Catalog and Algorithm Admission Safety
+Foundation,isolated DATA only;runtime/HTTP/production admission remains closed.
+
 ## Dormant PPA launch/recovery/function DATA foundation implemented — 2026-11-24
 
 [Owning foundation/evidence](SOURCE_POLICY_PPA_LAUNCH_DATA_FOUNDATION.md) adds fixed

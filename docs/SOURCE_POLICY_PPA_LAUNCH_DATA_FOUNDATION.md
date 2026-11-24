@@ -105,7 +105,10 @@ tests,not just a design. Physical factory/lifetime/exec and combined resource
 admission remain closed. The next worthwhile gap is the REAL source catalog needed
 by these validators,not another success projection or maintenance slice.
 
-Exact recommended next action:approve Repository-Only PPA Pinned-Core Function-Use
-Closure and Catalog Provenance Audit. Bounded read-only exact pinned core/vendor
-source analysis and catalog requirements only;no package acquisition,core loading,
-candidate/native/HTTP/SQL execution,additional modules,resource expansion or wiring.
+The approved [pinned-source audit](SOURCE_POLICY_PPA_PINNED_FUNCTION_CATALOG_AUDIT.md)
+is complete with confirmed gaps,not closed runtime compatibility:exact fallback
+pins,conditional recovery-cookie ctype use,encoding-dependent option reads and
+HMAC-MD5 requirements. Current validators/source remain unchanged and dormant.
+Exact recommended next gated slice:Repository-Only PPA Source-Bound Function Catalog
+and Algorithm Admission Safety Foundation,isolated DATA only;no package acquisition,
+core loading,candidate/native/HTTP/SQL execution,additional modules or wiring.

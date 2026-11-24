@@ -1,5 +1,14 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## PPA source catalog audited,HTTP admission still closed — 2026-11-24
+
+[Pinned-source audit](SOURCE_POLICY_PPA_PINNED_FUNCTION_CATALOG_AUDIT.md) identifies
+conditional recovery-cookie ctype use,omitted-encoding option effects,HMAC-MD5 and
+actual catalog-provenance gaps. No existing worker/controller/workflow changed.
+Whole-core compatibility,physical exec/resource fit and HTTP qualification remain
+unproved. Next gated source-bound catalog/algorithm isolated DATA foundation only;
+no native attempt,artifact acquisition or wiring,native46/product4/10 retained.
+
 ## PPA fixed launch/function DATA implemented,not wired — 2026-11-24
 
 [Foundation](SOURCE_POLICY_PPA_LAUNCH_DATA_FOUNDATION.md) passes new14 isolated tests/

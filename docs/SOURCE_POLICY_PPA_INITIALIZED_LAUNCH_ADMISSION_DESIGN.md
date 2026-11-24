@@ -1,5 +1,15 @@
 # PPA Initialized-Fixture Launch/Recovery and Function-Profile Admission Design
 
+## Pinned function/catalog audit completed — 2026-11-24
+
+[Read-only audit](SOURCE_POLICY_PPA_PINNED_FUNCTION_CATALOG_AUDIT.md) verifies1,900
+PHP/INC blobs. Explicit-UTF-8 two-file fallback differs from omitted-encoding
+option effects;recovery-cookie ctype use and HMAC-MD5 require explicit admission.
+Caller-supplied hashes/review labels are not physical source provenance. This
+supersedes historical NEXT pointers below:DATA foundation is implemented,audit
+complete,next gated source-bound catalog/algorithm DATA foundation only. No new
+native/HTTP/resource authority or wiring;native46/product4/10 unchanged.
+
 ## Subsequent approved DATA foundation — 2026-11-24
 
 [Implemented isolated policy](SOURCE_POLICY_PPA_LAUNCH_DATA_FOUNDATION.md) provides
