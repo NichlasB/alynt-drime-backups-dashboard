@@ -1,5 +1,13 @@
 # Initialized-Fixture Native Loader/Controller Integration
 
+## Stock charset hook/anchor DATA implemented, execution disabled — 2026-11-27
+
+[Foundation/evidence](SOURCE_POLICY_PPA_STOCK_CHARSET_DATA_FOUNDATION.md) implements
+exact nonempty stock callback/cache and typed baseline projections in test-only
+DATA. Current worker/controller/SQL/anchors/workflow unchanged; actual first-use
+lifetime/cache readers and independent observations remain unproved. Native46/
+product4/10 retained. Next gated stock-hook lifetime/passive-cache source audit.
+
 ## Private condition/charset anchor design complete, not integrated — 2026-11-24
 
 [Design/source findings](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md)

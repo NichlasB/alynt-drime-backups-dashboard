@@ -1,5 +1,13 @@
 # PPA Fixed-Producer Cookie and Charset-Effect Condition DATA Foundation
 
+## Separate stock-hook DATA successor — 2026-11-27
+
+[New component](SOURCE_POLICY_PPA_STOCK_CHARSET_DATA_FOUNDATION.md) preserves this
+v1 catalog/tests/refusal unchanged while binding exact stock callbacks and typed
+cache/anchor DATA in a separate version. Positive DATA remains unobserved; no
+native/HTTP/production grant or silent migration. Next gated first-use/lifetime
+and passive-cache source feasibility audit, before physical integration.
+
 ## Successor design finding — 2026-11-24
 
 The approved [private integration design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md)

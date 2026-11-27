@@ -1,5 +1,13 @@
 # PPA Private Condition Projection and Charset-Anchor Integration Design
 
+## Approved DATA successor implemented, not physically integrated — 2026-11-27
+
+[Stock-hook/anchor DATA foundation](SOURCE_POLICY_PPA_STOCK_CHARSET_DATA_FOUNDATION.md)
+now models exact stock callbacks, explicit cache projections and typed parent
+anchor/baseline joins. v1 remains unchanged; physical observation/lifetime/native
+grants stay false. Next gated source-only Stock Hook Lifetime and Passive Cache
+Projection Feasibility Audit, not an actual reader, worker or native attempt.
+
 ## Approval, exact baseline and unchanged authority — 2026-11-24
 
 Approved repository-only DESIGN through validation, commit, push and exact-head

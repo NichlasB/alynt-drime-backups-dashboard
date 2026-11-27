@@ -1,5 +1,15 @@
 # Alynt Drime Backups Dashboard Implementation Plan
 
+## PPA stock charset hook/anchor DATA foundation — 2026-11-27
+
+[Owning foundation](SOURCE_POLICY_PPA_STOCK_CHARSET_DATA_FOUNDATION.md) binds30
+sources, exact stock callbacks/all/autoload slots, explicit cache DATA and typed
+row/anchor/baseline joins. Thirteen new tests/25 semantic controls pass; full344
+Node/API tests pass. No real hook/cache/anchor observation or native grant; v1
+and post-core UNKNOWN refusal unchanged. Native46/product4/10 retained. Next gated
+repository-only Stock Hook Lifetime and Passive Cache Projection Feasibility Audit;
+no physical reader/worker/SQL/native implementation or production wiring.
+
 ## PPA private condition/charset-anchor integration design — 2026-11-24
 
 [Owning design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md) maps fixed

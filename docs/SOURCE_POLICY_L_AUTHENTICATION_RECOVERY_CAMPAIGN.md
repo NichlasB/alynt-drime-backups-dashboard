@@ -1,5 +1,13 @@
 # L Authentication Recovery — Authorized Development/Qualification Campaign
 
+## Stock-hook/anchor DATA successor complete — 2026-11-27
+
+[Owning foundation](SOURCE_POLICY_PPA_STOCK_CHARSET_DATA_FOUNDATION.md) adds dormant
+source-bound stock callback/cache/anchor distinctions,13 tests/25 controls;full344
+Node/API tests pass. No actual reader/bootstrap/HTTP/SQL/native attempt or wiring;
+v1/UNKNOWN refusal and native46/product4/10/allowances unchanged. Next gated
+repository-only Stock Hook Lifetime and Passive Cache Projection Feasibility Audit.
+
 ## PPA private condition/anchor integration DESIGN completed — 2026-11-24
 
 [Current design](SOURCE_POLICY_PPA_PRIVATE_CONDITION_INTEGRATION_DESIGN.md) maps
